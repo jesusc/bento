@@ -1,0 +1,7 @@
+
+== Limitations ==
+
+* Attribute -> Attribute binding
+  Our approach is limited by the capabilities of OCL. For example,
+  if a binding requires a computation not supported by OCL, then
+  the binding is not feasible. For example, "String -> Integer" 

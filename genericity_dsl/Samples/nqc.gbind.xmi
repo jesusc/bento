@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="5:1-57:2" metamodel="Imp" name="component">
+    <commentsBefore>-- In statementContainer:</commentsBefore>
+    <commentsBefore>-- For the moment only one level of Block nested (otherwise use statementContainer)</commentsBefore>
+    <commentsBefore>-- and write the flattening of statements accordingly</commentsBefore>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="6:2-6:42" concept="/1" concrete="/2">
+      <commentsAfter>-- class Goto to GoToStatement</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="8:2-8:41" concept="/3" concrete="/4 /5">
+      <commentsBefore>-- class Goto to GoToStatement</commentsBefore>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="10:2-10:30" concept="/6" concrete="/7"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="11:2-11:34" concept="/8" concrete="/9"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="13:2-13:32" conceptFeature="name" conceptClass="/3" concreteFeature="Name"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="14:2-14:47" conceptFeature="target" conceptClass="/1" concreteFeature="JumpLabel"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="15:2-15:39" conceptFeature="self_label" conceptClass="/6" concreteFeature="Label"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="18:2-18:86" conceptFeature="target_statement" conceptClass="/1">
+      <commentsAfter>-- Deberia duplicarse en Function y Subroutine</commentsAfter>
+      <concrete xsi:type="ocl:OperationCallExp" location="18:48-18:86" operationName="refImmediateComposite">
+        <commentsAfter>-- Deberia duplicarse en Function y Subroutine</commentsAfter>
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="18:48-18:62" name="JumpLabel">
+          <source xsi:type="ocl:VariableExp" location="18:48-18:52" referredVariable="/10"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="21:2-26:20" conceptFeature="statements_" conceptClass="/3">
+      <commentsBefore>-- Deberia duplicarse en Function y Subroutine</commentsBefore>
+      <concrete xsi:type="ocl:CollectionOperationCallExp" location="21:35-26:20" operationName="flatten">
+        <source xsi:type="ocl:IteratorExp" location="21:35-26:9" name="collect">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="21:35-21:50" name="Statements">
+            <source xsi:type="ocl:VariableExp" location="21:35-21:39" referredVariable="/11"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="22:5-26:8">
+            <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="23:4-23:16" name="Statements">
+              <source xsi:type="ocl:VariableExp" location="23:4-23:5" referredVariable="/0/@bindings.8/@concrete/@source/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:OperationCallExp" location="22:8-22:41" operationName="oclIsKindOf">
+              <source xsi:type="ocl:VariableExp" location="22:8-22:9" referredVariable="/0/@bindings.8/@concrete/@source/@iterators.0"/>
+              <arguments xsi:type="ocl:OclModelElement" location="22:22-22:40" name="BlockStatement" model="/12"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="25:4-25:5" referredVariable="/0/@bindings.8/@concrete/@source/@iterators.0"/>
+          </body>
+          <iterators location="21:60-21:61" varName="s" variableExp="/0/@bindings.8/@concrete/@source/@body/@condition/@source /0/@bindings.8/@concrete/@source/@body/@thenExpression/@source /0/@bindings.8/@concrete/@source/@body/@elseExpression"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="28:2-33:8" conceptFeature="statementContainer" conceptClass="/6">
+      <concrete xsi:type="ocl:LetExp" location="28:42-33:8">
+        <variable location="28:46-28:87" varName="c" variableExp="/0/@bindings.9/@concrete/@in_/@condition/@source /0/@bindings.9/@concrete/@in_/@thenExpression/@source /0/@bindings.9/@concrete/@in_/@elseExpression">
+          <type xsi:type="ocl:OclAnyType" location="28:50-28:56"/>
+          <initExpression xsi:type="ocl:OperationCallExp" location="28:59-28:87" operationName="refImmediateComposite">
+            <source xsi:type="ocl:VariableExp" location="28:59-28:63" referredVariable="/13"/>
+          </initExpression>
+        </variable>
+        <in_ xsi:type="ocl:IfExp" location="29:4-33:8">
+          <thenExpression xsi:type="ocl:OperationCallExp" location="30:4-30:29" operationName="refImmediateComposite">
+            <source xsi:type="ocl:VariableExp" location="30:4-30:5" referredVariable="/0/@bindings.9/@concrete/@variable"/>
+          </thenExpression>
+          <condition xsi:type="ocl:OperationCallExp" location="29:7-29:40" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="29:7-29:8" referredVariable="/0/@bindings.9/@concrete/@variable"/>
+            <arguments xsi:type="ocl:OclModelElement" location="29:21-29:39" name="BlockStatement" model="/12"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="32:4-32:5" referredVariable="/0/@bindings.9/@concrete/@variable"/>
+        </in_>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="35:2-35:67" conceptFeature="ifStatements_" conceptClass="/8">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="35:40-35:67" name="flattenize">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="35:40-35:56" name="Consequence">
+          <source xsi:type="ocl:VariableExp" location="35:40-35:44" referredVariable="/14"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="36:2-40:8" conceptFeature="elseStatements_" conceptClass="/8">
+      <concrete xsi:type="ocl:IfExp" location="36:40-40:8">
+        <thenExpression xsi:type="ocl:SequenceExp" location="37:4-37:16"/>
+        <condition xsi:type="ocl:OperationCallExp" location="36:43-36:76" operationName="oclIsUndefined">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="36:43-36:59" name="Alternative">
+            <source xsi:type="ocl:VariableExp" location="36:43-36:47" referredVariable="/15"/>
+          </source>
+        </condition>
+        <elseExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="39:4-39:31" name="flattenize">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="39:4-39:20" name="Alternative">
+            <source xsi:type="ocl:VariableExp" location="39:4-39:8" referredVariable="/16"/>
+          </source>
+        </elseExpression>
+      </concrete>
+    </bindings>
+    <helpers location="42:2-42:83" feature="flattenize" contextClass="/6">
+      <body xsi:type="ocl:SequenceExp" location="42:66-42:83">
+        <elements xsi:type="ocl:VariableExp" location="42:77-42:81" referredVariable="/17"/>
+      </body>
+      <type xsi:type="ocl:SequenceType" location="42:40-42:63">
+        <elementType xsi:type="ocl:OclModelElement" location="42:49-42:62" name="Statement" model="/12"/>
+      </type>
+    </helpers>
+    <helpers location="43:2-43:77" feature="flattenize" contextClass="/18">
+      <commentsAfter>-- Holes, which are defined on concrete metaclasses</commentsAfter>
+      <body xsi:type="ocl:NavigationOrAttributeCallExp" location="43:62-43:77" name="Statements">
+        <commentsAfter>-- Holes, which are defined on concrete metaclasses</commentsAfter>
+        <source xsi:type="ocl:VariableExp" location="43:62-43:66" referredVariable="/19"/>
+      </body>
+      <type xsi:type="ocl:SequenceType" location="43:37-43:60">
+        <elementType xsi:type="ocl:OclModelElement" location="43:46-43:59" name="Statement" model="/12"/>
+      </type>
+    </helpers>
+    <helpers location="46:2-46:55" feature="behaveAsStatement" contextClass="/20">
+      <commentsBefore>-- Holes, which are defined on concrete metaclasses</commentsBefore>
+      <body xsi:type="ocl:BooleanExp" location="46:50-46:55"/>
+      <type xsi:type="ocl:BooleanType" location="46:40-46:47"/>
+    </helpers>
+    <helpers location="48:2-48:65" feature="toInfo" contextClass="/21">
+      <body xsi:type="ocl:OperationCallExp" location="48:44-48:65" operationName="toString">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="48:44-48:54" name="Value">
+          <source xsi:type="ocl:VariableExp" location="48:44-48:48" referredVariable="/22"/>
+        </source>
+      </body>
+      <type xsi:type="ocl:StringType" location="48:35-48:41"/>
+    </helpers>
+    <helpers location="49:2-49:100" feature="toInfo" contextClass="/23">
+      <body xsi:type="ocl:OperatorCallExp" location="49:47-49:100" operationName="+">
+        <source xsi:type="ocl:OperatorCallExp" location="49:47-49:75" operationName="+">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="49:47-49:67" name="toInfo">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="49:47-49:60" name="Variable">
+              <source xsi:type="ocl:VariableExp" location="49:47-49:51" referredVariable="/24"/>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:StringExp" location="49:70-49:75" stringSymbol=" = "/>
+        </source>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="49:78-49:100" name="toInfo">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="49:78-49:93" name="Expression">
+            <source xsi:type="ocl:VariableExp" location="49:78-49:82" referredVariable="/25"/>
+          </source>
+        </arguments>
+      </body>
+      <type xsi:type="ocl:StringType" location="49:38-49:44"/>
+    </helpers>
+    <helpers location="50:2-50:65" feature="toInfo" contextClass="/26">
+      <body xsi:type="ocl:NavigationOrAttributeCallExp" location="50:47-50:65" name="Name">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="50:47-50:60" name="Variable">
+          <source xsi:type="ocl:VariableExp" location="50:47-50:51" referredVariable="/27"/>
+        </source>
+      </body>
+      <type xsi:type="ocl:StringType" location="50:37-50:43"/>
+    </helpers>
+    <helpers location="51:2-51:47" feature="toInfo" contextClass="/28">
+      <body xsi:type="ocl:StringExp" location="51:41-51:47" stringSymbol="goto"/>
+      <type xsi:type="ocl:StringType" location="51:32-51:38"/>
+    </helpers>
+    <helpers location="52:2-52:51" feature="toInfo" contextClass="/8">
+      <body xsi:type="ocl:StringExp" location="52:39-52:51" stringSymbol="if ... { }"/>
+      <type xsi:type="ocl:StringType" location="52:30-52:36"/>
+    </helpers>
+    <helpers location="53:2-53:45" feature="toInfo" contextClass="/29">
+      <body xsi:type="ocl:StringExp" location="53:42-53:45" stringSymbol="-"/>
+      <type xsi:type="ocl:StringType" location="53:33-53:39"/>
+    </helpers>
+    <helpers location="54:2-54:115" feature="toInfo" contextClass="/30">
+      <body xsi:type="ocl:OperatorCallExp" location="54:44-54:115" operationName="+">
+        <source xsi:type="ocl:OperatorCallExp" location="54:44-54:92" operationName="+">
+          <source xsi:type="ocl:OperatorCallExp" location="54:44-54:86" operationName="+">
+            <source xsi:type="ocl:OperatorCallExp" location="54:44-54:70" operationName="+">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="54:44-54:64" name="toInfo">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="54:44-54:57" name="Operand1">
+                  <source xsi:type="ocl:VariableExp" location="54:44-54:48" referredVariable="/31"/>
+                </source>
+              </source>
+              <arguments xsi:type="ocl:StringExp" location="54:67-54:70" stringSymbol=" "/>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="54:73-54:86" name="Operator">
+              <source xsi:type="ocl:VariableExp" location="54:73-54:77" referredVariable="/32"/>
+            </arguments>
+          </source>
+          <arguments xsi:type="ocl:StringExp" location="54:89-54:92" stringSymbol=" "/>
+        </source>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="54:95-54:115" name="toInfo">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="54:95-54:108" name="Operand2">
+            <source xsi:type="ocl:VariableExp" location="54:95-54:99" referredVariable="/33"/>
+          </source>
+        </arguments>
+      </body>
+      <type xsi:type="ocl:StringType" location="54:35-54:41"/>
+    </helpers>
+    <helpers location="55:3-55:69" feature="toInfo" contextClass="/34">
+      <body xsi:type="ocl:OperatorCallExp" location="55:43-55:69" operationName="+">
+        <source xsi:type="ocl:StringExp" location="55:43-55:50" stringSymbol="call "/>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="55:53-55:69" name="Name">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="55:53-55:64" name="Callee">
+            <source xsi:type="ocl:VariableExp" location="55:53-55:57" referredVariable="/35"/>
+          </source>
+        </arguments>
+      </body>
+      <type xsi:type="ocl:StringType" location="55:34-55:40"/>
+    </helpers>
+    <helpers location="56:2-56:67" feature="toInfo" contextClass="/36">
+      <body xsi:type="ocl:OperatorCallExp" location="56:40-56:67" operationName="+">
+        <source xsi:type="ocl:StringExp" location="56:40-56:48" stringSymbol="fcall "/>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="56:51-56:67" name="Name">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="56:51-56:62" name="Callee">
+            <source xsi:type="ocl:VariableExp" location="56:51-56:55" referredVariable="/37"/>
+          </source>
+        </arguments>
+      </body>
+      <type xsi:type="ocl:StringType" location="56:31-56:37"/>
+    </helpers>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="6:8-6:25" name="UnconditionalGoto"/>
+  <genericity_dsl:ConcreteMetaclass location="6:29-6:42" name="GoToStatement"/>
+  <genericity_dsl:ConceptMetaclass location="8:8-8:17" name="Procedure"/>
+  <genericity_dsl:ConcreteMetaclass location="8:21-8:29" name="Function"/>
+  <genericity_dsl:ConcreteMetaclass location="8:31-8:41" name="Subroutine"/>
+  <genericity_dsl:ConceptMetaclass location="10:8-10:17" name="Statement"/>
+  <genericity_dsl:ConcreteMetaclass location="10:21-10:30" name="Statement"/>
+  <genericity_dsl:ConceptMetaclass location="11:8-11:19" name="IfStatement"/>
+  <genericity_dsl:ConcreteMetaclass location="11:23-11:34" name="IfStatement"/>
+  <ocl:VariableDeclaration location="18:48-18:52" varName="self" variableExp="/0/@bindings.7/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="21:35-21:39" varName="self" variableExp="/0/@bindings.8/@concrete/@source/@source/@source"/>
+  <ocl:OclModel location="22:22-22:25" name="Imp" elements="/0/@bindings.8/@concrete/@source/@body/@condition/@arguments.0 /0/@bindings.9/@concrete/@in_/@condition/@arguments.0 /0/@helpers.0/@type/@elementType /0/@helpers.1/@type/@elementType"/>
+  <ocl:VariableDeclaration location="28:59-28:63" varName="self" variableExp="/0/@bindings.9/@concrete/@variable/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="35:40-35:44" varName="self" variableExp="/0/@bindings.10/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="36:43-36:47" varName="self" variableExp="/0/@bindings.11/@concrete/@condition/@source/@source"/>
+  <ocl:VariableDeclaration location="39:4-39:8" varName="self" variableExp="/0/@bindings.11/@concrete/@elseExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="42:77-42:81" varName="self" variableExp="/0/@helpers.0/@body/@elements.0"/>
+  <genericity_dsl:ConceptMetaclass location="43:9-43:23" name="BlockStatement"/>
+  <ocl:VariableDeclaration location="43:62-43:66" varName="self" variableExp="/0/@helpers.1/@body/@source"/>
+  <genericity_dsl:ConceptMetaclass location="46:9-46:19" name="Expression"/>
+  <genericity_dsl:ConceptMetaclass location="48:9-48:24" name="IntegerConstant"/>
+  <ocl:VariableDeclaration location="48:44-48:48" varName="self" variableExp="/0/@helpers.3/@body/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="49:9-49:28" name="AssignmentStatement"/>
+  <ocl:VariableDeclaration location="49:47-49:51" varName="self" variableExp="/0/@helpers.4/@body/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="49:78-49:82" varName="self" variableExp="/0/@helpers.4/@body/@arguments.0/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="50:9-50:27" name="VariableExpression"/>
+  <ocl:VariableDeclaration location="50:47-50:51" varName="self" variableExp="/0/@helpers.5/@body/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="51:9-51:22" name="GoToStatement"/>
+  <genericity_dsl:ConceptMetaclass location="53:9-53:23" name="EmptyStatement"/>
+  <genericity_dsl:ConceptMetaclass location="54:9-54:25" name="BinaryExpression"/>
+  <ocl:VariableDeclaration location="54:44-54:48" varName="self" variableExp="/0/@helpers.9/@body/@source/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="54:73-54:77" varName="self" variableExp="/0/@helpers.9/@body/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="54:95-54:99" varName="self" variableExp="/0/@helpers.9/@body/@arguments.0/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="55:10-55:24" name="SubroutineCall"/>
+  <ocl:VariableDeclaration location="55:53-55:57" varName="self" variableExp="/0/@helpers.10/@body/@arguments.0/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="56:9-56:21" name="FunctionCall"/>
+  <ocl:VariableDeclaration location="56:51-56:55" varName="self" variableExp="/0/@helpers.11/@body/@arguments.0/@source/@source"/>
+</xmi:XMI>

@@ -1,0 +1,73 @@
+@namespace(uri="http://genericity/language/gbind", prefix="gbind")
+package gbind;
+
+// import "platform:/plugin/be.ac.vub.simpleocl/metamodel/simpleocl.ecore";
+import "platform:/resource/be.ac.vub.simpleocl/metamodel/simpleocl.ecore";
+
+class BindingModel {
+    val ConceptBinding[*]#model_ bindings;
+    val BaseHelper[*]#model_ helpers;
+
+	val ConceptMetaclass[*]  conceptMetaclasses;
+	val ConcreteMetaclass[*] concreteMetaclasses;
+
+    attr String[1] metamodel;
+    attr String[0..1] metamodelURI;
+    
+    attr String[1] name;    
+	attr String[0..1] componentURI;
+}
+
+abstract class Metaclass {
+  attr String name;
+  ref EClass[1] eclass;
+}
+
+class ConceptMetaclass extends Metaclass {
+}
+
+class ConcreteMetaclass extends Metaclass {
+}
+  
+abstract class ConceptBinding {
+  attr String debugName;
+  ref BindingModel#bindings model_;
+}
+
+class ClassBinding extends ConceptBinding {
+  ref ConceptMetaclass[1] concept;
+  ref ConcreteMetaclass[+] concrete;
+  val simpleocl.OclExpression[1] whenClause;
+}
+
+class BaseFeatureBinding extends ConceptBinding {
+  attr String[1] conceptFeature;
+  ref ConceptMetaclass[1] conceptClass;
+  ref ConcreteMetaclass qualifier;
+}
+
+class RenamingFeatureBinding extends BaseFeatureBinding {
+  attr String[1] concreteFeature;
+}
+
+class OclFeatureBinding extends BaseFeatureBinding {
+  val simpleocl.OclExpression[1] concrete;
+}
+
+class BaseHelper {
+  attr String[1] feature;
+  val simpleocl.OclExpression[1] body;
+  val simpleocl.OclType type;
+  ref BindingModel#helpers model_;   
+}
+
+class ConceptHelper extends BaseHelper {
+  ref ConcreteMetaclass qualifier;
+  ref ConceptMetaclass[1] contextClass;   
+}
+
+
+// Intended to be attached to a concrete metaclass, i.e., a facility
+class LocalHelper extends BaseHelper {
+  ref ConcreteMetaclass context;
+}

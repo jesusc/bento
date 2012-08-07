@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleClass:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simpleClass="http://genericity/examples/simpleClass" xsi:schemaLocation="http://genericity/examples/simpleClass ../metamodels/SimpleClass.ecore">
+  <classes name="Vehicle"/>
+  <classes name="Car" superclasses="//@classes.0"/>
+  <classes name="Motorbike" superclasses="//@classes.0"/>
+  <classes name="Sidecar" superclasses="//@classes.2 //@classes.1"/>
+</simpleClass:Model>

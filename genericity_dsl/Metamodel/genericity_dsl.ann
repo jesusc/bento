@@ -1,0 +1,21 @@
+annotate genericity_dsl {
+	annotate genericity_dsl with
+		nsURI='http://genericity/genericity_dsl',
+		nsPrefix='genericity_dsl';
+
+	annotate PrimitiveTypes with
+		nsURI='genericity_dsl-PrimitiveTypes',
+		nsPrefix='pt';
+
+	annotate "PrimitiveTypes::Boolean" with
+		instanceClassName='boolean';
+
+	annotate "PrimitiveTypes::Double" with
+		instanceClassName='double';
+
+	annotate "PrimitiveTypes::Integer" with
+		instanceClassName='int';
+
+	annotate "PrimitiveTypes::String" with
+		instanceClassName='java.lang.String';
+}

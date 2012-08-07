@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<declaration:PLSQLDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:condition="http://gts.inf.um.es/modernization/plsql/condition" xmlns:declaration="http://gts.inf.um.es/modernization/plsql/declaration" xmlns:expression="http://gts.inf.um.es/modernization/plsql/expression" xmlns:statement="http://gts.inf.um.es/modernization/plsql/statement" xmlns:type="http://gts.inf.um.es/modernization/plsql/type" xsi:schemaLocation="http://gts.inf.um.es/modernization/plsql/condition plsql.ecore#//condition http://gts.inf.um.es/modernization/plsql/declaration plsql.ecore#//declaration http://gts.inf.um.es/modernization/plsql/expression plsql.ecore#//expression http://gts.inf.um.es/modernization/plsql/statement plsql.ecore#//statement http://gts.inf.um.es/modernization/plsql/type plsql.ecore#//type">
+  <triggers name="Item::ACT_MODALIDADES::WHEN-CHECKBOX-CHANGED">
+    <declarations xsi:type="declaration:VariableDeclaration" name="plazos ">
+      <type xsi:type="type:Datatype" name="NUMBER"/>
+    </declarations>
+    <declarations xsi:type="declaration:VariableDeclaration" name="modali ">
+      <type xsi:type="type:Datatype" name="NUMBER"/>
+    </declarations>
+    <declarations xsi:type="declaration:VariableDeclaration" name="r ">
+      <type xsi:type="type:Datatype" name="NUMBER"/>
+    </declarations>
+    <statements xsi:type="statement:SelectStatement" isCount="true">
+      <selectList>count(*)</selectList>
+      <into xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.0"/>
+      <from>otg_pconvocatorias</from>
+      <where xsi:type="condition:ConditionComparison" type="EQUALS">
+        <expr1 xsi:type="statement:FunctionCallStatement" name="pco_act_codigo"/>
+        <expr2 xsi:type="expression:FormsVarRef" reference="act_codigo"/>
+      </where>
+    </statements>
+    <statements xsi:type="statement:FunctionCallStatement" name="SYNCHRONIZE"/>
+  </triggers>
+</declaration:PLSQLDefinition>

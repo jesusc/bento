@@ -1,0 +1,20 @@
+@namespace(uri="http://genericity/examples/simpleClass", prefix="simpleClass")
+package simpleClass;
+
+class Model {
+   val Class[*] classes;
+}
+
+class Class {
+   attr String[1] name;
+   ref Class[*] superclasses;
+   val Attribute[*] attributes;   
+}
+
+class Attribute {
+   attr boolean[1] isPublic; 
+   attr String[1] name;
+   ref Class[1] type;
+}
+
+// TODO: NOS FALTA MAPEAR ENUMERADOS? ALGUN EJEMPLO?

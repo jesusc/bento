@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<DirectedGraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DirectedGraph="http://genericity/examples/directedgraph" xsi:schemaLocation="http://genericity/examples/directedgraph dgraph.ecore">
+  <contents xsi:type="DirectedGraph:Node" label="Nodo1" outgoing="//@contents.4" incoming="//@contents.5"/>
+  <contents xsi:type="DirectedGraph:Node" label="Nodo2" outgoing="//@contents.6" incoming="//@contents.4"/>
+  <contents xsi:type="DirectedGraph:Node" label="Nodo3" outgoing="//@contents.5"/>
+  <contents xsi:type="DirectedGraph:Node" label="Nodo4" incoming="//@contents.6"/>
+  <contents xsi:type="DirectedGraph:Edge" label="1->2" weight="1" source="//@contents.0" target="//@contents.1"/>
+  <contents xsi:type="DirectedGraph:Edge" label="3->1" weight="2" source="//@contents.2" target="//@contents.0"/>
+  <contents xsi:type="DirectedGraph:Edge" label="2->4" weight="8" source="//@contents.1" target="//@contents.3"/>
+</DirectedGraph:Graph>

@@ -1,0 +1,25 @@
+@namespace(uri="http://genericity/examples/basicBlocks", prefix="basicBlocks")
+package basicBlocks;
+
+class BlockChunk {
+   attr String[*] identifier;
+   val BasicBlock[*] blocks;
+}
+
+class BasicBlock {
+   attr Kind[1] kind;
+
+   attr String[0..1] identifier;
+   val DirectedEdge[*] edges; // Does not work in atl...
+}
+
+class DirectedEdge {
+   ref BasicBlock[1] source;
+   ref BasicBlock[1] target;
+}
+
+enum Kind {
+   NORMAL = 0;
+   START  = 1;
+   END    = 2;   
+}

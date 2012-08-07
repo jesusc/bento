@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="2:1-9:2" metamodel="UML" name="component">
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="3:2-3:26" concept="/1" concrete="/2"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="4:2-4:35" concept="/3" concrete="/4 /5"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="6:2-6:39" conceptFeature="superclasses" conceptClass="/1" concreteFeature="parents"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="7:2-7:48" conceptFeature="isPublic" conceptClass="/3" qualifier="/4" concreteFeature="public"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="8:2-8:41" conceptFeature="isPublic" conceptClass="/3" qualifier="/5">
+      <concrete xsi:type="ocl:BooleanExp" location="8:37-8:41" booleanSymbol="true"/>
+    </bindings>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="3:8-3:13" name="Class"/>
+  <genericity_dsl:ConcreteMetaclass location="3:17-3:26" name="Component"/>
+  <genericity_dsl:ConceptMetaclass location="4:8-4:17" name="Attribute"/>
+  <genericity_dsl:ConcreteMetaclass location="4:21-4:29" name="Property"/>
+  <genericity_dsl:ConcreteMetaclass location="4:31-4:35" name="Port"/>
+</xmi:XMI>

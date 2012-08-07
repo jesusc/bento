@@ -1,0 +1,6 @@
+@namespace(uri="http://constraints/problems", prefix="constraints_problems")
+package problems;
+
+class Problem {
+  attr String[1] description;
+}

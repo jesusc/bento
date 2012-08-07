@@ -1,0 +1,40 @@
+@namespace(uri="http://bindings", prefix="bindings")
+package bindings;
+
+import "platform:/resource/genericity.atl.transformations/metamodels/ATL.ecore";
+
+class Bindings {
+  val Binding[*]#model_ bindings;
+  attr String metamodel;
+  // val OCL.OclModel[*] models;
+  val DummyOclModel[*] models;
+}
+
+abstract class Binding {
+  attr String debugName;
+  ref Bindings#bindings model_;
+}
+
+class ClassBinding extends Binding {
+  attr String[1] concept;
+  attr String[1] concrete;
+}
+
+class ClassBindingN extends Binding {
+  attr String[1] concept;
+  attr String[*] concrete;
+}
+
+
+class FeatureBinding extends Binding {
+  attr String[1] conceptFeature;
+  attr String[1] conceptClass;
+  // val OCL.OclExpression[1] concrete;
+  val DummyOclExpression[1] concrete;
+}
+
+class DummyOclExpression {
+}
+
+class DummyOclModel {
+}

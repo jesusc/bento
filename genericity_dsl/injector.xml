@@ -1,0 +1,46 @@
+<!--
+	Auto-generated ant script that injects a <file>.gbind into <file>.gbind.xmi
+	It may be used in different ways:
+		- As an example to write your own ant scripts that do further processing
+		(e.g., ATL transformations, extractions).
+		- Called from another script
+		- From the "AM3 Resource Navigator" view, and if the corresponding megamodel
+		(megamodel.xmi) has been registered (via right-click action "Add megamodel"):
+		by right-click action "Inject genericity_dsl File to genericity_dsl Model" on files
+		with extension "gbind".
+	
+	Note that property "MUri" is initialized by AM3 when invoked as a right-click injection
+	action. In any other case (e.g., calling the ant script, copy-paste-modify), property
+	"MUri" has to be defined explicitely.
+-->
+<project name="genericity_dslInjector" default="injection">
+	<!--
+	<property name="MUri" value="/genericity_dsl/Samples/uml2java.gbind"/>
+	<property name="MUri" value="/genericity_dsl/Samples/component.gbind"/>
+	
+	-->
+	<!--
+	<property name="MUri" value="/genericity_dsl/Samples/nqc.gbind"/>
+	-->
+	<property name="MUri" value="/genericity_dsl/Samples/dgraph.gbind"/>
+
+	<target name="injection">
+		<!-- Loading genericity_dsl metamodel -->
+		<am3.loadModel modelHandler="EMF" name="genericity_dsl" metamodel="MOF" path="/genericity_dsl/Metamodel/genericity_dsl.ecore"/>
+
+		<!-- Loading genericity_dsl model -->
+		<am3.loadModel modelHandler="EMF" name="mygenericity_dsl" metamodel="genericity_dsl" path="${MUri}">
+			<injector name="ebnf">
+				<param name="name" value="genericity_dsl"/>
+				<param name="parserGenerator" value="antlr3"/>
+				<classpath>
+					<pathelement location="Syntax/genericity_dsl-parser.jar"/>
+				</classpath>
+			</injector>
+		</am3.loadModel>
+
+		<!-- Saving genericity_dsl model -->
+		<am3.saveModel model="mygenericity_dsl" path="${MUri}.xmi"/>
+	</target>
+
+</project>

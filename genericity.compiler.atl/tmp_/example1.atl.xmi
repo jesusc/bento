@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="1:1-7:2" name="basicblocks">
+    <inModels location="2:23-2:31" name="IN" metamodel="/2"/>
+    <outModels location="2:8-2:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:Helper" location="5:1-7:2">
+      <commentsBefore>--- Check whether the previous statement is a goto.</commentsBefore>
+      <definition location="5:8-6:35">
+        <feature xsi:type="ocl:Attribute" location="5:35-6:35" name="something">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="6:2-6:35" operationName="*">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="6:2-6:28" name="salary">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="6:2-6:21" name="additionalInfo">
+                <source xsi:type="ocl:VariableExp" location="6:2-6:6" referredVariable="/4"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:RealExp" location="6:31-6:35" realSymbol="1.25"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="5:47-5:54"/>
+        </feature>
+        <context_ location="5:8-5:29">
+          <context_ xsi:type="ocl:OclModelElement" location="5:16-5:29" name="Statement" model="/3"/>
+        </context_>
+      </definition>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="2:14-2:17" name="BBL" model="/0/@outModels.0"/>
+  <ocl:OclModel location="2:28-2:31" name="Imp" model="/0/@inModels.0"/>
+  <ocl:OclModel location="5:16-5:19" name="Imp" elements="/0/@elements.0/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="6:2-6:6" varName="self" variableExp="/0/@elements.0/@definition/@feature/@initExpression/@source/@source/@source"/>
+</xmi:XMI>

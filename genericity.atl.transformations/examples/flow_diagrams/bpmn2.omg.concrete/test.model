@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<BPMN2_Foundation:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BPMN2_Activities="omg.BPMN2.Activities" xmlns:BPMN2_Common="omg.BPMN2.Common" xmlns:BPMN2_Foundation="omg.BPMN2.Foundation" xmi:id="_EFVRECHLEeG9MpvAJUWieA">
+  <rootElements xsi:type="BPMN2_Activities:Task" xmi:id="_FowysCHLEeG9MpvAJUWieA" outgoing="_UAg7YCHLEeG9MpvAJUWieA"/>
+  <rootElements xsi:type="BPMN2_Common:ParallelGateway" xmi:id="_HBwl8CHLEeG9MpvAJUWieA" incoming="_UAg7YCHLEeG9MpvAJUWieA" outgoing="_iKa1UCHLEeG9MpvAJUWieA _l3b5oCHLEeG9MpvAJUWieA"/>
+  <rootElements xsi:type="BPMN2_Common:SequenceFlow" xmi:id="_UAg7YCHLEeG9MpvAJUWieA" sourceRef="_FowysCHLEeG9MpvAJUWieA" targetRef="_HBwl8CHLEeG9MpvAJUWieA"/>
+  <rootElements xsi:type="BPMN2_Activities:SendTask" xmi:id="_bXeh4CHLEeG9MpvAJUWieA" incoming="_iKa1UCHLEeG9MpvAJUWieA"/>
+  <rootElements xsi:type="BPMN2_Activities:ReceiveTask" xmi:id="_dRia0CHLEeG9MpvAJUWieA" incoming="_l3b5oCHLEeG9MpvAJUWieA"/>
+  <rootElements xsi:type="BPMN2_Common:SequenceFlow" xmi:id="_iKa1UCHLEeG9MpvAJUWieA" sourceRef="_HBwl8CHLEeG9MpvAJUWieA" targetRef="_bXeh4CHLEeG9MpvAJUWieA"/>
+  <rootElements xsi:type="BPMN2_Common:SequenceFlow" xmi:id="_l3b5oCHLEeG9MpvAJUWieA" sourceRef="_HBwl8CHLEeG9MpvAJUWieA" targetRef="_dRia0CHLEeG9MpvAJUWieA"/>
+</BPMN2_Foundation:Definitions>

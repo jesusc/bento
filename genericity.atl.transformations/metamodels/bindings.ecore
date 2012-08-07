@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bindings"
+    nsURI="http://bindings" nsPrefix="bindings">
+  <eClassifiers xsi:type="ecore:EClass" name="Bindings">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding" containment="true" eOpposite="#//Binding/model_"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//DummyOclModel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binding" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model_" eType="#//Bindings"
+        eOpposite="#//Bindings/bindings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassBinding" eSuperTypes="#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concept" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concrete" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassBindingN" eSuperTypes="#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concept" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concrete" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureBinding" eSuperTypes="#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conceptFeature" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conceptClass" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concrete" lowerBound="1"
+        eType="#//DummyOclExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DummyOclExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DummyOclModel"/>
+</ecore:EPackage>

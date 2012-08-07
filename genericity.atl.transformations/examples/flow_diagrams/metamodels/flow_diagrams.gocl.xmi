@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_ocl="genericity_ocl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_ocl:OclConstraintsModel location="5:1-15:2" metamodel="FD">
+    <commentsBefore>--</commentsBefore>
+    <commentsBefore>-- Constraints associated to the FlowDiagram concept</commentsBefore>
+    <commentsBefore>--</commentsBefore>
+    <commentsAfter>-- Otra restriccion </commentsAfter>
+    <commentsAfter>-- FinalTask has initial = false... ¿no?</commentsAfter>
+    <contexts location="7:2-9:31">
+      <metaclass_ location="7:10-7:21" name="FlowDiagram"/>
+      <invariant location="8:3-9:31" description="Check that...">
+        <expr xsi:type="ocl:OperatorCallExp" location="8:8-8:104" operationName="implies">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="8:8-8:29" name="isFinalMandatory">
+            <source xsi:type="ocl:VariableExp" location="8:8-8:12" referredVariable="/1"/>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="8:38-8:104" operationName=">">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="8:38-8:100" operationName="size">
+              <source xsi:type="ocl:IteratorExp" location="8:38-8:92" name="select">
+                <source xsi:type="ocl:OperationCallExp" location="8:38-8:65" operationName="allInstances">
+                  <source xsi:type="ocl:OclModelElement" location="8:38-8:50" name="FinalTask" model="/2"/>
+                </source>
+                <body xsi:type="ocl:NavigationOrAttributeCallExp" location="8:78-8:91" name="isMandatory">
+                  <source xsi:type="ocl:VariableExp" location="8:78-8:79" referredVariable="/0/@contexts.0/@invariant/@expr/@arguments.0/@source/@source/@iterators.0"/>
+                </body>
+                <iterators location="8:74-8:75" varName="f" variableExp="/0/@contexts.0/@invariant/@expr/@arguments.0/@source/@source/@body/@source"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:IntegerExp" location="8:103-8:104" integerSymbol="0"/>
+          </arguments>
+        </expr>
+      </invariant>
+    </contexts>
+    <contexts location="11:2-13:40">
+      <metaclass_ location="11:10-11:14" name="Task"/>
+      <invariant location="12:3-13:40" description="Task has a proper name">
+        <expr xsi:type="ocl:OperatorCallExp" location="12:8-12:23" operationName="&lt;>">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="12:8-12:17" name="name">
+            <source xsi:type="ocl:VariableExp" location="12:8-12:12" referredVariable="/3"/>
+          </source>
+          <arguments xsi:type="ocl:StringExp" location="12:21-12:23" stringSymbol=""/>
+        </expr>
+      </invariant>
+    </contexts>
+  </genericity_ocl:OclConstraintsModel>
+  <ocl:VariableDeclaration location="8:8-8:12" varName="self" variableExp="/0/@contexts.0/@invariant/@expr/@source/@source"/>
+  <ocl:OclModel location="8:38-8:40" name="FD" elements="/0/@contexts.0/@invariant/@expr/@arguments.0/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="12:8-12:12" varName="self" variableExp="/0/@contexts.1/@invariant/@expr/@source/@source"/>
+</xmi:XMI>

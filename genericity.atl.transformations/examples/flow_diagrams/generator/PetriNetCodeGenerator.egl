@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<pnml>
+<net id="Net-One" type="P/T net">
+[%
+var i : Integer := 0;
+var x : Integer := 50;
+var y : Integer := 40;
+for (place in Place.allInstances()) {
+  place.~ID := place.type().name.toString()+i; 
+  place.~x  := x;
+  place.~y  := y;
+  %]
+  <place id="[%=place.~ID%]">
+    <name><value>[%=place.name%]</value></name>
+    <initialMarking><value>[%=place.tokens%]</value></initialMarking> 
+    <graphics><position x="[%=place.~x%]" y="[%=place.~y%]"/></graphics>   
+  </place>
+[%i := i+1; if (x>600) { x := 50; y := y+200; } else x := x+200; }
+
+i:=0;
+for (transition in Transition.allInstances()) {
+  transition.~ID := transition.type().name.toString()+i;
+  if (transition.`in`.size()>0 and transition.out.size()>0) {
+    transition.~x := (transition.`in`.get(0).~x + transition.out.get(0).~x)/2;
+    transition.~y := (transition.`in`.get(0).~y + transition.out.get(0).~y)/2;
+  }
+  else {
+    transition.~x := x;
+    transition.~y := y;
+  }   
+  %]  
+  <transition id="[%=transition.~ID%]">
+  <graphics><position x="[%=transition.~x%]" y="[%=transition.~y%]"/></graphics>
+    <name><value>[%=transition.name%]</value></name>
+    <orientation><value>90</value></orientation>
+    <rate><value>1.0</value></rate>
+    <timed>
+    <value>false</value>
+    </timed>
+  </transition>
+[% for (place in transition.`in`) {%]
+  <arc id="[%=place.~ID%] to [%=transition.~ID%]" source="[%=place.~ID%]" target="[%=transition.~ID%]">
+    <graphics/>
+    <inscription>
+      <value>1</value> 
+    <graphics/>  
+    </inscription>
+    <arcpath id="000" x="436" y="167" curvePoint="false"/>
+    <arcpath id="001" x="428" y="207" curvePoint="false"/>  
+  </arc>
+  [%} 
+  for (place in transition.out) {%]
+  <arc id="[%=transition.~ID%] to [%=place.~ID%]" source="[%=transition.~ID%]" target="[%=place.~ID%]">
+    <graphics/>
+    <inscription>
+      <value>1</value>
+    <graphics/>  
+    </inscription>
+    <arcpath id="000" x="436" y="167" curvePoint="false"/>
+    <arcpath id="001" x="428" y="207" curvePoint="false"/>  
+  </arc>
+[%} i := i+1; } %]
+</net>
+</pnml>

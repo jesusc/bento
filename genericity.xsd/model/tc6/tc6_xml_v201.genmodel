@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.xsd/src-gen"
+    modelPluginID="genericity.xsd" modelName="Tc6_xml_v201" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>tc6_xml_v201.xsd</foreignModel>
+  <genPackages prefix="Tc60201" basePackage="org.plcopen.xml" resource="XML" disposableProviderFactory="true"
+      loadInitialization="true" literalsInterface="false" ecorePackage="tc60201.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tc60201.ecore#//AccessType">
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//AccessType/readOnly"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//AccessType/readWrite"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tc60201.ecore#//EdgeModifierType">
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//EdgeModifierType/none"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//EdgeModifierType/falling"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//EdgeModifierType/rising"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tc60201.ecore#//HandleUnknownType">
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//HandleUnknownType/preserve"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//HandleUnknownType/discard"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//HandleUnknownType/implementation"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tc60201.ecore#//PouType">
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//PouType/function"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//PouType/functionBlock"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//PouType/program"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tc60201.ecore#//QualifierType">
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/P1"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/N"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/P0"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/R"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/S"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/L"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/D"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/P"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/DS"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/DL"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/SD"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//QualifierType/SL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tc60201.ecore#//StorageModifierType">
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//StorageModifierType/none"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//StorageModifierType/set"/>
+      <genEnumLiterals ecoreEnumLiteral="tc60201.ecore#//StorageModifierType/reset"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="tc60201.ecore#//AccessTypeObject"/>
+    <genDataTypes ecoreDataType="tc60201.ecore#//EdgeModifierTypeObject"/>
+    <genDataTypes ecoreDataType="tc60201.ecore#//HandleUnknownTypeObject"/>
+    <genDataTypes ecoreDataType="tc60201.ecore#//PouTypeObject"/>
+    <genDataTypes ecoreDataType="tc60201.ecore#//PriorityType"/>
+    <genDataTypes ecoreDataType="tc60201.ecore#//QualifierTypeObject"/>
+    <genDataTypes ecoreDataType="tc60201.ecore#//StorageModifierTypeObject"/>
+    <genClasses ecoreClass="tc60201.ecore#//AccessVariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//AccessVariableType/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//AccessVariableType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//AccessVariableType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//AccessVariableType/alias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//AccessVariableType/direction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//AccessVariableType/instancePathAndName"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ActionBlockType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionBlockType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionBlockType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionBlockType/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionBlockType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionBlockType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionBlockType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionBlockType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionBlockType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionBlockType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionBlockType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionBlockType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ActionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionsType/action"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ActionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType/relPosition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType/reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType/inline"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/duration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/qualifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ActionType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType1/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType1/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ActionType1/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType1/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ActionType1/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//AddData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//AddData/data"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//AddDataInfo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//AddDataInfo/info"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ArrayType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ArrayType/dimension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ArrayType/baseType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ArrayValueType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//ArrayValueType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//ArrayValueType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//BlockType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//BlockType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//BlockType/inputVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//BlockType/inOutVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//BlockType/outputVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//BlockType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//BlockType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/instanceName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/typeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//BlockType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//Body">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/iL"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/sT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/fBD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/lD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/sFC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Body/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Body/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Body/worksheetName"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//CoilType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoilType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoilType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoilType/connectionPointOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoilType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoilType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/storage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CoilType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//CommentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CommentType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CommentType/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CommentType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CommentType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CommentType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CommentType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CommentType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//CommentType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConditionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConditionType/reference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConditionType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConditionType/inline"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConditionType/negated"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConfigurationsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationsType/configuration"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConfigurationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationType/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationType/globalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationType/accessVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationType/configVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigurationType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConfigurationType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConfigurationType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConfigVariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigVariableType/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigVariableType/initialValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigVariableType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConfigVariableType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConfigVariableType/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConfigVariableType/instancePathAndName"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//Connection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Connection/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Connection/addData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Connection/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Connection/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Connection/refLocalId"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointIn">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectionPointIn/relPosition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectionPointIn/connection"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointIn/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectionPointIn/addData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointIn/globalId"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointInType"/>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointOut">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectionPointOut/relPosition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOut/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectionPointOut/addData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOut/globalId"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointOutActionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOutActionType/formalParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointOutType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOutType/formalParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointOutType1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOutType1/formalParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointOutType2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOutType2/formalParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectionPointOutType3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectionPointOutType3/formalParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ConnectorType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectorType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectorType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectorType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ConnectorType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectorType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectorType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectorType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectorType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ConnectorType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ContactType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContactType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContactType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContactType/connectionPointOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContactType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContactType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/storage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContactType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ContentHeaderType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContentHeaderType/coordinateInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContentHeaderType/addDataInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContentHeaderType/addData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/modificationDateTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/organization"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContentHeaderType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ContinuationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContinuationType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContinuationType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContinuationType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ContinuationType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContinuationType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContinuationType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContinuationType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContinuationType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ContinuationType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//CoordinateInfoType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoordinateInfoType/pageSize"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoordinateInfoType/fbd"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoordinateInfoType/ld"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//CoordinateInfoType/sfc"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//DataType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/bOOL"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/bYTE"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/wORD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/dWORD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/lWORD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/sINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/iNT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/dINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/lINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/uSINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/uINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/uDINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/uLINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/rEAL"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/lREAL"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/tIME"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/dATE"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/dT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/tOD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/string"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/wstring"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNY"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYDERIVED"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYELEMENTARY"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYMAGNITUDE"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYNUM"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYREAL"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYINT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYBIT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYSTRING"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/aNYDATE"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/array"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/derived"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/enum"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/struct"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/subrangeSigned"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/subrangeUnsigned"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataType/pointer"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//DataType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//DataType1/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//DataType1/handleUnknown"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//DataType1/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//DataTypesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataTypesType/dataType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//DataTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataTypeType/baseType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataTypeType/initialValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataTypeType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DataTypeType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//DataTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//DerivedType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DerivedType/addData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//DerivedType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//DocumentRoot/project"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//EnumType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//EnumType/values"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//EnumType/baseType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ErrorType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ErrorType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ErrorType/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ErrorType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ErrorType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ErrorType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ErrorType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ErrorType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ErrorType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ExternalVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//FbdType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//FbdType/scaling"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//FBDType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//FBDType1/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/comment"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/error"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/connector"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/continuation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/actionBlock"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/vendorElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/block"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/inVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/outVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/inOutVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/label"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/jump"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//FBDType1/return"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//FileHeaderType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/companyName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/companyURL"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/contentDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/creationDateTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/productName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/productRelease"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//FileHeaderType/productVersion"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//FormattedText">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//FormattedText/any"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//GlobalVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//InfoType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InfoType/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InfoType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InfoType/vendor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InfoType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InlineType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InlineType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InOutVariablesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariablesType/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InOutVariablesType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariablesType1/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InOutVariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariableType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariableType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariableType/connectionPointOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariableType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InOutVariableType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/edgeIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/edgeOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/negatedIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/negatedOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/storageIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/storageOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InOutVariableType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InOutVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//InputVariablesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InputVariablesType/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InputVariablesType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InputVariablesType1/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InputVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//InstancesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InstancesType/configurations"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InterfaceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//InterfaceType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/localVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/tempVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/inputVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/outputVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/inOutVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/externalVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/globalVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/accessVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InterfaceType/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//InVariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InVariableType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InVariableType/connectionPointOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InVariableType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//InVariableType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/storage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//InVariableType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//JumpStepType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpStepType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpStepType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpStepType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpStepType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpStepType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpStepType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpStepType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpStepType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpStepType/targetName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpStepType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//JumpType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//JumpType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpType/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//JumpType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//LabelType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LabelType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LabelType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LabelType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LabelType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LabelType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LabelType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LabelType/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LabelType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LabelType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//LdType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LdType/scaling"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//LDType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//LDType1/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/comment"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/error"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/connector"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/continuation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/actionBlock"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/vendorElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/block"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/inVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/outVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/inOutVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/label"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/jump"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/return"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/leftPowerRail"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/rightPowerRail"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/coil"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//LDType1/contact"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//LeftPowerRailType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LeftPowerRailType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LeftPowerRailType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LeftPowerRailType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//LeftPowerRailType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LeftPowerRailType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LeftPowerRailType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LeftPowerRailType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LeftPowerRailType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//LeftPowerRailType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//LocalVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//MacroStepType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//MacroStepType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//MacroStepType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//MacroStepType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//MacroStepType/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//MacroStepType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//MacroStepType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//MacroStepType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//MacroStepType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//MacroStepType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//MacroStepType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//MacroStepType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//MacroStepType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//OutputVariablesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//OutputVariablesType/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//OutputVariablesType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//OutputVariablesType1/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//OutputVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//OutVariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//OutVariableType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//OutVariableType/connectionPointIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//OutVariableType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//OutVariableType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/storage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//OutVariableType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//PageSizeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PageSizeType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PageSizeType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//PointerType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PointerType/baseType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//Position">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Position/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//Position/y"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//PouInstance">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouInstance/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouInstance/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PouInstance/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PouInstance/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PouInstance/typeName"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//PousType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PousType/pou"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//PouType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouType1/interface"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouType1/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouType1/transitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouType1/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouType1/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//PouType1/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PouType1/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PouType1/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//PouType1/pouType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ProjectType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ProjectType/fileHeader"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ProjectType/contentHeader"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ProjectType/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ProjectType/instances"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ProjectType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ProjectType/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//RangeSigned">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RangeSigned/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RangeSigned/upper"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//RangeUnsigned">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RangeUnsigned/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RangeUnsigned/upper"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ReferenceType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReferenceType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ReferenceType1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReferenceType1/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ResourceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ResourceType/task"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ResourceType/globalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ResourceType/pouInstance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ResourceType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ResourceType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ResourceType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ResourceType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ReturnType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ReturnType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ReturnType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ReturnType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//ReturnType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReturnType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReturnType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReturnType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReturnType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ReturnType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//RightPowerRailType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//RightPowerRailType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//RightPowerRailType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//RightPowerRailType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//RightPowerRailType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RightPowerRailType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RightPowerRailType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RightPowerRailType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RightPowerRailType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//RightPowerRailType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ScalingType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ScalingType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ScalingType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ScalingType1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ScalingType1/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ScalingType1/y"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ScalingType2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ScalingType2/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ScalingType2/y"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SelectionConvergenceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionConvergenceType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionConvergenceType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionConvergenceType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionConvergenceType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionConvergenceType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionConvergenceType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionConvergenceType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionConvergenceType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionConvergenceType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SelectionDivergenceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionDivergenceType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionDivergenceType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionDivergenceType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionDivergenceType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SelectionDivergenceType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionDivergenceType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionDivergenceType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionDivergenceType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SelectionDivergenceType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SfcType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SfcType/scaling"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SFCType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//SFCType1/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/comment"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/error"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/connector"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/continuation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/actionBlock"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/vendorElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/block"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/inVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/outVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/inOutVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/label"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/jump"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/return"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/leftPowerRail"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/rightPowerRail"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/coil"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/contact"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/step"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/macroStep"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/jumpStep"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/transition"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/selectionDivergence"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/selectionConvergence"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/simultaneousDivergence"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//SFCType1/simultaneousConvergence"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SimpleValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimpleValueType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SimultaneousConvergenceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousConvergenceType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousConvergenceType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousConvergenceType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousConvergenceType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousConvergenceType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousConvergenceType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousConvergenceType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousConvergenceType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousConvergenceType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SimultaneousDivergenceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousDivergenceType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousDivergenceType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousDivergenceType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousDivergenceType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SimultaneousDivergenceType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousDivergenceType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousDivergenceType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousDivergenceType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousDivergenceType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//SimultaneousDivergenceType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//StepType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//StepType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//StepType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//StepType/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//StepType/connectionPointOutAction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//StepType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//StepType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/initialStep"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StepType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//StringType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//StringType/length"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//StructValueType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//StructValueType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//StructValueType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SubrangeSignedType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SubrangeSignedType/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SubrangeSignedType/baseType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//SubrangeUnsignedType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SubrangeUnsignedType/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//SubrangeUnsignedType/baseType"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//TaskType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TaskType/pouInstance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TaskType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TaskType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TaskType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TaskType/interval"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TaskType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TaskType/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TaskType/single"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//TempVarsType"/>
+    <genClasses ecoreClass="tc60201.ecore#//TransitionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionsType/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//TransitionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//TransitionType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType1/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType1/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType1/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType1/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType1/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TransitionType1/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType1/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType1/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType1/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType1/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType1/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//TransitionType1/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//TypesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TypesType/dataTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//TypesType/pous"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//Value">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Value/simpleValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Value/arrayValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//Value/structValue"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ValuesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute tc60201.ecore#//ValuesType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tc60201.ecore#//ValuesType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ValueType/member"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ValueType1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ValueType1/repetitionValue"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//ValueType2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ValueType2/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//ValueType2/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType/storage"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType1/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType1/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType1/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType1/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType1/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType1/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType1/storage"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType2">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType2/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType2/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType2/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType2/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType2/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType2/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType2/storage"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType3">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType3/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType3/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType3/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType3/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType3/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType3/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType3/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType3/storage"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType4">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType4/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType4/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType4/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType4/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType4/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType4/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType4/storage"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType5">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType5/connectionPointIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType5/connectionPointOut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType5/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType5/edge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType5/formalParameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType5/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType5/negated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType5/storage"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VariableType6">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType6/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType6/initialValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType6/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VariableType6/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType6/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType6/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VariableType6/name"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VarList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VarList/constant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VarList/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VarList/nonpersistent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VarList/nonretain"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VarList/persistent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VarList/retain"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VarListAccess">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListAccess/accessVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListAccess/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListAccess/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VarListConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListConfig/configVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListConfig/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListConfig/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VarListPlain">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListPlain/variable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListPlain/addData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VarListPlain/documentation"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//VendorElementType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VendorElementType/position"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VendorElementType/alternativeText"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VendorElementType/inputVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VendorElementType/inOutVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VendorElementType/outputVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tc60201.ecore#//VendorElementType/addData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VendorElementType/executionOrderId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VendorElementType/globalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VendorElementType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VendorElementType/localId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//VendorElementType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="tc60201.ecore#//WstringType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tc60201.ecore#//WstringType/length"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

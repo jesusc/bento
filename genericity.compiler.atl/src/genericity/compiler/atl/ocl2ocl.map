@@ -1,0 +1,38 @@
+mappings ocl2ocl(gbind) -> (atl)
+  uses callexpr as callexpr
+
+  delegate from _ : gbind!PropertyCallExp 
+             to callexpr!result
+               
+  [expr]
+  from gbind : gbind!RealExp
+    to   atl :   atl!RealExp
+	atl.realSymbol = gbind.realSymbol
+  end
+
+  [expr]
+  from gbind : gbind!MulOpCallExp
+    to   atl :   atl!OperatorCallExp
+	atl.operationName = gbind.operationName
+	atl.source    <- gbind.source
+	atl.arguments <- gbind.argument  
+  end
+
+  [expr]
+  from gbind : gbind!VariableExp
+    to   atl :   atl!VariableExp
+    
+	atl.referredVariable <- gbind.referredVariable  	  
+  end
+
+  [expr]
+  from gbind : gbind!SelfExp
+    to   atl :   atl!VariableExp, selfDcl : atl!VariableDeclaration
+    linking atl.referredVariable = selfDcl
+    
+    selfDcl.varName = 'self'
+    
+	// atl.referredVariable <- gbind.referredVariable  	  
+  end
+
+// end

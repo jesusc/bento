@@ -1,0 +1,24 @@
+@namespace(uri="http://genericity/examples/layout_nodes", prefix="layout_nodes")
+package layout_nodes;
+
+class Node {
+  attr Integer x;
+  attr Integer y;
+  ref EObject ~ref;
+  
+  // I keep this here only to be compatible node2layout
+  ref Node[*] connections;
+}
+
+
+abstract class Edge {
+  ref Node[1] source;
+  ref Node[1] target;   
+}
+
+class BezierEdge extends Edge {
+}
+
+class LineEdge extends Edge {   
+   
+}

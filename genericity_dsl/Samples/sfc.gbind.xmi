@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="9:1-76:2" metamodel="FD" name="SFC">
+    <commentsBefore>--</commentsBefore>
+    <commentsBefore>-- Binding between FlowDiagram concept and SFC</commentsBefore>
+    <commentsBefore>-- </commentsBefore>
+    <commentsBefore>-- Notes:</commentsBefore>
+    <commentsBefore>-- &#x9;&#x9;This binding is complex, but writing a transformation for this XSD-based meta-model</commentsBefore>
+    <commentsBefore>--&#x9;&#x9;would have been a lot more, because it would have mixed both concerns: dealing with</commentsBefore>
+    <commentsBefore>--      a degenerated meta-model and transforming to petri-nets. In some way, this binding</commentsBefore>
+    <commentsBefore>--      is just fixing the meta-model.</commentsBefore>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="10:2-10:31" concept="/1" concrete="/2"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="11:2-13:78" concept="/3" concrete="/4 /5 /6 /7 /8 /9">
+      <commentsAfter>-- Edges are not transitions (which has a different semantics), </commentsAfter>
+      <commentsAfter>-- but Connection/ConnectionPointIn which is an structural concept to link &quot;SFC nodes&quot; </commentsAfter>
+      <commentsAfter>-- (which include transitions)</commentsAfter>
+      <commentsAfter>-- class FlowEdge    to TransitionType</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="19:2-19:30" concept="/10" concrete="/11">
+      <commentsBefore>-- Edges are not transitions (which has a different semantics), </commentsBefore>
+      <commentsBefore>-- but Connection/ConnectionPointIn which is an structural concept to link &quot;SFC nodes&quot; </commentsBefore>
+      <commentsBefore>-- (which include transitions)</commentsBefore>
+      <commentsBefore>-- class FlowEdge    to TransitionType</commentsBefore>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="21:2-21:48" concept="/12" concrete="/4 /5"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="23:2-23:50" concept="/13" concrete="/6">
+      <commentsAfter>-- HOW TO MAP THE SELECTION CONVERGENCE TYPE? -> Not sure about the semantics</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="25:2-25:51" concept="/14" concrete="/7">
+      <commentsBefore>-- HOW TO MAP THE SELECTION CONVERGENCE TYPE? -> Not sure about the semantics</commentsBefore>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="27:2-27:55" concept="/15" concrete="/8"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="28:2-28:56" concept="/16" concrete="/9"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="30:2-30:31" concept="/17" concrete="/18"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="32:2-32:43" conceptFeature="nodes" conceptClass="/1">
+      <commentsAfter>-- </commentsAfter>
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="32:30-32:43" name="allNodes">
+        <commentsAfter>-- </commentsAfter>
+        <source xsi:type="ocl:VariableExp" location="32:30-32:34" referredVariable="/19"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="34:2-34:45" conceptFeature="edges" conceptClass="/1">
+      <commentsBefore>-- </commentsBefore>
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="34:30-34:45" name="transition">
+        <source xsi:type="ocl:VariableExp" location="34:30-34:34" referredVariable="/20"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="36:2-36:108" conceptFeature="in" conceptClass="/10">
+      <concrete xsi:type="ocl:IteratorExp" location="36:26-36:108" name="any">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="36:26-36:70" name="allNodes">
+          <source xsi:type="ocl:CollectionOperationCallExp" location="36:26-36:61" operationName="first">
+            <source xsi:type="ocl:OperationCallExp" location="36:26-36:52" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="36:26-36:37" name="SFCType1" model="/21"/>
+            </source>
+          </source>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="36:80-36:107" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="36:80-36:89" name="localId">
+            <source xsi:type="ocl:VariableExp" location="36:80-36:81" referredVariable="/0/@bindings.11/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="36:92-36:107" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="36:92-36:96" referredVariable="/22"/>
+          </arguments>
+        </body>
+        <iterators location="36:76-36:77" varName="n" variableExp="/0/@bindings.11/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="37:2-37:37" conceptFeature="out" conceptClass="/10">
+      <commentsAfter>-- feature Node.&quot;in&quot; = FD!Connection.allInstances()->select(c | c.parent = self )</commentsAfter>
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="37:26-37:37" name="parent">
+        <commentsAfter>-- feature Node.&quot;in&quot; = FD!Connection.allInstances()->select(c | c.parent = self )</commentsAfter>
+        <source xsi:type="ocl:VariableExp" location="37:26-37:30" referredVariable="/23"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="41:2-41:65" conceptFeature="in" conceptClass="/3" qualifier="/4">
+      <commentsBefore>-- feature Node.&quot;in&quot; = FD!Connection.allInstances()->select(c | c.parent = self )</commentsBefore>
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="41:32-41:65" name="connection">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="41:32-41:54" name="connectionPointIn">
+          <source xsi:type="ocl:VariableExp" location="41:32-41:36" referredVariable="/24"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="42:2-42:101" conceptFeature="out" conceptClass="/3" qualifier="/4">
+      <concrete xsi:type="ocl:IteratorExp" location="42:32-42:101" name="select">
+        <source xsi:type="ocl:OperationCallExp" location="42:32-42:60" operationName="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="42:32-42:45" name="Connection" model="/21"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="42:73-42:100" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="42:73-42:85" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="42:73-42:74" referredVariable="/0/@bindings.14/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="42:88-42:100" name="localId">
+            <source xsi:type="ocl:VariableExp" location="42:88-42:92" referredVariable="/25"/>
+          </arguments>
+        </body>
+        <iterators location="42:69-42:70" varName="c" variableExp="/0/@bindings.14/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="44:2-44:72" conceptFeature="in" conceptClass="/3" qualifier="/5">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="44:39-44:72" name="connection">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="44:39-44:61" name="connectionPointIn">
+          <source xsi:type="ocl:VariableExp" location="44:39-44:43" referredVariable="/26"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="45:2-45:108" conceptFeature="out" conceptClass="/3" qualifier="/5">
+      <concrete xsi:type="ocl:IteratorExp" location="45:39-45:108" name="select">
+        <source xsi:type="ocl:OperationCallExp" location="45:39-45:67" operationName="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="45:39-45:52" name="Connection" model="/21"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="45:80-45:107" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="45:80-45:92" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="45:80-45:81" referredVariable="/0/@bindings.16/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="45:95-45:107" name="localId">
+            <source xsi:type="ocl:VariableExp" location="45:95-45:99" referredVariable="/27"/>
+          </arguments>
+        </body>
+        <iterators location="45:76-45:77" varName="c" variableExp="/0/@bindings.16/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="47:2-47:80" conceptFeature="in" conceptClass="/3" qualifier="/6">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="47:47-47:80" name="connection">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="47:47-47:69" name="connectionPointIn">
+          <source xsi:type="ocl:VariableExp" location="47:47-47:51" referredVariable="/28"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="48:2-48:116" conceptFeature="out" conceptClass="/3" qualifier="/6">
+      <concrete xsi:type="ocl:IteratorExp" location="48:47-48:116" name="select">
+        <source xsi:type="ocl:OperationCallExp" location="48:47-48:75" operationName="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="48:47-48:60" name="Connection" model="/21"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="48:88-48:115" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="48:88-48:100" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="48:88-48:89" referredVariable="/0/@bindings.18/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="48:103-48:115" name="localId">
+            <source xsi:type="ocl:VariableExp" location="48:103-48:107" referredVariable="/29"/>
+          </arguments>
+        </body>
+        <iterators location="48:84-48:85" varName="c" variableExp="/0/@bindings.18/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="50:2-50:81" conceptFeature="in" conceptClass="/3" qualifier="/7">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="50:48-50:81" name="connection">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="50:48-50:70" name="connectionPointIn">
+          <source xsi:type="ocl:VariableExp" location="50:48-50:52" referredVariable="/30"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="51:2-51:117" conceptFeature="out" conceptClass="/3" qualifier="/7">
+      <concrete xsi:type="ocl:IteratorExp" location="51:48-51:117" name="select">
+        <source xsi:type="ocl:OperationCallExp" location="51:48-51:76" operationName="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="51:48-51:61" name="Connection" model="/21"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="51:89-51:116" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="51:89-51:101" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="51:89-51:90" referredVariable="/0/@bindings.20/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="51:104-51:116" name="localId">
+            <source xsi:type="ocl:VariableExp" location="51:104-51:108" referredVariable="/31"/>
+          </arguments>
+        </body>
+        <iterators location="51:85-51:86" varName="c" variableExp="/0/@bindings.20/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="53:2-53:83" conceptFeature="in" conceptClass="/3" qualifier="/8">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="53:50-53:83" name="connection">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="53:50-53:72" name="connectionPointIn">
+          <source xsi:type="ocl:VariableExp" location="53:50-53:54" referredVariable="/32"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="54:2-54:119" conceptFeature="out" conceptClass="/3" qualifier="/8">
+      <concrete xsi:type="ocl:IteratorExp" location="54:50-54:119" name="select">
+        <source xsi:type="ocl:OperationCallExp" location="54:50-54:78" operationName="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="54:50-54:63" name="Connection" model="/21"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="54:91-54:118" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="54:91-54:103" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="54:91-54:92" referredVariable="/0/@bindings.22/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="54:106-54:118" name="localId">
+            <source xsi:type="ocl:VariableExp" location="54:106-54:110" referredVariable="/33"/>
+          </arguments>
+        </body>
+        <iterators location="54:87-54:88" varName="c" variableExp="/0/@bindings.22/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="56:2-56:84" conceptFeature="in" conceptClass="/3" qualifier="/9">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="56:51-56:84" name="connection">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="56:51-56:73" name="connectionPointIn">
+          <source xsi:type="ocl:VariableExp" location="56:51-56:55" referredVariable="/34"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="57:2-57:120" conceptFeature="out" conceptClass="/3" qualifier="/9">
+      <commentsAfter>-- I forgot to use [ ] to qualify the isInitial/final</commentsAfter>
+      <concrete xsi:type="ocl:IteratorExp" location="57:51-57:120" name="select">
+        <commentsAfter>-- I forgot to use [ ] to qualify the isInitial/final</commentsAfter>
+        <source xsi:type="ocl:OperationCallExp" location="57:51-57:79" operationName="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="57:51-57:64" name="Connection" model="/21"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="57:92-57:119" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="57:92-57:104" name="refLocalId">
+            <source xsi:type="ocl:VariableExp" location="57:92-57:93" referredVariable="/0/@bindings.24/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="57:107-57:119" name="localId">
+            <source xsi:type="ocl:VariableExp" location="57:107-57:111" referredVariable="/35"/>
+          </arguments>
+        </body>
+        <iterators location="57:88-57:89" varName="c" variableExp="/0/@bindings.24/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="61:2-61:53" conceptFeature="isInitial" conceptClass="/12" qualifier="/4">
+      <commentsBefore>-- I forgot to use [ ] to qualify the isInitial/final</commentsBefore>
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="61:37-61:53" name="initialStep">
+        <source xsi:type="ocl:VariableExp" location="61:37-61:41" referredVariable="/36"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="62:2-62:51" conceptFeature="isInitial" conceptClass="/12" qualifier="/5">
+      <concrete xsi:type="ocl:BooleanExp" location="62:46-62:51"/>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="64:2-64:42" conceptFeature="isFinal" conceptClass="/12" qualifier="/4">
+      <concrete xsi:type="ocl:BooleanExp" location="64:37-64:42"/>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="65:2-65:49" conceptFeature="isFinal" conceptClass="/12" qualifier="/5">
+      <concrete xsi:type="ocl:BooleanExp" location="65:44-65:49"/>
+    </bindings>
+    <helpers location="68:2-68:90" feature="parent" contextClass="/37">
+      <body xsi:type="ocl:OperationCallExp" location="68:38-68:90" operationName="refImmediateComposite">
+        <source xsi:type="ocl:OperationCallExp" location="68:38-68:66" operationName="refImmediateComposite">
+          <source xsi:type="ocl:VariableExp" location="68:38-68:42" referredVariable="/38"/>
+        </source>
+      </body>
+      <type xsi:type="ocl:OclAnyType" location="68:29-68:35"/>
+    </helpers>
+    <helpers location="70:2-75:70" feature="allNodes" contextClass="/39">
+      <body xsi:type="ocl:OperationCallExp" location="70:38-75:70" operationName="union">
+        <source xsi:type="ocl:OperationCallExp" location="70:38-74:69" operationName="union">
+          <source xsi:type="ocl:OperationCallExp" location="70:38-73:67" operationName="union">
+            <source xsi:type="ocl:OperationCallExp" location="70:38-72:66" operationName="union">
+              <source xsi:type="ocl:OperationCallExp" location="70:38-71:33" operationName="union">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="70:38-70:47" name="step">
+                  <source xsi:type="ocl:VariableExp" location="70:38-70:42" referredVariable="/40"/>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="71:17-71:32" name="transition">
+                  <source xsi:type="ocl:VariableExp" location="71:17-71:21" referredVariable="/41"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="72:41-72:65" name="selectionDivergence">
+                <source xsi:type="ocl:VariableExp" location="72:41-72:45" referredVariable="/42"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="73:41-73:66" name="selectionConvergence">
+              <source xsi:type="ocl:VariableExp" location="73:41-73:45" referredVariable="/43"/>
+            </arguments>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="74:41-74:68" name="simultaneousDivergence">
+            <source xsi:type="ocl:VariableExp" location="74:41-74:45" referredVariable="/44"/>
+          </arguments>
+        </source>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="75:41-75:69" name="simultaneousConvergence">
+          <source xsi:type="ocl:VariableExp" location="75:41-75:45" referredVariable="/45"/>
+        </arguments>
+      </body>
+      <type xsi:type="ocl:OclAnyType" location="70:29-70:35"/>
+    </helpers>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="10:8-10:19" name="FlowDiagram"/>
+  <genericity_dsl:ConcreteMetaclass location="10:23-10:31" name="SFCType1"/>
+  <genericity_dsl:ConceptMetaclass location="11:8-11:12" name="Node"/>
+  <genericity_dsl:ConcreteMetaclass location="11:23-11:31" name="StepType"/>
+  <genericity_dsl:ConcreteMetaclass location="11:33-11:48" name="TransitionType1"/>
+  <genericity_dsl:ConcreteMetaclass location="12:23-12:46" name="SelectionDivergenceType"/>
+  <genericity_dsl:ConcreteMetaclass location="12:48-12:72" name="SelectionConvergenceType"/>
+  <genericity_dsl:ConcreteMetaclass location="13:23-13:49" name="SimultaneousDivergenceType"/>
+  <genericity_dsl:ConcreteMetaclass location="13:51-13:78" name="SimultaneousConvergenceType"/>
+  <genericity_dsl:ConceptMetaclass location="19:8-19:16" name="FlowEdge"/>
+  <genericity_dsl:ConcreteMetaclass location="19:20-19:30" name="Connection"/>
+  <genericity_dsl:ConceptMetaclass location="21:8-21:12" name="Task"/>
+  <genericity_dsl:ConceptMetaclass location="23:8-23:23" name="ExclusiveChoice"/>
+  <genericity_dsl:ConceptMetaclass location="25:8-25:19" name="SimpleMerge"/>
+  <genericity_dsl:ConceptMetaclass location="27:8-27:21" name="ParallelSplit"/>
+  <genericity_dsl:ConceptMetaclass location="28:8-28:23" name="Synchronization"/>
+  <genericity_dsl:ConceptMetaclass location="30:8-30:19" name="MultiChoice"/>
+  <genericity_dsl:ConcreteMetaclass location="30:27-30:31" name="NONE"/>
+  <ocl:VariableDeclaration location="32:30-32:34" varName="self" variableExp="/0/@bindings.9/@concrete/@source"/>
+  <ocl:VariableDeclaration location="34:30-34:34" varName="self" variableExp="/0/@bindings.10/@concrete/@source"/>
+  <ocl:OclModel location="36:26-36:28" name="FD" elements="/0/@bindings.11/@concrete/@source/@source/@source/@source /0/@bindings.14/@concrete/@source/@source /0/@bindings.16/@concrete/@source/@source /0/@bindings.18/@concrete/@source/@source /0/@bindings.20/@concrete/@source/@source /0/@bindings.22/@concrete/@source/@source /0/@bindings.24/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="36:92-36:96" varName="self" variableExp="/0/@bindings.11/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="37:26-37:30" varName="self" variableExp="/0/@bindings.12/@concrete/@source"/>
+  <ocl:VariableDeclaration location="41:32-41:36" varName="self" variableExp="/0/@bindings.13/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="42:88-42:92" varName="self" variableExp="/0/@bindings.14/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="44:39-44:43" varName="self" variableExp="/0/@bindings.15/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="45:95-45:99" varName="self" variableExp="/0/@bindings.16/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="47:47-47:51" varName="self" variableExp="/0/@bindings.17/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="48:103-48:107" varName="self" variableExp="/0/@bindings.18/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="50:48-50:52" varName="self" variableExp="/0/@bindings.19/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="51:104-51:108" varName="self" variableExp="/0/@bindings.20/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="53:50-53:54" varName="self" variableExp="/0/@bindings.21/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="54:106-54:110" varName="self" variableExp="/0/@bindings.22/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="56:51-56:55" varName="self" variableExp="/0/@bindings.23/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="57:107-57:111" varName="self" variableExp="/0/@bindings.24/@concrete/@body/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="61:37-61:41" varName="self" variableExp="/0/@bindings.25/@concrete/@source"/>
+  <genericity_dsl:ConceptMetaclass location="68:9-68:19" name="Connection"/>
+  <ocl:VariableDeclaration location="68:38-68:42" varName="self" variableExp="/0/@helpers.0/@body/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="70:9-70:17" name="SFCType1"/>
+  <ocl:VariableDeclaration location="70:38-70:42" varName="self" variableExp="/0/@helpers.1/@body/@source/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="71:17-71:21" varName="self" variableExp="/0/@helpers.1/@body/@source/@source/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="72:41-72:45" varName="self" variableExp="/0/@helpers.1/@body/@source/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="73:41-73:45" varName="self" variableExp="/0/@helpers.1/@body/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="74:41-74:45" varName="self" variableExp="/0/@helpers.1/@body/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="75:41-75:45" varName="self" variableExp="/0/@helpers.1/@body/@arguments.0/@source"/>
+</xmi:XMI>

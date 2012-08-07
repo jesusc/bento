@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<NQC_NS_Prefix:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:NQC_NS_Prefix="NQC_URI" xsi:schemaLocation="NQC_URI ../metamodels/NQC.ecore">
+  <Tasks Name="MyTask"/>
+  <Subroutines Name="subroutine1">
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant" Value="-1"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Label Label="x = 0"/>
+      <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant" Value="1"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant" Value="2"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:GoToStatement" JumpLabel="//@Subroutines.0/@Statements.1/@Label"/>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant" Value="3"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:IfStatement">
+      <Condition xsi:type="NQC_NS_Prefix:BooleanConstant"/>
+      <Consequence xsi:type="NQC_NS_Prefix:BlockStatement">
+        <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+          <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+          <Expression xsi:type="NQC_NS_Prefix:IntegerConstant" Value="4"/>
+        </Statements>
+        <Statements xsi:type="NQC_NS_Prefix:SubroutineCall" Callee="//@Subroutines.1"/>
+      </Consequence>
+      <Alternative xsi:type="NQC_NS_Prefix:BlockStatement">
+        <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+          <Variable Variable="//@Subroutines.0/@LocalVariables.0"/>
+          <Expression xsi:type="NQC_NS_Prefix:IntegerConstant" Value="5"/>
+        </Statements>
+        <Statements xsi:type="NQC_NS_Prefix:SubroutineCall" Callee="//@Subroutines.1"/>
+      </Alternative>
+    </Statements>
+    <LocalVariables Name="x"/>
+  </Subroutines>
+  <Subroutines Name="println">
+    <Statements xsi:type="NQC_NS_Prefix:EmptyStatement"/>
+  </Subroutines>
+</NQC_NS_Prefix:Program>

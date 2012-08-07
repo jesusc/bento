@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flow_concept:FlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow_concept="flow_concept" xmi:id="_RtAhIPWsEeCbdt8tTYmClA">
+  <nodes xsi:type="flow_concept:Task" xmi:id="_SSHZUPWsEeCbdt8tTYmClA" outs="_thswEPWsEeCbdt8tTYmClA" name="" isInitial="true"/>
+  <nodes xsi:type="flow_concept:Task" xmi:id="_Tdp_YPWsEeCbdt8tTYmClA" outs="_t8EX4PWsEeCbdt8tTYmClA" ins="_thswEPWsEeCbdt8tTYmClA" name="act1"/>
+  <nodes xsi:type="flow_concept:Task" xmi:id="_UN8M0PWsEeCbdt8tTYmClA" outs="_u9fYoPWsEeCbdt8tTYmClA" ins="_uP4rwPWsEeCbdt8tTYmClA" name="act2"/>
+  <nodes xsi:type="flow_concept:Task" xmi:id="_U8bqgPWsEeCbdt8tTYmClA" outs="_v7LI4PWsEeCbdt8tTYmClA" ins="_ulDDcPWsEeCbdt8tTYmClA _vkOogPWsEeCbdt8tTYmClA" name="act3"/>
+  <nodes xsi:type="flow_concept:Task" xmi:id="_V2ZYYPWsEeCbdt8tTYmClA" outs="_wPS-wPWsEeCbdt8tTYmClA" ins="_vQaUoPWsEeCbdt8tTYmClA" name="act4"/>
+  <nodes xsi:type="flow_concept:ExclusiveChoice" xmi:id="_Y6DWoPWsEeCbdt8tTYmClA" outs="_uP4rwPWsEeCbdt8tTYmClA _ulDDcPWsEeCbdt8tTYmClA _UGcucCGCEeGTN_FtbM-Qxg" ins="_t8EX4PWsEeCbdt8tTYmClA"/>
+  <nodes xsi:type="flow_concept:ParallelSplit" xmi:id="_aOidUPWsEeCbdt8tTYmClA" outs="_vQaUoPWsEeCbdt8tTYmClA _vkOogPWsEeCbdt8tTYmClA _QBXgoPZaEeCrefv42QW2Fg" ins="_u9fYoPWsEeCbdt8tTYmClA"/>
+  <nodes xsi:type="flow_concept:Synchronization" xmi:id="_arv9wPWsEeCbdt8tTYmClA" outs="_ISSdsPWtEeCbdt8tTYmClA" ins="_v7LI4PWsEeCbdt8tTYmClA _wPS-wPWsEeCbdt8tTYmClA _QBXgoPZaEeCrefv42QW2Fg"/>
+  <nodes xsi:type="flow_concept:FinalTask" xmi:id="_WuRbkPWsEeCbdt8tTYmClA" ins="_ISSdsPWtEeCbdt8tTYmClA" isMandatory="true"/>
+  <nodes xsi:type="flow_concept:FinalTask" xmi:id="_Rlu6oCGBEeGTN_FtbM-Qxg" ins="_UGcucCGCEeGTN_FtbM-Qxg" isTerminating="true"/>
+  <edges xmi:id="_thswEPWsEeCbdt8tTYmClA" in="_SSHZUPWsEeCbdt8tTYmClA" out="_Tdp_YPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_t8EX4PWsEeCbdt8tTYmClA" in="_Tdp_YPWsEeCbdt8tTYmClA" out="_Y6DWoPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_uP4rwPWsEeCbdt8tTYmClA" in="_Y6DWoPWsEeCbdt8tTYmClA" out="_UN8M0PWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_ulDDcPWsEeCbdt8tTYmClA" in="_Y6DWoPWsEeCbdt8tTYmClA" out="_U8bqgPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_u9fYoPWsEeCbdt8tTYmClA" in="_UN8M0PWsEeCbdt8tTYmClA" out="_aOidUPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_vQaUoPWsEeCbdt8tTYmClA" in="_aOidUPWsEeCbdt8tTYmClA" out="_V2ZYYPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_vkOogPWsEeCbdt8tTYmClA" in="_aOidUPWsEeCbdt8tTYmClA" out="_U8bqgPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_v7LI4PWsEeCbdt8tTYmClA" in="_U8bqgPWsEeCbdt8tTYmClA" out="_arv9wPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_wPS-wPWsEeCbdt8tTYmClA" in="_V2ZYYPWsEeCbdt8tTYmClA" out="_arv9wPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_ISSdsPWtEeCbdt8tTYmClA" in="_arv9wPWsEeCbdt8tTYmClA" out="_WuRbkPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_QBXgoPZaEeCrefv42QW2Fg" in="_aOidUPWsEeCbdt8tTYmClA" out="_arv9wPWsEeCbdt8tTYmClA"/>
+  <edges xmi:id="_UGcucCGCEeGTN_FtbM-Qxg" in="_Y6DWoPWsEeCbdt8tTYmClA" out="_Rlu6oCGBEeGTN_FtbM-Qxg"/>
+</flow_concept:FlowDiagram>

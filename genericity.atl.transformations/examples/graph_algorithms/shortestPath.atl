@@ -1,0 +1,80 @@
+module shortestPath;
+create OUT : Paths from IN : Graph;
+
+helper context Graph!Graph def: nodes : Sequence(Graph!Node) =
+	self.contents->select(n | n.oclIsKindOf(Graph!Node) );
+
+helper def : infinity : Integer = 10000000;
+
+helper def : findCloser(data : Map(Graph!Node, TupleType( node : Graph!Node, dist : Integer, previous : Grap!Node))) : OclAny =
+	data.getKeys()->iterate(n; acc : OclAny = Tuple { node = OclUndefined, dist = thisModule.infinity } |
+		if data.get(n).visited = false and data.get(n).dist < acc.dist then
+			data.get(n)
+		else
+			acc
+		endif
+	);
+
+	
+helper def : dijkstra(graph : Graph!Graph, source : Graph!Node) : Map(Graph!Node, TupleType( node : Graph!Node, dist : Integer, previous : Grap!Node)) =
+	let initial : OclAny = graph.nodes->iterate(n; acc : OclAny = Map {} |
+		acc.including(n, Tuple { node = n, dist = thisModule.infinity, previous = OclUndefined, visited = false } ) ) in  
+	let data : OclAny = initial.including(source, Tuple { node = source, dist = 0, previous = OclUndefined, visited = false } ) 
+	in graph.nodes->iterate(_ignore_; acc : OclAny = data |
+		let u : OclAny = thisModule.findCloser(acc) in
+			if u.node.oclIsUndefined() then 
+				acc
+			else
+				let nodeInfo  : OclAny  = Tuple { node = u.node, dist = u.dist, previous = u.previous, visited = true } in
+				let acc2      : OclAny = acc.including(u.node, nodeInfo) in
+				let neighbors : OclAny = u.node.outgoing->select(edge | acc2.get(edge.target).visited = false ) in
+					neighbors->iterate(edge; acc3 : OclAny = acc2 |
+						let v : Graph!Node = edge.target in
+						let alt : Integer  = u.dist + edge.weight in
+							if alt < acc3.get(v).dist then
+								acc3.including(v,
+									Tuple { node = v, dist = alt, previous = u.node, visited = acc3.get(v).visited } 
+								)							
+							else
+								acc3
+							endif					
+					)				
+			endif
+	
+	);
+
+helper def : hopsTo(data : Map(Graph!Node, OclAny), target : Graph!Node) : Sequence(Graph!Node) =
+	target.refImmediateComposite().nodes->iterate(ignore; acc : OclAny = Tuple { u = target, seq = Sequence {} } |
+		if data.get( acc.u ).previous.oclIsUndefined() then
+			acc
+		else
+			Tuple {
+				seq = acc.seq.prepend(acc.u),
+				u = data.get( acc.u ).previous			
+			}
+		endif
+	).seq;
+
+rule node2node {
+	from  source : Graph!Node 
+ 	to    target : Paths!Node (
+    	label <- source.label,
+		paths <- source.refImmediateComposite().nodes->collect(n | thisModule.pathToNode(source, n) )
+  	)
+}
+
+lazy rule pathToNode {
+	from source : Graph!Node,
+	     tgt    : Graph!Node
+	using {
+		dij  : OclAny = thisModule.dijkstra(source.refImmediateComposite(), source);
+		hops : Sequence(Graph!Node) = thisModule.hopsTo(dij, tgt); 
+	}
+	to   path : Paths!Path (
+		target <- tgt,
+		cost   <- dij.get(tgt).dist,
+		hops   <- hops
+	)
+}
+
+

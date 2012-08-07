@@ -1,0 +1,21 @@
+annotate genericity_ocl {
+	annotate genericity_ocl with
+		nsURI='genericity_ocl',
+		nsPrefix='genericity_ocl';
+
+	annotate PrimitiveTypes with
+		nsURI='genericity_ocl-PrimitiveTypes',
+		nsPrefix='pt';
+
+	annotate "PrimitiveTypes::Boolean" with
+		instanceClassName='boolean';
+
+	annotate "PrimitiveTypes::Double" with
+		instanceClassName='double';
+
+	annotate "PrimitiveTypes::Integer" with
+		instanceClassName='int';
+
+	annotate "PrimitiveTypes::String" with
+		instanceClassName='java.lang.String';
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="5:1-20:2" metamodel="BBL" name="basicblocks_target">
+    <commentsBefore>-- In statementContainer:</commentsBefore>
+    <commentsBefore>-- For the moment only one level of Block nested (otherwise use statementContainer)</commentsBefore>
+    <commentsBefore>-- and write the flattening of statements accordingly</commentsBefore>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="6:2-6:27" concept="/1" concrete="/2"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="7:2-7:26" concept="/3" concrete="/4"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="8:2-8:28" concept="/5" concrete="/6"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="10:2-10:39" conceptFeature="identifier" conceptClass="/1" concreteFeature="NONE"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="11:2-11:39" conceptFeature="blocks" conceptClass="/1" concreteFeature="contents"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="13:2-13:40" conceptFeature="identifier" conceptClass="/3" concreteFeature="label"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="14:2-14:38" conceptFeature="edges" conceptClass="/3" concreteFeature="outgoing">
+      <commentsAfter>-- Target features</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="18:2-18:40" conceptFeature="label" conceptClass="/5">
+      <commentsBefore>-- Target features</commentsBefore>
+      <concrete xsi:type="ocl:StringExp" location="18:31-18:40" stringSymbol="nothing"/>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="19:2-19:33" conceptFeature="weight" conceptClass="/5">
+      <concrete xsi:type="ocl:IntegerExp" location="19:32-19:33" integerSymbol="1"/>
+    </bindings>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="6:8-6:18" name="BlockChunk"/>
+  <genericity_dsl:ConcreteMetaclass location="6:22-6:27" name="Graph"/>
+  <genericity_dsl:ConceptMetaclass location="7:8-7:18" name="BasicBlock"/>
+  <genericity_dsl:ConcreteMetaclass location="7:22-7:26" name="Node"/>
+  <genericity_dsl:ConceptMetaclass location="8:8-8:20" name="DirectedEdge"/>
+  <genericity_dsl:ConcreteMetaclass location="8:24-8:28" name="Edge"/>
+</xmi:XMI>

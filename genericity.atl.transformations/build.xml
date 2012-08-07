@@ -1,0 +1,24 @@
+<project default="main">
+	<target name="main" depends="loadModels">
+		<epsilon.etl  src="transformations/apply_binding.etl">
+			<model ref="ATL"/>
+			<model ref="OUT"/>
+		</epsilon.etl>
+	</target>
+	
+	<target name="loadModels">
+		
+		<epsilon.loadModel name="ATL" type="EMF" >
+			
+			<parameter name="modelFile" file="uml2java.atl.xmi" />
+<!--
+			<parameter name="metamodelUri" value="http://www.eclipse.org/gmt/2005/ATL, http://www.eclipse.org/gmt/2005/OCL" />
+-->
+			<parameter name="metamodelFile" value="metamodels/ATL.ecore" />
+			<parameter name="readOnLoad" value="true" />
+			<parameter name="storeOnDisposal" value="false" />
+			<parameter name="expand" value="true" />		
+		</epsilon.loadModel>	
+
+	</target>
+</project>

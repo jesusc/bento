@@ -1,0 +1,13 @@
+@namespace(uri="http://genericity/examples/simpleBlocks", prefix="simpleBlocks")
+package simpleBlocks;
+
+class Model {
+	attr String[1] identifier;
+
+   val Block[*] blocks;
+}
+
+class Block {
+   attr String[1] identifier;
+   ref Block[*] targets;   
+}

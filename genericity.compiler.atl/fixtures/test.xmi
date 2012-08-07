@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gbind:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gbind="http://genericity/language/gbind" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" metamodel="Left" name="Example1_left2right">
+  <bindings xsi:type="gbind:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="gbind:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1"/>
+  <bindings xsi:type="gbind:OclFeatureBinding" conceptFeature="salary_" conceptClass="//@conceptMetaclasses.0">
+    <concrete xsi:type="simpleocl:MulOpCallExp" operationName="*">
+      <argument xsi:type="simpleocl:RealExp" realSymbol="1.25"/>
+      <source xsi:type="simpleocl:PropertyCallExp">
+        <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="salary"/>
+        <source xsi:type="simpleocl:SelfExp"/>
+      </source>
+    </concrete>
+  </bindings>
+  <bindings xsi:type="gbind:OclFeatureBinding" conceptFeature="publications" conceptClass="//@conceptMetaclasses.0">
+    <concrete xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="journals"/>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </concrete>
+  </bindings>
+  <conceptMetaclasses name="Professor"/>
+  <conceptMetaclasses name="Publication"/>
+  <concreteMetaclasses name="Prof"/>
+  <concreteMetaclasses name="Journal"/>
+</gbind:BindingModel>

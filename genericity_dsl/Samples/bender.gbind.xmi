@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="4:1-47:2" metamodel="FD" name="BENDER">
+    <commentsBefore>--</commentsBefore>
+    <commentsBefore>-- Binding between FlowDiagram concept and BENDER </commentsBefore>
+    <commentsBefore>--</commentsBefore>
+    <commentsAfter>-- The need for changing in/out -> ins/outs to avoid name conflicts is because</commentsAfter>
+    <commentsAfter>-- in some way we are making Collected to inherit both from Node and Transition,</commentsAfter>
+    <commentsAfter>-- so the issue with multiple inheritance of choosing one implementation for the</commentsAfter>
+    <commentsAfter>-- same method appears.</commentsAfter>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="5:2-5:35" concept="/1" concrete="/2"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="6:2-6:39" concept="/3" concrete="/4 /5"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="7:2-7:41" concept="/6" concrete="/7 /8"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="9:2-9:32" concept="/9" concrete="/4">
+      <commentsAfter>--- when self.oclIsTypeOf(FD!State)   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          </commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="10:2-10:36" concept="/10" concrete="/5">
+      <commentsBefore>--- when self.oclIsTypeOf(FD!State)   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          </commentsBefore>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="12:2-12:31" concept="/11" concrete="/12"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="13:2-13:31" concept="/13" concrete="/12"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="14:2-14:31" concept="/14" concrete="/12"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="15:2-15:31" concept="/15" concrete="/12"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="17:2-17:41" conceptFeature="nodes" conceptClass="/1">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="17:30-17:41" name="states">
+        <source xsi:type="ocl:VariableExp" location="17:30-17:34" referredVariable="/16"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="18:2-18:72" conceptFeature="edges" conceptClass="/1">
+      <concrete xsi:type="ocl:OperationCallExp" location="18:30-18:72" operationName="flatten">
+        <source xsi:type="ocl:IteratorExp" location="18:30-18:62" name="collect">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="18:30-18:41" name="states">
+            <source xsi:type="ocl:VariableExp" location="18:30-18:34" referredVariable="/17"/>
+          </source>
+          <body xsi:type="ocl:NavigationOrAttributeCallExp" location="18:55-18:61" name="outs">
+            <source xsi:type="ocl:VariableExp" location="18:55-18:56" referredVariable="/0/@bindings.10/@concrete/@source/@iterators.0"/>
+          </body>
+          <iterators location="18:51-18:52" varName="s" variableExp="/0/@bindings.10/@concrete/@source/@body/@source"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="20:2-20:42" conceptFeature="in" conceptClass="/6" qualifier="/7" concreteFeature="src"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="21:2-26:8" conceptFeature="out" conceptClass="/6" qualifier="/7">
+      <concrete xsi:type="ocl:IfExp" location="22:3-26:8">
+        <thenExpression xsi:type="ocl:VariableExp" location="23:4-23:8" referredVariable="/20">
+          <commentsAfter>--> the transition goes to itself, but seen as a node </commentsAfter>
+        </thenExpression>
+        <condition xsi:type="ocl:OperationCallExp" location="22:6-22:36" operationName="oclIsKindOf">
+          <source xsi:type="ocl:VariableExp" location="22:6-22:10" referredVariable="/18"/>
+          <arguments xsi:type="ocl:OclModelElement" location="22:23-22:35" name="Collected" model="/19"/>
+        </condition>
+        <elseExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="25:4-25:19" name="defaultTar">
+          <source xsi:type="ocl:VariableExp" location="25:4-25:8" referredVariable="/21"/>
+        </elseExpression>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="28:2-28:60" conceptFeature="in" conceptClass="/6" qualifier="/8">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="28:34-28:60" name="refImmediateComposite">
+        <source xsi:type="ocl:VariableExp" location="28:34-28:38" referredVariable="/22"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="29:2-29:37" conceptFeature="out" conceptClass="/6" qualifier="/8" concreteFeature="out"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="31:2-31:29" conceptFeature="name" conceptClass="/9" concreteFeature="nombre">
+      <commentsAfter>-- feature Node[State].name = self.nombre</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="34:2-34:85" conceptFeature="ins" conceptClass="/3" qualifier="/4">
+      <commentsBefore>-- feature Node[State].name = self.nombre</commentsBefore>
+      <concrete xsi:type="ocl:IteratorExp" location="34:29-34:85" name="any">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="34:29-34:55" name="allInstances">
+          <source xsi:type="ocl:OclModelElement" location="34:29-34:42" name="Transition" model="/19"/>
+        </source>
+        <body xsi:type="ocl:OperatorCallExp" location="34:65-34:84" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="34:65-34:77" name="defaultTar">
+            <source xsi:type="ocl:VariableExp" location="34:65-34:66" referredVariable="/0/@bindings.16/@concrete/@iterators.0"/>
+          </source>
+          <arguments xsi:type="ocl:VariableExp" location="34:80-34:84" referredVariable="/23"/>
+        </body>
+        <iterators location="34:61-34:62" varName="t" variableExp="/0/@bindings.16/@concrete/@body/@source/@source"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="35:2-35:35" conceptFeature="outs" conceptClass="/3" qualifier="/4" concreteFeature="outs">
+      <commentsAfter>-- feature Node[Collected].name = 'collected'</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="38:2-38:49" conceptFeature="ins" conceptClass="/3" qualifier="/5">
+      <commentsBefore>-- feature Node[Collected].name = 'collected'</commentsBefore>
+      <commentsAfter>-- This is weird (it returns itself as a transition)</commentsAfter>
+      <concrete xsi:type="ocl:SequenceExp" location="38:32-38:49">
+        <commentsAfter>-- This is weird (it returns itself as a transition)</commentsAfter>
+        <elements xsi:type="ocl:VariableExp" location="38:43-38:47" referredVariable="/24"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="39:2-39:43" conceptFeature="outs" conceptClass="/3" qualifier="/5" concreteFeature="branches">
+      <commentsBefore>-- This is weird (it returns itself as a transition)</commentsBefore>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="41:2-41:67" conceptFeature="isInitial" conceptClass="/9" qualifier="/4">
+      <concrete xsi:type="ocl:OperationCallExp" location="41:34-41:67" operationName="oclIsKindOf">
+        <source xsi:type="ocl:VariableExp" location="41:34-41:38" referredVariable="/25"/>
+        <arguments xsi:type="ocl:OclModelElement" location="41:51-41:66" name="InitialState" model="/19"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="42:2-42:65" conceptFeature="isFinal" conceptClass="/9" qualifier="/4">
+      <concrete xsi:type="ocl:OperationCallExp" location="42:34-42:65" operationName="oclIsKindOf">
+        <source xsi:type="ocl:VariableExp" location="42:34-42:38" referredVariable="/26"/>
+        <arguments xsi:type="ocl:OclModelElement" location="42:51-42:64" name="FinalState" model="/19"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="44:2-44:43" conceptFeature="isInitial" conceptClass="/9" qualifier="/5">
+      <concrete xsi:type="ocl:BooleanExp" location="44:38-44:43"/>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="45:2-45:43" conceptFeature="isFinal" conceptClass="/9" qualifier="/5">
+      <concrete xsi:type="ocl:BooleanExp" location="45:38-45:43"/>
+    </bindings>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="5:8-5:19" name="FlowDiagram"/>
+  <genericity_dsl:ConcreteMetaclass location="5:23-5:35" name="StateMachine"/>
+  <genericity_dsl:ConceptMetaclass location="6:8-6:12" name="Node"/>
+  <genericity_dsl:ConcreteMetaclass location="6:23-6:28" name="State"/>
+  <genericity_dsl:ConcreteMetaclass location="6:30-6:39" name="Collected"/>
+  <genericity_dsl:ConceptMetaclass location="7:8-7:16" name="FlowEdge"/>
+  <genericity_dsl:ConcreteMetaclass location="7:23-7:33" name="Transition"/>
+  <genericity_dsl:ConcreteMetaclass location="7:35-7:41" name="Branch"/>
+  <genericity_dsl:ConceptMetaclass location="9:8-9:12" name="Task"/>
+  <genericity_dsl:ConceptMetaclass location="10:8-10:23" name="ExclusiveChoice"/>
+  <genericity_dsl:ConceptMetaclass location="12:8-12:21" name="ParallelSplit"/>
+  <genericity_dsl:ConcreteMetaclass location="12:27-12:31" name="NONE"/>
+  <genericity_dsl:ConceptMetaclass location="13:8-13:23" name="Synchronization"/>
+  <genericity_dsl:ConceptMetaclass location="14:8-14:19" name="MultiChoice"/>
+  <genericity_dsl:ConceptMetaclass location="15:8-15:19" name="SimpleMerge"/>
+  <ocl:VariableDeclaration location="17:30-17:34" varName="self" variableExp="/0/@bindings.9/@concrete/@source"/>
+  <ocl:VariableDeclaration location="18:30-18:34" varName="self" variableExp="/0/@bindings.10/@concrete/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="22:6-22:10" varName="self" variableExp="/0/@bindings.12/@concrete/@condition/@source"/>
+  <ocl:OclModel location="22:23-22:25" name="FD" elements="/0/@bindings.12/@concrete/@condition/@arguments.0 /0/@bindings.16/@concrete/@source/@source /0/@bindings.20/@concrete/@arguments.0 /0/@bindings.21/@concrete/@arguments.0"/>
+  <ocl:VariableDeclaration location="23:4-23:8" varName="self" variableExp="/0/@bindings.12/@concrete/@thenExpression"/>
+  <ocl:VariableDeclaration location="25:4-25:8" varName="self" variableExp="/0/@bindings.12/@concrete/@elseExpression/@source"/>
+  <ocl:VariableDeclaration location="28:34-28:38" varName="self" variableExp="/0/@bindings.13/@concrete/@source"/>
+  <ocl:VariableDeclaration location="34:80-34:84" varName="self" variableExp="/0/@bindings.16/@concrete/@body/@arguments.0"/>
+  <ocl:VariableDeclaration location="38:43-38:47" varName="self" variableExp="/0/@bindings.18/@concrete/@elements.0"/>
+  <ocl:VariableDeclaration location="41:34-41:38" varName="self" variableExp="/0/@bindings.20/@concrete/@source"/>
+  <ocl:VariableDeclaration location="42:34-42:38" varName="self" variableExp="/0/@bindings.21/@concrete/@source"/>
+</xmi:XMI>

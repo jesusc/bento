@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.gbind.resource.gbind.ui.GbindUIMetaInformation" id="org.emftext.language.gbind.resource.gbind.ui.GbindUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.gbind.resource.gbind.ui.GbindEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="gbind" icon="icons/editor_icon.gif" id="org.emftext.language.gbind.resource.gbind.ui.GbindEditor" name="EMFText gbind Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.gbind.resource.gbind">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.gbind.resource.gbind.ui.GbindPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Gbind Text Editor" id="org.emftext.language.gbind.resource.gbind.ui.GbindPreferencePage" class="org.emftext.language.gbind.resource.gbind.ui.GbindPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.gbind.resource.gbind.ui.GbindSyntaxColoringPreferencePage" class="org.emftext.language.gbind.resource.gbind.ui.GbindSyntaxColoringPreferencePage" category="org.emftext.language.gbind.resource.gbind.ui.GbindPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.gbind.resource.gbind.ui.GbindBracketPreferencePage" class="org.emftext.language.gbind.resource.gbind.ui.GbindBracketPreferencePage" category="org.emftext.language.gbind.resource.gbind.ui.GbindPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.gbind.resource.gbind.ui.GbindNewFileWizard" id="org.emftext.language.gbind.resource.gbind.ui.GbindNewFileWizard" name="EMFText .gbind file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.gbind.resource.gbind.ui.GbindNewProjectWizard" id="org.emftext.language.gbind.resource.gbind.ui.GbindNewProjectWizard" name="EMFText gbind project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.gbind.resource.gbind.ui.GbindMarkerResolutionGenerator" markerType="org.emftext.language.gbind.resource.gbind.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.gbind.resource.gbind.ui.GbindAnnotationModelFactory" extensions="gbind">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.gbind.resource.gbind" name=".gbind File" base-type="org.eclipse.core.runtime.text" file-extensions="gbind">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="gbind" id="org.emftext.language.gbind.resource.gbind.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.gbind.resource.gbind.ui.occurences">
+		</type>
+		<type name="org.emftext.language.gbind.resource.gbind.ui.occurences.declaration" super="org.emftext.language.gbind.resource.gbind.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.gbind.resource.gbind.ui.occurences" label="Occurrences (in .gbind files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="gbind.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="gbind.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="gbind.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="gbind.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="gbind.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="gbind.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="gbind.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="gbind.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="gbind.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.gbind.resource.gbind.ui.occurences.declaration" label="Declarations (in .gbind files)" textPreferenceKey="gbind.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="gbind.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="gbind.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="gbind.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="gbind.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="gbind.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.emftext.language.gbind.resource.gbind.ui.launchConfigurationType" id="org.emftext.language.gbind.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.emftext.language.gbind.resource.gbind.ui.launchConfigurationType" class="org.emftext.language.gbind.resource.gbind.ui.launch.GbindLaunchConfigurationTabGroup" id="org.emftext.language.gbind.launchConfigurationTabGroup" helpContextId="org.emftext.language.gbind.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug gbind model.">
+			</launchMode>
+			<launchMode mode="run" description="Run gbind model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="gbind Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.gbind.launch" modes="run,debug" class="org.emftext.language.gbind.resource.gbind.ui.launch.GbindLaunchShortcut" description="Launch a gbind model" id="org.emftext.language.gbind.launchShortcut">
+			<description description="Run gbind model" mode="run">
+			</description>
+			<description description="Debug gbind model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.emftext.language.gbind.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.emftext.language.gbind.resource.gbind.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.emftext.language.gbind.PropertyTester" type="java.lang.Object" namespace="org.emftext.language.gbind" properties="isLaunchable" class="org.emftext.language.gbind.resource.gbind.ui.GbindPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.gbind.resource.gbind.ui.debug.lineBreakpoint" markerType="org.emftext.language.gbind.resource.gbind.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.gbind.resource.gbind.ui.debug.lineBreakpoint" label="Breakpoints (in .gbind files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.emftext.language.gbind.resource.gbind.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.emftext.language.gbind.resource.gbind.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.emftext.language.gbind.resource.gbind.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.emftext.language.gbind.resource.gbind.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.emftext.language.gbind.resource.gbind.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.emftext.language.gbind.resource.gbind.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.emftext.language.gbind.resource.gbind.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.emftext.language.gbind.resource.gbind.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.emftext.language.gbind.resource.gbind.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.emftext.language.gbind.resource.gbind.ui.GbindEditor" class="org.emftext.language.gbind.resource.gbind.ui.debug.GbindAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.gbind.resource.gbind.debug.GbindDebugVariable" class="org.emftext.language.gbind.resource.gbind.ui.debug.GbindAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.gbind.resource.gbind.debug.GbindDebugVariable" class="org.emftext.language.gbind.resource.gbind.ui.debug.GbindAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.emftext.language.gbind.resource.gbind.ui.RulerPopupActions" targetID="org.emftext.language.gbind.resource.gbind.EditorRuler">
+			<action id="org.emftext.language.gbind.resource.gbind.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.emftext.language.gbind.resource.gbind.ui.GbindEditor" id="org.emftext.language.gbind.resource.gbind.ui.BreakpointRulerActions">
+			<action id="org.emftext.language.gbind.resource.gbind.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.emftext.language.gbind.resource.gbind.debugModel" class="org.emftext.language.gbind.resource.gbind.ui.debug.GbindDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

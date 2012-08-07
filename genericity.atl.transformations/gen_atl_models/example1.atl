@@ -1,0 +1,7 @@
+module basicblocks;
+create OUT : BBL from IN : Imp;
+
+--- Check whether the previous statement is a goto.
+helper context Imp!Statement def: something : Boolean =
+	self.additionalInfo.salary * 1.25
+; 

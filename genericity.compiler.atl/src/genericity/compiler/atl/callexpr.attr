@@ -1,0 +1,41 @@
+attribution callexpr(socl) -> (atl)
+  uses ocl2ocl // as exprm
+
+  inh source  : socl!OclExpression
+  inh rest    : _!List
+  syn result  : atl!OclExpression
+  // inh env   : _!Map
+
+  rule socl!PropertyCallExp  
+    first_element = self.calls.first
+  
+  	first_element[source] <- self.source[ocl2ocl!expr.t] // //TODO: GET WITH AN USES (DEPENDENCY) //self.source
+    first_element[rest] <- self.calls.tail
+	self[result] <- first_element[result]
+  end
+
+  rule socl!NavigationOrAttributeCall 	
+  	// locals
+  	rest_calls = self[rest]
+  	next_call  = self[rest].first
+  	source     = self[source]
+  	
+  	// propagation
+  	next_call[source] <- self[source]
+ 	next_call[rest]   <- rest_calls.tail
+
+	self[result] <- rest_calls.size.eq(0).if_else(
+    		{ |v|  
+    			new_call = atl!NavigationOrAttributeCallExp.new
+    			new_call.name   = self.name
+    			new_call.source = source
+    			new_call    			
+   		},
+    		{ |v|    
+    			new_call = atl!NavigationOrAttributeCallExp.new
+    			new_call.name   = self.name
+    			new_call.source = next_call[result]
+    			new_call    			
+    		}	
+    	)       
+  end

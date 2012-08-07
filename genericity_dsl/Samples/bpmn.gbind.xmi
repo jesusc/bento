@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="6:1-42:2" metamodel="FD" name="BPMN">
+    <commentsBefore>--</commentsBefore>
+    <commentsBefore>-- Binding between FlowDiagram concept and BPMN</commentsBefore>
+    <commentsBefore>-- </commentsBefore>
+    <commentsBefore>-- Some links about BPMN:</commentsBefore>
+    <commentsBefore>--   * http://tynerblain.com/blog/2006/07/27/bpmn-gateways/</commentsBefore>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="7:2-7:34" concept="/1" concrete="/2"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="8:2-8:29" concept="/3" concrete="/4"/>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="9:2-9:35" concept="/5" concrete="/6">
+      <commentsAfter>-- So far, only 1:1 mapping</commentsAfter>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="12:2-15:62" concept="/7" concrete="/8">
+      <commentsBefore>-- So far, only 1:1 mapping</commentsBefore>
+      <whenClause xsi:type="ocl:OperatorCallExp" location="12:41-15:62" operationName="or">
+        <source xsi:type="ocl:OperatorCallExp" location="12:41-14:58" operationName="or">
+          <source xsi:type="ocl:OperatorCallExp" location="12:41-13:77" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="12:41-12:66" operationName="=">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="12:41-12:58" name="activityType">
+                <source xsi:type="ocl:VariableExp" location="12:41-12:45" referredVariable="/9"/>
+              </source>
+              <arguments xsi:type="ocl:EnumLiteralExp" location="12:61-12:66" name="Task"/>
+            </source>
+            <arguments xsi:type="ocl:OperatorCallExp" location="13:41-13:77" operationName="=">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="13:41-13:58" name="activityType">
+                <source xsi:type="ocl:VariableExp" location="13:41-13:45" referredVariable="/10"/>
+              </source>
+              <arguments xsi:type="ocl:EnumLiteralExp" location="13:61-13:77" name="EventStartEmpty"/>
+            </arguments>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="14:24-14:58" operationName="=">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="14:24-14:41" name="activityType">
+              <source xsi:type="ocl:VariableExp" location="14:24-14:28" referredVariable="/11"/>
+            </source>
+            <arguments xsi:type="ocl:EnumLiteralExp" location="14:44-14:58" name="EventEndEmpty"/>
+          </arguments>
+        </source>
+        <arguments xsi:type="ocl:OperatorCallExp" location="15:24-15:62" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="15:24-15:41" name="activityType">
+            <source xsi:type="ocl:VariableExp" location="15:24-15:28" referredVariable="/12"/>
+          </source>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="15:44-15:62" name="EventEndTerminate"/>
+        </arguments>
+      </whenClause>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="17:2-18:88" concept="/13" concrete="/8">
+      <whenClause xsi:type="ocl:OperatorCallExp" location="17:41-18:88" operationName="or">
+        <source xsi:type="ocl:OperatorCallExp" location="17:41-17:87" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="17:41-17:58" name="activityType">
+            <source xsi:type="ocl:VariableExp" location="17:41-17:45" referredVariable="/14"/>
+          </source>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="17:61-17:87" name="GatewayDataBasedExclusive"/>
+        </source>
+        <arguments xsi:type="ocl:OperatorCallExp" location="18:41-18:88" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="18:41-18:58" name="activityType">
+            <source xsi:type="ocl:VariableExp" location="18:41-18:45" referredVariable="/15"/>
+          </source>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="18:61-18:88" name="GatewayEventBasedExclusive"/>
+        </arguments>
+      </whenClause>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="20:2-22:70" concept="/16" concrete="/8">
+      <whenClause xsi:type="ocl:OperatorCallExp" location="20:41-22:70" operationName="and">
+        <source xsi:type="ocl:OperatorCallExp" location="20:41-21:70" operationName="and">
+          <source xsi:type="ocl:OperatorCallExp" location="20:41-20:77" operationName="=">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="20:41-20:58" name="activityType">
+              <source xsi:type="ocl:VariableExp" location="20:41-20:45" referredVariable="/17"/>
+            </source>
+            <arguments xsi:type="ocl:EnumLiteralExp" location="20:61-20:77" name="GatewayParallel"/>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="21:41-21:70" operationName="=">
+            <source xsi:type="ocl:OperationCallExp" location="21:41-21:66" operationName="size">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="21:41-21:59" name="incomingEdges">
+                <source xsi:type="ocl:VariableExp" location="21:41-21:45" referredVariable="/18"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:IntegerExp" location="21:69-21:70" integerSymbol="1"/>
+          </arguments>
+        </source>
+        <arguments xsi:type="ocl:OperatorCallExp" location="22:41-22:70" operationName=">">
+          <source xsi:type="ocl:OperationCallExp" location="22:41-22:66" operationName="size">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="22:41-22:59" name="outgoingEdges">
+              <source xsi:type="ocl:VariableExp" location="22:41-22:45" referredVariable="/19"/>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:IntegerExp" location="22:69-22:70" integerSymbol="1"/>
+        </arguments>
+      </whenClause>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="24:2-26:70" concept="/20" concrete="/8">
+      <whenClause xsi:type="ocl:OperatorCallExp" location="24:41-26:70" operationName="and">
+        <source xsi:type="ocl:OperatorCallExp" location="24:41-25:70" operationName="and">
+          <source xsi:type="ocl:OperatorCallExp" location="24:41-24:77" operationName="=">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="24:41-24:58" name="activityType">
+              <source xsi:type="ocl:VariableExp" location="24:41-24:45" referredVariable="/21"/>
+            </source>
+            <arguments xsi:type="ocl:EnumLiteralExp" location="24:61-24:77" name="GatewayParallel"/>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="25:41-25:70" operationName="=">
+            <source xsi:type="ocl:OperationCallExp" location="25:41-25:66" operationName="size">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="25:41-25:59" name="outgoingEdges">
+                <source xsi:type="ocl:VariableExp" location="25:41-25:45" referredVariable="/22"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:IntegerExp" location="25:69-25:70" integerSymbol="1"/>
+          </arguments>
+        </source>
+        <arguments xsi:type="ocl:OperatorCallExp" location="26:41-26:70" operationName=">">
+          <source xsi:type="ocl:OperationCallExp" location="26:41-26:66" operationName="size">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="26:41-26:59" name="incomingEdges">
+              <source xsi:type="ocl:VariableExp" location="26:41-26:45" referredVariable="/23"/>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:IntegerExp" location="26:69-26:70" integerSymbol="1"/>
+        </arguments>
+      </whenClause>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="28:2-28:31" concept="/24" concrete="/25"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="30:2-30:75" conceptFeature="nodes" conceptClass="/1">
+      <concrete xsi:type="ocl:OperationCallExp" location="30:30-30:75" operationName="flatten">
+        <source xsi:type="ocl:IteratorExp" location="30:30-30:65" name="collect">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="30:30-30:40" name="pools">
+            <source xsi:type="ocl:VariableExp" location="30:30-30:34" referredVariable="/26"/>
+          </source>
+          <body xsi:type="ocl:NavigationOrAttributeCallExp" location="30:54-30:64" name="vertices">
+            <source xsi:type="ocl:VariableExp" location="30:54-30:55" referredVariable="/0/@bindings.8/@concrete/@source/@iterators.0"/>
+          </body>
+          <iterators location="30:50-30:51" varName="p" variableExp="/0/@bindings.8/@concrete/@source/@body/@source"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="31:2-31:80" conceptFeature="edges" conceptClass="/1">
+      <concrete xsi:type="ocl:OperationCallExp" location="31:30-31:80" operationName="flatten">
+        <source xsi:type="ocl:IteratorExp" location="31:30-31:70" name="collect">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="31:30-31:40" name="pools">
+            <source xsi:type="ocl:VariableExp" location="31:30-31:34" referredVariable="/27"/>
+          </source>
+          <body xsi:type="ocl:NavigationOrAttributeCallExp" location="31:54-31:69" name="sequenceEdges">
+            <source xsi:type="ocl:VariableExp" location="31:54-31:55" referredVariable="/0/@bindings.9/@concrete/@source/@iterators.0"/>
+          </body>
+          <iterators location="31:50-31:51" varName="p" variableExp="/0/@bindings.9/@concrete/@source/@body/@source"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="33:2-33:33" conceptFeature="in" conceptClass="/5" concreteFeature="source"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="34:2-34:32" conceptFeature="out" conceptClass="/5" concreteFeature="target"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="36:2-36:36" conceptFeature="in" conceptClass="/3" concreteFeature="incomingEdges"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="37:2-37:35" conceptFeature="out" conceptClass="/3" concreteFeature="outgoingEdges"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="40:2-40:63" conceptFeature="isInitial" conceptClass="/7">
+      <concrete xsi:type="ocl:OperatorCallExp" location="40:27-40:63" operationName="=">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="40:27-40:44" name="activityType">
+          <source xsi:type="ocl:VariableExp" location="40:27-40:31" referredVariable="/28"/>
+        </source>
+        <arguments xsi:type="ocl:EnumLiteralExp" location="40:47-40:63" name="EventStartEmpty"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="41:2-41:103" conceptFeature="isFinal" conceptClass="/7">
+      <concrete xsi:type="ocl:OperatorCallExp" location="41:27-41:103" operationName="or">
+        <source xsi:type="ocl:OperatorCallExp" location="41:27-41:61" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="41:27-41:44" name="activityType">
+            <source xsi:type="ocl:VariableExp" location="41:27-41:31" referredVariable="/29"/>
+          </source>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="41:47-41:61" name="EventEndEmpty"/>
+        </source>
+        <arguments xsi:type="ocl:OperatorCallExp" location="41:65-41:103" operationName="=">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="41:65-41:82" name="activityType">
+            <source xsi:type="ocl:VariableExp" location="41:65-41:69" referredVariable="/30"/>
+          </source>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="41:85-41:103" name="EventEndTerminate"/>
+        </arguments>
+      </concrete>
+    </bindings>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="7:8-7:19" name="FlowDiagram"/>
+  <genericity_dsl:ConcreteMetaclass location="7:23-7:34" name="BpmnDiagram"/>
+  <genericity_dsl:ConceptMetaclass location="8:8-8:12" name="Node"/>
+  <genericity_dsl:ConcreteMetaclass location="8:23-8:29" name="Vertex"/>
+  <genericity_dsl:ConceptMetaclass location="9:8-9:16" name="FlowEdge"/>
+  <genericity_dsl:ConcreteMetaclass location="9:23-9:35" name="SequenceEdge"/>
+  <genericity_dsl:ConceptMetaclass location="12:8-12:12" name="Task"/>
+  <genericity_dsl:ConcreteMetaclass location="12:27-12:35" name="Activity"/>
+  <ocl:VariableDeclaration location="12:41-12:45" varName="self" variableExp="/0/@bindings.3/@whenClause/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="13:41-13:45" varName="self" variableExp="/0/@bindings.3/@whenClause/@source/@source/@arguments.0/@source/@source"/>
+  <ocl:VariableDeclaration location="14:24-14:28" varName="self" variableExp="/0/@bindings.3/@whenClause/@source/@arguments.0/@source/@source"/>
+  <ocl:VariableDeclaration location="15:24-15:28" varName="self" variableExp="/0/@bindings.3/@whenClause/@arguments.0/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="17:8-17:23" name="ExclusiveChoice"/>
+  <ocl:VariableDeclaration location="17:41-17:45" varName="self" variableExp="/0/@bindings.4/@whenClause/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="18:41-18:45" varName="self" variableExp="/0/@bindings.4/@whenClause/@arguments.0/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="20:8-20:21" name="ParallelSplit"/>
+  <ocl:VariableDeclaration location="20:41-20:45" varName="self" variableExp="/0/@bindings.5/@whenClause/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="21:41-21:45" varName="self" variableExp="/0/@bindings.5/@whenClause/@source/@arguments.0/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="22:41-22:45" varName="self" variableExp="/0/@bindings.5/@whenClause/@arguments.0/@source/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="24:8-24:23" name="Synchronization"/>
+  <ocl:VariableDeclaration location="24:41-24:45" varName="self" variableExp="/0/@bindings.6/@whenClause/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="25:41-25:45" varName="self" variableExp="/0/@bindings.6/@whenClause/@source/@arguments.0/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="26:41-26:45" varName="self" variableExp="/0/@bindings.6/@whenClause/@arguments.0/@source/@source/@source"/>
+  <genericity_dsl:ConceptMetaclass location="28:8-28:19" name="SimpleMerge"/>
+  <genericity_dsl:ConcreteMetaclass location="28:27-28:31" name="NONE"/>
+  <ocl:VariableDeclaration location="30:30-30:34" varName="self" variableExp="/0/@bindings.8/@concrete/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="31:30-31:34" varName="self" variableExp="/0/@bindings.9/@concrete/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="40:27-40:31" varName="self" variableExp="/0/@bindings.14/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="41:27-41:31" varName="self" variableExp="/0/@bindings.15/@concrete/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="41:65-41:69" varName="self" variableExp="/0/@bindings.15/@concrete/@arguments.0/@source/@source"/>
+</xmi:XMI>

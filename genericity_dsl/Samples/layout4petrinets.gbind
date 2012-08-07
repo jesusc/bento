@@ -1,0 +1,7 @@
+
+-- Layout for petrinets
+binding PetriNet for SRC { 
+	class Node to Place, Transition	
+}
+
+

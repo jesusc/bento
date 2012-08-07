@@ -1,0 +1,19 @@
+@namespace(uri="petri_nets", prefix="petri_nets")
+package petri;
+
+class PetriNet {
+   val NamedElement[*] elems;
+}
+
+abstract class NamedElement {
+   attr String[1] name;
+}
+
+class Place extends NamedElement {
+   attr int[1] tokens;
+}
+
+class Transition extends NamedElement {
+   ref Place[*] in;
+   ref Place[*] out;
+}

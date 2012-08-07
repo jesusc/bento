@@ -1,0 +1,137 @@
+@namespace(uri="http://genericity/mismatches", prefix="mismatches")
+package mismatches;
+
+import "platform:/resource/genericity_dsl/Metamodel/genericity_dsl.ecore";
+
+
+@namespace(uri="http://genericity/mismatches/core", prefix="mismatches_core")
+package core { 
+
+	class Model {
+	   val MClass[*] classes;
+	   val ClassMismatch[*] mismatches;
+	}
+	
+	class MClass {
+	   attr String[1] name;
+	   val MFeature[*] features;
+	   
+	   ref EClass origin;
+	   
+	   val ClassMismatch[1] mismatch;
+	   val problem.Problem[*] problems;
+	}
+	
+	class MFeature {
+	   attr String[1] name;
+	   
+	   ref EObject origin;
+	}
+	
+	class MReference extends MFeature {
+	   
+	}
+	
+	class MAttribute extends MFeature {
+	   
+	}
+	
+	abstract class Mismatch {
+	     val problem.Problem[*] problems; 
+	}
+	
+	// don't remember why i put this here
+	abstract class Constraint { }
+	class NameConflictConstraint { }
+	
+	abstract class ClassMismatch extends Mismatch { }
+	abstract class FeatureMismatch extends Mismatch { }
+	abstract class AttributeMismatch extends FeatureMismatch { }
+	abstract class ReferenceMismatch extends FeatureMismatch { }
+	
+	// Possibility, not really...
+	abstract class Hint { }
+	class ReferenceToIntermediate extends Hint { }
+	
+	class ClassRenaming extends ClassMismatch {
+	   attr String[1] conceptMetaclass;
+	   attr String[1] concreteMetaclass;
+	}
+	
+	class FeatureRenaming extends FeatureMismatch {
+	   attr String[1] dConceptClass;	   
+	   ref  EClass[1] conceptClass;
+
+	   attr String[1] conceptFeature;
+	   attr String[1] concreteFeature;
+	   attr boolean equalNames = false;		   
+	
+	    ref genericity_dsl.BaseFeatureBinding featureBinding;	
+	}
+	
+	//
+	// An concrete clas act as two concept classes, having two roles in the transformation.
+	// No problem as far as the roles are exclusive (not related by inheritance chains)
+	//
+	// Potential problems:
+	// * Feature names collisions between the roles
+	// * Rule application collision (depends on the target language)
+	//
+	class DoubleRole extends ClassMismatch {
+	   attr String[1] dConcreteClass;
+	   attr String[*] dConceptClasses;
+	   
+	   ref EClass[1] concreteClass;
+	   ref EClass[*] conceptClasses;
+	}
+}
+
+@namespace(uri="http://genericity/mismatches/problems", prefix="mismatches_problems")
+package problem { 
+	abstract class Problem {
+		attr String[0..1] message;
+	}
+
+    abstract class Error   extends Problem { }
+    abstract class Warning extends Problem { }
+	
+	abstract class ClassNotFound extends Error {
+		attr String[1] className;   
+	}
+
+    abstract class WithInvolvedClasses {
+	   attr String[*] dInvolvedConceptClasses;
+	   ref  EClass[*] involvedConceptClasses;       
+    }
+	
+	class ConceptClassNotFound   extends ClassNotFound { }
+	class ConcreteClassNotFound extends ClassNotFound { }
+
+	class NotMappedClass extends Error, WithInvolvedClasses {
+	}
+
+	class NotMappedFeature extends Error, WithInvolvedClasses {
+	   attr String[1] featureName;
+	}
+
+	class TooManyFeatureBindings extends Error, WithInvolvedClasses {
+	   attr String[1] featureName;
+	}
+	
+	class FeatureNameClash extends Error, WithInvolvedClasses {
+	   attr String[1] featureName;
+	}
+
+
+	class RuleConflict extends Warning, WithInvolvedClasses {
+		attr String[1] language;		
+	}
+}
+
+@namespace(uri="http://genericity/mismatches/info", prefix="mismatches_info")
+package info { 
+    class ConcreteClassNotMapped {
+	   attr String[1] dInvolvedConcreteClass;
+	   ref  EClass[1] involvedConcreteClass;       
+    }
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gbind"
+    nsURI="http://genericity/language/gbind" nsPrefix="gbind">
+  <eClassifiers xsi:type="ecore:EClass" name="BindingModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//ConceptBinding" containment="true" eOpposite="#//ConceptBinding/model_"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="helpers" upperBound="-1"
+        eType="#//BaseHelper" containment="true" eOpposite="#//BaseHelper/model_"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conceptMetaclasses" upperBound="-1"
+        eType="#//ConceptMetaclass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concreteMetaclasses" upperBound="-1"
+        eType="#//ConcreteMetaclass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metaclass" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eclass" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConceptMetaclass" eSuperTypes="#//Metaclass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteMetaclass" eSuperTypes="#//Metaclass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConceptBinding" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debugName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model_" eType="#//BindingModel"
+        eOpposite="#//BindingModel/bindings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassBinding" eSuperTypes="#//ConceptBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"
+        eType="#//ConceptMetaclass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concrete" lowerBound="1"
+        upperBound="-1" eType="#//ConcreteMetaclass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whenClause" lowerBound="1"
+        eType="ecore:EClass ../../be.ac.vub.simpleocl/metamodel/simpleocl.ecore#//OclExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseFeatureBinding" eSuperTypes="#//ConceptBinding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conceptFeature" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conceptClass" lowerBound="1"
+        eType="#//ConceptMetaclass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" eType="#//ConcreteMetaclass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RenamingFeatureBinding" eSuperTypes="#//BaseFeatureBinding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteFeature" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OclFeatureBinding" eSuperTypes="#//BaseFeatureBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concrete" lowerBound="1"
+        eType="ecore:EClass ../../be.ac.vub.simpleocl/metamodel/simpleocl.ecore#//OclExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseHelper">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="ecore:EClass ../../be.ac.vub.simpleocl/metamodel/simpleocl.ecore#//OclExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../be.ac.vub.simpleocl/metamodel/simpleocl.ecore#//OclType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model_" eType="#//BindingModel"
+        eOpposite="#//BindingModel/helpers"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConceptHelper" eSuperTypes="#//BaseHelper">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" eType="#//ConcreteMetaclass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextClass" lowerBound="1"
+        eType="#//ConceptMetaclass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalHelper" eSuperTypes="#//BaseHelper">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//ConcreteMetaclass"/>
+  </eClassifiers>
+</ecore:EPackage>

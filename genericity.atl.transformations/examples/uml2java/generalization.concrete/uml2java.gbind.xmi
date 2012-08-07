@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:genericity_dsl="http://genericity/genericity_dsl" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <genericity_dsl:BindingModel location="2:1-7:2" metamodel="UML" name="class2java">
+    <bindings xsi:type="genericity_dsl:ClassBinding" location="3:2-3:25" concept="/1" concrete="/2"/>
+    <bindings xsi:type="genericity_dsl:RenamingFeatureBinding" location="5:2-5:41" conceptFeature="name" conceptClass="/1" qualifier="/2" concreteFeature="umlName"/>
+    <bindings xsi:type="genericity_dsl:OclFeatureBinding" location="6:5-6:75" conceptFeature="superclasses" conceptClass="/1">
+      <concrete xsi:type="ocl:IteratorExp" location="6:34-6:75" name="collect">
+        <source xsi:type="ocl:VariableExp" location="6:34-6:49" referredVariable="/3"/>
+        <body xsi:type="ocl:NavigationOrAttributeCallExp" location="6:63-6:74" name="reference">
+          <source xsi:type="ocl:VariableExp" location="6:63-6:64" referredVariable="/0/@bindings.2/@concrete/@iterators.0"/>
+        </body>
+        <iterators location="6:59-6:60" varName="g" variableExp="/0/@bindings.2/@concrete/@body/@source"/>
+      </concrete>
+    </bindings>
+  </genericity_dsl:BindingModel>
+  <genericity_dsl:ConceptMetaclass location="3:8-3:13" name="Class"/>
+  <genericity_dsl:ConcreteMetaclass location="3:17-3:25" name="UMLClass"/>
+  <ocl:VariableDeclaration location="6:34-6:49" varName="generalizations" variableExp="/0/@bindings.2/@concrete/@source"/>
+</xmi:XMI>

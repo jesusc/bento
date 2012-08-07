@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:bindings="http://bindings" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL" xsi:schemaLocation="http://www.eclipse.org/gmt/2005/ATL http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes#/0 http://www.eclipse.org/gmt/2005/OCL http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes#/1">
+  <bindings:Bindings metamodel="Imp">
+    <bindings xsi:type="bindings:ClassBindingN" debugName="bind_Procedure_TO_Function_Subroutine" concept="Procedure">
+      <concrete>Subroutine</concrete>
+      <concrete>Function</concrete>
+    </bindings>
+    <bindings xsi:type="bindings:ClassBinding" debugName="bind_Goto_UnconditionalGoto" concept="UnconditionalGoto" concrete="GoToStatement"/>
+    <bindings xsi:type="bindings:ClassBinding" debugName="bind_Goto_Goto" concept="Goto" concrete="GoToStatement"/>
+    <bindings xsi:type="bindings:ClassBinding" debugName="bind_Statement_Statement" concept="Statement" concrete="Statement"/>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Subroutine_statements" conceptFeature="statements" conceptClass="Subroutine">
+      <concrete xsi:type="ocl:CollectionOperationCallExp" location="42:3-48:15" operationName="flatten">
+        <source xsi:type="ocl:IteratorExp" location="42:3-48:4" name="collect">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="42:3-42:18" name="Statements">
+            <source xsi:type="ocl:VariableExp" location="42:3-42:7" referredVariable="/4"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="43:4-47:7">
+            <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="44:3-44:15" name="Statements">
+              <source xsi:type="ocl:VariableExp" location="44:3-44:4" referredVariable="/0/@bindings.4/@concrete/@source/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:OperationCallExp" location="43:7-43:40" operationName="oclIsKindOf">
+              <source xsi:type="ocl:VariableExp" location="43:7-43:8" referredVariable="/0/@bindings.4/@concrete/@source/@iterators.0"/>
+              <arguments xsi:type="ocl:OclModelElement" location="43:21-43:39" name="BlockStatement" model="/0/@models.31"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="46:3-46:4" referredVariable="/0/@bindings.4/@concrete/@source/@iterators.0"/>
+          </body>
+          <iterators location="42:28-42:29" varName="s" variableExp="/0/@bindings.4/@concrete/@source/@body/@thenExpression/@source /0/@bindings.4/@concrete/@source/@body/@condition/@source /0/@bindings.4/@concrete/@source/@body/@elseExpression"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Function_statements" conceptFeature="statements" conceptClass="Function">
+      <concrete xsi:type="ocl:CollectionOperationCallExp" location="52:3-58:15" operationName="flatten">
+        <source xsi:type="ocl:IteratorExp" location="52:3-58:4" name="collect">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="52:3-52:18" name="Statements">
+            <source xsi:type="ocl:VariableExp" location="52:3-52:7" referredVariable="/19"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="53:4-57:7">
+            <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="54:3-54:15" name="Statements">
+              <source xsi:type="ocl:VariableExp" location="54:3-54:4" referredVariable="/0/@bindings.5/@concrete/@source/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:OperationCallExp" location="53:7-53:40" operationName="oclIsKindOf">
+              <source xsi:type="ocl:VariableExp" location="53:7-53:8" referredVariable="/0/@bindings.5/@concrete/@source/@iterators.0"/>
+              <arguments xsi:type="ocl:OclModelElement" location="53:21-53:39" name="BlockStatement" model="/0/@models.36"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="56:3-56:4" referredVariable="/0/@bindings.5/@concrete/@source/@iterators.0"/>
+          </body>
+          <iterators location="52:28-52:29" varName="s" variableExp="/0/@bindings.5/@concrete/@source/@body/@thenExpression/@source /0/@bindings.5/@concrete/@source/@body/@condition/@source /0/@bindings.5/@concrete/@source/@body/@elseExpression"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Statement_statementContainer" conceptFeature="statementContainer" conceptClass="Statement">
+      <concrete xsi:type="ocl:LetExp" location="64:2-69:7">
+        <variable location="64:6-64:47" varName="c" variableExp="/0/@bindings.6/@concrete/@in_/@condition/@source /0/@bindings.6/@concrete/@in_/@thenExpression/@source /0/@bindings.6/@concrete/@in_/@elseExpression">
+          <type xsi:type="ocl:OclAnyType" location="64:10-64:16"/>
+          <initExpression xsi:type="ocl:OperationCallExp" location="64:19-64:47" operationName="refImmediateComposite">
+            <source xsi:type="ocl:VariableExp" location="64:19-64:23" referredVariable="/20"/>
+          </initExpression>
+        </variable>
+        <in_ xsi:type="ocl:IfExp" location="65:3-69:7">
+          <thenExpression xsi:type="ocl:OperationCallExp" location="66:3-66:28" operationName="refImmediateComposite">
+            <source xsi:type="ocl:VariableExp" location="66:3-66:4" referredVariable="/0/@bindings.6/@concrete/@variable"/>
+          </thenExpression>
+          <condition xsi:type="ocl:OperationCallExp" location="65:6-65:39" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="65:6-65:7" referredVariable="/0/@bindings.6/@concrete/@variable"/>
+            <arguments xsi:type="ocl:OclModelElement" location="65:20-65:38" name="BlockStatement" model="/0/@models.28"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="68:3-68:4" referredVariable="/0/@bindings.6/@concrete/@variable"/>
+        </in_>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="IfStatement_ifStatements" conceptFeature="ifStatements" conceptClass="IfStatement">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="74:2-74:29" name="flattenize">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="74:2-74:18" name="Consequence">
+          <source xsi:type="ocl:VariableExp" location="74:2-74:6" referredVariable="/13"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="IfStatement_elseStatements" conceptFeature="elseStatements" conceptClass="IfStatement">
+      <concrete xsi:type="ocl:IfExp" location="79:2-83:7">
+        <thenExpression xsi:type="ocl:SequenceExp" location="80:3-80:15"/>
+        <condition xsi:type="ocl:OperationCallExp" location="79:5-79:38" operationName="oclIsUndefined">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="79:5-79:21" name="Alternative">
+            <source xsi:type="ocl:VariableExp" location="79:5-79:9" referredVariable="/15"/>
+          </source>
+        </condition>
+        <elseExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="82:3-82:30" name="flattenize">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="82:3-82:19" name="Alternative">
+            <source xsi:type="ocl:VariableExp" location="82:3-82:7" referredVariable="/2"/>
+          </source>
+        </elseExpression>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Statement_flattenize" conceptFeature="flattenize" conceptClass="Statement">
+      <concrete xsi:type="ocl:SequenceExp" location="87:2-87:19">
+        <elements xsi:type="ocl:VariableExp" location="87:13-87:17" referredVariable="/9"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="BlockStatement_flattenize" conceptFeature="flattenize" conceptClass="BlockStatement">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="91:2-91:17" name="Statements">
+        <source xsi:type="ocl:VariableExp" location="91:2-91:6" referredVariable="/18"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Subroutine_name" conceptFeature="name" conceptClass="Subroutine">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="98:52-98:61" name="Name">
+        <source xsi:type="ocl:VariableExp" location="98:52-98:56" referredVariable="/16"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Function_name" conceptFeature="name" conceptClass="Function">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="100:50-100:59" name="Name">
+        <source xsi:type="ocl:VariableExp" location="100:50-100:54" referredVariable="/3"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Goto_target" conceptFeature="target" conceptClass="Goto">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="102:56-102:70" name="JumpLabel">
+        <source xsi:type="ocl:VariableExp" location="102:56-102:60" referredVariable="/11"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Goto_target_statement" conceptFeature="target_statement" conceptClass="Goto">
+      <concrete xsi:type="ocl:OperationCallExp" location="106:2-106:40" operationName="refImmediateComposite">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="106:2-106:16" name="JumpLabel">
+          <source xsi:type="ocl:VariableExp" location="106:2-106:6" referredVariable="/10"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Statement_self_label" conceptFeature="self_label" conceptClass="Statement">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="108:65-108:75" name="Label">
+        <source xsi:type="ocl:VariableExp" location="108:65-108:69" referredVariable="/14"/>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="Expression_behaveAsStatement" conceptFeature="behaveAsStatement" conceptClass="Expression">
+      <concrete xsi:type="ocl:BooleanExp" location="111:66-111:71"/>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="IntegerConstant_toInfo" conceptFeature="toInfo" conceptClass="IntegerConstant">
+      <concrete xsi:type="ocl:OperationCallExp" location="115:2-115:23" operationName="toString">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="115:2-115:12" name="Value">
+          <source xsi:type="ocl:VariableExp" location="115:2-115:6" referredVariable="/5"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="AssignmentStatement_toInfo" conceptFeature="toInfo" conceptClass="AssignmentStatement">
+      <concrete xsi:type="ocl:OperatorCallExp" location="118:2-118:55" operationName="+">
+        <source xsi:type="ocl:OperatorCallExp" location="118:2-118:30" operationName="+">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="118:2-118:22" name="toInfo">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="118:2-118:15" name="Variable">
+              <source xsi:type="ocl:VariableExp" location="118:2-118:6" referredVariable="/17"/>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:StringExp" location="118:25-118:30" stringSymbol=" = "/>
+        </source>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="118:33-118:55" name="toInfo">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="118:33-118:48" name="Expression">
+            <source xsi:type="ocl:VariableExp" location="118:33-118:37" referredVariable="/12"/>
+          </source>
+        </arguments>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="VariableExpression_toInfo" conceptFeature="toInfo" conceptClass="VariableExpression">
+      <concrete xsi:type="ocl:NavigationOrAttributeCallExp" location="121:2-121:20" name="Name">
+        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="121:2-121:15" name="Variable">
+          <source xsi:type="ocl:VariableExp" location="121:2-121:6" referredVariable="/7"/>
+        </source>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="GoToStatement_toInfo" conceptFeature="toInfo" conceptClass="GoToStatement">
+      <concrete xsi:type="ocl:StringExp" location="124:2-124:8" stringSymbol="goto"/>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="IfStatement_toInfo" conceptFeature="toInfo" conceptClass="IfStatement">
+      <concrete xsi:type="ocl:StringExp" location="127:2-127:14" stringSymbol="if ... { }"/>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="EmptyStatement_toInfo" conceptFeature="toInfo" conceptClass="EmptyStatement">
+      <concrete xsi:type="ocl:StringExp" location="130:58-130:61" stringSymbol="-"/>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="BinaryExpression_toInfo" conceptFeature="toInfo" conceptClass="BinaryExpression">
+      <concrete xsi:type="ocl:OperatorCallExp" location="133:3-133:74" operationName="+">
+        <source xsi:type="ocl:OperatorCallExp" location="133:3-133:51" operationName="+">
+          <source xsi:type="ocl:OperatorCallExp" location="133:3-133:45" operationName="+">
+            <source xsi:type="ocl:OperatorCallExp" location="133:3-133:29" operationName="+">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="133:3-133:23" name="toInfo">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="133:3-133:16" name="Operand1">
+                  <source xsi:type="ocl:VariableExp" location="133:3-133:7" referredVariable="/8"/>
+                </source>
+              </source>
+              <arguments xsi:type="ocl:StringExp" location="133:26-133:29" stringSymbol=" "/>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="133:32-133:45" name="Operator">
+              <source xsi:type="ocl:VariableExp" location="133:32-133:36" referredVariable="/22"/>
+            </arguments>
+          </source>
+          <arguments xsi:type="ocl:StringExp" location="133:48-133:51" stringSymbol=" "/>
+        </source>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="133:54-133:74" name="toInfo">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="133:54-133:67" name="Operand2">
+            <source xsi:type="ocl:VariableExp" location="133:54-133:58" referredVariable="/21"/>
+          </source>
+        </arguments>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="SubroutineCall_toInfo" conceptFeature="toInfo" conceptClass="SubroutineCall">
+      <concrete xsi:type="ocl:OperatorCallExp" location="136:2-136:28" operationName="+">
+        <source xsi:type="ocl:StringExp" location="136:2-136:9" stringSymbol="call "/>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="136:12-136:28" name="Name">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="136:12-136:23" name="Callee">
+            <source xsi:type="ocl:VariableExp" location="136:12-136:16" referredVariable="/6"/>
+          </source>
+        </arguments>
+      </concrete>
+    </bindings>
+    <bindings xsi:type="bindings:FeatureBinding" debugName="FunctionCall_toInfo" conceptFeature="toInfo" conceptClass="FunctionCall">
+      <concrete xsi:type="ocl:OperatorCallExp" location="140:2-140:29" operationName="+">
+        <source xsi:type="ocl:StringExp" location="140:2-140:10" stringSymbol="fcall "/>
+        <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="140:13-140:29" name="Name">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="140:13-140:24" name="Callee">
+            <source xsi:type="ocl:VariableExp" location="140:13-140:17" referredVariable="/23"/>
+          </source>
+        </arguments>
+      </concrete>
+    </bindings>
+    <models xsi:type="ocl:OclModel" location="126:16-126:19" name="Imp" elements="/1/@elements.21/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="105:49-105:57" name="Concrete" elements="/1/@elements.14/@definition/@feature/@type"/>
+    <models xsi:type="ocl:OclModel" location="2:14-2:22" name="Concrete" model="/0/@models.44"/>
+    <models xsi:type="ocl:OclModel" location="5:11-5:14" name="Imp" elements="/1/@elements.0/@inPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="105:16-105:19" name="Imp" elements="/1/@elements.14/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="98:16-98:19" name="Imp" elements="/1/@elements.11/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="108:48-108:56" name="Concrete" elements="/1/@elements.15/@definition/@feature/@type"/>
+    <models xsi:type="ocl:OclModel" location="102:16-102:19" name="Imp" elements="/1/@elements.13/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="135:16-135:19" name="Imp" elements="/1/@elements.24/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="120:16-120:19" name="Imp" elements="/1/@elements.19/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="90:16-90:19" name="Imp" elements="/1/@elements.10/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="117:16-117:19" name="Imp" elements="/1/@elements.18/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="2:28-2:36" name="IN" metamodel="/0/@models.39"/>
+    <models xsi:type="ocl:OclModel" location="100:16-100:19" name="Imp" elements="/1/@elements.12/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="139:16-139:19" name="Imp" elements="/1/@elements.25/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="111:16-111:19" name="Imp" elements="/1/@elements.16/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="132:16-132:19" name="Imp" elements="/1/@elements.23/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="41:16-41:19" name="Imp" elements="/1/@elements.4/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="130:16-130:19" name="Imp" elements="/1/@elements.22/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="73:16-73:19" name="Imp" elements="/1/@elements.7/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="6:11-6:19" name="Concrete" elements="/1/@elements.0/@outPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="51:16-51:19" name="Imp" elements="/1/@elements.5/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="19:11-19:19" name="Concrete" elements="/1/@elements.1/@outPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="78:63-78:71" name="Concrete" elements="/1/@elements.8/@definition/@feature/@type/@elementType"/>
+    <models xsi:type="ocl:OclModel" location="24:11-24:19" name="Concrete" elements="/1/@elements.2/@outPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="63:16-63:19" name="Imp" elements="/1/@elements.6/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="34:11-34:19" name="Concrete" elements="/1/@elements.3/@outPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="86:57-86:60" name="Imp" elements="/1/@elements.9/@definition/@feature/@type/@elementType"/>
+    <models xsi:type="ocl:OclModel" location="65:20-65:23" name="Imp" elements="/0/@bindings.6/@concrete/@in_/@condition/@arguments.0"/>
+    <models xsi:type="ocl:OclModel" location="41:58-41:66" name="Concrete" elements="/1/@elements.4/@definition/@feature/@type/@elementType"/>
+    <models xsi:type="ocl:OclModel" location="73:61-73:69" name="Concrete" elements="/1/@elements.7/@definition/@feature/@type/@elementType"/>
+    <models xsi:type="ocl:OclModel" location="43:21-43:24" name="Imp" elements="/0/@bindings.4/@concrete/@source/@body/@condition/@arguments.0"/>
+    <models xsi:type="ocl:OclModel" location="18:11-18:14" name="Imp" elements="/1/@elements.1/@inPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="78:16-78:19" name="Imp" elements="/1/@elements.8/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="51:56-51:64" name="Concrete" elements="/1/@elements.5/@definition/@feature/@type/@elementType"/>
+    <models xsi:type="ocl:OclModel" location="23:11-23:14" name="Imp" elements="/1/@elements.2/@inPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="53:21-53:24" name="Imp" elements="/0/@bindings.5/@concrete/@source/@body/@condition/@arguments.0"/>
+    <models xsi:type="ocl:OclModel" location="33:11-33:14" name="Imp" elements="/1/@elements.3/@inPattern/@elements.0/@type"/>
+    <models xsi:type="ocl:OclModel" location="86:16-86:19" name="Imp" elements="/1/@elements.9/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="2:33-2:36" name="Imp" model="/0/@models.12"/>
+    <models xsi:type="ocl:OclModel" location="114:16-114:19" name="Imp" elements="/1/@elements.17/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="108:16-108:19" name="Imp" elements="/1/@elements.15/@definition/@context_/@context_"/>
+    <models xsi:type="ocl:OclModel" location="90:62-90:65" name="Imp" elements="/1/@elements.10/@definition/@feature/@type/@elementType"/>
+    <models xsi:type="ocl:OclModel" location="102:39-102:47" name="Concrete" elements="/1/@elements.13/@definition/@feature/@type"/>
+    <models xsi:type="ocl:OclModel" location="2:8-2:22" name="OUT" metamodel="/0/@models.2"/>
+    <models xsi:type="ocl:OclModel" location="123:16-123:19" name="Imp" elements="/1/@elements.20/@definition/@context_/@context_"/>
+  </bindings:Bindings>
+  <atl:Module location="1:1-140:30" name="java2uml">
+    <elements xsi:type="atl:MatchedRule" location="4:1-7:2" name="bind_Procedure_Function">
+      <commentsAfter>&#xA;-- PROBLEM:&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- I NEED THIS, BUT THE BINDING FOR PROCEDURE IS ALREADY DONE...&#xA;</commentsAfter>
+      <commentsAfter>&#xA;--rule bind_Procedure_Subroutine {&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- from j : Imp!Procedure&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- to c : Concrete!Subroutine&#xA;</commentsAfter>
+      <commentsAfter>&#xA;--}&#xA;</commentsAfter>
+      <outPattern location="6:2-6:28">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="6:7-6:28" varName="c">
+          <type xsi:type="ocl:OclModelElement" location="6:11-6:28" name="Function" model="/0/@models.20"/>
+        </elements>
+      </outPattern>
+      <inPattern location="5:2-5:24">
+        <elements xsi:type="atl:SimpleInPatternElement" location="5:7-5:24" varName="j">
+          <type xsi:type="ocl:OclModelElement" location="5:11-5:24" name="Procedure" model="/0/@models.3"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="17:1-20:2" name="bind_Goto_UnconditionalGoto">
+      <commentsBefore>&#xA;-- PROBLEM:&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- I NEED THIS, BUT THE BINDING FOR PROCEDURE IS ALREADY DONE...&#xA;</commentsBefore>
+      <commentsBefore>&#xA;--rule bind_Procedure_Subroutine {&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- from j : Imp!Procedure&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- to c : Concrete!Subroutine&#xA;</commentsBefore>
+      <commentsBefore>&#xA;--}&#xA;</commentsBefore>
+      <outPattern location="19:2-19:33">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="19:7-19:33" varName="c">
+          <type xsi:type="ocl:OclModelElement" location="19:11-19:33" name="GoToStatement" model="/0/@models.22"/>
+        </elements>
+      </outPattern>
+      <inPattern location="18:2-18:32">
+        <elements xsi:type="atl:SimpleInPatternElement" location="18:7-18:32" varName="j">
+          <type xsi:type="ocl:OclModelElement" location="18:11-18:32" name="UnconditionalGoto" model="/0/@models.32"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="22:1-25:2" name="bind_Goto_Goto">
+      <commentsAfter>&#xA;-- TODO: SERIA BUENO TENER UNA TRANSFORMACIÓN&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- QUE COMPROBARA CONTRA EL METAMODELO QUE EL BINDING ES &quot;COMPLETO&quot;&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- This is needed to resolve self_label easily &#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- (could be removed with a better implementation)&#xA;</commentsAfter>
+      <outPattern location="24:2-24:33">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="24:7-24:33" varName="c">
+          <type xsi:type="ocl:OclModelElement" location="24:11-24:33" name="GoToStatement" model="/0/@models.24"/>
+        </elements>
+      </outPattern>
+      <inPattern location="23:2-23:19">
+        <elements xsi:type="atl:SimpleInPatternElement" location="23:7-23:19" varName="j">
+          <type xsi:type="ocl:OclModelElement" location="23:11-23:19" name="Goto" model="/0/@models.35"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="32:1-35:2" name="bind_Statement_Statement">
+      <commentsBefore>&#xA;-- TODO: SERIA BUENO TENER UNA TRANSFORMACIÓN&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- QUE COMPROBARA CONTRA EL METAMODELO QUE EL BINDING ES &quot;COMPLETO&quot;&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- This is needed to resolve self_label easily &#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- (could be removed with a better implementation)&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- NEW VERSION&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- THIS IS PART OF THE BINDING&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- IT IS VERY SUBTLE THAT THIS IS THE &quot;UML GENERALIZATION PROBLEM&quot;&#xA;</commentsAfter>
+      <outPattern location="34:2-34:29">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="34:7-34:29" varName="c">
+          <type xsi:type="ocl:OclModelElement" location="34:11-34:29" name="Statement" model="/0/@models.26"/>
+        </elements>
+      </outPattern>
+      <inPattern location="33:2-33:24">
+        <elements xsi:type="atl:SimpleInPatternElement" location="33:7-33:24" varName="j">
+          <type xsi:type="ocl:OclModelElement" location="33:11-33:24" name="Statement" model="/0/@models.37"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:Helper" location="41:1-48:16">
+      <commentsBefore>&#xA;-- NEW VERSION&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- THIS IS PART OF THE BINDING&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- IT IS VERY SUBTLE THAT THIS IS THE &quot;UML GENERALIZATION PROBLEM&quot;&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- DUPLICATED BECAUSE THE METAMODEL IS NOT VERY WELL DONE&#xA;</commentsAfter>
+      <definition location="41:8-48:15">
+        <feature xsi:type="ocl:Attribute" location="41:36-48:15" name="statements">
+          <type xsi:type="ocl:SequenceType" location="41:49-41:77">
+            <elementType xsi:type="ocl:OclModelElement" location="41:58-41:76" name="Statement" model="/0/@models.29"/>
+          </type>
+        </feature>
+        <context_ location="41:8-41:30">
+          <context_ xsi:type="ocl:OclModelElement" location="41:16-41:30" name="Subroutine" model="/0/@models.17"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="51:1-58:16">
+      <commentsBefore>&#xA;-- DUPLICATED BECAUSE THE METAMODEL IS NOT VERY WELL DONE&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- NEW VERSION&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- For the moment only one level of Block nested (otherwise use&#xA;statementContainer)&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- and write the flattening of statements accordingly&#xA;</commentsAfter>
+      <definition location="51:8-58:15">
+        <feature xsi:type="ocl:Attribute" location="51:34-58:15" name="statements">
+          <type xsi:type="ocl:SequenceType" location="51:47-51:75">
+            <elementType xsi:type="ocl:OclModelElement" location="51:56-51:74" name="Statement" model="/0/@models.34"/>
+          </type>
+        </feature>
+        <context_ location="51:8-51:28">
+          <context_ xsi:type="ocl:OclModelElement" location="51:16-51:28" name="Function" model="/0/@models.21"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="63:1-70:2">
+      <commentsBefore>&#xA;-- NEW VERSION&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- For the moment only one level of Block nested (otherwise use&#xA;statementContainer)&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- and write the flattening of statements accordingly&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- NEWVERSION&#xA;</commentsAfter>
+      <definition location="63:8-69:7">
+        <feature xsi:type="ocl:Attribute" location="63:35-69:7" name="statementContainer">
+          <type xsi:type="ocl:OclAnyType" location="63:56-63:62"/>
+        </feature>
+        <context_ location="63:8-63:29">
+          <context_ xsi:type="ocl:OclModelElement" location="63:16-63:29" name="Statement" model="/0/@models.25"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="73:1-74:30">
+      <commentsBefore>&#xA;-- NEWVERSION&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- NEWVERSION&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- The additional check is needed because Alternative has cardinality 0..1&#xA;</commentsAfter>
+      <definition location="73:8-74:29">
+        <feature xsi:type="ocl:Attribute" location="73:37-74:29" name="ifStatements">
+          <type xsi:type="ocl:SequenceType" location="73:52-73:80">
+            <elementType xsi:type="ocl:OclModelElement" location="73:61-73:79" name="Statement" model="/0/@models.30"/>
+          </type>
+        </feature>
+        <context_ location="73:8-73:31">
+          <context_ xsi:type="ocl:OclModelElement" location="73:16-73:31" name="IfStatement" model="/0/@models.19"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="78:1-83:8">
+      <commentsBefore>&#xA;-- NEWVERSION&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- The additional check is needed because Alternative has cardinality 0..1&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- NEWVERSION&#xA;</commentsAfter>
+      <definition location="78:8-83:7">
+        <feature xsi:type="ocl:Attribute" location="78:37-83:7" name="elseStatements">
+          <type xsi:type="ocl:SequenceType" location="78:54-78:82">
+            <elementType xsi:type="ocl:OclModelElement" location="78:63-78:81" name="Statement" model="/0/@models.23"/>
+          </type>
+        </feature>
+        <context_ location="78:8-78:31">
+          <context_ xsi:type="ocl:OclModelElement" location="78:16-78:31" name="IfStatement" model="/0/@models.33"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="86:1-87:20">
+      <commentsBefore>&#xA;-- NEWVERSION&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- NEW VERSION&#xA;</commentsAfter>
+      <definition location="86:8-87:19">
+        <feature xsi:type="ocl:Attribute" location="86:35-87:19" name="flattenize">
+          <type xsi:type="ocl:SequenceType" location="86:48-86:71">
+            <elementType xsi:type="ocl:OclModelElement" location="86:57-86:70" name="Statement" model="/0/@models.27"/>
+          </type>
+        </feature>
+        <context_ location="86:8-86:29">
+          <context_ xsi:type="ocl:OclModelElement" location="86:16-86:29" name="Statement" model="/0/@models.38"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="90:1-91:18">
+      <commentsBefore>&#xA;-- NEW VERSION&#xA;</commentsBefore>
+      <commentsAfter>&#xA;--Old&#xA;</commentsAfter>
+      <commentsAfter>&#xA;--helper context Imp!Subroutine def: statements : Sequence(Concrete!Statement) =&#xA;</commentsAfter>
+      <commentsAfter>&#xA;-- self.Statements;&#xA;</commentsAfter>
+      <definition location="90:8-91:17">
+        <feature xsi:type="ocl:Attribute" location="90:40-91:17" name="flattenize">
+          <type xsi:type="ocl:SequenceType" location="90:53-90:76">
+            <elementType xsi:type="ocl:OclModelElement" location="90:62-90:75" name="Statement" model="/0/@models.42"/>
+          </type>
+        </feature>
+        <context_ location="90:8-90:34">
+          <context_ xsi:type="ocl:OclModelElement" location="90:16-90:34" name="BlockStatement" model="/0/@models.10"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="98:1-98:62">
+      <commentsBefore>&#xA;--Old&#xA;</commentsBefore>
+      <commentsBefore>&#xA;--helper context Imp!Subroutine def: statements : Sequence(Concrete!Statement) =&#xA;</commentsBefore>
+      <commentsBefore>&#xA;-- self.Statements;&#xA;</commentsBefore>
+      <definition location="98:8-98:61">
+        <feature xsi:type="ocl:Attribute" location="98:36-98:61" name="name">
+          <type xsi:type="ocl:OclAnyType" location="98:43-98:49"/>
+        </feature>
+        <context_ location="98:8-98:30">
+          <context_ xsi:type="ocl:OclModelElement" location="98:16-98:30" name="Subroutine" model="/0/@models.5"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="100:1-100:60">
+      <definition location="100:8-100:59">
+        <feature xsi:type="ocl:Attribute" location="100:34-100:59" name="name">
+          <type xsi:type="ocl:OclAnyType" location="100:41-100:47"/>
+        </feature>
+        <context_ location="100:8-100:28">
+          <context_ xsi:type="ocl:OclModelElement" location="100:16-100:28" name="Function" model="/0/@models.13"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="102:1-102:71">
+      <commentsAfter>&#xA;-- Notice the difference between the types of target and target_statement!!&#xA;</commentsAfter>
+      <definition location="102:8-102:70">
+        <feature xsi:type="ocl:Attribute" location="102:30-102:70" name="target">
+          <type xsi:type="ocl:OclModelElement" location="102:39-102:53" name="Label" model="/0/@models.43"/>
+        </feature>
+        <context_ location="102:8-102:24">
+          <context_ xsi:type="ocl:OclModelElement" location="102:16-102:24" name="Goto" model="/0/@models.7"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="105:1-106:41">
+      <commentsBefore>&#xA;-- Notice the difference between the types of target and target_statement!!&#xA;</commentsBefore>
+      <definition location="105:8-106:40">
+        <feature xsi:type="ocl:Attribute" location="105:30-106:40" name="target_statement">
+          <type xsi:type="ocl:OclModelElement" location="105:49-105:67" name="Statement" model="/0/@models.1"/>
+        </feature>
+        <context_ location="105:8-105:24">
+          <context_ xsi:type="ocl:OclModelElement" location="105:16-105:24" name="Goto" model="/0/@models.4"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="108:1-108:76">
+      <commentsAfter>&#xA;-- Expressions do not behave as statements always... enumerate the cases&#xA;</commentsAfter>
+      <definition location="108:8-108:75">
+        <feature xsi:type="ocl:Attribute" location="108:35-108:75" name="self_label">
+          <type xsi:type="ocl:OclModelElement" location="108:48-108:62" name="Label" model="/0/@models.6"/>
+        </feature>
+        <context_ location="108:8-108:29">
+          <context_ xsi:type="ocl:OclModelElement" location="108:16-108:29" name="Statement" model="/0/@models.41"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="111:1-111:72">
+      <commentsBefore>&#xA;-- Expressions do not behave as statements always... enumerate the cases&#xA;</commentsBefore>
+      <commentsAfter>&#xA;-- toString methods, this could be a library or superimpose module&#xA;</commentsAfter>
+      <definition location="111:8-111:71">
+        <feature xsi:type="ocl:Attribute" location="111:36-111:71" name="behaveAsStatement">
+          <type xsi:type="ocl:BooleanType" location="111:56-111:63"/>
+        </feature>
+        <context_ location="111:8-111:30">
+          <context_ xsi:type="ocl:OclModelElement" location="111:16-111:30" name="Expression" model="/0/@models.15"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="114:1-115:24">
+      <commentsBefore>&#xA;-- toString methods, this could be a library or superimpose module&#xA;</commentsBefore>
+      <definition location="114:8-115:23">
+        <feature xsi:type="ocl:Attribute" location="114:41-115:23" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="114:50-114:56"/>
+        </feature>
+        <context_ location="114:8-114:35">
+          <context_ xsi:type="ocl:OclModelElement" location="114:16-114:35" name="IntegerConstant" model="/0/@models.40"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="117:1-118:56">
+      <definition location="117:8-118:55">
+        <feature xsi:type="ocl:Attribute" location="117:45-118:55" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="117:54-117:60"/>
+        </feature>
+        <context_ location="117:8-117:39">
+          <context_ xsi:type="ocl:OclModelElement" location="117:16-117:39" name="AssignmentStatement" model="/0/@models.11"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="120:1-121:21">
+      <definition location="120:8-121:20">
+        <feature xsi:type="ocl:Attribute" location="120:44-121:20" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="120:53-120:59"/>
+        </feature>
+        <context_ location="120:8-120:38">
+          <context_ xsi:type="ocl:OclModelElement" location="120:16-120:38" name="VariableExpression" model="/0/@models.9"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="123:1-124:9">
+      <definition location="123:8-124:8">
+        <feature xsi:type="ocl:Attribute" location="123:39-124:8" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="123:48-123:54"/>
+        </feature>
+        <context_ location="123:8-123:33">
+          <context_ xsi:type="ocl:OclModelElement" location="123:16-123:33" name="GoToStatement" model="/0/@models.45"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="126:1-128:2">
+      <definition location="126:8-127:14">
+        <feature xsi:type="ocl:Attribute" location="126:37-127:14" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="126:46-126:52"/>
+        </feature>
+        <context_ location="126:8-126:31">
+          <context_ xsi:type="ocl:OclModelElement" location="126:16-126:31" name="IfStatement" model="/0/@models.0"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="130:1-130:62">
+      <definition location="130:8-130:61">
+        <feature xsi:type="ocl:Attribute" location="130:40-130:61" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="130:49-130:55"/>
+        </feature>
+        <context_ location="130:8-130:34">
+          <context_ xsi:type="ocl:OclModelElement" location="130:16-130:34" name="EmptyStatement" model="/0/@models.18"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="132:1-133:76">
+      <definition location="132:8-133:74">
+        <feature xsi:type="ocl:Attribute" location="132:42-133:74" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="132:51-132:57"/>
+        </feature>
+        <context_ location="132:8-132:36">
+          <context_ xsi:type="ocl:OclModelElement" location="132:16-132:36" name="BinaryExpression" model="/0/@models.16"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="135:1-137:2">
+      <definition location="135:8-136:28">
+        <feature xsi:type="ocl:Attribute" location="135:40-136:28" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="135:49-135:55"/>
+        </feature>
+        <context_ location="135:8-135:34">
+          <context_ xsi:type="ocl:OclModelElement" location="135:16-135:34" name="SubroutineCall" model="/0/@models.8"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="139:1-140:30">
+      <definition location="139:8-140:29">
+        <feature xsi:type="ocl:Attribute" location="139:38-140:29" name="toInfo">
+          <type xsi:type="ocl:OclAnyType" location="139:47-139:53"/>
+        </feature>
+        <context_ location="139:8-139:32">
+          <context_ xsi:type="ocl:OclModelElement" location="139:16-139:32" name="FunctionCall" model="/0/@models.14"/>
+        </context_>
+      </definition>
+    </elements>
+  </atl:Module>
+  <ocl:VariableDeclaration location="82:3-82:7" varName="self" variableExp="/0/@bindings.8/@concrete/@elseExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="100:50-100:54" varName="self" variableExp="/0/@bindings.12/@concrete/@source"/>
+  <ocl:VariableDeclaration location="42:3-42:7" varName="self" variableExp="/0/@bindings.4/@concrete/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="115:2-115:6" varName="self" variableExp="/0/@bindings.17/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="136:12-136:16" varName="self" variableExp="/0/@bindings.24/@concrete/@arguments.0/@source/@source"/>
+  <ocl:VariableDeclaration location="121:2-121:6" varName="self" variableExp="/0/@bindings.19/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="133:3-133:7" varName="self" variableExp="/0/@bindings.23/@concrete/@source/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="87:13-87:17" varName="self" variableExp="/0/@bindings.9/@concrete/@elements.0"/>
+  <ocl:VariableDeclaration location="106:2-106:6" varName="self" variableExp="/0/@bindings.14/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="102:56-102:60" varName="self" variableExp="/0/@bindings.13/@concrete/@source"/>
+  <ocl:VariableDeclaration location="118:33-118:37" varName="self" variableExp="/0/@bindings.18/@concrete/@arguments.0/@source/@source"/>
+  <ocl:VariableDeclaration location="74:2-74:6" varName="self" variableExp="/0/@bindings.7/@concrete/@source/@source"/>
+  <ocl:VariableDeclaration location="108:65-108:69" varName="self" variableExp="/0/@bindings.15/@concrete/@source"/>
+  <ocl:VariableDeclaration location="79:5-79:9" varName="self" variableExp="/0/@bindings.8/@concrete/@condition/@source/@source"/>
+  <ocl:VariableDeclaration location="98:52-98:56" varName="self" variableExp="/0/@bindings.11/@concrete/@source"/>
+  <ocl:VariableDeclaration location="118:2-118:6" varName="self" variableExp="/0/@bindings.18/@concrete/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="91:2-91:6" varName="self" variableExp="/0/@bindings.10/@concrete/@source"/>
+  <ocl:VariableDeclaration location="52:3-52:7" varName="self" variableExp="/0/@bindings.5/@concrete/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="64:19-64:23" varName="self" variableExp="/0/@bindings.6/@concrete/@variable/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="133:54-133:58" varName="self" variableExp="/0/@bindings.23/@concrete/@arguments.0/@source/@source"/>
+  <ocl:VariableDeclaration location="133:32-133:36" varName="self" variableExp="/0/@bindings.23/@concrete/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="140:13-140:17" varName="self" variableExp="/0/@bindings.25/@concrete/@arguments.0/@source/@source"/>
+</xmi:XMI>

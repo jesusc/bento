@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<declaration:PLSQLDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:condition="http://gts.inf.um.es/modernization/plsql/condition" xmlns:declaration="http://gts.inf.um.es/modernization/plsql/declaration" xmlns:expression="http://gts.inf.um.es/modernization/plsql/expression" xmlns:statement="http://gts.inf.um.es/modernization/plsql/statement" xmlns:type="http://gts.inf.um.es/modernization/plsql/type" xsi:schemaLocation="http://gts.inf.um.es/modernization/plsql/condition plsql.ecore#//condition http://gts.inf.um.es/modernization/plsql/declaration plsql.ecore#//declaration http://gts.inf.um.es/modernization/plsql/expression plsql.ecore#//expression http://gts.inf.um.es/modernization/plsql/statement plsql.ecore#//statement http://gts.inf.um.es/modernization/plsql/type plsql.ecore#//type">
+  <triggers name="Item::ACT_MODALIDADES::WHEN-CHECKBOX-CHANGED">
+    <declarations xsi:type="declaration:VariableDeclaration" name="plazos ">
+      <type xsi:type="type:Datatype" name="NUMBER"/>
+    </declarations>
+    <declarations xsi:type="declaration:VariableDeclaration" name="modali ">
+      <type xsi:type="type:Datatype" name="NUMBER"/>
+    </declarations>
+    <declarations xsi:type="declaration:VariableDeclaration" name="r ">
+      <type xsi:type="type:Datatype" name="NUMBER"/>
+    </declarations>
+    <statements xsi:type="statement:IfStatement">
+      <condition xsi:type="expression:BooleanExpression" type="EQUALS">
+        <expr1 xsi:type="expression:FormsVarRef" reference="ACT_MODALIDADES"/>
+        <expr2 xsi:type="expression:LiteralExpression" value="'S' "/>
+      </condition>
+      <ifStatements xsi:type="statement:SelectStatement" isCount="true">
+        <selectList>count(*)</selectList>
+        <into xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.0"/>
+        <from>otg_pconvocatorias</from>
+        <where xsi:type="condition:ConditionComparison" type="EQUALS">
+          <expr1 xsi:type="statement:FunctionCallStatement" name="pco_act_codigo"/>
+          <expr2 xsi:type="expression:FormsVarRef" reference="act_codigo"/>
+        </where>
+      </ifStatements>
+      <ifStatements xsi:type="statement:IfStatement">
+        <condition xsi:type="expression:BooleanExpression" type="NOTEQUALS">
+          <expr1 xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.0"/>
+          <expr2 xsi:type="expression:LiteralExpression" type="INTEGER" value="0 "/>
+        </condition>
+        <ifStatements xsi:type="statement:AssignmentStatement">
+          <expression xsi:type="statement:FunctionCallStatement" name="alerta">
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'X' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'Error de ActualizaciÃÂÃÂ³n' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'Elimine primero los plazos para esta actividad' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'Aceptar' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" type="NULL" value="null "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" type="NULL" value="null "/>
+            </parameters>
+          </expression>
+          <receptor xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.2"/>
+        </ifStatements>
+        <ifStatements xsi:type="statement:AssignmentStatement">
+          <expression xsi:type="expression:LiteralExpression" value="'N' "/>
+          <receptor xsi:type="expression:FormsVarRef" reference="ACT_MODALIDADES"/>
+        </ifStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="go_block">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'otg_pconvocatorias_act' "/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="clear_block">
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="NO_COMMIT"/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="go_item">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'act_modalidades' "/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="SET_TAB_PAGE_PROPERTY">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'SOLAPAS.MODALIDADES' "/>
+          </parameters>
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="VISIBLE"/>
+          </parameters>
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="PROPERTY_TRUE"/>
+          </parameters>
+        </elseStatements>
+      </ifStatements>
+      <ifStatements xsi:type="statement:FunctionCallStatement" name="SYNCHRONIZE"/>
+      <elseStatements xsi:type="statement:SelectStatement" isCount="true">
+        <selectList>count(*)</selectList>
+        <into xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.1"/>
+        <from>otg_modalidades</from>
+        <where xsi:type="condition:ConditionComparison" type="EQUALS">
+          <expr1 xsi:type="statement:FunctionCallStatement" name="mod_act_codigo"/>
+          <expr2 xsi:type="expression:FormsVarRef" reference="act_codigo"/>
+        </where>
+      </elseStatements>
+      <elseStatements xsi:type="statement:IfStatement">
+        <condition xsi:type="expression:BooleanExpression" type="NOTEQUALS">
+          <expr1 xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.1"/>
+          <expr2 xsi:type="expression:LiteralExpression" type="INTEGER" value="0 "/>
+        </condition>
+        <ifStatements xsi:type="statement:AssignmentStatement">
+          <expression xsi:type="statement:FunctionCallStatement" name="alerta">
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'X' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'Error de ActualizaciÃÂÃÂ³n' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'Elimine primero las modalidades para esta actividad' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" value="'Aceptar' "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" type="NULL" value="null "/>
+            </parameters>
+            <parameters>
+              <expr xsi:type="expression:LiteralExpression" type="NULL" value="null "/>
+            </parameters>
+          </expression>
+          <receptor xsi:type="expression:SQLVariable" reference="//@triggers.0/@declarations.2"/>
+        </ifStatements>
+        <ifStatements xsi:type="statement:AssignmentStatement">
+          <expression xsi:type="expression:LiteralExpression" value="'S' "/>
+          <receptor xsi:type="expression:FormsVarRef" reference="ACT_MODALIDADES"/>
+        </ifStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="go_block">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'otg_pconvocatorias' "/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="clear_block">
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="NO_COMMIT"/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="go_block">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'otg_modalidades' "/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="clear_block">
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="NO_COMMIT"/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="go_item">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'act_modalidades' "/>
+          </parameters>
+        </elseStatements>
+        <elseStatements xsi:type="statement:FunctionCallStatement" name="SET_TAB_PAGE_PROPERTY">
+          <parameters>
+            <expr xsi:type="expression:LiteralExpression" value="'SOLAPAS.MODALIDADES' "/>
+          </parameters>
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="VISIBLE"/>
+          </parameters>
+          <parameters>
+            <expr xsi:type="statement:FunctionCallStatement" name="PROPERTY_FALSE"/>
+          </parameters>
+        </elseStatements>
+      </elseStatements>
+      <elseStatements xsi:type="statement:FunctionCallStatement" name="SYNCHRONIZE"/>
+    </statements>
+  </triggers>
+</declaration:PLSQLDefinition>

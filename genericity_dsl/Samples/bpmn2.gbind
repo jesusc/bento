@@ -1,0 +1,41 @@
+--
+-- Binding between FlowDiagram concept and OMG's BPMN2
+-- 
+-- The BPMN meta-model is here:
+--   * http://www.omg.org/spec/BPMN/2.0/
+
+binding BPMN2 for FD { 
+	class FlowDiagram 		to Definitions 
+	class Node 				to FlowNode
+	class FlowEdge 			to SequenceFlow
+	
+	class Task				to Task, StartEvent, EndEvent
+	class FinalTask			to EndEvent
+	class ExclusiveChoice 	to ExclusiveGateway
+	class ParallelSplit   	to ParallelGateway 		when self.incoming.size() = 1 and self.outgoing.size() > 1
+	class Synchronization 	to ParallelGateway 		when self.incoming.size() > 1 and self.outgoing.size() = 1
+	class ExclusiveChoice   to NONE
+	class SimpleMerge   	to NONE
+	class MultiChoice		to NONE
+	
+	-- now map the features...
+	-- Task.name to FlowNode.name <-- not necessary to specify, is it?
+	-- feature Task.isInitial  to 
+	feature Task[Task].isInitial = false
+	feature Task[Task].name is name
+
+	feature Task[StartEvent].isInitial = true
+	feature Task[StartEvent].name is name
+	
+	feature Task[EndEvent].isInitial = true
+	feature Task[EndEvent].name is name
+	
+	feature Node.outs is outgoing
+	feature Node.ins  is incoming
+	
+	feature FlowEdge."in" is sourceRef
+	feature FlowEdge.out  is targetRef
+	
+	feature FinalTask.isTerminating = false
+	feature FinalTask.isMandatory   = false
+}
