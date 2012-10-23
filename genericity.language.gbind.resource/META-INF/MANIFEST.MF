@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: gbind
+Bundle-SymbolicName: genericity.language.gbind.resource;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.eclipse.debug.core;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  genericity.language.gbind
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: genericity.language.gbind,
+  genericity.language.gbind.analysis,
+  genericity.language.gbind.mopp,
+  genericity.language.gbind.debug,
+  genericity.language.gbind.launch,
+  genericity.language.gbind.grammar,
+  genericity.language.gbind.util
+Bundle-Activator: genericity.language.gbind.mopp.GbindPlugin

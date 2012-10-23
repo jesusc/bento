@@ -1,0 +1,198 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package gbind.dsl.impl;
+
+import gbind.dsl.*;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
+ * @generated
+ */
+public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static DslFactory init() {
+		try {
+			DslFactory theDslFactory = (DslFactory)EPackage.Registry.INSTANCE.getEFactory("http://http://genericity/language/gbind/dsl"); 
+			if (theDslFactory != null) {
+				return theDslFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new DslFactoryImpl();
+	}
+
+	/**
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DslFactoryImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EObject create(EClass eClass) {
+		switch (eClass.getClassifierID()) {
+			case DslPackage.BINDING_MODEL: return createBindingModel();
+			case DslPackage.CONCEPT_METACLASS: return createConceptMetaclass();
+			case DslPackage.CONCRETE_METACLASS: return createConcreteMetaclass();
+			case DslPackage.CLASS_BINDING: return createClassBinding();
+			case DslPackage.BASE_FEATURE_BINDING: return createBaseFeatureBinding();
+			case DslPackage.RENAMING_FEATURE_BINDING: return createRenamingFeatureBinding();
+			case DslPackage.OCL_FEATURE_BINDING: return createOclFeatureBinding();
+			case DslPackage.BASE_HELPER: return createBaseHelper();
+			case DslPackage.CONCEPT_HELPER: return createConceptHelper();
+			case DslPackage.LOCAL_HELPER: return createLocalHelper();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingModel createBindingModel() {
+		BindingModelImpl bindingModel = new BindingModelImpl();
+		return bindingModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConceptMetaclass createConceptMetaclass() {
+		ConceptMetaclassImpl conceptMetaclass = new ConceptMetaclassImpl();
+		return conceptMetaclass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConcreteMetaclass createConcreteMetaclass() {
+		ConcreteMetaclassImpl concreteMetaclass = new ConcreteMetaclassImpl();
+		return concreteMetaclass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassBinding createClassBinding() {
+		ClassBindingImpl classBinding = new ClassBindingImpl();
+		return classBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseFeatureBinding createBaseFeatureBinding() {
+		BaseFeatureBindingImpl baseFeatureBinding = new BaseFeatureBindingImpl();
+		return baseFeatureBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RenamingFeatureBinding createRenamingFeatureBinding() {
+		RenamingFeatureBindingImpl renamingFeatureBinding = new RenamingFeatureBindingImpl();
+		return renamingFeatureBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclFeatureBinding createOclFeatureBinding() {
+		OclFeatureBindingImpl oclFeatureBinding = new OclFeatureBindingImpl();
+		return oclFeatureBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseHelper createBaseHelper() {
+		BaseHelperImpl baseHelper = new BaseHelperImpl();
+		return baseHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConceptHelper createConceptHelper() {
+		ConceptHelperImpl conceptHelper = new ConceptHelperImpl();
+		return conceptHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LocalHelper createLocalHelper() {
+		LocalHelperImpl localHelper = new LocalHelperImpl();
+		return localHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DslPackage getDslPackage() {
+		return (DslPackage)getEPackage();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 */
+	@Deprecated
+	public static DslPackage getPackage() {
+		return DslPackage.eINSTANCE;
+	}
+
+} //DslFactoryImpl

@@ -14,9 +14,9 @@ end
 
 
 // in-place transformation
-iterate(ClassBindingAndRule) { |cbr| // objeto
+//iterate(ClassBindingAndRule) { |cbr| // objeto
 	
-}
+//}
 
 
 /*
