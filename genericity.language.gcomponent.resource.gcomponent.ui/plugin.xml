@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentUIMetaInformation" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="gcomponent" icon="icons/editor_icon.gif" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentEditor" name="EMFText gcomponent Editor">
+			<contentTypeBinding contentTypeId="genericity.language.gcomponent.resource.gcomponent">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Gcomponent Text Editor" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPreferencePage" class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentSyntaxColoringPreferencePage" class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentSyntaxColoringPreferencePage" category="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPreferencePage">
+		</page>
+		<page name="Brackets" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentBracketPreferencePage" class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentBracketPreferencePage" category="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentNewFileWizard" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentNewFileWizard" name="EMFText .gcomponent file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentNewProjectWizard" id="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentNewProjectWizard" name="EMFText gcomponent project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentMarkerResolutionGenerator" markerType="genericity.language.gcomponent.resource.gcomponent.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentAnnotationModelFactory" extensions="gcomponent">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="genericity.language.gcomponent.resource.gcomponent" name=".gcomponent File" base-type="org.eclipse.core.runtime.text" file-extensions="gcomponent">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="gcomponent" id="genericity.language.gcomponent.resource.gcomponent.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="genericity.language.gcomponent.resource.gcomponent.ui.occurences">
+		</type>
+		<type name="genericity.language.gcomponent.resource.gcomponent.ui.occurences.declaration" super="genericity.language.gcomponent.resource.gcomponent.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="genericity.language.gcomponent.resource.gcomponent.ui.occurences" label="Occurrences (in .gcomponent files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="gcomponent.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="gcomponent.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="gcomponent.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="gcomponent.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="gcomponent.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="gcomponent.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="gcomponent.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="gcomponent.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="gcomponent.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="genericity.language.gcomponent.resource.gcomponent.ui.occurences.declaration" label="Declarations (in .gcomponent files)" textPreferenceKey="gcomponent.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="gcomponent.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="gcomponent.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="gcomponent.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="gcomponent.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="gcomponent.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="genericity.language.gcomponent.resource.gcomponent.ui.launchConfigurationType" id="genericity.language.gcomponent.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="genericity.language.gcomponent.resource.gcomponent.ui.launchConfigurationType" class="genericity.language.gcomponent.resource.gcomponent.ui.launch.GcomponentLaunchConfigurationTabGroup" id="genericity.language.gcomponent.launchConfigurationTabGroup" helpContextId="genericity.language.gcomponent.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug gcomponent model.">
+			</launchMode>
+			<launchMode mode="run" description="Run gcomponent model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="gcomponent Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="genericity.language.gcomponent.launch" modes="run,debug" class="genericity.language.gcomponent.resource.gcomponent.ui.launch.GcomponentLaunchShortcut" description="Launch a gcomponent model" id="genericity.language.gcomponent.launchShortcut">
+			<description description="Run gcomponent model" mode="run">
+			</description>
+			<description description="Debug gcomponent model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="genericity.language.gcomponent.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="genericity.language.gcomponent.resource.gcomponent.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="genericity.language.gcomponent.PropertyTester" type="java.lang.Object" namespace="genericity.language.gcomponent" properties="isLaunchable" class="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="genericity.language.gcomponent.resource.gcomponent.ui.debug.lineBreakpoint" markerType="genericity.language.gcomponent.resource.gcomponent.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="genericity.language.gcomponent.resource.gcomponent.ui.debug.lineBreakpoint" label="Breakpoints (in .gcomponent files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="genericity.language.gcomponent.resource.gcomponent.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="genericity.language.gcomponent.resource.gcomponent.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="genericity.language.gcomponent.resource.gcomponent.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="genericity.language.gcomponent.resource.gcomponent.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="genericity.language.gcomponent.resource.gcomponent.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="genericity.language.gcomponent.resource.gcomponent.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="genericity.language.gcomponent.resource.gcomponent.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="genericity.language.gcomponent.resource.gcomponent.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="genericity.language.gcomponent.resource.gcomponent.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentEditor" class="genericity.language.gcomponent.resource.gcomponent.ui.debug.GcomponentAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="genericity.language.gcomponent.resource.gcomponent.debug.GcomponentDebugVariable" class="genericity.language.gcomponent.resource.gcomponent.ui.debug.GcomponentAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="genericity.language.gcomponent.resource.gcomponent.debug.GcomponentDebugVariable" class="genericity.language.gcomponent.resource.gcomponent.ui.debug.GcomponentAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="genericity.language.gcomponent.resource.gcomponent.ui.RulerPopupActions" targetID="genericity.language.gcomponent.resource.gcomponent.EditorRuler">
+			<action id="genericity.language.gcomponent.resource.gcomponent.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="genericity.language.gcomponent.resource.gcomponent.ui.GcomponentEditor" id="genericity.language.gcomponent.resource.gcomponent.ui.BreakpointRulerActions">
+			<action id="genericity.language.gcomponent.resource.gcomponent.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="genericity.language.gcomponent.resource.gcomponent.debugModel" class="genericity.language.gcomponent.resource.gcomponent.ui.debug.GcomponentDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

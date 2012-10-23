@@ -1,0 +1,76 @@
+@namespace(uri="http://genericity/language/gcomponent", prefix="gcomponent")
+package gcomponent;
+
+abstract class NamedElement {
+  attr String[1] name;
+}
+
+abstract class Tagged {
+   val Tag[*] tags; // should be ref   
+}
+
+abstract class AbstractComponent extends NamedElement {
+ 	attr String[0..1] owner;
+ 	attr String[0..1] maintainer;
+ 	attr String[1] version;
+ 	attr Status[1] status = 0;  
+}
+
+enum Status {
+   UNKNOWN = 0;
+   ALPHA   = 1;
+   BETA    = 2;
+   RELEASE = 3;
+}
+
+// dependencies??? may be....
+class TransformationComponent extends AbstractComponent, Tagged {
+	val Concept[+] source; // should be ref
+	val Concept[*] target;
+	val Parameter[*] formalParameters;
+		
+	attr boolean isM2M = true;
+    
+    val Template[1] template;
+
+    // Puede tener constraints la transformacion en si?
+    val Constraint[*] constraints;
+}
+
+abstract class Template { 
+}
+
+class AtlTemplate extends Template {
+   attr String[1] template;
+}
+
+
+abstract class Constraint {
+   
+}
+
+class OclConstraint extends Constraint {
+   
+}
+
+// Podriamos tener metamodelos que no fueran conceptos?
+class Metamodel extends NamedElement {
+   attr String[1] uri;
+   val Constraint[*] constraints;
+}
+
+class Tag {
+   attr String[1] value;
+}
+
+class Concept extends Metamodel, Tagged {
+}
+
+abstract class Parameter extends NamedElement {
+   
+}
+
+// Piece of meta-model for the specification?
+class Specification {
+   
+}
