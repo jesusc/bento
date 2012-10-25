@@ -1,0 +1,70 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ */
+qool rewrite_class1(atl, gbind) -> ()
+
+model rt 
+  class MatchedClassBinding
+	ref oclModelElement : atl!OclModelElement
+	ref classBinding    : gbind!ClassBinding
+  end
+end
+
+local queue genericQ    : rt!generic
+
+// ATL elements
+model queue mOclModelElement : atl!OclModelElement
+
+// GBind elements
+model queue mClassBinding : gbind!ClassBinding
+
+// Pattern queues
+local queue pRelevantOclModelElements : atl!OclModelElement
+local queue pMatchedClassBinding : gbind!ClassBinding
+
+// Begin-of PATTERNS
+
+/**
+ * Finds all OclModelElements that refers to the meta-model
+ * being bound (i.e., the meta-model that the binding DSL refers to)
+ */
+segment findRelevantOclModelElements
+	current_mm = gbind!BindingModel.all_instances.get(0).metamodel
+
+	forall o from mOclModelElement
+		o.^model.is_nil.if_false {
+			o.^model.name.eq(current_mm).if_true({
+				emit o to pRelevantOclModelElements				
+			})
+		}
+	end    
+end
+
+segment findConceptRef
+	forall o from pRelevantOclModelElements
+		// TODO: Restrict to 1:1 class bindings (probably another pattern)
+		forall cb from mClassBinding
+			cb.concept.name
+			cb.concrete.name
+			
+		o.^model.is_nil.if_false {
+			o.^model.name.eq(current_mm).if_true({
+				emit o to pRelevantClassBinding
+			})
+		}
+		end
+	end    
+end
+
+
+// End-of Patterns
+
+// Begin-of rules
+segment RenameConceptClass
+		
+	forall o from pConceptRef
+		o	     	
+		
+	end
+end
+

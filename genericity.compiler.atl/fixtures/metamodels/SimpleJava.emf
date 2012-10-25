@@ -1,0 +1,25 @@
+@namespace(uri="http://genericity/examples/simpleJava", prefix="simpleJava")
+package simpleJava;
+
+class JavaClass {
+   attr String[1] name;
+   ref JavaClass[1] extends_;
+   
+   val Member[*]#owner members;   
+}
+
+
+abstract class Member {
+   ref JavaClass[1]#members owner;
+
+   attr String[1] name;
+   ref JavaClass[1] type;  
+   
+   attr boolean isPublic;   
+}
+
+class Method extends Member {
+}
+
+class Field extends Member {
+}
