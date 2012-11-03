@@ -49,7 +49,7 @@ public class GcomponentMetaInformation implements genericity.language.gcomponent
 	}
 	
 	public String[] getTokenNames() {
-		return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentParser(null).getTokenNames();
+		return genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentParser.tokenNames;
 	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenStyle getDefaultTokenStyle(String tokenName) {
@@ -98,6 +98,29 @@ public class GcomponentMetaInformation implements genericity.language.gcomponent
 	
 	public String getLaunchConfigurationType() {
 		return "genericity.language.gcomponent.resource.gcomponent.ui.launchConfigurationType";
+	}
+	
+	public genericity.language.gcomponent.resource.gcomponent.IGcomponentNameProvider createNameProvider() {
+		return new genericity.language.gcomponent.resource.gcomponent.analysis.GcomponentDefaultNameProvider();
+	}
+	
+	public String[] getSyntaxHighlightableTokenNames() {
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentAntlrTokenHelper tokenHelper = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentAntlrTokenHelper();
+		java.util.List<String> highlightableTokens = new java.util.ArrayList<String>();
+		String[] parserTokenNames = getTokenNames();
+		for (int i = 0; i < parserTokenNames.length; i++) {
+			// If ANTLR is used we need to normalize the token names
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
+				continue;
+			}
+			String tokenName = tokenHelper.getTokenName(parserTokenNames, i);
+			if (tokenName == null) {
+				continue;
+			}
+			highlightableTokens.add(tokenName);
+		}
+		highlightableTokens.add(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyleInformationProvider.TASK_ITEM_TOKEN_NAME);
+		return highlightableTokens.toArray(new String[highlightableTokens.size()]);
 	}
 	
 }

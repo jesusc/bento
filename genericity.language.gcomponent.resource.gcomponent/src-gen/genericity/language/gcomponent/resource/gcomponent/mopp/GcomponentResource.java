@@ -129,6 +129,8 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	private genericity.language.gcomponent.resource.gcomponent.IGcomponentLocationMap locationMap;
 	private int proxyCounter = 0;
 	private genericity.language.gcomponent.resource.gcomponent.IGcomponentTextParser parser;
+	private genericity.language.gcomponent.resource.gcomponent.util.GcomponentLayoutUtil layoutUtil = new genericity.language.gcomponent.resource.gcomponent.util.GcomponentLayoutUtil();
+	private genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper markerHelper;
 	private java.util.Map<String, genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>> internalURIFragmentMap = new java.util.LinkedHashMap<String, genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject>>();
 	private java.util.Map<String, genericity.language.gcomponent.resource.gcomponent.IGcomponentQuickFix> quickFixMap = new java.util.LinkedHashMap<String, genericity.language.gcomponent.resource.gcomponent.IGcomponentQuickFix>();
 	private java.util.Map<?, ?> loadOptions;
@@ -140,9 +142,19 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	private genericity.language.gcomponent.resource.gcomponent.IGcomponentResourcePostProcessor runningPostProcessor;
 	
 	/**
-	 * A flag to indicate whether reloading of the resource shall be cancelled.
+	 * A flag (and lock) to indicate whether reloading of the resource shall be
+	 * cancelled.
 	 */
-	private boolean terminateReload = false;
+	private Boolean terminateReload = false;
+	private Object terminateReloadLock = new Object();
+	private Object loadingLock = new Object();
+	private boolean delayNotifications = false;
+	private java.util.List<org.eclipse.emf.common.notify.Notification> delayedNotifications = new java.util.ArrayList<org.eclipse.emf.common.notify.Notification>();
+	private java.io.InputStream latestReloadInputStream = null;
+	private java.util.Map<?, ?> latestReloadOptions = null;
+	private genericity.language.gcomponent.resource.gcomponent.util.GcomponentInterruptibleEcoreResolver interruptibleResolver;
+	
+	protected genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation metaInformation = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation();
 	
 	public GcomponentResource() {
 		super();
@@ -155,85 +167,180 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	}
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
-		this.loadOptions = options;
-		this.terminateReload = false;
-		String encoding = null;
-		java.io.InputStream actualInputStream = inputStream;
-		Object inputStreamPreProcessorProvider = null;
-		if (options != null) {
-			inputStreamPreProcessorProvider = options.get(genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
-		}
-		if (inputStreamPreProcessorProvider != null) {
-			if (inputStreamPreProcessorProvider instanceof genericity.language.gcomponent.resource.gcomponent.IGcomponentInputStreamProcessorProvider) {
-				genericity.language.gcomponent.resource.gcomponent.IGcomponentInputStreamProcessorProvider provider = (genericity.language.gcomponent.resource.gcomponent.IGcomponentInputStreamProcessorProvider) inputStreamPreProcessorProvider;
-				genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentInputStreamProcessor processor = provider.getInputStreamProcessor(inputStream);
-				actualInputStream = processor;
-				encoding = processor.getOutputEncoding();
+		synchronized (loadingLock) {
+			if (processTerminationRequested()) {
+				return;
 			}
-		}
-		
-		parser = getMetaInformation().createParser(actualInputStream, encoding);
-		parser.setOptions(options);
-		genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
-		referenceResolverSwitch.setOptions(options);
-		genericity.language.gcomponent.resource.gcomponent.IGcomponentParseResult result = parser.parse();
-		clearState();
-		getContentsInternal().clear();
-		org.eclipse.emf.ecore.EObject root = null;
-		if (result != null) {
-			root = result.getRoot();
-			if (root != null) {
-				getContentsInternal().add(root);
+			this.loadOptions = options;
+			delayNotifications = true;
+			resetLocationMap();
+			String encoding = getEncoding(options);
+			java.io.InputStream actualInputStream = inputStream;
+			Object inputStreamPreProcessorProvider = null;
+			if (options != null) {
+				inputStreamPreProcessorProvider = options.get(genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
 			}
-			java.util.Collection<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource>> commands = result.getPostParseCommands();
-			if (commands != null) {
-				for (genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource>  command : commands) {
-					command.execute(this);
+			if (inputStreamPreProcessorProvider != null) {
+				if (inputStreamPreProcessorProvider instanceof genericity.language.gcomponent.resource.gcomponent.IGcomponentInputStreamProcessorProvider) {
+					genericity.language.gcomponent.resource.gcomponent.IGcomponentInputStreamProcessorProvider provider = (genericity.language.gcomponent.resource.gcomponent.IGcomponentInputStreamProcessorProvider) inputStreamPreProcessorProvider;
+					genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentInputStreamProcessor processor = provider.getInputStreamProcessor(inputStream);
+					actualInputStream = processor;
 				}
 			}
-		}
-		getReferenceResolverSwitch().setOptions(options);
-		if (getErrors().isEmpty()) {
-			runPostProcessors(options);
-			if (root != null) {
-				runValidators(root);
+			
+			parser = getMetaInformation().createParser(actualInputStream, encoding);
+			parser.setOptions(options);
+			genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
+			referenceResolverSwitch.setOptions(options);
+			genericity.language.gcomponent.resource.gcomponent.IGcomponentParseResult result = parser.parse();
+			// dispose parser, we don't need it anymore
+			parser = null;
+			
+			if (processTerminationRequested()) {
+				// do nothing if reload was already restarted
+				return;
 			}
+			
+			clearState();
+			getContentsInternal().clear();
+			org.eclipse.emf.ecore.EObject root = null;
+			if (result != null) {
+				root = result.getRoot();
+				if (root != null) {
+					if (isLayoutInformationRecordingEnabled()) {
+						layoutUtil.transferAllLayoutInformationToModel(root);
+					}
+					if (processTerminationRequested()) {
+						// the next reload will add new content
+						return;
+					}
+					getContentsInternal().add(root);
+				}
+				java.util.Collection<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource>> commands = result.getPostParseCommands();
+				if (commands != null) {
+					for (genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource>  command : commands) {
+						command.execute(this);
+					}
+				}
+			}
+			getReferenceResolverSwitch().setOptions(options);
+			if (getErrors().isEmpty()) {
+				if (!runPostProcessors(options)) {
+					return;
+				}
+				if (root != null) {
+					runValidators(root);
+				}
+			}
+			notifyDelayed();
 		}
 	}
 	
+	protected boolean processTerminationRequested() {
+		if (terminateReload) {
+			delayNotifications = false;
+			delayedNotifications.clear();
+			return true;
+		}
+		return false;
+	}
+	protected void notifyDelayed() {
+		delayNotifications = false;
+		for (org.eclipse.emf.common.notify.Notification delayedNotification : delayedNotifications) {
+			super.eNotify(delayedNotification);
+		}
+		delayedNotifications.clear();
+	}
+	public void eNotify(org.eclipse.emf.common.notify.Notification notification) {
+		if (delayNotifications) {
+			delayedNotifications.add(notification);
+		} else {
+			super.eNotify(notification);
+		}
+	}
+	/**
+	 * Reloads the contents of this resource from the given stream.
+	 */
 	public void reload(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
-		try {
-			isLoaded = false;
-			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
-			doLoad(inputStream, loadOptions);
-			org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
-		} catch (genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTerminateParsingException tpe) {
-			// do nothing - the resource is left unchanged if this exception is thrown
+		synchronized (terminateReloadLock) {
+			latestReloadInputStream = inputStream;
+			latestReloadOptions = options;
+			if (terminateReload == true) {
+				// //reload already requested
+			}
+			terminateReload = true;
 		}
-		isLoaded = true;
+		cancelReload();
+		synchronized (loadingLock) {
+			synchronized (terminateReloadLock) {
+				terminateReload = false;
+			}
+			isLoaded = false;
+			java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(latestReloadOptions);
+			try {
+				doLoad(latestReloadInputStream, loadOptions);
+			} catch (genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTerminateParsingException tpe) {
+				// do nothing - the resource is left unchanged if this exception is thrown
+			}
+			resolveAfterParsing();
+			isLoaded = true;
+		}
 	}
 	
-	public void cancelReload() {
+	/**
+	 * Cancels reloading this resource. The running parser and post processors are
+	 * terminated.
+	 */
+	protected void cancelReload() {
+		// Cancel parser
 		genericity.language.gcomponent.resource.gcomponent.IGcomponentTextParser parserCopy = parser;
-		parserCopy.terminate();
-		this.terminateReload = true;
+		if (parserCopy != null) {
+			parserCopy.terminate();
+		}
+		// Cancel post processor(s)
 		genericity.language.gcomponent.resource.gcomponent.IGcomponentResourcePostProcessor runningPostProcessorCopy = runningPostProcessor;
 		if (runningPostProcessorCopy != null) {
 			runningPostProcessorCopy.terminate();
+		}
+		// Cancel reference resolving
+		genericity.language.gcomponent.resource.gcomponent.util.GcomponentInterruptibleEcoreResolver interruptibleResolverCopy = interruptibleResolver;
+		if (interruptibleResolverCopy != null) {
+			interruptibleResolverCopy.terminate();
 		}
 	}
 	
 	protected void doSave(java.io.OutputStream outputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		genericity.language.gcomponent.resource.gcomponent.IGcomponentTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 		genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
+		printer.setEncoding(getEncoding(options));
 		referenceResolverSwitch.setOptions(options);
 		for (org.eclipse.emf.ecore.EObject root : getContentsInternal()) {
+			if (isLayoutInformationRecordingEnabled()) {
+				layoutUtil.transferAllLayoutInformationFromModel(root);
+			}
 			printer.print(root);
+			if (isLayoutInformationRecordingEnabled()) {
+				layoutUtil.transferAllLayoutInformationToModel(root);
+			}
 		}
 	}
 	
 	protected String getSyntaxName() {
 		return "gcomponent";
+	}
+	
+	public String getEncoding(java.util.Map<?, ?> options) {
+		String encoding = null;
+		if (new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().isEclipsePlatformAvailable()) {
+			encoding = new genericity.language.gcomponent.resource.gcomponent.util.GcomponentEclipseProxy().getPlatformResourceEncoding(uri);
+		}
+		if (options != null) {
+			Object encodingOption = options.get(genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.OPTION_ENCODING);
+			if (encodingOption != null) {
+				encoding = encodingOption.toString();
+			}
+		}
+		return encoding;
 	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolverSwitch getReferenceResolverSwitch() {
@@ -247,8 +354,15 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation();
 	}
 	
+	/**
+	 * Clears the location map by replacing it with a new instance.
+	 */
 	protected void resetLocationMap() {
-		locationMap = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLocationMap();
+		if (isLocationMapEnabled()) {
+			locationMap = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLocationMap();
+		} else {
+			locationMap = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentDevNullLocationMap();
+		}
 	}
 	
 	public void addURIFragment(String internalURIFragment, genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment) {
@@ -273,8 +387,8 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 				result = uriFragment.resolve();
 			} catch (Exception e) {
 				String message = "An expection occured while resolving the proxy for: "+ id + ". (" + e.toString() + ")";
-				addProblem(new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentProblem(message, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.UNRESOLVED_REFERENCE, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemSeverity.ERROR),uriFragment.getProxy());
-				genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError(message, e);
+				addProblem(new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentProblem(message, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.UNRESOLVED_REFERENCE, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemSeverity.ERROR), uriFragment.getProxy());
+				new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError(message, e);
 			}
 			if (result == null) {
 				// the resolving did call itself
@@ -312,7 +426,7 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	private org.eclipse.emf.ecore.EObject getResultElement(genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
+	protected org.eclipse.emf.ecore.EObject getResultElement(genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment<? extends org.eclipse.emf.ecore.EObject> uriFragment, genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping, org.eclipse.emf.ecore.EObject proxy, final String errorMessage) {
 		if (mapping instanceof genericity.language.gcomponent.resource.gcomponent.IGcomponentURIMapping<?>) {
 			org.eclipse.emf.common.util.URI uri = ((genericity.language.gcomponent.resource.gcomponent.IGcomponentURIMapping<? extends org.eclipse.emf.ecore.EObject>)mapping).getTargetIdentifier();
 			if (uri != null) {
@@ -354,19 +468,19 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	private void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
+	protected void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
 		// remove all errors/warnings from this resource
 		for (org.eclipse.emf.ecore.resource.Resource.Diagnostic errorCand : new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(diagnostics)) {
 			if (errorCand instanceof genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic) {
 				if (((genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic) errorCand).wasCausedBy(cause)) {
 					diagnostics.remove(errorCand);
-					genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.unmark(this, cause);
+					unmark(cause);
 				}
 			}
 		}
 	}
 	
-	private void attachResolveError(genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
+	protected void attachResolveError(genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
 		final String errorMessage = result.getErrorMessage();
@@ -377,7 +491,7 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 	}
 	
-	private void attachResolveWarnings(genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
+	protected void attachResolveWarnings(genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
 		assert result != null;
 		assert result.wasResolved();
 		if (result.wasResolved()) {
@@ -401,15 +515,18 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		loadOptions = null;
 	}
 	
-	protected void runPostProcessors(java.util.Map<?, ?> loadOptions) {
-		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.unmark(this, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.ANALYSIS_PROBLEM);
-		if (terminateReload) {
-			return;
+	/**
+	 * Runs all post processors to process this resource.
+	 */
+	protected boolean runPostProcessors(java.util.Map<?, ?> loadOptions) {
+		unmark(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.ANALYSIS_PROBLEM);
+		if (processTerminationRequested()) {
+			return false;
 		}
 		// first, run the generated post processor
 		runPostProcessor(new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentResourcePostProcessor());
 		if (loadOptions == null) {
-			return;
+			return true;
 		}
 		// then, run post processors that are registered via the load options extension
 		// point
@@ -420,8 +537,8 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 			} else if (resourcePostProcessorProvider instanceof java.util.Collection<?>) {
 				java.util.Collection<?> resourcePostProcessorProviderCollection = (java.util.Collection<?>) resourcePostProcessorProvider;
 				for (Object processorProvider : resourcePostProcessorProviderCollection) {
-					if (terminateReload) {
-						return;
+					if (processTerminationRequested()) {
+						return false;
 					}
 					if (processorProvider instanceof genericity.language.gcomponent.resource.gcomponent.IGcomponentResourcePostProcessorProvider) {
 						genericity.language.gcomponent.resource.gcomponent.IGcomponentResourcePostProcessorProvider csProcessorProvider = (genericity.language.gcomponent.resource.gcomponent.IGcomponentResourcePostProcessorProvider) processorProvider;
@@ -431,14 +548,18 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 				}
 			}
 		}
+		return true;
 	}
 	
+	/**
+	 * Runs the given post processor to process this resource.
+	 */
 	protected void runPostProcessor(genericity.language.gcomponent.resource.gcomponent.IGcomponentResourcePostProcessor postProcessor) {
 		try {
 			this.runningPostProcessor = postProcessor;
 			postProcessor.process(this);
 		} catch (Exception e) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Exception while running a post-processor.", e);
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError("Exception while running a post-processor.", e);
 		}
 		this.runningPostProcessor = null;
 	}
@@ -446,7 +567,13 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
 		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
-		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this.getResourceSet());
+		resolveAfterParsing();
+	}
+	
+	protected void resolveAfterParsing() {
+		interruptibleResolver = new genericity.language.gcomponent.resource.gcomponent.util.GcomponentInterruptibleEcoreResolver();
+		interruptibleResolver.resolveAll(this);
+		interruptibleResolver = null;
 	}
 	
 	public void setURI(org.eclipse.emf.common.util.URI uri) {
@@ -456,6 +583,10 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		super.setURI(uri);
 	}
 	
+	/**
+	 * Returns the location map that contains information about the position of the
+	 * contents of this resource in the original textual representation.
+	 */
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentLocationMap getLocationMap() {
 		return locationMap;
 	}
@@ -463,9 +594,18 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	public void addProblem(genericity.language.gcomponent.resource.gcomponent.IGcomponentProblem problem, org.eclipse.emf.ecore.EObject element) {
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
 		getDiagnostics(problem.getSeverity()).add(diagnostic);
-		if (isMarkerCreationEnabled()) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.mark(this, diagnostic);
-		}
+		mark(diagnostic);
+		addQuickFixesToQuickFixMap(problem);
+	}
+	
+	public void addProblem(genericity.language.gcomponent.resource.gcomponent.IGcomponentProblem problem, int column, int line, int charStart, int charEnd) {
+		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
+		mark(diagnostic);
+		addQuickFixesToQuickFixMap(problem);
+	}
+	
+	protected void addQuickFixesToQuickFixMap(genericity.language.gcomponent.resource.gcomponent.IGcomponentProblem problem) {
 		java.util.Collection<genericity.language.gcomponent.resource.gcomponent.IGcomponentQuickFix> quickFixes = problem.getQuickFixes();
 		if (quickFixes != null) {
 			for (genericity.language.gcomponent.resource.gcomponent.IGcomponentQuickFix quickFix : quickFixes) {
@@ -473,14 +613,6 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 					quickFixMap.put(quickFix.getContextAsString(), quickFix);
 				}
 			}
-		}
-	}
-	
-	public void addProblem(genericity.language.gcomponent.resource.gcomponent.IGcomponentProblem problem, int column, int line, int charStart, int charEnd) {
-		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
-		getDiagnostics(problem.getSeverity()).add(diagnostic);
-		if (isMarkerCreationEnabled()) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.mark(this, diagnostic);
 		}
 	}
 	
@@ -502,7 +634,7 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		addProblem(new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentProblem(message, type, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemSeverity.WARNING), cause);
 	}
 	
-	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemSeverity severity) {
+	protected java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemSeverity severity) {
 		if (severity == genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemSeverity.ERROR) {
 			return getErrors();
 		} else {
@@ -512,59 +644,14 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	
 	protected java.util.Map<Object, Object> addDefaultLoadOptions(java.util.Map<?, ?> loadOptions) {
 		java.util.Map<Object, Object> loadOptionsCopy = genericity.language.gcomponent.resource.gcomponent.util.GcomponentMapUtil.copySafelyToObjectToObjectMap(loadOptions);
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
-			// find default load option providers
-			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
-			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
-			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
-				try {
-					genericity.language.gcomponent.resource.gcomponent.IGcomponentOptionProvider provider = (genericity.language.gcomponent.resource.gcomponent.IGcomponentOptionProvider) element.createExecutableExtension("class");
-					final java.util.Map<?, ?> options = provider.getOptions();
-					final java.util.Collection<?> keys = options.keySet();
-					for (Object key : keys) {
-						addLoadOption(loadOptionsCopy, key, options.get(key));
-					}
-				} catch (org.eclipse.core.runtime.CoreException ce) {
-					genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Exception while getting default options.", ce);
-				}
-			}
+		// first add static option provider
+		loadOptionsCopy.putAll(new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentOptionProvider().getOptions());
+		
+		// second, add dynamic option providers that are registered via extension
+		if (new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().isEclipsePlatformAvailable()) {
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentEclipseProxy().getDefaultLoadOptionProviderExtensions(loadOptionsCopy);
 		}
 		return loadOptionsCopy;
-	}
-	
-	/**
-	 * Adds a new key,value pair to the list of options. If there is already an option
-	 * with the same key, the two values are collected in a list.
-	 */
-	private void addLoadOption(java.util.Map<Object, Object> options,Object key, Object value) {
-		// check if there is already an option set
-		if (options.containsKey(key)) {
-			Object currentValue = options.get(key);
-			if (currentValue instanceof java.util.List<?>) {
-				// if the current value is a list, we add the new value to this list
-				java.util.List<?> currentValueAsList = (java.util.List<?>) currentValue;
-				java.util.List<Object> currentValueAsObjectList = genericity.language.gcomponent.resource.gcomponent.util.GcomponentListUtil.copySafelyToObjectList(currentValueAsList);
-				if (value instanceof java.util.Collection<?>) {
-					currentValueAsObjectList.addAll((java.util.Collection<?>) value);
-				} else {
-					currentValueAsObjectList.add(value);
-				}
-				options.put(key, currentValueAsObjectList);
-			} else {
-				// if the current value is not a list, we create a fresh list and add both the old
-				// (current) and the new value to this list
-				java.util.List<Object> newValueList = new java.util.ArrayList<Object>();
-				newValueList.add(currentValue);
-				if (value instanceof java.util.Collection<?>) {
-					newValueList.addAll((java.util.Collection<?>) value);
-				} else {
-					newValueList.add(value);
-				}
-				options.put(key, newValueList);
-			}
-		} else {
-			options.put(key, value);
-		}
 	}
 	
 	/**
@@ -577,11 +664,9 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		internalURIFragmentMap.clear();
 		getErrors().clear();
 		getWarnings().clear();
-		if (isMarkerCreationEnabled()) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.unmark(this, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.UNKNOWN);
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.unmark(this, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.SYNTAX_ERROR);
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper.unmark(this, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.UNRESOLVED_REFERENCE);
-		}
+		unmark(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.UNKNOWN);
+		unmark(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.SYNTAX_ERROR);
+		unmark(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.UNRESOLVED_REFERENCE);
 		proxyCounter = 0;
 		resolverSwitch = null;
 	}
@@ -593,81 +678,89 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 	 * interfere when changing the list.
 	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContents() {
+		if (terminateReload) {
+			// the contents' state is currently unclear
+			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.EObject>();
+		}
 		return new genericity.language.gcomponent.resource.gcomponent.util.GcomponentCopiedEObjectInternalEList((org.eclipse.emf.ecore.util.InternalEList<org.eclipse.emf.ecore.EObject>) super.getContents());
 	}
 	
 	/**
-	 * Returns the raw contents of this resource.
+	 * Returns the raw contents of this resource. In contrast to getContents(), this
+	 * methods does not return a copy of the content list, but the original list.
 	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal() {
+		if (terminateReload) {
+			// the contents' state is currently unclear
+			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.EObject>();
+		}
 		return super.getContents();
 	}
 	
+	/**
+	 * Returns all warnings that are associated with this resource.
+	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getWarnings() {
+		if (terminateReload) {
+			// the contents' state is currently unclear
+			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>();
+		}
 		return new genericity.language.gcomponent.resource.gcomponent.util.GcomponentCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getWarnings());
 	}
 	
+	/**
+	 * Returns all errors that are associated with this resource.
+	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getErrors() {
+		if (terminateReload) {
+			// the contents' state is currently unclear
+			return new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>();
+		}
 		return new genericity.language.gcomponent.resource.gcomponent.util.GcomponentCopiedEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(super.getErrors());
 	}
 	
-	@SuppressWarnings("restriction")	
-	private void runValidators(org.eclipse.emf.ecore.EObject root) {
-		// checking constraints provided by EMF validator classes was disabled
+	protected void runValidators(org.eclipse.emf.ecore.EObject root) {
+		// checking constraints provided by EMF validator classes was disabled by option
+		// 'disableEValidators'.
 		
-		// check EMF validation constraints
-		// EMF validation does not work if OSGi is not running
-		// The EMF validation framework code throws a NPE if the validation plug-in is not
-		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
-		// need to catch the exception here.
-		if (org.eclipse.core.runtime.Platform.isRunning()) {
-			// The EMF validation framework code throws a NPE if the validation plug-in is not
-			// loaded. This is a workaround for bug 322079.
-			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
-				try {
-					org.eclipse.emf.validation.service.ModelValidationService service = org.eclipse.emf.validation.service.ModelValidationService.getInstance();
-					org.eclipse.emf.validation.service.IBatchValidator validator = service.<org.eclipse.emf.ecore.EObject, org.eclipse.emf.validation.service.IBatchValidator>newValidator(org.eclipse.emf.validation.model.EvaluationMode.BATCH);
-					validator.setIncludeLiveConstraints(true);
-					org.eclipse.core.runtime.IStatus status = validator.validate(root);
-					addStatus(status, root);
-				} catch (Throwable t) {
-					genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Exception while checking contraints provided by EMF validator classes.", t);
-				}
-			}
-		}
-	}
-	
-	private void addStatus(org.eclipse.core.runtime.IStatus status, org.eclipse.emf.ecore.EObject root) {
-		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
-		causes.add(root);
-		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
-			org.eclipse.emf.validation.model.ConstraintStatus constraintStatus = (org.eclipse.emf.validation.model.ConstraintStatus) status;
-			java.util.Set<org.eclipse.emf.ecore.EObject> resultLocus = constraintStatus.getResultLocus();
-			causes.clear();
-			causes.addAll(resultLocus);
-		}
-		boolean hasChildren = status.getChildren() != null && status.getChildren().length > 0;
-		// Ignore composite status objects that have children. The actual status
-		// information is then contained in the child objects.
-		if (!status.isMultiStatus() || !hasChildren) {
-			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
-				for (org.eclipse.emf.ecore.EObject cause : causes) {
-					addError(status.getMessage(), genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.ANALYSIS_PROBLEM, cause);
-				}
-			}
-			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
-				for (org.eclipse.emf.ecore.EObject cause : causes) {
-					addWarning(status.getMessage(), genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.ANALYSIS_PROBLEM, cause);
-				}
-			}
-		}
-		for (org.eclipse.core.runtime.IStatus child : status.getChildren()) {
-			addStatus(child, root);
+		if (new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().isEclipsePlatformAvailable()) {
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentEclipseProxy().checkEMFValidationConstraints(this, root);
 		}
 	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentQuickFix getQuickFix(String quickFixContext) {
 		return quickFixMap.get(quickFixContext);
+	}
+	
+	protected void mark(genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic diagnostic) {
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper markerHelper = getMarkerHelper();
+		if (markerHelper != null) {
+			markerHelper.mark(this, diagnostic);
+		}
+	}
+	
+	protected void unmark(org.eclipse.emf.ecore.EObject cause) {
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper markerHelper = getMarkerHelper();
+		if (markerHelper != null) {
+			markerHelper.unmark(this, cause);
+		}
+	}
+	
+	protected void unmark(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType analysisProblem) {
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper markerHelper = getMarkerHelper();
+		if (markerHelper != null) {
+			markerHelper.unmark(this, analysisProblem);
+		}
+	}
+	
+	protected genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper getMarkerHelper() {
+		if (isMarkerCreationEnabled() && new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().isEclipsePlatformAvailable()) {
+			if (markerHelper == null) {
+				markerHelper = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMarkerHelper();
+			}
+			return markerHelper;
+		}
+		return null;
 	}
 	
 	public boolean isMarkerCreationEnabled() {
@@ -676,4 +769,19 @@ public class GcomponentResource extends org.eclipse.emf.ecore.resource.impl.Reso
 		}
 		return !loadOptions.containsKey(genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS);
 	}
+	
+	protected boolean isLocationMapEnabled() {
+		if (loadOptions == null) {
+			return true;
+		}
+		return !loadOptions.containsKey(genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.DISABLE_LOCATION_MAP);
+	}
+	
+	protected boolean isLayoutInformationRecordingEnabled() {
+		if (loadOptions == null) {
+			return true;
+		}
+		return !loadOptions.containsKey(genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.DISABLE_LAYOUT_INFORMATION_RECORDING);
+	}
+	
 }

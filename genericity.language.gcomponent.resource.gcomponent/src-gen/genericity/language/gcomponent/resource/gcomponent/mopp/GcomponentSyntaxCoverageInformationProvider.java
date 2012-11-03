@@ -10,15 +10,26 @@ public class GcomponentSyntaxCoverageInformationProvider {
 	
 	public org.eclipse.emf.ecore.EClass[] getClassesWithSyntax() {
 		return new org.eclipse.emf.ecore.EClass[] {
-			genericity.language.gcomponent.GcomponentPackage.eINSTANCE.getTransformationComponent(),
-			genericity.language.gcomponent.GcomponentPackage.eINSTANCE.getConcept(),
-			genericity.language.gcomponent.GcomponentPackage.eINSTANCE.getTag(),
+			genericity.language.gcomponent.dsl.DslPackage.eINSTANCE.getDefinitionRoot(),
+			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getTransformationComponent(),
+			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(),
+			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getTag(),
+			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getAtlTemplate(),
+			genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(),
+			genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(),
+			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getFeatureRef(),
 		};
 	}
 	
 	public org.eclipse.emf.ecore.EClass[] getStartSymbols() {
 		return new org.eclipse.emf.ecore.EClass[] {
-			genericity.language.gcomponent.GcomponentPackage.eINSTANCE.getTransformationComponent(),
+			genericity.language.gcomponent.dsl.DslPackage.eINSTANCE.getDefinitionRoot(),
 		};
 	}
 	

@@ -4,19 +4,16 @@ Bundle-Name: EMFText Parser Plugin: gcomponent
 Bundle-SymbolicName: genericity.language.gcomponent.resource.gcomponent;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.resources,
-  org.eclipse.emf,
-  org.eclipse.emf.codegen.ecore,
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
   org.eclipse.emf.ecore,
-  org.eclipse.emf.ecore.edit,
-  org.eclipse.emf.validation,
-  org.eclipse.emf.workspace,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
   org.emftext.access;resolution:=optional,
-  org.eclipse.debug.core,
-  org.emftext.commons.antlr3_3_0,
+  org.eclipse.debug.core;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
   genericity.language.gcomponent
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: genericity.language.gcomponent.resource.gcomponent,
   genericity.language.gcomponent.resource.gcomponent.analysis,
   genericity.language.gcomponent.resource.gcomponent.mopp,

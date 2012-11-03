@@ -20,12 +20,7 @@ public class GcomponentResourceUtil {
 	 * @return all proxy objects that are not resolvable
 	 */
 	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
-		java.util.Set<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
-		
-		for (org.eclipse.emf.ecore.resource.Resource resource : resourceSet.getResources()) {
-			unresolvedProxies.addAll(findUnresolvedProxies(resource));
-		}
-		return unresolvedProxies;
+		return new genericity.language.gcomponent.resource.gcomponent.util.GcomponentInterruptibleEcoreResolver().findUnresolvedProxies(resourceSet);
 	}
 	
 	/**
@@ -36,21 +31,7 @@ public class GcomponentResourceUtil {
 	 * @return all proxy objects that are not resolvable
 	 */
 	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
-		java.util.Set<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
-		
-		for (java.util.Iterator<org.eclipse.emf.ecore.EObject> elementIt = org.eclipse.emf.ecore.util.EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
-			org.eclipse.emf.ecore.InternalEObject nextElement = (org.eclipse.emf.ecore.InternalEObject) elementIt.next();
-			if (nextElement.eIsProxy()) {
-				unresolvedProxies.add(nextElement);
-			}
-			for (org.eclipse.emf.ecore.EObject crElement : nextElement.eCrossReferences()) {
-				crElement = org.eclipse.emf.ecore.util.EcoreUtil.resolve(crElement, resource);
-				if (crElement.eIsProxy()) {
-					unresolvedProxies.add(crElement);
-				}
-			}
-		}
-		return unresolvedProxies;
+		return new genericity.language.gcomponent.resource.gcomponent.util.GcomponentInterruptibleEcoreResolver().findUnresolvedProxies(resource);
 	}
 	
 	/**
@@ -71,10 +52,21 @@ public class GcomponentResourceUtil {
 		}
 	}
 	
-	public static genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentResource getResource(org.eclipse.core.resources.IFile file) {
-		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
-		return (genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentResource) csResource;
+	public static String getProxyIdentifier(org.eclipse.emf.ecore.EObject eObject) {
+		String deresolvedReference = null;
+		if (eObject instanceof org.eclipse.emf.ecore.EObject) {
+			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) eObject;
+			if (eObjectToDeResolve.eIsProxy()) {
+				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				// If the proxy was created by EMFText, we can try to recover the identifier from
+				// the proxy URI
+				if (deresolvedReference != null && deresolvedReference.startsWith(genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+					deresolvedReference = deresolvedReference.substring(genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
+				}
+			}
+		}
+		return deresolvedReference;
 	}
 	
 	public static genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentResource getResource(java.io.File file) {
@@ -100,16 +92,37 @@ public class GcomponentResourceUtil {
 	}
 	
 	/**
+	 * Returns the resource after parsing the given text.
+	 */
+	public static org.eclipse.emf.ecore.resource.Resource getResource(String text) {
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation metaInformation = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation();
+		metaInformation.registerResourceFactory();
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
+		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
+		if (resource == null) {
+			return null;
+		}
+		java.io.ByteArrayInputStream inputStream = new java.io.ByteArrayInputStream(text.getBytes());
+		try {
+			resource.load(inputStream, null);
+		} catch (java.io.IOException ioe) {
+			return null;
+		}
+		return resource;
+	}
+	
+	/**
 	 * Returns the root element of the resource with the given URI.
 	 */
-	public static genericity.language.gcomponent.TransformationComponent getResourceContent(org.eclipse.emf.common.util.URI uri) {
+	public static genericity.language.gcomponent.dsl.DefinitionRoot getResourceContent(org.eclipse.emf.common.util.URI uri) {
 		return getResourceContent(uri, null);
 	}
 	
 	/**
 	 * Returns the root element of the resource with the given URI.
 	 */
-	public static genericity.language.gcomponent.TransformationComponent getResourceContent(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+	public static genericity.language.gcomponent.dsl.DefinitionRoot getResourceContent(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
 		org.eclipse.emf.ecore.resource.Resource resource = getResource(uri, options);
 		if (resource == null) {
 			return null;
@@ -119,7 +132,23 @@ public class GcomponentResourceUtil {
 			return null;
 		}
 		org.eclipse.emf.ecore.EObject root = contents.get(0);
-		return (genericity.language.gcomponent.TransformationComponent) root;
+		return (genericity.language.gcomponent.dsl.DefinitionRoot) root;
+	}
+	
+	/**
+	 * Returns the root element after parsing the given text.
+	 */
+	public static genericity.language.gcomponent.dsl.DefinitionRoot getResourceContent(String text) {
+		org.eclipse.emf.ecore.resource.Resource resource = getResource(text);
+		if (resource == null) {
+			return null;
+		}
+		java.util.List<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+		if (contents == null || contents.isEmpty()) {
+			return null;
+		}
+		org.eclipse.emf.ecore.EObject root = contents.get(0);
+		return (genericity.language.gcomponent.dsl.DefinitionRoot) root;
 	}
 	
 	public static void saveResource(java.io.File file, org.eclipse.emf.ecore.resource.Resource resource) throws java.io.IOException {
@@ -127,6 +156,31 @@ public class GcomponentResourceUtil {
 		java.io.OutputStream outputStream = new java.io.FileOutputStream(file);
 		resource.save(outputStream, options);
 		outputStream.close();
+	}
+	
+	public static String getText(org.eclipse.emf.ecore.EObject eObject) {
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation metaInformation = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation();
+		metaInformation.registerResourceFactory();
+		org.eclipse.emf.ecore.resource.ResourceSet rs = null;
+		genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource resource = (genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource) eObject.eResource();
+		if (resource != null) {
+			rs = resource.getResourceSet();
+		}
+		if (rs == null) {
+			rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		}
+		if (resource == null) {
+			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
+			resource = (genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource) rs.createResource(uri);
+		}
+		java.io.ByteArrayOutputStream outputStream = new java.io.ByteArrayOutputStream();
+		genericity.language.gcomponent.resource.gcomponent.IGcomponentTextPrinter printer = metaInformation.createPrinter(outputStream, resource);
+		try {
+			printer.print(eObject);
+		} catch (java.io.IOException e) {
+			return null;
+		}
+		return outputStream.toString();
 	}
 	
 	public static boolean containsErrors(org.eclipse.emf.ecore.resource.Resource resource) {

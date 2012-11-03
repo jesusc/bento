@@ -23,6 +23,13 @@ public class GcomponentExpectedBooleanTerminal extends genericity.language.gcomp
 		return booleanTerminal;
 	}
 	
+	/**
+	 * Returns the expected boolean terminal.
+	 */
+	public genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentSyntaxElement getSymtaxElement() {
+		return booleanTerminal;
+	}
+	
 	private org.eclipse.emf.ecore.EStructuralFeature getFeature() {
 		return booleanTerminal.getFeature();
 	}
@@ -36,6 +43,11 @@ public class GcomponentExpectedBooleanTerminal extends genericity.language.gcomp
 			return getFeature().equals(((GcomponentExpectedBooleanTerminal) o).getFeature());
 		}
 		return false;
+	}
+	
+	@Override	
+	public int hashCode() {
+		return getFeature().hashCode();
 	}
 	
 	public java.util.Set<String> getTokenNames() {

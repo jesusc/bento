@@ -11,8 +11,6 @@ package genericity.language.gcomponent.resource.gcomponent.ui;
  */
 public class GcomponentPreferenceInitializer extends org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer {
 	
-	private final static genericity.language.gcomponent.resource.gcomponent.ui.GcomponentAntlrTokenHelper tokenHelper = new genericity.language.gcomponent.resource.gcomponent.ui.GcomponentAntlrTokenHelper();
-	
 	public void initializeDefaultPreferences() {
 		
 		initializeDefaultSyntaxHighlighting();
@@ -48,21 +46,14 @@ public class GcomponentPreferenceInitializer extends org.eclipse.core.runtime.pr
 		store.setDefault(languageId + genericity.language.gcomponent.resource.gcomponent.ui.GcomponentPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.getBracketString());
 	}
 	
-	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, genericity.language.gcomponent.resource.gcomponent.IGcomponentMetaInformation metaInformation) {
+	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentMetaInformation metaInformation) {
 		String languageId = metaInformation.getSyntaxName();
-		String[] tokenNames = metaInformation.getTokenNames();
+		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
 		if (tokenNames == null) {
 			return;
 		}
 		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
-				continue;
-			}
-			
-			String tokenName = tokenHelper.getTokenName(tokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
+			String tokenName = tokenNames[i];
 			genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenStyle style = metaInformation.getDefaultTokenStyle(tokenName);
 			if (style != null) {
 				String color = getColorString(style.getColorAsRGB());

@@ -35,12 +35,6 @@ public class ExportGBindXMI implements IObjectActionDelegate {
 	private Shell shell;
 	private ISelection selection;
 	
-	/**
-	 * Constructor for Action1.
-	 */
-	public ExportGBindXMI() {
-		super();
-	}
 
 	/**
 	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)

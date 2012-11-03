@@ -22,9 +22,10 @@ Require-Bundle: org.eclipse.core.resources,
   org.eclipse.ui.ide,
   org.eclipse.ui.views,
   genericity.language.gcomponent.resource.gcomponent,
-  org.emftext.commons.antlr3_3_0,
+  org.emftext.commons.antlr3_4_0,
   genericity.language.gcomponent
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: genericity.language.gcomponent.resource.gcomponent.ui
 Bundle-Activator: genericity.language.gcomponent.resource.gcomponent.ui.GcomponentUIPlugin
+Import-Package: org.eclipse.ui.texteditor.spelling

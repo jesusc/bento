@@ -1,0 +1,7 @@
+
+transformation component organicLayout {
+	source concept graph  : "Graph.ecore"
+	target concept layout : "Layout.ecore"
+	
+	definition atl "organic2layout.atl"
+}

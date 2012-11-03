@@ -14,7 +14,7 @@ public class GcomponentNewFileContentProvider {
 	
 	public String getNewFileContent(String newFileName) {
 		return getExampleContent(new org.eclipse.emf.ecore.EClass[] {
-			genericity.language.gcomponent.GcomponentPackage.eINSTANCE.getTransformationComponent(),
+			genericity.language.gcomponent.dsl.DslPackage.eINSTANCE.getDefinitionRoot(),
 		}, getMetaInformation().getClassesWithSyntax(), newFileName);
 	}
 	
@@ -43,7 +43,7 @@ public class GcomponentNewFileContentProvider {
 		try {
 			printer.print(root);
 		} catch (java.io.IOException e) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Exception while generating example content.", e);
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError("Exception while generating example content.", e);
 		}
 		return buffer.toString();
 	}

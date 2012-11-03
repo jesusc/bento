@@ -22,13 +22,6 @@ public class ExportAtlXMI  implements IObjectActionDelegate {
 	private ISelection selection;
 	
 	/**
-	 * Constructor for Action1.
-	 */
-	public ExportAtlXMI() {
-		super();
-	}
-
-	/**
 	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {

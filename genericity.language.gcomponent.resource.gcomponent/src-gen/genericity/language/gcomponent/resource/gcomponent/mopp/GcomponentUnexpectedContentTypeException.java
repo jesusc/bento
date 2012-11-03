@@ -13,7 +13,7 @@ package genericity.language.gcomponent.resource.gcomponent.mopp;
  * genericity.language.gcomponent.resource.gcomponent.IGcomponentOptions.RESOURCE_C
  * ONTENT_TYPE
  */
-public class GcomponentUnexpectedContentTypeException extends org.antlr.runtime3_3_0.RecognitionException {
+public class GcomponentUnexpectedContentTypeException extends org.antlr.runtime3_4_0.RecognitionException {
 	
 	private static final long serialVersionUID = 4791359811519433999L;
 	

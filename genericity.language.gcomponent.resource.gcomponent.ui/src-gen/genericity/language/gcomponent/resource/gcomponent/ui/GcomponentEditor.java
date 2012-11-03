@@ -8,6 +8,15 @@ package genericity.language.gcomponent.resource.gcomponent.ui;
 
 /**
  * A text editor for 'gcomponent' models.
+ * <p>
+ * This editor has id
+ * <code>genericity.language.gcomponent.resource.gcomponent.ui.GcomponentEditor</co
+ * de>
+ * The editor's context menu has id
+ * <code>genericity.language.gcomponent.resource.gcomponent.EditorContext</code>.
+ * The editor's ruler context menu has id
+ * <code>genericity.language.gcomponent.resource.gcomponent.EditorRuler</code>.
+ * </p>
  */
 public class GcomponentEditor extends org.eclipse.ui.editors.text.TextEditor implements org.eclipse.emf.edit.domain.IEditingDomainProvider, org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener, org.eclipse.emf.common.ui.viewer.IViewerProvider, genericity.language.gcomponent.resource.gcomponent.IGcomponentResourceProvider, genericity.language.gcomponent.resource.gcomponent.ui.IGcomponentBracketHandlerProvider, genericity.language.gcomponent.resource.gcomponent.ui.IGcomponentAnnotationModelProvider {
 	
@@ -29,7 +38,7 @@ public class GcomponentEditor extends org.eclipse.ui.editors.text.TextEditor imp
 	
 	public GcomponentEditor() {
 		super();
-		setSourceViewerConfiguration(new genericity.language.gcomponent.resource.gcomponent.ui.GcomponentEditorConfiguration(this, this, this, colorManager));
+		setSourceViewerConfiguration(new genericity.language.gcomponent.resource.gcomponent.ui.GcomponentSourceViewerConfiguration(this, this, this, colorManager));
 		initializeEditingDomain();
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
 		addSelectionChangedListener(this);
@@ -174,6 +183,7 @@ public class GcomponentEditor extends org.eclipse.ui.editors.text.TextEditor imp
 	
 	public void dispose() {
 		colorManager.dispose();
+		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
 		super.dispose();
 	}
 	
@@ -436,8 +446,8 @@ public class GcomponentEditor extends org.eclipse.ui.editors.text.TextEditor imp
 						continue;
 					}
 					
-					int annotationLayer = annotationAccess.getLayer(annotation);
 					if (annotationAccess != null) {
+						int annotationLayer = annotationAccess.getLayer(annotation);
 						if (annotationLayer < layer) {
 							continue;
 						}
@@ -490,7 +500,14 @@ public class GcomponentEditor extends org.eclipse.ui.editors.text.TextEditor imp
 			Object object = structuredSelection.getFirstElement();
 			if (object instanceof org.eclipse.emf.ecore.EObject) {
 				org.eclipse.emf.ecore.EObject element = (org.eclipse.emf.ecore.EObject) object;
-				genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource textResource = (genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource) element.eResource();
+				org.eclipse.emf.ecore.resource.Resource resource = element.eResource();
+				if (resource == null) {
+					return false;
+				}
+				if (!(resource instanceof genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource)) {
+					return false;
+				}
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource textResource = (genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource) resource;
 				genericity.language.gcomponent.resource.gcomponent.IGcomponentLocationMap locationMap = textResource.getLocationMap();
 				int destination = locationMap.getCharStart(element);
 				if (destination < 0) {

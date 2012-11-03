@@ -13,7 +13,8 @@ package genericity.language.gcomponent.resource.gcomponent.mopp;
 public abstract class GcomponentAbstractExpectedElement implements genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement {
 	
 	private org.eclipse.emf.ecore.EClass ruleMetaclass;
-	private java.util.Set<genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> followers = new java.util.LinkedHashSet<genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>>();
+	
+	private java.util.Set<genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[]>> followers = new java.util.LinkedHashSet<genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[]>>();
 	
 	public GcomponentAbstractExpectedElement(org.eclipse.emf.ecore.EClass ruleMetaclass) {
 		super();
@@ -24,11 +25,11 @@ public abstract class GcomponentAbstractExpectedElement implements genericity.la
 		return ruleMetaclass;
 	}
 	
-	public void addFollower(genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement follower, org.eclipse.emf.ecore.EStructuralFeature[] path) {
-		followers.add(new genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>(follower, path));
+	public void addFollower(genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement follower, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] path) {
+		followers.add(new genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[]>(follower, path));
 	}
 	
-	public java.util.Collection<genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, org.eclipse.emf.ecore.EStructuralFeature[]>> getFollowers() {
+	public java.util.Collection<genericity.language.gcomponent.resource.gcomponent.util.GcomponentPair<genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[]>> getFollowers() {
 		return followers;
 	}
 	

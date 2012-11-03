@@ -25,11 +25,17 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>genericity.language.gcomponent.resource.gcomponent.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.emftext.language.gbind.resource.gbind.nature</nature>
 		<nature>gbind.resource.gbind.nature</nature>
 		<nature>genericity.language.gbind.resource.nature</nature>
+		<nature>genericity.language.gcomponent.resource.gcomponent.nature</nature>
 	</natures>
 </projectDescription>

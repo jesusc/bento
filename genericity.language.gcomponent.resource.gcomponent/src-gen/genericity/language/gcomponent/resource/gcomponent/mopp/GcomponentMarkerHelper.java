@@ -36,10 +36,22 @@ public class GcomponentMarkerHelper {
 	 */
 	private final static MarkerCommandQueue COMMAND_QUEUE = new MarkerCommandQueue();
 	
+	public static class MutexRule implements org.eclipse.core.runtime.jobs.ISchedulingRule {
+		
+		public boolean isConflicting(org.eclipse.core.runtime.jobs.ISchedulingRule rule) {
+			return rule == this;
+		}
+		
+		public boolean contains(org.eclipse.core.runtime.jobs.ISchedulingRule rule) {
+			return rule == this;
+		}
+	}
+	
 	private static class MarkerCommandQueue {
 		
 		private java.util.List<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>> commands = new java.util.ArrayList<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>>();
-		private final Object jobLock = new Object();
+		
+		private MutexRule schedulingRule = new MutexRule();
 		
 		public void addCommand(genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object> command) {
 			synchronized(commands) {
@@ -52,22 +64,26 @@ public class GcomponentMarkerHelper {
 		}
 		
 		private void scheduleRunCommandsJob() {
-			new org.eclipse.core.runtime.jobs.Job("updating markers") {
+			org.eclipse.core.runtime.jobs.Job job = new org.eclipse.core.runtime.jobs.Job("updating markers") {
 				@Override				
 				protected org.eclipse.core.runtime.IStatus run(org.eclipse.core.runtime.IProgressMonitor monitor) {
-					synchronized(jobLock) {
-						java.util.List<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>> commandsToProcess = new java.util.ArrayList<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>>();
-						synchronized(commands) {
-							commandsToProcess.addAll(commands);
-							commands.clear();
-						}
-						for (genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object> command : commandsToProcess) {
-							command.execute(null);
-						}
-					}
+					runCommands();
 					return org.eclipse.core.runtime.Status.OK_STATUS;
 				}
-			}.schedule();
+			};
+			job.setRule(schedulingRule);
+			job.schedule();
+		}
+		
+		public void runCommands() {
+			java.util.List<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>> commandsToProcess = new java.util.ArrayList<genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>>();
+			synchronized(commands) {
+				commandsToProcess.addAll(commands);
+				commands.clear();
+			}
+			for (genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object> command : commandsToProcess) {
+				command.execute(null);
+			}
 		}
 		
 	}
@@ -81,7 +97,7 @@ public class GcomponentMarkerHelper {
 	 * @param resource The resource that is the file to mark.
 	 * @param diagnostic The diagnostic with information for the marker.
 	 */
-	public static void mark(org.eclipse.emf.ecore.resource.Resource resource, final genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic diagnostic) {
+	public void mark(org.eclipse.emf.ecore.resource.Resource resource, genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic diagnostic) {
 		final org.eclipse.core.resources.IFile file = getFile(resource);
 		if (file == null) {
 			return;
@@ -89,7 +105,7 @@ public class GcomponentMarkerHelper {
 		createMarkerFromDiagnostic(file, diagnostic);
 	}
 	
-	private static void createMarkerFromDiagnostic(final org.eclipse.core.resources.IFile file, final genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic diagnostic) {
+	protected void createMarkerFromDiagnostic(final org.eclipse.core.resources.IFile file, final genericity.language.gcomponent.resource.gcomponent.IGcomponentTextDiagnostic diagnostic) {
 		final genericity.language.gcomponent.resource.gcomponent.IGcomponentProblem problem = diagnostic.getProblem();
 		genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType problemType = problem.getType();
 		final String markerID = getMarkerID(problemType);
@@ -147,7 +163,7 @@ public class GcomponentMarkerHelper {
 	 * 
 	 * @param resource The resource where to delete markers from
 	 */
-	public static void unmark(org.eclipse.emf.ecore.resource.Resource resource) {
+	public void unmark(org.eclipse.emf.ecore.resource.Resource resource) {
 		for (genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType nextType : genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType.values()) {
 			unmark(resource, nextType);
 		}
@@ -162,7 +178,7 @@ public class GcomponentMarkerHelper {
 	 * @param resource The resource where to delete markers from
 	 * @param problemType The type of problem to remove
 	 */
-	public static void unmark(org.eclipse.emf.ecore.resource.Resource resource, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType problemType) {
+	public void unmark(org.eclipse.emf.ecore.resource.Resource resource, genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType problemType) {
 		final org.eclipse.core.resources.IFile file = getFile(resource);
 		if (file == null) {
 			return;
@@ -189,7 +205,7 @@ public class GcomponentMarkerHelper {
 	 * @param resource The resource where to delete markers from
 	 * @param causingObject The cause of the problems to remove
 	 */
-	public static void unmark(org.eclipse.emf.ecore.resource.Resource resource, final org.eclipse.emf.ecore.EObject causingObject) {
+	public void unmark(org.eclipse.emf.ecore.resource.Resource resource, final org.eclipse.emf.ecore.EObject causingObject) {
 		final org.eclipse.core.resources.IFile file = getFile(resource);
 		if (file == null) {
 			return;
@@ -220,7 +236,7 @@ public class GcomponentMarkerHelper {
 	 * Returns the ID of the marker type that is used to indicate problems of the
 	 * given type.
 	 */
-	private static String getMarkerID(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType problemType) {
+	public String getMarkerID(genericity.language.gcomponent.resource.gcomponent.GcomponentEProblemType problemType) {
 		String markerID = MARKER_TYPE;
 		String typeID = problemType.getID();
 		if (!"".equals(typeID)) {
@@ -234,7 +250,7 @@ public class GcomponentMarkerHelper {
 	 * running, the resource is not a platform resource, or the resource cannot be
 	 * found in the workspace, this method returns <code>null</code>.
 	 */
-	private static org.eclipse.core.resources.IFile getFile(org.eclipse.emf.ecore.resource.Resource resource) {
+	protected org.eclipse.core.resources.IFile getFile(org.eclipse.emf.ecore.resource.Resource resource) {
 		if (resource == null || !org.eclipse.core.runtime.Platform.isRunning()) {
 			return null;
 		}
@@ -249,7 +265,7 @@ public class GcomponentMarkerHelper {
 	/**
 	 * Returns an URI that identifies the given object.
 	 */
-	private static String getObjectURI(org.eclipse.emf.ecore.EObject object) {
+	protected String getObjectURI(org.eclipse.emf.ecore.EObject object) {
 		if (object == null) {
 			return null;
 		}
@@ -263,13 +279,70 @@ public class GcomponentMarkerHelper {
 		return eResource.getURI().toString() + "#" + eResource.getURIFragment(object);
 	}
 	
-	private static void handleException(org.eclipse.core.runtime.CoreException ce) {
+	protected void handleException(org.eclipse.core.runtime.CoreException ce) {
 		if (ce.getMessage().matches("Marker.*not found.")) {
 			// ignore
 		}else if (ce.getMessage().matches("Resource.*does not exist.")) {
 			// ignore
 		} else {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Error while removing markers from resource:", ce);
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError("Error while removing markers from resource:", ce);
 		}
 	}
+	
+	/**
+	 * Removes all markers of the given type from the given resource. Markers are
+	 * created and removed asynchronously. Thus, they may not appear when calls to
+	 * this method return. But, the order of marker additions and removals is
+	 * preserved.
+	 * 
+	 * @param resource The resource where to delete markers from
+	 * @param markerId The id of the marker type to remove
+	 */
+	public void removeAllMarkers(final org.eclipse.core.resources.IResource resource, final String markerId) {
+		if (resource == null) {
+			return;
+		}
+		COMMAND_QUEUE.addCommand(new genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>() {
+			public boolean execute(Object context) {
+				try {
+					resource.deleteMarkers(markerId, false, org.eclipse.core.resources.IResource.DEPTH_ZERO);
+				} catch (org.eclipse.core.runtime.CoreException ce) {
+					handleException(ce);
+				}
+				return true;
+			}
+		});
+	}
+	
+	public void createMarker(final org.eclipse.core.resources.IResource resource, final String markerId, final java.util.Map<String, Object> markerAttributes) {
+		if (resource == null) {
+			return;
+		}
+		
+		COMMAND_QUEUE.addCommand(new genericity.language.gcomponent.resource.gcomponent.IGcomponentCommand<Object>() {
+			public boolean execute(Object context) {
+				try {
+					org.eclipse.core.resources.IMarker marker = resource.createMarker(markerId);
+					for (String key : markerAttributes.keySet()) {
+						marker.setAttribute(key, markerAttributes.get(key));
+					}
+					return true;
+				} catch (org.eclipse.core.runtime.CoreException e) {
+					genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Can't create marker.", e);
+					return false;
+				}
+			}
+		});
+	}
+	
+	public void beginDeferMarkerUpdates() {
+	}
+	
+	public void endDeferMarkerUpdates() {
+	}
+	
+	public void runCommands() {
+		COMMAND_QUEUE.runCommands();
+	}
+	
 }

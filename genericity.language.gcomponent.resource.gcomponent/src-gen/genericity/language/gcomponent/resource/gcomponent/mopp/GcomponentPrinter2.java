@@ -12,10 +12,12 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		
 		private String text;
 		private String tokenName;
+		private org.eclipse.emf.ecore.EObject container;
 		
-		public PrintToken(String text, String tokenName) {
+		public PrintToken(String text, String tokenName, org.eclipse.emf.ecore.EObject container) {
 			this.text = text;
 			this.tokenName = tokenName;
+			this.container = container;
 		}
 		
 		public String getText() {
@@ -26,13 +28,93 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			return tokenName;
 		}
 		
+		public org.eclipse.emf.ecore.EObject getContainer() {
+			return container;
+		}
+		
+		public String toString() {
+			return "'" + text + "' [" + tokenName + "]";
+		}
+		
+	}
+	
+	/**
+	 * The PrintCountingMap keeps tracks of the values that must be printed for each
+	 * feature of an EObject. It is also used to store the indices of all values that
+	 * have been printed. This knowledge is used to avoid printing values twice. We
+	 * must store the concrete indices of the printed values instead of basically
+	 * counting them, because values may be printed in an order that differs from the
+	 * order in which they are stored in the EObject's feature.
+	 */
+	protected class PrintCountingMap {
+		
+		private java.util.Map<String, java.util.List<Object>> featureToValuesMap = new java.util.LinkedHashMap<String, java.util.List<Object>>();
+		private java.util.Map<String, java.util.Set<Integer>> featureToPrintedIndicesMap = new java.util.LinkedHashMap<String, java.util.Set<Integer>>();
+		
+		public void setFeatureValues(String featureName, java.util.List<Object> values) {
+			featureToValuesMap.put(featureName, values);
+			// If the feature does not have values it won't be printed. An entry in
+			// 'featureToPrintedIndicesMap' is therefore not needed in this case.
+			if (values != null) {
+				featureToPrintedIndicesMap.put(featureName, new java.util.LinkedHashSet<Integer>());
+			}
+		}
+		
+		public java.util.Set<Integer> getIndicesToPrint(String featureName) {
+			return featureToPrintedIndicesMap.get(featureName);
+		}
+		
+		public void addIndexToPrint(String featureName, int index) {
+			featureToPrintedIndicesMap.get(featureName).add(index);
+		}
+		
+		public int getCountLeft(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentTerminal terminal) {
+			org.eclipse.emf.ecore.EStructuralFeature feature = terminal.getFeature();
+			String featureName = feature.getName();
+			java.util.List<Object> totalValuesToPrint = featureToValuesMap.get(featureName);
+			java.util.Set<Integer> printedIndices = featureToPrintedIndicesMap.get(featureName);
+			if (totalValuesToPrint == null) {
+				return 0;
+			}
+			if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
+				// for attributes we do not need to check the type, since the CS languages does
+				// not allow type restrictions for attributes.
+				return totalValuesToPrint.size() - printedIndices.size();
+			} else if (feature instanceof org.eclipse.emf.ecore.EReference) {
+				org.eclipse.emf.ecore.EReference reference = (org.eclipse.emf.ecore.EReference) feature;
+				if (!reference.isContainment()) {
+					// for non-containment references we also do not need to check the type, since the
+					// CS languages does not allow type restrictions for these either.
+					return totalValuesToPrint.size() - printedIndices.size();
+				}
+			}
+			// now we're left with containment references for which we check the type of the
+			// objects to print
+			java.util.List<Class<?>> allowedTypes = getAllowedTypes(terminal);
+			java.util.Set<Integer> indicesWithCorrectType = new java.util.LinkedHashSet<Integer>();
+			int index = 0;
+			for (Object valueToPrint : totalValuesToPrint) {
+				for (Class<?> allowedType : allowedTypes) {
+					if (allowedType.isInstance(valueToPrint)) {
+						indicesWithCorrectType.add(index);
+					}
+				}
+				index++;
+			}
+			indicesWithCorrectType.removeAll(printedIndices);
+			return indicesWithCorrectType.size();
+		}
+		
+		public int getNextIndexToPrint(String featureName) {
+			int printedValues = featureToPrintedIndicesMap.get(featureName).size();
+			return printedValues;
+		}
+		
 	}
 	
 	public final static String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
 	
-	private final PrintToken SPACE_TOKEN = new PrintToken(" ", null);
-	private final PrintToken TAB_TOKEN = new PrintToken("\t", null);
-	private final PrintToken NEW_LINE_TOKEN = new PrintToken(NEW_LINE, null);
+	private final genericity.language.gcomponent.resource.gcomponent.util.GcomponentEClassUtil eClassUtil = new genericity.language.gcomponent.resource.gcomponent.util.GcomponentEClassUtil();
 	
 	/**
 	 * Holds the resource that is associated with this printer. May be null if the
@@ -42,6 +124,7 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 	
 	private java.util.Map<?, ?> options;
 	private java.io.OutputStream outputStream;
+	private String encoding = System.getProperty("file.encoding");
 	protected java.util.List<PrintToken> tokenOutputStream;
 	private genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolverFactory tokenResolverFactory = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenResolverFactory();
 	private boolean handleTokenSpaceAutomatically = true;
@@ -91,8 +174,8 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		// print all remaining formatting elements
 		java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations = getCopyOfLayoutInformation(element);
 		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation eofLayoutInformation = getLayoutInformation(layoutInformations, null, null, null);
-		printFormattingElements(formattingElements, layoutInformations, eofLayoutInformation);
-		java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.BufferedOutputStream(outputStream));
+		printFormattingElements(element, formattingElements, layoutInformations, eofLayoutInformation);
+		java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.BufferedOutputStream(outputStream), encoding));
 		if (handleTokenSpaceAutomatically) {
 			printSmart(writer);
 		} else {
@@ -109,16 +192,60 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			throw new java.lang.IllegalArgumentException("Nothing to write on.");
 		}
 		
-		if (element instanceof genericity.language.gcomponent.TransformationComponent) {
+		if (element instanceof genericity.language.gcomponent.dsl.DefinitionRoot) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_0, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.Concept) {
+		if (element instanceof genericity.language.gcomponent.core.TransformationComponent) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_1, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.Tag) {
+		if (element instanceof genericity.language.gcomponent.core.Concept) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_2, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.core.Tag) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_3, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.core.AtlTemplate) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_4, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.variants.SingleFeature) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_5, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.variants.XorFeature) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_6, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.core.CompositeComponent) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_7, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Composition) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_8, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Xor) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_9, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.flowcontrol.XorCond) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_10, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Apply) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_11, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.flowcontrol.ApplyParameter) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_12, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.flowcontrol.FeatureRef) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_13, foundFormattingElements);
 			return;
 		}
 		
@@ -148,7 +275,7 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 	}
 	
 	public void decorateTree(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject) {
-		java.util.Map<String, Integer> printCountingMap = initializePrintCountingMap(eObject);
+		PrintCountingMap printCountingMap = initializePrintCountingMap(eObject);
 		java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator> keywordsToPrint = new java.util.ArrayList<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator>();
 		decorateTreeBasic(decorator, eObject, printCountingMap, keywordsToPrint);
 		for (genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator keywordToPrint : keywordsToPrint) {
@@ -159,10 +286,10 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 	}
 	
 	/**
-	 * Tries to decorate the decorator with an attribute value, or reference holded by
-	 * eObject. Returns true if an attribute value or reference was found.
+	 * Tries to decorate the decorator with an attribute value, or reference held by
+	 * the given EObject. Returns true if an attribute value or reference was found.
 	 */
-	public boolean decorateTreeBasic(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator> keywordsToPrint) {
+	public boolean decorateTreeBasic(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator> keywordsToPrint) {
 		boolean foundFeatureToPrint = false;
 		genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentCardinality cardinality = syntaxElement.getCardinality();
@@ -178,11 +305,22 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 				if (feature == genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.ANONYMOUS_FEATURE) {
 					return false;
 				}
-				int countLeft = printCountingMap.get(feature.getName());
+				String featureName = feature.getName();
+				int countLeft = printCountingMap.getCountLeft(terminal);
 				if (countLeft > terminal.getMandatoryOccurencesAfter()) {
-					decorator.addIndexToPrint(countLeft);
-					printCountingMap.put(feature.getName(), countLeft - 1);
-					keepDecorating = true;
+					// normally we print the element at the next index
+					int indexToPrint = printCountingMap.getNextIndexToPrint(featureName);
+					// But, if there are type restrictions for containments, we must choose an index
+					// of an element that fits (i.e., which has the correct type)
+					if (terminal instanceof genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment) {
+						genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment containment = (genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment) terminal;
+						indexToPrint = findElementWithCorrectType(eObject, feature, printCountingMap.getIndicesToPrint(featureName), containment);
+					}
+					if (indexToPrint >= 0) {
+						decorator.addIndexToPrint(indexToPrint);
+						printCountingMap.addIndexToPrint(featureName, indexToPrint);
+						keepDecorating = true;
+					}
 				}
 			}
 			if (syntaxElement instanceof genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentChoice) {
@@ -231,14 +369,41 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		return foundFeatureToPrint;
 	}
 	
+	private int findElementWithCorrectType(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, java.util.Set<Integer> indicesToPrint, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment containment) {
+		// By default the type restrictions that are defined in the CS definition are
+		// considered when printing models. You can change this behavior by setting the
+		// 'ignoreTypeRestrictionsForPrinting' option to true.
+		boolean ignoreTypeRestrictions = false;
+		org.eclipse.emf.ecore.EClass[] allowedTypes = containment.getAllowedTypes();
+		Object value = eObject.eGet(feature);
+		if (value instanceof java.util.List<?>) {
+			java.util.List<?> valueList = (java.util.List<?>) value;
+			int listSize = valueList.size();
+			for (int index = 0; index < listSize; index++) {
+				if (indicesToPrint.contains(index)) {
+					continue;
+				}
+				Object valueAtIndex = valueList.get(index);
+				if (eClassUtil.isInstance(valueAtIndex, allowedTypes) || ignoreTypeRestrictions) {
+					return index;
+				}
+			}
+		} else {
+			if (eClassUtil.isInstance(value, allowedTypes) || ignoreTypeRestrictions) {
+				return 0;
+			}
+		}
+		return -1;
+	}
+	
 	/**
 	 * Checks whether decorating the given node will use at least one attribute value,
-	 * or reference holded by eObject. Returns true if a printable attribute value or
+	 * or reference held by eObject. Returns true if a printable attribute value or
 	 * reference was found. This method is used to decide which choice to pick, when
 	 * multiple choices are available. We pick the choice that prints at least one
 	 * attribute or reference.
 	 */
-	public boolean doesPrintFeature(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.Map<String, Integer> printCountingMap) {
+	public boolean doesPrintFeature(genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap) {
 		genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentSyntaxElement syntaxElement = decorator.getDecoratedElement();
 		if (syntaxElement instanceof genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentTerminal) {
 			genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentTerminal terminal = (genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentTerminal) syntaxElement;
@@ -246,7 +411,7 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			if (feature == genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.ANONYMOUS_FEATURE) {
 				return false;
 			}
-			int countLeft = printCountingMap.get(feature.getName());
+			int countLeft = printCountingMap.getCountLeft(terminal);
 			if (countLeft > terminal.getMandatoryOccurencesAfter()) {
 				// found a feature to print
 				return true;
@@ -324,10 +489,10 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 	}
 	
 	public void printKeyword(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentKeyword keyword, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
-		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, keyword, null, eObject);
-		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation keywordLayout = getLayoutInformation(layoutInformations, keyword, null, eObject);
+		printFormattingElements(eObject, foundFormattingElements, layoutInformations, keywordLayout);
 		String value = keyword.getValue();
-		tokenOutputStream.add(new PrintToken(value, "'" + genericity.language.gcomponent.resource.gcomponent.util.GcomponentStringUtil.escapeToANTLRKeyword(value) + "'"));
+		tokenOutputStream.add(new PrintToken(value, "'" + genericity.language.gcomponent.resource.gcomponent.util.GcomponentStringUtil.escapeToANTLRKeyword(value) + "'", eObject));
 	}
 	
 	public void printFeature(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentPlaceholder placeholder, int count, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
@@ -339,15 +504,17 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		}
 	}
 	
-	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentPlaceholder placeholder, int count, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
-		String result;
-		Object attributeValue = getValue(eObject, attribute, count);
-		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
-		String visibleTokenText = getVisibleTokenText(layoutInformation);
+	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentPlaceholder placeholder, int index, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
+		String result = null;
+		Object attributeValue = genericity.language.gcomponent.resource.gcomponent.util.GcomponentEObjectUtil.getFeatureValue(eObject, attribute, index);
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(attributeLayout);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
-		} else {
+		}
+		
+		if (result == null) {
 			// if no text is available, the attribute is deresolved to obtain its textual
 			// representation
 			genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(placeholder.getTokenName());
@@ -355,24 +522,27 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
 			result = deResolvedValue;
 		}
+		
 		if (result != null && !"".equals(result)) {
-			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			printFormattingElements(eObject, foundFormattingElements, layoutInformations, attributeLayout);
 			// write result to the output stream
-			tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName()));
+			tokenOutputStream.add(new PrintToken(result, placeholder.getTokenName(), eObject));
 		}
 	}
 	
 	
-	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentBooleanTerminal booleanTerminal, int count, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
+	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentBooleanTerminal booleanTerminal, int index, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = booleanTerminal.getAttribute();
-		String result;
-		Object attributeValue = getValue(eObject, attribute, count);
-		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
-		String visibleTokenText = getVisibleTokenText(layoutInformation);
+		String result = null;
+		Object attributeValue = genericity.language.gcomponent.resource.gcomponent.util.GcomponentEObjectUtil.getFeatureValue(eObject, attribute, index);
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(attributeLayout);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
-		} else {
+		}
+		
+		if (result == null) {
 			// if no text is available, the boolean attribute is converted to its textual
 			// representation using the literals of the boolean terminal
 			if (Boolean.TRUE.equals(attributeValue)) {
@@ -381,40 +551,44 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 				result = booleanTerminal.getFalseLiteral();
 			}
 		}
+		
 		if (result != null && !"".equals(result)) {
-			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			printFormattingElements(eObject, foundFormattingElements, layoutInformations, attributeLayout);
 			// write result to the output stream
-			tokenOutputStream.add(new PrintToken(result, "'" + genericity.language.gcomponent.resource.gcomponent.util.GcomponentStringUtil.escapeToANTLRKeyword(result) + "'"));
+			tokenOutputStream.add(new PrintToken(result, "'" + genericity.language.gcomponent.resource.gcomponent.util.GcomponentStringUtil.escapeToANTLRKeyword(result) + "'", eObject));
 		}
 	}
 	
 	
-	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentEnumerationTerminal enumTerminal, int count, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
+	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentEnumerationTerminal enumTerminal, int index, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = enumTerminal.getAttribute();
-		String result;
-		Object attributeValue = getValue(eObject, attribute, count);
-		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
-		String visibleTokenText = getVisibleTokenText(layoutInformation);
+		String result = null;
+		Object attributeValue = genericity.language.gcomponent.resource.gcomponent.util.GcomponentEObjectUtil.getFeatureValue(eObject, attribute, index);
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
+		String visibleTokenText = getVisibleTokenText(attributeLayout);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
 			result = visibleTokenText;
-		} else {
+		}
+		
+		if (result == null) {
 			// if no text is available, the enumeration attribute is converted to its textual
 			// representation using the literals of the enumeration terminal
 			assert attributeValue instanceof org.eclipse.emf.common.util.Enumerator;
 			result = enumTerminal.getText(((org.eclipse.emf.common.util.Enumerator) attributeValue).getName());
 		}
+		
 		if (result != null && !"".equals(result)) {
-			printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+			printFormattingElements(eObject, foundFormattingElements, layoutInformations, attributeLayout);
 			// write result to the output stream
-			tokenOutputStream.add(new PrintToken(result, "'" + genericity.language.gcomponent.resource.gcomponent.util.GcomponentStringUtil.escapeToANTLRKeyword(result) + "'"));
+			tokenOutputStream.add(new PrintToken(result, "'" + genericity.language.gcomponent.resource.gcomponent.util.GcomponentStringUtil.escapeToANTLRKeyword(result) + "'", eObject));
 		}
 	}
 	
 	
-	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment containment, int count, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
+	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment containment, int index, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature reference = containment.getFeature();
-		Object o = getValue(eObject, reference, count);
+		Object o = genericity.language.gcomponent.resource.gcomponent.util.GcomponentEObjectUtil.getFeatureValue(eObject, reference, index);
 		// save current number of tabs to restore them after printing the contained object
 		int oldTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		int oldCurrentTabs = currentTabs;
@@ -429,14 +603,14 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		currentTabs = oldCurrentTabs;
 	}
 	
-	public void printFormattingElements(java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation) {
+	public void printFormattingElements(org.eclipse.emf.ecore.EObject eObject, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation) {
 		String hiddenTokenText = getHiddenTokenText(layoutInformation);
 		if (hiddenTokenText != null) {
 			// removed used information
 			if (layoutInformations != null) {
 				layoutInformations.remove(layoutInformation);
 			}
-			tokenOutputStream.add(new PrintToken(hiddenTokenText, null));
+			tokenOutputStream.add(new PrintToken(hiddenTokenText, null, eObject));
 			foundFormattingElements.clear();
 			startedPrintingObject = false;
 			setTabsBeforeCurrentObject(0);
@@ -448,15 +622,15 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 				if (foundFormattingElement instanceof genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentWhiteSpace) {
 					int amount = ((genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentWhiteSpace) foundFormattingElement).getAmount();
 					for (int i = 0; i < amount; i++) {
-						tokenOutputStream.add(SPACE_TOKEN);
+						tokenOutputStream.add(createSpaceToken(eObject));
 					}
 				}
 				if (foundFormattingElement instanceof genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentLineBreak) {
 					currentTabs = ((genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentLineBreak) foundFormattingElement).getTabs();
 					printedTabs += currentTabs;
-					tokenOutputStream.add(NEW_LINE_TOKEN);
+					tokenOutputStream.add(createNewLineToken(eObject));
 					for (int i = 0; i < tabsBeforeCurrentObject + currentTabs; i++) {
-						tokenOutputStream.add(TAB_TOKEN);
+						tokenOutputStream.add(createTabToken(eObject));
 					}
 				}
 			}
@@ -469,7 +643,7 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 				startedPrintingObject = false;
 			} else {
 				if (!handleTokenSpaceAutomatically) {
-					tokenOutputStream.add(new PrintToken(getWhiteSpaceString(tokenSpace), null));
+					tokenOutputStream.add(new PrintToken(getWhiteSpaceString(tokenSpace), null, eObject));
 				}
 			}
 		}
@@ -485,30 +659,21 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		startedPrintingContainedObject = true;
 	}
 	
-	private Object getValue(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, int count) {
-		// get value of feature
-		Object o = eObject.eGet(feature);
-		if (o instanceof java.util.List<?>) {
-			java.util.List<?> list = (java.util.List<?>) o;
-			int index = list.size() - count;
-			o = list.get(index);
-		}
-		return o;
-	}
-	
 	@SuppressWarnings("unchecked")	
-	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentPlaceholder placeholder, int count, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
+	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentPlaceholder placeholder, int index, java.util.List<genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentFormattingElement> foundFormattingElements, java.util.List<genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation> layoutInformations) {
 		String tokenName = placeholder.getTokenName();
-		Object referencedObject = getValue(eObject, reference, count);
+		Object referencedObject = genericity.language.gcomponent.resource.gcomponent.util.GcomponentEObjectUtil.getFeatureValue(eObject, reference, index, false);
 		// first add layout before the reference
-		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation layoutInformation = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
-		printFormattingElements(foundFormattingElements, layoutInformations, layoutInformation);
+		genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentLayoutInformation referenceLayout = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
+		printFormattingElements(eObject, foundFormattingElements, layoutInformations, referenceLayout);
 		// proxy objects must be printed differently
 		String deresolvedReference = null;
 		if (referencedObject instanceof org.eclipse.emf.ecore.EObject) {
 			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) referencedObject;
 			if (eObjectToDeResolve.eIsProxy()) {
 				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				// If the proxy was created by EMFText, we can try to recover the identifier from
+				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 					deresolvedReference = deresolvedReference.substring(genericity.language.gcomponent.resource.gcomponent.IGcomponentContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
@@ -528,28 +693,33 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		tokenResolver.setOptions(getOptions());
 		String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
 		// write result to output stream
-		tokenOutputStream.add(new PrintToken(deresolvedToken, tokenName));
+		tokenOutputStream.add(new PrintToken(deresolvedToken, tokenName, eObject));
 	}
 	
-	public java.util.Map<String, Integer> initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
-		// The printCountingMap contains a mapping from feature names to the number of
+	@SuppressWarnings("unchecked")	
+	public PrintCountingMap initializePrintCountingMap(org.eclipse.emf.ecore.EObject eObject) {
+		// The PrintCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>();
+		PrintCountingMap printCountingMap = new PrintCountingMap();
 		java.util.List<org.eclipse.emf.ecore.EStructuralFeature> features = eObject.eClass().getEAllStructuralFeatures();
 		for (org.eclipse.emf.ecore.EStructuralFeature feature : features) {
-			int count = 0;
-			Object featureValue = eObject.eGet(feature);
+			// We get the feature value without resolving it, because resolving is not
+			// required to count the number of elements that are referenced by the feature.
+			// Moreover, triggering reference resolving is not desired here, because we'd also
+			// like to print models that contain unresolved references.
+			Object featureValue = eObject.eGet(feature, false);
 			if (featureValue != null) {
 				if (featureValue instanceof java.util.List<?>) {
-					count = ((java.util.List<?>) featureValue).size();
+					printCountingMap.setFeatureValues(feature.getName(), (java.util.List<Object>) featureValue);
 				} else {
-					count = 1;
+					printCountingMap.setFeatureValues(feature.getName(), java.util.Collections.singletonList(featureValue));
 				}
+			} else {
+				printCountingMap.setFeatureValues(feature.getName(), null);
 			}
-			printCountingMap.put(feature.getName(), count);
 		}
 		return printCountingMap;
 	}
@@ -560,6 +730,16 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 	
 	public void setOptions(java.util.Map<?,?> options) {
 		this.options = options;
+	}
+	
+	public String getEncoding() {
+		return encoding;
+	}
+	
+	public void setEncoding(String encoding) {
+		if (encoding != null) {
+			this.encoding = encoding;
+		}
 	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource getResource() {
@@ -595,7 +775,16 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			if (syntaxElement == layoutInformation.getSyntaxElement()) {
 				if (object == null) {
 					return layoutInformation;
-				} else if (object == layoutInformation.getObject(container)) {
+				}
+				// The layout information adapter must only try to resolve the object it refers
+				// to, if we compare with a non-proxy object. If we're printing a resource that
+				// contains proxy objects, resolving must not be triggered.
+				boolean isNoProxy = true;
+				if (object instanceof org.eclipse.emf.ecore.EObject) {
+					org.eclipse.emf.ecore.EObject eObject = (org.eclipse.emf.ecore.EObject) object;
+					isNoProxy = !eObject.eIsProxy();
+				}
+				if (isSame(object, layoutInformation.getObject(container, isNoProxy))) {
 					return layoutInformation;
 				}
 			}
@@ -684,12 +873,17 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		// stores the text that was already successfully checked (i.e., is can be scanned
 		// correctly and can thus be printed).
 		String validBlock = "";
+		char lastCharWritten = ' ';
 		for (int i = 0; i < tokenOutputStream.size(); i++) {
 			PrintToken tokenI = tokenOutputStream.get(i);
 			currentBlock.append(tokenI.getText());
 			// if declared or preserved whitespace is found - print block
 			if (tokenI.getTokenName() == null) {
-				writer.write(currentBlock.toString());
+				char[] charArray = currentBlock.toString().toCharArray();
+				writer.write(charArray);
+				if (charArray.length > 0) {
+					lastCharWritten = charArray[charArray.length - 1];
+				}
 				// reset all values
 				currentBlock = new StringBuilder();
 				currentBlockStart = i + 1;
@@ -732,9 +926,17 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			} else {
 				// sequence is not valid, must print whitespace to separate tokens
 				// print text that is valid so far
-				writer.write(validBlock);
+				char[] charArray = validBlock.toString().toCharArray();
+				writer.write(charArray);
+				if (charArray.length > 0) {
+					lastCharWritten = charArray[charArray.length - 1];
+				}
 				// print separating whitespace
-				writer.write(" ");
+				// if no whitespace (or tab or linebreak) is already there
+				if (lastCharWritten != ' ' && lastCharWritten != '\t' && lastCharWritten != '\n' && lastCharWritten != '\r') {
+					lastCharWritten = ' ';
+					writer.write(lastCharWritten);
+				}
 				// add current token as initial value for next iteration
 				currentBlock = new StringBuilder(tokenI.getText());
 				currentBlockStart = i;
@@ -743,6 +945,41 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 		}
 		// flush remaining valid text to writer
 		writer.write(validBlock);
+	}
+	
+	private boolean isSame(Object o1, Object o2) {
+		if (o1 instanceof String || o1 instanceof Integer || o1 instanceof Long || o1 instanceof Byte || o1 instanceof Short || o1 instanceof Float || o2 instanceof Double) {
+			return o1.equals(o2);
+		}
+		return o1 == o2;
+	}
+	
+	protected java.util.List<Class<?>> getAllowedTypes(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentTerminal terminal) {
+		java.util.List<Class<?>> allowedTypes = new java.util.ArrayList<Class<?>>();
+		allowedTypes.add(terminal.getFeature().getEType().getInstanceClass());
+		if (terminal instanceof genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment) {
+			genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment printingContainment = (genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentContainment) terminal;
+			org.eclipse.emf.ecore.EClass[] typeRestrictions = printingContainment.getAllowedTypes();
+			if (typeRestrictions != null && typeRestrictions.length > 0) {
+				allowedTypes.clear();
+				for (org.eclipse.emf.ecore.EClass eClass : typeRestrictions) {
+					allowedTypes.add(eClass.getInstanceClass());
+				}
+			}
+		}
+		return allowedTypes;
+	}
+	
+	protected PrintToken createSpaceToken(org.eclipse.emf.ecore.EObject container) {
+		return new PrintToken(" ", null, container);
+	}
+	
+	protected PrintToken createTabToken(org.eclipse.emf.ecore.EObject container) {
+		return new PrintToken("\t", null, container);
+	}
+	
+	protected PrintToken createNewLineToken(org.eclipse.emf.ecore.EObject container) {
+		return new PrintToken(NEW_LINE, null, container);
 	}
 	
 }

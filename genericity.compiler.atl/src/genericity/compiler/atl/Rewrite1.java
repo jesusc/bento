@@ -1,6 +1,7 @@
 package genericity.compiler.atl;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.eclectic.idc.datatypes.JavaListConverter;
@@ -54,6 +55,9 @@ public class Rewrite1 {
 
 		// TODO: Define in/out modes for EMFModels
 		// out.serialize();
+		
+		inout.serialize(new FileOutputStream(withDir("tmp_/uml2java-adapted.atl.xmi")));
+		System.out.println("Finished " + Rewrite1.class.getSimpleName());
 		
 	}
 

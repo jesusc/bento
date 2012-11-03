@@ -15,6 +15,7 @@ OPTIONS {
 	basePackage = "genericity.language.gbind";
 	resourcePluginID   = "genericity.language.gbind.resource";
 	resourceUIPluginID = "genericity.language.gbind.resource.ui";
+	overrideReferenceResolvers="false";
 
 	// BEGIN-OF OCL 
 	usePredefinedTokens = "false";

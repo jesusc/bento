@@ -23,4 +23,9 @@ public interface IGcomponentTextPrinter extends genericity.language.gcomponent.r
 	 */
 	public void print(org.eclipse.emf.ecore.EObject element) throws java.io.IOException;
 	
+	/**
+	 * Sets the encoding used for printing.
+	 */
+	public void setEncoding(String encoding);
+	
 }

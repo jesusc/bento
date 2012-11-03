@@ -29,6 +29,13 @@
                label="Export ATL to XMI"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
+         <action
+               class="genericity.components.ui.popup.actions.ImportAtlXMI"
+               enablesFor="1"
+               id="genericity.components.ui.ImportATL"
+               label="Import ATL from XMI"
+               menubarPath="genericity.components.ui.GComponentsMenu/group1">
+         </action>
       </objectContribution>
    </extension>
 

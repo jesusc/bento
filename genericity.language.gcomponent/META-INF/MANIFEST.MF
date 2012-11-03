@@ -8,8 +8,20 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: genericity.language.gcomponent,
+ genericity.language.gcomponent.core,
+ genericity.language.gcomponent.core.impl,
+ genericity.language.gcomponent.core.util,
+ genericity.language.gcomponent.dsl,
+ genericity.language.gcomponent.dsl.impl,
+ genericity.language.gcomponent.dsl.util,
+ genericity.language.gcomponent.flowcontrol,
+ genericity.language.gcomponent.flowcontrol.impl,
+ genericity.language.gcomponent.flowcontrol.util,
  genericity.language.gcomponent.impl,
- genericity.language.gcomponent.util
+ genericity.language.gcomponent.util,
+ genericity.language.gcomponent.variants,
+ genericity.language.gcomponent.variants.impl,
+ genericity.language.gcomponent.variants.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

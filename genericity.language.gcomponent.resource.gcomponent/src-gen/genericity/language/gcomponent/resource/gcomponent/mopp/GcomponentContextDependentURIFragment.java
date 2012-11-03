@@ -37,7 +37,7 @@ public abstract class GcomponentContextDependentURIFragment<ContainerType extend
 		return result != null;
 	}
 	
-	public synchronized genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<ReferenceType> resolve() {
+	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<ReferenceType> resolve() {
 		if (resolving) {
 			return null;
 		}
@@ -77,7 +77,7 @@ public abstract class GcomponentContextDependentURIFragment<ContainerType extend
 			} else if (list != null) {
 				addResultToList(mapping, proxy, list);
 			} else {
-				genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
+				new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
 			}
 		}
 	}

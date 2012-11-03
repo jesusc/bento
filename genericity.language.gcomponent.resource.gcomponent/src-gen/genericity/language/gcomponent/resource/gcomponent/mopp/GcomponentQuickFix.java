@@ -45,7 +45,7 @@ public abstract class GcomponentQuickFix implements genericity.language.gcompone
 			getResource().save(output, null);
 			return output.toString();
 		} catch (java.io.IOException e) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Exception while applying quick fix", e);
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError("Exception while applying quick fix", e);
 		}
 		return null;
 	}

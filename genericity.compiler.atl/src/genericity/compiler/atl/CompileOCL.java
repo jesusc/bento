@@ -34,7 +34,7 @@ public class CompileOCL {
 		EMFLoader    loader  = new EMFLoader(new JavaListConverter());
 		BasicEMFModel in  = loader.basicModelFromFile(
 				new String[] { 
-						withDir("../be.ac.vub.simpleocl/metamodel/simpleocl.ecore"),		
+						// withDir("../be.ac.vub.simpleocl/metamodel/simpleocl.ecore"),		
 						withDir("../genericity.language.gbind/metamodel/gbind.ecore")
 				}, 
 				withDir("fixtures/test1.xmi")); 

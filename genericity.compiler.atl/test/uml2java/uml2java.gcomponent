@@ -1,0 +1,7 @@
+
+transformation component uml2java {
+	source concept uml  : "Class.ecore"
+	target concept java : "Java.ecore"
+	
+	definition atl "uml2java.atl"
+}

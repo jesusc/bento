@@ -23,6 +23,13 @@ public class GcomponentExpectedCsString extends genericity.language.gcomponent.r
 		return keyword.getValue();
 	}
 	
+	/**
+	 * Returns the expected keyword.
+	 */
+	public genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentSyntaxElement getSymtaxElement() {
+		return keyword;
+	}
+	
 	public java.util.Set<String> getTokenNames() {
 		return java.util.Collections.singleton("'" + getValue() + "'");
 	}
@@ -36,6 +43,11 @@ public class GcomponentExpectedCsString extends genericity.language.gcomponent.r
 			return getValue().equals(((GcomponentExpectedCsString) o).getValue());
 		}
 		return false;
+	}
+	
+	@Override	
+	public int hashCode() {
+		return getValue().hashCode();
 	}
 	
 }

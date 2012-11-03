@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="ASCII"?>
 <bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" metamodel="UML" name="class2java">
   <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1"/>
   <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" qualifier="//@concreteMetaclasses.0" concreteFeature="umlName"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.1" concreteFeature="umlName"/>
   <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="superclasses" conceptClass="//@conceptMetaclasses.0">
     <concrete xsi:type="simpleocl:PropertyCallExp">
       <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="generalizations"/>
       <calls xsi:type="simpleocl:IteratorExp" name="collect">
         <body xsi:type="simpleocl:PropertyCallExp">
           <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="reference"/>
-          <source xsi:type="simpleocl:VariableExp" referredVariable="//@bindings.2/@concrete/@calls.1/@iterators.0"/>
+          <source xsi:type="simpleocl:VariableExp" referredVariable="//@bindings.4/@concrete/@calls.1/@iterators.0"/>
         </body>
-        <iterators varName="g" variableExp="//@bindings.2/@concrete/@calls.1/@body/@source"/>
+        <iterators varName="g" variableExp="//@bindings.4/@concrete/@calls.1/@body/@source"/>
       </calls>
       <source xsi:type="simpleocl:SelfExp"/>
     </concrete>
   </bindings>
   <conceptMetaclasses name="Class"/>
+  <conceptMetaclasses name="Attribute"/>
   <concreteMetaclasses name="UMLClass"/>
+  <concreteMetaclasses name="UMLAttribute"/>
 </bindingModel:BindingModel>

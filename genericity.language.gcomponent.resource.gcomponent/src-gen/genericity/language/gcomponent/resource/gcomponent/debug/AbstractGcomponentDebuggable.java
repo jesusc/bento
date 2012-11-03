@@ -28,7 +28,7 @@ public abstract class AbstractGcomponentDebuggable {
 			// starting event server socket done (connection established).
 			outputStream = new java.io.PrintStream(accept.getOutputStream());
 		} catch (Exception e) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Can't create socket connection while launching.", e);
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError("Can't create socket connection while launching.", e);
 		}
 	}
 	
@@ -36,7 +36,7 @@ public abstract class AbstractGcomponentDebuggable {
 		try {
 			server.close();
 		} catch (java.io.IOException e) {
-			genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin.logError("Exception while closing socket.", e);
+			new genericity.language.gcomponent.resource.gcomponent.util.GcomponentRuntimeUtil().logError("Exception while closing socket.", e);
 		}
 	}
 	

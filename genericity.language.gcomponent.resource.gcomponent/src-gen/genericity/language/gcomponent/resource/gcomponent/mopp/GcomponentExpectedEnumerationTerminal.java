@@ -36,4 +36,16 @@ public class GcomponentExpectedEnumerationTerminal extends genericity.language.g
 	public genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentEnumerationTerminal getEnumerationTerminal() {
 		return this.enumerationTerminal;
 	}
+	
+	/**
+	 * Returns the expected enumeration terminal.
+	 */
+	public genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentSyntaxElement getSymtaxElement() {
+		return enumerationTerminal;
+	}
+	
+	public String toString() {
+		return "EnumTerminal \"" + getEnumerationTerminal() + "\"";
+	}
+	
 }

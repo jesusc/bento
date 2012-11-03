@@ -319,6 +319,7 @@ public class GcomponentCodeFoldingManager {
 			encryptMsg = md.digest(text.getBytes());
 		} catch (java.security.NoSuchAlgorithmException e) {
 			genericity.language.gcomponent.resource.gcomponent.ui.GcomponentUIPlugin.logError("NoSuchAlgorithmException while creating MD5 checksum.", e);
+			return "";
 		}
 		String swap = "";
 		String byteStr = "";

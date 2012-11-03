@@ -23,6 +23,13 @@ public class GcomponentExpectedStructuralFeature extends genericity.language.gco
 		return placeholder.getFeature();
 	}
 	
+	/**
+	 * Returns the expected placeholder.
+	 */
+	public genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentSyntaxElement getSymtaxElement() {
+		return placeholder;
+	}
+	
 	public String getTokenName() {
 		return placeholder.getTokenName();
 	}
@@ -41,4 +48,9 @@ public class GcomponentExpectedStructuralFeature extends genericity.language.gco
 		}
 		return false;
 	}
+	@Override	
+	public int hashCode() {
+		return getFeature().hashCode();
+	}
+	
 }

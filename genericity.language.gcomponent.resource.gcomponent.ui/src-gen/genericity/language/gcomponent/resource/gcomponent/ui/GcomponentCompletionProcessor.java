@@ -18,6 +18,9 @@ public class GcomponentCompletionProcessor implements org.eclipse.jface.text.con
 	
 	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeCompletionProposals(org.eclipse.jface.text.ITextViewer viewer, int offset) {
 		genericity.language.gcomponent.resource.gcomponent.IGcomponentTextResource textResource = resourceProvider.getResource();
+		if (textResource == null) {
+			return new org.eclipse.jface.text.contentassist.ICompletionProposal[0];
+		}
 		String content = viewer.getDocument().get();
 		genericity.language.gcomponent.resource.gcomponent.ui.GcomponentCodeCompletionHelper helper = new genericity.language.gcomponent.resource.gcomponent.ui.GcomponentCodeCompletionHelper();
 		genericity.language.gcomponent.resource.gcomponent.ui.GcomponentCompletionProposal[] computedProposals = helper.computeCompletionProposals(textResource, content, offset);
