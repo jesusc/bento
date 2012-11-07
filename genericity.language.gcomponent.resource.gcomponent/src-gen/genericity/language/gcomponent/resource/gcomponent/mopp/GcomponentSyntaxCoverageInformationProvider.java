@@ -13,8 +13,10 @@ public class GcomponentSyntaxCoverageInformationProvider {
 			genericity.language.gcomponent.dsl.DslPackage.eINSTANCE.getDefinitionRoot(),
 			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getTransformationComponent(),
 			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(),
+			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel(),
 			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getTag(),
-			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getAtlTemplate(),
+			genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlTemplate(),
+			genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getJavaTemplate(),
 			genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(),
 			genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(),
 			genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(),
@@ -23,6 +25,7 @@ public class GcomponentSyntaxCoverageInformationProvider {
 			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(),
 			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(),
 			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(),
+			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(),
 			genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getFeatureRef(),
 		};
 	}

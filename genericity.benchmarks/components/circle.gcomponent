@@ -1,7 +1,0 @@
-
-transformation component circleLayout {
-	source concept graph  : "Graph.ecore"
-	target concept layout : "Layout.ecore"
-	
-	definition atl "graph2layout.atl"
-}

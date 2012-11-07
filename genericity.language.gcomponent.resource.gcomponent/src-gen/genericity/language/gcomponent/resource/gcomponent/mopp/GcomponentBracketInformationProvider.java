@@ -38,6 +38,7 @@ public class GcomponentBracketInformationProvider {
 		java.util.Collection<genericity.language.gcomponent.resource.gcomponent.IGcomponentBracketPair> result = new java.util.ArrayList<genericity.language.gcomponent.resource.gcomponent.IGcomponentBracketPair>();
 		result.add(new BracketPair("{", "}", true));
 		result.add(new BracketPair("(", ")", true));
+		result.add(new BracketPair("[", "]", true));
 		result.add(new BracketPair("\"", "\"", false));
 		return result;
 	}

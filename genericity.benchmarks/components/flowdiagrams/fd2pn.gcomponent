@@ -1,0 +1,15 @@
+
+transformation component fd2pn {
+	source concept FD  : "FlowDiagram.ecore"
+	target concept PN  : "PetriNet.ecore"
+	
+	source model fd : FD
+	target model pn : PN
+	
+	variants 
+		+ finalStateSemantics xor // we should say if they are compulsory...
+			- terminating
+			- nonTerminating
+	
+	definition atl "fd2pn.atl" 
+}

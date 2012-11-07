@@ -26,140 +26,53 @@ import org.eclipse.emf.ecore.util.Switch;
  * @see genericity.language.gcomponent.GcomponentPackage
  * @generated
  */
-public class GcomponentSwitch<T> extends Switch<T>
-{
-  /**
+public class GcomponentSwitch<T> extends Switch<T> {
+	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected static GcomponentPackage modelPackage;
+	protected static GcomponentPackage modelPackage;
 
-  /**
+	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public GcomponentSwitch()
-  {
+	public GcomponentSwitch() {
 		if (modelPackage == null) {
 			modelPackage = GcomponentPackage.eINSTANCE;
 		}
 	}
 
-  /**
+	/**
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @parameter ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-  @Override
-  protected boolean isSwitchFor(EPackage ePackage)
-  {
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
 		return ePackage == modelPackage;
 	}
 
-  /**
+	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-  @Override
-  protected T doSwitch(int classifierID, EObject theEObject)
-  {
+	@Override
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case GcomponentPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.TAGGED: {
-				Tagged tagged = (Tagged)theEObject;
-				T result = caseTagged(tagged);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.ABSTRACT_COMPONENT: {
-				AbstractComponent abstractComponent = (AbstractComponent)theEObject;
-				T result = caseAbstractComponent(abstractComponent);
-				if (result == null) result = caseNamedElement(abstractComponent);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.TRANSFORMATION_COMPONENT: {
-				TransformationComponent transformationComponent = (TransformationComponent)theEObject;
-				T result = caseTransformationComponent(transformationComponent);
-				if (result == null) result = caseAbstractComponent(transformationComponent);
-				if (result == null) result = caseTagged(transformationComponent);
-				if (result == null) result = caseNamedElement(transformationComponent);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.TEMPLATE: {
-				Template template = (Template)theEObject;
-				T result = caseTemplate(template);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.ATL_TEMPLATE: {
-				AtlTemplate atlTemplate = (AtlTemplate)theEObject;
-				T result = caseAtlTemplate(atlTemplate);
-				if (result == null) result = caseTemplate(atlTemplate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.CONSTRAINT: {
-				Constraint constraint = (Constraint)theEObject;
-				T result = caseConstraint(constraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.OCL_CONSTRAINT: {
-				OclConstraint oclConstraint = (OclConstraint)theEObject;
-				T result = caseOclConstraint(oclConstraint);
-				if (result == null) result = caseConstraint(oclConstraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.METAMODEL: {
-				Metamodel metamodel = (Metamodel)theEObject;
-				T result = caseMetamodel(metamodel);
-				if (result == null) result = caseNamedElement(metamodel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.TAG: {
-				Tag tag = (Tag)theEObject;
-				T result = caseTag(tag);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.CONCEPT: {
-				Concept concept = (Concept)theEObject;
-				T result = caseConcept(concept);
-				if (result == null) result = caseMetamodel(concept);
-				if (result == null) result = caseTagged(concept);
-				if (result == null) result = caseNamedElement(concept);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.PARAMETER: {
-				Parameter parameter = (Parameter)theEObject;
-				T result = caseParameter(parameter);
-				if (result == null) result = caseNamedElement(parameter);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GcomponentPackage.SPECIFICATION: {
-				Specification specification = (Specification)theEObject;
-				T result = caseSpecification(specification);
+			case GcomponentPackage.DUMMY_CLASS: {
+				DummyClass dummyClass = (DummyClass)theEObject;
+				T result = caseDummyClass(dummyClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -167,216 +80,34 @@ public class GcomponentSwitch<T> extends Switch<T>
 		}
 	}
 
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseNamedElement(NamedElement object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Tagged</em>'.
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dummy Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tagged</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dummy Class</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTagged(Tagged object) {
+	public T caseDummyClass(DummyClass object) {
 		return null;
 	}
 
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Component</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractComponent(AbstractComponent object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transformation Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transformation Component</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTransformationComponent(TransformationComponent object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Template</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Template</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTemplate(Template object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Atl Template</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Atl Template</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAtlTemplate(AtlTemplate object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConstraint(Constraint object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ocl Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ocl Constraint</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOclConstraint(OclConstraint object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Metamodel</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Metamodel</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMetamodel(Metamodel object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tag</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tag</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTag(Tag object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concept</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concept</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConcept(Concept object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameter(Parameter object) {
-		return null;
-	}
-
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>Specification</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Specification</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSpecification(Specification object) {
-		return null;
-	}
-
-		/**
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch, but this is the last case anyway.
-   * <!-- end-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch, but this is the last case anyway.
+	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-  @Override
-  public T defaultCase(EObject object)
-  {
+	@Override
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

@@ -6,7 +6,7 @@
  */
 package genericity.language.gcomponent.core.impl;
 
-import genericity.language.gcomponent.core.AtlTemplate;
+import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.CompositeComponent;
 import genericity.language.gcomponent.core.Concept;
@@ -14,9 +14,12 @@ import genericity.language.gcomponent.core.Constraint;
 import genericity.language.gcomponent.core.CoreFactory;
 import genericity.language.gcomponent.core.CorePackage;
 import genericity.language.gcomponent.core.Documentation;
+import genericity.language.gcomponent.core.GeneratedModel;
 import genericity.language.gcomponent.core.Metamodel;
+import genericity.language.gcomponent.core.Model;
 import genericity.language.gcomponent.core.NamedElement;
 import genericity.language.gcomponent.core.OclConstraint;
+import genericity.language.gcomponent.core.ParameterModel;
 import genericity.language.gcomponent.core.Status;
 import genericity.language.gcomponent.core.Tag;
 import genericity.language.gcomponent.core.Tagged;
@@ -29,6 +32,9 @@ import genericity.language.gcomponent.flowcontrol.FlowcontrolPackage;
 
 import genericity.language.gcomponent.flowcontrol.impl.FlowcontrolPackageImpl;
 
+import genericity.language.gcomponent.impl.GcomponentPackageImpl;
+import genericity.language.gcomponent.technologies.TechnologiesPackage;
+import genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl;
 import genericity.language.gcomponent.variants.VariantsPackage;
 
 import genericity.language.gcomponent.variants.impl.VariantsPackageImpl;
@@ -67,6 +73,27 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass modelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass generatedModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass taggedEClass = null;
 
 	/**
@@ -89,13 +116,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass templateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass atlTemplateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -193,21 +213,27 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		GcomponentPackageImpl theGcomponentPackage = (GcomponentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) instanceof GcomponentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) : GcomponentPackage.eINSTANCE);
 		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) : VariantsPackage.eINSTANCE);
 		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) : FlowcontrolPackage.eINSTANCE);
 		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theCorePackage.createPackageContents();
+		theGcomponentPackage.createPackageContents();
 		theVariantsPackage.createPackageContents();
 		theFlowcontrolPackage.createPackageContents();
 		theDslPackage.createPackageContents();
+		theTechnologiesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theCorePackage.initializePackageContents();
+		theGcomponentPackage.initializePackageContents();
 		theVariantsPackage.initializePackageContents();
 		theFlowcontrolPackage.initializePackageContents();
 		theDslPackage.initializePackageContents();
+		theTechnologiesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theCorePackage.freeze();
@@ -304,8 +330,71 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponent_FormalParameters() {
+	public EReference getComponent_SourceModels() {
 		return (EReference)componentEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponent_TargetModels() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponent_GenerateModels() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponent_FormalParameters() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModel() {
+		return modelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameterModel() {
+		return parameterModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterModel_Type() {
+		return (EReference)parameterModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGeneratedModel() {
+		return generatedModelEClass;
 	}
 
 	/**
@@ -396,24 +485,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EClass getTemplate() {
 		return templateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAtlTemplate() {
-		return atlTemplateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAtlTemplate_Template() {
-		return (EAttribute)atlTemplateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -544,7 +615,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEAttribute(componentEClass, COMPONENT__STATUS);
 		createEReference(componentEClass, COMPONENT__SOURCE);
 		createEReference(componentEClass, COMPONENT__TARGET);
+		createEReference(componentEClass, COMPONENT__SOURCE_MODELS);
+		createEReference(componentEClass, COMPONENT__TARGET_MODELS);
+		createEReference(componentEClass, COMPONENT__GENERATE_MODELS);
 		createEReference(componentEClass, COMPONENT__FORMAL_PARAMETERS);
+
+		modelEClass = createEClass(MODEL);
+
+		parameterModelEClass = createEClass(PARAMETER_MODEL);
+		createEReference(parameterModelEClass, PARAMETER_MODEL__TYPE);
+
+		generatedModelEClass = createEClass(GENERATED_MODEL);
 
 		taggedEClass = createEClass(TAGGED);
 		createEReference(taggedEClass, TAGGED__TAGS);
@@ -559,9 +640,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(compositeComponentEClass, COMPOSITE_COMPONENT__COMPOSITION);
 
 		templateEClass = createEClass(TEMPLATE);
-
-		atlTemplateEClass = createEClass(ATL_TEMPLATE);
-		createEAttribute(atlTemplateEClass, ATL_TEMPLATE__TEMPLATE);
 
 		constraintEClass = createEClass(CONSTRAINT);
 
@@ -615,10 +693,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Add supertypes to classes
 		componentEClass.getESuperTypes().add(this.getNamedElement());
+		modelEClass.getESuperTypes().add(this.getNamedElement());
+		parameterModelEClass.getESuperTypes().add(this.getModel());
+		generatedModelEClass.getESuperTypes().add(this.getModel());
 		transformationComponentEClass.getESuperTypes().add(this.getComponent());
 		transformationComponentEClass.getESuperTypes().add(this.getTagged());
 		compositeComponentEClass.getESuperTypes().add(this.getComponent());
-		atlTemplateEClass.getESuperTypes().add(this.getTemplate());
 		oclConstraintEClass.getESuperTypes().add(this.getConstraint());
 		metamodelEClass.getESuperTypes().add(this.getNamedElement());
 		conceptEClass.getESuperTypes().add(this.getMetamodel());
@@ -635,7 +715,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEAttribute(getComponent_Status(), this.getStatus(), "status", "0", 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_Source(), this.getConcept(), null, "source", null, 1, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_Target(), this.getConcept(), null, "target", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_SourceModels(), this.getParameterModel(), null, "sourceModels", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_TargetModels(), this.getParameterModel(), null, "targetModels", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_GenerateModels(), this.getGeneratedModel(), null, "generateModels", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_FormalParameters(), theVariantsPackage.getParameter(), null, "formalParameters", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelEClass, Model.class, "Model", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(parameterModelEClass, ParameterModel.class, "ParameterModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterModel_Type(), this.getConcept(), null, "type", null, 0, -1, ParameterModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(generatedModelEClass, GeneratedModel.class, "GeneratedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(taggedEClass, Tagged.class, "Tagged", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTagged_Tags(), this.getTag(), null, "tags", null, 0, -1, Tagged.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -650,9 +740,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getCompositeComponent_Composition(), theFlowcontrolPackage.getComposition(), null, "composition", null, 1, 1, CompositeComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateEClass, Template.class, "Template", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(atlTemplateEClass, AtlTemplate.class, "AtlTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAtlTemplate_Template(), ecorePackage.getEString(), "template", null, 1, 1, AtlTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintEClass, Constraint.class, "Constraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -675,9 +762,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(statusEEnum, Status.ALPHA);
 		addEEnumLiteral(statusEEnum, Status.BETA);
 		addEEnumLiteral(statusEEnum, Status.RELEASE);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //CorePackageImpl

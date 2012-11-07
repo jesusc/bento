@@ -6,6 +6,7 @@
  */
 package genericity.language.gcomponent.flowcontrol.impl;
 
+import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.CorePackage;
 
 import genericity.language.gcomponent.core.impl.CorePackageImpl;
@@ -29,6 +30,9 @@ import genericity.language.gcomponent.flowcontrol.Value;
 import genericity.language.gcomponent.flowcontrol.Xor;
 import genericity.language.gcomponent.flowcontrol.XorCond;
 
+import genericity.language.gcomponent.impl.GcomponentPackageImpl;
+import genericity.language.gcomponent.technologies.TechnologiesPackage;
+import genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl;
 import genericity.language.gcomponent.variants.VariantsPackage;
 
 import genericity.language.gcomponent.variants.impl.VariantsPackageImpl;
@@ -193,21 +197,27 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		GcomponentPackageImpl theGcomponentPackage = (GcomponentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) instanceof GcomponentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) : GcomponentPackage.eINSTANCE);
 		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
 		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) : VariantsPackage.eINSTANCE);
 		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theFlowcontrolPackage.createPackageContents();
+		theGcomponentPackage.createPackageContents();
 		theCorePackage.createPackageContents();
 		theVariantsPackage.createPackageContents();
 		theDslPackage.createPackageContents();
+		theTechnologiesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theFlowcontrolPackage.initializePackageContents();
+		theGcomponentPackage.initializePackageContents();
 		theCorePackage.initializePackageContents();
 		theVariantsPackage.initializePackageContents();
 		theDslPackage.initializePackageContents();
+		theTechnologiesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theFlowcontrolPackage.freeze();
@@ -295,8 +305,26 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getApplyParameter_CalledModelName() {
-		return (EAttribute)applyParameterEClass.getEStructuralFeatures().get(0);
+	public EReference getApplyParameter_Model() {
+		return (EReference)applyParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getApplyParameter_BoundConceptQualifier() {
+		return (EReference)applyParameterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getApplyParameter_BoundConcept() {
+		return (EReference)applyParameterEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -305,16 +333,7 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 	 * @generated
 	 */
 	public EAttribute getApplyParameter_BindingName() {
-		return (EAttribute)applyParameterEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getApplyParameter_CalleeModelName() {
-		return (EAttribute)applyParameterEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)applyParameterEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -324,6 +343,15 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 	 */
 	public EClass getSeq() {
 		return seqEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSeq_Steps() {
+		return (EReference)seqEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -509,11 +537,13 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 		createEReference(applyEClass, APPLY__OUTPUT_MODELS);
 
 		applyParameterEClass = createEClass(APPLY_PARAMETER);
-		createEAttribute(applyParameterEClass, APPLY_PARAMETER__CALLED_MODEL_NAME);
+		createEReference(applyParameterEClass, APPLY_PARAMETER__MODEL);
+		createEReference(applyParameterEClass, APPLY_PARAMETER__BOUND_CONCEPT_QUALIFIER);
+		createEReference(applyParameterEClass, APPLY_PARAMETER__BOUND_CONCEPT);
 		createEAttribute(applyParameterEClass, APPLY_PARAMETER__BINDING_NAME);
-		createEAttribute(applyParameterEClass, APPLY_PARAMETER__CALLEE_MODEL_NAME);
 
 		seqEClass = createEClass(SEQ);
+		createEReference(seqEClass, SEQ__STEPS);
 
 		xorEClass = createEClass(XOR);
 		createEReference(xorEClass, XOR__CONDITIONS);
@@ -597,11 +627,13 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 		initEReference(getApply_OutputModels(), this.getApplyParameter(), null, "outputModels", null, 0, -1, Apply.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(applyParameterEClass, ApplyParameter.class, "ApplyParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getApplyParameter_CalledModelName(), ecorePackage.getEString(), "calledModelName", null, 1, 1, ApplyParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyParameter_Model(), theCorePackage.getModel(), null, "model", null, 1, 1, ApplyParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyParameter_BoundConceptQualifier(), theCorePackage.getComponent(), null, "boundConceptQualifier", null, 0, 1, ApplyParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyParameter_BoundConcept(), theCorePackage.getConcept(), null, "boundConcept", null, 0, 1, ApplyParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getApplyParameter_BindingName(), ecorePackage.getEString(), "bindingName", null, 1, 1, ApplyParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getApplyParameter_CalleeModelName(), ecorePackage.getEString(), "calleeModelName", null, 1, 1, ApplyParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(seqEClass, Seq.class, "Seq", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSeq_Steps(), this.getCompositionStep(), null, "steps", null, 0, -1, Seq.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xorEClass, Xor.class, "Xor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXor_Conditions(), this.getXorCond(), null, "conditions", null, 1, -1, Xor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -635,9 +667,6 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 		addEEnumLiteral(booleanOperatorEEnum, BooleanOperator.GREATER);
 		addEEnumLiteral(booleanOperatorEEnum, BooleanOperator.GREATER_THAN);
 		addEEnumLiteral(booleanOperatorEEnum, BooleanOperator.EQUAL);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //FlowcontrolPackageImpl

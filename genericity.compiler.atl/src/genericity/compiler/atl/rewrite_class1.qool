@@ -129,7 +129,8 @@ segment CreateHelperForRenamingFeature
 		// * instantiation, then invocation 
 		//     - invocation may need to call an entry point... (e.g., templates)
 		
-		invoke-external gen_atl[atl, gbind]
+		invoke-external gen_atl[atl][gbind]
+		
 		
 		"--".println(m.concreteMetaclass)
 		// conceptFeature

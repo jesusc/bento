@@ -16,14 +16,22 @@ TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }
 
+TOKENSTYLES {
+	"->" COLOR #800040, BOLD;
+}
+
 RULES {
     Dsl.DefinitionRoot ::= 
     	component;   	
 
 	Core.TransformationComponent ::= 
 		"transformation" "component" name[] "{"
-			("source" source)+
-			("target" target)*
+			(
+			("source" source)
+			("target" target)
+			("source" sourceModels)
+			("target" targetModels)
+			)+
 			
 			("variants" (formalParameters)+ )?
 			"definition" template
@@ -33,10 +41,14 @@ RULES {
 		("tags" ":" tags+)?
 		// TODO: constraints	
 	;
+
+	Core.ParameterModel ::= "model" name[] ":" type[]
+	;
 	
 	Core.Tag ::= value[];
 		
-	Core.AtlTemplate ::= "atl" template['"', '"'];
+	Technologies.AtlTemplate ::= "atl" template['"', '"'];
+	Technologies.JavaTemplate ::= "java" qualifiedClassname['"', '"'];
 
     // Begin-of variantes (parameters, feature models)
     Variants.SingleFeature ::= "-" name[];
@@ -49,8 +61,13 @@ RULES {
 		"composite" "component" name[] "{"
 			("uses" uses['"', '"'])+
 		
-			("source" source)+
-			("target" target)*
+			(
+			("source" source)
+			("target" target)
+			("source" sourceModels)
+			("target" targetModels)
+			)+
+
 			("variants" (formalParameters)+ )?
 			
 			composition
@@ -71,8 +88,17 @@ RULES {
 		"->" "(" outputModels? ("," outputModels)* ")"
 		;
 	
-	Flowcontrol.ApplyParameter ::= calledModelName[] ":" bindingName[] "(" calleeModelName[] ")"
+//	Flowcontrol.ApplyParameter ::= calledModelName[] ":" bindingName[] "(" calleeModelName[] ")"
+//		;
+	Flowcontrol.ApplyParameter ::= model[] 
+		(":" (boundConceptQualifier[] "::" boundConcept[] "[" bindingName[] "]" | boundConcept[] "[" bindingName[] "]" ) )?
 		;
+
+
+	Flowcontrol.Seq ::= "seq"
+		steps steps+
+	;
+
 			
 	Flowcontrol.FeatureRef ::= feature[];
 	// End-of composite components

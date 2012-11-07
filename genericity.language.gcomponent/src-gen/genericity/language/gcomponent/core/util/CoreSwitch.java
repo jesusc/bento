@@ -83,6 +83,29 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CorePackage.MODEL: {
+				Model model = (Model)theEObject;
+				T result = caseModel(model);
+				if (result == null) result = caseNamedElement(model);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.PARAMETER_MODEL: {
+				ParameterModel parameterModel = (ParameterModel)theEObject;
+				T result = caseParameterModel(parameterModel);
+				if (result == null) result = caseModel(parameterModel);
+				if (result == null) result = caseNamedElement(parameterModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.GENERATED_MODEL: {
+				GeneratedModel generatedModel = (GeneratedModel)theEObject;
+				T result = caseGeneratedModel(generatedModel);
+				if (result == null) result = caseModel(generatedModel);
+				if (result == null) result = caseNamedElement(generatedModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CorePackage.TAGGED: {
 				Tagged tagged = (Tagged)theEObject;
 				T result = caseTagged(tagged);
@@ -109,13 +132,6 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.TEMPLATE: {
 				Template template = (Template)theEObject;
 				T result = caseTemplate(template);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.ATL_TEMPLATE: {
-				AtlTemplate atlTemplate = (AtlTemplate)theEObject;
-				T result = caseAtlTemplate(atlTemplate);
-				if (result == null) result = caseTemplate(atlTemplate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -195,6 +211,51 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModel(Model object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterModel(ParameterModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generated Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generated Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGeneratedModel(GeneratedModel object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tagged</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -251,21 +312,6 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTemplate(Template object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Atl Template</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Atl Template</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAtlTemplate(AtlTemplate object) {
 		return null;
 	}
 

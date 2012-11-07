@@ -6,6 +6,7 @@
  */
 package genericity.language.gcomponent.variants.impl;
 
+import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.CorePackage;
 
 import genericity.language.gcomponent.core.impl.CorePackageImpl;
@@ -16,6 +17,9 @@ import genericity.language.gcomponent.flowcontrol.FlowcontrolPackage;
 
 import genericity.language.gcomponent.flowcontrol.impl.FlowcontrolPackageImpl;
 
+import genericity.language.gcomponent.impl.GcomponentPackageImpl;
+import genericity.language.gcomponent.technologies.TechnologiesPackage;
+import genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl;
 import genericity.language.gcomponent.variants.CompositeFeature;
 import genericity.language.gcomponent.variants.Feature;
 import genericity.language.gcomponent.variants.Parameter;
@@ -119,21 +123,27 @@ public class VariantsPackageImpl extends EPackageImpl implements VariantsPackage
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		GcomponentPackageImpl theGcomponentPackage = (GcomponentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) instanceof GcomponentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) : GcomponentPackage.eINSTANCE);
 		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
 		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) : FlowcontrolPackage.eINSTANCE);
 		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theVariantsPackage.createPackageContents();
+		theGcomponentPackage.createPackageContents();
 		theCorePackage.createPackageContents();
 		theFlowcontrolPackage.createPackageContents();
 		theDslPackage.createPackageContents();
+		theTechnologiesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theVariantsPackage.initializePackageContents();
+		theGcomponentPackage.initializePackageContents();
 		theCorePackage.initializePackageContents();
 		theFlowcontrolPackage.initializePackageContents();
 		theDslPackage.initializePackageContents();
+		theTechnologiesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theVariantsPackage.freeze();
@@ -286,9 +296,6 @@ public class VariantsPackageImpl extends EPackageImpl implements VariantsPackage
 		initEReference(getCompositeFeature_Children(), this.getFeature(), null, "children", null, 1, -1, CompositeFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xorFeatureEClass, XorFeature.class, "XorFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //VariantsPackageImpl

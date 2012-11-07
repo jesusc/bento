@@ -6,6 +6,7 @@
  */
 package genericity.language.gcomponent.dsl.impl;
 
+import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.CorePackage;
 
 import genericity.language.gcomponent.core.impl.CorePackageImpl;
@@ -18,6 +19,9 @@ import genericity.language.gcomponent.flowcontrol.FlowcontrolPackage;
 
 import genericity.language.gcomponent.flowcontrol.impl.FlowcontrolPackageImpl;
 
+import genericity.language.gcomponent.impl.GcomponentPackageImpl;
+import genericity.language.gcomponent.technologies.TechnologiesPackage;
+import genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl;
 import genericity.language.gcomponent.variants.VariantsPackage;
 
 import genericity.language.gcomponent.variants.impl.VariantsPackageImpl;
@@ -89,21 +93,27 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		GcomponentPackageImpl theGcomponentPackage = (GcomponentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) instanceof GcomponentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GcomponentPackage.eNS_URI) : GcomponentPackage.eINSTANCE);
 		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
 		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) : VariantsPackage.eINSTANCE);
 		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) : FlowcontrolPackage.eINSTANCE);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDslPackage.createPackageContents();
+		theGcomponentPackage.createPackageContents();
 		theCorePackage.createPackageContents();
 		theVariantsPackage.createPackageContents();
 		theFlowcontrolPackage.createPackageContents();
+		theTechnologiesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theDslPackage.initializePackageContents();
+		theGcomponentPackage.initializePackageContents();
 		theCorePackage.initializePackageContents();
 		theVariantsPackage.initializePackageContents();
 		theFlowcontrolPackage.initializePackageContents();
+		theTechnologiesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theDslPackage.freeze();
@@ -199,9 +209,6 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(definitionRootEClass, DefinitionRoot.class, "DefinitionRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinitionRoot_Component(), theCorePackage.getComponent(), null, "component", null, 1, 1, DefinitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //DslPackageImpl

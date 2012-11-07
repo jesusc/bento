@@ -11,6 +11,9 @@ public class GcomponentTokenStyleInformationProvider {
 	public static String TASK_ITEM_TOKEN_NAME = "TASK_ITEM";
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenStyle getDefaultTokenStyle(String tokenName) {
+		if ("->".equals(tokenName)) {
+			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x40}, null, true, false, false, false);
+		}
 		if ("transformation".equals(tokenName)) {
 			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
@@ -35,7 +38,13 @@ public class GcomponentTokenStyleInformationProvider {
 		if ("tags".equals(tokenName)) {
 			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("model".equals(tokenName)) {
+			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("atl".equals(tokenName)) {
+			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("java".equals(tokenName)) {
 			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("xor".equals(tokenName)) {
@@ -54,6 +63,9 @@ public class GcomponentTokenStyleInformationProvider {
 			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("apply".equals(tokenName)) {
+			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("seq".equals(tokenName)) {
 			return new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("QUOTED_34_34".equals(tokenName)) {

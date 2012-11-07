@@ -24,6 +24,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link genericity.language.gcomponent.core.Component#getStatus <em>Status</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.Component#getSource <em>Source</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.Component#getTarget <em>Target</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.Component#getSourceModels <em>Source Models</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.Component#getTargetModels <em>Target Models</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.Component#getGenerateModels <em>Generate Models</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.Component#getFormalParameters <em>Formal Parameters</em>}</li>
  * </ul>
  * </p>
@@ -172,6 +175,54 @@ public interface Component extends NamedElement {
 	 * @generated
 	 */
 	EList<Concept> getTarget();
+
+	/**
+	 * Returns the value of the '<em><b>Source Models</b></em>' containment reference list.
+	 * The list contents are of type {@link genericity.language.gcomponent.core.ParameterModel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source Models</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source Models</em>' containment reference list.
+	 * @see genericity.language.gcomponent.core.CorePackage#getComponent_SourceModels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ParameterModel> getSourceModels();
+
+	/**
+	 * Returns the value of the '<em><b>Target Models</b></em>' containment reference list.
+	 * The list contents are of type {@link genericity.language.gcomponent.core.ParameterModel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target Models</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target Models</em>' containment reference list.
+	 * @see genericity.language.gcomponent.core.CorePackage#getComponent_TargetModels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ParameterModel> getTargetModels();
+
+	/**
+	 * Returns the value of the '<em><b>Generate Models</b></em>' containment reference list.
+	 * The list contents are of type {@link genericity.language.gcomponent.core.GeneratedModel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Generate Models</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Generate Models</em>' containment reference list.
+	 * @see genericity.language.gcomponent.core.CorePackage#getComponent_GenerateModels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<GeneratedModel> getGenerateModels();
 
 	/**
 	 * Returns the value of the '<em><b>Formal Parameters</b></em>' containment reference list.

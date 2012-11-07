@@ -13,9 +13,17 @@ public class GcomponentReferenceResolverSwitch implements genericity.language.gc
 	 */
 	private java.util.Map<Object, Object> options;
 	
+	protected genericity.language.gcomponent.resource.gcomponent.analysis.ParameterModelTypeReferenceResolver parameterModelTypeReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.ParameterModelTypeReferenceResolver();
 	protected genericity.language.gcomponent.resource.gcomponent.analysis.CompositeComponentUsesReferenceResolver compositeComponentUsesReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.CompositeComponentUsesReferenceResolver();
 	protected genericity.language.gcomponent.resource.gcomponent.analysis.ApplyComponentReferenceResolver applyComponentReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.ApplyComponentReferenceResolver();
+	protected genericity.language.gcomponent.resource.gcomponent.analysis.ApplyParameterModelReferenceResolver applyParameterModelReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.ApplyParameterModelReferenceResolver();
+	protected genericity.language.gcomponent.resource.gcomponent.analysis.ApplyParameterBoundConceptQualifierReferenceResolver applyParameterBoundConceptQualifierReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.ApplyParameterBoundConceptQualifierReferenceResolver();
+	protected genericity.language.gcomponent.resource.gcomponent.analysis.ApplyParameterBoundConceptReferenceResolver applyParameterBoundConceptReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.ApplyParameterBoundConceptReferenceResolver();
 	protected genericity.language.gcomponent.resource.gcomponent.analysis.FeatureRefFeatureReferenceResolver featureRefFeatureReferenceResolver = new genericity.language.gcomponent.resource.gcomponent.analysis.FeatureRefFeatureReferenceResolver();
+	
+	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.core.ParameterModel, genericity.language.gcomponent.core.Concept> getParameterModelTypeReferenceResolver() {
+		return getResolverChain(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel_Type(), parameterModelTypeReferenceResolver);
+	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.core.CompositeComponent, genericity.language.gcomponent.core.Component> getCompositeComponentUsesReferenceResolver() {
 		return getResolverChain(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent_Uses(), compositeComponentUsesReferenceResolver);
@@ -23,6 +31,18 @@ public class GcomponentReferenceResolverSwitch implements genericity.language.gc
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.flowcontrol.Apply, genericity.language.gcomponent.core.Component> getApplyComponentReferenceResolver() {
 		return getResolverChain(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply_Component(), applyComponentReferenceResolver);
+	}
+	
+	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.flowcontrol.ApplyParameter, genericity.language.gcomponent.core.Model> getApplyParameterModelReferenceResolver() {
+		return getResolverChain(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter_Model(), applyParameterModelReferenceResolver);
+	}
+	
+	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.flowcontrol.ApplyParameter, genericity.language.gcomponent.core.Component> getApplyParameterBoundConceptQualifierReferenceResolver() {
+		return getResolverChain(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter_BoundConceptQualifier(), applyParameterBoundConceptQualifierReferenceResolver);
+	}
+	
+	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.flowcontrol.ApplyParameter, genericity.language.gcomponent.core.Concept> getApplyParameterBoundConceptReferenceResolver() {
+		return getResolverChain(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter_BoundConcept(), applyParameterBoundConceptReferenceResolver);
 	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<genericity.language.gcomponent.flowcontrol.FeatureRef, genericity.language.gcomponent.variants.Feature> getFeatureRefFeatureReferenceResolver() {
@@ -34,14 +54,26 @@ public class GcomponentReferenceResolverSwitch implements genericity.language.gc
 			this.options = new java.util.LinkedHashMap<Object, Object>();
 			this.options.putAll(options);
 		}
+		parameterModelTypeReferenceResolver.setOptions(options);
 		compositeComponentUsesReferenceResolver.setOptions(options);
 		applyComponentReferenceResolver.setOptions(options);
+		applyParameterModelReferenceResolver.setOptions(options);
+		applyParameterBoundConceptQualifierReferenceResolver.setOptions(options);
+		applyParameterBoundConceptReferenceResolver.setOptions(options);
 		featureRefFeatureReferenceResolver.setOptions(options);
 	}
 	
 	public void resolveFuzzy(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
 		if (container == null) {
 			return;
+		}
+		if (genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel().isInstance(container)) {
+			GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Concept> frr = new GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Concept>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("type")) {
+				parameterModelTypeReferenceResolver.resolve(identifier, (genericity.language.gcomponent.core.ParameterModel) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
 		}
 		if (genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent().isInstance(container)) {
 			GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Component> frr = new GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Component>(result);
@@ -59,6 +91,30 @@ public class GcomponentReferenceResolverSwitch implements genericity.language.gc
 				applyComponentReferenceResolver.resolve(identifier, (genericity.language.gcomponent.flowcontrol.Apply) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
+		if (genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter().isInstance(container)) {
+			GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Model> frr = new GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Model>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("model")) {
+				applyParameterModelReferenceResolver.resolve(identifier, (genericity.language.gcomponent.flowcontrol.ApplyParameter) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter().isInstance(container)) {
+			GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Component> frr = new GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Component>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("boundConceptQualifier")) {
+				applyParameterBoundConceptQualifierReferenceResolver.resolve(identifier, (genericity.language.gcomponent.flowcontrol.ApplyParameter) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter().isInstance(container)) {
+			GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Concept> frr = new GcomponentFuzzyResolveResult<genericity.language.gcomponent.core.Concept>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("boundConcept")) {
+				applyParameterBoundConceptReferenceResolver.resolve(identifier, (genericity.language.gcomponent.flowcontrol.ApplyParameter) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
 		if (genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getFeatureRef().isInstance(container)) {
 			GcomponentFuzzyResolveResult<genericity.language.gcomponent.variants.Feature> frr = new GcomponentFuzzyResolveResult<genericity.language.gcomponent.variants.Feature>(result);
 			String referenceName = reference.getName();
@@ -70,11 +126,23 @@ public class GcomponentReferenceResolverSwitch implements genericity.language.gc
 	}
 	
 	public genericity.language.gcomponent.resource.gcomponent.IGcomponentReferenceResolver<? extends org.eclipse.emf.ecore.EObject, ? extends org.eclipse.emf.ecore.EObject> getResolver(org.eclipse.emf.ecore.EStructuralFeature reference) {
+		if (reference == genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel_Type()) {
+			return getResolverChain(reference, parameterModelTypeReferenceResolver);
+		}
 		if (reference == genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent_Uses()) {
 			return getResolverChain(reference, compositeComponentUsesReferenceResolver);
 		}
 		if (reference == genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply_Component()) {
 			return getResolverChain(reference, applyComponentReferenceResolver);
+		}
+		if (reference == genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter_Model()) {
+			return getResolverChain(reference, applyParameterModelReferenceResolver);
+		}
+		if (reference == genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter_BoundConceptQualifier()) {
+			return getResolverChain(reference, applyParameterBoundConceptQualifierReferenceResolver);
+		}
+		if (reference == genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter_BoundConcept()) {
+			return getResolverChain(reference, applyParameterBoundConceptReferenceResolver);
 		}
 		if (reference == genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getFeatureRef_Feature()) {
 			return getResolverChain(reference, featureRefFeatureReferenceResolver);

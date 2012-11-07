@@ -9,6 +9,8 @@ package genericity.language.gcomponent.core.impl;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.Concept;
 import genericity.language.gcomponent.core.CorePackage;
+import genericity.language.gcomponent.core.GeneratedModel;
+import genericity.language.gcomponent.core.ParameterModel;
 import genericity.language.gcomponent.core.Status;
 
 import genericity.language.gcomponent.variants.Parameter;
@@ -37,6 +39,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getSource <em>Source</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getSourceModels <em>Source Models</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getTargetModels <em>Target Models</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getGenerateModels <em>Generate Models</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.impl.ComponentImpl#getFormalParameters <em>Formal Parameters</em>}</li>
  * </ul>
  * </p>
@@ -143,6 +148,36 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 	 * @ordered
 	 */
 	protected EList<Concept> target;
+
+	/**
+	 * The cached value of the '{@link #getSourceModels() <em>Source Models</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterModel> sourceModels;
+
+	/**
+	 * The cached value of the '{@link #getTargetModels() <em>Target Models</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterModel> targetModels;
+
+	/**
+	 * The cached value of the '{@link #getGenerateModels() <em>Generate Models</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGenerateModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GeneratedModel> generateModels;
 
 	/**
 	 * The cached value of the '{@link #getFormalParameters() <em>Formal Parameters</em>}' containment reference list.
@@ -286,6 +321,42 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterModel> getSourceModels() {
+		if (sourceModels == null) {
+			sourceModels = new EObjectContainmentEList<ParameterModel>(ParameterModel.class, this, CorePackage.COMPONENT__SOURCE_MODELS);
+		}
+		return sourceModels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ParameterModel> getTargetModels() {
+		if (targetModels == null) {
+			targetModels = new EObjectContainmentEList<ParameterModel>(ParameterModel.class, this, CorePackage.COMPONENT__TARGET_MODELS);
+		}
+		return targetModels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<GeneratedModel> getGenerateModels() {
+		if (generateModels == null) {
+			generateModels = new EObjectContainmentEList<GeneratedModel>(GeneratedModel.class, this, CorePackage.COMPONENT__GENERATE_MODELS);
+		}
+		return generateModels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Parameter> getFormalParameters() {
 		if (formalParameters == null) {
 			formalParameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, CorePackage.COMPONENT__FORMAL_PARAMETERS);
@@ -305,6 +376,12 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 				return ((InternalEList<?>)getSource()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT__TARGET:
 				return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT__SOURCE_MODELS:
+				return ((InternalEList<?>)getSourceModels()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT__TARGET_MODELS:
+				return ((InternalEList<?>)getTargetModels()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT__GENERATE_MODELS:
+				return ((InternalEList<?>)getGenerateModels()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT__FORMAL_PARAMETERS:
 				return ((InternalEList<?>)getFormalParameters()).basicRemove(otherEnd, msgs);
 		}
@@ -331,6 +408,12 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 				return getSource();
 			case CorePackage.COMPONENT__TARGET:
 				return getTarget();
+			case CorePackage.COMPONENT__SOURCE_MODELS:
+				return getSourceModels();
+			case CorePackage.COMPONENT__TARGET_MODELS:
+				return getTargetModels();
+			case CorePackage.COMPONENT__GENERATE_MODELS:
+				return getGenerateModels();
 			case CorePackage.COMPONENT__FORMAL_PARAMETERS:
 				return getFormalParameters();
 		}
@@ -366,6 +449,18 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 				getTarget().clear();
 				getTarget().addAll((Collection<? extends Concept>)newValue);
 				return;
+			case CorePackage.COMPONENT__SOURCE_MODELS:
+				getSourceModels().clear();
+				getSourceModels().addAll((Collection<? extends ParameterModel>)newValue);
+				return;
+			case CorePackage.COMPONENT__TARGET_MODELS:
+				getTargetModels().clear();
+				getTargetModels().addAll((Collection<? extends ParameterModel>)newValue);
+				return;
+			case CorePackage.COMPONENT__GENERATE_MODELS:
+				getGenerateModels().clear();
+				getGenerateModels().addAll((Collection<? extends GeneratedModel>)newValue);
+				return;
 			case CorePackage.COMPONENT__FORMAL_PARAMETERS:
 				getFormalParameters().clear();
 				getFormalParameters().addAll((Collection<? extends Parameter>)newValue);
@@ -400,6 +495,15 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 			case CorePackage.COMPONENT__TARGET:
 				getTarget().clear();
 				return;
+			case CorePackage.COMPONENT__SOURCE_MODELS:
+				getSourceModels().clear();
+				return;
+			case CorePackage.COMPONENT__TARGET_MODELS:
+				getTargetModels().clear();
+				return;
+			case CorePackage.COMPONENT__GENERATE_MODELS:
+				getGenerateModels().clear();
+				return;
 			case CorePackage.COMPONENT__FORMAL_PARAMETERS:
 				getFormalParameters().clear();
 				return;
@@ -427,6 +531,12 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 				return source != null && !source.isEmpty();
 			case CorePackage.COMPONENT__TARGET:
 				return target != null && !target.isEmpty();
+			case CorePackage.COMPONENT__SOURCE_MODELS:
+				return sourceModels != null && !sourceModels.isEmpty();
+			case CorePackage.COMPONENT__TARGET_MODELS:
+				return targetModels != null && !targetModels.isEmpty();
+			case CorePackage.COMPONENT__GENERATE_MODELS:
+				return generateModels != null && !generateModels.isEmpty();
 			case CorePackage.COMPONENT__FORMAL_PARAMETERS:
 				return formalParameters != null && !formalParameters.isEmpty();
 		}

@@ -162,13 +162,40 @@ public interface CorePackage extends EPackage {
 	int COMPONENT__TARGET = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Source Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__SOURCE_MODELS = NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Target Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__TARGET_MODELS = NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Generate Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__GENERATE_MODELS = NAMED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__FORMAL_PARAMETERS = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int COMPONENT__FORMAL_PARAMETERS = NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Component</em>' class.
@@ -177,7 +204,100 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int COMPONENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
+	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.ModelImpl <em>Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.language.gcomponent.core.impl.ModelImpl
+	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getModel()
+	 * @generated
+	 */
+	int MODEL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.ParameterModelImpl <em>Parameter Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.language.gcomponent.core.impl.ParameterModelImpl
+	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getParameterModel()
+	 * @generated
+	 */
+	int PARAMETER_MODEL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_MODEL__NAME = MODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_MODEL__TYPE = MODEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Parameter Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_MODEL_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.GeneratedModelImpl <em>Generated Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.language.gcomponent.core.impl.GeneratedModelImpl
+	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getGeneratedModel()
+	 * @generated
+	 */
+	int GENERATED_MODEL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATED_MODEL__NAME = MODEL__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Generated Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATED_MODEL_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.TaggedImpl <em>Tagged</em>}' class.
@@ -187,7 +307,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getTagged()
 	 * @generated
 	 */
-	int TAGGED = 2;
+	int TAGGED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -215,7 +335,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getTransformationComponent()
 	 * @generated
 	 */
-	int TRANSFORMATION_COMPONENT = 3;
+	int TRANSFORMATION_COMPONENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -281,6 +401,33 @@ public interface CorePackage extends EPackage {
 	int TRANSFORMATION_COMPONENT__TARGET = COMPONENT__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__SOURCE_MODELS = COMPONENT__SOURCE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Target Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__TARGET_MODELS = COMPONENT__TARGET_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Generate Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__GENERATE_MODELS = COMPONENT__GENERATE_MODELS;
+
+	/**
 	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -342,7 +489,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getCompositeComponent()
 	 * @generated
 	 */
-	int COMPOSITE_COMPONENT = 4;
+	int COMPOSITE_COMPONENT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -408,6 +555,33 @@ public interface CorePackage extends EPackage {
 	int COMPOSITE_COMPONENT__TARGET = COMPONENT__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_COMPONENT__SOURCE_MODELS = COMPONENT__SOURCE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Target Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_COMPONENT__TARGET_MODELS = COMPONENT__TARGET_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Generate Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_COMPONENT__GENERATE_MODELS = COMPONENT__GENERATE_MODELS;
+
+	/**
 	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -451,7 +625,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getTemplate()
 	 * @generated
 	 */
-	int TEMPLATE = 5;
+	int TEMPLATE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Template</em>' class.
@@ -463,34 +637,6 @@ public interface CorePackage extends EPackage {
 	int TEMPLATE_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.AtlTemplateImpl <em>Atl Template</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see genericity.language.gcomponent.core.impl.AtlTemplateImpl
-	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getAtlTemplate()
-	 * @generated
-	 */
-	int ATL_TEMPLATE = 6;
-
-	/**
-	 * The feature id for the '<em><b>Template</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATL_TEMPLATE__TEMPLATE = TEMPLATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Atl Template</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATL_TEMPLATE_FEATURE_COUNT = TEMPLATE_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.ConstraintImpl <em>Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -498,7 +644,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 7;
+	int CONSTRAINT = 9;
 
 	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
@@ -517,7 +663,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getOclConstraint()
 	 * @generated
 	 */
-	int OCL_CONSTRAINT = 8;
+	int OCL_CONSTRAINT = 10;
 
 	/**
 	 * The number of structural features of the '<em>Ocl Constraint</em>' class.
@@ -536,7 +682,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getMetamodel()
 	 * @generated
 	 */
-	int METAMODEL = 9;
+	int METAMODEL = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -582,7 +728,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getTag()
 	 * @generated
 	 */
-	int TAG = 10;
+	int TAG = 12;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -610,7 +756,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getConcept()
 	 * @generated
 	 */
-	int CONCEPT = 11;
+	int CONCEPT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -665,7 +811,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getDocumentation()
 	 * @generated
 	 */
-	int DOCUMENTATION = 12;
+	int DOCUMENTATION = 14;
 
 	/**
 	 * The number of structural features of the '<em>Documentation</em>' class.
@@ -684,7 +830,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getStatus()
 	 * @generated
 	 */
-	int STATUS = 13;
+	int STATUS = 15;
 
 
 	/**
@@ -785,6 +931,39 @@ public interface CorePackage extends EPackage {
 	EReference getComponent_Target();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.core.Component#getSourceModels <em>Source Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Source Models</em>'.
+	 * @see genericity.language.gcomponent.core.Component#getSourceModels()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EReference getComponent_SourceModels();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.core.Component#getTargetModels <em>Target Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Target Models</em>'.
+	 * @see genericity.language.gcomponent.core.Component#getTargetModels()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EReference getComponent_TargetModels();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.core.Component#getGenerateModels <em>Generate Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Generate Models</em>'.
+	 * @see genericity.language.gcomponent.core.Component#getGenerateModels()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EReference getComponent_GenerateModels();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.core.Component#getFormalParameters <em>Formal Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -794,6 +973,47 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComponent_FormalParameters();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model</em>'.
+	 * @see genericity.language.gcomponent.core.Model
+	 * @generated
+	 */
+	EClass getModel();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.ParameterModel <em>Parameter Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter Model</em>'.
+	 * @see genericity.language.gcomponent.core.ParameterModel
+	 * @generated
+	 */
+	EClass getParameterModel();
+
+	/**
+	 * Returns the meta object for the reference list '{@link genericity.language.gcomponent.core.ParameterModel#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Type</em>'.
+	 * @see genericity.language.gcomponent.core.ParameterModel#getType()
+	 * @see #getParameterModel()
+	 * @generated
+	 */
+	EReference getParameterModel_Type();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.GeneratedModel <em>Generated Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Generated Model</em>'.
+	 * @see genericity.language.gcomponent.core.GeneratedModel
+	 * @generated
+	 */
+	EClass getGeneratedModel();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.Tagged <em>Tagged</em>}'.
@@ -900,27 +1120,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTemplate();
-
-	/**
-	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.AtlTemplate <em>Atl Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Atl Template</em>'.
-	 * @see genericity.language.gcomponent.core.AtlTemplate
-	 * @generated
-	 */
-	EClass getAtlTemplate();
-
-	/**
-	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.core.AtlTemplate#getTemplate <em>Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Template</em>'.
-	 * @see genericity.language.gcomponent.core.AtlTemplate#getTemplate()
-	 * @see #getAtlTemplate()
-	 * @generated
-	 */
-	EAttribute getAtlTemplate_Template();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.Constraint <em>Constraint</em>}'.
@@ -1124,12 +1323,74 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT__TARGET = eINSTANCE.getComponent_Target();
 
 		/**
+		 * The meta object literal for the '<em><b>Source Models</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT__SOURCE_MODELS = eINSTANCE.getComponent_SourceModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Models</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT__TARGET_MODELS = eINSTANCE.getComponent_TargetModels();
+
+		/**
+		 * The meta object literal for the '<em><b>Generate Models</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT__GENERATE_MODELS = eINSTANCE.getComponent_GenerateModels();
+
+		/**
 		 * The meta object literal for the '<em><b>Formal Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference COMPONENT__FORMAL_PARAMETERS = eINSTANCE.getComponent_FormalParameters();
+
+		/**
+		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.ModelImpl <em>Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.language.gcomponent.core.impl.ModelImpl
+		 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getModel()
+		 * @generated
+		 */
+		EClass MODEL = eINSTANCE.getModel();
+
+		/**
+		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.ParameterModelImpl <em>Parameter Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.language.gcomponent.core.impl.ParameterModelImpl
+		 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getParameterModel()
+		 * @generated
+		 */
+		EClass PARAMETER_MODEL = eINSTANCE.getParameterModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER_MODEL__TYPE = eINSTANCE.getParameterModel_Type();
+
+		/**
+		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.GeneratedModelImpl <em>Generated Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.language.gcomponent.core.impl.GeneratedModelImpl
+		 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getGeneratedModel()
+		 * @generated
+		 */
+		EClass GENERATED_MODEL = eINSTANCE.getGeneratedModel();
 
 		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.TaggedImpl <em>Tagged</em>}' class.
@@ -1218,24 +1479,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass TEMPLATE = eINSTANCE.getTemplate();
-
-		/**
-		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.AtlTemplateImpl <em>Atl Template</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see genericity.language.gcomponent.core.impl.AtlTemplateImpl
-		 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getAtlTemplate()
-		 * @generated
-		 */
-		EClass ATL_TEMPLATE = eINSTANCE.getAtlTemplate();
-
-		/**
-		 * The meta object literal for the '<em><b>Template</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ATL_TEMPLATE__TEMPLATE = eINSTANCE.getAtlTemplate_Template();
 
 		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.ConstraintImpl <em>Constraint</em>}' class.

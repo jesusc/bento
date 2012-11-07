@@ -1,6 +1,8 @@
 @namespace(uri="http://genericity/language/gcomponent", prefix="gcomponent")
 package gcomponent;
 
+class DummyClass { } // to generate a factory for the root package
+
 @namespace(uri="http://genericity/language/gcomponent/core", prefix="gcomponent_core")
 package core {
 	
@@ -17,10 +19,21 @@ package core {
         // All our components use concepts as "ports"?
 		val Concept[+] source; // should be ref
 		val Concept[*] target;
+	
+	    val ParameterModel[*] sourceModels;
+	    val ParameterModel[*] targetModels;
+		val GeneratedModel[*] generateModels;
 		
 		val variants.Parameter[*] formalParameters;	
 	}
 
+    abstract class Model extends NamedElement { }
+    class ParameterModel extends Model {
+       ref Concept[*] type;
+    }
+    class GeneratedModel extends Model { }
+    
+ 
 	enum Status {
 	   UNKNOWN = 0;
 	   ALPHA   = 1;
@@ -47,10 +60,6 @@ package core {
 	}
 	
 	abstract class Template { 
-	}
-	
-	class AtlTemplate extends Template {
-	   attr String[1] template;
 	}
 
 	abstract class Constraint {
@@ -102,7 +111,6 @@ package variants {
 	class XorFeature extends CompositeFeature {
 	   
 	}
-
 }
 
 @namespace(uri="http://genericity/language/gcomponent/flowcontrol", prefix="gcomponent_flowcontrol")
@@ -127,14 +135,21 @@ package flowcontrol {
 	}
 	
 	class ApplyParameter {  
-		attr String[1] calledModelName;
+		ref core.Model[1] model;
+		ref core.Component[0..1] boundConceptQualifier;
+		ref core.Concept[0..1] boundConcept;
+		
+		
+		//attr String[1] calledModelName;
 		attr String[1] bindingName;
-		attr String[1] calleeModelName;
+		//attr String[1] calleeModelName;
 	}
 	// class ApplyParameterIdentity 
 	
 	class Seq extends CompositionStep {
-		// TODO: Connect inputs and outputs	   
+		// input and output models are implicitly connected through model names
+		val CompositionStep[*] steps;
+		
 	}
 	
 	class Xor extends CompositionStep {
@@ -182,4 +197,17 @@ package dsl {
 	class DefinitionRoot {
 		val core.Component[1] component;
 	}
+}
+
+@namespace(uri="http://genericity/language/gcomponent/technologies", prefix="gcomponent_technologies")
+package technologies {
+	
+	class AtlTemplate extends core.Template {
+	   attr String[1] template;
+	}
+
+	class JavaTemplate extends core.Template {
+	   attr String[1] qualifiedClassname;
+	}
+
 }

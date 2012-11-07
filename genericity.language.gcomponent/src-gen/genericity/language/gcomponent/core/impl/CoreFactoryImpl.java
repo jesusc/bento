@@ -61,9 +61,10 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case CorePackage.PARAMETER_MODEL: return createParameterModel();
+			case CorePackage.GENERATED_MODEL: return createGeneratedModel();
 			case CorePackage.TRANSFORMATION_COMPONENT: return createTransformationComponent();
 			case CorePackage.COMPOSITE_COMPONENT: return createCompositeComponent();
-			case CorePackage.ATL_TEMPLATE: return createAtlTemplate();
 			case CorePackage.OCL_CONSTRAINT: return createOclConstraint();
 			case CorePackage.METAMODEL: return createMetamodel();
 			case CorePackage.TAG: return createTag();
@@ -109,6 +110,26 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ParameterModel createParameterModel() {
+		ParameterModelImpl parameterModel = new ParameterModelImpl();
+		return parameterModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GeneratedModel createGeneratedModel() {
+		GeneratedModelImpl generatedModel = new GeneratedModelImpl();
+		return generatedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TransformationComponent createTransformationComponent() {
 		TransformationComponentImpl transformationComponent = new TransformationComponentImpl();
 		return transformationComponent;
@@ -122,16 +143,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	public CompositeComponent createCompositeComponent() {
 		CompositeComponentImpl compositeComponent = new CompositeComponentImpl();
 		return compositeComponent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AtlTemplate createAtlTemplate() {
-		AtlTemplateImpl atlTemplate = new AtlTemplateImpl();
-		return atlTemplate;
 	}
 
 	/**

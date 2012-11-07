@@ -58,7 +58,17 @@ public class AbstractGcomponentInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
+		if (object instanceof genericity.language.gcomponent.DummyClass) {
+			result = interprete_genericity_language_gcomponent_DummyClass((genericity.language.gcomponent.DummyClass) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		return result;
+	}
+	
+	public ResultType interprete_genericity_language_gcomponent_DummyClass(genericity.language.gcomponent.DummyClass dummyClass, ContextType context) {
+		return null;
 	}
 	
 	private void notifyListeners(org.eclipse.emf.ecore.EObject element) {

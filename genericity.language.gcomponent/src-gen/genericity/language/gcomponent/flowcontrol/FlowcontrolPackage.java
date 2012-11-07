@@ -175,13 +175,31 @@ public interface FlowcontrolPackage extends EPackage {
 	int APPLY_PARAMETER = 3;
 
 	/**
-	 * The feature id for the '<em><b>Called Model Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLY_PARAMETER__CALLED_MODEL_NAME = 0;
+	int APPLY_PARAMETER__MODEL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Bound Concept Qualifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLY_PARAMETER__BOUND_CONCEPT_QUALIFIER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Bound Concept</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLY_PARAMETER__BOUND_CONCEPT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Binding Name</b></em>' attribute.
@@ -190,16 +208,7 @@ public interface FlowcontrolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLY_PARAMETER__BINDING_NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Callee Model Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLY_PARAMETER__CALLEE_MODEL_NAME = 2;
+	int APPLY_PARAMETER__BINDING_NAME = 3;
 
 	/**
 	 * The number of structural features of the '<em>Apply Parameter</em>' class.
@@ -208,7 +217,7 @@ public interface FlowcontrolPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLY_PARAMETER_FEATURE_COUNT = 3;
+	int APPLY_PARAMETER_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.flowcontrol.impl.SeqImpl <em>Seq</em>}' class.
@@ -221,13 +230,22 @@ public interface FlowcontrolPackage extends EPackage {
 	int SEQ = 4;
 
 	/**
+	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQ__STEPS = COMPOSITION_STEP_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Seq</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEQ_FEATURE_COUNT = COMPOSITION_STEP_FEATURE_COUNT + 0;
+	int SEQ_FEATURE_COUNT = COMPOSITION_STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.flowcontrol.impl.XorImpl <em>Xor</em>}' class.
@@ -540,15 +558,37 @@ public interface FlowcontrolPackage extends EPackage {
 	EClass getApplyParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getCalledModelName <em>Called Model Name</em>}'.
+	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getModel <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Called Model Name</em>'.
-	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getCalledModelName()
+	 * @return the meta object for the reference '<em>Model</em>'.
+	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getModel()
 	 * @see #getApplyParameter()
 	 * @generated
 	 */
-	EAttribute getApplyParameter_CalledModelName();
+	EReference getApplyParameter_Model();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBoundConceptQualifier <em>Bound Concept Qualifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Bound Concept Qualifier</em>'.
+	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getBoundConceptQualifier()
+	 * @see #getApplyParameter()
+	 * @generated
+	 */
+	EReference getApplyParameter_BoundConceptQualifier();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBoundConcept <em>Bound Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Bound Concept</em>'.
+	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getBoundConcept()
+	 * @see #getApplyParameter()
+	 * @generated
+	 */
+	EReference getApplyParameter_BoundConcept();
 
 	/**
 	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBindingName <em>Binding Name</em>}'.
@@ -562,17 +602,6 @@ public interface FlowcontrolPackage extends EPackage {
 	EAttribute getApplyParameter_BindingName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getCalleeModelName <em>Callee Model Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Callee Model Name</em>'.
-	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getCalleeModelName()
-	 * @see #getApplyParameter()
-	 * @generated
-	 */
-	EAttribute getApplyParameter_CalleeModelName();
-
-	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.flowcontrol.Seq <em>Seq</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -581,6 +610,17 @@ public interface FlowcontrolPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSeq();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.flowcontrol.Seq#getSteps <em>Steps</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Steps</em>'.
+	 * @see genericity.language.gcomponent.flowcontrol.Seq#getSteps()
+	 * @see #getSeq()
+	 * @generated
+	 */
+	EReference getSeq_Steps();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.flowcontrol.Xor <em>Xor</em>}'.
@@ -844,12 +884,28 @@ public interface FlowcontrolPackage extends EPackage {
 		EClass APPLY_PARAMETER = eINSTANCE.getApplyParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Called Model Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute APPLY_PARAMETER__CALLED_MODEL_NAME = eINSTANCE.getApplyParameter_CalledModelName();
+		EReference APPLY_PARAMETER__MODEL = eINSTANCE.getApplyParameter_Model();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Concept Qualifier</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLY_PARAMETER__BOUND_CONCEPT_QUALIFIER = eINSTANCE.getApplyParameter_BoundConceptQualifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Concept</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLY_PARAMETER__BOUND_CONCEPT = eINSTANCE.getApplyParameter_BoundConcept();
 
 		/**
 		 * The meta object literal for the '<em><b>Binding Name</b></em>' attribute feature.
@@ -860,14 +916,6 @@ public interface FlowcontrolPackage extends EPackage {
 		EAttribute APPLY_PARAMETER__BINDING_NAME = eINSTANCE.getApplyParameter_BindingName();
 
 		/**
-		 * The meta object literal for the '<em><b>Callee Model Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APPLY_PARAMETER__CALLEE_MODEL_NAME = eINSTANCE.getApplyParameter_CalleeModelName();
-
-		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.flowcontrol.impl.SeqImpl <em>Seq</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -876,6 +924,14 @@ public interface FlowcontrolPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SEQ = eINSTANCE.getSeq();
+
+		/**
+		 * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SEQ__STEPS = eINSTANCE.getSeq_Steps();
 
 		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.flowcontrol.impl.XorImpl <em>Xor</em>}' class.

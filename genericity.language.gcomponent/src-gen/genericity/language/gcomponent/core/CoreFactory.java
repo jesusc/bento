@@ -26,6 +26,24 @@ public interface CoreFactory extends EFactory {
 	CoreFactory eINSTANCE = genericity.language.gcomponent.core.impl.CoreFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Parameter Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter Model</em>'.
+	 * @generated
+	 */
+	ParameterModel createParameterModel();
+
+	/**
+	 * Returns a new object of class '<em>Generated Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generated Model</em>'.
+	 * @generated
+	 */
+	GeneratedModel createGeneratedModel();
+
+	/**
 	 * Returns a new object of class '<em>Transformation Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,15 +60,6 @@ public interface CoreFactory extends EFactory {
 	 * @generated
 	 */
 	CompositeComponent createCompositeComponent();
-
-	/**
-	 * Returns a new object of class '<em>Atl Template</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Atl Template</em>'.
-	 * @generated
-	 */
-	AtlTemplate createAtlTemplate();
 
 	/**
 	 * Returns a new object of class '<em>Ocl Constraint</em>'.

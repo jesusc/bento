@@ -80,6 +80,18 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createComponentAdapter();
 			}
 			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
+			}
+			@Override
+			public Adapter caseParameterModel(ParameterModel object) {
+				return createParameterModelAdapter();
+			}
+			@Override
+			public Adapter caseGeneratedModel(GeneratedModel object) {
+				return createGeneratedModelAdapter();
+			}
+			@Override
 			public Adapter caseTagged(Tagged object) {
 				return createTaggedAdapter();
 			}
@@ -94,10 +106,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTemplate(Template object) {
 				return createTemplateAdapter();
-			}
-			@Override
-			public Adapter caseAtlTemplate(AtlTemplate object) {
-				return createAtlTemplateAdapter();
 			}
 			@Override
 			public Adapter caseConstraint(Constraint object) {
@@ -172,6 +180,48 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.core.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.language.gcomponent.core.Model
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.core.ParameterModel <em>Parameter Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.language.gcomponent.core.ParameterModel
+	 * @generated
+	 */
+	public Adapter createParameterModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.core.GeneratedModel <em>Generated Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.language.gcomponent.core.GeneratedModel
+	 * @generated
+	 */
+	public Adapter createGeneratedModelAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.core.Tagged <em>Tagged</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -224,20 +274,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTemplateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.core.AtlTemplate <em>Atl Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see genericity.language.gcomponent.core.AtlTemplate
-	 * @generated
-	 */
-	public Adapter createAtlTemplateAdapter() {
 		return null;
 	}
 
