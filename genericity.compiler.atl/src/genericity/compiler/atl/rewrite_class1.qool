@@ -108,6 +108,9 @@ end
 
 segment CreateHelperForRenamingFeature
 	forall m from pMatchedRenamingBinding
+		// ref featureBinding    : gbind!RenamingFeatureBinding
+		// ref concreteMetaclass : gbind!ConcreteMetaclass
+
 		// invoke gen_atl[atl, gbind].createRenamingHelper(m.featureBinding, m.concreteMetaclass, m)
 		
 		// some transformations has an entrypoint, some they don't
@@ -129,10 +132,14 @@ segment CreateHelperForRenamingFeature
 		// * instantiation, then invocation 
 		//     - invocation may need to call an entry point... (e.g., templates)
 		
-		invoke-external gen_atl[atl][gbind]
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(m.featureBinding.model_.metamodel) }.first
+		
+		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createRenamingHelper(m.featureBinding, m.concreteMetaclass, ocl_model)
 		
 		
-		"--".println(m.concreteMetaclass)
+		module = atl!Module.all_instances.first
+		module.elements = helper
 		// conceptFeature
 		// conceptClass : ConceptMetaclass
 		// qualifier... ConcreteMetaclass

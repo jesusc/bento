@@ -1,0 +1,34 @@
+tao gen_atl(gbind, atl) -> (atl)
+	// TODO: Need to access core meta-model...
+
+template createRenamingHelper(fb : gbind!RenamingFeatureBinding, concreteMetaclass : gbind!ConcreteMetaclass, atl_model : atl!OclModel) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = fb.conceptFeature
+				initExpression = atl!NavigationOrAttributeCallExp {
+					name = fb.concreteFeature
+					source = atl!VariableExp {
+						referredVariable = atl!VariableDeclaration { varName = "self" }
+					}
+				}
+				type = atl!OclAnyType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concreteMetaclass.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end
+
+      /*    
+  	   # out.definition.context_.context_.model = ATL::OCL::OclModel.all_objects.find_one { |m| m.name == MetamodelName }
+       ocl_model = ATL::OCL::OclModel.all_objects.find { |m| m.name == fb.model_.metamodel }
+  	   out.definition.context_.context_.model = trace_query(ocl_model).one!(OUT::OCL::OclModel)
+  
+    	   # // Poner el tipo, pero no está guardado en el concepto...
+  	   out.definition.feature.type = OUT::OCL::OclAnyType.new;
+		*/
