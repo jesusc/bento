@@ -1,0 +1,56 @@
+@namespace(uri="http://genericity/language/gcomponent/instantiation", prefix="gcomponent_instantiation")
+package instantiation;
+
+import "platform:/resource/genericity.language.gcomponent/metamodel/gcomponent.ecore";
+
+
+
+
+
+class ComponentInstantiation {
+	val Action[*] actions;
+
+	val ExecutableTransformation[1] transformation;
+}
+
+abstract class ExecutableTransformation { }
+
+class AdaptedTransformation extends ExecutableTransformation {
+   val AdaptWithBinding[*] requiredAdaptations;
+}
+
+class AdaptWithBinding {
+   attr int[1] parameterIndex;
+   ref gcomponent.core.ParameterModel[1] concreteModel;  // Defined in the invoker component
+   ref gcomponent.core.ParameterModel[1] conceptModel;   // Defined in the invoked component
+      
+   ref gcomponent.core.BindingDeclaration[1] appliedBinding;
+}
+
+
+
+// old
+
+abstract class Action {
+   
+}
+
+class ExecuteTransformation extends Action {
+   ref AdaptTransformation[1] adaptedTransformation; 
+   // TODO: I would like to be able to execute not adapted transformations directly...
+}
+
+class AdaptTransformation extends Action {
+   val AdaptTransformationStep[*] adaptations;
+}
+
+class AdaptTransformationStep  {
+	ref gcomponent.core.Component component;
+ 	ref gcomponent.core.BindingDeclaration binding;  
+   
+}
+
+class Nothing extends Action {
+   
+   
+}

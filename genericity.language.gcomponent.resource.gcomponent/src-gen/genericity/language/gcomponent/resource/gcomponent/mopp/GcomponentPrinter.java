@@ -72,14 +72,6 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 			print_genericity_language_gcomponent_core_Tag((genericity.language.gcomponent.core.Tag) element, globaltab, out);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.technologies.AtlTemplate) {
-			print_genericity_language_gcomponent_technologies_AtlTemplate((genericity.language.gcomponent.technologies.AtlTemplate) element, globaltab, out);
-			return;
-		}
-		if (element instanceof genericity.language.gcomponent.technologies.JavaTemplate) {
-			print_genericity_language_gcomponent_technologies_JavaTemplate((genericity.language.gcomponent.technologies.JavaTemplate) element, globaltab, out);
-			return;
-		}
 		if (element instanceof genericity.language.gcomponent.variants.SingleFeature) {
 			print_genericity_language_gcomponent_variants_SingleFeature((genericity.language.gcomponent.variants.SingleFeature) element, globaltab, out);
 			return;
@@ -90,6 +82,10 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		}
 		if (element instanceof genericity.language.gcomponent.core.CompositeComponent) {
 			print_genericity_language_gcomponent_core_CompositeComponent((genericity.language.gcomponent.core.CompositeComponent) element, globaltab, out);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.core.BindingDeclaration) {
+			print_genericity_language_gcomponent_core_BindingDeclaration((genericity.language.gcomponent.core.BindingDeclaration) element, globaltab, out);
 			return;
 		}
 		if (element instanceof genericity.language.gcomponent.flowcontrol.Composition) {
@@ -118,6 +114,18 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		}
 		if (element instanceof genericity.language.gcomponent.flowcontrol.FeatureRef) {
 			print_genericity_language_gcomponent_flowcontrol_FeatureRef((genericity.language.gcomponent.flowcontrol.FeatureRef) element, globaltab, out);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.technologies.AtlTemplate) {
+			print_genericity_language_gcomponent_technologies_AtlTemplate((genericity.language.gcomponent.technologies.AtlTemplate) element, globaltab, out);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.technologies.AtlParameter) {
+			print_genericity_language_gcomponent_technologies_AtlParameter((genericity.language.gcomponent.technologies.AtlParameter) element, globaltab, out);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.technologies.JavaTemplate) {
+			print_genericity_language_gcomponent_technologies_JavaTemplate((genericity.language.gcomponent.technologies.JavaTemplate) element, globaltab, out);
 			return;
 		}
 		
@@ -563,19 +571,25 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 	
 	
 	public void print_genericity_language_gcomponent_core_ParameterModel(genericity.language.gcomponent.core.ParameterModel element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.PARAMETER_MODEL__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.PARAMETER_MODEL__TYPE));
 		printCountingMap.put("type", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.PARAMETER_MODEL__RESOURCE_NAME));
+		printCountingMap.put("resourceName", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("model");
 		out.print(" ");
@@ -613,6 +627,38 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 			}
 			printCountingMap.put("type", count - 1);
 		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_genericity_language_gcomponent_core_ParameterModel_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+	}
+	
+	public void print_genericity_language_gcomponent_core_ParameterModel_0(genericity.language.gcomponent.core.ParameterModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("resourceName");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.PARAMETER_MODEL__RESOURCE_NAME));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.PARAMETER_MODEL__RESOURCE_NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("resourceName", count - 1);
+		}
 	}
 	
 	
@@ -639,66 +685,6 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 				out.print(" ");
 			}
 			printCountingMap.put("value", count - 1);
-		}
-	}
-	
-	
-	public void print_genericity_language_gcomponent_technologies_AtlTemplate(genericity.language.gcomponent.technologies.AtlTemplate element, String outertab, java.io.PrintWriter out) {
-		// The printCountingMap contains a mapping from feature names to the number of
-		// remaining elements that still need to be printed. The map is initialized with
-		// the number of elements stored in each structural feature. For lists this is the
-		// list size. For non-multiple features it is either 1 (if the feature is set) or
-		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
-		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__TEMPLATE));
-		printCountingMap.put("template", temp == null ? 0 : 1);
-		// print collected hidden tokens
-		int count;
-		// DEFINITION PART BEGINS (CsString)
-		out.print("atl");
-		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderInQuotes)
-		count = printCountingMap.get("template");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__TEMPLATE));
-			if (o != null) {
-				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__TEMPLATE), element));
-				out.print(" ");
-			}
-			printCountingMap.put("template", count - 1);
-		}
-	}
-	
-	
-	public void print_genericity_language_gcomponent_technologies_JavaTemplate(genericity.language.gcomponent.technologies.JavaTemplate element, String outertab, java.io.PrintWriter out) {
-		// The printCountingMap contains a mapping from feature names to the number of
-		// remaining elements that still need to be printed. The map is initialized with
-		// the number of elements stored in each structural feature. For lists this is the
-		// list size. For non-multiple features it is either 1 (if the feature is set) or
-		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
-		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.JAVA_TEMPLATE__QUALIFIED_CLASSNAME));
-		printCountingMap.put("qualifiedClassname", temp == null ? 0 : 1);
-		// print collected hidden tokens
-		int count;
-		// DEFINITION PART BEGINS (CsString)
-		out.print("java");
-		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderInQuotes)
-		count = printCountingMap.get("qualifiedClassname");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.JAVA_TEMPLATE__QUALIFIED_CLASSNAME));
-			if (o != null) {
-				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.JAVA_TEMPLATE__QUALIFIED_CLASSNAME), element));
-				out.print(" ");
-			}
-			printCountingMap.put("qualifiedClassname", count - 1);
 		}
 	}
 	
@@ -775,7 +761,7 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(13);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(14);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.COMPOSITE_COMPONENT__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
@@ -803,6 +789,8 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		printCountingMap.put("uses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.COMPOSITE_COMPONENT__COMPOSITION));
 		printCountingMap.put("composition", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.COMPOSITE_COMPONENT__BINDINGS));
+		printCountingMap.put("bindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		boolean iterate = true;
@@ -929,6 +917,8 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		print_genericity_language_gcomponent_core_CompositeComponent_1_2(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_genericity_language_gcomponent_core_CompositeComponent_1_3(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_genericity_language_gcomponent_core_CompositeComponent_1_4(element, localtab, out, printCountingMap);
 	}
 	
 	public void print_genericity_language_gcomponent_core_CompositeComponent_1_0(genericity.language.gcomponent.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
@@ -1027,6 +1017,27 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		}
 	}
 	
+	public void print_genericity_language_gcomponent_core_CompositeComponent_1_4(genericity.language.gcomponent.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("bindings");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.COMPOSITE_COMPONENT__BINDINGS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("bindings", count - 1);
+		}
+	}
+	
 	public void print_genericity_language_gcomponent_core_CompositeComponent_2(genericity.language.gcomponent.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		boolean iterate = true;
@@ -1074,6 +1085,53 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("formalParameters", count - 1);
+		}
+	}
+	
+	
+	public void print_genericity_language_gcomponent_core_BindingDeclaration(genericity.language.gcomponent.core.BindingDeclaration element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.BINDING_DECLARATION__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.BINDING_DECLARATION__FILE_NAME));
+		printCountingMap.put("fileName", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("binding");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.BINDING_DECLARATION__NAME));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.BINDING_DECLARATION__NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("name", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("fileName");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.BINDING_DECLARATION__FILE_NAME));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.core.CorePackage.BINDING_DECLARATION__FILE_NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("fileName", count - 1);
 		}
 	}
 	
@@ -1394,8 +1452,8 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		printCountingMap.put("boundConceptQualifier", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BOUND_CONCEPT));
 		printCountingMap.put("boundConcept", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME));
-		printCountingMap.put("bindingName", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING));
+		printCountingMap.put("binding", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		java.io.StringWriter sWriter = null;
@@ -1443,10 +1501,10 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		alt = 0;
 		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"boundConceptQualifier"		,
 		"boundConcept"		,
-		"bindingName"		));
+		"binding"		));
 		int tempMatchCount;
 		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"boundConcept"		,
-		"bindingName"		));
+		"binding"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
 			matches = tempMatchCount;
@@ -1469,16 +1527,16 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 				out.print("[");
 				out.print(" ");
 				// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-				count = printCountingMap.get("bindingName");
+				count = printCountingMap.get("binding");
 				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME));
+					Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING));
 					if (o != null) {
 						genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 						resolver.setOptions(getOptions());
-						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME), element));
+						out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getApplyParameterBindingReferenceResolver().deResolve((genericity.language.gcomponent.core.BindingDeclaration) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING)), element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING), element));
 						out.print(" ");
 					}
-					printCountingMap.put("bindingName", count - 1);
+					printCountingMap.put("binding", count - 1);
 				}
 				// DEFINITION PART BEGINS (CsString)
 				out.print("]");
@@ -1516,16 +1574,16 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 			out.print("[");
 			out.print(" ");
 			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-			count = printCountingMap.get("bindingName");
+			count = printCountingMap.get("binding");
 			if (count > 0) {
-				Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME));
+				Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING));
 				if (o != null) {
 					genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 					resolver.setOptions(getOptions());
-					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME), element));
+					out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getApplyParameterBindingReferenceResolver().deResolve((genericity.language.gcomponent.core.BindingDeclaration) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING)), element.eClass().getEStructuralFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.APPLY_PARAMETER__BINDING), element));
 					out.print(" ");
 				}
-				printCountingMap.put("bindingName", count - 1);
+				printCountingMap.put("binding", count - 1);
 			}
 			// DEFINITION PART BEGINS (CsString)
 			out.print("]");
@@ -1607,6 +1665,177 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 				out.print(" ");
 			}
 			printCountingMap.put("feature", count - 1);
+		}
+	}
+	
+	
+	public void print_genericity_language_gcomponent_technologies_AtlTemplate(genericity.language.gcomponent.technologies.AtlTemplate element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__TEMPLATE));
+		printCountingMap.put("template", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__PARAMETERS));
+		printCountingMap.put("parameters", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		// print collected hidden tokens
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("atl");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("template");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__TEMPLATE));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__TEMPLATE), element));
+				out.print(" ");
+			}
+			printCountingMap.put("template", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("with");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("parameters");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__PARAMETERS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("parameters", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_genericity_language_gcomponent_technologies_AtlTemplate_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_genericity_language_gcomponent_technologies_AtlTemplate_0(genericity.language.gcomponent.technologies.AtlTemplate element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("parameters");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_TEMPLATE__PARAMETERS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("parameters", count - 1);
+		}
+	}
+	
+	
+	public void print_genericity_language_gcomponent_technologies_AtlParameter(genericity.language.gcomponent.technologies.AtlParameter element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME));
+		printCountingMap.put("atlModelName", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__MODEL));
+		printCountingMap.put("model", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("atlModelName");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("atlModelName", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("model");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__MODEL));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getAtlParameterModelReferenceResolver().deResolve((genericity.language.gcomponent.core.Model) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__MODEL)), element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.ATL_PARAMETER__MODEL), element));
+				out.print(" ");
+			}
+			printCountingMap.put("model", count - 1);
+		}
+	}
+	
+	
+	public void print_genericity_language_gcomponent_technologies_JavaTemplate(genericity.language.gcomponent.technologies.JavaTemplate element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.JAVA_TEMPLATE__QUALIFIED_CLASSNAME));
+		printCountingMap.put("qualifiedClassname", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("java");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("qualifiedClassname");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.JAVA_TEMPLATE__QUALIFIED_CLASSNAME));
+			if (o != null) {
+				genericity.language.gcomponent.resource.gcomponent.IGcomponentTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.JAVA_TEMPLATE__QUALIFIED_CLASSNAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("qualifiedClassname", count - 1);
 		}
 	}
 	

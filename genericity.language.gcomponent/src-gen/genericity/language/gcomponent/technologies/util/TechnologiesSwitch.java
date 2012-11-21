@@ -79,6 +79,12 @@ public class TechnologiesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TechnologiesPackage.ATL_PARAMETER: {
+				AtlParameter atlParameter = (AtlParameter)theEObject;
+				T result = caseAtlParameter(atlParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TechnologiesPackage.JAVA_TEMPLATE: {
 				JavaTemplate javaTemplate = (JavaTemplate)theEObject;
 				T result = caseJavaTemplate(javaTemplate);
@@ -102,6 +108,21 @@ public class TechnologiesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAtlTemplate(AtlTemplate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Atl Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Atl Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAtlParameter(AtlParameter object) {
 		return null;
 	}
 

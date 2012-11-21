@@ -14,9 +14,12 @@
             <separator
                   name="group1">
             </separator>
+            <groupMarker
+                  name="genericity.gcomponents.ui.ExporterGroup">
+            </groupMarker>
          </menu>
          <action
-               label="Export gBind to XMI"
+               label="gBind to XMI"
                class="genericity.components.ui.popup.actions.ExportGBindXMI"
                menubarPath="genericity.components.ui.GComponentsMenu/group1"
                enablesFor="1"
@@ -26,15 +29,29 @@
                class="genericity.components.ui.popup.actions.ExportAtlXMI"
                enablesFor="1"
                id="genericity.components.ui.ExportATL"
-               label="Export ATL to XMI"
+               label="ATL to XMI"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
          <action
                class="genericity.components.ui.popup.actions.ImportAtlXMI"
                enablesFor="1"
                id="genericity.components.ui.ImportATL"
-               label="Import ATL from XMI"
+               label="XMI to ATL"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
+         </action>
+         <action
+               class="genericity.components.ui.popup.actions.ApplyComponent"
+               enablesFor="1"
+               id="genericity.components.ui.ApplyComponent"
+               label="Apply component"
+               menubarPath="genericity.components.ui.GComponentsMenu/group1">
+         </action>
+         <action
+               class="genericity.components.ui.popup.actions.ExportGComponentXMI"
+               enablesFor="1"
+               id="genericity.components.ui.ExportGComponent"
+               label="gComponent to XMI"
+               menubarPath="genericity.components.ui.GComponentsMenu/genericity.gcomponents.ui.ExporterGroup">
          </action>
       </objectContribution>
    </extension>

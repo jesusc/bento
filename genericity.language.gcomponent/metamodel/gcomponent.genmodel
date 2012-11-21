@@ -35,6 +35,7 @@
       <genClasses ecoreClass="gcomponent.ecore#//core/ParameterModel">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference gcomponent.ecore#//core/ParameterModel/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/ParameterModel/resourceName"/>
       </genClasses>
       <genClasses ecoreClass="gcomponent.ecore#//core/GeneratedModel"/>
       <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Tagged">
@@ -49,6 +50,11 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference gcomponent.ecore#//core/CompositeComponent/uses"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/CompositeComponent/composition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/CompositeComponent/bindings"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/BindingDeclaration">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/BindingDeclaration/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/BindingDeclaration/fileName"/>
       </genClasses>
       <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Template"/>
       <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Constraint"/>
@@ -101,7 +107,8 @@
             ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/boundConceptQualifier"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/boundConcept"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//flowcontrol/ApplyParameter/bindingName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/binding"/>
       </genClasses>
       <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/Seq">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Seq/steps"/>
@@ -137,6 +144,12 @@
         disposableProviderFactory="true" ecorePackage="gcomponent.ecore#//technologies">
       <genClasses ecoreClass="gcomponent.ecore#//technologies/AtlTemplate">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlTemplate/template"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//technologies/AtlTemplate/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//technologies/AtlParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlParameter/atlModelName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//technologies/AtlParameter/model"/>
       </genClasses>
       <genClasses ecoreClass="gcomponent.ecore#//technologies/JavaTemplate">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/JavaTemplate/qualifiedClassname"/>

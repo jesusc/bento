@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     01/01/2012 23:58:17                                                        
+
+     project    
+     description
+                   
+     jesusc                                                                
+     ====================================================================== -->
+<project name="project" default="default">
+    <description>
+		Package the genericity compiler for ATL into a jar file.
+    </description>
+
+
+	<target name="generate-jar">
+		<jar destfile="lib/genericity-atl.jar">
+			<fileset dir="../genericity.compiler.atl/eclectic-gen" >
+				<include name="eclectic/rewrite_class1*"/>
+				<include name="eclectic/gen_atl*"/>
+			</fileset>
+
+			<!-- NO BCEL IN THE PATH...
+			<classfileset dir="../genericity.compiler.atl/eclectic-gen" >
+				<root classname="eclectic.rewrite_class1" includes="eclectic/rewrite_class1*" />
+			</classfileset>
+			-->
+		</jar>
+
+		<jar destfile="lib/genericity-instantiation.jar">
+			<fileset dir="../genericity.compiler.atl/eclectic-gen" >
+				<include name="eclectic/propagate_instantiation*"/>
+			</fileset>
+
+			<!-- NO BCEL IN THE PATH...
+			<classfileset dir="../genericity.compiler.atl/eclectic-gen" >
+				<root classname="eclectic.rewrite_class1" includes="eclectic/rewrite_class1*" />
+			</classfileset>
+			-->
+		</jar>
+
+	</target>
+	
+	<target name="default" depends="generate-jar">
+	</target>
+	
+    <target name="depends">
+    </target>
+
+</project>

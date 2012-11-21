@@ -104,6 +104,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeComponentAdapter();
 			}
 			@Override
+			public Adapter caseBindingDeclaration(BindingDeclaration object) {
+				return createBindingDeclarationAdapter();
+			}
+			@Override
 			public Adapter caseTemplate(Template object) {
 				return createTemplateAdapter();
 			}
@@ -260,6 +264,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompositeComponentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.core.BindingDeclaration <em>Binding Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.language.gcomponent.core.BindingDeclaration
+	 * @generated
+	 */
+	public Adapter createBindingDeclarationAdapter() {
 		return null;
 	}
 

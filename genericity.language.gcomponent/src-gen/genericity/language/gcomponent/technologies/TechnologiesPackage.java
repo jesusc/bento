@@ -11,6 +11,7 @@ import genericity.language.gcomponent.core.CorePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,13 +81,59 @@ public interface TechnologiesPackage extends EPackage {
 	int ATL_TEMPLATE__TEMPLATE = CorePackage.TEMPLATE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_TEMPLATE__PARAMETERS = CorePackage.TEMPLATE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Atl Template</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATL_TEMPLATE_FEATURE_COUNT = CorePackage.TEMPLATE_FEATURE_COUNT + 1;
+	int ATL_TEMPLATE_FEATURE_COUNT = CorePackage.TEMPLATE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link genericity.language.gcomponent.technologies.impl.AtlParameterImpl <em>Atl Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.language.gcomponent.technologies.impl.AtlParameterImpl
+	 * @see genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl#getAtlParameter()
+	 * @generated
+	 */
+	int ATL_PARAMETER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Atl Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_PARAMETER__ATL_MODEL_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_PARAMETER__MODEL = 1;
+
+	/**
+	 * The number of structural features of the '<em>Atl Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_PARAMETER_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.technologies.impl.JavaTemplateImpl <em>Java Template</em>}' class.
@@ -96,7 +143,7 @@ public interface TechnologiesPackage extends EPackage {
 	 * @see genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl#getJavaTemplate()
 	 * @generated
 	 */
-	int JAVA_TEMPLATE = 1;
+	int JAVA_TEMPLATE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Classname</b></em>' attribute.
@@ -137,6 +184,49 @@ public interface TechnologiesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAtlTemplate_Template();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.technologies.AtlTemplate#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see genericity.language.gcomponent.technologies.AtlTemplate#getParameters()
+	 * @see #getAtlTemplate()
+	 * @generated
+	 */
+	EReference getAtlTemplate_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.language.gcomponent.technologies.AtlParameter <em>Atl Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Atl Parameter</em>'.
+	 * @see genericity.language.gcomponent.technologies.AtlParameter
+	 * @generated
+	 */
+	EClass getAtlParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.technologies.AtlParameter#getAtlModelName <em>Atl Model Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Atl Model Name</em>'.
+	 * @see genericity.language.gcomponent.technologies.AtlParameter#getAtlModelName()
+	 * @see #getAtlParameter()
+	 * @generated
+	 */
+	EAttribute getAtlParameter_AtlModelName();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.technologies.AtlParameter#getModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Model</em>'.
+	 * @see genericity.language.gcomponent.technologies.AtlParameter#getModel()
+	 * @see #getAtlParameter()
+	 * @generated
+	 */
+	EReference getAtlParameter_Model();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.technologies.JavaTemplate <em>Java Template</em>}'.
@@ -198,6 +288,40 @@ public interface TechnologiesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATL_TEMPLATE__TEMPLATE = eINSTANCE.getAtlTemplate_Template();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATL_TEMPLATE__PARAMETERS = eINSTANCE.getAtlTemplate_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link genericity.language.gcomponent.technologies.impl.AtlParameterImpl <em>Atl Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.language.gcomponent.technologies.impl.AtlParameterImpl
+		 * @see genericity.language.gcomponent.technologies.impl.TechnologiesPackageImpl#getAtlParameter()
+		 * @generated
+		 */
+		EClass ATL_PARAMETER = eINSTANCE.getAtlParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Atl Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATL_PARAMETER__ATL_MODEL_NAME = eINSTANCE.getAtlParameter_AtlModelName();
+
+		/**
+		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATL_PARAMETER__MODEL = eINSTANCE.getAtlParameter_Model();
 
 		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.technologies.impl.JavaTemplateImpl <em>Java Template</em>}' class.

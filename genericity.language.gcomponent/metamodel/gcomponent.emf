@@ -30,6 +30,7 @@ package core {
     abstract class Model extends NamedElement { }
     class ParameterModel extends Model {
        ref Concept[*] type;
+	   attr String[0..1] resourceName;
     }
     class GeneratedModel extends Model { }
     
@@ -57,6 +58,13 @@ package core {
 	class CompositeComponent extends Component {
 	   ref Component[+] uses;
 	   val flowcontrol.Composition[1] composition;
+		
+	   val BindingDeclaration[*] bindings;
+	}
+	
+	class BindingDeclaration {
+	   attr String[1] name;
+	   attr String[1] fileName;
 	}
 	
 	abstract class Template { 
@@ -139,10 +147,7 @@ package flowcontrol {
 		ref core.Component[0..1] boundConceptQualifier;
 		ref core.Concept[0..1] boundConcept;
 		
-		
-		//attr String[1] calledModelName;
-		attr String[1] bindingName;
-		//attr String[1] calleeModelName;
+		ref core.BindingDeclaration[1] binding;
 	}
 	// class ApplyParameterIdentity 
 	
@@ -201,13 +206,24 @@ package dsl {
 
 @namespace(uri="http://genericity/language/gcomponent/technologies", prefix="gcomponent_technologies")
 package technologies {
-	
+
+	// Begin-of ATL	
 	class AtlTemplate extends core.Template {
-	   attr String[1] template;
+	   	attr String[1] template;
+		val AtlParameter[*] parameters;
 	}
 
+	class AtlParameter {
+	   	attr String[1] atlModelName;
+		ref core.Model[1] model;
+	}
+	
+	// End-of ATL
+
+
+	// Begin-of Java
 	class JavaTemplate extends core.Template {
 	   attr String[1] qualifiedClassname;
 	}
-
+	// End-of Java
 }

@@ -42,14 +42,11 @@ RULES {
 		// TODO: constraints	
 	;
 
-	Core.ParameterModel ::= "model" name[] ":" type[]
+	Core.ParameterModel ::= "model" name[] ":" type[] ("=" resourceName['"','"'])?
 	;
 	
 	Core.Tag ::= value[];
 		
-	Technologies.AtlTemplate ::= "atl" template['"', '"'];
-	Technologies.JavaTemplate ::= "java" qualifiedClassname['"', '"'];
-
     // Begin-of variantes (parameters, feature models)
     Variants.SingleFeature ::= "-" name[];
     Variants.XorFeature ::= "+" name[] "xor" ;
@@ -66,12 +63,17 @@ RULES {
 			("target" target)
 			("source" sourceModels)
 			("target" targetModels)
+			(bindings)
 			)+
 
 			("variants" (formalParameters)+ )?
 			
 			composition
 		"}";
+
+
+	Core.BindingDeclaration ::= "binding" name[] "=" fileName['"', '"']
+	;
 		
 	Flowcontrol.Composition ::= 
 		"compose" step
@@ -91,7 +93,7 @@ RULES {
 //	Flowcontrol.ApplyParameter ::= calledModelName[] ":" bindingName[] "(" calleeModelName[] ")"
 //		;
 	Flowcontrol.ApplyParameter ::= model[] 
-		(":" (boundConceptQualifier[] "::" boundConcept[] "[" bindingName[] "]" | boundConcept[] "[" bindingName[] "]" ) )?
+		(":" (boundConceptQualifier[] "::" boundConcept[] "[" binding[] "]" | boundConcept[] "[" binding[] "]" ) )?
 		;
 
 
@@ -102,4 +104,11 @@ RULES {
 			
 	Flowcontrol.FeatureRef ::= feature[];
 	// End-of composite components
+
+	// Begin-of technologies
+	Technologies.AtlTemplate ::= "atl" template['"', '"'] "with" parameters ("," parameters)* ;
+	Technologies.AtlParameter ::= atlModelName[] "=" model[];
+	Technologies.JavaTemplate ::= "java" qualifiedClassname['"', '"'];
+	
+	// End-of technologies
 }	

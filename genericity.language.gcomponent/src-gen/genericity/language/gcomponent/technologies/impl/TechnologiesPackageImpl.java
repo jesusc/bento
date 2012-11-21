@@ -20,6 +20,7 @@ import genericity.language.gcomponent.flowcontrol.FlowcontrolPackage;
 import genericity.language.gcomponent.flowcontrol.impl.FlowcontrolPackageImpl;
 
 import genericity.language.gcomponent.impl.GcomponentPackageImpl;
+import genericity.language.gcomponent.technologies.AtlParameter;
 import genericity.language.gcomponent.technologies.AtlTemplate;
 import genericity.language.gcomponent.technologies.JavaTemplate;
 import genericity.language.gcomponent.technologies.TechnologiesFactory;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -48,6 +50,13 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 	 * @generated
 	 */
 	private EClass atlTemplateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass atlParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,6 +166,42 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAtlTemplate_Parameters() {
+		return (EReference)atlTemplateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAtlParameter() {
+		return atlParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAtlParameter_AtlModelName() {
+		return (EAttribute)atlParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAtlParameter_Model() {
+		return (EReference)atlParameterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJavaTemplate() {
 		return javaTemplateEClass;
 	}
@@ -200,6 +245,11 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 		// Create classes and their features
 		atlTemplateEClass = createEClass(ATL_TEMPLATE);
 		createEAttribute(atlTemplateEClass, ATL_TEMPLATE__TEMPLATE);
+		createEReference(atlTemplateEClass, ATL_TEMPLATE__PARAMETERS);
+
+		atlParameterEClass = createEClass(ATL_PARAMETER);
+		createEAttribute(atlParameterEClass, ATL_PARAMETER__ATL_MODEL_NAME);
+		createEReference(atlParameterEClass, ATL_PARAMETER__MODEL);
 
 		javaTemplateEClass = createEClass(JAVA_TEMPLATE);
 		createEAttribute(javaTemplateEClass, JAVA_TEMPLATE__QUALIFIED_CLASSNAME);
@@ -242,6 +292,11 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 		// Initialize classes and features; add operations and parameters
 		initEClass(atlTemplateEClass, AtlTemplate.class, "AtlTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAtlTemplate_Template(), ecorePackage.getEString(), "template", null, 1, 1, AtlTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAtlTemplate_Parameters(), this.getAtlParameter(), null, "parameters", null, 0, -1, AtlTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(atlParameterEClass, AtlParameter.class, "AtlParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAtlParameter_AtlModelName(), ecorePackage.getEString(), "atlModelName", null, 1, 1, AtlParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAtlParameter_Model(), theCorePackage.getModel(), null, "model", null, 1, 1, AtlParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(javaTemplateEClass, JavaTemplate.class, "JavaTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJavaTemplate_QualifiedClassname(), ecorePackage.getEString(), "qualifiedClassname", null, 1, 1, JavaTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

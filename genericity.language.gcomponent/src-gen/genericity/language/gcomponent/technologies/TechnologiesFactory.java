@@ -35,6 +35,15 @@ public interface TechnologiesFactory extends EFactory {
 	AtlTemplate createAtlTemplate();
 
 	/**
+	 * Returns a new object of class '<em>Atl Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Atl Parameter</em>'.
+	 * @generated
+	 */
+	AtlParameter createAtlParameter();
+
+	/**
 	 * Returns a new object of class '<em>Java Template</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -78,6 +78,10 @@ public class TechnologiesAdapterFactory extends AdapterFactoryImpl {
 				return createAtlTemplateAdapter();
 			}
 			@Override
+			public Adapter caseAtlParameter(AtlParameter object) {
+				return createAtlParameterAdapter();
+			}
+			@Override
 			public Adapter caseJavaTemplate(JavaTemplate object) {
 				return createJavaTemplateAdapter();
 			}
@@ -116,6 +120,20 @@ public class TechnologiesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAtlTemplateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.language.gcomponent.technologies.AtlParameter <em>Atl Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.language.gcomponent.technologies.AtlParameter
+	 * @generated
+	 */
+	public Adapter createAtlParameterAdapter() {
 		return null;
 	}
 

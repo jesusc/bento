@@ -1,0 +1,12 @@
+
+transformation component oo2java {
+	source concept OO  : "OO.ecore"
+	target concept Java : "SimpleJava.ecore"
+	source model in : OO
+	target model out : Java
+	
+	//definition atl "oo2java.atl" 
+	//definition atl "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.atl"
+	definition atl "/home/jesus/projects/genericity/genericity.benchmarks/components/oo2java/oo2java.atl"
+		with IN = in, OUT = out 
+}

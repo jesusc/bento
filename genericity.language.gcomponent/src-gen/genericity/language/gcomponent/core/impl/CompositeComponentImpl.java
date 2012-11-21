@@ -6,6 +6,7 @@
  */
 package genericity.language.gcomponent.core.impl;
 
+import genericity.language.gcomponent.core.BindingDeclaration;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.CompositeComponent;
 import genericity.language.gcomponent.core.CorePackage;
@@ -24,7 +25,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,6 +38,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <ul>
  *   <li>{@link genericity.language.gcomponent.core.impl.CompositeComponentImpl#getUses <em>Uses</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.impl.CompositeComponentImpl#getComposition <em>Composition</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.impl.CompositeComponentImpl#getBindings <em>Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,6 +64,16 @@ public class CompositeComponentImpl extends ComponentImpl implements CompositeCo
 	 * @ordered
 	 */
 	protected Composition composition;
+
+	/**
+	 * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBindings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BindingDeclaration> bindings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,11 +154,25 @@ public class CompositeComponentImpl extends ComponentImpl implements CompositeCo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BindingDeclaration> getBindings() {
+		if (bindings == null) {
+			bindings = new EObjectContainmentEList<BindingDeclaration>(BindingDeclaration.class, this, CorePackage.COMPOSITE_COMPONENT__BINDINGS);
+		}
+		return bindings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CorePackage.COMPOSITE_COMPONENT__COMPOSITION:
 				return basicSetComposition(null, msgs);
+			case CorePackage.COMPOSITE_COMPONENT__BINDINGS:
+				return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -161,6 +189,8 @@ public class CompositeComponentImpl extends ComponentImpl implements CompositeCo
 				return getUses();
 			case CorePackage.COMPOSITE_COMPONENT__COMPOSITION:
 				return getComposition();
+			case CorePackage.COMPOSITE_COMPONENT__BINDINGS:
+				return getBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,6 +211,10 @@ public class CompositeComponentImpl extends ComponentImpl implements CompositeCo
 			case CorePackage.COMPOSITE_COMPONENT__COMPOSITION:
 				setComposition((Composition)newValue);
 				return;
+			case CorePackage.COMPOSITE_COMPONENT__BINDINGS:
+				getBindings().clear();
+				getBindings().addAll((Collection<? extends BindingDeclaration>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -199,6 +233,9 @@ public class CompositeComponentImpl extends ComponentImpl implements CompositeCo
 			case CorePackage.COMPOSITE_COMPONENT__COMPOSITION:
 				setComposition((Composition)null);
 				return;
+			case CorePackage.COMPOSITE_COMPONENT__BINDINGS:
+				getBindings().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -215,6 +252,8 @@ public class CompositeComponentImpl extends ComponentImpl implements CompositeCo
 				return uses != null && !uses.isEmpty();
 			case CorePackage.COMPOSITE_COMPONENT__COMPOSITION:
 				return composition != null;
+			case CorePackage.COMPOSITE_COMPONENT__BINDINGS:
+				return bindings != null && !bindings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -41,6 +41,9 @@ public class GcomponentLexer extends Lexer {
     public static final int T__36=36;
     public static final int T__37=37;
     public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int T__40=40;
+    public static final int T__41=41;
     public static final int COMMENT=4;
     public static final int LINEBREAK=5;
     public static final int QUOTED_34_34=6;
@@ -248,10 +251,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:23:7: ( '[' )
-            // Gcomponent.g:23:9: '['
+            // Gcomponent.g:23:7: ( '=' )
+            // Gcomponent.g:23:9: '='
             {
-            match('['); 
+            match('='); 
 
             }
 
@@ -269,10 +272,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:24:7: ( ']' )
-            // Gcomponent.g:24:9: ']'
+            // Gcomponent.g:24:7: ( '[' )
+            // Gcomponent.g:24:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -290,12 +293,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:25:7: ( 'apply' )
-            // Gcomponent.g:25:9: 'apply'
+            // Gcomponent.g:25:7: ( ']' )
+            // Gcomponent.g:25:9: ']'
             {
-            match("apply"); 
-
-
+            match(']'); 
 
             }
 
@@ -313,10 +314,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:26:7: ( 'atl' )
-            // Gcomponent.g:26:9: 'atl'
+            // Gcomponent.g:26:7: ( 'apply' )
+            // Gcomponent.g:26:9: 'apply'
             {
-            match("atl"); 
+            match("apply"); 
 
 
 
@@ -336,10 +337,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:27:7: ( 'component' )
-            // Gcomponent.g:27:9: 'component'
+            // Gcomponent.g:27:7: ( 'atl' )
+            // Gcomponent.g:27:9: 'atl'
             {
-            match("component"); 
+            match("atl"); 
 
 
 
@@ -359,10 +360,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:28:7: ( 'compose' )
-            // Gcomponent.g:28:9: 'compose'
+            // Gcomponent.g:28:7: ( 'binding' )
+            // Gcomponent.g:28:9: 'binding'
             {
-            match("compose"); 
+            match("binding"); 
 
 
 
@@ -382,10 +383,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:29:7: ( 'composite' )
-            // Gcomponent.g:29:9: 'composite'
+            // Gcomponent.g:29:7: ( 'component' )
+            // Gcomponent.g:29:9: 'component'
             {
-            match("composite"); 
+            match("component"); 
 
 
 
@@ -405,10 +406,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:30:7: ( 'concept' )
-            // Gcomponent.g:30:9: 'concept'
+            // Gcomponent.g:30:7: ( 'compose' )
+            // Gcomponent.g:30:9: 'compose'
             {
-            match("concept"); 
+            match("compose"); 
 
 
 
@@ -428,10 +429,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:31:7: ( 'definition' )
-            // Gcomponent.g:31:9: 'definition'
+            // Gcomponent.g:31:7: ( 'composite' )
+            // Gcomponent.g:31:9: 'composite'
             {
-            match("definition"); 
+            match("composite"); 
 
 
 
@@ -451,10 +452,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:32:7: ( 'java' )
-            // Gcomponent.g:32:9: 'java'
+            // Gcomponent.g:32:7: ( 'concept' )
+            // Gcomponent.g:32:9: 'concept'
             {
-            match("java"); 
+            match("concept"); 
 
 
 
@@ -474,10 +475,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:33:7: ( 'model' )
-            // Gcomponent.g:33:9: 'model'
+            // Gcomponent.g:33:7: ( 'definition' )
+            // Gcomponent.g:33:9: 'definition'
             {
-            match("model"); 
+            match("definition"); 
 
 
 
@@ -497,10 +498,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:34:7: ( 'seq' )
-            // Gcomponent.g:34:9: 'seq'
+            // Gcomponent.g:34:7: ( 'java' )
+            // Gcomponent.g:34:9: 'java'
             {
-            match("seq"); 
+            match("java"); 
 
 
 
@@ -520,10 +521,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:35:7: ( 'source' )
-            // Gcomponent.g:35:9: 'source'
+            // Gcomponent.g:35:7: ( 'model' )
+            // Gcomponent.g:35:9: 'model'
             {
-            match("source"); 
+            match("model"); 
 
 
 
@@ -543,10 +544,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:36:7: ( 'tags' )
-            // Gcomponent.g:36:9: 'tags'
+            // Gcomponent.g:36:7: ( 'seq' )
+            // Gcomponent.g:36:9: 'seq'
             {
-            match("tags"); 
+            match("seq"); 
 
 
 
@@ -566,10 +567,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:37:7: ( 'target' )
-            // Gcomponent.g:37:9: 'target'
+            // Gcomponent.g:37:7: ( 'source' )
+            // Gcomponent.g:37:9: 'source'
             {
-            match("target"); 
+            match("source"); 
 
 
 
@@ -589,10 +590,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:38:7: ( 'transformation' )
-            // Gcomponent.g:38:9: 'transformation'
+            // Gcomponent.g:38:7: ( 'tags' )
+            // Gcomponent.g:38:9: 'tags'
             {
-            match("transformation"); 
+            match("tags"); 
 
 
 
@@ -612,10 +613,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:39:7: ( 'uses' )
-            // Gcomponent.g:39:9: 'uses'
+            // Gcomponent.g:39:7: ( 'target' )
+            // Gcomponent.g:39:9: 'target'
             {
-            match("uses"); 
+            match("target"); 
 
 
 
@@ -635,10 +636,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:40:7: ( 'variants' )
-            // Gcomponent.g:40:9: 'variants'
+            // Gcomponent.g:40:7: ( 'transformation' )
+            // Gcomponent.g:40:9: 'transformation'
             {
-            match("variants"); 
+            match("transformation"); 
 
 
 
@@ -658,10 +659,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:41:7: ( 'when' )
-            // Gcomponent.g:41:9: 'when'
+            // Gcomponent.g:41:7: ( 'uses' )
+            // Gcomponent.g:41:9: 'uses'
             {
-            match("when"); 
+            match("uses"); 
 
 
 
@@ -681,10 +682,10 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:42:7: ( 'xor' )
-            // Gcomponent.g:42:9: 'xor'
+            // Gcomponent.g:42:7: ( 'variants' )
+            // Gcomponent.g:42:9: 'variants'
             {
-            match("xor"); 
+            match("variants"); 
 
 
 
@@ -704,10 +705,12 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:43:7: ( '{' )
-            // Gcomponent.g:43:9: '{'
+            // Gcomponent.g:43:7: ( 'when' )
+            // Gcomponent.g:43:9: 'when'
             {
-            match('{'); 
+            match("when"); 
+
+
 
             }
 
@@ -725,10 +728,12 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:44:7: ( '}' )
-            // Gcomponent.g:44:9: '}'
+            // Gcomponent.g:44:7: ( 'with' )
+            // Gcomponent.g:44:9: 'with'
             {
-            match('}'); 
+            match("with"); 
+
+
 
             }
 
@@ -741,22 +746,87 @@ public class GcomponentLexer extends Lexer {
     }
     // $ANTLR end "T__38"
 
+    // $ANTLR start "T__39"
+    public final void mT__39() throws RecognitionException {
+        try {
+            int _type = T__39;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Gcomponent.g:45:7: ( 'xor' )
+            // Gcomponent.g:45:9: 'xor'
+            {
+            match("xor"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__39"
+
+    // $ANTLR start "T__40"
+    public final void mT__40() throws RecognitionException {
+        try {
+            int _type = T__40;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Gcomponent.g:46:7: ( '{' )
+            // Gcomponent.g:46:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__40"
+
+    // $ANTLR start "T__41"
+    public final void mT__41() throws RecognitionException {
+        try {
+            int _type = T__41;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Gcomponent.g:47:7: ( '}' )
+            // Gcomponent.g:47:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__41"
+
     // $ANTLR start "COMMENT"
     public final void mCOMMENT() throws RecognitionException {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3034:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Gcomponent.g:3035:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Gcomponent.g:3440:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Gcomponent.g:3441:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Gcomponent.g:3035:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Gcomponent.g:3035:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Gcomponent.g:3441:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Gcomponent.g:3441:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
 
 
-            // Gcomponent.g:3035:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Gcomponent.g:3441:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -811,13 +881,13 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3038:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
-            // Gcomponent.g:3039:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Gcomponent.g:3444:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
+            // Gcomponent.g:3445:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
             {
-            // Gcomponent.g:3039:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // Gcomponent.g:3039:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Gcomponent.g:3445:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Gcomponent.g:3445:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // Gcomponent.g:3039:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Gcomponent.g:3445:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt2=0;
             loop2:
             do {
@@ -875,8 +945,8 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3041:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Gcomponent.g:3042:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Gcomponent.g:3447:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Gcomponent.g:3448:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -906,13 +976,13 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3045:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Gcomponent.g:3046:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Gcomponent.g:3451:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Gcomponent.g:3452:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Gcomponent.g:3046:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Gcomponent.g:3046:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Gcomponent.g:3452:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Gcomponent.g:3452:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Gcomponent.g:3046:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Gcomponent.g:3452:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt3=3;
             int LA3_0 = input.LA(1);
 
@@ -938,7 +1008,7 @@ public class GcomponentLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Gcomponent.g:3046:4: '\\r\\n'
+                    // Gcomponent.g:3452:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -947,14 +1017,14 @@ public class GcomponentLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Gcomponent.g:3046:13: '\\r'
+                    // Gcomponent.g:3452:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Gcomponent.g:3046:20: '\\n'
+                    // Gcomponent.g:3452:20: '\\n'
                     {
                     match('\n'); 
 
@@ -985,21 +1055,21 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3049:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Gcomponent.g:3050:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Gcomponent.g:3455:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Gcomponent.g:3456:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Gcomponent.g:3050:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Gcomponent.g:3050:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Gcomponent.g:3456:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Gcomponent.g:3456:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
             {
-            // Gcomponent.g:3050:3: ( '\"' )
-            // Gcomponent.g:3050:4: '\"'
+            // Gcomponent.g:3456:3: ( '\"' )
+            // Gcomponent.g:3456:4: '\"'
             {
             match('\"'); 
 
             }
 
 
-            // Gcomponent.g:3050:8: (~ ( '\"' ) )*
+            // Gcomponent.g:3456:8: (~ ( '\"' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -1033,8 +1103,8 @@ public class GcomponentLexer extends Lexer {
             } while (true);
 
 
-            // Gcomponent.g:3050:17: ( '\"' )
-            // Gcomponent.g:3050:18: '\"'
+            // Gcomponent.g:3456:17: ( '\"' )
+            // Gcomponent.g:3456:18: '\"'
             {
             match('\"'); 
 
@@ -1056,8 +1126,8 @@ public class GcomponentLexer extends Lexer {
     // $ANTLR end "QUOTED_34_34"
 
     public void mTokens() throws RecognitionException {
-        // Gcomponent.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | COMMENT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 )
-        int alt5=35;
+        // Gcomponent.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | COMMENT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 )
+        int alt5=38;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
@@ -1301,39 +1371,63 @@ public class GcomponentLexer extends Lexer {
                 }
                 break;
             case 31 :
-                // Gcomponent.g:1:189: COMMENT
+                // Gcomponent.g:1:189: T__39
+                {
+                mT__39(); 
+
+
+                }
+                break;
+            case 32 :
+                // Gcomponent.g:1:195: T__40
+                {
+                mT__40(); 
+
+
+                }
+                break;
+            case 33 :
+                // Gcomponent.g:1:201: T__41
+                {
+                mT__41(); 
+
+
+                }
+                break;
+            case 34 :
+                // Gcomponent.g:1:207: COMMENT
                 {
                 mCOMMENT(); 
 
 
                 }
                 break;
-            case 32 :
-                // Gcomponent.g:1:197: TEXT
+            case 35 :
+                // Gcomponent.g:1:215: TEXT
                 {
                 mTEXT(); 
 
 
                 }
                 break;
-            case 33 :
-                // Gcomponent.g:1:202: WHITESPACE
+            case 36 :
+                // Gcomponent.g:1:220: WHITESPACE
                 {
                 mWHITESPACE(); 
 
 
                 }
                 break;
-            case 34 :
-                // Gcomponent.g:1:213: LINEBREAK
+            case 37 :
+                // Gcomponent.g:1:231: LINEBREAK
                 {
                 mLINEBREAK(); 
 
 
                 }
                 break;
-            case 35 :
-                // Gcomponent.g:1:223: QUOTED_34_34
+            case 38 :
+                // Gcomponent.g:1:241: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 
@@ -1348,182 +1442,199 @@ public class GcomponentLexer extends Lexer {
 
     protected DFA5 dfa5 = new DFA5(this);
     static final String DFA5_eotS =
-        "\5\uffff\1\34\1\36\2\uffff\13\27\13\uffff\17\27\1\76\5\27\1\104"+
-        "\7\27\1\114\1\27\1\uffff\3\27\1\121\1\27\1\uffff\1\27\1\124\2\27"+
-        "\1\127\1\27\1\131\1\uffff\1\132\3\27\1\uffff\1\137\1\27\1\uffff"+
-        "\2\27\1\uffff\1\27\2\uffff\4\27\1\uffff\1\151\1\152\3\27\1\156\1"+
-        "\27\1\160\1\27\2\uffff\3\27\1\uffff\1\27\1\uffff\2\27\1\170\1\171"+
-        "\1\172\2\27\3\uffff\1\175\1\27\1\uffff\3\27\1\u0082\1\uffff";
+        "\5\uffff\1\36\1\40\3\uffff\14\31\13\uffff\21\31\1\104\6\31\1\113"+
+        "\10\31\1\124\1\31\1\uffff\4\31\1\132\1\31\1\uffff\1\31\1\135\2\31"+
+        "\1\140\1\31\1\142\1\143\1\uffff\1\144\4\31\1\uffff\1\152\1\31\1"+
+        "\uffff\2\31\1\uffff\1\31\3\uffff\5\31\1\uffff\1\165\1\166\2\31\1"+
+        "\171\1\31\1\173\1\31\1\175\1\31\2\uffff\2\31\1\uffff\1\31\1\uffff"+
+        "\1\31\1\uffff\2\31\1\u0085\1\u0086\1\u0087\2\31\3\uffff\1\u008a"+
+        "\1\31\1\uffff\3\31\1\u008f\1\uffff";
     static final String DFA5_eofS =
-        "\u0083\uffff";
+        "\u0090\uffff";
     static final String DFA5_minS =
-        "\1\11\4\uffff\1\55\1\72\2\uffff\1\160\1\157\1\145\1\141\1\157\1"+
-        "\145\1\141\1\163\1\141\1\150\1\157\13\uffff\1\160\1\154\1\155\1"+
-        "\146\1\166\1\144\1\161\1\165\1\147\1\141\1\145\1\162\1\145\1\162"+
-        "\1\154\1\55\1\160\1\143\1\151\1\141\1\145\1\55\1\162\1\163\1\147"+
-        "\1\156\1\163\1\151\1\156\1\55\1\171\1\uffff\1\157\1\145\1\156\1"+
-        "\55\1\154\1\uffff\1\143\1\55\1\145\1\163\1\55\1\141\1\55\1\uffff"+
-        "\1\55\1\156\1\160\1\151\1\uffff\1\55\1\145\1\uffff\1\164\1\146\1"+
-        "\uffff\1\156\2\uffff\2\145\2\164\1\uffff\2\55\1\157\1\164\1\156"+
-        "\1\55\1\164\1\55\1\151\2\uffff\1\162\1\163\1\164\1\uffff\1\145\1"+
-        "\uffff\1\157\1\155\3\55\1\156\1\141\3\uffff\1\55\1\164\1\uffff\1"+
-        "\151\1\157\1\156\1\55\1\uffff";
+        "\1\11\4\uffff\1\55\1\72\3\uffff\1\160\1\151\1\157\1\145\1\141\1"+
+        "\157\1\145\1\141\1\163\1\141\1\150\1\157\13\uffff\1\160\1\154\1"+
+        "\156\1\155\1\146\1\166\1\144\1\161\1\165\1\147\1\141\1\145\1\162"+
+        "\1\145\1\164\1\162\1\154\1\55\1\144\1\160\1\143\1\151\1\141\1\145"+
+        "\1\55\1\162\1\163\1\147\1\156\1\163\1\151\1\156\1\150\1\55\1\171"+
+        "\1\uffff\1\151\1\157\1\145\1\156\1\55\1\154\1\uffff\1\143\1\55\1"+
+        "\145\1\163\1\55\1\141\2\55\1\uffff\1\55\2\156\1\160\1\151\1\uffff"+
+        "\1\55\1\145\1\uffff\1\164\1\146\1\uffff\1\156\3\uffff\1\147\2\145"+
+        "\2\164\1\uffff\2\55\1\157\1\164\1\55\1\156\1\55\1\164\1\55\1\151"+
+        "\2\uffff\1\162\1\163\1\uffff\1\164\1\uffff\1\145\1\uffff\1\157\1"+
+        "\155\3\55\1\156\1\141\3\uffff\1\55\1\164\1\uffff\1\151\1\157\1\156"+
+        "\1\55\1\uffff";
     static final String DFA5_maxS =
-        "\1\175\4\uffff\1\172\1\72\2\uffff\1\164\1\157\1\145\1\141\2\157"+
-        "\1\162\1\163\1\141\1\150\1\157\13\uffff\1\160\1\154\1\156\1\146"+
-        "\1\166\1\144\1\161\1\165\1\162\1\141\1\145\1\162\1\145\1\162\1\154"+
-        "\1\172\1\160\1\143\1\151\1\141\1\145\1\172\1\162\1\163\1\147\1\156"+
-        "\1\163\1\151\1\156\1\172\1\171\1\uffff\1\157\1\145\1\156\1\172\1"+
-        "\154\1\uffff\1\143\1\172\1\145\1\163\1\172\1\141\1\172\1\uffff\1"+
-        "\172\1\163\1\160\1\151\1\uffff\1\172\1\145\1\uffff\1\164\1\146\1"+
-        "\uffff\1\156\2\uffff\1\145\1\151\2\164\1\uffff\2\172\1\157\1\164"+
-        "\1\156\1\172\1\164\1\172\1\151\2\uffff\1\162\1\163\1\164\1\uffff"+
-        "\1\145\1\uffff\1\157\1\155\3\172\1\156\1\141\3\uffff\1\172\1\164"+
-        "\1\uffff\1\151\1\157\1\156\1\172\1\uffff";
+        "\1\175\4\uffff\1\172\1\72\3\uffff\1\164\1\151\1\157\1\145\1\141"+
+        "\2\157\1\162\1\163\1\141\1\151\1\157\13\uffff\1\160\1\154\2\156"+
+        "\1\146\1\166\1\144\1\161\1\165\1\162\1\141\1\145\1\162\1\145\1\164"+
+        "\1\162\1\154\1\172\1\144\1\160\1\143\1\151\1\141\1\145\1\172\1\162"+
+        "\1\163\1\147\1\156\1\163\1\151\1\156\1\150\1\172\1\171\1\uffff\1"+
+        "\151\1\157\1\145\1\156\1\172\1\154\1\uffff\1\143\1\172\1\145\1\163"+
+        "\1\172\1\141\2\172\1\uffff\1\172\1\156\1\163\1\160\1\151\1\uffff"+
+        "\1\172\1\145\1\uffff\1\164\1\146\1\uffff\1\156\3\uffff\1\147\1\145"+
+        "\1\151\2\164\1\uffff\2\172\1\157\1\164\1\172\1\156\1\172\1\164\1"+
+        "\172\1\151\2\uffff\1\162\1\163\1\uffff\1\164\1\uffff\1\145\1\uffff"+
+        "\1\157\1\155\3\172\1\156\1\141\3\uffff\1\172\1\164\1\uffff\1\151"+
+        "\1\157\1\156\1\172\1\uffff";
     static final String DFA5_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\2\uffff\1\11\1\12\13\uffff\1\35\1\36\1"+
-        "\37\1\40\1\41\1\42\1\43\1\6\1\5\1\10\1\7\37\uffff\1\14\5\uffff\1"+
-        "\24\7\uffff\1\34\4\uffff\1\22\2\uffff\1\26\2\uffff\1\31\1\uffff"+
-        "\1\33\1\13\4\uffff\1\23\11\uffff\1\25\1\27\3\uffff\1\16\1\uffff"+
-        "\1\20\7\uffff\1\32\1\15\1\17\2\uffff\1\21\4\uffff\1\30";
+        "\1\uffff\1\1\1\2\1\3\1\4\2\uffff\1\11\1\12\1\13\14\uffff\1\40\1"+
+        "\41\1\42\1\43\1\44\1\45\1\46\1\6\1\5\1\10\1\7\43\uffff\1\15\6\uffff"+
+        "\1\26\10\uffff\1\37\5\uffff\1\24\2\uffff\1\30\2\uffff\1\33\1\uffff"+
+        "\1\35\1\36\1\14\5\uffff\1\25\12\uffff\1\27\1\31\2\uffff\1\16\1\uffff"+
+        "\1\20\1\uffff\1\22\7\uffff\1\34\1\17\1\21\2\uffff\1\23\4\uffff\1"+
+        "\32";
     static final String DFA5_specialS =
-        "\u0083\uffff}>";
+        "\u0090\uffff}>";
     static final String[] DFA5_transitionS = {
-            "\1\30\1\31\1\uffff\1\30\1\31\22\uffff\1\30\1\uffff\1\32\5\uffff"+
-            "\1\1\1\2\1\uffff\1\3\1\4\1\5\1\uffff\1\26\12\27\1\6\6\uffff"+
-            "\32\27\1\7\1\uffff\1\10\1\uffff\1\27\1\uffff\1\11\1\27\1\12"+
-            "\1\13\5\27\1\14\2\27\1\15\5\27\1\16\1\17\1\20\1\21\1\22\1\23"+
-            "\2\27\1\24\1\uffff\1\25",
+            "\1\32\1\33\1\uffff\1\32\1\33\22\uffff\1\32\1\uffff\1\34\5\uffff"+
+            "\1\1\1\2\1\uffff\1\3\1\4\1\5\1\uffff\1\30\12\31\1\6\2\uffff"+
+            "\1\7\3\uffff\32\31\1\10\1\uffff\1\11\1\uffff\1\31\1\uffff\1"+
+            "\12\1\13\1\14\1\15\5\31\1\16\2\31\1\17\5\31\1\20\1\21\1\22\1"+
+            "\23\1\24\1\25\2\31\1\26\1\uffff\1\27",
             "",
             "",
             "",
             "",
-            "\1\27\2\uffff\12\27\4\uffff\1\33\2\uffff\32\27\4\uffff\1\27"+
-            "\1\uffff\32\27",
-            "\1\35",
+            "\1\31\2\uffff\12\31\4\uffff\1\35\2\uffff\32\31\4\uffff\1\31"+
+            "\1\uffff\32\31",
+            "\1\37",
             "",
             "",
-            "\1\37\3\uffff\1\40",
-            "\1\41",
-            "\1\42",
+            "",
+            "\1\41\3\uffff\1\42",
             "\1\43",
             "\1\44",
-            "\1\45\11\uffff\1\46",
-            "\1\47\20\uffff\1\50",
-            "\1\51",
-            "\1\52",
-            "\1\53",
+            "\1\45",
+            "\1\46",
+            "\1\47",
+            "\1\50\11\uffff\1\51",
+            "\1\52\20\uffff\1\53",
             "\1\54",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\55",
-            "\1\56",
-            "\1\57\1\60",
+            "\1\56\1\57",
+            "\1\60",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\61",
             "\1\62",
             "\1\63",
-            "\1\64",
-            "\1\65",
-            "\1\66\12\uffff\1\67",
+            "\1\64\1\65",
+            "\1\66",
+            "\1\67",
             "\1\70",
             "\1\71",
             "\1\72",
-            "\1\73",
-            "\1\74",
+            "\1\73\12\uffff\1\74",
             "\1\75",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\76",
             "\1\77",
             "\1\100",
             "\1\101",
             "\1\102",
             "\1\103",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\105",
             "\1\106",
             "\1\107",
             "\1\110",
             "\1\111",
             "\1\112",
-            "\1\113",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\114",
             "\1\115",
-            "",
             "\1\116",
             "\1\117",
             "\1\120",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\121",
             "\1\122",
-            "",
             "\1\123",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\125",
+            "",
             "\1\126",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\127",
             "\1\130",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\131",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\133",
             "",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\133\4\uffff\1\134",
-            "\1\135",
+            "\1\134",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\136",
-            "",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\140",
-            "",
+            "\1\137",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\141",
-            "\1\142",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "",
-            "\1\143",
-            "",
-            "",
-            "\1\144",
-            "\1\145\3\uffff\1\146",
-            "\1\147",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\145",
+            "\1\146\4\uffff\1\147",
             "\1\150",
+            "\1\151",
             "",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\153",
+            "",
             "\1\154",
             "\1\155",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "",
+            "\1\156",
+            "",
+            "",
+            "",
             "\1\157",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\161",
-            "",
-            "",
-            "\1\162",
+            "\1\160",
+            "\1\161\3\uffff\1\162",
             "\1\163",
             "\1\164",
             "",
-            "\1\165",
-            "",
-            "\1\166",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\167",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
-            "\1\173",
+            "\1\170",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\172",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\174",
-            "",
-            "",
-            "",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\176",
+            "",
             "",
             "\1\177",
             "\1\u0080",
+            "",
             "\1\u0081",
-            "\1\27\2\uffff\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "",
+            "\1\u0082",
+            "",
+            "\1\u0083",
+            "\1\u0084",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\u0088",
+            "\1\u0089",
+            "",
+            "",
+            "",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\u008b",
+            "",
+            "\1\u008c",
+            "\1\u008d",
+            "\1\u008e",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             ""
     };
 
@@ -1557,7 +1668,7 @@ public class GcomponentLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | COMMENT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 );";
+            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | COMMENT | TEXT | WHITESPACE | LINEBREAK | QUOTED_34_34 );";
         }
     }
  

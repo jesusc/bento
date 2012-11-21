@@ -11,5 +11,5 @@ transformation component fd2pn {
 			- terminating
 			- nonTerminating
 	
-	definition atl "fd2pn.atl" 
+	definition atl "fd2pn.atl" with IN = fd, OUT = pn
 }

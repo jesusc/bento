@@ -61,6 +61,7 @@ public class TechnologiesFactoryImpl extends EFactoryImpl implements Technologie
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case TechnologiesPackage.ATL_TEMPLATE: return createAtlTemplate();
+			case TechnologiesPackage.ATL_PARAMETER: return createAtlParameter();
 			case TechnologiesPackage.JAVA_TEMPLATE: return createJavaTemplate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -75,6 +76,16 @@ public class TechnologiesFactoryImpl extends EFactoryImpl implements Technologie
 	public AtlTemplate createAtlTemplate() {
 		AtlTemplateImpl atlTemplate = new AtlTemplateImpl();
 		return atlTemplate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AtlParameter createAtlParameter() {
+		AtlParameterImpl atlParameter = new AtlParameterImpl();
+		return atlParameter;
 	}
 
 	/**

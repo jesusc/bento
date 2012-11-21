@@ -62,6 +62,15 @@ public interface CoreFactory extends EFactory {
 	CompositeComponent createCompositeComponent();
 
 	/**
+	 * Returns a new object of class '<em>Binding Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binding Declaration</em>'.
+	 * @generated
+	 */
+	BindingDeclaration createBindingDeclaration();
+
+	/**
 	 * Returns a new object of class '<em>Ocl Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

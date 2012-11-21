@@ -2,20 +2,20 @@
 package simpleUML;
 
 class Model {
-   val UMLClass[*] classes;
+  val UMLClass[*] classes;
 }
 
 class UMLClass {
-   attr String[1] umlName;
-   val Generalization[*] generalizations;   
-   val UMLAttribute[*] attributes;
+  attr String[1] umlName;
+  val Generalization[*] generalizations;
+  val UMLAttribute[*] attributes;
 }
 
 class UMLAttribute {
-   attr String[1] umlName;  
-   
+  attr String[1] umlName;
 }
 
 class Generalization {
-   ref UMLClass[1] reference;
+  ref UMLClass[1] reference;
 }
+

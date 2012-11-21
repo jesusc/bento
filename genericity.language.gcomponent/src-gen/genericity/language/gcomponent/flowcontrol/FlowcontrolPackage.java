@@ -202,13 +202,13 @@ public interface FlowcontrolPackage extends EPackage {
 	int APPLY_PARAMETER__BOUND_CONCEPT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Binding Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Binding</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLY_PARAMETER__BINDING_NAME = 3;
+	int APPLY_PARAMETER__BINDING = 3;
 
 	/**
 	 * The number of structural features of the '<em>Apply Parameter</em>' class.
@@ -591,15 +591,15 @@ public interface FlowcontrolPackage extends EPackage {
 	EReference getApplyParameter_BoundConcept();
 
 	/**
-	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBindingName <em>Binding Name</em>}'.
+	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBinding <em>Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Binding Name</em>'.
-	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getBindingName()
+	 * @return the meta object for the reference '<em>Binding</em>'.
+	 * @see genericity.language.gcomponent.flowcontrol.ApplyParameter#getBinding()
 	 * @see #getApplyParameter()
 	 * @generated
 	 */
-	EAttribute getApplyParameter_BindingName();
+	EReference getApplyParameter_Binding();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.flowcontrol.Seq <em>Seq</em>}'.
@@ -908,12 +908,12 @@ public interface FlowcontrolPackage extends EPackage {
 		EReference APPLY_PARAMETER__BOUND_CONCEPT = eINSTANCE.getApplyParameter_BoundConcept();
 
 		/**
-		 * The meta object literal for the '<em><b>Binding Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Binding</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute APPLY_PARAMETER__BINDING_NAME = eINSTANCE.getApplyParameter_BindingName();
+		EReference APPLY_PARAMETER__BINDING = eINSTANCE.getApplyParameter_Binding();
 
 		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.flowcontrol.impl.SeqImpl <em>Seq</em>}' class.

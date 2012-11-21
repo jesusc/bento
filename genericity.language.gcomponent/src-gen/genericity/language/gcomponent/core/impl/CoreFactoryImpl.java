@@ -65,6 +65,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.GENERATED_MODEL: return createGeneratedModel();
 			case CorePackage.TRANSFORMATION_COMPONENT: return createTransformationComponent();
 			case CorePackage.COMPOSITE_COMPONENT: return createCompositeComponent();
+			case CorePackage.BINDING_DECLARATION: return createBindingDeclaration();
 			case CorePackage.OCL_CONSTRAINT: return createOclConstraint();
 			case CorePackage.METAMODEL: return createMetamodel();
 			case CorePackage.TAG: return createTag();
@@ -143,6 +144,16 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	public CompositeComponent createCompositeComponent() {
 		CompositeComponentImpl compositeComponent = new CompositeComponentImpl();
 		return compositeComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingDeclaration createBindingDeclaration() {
+		BindingDeclarationImpl bindingDeclaration = new BindingDeclarationImpl();
+		return bindingDeclaration;
 	}
 
 	/**

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link genericity.language.gcomponent.core.ParameterModel#getType <em>Type</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.ParameterModel#getResourceName <em>Resource Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,31 @@ public interface ParameterModel extends Model {
 	 * @generated
 	 */
 	EList<Concept> getType();
+
+  /**
+	 * Returns the value of the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resource Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resource Name</em>' attribute.
+	 * @see #setResourceName(String)
+	 * @see genericity.language.gcomponent.core.CorePackage#getParameterModel_ResourceName()
+	 * @model
+	 * @generated
+	 */
+	String getResourceName();
+
+	/**
+	 * Sets the value of the '{@link genericity.language.gcomponent.core.ParameterModel#getResourceName <em>Resource Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resource Name</em>' attribute.
+	 * @see #getResourceName()
+	 * @generated
+	 */
+	void setResourceName(String value);
 
 } // ParameterModel

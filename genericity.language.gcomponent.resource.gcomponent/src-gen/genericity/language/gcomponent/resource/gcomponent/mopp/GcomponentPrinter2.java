@@ -212,52 +212,60 @@ public class GcomponentPrinter2 implements genericity.language.gcomponent.resour
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.technologies.AtlTemplate) {
+		if (element instanceof genericity.language.gcomponent.variants.SingleFeature) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_5, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.technologies.JavaTemplate) {
+		if (element instanceof genericity.language.gcomponent.variants.XorFeature) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_6, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.variants.SingleFeature) {
+		if (element instanceof genericity.language.gcomponent.core.CompositeComponent) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_7, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.variants.XorFeature) {
+		if (element instanceof genericity.language.gcomponent.core.BindingDeclaration) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_8, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.core.CompositeComponent) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Composition) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_9, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.Composition) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Xor) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_10, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.Xor) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.XorCond) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_11, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.XorCond) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Apply) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_12, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.Apply) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.ApplyParameter) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_13, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.ApplyParameter) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.Seq) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_14, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.Seq) {
+		if (element instanceof genericity.language.gcomponent.flowcontrol.FeatureRef) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_15, foundFormattingElements);
 			return;
 		}
-		if (element instanceof genericity.language.gcomponent.flowcontrol.FeatureRef) {
+		if (element instanceof genericity.language.gcomponent.technologies.AtlTemplate) {
 			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_16, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.technologies.AtlParameter) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17, foundFormattingElements);
+			return;
+		}
+		if (element instanceof genericity.language.gcomponent.technologies.JavaTemplate) {
+			printInternal(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_18, foundFormattingElements);
 			return;
 		}
 		

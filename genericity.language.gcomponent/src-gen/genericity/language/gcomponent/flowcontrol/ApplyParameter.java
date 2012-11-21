@@ -6,6 +6,7 @@
  */
 package genericity.language.gcomponent.flowcontrol;
 
+import genericity.language.gcomponent.core.BindingDeclaration;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.Concept;
 import genericity.language.gcomponent.core.Model;
@@ -22,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getModel <em>Model</em>}</li>
  *   <li>{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBoundConceptQualifier <em>Bound Concept Qualifier</em>}</li>
  *   <li>{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBoundConcept <em>Bound Concept</em>}</li>
- *   <li>{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBindingName <em>Binding Name</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBinding <em>Binding</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,29 +111,29 @@ public interface ApplyParameter extends EObject {
 	void setBoundConcept(Concept value);
 
 	/**
-	 * Returns the value of the '<em><b>Binding Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Binding</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Binding Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Binding</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Binding Name</em>' attribute.
-	 * @see #setBindingName(String)
-	 * @see genericity.language.gcomponent.flowcontrol.FlowcontrolPackage#getApplyParameter_BindingName()
+	 * @return the value of the '<em>Binding</em>' reference.
+	 * @see #setBinding(BindingDeclaration)
+	 * @see genericity.language.gcomponent.flowcontrol.FlowcontrolPackage#getApplyParameter_Binding()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getBindingName();
+	BindingDeclaration getBinding();
 
 	/**
-	 * Sets the value of the '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBindingName <em>Binding Name</em>}' attribute.
+	 * Sets the value of the '{@link genericity.language.gcomponent.flowcontrol.ApplyParameter#getBinding <em>Binding</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Binding Name</em>' attribute.
-	 * @see #getBindingName()
+	 * @param value the new value of the '<em>Binding</em>' reference.
+	 * @see #getBinding()
 	 * @generated
 	 */
-	void setBindingName(String value);
+	void setBinding(BindingDeclaration value);
 
 } // ApplyParameter

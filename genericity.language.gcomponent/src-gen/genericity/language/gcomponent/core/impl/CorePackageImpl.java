@@ -7,6 +7,7 @@
 package genericity.language.gcomponent.core.impl;
 
 import genericity.language.gcomponent.GcomponentPackage;
+import genericity.language.gcomponent.core.BindingDeclaration;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.CompositeComponent;
 import genericity.language.gcomponent.core.Concept;
@@ -109,6 +110,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass compositeComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -393,6 +401,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getParameterModel_ResourceName() {
+		return (EAttribute)parameterModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getGeneratedModel() {
 		return generatedModelEClass;
 	}
@@ -476,6 +493,42 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getCompositeComponent_Composition() {
 		return (EReference)compositeComponentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeComponent_Bindings() {
+		return (EReference)compositeComponentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBindingDeclaration() {
+		return bindingDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBindingDeclaration_Name() {
+		return (EAttribute)bindingDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBindingDeclaration_FileName() {
+		return (EAttribute)bindingDeclarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -624,6 +677,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		parameterModelEClass = createEClass(PARAMETER_MODEL);
 		createEReference(parameterModelEClass, PARAMETER_MODEL__TYPE);
+		createEAttribute(parameterModelEClass, PARAMETER_MODEL__RESOURCE_NAME);
 
 		generatedModelEClass = createEClass(GENERATED_MODEL);
 
@@ -638,6 +692,11 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		compositeComponentEClass = createEClass(COMPOSITE_COMPONENT);
 		createEReference(compositeComponentEClass, COMPOSITE_COMPONENT__USES);
 		createEReference(compositeComponentEClass, COMPOSITE_COMPONENT__COMPOSITION);
+		createEReference(compositeComponentEClass, COMPOSITE_COMPONENT__BINDINGS);
+
+		bindingDeclarationEClass = createEClass(BINDING_DECLARATION);
+		createEAttribute(bindingDeclarationEClass, BINDING_DECLARATION__NAME);
+		createEAttribute(bindingDeclarationEClass, BINDING_DECLARATION__FILE_NAME);
 
 		templateEClass = createEClass(TEMPLATE);
 
@@ -724,6 +783,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(parameterModelEClass, ParameterModel.class, "ParameterModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterModel_Type(), this.getConcept(), null, "type", null, 0, -1, ParameterModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameterModel_ResourceName(), ecorePackage.getEString(), "resourceName", null, 0, 1, ParameterModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generatedModelEClass, GeneratedModel.class, "GeneratedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -738,6 +798,11 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(compositeComponentEClass, CompositeComponent.class, "CompositeComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeComponent_Uses(), this.getComponent(), null, "uses", null, 1, -1, CompositeComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeComponent_Composition(), theFlowcontrolPackage.getComposition(), null, "composition", null, 1, 1, CompositeComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeComponent_Bindings(), this.getBindingDeclaration(), null, "bindings", null, 0, -1, CompositeComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bindingDeclarationEClass, BindingDeclaration.class, "BindingDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBindingDeclaration_Name(), ecorePackage.getEString(), "name", null, 1, 1, BindingDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBindingDeclaration_FileName(), ecorePackage.getEString(), "fileName", null, 1, 1, BindingDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateEClass, Template.class, "Template", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

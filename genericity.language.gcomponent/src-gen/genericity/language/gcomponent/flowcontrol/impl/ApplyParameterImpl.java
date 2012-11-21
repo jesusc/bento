@@ -6,6 +6,7 @@
  */
 package genericity.language.gcomponent.flowcontrol.impl;
 
+import genericity.language.gcomponent.core.BindingDeclaration;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.Concept;
 import genericity.language.gcomponent.core.Model;
@@ -30,7 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link genericity.language.gcomponent.flowcontrol.impl.ApplyParameterImpl#getModel <em>Model</em>}</li>
  *   <li>{@link genericity.language.gcomponent.flowcontrol.impl.ApplyParameterImpl#getBoundConceptQualifier <em>Bound Concept Qualifier</em>}</li>
  *   <li>{@link genericity.language.gcomponent.flowcontrol.impl.ApplyParameterImpl#getBoundConcept <em>Bound Concept</em>}</li>
- *   <li>{@link genericity.language.gcomponent.flowcontrol.impl.ApplyParameterImpl#getBindingName <em>Binding Name</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.flowcontrol.impl.ApplyParameterImpl#getBinding <em>Binding</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,24 +69,14 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 	protected Concept boundConcept;
 
 	/**
-	 * The default value of the '{@link #getBindingName() <em>Binding Name</em>}' attribute.
+	 * The cached value of the '{@link #getBinding() <em>Binding</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBindingName()
+	 * @see #getBinding()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String BINDING_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBindingName() <em>Binding Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBindingName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String bindingName = BINDING_NAME_EDEFAULT;
+	protected BindingDeclaration binding;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -225,8 +216,16 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getBindingName() {
-		return bindingName;
+	public BindingDeclaration getBinding() {
+		if (binding != null && binding.eIsProxy()) {
+			InternalEObject oldBinding = (InternalEObject)binding;
+			binding = (BindingDeclaration)eResolveProxy(oldBinding);
+			if (binding != oldBinding) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FlowcontrolPackage.APPLY_PARAMETER__BINDING, oldBinding, binding));
+			}
+		}
+		return binding;
 	}
 
 	/**
@@ -234,11 +233,20 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBindingName(String newBindingName) {
-		String oldBindingName = bindingName;
-		bindingName = newBindingName;
+	public BindingDeclaration basicGetBinding() {
+		return binding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBinding(BindingDeclaration newBinding) {
+		BindingDeclaration oldBinding = binding;
+		binding = newBinding;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME, oldBindingName, bindingName));
+			eNotify(new ENotificationImpl(this, Notification.SET, FlowcontrolPackage.APPLY_PARAMETER__BINDING, oldBinding, binding));
 	}
 
 	/**
@@ -258,8 +266,9 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 			case FlowcontrolPackage.APPLY_PARAMETER__BOUND_CONCEPT:
 				if (resolve) return getBoundConcept();
 				return basicGetBoundConcept();
-			case FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME:
-				return getBindingName();
+			case FlowcontrolPackage.APPLY_PARAMETER__BINDING:
+				if (resolve) return getBinding();
+				return basicGetBinding();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,8 +290,8 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 			case FlowcontrolPackage.APPLY_PARAMETER__BOUND_CONCEPT:
 				setBoundConcept((Concept)newValue);
 				return;
-			case FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME:
-				setBindingName((String)newValue);
+			case FlowcontrolPackage.APPLY_PARAMETER__BINDING:
+				setBinding((BindingDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -305,8 +314,8 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 			case FlowcontrolPackage.APPLY_PARAMETER__BOUND_CONCEPT:
 				setBoundConcept((Concept)null);
 				return;
-			case FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME:
-				setBindingName(BINDING_NAME_EDEFAULT);
+			case FlowcontrolPackage.APPLY_PARAMETER__BINDING:
+				setBinding((BindingDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -326,26 +335,10 @@ public class ApplyParameterImpl extends EObjectImpl implements ApplyParameter {
 				return boundConceptQualifier != null;
 			case FlowcontrolPackage.APPLY_PARAMETER__BOUND_CONCEPT:
 				return boundConcept != null;
-			case FlowcontrolPackage.APPLY_PARAMETER__BINDING_NAME:
-				return BINDING_NAME_EDEFAULT == null ? bindingName != null : !BINDING_NAME_EDEFAULT.equals(bindingName);
+			case FlowcontrolPackage.APPLY_PARAMETER__BINDING:
+				return binding != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (bindingName: ");
-		result.append(bindingName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ApplyParameterImpl

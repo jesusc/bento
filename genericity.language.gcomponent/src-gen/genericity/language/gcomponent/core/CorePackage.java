@@ -263,13 +263,22 @@ public interface CorePackage extends EPackage {
 	int PARAMETER_MODEL__TYPE = MODEL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Resource Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_MODEL__RESOURCE_NAME = MODEL_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Parameter Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_MODEL_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+	int PARAMETER_MODEL_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.GeneratedModelImpl <em>Generated Model</em>}' class.
@@ -609,13 +618,59 @@ public interface CorePackage extends EPackage {
 	int COMPOSITE_COMPONENT__COMPOSITION = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_COMPONENT__BINDINGS = COMPONENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Composite Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_COMPONENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 2;
+	int COMPOSITE_COMPONENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.BindingDeclarationImpl <em>Binding Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.language.gcomponent.core.impl.BindingDeclarationImpl
+	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getBindingDeclaration()
+	 * @generated
+	 */
+	int BINDING_DECLARATION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_DECLARATION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_DECLARATION__FILE_NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Binding Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_DECLARATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.core.impl.TemplateImpl <em>Template</em>}' class.
@@ -625,7 +680,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getTemplate()
 	 * @generated
 	 */
-	int TEMPLATE = 8;
+	int TEMPLATE = 9;
 
 	/**
 	 * The number of structural features of the '<em>Template</em>' class.
@@ -644,7 +699,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 9;
+	int CONSTRAINT = 10;
 
 	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
@@ -663,7 +718,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getOclConstraint()
 	 * @generated
 	 */
-	int OCL_CONSTRAINT = 10;
+	int OCL_CONSTRAINT = 11;
 
 	/**
 	 * The number of structural features of the '<em>Ocl Constraint</em>' class.
@@ -682,7 +737,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getMetamodel()
 	 * @generated
 	 */
-	int METAMODEL = 11;
+	int METAMODEL = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -728,7 +783,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getTag()
 	 * @generated
 	 */
-	int TAG = 12;
+	int TAG = 13;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -756,7 +811,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getConcept()
 	 * @generated
 	 */
-	int CONCEPT = 13;
+	int CONCEPT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -811,7 +866,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getDocumentation()
 	 * @generated
 	 */
-	int DOCUMENTATION = 14;
+	int DOCUMENTATION = 15;
 
 	/**
 	 * The number of structural features of the '<em>Documentation</em>' class.
@@ -830,7 +885,7 @@ public interface CorePackage extends EPackage {
 	 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getStatus()
 	 * @generated
 	 */
-	int STATUS = 15;
+	int STATUS = 16;
 
 
 	/**
@@ -1006,6 +1061,17 @@ public interface CorePackage extends EPackage {
 	EReference getParameterModel_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.core.ParameterModel#getResourceName <em>Resource Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resource Name</em>'.
+	 * @see genericity.language.gcomponent.core.ParameterModel#getResourceName()
+	 * @see #getParameterModel()
+	 * @generated
+	 */
+	EAttribute getParameterModel_ResourceName();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.GeneratedModel <em>Generated Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1110,6 +1176,49 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeComponent_Composition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link genericity.language.gcomponent.core.CompositeComponent#getBindings <em>Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Bindings</em>'.
+	 * @see genericity.language.gcomponent.core.CompositeComponent#getBindings()
+	 * @see #getCompositeComponent()
+	 * @generated
+	 */
+	EReference getCompositeComponent_Bindings();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.BindingDeclaration <em>Binding Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Binding Declaration</em>'.
+	 * @see genericity.language.gcomponent.core.BindingDeclaration
+	 * @generated
+	 */
+	EClass getBindingDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.core.BindingDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see genericity.language.gcomponent.core.BindingDeclaration#getName()
+	 * @see #getBindingDeclaration()
+	 * @generated
+	 */
+	EAttribute getBindingDeclaration_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.core.BindingDeclaration#getFileName <em>File Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>File Name</em>'.
+	 * @see genericity.language.gcomponent.core.BindingDeclaration#getFileName()
+	 * @see #getBindingDeclaration()
+	 * @generated
+	 */
+	EAttribute getBindingDeclaration_FileName();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.language.gcomponent.core.Template <em>Template</em>}'.
@@ -1383,6 +1492,14 @@ public interface CorePackage extends EPackage {
 		EReference PARAMETER_MODEL__TYPE = eINSTANCE.getParameterModel_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Resource Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER_MODEL__RESOURCE_NAME = eINSTANCE.getParameterModel_ResourceName();
+
+		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.GeneratedModelImpl <em>Generated Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1469,6 +1586,40 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_COMPONENT__COMPOSITION = eINSTANCE.getCompositeComponent_Composition();
+
+		/**
+		 * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_COMPONENT__BINDINGS = eINSTANCE.getCompositeComponent_Bindings();
+
+		/**
+		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.BindingDeclarationImpl <em>Binding Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.language.gcomponent.core.impl.BindingDeclarationImpl
+		 * @see genericity.language.gcomponent.core.impl.CorePackageImpl#getBindingDeclaration()
+		 * @generated
+		 */
+		EClass BINDING_DECLARATION = eINSTANCE.getBindingDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BINDING_DECLARATION__NAME = eINSTANCE.getBindingDeclaration_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>File Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BINDING_DECLARATION__FILE_NAME = eINSTANCE.getBindingDeclaration_FileName();
 
 		/**
 		 * The meta object literal for the '{@link genericity.language.gcomponent.core.impl.TemplateImpl <em>Template</em>}' class.

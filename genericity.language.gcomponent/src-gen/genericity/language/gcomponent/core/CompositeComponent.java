@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link genericity.language.gcomponent.core.CompositeComponent#getUses <em>Uses</em>}</li>
  *   <li>{@link genericity.language.gcomponent.core.CompositeComponent#getComposition <em>Composition</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.core.CompositeComponent#getBindings <em>Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,5 +70,21 @@ public interface CompositeComponent extends Component {
 	 * @generated
 	 */
 	void setComposition(Composition value);
+
+	/**
+	 * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
+	 * The list contents are of type {@link genericity.language.gcomponent.core.BindingDeclaration}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bindings</em>' containment reference list.
+	 * @see genericity.language.gcomponent.core.CorePackage#getCompositeComponent_Bindings()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BindingDeclaration> getBindings();
 
 } // CompositeComponent
