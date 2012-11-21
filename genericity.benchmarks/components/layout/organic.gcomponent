@@ -6,4 +6,5 @@ transformation component organicLayout {
 	target model out : Layout
 
 	definition atl "organic2layout.atl"
+		with IN = in, OUT = out
 }

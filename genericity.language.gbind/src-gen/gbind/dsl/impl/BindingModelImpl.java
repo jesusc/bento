@@ -13,6 +13,7 @@ import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.DslPackage;
 
+import gbind.dsl.UsedMetamodel;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -42,7 +43,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getMetamodel <em>Metamodel</em>}</li>
- *   <li>{@link gbind.dsl.impl.BindingModelImpl#getMetamodelURI <em>Metamodel URI</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getComponentURI <em>Component URI</em>}</li>
  * </ul>
@@ -92,44 +92,14 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	protected EList<ConcreteMetaclass> concreteMetaclasses;
 
 	/**
-	 * The default value of the '{@link #getMetamodel() <em>Metamodel</em>}' attribute.
+	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getMetamodel()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String METAMODEL_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetamodel()
-	 * @generated
-	 * @ordered
-	 */
-	protected String metamodel = METAMODEL_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getMetamodelURI() <em>Metamodel URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetamodelURI()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String METAMODEL_URI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMetamodelURI() <em>Metamodel URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetamodelURI()
-	 * @generated
-	 * @ordered
-	 */
-	protected String metamodelURI = METAMODEL_URI_EDEFAULT;
+	protected UsedMetamodel metamodel;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -243,7 +213,7 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMetamodel() {
+	public UsedMetamodel getMetamodel() {
 		return metamodel;
 	}
 
@@ -252,11 +222,14 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetamodel(String newMetamodel) {
-		String oldMetamodel = metamodel;
+	public NotificationChain basicSetMetamodel(UsedMetamodel newMetamodel, NotificationChain msgs) {
+		UsedMetamodel oldMetamodel = metamodel;
 		metamodel = newMetamodel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__METAMODEL, oldMetamodel, metamodel));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__METAMODEL, oldMetamodel, newMetamodel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -264,20 +237,18 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMetamodelURI() {
-		return metamodelURI;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMetamodelURI(String newMetamodelURI) {
-		String oldMetamodelURI = metamodelURI;
-		metamodelURI = newMetamodelURI;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__METAMODEL_URI, oldMetamodelURI, metamodelURI));
+	public void setMetamodel(UsedMetamodel newMetamodel) {
+		if (newMetamodel != metamodel) {
+			NotificationChain msgs = null;
+			if (metamodel != null)
+				msgs = ((InternalEObject)metamodel).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DslPackage.BINDING_MODEL__METAMODEL, null, msgs);
+			if (newMetamodel != null)
+				msgs = ((InternalEObject)newMetamodel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DslPackage.BINDING_MODEL__METAMODEL, null, msgs);
+			msgs = basicSetMetamodel(newMetamodel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__METAMODEL, newMetamodel, newMetamodel));
 	}
 
 	/**
@@ -355,6 +326,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return ((InternalEList<?>)getConceptMetaclasses()).basicRemove(otherEnd, msgs);
 			case DslPackage.BINDING_MODEL__CONCRETE_METACLASSES:
 				return ((InternalEList<?>)getConcreteMetaclasses()).basicRemove(otherEnd, msgs);
+			case DslPackage.BINDING_MODEL__METAMODEL:
+				return basicSetMetamodel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -377,8 +350,6 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return getConcreteMetaclasses();
 			case DslPackage.BINDING_MODEL__METAMODEL:
 				return getMetamodel();
-			case DslPackage.BINDING_MODEL__METAMODEL_URI:
-				return getMetamodelURI();
 			case DslPackage.BINDING_MODEL__NAME:
 				return getName();
 			case DslPackage.BINDING_MODEL__COMPONENT_URI:
@@ -413,10 +384,7 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				getConcreteMetaclasses().addAll((Collection<? extends ConcreteMetaclass>)newValue);
 				return;
 			case DslPackage.BINDING_MODEL__METAMODEL:
-				setMetamodel((String)newValue);
-				return;
-			case DslPackage.BINDING_MODEL__METAMODEL_URI:
-				setMetamodelURI((String)newValue);
+				setMetamodel((UsedMetamodel)newValue);
 				return;
 			case DslPackage.BINDING_MODEL__NAME:
 				setName((String)newValue);
@@ -449,10 +417,7 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				getConcreteMetaclasses().clear();
 				return;
 			case DslPackage.BINDING_MODEL__METAMODEL:
-				setMetamodel(METAMODEL_EDEFAULT);
-				return;
-			case DslPackage.BINDING_MODEL__METAMODEL_URI:
-				setMetamodelURI(METAMODEL_URI_EDEFAULT);
+				setMetamodel((UsedMetamodel)null);
 				return;
 			case DslPackage.BINDING_MODEL__NAME:
 				setName(NAME_EDEFAULT);
@@ -481,9 +446,7 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			case DslPackage.BINDING_MODEL__CONCRETE_METACLASSES:
 				return concreteMetaclasses != null && !concreteMetaclasses.isEmpty();
 			case DslPackage.BINDING_MODEL__METAMODEL:
-				return METAMODEL_EDEFAULT == null ? metamodel != null : !METAMODEL_EDEFAULT.equals(metamodel);
-			case DslPackage.BINDING_MODEL__METAMODEL_URI:
-				return METAMODEL_URI_EDEFAULT == null ? metamodelURI != null : !METAMODEL_URI_EDEFAULT.equals(metamodelURI);
+				return metamodel != null;
 			case DslPackage.BINDING_MODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DslPackage.BINDING_MODEL__COMPONENT_URI:
@@ -502,11 +465,7 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (metamodel: ");
-		result.append(metamodel);
-		result.append(", metamodelURI: ");
-		result.append(metamodelURI);
-		result.append(", name: ");
+		result.append(" (name: ");
 		result.append(name);
 		result.append(", componentURI: ");
 		result.append(componentURI);

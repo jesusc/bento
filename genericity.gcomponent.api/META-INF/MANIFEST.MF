@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Genericity GComponent Api
-Bundle-SymbolicName: genericity.gcomponent.api
+Bundle-SymbolicName: genericity.gcomponent.api;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: genericity.gcomponent.api.Activator
 Require-Bundle: org.eclipse.core.runtime,
@@ -22,6 +22,10 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: genericity.compiler.atl.api,
  genericity.gcomponent,
- genericity.gcomponent.api
+ genericity.gcomponent.api,
+ genericity.gcomponent.instantiation,
+ genericity.gcomponent.instantiation.impl,
+ genericity.gcomponent.instantiation.util
 Bundle-ClassPath: lib/genericity-atl.jar,
+ lib/genericity-instantiation.jar,
  .

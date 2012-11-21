@@ -63,7 +63,7 @@ RULES {
 			("target" target)
 			("source" sourceModels)
 			("target" targetModels)
-			(bindings)
+			(bindings)?
 			)+
 
 			("variants" (formalParameters)+ )?

@@ -6,6 +6,7 @@
  */
 package gbind.dsl;
 
+import gbind.simpleocl.SimpleoclPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -106,7 +107,7 @@ public interface DslPackage extends EPackage {
 	int BINDING_MODEL__CONCRETE_METACLASSES = 3;
 
 	/**
-	 * The feature id for the '<em><b>Metamodel</b></em>' attribute.
+	 * The feature id for the '<em><b>Metamodel</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -115,22 +116,13 @@ public interface DslPackage extends EPackage {
 	int BINDING_MODEL__METAMODEL = 4;
 
 	/**
-	 * The feature id for the '<em><b>Metamodel URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINDING_MODEL__METAMODEL_URI = 5;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__NAME = 6;
+	int BINDING_MODEL__NAME = 5;
 
 	/**
 	 * The feature id for the '<em><b>Component URI</b></em>' attribute.
@@ -139,7 +131,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__COMPONENT_URI = 7;
+	int BINDING_MODEL__COMPONENT_URI = 6;
 
 	/**
 	 * The number of structural features of the '<em>Binding Model</em>' class.
@@ -148,7 +140,107 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL_FEATURE_COUNT = 8;
+	int BINDING_MODEL_FEATURE_COUNT = 7;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.UsedMetamodelImpl <em>Used Metamodel</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.UsedMetamodelImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getUsedMetamodel()
+	 * @generated
+	 */
+	int USED_METAMODEL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__LINE = SimpleoclPackage.OCL_METAMODEL__LINE;
+
+	/**
+	 * The feature id for the '<em><b>Column</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__COLUMN = SimpleoclPackage.OCL_METAMODEL__COLUMN;
+
+	/**
+	 * The feature id for the '<em><b>Char Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__CHAR_START = SimpleoclPackage.OCL_METAMODEL__CHAR_START;
+
+	/**
+	 * The feature id for the '<em><b>Char End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__CHAR_END = SimpleoclPackage.OCL_METAMODEL__CHAR_END;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__NAME = SimpleoclPackage.OCL_METAMODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__ELEMENTS = SimpleoclPackage.OCL_METAMODEL__ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__MODEL = SimpleoclPackage.OCL_METAMODEL__MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__URI = SimpleoclPackage.OCL_METAMODEL__URI;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL__METAMODEL_URI = SimpleoclPackage.OCL_METAMODEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Used Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USED_METAMODEL_FEATURE_COUNT = SimpleoclPackage.OCL_METAMODEL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.MetaclassImpl <em>Metaclass</em>}' class.
@@ -158,7 +250,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 1;
+	int METACLASS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -195,7 +287,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptMetaclass()
 	 * @generated
 	 */
-	int CONCEPT_METACLASS = 2;
+	int CONCEPT_METACLASS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -232,7 +324,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConcreteMetaclass()
 	 * @generated
 	 */
-	int CONCRETE_METACLASS = 3;
+	int CONCRETE_METACLASS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -269,7 +361,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptBinding()
 	 * @generated
 	 */
-	int CONCEPT_BINDING = 4;
+	int CONCEPT_BINDING = 5;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -306,7 +398,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getClassBinding()
 	 * @generated
 	 */
-	int CLASS_BINDING = 5;
+	int CLASS_BINDING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -370,7 +462,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseFeatureBinding()
 	 * @generated
 	 */
-	int BASE_FEATURE_BINDING = 6;
+	int BASE_FEATURE_BINDING = 7;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -434,7 +526,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getRenamingFeatureBinding()
 	 * @generated
 	 */
-	int RENAMING_FEATURE_BINDING = 7;
+	int RENAMING_FEATURE_BINDING = 8;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -507,7 +599,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getOclFeatureBinding()
 	 * @generated
 	 */
-	int OCL_FEATURE_BINDING = 8;
+	int OCL_FEATURE_BINDING = 9;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -580,7 +672,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseHelper()
 	 * @generated
 	 */
-	int BASE_HELPER = 9;
+	int BASE_HELPER = 10;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -635,7 +727,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptHelper()
 	 * @generated
 	 */
-	int CONCEPT_HELPER = 10;
+	int CONCEPT_HELPER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -708,7 +800,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getLocalHelper()
 	 * @generated
 	 */
-	int LOCAL_HELPER = 11;
+	int LOCAL_HELPER = 12;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -820,26 +912,15 @@ public interface DslPackage extends EPackage {
 	EReference getBindingModel_ConcreteMetaclasses();
 
 	/**
-	 * Returns the meta object for the attribute '{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}'.
+	 * Returns the meta object for the containment reference '{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Metamodel</em>'.
+	 * @return the meta object for the containment reference '<em>Metamodel</em>'.
 	 * @see gbind.dsl.BindingModel#getMetamodel()
 	 * @see #getBindingModel()
 	 * @generated
 	 */
-	EAttribute getBindingModel_Metamodel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link gbind.dsl.BindingModel#getMetamodelURI <em>Metamodel URI</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Metamodel URI</em>'.
-	 * @see gbind.dsl.BindingModel#getMetamodelURI()
-	 * @see #getBindingModel()
-	 * @generated
-	 */
-	EAttribute getBindingModel_MetamodelURI();
+	EReference getBindingModel_Metamodel();
 
 	/**
 	 * Returns the meta object for the attribute '{@link gbind.dsl.BindingModel#getName <em>Name</em>}'.
@@ -862,6 +943,27 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBindingModel_ComponentURI();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.UsedMetamodel <em>Used Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Used Metamodel</em>'.
+	 * @see gbind.dsl.UsedMetamodel
+	 * @generated
+	 */
+	EClass getUsedMetamodel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.UsedMetamodel#getMetamodelURI <em>Metamodel URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Metamodel URI</em>'.
+	 * @see gbind.dsl.UsedMetamodel#getMetamodelURI()
+	 * @see #getUsedMetamodel()
+	 * @generated
+	 */
+	EAttribute getUsedMetamodel_MetamodelURI();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.Metaclass <em>Metaclass</em>}'.
@@ -1247,20 +1349,12 @@ public interface DslPackage extends EPackage {
 		EReference BINDING_MODEL__CONCRETE_METACLASSES = eINSTANCE.getBindingModel_ConcreteMetaclasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Metamodel</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Metamodel</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BINDING_MODEL__METAMODEL = eINSTANCE.getBindingModel_Metamodel();
-
-		/**
-		 * The meta object literal for the '<em><b>Metamodel URI</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BINDING_MODEL__METAMODEL_URI = eINSTANCE.getBindingModel_MetamodelURI();
+		EReference BINDING_MODEL__METAMODEL = eINSTANCE.getBindingModel_Metamodel();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1277,6 +1371,24 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BINDING_MODEL__COMPONENT_URI = eINSTANCE.getBindingModel_ComponentURI();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.UsedMetamodelImpl <em>Used Metamodel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.UsedMetamodelImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getUsedMetamodel()
+		 * @generated
+		 */
+		EClass USED_METAMODEL = eINSTANCE.getUsedMetamodel();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel URI</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USED_METAMODEL__METAMODEL_URI = eINSTANCE.getUsedMetamodel_MetamodelURI();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.MetaclassImpl <em>Metaclass</em>}' class.

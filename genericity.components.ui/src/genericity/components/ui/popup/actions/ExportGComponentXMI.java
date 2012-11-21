@@ -42,6 +42,9 @@ public class ExportGComponentXMI implements IObjectActionDelegate {
 		Resource r = rs.getResource(URI.createPlatformResourceURI(f.getFullPath().toPortableString(), true), true);
 
 		String dest = f.getFullPath().toPortableString() + ".xmi";
+		Resource target = genericity.gcomponent.Util.copyResolvingCrossReferences(r, URI.createPlatformResourceURI(dest, true));
+		
+		/*
 		Resource target = rs.createResource(URI.createPlatformResourceURI(dest, true));
 
 		DefinitionRoot mainRoot = (DefinitionRoot) r.getContents().get(0);
@@ -62,13 +65,15 @@ public class ExportGComponentXMI implements IObjectActionDelegate {
 
 		System.out.println("------------> ");
 		System.out.println(target.getContents());
-		
+		*/
 		try {
 			target.save(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	/**

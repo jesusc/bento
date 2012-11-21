@@ -384,11 +384,16 @@ package dsl {
 		val ConceptMetaclass[*]  conceptMetaclasses;
 		val ConcreteMetaclass[*] concreteMetaclasses;
 	
-	    attr String[1] metamodel;
-	    attr String[0..1] metamodelURI;
+	    //attr String[1] metamodel;
+	    //attr String[0..1] metamodelURI;
+	    val UsedMetamodel[1] metamodel;
 	    
-	    attr String[1] name;    
+	    attr String[1] name;
 		attr String[0..1] componentURI;
+	}
+	
+	class UsedMetamodel extends simpleocl.OclMetamodel {
+	   attr String[0..1] metamodelURI;
 	}
 	
 	abstract class Metaclass {

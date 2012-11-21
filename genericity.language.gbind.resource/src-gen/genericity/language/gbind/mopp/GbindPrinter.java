@@ -68,10 +68,6 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_simpleocl_OclContextDefinition((gbind.simpleocl.OclContextDefinition) element, globaltab, out);
 			return;
 		}
-		if (element instanceof gbind.simpleocl.OclMetamodel) {
-			print_gbind_simpleocl_OclMetamodel((gbind.simpleocl.OclMetamodel) element, globaltab, out);
-			return;
-		}
 		if (element instanceof gbind.simpleocl.OclInstanceModel) {
 			print_gbind_simpleocl_OclInstanceModel((gbind.simpleocl.OclInstanceModel) element, globaltab, out);
 			return;
@@ -304,6 +300,10 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_dsl_BindingModel((gbind.dsl.BindingModel) element, globaltab, out);
 			return;
 		}
+		if (element instanceof gbind.dsl.UsedMetamodel) {
+			print_gbind_dsl_UsedMetamodel((gbind.dsl.UsedMetamodel) element, globaltab, out);
+			return;
+		}
 		if (element instanceof gbind.dsl.ClassBinding) {
 			print_gbind_dsl_ClassBinding((gbind.dsl.ClassBinding) element, globaltab, out);
 			return;
@@ -322,6 +322,10 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		}
 		if (element instanceof gbind.dsl.LocalHelper) {
 			print_gbind_dsl_LocalHelper((gbind.dsl.LocalHelper) element, globaltab, out);
+			return;
+		}
+		if (element instanceof gbind.simpleocl.OclMetamodel) {
+			print_gbind_simpleocl_OclMetamodel((gbind.simpleocl.OclMetamodel) element, globaltab, out);
 			return;
 		}
 		if (element instanceof gbind.simpleocl.LocalVariable) {
@@ -6170,7 +6174,7 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(8);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(7);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BINDINGS));
 		printCountingMap.put("bindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
@@ -6182,8 +6186,6 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("concreteMetaclasses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL));
 		printCountingMap.put("metamodel", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL_URI));
-		printCountingMap.put("metamodelURI", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__COMPONENT_URI));
@@ -6224,30 +6226,14 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// DEFINITION PART BEGINS (CsString)
 		out.print("for");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("metamodel");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL));
 			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL), element));
-				out.print(" ");
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("metamodel", count - 1);
-		}
-		// DEFINITION PART BEGINS (CompoundDefinition)
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_gbind_dsl_BindingModel_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
 		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print("{");
@@ -6290,22 +6276,6 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 	public void print_gbind_dsl_BindingModel_0(gbind.dsl.BindingModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		// DEFINITION PART BEGINS (PlaceholderInQuotes)
-		count = printCountingMap.get("metamodelURI");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL_URI));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_91_93");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL_URI), element));
-				out.print(" ");
-			}
-			printCountingMap.put("metamodelURI", count - 1);
-		}
-	}
-	
-	public void print_gbind_dsl_BindingModel_1(gbind.dsl.BindingModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
-		int count;
-		// DEFINITION PART BEGINS (PlaceholderInQuotes)
 		count = printCountingMap.get("componentURI");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__COMPONENT_URI));
@@ -6316,6 +6286,74 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				out.print(" ");
 			}
 			printCountingMap.put("componentURI", count - 1);
+		}
+	}
+	
+	
+	public void print_gbind_dsl_UsedMetamodel(gbind.dsl.UsedMetamodel element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(9);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__ELEMENTS));
+		printCountingMap.put("elements", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__MODEL));
+		printCountingMap.put("model", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__URI));
+		printCountingMap.put("uri", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__METAMODEL_URI));
+		printCountingMap.put("metamodelURI", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__NAME));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("name", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_gbind_dsl_UsedMetamodel_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+	}
+	
+	public void print_gbind_dsl_UsedMetamodel_0(gbind.dsl.UsedMetamodel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("metamodelURI");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__METAMODEL_URI));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_91_93");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__METAMODEL_URI), element));
+				out.print(" ");
+			}
+			printCountingMap.put("metamodelURI", count - 1);
 		}
 	}
 	
@@ -6399,6 +6437,19 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				printCountingMap.putAll(printCountingMap1);
 			}
 		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_gbind_dsl_ClassBinding_1(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 	}
 	
 	public void print_gbind_dsl_ClassBinding_0(gbind.dsl.ClassBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
@@ -6424,6 +6475,23 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				out.print(" ");
 			}
 			printCountingMap.put("concrete", count - 1);
+		}
+	}
+	
+	public void print_gbind_dsl_ClassBinding_1(gbind.dsl.ClassBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("when");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("whenClause");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CLASS_BINDING__WHEN_CLAUSE));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("whenClause", count - 1);
 		}
 	}
 	
@@ -6485,18 +6553,8 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// DEFINITION PART BEGINS (CsString)
 		out.print(".");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("conceptFeature");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.OCL_FEATURE_BINDING__CONCEPT_FEATURE));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.OCL_FEATURE_BINDING__CONCEPT_FEATURE), element));
-				out.print(" ");
-			}
-			printCountingMap.put("conceptFeature", count - 1);
-		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_OclFeatureBinding_1(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("=");
 		out.print(" ");
@@ -6524,6 +6582,48 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				out.print(" ");
 			}
 			printCountingMap.put("qualifier", count - 1);
+		}
+	}
+	
+	public void print_gbind_dsl_OclFeatureBinding_1(gbind.dsl.OclFeatureBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"conceptFeature"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"conceptFeature"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("conceptFeature");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.OCL_FEATURE_BINDING__CONCEPT_FEATURE));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.OCL_FEATURE_BINDING__CONCEPT_FEATURE), element));
+						out.print(" ");
+					}
+					printCountingMap.put("conceptFeature", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("conceptFeature");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.OCL_FEATURE_BINDING__CONCEPT_FEATURE));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.OCL_FEATURE_BINDING__CONCEPT_FEATURE), element));
+					out.print(" ");
+				}
+				printCountingMap.put("conceptFeature", count - 1);
+			}
 		}
 	}
 	
@@ -6585,33 +6685,13 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// DEFINITION PART BEGINS (CsString)
 		out.print(".");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("conceptFeature");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCEPT_FEATURE));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCEPT_FEATURE), element));
-				out.print(" ");
-			}
-			printCountingMap.put("conceptFeature", count - 1);
-		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_RenamingFeatureBinding_1(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CsString)
 		out.print("is");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("concreteFeature");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCRETE_FEATURE));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCRETE_FEATURE), element));
-				out.print(" ");
-			}
-			printCountingMap.put("concreteFeature", count - 1);
-		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_RenamingFeatureBinding_2(element, localtab, out, printCountingMap);
 	}
 	
 	public void print_gbind_dsl_RenamingFeatureBinding_0(gbind.dsl.RenamingFeatureBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
@@ -6627,6 +6707,90 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				out.print(" ");
 			}
 			printCountingMap.put("qualifier", count - 1);
+		}
+	}
+	
+	public void print_gbind_dsl_RenamingFeatureBinding_1(gbind.dsl.RenamingFeatureBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"conceptFeature"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"conceptFeature"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("conceptFeature");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCEPT_FEATURE));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCEPT_FEATURE), element));
+						out.print(" ");
+					}
+					printCountingMap.put("conceptFeature", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("conceptFeature");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCEPT_FEATURE));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCEPT_FEATURE), element));
+					out.print(" ");
+				}
+				printCountingMap.put("conceptFeature", count - 1);
+			}
+		}
+	}
+	
+	public void print_gbind_dsl_RenamingFeatureBinding_2(gbind.dsl.RenamingFeatureBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"concreteFeature"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"concreteFeature"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("concreteFeature");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCRETE_FEATURE));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCRETE_FEATURE), element));
+						out.print(" ");
+					}
+					printCountingMap.put("concreteFeature", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("concreteFeature");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCRETE_FEATURE));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.RENAMING_FEATURE_BINDING__CONCRETE_FEATURE), element));
+					out.print(" ");
+				}
+				printCountingMap.put("concreteFeature", count - 1);
+			}
 		}
 	}
 	

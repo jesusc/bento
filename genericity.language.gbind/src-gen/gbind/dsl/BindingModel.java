@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link gbind.dsl.BindingModel#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}</li>
- *   <li>{@link gbind.dsl.BindingModel#getMetamodelURI <em>Metamodel URI</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getName <em>Name</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getComponentURI <em>Component URI</em>}</li>
  * </ul>
@@ -103,56 +102,30 @@ public interface BindingModel extends EObject {
 	EList<ConcreteMetaclass> getConcreteMetaclasses();
 
 	/**
-	 * Returns the value of the '<em><b>Metamodel</b></em>' attribute.
+	 * Returns the value of the '<em><b>Metamodel</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Metamodel</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metamodel</em>' attribute.
-	 * @see #setMetamodel(String)
+	 * @return the value of the '<em>Metamodel</em>' containment reference.
+	 * @see #setMetamodel(UsedMetamodel)
 	 * @see gbind.dsl.DslPackage#getBindingModel_Metamodel()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getMetamodel();
+	UsedMetamodel getMetamodel();
 
 	/**
-	 * Sets the value of the '{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}' attribute.
+	 * Sets the value of the '{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel</em>' attribute.
+	 * @param value the new value of the '<em>Metamodel</em>' containment reference.
 	 * @see #getMetamodel()
 	 * @generated
 	 */
-	void setMetamodel(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Metamodel URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Metamodel URI</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metamodel URI</em>' attribute.
-	 * @see #setMetamodelURI(String)
-	 * @see gbind.dsl.DslPackage#getBindingModel_MetamodelURI()
-	 * @model
-	 * @generated
-	 */
-	String getMetamodelURI();
-
-	/**
-	 * Sets the value of the '{@link gbind.dsl.BindingModel#getMetamodelURI <em>Metamodel URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel URI</em>' attribute.
-	 * @see #getMetamodelURI()
-	 * @generated
-	 */
-	void setMetamodelURI(String value);
+	void setMetamodel(UsedMetamodel value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

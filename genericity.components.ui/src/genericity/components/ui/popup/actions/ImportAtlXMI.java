@@ -44,7 +44,7 @@ public class ImportAtlXMI implements IObjectActionDelegate {
 			String srcXmiFile = "file:/" + f.getLocation().toPortableString();
 			EMFInjector injector = new EMFInjector();
 			injector.inject(atlModel, srcXmiFile);
-
+			
 			// String injectedFile = "file:/" + srcXmiFile + ".xmi";
 			String extractedFile = srcXmiFile.replace(".xmi", "");
 			if (!extractedFile.endsWith(".atl"))

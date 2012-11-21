@@ -5,6 +5,7 @@ import genericity.compiler.atl.api.FilePathResolver;
 import genericity.compiler.atl.api.MyComponentError;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -40,9 +41,12 @@ public class ApplyComponent  implements IObjectActionDelegate {
 		Resource r = rs.getResource(URI.createPlatformResourceURI(f.getFullPath().toPortableString(), true), true);
 		
 		try {
-			new ComponentExecutor(r, new WorkspaceFileResolver()).execute();
+			new ComponentExecutor(r, new WorkspaceFileResolver(f.getLocation().toPortableString())).execute();
 		} catch (MyComponentError e) {
 			MessageDialog.openError(shell, "Component execution", e.getMessage());;
+		} catch (Exception e2) { // Capturing this because silent errors appears when trying to load unexisting files...
+			e2.printStackTrace();
+			MessageDialog.openError(shell, "Component execution", e2.getMessage());;			
 		}
 	}
 	

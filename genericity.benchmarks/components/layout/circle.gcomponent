@@ -6,4 +6,5 @@ transformation component circleLayout {
 	target model out : Layout
 	
 	definition atl "graph2layout.atl"
+		with IN = in, OUT = out
 }

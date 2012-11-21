@@ -2,49 +2,49 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.emftext.access.syntax.ui">
-		<metaInformationProvider class="gbind.resource.gbind.ui.GbindUIMetaInformation" id="gbind.resource.gbind.ui.GbindUIMetaInformation">
+		<metaInformationProvider class="genericity.language.gbind.resource.gbind.ui.GbindUIMetaInformation" id="genericity.language.gbind.resource.gbind.ui.GbindUIMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="gbind.resource.gbind.ui.GbindEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="gbind" icon="icons/editor_icon.gif" id="gbind.resource.gbind.ui.GbindEditor" name="EMFText gbind Editor">
+		<editor class="genericity.language.gbind.resource.gbind.ui.GbindEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="gbind" icon="icons/editor_icon.gif" id="genericity.language.gbind.resource.gbind.ui.GbindEditor" name="EMFText gbind Editor">
 			<contentTypeBinding contentTypeId="genericity.language.gbind.resource">
 			</contentTypeBinding>
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
-		<initializer class="gbind.resource.gbind.ui.GbindPreferenceInitializer">
+		<initializer class="genericity.language.gbind.resource.gbind.ui.GbindPreferenceInitializer">
 		</initializer>
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Gbind Text Editor" id="gbind.resource.gbind.ui.GbindPreferencePage" class="gbind.resource.gbind.ui.GbindPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		<page name="Gbind Text Editor" id="genericity.language.gbind.resource.gbind.ui.GbindPreferencePage" class="genericity.language.gbind.resource.gbind.ui.GbindPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
 		</page>
-		<page name="Syntax Coloring" id="gbind.resource.gbind.ui.GbindSyntaxColoringPreferencePage" class="gbind.resource.gbind.ui.GbindSyntaxColoringPreferencePage" category="gbind.resource.gbind.ui.GbindPreferencePage">
+		<page name="Syntax Coloring" id="genericity.language.gbind.resource.gbind.ui.GbindSyntaxColoringPreferencePage" class="genericity.language.gbind.resource.gbind.ui.GbindSyntaxColoringPreferencePage" category="genericity.language.gbind.resource.gbind.ui.GbindPreferencePage">
 		</page>
-		<page name="Brackets" id="gbind.resource.gbind.ui.GbindBracketPreferencePage" class="gbind.resource.gbind.ui.GbindBracketPreferencePage" category="gbind.resource.gbind.ui.GbindPreferencePage">
+		<page name="Brackets" id="genericity.language.gbind.resource.gbind.ui.GbindBracketPreferencePage" class="genericity.language.gbind.resource.gbind.ui.GbindBracketPreferencePage" category="genericity.language.gbind.resource.gbind.ui.GbindPreferencePage">
 		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="gbind.resource.gbind.ui.GbindNewFileWizard" id="gbind.resource.gbind.ui.GbindNewFileWizard" name="EMFText .gbind file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="genericity.language.gbind.resource.gbind.ui.GbindNewFileWizard" id="genericity.language.gbind.resource.gbind.ui.GbindNewFileWizard" name="EMFText .gbind file">
 		</wizard>
 		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="gbind.resource.gbind.ui.GbindNewProjectWizard" id="gbind.resource.gbind.ui.GbindNewProjectWizard" name="EMFText gbind project" project="true">
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="genericity.language.gbind.resource.gbind.ui.GbindNewProjectWizard" id="genericity.language.gbind.resource.gbind.ui.GbindNewProjectWizard" name="EMFText gbind project" project="true">
 		</wizard>
 	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
-		<markerResolutionGenerator class="gbind.resource.gbind.ui.GbindMarkerResolutionGenerator" markerType="genericity.language.gbind.resource.problem">
+		<markerResolutionGenerator class="genericity.language.gbind.resource.gbind.ui.GbindMarkerResolutionGenerator" markerType="genericity.language.gbind.resource.problem">
 		</markerResolutionGenerator>
 	</extension>
 	
 	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
-		<factory class="gbind.resource.gbind.ui.GbindAnnotationModelFactory" extensions="gbind">
+		<factory class="genericity.language.gbind.resource.gbind.ui.GbindAnnotationModelFactory" extensions="gbind">
 		</factory>
 	</extension>
 	
@@ -83,15 +83,15 @@
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.adapters">
-		<factory adaptableType="gbind.resource.gbind.ui.GbindEditor" class="gbind.resource.gbind.ui.debug.GbindAdapterFactory">
+		<factory adaptableType="genericity.language.gbind.resource.gbind.ui.GbindEditor" class="genericity.language.gbind.resource.gbind.ui.debug.GbindAdapterFactory">
 			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
 			</adapter>
 		</factory>
-		<factory adaptableType="genericity.language.gbind.debug.GbindDebugVariable" class="gbind.resource.gbind.ui.debug.GbindAdapterFactory">
+		<factory adaptableType="genericity.language.gbind.debug.GbindDebugVariable" class="genericity.language.gbind.resource.gbind.ui.debug.GbindAdapterFactory">
 			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
 			</adapter>
 		</factory>
-		<factory adaptableType="genericity.language.gbind.debug.GbindDebugVariable" class="gbind.resource.gbind.ui.debug.GbindAdapterFactory">
+		<factory adaptableType="genericity.language.gbind.debug.GbindDebugVariable" class="genericity.language.gbind.resource.gbind.ui.debug.GbindAdapterFactory">
 			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
 			</adapter>
 		</factory>
@@ -105,14 +105,14 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.editorActions">
-		<editorContribution targetID="gbind.resource.gbind.ui.GbindEditor" id="genericity.language.gbind.resource.ui.BreakpointRulerActions">
+		<editorContribution targetID="genericity.language.gbind.resource.gbind.ui.GbindEditor" id="genericity.language.gbind.resource.ui.BreakpointRulerActions">
 			<action id="genericity.language.gbind.resource.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
 			</action>
 		</editorContribution>
 	</extension>
 	
 	<extension point="org.eclipse.debug.ui.debugModelPresentations">
-		<debugModelPresentation id="genericity.language.gbind.resource.debugModel" class="gbind.resource.gbind.ui.debug.GbindDebugModelPresentation">
+		<debugModelPresentation id="genericity.language.gbind.resource.debugModel" class="genericity.language.gbind.resource.gbind.ui.debug.GbindDebugModelPresentation">
 		</debugModelPresentation>
 	</extension>
 	

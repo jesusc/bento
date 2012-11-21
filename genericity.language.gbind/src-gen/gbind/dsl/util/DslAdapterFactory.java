@@ -8,6 +8,10 @@ package gbind.dsl.util;
 
 import gbind.dsl.*;
 
+import gbind.simpleocl.LocatedElement;
+import gbind.simpleocl.NamedElement;
+import gbind.simpleocl.OclMetamodel;
+import gbind.simpleocl.OclModel;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -76,6 +80,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createBindingModelAdapter();
 			}
 			@Override
+			public Adapter caseUsedMetamodel(UsedMetamodel object) {
+				return createUsedMetamodelAdapter();
+			}
+			@Override
 			public Adapter caseMetaclass(Metaclass object) {
 				return createMetaclassAdapter();
 			}
@@ -120,6 +128,22 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createLocalHelperAdapter();
 			}
 			@Override
+			public Adapter caseLocatedElement(LocatedElement object) {
+				return createLocatedElementAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseOclModel(OclModel object) {
+				return createOclModelAdapter();
+			}
+			@Override
+			public Adapter caseOclMetamodel(OclMetamodel object) {
+				return createOclMetamodelAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -150,6 +174,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBindingModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.UsedMetamodel <em>Used Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.UsedMetamodel
+	 * @generated
+	 */
+	public Adapter createUsedMetamodelAdapter() {
 		return null;
 	}
 
@@ -304,6 +342,62 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLocalHelperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.LocatedElement <em>Located Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.LocatedElement
+	 * @generated
+	 */
+	public Adapter createLocatedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.OclModel <em>Ocl Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.OclModel
+	 * @generated
+	 */
+	public Adapter createOclModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.OclMetamodel <em>Ocl Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.OclMetamodel
+	 * @generated
+	 */
+	public Adapter createOclMetamodelAdapter() {
 		return null;
 	}
 

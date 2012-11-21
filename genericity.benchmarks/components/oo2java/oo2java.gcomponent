@@ -6,7 +6,6 @@ transformation component oo2java {
 	target model out : Java
 	
 	//definition atl "oo2java.atl" 
-	//definition atl "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.atl"
-	definition atl "/home/jesus/projects/genericity/genericity.benchmarks/components/oo2java/oo2java.atl"
+	definition atl "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.atl"
 		with IN = in, OUT = out 
 }

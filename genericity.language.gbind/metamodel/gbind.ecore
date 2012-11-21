@@ -383,12 +383,14 @@
           eType="#//dsl/ConceptMetaclass" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="concreteMetaclasses"
           upperBound="-1" eType="#//dsl/ConcreteMetaclass" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" lowerBound="1"
+          eType="#//dsl/UsedMetamodel" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UsedMetamodel" eSuperTypes="#//simpleocl/OclMetamodel">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Metaclass" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

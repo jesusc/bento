@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" metamodel="UML" name="class2java">
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="class2java">
   <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
   <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1"/>
   <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" qualifier="//@concreteMetaclasses.0" concreteFeature="umlName"/>
@@ -21,4 +21,5 @@
   <conceptMetaclasses name="Attribute"/>
   <concreteMetaclasses name="UMLClass"/>
   <concreteMetaclasses name="UMLAttribute"/>
+  <metamodel name="UML"/>
 </bindingModel:BindingModel>

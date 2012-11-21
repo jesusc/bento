@@ -1,29 +1,37 @@
 package genericity.compiler.atl.api;
 
+import eclectic.propagate_instantiation;
+import genericity.compiler.atl.api.AtlTransformationLoader.FileBased;
+import genericity.gcomponent.Util;
+import genericity.gcomponent.instantiation.AdaptWithBinding;
+import genericity.gcomponent.instantiation.AdaptedTransformation;
+import genericity.gcomponent.instantiation.ComponentInstantiation;
+import genericity.gcomponent.instantiation.ComponentInstantiationPackage;
+import genericity.gcomponent.instantiation.ExecutableTransformation;
+import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.CompositeComponent;
-import genericity.language.gcomponent.core.ParameterModel;
-import genericity.language.gcomponent.core.Template;
-import genericity.language.gcomponent.core.TransformationComponent;
 import genericity.language.gcomponent.dsl.DefinitionRoot;
-import genericity.language.gcomponent.flowcontrol.Apply;
-import genericity.language.gcomponent.flowcontrol.ApplyParameter;
-import genericity.language.gcomponent.flowcontrol.Composition;
-import genericity.language.gcomponent.flowcontrol.CompositionStep;
 import genericity.language.gcomponent.technologies.AtlTemplate;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.eclectic.idc.datatypes.JavaListConverter;
+import org.eclectic.idc.jvm.runtime.BasicMethodHandler;
+import org.eclectic.modeling.emf.BasicEMFModel;
+import org.eclectic.modeling.emf.EMFLoader;
+import org.eclectic.modeling.emf.ModelManager;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.m2m.atl.core.launch.ILauncher;
-import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
 
 public class ComponentExecutor {
 
 	private Component component;
 	private FilePathResolver filePathResolver;
-
+	private HashMap<ExecutableTransformation, AtlTransformationLoader> loaders = new HashMap<ExecutableTransformation, AtlTransformationLoader>();
+	
 	public ComponentExecutor(Resource r, FilePathResolver filePathResolver) {
 		this.component = ((DefinitionRoot) r.getContents().get(0)).getComponent();
 		this.filePathResolver = filePathResolver;
@@ -31,16 +39,57 @@ public class ComponentExecutor {
 
 	public void execute() throws MyComponentError {
 		if ( component instanceof CompositeComponent ) {
-			adaptComponent((CompositeComponent) component, null);
+			adaptComponent((CompositeComponent) component);
+		} else {
+			throw new MyComponentError("Only composite components can be executed");
 		}
-		throw new MyComponentError("Only composite components can be executed");
 	}
 
-	private void adaptComponent(CompositeComponent component, AdaptationContext context) {
-		adaptSwitch( component.getComposition().getStep() );
+	private void adaptComponent(CompositeComponent component) throws MyComponentError { 
+		propagate_instantiation transformation = new propagate_instantiation();
+
+		Resource copiedResource = Util.copyResolvingCrossReferences(component.eResource(), URI.createURI("file://tmp/temp.xmi"));
 		
+		ModelManager manager = new ModelManager();		
+		EMFLoader    loader  = new EMFLoader(new JavaListConverter(), copiedResource.getResourceSet());
+		BasicEMFModel in = null, out = null;
 		
-		AtlInvoker invoker = new AtlInvoker();
+		try {
+			// load input -> DSL with cross-references resolved
+			in  = loader.basicModelFromMemory(GcomponentPackage.eINSTANCE, copiedResource);
+			// System.out.println(copiedResource.getContents());
+			// copiedResource.save(null);	
+			
+			// create empty output model
+			ArrayList<EPackage> pkgs = new ArrayList<EPackage>();
+			pkgs.add(ComponentInstantiationPackage.eINSTANCE);
+			out = loader.emptyModelFromMemory(pkgs, "/tmp/temp-instantiated.xmi");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyComponentError("Could not load component models", e);
+		}
+		
+		// in.registerMethodHandler(new BasicMethodHandler(manager));
+		manager.register("comp", in);
+		manager.register("inst", out);
+		in.registerMethodHandler(new BasicMethodHandler(manager));
+		out.registerMethodHandler(new BasicMethodHandler(manager));
+		transformation.setModelManager(manager);
+
+		transformation.configure_();
+		transformation.start_();
+			
+		// adaptSwitch( component.getComposition().getStep() );
+		
+		out.getHandler().packRootElements();
+		ComponentInstantiation ci = (ComponentInstantiation) out.getHandler().getResource().getContents().get(0);
+		//System.out.println(out.getHandler().getResource().getContents());
+		//out.serialize();
+		
+		adapt(ci);
+		//execute(ci);
+		
+		//AtlInvoker invoker = new AtlInvoker();
 		/*
 		// After adaptation -> execute if final component
 		for(ParameterModel s : component.getSourceModels()) {
@@ -54,69 +103,38 @@ public class ComponentExecutor {
 		*/
 	}
 
-	private void adaptComponent(TransformationComponent component, AdaptationContext context) {
-		adaptTemplateSwitch(component.getTemplate(), context);
+	private void adapt(ComponentInstantiation ci) {
+		adapt((AdaptedTransformation) ci.getTransformation());
 	}
 
-	private void adapt(Apply composition) {
-		adaptSwitch(composition.getComponent(), new AdaptationContext(composition));
-	}
-
-	
-	private void adaptTemplate(AtlTemplate template, AdaptationContext context) {
-		AtlAdapter adapter = new AtlAdapter( new AtlTransformationLoader.FileBased(
-				this.filePathResolver.resolve(template.getTemplate())) );
+	private void adapt(AdaptedTransformation transformation) {
+		String atlTemplate = null;
+		if ( transformation.getTemplate() instanceof AtlTemplate ) {
+			atlTemplate = ((AtlTemplate) transformation.getTemplate()).getTemplate();
+		} else {
+			throw new UnsupportedOperationException();
+		}
 		
-		List<ApplyParameter> inputModels = context.getInputModels();
-		for (ApplyParameter applyParameter : inputModels) {
-			// Not needed if type checking is not performed
-			// 		-> applyParameter.getBoundConcept()
-			
-			BindingModelLoader loader = new BindingModelLoader.FileBased( applyParameter.getBinding().getFileName() );
+		FileBased atlLoader = new AtlTransformationLoader.FileBased(this.filePathResolver.resolve(atlTemplate));
+		AtlAdapter adapter = new AtlAdapter( atlLoader );
+
+		for(AdaptWithBinding step : transformation.getRequiredAdaptations()) {				
+			BindingModelLoader loader = new BindingModelLoader.FileBased( step.getAppliedBinding().getFileName() );
 			adapter.doAdaptation(loader);
-			context.setAdapted(adapter.getResource());
 		}
-	}
 
-	// Switches	
-	private void adaptTemplateSwitch(Template template, AdaptationContext context) {
-		if ( template instanceof AtlTemplate ) adaptTemplate((AtlTemplate) template, context);
-		else throw new UnsupportedOperationException("Not supported: " + template.eClass().getName());
-	}
-
-	private void adaptSwitch(Component component, AdaptationContext context) {
-		if ( component instanceof CompositeComponent ) adaptComponent((CompositeComponent) component, context);
-		if ( component instanceof TransformationComponent ) adaptComponent((TransformationComponent) component, context);
-		else throw new UnsupportedOperationException("Not supported: " + component.eClass().getName());
-	}
-
-	private void adaptSwitch(CompositionStep compositionStep) {
-		if ( compositionStep instanceof Apply ) adapt((Apply) compositionStep);
-		else throw new UnsupportedOperationException("Not supported: " + compositionStep.eClass().getName());
-	}
-
-	
-	/**
-	 * It provides the context in which a given transformation context is
-	 * instantiated, that is, "who is using this component".
-	 * 
-	 */
-	private static class AdaptationContext {
-		private Apply composition;
-		private Resource adapted;
-
-		public AdaptationContext(Apply composition) {
-			this.composition = composition;
-		}
 		
-		public void setAdapted(Resource resource) {
-			this.adapted = resource;
-		}
-		
-		public Resource getAdapted() {
-			return adapted;
-		}
+		atlLoader.exportAdapted(filePathResolver.createFileNameFromInitial(component.getName() + ".atl") );
 
-		public List<ApplyParameter> getInputModels() { return composition.getInputModels(); }
+		loaders.put(transformation, atlLoader);
+	}
+
+	private void execute(ComponentInstantiation ci) {
+		execute((AdaptedTransformation) ci.getTransformation());		
+	}
+
+	private void execute(AdaptedTransformation transformation) {
+		AtlTransformationLoader atlLoader = loaders.get(transformation);		
+		
 	}
 }

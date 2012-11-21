@@ -20,10 +20,11 @@ import eclectic.rewrite_class1;
 public class AtlAdapter {
 
 	private AtlTransformationLoader atlTransformation;
-	private Resource adaptedTransformation;
+	private BasicEMFModel inout;
 	
 	public AtlAdapter(AtlTransformationLoader atlTransformation) {
 		this.atlTransformation = atlTransformation;
+		this.inout = null;
 	}
 	
 	public void doAdaptation(BindingModelLoader binding) {
@@ -32,10 +33,13 @@ public class AtlAdapter {
 	    Util.registerResourceFactory();
 		ModelManager manager = new ModelManager();
 		EMFLoader    loader  = new EMFLoader(new JavaListConverter());
-		BasicEMFModel in = null, inout = null;
+		BasicEMFModel in = null;
 		try {
 			in = binding.load(loader);
-			inout = atlTransformation.load(loader);
+			
+			// Atl model is only loaded once, the other times the transformation is re-applied 
+			if ( inout == null )
+				inout = atlTransformation.load(loader);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,8 +54,6 @@ public class AtlAdapter {
 
 		transformation.configure_();
 		transformation.start_();
-
-		adaptedTransformation = inout.getHandler().getResource();
 		
 		// TODO: Define in/out modes for EMFModels
 		// out.serialize();
@@ -63,7 +65,8 @@ public class AtlAdapter {
 	}
 
 	public Resource getResource() {
-		return adaptedTransformation;
+		inout.getHandler().packRootElements();
+		return inout.getHandler().getResource();
 	}
 	
 }

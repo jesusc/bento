@@ -39,10 +39,12 @@ attribution propagate_instantiation(comp) -> (inst)
   end
 
   rule comp!Apply
+  	// inputModels -> input parameters
   	adaptations = self.inputModels.select { |m| x = m.boundConcept.is_nil.not }.map { |m2|
   		adapt = inst!AdaptWithBinding.new
   		adapt.parameterIndex = self.inputModels.index_of(m2)
-  		adapt.conceptModel   = m2
+  		adapt.conceptModel   = m2.model
+		adapt.appliedBinding = m2.binding
   		adapt
   	}
   	
@@ -55,6 +57,7 @@ attribution propagate_instantiation(comp) -> (inst)
   //       set of inherited attributes provided) -> will therefore be executed lazily
   rule comp!TransformationComponent 
   	t = inst!AdaptedTransformation.new
+  	t.template = self.template
   	t.requiredAdaptations = self[sourceAdaptations].map { |a| 
 		a.concreteModel = self.sourceModels.get(a.parameterIndex)		
 		a

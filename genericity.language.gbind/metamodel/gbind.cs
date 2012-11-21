@@ -237,20 +237,23 @@ RULES {
 	Simpleocl.EnvType ::= name[ENVTYPE];
 	// END-OF OclRules
 
-	Dsl.BindingModel ::= "binding" name[] (metamodelURI['[', ']'])? 
-	                 "for" metamodel[] (componentURI['[', ']'])?  
+	Dsl.BindingModel ::= "binding" name[] (componentURI['[', ']'])? 
+	                 "for" metamodel   
 		"{"
 			bindings*
 			helpers*
 		"}";
 	
-	Dsl.ClassBinding ::= "class" concept[] "to" concrete[] ("," concrete[])* ;
+	Dsl.UsedMetamodel ::= name[] (metamodelURI['[', ']'])?;
+	
+	Dsl.ClassBinding ::= "class" concept[] "to" concrete[] ("," concrete[])* 
+		( "when" whenClause )?;
 
-	Dsl.OclFeatureBinding ::= "feature" conceptClass[] (qualifier['[', ']'])? "." conceptFeature[] "=" 
+	Dsl.OclFeatureBinding ::= "feature" conceptClass[] (qualifier['[', ']'])? "." (conceptFeature[]|conceptFeature['"','"','\\']) "=" 
 		concrete : Simpleocl.OclExpression; //ocl.OclExpression;
 
-	Dsl.RenamingFeatureBinding ::= "feature" conceptClass[] (qualifier['[', ']'])? "." conceptFeature[] "is" 
-		concreteFeature[];
+	Dsl.RenamingFeatureBinding ::= "feature" conceptClass[] (qualifier['[', ']'])? "." (conceptFeature[]|conceptFeature['"','"','\\']) "is" 
+		(concreteFeature[]|concreteFeature['"','"','\\']);
         
         //template OclFeatureBinding :    
         //        "feature" conceptClass{refersTo = name, lookIn = #all} 

@@ -51,6 +51,7 @@ public class GbindLexer extends Lexer {
     public static final int T__74=74;
     public static final int T__75=75;
     public static final int T__76=76;
+    public static final int T__77=77;
     public static final int ADDOP=4;
     public static final int BAGTYPE=5;
     public static final int BOOLEANTYPE=6;
@@ -949,10 +950,12 @@ public class GbindLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:52:7: ( '{' )
-            // Gbind.g:52:9: '{'
+            // Gbind.g:52:7: ( 'when' )
+            // Gbind.g:52:9: 'when'
             {
-            match('{'); 
+            match("when"); 
+
+
 
             }
 
@@ -970,10 +973,10 @@ public class GbindLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:53:7: ( '|' )
-            // Gbind.g:53:9: '|'
+            // Gbind.g:53:7: ( '{' )
+            // Gbind.g:53:9: '{'
             {
-            match('|'); 
+            match('{'); 
 
             }
 
@@ -991,10 +994,10 @@ public class GbindLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:54:7: ( '}' )
-            // Gbind.g:54:9: '}'
+            // Gbind.g:54:7: ( '|' )
+            // Gbind.g:54:9: '|'
             {
-            match('}'); 
+            match('|'); 
 
             }
 
@@ -1007,16 +1010,37 @@ public class GbindLexer extends Lexer {
     }
     // $ANTLR end "T__76"
 
+    // $ANTLR start "T__77"
+    public final void mT__77() throws RecognitionException {
+        try {
+            int _type = T__77;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Gbind.g:55:7: ( '}' )
+            // Gbind.g:55:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__77"
+
     // $ANTLR start "NOTOP"
     public final void mNOTOP() throws RecognitionException {
         try {
             int _type = NOTOP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13457:6: ( ( 'not' ) )
-            // Gbind.g:13458:2: ( 'not' )
+            // Gbind.g:13762:6: ( ( 'not' ) )
+            // Gbind.g:13763:2: ( 'not' )
             {
-            // Gbind.g:13458:2: ( 'not' )
-            // Gbind.g:13458:2: 'not'
+            // Gbind.g:13763:2: ( 'not' )
+            // Gbind.g:13763:2: 'not'
             {
             match("not"); 
 
@@ -1041,13 +1065,13 @@ public class GbindLexer extends Lexer {
         try {
             int _type = BOOLOP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13460:7: ( ( ( 'and' | 'or' | 'xor' | 'implies' ) ) )
-            // Gbind.g:13461:2: ( ( 'and' | 'or' | 'xor' | 'implies' ) )
+            // Gbind.g:13765:7: ( ( ( 'and' | 'or' | 'xor' | 'implies' ) ) )
+            // Gbind.g:13766:2: ( ( 'and' | 'or' | 'xor' | 'implies' ) )
             {
-            // Gbind.g:13461:2: ( ( 'and' | 'or' | 'xor' | 'implies' ) )
-            // Gbind.g:13461:2: ( 'and' | 'or' | 'xor' | 'implies' )
+            // Gbind.g:13766:2: ( ( 'and' | 'or' | 'xor' | 'implies' ) )
+            // Gbind.g:13766:2: ( 'and' | 'or' | 'xor' | 'implies' )
             {
-            // Gbind.g:13461:2: ( 'and' | 'or' | 'xor' | 'implies' )
+            // Gbind.g:13766:2: ( 'and' | 'or' | 'xor' | 'implies' )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 'a':
@@ -1080,7 +1104,7 @@ public class GbindLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // Gbind.g:13461:3: 'and'
+                    // Gbind.g:13766:3: 'and'
                     {
                     match("and"); 
 
@@ -1089,7 +1113,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Gbind.g:13461:9: 'or'
+                    // Gbind.g:13766:9: 'or'
                     {
                     match("or"); 
 
@@ -1098,7 +1122,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // Gbind.g:13461:14: 'xor'
+                    // Gbind.g:13766:14: 'xor'
                     {
                     match("xor"); 
 
@@ -1107,7 +1131,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // Gbind.g:13461:20: 'implies'
+                    // Gbind.g:13766:20: 'implies'
                     {
                     match("implies"); 
 
@@ -1138,13 +1162,13 @@ public class GbindLexer extends Lexer {
         try {
             int _type = INTOP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13463:6: ( ( ( 'div' | 'mod' ) ) )
-            // Gbind.g:13464:2: ( ( 'div' | 'mod' ) )
+            // Gbind.g:13768:6: ( ( ( 'div' | 'mod' ) ) )
+            // Gbind.g:13769:2: ( ( 'div' | 'mod' ) )
             {
-            // Gbind.g:13464:2: ( ( 'div' | 'mod' ) )
-            // Gbind.g:13464:2: ( 'div' | 'mod' )
+            // Gbind.g:13769:2: ( ( 'div' | 'mod' ) )
+            // Gbind.g:13769:2: ( 'div' | 'mod' )
             {
-            // Gbind.g:13464:2: ( 'div' | 'mod' )
+            // Gbind.g:13769:2: ( 'div' | 'mod' )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1163,7 +1187,7 @@ public class GbindLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // Gbind.g:13464:3: 'div'
+                    // Gbind.g:13769:3: 'div'
                     {
                     match("div"); 
 
@@ -1172,7 +1196,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Gbind.g:13464:9: 'mod'
+                    // Gbind.g:13769:9: 'mod'
                     {
                     match("mod"); 
 
@@ -1203,13 +1227,13 @@ public class GbindLexer extends Lexer {
         try {
             int _type = RELOP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13466:6: ( ( ( '>' | '<' | '>=' | '<=' ) ) )
-            // Gbind.g:13467:2: ( ( '>' | '<' | '>=' | '<=' ) )
+            // Gbind.g:13771:6: ( ( ( '>' | '<' | '>=' | '<=' ) ) )
+            // Gbind.g:13772:2: ( ( '>' | '<' | '>=' | '<=' ) )
             {
-            // Gbind.g:13467:2: ( ( '>' | '<' | '>=' | '<=' ) )
-            // Gbind.g:13467:2: ( '>' | '<' | '>=' | '<=' )
+            // Gbind.g:13772:2: ( ( '>' | '<' | '>=' | '<=' ) )
+            // Gbind.g:13772:2: ( '>' | '<' | '>=' | '<=' )
             {
-            // Gbind.g:13467:2: ( '>' | '<' | '>=' | '<=' )
+            // Gbind.g:13772:2: ( '>' | '<' | '>=' | '<=' )
             int alt3=4;
             int LA3_0 = input.LA(1);
 
@@ -1242,21 +1266,21 @@ public class GbindLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Gbind.g:13467:3: '>'
+                    // Gbind.g:13772:3: '>'
                     {
                     match('>'); 
 
                     }
                     break;
                 case 2 :
-                    // Gbind.g:13467:7: '<'
+                    // Gbind.g:13772:7: '<'
                     {
                     match('<'); 
 
                     }
                     break;
                 case 3 :
-                    // Gbind.g:13467:11: '>='
+                    // Gbind.g:13772:11: '>='
                     {
                     match(">="); 
 
@@ -1265,7 +1289,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // Gbind.g:13467:16: '<='
+                    // Gbind.g:13772:16: '<='
                     {
                     match("<="); 
 
@@ -1296,8 +1320,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = EQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13469:3: ( '=' )
-            // Gbind.g:13470:1: '='
+            // Gbind.g:13774:3: ( '=' )
+            // Gbind.g:13775:1: '='
             {
             match('='); 
 
@@ -1317,11 +1341,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = NEQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13471:4: ( ( '<>' ) )
-            // Gbind.g:13472:2: ( '<>' )
+            // Gbind.g:13776:4: ( ( '<>' ) )
+            // Gbind.g:13777:2: ( '<>' )
             {
-            // Gbind.g:13472:2: ( '<>' )
-            // Gbind.g:13472:2: '<>'
+            // Gbind.g:13777:2: ( '<>' )
+            // Gbind.g:13777:2: '<>'
             {
             match("<>"); 
 
@@ -1346,7 +1370,7 @@ public class GbindLexer extends Lexer {
         try {
             int _type = ADDOP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13474:6: ( ( ( '-' | '+' ) ) )
+            // Gbind.g:13779:6: ( ( ( '-' | '+' ) ) )
             // Gbind.g:
             {
             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1375,7 +1399,7 @@ public class GbindLexer extends Lexer {
         try {
             int _type = MULOP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13477:6: ( ( ( '*' | '/' ) ) )
+            // Gbind.g:13782:6: ( ( ( '*' | '/' ) ) )
             // Gbind.g:
             {
             if ( input.LA(1)=='*'||input.LA(1)=='/' ) {
@@ -1404,17 +1428,17 @@ public class GbindLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13480:8: ( ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Gbind.g:13481:2: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Gbind.g:13785:8: ( ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Gbind.g:13786:2: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Gbind.g:13481:2: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Gbind.g:13481:2: '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Gbind.g:13786:2: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Gbind.g:13786:2: '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("--"); 
 
 
 
-            // Gbind.g:13481:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Gbind.g:13786:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -1469,13 +1493,13 @@ public class GbindLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13484:6: ( ( ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+ ) )
-            // Gbind.g:13485:2: ( ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+ )
+            // Gbind.g:13789:6: ( ( ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+ ) )
+            // Gbind.g:13790:2: ( ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+ )
             {
-            // Gbind.g:13485:2: ( ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+ )
-            // Gbind.g:13485:2: ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+
+            // Gbind.g:13790:2: ( ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+ )
+            // Gbind.g:13790:2: ( '-' )? ( ( '0' .. '9' ) )+ '.' ( ( '0' .. '9' ) )+
             {
-            // Gbind.g:13485:2: ( '-' )?
+            // Gbind.g:13790:2: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1484,7 +1508,7 @@ public class GbindLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Gbind.g:13485:2: '-'
+                    // Gbind.g:13790:2: '-'
                     {
                     match('-'); 
 
@@ -1494,7 +1518,7 @@ public class GbindLexer extends Lexer {
             }
 
 
-            // Gbind.g:13485:6: ( ( '0' .. '9' ) )+
+            // Gbind.g:13790:6: ( ( '0' .. '9' ) )+
             int cnt6=0;
             loop6:
             do {
@@ -1535,7 +1559,7 @@ public class GbindLexer extends Lexer {
 
             match('.'); 
 
-            // Gbind.g:13485:22: ( ( '0' .. '9' ) )+
+            // Gbind.g:13790:22: ( ( '0' .. '9' ) )+
             int cnt7=0;
             loop7:
             do {
@@ -1593,13 +1617,13 @@ public class GbindLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13487:8: ( ( ( '-' )? ( ( '0' .. '9' ) )+ ) )
-            // Gbind.g:13488:2: ( ( '-' )? ( ( '0' .. '9' ) )+ )
+            // Gbind.g:13792:8: ( ( ( '-' )? ( ( '0' .. '9' ) )+ ) )
+            // Gbind.g:13793:2: ( ( '-' )? ( ( '0' .. '9' ) )+ )
             {
-            // Gbind.g:13488:2: ( ( '-' )? ( ( '0' .. '9' ) )+ )
-            // Gbind.g:13488:2: ( '-' )? ( ( '0' .. '9' ) )+
+            // Gbind.g:13793:2: ( ( '-' )? ( ( '0' .. '9' ) )+ )
+            // Gbind.g:13793:2: ( '-' )? ( ( '0' .. '9' ) )+
             {
-            // Gbind.g:13488:2: ( '-' )?
+            // Gbind.g:13793:2: ( '-' )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1608,7 +1632,7 @@ public class GbindLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // Gbind.g:13488:2: '-'
+                    // Gbind.g:13793:2: '-'
                     {
                     match('-'); 
 
@@ -1618,7 +1642,7 @@ public class GbindLexer extends Lexer {
             }
 
 
-            // Gbind.g:13488:6: ( ( '0' .. '9' ) )+
+            // Gbind.g:13793:6: ( ( '0' .. '9' ) )+
             int cnt9=0;
             loop9:
             do {
@@ -1676,11 +1700,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = STRINGTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13490:11: ( ( 'String' ) )
-            // Gbind.g:13491:2: ( 'String' )
+            // Gbind.g:13795:11: ( ( 'String' ) )
+            // Gbind.g:13796:2: ( 'String' )
             {
-            // Gbind.g:13491:2: ( 'String' )
-            // Gbind.g:13491:2: 'String'
+            // Gbind.g:13796:2: ( 'String' )
+            // Gbind.g:13796:2: 'String'
             {
             match("String"); 
 
@@ -1705,11 +1729,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = BOOLEANTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13493:12: ( ( 'Boolean' ) )
-            // Gbind.g:13494:2: ( 'Boolean' )
+            // Gbind.g:13798:12: ( ( 'Boolean' ) )
+            // Gbind.g:13799:2: ( 'Boolean' )
             {
-            // Gbind.g:13494:2: ( 'Boolean' )
-            // Gbind.g:13494:2: 'Boolean'
+            // Gbind.g:13799:2: ( 'Boolean' )
+            // Gbind.g:13799:2: 'Boolean'
             {
             match("Boolean"); 
 
@@ -1734,11 +1758,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = INTEGERTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13496:12: ( ( 'Integer' ) )
-            // Gbind.g:13497:2: ( 'Integer' )
+            // Gbind.g:13801:12: ( ( 'Integer' ) )
+            // Gbind.g:13802:2: ( 'Integer' )
             {
-            // Gbind.g:13497:2: ( 'Integer' )
-            // Gbind.g:13497:2: 'Integer'
+            // Gbind.g:13802:2: ( 'Integer' )
+            // Gbind.g:13802:2: 'Integer'
             {
             match("Integer"); 
 
@@ -1763,11 +1787,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = REALTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13499:9: ( ( 'Real' ) )
-            // Gbind.g:13500:2: ( 'Real' )
+            // Gbind.g:13804:9: ( ( 'Real' ) )
+            // Gbind.g:13805:2: ( 'Real' )
             {
-            // Gbind.g:13500:2: ( 'Real' )
-            // Gbind.g:13500:2: 'Real'
+            // Gbind.g:13805:2: ( 'Real' )
+            // Gbind.g:13805:2: 'Real'
             {
             match("Real"); 
 
@@ -1792,11 +1816,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = COLLECTIONTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13502:15: ( ( 'Collection' ) )
-            // Gbind.g:13503:2: ( 'Collection' )
+            // Gbind.g:13807:15: ( ( 'Collection' ) )
+            // Gbind.g:13808:2: ( 'Collection' )
             {
-            // Gbind.g:13503:2: ( 'Collection' )
-            // Gbind.g:13503:2: 'Collection'
+            // Gbind.g:13808:2: ( 'Collection' )
+            // Gbind.g:13808:2: 'Collection'
             {
             match("Collection"); 
 
@@ -1821,8 +1845,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = BAGTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13505:8: ( 'Bag' )
-            // Gbind.g:13506:1: 'Bag'
+            // Gbind.g:13810:8: ( 'Bag' )
+            // Gbind.g:13811:1: 'Bag'
             {
             match("Bag"); 
 
@@ -1844,8 +1868,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = ORDEREDSETTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13507:15: ( 'OrderedSet' )
-            // Gbind.g:13508:1: 'OrderedSet'
+            // Gbind.g:13812:15: ( 'OrderedSet' )
+            // Gbind.g:13813:1: 'OrderedSet'
             {
             match("OrderedSet"); 
 
@@ -1867,8 +1891,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = SEQUENCETYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13509:13: ( 'Sequence' )
-            // Gbind.g:13510:1: 'Sequence'
+            // Gbind.g:13814:13: ( 'Sequence' )
+            // Gbind.g:13815:1: 'Sequence'
             {
             match("Sequence"); 
 
@@ -1890,8 +1914,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = SETTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13511:8: ( 'Set' )
-            // Gbind.g:13512:1: 'Set'
+            // Gbind.g:13816:8: ( 'Set' )
+            // Gbind.g:13817:1: 'Set'
             {
             match("Set"); 
 
@@ -1913,11 +1937,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = OCLANYTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13513:11: ( ( 'OclAny' ) )
-            // Gbind.g:13514:2: ( 'OclAny' )
+            // Gbind.g:13818:11: ( ( 'OclAny' ) )
+            // Gbind.g:13819:2: ( 'OclAny' )
             {
-            // Gbind.g:13514:2: ( 'OclAny' )
-            // Gbind.g:13514:2: 'OclAny'
+            // Gbind.g:13819:2: ( 'OclAny' )
+            // Gbind.g:13819:2: 'OclAny'
             {
             match("OclAny"); 
 
@@ -1942,11 +1966,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = OCLTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13516:8: ( ( 'OclType' ) )
-            // Gbind.g:13517:2: ( 'OclType' )
+            // Gbind.g:13821:8: ( ( 'OclType' ) )
+            // Gbind.g:13822:2: ( 'OclType' )
             {
-            // Gbind.g:13517:2: ( 'OclType' )
-            // Gbind.g:13517:2: 'OclType'
+            // Gbind.g:13822:2: ( 'OclType' )
+            // Gbind.g:13822:2: 'OclType'
             {
             match("OclType"); 
 
@@ -1971,11 +1995,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = TUPLETYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13519:10: ( ( 'TupleType' ) )
-            // Gbind.g:13520:2: ( 'TupleType' )
+            // Gbind.g:13824:10: ( ( 'TupleType' ) )
+            // Gbind.g:13825:2: ( 'TupleType' )
             {
-            // Gbind.g:13520:2: ( 'TupleType' )
-            // Gbind.g:13520:2: 'TupleType'
+            // Gbind.g:13825:2: ( 'TupleType' )
+            // Gbind.g:13825:2: 'TupleType'
             {
             match("TupleType"); 
 
@@ -2000,8 +2024,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = TUPLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13522:6: ( 'Tuple' )
-            // Gbind.g:13523:1: 'Tuple'
+            // Gbind.g:13827:6: ( 'Tuple' )
+            // Gbind.g:13828:1: 'Tuple'
             {
             match("Tuple"); 
 
@@ -2023,8 +2047,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = MAPTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13524:8: ( 'Map' )
-            // Gbind.g:13525:1: 'Map'
+            // Gbind.g:13829:8: ( 'Map' )
+            // Gbind.g:13830:1: 'Map'
             {
             match("Map"); 
 
@@ -2046,11 +2070,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = LAMBDATYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13526:11: ( ( 'Lambda' ) )
-            // Gbind.g:13527:2: ( 'Lambda' )
+            // Gbind.g:13831:11: ( ( 'Lambda' ) )
+            // Gbind.g:13832:2: ( 'Lambda' )
             {
-            // Gbind.g:13527:2: ( 'Lambda' )
-            // Gbind.g:13527:2: 'Lambda'
+            // Gbind.g:13832:2: ( 'Lambda' )
+            // Gbind.g:13832:2: 'Lambda'
             {
             match("Lambda"); 
 
@@ -2075,11 +2099,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = ENVTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13529:8: ( ( 'Env' ) )
-            // Gbind.g:13530:2: ( 'Env' )
+            // Gbind.g:13834:8: ( ( 'Env' ) )
+            // Gbind.g:13835:2: ( 'Env' )
             {
-            // Gbind.g:13530:2: ( 'Env' )
-            // Gbind.g:13530:2: 'Env'
+            // Gbind.g:13835:2: ( 'Env' )
+            // Gbind.g:13835:2: 'Env'
             {
             match("Env"); 
 
@@ -2104,11 +2128,11 @@ public class GbindLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13532:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )* ) )
-            // Gbind.g:13533:2: ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )* )
+            // Gbind.g:13837:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )* ) )
+            // Gbind.g:13838:2: ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )* )
             {
-            // Gbind.g:13533:2: ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )* )
-            // Gbind.g:13533:2: ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )*
+            // Gbind.g:13838:2: ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )* )
+            // Gbind.g:13838:2: ( 'A' .. 'Z' | 'a' .. 'z' ) ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -2120,7 +2144,7 @@ public class GbindLexer extends Lexer {
             }
 
 
-            // Gbind.g:13533:21: ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )*
+            // Gbind.g:13838:21: ( ( 'A' .. 'Z' | 'a' .. 'z' ) | ( '0' .. '9' ) | '_' )*
             loop10:
             do {
                 int alt10=2;
@@ -2173,13 +2197,13 @@ public class GbindLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13535:10: ( ( ( '\\r\\n' | '\\'r' | '\\n' ) ) )
-            // Gbind.g:13536:2: ( ( '\\r\\n' | '\\'r' | '\\n' ) )
+            // Gbind.g:13840:10: ( ( ( '\\r\\n' | '\\'r' | '\\n' ) ) )
+            // Gbind.g:13841:2: ( ( '\\r\\n' | '\\'r' | '\\n' ) )
             {
-            // Gbind.g:13536:2: ( ( '\\r\\n' | '\\'r' | '\\n' ) )
-            // Gbind.g:13536:2: ( '\\r\\n' | '\\'r' | '\\n' )
+            // Gbind.g:13841:2: ( ( '\\r\\n' | '\\'r' | '\\n' ) )
+            // Gbind.g:13841:2: ( '\\r\\n' | '\\'r' | '\\n' )
             {
-            // Gbind.g:13536:2: ( '\\r\\n' | '\\'r' | '\\n' )
+            // Gbind.g:13841:2: ( '\\r\\n' | '\\'r' | '\\n' )
             int alt11=3;
             switch ( input.LA(1) ) {
             case '\r':
@@ -2207,7 +2231,7 @@ public class GbindLexer extends Lexer {
 
             switch (alt11) {
                 case 1 :
-                    // Gbind.g:13536:3: '\\r\\n'
+                    // Gbind.g:13841:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -2216,7 +2240,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Gbind.g:13536:10: '\\'r'
+                    // Gbind.g:13841:10: '\\'r'
                     {
                     match("'r"); 
 
@@ -2225,7 +2249,7 @@ public class GbindLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // Gbind.g:13536:16: '\\n'
+                    // Gbind.g:13841:16: '\\n'
                     {
                     match('\n'); 
 
@@ -2256,8 +2280,8 @@ public class GbindLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13539:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Gbind.g:13540:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Gbind.g:13844:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Gbind.g:13845:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -2287,21 +2311,21 @@ public class GbindLexer extends Lexer {
         try {
             int _type = QUOTED_34_34_92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13543:16: ( ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) ) )
-            // Gbind.g:13544:2: ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) )
+            // Gbind.g:13848:16: ( ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) ) )
+            // Gbind.g:13849:2: ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) )
             {
-            // Gbind.g:13544:2: ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) )
-            // Gbind.g:13544:2: ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' )
+            // Gbind.g:13849:2: ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) )
+            // Gbind.g:13849:2: ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' )
             {
-            // Gbind.g:13544:2: ( '\"' )
-            // Gbind.g:13544:3: '\"'
+            // Gbind.g:13849:2: ( '\"' )
+            // Gbind.g:13849:3: '\"'
             {
             match('\"'); 
 
             }
 
 
-            // Gbind.g:13544:7: ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )*
+            // Gbind.g:13849:7: ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )*
             loop12:
             do {
                 int alt12=4;
@@ -2326,10 +2350,10 @@ public class GbindLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // Gbind.g:13544:8: ( '\\\\' '\"' )
+            	    // Gbind.g:13849:8: ( '\\\\' '\"' )
             	    {
-            	    // Gbind.g:13544:8: ( '\\\\' '\"' )
-            	    // Gbind.g:13544:9: '\\\\' '\"'
+            	    // Gbind.g:13849:8: ( '\\\\' '\"' )
+            	    // Gbind.g:13849:9: '\\\\' '\"'
             	    {
             	    match('\\'); 
 
@@ -2341,10 +2365,10 @@ public class GbindLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // Gbind.g:13544:18: ( '\\\\' '\\\\' )
+            	    // Gbind.g:13849:18: ( '\\\\' '\\\\' )
             	    {
-            	    // Gbind.g:13544:18: ( '\\\\' '\\\\' )
-            	    // Gbind.g:13544:19: '\\\\' '\\\\'
+            	    // Gbind.g:13849:18: ( '\\\\' '\\\\' )
+            	    // Gbind.g:13849:19: '\\\\' '\\\\'
             	    {
             	    match('\\'); 
 
@@ -2356,7 +2380,7 @@ public class GbindLexer extends Lexer {
             	    }
             	    break;
             	case 3 :
-            	    // Gbind.g:13544:29: (~ ( '\"' | '\\\\' ) )
+            	    // Gbind.g:13849:29: (~ ( '\"' | '\\\\' ) )
             	    {
             	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
@@ -2377,8 +2401,8 @@ public class GbindLexer extends Lexer {
             } while (true);
 
 
-            // Gbind.g:13544:44: ( '\"' )
-            // Gbind.g:13544:45: '\"'
+            // Gbind.g:13849:44: ( '\"' )
+            // Gbind.g:13849:45: '\"'
             {
             match('\"'); 
 
@@ -2404,21 +2428,21 @@ public class GbindLexer extends Lexer {
         try {
             int _type = QUOTED_39_39_92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13546:16: ( ( ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' ) ) )
-            // Gbind.g:13547:2: ( ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' ) )
+            // Gbind.g:13851:16: ( ( ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' ) ) )
+            // Gbind.g:13852:2: ( ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' ) )
             {
-            // Gbind.g:13547:2: ( ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' ) )
-            // Gbind.g:13547:2: ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' )
+            // Gbind.g:13852:2: ( ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' ) )
+            // Gbind.g:13852:2: ( '\\'' ) ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )* ( '\\'' )
             {
-            // Gbind.g:13547:2: ( '\\'' )
-            // Gbind.g:13547:3: '\\''
+            // Gbind.g:13852:2: ( '\\'' )
+            // Gbind.g:13852:3: '\\''
             {
             match('\''); 
 
             }
 
 
-            // Gbind.g:13547:8: ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )*
+            // Gbind.g:13852:8: ( ( '\\\\' '\\'' ) | ( '\\\\' '\\\\' ) | (~ ( '\\'' | '\\\\' ) ) )*
             loop13:
             do {
                 int alt13=4;
@@ -2443,10 +2467,10 @@ public class GbindLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // Gbind.g:13547:9: ( '\\\\' '\\'' )
+            	    // Gbind.g:13852:9: ( '\\\\' '\\'' )
             	    {
-            	    // Gbind.g:13547:9: ( '\\\\' '\\'' )
-            	    // Gbind.g:13547:10: '\\\\' '\\''
+            	    // Gbind.g:13852:9: ( '\\\\' '\\'' )
+            	    // Gbind.g:13852:10: '\\\\' '\\''
             	    {
             	    match('\\'); 
 
@@ -2458,10 +2482,10 @@ public class GbindLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // Gbind.g:13547:20: ( '\\\\' '\\\\' )
+            	    // Gbind.g:13852:20: ( '\\\\' '\\\\' )
             	    {
-            	    // Gbind.g:13547:20: ( '\\\\' '\\\\' )
-            	    // Gbind.g:13547:21: '\\\\' '\\\\'
+            	    // Gbind.g:13852:20: ( '\\\\' '\\\\' )
+            	    // Gbind.g:13852:21: '\\\\' '\\\\'
             	    {
             	    match('\\'); 
 
@@ -2473,7 +2497,7 @@ public class GbindLexer extends Lexer {
             	    }
             	    break;
             	case 3 :
-            	    // Gbind.g:13547:31: (~ ( '\\'' | '\\\\' ) )
+            	    // Gbind.g:13852:31: (~ ( '\\'' | '\\\\' ) )
             	    {
             	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '&')||(input.LA(1) >= '(' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
@@ -2494,8 +2518,8 @@ public class GbindLexer extends Lexer {
             } while (true);
 
 
-            // Gbind.g:13547:47: ( '\\'' )
-            // Gbind.g:13547:48: '\\''
+            // Gbind.g:13852:47: ( '\\'' )
+            // Gbind.g:13852:48: '\\''
             {
             match('\''); 
 
@@ -2521,21 +2545,21 @@ public class GbindLexer extends Lexer {
         try {
             int _type = QUOTED_91_93;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gbind.g:13549:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
-            // Gbind.g:13550:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Gbind.g:13854:13: ( ( ( '[' ) (~ ( ']' ) )* ( ']' ) ) )
+            // Gbind.g:13855:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
             {
-            // Gbind.g:13550:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
-            // Gbind.g:13550:2: ( '[' ) (~ ( ']' ) )* ( ']' )
+            // Gbind.g:13855:2: ( ( '[' ) (~ ( ']' ) )* ( ']' ) )
+            // Gbind.g:13855:2: ( '[' ) (~ ( ']' ) )* ( ']' )
             {
-            // Gbind.g:13550:2: ( '[' )
-            // Gbind.g:13550:3: '['
+            // Gbind.g:13855:2: ( '[' )
+            // Gbind.g:13855:3: '['
             {
             match('['); 
 
             }
 
 
-            // Gbind.g:13550:7: (~ ( ']' ) )*
+            // Gbind.g:13855:7: (~ ( ']' ) )*
             loop14:
             do {
                 int alt14=2;
@@ -2569,8 +2593,8 @@ public class GbindLexer extends Lexer {
             } while (true);
 
 
-            // Gbind.g:13550:16: ( ']' )
-            // Gbind.g:13550:17: ']'
+            // Gbind.g:13855:16: ( ']' )
+            // Gbind.g:13855:17: ']'
             {
             match(']'); 
 
@@ -2592,8 +2616,8 @@ public class GbindLexer extends Lexer {
     // $ANTLR end "QUOTED_91_93"
 
     public void mTokens() throws RecognitionException {
-        // Gbind.g:1:8: ( T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | NOTOP | BOOLOP | INTOP | RELOP | EQ | NEQ | ADDOP | MULOP | COMMENT | FLOAT | INTEGER | STRINGTYPE | BOOLEANTYPE | INTEGERTYPE | REALTYPE | COLLECTIONTYPE | BAGTYPE | ORDEREDSETTYPE | SEQUENCETYPE | SETTYPE | OCLANYTYPE | OCLTYPE | TUPLETYPE | TUPLE | MAPTYPE | LAMBDATYPE | ENVTYPE | TEXT | LINEBREAK | WHITESPACE | QUOTED_34_34_92 | QUOTED_39_39_92 | QUOTED_91_93 )
-        int alt15=73;
+        // Gbind.g:1:8: ( T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | NOTOP | BOOLOP | INTOP | RELOP | EQ | NEQ | ADDOP | MULOP | COMMENT | FLOAT | INTEGER | STRINGTYPE | BOOLEANTYPE | INTEGERTYPE | REALTYPE | COLLECTIONTYPE | BAGTYPE | ORDEREDSETTYPE | SEQUENCETYPE | SETTYPE | OCLANYTYPE | OCLTYPE | TUPLETYPE | TUPLE | MAPTYPE | LAMBDATYPE | ENVTYPE | TEXT | LINEBREAK | WHITESPACE | QUOTED_34_34_92 | QUOTED_39_39_92 | QUOTED_91_93 )
+        int alt15=74;
         alt15 = dfa15.predict(input);
         switch (alt15) {
             case 1 :
@@ -2917,263 +2941,271 @@ public class GbindLexer extends Lexer {
                 }
                 break;
             case 41 :
-                // Gbind.g:1:250: NOTOP
+                // Gbind.g:1:250: T__77
+                {
+                mT__77(); 
+
+
+                }
+                break;
+            case 42 :
+                // Gbind.g:1:256: NOTOP
                 {
                 mNOTOP(); 
 
 
                 }
                 break;
-            case 42 :
-                // Gbind.g:1:256: BOOLOP
+            case 43 :
+                // Gbind.g:1:262: BOOLOP
                 {
                 mBOOLOP(); 
 
 
                 }
                 break;
-            case 43 :
-                // Gbind.g:1:263: INTOP
+            case 44 :
+                // Gbind.g:1:269: INTOP
                 {
                 mINTOP(); 
 
 
                 }
                 break;
-            case 44 :
-                // Gbind.g:1:269: RELOP
+            case 45 :
+                // Gbind.g:1:275: RELOP
                 {
                 mRELOP(); 
 
 
                 }
                 break;
-            case 45 :
-                // Gbind.g:1:275: EQ
+            case 46 :
+                // Gbind.g:1:281: EQ
                 {
                 mEQ(); 
 
 
                 }
                 break;
-            case 46 :
-                // Gbind.g:1:278: NEQ
+            case 47 :
+                // Gbind.g:1:284: NEQ
                 {
                 mNEQ(); 
 
 
                 }
                 break;
-            case 47 :
-                // Gbind.g:1:282: ADDOP
+            case 48 :
+                // Gbind.g:1:288: ADDOP
                 {
                 mADDOP(); 
 
 
                 }
                 break;
-            case 48 :
-                // Gbind.g:1:288: MULOP
+            case 49 :
+                // Gbind.g:1:294: MULOP
                 {
                 mMULOP(); 
 
 
                 }
                 break;
-            case 49 :
-                // Gbind.g:1:294: COMMENT
+            case 50 :
+                // Gbind.g:1:300: COMMENT
                 {
                 mCOMMENT(); 
 
 
                 }
                 break;
-            case 50 :
-                // Gbind.g:1:302: FLOAT
+            case 51 :
+                // Gbind.g:1:308: FLOAT
                 {
                 mFLOAT(); 
 
 
                 }
                 break;
-            case 51 :
-                // Gbind.g:1:308: INTEGER
+            case 52 :
+                // Gbind.g:1:314: INTEGER
                 {
                 mINTEGER(); 
 
 
                 }
                 break;
-            case 52 :
-                // Gbind.g:1:316: STRINGTYPE
+            case 53 :
+                // Gbind.g:1:322: STRINGTYPE
                 {
                 mSTRINGTYPE(); 
 
 
                 }
                 break;
-            case 53 :
-                // Gbind.g:1:327: BOOLEANTYPE
+            case 54 :
+                // Gbind.g:1:333: BOOLEANTYPE
                 {
                 mBOOLEANTYPE(); 
 
 
                 }
                 break;
-            case 54 :
-                // Gbind.g:1:339: INTEGERTYPE
+            case 55 :
+                // Gbind.g:1:345: INTEGERTYPE
                 {
                 mINTEGERTYPE(); 
 
 
                 }
                 break;
-            case 55 :
-                // Gbind.g:1:351: REALTYPE
+            case 56 :
+                // Gbind.g:1:357: REALTYPE
                 {
                 mREALTYPE(); 
 
 
                 }
                 break;
-            case 56 :
-                // Gbind.g:1:360: COLLECTIONTYPE
+            case 57 :
+                // Gbind.g:1:366: COLLECTIONTYPE
                 {
                 mCOLLECTIONTYPE(); 
 
 
                 }
                 break;
-            case 57 :
-                // Gbind.g:1:375: BAGTYPE
+            case 58 :
+                // Gbind.g:1:381: BAGTYPE
                 {
                 mBAGTYPE(); 
 
 
                 }
                 break;
-            case 58 :
-                // Gbind.g:1:383: ORDEREDSETTYPE
+            case 59 :
+                // Gbind.g:1:389: ORDEREDSETTYPE
                 {
                 mORDEREDSETTYPE(); 
 
 
                 }
                 break;
-            case 59 :
-                // Gbind.g:1:398: SEQUENCETYPE
+            case 60 :
+                // Gbind.g:1:404: SEQUENCETYPE
                 {
                 mSEQUENCETYPE(); 
 
 
                 }
                 break;
-            case 60 :
-                // Gbind.g:1:411: SETTYPE
+            case 61 :
+                // Gbind.g:1:417: SETTYPE
                 {
                 mSETTYPE(); 
 
 
                 }
                 break;
-            case 61 :
-                // Gbind.g:1:419: OCLANYTYPE
+            case 62 :
+                // Gbind.g:1:425: OCLANYTYPE
                 {
                 mOCLANYTYPE(); 
 
 
                 }
                 break;
-            case 62 :
-                // Gbind.g:1:430: OCLTYPE
+            case 63 :
+                // Gbind.g:1:436: OCLTYPE
                 {
                 mOCLTYPE(); 
 
 
                 }
                 break;
-            case 63 :
-                // Gbind.g:1:438: TUPLETYPE
+            case 64 :
+                // Gbind.g:1:444: TUPLETYPE
                 {
                 mTUPLETYPE(); 
 
 
                 }
                 break;
-            case 64 :
-                // Gbind.g:1:448: TUPLE
+            case 65 :
+                // Gbind.g:1:454: TUPLE
                 {
                 mTUPLE(); 
 
 
                 }
                 break;
-            case 65 :
-                // Gbind.g:1:454: MAPTYPE
+            case 66 :
+                // Gbind.g:1:460: MAPTYPE
                 {
                 mMAPTYPE(); 
 
 
                 }
                 break;
-            case 66 :
-                // Gbind.g:1:462: LAMBDATYPE
+            case 67 :
+                // Gbind.g:1:468: LAMBDATYPE
                 {
                 mLAMBDATYPE(); 
 
 
                 }
                 break;
-            case 67 :
-                // Gbind.g:1:473: ENVTYPE
+            case 68 :
+                // Gbind.g:1:479: ENVTYPE
                 {
                 mENVTYPE(); 
 
 
                 }
                 break;
-            case 68 :
-                // Gbind.g:1:481: TEXT
+            case 69 :
+                // Gbind.g:1:487: TEXT
                 {
                 mTEXT(); 
 
 
                 }
                 break;
-            case 69 :
-                // Gbind.g:1:486: LINEBREAK
+            case 70 :
+                // Gbind.g:1:492: LINEBREAK
                 {
                 mLINEBREAK(); 
 
 
                 }
                 break;
-            case 70 :
-                // Gbind.g:1:496: WHITESPACE
+            case 71 :
+                // Gbind.g:1:502: WHITESPACE
                 {
                 mWHITESPACE(); 
 
 
                 }
                 break;
-            case 71 :
-                // Gbind.g:1:507: QUOTED_34_34_92
+            case 72 :
+                // Gbind.g:1:513: QUOTED_34_34_92
                 {
                 mQUOTED_34_34_92(); 
 
 
                 }
                 break;
-            case 72 :
-                // Gbind.g:1:523: QUOTED_39_39_92
+            case 73 :
+                // Gbind.g:1:529: QUOTED_39_39_92
                 {
                 mQUOTED_39_39_92(); 
 
 
                 }
                 break;
-            case 73 :
-                // Gbind.g:1:539: QUOTED_91_93
+            case 74 :
+                // Gbind.g:1:545: QUOTED_91_93
                 {
                 mQUOTED_91_93(); 
 
@@ -3188,144 +3220,146 @@ public class GbindLexer extends Lexer {
 
     protected DFA15 dfa15 = new DFA15(this);
     static final String DFA15_eotS =
-        "\6\uffff\1\40\1\uffff\1\65\1\uffff\15\54\3\uffff\3\54\1\uffff\1"+
-        "\35\3\uffff\1\130\11\54\12\uffff\15\54\1\164\1\54\1\166\1\167\5"+
-        "\54\1\175\4\54\1\u0082\4\54\3\uffff\13\54\1\55\1\uffff\5\54\1\u009a"+
-        "\1\u009b\2\54\1\u009e\2\54\1\u00a1\1\54\1\uffff\1\54\2\uffff\1\54"+
-        "\1\u00a6\1\54\1\u009b\1\54\1\uffff\4\54\1\uffff\1\54\1\u00af\2\175"+
-        "\2\54\1\u00b2\1\54\1\u00b4\4\54\1\u00b9\1\54\1\u00bb\7\54\2\uffff"+
-        "\1\u00c3\1\54\1\uffff\2\54\1\uffff\4\54\1\uffff\3\54\1\u00ce\2\54"+
-        "\1\u00d1\1\u00d2\1\uffff\2\54\1\uffff\1\54\1\uffff\1\54\1\u00d7"+
-        "\2\54\1\uffff\1\54\1\uffff\5\54\1\u00e0\1\54\1\uffff\1\u00e2\1\u00e3"+
-        "\10\54\1\uffff\1\54\1\u00ed\2\uffff\4\54\1\uffff\1\54\1\u00f4\2"+
-        "\54\1\u00f7\3\54\1\uffff\1\54\2\uffff\1\54\1\u00fd\1\u00fe\3\54"+
-        "\1\u0102\1\54\1\u0104\1\uffff\1\u0105\5\54\1\uffff\1\u010b\1\54"+
-        "\1\uffff\1\u010d\1\54\1\u010f\1\u0110\1\u0111\2\uffff\1\175\1\u0112"+
-        "\1\54\1\uffff\1\54\2\uffff\1\54\1\u0116\1\u0117\2\54\1\uffff\1\54"+
-        "\1\uffff\1\54\4\uffff\2\54\1\u011e\2\uffff\4\54\1\u0123\1\u0124"+
-        "\1\uffff\1\54\1\u0126\1\54\1\u0128\2\uffff\1\u0129\1\uffff\1\54"+
-        "\2\uffff\1\u012b\1\uffff";
+        "\6\uffff\1\41\1\uffff\1\66\1\uffff\16\55\3\uffff\3\55\1\uffff\1"+
+        "\36\3\uffff\1\132\11\55\12\uffff\15\55\1\166\1\55\1\170\1\171\5"+
+        "\55\1\177\4\55\1\u0084\5\55\3\uffff\13\55\1\56\1\uffff\5\55\1\u009d"+
+        "\1\u009e\2\55\1\u00a1\2\55\1\u00a4\1\55\1\uffff\1\55\2\uffff\1\55"+
+        "\1\u00a9\1\55\1\u009e\1\55\1\uffff\4\55\1\uffff\2\55\1\u00b3\2\177"+
+        "\2\55\1\u00b6\1\55\1\u00b8\4\55\1\u00bd\1\55\1\u00bf\7\55\2\uffff"+
+        "\1\u00c7\1\55\1\uffff\2\55\1\uffff\4\55\1\uffff\3\55\1\u00d2\2\55"+
+        "\1\u00d5\1\u00d6\1\u00d7\1\uffff\2\55\1\uffff\1\55\1\uffff\1\55"+
+        "\1\u00dc\2\55\1\uffff\1\55\1\uffff\5\55\1\u00e5\1\55\1\uffff\1\u00e7"+
+        "\1\u00e8\10\55\1\uffff\1\55\1\u00f2\3\uffff\4\55\1\uffff\1\55\1"+
+        "\u00f9\2\55\1\u00fc\3\55\1\uffff\1\55\2\uffff\1\55\1\u0102\1\u0103"+
+        "\3\55\1\u0107\1\55\1\u0109\1\uffff\1\u010a\5\55\1\uffff\1\u0110"+
+        "\1\55\1\uffff\1\u0112\1\55\1\u0114\1\u0115\1\u0116\2\uffff\1\177"+
+        "\1\u0117\1\55\1\uffff\1\55\2\uffff\1\55\1\u011b\1\u011c\2\55\1\uffff"+
+        "\1\55\1\uffff\1\55\4\uffff\2\55\1\u0123\2\uffff\4\55\1\u0128\1\u0129"+
+        "\1\uffff\1\55\1\u012b\1\55\1\u012d\2\uffff\1\u012e\1\uffff\1\55"+
+        "\2\uffff\1\u0130\1\uffff";
     static final String DFA15_eofS =
-        "\u012c\uffff";
+        "\u0131\uffff";
     static final String DFA15_minS =
         "\1\11\5\uffff\1\55\1\uffff\1\72\1\uffff\1\143\1\151\1\154\1\145"+
-        "\1\154\1\141\1\145\1\146\2\145\1\160\1\145\1\150\3\uffff\1\157\1"+
+        "\1\154\1\141\1\145\1\146\2\145\1\160\1\145\2\150\3\uffff\1\157\1"+
         "\156\1\157\1\uffff\1\76\3\uffff\1\56\1\145\1\141\1\156\1\145\1\157"+
         "\1\165\2\141\1\156\2\uffff\1\0\7\uffff\1\154\1\144\1\156\1\141\1"+
         "\156\1\146\1\166\1\163\1\144\1\154\1\141\1\162\1\154\1\60\1\160"+
         "\2\60\1\145\2\164\1\144\1\145\1\60\1\154\1\141\1\160\1\145\1\60"+
-        "\1\165\1\164\1\144\1\162\3\uffff\1\162\1\161\1\157\1\147\1\164\1"+
-        "\141\1\154\2\160\1\155\1\166\1\0\1\uffff\1\101\1\145\1\144\1\163"+
-        "\1\164\2\60\1\145\1\151\1\60\1\163\1\164\1\60\1\160\1\uffff\1\154"+
-        "\2\uffff\1\162\1\60\1\141\1\60\1\162\1\uffff\1\146\1\164\1\145\1"+
-        "\156\1\uffff\1\145\3\60\1\151\1\165\1\60\1\154\1\60\1\145\3\154"+
-        "\1\60\1\142\1\60\2\156\1\171\1\162\1\151\1\163\1\145\2\uffff\1\60"+
-        "\1\146\1\uffff\1\145\1\165\1\uffff\1\145\1\162\1\151\1\141\1\uffff"+
-        "\1\155\1\154\1\141\1\60\1\151\1\162\2\60\1\uffff\1\156\1\145\1\uffff"+
-        "\1\145\1\uffff\1\147\1\60\2\145\1\uffff\1\144\1\uffff\1\144\1\171"+
-        "\1\160\1\145\1\156\1\60\1\170\1\uffff\2\60\2\162\1\164\1\145\1\164"+
-        "\1\157\1\145\1\164\1\uffff\1\143\1\60\2\uffff\1\147\1\156\1\141"+
-        "\1\145\1\uffff\1\143\1\60\1\141\1\145\1\60\1\145\1\144\1\147\1\uffff"+
-        "\1\164\2\uffff\1\145\2\60\1\163\1\145\1\144\1\60\1\151\1\60\1\uffff"+
-        "\1\60\1\143\1\156\1\162\1\164\1\171\1\uffff\1\60\1\146\1\uffff\1"+
-        "\60\1\123\3\60\2\uffff\2\60\1\145\1\uffff\1\157\2\uffff\1\145\2"+
-        "\60\1\151\1\160\1\uffff\1\151\1\uffff\1\145\4\uffff\1\154\1\156"+
-        "\1\60\2\uffff\1\157\1\145\1\156\1\164\2\60\1\uffff\1\156\1\60\1"+
-        "\145\1\60\2\uffff\1\60\1\uffff\1\144\2\uffff\1\60\1\uffff";
+        "\1\165\1\145\1\164\1\144\1\162\3\uffff\1\162\1\161\1\157\1\147\1"+
+        "\164\1\141\1\154\2\160\1\155\1\166\1\0\1\uffff\1\101\1\145\1\144"+
+        "\1\163\1\164\2\60\1\145\1\151\1\60\1\163\1\164\1\60\1\160\1\uffff"+
+        "\1\154\2\uffff\1\162\1\60\1\141\1\60\1\162\1\uffff\1\146\1\164\1"+
+        "\145\1\156\1\uffff\1\145\1\156\3\60\1\151\1\165\1\60\1\154\1\60"+
+        "\1\145\3\154\1\60\1\142\1\60\2\156\1\171\1\162\1\151\1\163\1\145"+
+        "\2\uffff\1\60\1\146\1\uffff\1\145\1\165\1\uffff\1\145\1\162\1\151"+
+        "\1\141\1\uffff\1\155\1\154\1\141\1\60\1\151\1\162\3\60\1\uffff\1"+
+        "\156\1\145\1\uffff\1\145\1\uffff\1\147\1\60\2\145\1\uffff\1\144"+
+        "\1\uffff\1\144\1\171\1\160\1\145\1\156\1\60\1\170\1\uffff\2\60\2"+
+        "\162\1\164\1\145\1\164\1\157\1\145\1\164\1\uffff\1\143\1\60\3\uffff"+
+        "\1\147\1\156\1\141\1\145\1\uffff\1\143\1\60\1\141\1\145\1\60\1\145"+
+        "\1\144\1\147\1\uffff\1\164\2\uffff\1\145\2\60\1\163\1\145\1\144"+
+        "\1\60\1\151\1\60\1\uffff\1\60\1\143\1\156\1\162\1\164\1\171\1\uffff"+
+        "\1\60\1\146\1\uffff\1\60\1\123\3\60\2\uffff\2\60\1\145\1\uffff\1"+
+        "\157\2\uffff\1\145\2\60\1\151\1\160\1\uffff\1\151\1\uffff\1\145"+
+        "\4\uffff\1\154\1\156\1\60\2\uffff\1\157\1\145\1\156\1\164\2\60\1"+
+        "\uffff\1\156\1\60\1\145\1\60\2\uffff\1\60\1\uffff\1\144\2\uffff"+
+        "\1\60\1\uffff";
     static final String DFA15_maxS =
         "\1\175\5\uffff\1\76\1\uffff\1\72\1\uffff\1\162\1\151\1\157\1\151"+
-        "\1\156\1\157\1\145\1\164\1\145\1\157\1\162\1\165\1\162\3\uffff\1"+
-        "\157\1\156\1\157\1\uffff\1\76\3\uffff\1\71\1\164\1\157\1\156\1\145"+
-        "\1\157\1\165\2\141\1\156\2\uffff\1\uffff\7\uffff\1\154\1\144\1\156"+
-        "\1\141\1\156\1\146\1\166\1\163\1\166\1\154\1\141\1\162\1\154\1\172"+
-        "\1\160\2\172\1\145\2\164\1\144\1\145\1\172\1\154\1\141\1\160\1\145"+
-        "\1\172\1\165\1\164\1\144\1\162\3\uffff\1\162\1\164\1\157\1\147\1"+
-        "\164\1\141\1\154\2\160\1\155\1\166\1\uffff\1\uffff\1\125\1\145\1"+
-        "\144\1\163\1\164\2\172\1\145\1\151\1\172\1\163\1\164\1\172\1\160"+
-        "\1\uffff\1\157\2\uffff\1\162\1\172\1\141\1\172\1\162\1\uffff\1\146"+
-        "\1\164\1\145\1\156\1\uffff\1\145\3\172\1\151\1\165\1\172\1\154\1"+
-        "\172\1\145\3\154\1\172\1\142\1\172\2\156\1\171\1\162\1\151\1\163"+
-        "\1\145\2\uffff\1\172\1\146\1\uffff\1\145\1\165\1\uffff\1\145\1\162"+
-        "\1\151\1\141\1\uffff\1\155\1\154\1\141\1\172\1\151\1\162\2\172\1"+
-        "\uffff\1\156\1\145\1\uffff\1\145\1\uffff\1\147\1\172\2\145\1\uffff"+
-        "\1\144\1\uffff\1\144\1\171\1\160\1\145\1\156\1\172\1\170\1\uffff"+
-        "\2\172\2\162\1\164\1\145\1\164\1\157\1\145\1\164\1\uffff\1\143\1"+
-        "\172\2\uffff\1\147\1\156\1\141\1\145\1\uffff\1\143\1\172\1\141\1"+
-        "\145\1\172\1\145\1\144\1\147\1\uffff\1\164\2\uffff\1\145\2\172\1"+
-        "\163\1\145\1\144\1\172\1\151\1\172\1\uffff\1\172\1\143\1\156\1\162"+
-        "\1\164\1\171\1\uffff\1\172\1\146\1\uffff\1\172\1\123\3\172\2\uffff"+
-        "\2\172\1\145\1\uffff\1\157\2\uffff\1\145\2\172\1\151\1\160\1\uffff"+
-        "\1\151\1\uffff\1\145\4\uffff\1\154\1\156\1\172\2\uffff\1\157\1\145"+
-        "\1\156\1\164\2\172\1\uffff\1\156\1\172\1\145\1\172\2\uffff\1\172"+
-        "\1\uffff\1\144\2\uffff\1\172\1\uffff";
+        "\1\156\1\157\1\145\1\164\1\145\1\157\1\162\1\165\1\162\1\150\3\uffff"+
+        "\1\157\1\156\1\157\1\uffff\1\76\3\uffff\1\71\1\164\1\157\1\156\1"+
+        "\145\1\157\1\165\2\141\1\156\2\uffff\1\uffff\7\uffff\1\154\1\144"+
+        "\1\156\1\141\1\156\1\146\1\166\1\163\1\166\1\154\1\141\1\162\1\154"+
+        "\1\172\1\160\2\172\1\145\2\164\1\144\1\145\1\172\1\154\1\141\1\160"+
+        "\1\145\1\172\1\165\1\145\1\164\1\144\1\162\3\uffff\1\162\1\164\1"+
+        "\157\1\147\1\164\1\141\1\154\2\160\1\155\1\166\1\uffff\1\uffff\1"+
+        "\125\1\145\1\144\1\163\1\164\2\172\1\145\1\151\1\172\1\163\1\164"+
+        "\1\172\1\160\1\uffff\1\157\2\uffff\1\162\1\172\1\141\1\172\1\162"+
+        "\1\uffff\1\146\1\164\1\145\1\156\1\uffff\1\145\1\156\3\172\1\151"+
+        "\1\165\1\172\1\154\1\172\1\145\3\154\1\172\1\142\1\172\2\156\1\171"+
+        "\1\162\1\151\1\163\1\145\2\uffff\1\172\1\146\1\uffff\1\145\1\165"+
+        "\1\uffff\1\145\1\162\1\151\1\141\1\uffff\1\155\1\154\1\141\1\172"+
+        "\1\151\1\162\3\172\1\uffff\1\156\1\145\1\uffff\1\145\1\uffff\1\147"+
+        "\1\172\2\145\1\uffff\1\144\1\uffff\1\144\1\171\1\160\1\145\1\156"+
+        "\1\172\1\170\1\uffff\2\172\2\162\1\164\1\145\1\164\1\157\1\145\1"+
+        "\164\1\uffff\1\143\1\172\3\uffff\1\147\1\156\1\141\1\145\1\uffff"+
+        "\1\143\1\172\1\141\1\145\1\172\1\145\1\144\1\147\1\uffff\1\164\2"+
+        "\uffff\1\145\2\172\1\163\1\145\1\144\1\172\1\151\1\172\1\uffff\1"+
+        "\172\1\143\1\156\1\162\1\164\1\171\1\uffff\1\172\1\146\1\uffff\1"+
+        "\172\1\123\3\172\2\uffff\2\172\1\145\1\uffff\1\157\2\uffff\1\145"+
+        "\2\172\1\151\1\160\1\uffff\1\151\1\uffff\1\145\4\uffff\1\154\1\156"+
+        "\1\172\2\uffff\1\157\1\145\1\156\1\164\2\172\1\uffff\1\156\1\172"+
+        "\1\145\1\172\2\uffff\1\172\1\uffff\1\144\2\uffff\1\172\1\uffff";
     static final String DFA15_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\uffff\1\7\1\uffff\1\12\15\uffff\1"+
-        "\46\1\47\1\50\3\uffff\1\54\1\uffff\1\55\1\57\1\60\12\uffff\1\104"+
-        "\1\105\1\uffff\1\106\1\107\1\111\1\6\1\61\1\11\1\10\40\uffff\1\56"+
-        "\1\62\1\63\14\uffff\1\110\16\uffff\1\27\1\uffff\1\31\1\32\5\uffff"+
-        "\1\52\4\uffff\1\44\27\uffff\1\17\1\53\2\uffff\1\22\2\uffff\1\25"+
-        "\4\uffff\1\34\10\uffff\1\51\2\uffff\1\74\1\uffff\1\71\4\uffff\1"+
-        "\101\1\uffff\1\103\7\uffff\1\20\12\uffff\1\40\2\uffff\1\43\1\45"+
-        "\4\uffff\1\67\10\uffff\1\15\1\uffff\1\21\1\23\11\uffff\1\42\6\uffff"+
-        "\1\100\2\uffff\1\75\5\uffff\1\26\1\30\3\uffff\1\36\1\uffff\1\41"+
-        "\1\64\5\uffff\1\102\1\uffff\1\76\1\uffff\1\14\1\16\1\24\1\33\3\uffff"+
-        "\1\65\1\66\6\uffff\1\73\4\uffff\1\35\1\37\1\uffff\1\77\1\uffff\1"+
-        "\72\1\70\1\uffff\1\13";
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\uffff\1\7\1\uffff\1\12\16\uffff\1"+
+        "\47\1\50\1\51\3\uffff\1\55\1\uffff\1\56\1\60\1\61\12\uffff\1\105"+
+        "\1\106\1\uffff\1\107\1\110\1\112\1\6\1\62\1\11\1\10\41\uffff\1\57"+
+        "\1\63\1\64\14\uffff\1\111\16\uffff\1\27\1\uffff\1\31\1\32\5\uffff"+
+        "\1\53\4\uffff\1\44\30\uffff\1\17\1\54\2\uffff\1\22\2\uffff\1\25"+
+        "\4\uffff\1\34\11\uffff\1\52\2\uffff\1\75\1\uffff\1\72\4\uffff\1"+
+        "\102\1\uffff\1\104\7\uffff\1\20\12\uffff\1\40\2\uffff\1\43\1\45"+
+        "\1\46\4\uffff\1\70\10\uffff\1\15\1\uffff\1\21\1\23\11\uffff\1\42"+
+        "\6\uffff\1\101\2\uffff\1\76\5\uffff\1\26\1\30\3\uffff\1\36\1\uffff"+
+        "\1\41\1\65\5\uffff\1\103\1\uffff\1\77\1\uffff\1\14\1\16\1\24\1\33"+
+        "\3\uffff\1\66\1\67\6\uffff\1\74\4\uffff\1\35\1\37\1\uffff\1\100"+
+        "\1\uffff\1\73\1\71\1\uffff\1\13";
     static final String DFA15_specialS =
-        "\56\uffff\1\1\65\uffff\1\0\u00c7\uffff}>";
+        "\57\uffff\1\0\66\uffff\1\1\u00ca\uffff}>";
     static final String[] DFA15_transitionS = {
-            "\1\57\1\55\1\uffff\1\57\1\55\22\uffff\1\57\1\1\1\60\1\2\3\uffff"+
-            "\1\56\1\3\1\4\1\41\1\40\1\5\1\6\1\7\1\41\12\42\1\10\1\11\1\36"+
-            "\1\37\1\35\2\uffff\1\54\1\44\1\47\1\54\1\53\3\54\1\45\2\54\1"+
-            "\52\1\51\1\54\1\12\2\54\1\46\1\43\1\50\6\54\1\61\5\uffff\1\33"+
-            "\1\13\1\14\1\15\1\16\1\17\1\54\1\20\1\21\2\54\1\22\1\23\1\32"+
-            "\1\24\3\54\1\25\1\26\3\54\1\34\2\54\1\27\1\30\1\31",
+            "\1\60\1\56\1\uffff\1\60\1\56\22\uffff\1\60\1\1\1\61\1\2\3\uffff"+
+            "\1\57\1\3\1\4\1\42\1\41\1\5\1\6\1\7\1\42\12\43\1\10\1\11\1\37"+
+            "\1\40\1\36\2\uffff\1\55\1\45\1\50\1\55\1\54\3\55\1\46\2\55\1"+
+            "\53\1\52\1\55\1\12\2\55\1\47\1\44\1\51\6\55\1\62\5\uffff\1\34"+
+            "\1\13\1\14\1\15\1\16\1\17\1\55\1\20\1\21\2\55\1\22\1\23\1\33"+
+            "\1\24\3\55\1\25\1\26\2\55\1\27\1\35\2\55\1\30\1\31\1\32",
             "",
             "",
             "",
             "",
             "",
-            "\1\63\2\uffff\12\42\4\uffff\1\62",
+            "\1\64\2\uffff\12\43\4\uffff\1\63",
             "",
-            "\1\64",
+            "\1\65",
             "",
-            "\1\66\16\uffff\1\67",
-            "\1\70",
-            "\1\71\2\uffff\1\72",
-            "\1\73\3\uffff\1\74",
-            "\1\75\1\uffff\1\76",
-            "\1\77\3\uffff\1\100\11\uffff\1\101",
-            "\1\102",
-            "\1\103\6\uffff\1\104\1\105\4\uffff\1\106\1\107",
-            "\1\110",
-            "\1\111\11\uffff\1\112",
-            "\1\113\1\uffff\1\114",
-            "\1\115\16\uffff\1\116\1\117",
-            "\1\120\6\uffff\1\121\2\uffff\1\122",
-            "",
-            "",
-            "",
-            "\1\123",
+            "\1\67\16\uffff\1\70",
+            "\1\71",
+            "\1\72\2\uffff\1\73",
+            "\1\74\3\uffff\1\75",
+            "\1\76\1\uffff\1\77",
+            "\1\100\3\uffff\1\101\11\uffff\1\102",
+            "\1\103",
+            "\1\104\6\uffff\1\105\1\106\4\uffff\1\107\1\110",
+            "\1\111",
+            "\1\112\11\uffff\1\113",
+            "\1\114\1\uffff\1\115",
+            "\1\116\16\uffff\1\117\1\120",
+            "\1\121\6\uffff\1\122\2\uffff\1\123",
             "\1\124",
+            "",
+            "",
+            "",
             "\1\125",
-            "",
             "\1\126",
+            "\1\127",
+            "",
+            "\1\130",
             "",
             "",
             "",
-            "\1\127\1\uffff\12\42",
-            "\1\132\16\uffff\1\131",
-            "\1\134\15\uffff\1\133",
-            "\1\135",
-            "\1\136",
+            "\1\131\1\uffff\12\43",
+            "\1\134\16\uffff\1\133",
+            "\1\136\15\uffff\1\135",
             "\1\137",
             "\1\140",
             "\1\141",
             "\1\142",
             "\1\143",
+            "\1\144",
+            "\1\145",
             "",
             "",
-            "\162\145\1\144\uff8d\145",
+            "\162\147\1\146\uff8d\147",
             "",
             "",
             "",
@@ -3333,251 +3367,255 @@ public class GbindLexer extends Lexer {
             "",
             "",
             "",
-            "\1\146",
-            "\1\147",
             "\1\150",
             "\1\151",
             "\1\152",
             "\1\153",
             "\1\154",
             "\1\155",
-            "\1\156\21\uffff\1\157",
-            "\1\160",
-            "\1\161",
+            "\1\156",
+            "\1\157",
+            "\1\160\21\uffff\1\161",
             "\1\162",
             "\1\163",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\164",
             "\1\165",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\1\170",
-            "\1\171",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\167",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\172",
             "\1\173",
             "\1\174",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\175",
             "\1\176",
-            "\1\177",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u0080",
             "\1\u0081",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u0082",
             "\1\u0083",
-            "\1\u0084",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u0085",
             "\1\u0086",
-            "",
-            "",
-            "",
             "\1\u0087",
-            "\1\u0088\2\uffff\1\u0089",
+            "\1\u0088",
+            "\1\u0089",
+            "",
+            "",
+            "",
             "\1\u008a",
-            "\1\u008b",
-            "\1\u008c",
+            "\1\u008b\2\uffff\1\u008c",
             "\1\u008d",
             "\1\u008e",
             "\1\u008f",
             "\1\u0090",
             "\1\u0091",
             "\1\u0092",
-            "\0\145",
+            "\1\u0093",
+            "\1\u0094",
+            "\1\u0095",
+            "\0\147",
             "",
-            "\1\u0094\22\uffff\1\u0095\1\u0093",
-            "\1\u0096",
-            "\1\u0097",
-            "\1\u0098",
+            "\1\u0097\22\uffff\1\u0098\1\u0096",
             "\1\u0099",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u009a",
+            "\1\u009b",
             "\1\u009c",
-            "\1\u009d",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u009f",
             "\1\u00a0",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00a2",
-            "",
-            "\1\u00a4\2\uffff\1\u00a3",
-            "",
-            "",
+            "\1\u00a3",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00a5",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\1\u00a7",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\24\54\1\u00a8\5\54",
-            "\1\u00a9",
             "",
+            "\1\u00a7\2\uffff\1\u00a6",
+            "",
+            "",
+            "\1\u00a8",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00aa",
-            "\1\u00ab",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\24\55\1\u00ab\5\55",
             "\1\u00ac",
-            "\1\u00ad",
             "",
+            "\1\u00ad",
             "\1\u00ae",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00af",
             "\1\u00b0",
+            "",
             "\1\u00b1",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\1\u00b3",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00b2",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00b4",
             "\1\u00b5",
-            "\1\u00b6",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00b7",
-            "\1\u00b8",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00b9",
             "\1\u00ba",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00bb",
             "\1\u00bc",
-            "\1\u00bd",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00be",
-            "\1\u00bf",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00c0",
             "\1\u00c1",
             "\1\u00c2",
-            "",
-            "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00c3",
             "\1\u00c4",
-            "",
             "\1\u00c5",
             "\1\u00c6",
             "",
-            "\1\u00c7",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00c8",
+            "",
             "\1\u00c9",
             "\1\u00ca",
             "",
             "\1\u00cb",
             "\1\u00cc",
             "\1\u00cd",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00ce",
+            "",
             "\1\u00cf",
             "\1\u00d0",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "",
+            "\1\u00d1",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00d3",
             "\1\u00d4",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
-            "\1\u00d5",
-            "",
-            "\1\u00d6",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u00d8",
             "\1\u00d9",
             "",
             "\1\u00da",
             "",
             "\1\u00db",
-            "\1\u00dc",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00dd",
             "\1\u00de",
-            "\1\u00df",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\1\u00e1",
             "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00df",
+            "",
+            "\1\u00e0",
+            "\1\u00e1",
+            "\1\u00e2",
+            "\1\u00e3",
             "\1\u00e4",
-            "\1\u00e5",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00e6",
-            "\1\u00e7",
-            "\1\u00e8",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00e9",
             "\1\u00ea",
             "\1\u00eb",
-            "",
             "\1\u00ec",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "",
-            "",
+            "\1\u00ed",
             "\1\u00ee",
             "\1\u00ef",
             "\1\u00f0",
-            "\1\u00f1",
             "",
-            "\1\u00f2",
-            "\12\54\7\uffff\23\54\1\u00f3\6\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u00f1",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "",
+            "",
+            "",
+            "\1\u00f3",
+            "\1\u00f4",
             "\1\u00f5",
             "\1\u00f6",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\1\u00f8",
-            "\1\u00f9",
+            "",
+            "\1\u00f7",
+            "\12\55\7\uffff\23\55\1\u00f8\6\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u00fa",
-            "",
             "\1\u00fb",
-            "",
-            "",
-            "\1\u00fc",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u00fd",
+            "\1\u00fe",
             "\1\u00ff",
+            "",
             "\1\u0100",
+            "",
+            "",
             "\1\u0101",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\1\u0103",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u0104",
+            "\1\u0105",
             "\1\u0106",
-            "\1\u0107",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u0108",
-            "\1\u0109",
-            "\1\u010a",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u010b",
             "\1\u010c",
-            "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u010d",
             "\1\u010e",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u010f",
             "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u0111",
             "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u0113",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
-            "\1\u0114",
             "",
-            "",
-            "\1\u0115",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u0118",
+            "",
             "\1\u0119",
             "",
+            "",
             "\1\u011a",
-            "",
-            "\1\u011b",
-            "",
-            "",
-            "",
-            "",
-            "\1\u011c",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "\1\u011d",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "",
+            "\1\u011e",
             "",
             "\1\u011f",
+            "",
             "\1\u0120",
+            "",
+            "",
+            "",
+            "",
             "\1\u0121",
             "\1\u0122",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
+            "",
+            "\1\u0124",
             "\1\u0125",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\1\u0126",
             "\1\u0127",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
-            "",
-            "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
             "\1\u012a",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "\1\u012c",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             "",
             "",
-            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
+            "",
+            "\1\u012f",
+            "",
+            "",
+            "\12\55\7\uffff\32\55\4\uffff\1\55\1\uffff\32\55",
             ""
     };
 
@@ -3611,29 +3649,29 @@ public class GbindLexer extends Lexer {
             this.transition = DFA15_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | NOTOP | BOOLOP | INTOP | RELOP | EQ | NEQ | ADDOP | MULOP | COMMENT | FLOAT | INTEGER | STRINGTYPE | BOOLEANTYPE | INTEGERTYPE | REALTYPE | COLLECTIONTYPE | BAGTYPE | ORDEREDSETTYPE | SEQUENCETYPE | SETTYPE | OCLANYTYPE | OCLTYPE | TUPLETYPE | TUPLE | MAPTYPE | LAMBDATYPE | ENVTYPE | TEXT | LINEBREAK | WHITESPACE | QUOTED_34_34_92 | QUOTED_39_39_92 | QUOTED_91_93 );";
+            return "1:1: Tokens : ( T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | NOTOP | BOOLOP | INTOP | RELOP | EQ | NEQ | ADDOP | MULOP | COMMENT | FLOAT | INTEGER | STRINGTYPE | BOOLEANTYPE | INTEGERTYPE | REALTYPE | COLLECTIONTYPE | BAGTYPE | ORDEREDSETTYPE | SEQUENCETYPE | SETTYPE | OCLANYTYPE | OCLTYPE | TUPLETYPE | TUPLE | MAPTYPE | LAMBDATYPE | ENVTYPE | TEXT | LINEBREAK | WHITESPACE | QUOTED_34_34_92 | QUOTED_39_39_92 | QUOTED_91_93 );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA15_100 = input.LA(1);
+                        int LA15_47 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA15_100 >= '\u0000' && LA15_100 <= '\uFFFF')) ) {s = 101;}
+                        if ( (LA15_47=='r') ) {s = 102;}
 
-                        else s = 45;
+                        else if ( ((LA15_47 >= '\u0000' && LA15_47 <= 'q')||(LA15_47 >= 's' && LA15_47 <= '\uFFFF')) ) {s = 103;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA15_46 = input.LA(1);
+                        int LA15_102 = input.LA(1);
 
                         s = -1;
-                        if ( (LA15_46=='r') ) {s = 100;}
+                        if ( ((LA15_102 >= '\u0000' && LA15_102 <= '\uFFFF')) ) {s = 103;}
 
-                        else if ( ((LA15_46 >= '\u0000' && LA15_46 <= 'q')||(LA15_46 >= 's' && LA15_46 <= '\uFFFF')) ) {s = 101;}
+                        else s = 46;
 
                         if ( s>=0 ) return s;
                         break;

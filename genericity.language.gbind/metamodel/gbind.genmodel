@@ -275,10 +275,12 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/helpers"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/conceptMetaclasses"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/concreteMetaclasses"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/metamodel"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/metamodelURI"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/metamodel"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/name"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/componentURI"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/UsedMetamodel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/UsedMetamodel/metamodelURI"/>
       </genClasses>
       <genClasses image="false" ecoreClass="gbind.ecore#//dsl/Metaclass">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/Metaclass/name"/>

@@ -26,6 +26,6 @@ Require-Bundle: org.eclipse.core.resources,
   genericity.language.gbind
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: gbind.resource.gbind.ui
-Bundle-Activator: gbind.resource.gbind.ui.GbindUIPlugin
+Export-Package: genericity.language.gbind.resource.gbind.ui
+Bundle-Activator: genericity.language.gbind.resource.gbind.ui.GbindUIPlugin
 Import-Package: org.eclipse.ui.texteditor.spelling

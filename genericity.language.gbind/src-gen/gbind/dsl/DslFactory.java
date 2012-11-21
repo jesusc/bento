@@ -35,6 +35,15 @@ public interface DslFactory extends EFactory {
 	BindingModel createBindingModel();
 
 	/**
+	 * Returns a new object of class '<em>Used Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Used Metamodel</em>'.
+	 * @generated
+	 */
+	UsedMetamodel createUsedMetamodel();
+
+	/**
 	 * Returns a new object of class '<em>Concept Metaclass</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

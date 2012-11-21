@@ -69,7 +69,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
     }
     public GcomponentParser(TokenStream input, RecognizerSharedState state) {
         super(input, state);
-        this.state.initializeRuleMemo(48 + 1);
+        this.state.initializeRuleMemo(49 + 1);
          
 
     }
@@ -2243,7 +2243,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_core_CompositeComponent"
-    // Gcomponent.g:1530:1: parse_genericity_language_gcomponent_core_CompositeComponent returns [genericity.language.gcomponent.core.CompositeComponent element = null] : a0= 'composite' a1= 'component' (a2= TEXT ) a3= '{' ( (a4= 'uses' (a5= QUOTED_34_34 ) ) )+ ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) ) )+ ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )? (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition ) a18= '}' ;
+    // Gcomponent.g:1530:1: parse_genericity_language_gcomponent_core_CompositeComponent returns [genericity.language.gcomponent.core.CompositeComponent element = null] : a0= 'composite' a1= 'component' (a2= TEXT ) a3= '{' ( (a4= 'uses' (a5= QUOTED_34_34 ) ) )+ ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )? ) )+ ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )? (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition ) a18= '}' ;
     public final genericity.language.gcomponent.core.CompositeComponent parse_genericity_language_gcomponent_core_CompositeComponent() throws RecognitionException {
         genericity.language.gcomponent.core.CompositeComponent element =  null;
 
@@ -2281,8 +2281,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return element; }
 
-            // Gcomponent.g:1533:2: (a0= 'composite' a1= 'component' (a2= TEXT ) a3= '{' ( (a4= 'uses' (a5= QUOTED_34_34 ) ) )+ ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) ) )+ ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )? (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition ) a18= '}' )
-            // Gcomponent.g:1534:2: a0= 'composite' a1= 'component' (a2= TEXT ) a3= '{' ( (a4= 'uses' (a5= QUOTED_34_34 ) ) )+ ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) ) )+ ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )? (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition ) a18= '}'
+            // Gcomponent.g:1533:2: (a0= 'composite' a1= 'component' (a2= TEXT ) a3= '{' ( (a4= 'uses' (a5= QUOTED_34_34 ) ) )+ ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )? ) )+ ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )? (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition ) a18= '}' )
+            // Gcomponent.g:1534:2: a0= 'composite' a1= 'component' (a2= TEXT ) a3= '{' ( (a4= 'uses' (a5= QUOTED_34_34 ) ) )+ ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )? ) )+ ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )? (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition ) a18= '}'
             {
             a0=(Token)match(input,25,FOLLOW_25_in_parse_genericity_language_gcomponent_core_CompositeComponent1302); if (state.failed) return element;
 
@@ -2483,24 +2483,24 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[83]);
             	}
 
-            // Gcomponent.g:1677:2: ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) ) )+
-            int cnt8=0;
-            loop8:
+            // Gcomponent.g:1677:2: ( ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )? ) )+
+            int cnt9=0;
+            loop9:
             do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA8_0==31) ) {
-                    alt8=1;
+                if ( (LA9_0==31) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt8) {
+                switch (alt9) {
             	case 1 :
-            	    // Gcomponent.g:1678:3: ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )
+            	    // Gcomponent.g:1678:3: ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )? )
             	    {
-            	    // Gcomponent.g:1678:3: ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )
-            	    // Gcomponent.g:1679:4: (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) )
+            	    // Gcomponent.g:1678:3: ( (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )? )
+            	    // Gcomponent.g:1679:4: (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) ) (a8= 'target' (a9_0= parse_genericity_language_gcomponent_core_Concept ) ) (a10= 'source' (a11_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) (a12= 'target' (a13_0= parse_genericity_language_gcomponent_core_ParameterModel ) ) ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )?
             	    {
             	    // Gcomponent.g:1679:4: (a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept ) )
             	    // Gcomponent.g:1680:5: a6= 'source' (a7_0= parse_genericity_language_gcomponent_core_Concept )
@@ -2752,56 +2752,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    if ( state.backtracking==0 ) {
             	    					// expected elements (follow set)
             	    					addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[94]);
-            	    				}
-
-            	    }
-
-
-            	    if ( state.backtracking==0 ) {
-            	    				// expected elements (follow set)
-            	    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[95]);
-            	    			}
-
-            	    // Gcomponent.g:1867:4: ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) )
-            	    // Gcomponent.g:1868:5: (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration )
-            	    {
-            	    // Gcomponent.g:1868:5: (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration )
-            	    // Gcomponent.g:1869:6: a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration
-            	    {
-            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_core_BindingDeclaration_in_parse_genericity_language_gcomponent_core_CompositeComponent1800);
-            	    a14_0=parse_genericity_language_gcomponent_core_BindingDeclaration();
-
-            	    state._fsp--;
-            	    if (state.failed) return element;
-
-            	    if ( state.backtracking==0 ) {
-            	    						if (terminateParsing) {
-            	    							throw new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTerminateParsingException();
-            	    						}
-            	    						if (element == null) {
-            	    							element = genericity.language.gcomponent.core.CoreFactory.eINSTANCE.createCompositeComponent();
-            	    							startIncompleteElement(element);
-            	    						}
-            	    						if (a14_0 != null) {
-            	    							if (a14_0 != null) {
-            	    								Object value = a14_0;
-            	    								addObjectToList(element, genericity.language.gcomponent.core.CorePackage.COMPOSITE_COMPONENT__BINDINGS, value);
-            	    								completedElement(value, true);
-            	    							}
-            	    							collectHiddenTokens(element);
-            	    							retrieveLayoutInformation(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_7_0_0_5_0_0_4_0_0_0, a14_0, true);
-            	    							copyLocalizationInfos(a14_0, element);
-            	    						}
-            	    					}
-
-            	    }
-
-
-            	    if ( state.backtracking==0 ) {
-            	    					// expected elements (follow set)
+            	    					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[95]);
             	    					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[96]);
-            	    					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[97]);
-            	    					addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[98]);
+            	    					addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[97]);
             	    				}
 
             	    }
@@ -2809,9 +2762,79 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
+            	    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[98]);
             	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[99]);
             	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[100]);
             	    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[101]);
+            	    			}
+
+            	    // Gcomponent.g:1873:4: ( ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) ) )?
+            	    int alt8=2;
+            	    int LA8_0 = input.LA(1);
+
+            	    if ( (LA8_0==22) ) {
+            	        alt8=1;
+            	    }
+            	    switch (alt8) {
+            	        case 1 :
+            	            // Gcomponent.g:1874:5: ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) )
+            	            {
+            	            // Gcomponent.g:1874:5: ( (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration ) )
+            	            // Gcomponent.g:1875:6: (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration )
+            	            {
+            	            // Gcomponent.g:1875:6: (a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration )
+            	            // Gcomponent.g:1876:7: a14_0= parse_genericity_language_gcomponent_core_BindingDeclaration
+            	            {
+            	            pushFollow(FOLLOW_parse_genericity_language_gcomponent_core_BindingDeclaration_in_parse_genericity_language_gcomponent_core_CompositeComponent1808);
+            	            a14_0=parse_genericity_language_gcomponent_core_BindingDeclaration();
+
+            	            state._fsp--;
+            	            if (state.failed) return element;
+
+            	            if ( state.backtracking==0 ) {
+            	            							if (terminateParsing) {
+            	            								throw new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentTerminateParsingException();
+            	            							}
+            	            							if (element == null) {
+            	            								element = genericity.language.gcomponent.core.CoreFactory.eINSTANCE.createCompositeComponent();
+            	            								startIncompleteElement(element);
+            	            							}
+            	            							if (a14_0 != null) {
+            	            								if (a14_0 != null) {
+            	            									Object value = a14_0;
+            	            									addObjectToList(element, genericity.language.gcomponent.core.CorePackage.COMPOSITE_COMPONENT__BINDINGS, value);
+            	            									completedElement(value, true);
+            	            								}
+            	            								collectHiddenTokens(element);
+            	            								retrieveLayoutInformation(element, genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_7_0_0_5_0_0_4_0_0_0, a14_0, true);
+            	            								copyLocalizationInfos(a14_0, element);
+            	            							}
+            	            						}
+
+            	            }
+
+
+            	            if ( state.backtracking==0 ) {
+            	            						// expected elements (follow set)
+            	            						addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[102]);
+            	            						addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[103]);
+            	            						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[104]);
+            	            					}
+
+            	            }
+
+
+            	            }
+            	            break;
+
+            	    }
+
+
+            	    if ( state.backtracking==0 ) {
+            	    				// expected elements (follow set)
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[105]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[106]);
+            	    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[107]);
             	    			}
 
             	    }
@@ -2821,38 +2844,38 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    break;
 
             	default :
-            	    if ( cnt8 >= 1 ) break loop8;
+            	    if ( cnt9 >= 1 ) break loop9;
             	    if (state.backtracking>0) {state.failed=true; return element;}
                         EarlyExitException eee =
-                            new EarlyExitException(8, input);
+                            new EarlyExitException(9, input);
                         throw eee;
                 }
-                cnt8++;
+                cnt9++;
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[102]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[103]);
-            		addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[104]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[108]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[109]);
+            		addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[110]);
             	}
 
-            // Gcomponent.g:1913:2: ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // Gcomponent.g:1921:2: ( (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ ) )?
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0==36) ) {
-                alt10=1;
+            if ( (LA11_0==36) ) {
+                alt11=1;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
-                    // Gcomponent.g:1914:3: (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ )
+                    // Gcomponent.g:1922:3: (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ )
                     {
-                    // Gcomponent.g:1914:3: (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ )
-                    // Gcomponent.g:1915:4: a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+
+                    // Gcomponent.g:1922:3: (a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+ )
+                    // Gcomponent.g:1923:4: a15= 'variants' ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+
                     {
-                    a15=(Token)match(input,36,FOLLOW_36_in_parse_genericity_language_gcomponent_core_CompositeComponent1868); if (state.failed) return element;
+                    a15=(Token)match(input,36,FOLLOW_36_in_parse_genericity_language_gcomponent_core_CompositeComponent1891); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -2866,33 +2889,33 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[105]);
-                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[106]);
+                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[111]);
+                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[112]);
                     			}
 
-                    // Gcomponent.g:1930:4: ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+
-                    int cnt9=0;
-                    loop9:
+                    // Gcomponent.g:1938:4: ( ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) ) )+
+                    int cnt10=0;
+                    loop10:
                     do {
-                        int alt9=2;
-                        int LA9_0 = input.LA(1);
+                        int alt10=2;
+                        int LA10_0 = input.LA(1);
 
-                        if ( (LA9_0==11||LA9_0==13) ) {
-                            alt9=1;
+                        if ( (LA10_0==11||LA10_0==13) ) {
+                            alt10=1;
                         }
 
 
-                        switch (alt9) {
+                        switch (alt10) {
                     	case 1 :
-                    	    // Gcomponent.g:1931:5: ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) )
+                    	    // Gcomponent.g:1939:5: ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) )
                     	    {
-                    	    // Gcomponent.g:1931:5: ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) )
-                    	    // Gcomponent.g:1932:6: (a16_0= parse_genericity_language_gcomponent_variants_Parameter )
+                    	    // Gcomponent.g:1939:5: ( (a16_0= parse_genericity_language_gcomponent_variants_Parameter ) )
+                    	    // Gcomponent.g:1940:6: (a16_0= parse_genericity_language_gcomponent_variants_Parameter )
                     	    {
-                    	    // Gcomponent.g:1932:6: (a16_0= parse_genericity_language_gcomponent_variants_Parameter )
-                    	    // Gcomponent.g:1933:7: a16_0= parse_genericity_language_gcomponent_variants_Parameter
+                    	    // Gcomponent.g:1940:6: (a16_0= parse_genericity_language_gcomponent_variants_Parameter )
+                    	    // Gcomponent.g:1941:7: a16_0= parse_genericity_language_gcomponent_variants_Parameter
                     	    {
-                    	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_variants_Parameter_in_parse_genericity_language_gcomponent_core_CompositeComponent1909);
+                    	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_variants_Parameter_in_parse_genericity_language_gcomponent_core_CompositeComponent1932);
                     	    a16_0=parse_genericity_language_gcomponent_variants_Parameter();
 
                     	    state._fsp--;
@@ -2923,9 +2946,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                     	    if ( state.backtracking==0 ) {
                     	    						// expected elements (follow set)
-                    	    						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[107]);
-                    	    						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[108]);
-                    	    						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[109]);
+                    	    						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[113]);
+                    	    						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[114]);
+                    	    						addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[115]);
                     	    					}
 
                     	    }
@@ -2935,21 +2958,21 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     	    break;
 
                     	default :
-                    	    if ( cnt9 >= 1 ) break loop9;
+                    	    if ( cnt10 >= 1 ) break loop10;
                     	    if (state.backtracking>0) {state.failed=true; return element;}
                                 EarlyExitException eee =
-                                    new EarlyExitException(9, input);
+                                    new EarlyExitException(10, input);
                                 throw eee;
                         }
-                        cnt9++;
+                        cnt10++;
                     } while (true);
 
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[110]);
-                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[111]);
-                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[112]);
+                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[116]);
+                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[117]);
+                    				addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[118]);
                     			}
 
                     }
@@ -2963,13 +2986,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[113]);
+            		addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[119]);
             	}
 
-            // Gcomponent.g:1976:2: (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition )
-            // Gcomponent.g:1977:3: a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition
+            // Gcomponent.g:1984:2: (a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition )
+            // Gcomponent.g:1985:3: a17_0= parse_genericity_language_gcomponent_flowcontrol_Composition
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Composition_in_parse_genericity_language_gcomponent_core_CompositeComponent1987);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Composition_in_parse_genericity_language_gcomponent_core_CompositeComponent2010);
             a17_0=parse_genericity_language_gcomponent_flowcontrol_Composition();
 
             state._fsp--;
@@ -3000,10 +3023,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[114]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[120]);
             	}
 
-            a18=(Token)match(input,41,FOLLOW_41_in_parse_genericity_language_gcomponent_core_CompositeComponent2005); if (state.failed) return element;
+            a18=(Token)match(input,41,FOLLOW_41_in_parse_genericity_language_gcomponent_core_CompositeComponent2028); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3039,7 +3062,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_core_BindingDeclaration"
-    // Gcomponent.g:2017:1: parse_genericity_language_gcomponent_core_BindingDeclaration returns [genericity.language.gcomponent.core.BindingDeclaration element = null] : a0= 'binding' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ;
+    // Gcomponent.g:2025:1: parse_genericity_language_gcomponent_core_BindingDeclaration returns [genericity.language.gcomponent.core.BindingDeclaration element = null] : a0= 'binding' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ;
     public final genericity.language.gcomponent.core.BindingDeclaration parse_genericity_language_gcomponent_core_BindingDeclaration() throws RecognitionException {
         genericity.language.gcomponent.core.BindingDeclaration element =  null;
 
@@ -3055,10 +3078,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return element; }
 
-            // Gcomponent.g:2020:2: (a0= 'binding' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) )
-            // Gcomponent.g:2021:2: a0= 'binding' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 )
+            // Gcomponent.g:2028:2: (a0= 'binding' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) )
+            // Gcomponent.g:2029:2: a0= 'binding' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 )
             {
-            a0=(Token)match(input,22,FOLLOW_22_in_parse_genericity_language_gcomponent_core_BindingDeclaration2034); if (state.failed) return element;
+            a0=(Token)match(input,22,FOLLOW_22_in_parse_genericity_language_gcomponent_core_BindingDeclaration2057); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3072,13 +3095,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[115]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[121]);
             	}
 
-            // Gcomponent.g:2035:2: (a1= TEXT )
-            // Gcomponent.g:2036:3: a1= TEXT
+            // Gcomponent.g:2043:2: (a1= TEXT )
+            // Gcomponent.g:2044:3: a1= TEXT
             {
-            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_core_BindingDeclaration2052); if (state.failed) return element;
+            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_core_BindingDeclaration2075); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3114,10 +3137,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[116]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[122]);
             	}
 
-            a2=(Token)match(input,17,FOLLOW_17_in_parse_genericity_language_gcomponent_core_BindingDeclaration2073); if (state.failed) return element;
+            a2=(Token)match(input,17,FOLLOW_17_in_parse_genericity_language_gcomponent_core_BindingDeclaration2096); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3131,13 +3154,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[117]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[123]);
             	}
 
-            // Gcomponent.g:2085:2: (a3= QUOTED_34_34 )
-            // Gcomponent.g:2086:3: a3= QUOTED_34_34
+            // Gcomponent.g:2093:2: (a3= QUOTED_34_34 )
+            // Gcomponent.g:2094:3: a3= QUOTED_34_34
             {
-            a3=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_core_BindingDeclaration2091); if (state.failed) return element;
+            a3=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_core_BindingDeclaration2114); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3173,9 +3196,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[118]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[119]);
-            		addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[120]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[124]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[125]);
+            		addExpectedElement(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getCompositeComponent(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[126]);
             	}
 
             }
@@ -3198,7 +3221,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_Composition"
-    // Gcomponent.g:2125:1: parse_genericity_language_gcomponent_flowcontrol_Composition returns [genericity.language.gcomponent.flowcontrol.Composition element = null] : a0= 'compose' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ;
+    // Gcomponent.g:2133:1: parse_genericity_language_gcomponent_flowcontrol_Composition returns [genericity.language.gcomponent.flowcontrol.Composition element = null] : a0= 'compose' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ;
     public final genericity.language.gcomponent.flowcontrol.Composition parse_genericity_language_gcomponent_flowcontrol_Composition() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.Composition element =  null;
 
@@ -3213,10 +3236,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 11) ) { return element; }
 
-            // Gcomponent.g:2128:2: (a0= 'compose' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )
-            // Gcomponent.g:2129:2: a0= 'compose' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            // Gcomponent.g:2136:2: (a0= 'compose' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )
+            // Gcomponent.g:2137:2: a0= 'compose' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
             {
-            a0=(Token)match(input,24,FOLLOW_24_in_parse_genericity_language_gcomponent_flowcontrol_Composition2127); if (state.failed) return element;
+            a0=(Token)match(input,24,FOLLOW_24_in_parse_genericity_language_gcomponent_flowcontrol_Composition2150); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3230,15 +3253,15 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[121]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[122]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[123]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[127]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[128]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[129]);
             	}
 
-            // Gcomponent.g:2145:2: (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
-            // Gcomponent.g:2146:3: a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
+            // Gcomponent.g:2153:2: (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            // Gcomponent.g:2154:3: a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Composition2145);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Composition2168);
             a1_0=parse_genericity_language_gcomponent_flowcontrol_CompositionStep();
 
             state._fsp--;
@@ -3269,7 +3292,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[124]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[130]);
             	}
 
             }
@@ -3292,7 +3315,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_Xor"
-    // Gcomponent.g:2173:1: parse_genericity_language_gcomponent_flowcontrol_Xor returns [genericity.language.gcomponent.flowcontrol.Xor element = null] : a0= 'xor' ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+ ;
+    // Gcomponent.g:2181:1: parse_genericity_language_gcomponent_flowcontrol_Xor returns [genericity.language.gcomponent.flowcontrol.Xor element = null] : a0= 'xor' ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+ ;
     public final genericity.language.gcomponent.flowcontrol.Xor parse_genericity_language_gcomponent_flowcontrol_Xor() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.Xor element =  null;
 
@@ -3308,10 +3331,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 12) ) { return element; }
 
-            // Gcomponent.g:2176:2: (a0= 'xor' ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+ )
-            // Gcomponent.g:2177:2: a0= 'xor' ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+
+            // Gcomponent.g:2184:2: (a0= 'xor' ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+ )
+            // Gcomponent.g:2185:2: a0= 'xor' ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+
             {
-            a0=(Token)match(input,39,FOLLOW_39_in_parse_genericity_language_gcomponent_flowcontrol_Xor2178); if (state.failed) return element;
+            a0=(Token)match(input,39,FOLLOW_39_in_parse_genericity_language_gcomponent_flowcontrol_Xor2201); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3325,35 +3348,35 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[125]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[131]);
             	}
 
-            // Gcomponent.g:2191:2: ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+
-            int cnt11=0;
-            loop11:
+            // Gcomponent.g:2199:2: ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )+
+            int cnt12=0;
+            loop12:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( (LA11_0==37) ) {
-                    int LA11_2 = input.LA(2);
+                if ( (LA12_0==37) ) {
+                    int LA12_2 = input.LA(2);
 
-                    if ( (synpred11_Gcomponent()) ) {
-                        alt11=1;
+                    if ( (synpred12_Gcomponent()) ) {
+                        alt12=1;
                     }
 
 
                 }
 
 
-                switch (alt11) {
+                switch (alt12) {
             	case 1 :
-            	    // Gcomponent.g:2192:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
+            	    // Gcomponent.g:2200:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
             	    {
-            	    // Gcomponent.g:2192:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
-            	    // Gcomponent.g:2193:4: a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
+            	    // Gcomponent.g:2200:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
+            	    // Gcomponent.g:2201:4: a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
             	    {
-            	    a1=(Token)match(input,37,FOLLOW_37_in_parse_genericity_language_gcomponent_flowcontrol_Xor2201); if (state.failed) return element;
+            	    a1=(Token)match(input,37,FOLLOW_37_in_parse_genericity_language_gcomponent_flowcontrol_Xor2224); if (state.failed) return element;
 
             	    if ( state.backtracking==0 ) {
             	    				if (element == null) {
@@ -3367,13 +3390,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[126]);
+            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[132]);
             	    			}
 
-            	    // Gcomponent.g:2207:4: (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
-            	    // Gcomponent.g:2208:5: a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond
+            	    // Gcomponent.g:2215:4: (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
+            	    // Gcomponent.g:2216:5: a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond
             	    {
-            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_parse_genericity_language_gcomponent_flowcontrol_Xor2227);
+            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_parse_genericity_language_gcomponent_flowcontrol_Xor2250);
             	    a2_0=parse_genericity_language_gcomponent_flowcontrol_XorCond();
 
             	    state._fsp--;
@@ -3404,11 +3427,11 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[127]);
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[128]);
-            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[129]);
-            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[130]);
-            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[131]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[133]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[134]);
+            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[135]);
+            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[136]);
+            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[137]);
             	    			}
 
             	    }
@@ -3418,23 +3441,23 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    break;
 
             	default :
-            	    if ( cnt11 >= 1 ) break loop11;
+            	    if ( cnt12 >= 1 ) break loop12;
             	    if (state.backtracking>0) {state.failed=true; return element;}
                         EarlyExitException eee =
-                            new EarlyExitException(11, input);
+                            new EarlyExitException(12, input);
                         throw eee;
                 }
-                cnt11++;
+                cnt12++;
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[132]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[133]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[134]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[135]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[136]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[138]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[139]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[140]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[141]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[142]);
             	}
 
             }
@@ -3457,7 +3480,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_XorCond"
-    // Gcomponent.g:2250:1: parse_genericity_language_gcomponent_flowcontrol_XorCond returns [genericity.language.gcomponent.flowcontrol.XorCond element = null] : (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue ) a1= '->' (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ;
+    // Gcomponent.g:2258:1: parse_genericity_language_gcomponent_flowcontrol_XorCond returns [genericity.language.gcomponent.flowcontrol.XorCond element = null] : (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue ) a1= '->' (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ;
     public final genericity.language.gcomponent.flowcontrol.XorCond parse_genericity_language_gcomponent_flowcontrol_XorCond() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.XorCond element =  null;
 
@@ -3474,13 +3497,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 13) ) { return element; }
 
-            // Gcomponent.g:2253:2: ( (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue ) a1= '->' (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )
-            // Gcomponent.g:2254:2: (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue ) a1= '->' (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            // Gcomponent.g:2261:2: ( (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue ) a1= '->' (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )
+            // Gcomponent.g:2262:2: (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue ) a1= '->' (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
             {
-            // Gcomponent.g:2254:2: (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue )
-            // Gcomponent.g:2255:3: a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue
+            // Gcomponent.g:2262:2: (a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue )
+            // Gcomponent.g:2263:3: a0_0= parse_genericity_language_gcomponent_flowcontrol_BooleanValue
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_BooleanValue_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2287);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_BooleanValue_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2310);
             a0_0=parse_genericity_language_gcomponent_flowcontrol_BooleanValue();
 
             state._fsp--;
@@ -3511,10 +3534,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[137]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[143]);
             	}
 
-            a1=(Token)match(input,14,FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2305); if (state.failed) return element;
+            a1=(Token)match(input,14,FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2328); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3528,15 +3551,15 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[138]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[139]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[140]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[144]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[145]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[146]);
             	}
 
-            // Gcomponent.g:2296:2: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
-            // Gcomponent.g:2297:3: a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
+            // Gcomponent.g:2304:2: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            // Gcomponent.g:2305:3: a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2323);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2346);
             a2_0=parse_genericity_language_gcomponent_flowcontrol_CompositionStep();
 
             state._fsp--;
@@ -3567,11 +3590,11 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[141]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[142]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[143]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[144]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[145]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[147]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[148]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[149]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[150]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[151]);
             	}
 
             }
@@ -3594,7 +3617,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_Apply"
-    // Gcomponent.g:2328:1: parse_genericity_language_gcomponent_flowcontrol_Apply returns [genericity.language.gcomponent.flowcontrol.Apply element = null] : a0= 'apply' (a1= TEXT ) a2= '(' (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a6= ')' a7= '->' a8= '(' ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )? ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a12= ')' ;
+    // Gcomponent.g:2336:1: parse_genericity_language_gcomponent_flowcontrol_Apply returns [genericity.language.gcomponent.flowcontrol.Apply element = null] : a0= 'apply' (a1= TEXT ) a2= '(' (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a6= ')' a7= '->' a8= '(' ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )? ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a12= ')' ;
     public final genericity.language.gcomponent.flowcontrol.Apply parse_genericity_language_gcomponent_flowcontrol_Apply() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.Apply element =  null;
 
@@ -3623,10 +3646,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 14) ) { return element; }
 
-            // Gcomponent.g:2331:2: (a0= 'apply' (a1= TEXT ) a2= '(' (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a6= ')' a7= '->' a8= '(' ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )? ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a12= ')' )
-            // Gcomponent.g:2332:2: a0= 'apply' (a1= TEXT ) a2= '(' (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a6= ')' a7= '->' a8= '(' ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )? ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a12= ')'
+            // Gcomponent.g:2339:2: (a0= 'apply' (a1= TEXT ) a2= '(' (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a6= ')' a7= '->' a8= '(' ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )? ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a12= ')' )
+            // Gcomponent.g:2340:2: a0= 'apply' (a1= TEXT ) a2= '(' (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a6= ')' a7= '->' a8= '(' ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )? ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )* a12= ')'
             {
-            a0=(Token)match(input,20,FOLLOW_20_in_parse_genericity_language_gcomponent_flowcontrol_Apply2356); if (state.failed) return element;
+            a0=(Token)match(input,20,FOLLOW_20_in_parse_genericity_language_gcomponent_flowcontrol_Apply2379); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3640,13 +3663,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[146]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[152]);
             	}
 
-            // Gcomponent.g:2346:2: (a1= TEXT )
-            // Gcomponent.g:2347:3: a1= TEXT
+            // Gcomponent.g:2354:2: (a1= TEXT )
+            // Gcomponent.g:2355:3: a1= TEXT
             {
-            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_Apply2374); if (state.failed) return element;
+            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_Apply2397); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3686,10 +3709,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[147]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[153]);
             	}
 
-            a2=(Token)match(input,9,FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2395); if (state.failed) return element;
+            a2=(Token)match(input,9,FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2418); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3703,13 +3726,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[148]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[154]);
             	}
 
-            // Gcomponent.g:2400:2: (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
-            // Gcomponent.g:2401:3: a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
+            // Gcomponent.g:2408:2: (a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+            // Gcomponent.g:2409:3: a3_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2413);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2436);
             a3_0=parse_genericity_language_gcomponent_flowcontrol_ApplyParameter();
 
             state._fsp--;
@@ -3740,29 +3763,29 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[149]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[150]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[155]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[156]);
             	}
 
-            // Gcomponent.g:2427:2: ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )*
-            loop12:
+            // Gcomponent.g:2435:2: ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )*
+            loop13:
             do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA12_0==12) ) {
-                    alt12=1;
+                if ( (LA13_0==12) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt12) {
+                switch (alt13) {
             	case 1 :
-            	    // Gcomponent.g:2428:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
+            	    // Gcomponent.g:2436:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
             	    {
-            	    // Gcomponent.g:2428:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
-            	    // Gcomponent.g:2429:4: a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+            	    // Gcomponent.g:2436:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
+            	    // Gcomponent.g:2437:4: a4= ',' (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
             	    {
-            	    a4=(Token)match(input,12,FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2440); if (state.failed) return element;
+            	    a4=(Token)match(input,12,FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2463); if (state.failed) return element;
 
             	    if ( state.backtracking==0 ) {
             	    				if (element == null) {
@@ -3776,13 +3799,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[151]);
+            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[157]);
             	    			}
 
-            	    // Gcomponent.g:2443:4: (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
-            	    // Gcomponent.g:2444:5: a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
+            	    // Gcomponent.g:2451:4: (a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+            	    // Gcomponent.g:2452:5: a5_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
             	    {
-            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2466);
+            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2489);
             	    a5_0=parse_genericity_language_gcomponent_flowcontrol_ApplyParameter();
 
             	    state._fsp--;
@@ -3813,8 +3836,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[152]);
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[153]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[158]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[159]);
             	    			}
 
             	    }
@@ -3824,18 +3847,18 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    break;
 
             	default :
-            	    break loop12;
+            	    break loop13;
                 }
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[154]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[155]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[160]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[161]);
             	}
 
-            a6=(Token)match(input,10,FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2507); if (state.failed) return element;
+            a6=(Token)match(input,10,FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2530); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3849,10 +3872,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[156]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[162]);
             	}
 
-            a7=(Token)match(input,14,FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_Apply2521); if (state.failed) return element;
+            a7=(Token)match(input,14,FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_Apply2544); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3866,10 +3889,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[157]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[163]);
             	}
 
-            a8=(Token)match(input,9,FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2535); if (state.failed) return element;
+            a8=(Token)match(input,9,FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2558); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3883,26 +3906,26 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[158]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[159]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[160]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[164]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[165]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[166]);
             	}
 
-            // Gcomponent.g:2522:2: ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )?
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            // Gcomponent.g:2530:2: ( (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )?
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA13_0==TEXT) ) {
-                alt13=1;
+            if ( (LA14_0==TEXT) ) {
+                alt14=1;
             }
-            switch (alt13) {
+            switch (alt14) {
                 case 1 :
-                    // Gcomponent.g:2523:3: (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+                    // Gcomponent.g:2531:3: (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
                     {
-                    // Gcomponent.g:2523:3: (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
-                    // Gcomponent.g:2524:4: a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
+                    // Gcomponent.g:2531:3: (a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+                    // Gcomponent.g:2532:4: a9_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2558);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2581);
                     a9_0=parse_genericity_language_gcomponent_flowcontrol_ApplyParameter();
 
                     state._fsp--;
@@ -3939,29 +3962,29 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[161]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[162]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[167]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[168]);
             	}
 
-            // Gcomponent.g:2551:2: ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )*
-            loop14:
+            // Gcomponent.g:2559:2: ( (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) ) )*
+            loop15:
             do {
-                int alt14=2;
-                int LA14_0 = input.LA(1);
+                int alt15=2;
+                int LA15_0 = input.LA(1);
 
-                if ( (LA14_0==12) ) {
-                    alt14=1;
+                if ( (LA15_0==12) ) {
+                    alt15=1;
                 }
 
 
-                switch (alt14) {
+                switch (alt15) {
             	case 1 :
-            	    // Gcomponent.g:2552:3: (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
+            	    // Gcomponent.g:2560:3: (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
             	    {
-            	    // Gcomponent.g:2552:3: (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
-            	    // Gcomponent.g:2553:4: a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+            	    // Gcomponent.g:2560:3: (a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter ) )
+            	    // Gcomponent.g:2561:4: a10= ',' (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
             	    {
-            	    a10=(Token)match(input,12,FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2593); if (state.failed) return element;
+            	    a10=(Token)match(input,12,FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2616); if (state.failed) return element;
 
             	    if ( state.backtracking==0 ) {
             	    				if (element == null) {
@@ -3975,13 +3998,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[163]);
+            	    				addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[169]);
             	    			}
 
-            	    // Gcomponent.g:2567:4: (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
-            	    // Gcomponent.g:2568:5: a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
+            	    // Gcomponent.g:2575:4: (a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter )
+            	    // Gcomponent.g:2576:5: a11_0= parse_genericity_language_gcomponent_flowcontrol_ApplyParameter
             	    {
-            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2619);
+            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2642);
             	    a11_0=parse_genericity_language_gcomponent_flowcontrol_ApplyParameter();
 
             	    state._fsp--;
@@ -4012,8 +4035,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[164]);
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[165]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[170]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[171]);
             	    			}
 
             	    }
@@ -4023,18 +4046,18 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    break;
 
             	default :
-            	    break loop14;
+            	    break loop15;
                 }
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[166]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[167]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[172]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[173]);
             	}
 
-            a12=(Token)match(input,10,FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2660); if (state.failed) return element;
+            a12=(Token)match(input,10,FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2683); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4048,11 +4071,11 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[168]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[169]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[170]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[171]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[172]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[174]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[175]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[176]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[177]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[178]);
             	}
 
             }
@@ -4075,7 +4098,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_ApplyParameter"
-    // Gcomponent.g:2622:1: parse_genericity_language_gcomponent_flowcontrol_ApplyParameter returns [genericity.language.gcomponent.flowcontrol.ApplyParameter element = null] : (a0= TEXT ) ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )? ;
+    // Gcomponent.g:2630:1: parse_genericity_language_gcomponent_flowcontrol_ApplyParameter returns [genericity.language.gcomponent.flowcontrol.ApplyParameter element = null] : (a0= TEXT ) ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )? ;
     public final genericity.language.gcomponent.flowcontrol.ApplyParameter parse_genericity_language_gcomponent_flowcontrol_ApplyParameter() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.ApplyParameter element =  null;
 
@@ -4099,13 +4122,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return element; }
 
-            // Gcomponent.g:2625:2: ( (a0= TEXT ) ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )? )
-            // Gcomponent.g:2626:2: (a0= TEXT ) ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )?
+            // Gcomponent.g:2633:2: ( (a0= TEXT ) ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )? )
+            // Gcomponent.g:2634:2: (a0= TEXT ) ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )?
             {
-            // Gcomponent.g:2626:2: (a0= TEXT )
-            // Gcomponent.g:2627:3: a0= TEXT
+            // Gcomponent.g:2634:2: (a0= TEXT )
+            // Gcomponent.g:2635:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2693); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2716); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4145,26 +4168,26 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[173]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[174]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[175]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[179]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[180]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[181]);
             	}
 
-            // Gcomponent.g:2668:2: ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )?
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            // Gcomponent.g:2676:2: ( (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) ) )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
 
-            if ( (LA16_0==15) ) {
-                alt16=1;
+            if ( (LA17_0==15) ) {
+                alt17=1;
             }
-            switch (alt16) {
+            switch (alt17) {
                 case 1 :
-                    // Gcomponent.g:2669:3: (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) )
+                    // Gcomponent.g:2677:3: (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) )
                     {
-                    // Gcomponent.g:2669:3: (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) )
-                    // Gcomponent.g:2670:4: a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' )
+                    // Gcomponent.g:2677:3: (a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' ) )
+                    // Gcomponent.g:2678:4: a1= ':' ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' )
                     {
-                    a1=(Token)match(input,15,FOLLOW_15_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2723); if (state.failed) return element;
+                    a1=(Token)match(input,15,FOLLOW_15_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2746); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -4178,27 +4201,27 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[176]);
-                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[177]);
+                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[182]);
+                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[183]);
                     			}
 
-                    // Gcomponent.g:2685:4: ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' )
-                    int alt15=2;
-                    int LA15_0 = input.LA(1);
+                    // Gcomponent.g:2693:4: ( (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']' | (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']' )
+                    int alt16=2;
+                    int LA16_0 = input.LA(1);
 
-                    if ( (LA15_0==TEXT) ) {
-                        int LA15_1 = input.LA(2);
+                    if ( (LA16_0==TEXT) ) {
+                        int LA16_1 = input.LA(2);
 
-                        if ( (LA15_1==16) ) {
-                            alt15=1;
+                        if ( (LA16_1==16) ) {
+                            alt16=1;
                         }
-                        else if ( (LA15_1==18) ) {
-                            alt15=2;
+                        else if ( (LA16_1==18) ) {
+                            alt16=2;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return element;}
                             NoViableAltException nvae =
-                                new NoViableAltException("", 15, 1, input);
+                                new NoViableAltException("", 16, 1, input);
 
                             throw nvae;
 
@@ -4207,19 +4230,19 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     else {
                         if (state.backtracking>0) {state.failed=true; return element;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 15, 0, input);
+                            new NoViableAltException("", 16, 0, input);
 
                         throw nvae;
 
                     }
-                    switch (alt15) {
+                    switch (alt16) {
                         case 1 :
-                            // Gcomponent.g:2686:5: (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']'
+                            // Gcomponent.g:2694:5: (a2= TEXT ) a3= '::' (a4= TEXT ) a5= '[' (a6= TEXT ) a7= ']'
                             {
-                            // Gcomponent.g:2686:5: (a2= TEXT )
-                            // Gcomponent.g:2687:6: a2= TEXT
+                            // Gcomponent.g:2694:5: (a2= TEXT )
+                            // Gcomponent.g:2695:6: a2= TEXT
                             {
-                            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2756); if (state.failed) return element;
+                            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2779); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             						if (terminateParsing) {
@@ -4259,10 +4282,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[178]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[184]);
                             				}
 
-                            a3=(Token)match(input,16,FOLLOW_16_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2795); if (state.failed) return element;
+                            a3=(Token)match(input,16,FOLLOW_16_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2818); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -4276,13 +4299,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[179]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[185]);
                             				}
 
-                            // Gcomponent.g:2740:5: (a4= TEXT )
-                            // Gcomponent.g:2741:6: a4= TEXT
+                            // Gcomponent.g:2748:5: (a4= TEXT )
+                            // Gcomponent.g:2749:6: a4= TEXT
                             {
-                            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2825); if (state.failed) return element;
+                            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2848); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             						if (terminateParsing) {
@@ -4322,10 +4345,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[180]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[186]);
                             				}
 
-                            a5=(Token)match(input,18,FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2864); if (state.failed) return element;
+                            a5=(Token)match(input,18,FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2887); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -4339,13 +4362,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[181]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[187]);
                             				}
 
-                            // Gcomponent.g:2794:5: (a6= TEXT )
-                            // Gcomponent.g:2795:6: a6= TEXT
+                            // Gcomponent.g:2802:5: (a6= TEXT )
+                            // Gcomponent.g:2803:6: a6= TEXT
                             {
-                            a6=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2894); if (state.failed) return element;
+                            a6=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2917); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             						if (terminateParsing) {
@@ -4385,10 +4408,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[182]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[188]);
                             				}
 
-                            a7=(Token)match(input,19,FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2933); if (state.failed) return element;
+                            a7=(Token)match(input,19,FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2956); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -4402,19 +4425,19 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[183]);
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[184]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[189]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[190]);
                             				}
 
                             }
                             break;
                         case 2 :
-                            // Gcomponent.g:2850:10: (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']'
+                            // Gcomponent.g:2858:10: (a8= TEXT ) a9= '[' (a10= TEXT ) a11= ']'
                             {
-                            // Gcomponent.g:2850:10: (a8= TEXT )
-                            // Gcomponent.g:2851:6: a8= TEXT
+                            // Gcomponent.g:2858:10: (a8= TEXT )
+                            // Gcomponent.g:2859:6: a8= TEXT
                             {
-                            a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2973); if (state.failed) return element;
+                            a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2996); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             						if (terminateParsing) {
@@ -4454,10 +4477,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[185]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[191]);
                             				}
 
-                            a9=(Token)match(input,18,FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3012); if (state.failed) return element;
+                            a9=(Token)match(input,18,FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3035); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -4471,13 +4494,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[186]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[192]);
                             				}
 
-                            // Gcomponent.g:2904:5: (a10= TEXT )
-                            // Gcomponent.g:2905:6: a10= TEXT
+                            // Gcomponent.g:2912:5: (a10= TEXT )
+                            // Gcomponent.g:2913:6: a10= TEXT
                             {
-                            a10=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3042); if (state.failed) return element;
+                            a10=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3065); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             						if (terminateParsing) {
@@ -4517,10 +4540,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[187]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[193]);
                             				}
 
-                            a11=(Token)match(input,19,FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3081); if (state.failed) return element;
+                            a11=(Token)match(input,19,FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3104); if (state.failed) return element;
 
                             if ( state.backtracking==0 ) {
                             					if (element == null) {
@@ -4534,8 +4557,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                             if ( state.backtracking==0 ) {
                             					// expected elements (follow set)
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[188]);
-                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[189]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[194]);
+                            					addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[195]);
                             				}
 
                             }
@@ -4546,8 +4569,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[190]);
-                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[191]);
+                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[196]);
+                    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[197]);
                     			}
 
                     }
@@ -4561,8 +4584,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[192]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[193]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[198]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[199]);
             	}
 
             }
@@ -4585,7 +4608,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_Seq"
-    // Gcomponent.g:2976:1: parse_genericity_language_gcomponent_flowcontrol_Seq returns [genericity.language.gcomponent.flowcontrol.Seq element = null] : a0= 'seq' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+ ;
+    // Gcomponent.g:2984:1: parse_genericity_language_gcomponent_flowcontrol_Seq returns [genericity.language.gcomponent.flowcontrol.Seq element = null] : a0= 'seq' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+ ;
     public final genericity.language.gcomponent.flowcontrol.Seq parse_genericity_language_gcomponent_flowcontrol_Seq() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.Seq element =  null;
 
@@ -4602,10 +4625,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return element; }
 
-            // Gcomponent.g:2979:2: (a0= 'seq' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+ )
-            // Gcomponent.g:2980:2: a0= 'seq' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+
+            // Gcomponent.g:2987:2: (a0= 'seq' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+ )
+            // Gcomponent.g:2988:2: a0= 'seq' (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+
             {
-            a0=(Token)match(input,30,FOLLOW_30_in_parse_genericity_language_gcomponent_flowcontrol_Seq3145); if (state.failed) return element;
+            a0=(Token)match(input,30,FOLLOW_30_in_parse_genericity_language_gcomponent_flowcontrol_Seq3168); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4619,15 +4642,15 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[194]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[195]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[196]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[200]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[201]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[202]);
             	}
 
-            // Gcomponent.g:2996:2: (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
-            // Gcomponent.g:2997:3: a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
+            // Gcomponent.g:3004:2: (a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            // Gcomponent.g:3005:3: a1_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3163);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3186);
             a1_0=parse_genericity_language_gcomponent_flowcontrol_CompositionStep();
 
             state._fsp--;
@@ -4658,23 +4681,23 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[197]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[198]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[199]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[203]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[204]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[205]);
             	}
 
-            // Gcomponent.g:3024:2: ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+
-            int cnt17=0;
-            loop17:
+            // Gcomponent.g:3032:2: ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )+
+            int cnt18=0;
+            loop18:
             do {
-                int alt17=2;
+                int alt18=2;
                 switch ( input.LA(1) ) {
                 case 39:
                     {
-                    int LA17_4 = input.LA(2);
+                    int LA18_4 = input.LA(2);
 
-                    if ( (synpred17_Gcomponent()) ) {
-                        alt17=1;
+                    if ( (synpred18_Gcomponent()) ) {
+                        alt18=1;
                     }
 
 
@@ -4682,10 +4705,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     break;
                 case 20:
                     {
-                    int LA17_5 = input.LA(2);
+                    int LA18_5 = input.LA(2);
 
-                    if ( (synpred17_Gcomponent()) ) {
-                        alt17=1;
+                    if ( (synpred18_Gcomponent()) ) {
+                        alt18=1;
                     }
 
 
@@ -4693,10 +4716,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     break;
                 case 30:
                     {
-                    int LA17_6 = input.LA(2);
+                    int LA18_6 = input.LA(2);
 
-                    if ( (synpred17_Gcomponent()) ) {
-                        alt17=1;
+                    if ( (synpred18_Gcomponent()) ) {
+                        alt18=1;
                     }
 
 
@@ -4705,14 +4728,14 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
                 }
 
-                switch (alt17) {
+                switch (alt18) {
             	case 1 :
-            	    // Gcomponent.g:3025:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            	    // Gcomponent.g:3033:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
             	    {
-            	    // Gcomponent.g:3025:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
-            	    // Gcomponent.g:3026:4: a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
+            	    // Gcomponent.g:3033:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+            	    // Gcomponent.g:3034:4: a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
             	    {
-            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3190);
+            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3213);
             	    a2_0=parse_genericity_language_gcomponent_flowcontrol_CompositionStep();
 
             	    state._fsp--;
@@ -4745,23 +4768,23 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    break;
 
             	default :
-            	    if ( cnt17 >= 1 ) break loop17;
+            	    if ( cnt18 >= 1 ) break loop18;
             	    if (state.backtracking>0) {state.failed=true; return element;}
                         EarlyExitException eee =
-                            new EarlyExitException(17, input);
+                            new EarlyExitException(18, input);
                         throw eee;
                 }
-                cnt17++;
+                cnt18++;
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[200]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[201]);
-            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[202]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[203]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[204]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[206]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[207]);
+            		addExpectedElement(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[208]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[209]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[210]);
             	}
 
             }
@@ -4784,7 +4807,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_FeatureRef"
-    // Gcomponent.g:3058:1: parse_genericity_language_gcomponent_flowcontrol_FeatureRef returns [genericity.language.gcomponent.flowcontrol.FeatureRef element = null] : (a0= TEXT ) ;
+    // Gcomponent.g:3066:1: parse_genericity_language_gcomponent_flowcontrol_FeatureRef returns [genericity.language.gcomponent.flowcontrol.FeatureRef element = null] : (a0= TEXT ) ;
     public final genericity.language.gcomponent.flowcontrol.FeatureRef parse_genericity_language_gcomponent_flowcontrol_FeatureRef() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.FeatureRef element =  null;
 
@@ -4797,13 +4820,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return element; }
 
-            // Gcomponent.g:3061:2: ( (a0= TEXT ) )
-            // Gcomponent.g:3062:2: (a0= TEXT )
+            // Gcomponent.g:3069:2: ( (a0= TEXT ) )
+            // Gcomponent.g:3070:2: (a0= TEXT )
             {
-            // Gcomponent.g:3062:2: (a0= TEXT )
-            // Gcomponent.g:3063:3: a0= TEXT
+            // Gcomponent.g:3070:2: (a0= TEXT )
+            // Gcomponent.g:3071:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_FeatureRef3235); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_FeatureRef3258); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4843,7 +4866,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[205]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[211]);
             	}
 
             }
@@ -4866,7 +4889,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_technologies_AtlTemplate"
-    // Gcomponent.g:3104:1: parse_genericity_language_gcomponent_technologies_AtlTemplate returns [genericity.language.gcomponent.technologies.AtlTemplate element = null] : a0= 'atl' (a1= QUOTED_34_34 ) a2= 'with' (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )* ;
+    // Gcomponent.g:3112:1: parse_genericity_language_gcomponent_technologies_AtlTemplate returns [genericity.language.gcomponent.technologies.AtlTemplate element = null] : a0= 'atl' (a1= QUOTED_34_34 ) a2= 'with' (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )* ;
     public final genericity.language.gcomponent.technologies.AtlTemplate parse_genericity_language_gcomponent_technologies_AtlTemplate() throws RecognitionException {
         genericity.language.gcomponent.technologies.AtlTemplate element =  null;
 
@@ -4886,10 +4909,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return element; }
 
-            // Gcomponent.g:3107:2: (a0= 'atl' (a1= QUOTED_34_34 ) a2= 'with' (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )* )
-            // Gcomponent.g:3108:2: a0= 'atl' (a1= QUOTED_34_34 ) a2= 'with' (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )*
+            // Gcomponent.g:3115:2: (a0= 'atl' (a1= QUOTED_34_34 ) a2= 'with' (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )* )
+            // Gcomponent.g:3116:2: a0= 'atl' (a1= QUOTED_34_34 ) a2= 'with' (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )*
             {
-            a0=(Token)match(input,21,FOLLOW_21_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3271); if (state.failed) return element;
+            a0=(Token)match(input,21,FOLLOW_21_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3294); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4903,13 +4926,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[206]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[212]);
             	}
 
-            // Gcomponent.g:3122:2: (a1= QUOTED_34_34 )
-            // Gcomponent.g:3123:3: a1= QUOTED_34_34
+            // Gcomponent.g:3130:2: (a1= QUOTED_34_34 )
+            // Gcomponent.g:3131:3: a1= QUOTED_34_34
             {
-            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3289); if (state.failed) return element;
+            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3312); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4945,10 +4968,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[207]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[213]);
             	}
 
-            a2=(Token)match(input,38,FOLLOW_38_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3310); if (state.failed) return element;
+            a2=(Token)match(input,38,FOLLOW_38_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3333); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4962,13 +4985,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlTemplate(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[208]);
+            		addExpectedElement(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlTemplate(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[214]);
             	}
 
-            // Gcomponent.g:3172:2: (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter )
-            // Gcomponent.g:3173:3: a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter
+            // Gcomponent.g:3180:2: (a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter )
+            // Gcomponent.g:3181:3: a3_0= parse_genericity_language_gcomponent_technologies_AtlParameter
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3328);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3351);
             a3_0=parse_genericity_language_gcomponent_technologies_AtlParameter();
 
             state._fsp--;
@@ -4999,29 +5022,29 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[209]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[210]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[215]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[216]);
             	}
 
-            // Gcomponent.g:3199:2: ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )*
-            loop18:
+            // Gcomponent.g:3207:2: ( (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) ) )*
+            loop19:
             do {
-                int alt18=2;
-                int LA18_0 = input.LA(1);
+                int alt19=2;
+                int LA19_0 = input.LA(1);
 
-                if ( (LA18_0==12) ) {
-                    alt18=1;
+                if ( (LA19_0==12) ) {
+                    alt19=1;
                 }
 
 
-                switch (alt18) {
+                switch (alt19) {
             	case 1 :
-            	    // Gcomponent.g:3200:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) )
+            	    // Gcomponent.g:3208:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) )
             	    {
-            	    // Gcomponent.g:3200:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) )
-            	    // Gcomponent.g:3201:4: a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter )
+            	    // Gcomponent.g:3208:3: (a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter ) )
+            	    // Gcomponent.g:3209:4: a4= ',' (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter )
             	    {
-            	    a4=(Token)match(input,12,FOLLOW_12_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3355); if (state.failed) return element;
+            	    a4=(Token)match(input,12,FOLLOW_12_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3378); if (state.failed) return element;
 
             	    if ( state.backtracking==0 ) {
             	    				if (element == null) {
@@ -5035,13 +5058,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlTemplate(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[211]);
+            	    				addExpectedElement(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlTemplate(), genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[217]);
             	    			}
 
-            	    // Gcomponent.g:3215:4: (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter )
-            	    // Gcomponent.g:3216:5: a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter
+            	    // Gcomponent.g:3223:4: (a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter )
+            	    // Gcomponent.g:3224:5: a5_0= parse_genericity_language_gcomponent_technologies_AtlParameter
             	    {
-            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3381);
+            	    pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3404);
             	    a5_0=parse_genericity_language_gcomponent_technologies_AtlParameter();
 
             	    state._fsp--;
@@ -5072,8 +5095,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[212]);
-            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[213]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[218]);
+            	    				addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[219]);
             	    			}
 
             	    }
@@ -5083,15 +5106,15 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
             	    break;
 
             	default :
-            	    break loop18;
+            	    break loop19;
                 }
             } while (true);
 
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[214]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[215]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[220]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[221]);
             	}
 
             }
@@ -5114,7 +5137,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_technologies_AtlParameter"
-    // Gcomponent.g:3252:1: parse_genericity_language_gcomponent_technologies_AtlParameter returns [genericity.language.gcomponent.technologies.AtlParameter element = null] : (a0= TEXT ) a1= '=' (a2= TEXT ) ;
+    // Gcomponent.g:3260:1: parse_genericity_language_gcomponent_technologies_AtlParameter returns [genericity.language.gcomponent.technologies.AtlParameter element = null] : (a0= TEXT ) a1= '=' (a2= TEXT ) ;
     public final genericity.language.gcomponent.technologies.AtlParameter parse_genericity_language_gcomponent_technologies_AtlParameter() throws RecognitionException {
         genericity.language.gcomponent.technologies.AtlParameter element =  null;
 
@@ -5129,13 +5152,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 19) ) { return element; }
 
-            // Gcomponent.g:3255:2: ( (a0= TEXT ) a1= '=' (a2= TEXT ) )
-            // Gcomponent.g:3256:2: (a0= TEXT ) a1= '=' (a2= TEXT )
+            // Gcomponent.g:3263:2: ( (a0= TEXT ) a1= '=' (a2= TEXT ) )
+            // Gcomponent.g:3264:2: (a0= TEXT ) a1= '=' (a2= TEXT )
             {
-            // Gcomponent.g:3256:2: (a0= TEXT )
-            // Gcomponent.g:3257:3: a0= TEXT
+            // Gcomponent.g:3264:2: (a0= TEXT )
+            // Gcomponent.g:3265:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3441); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3464); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -5171,10 +5194,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[216]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[222]);
             	}
 
-            a1=(Token)match(input,17,FOLLOW_17_in_parse_genericity_language_gcomponent_technologies_AtlParameter3462); if (state.failed) return element;
+            a1=(Token)match(input,17,FOLLOW_17_in_parse_genericity_language_gcomponent_technologies_AtlParameter3485); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -5188,13 +5211,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[217]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[223]);
             	}
 
-            // Gcomponent.g:3306:2: (a2= TEXT )
-            // Gcomponent.g:3307:3: a2= TEXT
+            // Gcomponent.g:3314:2: (a2= TEXT )
+            // Gcomponent.g:3315:3: a2= TEXT
             {
-            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3480); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3503); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -5234,8 +5257,8 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[218]);
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[219]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[224]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[225]);
             	}
 
             }
@@ -5258,7 +5281,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_technologies_JavaTemplate"
-    // Gcomponent.g:3349:1: parse_genericity_language_gcomponent_technologies_JavaTemplate returns [genericity.language.gcomponent.technologies.JavaTemplate element = null] : a0= 'java' (a1= QUOTED_34_34 ) ;
+    // Gcomponent.g:3357:1: parse_genericity_language_gcomponent_technologies_JavaTemplate returns [genericity.language.gcomponent.technologies.JavaTemplate element = null] : a0= 'java' (a1= QUOTED_34_34 ) ;
     public final genericity.language.gcomponent.technologies.JavaTemplate parse_genericity_language_gcomponent_technologies_JavaTemplate() throws RecognitionException {
         genericity.language.gcomponent.technologies.JavaTemplate element =  null;
 
@@ -5272,10 +5295,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 20) ) { return element; }
 
-            // Gcomponent.g:3352:2: (a0= 'java' (a1= QUOTED_34_34 ) )
-            // Gcomponent.g:3353:2: a0= 'java' (a1= QUOTED_34_34 )
+            // Gcomponent.g:3360:2: (a0= 'java' (a1= QUOTED_34_34 ) )
+            // Gcomponent.g:3361:2: a0= 'java' (a1= QUOTED_34_34 )
             {
-            a0=(Token)match(input,28,FOLLOW_28_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3516); if (state.failed) return element;
+            a0=(Token)match(input,28,FOLLOW_28_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3539); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -5289,13 +5312,13 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[220]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[226]);
             	}
 
-            // Gcomponent.g:3367:2: (a1= QUOTED_34_34 )
-            // Gcomponent.g:3368:3: a1= QUOTED_34_34
+            // Gcomponent.g:3375:2: (a1= QUOTED_34_34 )
+            // Gcomponent.g:3376:3: a1= QUOTED_34_34
             {
-            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3534); if (state.failed) return element;
+            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3557); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -5331,7 +5354,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[221]);
+            		addExpectedElement(null, genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectationConstants.EXPECTATIONS[227]);
             	}
 
             }
@@ -5354,7 +5377,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_core_Component"
-    // Gcomponent.g:3405:1: parse_genericity_language_gcomponent_core_Component returns [genericity.language.gcomponent.core.Component element = null] : (c0= parse_genericity_language_gcomponent_core_TransformationComponent |c1= parse_genericity_language_gcomponent_core_CompositeComponent );
+    // Gcomponent.g:3413:1: parse_genericity_language_gcomponent_core_Component returns [genericity.language.gcomponent.core.Component element = null] : (c0= parse_genericity_language_gcomponent_core_TransformationComponent |c1= parse_genericity_language_gcomponent_core_CompositeComponent );
     public final genericity.language.gcomponent.core.Component parse_genericity_language_gcomponent_core_Component() throws RecognitionException {
         genericity.language.gcomponent.core.Component element =  null;
 
@@ -5368,29 +5391,29 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 21) ) { return element; }
 
-            // Gcomponent.g:3406:2: (c0= parse_genericity_language_gcomponent_core_TransformationComponent |c1= parse_genericity_language_gcomponent_core_CompositeComponent )
-            int alt19=2;
-            int LA19_0 = input.LA(1);
+            // Gcomponent.g:3414:2: (c0= parse_genericity_language_gcomponent_core_TransformationComponent |c1= parse_genericity_language_gcomponent_core_CompositeComponent )
+            int alt20=2;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA19_0==34) ) {
-                alt19=1;
+            if ( (LA20_0==34) ) {
+                alt20=1;
             }
-            else if ( (LA19_0==25) ) {
-                alt19=2;
+            else if ( (LA20_0==25) ) {
+                alt20=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 19, 0, input);
+                    new NoViableAltException("", 20, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt19) {
+            switch (alt20) {
                 case 1 :
-                    // Gcomponent.g:3407:2: c0= parse_genericity_language_gcomponent_core_TransformationComponent
+                    // Gcomponent.g:3415:2: c0= parse_genericity_language_gcomponent_core_TransformationComponent
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_core_TransformationComponent_in_parse_genericity_language_gcomponent_core_Component3566);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_core_TransformationComponent_in_parse_genericity_language_gcomponent_core_Component3589);
                     c0=parse_genericity_language_gcomponent_core_TransformationComponent();
 
                     state._fsp--;
@@ -5401,9 +5424,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Gcomponent.g:3408:4: c1= parse_genericity_language_gcomponent_core_CompositeComponent
+                    // Gcomponent.g:3416:4: c1= parse_genericity_language_gcomponent_core_CompositeComponent
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_core_CompositeComponent_in_parse_genericity_language_gcomponent_core_Component3576);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_core_CompositeComponent_in_parse_genericity_language_gcomponent_core_Component3599);
                     c1=parse_genericity_language_gcomponent_core_CompositeComponent();
 
                     state._fsp--;
@@ -5433,7 +5456,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_variants_Parameter"
-    // Gcomponent.g:3412:1: parse_genericity_language_gcomponent_variants_Parameter returns [genericity.language.gcomponent.variants.Parameter element = null] : (c0= parse_genericity_language_gcomponent_variants_SingleFeature |c1= parse_genericity_language_gcomponent_variants_XorFeature );
+    // Gcomponent.g:3420:1: parse_genericity_language_gcomponent_variants_Parameter returns [genericity.language.gcomponent.variants.Parameter element = null] : (c0= parse_genericity_language_gcomponent_variants_SingleFeature |c1= parse_genericity_language_gcomponent_variants_XorFeature );
     public final genericity.language.gcomponent.variants.Parameter parse_genericity_language_gcomponent_variants_Parameter() throws RecognitionException {
         genericity.language.gcomponent.variants.Parameter element =  null;
 
@@ -5447,29 +5470,29 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 22) ) { return element; }
 
-            // Gcomponent.g:3413:2: (c0= parse_genericity_language_gcomponent_variants_SingleFeature |c1= parse_genericity_language_gcomponent_variants_XorFeature )
-            int alt20=2;
-            int LA20_0 = input.LA(1);
+            // Gcomponent.g:3421:2: (c0= parse_genericity_language_gcomponent_variants_SingleFeature |c1= parse_genericity_language_gcomponent_variants_XorFeature )
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA20_0==13) ) {
-                alt20=1;
+            if ( (LA21_0==13) ) {
+                alt21=1;
             }
-            else if ( (LA20_0==11) ) {
-                alt20=2;
+            else if ( (LA21_0==11) ) {
+                alt21=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 20, 0, input);
+                    new NoViableAltException("", 21, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt20) {
+            switch (alt21) {
                 case 1 :
-                    // Gcomponent.g:3414:2: c0= parse_genericity_language_gcomponent_variants_SingleFeature
+                    // Gcomponent.g:3422:2: c0= parse_genericity_language_gcomponent_variants_SingleFeature
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_variants_SingleFeature_in_parse_genericity_language_gcomponent_variants_Parameter3597);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_variants_SingleFeature_in_parse_genericity_language_gcomponent_variants_Parameter3620);
                     c0=parse_genericity_language_gcomponent_variants_SingleFeature();
 
                     state._fsp--;
@@ -5480,9 +5503,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Gcomponent.g:3415:4: c1= parse_genericity_language_gcomponent_variants_XorFeature
+                    // Gcomponent.g:3423:4: c1= parse_genericity_language_gcomponent_variants_XorFeature
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_variants_XorFeature_in_parse_genericity_language_gcomponent_variants_Parameter3607);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_variants_XorFeature_in_parse_genericity_language_gcomponent_variants_Parameter3630);
                     c1=parse_genericity_language_gcomponent_variants_XorFeature();
 
                     state._fsp--;
@@ -5512,7 +5535,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_core_Template"
-    // Gcomponent.g:3419:1: parse_genericity_language_gcomponent_core_Template returns [genericity.language.gcomponent.core.Template element = null] : (c0= parse_genericity_language_gcomponent_technologies_AtlTemplate |c1= parse_genericity_language_gcomponent_technologies_JavaTemplate );
+    // Gcomponent.g:3427:1: parse_genericity_language_gcomponent_core_Template returns [genericity.language.gcomponent.core.Template element = null] : (c0= parse_genericity_language_gcomponent_technologies_AtlTemplate |c1= parse_genericity_language_gcomponent_technologies_JavaTemplate );
     public final genericity.language.gcomponent.core.Template parse_genericity_language_gcomponent_core_Template() throws RecognitionException {
         genericity.language.gcomponent.core.Template element =  null;
 
@@ -5526,29 +5549,29 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 23) ) { return element; }
 
-            // Gcomponent.g:3420:2: (c0= parse_genericity_language_gcomponent_technologies_AtlTemplate |c1= parse_genericity_language_gcomponent_technologies_JavaTemplate )
-            int alt21=2;
-            int LA21_0 = input.LA(1);
+            // Gcomponent.g:3428:2: (c0= parse_genericity_language_gcomponent_technologies_AtlTemplate |c1= parse_genericity_language_gcomponent_technologies_JavaTemplate )
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA21_0==21) ) {
-                alt21=1;
+            if ( (LA22_0==21) ) {
+                alt22=1;
             }
-            else if ( (LA21_0==28) ) {
-                alt21=2;
+            else if ( (LA22_0==28) ) {
+                alt22=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 21, 0, input);
+                    new NoViableAltException("", 22, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt21) {
+            switch (alt22) {
                 case 1 :
-                    // Gcomponent.g:3421:2: c0= parse_genericity_language_gcomponent_technologies_AtlTemplate
+                    // Gcomponent.g:3429:2: c0= parse_genericity_language_gcomponent_technologies_AtlTemplate
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_AtlTemplate_in_parse_genericity_language_gcomponent_core_Template3628);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_AtlTemplate_in_parse_genericity_language_gcomponent_core_Template3651);
                     c0=parse_genericity_language_gcomponent_technologies_AtlTemplate();
 
                     state._fsp--;
@@ -5559,9 +5582,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Gcomponent.g:3422:4: c1= parse_genericity_language_gcomponent_technologies_JavaTemplate
+                    // Gcomponent.g:3430:4: c1= parse_genericity_language_gcomponent_technologies_JavaTemplate
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_JavaTemplate_in_parse_genericity_language_gcomponent_core_Template3638);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_technologies_JavaTemplate_in_parse_genericity_language_gcomponent_core_Template3661);
                     c1=parse_genericity_language_gcomponent_technologies_JavaTemplate();
 
                     state._fsp--;
@@ -5591,7 +5614,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_CompositionStep"
-    // Gcomponent.g:3426:1: parse_genericity_language_gcomponent_flowcontrol_CompositionStep returns [genericity.language.gcomponent.flowcontrol.CompositionStep element = null] : (c0= parse_genericity_language_gcomponent_flowcontrol_Xor |c1= parse_genericity_language_gcomponent_flowcontrol_Apply |c2= parse_genericity_language_gcomponent_flowcontrol_Seq );
+    // Gcomponent.g:3434:1: parse_genericity_language_gcomponent_flowcontrol_CompositionStep returns [genericity.language.gcomponent.flowcontrol.CompositionStep element = null] : (c0= parse_genericity_language_gcomponent_flowcontrol_Xor |c1= parse_genericity_language_gcomponent_flowcontrol_Apply |c2= parse_genericity_language_gcomponent_flowcontrol_Seq );
     public final genericity.language.gcomponent.flowcontrol.CompositionStep parse_genericity_language_gcomponent_flowcontrol_CompositionStep() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.CompositionStep element =  null;
 
@@ -5607,38 +5630,38 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 24) ) { return element; }
 
-            // Gcomponent.g:3427:2: (c0= parse_genericity_language_gcomponent_flowcontrol_Xor |c1= parse_genericity_language_gcomponent_flowcontrol_Apply |c2= parse_genericity_language_gcomponent_flowcontrol_Seq )
-            int alt22=3;
+            // Gcomponent.g:3435:2: (c0= parse_genericity_language_gcomponent_flowcontrol_Xor |c1= parse_genericity_language_gcomponent_flowcontrol_Apply |c2= parse_genericity_language_gcomponent_flowcontrol_Seq )
+            int alt23=3;
             switch ( input.LA(1) ) {
             case 39:
                 {
-                alt22=1;
+                alt23=1;
                 }
                 break;
             case 20:
                 {
-                alt22=2;
+                alt23=2;
                 }
                 break;
             case 30:
                 {
-                alt22=3;
+                alt23=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 22, 0, input);
+                    new NoViableAltException("", 23, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt22) {
+            switch (alt23) {
                 case 1 :
-                    // Gcomponent.g:3428:2: c0= parse_genericity_language_gcomponent_flowcontrol_Xor
+                    // Gcomponent.g:3436:2: c0= parse_genericity_language_gcomponent_flowcontrol_Xor
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Xor_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3659);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Xor_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3682);
                     c0=parse_genericity_language_gcomponent_flowcontrol_Xor();
 
                     state._fsp--;
@@ -5649,9 +5672,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Gcomponent.g:3429:4: c1= parse_genericity_language_gcomponent_flowcontrol_Apply
+                    // Gcomponent.g:3437:4: c1= parse_genericity_language_gcomponent_flowcontrol_Apply
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Apply_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3669);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Apply_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3692);
                     c1=parse_genericity_language_gcomponent_flowcontrol_Apply();
 
                     state._fsp--;
@@ -5662,9 +5685,9 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Gcomponent.g:3430:4: c2= parse_genericity_language_gcomponent_flowcontrol_Seq
+                    // Gcomponent.g:3438:4: c2= parse_genericity_language_gcomponent_flowcontrol_Seq
                     {
-                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Seq_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3679);
+                    pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Seq_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3702);
                     c2=parse_genericity_language_gcomponent_flowcontrol_Seq();
 
                     state._fsp--;
@@ -5694,7 +5717,7 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
 
 
     // $ANTLR start "parse_genericity_language_gcomponent_flowcontrol_BooleanValue"
-    // Gcomponent.g:3434:1: parse_genericity_language_gcomponent_flowcontrol_BooleanValue returns [genericity.language.gcomponent.flowcontrol.BooleanValue element = null] : c0= parse_genericity_language_gcomponent_flowcontrol_FeatureRef ;
+    // Gcomponent.g:3442:1: parse_genericity_language_gcomponent_flowcontrol_BooleanValue returns [genericity.language.gcomponent.flowcontrol.BooleanValue element = null] : c0= parse_genericity_language_gcomponent_flowcontrol_FeatureRef ;
     public final genericity.language.gcomponent.flowcontrol.BooleanValue parse_genericity_language_gcomponent_flowcontrol_BooleanValue() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.BooleanValue element =  null;
 
@@ -5706,10 +5729,10 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 25) ) { return element; }
 
-            // Gcomponent.g:3435:2: (c0= parse_genericity_language_gcomponent_flowcontrol_FeatureRef )
-            // Gcomponent.g:3436:2: c0= parse_genericity_language_gcomponent_flowcontrol_FeatureRef
+            // Gcomponent.g:3443:2: (c0= parse_genericity_language_gcomponent_flowcontrol_FeatureRef )
+            // Gcomponent.g:3444:2: c0= parse_genericity_language_gcomponent_flowcontrol_FeatureRef
             {
-            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_FeatureRef_in_parse_genericity_language_gcomponent_flowcontrol_BooleanValue3700);
+            pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_FeatureRef_in_parse_genericity_language_gcomponent_flowcontrol_BooleanValue3723);
             c0=parse_genericity_language_gcomponent_flowcontrol_FeatureRef();
 
             state._fsp--;
@@ -5734,24 +5757,24 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
     }
     // $ANTLR end "parse_genericity_language_gcomponent_flowcontrol_BooleanValue"
 
-    // $ANTLR start synpred11_Gcomponent
-    public final void synpred11_Gcomponent_fragment() throws RecognitionException {
+    // $ANTLR start synpred12_Gcomponent
+    public final void synpred12_Gcomponent_fragment() throws RecognitionException {
         Token a1=null;
         genericity.language.gcomponent.flowcontrol.XorCond a2_0 =null;
 
 
-        // Gcomponent.g:2192:3: ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )
-        // Gcomponent.g:2192:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
+        // Gcomponent.g:2200:3: ( (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) ) )
+        // Gcomponent.g:2200:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
         {
-        // Gcomponent.g:2192:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
-        // Gcomponent.g:2193:4: a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
+        // Gcomponent.g:2200:3: (a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond ) )
+        // Gcomponent.g:2201:4: a1= 'when' (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
         {
-        a1=(Token)match(input,37,FOLLOW_37_in_synpred11_Gcomponent2201); if (state.failed) return ;
+        a1=(Token)match(input,37,FOLLOW_37_in_synpred12_Gcomponent2224); if (state.failed) return ;
 
-        // Gcomponent.g:2207:4: (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
-        // Gcomponent.g:2208:5: a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond
+        // Gcomponent.g:2215:4: (a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond )
+        // Gcomponent.g:2216:5: a2_0= parse_genericity_language_gcomponent_flowcontrol_XorCond
         {
-        pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_synpred11_Gcomponent2227);
+        pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_synpred12_Gcomponent2250);
         a2_0=parse_genericity_language_gcomponent_flowcontrol_XorCond();
 
         state._fsp--;
@@ -5766,20 +5789,20 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         }
 
     }
-    // $ANTLR end synpred11_Gcomponent
+    // $ANTLR end synpred12_Gcomponent
 
-    // $ANTLR start synpred17_Gcomponent
-    public final void synpred17_Gcomponent_fragment() throws RecognitionException {
+    // $ANTLR start synpred18_Gcomponent
+    public final void synpred18_Gcomponent_fragment() throws RecognitionException {
         genericity.language.gcomponent.flowcontrol.CompositionStep a2_0 =null;
 
 
-        // Gcomponent.g:3025:3: ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )
-        // Gcomponent.g:3025:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+        // Gcomponent.g:3033:3: ( (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep ) )
+        // Gcomponent.g:3033:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
         {
-        // Gcomponent.g:3025:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
-        // Gcomponent.g:3026:4: a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
+        // Gcomponent.g:3033:3: (a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep )
+        // Gcomponent.g:3034:4: a2_0= parse_genericity_language_gcomponent_flowcontrol_CompositionStep
         {
-        pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_synpred17_Gcomponent3190);
+        pushFollow(FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_synpred18_Gcomponent3213);
         a2_0=parse_genericity_language_gcomponent_flowcontrol_CompositionStep();
 
         state._fsp--;
@@ -5791,15 +5814,15 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         }
 
     }
-    // $ANTLR end synpred17_Gcomponent
+    // $ANTLR end synpred18_Gcomponent
 
     // Delegated rules
 
-    public final boolean synpred11_Gcomponent() {
+    public final boolean synpred18_Gcomponent() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred11_Gcomponent_fragment(); // can never throw exception
+            synpred18_Gcomponent_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -5809,11 +5832,11 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
         state.failed=false;
         return success;
     }
-    public final boolean synpred17_Gcomponent() {
+    public final boolean synpred12_Gcomponent() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred17_Gcomponent_fragment(); // can never throw exception
+            synpred12_Gcomponent_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -5879,76 +5902,76 @@ public class GcomponentParser extends GcomponentANTLRParserBase {
     public static final BitSet FOLLOW_31_in_parse_genericity_language_gcomponent_core_CompositeComponent1629 = new BitSet(new long[]{0x0000000020000000L});
     public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_ParameterModel_in_parse_genericity_language_gcomponent_core_CompositeComponent1659 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_33_in_parse_genericity_language_gcomponent_core_CompositeComponent1711 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_ParameterModel_in_parse_genericity_language_gcomponent_core_CompositeComponent1741 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_BindingDeclaration_in_parse_genericity_language_gcomponent_core_CompositeComponent1800 = new BitSet(new long[]{0x0000001081000000L});
-    public static final BitSet FOLLOW_36_in_parse_genericity_language_gcomponent_core_CompositeComponent1868 = new BitSet(new long[]{0x0000000000002800L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_variants_Parameter_in_parse_genericity_language_gcomponent_core_CompositeComponent1909 = new BitSet(new long[]{0x0000000001002800L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Composition_in_parse_genericity_language_gcomponent_core_CompositeComponent1987 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_41_in_parse_genericity_language_gcomponent_core_CompositeComponent2005 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_parse_genericity_language_gcomponent_core_BindingDeclaration2034 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_core_BindingDeclaration2052 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_genericity_language_gcomponent_core_BindingDeclaration2073 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_core_BindingDeclaration2091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_parse_genericity_language_gcomponent_flowcontrol_Composition2127 = new BitSet(new long[]{0x0000008040100000L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Composition2145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_parse_genericity_language_gcomponent_flowcontrol_Xor2178 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_parse_genericity_language_gcomponent_flowcontrol_Xor2201 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_parse_genericity_language_gcomponent_flowcontrol_Xor2227 = new BitSet(new long[]{0x0000002000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_BooleanValue_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2287 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2305 = new BitSet(new long[]{0x0000008040100000L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2323 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_parse_genericity_language_gcomponent_flowcontrol_Apply2356 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_Apply2374 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2395 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2413 = new BitSet(new long[]{0x0000000000001400L});
-    public static final BitSet FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2440 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2466 = new BitSet(new long[]{0x0000000000001400L});
-    public static final BitSet FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2507 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_Apply2521 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2535 = new BitSet(new long[]{0x0000000000001480L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2558 = new BitSet(new long[]{0x0000000000001400L});
-    public static final BitSet FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2593 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2619 = new BitSet(new long[]{0x0000000000001400L});
-    public static final BitSet FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2660 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2693 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_15_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2723 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2756 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2795 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2825 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2864 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2894 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2933 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2973 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3012 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3042 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3081 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_parse_genericity_language_gcomponent_flowcontrol_Seq3145 = new BitSet(new long[]{0x0000008040100000L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3163 = new BitSet(new long[]{0x0000008040100000L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3190 = new BitSet(new long[]{0x0000008040100002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_FeatureRef3235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3271 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3289 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_38_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3310 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3328 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_12_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3355 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3381 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3441 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_genericity_language_gcomponent_technologies_AtlParameter3462 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3516 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_TransformationComponent_in_parse_genericity_language_gcomponent_core_Component3566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_CompositeComponent_in_parse_genericity_language_gcomponent_core_Component3576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_variants_SingleFeature_in_parse_genericity_language_gcomponent_variants_Parameter3597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_variants_XorFeature_in_parse_genericity_language_gcomponent_variants_Parameter3607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_AtlTemplate_in_parse_genericity_language_gcomponent_core_Template3628 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_JavaTemplate_in_parse_genericity_language_gcomponent_core_Template3638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Xor_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Apply_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Seq_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_FeatureRef_in_parse_genericity_language_gcomponent_flowcontrol_BooleanValue3700 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_synpred11_Gcomponent2201 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_synpred11_Gcomponent2227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_synpred17_Gcomponent3190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_ParameterModel_in_parse_genericity_language_gcomponent_core_CompositeComponent1741 = new BitSet(new long[]{0x0000001081400000L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_BindingDeclaration_in_parse_genericity_language_gcomponent_core_CompositeComponent1808 = new BitSet(new long[]{0x0000001081000000L});
+    public static final BitSet FOLLOW_36_in_parse_genericity_language_gcomponent_core_CompositeComponent1891 = new BitSet(new long[]{0x0000000000002800L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_variants_Parameter_in_parse_genericity_language_gcomponent_core_CompositeComponent1932 = new BitSet(new long[]{0x0000000001002800L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Composition_in_parse_genericity_language_gcomponent_core_CompositeComponent2010 = new BitSet(new long[]{0x0000020000000000L});
+    public static final BitSet FOLLOW_41_in_parse_genericity_language_gcomponent_core_CompositeComponent2028 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_parse_genericity_language_gcomponent_core_BindingDeclaration2057 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_core_BindingDeclaration2075 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_parse_genericity_language_gcomponent_core_BindingDeclaration2096 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_core_BindingDeclaration2114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_parse_genericity_language_gcomponent_flowcontrol_Composition2150 = new BitSet(new long[]{0x0000008040100000L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Composition2168 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_parse_genericity_language_gcomponent_flowcontrol_Xor2201 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_parse_genericity_language_gcomponent_flowcontrol_Xor2224 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_parse_genericity_language_gcomponent_flowcontrol_Xor2250 = new BitSet(new long[]{0x0000002000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_BooleanValue_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2310 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2328 = new BitSet(new long[]{0x0000008040100000L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_XorCond2346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_parse_genericity_language_gcomponent_flowcontrol_Apply2379 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_Apply2397 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2418 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2436 = new BitSet(new long[]{0x0000000000001400L});
+    public static final BitSet FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2463 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2489 = new BitSet(new long[]{0x0000000000001400L});
+    public static final BitSet FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2530 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_genericity_language_gcomponent_flowcontrol_Apply2544 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_genericity_language_gcomponent_flowcontrol_Apply2558 = new BitSet(new long[]{0x0000000000001480L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2581 = new BitSet(new long[]{0x0000000000001400L});
+    public static final BitSet FOLLOW_12_in_parse_genericity_language_gcomponent_flowcontrol_Apply2616 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter_in_parse_genericity_language_gcomponent_flowcontrol_Apply2642 = new BitSet(new long[]{0x0000000000001400L});
+    public static final BitSet FOLLOW_10_in_parse_genericity_language_gcomponent_flowcontrol_Apply2683 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2716 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_15_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2746 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2779 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2818 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2848 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2887 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2917 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2956 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter2996 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3035 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3065 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_parse_genericity_language_gcomponent_flowcontrol_ApplyParameter3104 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_parse_genericity_language_gcomponent_flowcontrol_Seq3168 = new BitSet(new long[]{0x0000008040100000L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3186 = new BitSet(new long[]{0x0000008040100000L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_parse_genericity_language_gcomponent_flowcontrol_Seq3213 = new BitSet(new long[]{0x0000008040100002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_flowcontrol_FeatureRef3258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3294 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3312 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_38_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3333 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3351 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_12_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3378 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_AtlParameter_in_parse_genericity_language_gcomponent_technologies_AtlTemplate3404 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3464 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_parse_genericity_language_gcomponent_technologies_AtlParameter3485 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_TEXT_in_parse_genericity_language_gcomponent_technologies_AtlParameter3503 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3539 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_genericity_language_gcomponent_technologies_JavaTemplate3557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_TransformationComponent_in_parse_genericity_language_gcomponent_core_Component3589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_core_CompositeComponent_in_parse_genericity_language_gcomponent_core_Component3599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_variants_SingleFeature_in_parse_genericity_language_gcomponent_variants_Parameter3620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_variants_XorFeature_in_parse_genericity_language_gcomponent_variants_Parameter3630 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_AtlTemplate_in_parse_genericity_language_gcomponent_core_Template3651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_technologies_JavaTemplate_in_parse_genericity_language_gcomponent_core_Template3661 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Xor_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Apply_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_Seq_in_parse_genericity_language_gcomponent_flowcontrol_CompositionStep3702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_FeatureRef_in_parse_genericity_language_gcomponent_flowcontrol_BooleanValue3723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_synpred12_Gcomponent2224 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_XorCond_in_synpred12_Gcomponent2250 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_genericity_language_gcomponent_flowcontrol_CompositionStep_in_synpred18_Gcomponent3213 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -816,17 +816,17 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3440:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Gcomponent.g:3441:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Gcomponent.g:3448:8: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Gcomponent.g:3449:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Gcomponent.g:3441:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Gcomponent.g:3441:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Gcomponent.g:3449:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Gcomponent.g:3449:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
 
 
-            // Gcomponent.g:3441:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Gcomponent.g:3449:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -881,13 +881,13 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3444:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
-            // Gcomponent.g:3445:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Gcomponent.g:3452:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ ) )
+            // Gcomponent.g:3453:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
             {
-            // Gcomponent.g:3445:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // Gcomponent.g:3445:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Gcomponent.g:3453:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // Gcomponent.g:3453:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // Gcomponent.g:3445:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // Gcomponent.g:3453:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt2=0;
             loop2:
             do {
@@ -945,8 +945,8 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3447:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Gcomponent.g:3448:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Gcomponent.g:3455:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Gcomponent.g:3456:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -976,13 +976,13 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3451:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Gcomponent.g:3452:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Gcomponent.g:3459:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Gcomponent.g:3460:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Gcomponent.g:3452:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Gcomponent.g:3452:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Gcomponent.g:3460:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Gcomponent.g:3460:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Gcomponent.g:3452:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Gcomponent.g:3460:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt3=3;
             int LA3_0 = input.LA(1);
 
@@ -1008,7 +1008,7 @@ public class GcomponentLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Gcomponent.g:3452:4: '\\r\\n'
+                    // Gcomponent.g:3460:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -1017,14 +1017,14 @@ public class GcomponentLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Gcomponent.g:3452:13: '\\r'
+                    // Gcomponent.g:3460:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Gcomponent.g:3452:20: '\\n'
+                    // Gcomponent.g:3460:20: '\\n'
                     {
                     match('\n'); 
 
@@ -1055,21 +1055,21 @@ public class GcomponentLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Gcomponent.g:3455:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Gcomponent.g:3456:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Gcomponent.g:3463:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Gcomponent.g:3464:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Gcomponent.g:3456:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Gcomponent.g:3456:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Gcomponent.g:3464:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Gcomponent.g:3464:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
             {
-            // Gcomponent.g:3456:3: ( '\"' )
-            // Gcomponent.g:3456:4: '\"'
+            // Gcomponent.g:3464:3: ( '\"' )
+            // Gcomponent.g:3464:4: '\"'
             {
             match('\"'); 
 
             }
 
 
-            // Gcomponent.g:3456:8: (~ ( '\"' ) )*
+            // Gcomponent.g:3464:8: (~ ( '\"' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -1103,8 +1103,8 @@ public class GcomponentLexer extends Lexer {
             } while (true);
 
 
-            // Gcomponent.g:3456:17: ( '\"' )
-            // Gcomponent.g:3456:18: '\"'
+            // Gcomponent.g:3464:17: ( '\"' )
+            // Gcomponent.g:3464:18: '\"'
             {
             match('\"'); 
 

@@ -909,6 +909,9 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 	
 	public void print_genericity_language_gcomponent_core_CompositeComponent_1(genericity.language.gcomponent.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_genericity_language_gcomponent_core_CompositeComponent_1_0(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CompoundDefinition)
@@ -918,7 +921,18 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_genericity_language_gcomponent_core_CompositeComponent_1_3(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		print_genericity_language_gcomponent_core_CompositeComponent_1_4(element, localtab, out, printCountingMap);
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_genericity_language_gcomponent_core_CompositeComponent_1_4(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 	}
 	
 	public void print_genericity_language_gcomponent_core_CompositeComponent_1_0(genericity.language.gcomponent.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {

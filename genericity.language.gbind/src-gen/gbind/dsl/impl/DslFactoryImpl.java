@@ -61,6 +61,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DslPackage.BINDING_MODEL: return createBindingModel();
+			case DslPackage.USED_METAMODEL: return createUsedMetamodel();
 			case DslPackage.CONCEPT_METACLASS: return createConceptMetaclass();
 			case DslPackage.CONCRETE_METACLASS: return createConcreteMetaclass();
 			case DslPackage.CLASS_BINDING: return createClassBinding();
@@ -83,6 +84,16 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public BindingModel createBindingModel() {
 		BindingModelImpl bindingModel = new BindingModelImpl();
 		return bindingModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UsedMetamodel createUsedMetamodel() {
+		UsedMetamodelImpl usedMetamodel = new UsedMetamodelImpl();
+		return usedMetamodel;
 	}
 
 	/**

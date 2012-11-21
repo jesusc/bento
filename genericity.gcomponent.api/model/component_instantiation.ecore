@@ -4,13 +4,13 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="instantiation"
     nsURI="http://genericity/language/gcomponent/instantiation" nsPrefix="gcomponent_instantiation">
   <eClassifiers xsi:type="ecore:EClass" name="ComponentInstantiation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
         eType="#//ExecutableTransformation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutableTransformation" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="AdaptedTransformation" eSuperTypes="#//ExecutableTransformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="template" lowerBound="1"
+        eType="ecore:EClass ../../genericity.language.gcomponent/metamodel/gcomponent.ecore#//core/Template"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredAdaptations" upperBound="-1"
         eType="#//AdaptWithBinding" containment="true"/>
   </eClassifiers>
@@ -24,18 +24,4 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="appliedBinding" lowerBound="1"
         eType="ecore:EClass ../../genericity.language.gcomponent/metamodel/gcomponent.ecore#//core/BindingDeclaration"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecuteTransformation" eSuperTypes="#//Action">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="adaptedTransformation"
-        lowerBound="1" eType="#//AdaptTransformation"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdaptTransformation" eSuperTypes="#//Action">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="adaptations" upperBound="-1"
-        eType="#//AdaptTransformationStep" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdaptTransformationStep">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="ecore:EClass ../../genericity.language.gcomponent/metamodel/gcomponent.ecore#//core/Component"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass ../../genericity.language.gcomponent/metamodel/gcomponent.ecore#//core/BindingDeclaration"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Nothing" eSuperTypes="#//Action"/>
 </ecore:EPackage>

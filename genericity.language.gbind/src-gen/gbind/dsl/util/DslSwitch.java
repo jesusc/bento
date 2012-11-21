@@ -8,6 +8,10 @@ package gbind.dsl.util;
 
 import gbind.dsl.*;
 
+import gbind.simpleocl.LocatedElement;
+import gbind.simpleocl.NamedElement;
+import gbind.simpleocl.OclMetamodel;
+import gbind.simpleocl.OclModel;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -73,6 +77,16 @@ public class DslSwitch<T> extends Switch<T> {
 			case DslPackage.BINDING_MODEL: {
 				BindingModel bindingModel = (BindingModel)theEObject;
 				T result = caseBindingModel(bindingModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.USED_METAMODEL: {
+				UsedMetamodel usedMetamodel = (UsedMetamodel)theEObject;
+				T result = caseUsedMetamodel(usedMetamodel);
+				if (result == null) result = caseOclMetamodel(usedMetamodel);
+				if (result == null) result = caseOclModel(usedMetamodel);
+				if (result == null) result = caseNamedElement(usedMetamodel);
+				if (result == null) result = caseLocatedElement(usedMetamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -168,6 +182,21 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBindingModel(BindingModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Used Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Used Metamodel</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUsedMetamodel(UsedMetamodel object) {
 		return null;
 	}
 
@@ -333,6 +362,66 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLocalHelper(LocalHelper object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Located Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Located Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLocatedElement(LocatedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ocl Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ocl Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOclModel(OclModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ocl Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ocl Metamodel</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOclMetamodel(OclMetamodel object) {
 		return null;
 	}
 
