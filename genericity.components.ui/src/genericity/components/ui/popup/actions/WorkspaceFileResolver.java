@@ -27,9 +27,7 @@ public class WorkspaceFileResolver implements FilePathResolver {
 	@Override
 	public String resolve(String file) {
 		Path p = new Path(file);
-		if ( p.isAbsolute() ) {
-			return file;
-		} else if ( file.startsWith("platform:/resource/") ) {
+		if ( file.startsWith("platform:/resource/") ) {
 			Path p2 = new Path(file.replace("platform:/resource/", ""));
 			IFile w = ResourcesPlugin.getWorkspace().getRoot().getFile(p2);
 			System.out.println(p2);
