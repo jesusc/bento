@@ -1,6 +1,7 @@
 package genericity.compiler.atl;
 
 import java.io.File;
+
 import java.io.IOException;
 
 import org.eclectic.idc.datatypes.JavaListConverter;
@@ -37,7 +38,7 @@ public class CompileOCL {
 						// withDir("../be.ac.vub.simpleocl/metamodel/simpleocl.ecore"),		
 						withDir("../genericity.language.gbind/metamodel/gbind.ecore")
 				}, 
-				withDir("fixtures/test1.xmi")); 
+				withDir("fixtures/test1.gbind.xmi")); 
 		BasicEMFModel out = loader.basicEmptyModelFromFile(
 				withDir("../genericity.atl.transformations/metamodels/ATL.ecore"), 
 				withDir("tmp_/output.xmi")); 
@@ -47,6 +48,9 @@ public class CompileOCL {
 		manager.register("gbind", in);
 		manager.register("socl", in);
 		manager.register("atl", out);
+
+		in.registerMethodHandler(new org.eclectic.idc.jvm.runtime.BasicMethodHandler(manager));
+
 		transformation.setModelManager(manager);
 		
 		transformation.configure_();

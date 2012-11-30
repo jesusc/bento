@@ -4,10 +4,15 @@ import java.io.IOException;
 
 import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.idc.jvm.runtime.BasicMethodHandler;
+import org.eclectic.idc.jvm.runtime.IMethodWrapper;
+import org.eclectic.idc.jvm.runtime.IdcException;
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.EMFLoader;
+import org.eclectic.modeling.emf.IModel;
 import org.eclectic.modeling.emf.ModelManager;
+import org.eclectic.modeling.emf.NoModelFoundException;
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import eclectic.rewrite_class1;
@@ -47,9 +52,10 @@ public class AtlAdapter {
 		
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
 		manager.register("gbind", in);
+		manager.register("socl", in);
 		manager.register("atl", inout);
-		in.registerMethodHandler(new BasicMethodHandler(manager));
-		inout.registerMethodHandler(new BasicMethodHandler(manager));
+		in.registerMethodHandler(new CustomMethodHandler(manager));
+		inout.registerMethodHandler(new CustomMethodHandler(manager));
 		transformation.setModelManager(manager);
 
 		transformation.configure_();
@@ -68,5 +74,37 @@ public class AtlAdapter {
 		inout.getHandler().packRootElements();
 		return inout.getHandler().getResource();
 	}
+
+	public static class CustomMethodHandler extends org.eclectic.idc.jvm.runtime.BasicMethodHandler  {
+		public CustomMethodHandler(ModelManager m) {
+			super(m);
+		}
+		
+		@Override
+		public IMethodWrapper wrap(Object o) {
+			try {
+				return new CustomMethodWrapper(manager.getNamespace(o), o);
+			} catch (NoModelFoundException e) {
+				throw new IdcException(e);
+			}
+		}
+	}	
 	
+	public static class CustomMethodWrapper extends org.eclectic.idc.jvm.runtime.BasicMethodWrapper {
+		public CustomMethodWrapper(IModel<?, ?> model, Object o) {
+			super(model, o);
+		}
+		
+		public Boolean is_child_of(EObject parent) {
+			
+			return checkIsChild((EObject) object, parent);
+		}
+		
+		private boolean checkIsChild(EObject o, EObject parent) {
+			if ( o == null )   return false;
+			if ( o == parent ) return true;
+			return checkIsChild(o.eContainer(), parent);
+		}
+	}	
+
 }

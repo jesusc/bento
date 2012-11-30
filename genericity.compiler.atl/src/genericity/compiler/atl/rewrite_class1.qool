@@ -13,6 +13,11 @@ model matches
 	ref featureBinding    : gbind!RenamingFeatureBinding
 	ref concreteMetaclass : gbind!ConcreteMetaclass
   end
+
+  class MatchedOclHelper
+	ref featureBinding    : gbind!OclFeatureBinding
+	ref concreteMetaclass : gbind!ConcreteMetaclass
+  end
 end
 
 // rt model for traces if needed!
@@ -24,11 +29,13 @@ model queue mOclModelElement : atl!OclModelElement
 // GBind elements
 model queue mClassBinding           : gbind!ClassBinding
 model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
+model queue mOclFeatureBinding      : gbind!OclFeatureBinding
 
 // Pattern queues
 local queue pRelevantOclModelElements : atl!OclModelElement
 local queue pMatchedClassBinding      : matches!MatchedClassBinding
 local queue pMatchedRenamingBinding   : matches!MatchedRenamingHelper
+local queue pMatchedOclBinding        : matches!MatchedOclHelper
 
 //
 // Begin-of PATTERNS
@@ -88,9 +95,10 @@ segment RenameConceptClass
 	end
 end
 
-// Create helper for renaming feature
-
-segment findRenamingFeatures
+// Find features that needs to be transformed to helpers
+// 	* Renaming bindings       -> MatchedRenamingHelper
+//  * Ocl bindings (adapters) -> MatchedOclHelper
+segment findBindingFeatures
 	forall r from mRenamingFeatureBinding
 		m = matches!MatchedRenamingHelper.new
 		m.featureBinding    = r
@@ -103,6 +111,21 @@ segment findRenamingFeatures
 		})
 		
 		emit m to pMatchedRenamingBinding
+	end
+
+	forall o from mOclFeatureBinding
+		mo = matches!MatchedOclHelper.new
+		mo.featureBinding    = o
+
+		// the same as above
+		o.qualifier.is_nil.if_else({
+			r = o // TODO: Scoping is wrong: r is "visible" from xText point of view from here, but defined above for another scope
+			mo.concreteMetaclass = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first.concrete.first
+		}, {
+			mo.concreteMetaclass = o.qualifier
+		})
+		
+		emit mo to pMatchedOclBinding
 	end
 end 
 
@@ -147,4 +170,52 @@ segment CreateHelperForRenamingFeature
 	end    
 end
 
+
+
+segment CreateHelperForOclFeature
+	forall mo from pMatchedOclBinding
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(mo.featureBinding.model_.metamodel.name) }.first
+		ocl_expr  = mo.featureBinding.concrete
+		
+		/*
+		 * Recursive closures are not supported yet!
+		 * 
+		filter_view = { |o|
+			o.eq(ocl_expr).if_else({
+				1.eq(1) // true				
+			}, {
+				o._container.is_nil.if_true({
+					0.eq(1) // false
+				}, {
+					filter_view.call(o._container)
+				})
+			})
+		}
+		*/
+
+		// The same using a Java helper
+		filter_view = { |o|
+			o.is_child_of(ocl_expr)
+		}		
+
+
+		// Creating a view
+		//   1. One way would be to pass a queue that contains the elements that contains (or will contain) the elements
+		//      which form of the model seen by the invoked transformation, thus acting as a filter. The problem of this
+		//      is that I needed a new queue per invocation, and now queues are instantiated once at the beginning of the
+		//	    the transformation. New kind of queue -> dynamic queue??
+		//   2. Declarative approach: a set of constructs to describe what is visible: e.g., containedIn, referencedBy, etc.
+		//   3. A closure with a filter expression 
+		atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+				 input-view-filter filter_view
+				 output-element ocl_expr[expr.t]
+
+		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createOclHelper(mo.featureBinding, mo.concreteMetaclass, ocl_model, atl_expr)
+		
+		
+		module = atl!Module.all_instances.first
+		module.elements = helper
+	end
+end
 // End-of rules

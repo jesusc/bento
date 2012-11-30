@@ -1,9 +1,11 @@
 package genericity.compiler.atl.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.EMFLoader;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 public interface BindingModelLoader {
@@ -19,7 +21,10 @@ public interface BindingModelLoader {
 		
 		@Override
 		public BasicEMFModel load(EMFLoader loader) throws IOException {
-			return loader.basicModelFromMemory(gbind.dsl.DslPackage.eINSTANCE, resource);
+			ArrayList<EPackage> pkgs = new ArrayList<EPackage>();
+			pkgs.add(gbind.dsl.DslPackage.eINSTANCE);
+			pkgs.add(gbind.simpleocl.SimpleoclPackage.eINSTANCE);
+			return loader.basicModelFromMemory(pkgs, resource);
 		}		
 	}
 
@@ -32,7 +37,11 @@ public interface BindingModelLoader {
 		
 		@Override
 		public BasicEMFModel load(EMFLoader loader) throws IOException {
-			return loader.basicModelFromFile(gbind.dsl.DslPackage.eINSTANCE, fileName);
+			ArrayList<EPackage> pkgs = new ArrayList<EPackage>();
+			pkgs.add(gbind.dsl.DslPackage.eINSTANCE);
+			pkgs.add(gbind.simpleocl.SimpleoclPackage.eINSTANCE);
+
+			return loader.basicModelFromFile(pkgs, fileName);
 		}		
 	}
 

@@ -24,6 +24,25 @@ template createRenamingHelper(fb : gbind!RenamingFeatureBinding, concreteMetacla
 	}
 end
 
+template createOclHelper(fb : gbind!OclFeatureBinding, concreteMetaclass : gbind!ConcreteMetaclass, 
+						 atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = fb.conceptFeature
+				initExpression = atl_ocl_expr
+				type = atl!OclAnyType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concreteMetaclass.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end
+
       /*    
   	   # out.definition.context_.context_.model = ATL::OCL::OclModel.all_objects.find_one { |m| m.name == MetamodelName }
        ocl_model = ATL::OCL::OclModel.all_objects.find { |m| m.name == fb.model_.metamodel }

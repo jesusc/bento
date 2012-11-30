@@ -3,7 +3,12 @@
   <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
   <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1"/>
   <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" qualifier="//@concreteMetaclasses.0" concreteFeature="umlName"/>
-  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.1" concreteFeature="umlName"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.1">
+    <concrete xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="umlName"/>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </concrete>
+  </bindings>
   <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="superclasses" conceptClass="//@conceptMetaclasses.0">
     <concrete xsi:type="simpleocl:PropertyCallExp">
       <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="generalizations"/>

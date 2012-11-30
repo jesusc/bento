@@ -1,8 +1,19 @@
 mappings ocl2ocl(gbind) -> (atl)
   uses callexpr as callexpr
 
+  [expr]
   delegate from _ : gbind!PropertyCallExp 
              to callexpr!result
+  
+  [expr]
+  from gbind : gbind!IteratorExp
+    to   atl :   atl!IteratorExp
+    
+	atl.name = gbind.name
+	
+	atl.body      <- gbind.body
+	atl.iterators <- gbind.iterators
+  end
                
   [expr]
   from gbind : gbind!RealExp
@@ -34,5 +45,13 @@ mappings ocl2ocl(gbind) -> (atl)
     
 	// atl.referredVariable <- gbind.referredVariable  	  
   end
+
+  from gbind : gbind!Iterator
+    to   atl :   atl!Iterator
+    
+    atl.varName = gbind.varName
+    // atl.variableExp <- gbind.variableExp
+  end
+
 
 // end

@@ -1,7 +1,6 @@
 
 chain genericity(gbind, atl) -> (atl)
   composite composed_genericity(gbind) -> (atl)
-    atl = adapt(gbind, atl)
     atl = ocl2ocl(gbind)
     atl = callexpr(gbind)  
   end

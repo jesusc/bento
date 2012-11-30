@@ -1,41 +1,71 @@
 attribution callexpr(socl) -> (atl)
   uses ocl2ocl // as exprm
 
-  inh source  : socl!OclExpression
+  // I should be able to define "external" attributes with a match trace expression associated,
+  // like declaring the interface with another transformation (what is required from a transf declared in uses.)
+
   inh rest    : _!List
   syn result  : atl!OclExpression
-  // inh env   : _!Map
+  inh previous_result  : atl!OclExpression
 
   rule socl!PropertyCallExp  
+	// x = "incall".println(self)
     first_element = self.calls.first
+  	last_element  = self.calls.get(self.calls.size.sub(1))
   
-  	first_element[source] <- self.source[ocl2ocl!expr.t] // //TODO: GET WITH AN USES (DEPENDENCY) //self.source
+  	first_element[previous_result] <- self.source[ocl2ocl!expr.t] 
     first_element[rest] <- self.calls.tail
-	self[result] <- first_element[result]
+		
+	self[result] <- last_element[result]
   end
 
   rule socl!NavigationOrAttributeCall 	
   	// locals
   	rest_calls = self[rest]
   	next_call  = self[rest].first
-  	source     = self[source]
   	
   	// propagation
-  	next_call[source] <- self[source]
  	next_call[rest]   <- rest_calls.tail
 
-	self[result] <- rest_calls.size.eq(0).if_else(
+  	// is_first_call  = self._refContainer.calls.index_of(self).eq(0)
+
+	new_call = atl!NavigationOrAttributeCallExp.new
+	new_call.name   = self.name
+	new_call.source = self[previous_result]
+	
+    next_call[previous_result] <- new_call
+    self[result] <- new_call
+	
+	/*
+	new_obj = is_first_call.if_else(
     		{ |v|  
     			new_call = atl!NavigationOrAttributeCallExp.new
     			new_call.name   = self.name
-    			new_call.source = source
+    			new_call.source = self[previous_result]
     			new_call    			
    		},
     		{ |v|    
     			new_call = atl!NavigationOrAttributeCallExp.new
     			new_call.name   = self.name
-    			new_call.source = next_call[result]
+    			new_call.source = self[previous_result]
     			new_call    			
     		}	
-    	)       
+    	)    
+    next_call[previous_result] <- new_obj
+    self[result] <- new_obj   
+	*/    	
   end
+
+  rule socl!IteratorExp
+  	next_call  = self[rest].first
+
+	// assign the source
+  	atl_iterator_exp = self.mySelf[ocl2ocl!expr.t]  
+	atl_iterator_exp.source = self[previous_result]
+
+  	// propagation
+    self[result]               <- atl_iterator_exp
+ 	next_call[rest]            <- self[rest].tail
+    next_call[previous_result] <- atl_iterator_exp
+  end
+  

@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
-  <atl:Module location="1:1-7:2" name="basicblocks">
+  <atl:Module location="1:1-9:36" name="basicblocks">
     <inModels location="2:23-2:31" name="IN" metamodel="/2"/>
     <outModels location="2:8-2:17" name="OUT" metamodel="/1"/>
-    <elements xsi:type="atl:Helper" location="5:1-7:2">
+    <elements xsi:type="atl:Helper" location="4:1-5:49">
+      <commentsAfter>--- Check whether the previous statement is a goto.</commentsAfter>
+      <definition location="4:8-5:48">
+        <feature xsi:type="ocl:Attribute" location="4:35-5:48" name="something">
+          <initExpression xsi:type="ocl:IteratorExp" location="5:2-5:48" name="collect">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="5:2-5:22" name="generalizations">
+              <source xsi:type="ocl:VariableExp" location="5:2-5:6" referredVariable="/4"/>
+            </source>
+            <body xsi:type="ocl:NavigationOrAttributeCallExp" location="5:36-5:47" name="reference">
+              <source xsi:type="ocl:VariableExp" location="5:36-5:37" referredVariable="/0/@elements.0/@definition/@feature/@initExpression/@iterators.0"/>
+            </body>
+            <iterators location="5:32-5:33" varName="g" variableExp="/0/@elements.0/@definition/@feature/@initExpression/@body/@source"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="4:47-4:54"/>
+        </feature>
+        <context_ location="4:8-4:29">
+          <context_ xsi:type="ocl:OclModelElement" location="4:16-4:29" name="Statement" model="/3"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="8:1-9:36">
       <commentsBefore>--- Check whether the previous statement is a goto.</commentsBefore>
-      <definition location="5:8-6:35">
-        <feature xsi:type="ocl:Attribute" location="5:35-6:35" name="something">
-          <initExpression xsi:type="ocl:OperatorCallExp" location="6:2-6:35" operationName="*">
-            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="6:2-6:28" name="salary">
-              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="6:2-6:21" name="additionalInfo">
-                <source xsi:type="ocl:VariableExp" location="6:2-6:6" referredVariable="/4"/>
+      <definition location="8:8-9:35">
+        <feature xsi:type="ocl:Attribute" location="8:35-9:35" name="something">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="9:2-9:35" operationName="*">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="9:2-9:28" name="salary">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="9:2-9:21" name="additionalInfo">
+                <source xsi:type="ocl:VariableExp" location="9:2-9:6" referredVariable="/6"/>
               </source>
             </source>
-            <arguments xsi:type="ocl:RealExp" location="6:31-6:35" realSymbol="1.25"/>
+            <arguments xsi:type="ocl:RealExp" location="9:31-9:35" realSymbol="1.25"/>
           </initExpression>
-          <type xsi:type="ocl:BooleanType" location="5:47-5:54"/>
+          <type xsi:type="ocl:BooleanType" location="8:47-8:54"/>
         </feature>
-        <context_ location="5:8-5:29">
-          <context_ xsi:type="ocl:OclModelElement" location="5:16-5:29" name="Statement" model="/3"/>
+        <context_ location="8:8-8:29">
+          <context_ xsi:type="ocl:OclModelElement" location="8:16-8:29" name="Statement" model="/5"/>
         </context_>
       </definition>
     </elements>
   </atl:Module>
   <ocl:OclModel location="2:14-2:17" name="BBL" model="/0/@outModels.0"/>
   <ocl:OclModel location="2:28-2:31" name="Imp" model="/0/@inModels.0"/>
-  <ocl:OclModel location="5:16-5:19" name="Imp" elements="/0/@elements.0/@definition/@context_/@context_"/>
-  <ocl:VariableDeclaration location="6:2-6:6" varName="self" variableExp="/0/@elements.0/@definition/@feature/@initExpression/@source/@source/@source"/>
+  <ocl:OclModel location="4:16-4:19" name="Imp" elements="/0/@elements.0/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="5:2-5:6" varName="self" variableExp="/0/@elements.0/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="8:16-8:19" name="Imp" elements="/0/@elements.1/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="9:2-9:6" varName="self" variableExp="/0/@elements.1/@definition/@feature/@initExpression/@source/@source/@source"/>
 </xmi:XMI>

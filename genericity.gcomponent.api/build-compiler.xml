@@ -18,6 +18,9 @@
 			<fileset dir="../genericity.compiler.atl/eclectic-gen" >
 				<include name="eclectic/rewrite_class1*"/>
 				<include name="eclectic/gen_atl*"/>
+				<include name="eclectic/ocl2ocl*"/>
+				<include name="eclectic/callexpr*"/>
+				<include name="eclectic/composed_genericity*"/>
 			</fileset>
 
 			<!-- NO BCEL IN THE PATH...
