@@ -56,14 +56,15 @@ RULES {
 	
 	Core.CompositeComponent ::= 
 		"composite" "component" name[] "{"
-			("uses" uses['"', '"'])+
+			("uses" uses['"', '"']
+			(bindings)?
+			)+
 		
 			(
 			("source" source)
 			("target" target)
 			("source" sourceModels)
 			("target" targetModels)
-			(bindings)?
 			)+
 
 			("variants" (formalParameters)+ )?
@@ -90,12 +91,15 @@ RULES {
 		"->" "(" outputModels? ("," outputModels)* ")"
 		;
 	
-//	Flowcontrol.ApplyParameter ::= calledModelName[] ":" bindingName[] "(" calleeModelName[] ")"
-//		;
-	Flowcontrol.ApplyParameter ::= model[] 
-		(":" (boundConceptQualifier[] "::" boundConcept[] "[" binding[] "]" | boundConcept[] "[" binding[] "]" ) )?
-		;
+	
+	//Flowcontrol.ApplyParameter ::= model[] 
+	//	(":" (boundConceptQualifier[] "::" boundConcept[] "[" binding[] "]" | boundConcept[] "[" binding[] "]" ) )?
+	//	;
 
+	Flowcontrol.ApplyParameter ::= 
+		( model[]
+		|  binding[] "(" model [] ")" )	
+		;
 
 	Flowcontrol.Seq ::= "seq"
 		steps steps+

@@ -1,14 +1,13 @@
 composite component oo2java_uml {
 	uses "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.gcomponent"  
+	binding bindUML = "platform:/resource/genericity.benchmarks/tests/oo2java.uml/uml2oo.gbind"
 			
 	source concept UML  : "UML.ecore"
 	target concept Java : "Java.ecore"
 	source model in  : UML  = "persons.uml" 
 	target model out : Java = "output-persons.xmi"
 	
-	binding bindUML = "platform:/resource/genericity.benchmarks/tests/oo2java.uml/uml2oo.gbind"
-	
-	compose apply oo2java(in : UML[bindUML]) -> (out)
+	compose apply oo2java(bindUML(in)) -> (out)
 	
 //		apply oo2java(bindUML(in)) -> (out)
 //		apply oo2java(bindUML(in)) -> (out)

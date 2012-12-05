@@ -144,10 +144,14 @@ package flowcontrol {
 	
 	class ApplyParameter {  
 		ref core.Model[1] model;
+		
+		// Perhaps these two are not needed if some inference is done
+		// to check that the meta-model declared in the binding is compatible
+		// with the meta-model expected by the parameter
 		ref core.Component[0..1] boundConceptQualifier;
 		ref core.Concept[0..1] boundConcept;
 		
-		ref core.BindingDeclaration[1] binding;
+		ref core.BindingDeclaration[0..1] binding;
 	}
 	// class ApplyParameterIdentity 
 	

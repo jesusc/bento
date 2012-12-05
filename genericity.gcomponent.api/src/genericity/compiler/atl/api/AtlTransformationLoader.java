@@ -76,6 +76,7 @@ public interface AtlTransformationLoader {
 				EMFInjector injector = new EMFInjector();
 				injector.inject(atlModel, resource);
 				*/
+				System.out.println(loadedAtlModel);
 				AtlParser atlParser = new AtlParser();
 				atlParser.extract(loadedAtlModel, adaptedFileName);
 				//atlParser.extract(atlModel, adaptedFileName);

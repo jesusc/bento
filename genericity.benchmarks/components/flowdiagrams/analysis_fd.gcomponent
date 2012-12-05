@@ -2,7 +2,8 @@
 composite component GraphLayouts {
 	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/fd2pn.gcomponent"  
 	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/analysis_pipe.gcomponent" 
-			
+	binding bindPIPE = "platform:/resource/genericity.benchmarks/components/flowdiagrams/bindPIPE.gbind"
+	
 	source concept FD : "FlowDiagram.ecore" // where concepts come from?, they could be shared...
 	target concept Analysis : "Analysis.ecore"
 	source model in : FD
@@ -13,11 +14,12 @@ composite component GraphLayouts {
 		+ finalStateSemantics xor
 			- terminating
 			- nonTerminating
-				
+					
 	// TODO: apply should be something like "apply circle(bindGraph(graph))" 
 	// Maybe we should be allowed to create bindings inline
 	compose seq
-	  apply fd2pn(in) -> (pipe : analysis_pipe::PIPE[bindPIPE])
+	  // apply fd2pn(in) -> (pipe : analysis_pipe::PIPE[bindPIPE])
+	  apply fd2pn(in) -> (bindPIPE(pipe))
 	  apply analysis_pipe(pipe) -> (out)
 
 	  // There is another option... 

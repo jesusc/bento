@@ -1,3 +1,4 @@
+
 attribution propagate_instantiation(comp) -> (inst)
   inh sourceAdaptations : _!List
   inh targetAdaptations : _!List
@@ -40,7 +41,7 @@ attribution propagate_instantiation(comp) -> (inst)
 
   rule comp!Apply
   	// inputModels -> input parameters
-  	adaptations = self.inputModels.select { |m| x = m.boundConcept.is_nil.not }.map { |m2|
+  	adaptations = self.inputModels.select { |m| x = m.binding.is_nil.not }.map { |m2|
   		adapt = inst!AdaptWithBinding.new
   		adapt.parameterIndex = self.inputModels.index_of(m2)
   		adapt.conceptModel   = m2.model
