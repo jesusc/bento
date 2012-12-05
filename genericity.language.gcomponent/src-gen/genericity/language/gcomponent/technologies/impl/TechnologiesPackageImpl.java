@@ -193,8 +193,17 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAtlParameter_AtlMetamodelName() {
+		return (EAttribute)atlParameterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getAtlParameter_Model() {
-		return (EReference)atlParameterEClass.getEStructuralFeatures().get(1);
+		return (EReference)atlParameterEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -249,6 +258,7 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 
 		atlParameterEClass = createEClass(ATL_PARAMETER);
 		createEAttribute(atlParameterEClass, ATL_PARAMETER__ATL_MODEL_NAME);
+		createEAttribute(atlParameterEClass, ATL_PARAMETER__ATL_METAMODEL_NAME);
 		createEReference(atlParameterEClass, ATL_PARAMETER__MODEL);
 
 		javaTemplateEClass = createEClass(JAVA_TEMPLATE);
@@ -296,7 +306,8 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 
 		initEClass(atlParameterEClass, AtlParameter.class, "AtlParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAtlParameter_AtlModelName(), ecorePackage.getEString(), "atlModelName", null, 1, 1, AtlParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAtlParameter_Model(), theCorePackage.getModel(), null, "model", null, 1, 1, AtlParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAtlParameter_AtlMetamodelName(), ecorePackage.getEString(), "atlMetamodelName", null, 0, 1, AtlParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAtlParameter_Model(), theCorePackage.getModel(), null, "model", null, 0, 1, AtlParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(javaTemplateEClass, JavaTemplate.class, "JavaTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJavaTemplate_QualifiedClassname(), ecorePackage.getEString(), "qualifiedClassname", null, 1, 1, JavaTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

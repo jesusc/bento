@@ -118,13 +118,22 @@ public interface TechnologiesPackage extends EPackage {
 	int ATL_PARAMETER__ATL_MODEL_NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Atl Metamodel Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_PARAMETER__ATL_METAMODEL_NAME = 1;
+
+	/**
 	 * The feature id for the '<em><b>Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATL_PARAMETER__MODEL = 1;
+	int ATL_PARAMETER__MODEL = 2;
 
 	/**
 	 * The number of structural features of the '<em>Atl Parameter</em>' class.
@@ -133,7 +142,7 @@ public interface TechnologiesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATL_PARAMETER_FEATURE_COUNT = 2;
+	int ATL_PARAMETER_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link genericity.language.gcomponent.technologies.impl.JavaTemplateImpl <em>Java Template</em>}' class.
@@ -216,6 +225,17 @@ public interface TechnologiesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAtlParameter_AtlModelName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.language.gcomponent.technologies.AtlParameter#getAtlMetamodelName <em>Atl Metamodel Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Atl Metamodel Name</em>'.
+	 * @see genericity.language.gcomponent.technologies.AtlParameter#getAtlMetamodelName()
+	 * @see #getAtlParameter()
+	 * @generated
+	 */
+	EAttribute getAtlParameter_AtlMetamodelName();
 
 	/**
 	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.technologies.AtlParameter#getModel <em>Model</em>}'.
@@ -314,6 +334,14 @@ public interface TechnologiesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATL_PARAMETER__ATL_MODEL_NAME = eINSTANCE.getAtlParameter_AtlModelName();
+
+		/**
+		 * The meta object literal for the '<em><b>Atl Metamodel Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATL_PARAMETER__ATL_METAMODEL_NAME = eINSTANCE.getAtlParameter_AtlMetamodelName();
 
 		/**
 		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
@@ -36,14 +37,14 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference list.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Concept> type;
+	protected Concept type;
 
 	/**
 	 * The default value of the '{@link #getResourceName() <em>Resource Name</em>}' attribute.
@@ -89,11 +90,37 @@ public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Concept> getType() {
-		if (type == null) {
-			type = new EObjectResolvingEList<Concept>(Concept.class, this, CorePackage.PARAMETER_MODEL__TYPE);
+	public Concept getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (Concept)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.PARAMETER_MODEL__TYPE, oldType, type));
+			}
 		}
 		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Concept basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(Concept newType) {
+		Concept oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.PARAMETER_MODEL__TYPE, oldType, type));
 	}
 
 	/**
@@ -126,7 +153,8 @@ public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CorePackage.PARAMETER_MODEL__TYPE:
-				return getType();
+				if (resolve) return getType();
+				return basicGetType();
 			case CorePackage.PARAMETER_MODEL__RESOURCE_NAME:
 				return getResourceName();
 		}
@@ -143,8 +171,7 @@ public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.PARAMETER_MODEL__TYPE:
-				getType().clear();
-				getType().addAll((Collection<? extends Concept>)newValue);
+				setType((Concept)newValue);
 				return;
 			case CorePackage.PARAMETER_MODEL__RESOURCE_NAME:
 				setResourceName((String)newValue);
@@ -162,7 +189,7 @@ public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CorePackage.PARAMETER_MODEL__TYPE:
-				getType().clear();
+				setType((Concept)null);
 				return;
 			case CorePackage.PARAMETER_MODEL__RESOURCE_NAME:
 				setResourceName(RESOURCE_NAME_EDEFAULT);
@@ -180,7 +207,7 @@ public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.PARAMETER_MODEL__TYPE:
-				return type != null && !type.isEmpty();
+				return type != null;
 			case CorePackage.PARAMETER_MODEL__RESOURCE_NAME:
 				return RESOURCE_NAME_EDEFAULT == null ? resourceName != null : !RESOURCE_NAME_EDEFAULT.equals(resourceName);
 		}

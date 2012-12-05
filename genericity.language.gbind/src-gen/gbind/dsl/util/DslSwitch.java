@@ -80,13 +80,13 @@ public class DslSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DslPackage.USED_METAMODEL: {
-				UsedMetamodel usedMetamodel = (UsedMetamodel)theEObject;
-				T result = caseUsedMetamodel(usedMetamodel);
-				if (result == null) result = caseOclMetamodel(usedMetamodel);
-				if (result == null) result = caseOclModel(usedMetamodel);
-				if (result == null) result = caseNamedElement(usedMetamodel);
-				if (result == null) result = caseLocatedElement(usedMetamodel);
+			case DslPackage.METAMODEL_DECLARATION: {
+				MetamodelDeclaration metamodelDeclaration = (MetamodelDeclaration)theEObject;
+				T result = caseMetamodelDeclaration(metamodelDeclaration);
+				if (result == null) result = caseOclMetamodel(metamodelDeclaration);
+				if (result == null) result = caseOclModel(metamodelDeclaration);
+				if (result == null) result = caseNamedElement(metamodelDeclaration);
+				if (result == null) result = caseLocatedElement(metamodelDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -186,17 +186,17 @@ public class DslSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Used Metamodel</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Metamodel Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Used Metamodel</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Metamodel Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUsedMetamodel(UsedMetamodel object) {
+	public T caseMetamodelDeclaration(MetamodelDeclaration object) {
 		return null;
 	}
 

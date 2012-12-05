@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link genericity.language.gcomponent.technologies.AtlParameter#getAtlModelName <em>Atl Model Name</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.technologies.AtlParameter#getAtlMetamodelName <em>Atl Metamodel Name</em>}</li>
  *   <li>{@link genericity.language.gcomponent.technologies.AtlParameter#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
@@ -55,6 +56,32 @@ public interface AtlParameter extends EObject {
 	void setAtlModelName(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Atl Metamodel Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Atl Metamodel Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Atl Metamodel Name</em>' attribute.
+	 * @see #setAtlMetamodelName(String)
+	 * @see genericity.language.gcomponent.technologies.TechnologiesPackage#getAtlParameter_AtlMetamodelName()
+	 * @model
+	 * @generated
+	 */
+	String getAtlMetamodelName();
+
+	/**
+	 * Sets the value of the '{@link genericity.language.gcomponent.technologies.AtlParameter#getAtlMetamodelName <em>Atl Metamodel Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Atl Metamodel Name</em>' attribute.
+	 * @see #getAtlMetamodelName()
+	 * @generated
+	 */
+	void setAtlMetamodelName(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -65,7 +92,7 @@ public interface AtlParameter extends EObject {
 	 * @return the value of the '<em>Model</em>' reference.
 	 * @see #setModel(Model)
 	 * @see genericity.language.gcomponent.technologies.TechnologiesPackage#getAtlParameter_Model()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Model getModel();

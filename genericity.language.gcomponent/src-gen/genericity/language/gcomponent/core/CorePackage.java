@@ -254,7 +254,7 @@ public interface CorePackage extends EPackage {
 	int PARAMETER_MODEL__NAME = MODEL__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference list.
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1050,10 +1050,10 @@ public interface CorePackage extends EPackage {
 	EClass getParameterModel();
 
 	/**
-	 * Returns the meta object for the reference list '{@link genericity.language.gcomponent.core.ParameterModel#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link genericity.language.gcomponent.core.ParameterModel#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Type</em>'.
+	 * @return the meta object for the reference '<em>Type</em>'.
 	 * @see genericity.language.gcomponent.core.ParameterModel#getType()
 	 * @see #getParameterModel()
 	 * @generated
@@ -1484,7 +1484,7 @@ public interface CorePackage extends EPackage {
 		EClass PARAMETER_MODEL = eINSTANCE.getParameterModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

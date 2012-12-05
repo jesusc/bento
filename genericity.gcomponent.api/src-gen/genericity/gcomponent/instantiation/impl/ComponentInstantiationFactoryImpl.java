@@ -63,6 +63,7 @@ public class ComponentInstantiationFactoryImpl extends EFactoryImpl implements C
 			case ComponentInstantiationPackage.COMPONENT_INSTANTIATION: return createComponentInstantiation();
 			case ComponentInstantiationPackage.ADAPTED_TRANSFORMATION: return createAdaptedTransformation();
 			case ComponentInstantiationPackage.ADAPT_WITH_BINDING: return createAdaptWithBinding();
+			case ComponentInstantiationPackage.ATL_TEMPLATE_DATA: return createAtlTemplateData();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -96,6 +97,16 @@ public class ComponentInstantiationFactoryImpl extends EFactoryImpl implements C
 	public AdaptWithBinding createAdaptWithBinding() {
 		AdaptWithBindingImpl adaptWithBinding = new AdaptWithBindingImpl();
 		return adaptWithBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AtlTemplateData createAtlTemplateData() {
+		AtlTemplateDataImpl atlTemplateData = new AtlTemplateDataImpl();
+		return atlTemplateData;
 	}
 
 	/**

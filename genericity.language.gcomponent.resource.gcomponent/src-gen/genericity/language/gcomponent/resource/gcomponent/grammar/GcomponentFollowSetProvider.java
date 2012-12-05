@@ -12,7 +12,7 @@ package genericity.language.gcomponent.resource.gcomponent.grammar;
  */
 public class GcomponentFollowSetProvider {
 	
-	public final static genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement TERMINALS[] = new genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement[74];
+	public final static genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement TERMINALS[] = new genericity.language.gcomponent.resource.gcomponent.IGcomponentExpectedElement[76];
 	
 	public final static org.eclipse.emf.ecore.EStructuralFeature[] FEATURES = new org.eclipse.emf.ecore.EStructuralFeature[18];
 	
@@ -92,9 +92,11 @@ public class GcomponentFollowSetProvider {
 		TERMINALS[68] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedCsString(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_16_0_0_2);
 		TERMINALS[69] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedStructuralFeature(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_0);
 		TERMINALS[70] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedCsString(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_16_0_0_4_0_0_0);
-		TERMINALS[71] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedCsString(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_1);
-		TERMINALS[72] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedStructuralFeature(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_2);
-		TERMINALS[73] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedStructuralFeature(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_18_0_0_1);
+		TERMINALS[71] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedCsString(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_1_0_0_0);
+		TERMINALS[72] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedCsString(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_2);
+		TERMINALS[73] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedStructuralFeature(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_1_0_0_1);
+		TERMINALS[74] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedStructuralFeature(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_17_0_0_3);
+		TERMINALS[75] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentExpectedStructuralFeature(genericity.language.gcomponent.resource.gcomponent.grammar.GcomponentGrammarInformationProvider.GCOMPONENT_18_0_0_1);
 	}
 	
 	public static void initializeTerminals() {
@@ -318,11 +320,14 @@ public class GcomponentFollowSetProvider {
 		TERMINALS[68].addFollower(TERMINALS[69], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(), FEATURES[16]), });
 		TERMINALS[70].addFollower(TERMINALS[69], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(), FEATURES[16]), });
 		TERMINALS[69].addFollower(TERMINALS[71], EMPTY_LINK_ARRAY);
-		TERMINALS[71].addFollower(TERMINALS[72], EMPTY_LINK_ARRAY);
-		TERMINALS[72].addFollower(TERMINALS[70], EMPTY_LINK_ARRAY);
-		TERMINALS[72].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
-		TERMINALS[16].addFollower(TERMINALS[73], EMPTY_LINK_ARRAY);
-		TERMINALS[73].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
+		TERMINALS[69].addFollower(TERMINALS[72], EMPTY_LINK_ARRAY);
+		TERMINALS[71].addFollower(TERMINALS[73], EMPTY_LINK_ARRAY);
+		TERMINALS[73].addFollower(TERMINALS[72], EMPTY_LINK_ARRAY);
+		TERMINALS[72].addFollower(TERMINALS[74], EMPTY_LINK_ARRAY);
+		TERMINALS[74].addFollower(TERMINALS[70], EMPTY_LINK_ARRAY);
+		TERMINALS[74].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
+		TERMINALS[16].addFollower(TERMINALS[75], EMPTY_LINK_ARRAY);
+		TERMINALS[75].addFollower(TERMINALS[17], EMPTY_LINK_ARRAY);
 	}
 	
 	public static void wire() {

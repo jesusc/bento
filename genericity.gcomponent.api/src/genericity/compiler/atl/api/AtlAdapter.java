@@ -11,6 +11,7 @@ import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.IModel;
 import org.eclectic.modeling.emf.ModelManager;
 import org.eclectic.modeling.emf.NoModelFoundException;
+import org.eclectic.modeling.emf.ParametersModel;
 import org.eclectic.modeling.emf.Util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -32,7 +33,7 @@ public class AtlAdapter {
 		this.inout = null;
 	}
 	
-	public void doAdaptation(BindingModelLoader binding) {
+	public void doAdaptation(BindingModelLoader binding, String boundMetamodelName) {
 	    rewrite_class1 transformation = new rewrite_class1();
 
 	    Util.registerResourceFactory();
@@ -50,10 +51,15 @@ public class AtlAdapter {
 			e.printStackTrace();
 		}
 		
+		ParametersModel parameters = new ParametersModel();
+		parameters.addParameterObject(new BindingData(boundMetamodelName));
+		
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
 		manager.register("gbind", in);
 		manager.register("socl", in);
 		manager.register("atl", inout);
+		manager.register("params", parameters);
+		
 		in.registerMethodHandler(new CustomMethodHandler(manager));
 		inout.registerMethodHandler(new CustomMethodHandler(manager));
 		transformation.setModelManager(manager);
@@ -107,4 +113,15 @@ public class AtlAdapter {
 		}
 	}	
 
+	public class BindingData {
+		private String boundMetamodelName;
+
+		public BindingData(String boundMetamodelName) {
+			this.boundMetamodelName = boundMetamodelName;
+		}
+		
+		public String boundMetamodelName() {
+			return boundMetamodelName;
+		}
+	}
 }

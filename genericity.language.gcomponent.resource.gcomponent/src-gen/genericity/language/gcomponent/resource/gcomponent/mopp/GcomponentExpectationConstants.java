@@ -11,7 +11,7 @@ package genericity.language.gcomponent.resource.gcomponent.mopp;
  */
 public class GcomponentExpectationConstants {
 	
-	public final static int EXPECTATIONS[][] = new int[216][];
+	public final static int EXPECTATIONS[][] = new int[220][];
 	
 	public static void initialize0() {
 		EXPECTATIONS[0] = new int[3];
@@ -728,19 +728,31 @@ public class GcomponentExpectationConstants {
 		EXPECTATIONS[210][1] = 120;
 		EXPECTATIONS[211] = new int[2];
 		EXPECTATIONS[211][0] = 72;
-		EXPECTATIONS[211][1] = 121;
+		EXPECTATIONS[211][1] = 120;
 		EXPECTATIONS[212] = new int[2];
-		EXPECTATIONS[212][0] = 70;
-		EXPECTATIONS[212][1] = 122;
+		EXPECTATIONS[212][0] = 73;
+		EXPECTATIONS[212][1] = 121;
 		EXPECTATIONS[213] = new int[2];
-		EXPECTATIONS[213][0] = 17;
+		EXPECTATIONS[213][0] = 72;
 		EXPECTATIONS[213][1] = 122;
 		EXPECTATIONS[214] = new int[2];
-		EXPECTATIONS[214][0] = 73;
+		EXPECTATIONS[214][0] = 72;
 		EXPECTATIONS[214][1] = 123;
 		EXPECTATIONS[215] = new int[2];
-		EXPECTATIONS[215][0] = 17;
+		EXPECTATIONS[215][0] = 74;
 		EXPECTATIONS[215][1] = 124;
+		EXPECTATIONS[216] = new int[2];
+		EXPECTATIONS[216][0] = 70;
+		EXPECTATIONS[216][1] = 125;
+		EXPECTATIONS[217] = new int[2];
+		EXPECTATIONS[217][0] = 17;
+		EXPECTATIONS[217][1] = 125;
+		EXPECTATIONS[218] = new int[2];
+		EXPECTATIONS[218][0] = 75;
+		EXPECTATIONS[218][1] = 126;
+		EXPECTATIONS[219] = new int[2];
+		EXPECTATIONS[219][0] = 17;
+		EXPECTATIONS[219][1] = 127;
 	}
 	
 	public static void initialize() {

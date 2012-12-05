@@ -148,6 +148,7 @@
       </genClasses>
       <genClasses ecoreClass="gcomponent.ecore#//technologies/AtlParameter">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlParameter/atlModelName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlParameter/atlMetamodelName"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference gcomponent.ecore#//technologies/AtlParameter/model"/>
       </genClasses>

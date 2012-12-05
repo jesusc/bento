@@ -26,5 +26,6 @@
   <conceptMetaclasses name="Attribute"/>
   <concreteMetaclasses name="UMLClass"/>
   <concreteMetaclasses name="UMLAttribute"/>
-  <metamodel name="UML"/>
+  <boundConcept name="OO" metamodelURI="OO.ecore"/>
+  <boundMetamodel name="UML" metamodelURI="UML.ecore"/>
 </bindingModel:BindingModel>

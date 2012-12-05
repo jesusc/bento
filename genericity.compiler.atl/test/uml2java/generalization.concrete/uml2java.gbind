@@ -1,5 +1,8 @@
 
-binding class2java for UML { 
+binding class2java {
+	concept    OO  : "OO.ecore"
+	metamodel  UML : "UML.ecore"
+ 
 	class Class to UMLClass
 	class Attribute to UMLAttribute
 	

@@ -1,9 +1,9 @@
 module uml2java;
-create OUT : Java from IN : UML;
+create OUT : Java from IN : SimpleOO;
 
 
 rule class2jclass {
-	from umlClass  : UML!Class
+	from umlClass  : SimpleOO!Class
 	to   javaClass :  Java!JavaClass (
 		name         <- umlClass.name,	
    	    extends_     <- umlClass.superclasses->first()		
@@ -11,7 +11,7 @@ rule class2jclass {
 }
 
 rule attribute2field {
-	from attr  : UML!Attribute
+	from attr  : SimpleOO!Attribute
 	to   javaClass :  Java!Field (
 		owner        <- attr.refImmediateComposite(), 
 		name         <- attr.name,

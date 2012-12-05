@@ -53,6 +53,15 @@ public interface ComponentInstantiationFactory extends EFactory {
 	AdaptWithBinding createAdaptWithBinding();
 
 	/**
+	 * Returns a new object of class '<em>Atl Template Data</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Atl Template Data</em>'.
+	 * @generated
+	 */
+	AtlTemplateData createAtlTemplateData();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

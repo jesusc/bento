@@ -4,9 +4,6 @@ package instantiation;
 import "platform:/resource/genericity.language.gcomponent/metamodel/gcomponent.ecore";
 
 
-
-
-
 class ComponentInstantiation {
 	val ExecutableTransformation[1] transformation;
 }
@@ -25,6 +22,14 @@ class AdaptWithBinding {
    ref gcomponent.core.ParameterModel[1] conceptModel;   // Defined in the invoked component
       
    ref gcomponent.core.BindingDeclaration[1] appliedBinding;
+
+	val TemplateSpecificData[1] templateData;
 }
 
+abstract class TemplateSpecificData {
+}
+
+class AtlTemplateData extends TemplateSpecificData {
+   attr String[1] atlDeclaredMetamodelName;
+}
 

@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link gbind.dsl.BindingModel#getHelpers <em>Helpers</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
- *   <li>{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}</li>
+ *   <li>{@link gbind.dsl.BindingModel#getBoundConcept <em>Bound Concept</em>}</li>
+ *   <li>{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getName <em>Name</em>}</li>
- *   <li>{@link gbind.dsl.BindingModel#getComponentURI <em>Component URI</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,30 +102,56 @@ public interface BindingModel extends EObject {
 	EList<ConcreteMetaclass> getConcreteMetaclasses();
 
 	/**
-	 * Returns the value of the '<em><b>Metamodel</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Bound Concept</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Metamodel</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Bound Concept</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metamodel</em>' containment reference.
-	 * @see #setMetamodel(UsedMetamodel)
-	 * @see gbind.dsl.DslPackage#getBindingModel_Metamodel()
+	 * @return the value of the '<em>Bound Concept</em>' containment reference.
+	 * @see #setBoundConcept(MetamodelDeclaration)
+	 * @see gbind.dsl.DslPackage#getBindingModel_BoundConcept()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	UsedMetamodel getMetamodel();
+	MetamodelDeclaration getBoundConcept();
 
 	/**
-	 * Sets the value of the '{@link gbind.dsl.BindingModel#getMetamodel <em>Metamodel</em>}' containment reference.
+	 * Sets the value of the '{@link gbind.dsl.BindingModel#getBoundConcept <em>Bound Concept</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel</em>' containment reference.
-	 * @see #getMetamodel()
+	 * @param value the new value of the '<em>Bound Concept</em>' containment reference.
+	 * @see #getBoundConcept()
 	 * @generated
 	 */
-	void setMetamodel(UsedMetamodel value);
+	void setBoundConcept(MetamodelDeclaration value);
+
+	/**
+	 * Returns the value of the '<em><b>Bound Metamodel</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bound Metamodel</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bound Metamodel</em>' containment reference.
+	 * @see #setBoundMetamodel(MetamodelDeclaration)
+	 * @see gbind.dsl.DslPackage#getBindingModel_BoundMetamodel()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	MetamodelDeclaration getBoundMetamodel();
+
+	/**
+	 * Sets the value of the '{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bound Metamodel</em>' containment reference.
+	 * @see #getBoundMetamodel()
+	 * @generated
+	 */
+	void setBoundMetamodel(MetamodelDeclaration value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -152,31 +178,5 @@ public interface BindingModel extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Component URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Component URI</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Component URI</em>' attribute.
-	 * @see #setComponentURI(String)
-	 * @see gbind.dsl.DslPackage#getBindingModel_ComponentURI()
-	 * @model
-	 * @generated
-	 */
-	String getComponentURI();
-
-	/**
-	 * Sets the value of the '{@link gbind.dsl.BindingModel#getComponentURI <em>Component URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Component URI</em>' attribute.
-	 * @see #getComponentURI()
-	 * @generated
-	 */
-	void setComponentURI(String value);
 
 } // BindingModel

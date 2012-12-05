@@ -300,8 +300,8 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_dsl_BindingModel((gbind.dsl.BindingModel) element, globaltab, out);
 			return;
 		}
-		if (element instanceof gbind.dsl.UsedMetamodel) {
-			print_gbind_dsl_UsedMetamodel((gbind.dsl.UsedMetamodel) element, globaltab, out);
+		if (element instanceof gbind.dsl.MetamodelDeclaration) {
+			print_gbind_dsl_MetamodelDeclaration((gbind.dsl.MetamodelDeclaration) element, globaltab, out);
 			return;
 		}
 		if (element instanceof gbind.dsl.ClassBinding) {
@@ -6184,17 +6184,14 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("conceptMetaclasses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__CONCRETE_METACLASSES));
 		printCountingMap.put("concreteMetaclasses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL));
-		printCountingMap.put("metamodel", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_CONCEPT));
+		printCountingMap.put("boundConcept", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_METAMODEL));
+		printCountingMap.put("boundMetamodel", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__COMPONENT_URI));
-		printCountingMap.put("componentURI", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("binding");
 		out.print(" ");
@@ -6210,34 +6207,33 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			}
 			printCountingMap.put("name", count - 1);
 		}
-		// DEFINITION PART BEGINS (CompoundDefinition)
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_gbind_dsl_BindingModel_0(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
-		// DEFINITION PART BEGINS (CsString)
-		out.print("for");
-		out.print(" ");
-		// DEFINITION PART BEGINS (Containment)
-		count = printCountingMap.get("metamodel");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__METAMODEL));
-			if (o != null) {
-				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
-			}
-			printCountingMap.put("metamodel", count - 1);
-		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print("{");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("concept");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("boundConcept");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_CONCEPT));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("boundConcept", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("metamodel");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("boundMetamodel");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_METAMODEL));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("boundMetamodel", count - 1);
+		}
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("bindings");
 		if (count > 0) {
@@ -6273,25 +6269,8 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		out.print(" ");
 	}
 	
-	public void print_gbind_dsl_BindingModel_0(gbind.dsl.BindingModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
-		int count;
-		// DEFINITION PART BEGINS (PlaceholderInQuotes)
-		count = printCountingMap.get("componentURI");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__COMPONENT_URI));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_91_93");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__COMPONENT_URI), element));
-				out.print(" ");
-			}
-			printCountingMap.put("componentURI", count - 1);
-		}
-	}
 	
-	
-	public void print_gbind_dsl_UsedMetamodel(gbind.dsl.UsedMetamodel element, String outertab, java.io.PrintWriter out) {
-		String localtab = outertab;
+	public void print_gbind_dsl_MetamodelDeclaration(gbind.dsl.MetamodelDeclaration element, String outertab, java.io.PrintWriter out) {
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -6299,58 +6278,41 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// 0 (if the feature is null).
 		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(9);
 		Object temp;
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__NAME));
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__ELEMENTS));
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__ELEMENTS));
 		printCountingMap.put("elements", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__MODEL));
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__MODEL));
 		printCountingMap.put("model", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__URI));
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__URI));
 		printCountingMap.put("uri", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__METAMODEL_URI));
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__METAMODEL_URI));
 		printCountingMap.put("metamodelURI", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
-		java.io.StringWriter sWriter = null;
-		java.io.PrintWriter out1 = null;
-		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("name");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__NAME));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__NAME));
 			if (o != null) {
 				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__NAME), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__NAME), element));
 				out.print(" ");
 			}
 			printCountingMap.put("name", count - 1);
 		}
-		// DEFINITION PART BEGINS (CompoundDefinition)
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_gbind_dsl_UsedMetamodel_0(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
-		}
-	}
-	
-	public void print_gbind_dsl_UsedMetamodel_0(gbind.dsl.UsedMetamodel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
-		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(":");
+		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderInQuotes)
 		count = printCountingMap.get("metamodelURI");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__METAMODEL_URI));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__METAMODEL_URI));
 			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_91_93");
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.USED_METAMODEL__METAMODEL_URI), element));
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.METAMODEL_DECLARATION__METAMODEL_URI), element));
 				out.print(" ");
 			}
 			printCountingMap.put("metamodelURI", count - 1);

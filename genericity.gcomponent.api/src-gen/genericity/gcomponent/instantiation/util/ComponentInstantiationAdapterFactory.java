@@ -88,6 +88,14 @@ public class ComponentInstantiationAdapterFactory extends AdapterFactoryImpl {
 				return createAdaptWithBindingAdapter();
 			}
 			@Override
+			public Adapter caseTemplateSpecificData(TemplateSpecificData object) {
+				return createTemplateSpecificDataAdapter();
+			}
+			@Override
+			public Adapter caseAtlTemplateData(AtlTemplateData object) {
+				return createAtlTemplateDataAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -160,6 +168,34 @@ public class ComponentInstantiationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAdaptWithBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.gcomponent.instantiation.TemplateSpecificData <em>Template Specific Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.gcomponent.instantiation.TemplateSpecificData
+	 * @generated
+	 */
+	public Adapter createTemplateSpecificDataAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.gcomponent.instantiation.AtlTemplateData <em>Atl Template Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.gcomponent.instantiation.AtlTemplateData
+	 * @generated
+	 */
+	public Adapter createAtlTemplateDataAdapter() {
 		return null;
 	}
 

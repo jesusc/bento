@@ -1,7 +1,7 @@
 /**
  * Rewrites an ATL transformation according to a binding model.
  */
-qool rewrite_class1(atl, gbind) -> ()
+qool rewrite_class1(atl, gbind, params) -> ()
 
 model matches
   class MatchedClassBinding
@@ -46,7 +46,10 @@ local queue pMatchedOclBinding        : matches!MatchedOclHelper
  * being bound (i.e., the meta-model that the binding DSL refers to)
  */
 segment findRelevantOclModelElements
-	current_mm = gbind!BindingModel.all_instances.get(0).metamodel.name
+	// current_mm = gbind!BindingModel.all_instances.get(0).metamodel.name
+	// TODO: This will be like this when IdcMetaclass is created by an IModel method, now it is not very extensible
+	// current_mm = params!BindingData.boundMetamodelName
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
 
 	forall o from mOclModelElement
 		o.^model.is_nil.if_false {
@@ -155,7 +158,9 @@ segment CreateHelperForRenamingFeature
 		// * instantiation, then invocation 
 		//     - invocation may need to call an entry point... (e.g., templates)
 		
-		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(m.featureBinding.model_.metamodel.name) }.first
+		current_mm = params!BindingData.all_instances.first.boundMetamodelName
+		
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
 		
 		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
 				 entrypoint createRenamingHelper(m.featureBinding, m.concreteMetaclass, ocl_model)
@@ -174,7 +179,9 @@ end
 
 segment CreateHelperForOclFeature
 	forall mo from pMatchedOclBinding
-		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(mo.featureBinding.model_.metamodel.name) }.first
+		current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
 		ocl_expr  = mo.featureBinding.concrete
 		
 		/*

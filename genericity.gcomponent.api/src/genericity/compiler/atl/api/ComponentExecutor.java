@@ -11,7 +11,9 @@ import genericity.gcomponent.instantiation.ExecutableTransformation;
 import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.CompositeComponent;
+import genericity.language.gcomponent.core.Template;
 import genericity.language.gcomponent.dsl.DefinitionRoot;
+import genericity.language.gcomponent.technologies.AtlParameter;
 import genericity.language.gcomponent.technologies.AtlTemplate;
 
 import java.util.ArrayList;
@@ -120,7 +122,17 @@ public class ComponentExecutor {
 
 		for(AdaptWithBinding step : transformation.getRequiredAdaptations()) {				
 			BindingModelLoader loader = new BindingModelLoader.FileBased( step.getAppliedBinding().getFileName() );
-			adapter.doAdaptation(loader);
+			
+			// Select the actual ATL model that is bound
+			AtlParameter atlBoundModel = null;
+			AtlTemplate template = (AtlTemplate) transformation.getTemplate();			
+			for(AtlParameter p : template.getParameters()) {
+				if ( p.getModel() == step.getConcreteModel() ) {
+					atlBoundModel = p;
+				}
+			}
+			
+			adapter.doAdaptation(loader, atlBoundModel.getAtlMetamodelName());
 		}
 
 		

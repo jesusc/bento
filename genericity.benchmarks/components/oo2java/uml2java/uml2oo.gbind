@@ -1,5 +1,9 @@
 
-binding uml2oo for UML { 
+-- binding uml2oo for UML { 
+binding uml2oo {
+	concept    OO  : "OO.ecore"
+	metamodel  UML : "UML.ecore"
+	
 	class Class to UMLClass
 	class Attribute to UMLAttribute
 	

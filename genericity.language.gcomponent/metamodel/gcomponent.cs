@@ -110,8 +110,11 @@ RULES {
 	// End-of composite components
 
 	// Begin-of technologies
-	Technologies.AtlTemplate ::= "atl" template['"', '"'] "with" parameters ("," parameters)* ;
-	Technologies.AtlParameter ::= atlModelName[] "=" model[];
+	Technologies.AtlTemplate ::= "atl" template['"', '"'] 
+		"with" parameters ("," parameters)* ;
+	Technologies.AtlParameter ::= atlModelName[] ( ":" atlMetamodelName[] )? "=" model[];
+	//Technologies.AtlModelParameter ::= atlModelName[] "=" model[];
+	//Technologies.AtlMetamodelParameter ::= atlModelName[] "=" concept[];
 	Technologies.JavaTemplate ::= "java" qualifiedClassname['"', '"'];
 	
 	// End-of technologies

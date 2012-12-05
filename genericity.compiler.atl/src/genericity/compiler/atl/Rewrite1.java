@@ -3,6 +3,11 @@ package genericity.compiler.atl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.eclectic.idc.datatypes.ImmutableList;
 import org.eclectic.idc.datatypes.JavaListConverter;
@@ -22,6 +27,7 @@ import eclectic.callexpr;
 import eclectic.composed_genericity;
 import eclectic.ocl2ocl;
 import eclectic.rewrite_class1;
+import genericity.compiler.atl.Rewrite1.ParametersModel;
 
 public class Rewrite1 {
 	
@@ -45,11 +51,16 @@ public class Rewrite1 {
 				withDir("../genericity.atl.transformations/metamodels/ATL.ecore"), 
 				withDir("test/uml2java/uml2java.atl.xmi")); 
 		
+		ParametersModel parameters = new ParametersModel();
+		parameters.addParameterObject("BindingData", new BindingData());
+		
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
 		manager.register("gbind", in);
 		manager.register("socl", in);
-
+		manager.register("params", parameters);
 		manager.register("atl", inout);
+		
+		
 		//in.registerMethodHandler(new org.eclectic.idc.jvm.runtime.BasicMethodHandler(manager));
 		in.registerMethodHandler(new CustomMethodHandler(manager));
 		inout.registerMethodHandler(new CustomMethodHandler(manager));
@@ -103,5 +114,59 @@ public class Rewrite1 {
 			return checkIsChild(o.eContainer(), parent);
 		}
 	}	
+
+	public static class BindingData {
+		public String boundMetamodelName() { return "UML"; }
+	}
 	
+	public static class ParametersModel implements org.eclectic.modeling.emf.IModel<Object, Object> {
+		private HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		public void addParameterObject(String metaclassName, Object data) {
+			this.data.put(metaclassName, data);
+		}
+
+		@Override
+		public Object getMetaclass(String metaclass) { 
+			if ( data.containsKey(metaclass) ) 
+				return data.get(metaclass);
+			throw new IllegalArgumentException("No parameter " + metaclass + " in parameters models");
+		}
+
+		@Override
+		public List<Object> allObjectsOf(String metaclass) {  
+			ArrayList<Object> result = new ArrayList<Object>();
+			if ( data.containsKey(metaclass) ) {
+				result.add(data.get(metaclass));
+			}
+			return result;
+		}
+		
+		@Override
+		public Object createObject(String metaclass) { throw new UnsupportedOperationException(); }
+		@Override
+		public void setFeature(Object receptor, String featureName, Object value) { throw new UnsupportedOperationException(); }
+		
+		@Override
+		public Object getFeature(Object receptor, String featureName) { throw new UnsupportedOperationException(); }
+		
+		@Override
+		public boolean hasFeature(Object receptor, String featureName) { 
+			return false;
+		}
+		
+		@Override
+		public boolean contains(Object obj) {
+			return data.values().contains(obj);
+		}
+		@Override
+		public boolean isKindOf(Object o, String metaclass) { throw new UnsupportedOperationException(); }
+		@Override
+		public void registerMethodHandler(Object handler) { }
+		@Override
+		public Object getMethodHandler() { return null; }
+		@Override
+		public Object getContainer(Object object) { throw new UnsupportedOperationException(); }
+	}
 }
+

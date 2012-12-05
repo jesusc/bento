@@ -7,28 +7,30 @@
 package gbind.dsl.impl;
 
 import gbind.dsl.DslPackage;
-import gbind.dsl.UsedMetamodel;
+import gbind.dsl.MetamodelDeclaration;
 
 import gbind.simpleocl.impl.OclMetamodelImpl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Used Metamodel</b></em>'.
+ * An implementation of the model object '<em><b>Metamodel Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link gbind.dsl.impl.UsedMetamodelImpl#getMetamodelURI <em>Metamodel URI</em>}</li>
+ *   <li>{@link gbind.dsl.impl.MetamodelDeclarationImpl#getMetamodelURI <em>Metamodel URI</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel {
+public class MetamodelDeclarationImpl extends OclMetamodelImpl implements MetamodelDeclaration {
 	/**
 	 * The default value of the '{@link #getMetamodelURI() <em>Metamodel URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,6 +40,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	 * @ordered
 	 */
 	protected static final String METAMODEL_URI_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getMetamodelURI() <em>Metamodel URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -53,7 +56,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UsedMetamodelImpl() {
+	protected MetamodelDeclarationImpl() {
 		super();
 	}
 
@@ -64,7 +67,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DslPackage.Literals.USED_METAMODEL;
+		return DslPackage.Literals.METAMODEL_DECLARATION;
 	}
 
 	/**
@@ -85,7 +88,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 		String oldMetamodelURI = metamodelURI;
 		metamodelURI = newMetamodelURI;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.USED_METAMODEL__METAMODEL_URI, oldMetamodelURI, metamodelURI));
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.METAMODEL_DECLARATION__METAMODEL_URI, oldMetamodelURI, metamodelURI));
 	}
 
 	/**
@@ -96,7 +99,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DslPackage.USED_METAMODEL__METAMODEL_URI:
+			case DslPackage.METAMODEL_DECLARATION__METAMODEL_URI:
 				return getMetamodelURI();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -110,7 +113,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DslPackage.USED_METAMODEL__METAMODEL_URI:
+			case DslPackage.METAMODEL_DECLARATION__METAMODEL_URI:
 				setMetamodelURI((String)newValue);
 				return;
 		}
@@ -125,7 +128,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DslPackage.USED_METAMODEL__METAMODEL_URI:
+			case DslPackage.METAMODEL_DECLARATION__METAMODEL_URI:
 				setMetamodelURI(METAMODEL_URI_EDEFAULT);
 				return;
 		}
@@ -140,7 +143,7 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DslPackage.USED_METAMODEL__METAMODEL_URI:
+			case DslPackage.METAMODEL_DECLARATION__METAMODEL_URI:
 				return METAMODEL_URI_EDEFAULT == null ? metamodelURI != null : !METAMODEL_URI_EDEFAULT.equals(metamodelURI);
 		}
 		return super.eIsSet(featureID);
@@ -162,4 +165,4 @@ public class UsedMetamodelImpl extends OclMetamodelImpl implements UsedMetamodel
 		return result.toString();
 	}
 
-} //UsedMetamodelImpl
+} //MetamodelDeclarationImpl

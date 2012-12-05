@@ -23,5 +23,12 @@
         eType="ecore:EClass ../../genericity.language.gcomponent/metamodel/gcomponent.ecore#//core/ParameterModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="appliedBinding" lowerBound="1"
         eType="ecore:EClass ../../genericity.language.gcomponent/metamodel/gcomponent.ecore#//core/BindingDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateData" lowerBound="1"
+        eType="#//TemplateSpecificData" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateSpecificData" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtlTemplateData" eSuperTypes="#//TemplateSpecificData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="atlDeclaredMetamodelName"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

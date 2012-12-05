@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link genericity.language.gcomponent.technologies.impl.AtlParameterImpl#getAtlModelName <em>Atl Model Name</em>}</li>
+ *   <li>{@link genericity.language.gcomponent.technologies.impl.AtlParameterImpl#getAtlMetamodelName <em>Atl Metamodel Name</em>}</li>
  *   <li>{@link genericity.language.gcomponent.technologies.impl.AtlParameterImpl#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
@@ -53,6 +54,26 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 	 * @ordered
 	 */
 	protected String atlModelName = ATL_MODEL_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAtlMetamodelName() <em>Atl Metamodel Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAtlMetamodelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ATL_METAMODEL_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAtlMetamodelName() <em>Atl Metamodel Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAtlMetamodelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String atlMetamodelName = ATL_METAMODEL_NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getModel() <em>Model</em>}' reference.
@@ -109,6 +130,27 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAtlMetamodelName() {
+		return atlMetamodelName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAtlMetamodelName(String newAtlMetamodelName) {
+		String oldAtlMetamodelName = atlMetamodelName;
+		atlMetamodelName = newAtlMetamodelName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TechnologiesPackage.ATL_PARAMETER__ATL_METAMODEL_NAME, oldAtlMetamodelName, atlMetamodelName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Model getModel() {
 		if (model != null && model.eIsProxy()) {
 			InternalEObject oldModel = (InternalEObject)model;
@@ -152,6 +194,8 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 		switch (featureID) {
 			case TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME:
 				return getAtlModelName();
+			case TechnologiesPackage.ATL_PARAMETER__ATL_METAMODEL_NAME:
+				return getAtlMetamodelName();
 			case TechnologiesPackage.ATL_PARAMETER__MODEL:
 				if (resolve) return getModel();
 				return basicGetModel();
@@ -169,6 +213,9 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 		switch (featureID) {
 			case TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME:
 				setAtlModelName((String)newValue);
+				return;
+			case TechnologiesPackage.ATL_PARAMETER__ATL_METAMODEL_NAME:
+				setAtlMetamodelName((String)newValue);
 				return;
 			case TechnologiesPackage.ATL_PARAMETER__MODEL:
 				setModel((Model)newValue);
@@ -188,6 +235,9 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 			case TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME:
 				setAtlModelName(ATL_MODEL_NAME_EDEFAULT);
 				return;
+			case TechnologiesPackage.ATL_PARAMETER__ATL_METAMODEL_NAME:
+				setAtlMetamodelName(ATL_METAMODEL_NAME_EDEFAULT);
+				return;
 			case TechnologiesPackage.ATL_PARAMETER__MODEL:
 				setModel((Model)null);
 				return;
@@ -205,6 +255,8 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 		switch (featureID) {
 			case TechnologiesPackage.ATL_PARAMETER__ATL_MODEL_NAME:
 				return ATL_MODEL_NAME_EDEFAULT == null ? atlModelName != null : !ATL_MODEL_NAME_EDEFAULT.equals(atlModelName);
+			case TechnologiesPackage.ATL_PARAMETER__ATL_METAMODEL_NAME:
+				return ATL_METAMODEL_NAME_EDEFAULT == null ? atlMetamodelName != null : !ATL_METAMODEL_NAME_EDEFAULT.equals(atlMetamodelName);
 			case TechnologiesPackage.ATL_PARAMETER__MODEL:
 				return model != null;
 		}
@@ -223,6 +275,8 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (atlModelName: ");
 		result.append(atlModelName);
+		result.append(", atlMetamodelName: ");
+		result.append(atlMetamodelName);
 		result.append(')');
 		return result.toString();
 	}

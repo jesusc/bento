@@ -95,6 +95,19 @@ public class ComponentInstantiationSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ComponentInstantiationPackage.TEMPLATE_SPECIFIC_DATA: {
+				TemplateSpecificData templateSpecificData = (TemplateSpecificData)theEObject;
+				T result = caseTemplateSpecificData(templateSpecificData);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ComponentInstantiationPackage.ATL_TEMPLATE_DATA: {
+				AtlTemplateData atlTemplateData = (AtlTemplateData)theEObject;
+				T result = caseAtlTemplateData(atlTemplateData);
+				if (result == null) result = caseTemplateSpecificData(atlTemplateData);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -156,6 +169,36 @@ public class ComponentInstantiationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAdaptWithBinding(AdaptWithBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template Specific Data</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template Specific Data</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateSpecificData(TemplateSpecificData object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Atl Template Data</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Atl Template Data</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAtlTemplateData(AtlTemplateData object) {
 		return null;
 	}
 

@@ -39,11 +39,11 @@ public class TestInstantiation {
 						// withDir("../be.ac.vub.simpleocl/metamodel/simpleocl.ecore"),		
 						withDir("../genericity.language.gcomponent/metamodel/gcomponent.ecore")
 				}, 
-				withDir("../genericity.benchmarks/tests/oo2java.uml/oo2java-uml.gcomponent.xmi")); 
+				withDir("../genericity.benchmarks/components/oo2java/uml2java/uml2java.gcomponent.xmi")); 
 		
 		BasicEMFModel out = loader.basicEmptyModelFromFile(
 				withDir("../genericity.gcomponent.api/model/component_instantiation.ecore"), 
-				withDir("../genericity.benchmarks/tests/oo2java.uml/oo2java-uml.instantiation.xmi")); 
+				withDir("../genericity.benchmarks/components/oo2java/uml2java/uml2java.instantiation.xmi")); 
 		
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
 		manager.register("comp", in);

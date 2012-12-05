@@ -8,11 +8,13 @@ package genericity.gcomponent.instantiation.impl;
 
 import genericity.gcomponent.instantiation.AdaptWithBinding;
 import genericity.gcomponent.instantiation.AdaptedTransformation;
+import genericity.gcomponent.instantiation.AtlTemplateData;
 import genericity.gcomponent.instantiation.ComponentInstantiation;
 import genericity.gcomponent.instantiation.ComponentInstantiationFactory;
 import genericity.gcomponent.instantiation.ComponentInstantiationPackage;
 import genericity.gcomponent.instantiation.ExecutableTransformation;
 
+import genericity.gcomponent.instantiation.TemplateSpecificData;
 import genericity.language.gcomponent.GcomponentPackage;
 
 import genericity.language.gcomponent.core.CorePackage;
@@ -58,6 +60,20 @@ public class ComponentInstantiationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	private EClass adaptWithBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass templateSpecificDataEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass atlTemplateDataEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -227,6 +243,42 @@ public class ComponentInstantiationPackageImpl extends EPackageImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAdaptWithBinding_TemplateData() {
+		return (EReference)adaptWithBindingEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTemplateSpecificData() {
+		return templateSpecificDataEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAtlTemplateData() {
+		return atlTemplateDataEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAtlTemplateData_AtlDeclaredMetamodelName() {
+		return (EAttribute)atlTemplateDataEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ComponentInstantiationFactory getComponentInstantiationFactory() {
 		return (ComponentInstantiationFactory)getEFactoryInstance();
 	}
@@ -264,6 +316,12 @@ public class ComponentInstantiationPackageImpl extends EPackageImpl implements C
 		createEReference(adaptWithBindingEClass, ADAPT_WITH_BINDING__CONCRETE_MODEL);
 		createEReference(adaptWithBindingEClass, ADAPT_WITH_BINDING__CONCEPT_MODEL);
 		createEReference(adaptWithBindingEClass, ADAPT_WITH_BINDING__APPLIED_BINDING);
+		createEReference(adaptWithBindingEClass, ADAPT_WITH_BINDING__TEMPLATE_DATA);
+
+		templateSpecificDataEClass = createEClass(TEMPLATE_SPECIFIC_DATA);
+
+		atlTemplateDataEClass = createEClass(ATL_TEMPLATE_DATA);
+		createEAttribute(atlTemplateDataEClass, ATL_TEMPLATE_DATA__ATL_DECLARED_METAMODEL_NAME);
 	}
 
 	/**
@@ -298,6 +356,7 @@ public class ComponentInstantiationPackageImpl extends EPackageImpl implements C
 
 		// Add supertypes to classes
 		adaptedTransformationEClass.getESuperTypes().add(this.getExecutableTransformation());
+		atlTemplateDataEClass.getESuperTypes().add(this.getTemplateSpecificData());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentInstantiationEClass, ComponentInstantiation.class, "ComponentInstantiation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -314,6 +373,12 @@ public class ComponentInstantiationPackageImpl extends EPackageImpl implements C
 		initEReference(getAdaptWithBinding_ConcreteModel(), theCorePackage.getParameterModel(), null, "concreteModel", null, 1, 1, AdaptWithBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAdaptWithBinding_ConceptModel(), theCorePackage.getParameterModel(), null, "conceptModel", null, 1, 1, AdaptWithBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAdaptWithBinding_AppliedBinding(), theCorePackage.getBindingDeclaration(), null, "appliedBinding", null, 1, 1, AdaptWithBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdaptWithBinding_TemplateData(), this.getTemplateSpecificData(), null, "templateData", null, 1, 1, AdaptWithBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(templateSpecificDataEClass, TemplateSpecificData.class, "TemplateSpecificData", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(atlTemplateDataEClass, AtlTemplateData.class, "AtlTemplateData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAtlTemplateData_AtlDeclaredMetamodelName(), ecorePackage.getEString(), "atlDeclaredMetamodelName", null, 1, 1, AtlTemplateData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

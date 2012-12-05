@@ -121,7 +121,7 @@ public interface ApplyParameter extends EObject {
 	 * @return the value of the '<em>Binding</em>' reference.
 	 * @see #setBinding(BindingDeclaration)
 	 * @see genericity.language.gcomponent.flowcontrol.FlowcontrolPackage#getApplyParameter_Binding()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	BindingDeclaration getBinding();

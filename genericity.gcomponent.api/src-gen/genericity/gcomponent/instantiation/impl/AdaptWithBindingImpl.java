@@ -9,11 +9,13 @@ package genericity.gcomponent.instantiation.impl;
 import genericity.gcomponent.instantiation.AdaptWithBinding;
 import genericity.gcomponent.instantiation.ComponentInstantiationPackage;
 
+import genericity.gcomponent.instantiation.TemplateSpecificData;
 import genericity.language.gcomponent.core.BindingDeclaration;
 import genericity.language.gcomponent.core.ParameterModel;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -31,6 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link genericity.gcomponent.instantiation.impl.AdaptWithBindingImpl#getConcreteModel <em>Concrete Model</em>}</li>
  *   <li>{@link genericity.gcomponent.instantiation.impl.AdaptWithBindingImpl#getConceptModel <em>Concept Model</em>}</li>
  *   <li>{@link genericity.gcomponent.instantiation.impl.AdaptWithBindingImpl#getAppliedBinding <em>Applied Binding</em>}</li>
+ *   <li>{@link genericity.gcomponent.instantiation.impl.AdaptWithBindingImpl#getTemplateData <em>Template Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,6 +89,16 @@ public class AdaptWithBindingImpl extends EObjectImpl implements AdaptWithBindin
 	 * @ordered
 	 */
 	protected BindingDeclaration appliedBinding;
+
+	/**
+	 * The cached value of the '{@link #getTemplateData() <em>Template Data</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTemplateData()
+	 * @generated
+	 * @ordered
+	 */
+	protected TemplateSpecificData templateData;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,6 +259,63 @@ public class AdaptWithBindingImpl extends EObjectImpl implements AdaptWithBindin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TemplateSpecificData getTemplateData() {
+		return templateData;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTemplateData(TemplateSpecificData newTemplateData, NotificationChain msgs) {
+		TemplateSpecificData oldTemplateData = templateData;
+		templateData = newTemplateData;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA, oldTemplateData, newTemplateData);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTemplateData(TemplateSpecificData newTemplateData) {
+		if (newTemplateData != templateData) {
+			NotificationChain msgs = null;
+			if (templateData != null)
+				msgs = ((InternalEObject)templateData).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA, null, msgs);
+			if (newTemplateData != null)
+				msgs = ((InternalEObject)newTemplateData).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA, null, msgs);
+			msgs = basicSetTemplateData(newTemplateData, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA, newTemplateData, newTemplateData));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA:
+				return basicSetTemplateData(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -260,6 +330,8 @@ public class AdaptWithBindingImpl extends EObjectImpl implements AdaptWithBindin
 			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__APPLIED_BINDING:
 				if (resolve) return getAppliedBinding();
 				return basicGetAppliedBinding();
+			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA:
+				return getTemplateData();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,6 +355,9 @@ public class AdaptWithBindingImpl extends EObjectImpl implements AdaptWithBindin
 				return;
 			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__APPLIED_BINDING:
 				setAppliedBinding((BindingDeclaration)newValue);
+				return;
+			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA:
+				setTemplateData((TemplateSpecificData)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,6 +383,9 @@ public class AdaptWithBindingImpl extends EObjectImpl implements AdaptWithBindin
 			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__APPLIED_BINDING:
 				setAppliedBinding((BindingDeclaration)null);
 				return;
+			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA:
+				setTemplateData((TemplateSpecificData)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -328,6 +406,8 @@ public class AdaptWithBindingImpl extends EObjectImpl implements AdaptWithBindin
 				return conceptModel != null;
 			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__APPLIED_BINDING:
 				return appliedBinding != null;
+			case ComponentInstantiationPackage.ADAPT_WITH_BINDING__TEMPLATE_DATA:
+				return templateData != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.gcomponent.instantiation.AdaptWithBinding#getConcreteModel <em>Concrete Model</em>}</li>
  *   <li>{@link genericity.gcomponent.instantiation.AdaptWithBinding#getConceptModel <em>Concept Model</em>}</li>
  *   <li>{@link genericity.gcomponent.instantiation.AdaptWithBinding#getAppliedBinding <em>Applied Binding</em>}</li>
+ *   <li>{@link genericity.gcomponent.instantiation.AdaptWithBinding#getTemplateData <em>Template Data</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,5 +135,31 @@ public interface AdaptWithBinding extends EObject {
 	 * @generated
 	 */
 	void setAppliedBinding(BindingDeclaration value);
+
+	/**
+	 * Returns the value of the '<em><b>Template Data</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Template Data</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Template Data</em>' containment reference.
+	 * @see #setTemplateData(TemplateSpecificData)
+	 * @see genericity.gcomponent.instantiation.ComponentInstantiationPackage#getAdaptWithBinding_TemplateData()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	TemplateSpecificData getTemplateData();
+
+	/**
+	 * Sets the value of the '{@link genericity.gcomponent.instantiation.AdaptWithBinding#getTemplateData <em>Template Data</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Template Data</em>' containment reference.
+	 * @see #getTemplateData()
+	 * @generated
+	 */
+	void setTemplateData(TemplateSpecificData value);
 
 } // AdaptWithBinding

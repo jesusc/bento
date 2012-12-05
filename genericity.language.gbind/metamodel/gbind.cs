@@ -20,12 +20,12 @@ OPTIONS {
 	// BEGIN-OF OCL 
 	usePredefinedTokens = "false";
 	disableTokenSorting = "true";
-	//overrideResourceFactory = "false";
-	//overrideBuilder = "false";
-	//overrideBuilderAdapter = "false";
+	overrideResourceFactory = "false";
+	overrideBuilder = "false";
+	overrideBuilderAdapter = "false";
 	//overrideManifest = "false";
 	disableLaunchSupport = "true";
-	//overrideLineBreakpoint = "false";
+	overrideLineBreakpoint = "false";
 	//overrideLineBreakpointAdapter = "false";
 	//overrideUIManifest = "false";
 	//overrideNewFileWizard = "false";
@@ -237,14 +237,16 @@ RULES {
 	Simpleocl.EnvType ::= name[ENVTYPE];
 	// END-OF OclRules
 
-	Dsl.BindingModel ::= "binding" name[] (componentURI['[', ']'])? 
-	                 "for" metamodel   
+	Dsl.BindingModel ::= "binding" name[] 
 		"{"
+			"concept" boundConcept
+			"metamodel" boundMetamodel
+			
 			bindings*
 			helpers*
 		"}";
 	
-	Dsl.UsedMetamodel ::= name[] (metamodelURI['[', ']'])?;
+	Dsl.MetamodelDeclaration ::= name[] ":" metamodelURI['"','"','\\'];
 	
 	Dsl.ClassBinding ::= "class" concept[] "to" concrete[] ("," concrete[])* 
 		( "when" whenClause )?;

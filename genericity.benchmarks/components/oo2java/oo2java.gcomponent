@@ -7,5 +7,5 @@ transformation component oo2java {
 	
 	//definition atl "oo2java.atl" 
 	definition atl "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.atl"
-		with IN = in, OUT = out 
+        with IN : SimpleOO = in, OUT = out
 }

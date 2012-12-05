@@ -190,13 +190,70 @@ public interface ComponentInstantiationPackage extends EPackage {
 	int ADAPT_WITH_BINDING__APPLIED_BINDING = 3;
 
 	/**
+	 * The feature id for the '<em><b>Template Data</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPT_WITH_BINDING__TEMPLATE_DATA = 4;
+
+	/**
 	 * The number of structural features of the '<em>Adapt With Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPT_WITH_BINDING_FEATURE_COUNT = 4;
+	int ADAPT_WITH_BINDING_FEATURE_COUNT = 5;
+
+
+	/**
+	 * The meta object id for the '{@link genericity.gcomponent.instantiation.impl.TemplateSpecificDataImpl <em>Template Specific Data</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.gcomponent.instantiation.impl.TemplateSpecificDataImpl
+	 * @see genericity.gcomponent.instantiation.impl.ComponentInstantiationPackageImpl#getTemplateSpecificData()
+	 * @generated
+	 */
+	int TEMPLATE_SPECIFIC_DATA = 4;
+
+	/**
+	 * The number of structural features of the '<em>Template Specific Data</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_SPECIFIC_DATA_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link genericity.gcomponent.instantiation.impl.AtlTemplateDataImpl <em>Atl Template Data</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.gcomponent.instantiation.impl.AtlTemplateDataImpl
+	 * @see genericity.gcomponent.instantiation.impl.ComponentInstantiationPackageImpl#getAtlTemplateData()
+	 * @generated
+	 */
+	int ATL_TEMPLATE_DATA = 5;
+
+	/**
+	 * The feature id for the '<em><b>Atl Declared Metamodel Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_TEMPLATE_DATA__ATL_DECLARED_METAMODEL_NAME = TEMPLATE_SPECIFIC_DATA_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Atl Template Data</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_TEMPLATE_DATA_FEATURE_COUNT = TEMPLATE_SPECIFIC_DATA_FEATURE_COUNT + 1;
 
 
 	/**
@@ -317,6 +374,48 @@ public interface ComponentInstantiationPackage extends EPackage {
 	EReference getAdaptWithBinding_AppliedBinding();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link genericity.gcomponent.instantiation.AdaptWithBinding#getTemplateData <em>Template Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Template Data</em>'.
+	 * @see genericity.gcomponent.instantiation.AdaptWithBinding#getTemplateData()
+	 * @see #getAdaptWithBinding()
+	 * @generated
+	 */
+	EReference getAdaptWithBinding_TemplateData();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.gcomponent.instantiation.TemplateSpecificData <em>Template Specific Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Template Specific Data</em>'.
+	 * @see genericity.gcomponent.instantiation.TemplateSpecificData
+	 * @generated
+	 */
+	EClass getTemplateSpecificData();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.gcomponent.instantiation.AtlTemplateData <em>Atl Template Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Atl Template Data</em>'.
+	 * @see genericity.gcomponent.instantiation.AtlTemplateData
+	 * @generated
+	 */
+	EClass getAtlTemplateData();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.gcomponent.instantiation.AtlTemplateData#getAtlDeclaredMetamodelName <em>Atl Declared Metamodel Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Atl Declared Metamodel Name</em>'.
+	 * @see genericity.gcomponent.instantiation.AtlTemplateData#getAtlDeclaredMetamodelName()
+	 * @see #getAtlTemplateData()
+	 * @generated
+	 */
+	EAttribute getAtlTemplateData_AtlDeclaredMetamodelName();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -433,6 +532,42 @@ public interface ComponentInstantiationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ADAPT_WITH_BINDING__APPLIED_BINDING = eINSTANCE.getAdaptWithBinding_AppliedBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Template Data</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADAPT_WITH_BINDING__TEMPLATE_DATA = eINSTANCE.getAdaptWithBinding_TemplateData();
+
+		/**
+		 * The meta object literal for the '{@link genericity.gcomponent.instantiation.impl.TemplateSpecificDataImpl <em>Template Specific Data</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.gcomponent.instantiation.impl.TemplateSpecificDataImpl
+		 * @see genericity.gcomponent.instantiation.impl.ComponentInstantiationPackageImpl#getTemplateSpecificData()
+		 * @generated
+		 */
+		EClass TEMPLATE_SPECIFIC_DATA = eINSTANCE.getTemplateSpecificData();
+
+		/**
+		 * The meta object literal for the '{@link genericity.gcomponent.instantiation.impl.AtlTemplateDataImpl <em>Atl Template Data</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.gcomponent.instantiation.impl.AtlTemplateDataImpl
+		 * @see genericity.gcomponent.instantiation.impl.ComponentInstantiationPackageImpl#getAtlTemplateData()
+		 * @generated
+		 */
+		EClass ATL_TEMPLATE_DATA = eINSTANCE.getAtlTemplateData();
+
+		/**
+		 * The meta object literal for the '<em><b>Atl Declared Metamodel Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATL_TEMPLATE_DATA__ATL_DECLARED_METAMODEL_NAME = eINSTANCE.getAtlTemplateData_AtlDeclaredMetamodelName();
 
 	}
 

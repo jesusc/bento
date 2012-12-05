@@ -80,8 +80,8 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createBindingModelAdapter();
 			}
 			@Override
-			public Adapter caseUsedMetamodel(UsedMetamodel object) {
-				return createUsedMetamodelAdapter();
+			public Adapter caseMetamodelDeclaration(MetamodelDeclaration object) {
+				return createMetamodelDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseMetaclass(Metaclass object) {
@@ -178,16 +178,16 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link gbind.dsl.UsedMetamodel <em>Used Metamodel</em>}'.
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.MetamodelDeclaration <em>Metamodel Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see gbind.dsl.UsedMetamodel
+	 * @see gbind.dsl.MetamodelDeclaration
 	 * @generated
 	 */
-	public Adapter createUsedMetamodelAdapter() {
+	public Adapter createMetamodelDeclarationAdapter() {
 		return null;
 	}
 

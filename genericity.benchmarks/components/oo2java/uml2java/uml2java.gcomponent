@@ -1,6 +1,6 @@
 composite component oo2java_uml {
 	uses "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.gcomponent"  
-	binding bindUML = "platform:/resource/genericity.benchmarks/tests/oo2java.uml/uml2oo.gbind"
+	binding bindUML = "platform:/resource/genericity.benchmarks/components/oo2java/uml2java/uml2oo.gbind"
 			
 	source concept UML  : "UML.ecore"
 	target concept Java : "Java.ecore"
