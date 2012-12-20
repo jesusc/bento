@@ -31,6 +31,12 @@ import genericity.compiler.atl.Rewrite1.ParametersModel;
 
 public class Rewrite1 {
 	
+	//public static final String BINDING_MODEL = "test/uml2java/generalization.concrete/uml2java.gbind.xmi";
+	//public static final String ATL_TRANSFORMATION = "test/uml2java/uml2java.atl.xmi";
+
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2java/component2java/component2oo.gbind.xmi";
+	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2java/oo2java.atl.xmi";
+
 	public static void main(String[] args) throws IOException {
 	     System.setProperty("org.apache.commons.logging.Log",
                  "org.apache.commons.logging.impl.NoOpLog");
@@ -45,11 +51,11 @@ public class Rewrite1 {
 						// withDir("../be.ac.vub.simpleocl/metamodel/simpleocl.ecore"),		
 						withDir("../genericity.language.gbind/metamodel/gbind.ecore")
 				}, 
-				withDir("test/uml2java/generalization.concrete/uml2java.gbind.xmi")); 
+				withDir(BINDING_MODEL)); 
 		
 		BasicEMFModel inout = loader.basicModelFromFile(
 				withDir("../genericity.atl.transformations/metamodels/ATL.ecore"), 
-				withDir("test/uml2java/uml2java.atl.xmi")); 
+				withDir(ATL_TRANSFORMATION)); 
 		
 		ParametersModel parameters = new ParametersModel();
 		parameters.addParameterObject("BindingData", new BindingData());
@@ -116,7 +122,7 @@ public class Rewrite1 {
 	}	
 
 	public static class BindingData {
-		public String boundMetamodelName() { return "UML"; }
+		public String boundMetamodelName() { return "SimpleOO"; }
 	}
 	
 	public static class ParametersModel implements org.eclectic.modeling.emf.IModel<Object, Object> {

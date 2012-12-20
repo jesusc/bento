@@ -33,7 +33,8 @@ model queue mOclFeatureBinding      : gbind!OclFeatureBinding
 
 // Pattern queues
 local queue pRelevantOclModelElements : atl!OclModelElement
-local queue pMatchedClassBinding      : matches!MatchedClassBinding
+local queue pMatchedClassBinding1     : matches!MatchedClassBinding
+local queue pMatchedClassBindingN     : matches!MatchedClassBinding
 local queue pMatchedRenamingBinding   : matches!MatchedRenamingHelper
 local queue pMatchedOclBinding        : matches!MatchedOclHelper
 
@@ -72,7 +73,11 @@ segment findConceptRef
 		    	m = matches!MatchedClassBinding.new
 		    	m.oclModelElement = o
 		    	m.classBinding    = cb
-		    	emit m to pMatchedClassBinding
+		    	cb.concrete.size.eq(1).if_else({
+		    		emit m to pMatchedClassBinding1 
+		    	}, {
+		    		emit m to pMatchedClassBindingN
+		    	})
 		    }
 		end
 	end    
@@ -90,13 +95,33 @@ end
 //
 
 segment RenameConceptClass		
-	forall m from pMatchedClassBinding
+
+	// Renames a bound concept element. If it has been bound to
+	// several metaclasses, the first one is picked for the renaming
+	// The rest must be handled by other rules
+	forall m from pMatchedClassBinding1
 		oclModelElement = m.oclModelElement		
-		oclModelElement.name = m.classBinding.concrete.first.name		
-	
+		oclModelElement.name = m.classBinding.concrete.first.name			
 	    oclModelElement.name.println("Changed: ")
 	end
+
+	forall m_n from pMatchedClassBindingN
+	    //emit m to pMatchedClassBinding1
+	    // One thing I could do is to copy everything, using a special 
+	    // copy-transformation (which actually could be just implemented in Java and provided
+	    // as a regular transformation in the form of a library).
+	    // 
+	    // Then, I would invoke this transformation again with a view...
+	    // The view has to be quite smart, because it has to deal with this binding
+	    // as a a 1-to-1 binding. Perhaps a better idea is to invoke another transformation
+	    // that does the rewriting, and perhaps other manipulations... 
+	    oclModelElement = m_n.oclModelElement		
+	    oclModelElement.name.println("Not changed: ")
+	end
+
 end
+
+
 
 // Find features that needs to be transformed to helpers
 // 	* Renaming bindings       -> MatchedRenamingHelper

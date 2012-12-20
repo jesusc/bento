@@ -30,6 +30,13 @@ mappings ocl2ocl(gbind) -> (atl)
   end
 
   [expr]
+  from gbind : gbind!BooleanExp
+    to   atl :   atl!BooleanExp
+    
+	atl.booleanSymbol = gbind.booleanSymbol
+  end
+
+  [expr]
   from gbind : gbind!VariableExp
     to   atl :   atl!VariableExp
     
