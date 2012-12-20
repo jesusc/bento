@@ -1,0 +1,11 @@
+composite component ecore2measure_uml {
+	uses "platform:/resource/genericity.benchmarks/components/oo2measure/trafo/oo2measure.gcomponent"  
+	binding bindECORE = "platform:/resource/genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind"
+			
+	source concept UML2    : "http://www.eclipse.org/emf/2002/Ecore"
+	target concept Measure : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/Measure.ecore"
+	source model in  : UML2    = "platform:/resource/genericity.benchmarks/components/oo2measure/models/example.model" 
+	target model out : Measure = "platform:/resource/genericity.benchmarks/components/oo2measure/models/output2.xmi"
+	
+	compose apply oo2measure(bindECORE(in)) -> (out)
+}

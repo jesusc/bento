@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<OO_concept:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:OO_concept="OO_concept" xmi:id="_a8MpYC6AEeKjTLcAOXEZ1w" name="org">
+  <packagedElement xsi:type="OO_concept:Package" xmi:id="_bfwCYC6AEeKjTLcAOXEZ1w" name="eclipse">
+    <packagedElement xsi:type="OO_concept:Package" xmi:id="_VeFTgC6DEeKjTLcAOXEZ1w" name="core">
+      <packagedElement xsi:type="OO_concept:Package" xmi:id="_VxbGQC6DEeKjTLcAOXEZ1w" name="internal">
+        <packagedElement xsi:type="OO_concept:Package" xmi:id="_WEd-EC6DEeKjTLcAOXEZ1w" name="preferences">
+          <packagedElement xsi:type="OO_concept:Package" xmi:id="_WXg14C6DEeKjTLcAOXEZ1w" name="legacy">
+            <packagedElement xsi:type="OO_concept:Class" xmi:id="_p40SUC6DEeKjTLcAOXEZ1w" name="InitLegacyPreferences">
+              <generalization xmi:id="_i8OCcC8ZEeKjoq1jCJHQrA" general="_qOJX8C8ZEeKjoq1jCJHQrA"/>
+              <ownedOperation xmi:id="_Hj5bIC6EEeKjTLcAOXEZ1w" name="&lt;init>">
+                <ownedParameter xmi:id="_ZwbTMS8XEeKjoq1jCJHQrA" name="arg0"/>
+                <ownedParameter xmi:id="_eLbz0UnPEeKEr5Mko_5GWw" name="arg1" type="_qOJX8C8ZEeKjoq1jCJHQrA"/>
+              </ownedOperation>
+              <ownedAttribute xmi:id="_j2AxMC8ZEeKjoq1jCJHQrA" name="att1" type="_2y55AC8ZEeKjoq1jCJHQrA"/>
+              <nestedClassifier xsi:type="OO_concept:Class" xmi:id="_2y55AC8ZEeKjoq1jCJHQrA"/>
+            </packagedElement>
+            <packagedElement xsi:type="OO_concept:Class" xmi:id="_qOJX8C8ZEeKjoq1jCJHQrA" name="clase2" isAbstract="true" visibility="private">
+              <ownedOperation xmi:id="_mQgdgEnPEeKEr5Mko_5GWw" name="&lt;start>" type="_2y55AC8ZEeKjoq1jCJHQrA" method="_h_6yEEnPEeKEr5Mko_5GWw"/>
+              <nestedClassifier xsi:type="OO_concept:Behavior" xmi:id="_h_6yEEnPEeKEr5Mko_5GWw" name="beh"/>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</OO_concept:Package>

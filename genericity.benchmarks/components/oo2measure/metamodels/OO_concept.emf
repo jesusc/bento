@@ -1,0 +1,79 @@
+@namespace(uri="OO_concept", prefix="OO_concept")
+package OO_concept;
+
+abstract class PackageableElement {   
+}
+
+class Package extends PackageableElement, NamedElement {
+  val PackageableElement[*] packagedElement;   
+}
+
+class Class extends PackageableElement, Classifier, Type {
+  val Operation[*]  ownedOperation;
+  val Property[*]   ownedAttribute;
+  val Classifier[*] nestedClassifier;    
+}
+
+abstract class NamedElement {   
+  attr String name;
+  attr boolean isAbstract = false;
+  attr VisibilityKind[0..1] visibility;
+}
+
+class Model extends Package {   
+}
+
+class Operation extends TypedElement, BehavioralFeature {  
+  val Parameter[*] ownedParameter; 
+}
+
+abstract class Feature extends NamedElement {   
+}
+
+//class Property extends TypedElement, StructuralFeature {   
+class Property extends TypedElement, Feature {
+}
+
+class Parameter extends TypedElement {   
+}
+
+class Generalization {   
+  ref Classifier[1] general;
+  ref Classifier[1]#generalization specific;  
+}
+
+class Dependency {   
+  ref NamedElement[1..*] supplier;
+  ref NamedElement[1..*] client;
+}
+
+// -------------------------------------------------------------------------------
+// CLASSES NOT USED IN THE TRANSFORMATION
+
+abstract class Classifier {
+  val Generalization[*]#specific generalization;   
+}
+
+abstract class TypedElement extends NamedElement {
+  ref Type[0..1] type;   
+}
+
+abstract class Type extends NamedElement {   
+}
+
+abstract class BehavioralFeature extends Feature {
+  ref Behavior[*] method;   
+}
+
+class Behavior extends Class {   
+}
+
+//abstract class StructuralFeature extends Feature {   
+//}
+
+enum VisibilityKind {
+   public;
+   private;
+   protected; 
+   ~package;
+}

@@ -1,0 +1,38 @@
+binding uml2oo {  
+	concept   OO    : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	
+	class PackageableElement to Package, NamedElement -- (Class split) named element that may be owned by a package
+    class Package to EPackage 
+    class Class to EClass 
+    class NamedElement to ENamedElement 
+    class Model to None --- !!! 
+    class Operation to EOperation 
+    class Feature to EStructuralFeature 
+    class Property to EAttribute 
+    class Parameter to EParameter     
+    class Generalization to None --- !!! No sé si habría que poner eSuperTypes o no, ya que también se mapea Class.nestedClassifier
+    class Dependency to None -- Relationship that signifies that a single or a set of model elements requires other model elements for their specification or implementation (???)
+    class Classifier to EClassifier 
+    class TypedElement to ETypedElement 
+    class Type to EClassifier 
+    class BehavioralFeature to Operation 
+    class Behavior to None -- ni idea de a qué mapearlo... 
+    class VisibilityKind to None -- en ecore no hay visibilidad 
+       
+    feature Package.packagedElement is eSubpackages   
+    feature Class.ownedOperation is eOperations    
+    feature Class.ownedAttribute is eAttributes    
+    feature Class.nestedClassifier = EClass::allInstances()->select(c | c.eSuperTypes->includes(self)) -- References all the Classifiers that are defined (nested) within the Class 
+    feature NamedElement.name is name 
+    feature NamedElement.isAbstract = if self.oclIsKindOf(EClass) then self.abstract else true endif -- atributo definido sólo en una de las subclases
+    feature NamedElement.visibility = true -- en ecore no hay visibilidad 
+    feature Operation.ownedParameter is eParameters 
+--    feature Generalization.general is -- no hemos mapeado Generalization
+--    feature Generalization.specific is  -- no hemos mapeado Generalization 
+--    feature Dependency.supplier is -- no hemos mapeado Dependency
+--    feature Dependency.client is -- no hemos mapeado Dependency
+    feature Classifier.generalization = Sequence{} -- porque no hemos mapeado Generalization    
+    feature TypedElement.type is eType 
+    feature BehavioralFeature.method = Sequence{} -- no hemos mapeado Behavior (es el tipo del atributo) 
+}
