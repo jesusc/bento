@@ -227,7 +227,7 @@ segment CreateHelperForOclFeature
 
 		// The same using a Java helper
 		filter_view = { |o|
-			o.is_child_of(ocl_expr)
+			o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
 		}		
 
 

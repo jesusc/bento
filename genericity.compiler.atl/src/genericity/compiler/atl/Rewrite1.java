@@ -31,12 +31,15 @@ import genericity.compiler.atl.Rewrite1.ParametersModel;
 
 public class Rewrite1 {
 	
-	//public static final String BINDING_MODEL = "test/uml2java/generalization.concrete/uml2java.gbind.xmi";
-	//public static final String ATL_TRANSFORMATION = "test/uml2java/uml2java.atl.xmi";
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2java/component2java/component2oo.gbind.xmi";
+	//public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2java/oo2java.atl.xmi";
 
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2java/component2java/component2oo.gbind.xmi";
-	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2java/oo2java.atl.xmi";
+	
+	// oo2measure
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
+	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/trafo/oo2measure.atl.xmi";
 
+	
 	public static void main(String[] args) throws IOException {
 	     System.setProperty("org.apache.commons.logging.Log",
                  "org.apache.commons.logging.impl.NoOpLog");
@@ -110,12 +113,14 @@ public class Rewrite1 {
 		}
 		
 		public Boolean is_child_of(EObject parent) {
-			
-			return checkIsChild((EObject) object, parent);
+			boolean result = checkIsChild((EObject) object, parent);
+			//if ( result ) System.out.println("Processed " + object);
+			//if ( ! result ) System.out.println("NOT Processed " + object);				
+			return result;
 		}
 		
 		private boolean checkIsChild(EObject o, EObject parent) {
-			if ( o == null )   return false;
+			if ( o == null ) return false;
 			if ( o == parent ) return true;
 			return checkIsChild(o.eContainer(), parent);
 		}
@@ -173,6 +178,11 @@ public class Rewrite1 {
 		public Object getMethodHandler() { return null; }
 		@Override
 		public Object getContainer(Object object) { throw new UnsupportedOperationException(); }
+
+		@Override
+		public List<Object> allObjectsOf(String metaclass, boolean noSubtypes) {
+			throw new UnsupportedOperationException();
+		}
 	}
 }
 

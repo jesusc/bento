@@ -10,7 +10,6 @@ mappings ocl2ocl(gbind) -> (atl)
     to   atl :   atl!IteratorExp
     
 	atl.name = gbind.name
-	
 	atl.body      <- gbind.body
 	atl.iterators <- gbind.iterators
   end
@@ -60,5 +59,55 @@ mappings ocl2ocl(gbind) -> (atl)
     // atl.variableExp <- gbind.variableExp
   end
 
+  [expr]
+  from gbind : gbind!OperationCall !
+    to   atl :   atl!OperationCallExp
+
+	atl.operationName = gbind.operationName
+  	atl.arguments <- gbind.arguments
+  end
+
+  // TODO: Add "dynamic dispatch" to queues, because CollectionOperationCall
+  //       inherits from OperationCall, so both rules are applied 
+  //       Quick hack: put CollectionOperationCall the last one..
+  [expr]
+  from gbind : gbind!CollectionOperationCall
+    to   atl :   atl!CollectionOperationCallExp
+
+	atl.operationName = gbind.operationName
+	atl.arguments <- gbind.arguments
+  end
+
+  [expr]
+  from gbind : gbind!OclModelElementExp
+    to   atl :   atl!OclModelElement
+
+	atl.name = gbind.name
+	atl.model <- gbind.model
+  end
+
+  [expr]
+  from gbind : gbind!IfExp
+    to   atl :   atl!IfExp
+
+	atl.thenExpression <- gbind.thenExpression
+	atl.condition      <- gbind.condition
+	atl.elseExpression <- gbind.elseExpression
+  end
+
+  [expr]
+  from gbind : gbind!SequenceExp
+    to   atl :   atl!SequenceExp
+  end
+
+  // This 79works because in ATL abstract syntax you can have as many
+  // OclModel as you want, but it is not really clean. Doing this right
+  // would require parameterizing this transformation with an initial trace
+  // model that contains the mappings for the source OclModels.
+  from gbind : gbind!OclModel // MetamodelDeclaration perhaps?
+    to   atl :   atl!OclModel
+
+	atl.name = gbind.name
+  end
 
 // end

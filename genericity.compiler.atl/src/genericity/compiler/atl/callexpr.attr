@@ -34,26 +34,7 @@ attribution callexpr(socl) -> (atl)
 	new_call.source = self[previous_result]
 	
     next_call[previous_result] <- new_call
-    self[result] <- new_call
-	
-	/*
-	new_obj = is_first_call.if_else(
-    		{ |v|  
-    			new_call = atl!NavigationOrAttributeCallExp.new
-    			new_call.name   = self.name
-    			new_call.source = self[previous_result]
-    			new_call    			
-   		},
-    		{ |v|    
-    			new_call = atl!NavigationOrAttributeCallExp.new
-    			new_call.name   = self.name
-    			new_call.source = self[previous_result]
-    			new_call    			
-    		}	
-    	)    
-    next_call[previous_result] <- new_obj
-    self[result] <- new_obj   
-	*/    	
+    self[result] <- new_call	
   end
 
   rule socl!IteratorExp
@@ -67,5 +48,31 @@ attribution callexpr(socl) -> (atl)
     self[result]               <- atl_iterator_exp
  	next_call[rest]            <- self[rest].tail
     next_call[previous_result] <- atl_iterator_exp
+  end
+  
+  rule socl!CollectionOperationCall
+  	next_call  = self[rest].first
+
+	// assign the source
+  	atl_operation_call = self.mySelf[ocl2ocl!expr.t]  
+	atl_operation_call.source = self[previous_result]
+
+  	// propagation
+    self[result]               <- atl_operation_call
+ 	next_call[rest]            <- self[rest].tail
+    next_call[previous_result] <- atl_operation_call
+  end
+
+  rule socl!OperationCall
+  	next_call  = self[rest].first
+
+	// assign the source
+  	atl_operation_call = self.mySelf[ocl2ocl!expr.t]  
+	atl_operation_call.source = self[previous_result]
+
+  	// propagation
+    self[result]               <- atl_operation_call
+ 	next_call[rest]            <- self[rest].tail
+    next_call[previous_result] <- atl_operation_call
   end
   
