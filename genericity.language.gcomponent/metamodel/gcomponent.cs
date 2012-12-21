@@ -56,8 +56,8 @@ RULES {
 	
 	Core.CompositeComponent ::= 
 		"composite" "component" name[] "{"
-			("uses" uses['"', '"'])
-			(bindings)?
+			("uses" uses['"', '"'])+ 
+			(bindings)*		
 		
 			(
 			("source" source)

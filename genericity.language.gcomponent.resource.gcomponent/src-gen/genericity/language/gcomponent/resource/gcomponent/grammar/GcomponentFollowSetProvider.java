@@ -16,7 +16,7 @@ public class GcomponentFollowSetProvider {
 	
 	public final static org.eclipse.emf.ecore.EStructuralFeature[] FEATURES = new org.eclipse.emf.ecore.EStructuralFeature[18];
 	
-	public final static genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] LINKS = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[80];
+	public final static genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] LINKS = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[83];
 	
 	public final static genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] EMPTY_LINK_ARRAY = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[0];
 	
@@ -154,50 +154,50 @@ public class GcomponentFollowSetProvider {
 		LINKS[22] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
 		LINKS[23] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]);
 		LINKS[24] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]);
-		LINKS[25] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(), FEATURES[0]);
-		LINKS[26] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(), FEATURES[1]);
-		LINKS[27] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel(), FEATURES[2]);
-		LINKS[28] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel(), FEATURES[3]);
-		LINKS[29] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
-		LINKS[30] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
+		LINKS[25] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]);
+		LINKS[26] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]);
+		LINKS[27] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(), FEATURES[0]);
+		LINKS[28] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(), FEATURES[1]);
+		LINKS[29] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel(), FEATURES[2]);
+		LINKS[30] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getParameterModel(), FEATURES[3]);
 		LINKS[31] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
-		LINKS[32] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(), FEATURES[4]);
-		LINKS[33] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(), FEATURES[4]);
+		LINKS[32] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
+		LINKS[33] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
 		LINKS[34] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(), FEATURES[4]);
 		LINKS[35] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(), FEATURES[4]);
-		LINKS[36] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
-		LINKS[37] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(), FEATURES[4]);
-		LINKS[38] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(), FEATURES[4]);
-		LINKS[39] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
-		LINKS[40] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
-		LINKS[41] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[9]);
-		LINKS[42] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[9]);
-		LINKS[43] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[9]);
-		LINKS[44] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getFeatureRef(), FEATURES[10]);
-		LINKS[45] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), FEATURES[11]);
-		LINKS[46] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
-		LINKS[47] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
-		LINKS[48] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
+		LINKS[36] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(), FEATURES[4]);
+		LINKS[37] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(), FEATURES[4]);
+		LINKS[38] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
+		LINKS[39] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getSingleFeature(), FEATURES[4]);
+		LINKS[40] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.variants.VariantsPackage.eINSTANCE.getXorFeature(), FEATURES[4]);
+		LINKS[41] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
+		LINKS[42] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(), FEATURES[7]);
+		LINKS[43] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]);
+		LINKS[44] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[9]);
+		LINKS[45] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[9]);
+		LINKS[46] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[9]);
+		LINKS[47] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getFeatureRef(), FEATURES[10]);
+		LINKS[48] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXorCond(), FEATURES[11]);
 		LINKS[49] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
 		LINKS[50] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
 		LINKS[51] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
-		LINKS[52] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[12]);
-		LINKS[53] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[12]);
-		LINKS[54] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[12]);
-		LINKS[55] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
-		LINKS[56] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
-		LINKS[57] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
-		LINKS[58] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
-		LINKS[59] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
-		LINKS[60] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
+		LINKS[52] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
+		LINKS[53] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
+		LINKS[54] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
+		LINKS[55] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[12]);
+		LINKS[56] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[12]);
+		LINKS[57] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[12]);
+		LINKS[58] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
+		LINKS[59] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
+		LINKS[60] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
 		LINKS[61] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
-		LINKS[62] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
-		LINKS[63] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
-		LINKS[64] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
+		LINKS[62] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
+		LINKS[63] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
+		LINKS[64] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[13]);
 		LINKS[65] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
-		LINKS[66] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
-		LINKS[67] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
-		LINKS[68] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
+		LINKS[66] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
+		LINKS[67] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
+		LINKS[68] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApplyParameter(), FEATURES[14]);
 		LINKS[69] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
 		LINKS[70] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
 		LINKS[71] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
@@ -207,8 +207,11 @@ public class GcomponentFollowSetProvider {
 		LINKS[75] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
 		LINKS[76] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
 		LINKS[77] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
-		LINKS[78] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(), FEATURES[16]);
-		LINKS[79] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(), FEATURES[16]);
+		LINKS[78] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[15]);
+		LINKS[79] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[15]);
+		LINKS[80] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getSeq(), FEATURES[15]);
+		LINKS[81] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(), FEATURES[16]);
+		LINKS[82] = new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(), FEATURES[16]);
 	}
 	
 	public static void initializeLinks() {
@@ -264,6 +267,7 @@ public class GcomponentFollowSetProvider {
 		TERMINALS[36].addFollower(TERMINALS[37], EMPTY_LINK_ARRAY);
 		TERMINALS[37].addFollower(TERMINALS[38], EMPTY_LINK_ARRAY);
 		TERMINALS[38].addFollower(TERMINALS[39], EMPTY_LINK_ARRAY);
+		TERMINALS[39].addFollower(TERMINALS[38], EMPTY_LINK_ARRAY);
 		TERMINALS[39].addFollower(TERMINALS[40], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]), });
 		TERMINALS[39].addFollower(TERMINALS[41], EMPTY_LINK_ARRAY);
 		TERMINALS[41].addFollower(TERMINALS[6], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getConcept(), FEATURES[0]), });
@@ -275,6 +279,7 @@ public class GcomponentFollowSetProvider {
 		TERMINALS[40].addFollower(TERMINALS[45], EMPTY_LINK_ARRAY);
 		TERMINALS[45].addFollower(TERMINALS[46], EMPTY_LINK_ARRAY);
 		TERMINALS[46].addFollower(TERMINALS[47], EMPTY_LINK_ARRAY);
+		TERMINALS[47].addFollower(TERMINALS[40], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.core.CorePackage.eINSTANCE.getBindingDeclaration(), FEATURES[8]), });
 		TERMINALS[47].addFollower(TERMINALS[41], EMPTY_LINK_ARRAY);
 		TERMINALS[32].addFollower(TERMINALS[48], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getXor(), FEATURES[9]), });
 		TERMINALS[32].addFollower(TERMINALS[49], new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature[] {new genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentContainedFeature(genericity.language.gcomponent.flowcontrol.FlowcontrolPackage.eINSTANCE.getApply(), FEATURES[9]), });

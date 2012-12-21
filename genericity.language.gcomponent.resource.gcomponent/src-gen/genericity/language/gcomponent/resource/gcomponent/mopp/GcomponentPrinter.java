@@ -813,18 +813,38 @@ public class GcomponentPrinter implements genericity.language.gcomponent.resourc
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_genericity_language_gcomponent_core_CompositeComponent_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_genericity_language_gcomponent_core_CompositeComponent_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_genericity_language_gcomponent_core_CompositeComponent_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_genericity_language_gcomponent_core_CompositeComponent_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_genericity_language_gcomponent_core_CompositeComponent_2(element, localtab, out, printCountingMap);
