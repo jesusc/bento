@@ -1,9 +1,8 @@
-
 transformation component oo2measure {
 	source concept OO      : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"
 	target concept Measure : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/Measure.ecore"
 	source model in  : OO
 	target model out : Measure
 	
-	definition atl "platform:/resource/genericity.benchmarks/components/oo2measure/trafo/oo2measure.atl" with IN : UML2 = in, OUT = out
+	definition atl "platform:/resource/genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl" with IN : UML2 = in, OUT = out
 }
