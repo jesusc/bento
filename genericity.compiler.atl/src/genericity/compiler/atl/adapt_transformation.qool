@@ -1,0 +1,140 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ * It follows this strategy:
+ * 
+ *   - Match rules and helpers whose context must be rewritten
+ */
+qool adapt_transformation(atl, gbind, params) -> ()
+
+model matches
+  class MatchedAtlMatchedRule
+	ref rule         : atl!MatchedRule
+	ref classBinding : gbind!ClassBinding
+  	ref concreteClass : gbind!ConcreteMetaclass
+  end
+
+  /*
+  class MatchedClassBinding
+	ref oclModelElement : atl!OclModelElement
+	ref classBinding    : gbind!ClassBinding
+  end
+
+  class MatchedRenamingHelper
+	ref featureBinding    : gbind!RenamingFeatureBinding
+	ref concreteMetaclass : gbind!ConcreteMetaclass
+  end
+
+  class MatchedOclHelper
+	ref featureBinding    : gbind!OclFeatureBinding
+	ref concreteMetaclass : gbind!ConcreteMetaclass
+  end
+  */
+end
+
+// rt model for traces if needed!
+// local queue genericQ    : rt!generic
+
+// ATL elements
+model queue mHelper      : atl!Helper
+model queue mMatchedRule : atl!MatchedRule
+// model queue mOclModelElement : atl!OclModelElement
+
+
+// GBind elements
+model queue mClassBinding           : gbind!ClassBinding
+model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
+model queue mOclFeatureBinding      : gbind!OclFeatureBinding
+
+// Pattern queues
+local queue pMatchedAtlMatchedRule1 : matches!MatchedAtlMatchedRule
+local queue pMatchedAtlMatchedRuleN : matches!MatchedAtlMatchedRule
+
+/*
+local queue pRelevantOclModelElements : atl!OclModelElement
+local queue pMatchedClassBinding1     : matches!MatchedClassBinding
+local queue pMatchedClassBindingN     : matches!MatchedClassBinding
+local queue pMatchedRenamingBinding   : matches!MatchedRenamingHelper
+local queue pMatchedOclBinding        : matches!MatchedOclHelper
+*/
+
+//
+// Begin-of PATTERNS
+//
+
+segment findModuleElements
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall mr from mMatchedRule
+		in_pattern_element = mr.inPattern.elements.first // assumes rules with one input element
+		forall cb1 from mClassBinding
+			//" <- mr: ".println(in_pattern_element.type.^model.name)
+			//" <- mr: ".println(in_pattern_element.type.name)
+			//" <- cb: ".println(cb1.concept.name)
+		
+			in_pattern_element.type.^model.name.eq(current_mm).if_true({
+			    cb1.concept.name.eq(in_pattern_element.type.name).if_true {
+			    	m = matches!MatchedAtlMatchedRule.new
+			    	m.rule         = mr
+			    	m.classBinding = cb1
+			        m.concreteClass = cb1.concrete.first
+			    	emit m to pMatchedAtlMatchedRule1 
+
+                    cb1.concrete.tail.each { |cm|
+				    	m2 = matches!MatchedAtlMatchedRule.new
+				    	m2.rule         = mr
+				    	m2.classBinding = cb1
+				        m2.concreteClass = cm
+				    	emit m2 to pMatchedAtlMatchedRuleN
+                    }
+                    
+			    	/*
+			    	cb1.concrete.size.eq(1).if_else({
+			    		m.idx = 1
+			    		emit m to pMatchedAtlMatchedRule1 
+			    	}, {
+			    		emit m to pMatchedAtlMatchedRule
+			    	})
+			    	*/
+			    }
+			})			
+		end
+	end
+
+	//forall h from mHelper
+	
+	//end
+
+end
+
+
+
+segment RenameRule1
+	forall m from pMatchedAtlMatchedRule1
+		//current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+		in_pattern_element_type = m.rule.inPattern.elements.first.type 
+		
+		"".println("Renamed [".concat(m.rule.name).concat("]: ").concat(in_pattern_element_type.name).concat(" -> ").concat(m.concreteClass.name))
+				
+		in_pattern_element_type.name = m.concreteClass.name
+		
+		// Ideas:
+		//   - A syntax to objects/models models on the fly... 
+		//           model!type { prop = value, prop2 = value }
+		//   - Allow passing an internal model/on the fly model as a model parameter
+		//     instead of an special syntax for passing primitive parameters
+		//
+		// 
+		// filter_view = { |o|
+		// 	1.eq(1)
+		// }		
+		//
+		//invoke-external eclectic.adapt_rule(atl = atl, gbind = gbind) -> () + (rule = m_atl.rule, binding = m_atl.classBinding)
+		//		 input-view-filter filter_view
+		// I need parameters to establish which of the concrete metaclasses is to be used for the rewrite
+		// View filters to ensure that only the copied rule is rewritten		
+	end
+end
+// End-of rules
+
+// TODO: OclIsKindOf / OclIsTypeOf (Both needed!)
