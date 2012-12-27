@@ -1,4 +1,4 @@
-binding uml2oo {  
+binding ecore2oo {  
 	concept   OO    : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"
 	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
 	

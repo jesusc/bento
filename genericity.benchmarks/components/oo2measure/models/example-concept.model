@@ -11,11 +11,10 @@
                 <ownedParameter xmi:id="_ZwbTMS8XEeKjoq1jCJHQrA" name="arg0"/>
                 <ownedParameter xmi:id="_eLbz0UnPEeKEr5Mko_5GWw" name="arg1" type="_qOJX8C8ZEeKjoq1jCJHQrA"/>
               </ownedOperation>
-              <ownedAttribute xmi:id="_j2AxMC8ZEeKjoq1jCJHQrA" name="att1" type="_2y55AC8ZEeKjoq1jCJHQrA"/>
-              <nestedClassifier xsi:type="OO_concept:Class" xmi:id="_2y55AC8ZEeKjoq1jCJHQrA"/>
+              <ownedAttribute xmi:id="_j2AxMC8ZEeKjoq1jCJHQrA" name="att1"/>
             </packagedElement>
             <packagedElement xsi:type="OO_concept:Class" xmi:id="_qOJX8C8ZEeKjoq1jCJHQrA" name="clase2" isAbstract="true" visibility="private">
-              <ownedOperation xmi:id="_mQgdgEnPEeKEr5Mko_5GWw" name="&lt;start>" type="_2y55AC8ZEeKjoq1jCJHQrA" method="_h_6yEEnPEeKEr5Mko_5GWw"/>
+              <ownedOperation xmi:id="_mQgdgEnPEeKEr5Mko_5GWw" name="&lt;start>" type="_p40SUC6DEeKjTLcAOXEZ1w" method="_h_6yEEnPEeKEr5Mko_5GWw"/>
               <nestedClassifier xsi:type="OO_concept:Behavior" xmi:id="_h_6yEEnPEeKEr5Mko_5GWw" name="beh"/>
             </packagedElement>
           </packagedElement>
