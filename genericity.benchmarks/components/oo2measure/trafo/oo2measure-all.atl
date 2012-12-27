@@ -743,7 +743,7 @@ def : internalSupplierClasses : Set(UML2!Class) =
 --@comments This attribute helper is not include in FLAME library.
 --@comments The package which contains this packageable element.
 helper context UML2!PackageableElement
-def : owner : UML2!Package =
+def : owner : UML2!Package = 
     let owners : Sequence(UML2!Package) =
         UML2!Package.allInstances()->select(p|p.oclIsTypeOf(UML2!Package))->
             select(p|p.contents->includes(self)) in

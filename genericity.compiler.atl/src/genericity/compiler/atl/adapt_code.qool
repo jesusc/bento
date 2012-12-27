@@ -1,0 +1,232 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ * It follows this strategy:
+ * 
+ *   - Match rules and helpers whose context must be rewritten
+ */
+qool adapt_code(atl, gbind, params) -> ()
+
+//segment main
+//	rule    = params!Value.all_instances.first.rule
+//	binding = params!Value.all_instances.first.binding
+//end
+
+model matches
+  class MatchedOclIsKindOf
+	ref operation    : atl!OperationCallExp // operationName == 'oclIsKindOf'
+    ref type         : atl!OclModelElement
+	ref classBinding : gbind!ClassBinding
+  end
+
+  class MatchedAllInstancesOf
+	ref operation    : atl!OperationCallExp 
+	ref classBinding : gbind!ClassBinding
+    ref type         : atl!OclModelElement
+  end
+
+end
+
+
+// ATL elements
+model queue mOperationCallExp : atl!OperationCallExp
+
+// GBind elements
+model queue mClassBinding           : gbind!ClassBinding
+//model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
+//model queue mOclFeatureBinding      : gbind!OclFeatureBinding
+
+// Pattern queues
+local queue pOclIsKindOf_N : matches!MatchedOclIsKindOf
+local queue pOclIsKindOf_None : matches!MatchedOclIsKindOf
+local queue pAllInstancesOf_None : matches!MatchedAllInstancesOf
+
+//
+// Begin-of PATTERNS
+//
+
+/**
+ * Matches all oclIsKindOf or oclIsTypeOf expressions that has
+ * to be rewritten due to a 1 - N matching
+ */
+segment findOclIsKindOf
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall op from mOperationCallExp
+	 where op.operationName.eq("oclIsKindOf").or(op.operationName.eq("oclIsTypeOf")) // && atl.arguments.first.kind_of?(ATL::OCL::OclModelElement)
+	
+		ocl_model_element = op.arguments.first
+
+		// Cardinality N	  
+	  	forall cb1 from mClassBinding
+	   	where cb1.concrete.size.gt(1)
+			ocl_model_element.^model.name.eq(current_mm).if_true {
+			    cb1.concept.name.eq(ocl_model_element.name).if_true {
+			    	m = matches!MatchedOclIsKindOf.new
+			    	m.operation    = op
+			    	m.classBinding = cb1
+			    	m.type         = ocl_model_element
+			    	emit m to pOclIsKindOf_N
+				}
+			}			
+	  	end
+
+		// Mapped to None
+	  	forall cb2 from mClassBinding
+	   	where cb2.concrete.first.name.eq("NONE").or(cb2.concrete.first.name.eq("None"))
+			ocl_model_element.^model.name.eq(current_mm).if_true {
+			    cb2.concept.name.eq(ocl_model_element.name).if_true {
+			    	m2 = matches!MatchedOclIsKindOf.new
+			    	m2.operation    = op
+			    	m2.classBinding = cb2
+			    	m2.type         = ocl_model_element
+			    	emit m2 to pOclIsKindOf_None
+				}
+			}
+	  	end
+
+	end
+end
+
+
+segment findAllInstancesOf
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall op from mOperationCallExp
+	 where op.operationName.eq("allInstances")
+		ocl_model_element = op.source 
+
+		// Mapped to None
+	  	forall cb2 from mClassBinding
+	   	where cb2.concrete.first.name.eq("NONE").or(cb2.concrete.first.name.eq("None"))
+
+			ocl_model_element.^model.name.eq(current_mm).if_true {
+			    cb2.concept.name.eq(ocl_model_element.name).if_true {
+			    	m = matches!MatchedAllInstancesOf.new
+			    	m.operation    = op
+			    	m.classBinding = cb2
+			    	m.type         = ocl_model_element
+			    	emit m to pAllInstancesOf_None
+				}
+			}
+	  	end
+
+	end
+end
+//
+// End-of Patterns
+//
+
+//
+// Begin-of rules
+//
+segment AdaptOclIsKindOf
+	forall m from pOclIsKindOf_N
+      operation         = m.operation
+      ocl_model_element = m.type
+      class_binding     = m.classBinding
+      
+      ocl_model_element.name.println("Adapting oclIsXxxxOf: ")
+      
+      create_let_expression = {
+	      let_exp = atl!LetExp.new
+	      vd  = atl!VariableDeclaration.new 
+	      vd.id = "__unique_id__"
+	      vd.varName = "__unique_id__"
+	      vd.type = atl!OclAnyType.new        
+	      vd.initExpression = operation.source 
+	      let_exp.variable = vd
+	      let_exp
+      }
+      let = create_let_expression.call
+      
+      create_initial_op = {
+	      target_oclm = atl!OclModelElement.new
+	      target_oclm.name = class_binding.concrete.first.name
+	      target_oclm.^model = ocl_model_element.^model
+	      
+	      initial_op_exp = atl!OperationCallExp.new
+	      initial_op_exp.operationName = operation.operationName // either oclIsTypeOf or oclIsKindOf
+	      v_exp = atl!VariableExp.new
+	      v_exp.referredVariable = let.variable
+	      initial_op_exp.source = v_exp
+	      
+	      initial_op_exp.arguments = target_oclm
+	      initial_op_exp
+      }      
+      
+      initial_op = create_initial_op.call
+      
+      initial_or = atl!OperatorCallExp.new
+      initial_or.operationName = "or"
+      initial_or.source = initial_op
+      // initial_or.arguments = ... put by the next one
+      
+      last_or = class_binding.concrete.tail.tail.inject(initial_or) { |tmp,  metaclass|
+         target_oclm2 = atl!OclModelElement.new
+         target_oclm2.name = metaclass.name
+	     target_oclm2.^model = ocl_model_element.^model
+         
+         op = atl!OperationCallExp.new
+         op.operationName = operation.operationName // either oclIsTypeOf or oclIsKindOf
+
+         v_exp2 = atl!VariableExp.new
+         v_exp2.referredVariable = let.variable
+         op.source = v_exp2
+
+         op.arguments = target_oclm2         
+         tmp.arguments = op
+         
+         next_or = atl!OperatorCallExp.new
+         next_or.operationName = 'or'
+         next_or.source = tmp
+         next_or         
+      }
+
+	  create_last_check = {
+      target_oclm3 = atl!OclModelElement.new
+      target_oclm3.name = class_binding.concrete.tail.first.name
+	  target_oclm3.^model = ocl_model_element.^model
+      
+      last_op = atl!OperationCallExp.new
+      last_op.operationName // either oclIsTypeOf or oclIsKindOf
+      v_exp3 = atl!VariableExp.new
+      v_exp3.referredVariable = let.variable
+      last_op.source = v_exp3
+
+      last_op.arguments = target_oclm3      
+      last_or.arguments = last_op 
+      
+      let.in_ = last_or
+      }
+      
+      create_last_check.call
+
+      operation.replace_containing_property(let)
+	end
+end
+
+segment AdaptOclIsKindOf_None
+	forall m from pOclIsKindOf_None
+	    ocl_model_element = m.type
+		operation         = m.operation  
+		
+		exp = atl!BooleanExp.new
+      	exp.booleanSymbol = 1.eq(2) // false
+
+    	//"Adapt: ".println(m.operation)
+		"".println(operation.operationName.concat("(").concat(ocl_model_element.name).concat(") -> false"))		
+		operation.replace_containing_property(exp)				
+	end
+end
+
+segment AdaptAllInstancesOf_None
+	forall m from pAllInstancesOf_None
+	    ocl_model_element = m.type
+		"".println(ocl_model_element.name.concat(".allInstances -> Sequence { }"))
+
+		operation = m.operation
+		exp       = atl!SequenceExp.new
+      
+		operation.replace_containing_property(exp)				
+	end
+end

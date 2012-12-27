@@ -13,10 +13,14 @@ import org.eclectic.modeling.emf.IModel;
 import org.eclectic.modeling.emf.ModelManager;
 import org.eclectic.modeling.emf.NoModelFoundException;
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import eclectic.rewrite_class1;
+import eclectic.adapt_transformation;
+import gbind.dsl.BindingModel;
 
 /**
  * Adapts an existing ATL transformation according to a given binding.
@@ -34,14 +38,17 @@ public class AtlAdapter {
 	}
 	
 	public void doAdaptation(BindingModelLoader binding, String boundMetamodelName) {
-	    rewrite_class1 transformation = new rewrite_class1();
-
+	    adapt_transformation transformation = new adapt_transformation();
+	    
+	    String concreteMetamodelName = null;
+	    
 	    Util.registerResourceFactory();
 		ModelManager manager = new ModelManager();
 		EMFLoader    loader  = new EMFLoader(new JavaListConverter());
 		BasicEMFModel in = null;
 		try {
 			in = binding.load(loader);
+			concreteMetamodelName = ((BindingModel) in.allObjectsOf(BindingModel.class.getSimpleName()).get(0)).getBoundMetamodel().getName();
 			
 			// Atl model is only loaded once, the other times the transformation is re-applied 
 			if ( inout == null )
@@ -52,7 +59,7 @@ public class AtlAdapter {
 		}
 		
 		ParametersModel parameters = new ParametersModel();
-		parameters.addParameterObject(new BindingData(boundMetamodelName));
+		parameters.addParameterObject(new BindingData(boundMetamodelName, concreteMetamodelName));
 		
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
 		manager.register("gbind", in);
@@ -111,17 +118,116 @@ public class AtlAdapter {
 			if ( o == parent ) return true;
 			return checkIsChild(o.eContainer(), parent);
 		}
+
+		public EObject copy() {
+			MyCopier copier = new MyCopier((EObject) object);
+			EObject copied = copier.copy((EObject) object);
+			copier.copyReferences();
+
+			// EObject copied = (EObject) EcoreUtil.copy((EObject) this.object);
+			BasicEMFModel m = (BasicEMFModel) ((IModel<?, ?>) this.model);
+			m.getHandler().addToResource(copied);
+
+			TreeIterator<EObject> it = copied.eAllContents();
+			while (it.hasNext()) {
+				m.getHandler().addToResource(it.next());
+			}
+			return copied;
+		}
+
+		public void replace_containing_property(Object obj) {
+			//EcoreUtil.replace((EObject) this.object, (EObject) obj);
+			
+			
+			BasicEMFModel m = (BasicEMFModel) ((IModel<?, ?>) this.model);
+			EObject container = (EObject) this.model.getContainer(this.object);
+						
+			put_expression_in_container((EObject) this.object, container, (EObject) obj);
+		}
+
+		private void put_expression_in_container(EObject original, EObject container, EObject v) {
+			/*
+			String containing_property;
+			if (this.model.isKindOf(container, "Attribute")) {
+				containing_property = "initExpression";
+			} else if (this.model.isKindOf(container, "IfExp") || this.model.isKindOf(container, "IfStat") ) {
+				containing_property = "condition";
+			} else {
+				containing_property = "source";
+			}
+			*/
+			String containing_property = original.eContainingFeature().getName();
+			BasicEMFModel m = (BasicEMFModel) ((IModel<?, ?>) this.model);
+			m.delete(original);
+
+			//System.out.println("Setting " + containing_property + container);
+			//System.out.println(v);
+			//System.out.println();
+			
+			this.model.setFeature(container, containing_property, v);
+		}
+		
 	}	
+
+	public static class MyCopier extends EcoreUtil.Copier {
+		private EObject root;
+
+		public MyCopier(EObject object) {
+			super();
+			this.root = object;
+		}
+
+		protected void copyReference(EReference eReference, EObject eObject,
+				EObject copyEObject) {
+			super.copyReference(eReference, eObject, copyEObject);
+
+			if (eObject.eIsSet(eReference)) {
+				if (eReference.isMany()) {
+				} else {
+					Object referencedEObject = eObject.eGet(eReference,
+							resolveProxies);
+					if (referencedEObject == null) {
+					} else {
+						Object copyReferencedEObject = get(referencedEObject);
+						if (copyReferencedEObject == null) {
+							if (useOriginalReferences
+									&& eReference.getEOpposite() == null) {
+							}
+							// added to make a cross-reference to objects
+							// outside the copy
+							else {
+								boolean isContained = EcoreUtil.isAncestor(
+										root, (EObject) referencedEObject);
+								if (useOriginalReferences && !isContained) {
+									copyEObject.eSet(eReference,
+											referencedEObject);
+								}
+							}
+						} else {
+						}
+					}
+				}
+			}
+		}
+	}
+	// End-of MyCopier
 
 	public class BindingData {
 		private String boundMetamodelName;
+		private String concreteMetamodelName;
 
-		public BindingData(String boundMetamodelName) {
+		public BindingData(String boundMetamodelName, String concreteMetamodelName) {
 			this.boundMetamodelName = boundMetamodelName;
+			this.concreteMetamodelName = concreteMetamodelName;
 		}
 		
 		public String boundMetamodelName() {
 			return boundMetamodelName;
 		}
+		
+		public String concreteMetamodelName() {
+			return concreteMetamodelName;
+		}
+		
 	}
 }

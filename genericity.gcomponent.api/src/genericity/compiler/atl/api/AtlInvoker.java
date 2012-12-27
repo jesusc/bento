@@ -25,8 +25,6 @@ import org.eclipse.m2m.atl.core.launch.ILauncher;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
 
-import eclectic.rewrite_class1;
-
 /**
  * Adapts an existing ATL transformation according to a given binding.
  * 
