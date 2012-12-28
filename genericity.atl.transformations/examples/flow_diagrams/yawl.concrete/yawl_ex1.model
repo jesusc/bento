@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<yawl:Net xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yawl="yawl" xmi:id="_4XygsVDaEeKpMqdS3_fgPA">
+  <elements xsi:type="yawl:InitialCondition" xmi:id="_927C4FDaEeKpMqdS3_fgPA" name="init" conditionalFlows="_G3wUwFDcEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:FinalCondition" xmi:id="_-fLVsFDaEeKpMqdS3_fgPA" name="end" simpleFlows="_ATHjEFDcEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:OrSplit" xmi:id="_LNOVoFDbEeKpMqdS3_fgPA" name="register" conditionalFlows="_G3wUwFDcEeKpMqdS3_fgPA" tasks="_npdFsFDbEeKpMqdS3_fgPA _cn1yYFDbEeKpMqdS3_fgPA _lQEzgFDbEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:SingleInstanceAtomicTask" xmi:id="_cn1yYFDbEeKpMqdS3_fgPA" name="flight" split="_LNOVoFDbEeKpMqdS3_fgPA" join="_rwi24FDbEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:SingleInstanceAtomicTask" xmi:id="_lQEzgFDbEeKpMqdS3_fgPA" name="hotel" split="_LNOVoFDbEeKpMqdS3_fgPA" join="_rwi24FDbEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:SingleInstanceAtomicTask" xmi:id="_npdFsFDbEeKpMqdS3_fgPA" name="car" split="_LNOVoFDbEeKpMqdS3_fgPA" join="_rwi24FDbEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:OrJoin" xmi:id="_rwi24FDbEeKpMqdS3_fgPA" simpleFlows="_ATHjEFDcEeKpMqdS3_fgPA" tasks="_npdFsFDbEeKpMqdS3_fgPA _cn1yYFDbEeKpMqdS3_fgPA _lQEzgFDbEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:SimpleFlow" xmi:id="_ATHjEFDcEeKpMqdS3_fgPA" name="finish" condition="_-fLVsFDaEeKpMqdS3_fgPA" join="_rwi24FDbEeKpMqdS3_fgPA"/>
+  <elements xsi:type="yawl:ConditionalFlow" xmi:id="_G3wUwFDcEeKpMqdS3_fgPA" name="start" condition="_927C4FDaEeKpMqdS3_fgPA" split="_LNOVoFDbEeKpMqdS3_fgPA"/>
+</yawl:Net>
