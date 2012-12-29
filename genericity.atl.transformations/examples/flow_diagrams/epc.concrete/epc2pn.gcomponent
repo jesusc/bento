@@ -1,0 +1,11 @@
+composite component epc2pn {
+	uses "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/epc.concrete/flow2pn.gcomponent"  
+	binding bindEPC = "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/epc.concrete/epc.gbind"
+			
+	source concept EPC : "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/epc.concrete/epc.ecore"
+	target concept PN : "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/metamodels/petri_nets.ecore"
+	source model in  : EPC = "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/models/example-epc.model" 
+	target model out : PN = "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/models/output.xmi"
+	
+	compose apply oo2measure(bindEPC(in)) -> (out)
+}

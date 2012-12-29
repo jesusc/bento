@@ -32,6 +32,7 @@ class OrganizationalUnit {
 abstract class ProcessObject{}
 
 abstract class Function extends ProcessObject {
+  attr String name;
   ref ControlFlow[1]#fsource outgoing;
   ref ControlFlow[1]#ftarget incoming;
 } 
@@ -49,6 +50,7 @@ abstract class LogicalOperator extends ProcessObject {
 }
 
 class Event extends ProcessObject {
+  attr String name;
   ref ControlFlow[*]#esource outgoing;
   ref ControlFlow[*]#etarget incoming;
 }
