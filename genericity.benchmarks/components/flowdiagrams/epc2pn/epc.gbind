@@ -1,13 +1,13 @@
 binding epc {  
-	concept   FD  : "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/metamodels/flow_concept.ecore"
-	metamodel EPC : "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/epc.concrete/epc.ecore"
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel EPC  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/epc2pn/epc.ecore"
 	
 	-- No soportamos or-join (es workflow pattern "local synchronizing merge");
 	-- es dificil, podemos referenciar "Formalization and verification of event-driven process chains" de van der Aalst
 	
 	class FlowDiagram     to EPCDiagram
 	class Node            to ProcessObject 
-	class Task            to Event, Function -- ¿hay que quitar los eventos finales de aqui?
+	class Task            to Event, Function -- ï¿½hay que quitar los eventos finales de aqui?
 	class FinalTask       to Event when self.outgoing->size() = 0 
 	class ParallelSplit   to And when self.outgoing->size() > 1
 	class Synchronization to And when self.incoming->size() > 1

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_9CcJASQuEeGS-Kj1TEkw3A" name="Model">
+  <packageImport xmi:id="_9CcJAiQuEeGS-Kj1TEkw3A">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Activity" xmi:id="_9EglkCQuEeGS-Kj1TEkw3A" name="Install component (page 361)">
+    <node xmi:type="uml:InitialNode" xmi:id="_M72rkCSZEeGKJqPNtrqTPA" name="InitialNode1" outgoing="_-Wpq0CSaEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:ForkNode" xmi:id="_tYECwCSaEeGKJqPNtrqTPA" name="ForkNode1" outgoing="_FWM24CSbEeGKJqPNtrqTPA _GyDw4CSbEeGKJqPNtrqTPA" incoming="_-5_BYCSaEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_v_JZwCSaEeGKJqPNtrqTPA" name="Build Component" outgoing="_-5_BYCSaEeGKJqPNtrqTPA" incoming="_-Wpq0CSaEeGKJqPNtrqTPA _Wiu0UCSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_BCm6wCSbEeGKJqPNtrqTPA" name="Install component" outgoing="_ZJlh0CSbEeGKJqPNtrqTPA" incoming="_FWM24CSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_Dbp1wCSbEeGKJqPNtrqTPA" name="DecisionNode1" outgoing="_KPm10CSbEeGKJqPNtrqTPA _Wiu0UCSbEeGKJqPNtrqTPA" incoming="_GyDw4CSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:FlowFinalNode" xmi:id="_JZz2QCSbEeGKJqPNtrqTPA" name="FlowFinalNode1" incoming="_KPm10CSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_PTdxQCSbEeGKJqPNtrqTPA" name="Deliver app" outgoing="_aAmCUCSbEeGKJqPNtrqTPA" incoming="_ZnHLUCSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:FlowFinalNode" xmi:id="_TKDBQCSbEeGKJqPNtrqTPA" name="FlowFinalNode2" incoming="_aiZH0CSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_UfkpwCSbEeGKJqPNtrqTPA" name="DecisionNode2" outgoing="_ZnHLUCSbEeGKJqPNtrqTPA _aiZH0CSbEeGKJqPNtrqTPA" incoming="_ZJlh0CSbEeGKJqPNtrqTPA"/>
+    <node xmi:type="uml:ActivityFinalNode" xmi:id="_VVDgQCSbEeGKJqPNtrqTPA" name="ActivityFinalNode1" incoming="_aAmCUCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_-Wpq0CSaEeGKJqPNtrqTPA" name="ControlFlow1" source="_M72rkCSZEeGKJqPNtrqTPA" target="_v_JZwCSaEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_-5_BYCSaEeGKJqPNtrqTPA" name="ControlFlow2" source="_v_JZwCSaEeGKJqPNtrqTPA" target="_tYECwCSaEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_FWM24CSbEeGKJqPNtrqTPA" name="ControlFlow3" source="_tYECwCSaEeGKJqPNtrqTPA" target="_BCm6wCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_GyDw4CSbEeGKJqPNtrqTPA" name="ControlFlow4" source="_tYECwCSaEeGKJqPNtrqTPA" target="_Dbp1wCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_KPm10CSbEeGKJqPNtrqTPA" name="ControlFlow5" source="_Dbp1wCSbEeGKJqPNtrqTPA" target="_JZz2QCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_Wiu0UCSbEeGKJqPNtrqTPA" name="ControlFlow6" source="_Dbp1wCSbEeGKJqPNtrqTPA" target="_v_JZwCSaEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_ZJlh0CSbEeGKJqPNtrqTPA" name="ControlFlow7" source="_BCm6wCSbEeGKJqPNtrqTPA" target="_UfkpwCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_ZnHLUCSbEeGKJqPNtrqTPA" name="ControlFlow8" source="_UfkpwCSbEeGKJqPNtrqTPA" target="_PTdxQCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_aAmCUCSbEeGKJqPNtrqTPA" name="ControlFlow9" source="_PTdxQCSbEeGKJqPNtrqTPA" target="_VVDgQCSbEeGKJqPNtrqTPA"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_aiZH0CSbEeGKJqPNtrqTPA" name="ControlFlow10" source="_UfkpwCSbEeGKJqPNtrqTPA" target="_TKDBQCSbEeGKJqPNtrqTPA"/>
+  </packagedElement>
+</uml:Model>

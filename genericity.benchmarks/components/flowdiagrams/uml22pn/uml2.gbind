@@ -1,0 +1,56 @@
+
+binding uml2 {  
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel UML  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/uml22pn/UML.ecore"
+	
+	class FlowDiagram to Activity		
+	class Node        to ActivityNode	
+	class FlowEdge    to ActivityEdge
+
+    feature FlowDiagram.isFinalMandatory = true
+
+    -- Naive and wrong (for the checker is fine...)
+    -- class Task to Action
+    -- feature Task.name     is name
+	-- feature Task.isInitial = self.oclIsKindOf(FD!InitialNode)
+    
+	
+	-- Right way of doing it
+	class Task to ActivityNode when self.oclIsKindOf(UML!Action) or self.oclIsKindOf(UML!InitialNode)
+    -- feature Task.name     is name
+	feature Task.isInitial = self.oclIsKindOf(UML!InitialNode)
+ 
+	      -- TODO: Filter some subclasses of FD!Action (e.g., InterrumpibleAction)
+	
+	-- This is an alternative way of doing this
+	-- class Task            to Action, InitialNode
+	-- feature Task[Action].name is name
+	-- feature Task[Action].isInitial = false
+	-- feature Task[InitialNode].name is 'Initial'
+	-- feature Task[InitialNode].isInitial = true 
+	     					           
+	     					           
+	class ExclusiveChoice to DecisionNode	                                        
+	class ParallelSplit   to ForkNode
+	class Synchronization to NONE
+	class MultiChoice     to NONE
+	class SimpleMerge     to NONE
+	
+	feature FlowDiagram.nodes = self.node
+	feature FlowDiagram.edges = self.edge
+
+	feature FlowEdge."in" is source
+	feature FlowEdge.out is target
+
+	feature Node."ins" is incoming
+	feature Node.outs  is outgoing
+
+	
+
+	-- Bindings for final tasks
+	class FinalTask   to FinalNode
+	feature FinalTask.isTerminating = self.oclIsKindOf(UML!ActivityFinalNode)     
+	feature FinalTask.isMandatory   = false -- In UML2 existence of final tasks doesn't seem compulsory
+}
+
+

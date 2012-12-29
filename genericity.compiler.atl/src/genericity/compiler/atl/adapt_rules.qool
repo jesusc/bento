@@ -38,8 +38,10 @@ model queue mClassBinding           : gbind!ClassBinding
 // Pattern queues
 local queue pMatchedAtlMatchedRule1 : matches!MatchedAtlMatchedRule
 local queue pMatchedAtlMatchedRuleN : matches!MatchedAtlMatchedRule
+local queue pMatchedAtlMatchedRuleNone : matches!MatchedAtlMatchedRule
 local queue pMatchedHelper1         : matches!MatchedHelper
 local queue pMatchedHelperN         : matches!MatchedHelper
+local queue pMatchedHelperNone      : matches!MatchedHelper
 
 //
 // Begin-of PATTERNS
@@ -61,7 +63,13 @@ segment findModuleElements
 			    	m.rule         = mr
 			    	m.classBinding = cb1
 			        m.concreteClass = cb1.concrete.first
-			    	emit m to pMatchedAtlMatchedRule1 
+
+	   				is_none = cb1.concrete.first.name.eq("NONE").or(cb1.concrete.first.name.eq("None"))
+					is_none.if_else({
+						emit m to pMatchedAtlMatchedRuleNone
+					}, {
+			    		emit m to pMatchedAtlMatchedRule1 						
+					})
 
                     cb1.concrete.tail.each { |cm|
 				    	m2 = matches!MatchedAtlMatchedRule.new
@@ -70,15 +78,6 @@ segment findModuleElements
 				        m2.concreteClass = cm
 				    	emit m2 to pMatchedAtlMatchedRuleN
                     }
-                    
-			    	/*
-			    	cb1.concrete.size.eq(1).if_else({
-			    		m.idx = 1
-			    		emit m to pMatchedAtlMatchedRule1 
-			    	}, {
-			    		emit m to pMatchedAtlMatchedRule
-			    	})
-			    	*/
 			    }
 			})			
 		end
@@ -97,8 +96,14 @@ segment findModuleElements
 			    	m.helper = h
 			    	m.classBinding = cb2
 			        m.concreteClass = cb2.concrete.first
-			    	emit m to pMatchedHelper1
 
+	   				is_none = cb2.concrete.first.name.eq("NONE").or(cb2.concrete.first.name.eq("None"))
+					is_none.if_else({
+				    	emit m to pMatchedHelperNone						
+					}, {
+				    	emit m to pMatchedHelper1						
+					})
+					
                     cb2.concrete.tail.each { |cm|
 				    	m2 = matches!MatchedHelper.new
 				    	m2.helper       = h
@@ -172,4 +177,16 @@ segment RenameHelperN
 		"".println("Duplicated helper [".concat(m.helper.definition.feature.name).concat("]: ").concat(m.helper.definition.context_.context_.name).concat(" -> ").concat(m.concreteClass.name))
 		}.call
 	end
+end
+
+
+segment RemoveNones
+	forall m3 from pMatchedAtlMatchedRuleNone
+		m3.rule.deattach
+	end
+
+	forall m4 from pMatchedHelperNone
+		m4.helper.deattach
+	end
+
 end

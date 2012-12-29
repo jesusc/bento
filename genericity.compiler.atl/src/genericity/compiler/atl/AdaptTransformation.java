@@ -47,11 +47,17 @@ public class AdaptTransformation {
 //	public static final String TARGET_METAMODEL_NAME = "ECORE";
 
 	// bpmn2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "FD";
+//	public static final String TARGET_METAMODEL_NAME = "BPMN";
+
+	// uml2pn
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
 	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 	public static final String BOUND_METAMODEL_NAME = "FD";
-	public static final String TARGET_METAMODEL_NAME = "BPMN";
-	
+	public static final String TARGET_METAMODEL_NAME = "UML";
+
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
 				"org.apache.commons.logging.impl.NoOpLog");
@@ -200,6 +206,14 @@ public class AdaptTransformation {
 			this.model.setFeature(container, containing_property, v);
 		}
 
+		public void deattach() {
+			// BasicEMFModel m = (BasicEMFModel) ((IModel<?, ?>) this.model);
+			// m.delete((EObject) object);			
+			// Deattach works, and seems safer that delete...
+			
+			EObject eobj = (EObject) object;			
+			EcoreUtil.remove(eobj);
+		}
 	}
 
 	public static class BindingData {

@@ -175,7 +175,16 @@ public class AtlAdapter {
 			
 			this.model.setFeature(container, containing_property, v);
 		}
-		
+
+		public void deattach() {
+			// BasicEMFModel m = (BasicEMFModel) ((IModel<?, ?>) this.model);
+			// m.delete((EObject) object);			
+			// Deattach works, and seems safer that delete...
+			
+			EObject eobj = (EObject) object;			
+			EcoreUtil.remove(eobj);
+		}
+
 	}	
 
 	public static class MyCopier extends EcoreUtil.Copier {
