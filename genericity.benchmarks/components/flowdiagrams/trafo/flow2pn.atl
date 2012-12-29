@@ -18,6 +18,9 @@ helper context FD!Node def: toPlaceAsOutput      : Boolean = self.isTask or self
 helper context FD!Node def: toTransitionAsInput  : Boolean = self.isSynchronization or self.isParallelSplit;
 helper context FD!Node def: toTransitionAsOutput : Boolean = self.isSynchronization or self.isParallelSplit or self.isSimpleMerge or self.isMultiChoice;
 
+helper context FD!Node def: parentFlowDiagram    : FD!FlowDiagram  = FD!FlowDiagram.allInstances()->first() 
+helper context FD!FlowEdge def: parentFlowDiagram    : FD!FlowDiagram  = FD!FlowDiagram.allInstances()->first() 
+
 helper context Integer def: pow (m:Integer) : Integer = if (m>1) then self*self.pow(m-1) else self endif; -- n^m
 helper context Integer def: toSequence ()   : Sequence(Integer) = if self<=0 then Sequence{} else Sequence{self}.union((self-1).toSequence()) endif; -- Sequence{1, 2..., n}
 helper context Integer def: choices () : Sequence(Sequence(Boolean)) = 
@@ -36,7 +39,7 @@ helper context FD!MultiChoice def: nodeGenerator : Sequence(TupleType(source : F
 
 rule create_transition(source : FD!Node, num : Integer) {
 	using { choices  : Sequence(Boolean) = source.outs->size().choices()->at(num); 
-	        icontrol : Sequence(OclAny)  = source.refImmediateComposite().control; 
+	        icontrol : Sequence(OclAny)  = source.parentFlowDiagram.control; 
             ocontrol : Sequence(OclAny)  = if source.isConnectedToTerminating then Sequence{} else icontrol endif; }
  	to  transition : PN!Transition (
  		name <- source.typeName + ' ' + num,
@@ -118,7 +121,7 @@ rule finaltask {
 -- each synchronization (i.e. join) is transformed into a transition
 rule synchronization_all {
 	from synch       : FD!Node (synch.isParallelSplit or synch.isSynchronization)
-	using { icontrol : Sequence(OclAny) = synch.refImmediateComposite().control; 
+	using { icontrol : Sequence(OclAny) = synch.parentFlowDiagram.control; 
             ocontrol : Sequence(OclAny) = if synch.isConnectedToTerminating then Sequence{} else icontrol endif; }
     to   transition  : PN!Transition (
 		name <- synch.typeName,		
@@ -166,7 +169,7 @@ rule multi_choice {
 -- are transformed into transitions
 rule place_place {
 	from edge        : FD!FlowEdge ( edge.in.toPlaceAsOutput and edge.out.toPlaceAsInput )
-	using { icontrol : Sequence(OclAny) = edge.refImmediateComposite().control; 
+	using { icontrol : Sequence(OclAny) = edge.parentFlowDiagram.control; 
             ocontrol : Sequence(OclAny) = if edge.isConnectedToTerminating then Sequence{} else icontrol endif; }
 	to   transition  : PN!Transition (
 	    in  <- icontrol.append (edge.in),

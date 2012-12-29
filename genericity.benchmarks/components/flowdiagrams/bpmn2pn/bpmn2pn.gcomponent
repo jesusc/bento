@@ -1,4 +1,4 @@
-composite component ecore2measure_uml {
+composite component bpmn2pn {
 	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/fd2pn.gcomponent"  
 	binding bindBPMN = "platform:/resource/genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind"
 			
