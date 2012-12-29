@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:BpmnDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bpmn="http://stp.eclipse.org/bpmn" xmi:id="_gHQMQf-0EeC0l42CJhc7bA" iD="_gHQMQP-0EeC0l42CJhc7bA">
+  <pools xmi:type="bpmn:Pool" xmi:id="_gHxJof-0EeC0l42CJhc7bA" iD="_gHxJoP-0EeC0l42CJhc7bA" name="Pool">
+    <vertices xmi:type="bpmn:Activity" xmi:id="_gHxwsf-0EeC0l42CJhc7bA" iD="_gHxwsP-0EeC0l42CJhc7bA" outgoingEdges="_wcQEwf-0EeC0l42CJhc7bA" incomingEdges="_jV7uwf-0EeC0l42CJhc7bA" name="InventMouseTrap" activityType="Task"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_ixPGQf-0EeC0l42CJhc7bA" iD="_ixPGQP-0EeC0l42CJhc7bA" outgoingEdges="_jV7uwf-0EeC0l42CJhc7bA" activityType="EventStartEmpty"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_pLJ1sf-0EeC0l42CJhc7bA" iD="_pLJ1sP-0EeC0l42CJhc7bA" outgoingEdges="_xUQDwf-0EeC0l42CJhc7bA _xvo_Qf-0EeC0l42CJhc7bA" incomingEdges="_wcQEwf-0EeC0l42CJhc7bA" activityType="GatewayParallel"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_p1pkMf-0EeC0l42CJhc7bA" iD="_p1pkMP-0EeC0l42CJhc7bA" outgoingEdges="_2u68sf-0EeC0l42CJhc7bA" incomingEdges="_xUQDwf-0EeC0l42CJhc7bA" name="File Patent"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_rh-jIf-0EeC0l42CJhc7bA" iD="_rh-jIP-0EeC0l42CJhc7bA" outgoingEdges="_3qDIMf-0EeC0l42CJhc7bA" incomingEdges="_xvo_Qf-0EeC0l42CJhc7bA" name="Create prototype"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_1Acosf-0EeC0l42CJhc7bA" iD="_1AcosP-0EeC0l42CJhc7bA" outgoingEdges="_4djBsf-0EeC0l42CJhc7bA" incomingEdges="_2u68sf-0EeC0l42CJhc7bA _3qDIMf-0EeC0l42CJhc7bA" activityType="GatewayParallel"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_10BasP-0EeC0l42CJhc7bA" iD="_10AzoP-0EeC0l42CJhc7bA" outgoingEdges="_MThV8RBxEeGuWo27sTHtEA" incomingEdges="_4djBsf-0EeC0l42CJhc7bA" name="Get Rich"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_L2GaIRBxEeGuWo27sTHtEA" iD="_L2GaIBBxEeGuWo27sTHtEA" incomingEdges="_MThV8RBxEeGuWo27sTHtEA" activityType="EventEndEmpty"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_jV7uwf-0EeC0l42CJhc7bA" iD="_jV7uwP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_wcQEwf-0EeC0l42CJhc7bA" iD="_wcQEwP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_xUQDwf-0EeC0l42CJhc7bA" iD="_xUQDwP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_xvo_Qf-0EeC0l42CJhc7bA" iD="_xvo_QP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_2u68sf-0EeC0l42CJhc7bA" iD="_2u68sP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_3qDIMf-0EeC0l42CJhc7bA" iD="_3qDIMP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_4djBsf-0EeC0l42CJhc7bA" iD="_4djBsP-0EeC0l42CJhc7bA"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_MThV8RBxEeGuWo27sTHtEA" iD="_MThV8BBxEeGuWo27sTHtEA"/>
+  </pools>
+</bpmn:BpmnDiagram>

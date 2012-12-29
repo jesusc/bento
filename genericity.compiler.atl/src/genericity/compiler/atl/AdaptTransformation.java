@@ -41,11 +41,17 @@ public class AdaptTransformation {
 	// "../genericity.benchmarks/components/oo2java/oo2java.atl.xmi";
 
 	// oo2measure
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
-	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl.xmi";
-	public static final String BOUND_METAMODEL_NAME = "UML2";
-	public static final String TARGET_METAMODEL_NAME = "ECORE";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "UML2";
+//	public static final String TARGET_METAMODEL_NAME = "ECORE";
 
+	// bpmn2pn
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind.xmi";
+	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+	public static final String BOUND_METAMODEL_NAME = "FD";
+	public static final String TARGET_METAMODEL_NAME = "BPMN";
+	
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
 				"org.apache.commons.logging.impl.NoOpLog");
@@ -163,6 +169,15 @@ public class AdaptTransformation {
 			put_expression_in_container((EObject) this.object, container, (EObject) obj);
 		}
 
+		public String containing_property() {
+			return ((EObject) object).eContainingFeature().getName();
+		}
+		
+
+		public void set_inner_expression(Object obj, String featureName) {
+			this.model.setFeature(((EObject) object), featureName, obj);			
+		}
+		
 		private void put_expression_in_container(EObject original, EObject container, EObject v) {
 			/*
 			String containing_property;

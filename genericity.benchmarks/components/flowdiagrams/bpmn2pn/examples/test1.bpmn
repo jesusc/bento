@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:BpmnDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bpmn="http://stp.eclipse.org/bpmn" xmi:id="_-QQkcffjEeCkAafyxMUC9w" iD="_-QQkcPfjEeCkAafyxMUC9w">
+  <pools xmi:type="bpmn:Pool" xmi:id="_-RZM4ffjEeCkAafyxMUC9w" iD="_-RZM4PfjEeCkAafyxMUC9w" name="Pool">
+    <vertices xmi:type="bpmn:Activity" xmi:id="_-R-bsffjEeCkAafyxMUC9w" iD="_-R-bsPfjEeCkAafyxMUC9w" outgoingEdges="_DPfekffkEeCkAafyxMUC9w" incomingEdges="_lDtUwf4rEeCUfb-7CA1UAQ" name="Task1" lanes="_mefpUffsEeCkAafyxMUC9w _m-AP0ffsEeCkAafyxMUC9w" activityType="Task"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_CBMfcPfkEeCkAafyxMUC9w" iD="_CBL4YPfkEeCkAafyxMUC9w" outgoingEdges="_dkaf4fgQEeCkAafyxMUC9w" incomingEdges="_DPfekffkEeCkAafyxMUC9w" name="Task2"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_cj76UfgQEeCkAafyxMUC9w" iD="_cj76UPgQEeCkAafyxMUC9w" outgoingEdges="_jomP4PgQEeCkAafyxMUC9w" incomingEdges="_dkaf4fgQEeCkAafyxMUC9w _Bwi64fgREeCkAafyxMUC9w" name="ddd" activityType="GatewayDataBasedExclusive"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_i-PrUfgQEeCkAafyxMUC9w" iD="_i-PrUPgQEeCkAafyxMUC9w" outgoingEdges="_nd9JoP4rEeCUfb-7CA1UAQ" incomingEdges="_jomP4PgQEeCkAafyxMUC9w"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_AnwG0fgREeCkAafyxMUC9w" iD="_AnwG0PgREeCkAafyxMUC9w" outgoingEdges="_Bwi64fgREeCkAafyxMUC9w"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_ttKasf4nEeCUfb-7CA1UAQ" iD="_ttKasP4nEeCUfb-7CA1UAQ" outgoingEdges="_lDtUwf4rEeCUfb-7CA1UAQ" activityType="EventStartEmpty"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_Jojukf4oEeCUfb-7CA1UAQ" iD="_JojukP4oEeCUfb-7CA1UAQ" incomingEdges="_nd9JoP4rEeCUfb-7CA1UAQ" activityType="EventEndEmpty"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_DPfekffkEeCkAafyxMUC9w" iD="_DPfekPfkEeCkAafyxMUC9w"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_dkaf4fgQEeCkAafyxMUC9w" iD="_dkaf4PgQEeCkAafyxMUC9w"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_jomP4PgQEeCkAafyxMUC9w" iD="_jolo0PgQEeCkAafyxMUC9w"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_Bwi64fgREeCkAafyxMUC9w" iD="_Bwi64PgREeCkAafyxMUC9w"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_lDtUwf4rEeCUfb-7CA1UAQ" iD="_lDtUwP4rEeCUfb-7CA1UAQ"/>
+    <sequenceEdges xmi:type="bpmn:SequenceEdge" xmi:id="_nd9JoP4rEeCUfb-7CA1UAQ" iD="_nd8ikP4rEeCUfb-7CA1UAQ"/>
+  </pools>
+  <pools xmi:type="bpmn:Pool" xmi:id="_j62A0ffsEeCkAafyxMUC9w" iD="_j62A0PfsEeCkAafyxMUC9w" name="Another">
+    <vertices xmi:type="bpmn:Activity" xmi:id="_oZKw0fftEeCkAafyxMUC9w" iD="_oZKw0PftEeCkAafyxMUC9w" name="    TaskLane0"/>
+    <vertices xmi:type="bpmn:Activity" xmi:id="_qOIHUfftEeCkAafyxMUC9w" iD="_qOIHUPftEeCkAafyxMUC9w" name="TaskLan1" lanes="_m-AP0ffsEeCkAafyxMUC9w"/>
+    <lanes xmi:type="bpmn:Lane" xmi:id="_mefpUffsEeCkAafyxMUC9w" iD="_mefpUPfsEeCkAafyxMUC9w" name="lane0" activities="_-R-bsffjEeCkAafyxMUC9w"/>
+    <lanes xmi:type="bpmn:Lane" xmi:id="_m-AP0ffsEeCkAafyxMUC9w" iD="_m-AP0PfsEeCkAafyxMUC9w" name="lane1" activities="_-R-bsffjEeCkAafyxMUC9w _qOIHUfftEeCkAafyxMUC9w"/>
+  </pools>
+</bpmn:BpmnDiagram>

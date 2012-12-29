@@ -145,6 +145,15 @@ public class AtlAdapter {
 			put_expression_in_container((EObject) this.object, container, (EObject) obj);
 		}
 
+		public String containing_property() {
+			return ((EObject) object).eContainingFeature().getName();
+		}
+		
+
+		public void set_inner_expression(Object obj, String featureName) {
+			this.model.setFeature(((EObject) object), featureName, obj);			
+		}
+
 		private void put_expression_in_container(EObject original, EObject container, EObject v) {
 			/*
 			String containing_property;

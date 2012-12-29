@@ -21,7 +21,7 @@ mappings ocl2ocl(gbind) -> (atl)
   end
 
   [expr]
-  from gbind : gbind!MulOpCallExp
+  from gbind : gbind!OperatorCallExp // There are several empty subclasses: AddOpCallExp, EqOpCallExp, MulOpCallExp
     to   atl :   atl!OperatorCallExp
 	atl.operationName = gbind.operationName
 	atl.source    <- gbind.source
@@ -33,6 +33,13 @@ mappings ocl2ocl(gbind) -> (atl)
     to   atl :   atl!BooleanExp
     
 	atl.booleanSymbol = gbind.booleanSymbol
+  end
+
+  [expr]
+  from gbind : gbind!IntegerExp
+    to   atl :   atl!IntegerExp
+    
+	atl.integerSymbol = gbind.integerSymbol
   end
 
   [expr]
@@ -98,6 +105,13 @@ mappings ocl2ocl(gbind) -> (atl)
   [expr]
   from gbind : gbind!SequenceExp
     to   atl :   atl!SequenceExp
+  end
+
+  [expr]
+  from gbind : gbind!EnumLiteralExp
+    to   atl :   atl!EnumLiteralExp
+    
+    atl.name = gbind.name
   end
 
   // This 79works because in ATL abstract syntax you can have as many

@@ -39,6 +39,7 @@ task :extract_adapted_transformation do
 end
 
 task :all_BPMN => [:inject_atl_file, :apply_binding_BPMN, :extract_adapted_transformation] 
+task :all_BPMN_1 => [:apply_binding_BPMN, :extract_adapted_transformation] 
 
 
 

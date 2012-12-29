@@ -43,11 +43,20 @@ template createOclHelper(fb : gbind!OclFeatureBinding, concreteMetaclass : gbind
 	}
 end
 
-      /*    
-  	   # out.definition.context_.context_.model = ATL::OCL::OclModel.all_objects.find_one { |m| m.name == MetamodelName }
-       ocl_model = ATL::OCL::OclModel.all_objects.find { |m| m.name == fb.model_.metamodel }
-  	   out.definition.context_.context_.model = trace_query(ocl_model).one!(OUT::OCL::OclModel)
-  
-    	   # // Poner el tipo, pero no está guardado en el concepto...
-  	   out.definition.feature.type = OUT::OCL::OclAnyType.new;
-		*/
+template createWhenClauseHelper(concept : gbind!ConceptMetaclass, atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = concept.name.concat("__filter__")
+				initExpression = atl_ocl_expr
+				type = atl!BooleanType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concept.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end

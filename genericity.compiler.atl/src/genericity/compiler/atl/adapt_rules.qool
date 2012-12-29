@@ -88,6 +88,8 @@ segment findModuleElements
 	 where h.definition.context_.is_nil.not
 		ocl_type = h.definition.context_.context_
 		forall cb2 from mClassBinding
+		 where ocl_type.kind_of(atl!OclModelElement) // not very efficient :-(
+		 
 			ocl_type.^model.name.eq(current_mm).if_true {
 			    cb2.concept.name.eq(ocl_type.name).if_true {
 

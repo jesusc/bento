@@ -11,5 +11,6 @@ transformation component fd2pn {
 			- terminating
 			- nonTerminating
 	
-	definition atl "fd2pn.atl" with IN = fd, OUT = pn
+	definition atl "platform:/resource/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl" 
+		with IN : FD = fd, OUT : PN = pn
 }
