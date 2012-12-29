@@ -238,7 +238,7 @@ segment AdaptRuleForAttribute2ClassBinding
 		ocl_model_element = op.arguments.first
 
 		ocl_model_element.^model.name.eq(current_mm).if_true {	
-			cb = gbind!ClassBinding.all_instances.select { |cb1| cb1.concept.name.eq(ocl_model_element.name) }.first
+			cb = gbind!ClassBinding.all_instances.select { |cb1| cb1.concept.name.eq(ocl_model_element.name).and(cb1.whenClause.is_nil.not) }.first
 			cb.is_nil.if_false {
 				
 				// TODO: Decide where to put this adaptation (in this module...?)

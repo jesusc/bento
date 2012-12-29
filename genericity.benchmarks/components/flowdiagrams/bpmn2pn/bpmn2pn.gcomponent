@@ -3,7 +3,7 @@ composite component bpmn2pn {
 	binding bindBPMN = "platform:/resource/genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind"
 			
 	source concept BPMN  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn.ecore"
-	target concept PN    : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/Measure.ecore"
+	target concept PN    : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore"
 	source model in  : BPMN  = "platform:/resource/genericity.benchmarks/components/flowdiagrams/bpmn2pn/example.bpmn" 
 	target model out : PN    = "platform:/resource/genericity.benchmarks/components/flowdiagrams/models/output_test.xmi" 
 	
