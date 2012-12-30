@@ -7,7 +7,7 @@ binding epc {
 	
 	class FlowDiagram     to EPCDiagram
 	class Node            to ProcessObject 
-	class Task            to Function, Event when self.outgoing->size() > 0
+	class Task            to Function, Event when if self.oclIsKindOf(EPC!Event) then self.outgoing->size() > 0 else true endif
 	class FinalTask       to Event when self.outgoing->size() = 0 
 	class ParallelSplit   to And when self.outgoing->size() > 1
 	class Synchronization to And when self.incoming->size() > 1
@@ -27,6 +27,20 @@ binding epc {
 	feature Task[Function].isInitial = false
 	feature FinalTask.isTerminating = true -- me lo he inventado
 	feature FinalTask.isMandatory = true
-	feature FlowEdge."in" = self.fsource->union(self.lsource)->union(self.esource) -- reference split
-	feature FlowEdge.out = self.ftarget->union(self.ltarget)->union(self.etarget) -- reference split
+	feature FlowEdge."in" = if not self.fsource.oclIsUndefined() -- reference split (aunque no se usa union, porque tiene cardinalidad 1) 
+	                        then self.fsource 
+	                        else
+	                          if self.lsource.oclIsUndefined()
+	                          then self.esource
+	                          else self.lsource
+	                          endif
+	                        endif    
+	feature FlowEdge.out = if not self.ftarget.oclIsUndefined() -- reference split (aunque no se usa union, porque tiene cardinalidad 1) 
+	                        then self.ftarget
+	                        else
+	                          if self.ltarget.oclIsUndefined()
+	                          then self.etarget
+	                          else self.ltarget
+	                          endif
+	                        endif    
 }
