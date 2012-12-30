@@ -7,13 +7,13 @@ binding epc {
 	
 	class FlowDiagram     to EPCDiagram
 	class Node            to ProcessObject 
-	class Task            to Event, Function -- �hay que quitar los eventos finales de aqui?
+	class Task            to Function, Event when self.outgoing->size() > 0
 	class FinalTask       to Event when self.outgoing->size() = 0 
 	class ParallelSplit   to And when self.outgoing->size() > 1
 	class Synchronization to And when self.incoming->size() > 1
-	class ExclusiveChoice to Xor when self.outgoing->size() > 1
-	class SimpleMerge     to Xor when self.incoming->size() > 1
-	class MultiChoice     to Or when self.outgoing->size() > 1
+	class ExclusiveChoice to Xor when self.incoming->size() = 1 and self.outgoing->size() > 1
+	class SimpleMerge     to Xor when self.incoming->size() > 1 and self.outgoing->size() = 1
+	class MultiChoice     to Or  when self.incoming->size() = 1 and self.outgoing->size() > 1
 	class FlowEdge        to ControlFlow
 	
 	feature FlowDiagram.nodes is objects

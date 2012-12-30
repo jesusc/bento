@@ -26,6 +26,7 @@ class OrganizationalFlow extends FlowConnector {
 }
 
 class OrganizationalUnit {
+   attr String name;
    ref OrganizationalFlow[*]#source outgoing;
 }
 
