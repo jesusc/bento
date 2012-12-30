@@ -59,10 +59,16 @@ public class AdaptTransformation {
 //	public static final String TARGET_METAMODEL_NAME = "UML";
 
 	// grafcet2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "FD";
+//	public static final String TARGET_METAMODEL_NAME = "SFC";
+
+	// epc2pn
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/epc2pn/epc.gbind.xmi";
 	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 	public static final String BOUND_METAMODEL_NAME = "FD";
-	public static final String TARGET_METAMODEL_NAME = "SFC";
+	public static final String TARGET_METAMODEL_NAME = "EPC";
 
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",

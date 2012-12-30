@@ -153,6 +153,24 @@ segment RenameRule1
 	end
 end
 
+segment RenameRuleN
+	forall mr from pMatchedAtlMatchedRuleN
+		newRule = mr.rule.copy
+		module = atl!Module.all_instances.first
+		module.elements = newRule
+
+		rename = { 
+			ocl_type = newRule.inPattern.elements.first.type 
+			ocl_type.name = mr.concreteClass.name
+			newRule.name = newRule.name.concat("_").concat(mr.concreteClass.name)
+		}.call
+		
+		x = {
+		"".println("Duplicated rule [".concat(mr.rule.name).concat("]: ").concat(mr.rule.inPattern.elements.first.type.name).concat(" -> ").concat(mr.concreteClass.name))
+		}.call
+	end
+end
+
 
 segment RenameHelper1
 	forall m from pMatchedHelper1
