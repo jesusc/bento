@@ -17,12 +17,12 @@ segment main
 	invoke-external eclectic.adapt_adapters(atl = atl, gbind = gbind) -> ()
 		input-view-filter filter_view
 
-	// adapt rules, copy rules for cardinality N	
-	invoke-external eclectic.adapt_rules(atl = atl, gbind = gbind) -> ()
-		input-view-filter filter_view
-
 	// adapt the code of all rules and helpers, e.g., oclIsKindOf...
 	invoke-external eclectic.adapt_code(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
+	// adapt rules, copy rules for cardinality N	
+	invoke-external eclectic.adapt_rules(atl = atl, gbind = gbind) -> ()
 		input-view-filter filter_view
 		
 	// adapt the rest of ocl model elements

@@ -19,8 +19,7 @@ binding uml2 {
 	class Task to ActivityNode when self.oclIsKindOf(UML!Action) or self.oclIsKindOf(UML!InitialNode)
     -- feature Task.name     is name
 	feature Task.isInitial = self.oclIsKindOf(UML!InitialNode)
- 
-	      -- TODO: Filter some subclasses of FD!Action (e.g., InterrumpibleAction)
+ 	-- TODO: Filter some subclasses of FD!Action (e.g., InterrumpibleAction)
 	
 	-- This is an alternative way of doing this
 	-- class Task            to Action, InitialNode

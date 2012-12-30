@@ -1,0 +1,14 @@
+//
+// SFC (Sequential Flow Charts) is the standard version of Grafcet
+//
+composite component sfc2pn {
+	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/fd2pn.gcomponent"    
+	binding bindSFC = "platform:/resource/genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind"
+			
+	source concept SFC : "platform:/resource/genericity.benchmarks/components/flowdiagrams/sfc2pn/tc60201.ecore"
+	target concept PN    : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore"
+	source model in  : SFC = "platform:/resource/genericity.benchmarks/components/flowdiagrams/sfc2pn/examples/plc.xml" 
+	target model out : PN = "platform:/resource/genericity.benchmarks/components/flowdiagrams/models/output_test.xmi"
+	
+	compose apply fd2pn(bindSFC(in)) -> (out)
+}
