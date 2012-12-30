@@ -188,7 +188,7 @@ segment AdaptOclIsKindOf
 	  target_oclm3.^model = ocl_model_element.^model
       
       last_op = atl!OperationCallExp.new
-      last_op.operationName // either oclIsTypeOf or oclIsKindOf
+      last_op.operationName = operation.operationName // either oclIsTypeOf or oclIsKindOf
       v_exp3 = atl!VariableExp.new
       v_exp3.referredVariable = let.variable
       last_op.source = v_exp3
