@@ -30,6 +30,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2m.atl.adt.builder.atlBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -37,5 +42,6 @@
 		<nature>gbind.resource.gbind.nature</nature>
 		<nature>genericity.language.gbind.resource.nature</nature>
 		<nature>genericity.language.gcomponent.resource.gcomponent.nature</nature>
+                <nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
 	</natures>
 </projectDescription>

@@ -1,0 +1,33 @@
+binding epc {  
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel YAWL : "platform:/resource/genericity.benchmarks/components/flowdiagrams/yawl2pn/yawlc.ecore"
+	
+	class FlowDiagram     to Net 
+	class Node            to Task, Condition, Join, Split --NetElement when self.oclIsKindOf(YAWL!Task) or self.oclIsKindOf(YAWL!Condition) or self.oclIsKindOf(YAWL!Join) or self.oclIsKindOf(YAWL!Split)
+	class Task            to Task, InitialCondition, IntermediateCondition
+	class FinalTask       to FinalCondition  
+	class ParallelSplit   to AndSplit
+	class Synchronization to AndJoin
+	class ExclusiveChoice to XorSplit
+	class SimpleMerge     to XorJoin
+	class MultiChoice     to OrSplit
+	class FlowEdge        to SimpleFlow, ConditionalFlow 
+	
+	feature FlowDiagram.nodes = self.elements->select(e | e.oclIsKindOf(YAWL!Task) or e.oclIsKindOf(YAWL!Condition) or e.oclIsKindOf(YAWL!Join) or e.oclIsKindOf(YAWL!Split)) 
+	feature FlowDiagram.edges = self.elements->select(e | e.oclIsKindOf(YAWL!SimpleFlow) or e.oclIsKindOf(YAWL!ConditionalFlow))
+	feature FlowDiagram.isFinalMandatory = true
+--	feature Node[Task].outs = self.join->union(self.split) -- reference split
+--	feature Node[Condition].outs = self.simpleFlows->union(self.conditionalFlows) -- reference split 
+--	feature Node[Join].outs = self.tasks->union(self.simpleFlows) -- reference split 
+--	feature Node[Split].outs = self.tasks->union(self.conditionaFlows) -- reference split
+--	feature Node[Task].ins = YAWL!Join->select(j | j.tasks->includes(self))->union(YAWL!Split->select(s | s.tasks->includes(self)))
+--	feature Node[Condition].ins = YAWL!SimpleFlow->select(s | s.condition = self)->union(YAWL!ConditionalFlow->select(c | c.condition = self))
+--	feature Node[Join].ins = YAWL!Task->select(t | t.join->includes(self))->union(YAWL!SimpleFlow->select(s | s.join->includes(self))) 
+--	feature Node[Split].ins = YAWL!Task->select(t | t.join->includes(self))->union(YAWL!ConditionalFlow->select(s | s.split->includes(self))) 
+	feature Task.name is name
+	feature Task.isInitial = self.oclIsKindOf(YAWL!InitialCondition)
+	feature FinalTask.isTerminating = true
+	feature FinalTask.isMandatory = true
+--	feature FlowEdge."in" is    
+--	feature FlowEdge.out is  
+}
