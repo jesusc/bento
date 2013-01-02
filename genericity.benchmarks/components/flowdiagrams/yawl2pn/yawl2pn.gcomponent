@@ -1,4 +1,4 @@
-composite component epc2pn {
+composite component yawl2pn {
 	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/fd2pn.gcomponent"    
 	binding bindYAWL = "platform:/resource/genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind"
 			

@@ -1,76 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="yawl"
-    nsURI="yawl" nsPrefix="yawl">
-  <eClassifiers xsi:type="ecore:EClass" name="Net">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialCond" lowerBound="1"
-        eType="#//InitialCondition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="finalCond" lowerBound="1"
-        eType="#//FinalCondition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//NetElement" containment="true" eOpposite="#//NetElement/parentNet"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="queue" upperBound="-1"
-        eType="#//EventQueue" containment="true" eOpposite="#//EventQueue/parentNet"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="yawl" nsURI="http://www.cwi.nl/yawl" nsPrefix="yawl">
+  <eClassifiers xsi:type="ecore:EClass" name="SpecificationSet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specifications" upperBound="-1"
+        eType="#//Specification" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NetElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNet" lowerBound="1"
-        eType="#//Net" eOpposite="#//Net/elements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Specification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaData" eType="#//MetaData"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSchema"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decompositions" upperBound="-1"
+        eType="#//Decomposition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Decomposition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//FactsType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rootNet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processControlElements"
+        upperBound="-1" eType="#//ProcessControlElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true" eSuperTypes="#//NetElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalFlows" upperBound="-1"
-        eType="#//ConditionalFlow" eOpposite="#//ConditionalFlow/condition"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleFlows" upperBound="-1"
-        eType="#//SimpleFlow" eOpposite="#//SimpleFlow/condition"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="FactsType">
+    <eLiterals name="NetFacts"/>
+    <eLiterals name="WebServiceGatewayFacts" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InitialCondition" eSuperTypes="#//Condition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IntermediateCondition" eSuperTypes="#//Condition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FinalCondition" eSuperTypes="#//Condition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//NetElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="split" upperBound="-1"
-        eType="#//Split" eOpposite="#//Split/tasks"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="join" upperBound="-1" eType="#//Join"
-        eOpposite="#//Join/tasks"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="CombinationType">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+    <eLiterals name="XOR" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleInstanceTask" eSuperTypes="#//Task"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleInstanceAtomicTask" eSuperTypes="#//SingleInstanceTask"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SingleInstanceCompositeTask" eSuperTypes="#//SingleInstanceTask"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MultipleInstanceTask" eSuperTypes="#//Task"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MultipleInstanceAtomicTask" eSuperTypes="#//MultipleInstanceTask"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MultipleInstanceCompositeTask" eSuperTypes="#//MultipleInstanceTask"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Split" abstract="true" eSuperTypes="#//NetElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalFlows" upperBound="-1"
-        eType="#//ConditionalFlow" eOpposite="#//ConditionalFlow/split"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
-        eType="#//Task" eOpposite="#//Task/split"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessControlElement" abstract="true"
+      interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowsInto" upperBound="-1"
+        eType="#//ProcessControlElement" eOpposite="#//ProcessControlElement/flowsOutOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowsOutOf" upperBound="-1"
+        eType="#//ProcessControlElement" eOpposite="#//ProcessControlElement/flowsInto"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decomposesTo" eType="#//Decomposition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OrSplit" eSuperTypes="#//Split"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AndSplit" eSuperTypes="#//Split"/>
-  <eClassifiers xsi:type="ecore:EClass" name="XorSplit" eSuperTypes="#//Split"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Join" abstract="true" eSuperTypes="#//NetElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleFlows" upperBound="-1"
-        eType="#//SimpleFlow" eOpposite="#//SimpleFlow/join"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
-        eType="#//Task" eOpposite="#//Task/join"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//ProcessControlElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="joinType" eType="#//CombinationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="splitType" eType="#//CombinationType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OrJoin" eSuperTypes="#//Join"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AndJoin" eSuperTypes="#//Join"/>
-  <eClassifiers xsi:type="ecore:EClass" name="XorJoin" eSuperTypes="#//Join"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalFlow" eSuperTypes="#//NetElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
-        eType="#//Condition" eOpposite="#//Condition/conditionalFlows"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="split" lowerBound="1" eType="#//Split"
-        eOpposite="#//Split/conditionalFlows"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleFlow" eSuperTypes="#//NetElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
-        eType="#//Condition" eOpposite="#//Condition/simpleFlows"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="join" lowerBound="1" eType="#//Join"
-        eOpposite="#//Join/simpleFlows"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventQueue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentNet" lowerBound="1"
-        eType="#//Net" eOpposite="#//Net/queue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputCondition" eSuperTypes="#//ProcessControlElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputCondition" eSuperTypes="#//ProcessControlElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetaData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="validFrom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

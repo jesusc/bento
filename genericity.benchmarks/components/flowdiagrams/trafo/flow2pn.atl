@@ -18,8 +18,8 @@ helper context FD!Node def: toPlaceAsOutput      : Boolean = self.isTask or self
 helper context FD!Node def: toTransitionAsInput  : Boolean = self.isSynchronization or self.isParallelSplit;
 helper context FD!Node def: toTransitionAsOutput : Boolean = self.isSynchronization or self.isParallelSplit or self.isSimpleMerge or self.isMultiChoice;
 
-helper context FD!Node def: parentFlowDiagram    : FD!FlowDiagram  = FD!FlowDiagram.allInstances()->first() 
-helper context FD!FlowEdge def: parentFlowDiagram    : FD!FlowDiagram  = FD!FlowDiagram.allInstances()->first() 
+helper context FD!Node def: parentFlowDiagram    : FD!FlowDiagram  = FD!FlowDiagram.allInstances()->first(); 
+helper context FD!FlowEdge def: parentFlowDiagram    : FD!FlowDiagram  = FD!FlowDiagram.allInstances()->first(); 
 
 helper context Integer def: pow (m:Integer) : Integer = if (m>1) then self*self.pow(m-1) else self endif; -- n^m
 helper context Integer def: toSequence ()   : Sequence(Integer) = if self<=0 then Sequence{} else Sequence{self}.union((self-1).toSequence()) endif; -- Sequence{1, 2..., n}
