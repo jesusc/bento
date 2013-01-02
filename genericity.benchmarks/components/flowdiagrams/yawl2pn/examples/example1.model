@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<yawl:SpecificationSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yawl="http://www.cwi.nl/yawl" xmi:id="_ebI8EVT5EeKd_aryiOVhcQ">
+  <specifications xmi:id="_fTh8oFT5EeKd_aryiOVhcQ" uri="http://spec-example">
+    <decompositions xmi:id="_hffd4FT5EeKd_aryiOVhcQ" rootNet="true" name="decomposition-1">
+      <processControlElements xsi:type="yawl:InputCondition" xmi:id="_kwy2kFT5EeKd_aryiOVhcQ" flowsOutOf="_A2_sQFT6EeKd_aryiOVhcQ"/>
+      <processControlElements xsi:type="yawl:OutputCondition" xmi:id="_nA4C0FT5EeKd_aryiOVhcQ" flowsInto="_IkEssFT6EeKd_aryiOVhcQ _KPJucFT6EeKd_aryiOVhcQ"/>
+      <processControlElements xsi:type="yawl:Task" xmi:id="_A2_sQFT6EeKd_aryiOVhcQ" flowsInto="_kwy2kFT5EeKd_aryiOVhcQ" flowsOutOf="_DcvmgFT6EeKd_aryiOVhcQ _FNMQcFT6EeKd_aryiOVhcQ" name="Receive and validate application" splitType="AND"/>
+      <processControlElements xsi:type="yawl:Task" xmi:id="_DcvmgFT6EeKd_aryiOVhcQ" flowsInto="_A2_sQFT6EeKd_aryiOVhcQ" flowsOutOf="_G5YFcFT6EeKd_aryiOVhcQ" name="Determine credit requirements"/>
+      <processControlElements xsi:type="yawl:Task" xmi:id="_FNMQcFT6EeKd_aryiOVhcQ" flowsInto="_A2_sQFT6EeKd_aryiOVhcQ" flowsOutOf="_G5YFcFT6EeKd_aryiOVhcQ" name="Obtain credit report"/>
+      <processControlElements xsi:type="yawl:Task" xmi:id="_G5YFcFT6EeKd_aryiOVhcQ" flowsInto="_DcvmgFT6EeKd_aryiOVhcQ _FNMQcFT6EeKd_aryiOVhcQ" flowsOutOf="_IkEssFT6EeKd_aryiOVhcQ _KPJucFT6EeKd_aryiOVhcQ" name="Choose aproval process" joinType="AND" splitType="XOR"/>
+      <processControlElements xsi:type="yawl:Task" xmi:id="_IkEssFT6EeKd_aryiOVhcQ" flowsInto="_G5YFcFT6EeKd_aryiOVhcQ" flowsOutOf="_nA4C0FT5EeKd_aryiOVhcQ" name="Large credit aproval"/>
+      <processControlElements xsi:type="yawl:Task" xmi:id="_KPJucFT6EeKd_aryiOVhcQ" flowsInto="_G5YFcFT6EeKd_aryiOVhcQ" flowsOutOf="_nA4C0FT5EeKd_aryiOVhcQ" name="Small credit aproval"/>
+    </decompositions>
+  </specifications>
+</yawl:SpecificationSet>
