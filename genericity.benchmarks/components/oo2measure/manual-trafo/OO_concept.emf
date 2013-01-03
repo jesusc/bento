@@ -1,0 +1,21 @@
+@namespace(uri="simple_OO_concept", prefix="simple_OO_concept")
+package simple_OO_concept;
+
+abstract class NamedElement {
+   attr String name;
+}
+
+class Package extends NamedElement {
+   val Class[*] classes;
+}
+
+class Class {
+  val Attribute[*] attributes;
+  val Operation[*] operations;
+  ref Class[*]     parents; 
+}
+
+class Attribute extends NamedElement {}
+
+class Operation extends NamedElement {}
+

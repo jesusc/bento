@@ -1,0 +1,137 @@
+-- generic transformation developed by hand, together with concept  
+
+module oo2measure;
+create OUT : simple_metrics from IN : simple_OO_concept;
+
+-- Each package is transformed into a measure set
+rule Package2MeasureSet {
+	from pck : simple_OO_concept!Package
+	to   set : simple_metrics!MetricsSet 
+    do {
+		set.name    <- 'package ' + pck.name;
+		set.metrics <- thisModule.Metric('AIF', pck.AIF());
+		set.metrics <- thisModule.Metric('OIF', pck.OIF());
+		set.metrics <- thisModule.Metric('BPF', pck.BPF());
+		set.metrics <- thisModule.Metric('IIF', pck.IIF());
+    }
+}
+
+rule Metric (name:String, value:Integer) {
+	to metric : simple_metrics!Metric ( name <- name, value <- value )
+	do { metric; }
+}
+
+-- -------------------------------------------------------------------------
+-- METRICS FOR OBJECT ORIENTED DESIGN
+-- -------------------------------------------------------------------------
+
+-- AIF - Attributes Inheritance Factor
+-- Quotient between the number of inherited attributes for all classes of 
+-- the package and the number of available attributes (locally defined plus 
+-- inherited) for all classes of the package.
+helper context simple_OO_concept!Package
+def : AIF() : Real =
+	self.classes->collect(c | c.InheritedAttributes()->size())->sum() / -- # inherited attributes for all classes /
+	self.classes->collect(c | c.AllAttributes()->size())->sum()       ; -- # available attributes (local and inherited) for all classes
+	
+-- OIF - Operations Inheritance Factor
+-- Quotient between the number of inherited operations for all classes of 
+-- the package and the number of available operations (locally defined plus 
+-- inherited) for all classes of the package.	
+helper context simple_OO_concept!Package
+def : OIF() : Real =
+	self.classes->collect(c | c.InheritedOperations()->size())->sum() / -- # inherited operations for all classes /
+	self.classes->collect(c | c.AllOperations()->size())->sum()       ; -- # available operations (local and inherited) for all classes
+	
+-- AHF - Attributes Hiding Factor
+-- Quotient between the sum of the invisibilities of all attributes defined 
+-- in all classes in the current package and the total number of attributes 
+-- defined in the package.
+-- UNIMPLEMENTED, as visibility is not present in metamodels like km3 or ecore
+
+-- OHF - Operations Hiding Factor
+-- Quotient between the sum of the invisibilities of all operations defined 
+-- in all classes in the current package and the total number of operations 
+-- defined in the package.
+-- UNIMPLEMENTED, as visibility is not present in metamodels like km3 or ecore
+
+-- BPF - Behavioral Polymorphism Factor
+-- Quotient between the actual number of possible different polymorphic 
+-- situations within the current package and the maximum number of possible 
+-- distinct polymorphic situations (due to inheritance).
+helper context simple_OO_concept!Package
+def : BPF() : Real =
+	self.classes->collect(c | c.OverridenOperations()->size())->sum() / -- # total operations overriden /
+	self.classes->collect(c | c.AllOperations()->size())->sum()       ; -- # total operations available
+	
+-- IIF - Internal Inheritance Factor
+-- Quotient between the number of inheritance links where both the child 
+-- and parent classes belong to the current package and the total number 
+-- of inheritance links originating in the package.
+helper context simple_OO_concept!Package
+def : IIF() : Real =
+	self.classes->collect(c | c.parents->size())->sum() /                                       -- # inh links where both the child and parent classes are in the package
+	self.classes->collect(c | c.parents->select(p | self.classes->contains(p))->size())->sum(); -- # inh links where the child class is in the package
+
+-- -------------------------------------------------------------------------
+-- AUXILIARY HELPERS
+-- -------------------------------------------------------------------------
+
+-- ancestors of a class, direct and indirect
+helper context simple_OO_concept!Class
+def : Ancestors() : Set(OO_concept!Class) =
+	if self.parents->isEmpty()
+	then Set{}
+	else self.parents->union(self.parents->collect(p | p.Ancestors())->flatten())
+	endif;
+
+-- ***** ATTRIBUTES *****
+
+-- all attributes of a class (local and inherited)
+helper context simple_OO_concept!Class
+def : AllAttributes() : Set(OO_concept!Class) =
+    self.attributes->union(self.InheritedAttributes());
+
+-- attributes defined in the class, that do not override inherited ones
+helper context simple_OO_concept!Class
+def: NewAttributes() : Set(OO_concept!Class) =
+	let inherited_attributes : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+	self.attributes->select(att | not inherited_attributes->exists(att2 | att2.name = att.name));
+
+-- inherited attributes of a class, not overriden by locally defined ones
+helper context simple_OO_concept!Class
+def : InheritedAttributes() : Set(OO_concept!Class) =
+	let inherited_attributes : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+	inherited_attributes->select(att | not self.attributes->exists(att2 | att.name = att2.name));
+
+-- inherited operations of a class that are overriden by locally defined ones
+helper context simple_OO_concept!Class
+def : OverridenAttributes() : Set(OO_concept!Class) =
+	let inherited_attributes : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+	self.attributes->select(att | inherited_attributes->exists(att2 | att.name = att2.name));
+
+-- ***** OPERATIONS *****
+
+-- all operations of a class (local and inherited)
+helper context simple_OO_concept!Class
+def : AllOperations() : Set(OO_concept!Class) =
+    self.operations->union(self.InheritedOperations());
+
+-- operations defined in the class, that do not override inherited ones
+helper context simple_OO_concept!Class
+def: NewOperations() : Set(OO_concept!Class) =
+	let inherited_operations : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
+	self.operations->select(op | not inherited_operations->exists(op2 | op2.name = op.name));
+
+-- inherited operations of a class, not overriden by locally defined ones
+helper context simple_OO_concept!Class
+def : InheritedOperations() : Set(OO_concept!Class) =
+	let inherited_operations : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
+	inherited_operations->select(op | not self.operations->exists(op2 | op.name = op2.name));
+
+-- inherited operations of a class that are overriden by locally defined ones
+helper context simple_OO_concept!Class
+def : OverridenOperations() : Set(OO_concept!Class) =
+	let inherited_operations : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
+	self.operations->select(op | inherited_operations->exists(op2 | op.name = op2.name));
+ 
