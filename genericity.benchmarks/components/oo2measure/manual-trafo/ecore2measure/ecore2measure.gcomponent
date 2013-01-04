@@ -1,0 +1,11 @@
+composite component ecore2measure {
+	uses "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.gcomponent"  
+	binding bindECORE = "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind"
+			
+	source concept ECORE:   "http://www.eclipse.org/emf/2002/Ecore"
+	target concept METRICS: "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/metric.ecore"
+	source model in  : ECORE   = "platform:/resource/genericity.benchmarks/components/oo2measure/models/example-ecore.ecore" 
+	target model out : METRICS = "platform:/resource/genericity.benchmarks/components/oo2measure/models/output.xmi"
+	
+	compose apply oo2measure(bindECORE(in)) -> (out)
+}
