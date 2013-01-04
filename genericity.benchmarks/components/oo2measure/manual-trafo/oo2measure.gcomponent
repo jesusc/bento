@@ -3,5 +3,5 @@ transformation component oo2measure {
 	target concept METRICS : "metric.ecore"	
 	source model oo        : OO
 	target model metrics   : METRICS	
-	definition atl "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl"  with IN : OO = oo, OUT : METRICS = metrics
+	definition atl "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl"  with IN : simple_OO_concept = oo, OUT : simple_metrics = metrics
 }
