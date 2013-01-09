@@ -8,7 +8,7 @@ binding bpmn2fd {
 	class FlowDiagram to Net	
 	class Node        to Node
 	class FlowEdge    to Edge	
-	class Task        to Task
+	class Task        to Task when APRO!Edge.allInstances()->select( e | e.source = self )->notEmpty()
 	     						           
 	feature FlowDiagram.nodes is nodes
 	feature FlowDiagram.edges is edges
@@ -16,12 +16,12 @@ binding bpmn2fd {
 	feature FlowEdge."in" is source
 	feature FlowEdge.out is target
 
-	feature Node.ins = APRO!Edge::allInstances()->select( e | e.target = self )
-	feature Node.outs = APRO!Edge::allInstances()->select( e | e.source = self )
+	feature Node.ins = APRO!Edge.allInstances()->select( e | e.target = self )
+	feature Node.outs = APRO!Edge.allInstances()->select( e | e.source = self )
 
-	feature Task.isInitial = APRO!Edge::allInstances()->select( e | e.target = self )->isEmpty()
+	feature Task.isInitial = APRO!Edge.allInstances()->select( e | e.target = self )->isEmpty()
 	    
-	class FinalTask to Task when APRO!Edge::allInstances()->select( e | e.source = self )->isEmpty()
+	class FinalTask to Task when APRO!Edge.allInstances()->select( e | e.source = self )->isEmpty()
 	
 	class ParallelSplit   to ANDSplit
 	class MultiChoice     to ORSplit
