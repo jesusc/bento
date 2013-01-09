@@ -1,0 +1,92 @@
+@namespace(uri="apromore", prefix="apromore")
+package apromore;
+
+// Meta-model taken from http://apromore.org/
+
+class CanonicalProcess {
+   attr String uri;
+   attr String version;
+   attr String author;
+   ref  Net[1..*] nets;
+   val  Net root;
+}
+
+class Net {
+   attr int ident;
+   ref  Node[1..*] nodes;
+   ref  Edge[*] edges;
+}
+
+abstract class Node {
+   attr int ident;
+   attr String name;
+   attr boolean[0..1] configurable;
+}
+
+class Edge {
+   attr int ident;
+   attr String[0..1] condition;
+   attr boolean[0..1] default;
+   ref  Node[0..1] source;
+   ref  Node[0..1] target;
+}
+
+class Work extends Node {
+      
+}
+
+class Event extends Work{
+   
+}
+
+class Message extends Event {
+      
+}
+
+class Time extends Event {
+   
+}
+
+class Task extends Work {
+   val Net[0..1] subnet;
+}
+
+class Routing extends Node{
+   
+}
+
+class Split extends Routing{
+   
+}
+
+class ORSplit extends Split{
+   
+}
+
+class XORSplit extends Split{
+   
+}
+
+class ANDSplit extends Split {
+   
+}
+
+class State extends Routing{
+   
+}
+
+class Join extends Routing{
+   
+}
+
+class ORJoin extends Join{
+   
+}
+
+class XORJoin extends Join{
+   
+}
+
+class ANDJoin extends Join{
+   
+}
