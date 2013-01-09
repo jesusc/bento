@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>genericity.benchmarks</name>
+	<name>genericity.atl.transformations</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -11,12 +11,22 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.emftext.language.gbind.resource.gbind.builder</name>
+			<name>org.eclipse.m2m.atl.adt.builder.atlBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>gbind.resource.gbind.builder</name>
+			<name>org.eclipse.stp.bpmn.validation.BatchValidationBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.ManifestBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.SchemaBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -30,18 +40,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.m2m.atl.adt.builder.atlBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
+		<nature>gts.rubytl.core.rubytlnature</nature>
+		<nature>org.eclipse.stp.bpmn.validation.BatchValidationBuildAbleNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.emftext.language.gbind.resource.gbind.nature</nature>
-		<nature>gbind.resource.gbind.nature</nature>
+		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>genericity.language.gbind.resource.nature</nature>
 		<nature>genericity.language.gcomponent.resource.gcomponent.nature</nature>
-                <nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
 	</natures>
 </projectDescription>

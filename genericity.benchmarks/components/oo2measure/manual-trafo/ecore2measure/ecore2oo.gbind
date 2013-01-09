@@ -1,0 +1,16 @@
+binding ecore2oo {  
+	concept   OO    : "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/OO_concept.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	
+    class NamedElement to ENamedElement 
+    class Package to EPackage
+    class Class to EClass
+    class Attribute to EStructuralFeature
+    class Operation to EOperation
+    
+    feature NamedElement.name is name
+    feature Package.classes = self.eClassifiers->select(c | c.oclIsKindOf(ECORE!EClass))
+    feature Class.attributes is eStructuralFeatures
+    feature Class.operations is eOperations
+    feature Class.parents is eSuperTypes
+}
