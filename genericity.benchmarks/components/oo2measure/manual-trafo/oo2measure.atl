@@ -10,9 +10,26 @@ rule Package2MeasureSet {
     do {
 		set.name    <- 'package ' + pck.name;
 		set.metrics <- thisModule.Metric('AIF', pck.AIF());
-		set.metrics <- thisModule.Metric('OIF', pck.OIF());
+		set.metrics <- thisModule.Metric('ANA', pck.ANA());
+		set.metrics <- thisModule.Metric('AWI', pck.AWI());
 		set.metrics <- thisModule.Metric('BPF', pck.BPF());
 		set.metrics <- thisModule.Metric('IIF', pck.IIF());
+		set.metrics <- thisModule.Metric('NAC', pck.NAC());
+		set.metrics <- thisModule.Metric('NIC', pck.NIC());
+		set.metrics <- thisModule.Metric('NLC', pck.NLC());
+		set.metrics <- thisModule.Metric('NSI', pck.NSI());
+		set.metrics <- thisModule.Metric('OIF', pck.OIF());
+    }
+}
+
+-- Each class is transformed into a measure set
+rule Class2MeasureSet {
+	from class : simple_OO_concept!Class
+	to   set : simple_metrics!MetricsSet 
+    do {
+		set.name    <- 'class ' + class.name;
+		set.metrics <- thisModule.Metric('NOA', class.NOA());
+		set.metrics <- thisModule.Metric('NOC', class.NOC());
     }
 }
 
@@ -29,6 +46,7 @@ rule Metric (name:String, value:Integer) {
 -- Quotient between the number of inherited attributes for all classes of 
 -- the package and the number of available attributes (locally defined plus 
 -- inherited) for all classes of the package.
+-- @uses Package, Package.classes, Class, Class.attributes, Class.parents, Attribute, Attribute.name
 helper context simple_OO_concept!Package
 def : AIF() : Real =
 	self.classes->collect(c | c.InheritedAttributes()->size())->sum() / -- # inherited attributes for all classes /
@@ -38,6 +56,7 @@ def : AIF() : Real =
 -- Quotient between the number of inherited operations for all classes of 
 -- the package and the number of available operations (locally defined plus 
 -- inherited) for all classes of the package.	
+-- @uses Package, Package.classes, Class, Class.operations, Class.parents, Operation, Operation.name
 helper context simple_OO_concept!Package
 def : OIF() : Real =
 	self.classes->collect(c | c.InheritedOperations()->size())->sum() / -- # inherited operations for all classes /
@@ -59,19 +78,270 @@ def : OIF() : Real =
 -- Quotient between the actual number of possible different polymorphic 
 -- situations within the current package and the maximum number of possible 
 -- distinct polymorphic situations (due to inheritance).
+-- @uses Package, Package.classes, Class, Class.operations, Class.parents, Operation, Operation.name
 helper context simple_OO_concept!Package
 def : BPF() : Real =
 	self.classes->collect(c | c.OverridenOperations()->size())->sum() / -- # total operations overriden /
 	self.classes->collect(c | c.AllOperations()->size())->sum()       ; -- # total operations available
 	
+-- CCF - Class Coupling Factor
+-- Quotient between the actual number of coupled class-pairs within the 
+-- package and the maximum possible number of class-pair couplings in the 
+-- package. This coupling is the one not imputable to inheritance.
+-- UNIMPLEMENTED yet
+
+-- ICF - Internal Coupling Factor
+-- Quotient between the number of coupling links where both the client 
+-- and supplier classes belong to the current package and the total number 
+-- of coupling links originating in the current package.
+-- UNIMPLEMENTED YET
+	
 -- IIF - Internal Inheritance Factor
 -- Quotient between the number of inheritance links where both the child 
 -- and parent classes belong to the current package and the total number 
 -- of inheritance links originating in the package.
+-- @uses Package, Package.classes, Class, Class.parents
 helper context simple_OO_concept!Package
 def : IIF() : Real =
 	self.classes->collect(c | c.parents->size())->sum() /                                       -- # inh links where both the child and parent classes are in the package
 	self.classes->collect(c | c.parents->select(p | self.classes->contains(p))->size())->sum(); -- # inh links where the child class is in the package
+	
+-- AHEF - Attributes Hiding Effectiveness Factor
+-- Quotient between the cumulative number of the package classes that do 
+-- access the package attributes and the cumulative number of the package 
+-- classes that can access the package attributes.
+-- UNIMPLEMENTED YET
+
+-- OHEF - Operations Hiding Effectiveness Factor
+-- Quotient between the cumulative number of the package classes that do 
+-- access the package operations and the cumulative number of the package 
+-- classes that can access the package operations.
+-- UNIMPLEMENTED YET
+
+-- DIT - Depth of Inheritance Tree
+-- The length of the longest path of inheritance from the current class to 
+-- the root of the tree.
+-- UNIMPLEMENTED YET
+
+-- NOC - Number Of Children
+-- The number of classes that inherit directly from the current class.
+-- @uses Class, Class.parents
+helper context simple_OO_concept!Class
+def : NOC() : Real =
+	self.Children()->size();
+	
+-- CBO - Coupling Between Objects
+-- The number of other classes that are coupled to the current one. Two 
+-- classes are coupled when references declared in one class use references 
+-- or instance variables defined by the other class. Or used as a type or 
+-- in reference by other classes.
+-- UNIMPLEMENTED YET
+
+-- RFC - Response for a Class
+-- The number of methods in the current class that might respond to a 
+-- message received by its object, including methods both inside and 
+-- outside of this class.
+-- UNIMPLEMENTED YET
+
+-- SIZE2
+-- Number of local attributes and operations defined in the class. The 
+-- metric SIZE 1 is code dependant so not adapted to our problem.
+-- UNIMPLEMENTED YET
+
+-- DSC - Design Size in Classes
+-- Count of the total number of classes in the design.
+-- UNIMPLEMENTED YET
+
+-- NOH - Number of Hierarchies
+-- Count of the number of class hierarchies in the design.
+-- UNIMPLEMENTED YET
+
+-- NIC - Number of Independent Classes
+-- Count of the number of Classes that are not inherited by any Class in the package.
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : NIC() : Real =
+	self.classes->select(c | c.parents->isEmpty() and c.Children()->isEmpty())->size();
+
+-- NSI - Number of Single Inheritance
+-- Number of classes (sub classes) that use inheritance in the design.
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : NSI() : Real =
+	self.classes->select(c | c.parents->size()=1)->size();
+
+-- NNC - Number of Internal Classes
+-- Count of the number of internal classes defined for creating 
+-- generalization-specialization structures in class hierarchies of the design.
+-- UNIMPLEMENTED YET
+
+-- NAC - Number of Abstract Classes
+-- Count of the number of classes that have been defined purely for organizing 
+-- information in the design.
+-- @uses Package, Package.classes, Class, Class.isAbstract
+helper context simple_OO_concept!Package
+def : NAC() : Real =
+	self.classes->select(c | c.isAbstract=true)->size();
+
+-- NLC - Number of Leaf Classes
+-- Count of the number of leaf classes in the hierarchies of the package.
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : NLC() : Real =
+	self.classes->select(c | c.Children()->isEmpty())->size();
+
+-- ADI - Average Depth of Inheritance
+-- The average depth of inheritance of classes in the design. It is computed 
+-- by dividing the summation of maximum path lengths to all classes by the 
+-- number of classes. The path length for a class is the number of edges from 
+-- the root to the class in an inheritance tree representation.
+-- UNIMPLEMENTED YET
+
+-- AWI - Average Width of Inheritance
+-- The average number of children per class in the design.
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : AWI() : Real =
+	self.classes->collect(c | c.NOC())->sum() / self.classes->size();
+
+-- ANA - Average Number of Ancestors
+-- The average number of classes from which a class inherits information.
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : ANA() : Real =
+	self.classes->collect(c | c.NOA())->sum() / self.classes->size();
+
+-- MFA - Measure of Functional Abstraction
+-- The ratio of the number of methods inherited by a class to the total 
+-- number of methods accessible by members in the class.
+-- UNIMPLEMENTED YET
+
+-- MAA - Measure of Attribute Abstraction
+-- The ratio of the number of attributes inherited by a class to the total 
+-- number of attributes in the class.
+-- UNIMPLEMENTED YET
+
+-- MAT - Measure of Abstraction
+-- The average of functional and attribute abstraction measures.
+-- UNIMPLEMENTED YET
+
+-- MOA - Measure of Aggregation
+-- Count of the number of data declarations whose types are user defined 
+-- classes.
+-- UNIMPLEMENTED YET
+
+-- MRM - Modeled Relationship Measure
+-- Measure of the total number of attribute and parameter based relationships 
+-- in a class.
+-- UNIMPLEMENTED YET
+
+-- DAM - Data Access Metric
+-- The ratio of the number of private attributes to the total number of 
+-- attributes declared in a class.
+-- UNIMPLEMENTED YET
+
+-- OAM - Operation Access Metric
+-- The ratio of the number of public methods to the total number of methods 
+-- declared in the class.
+-- UNIMPLEMENTED YET
+
+-- MAM - Member Access Metric
+-- This metric computes the access to all the members (attributes and methods) 
+-- of a class.
+-- UNIMPLEMENTED YET
+
+-- NOA - Number of Ancestors
+-- Counts the number of distinct classes which a class inherits.
+-- @uses Class, Class.parents
+helper context simple_OO_concept!Class
+def : NOA() : Real =
+	self.Ancestors()->size();
+
+-- NOM - Number of Methods
+-- Count of all the methods defined in a class.
+-- UNIMPLEMENTED YET
+
+-- CIS - Class Interface Size
+-- Number of public methods in a class.
+-- UNIMPLEMENTED, as visibility is not present in metamodels like km3 or ecore
+
+-- NPT - Number of Unique Parameter Types
+-- Number of different parameter types used in the methods of the class.
+-- UNIMPLEMENTED YET
+
+-- NPM - Number of Parameters per Method
+-- Average of the number of parameters per method in the class. Computed by 
+-- summing the parameters of all methods and dividing by the number of methods 
+-- in the class.
+-- UNIMPLEMENTED YET
+
+-- NOD - Number of Attributes
+-- Number of attributes in the class.
+-- UNIMPLEMENTED YET
+
+-- NAD - Number of Abstract Data Types
+-- Number of user defined objects used as attributes in the class and which 
+-- are necessary to instantiate an object instance of the (aggregate) class.
+-- UNIMPLEMENTED YET
+
+-- NPA - Number of Public Attributes
+-- Number of attributes that are declared as public in the class.
+-- UNIMPLEMENTED YET
+
+-- CSM - Class Size Metric
+-- Sum of the number of methods and attributes in the class.
+-- UNIMPLEMENTED YET
+
+-- CAM - Cohesion Among Methods of Class
+-- Computes the relatedness among methods of the class based upon the 
+-- parameter list of the methods. The metrics is computed using the 
+-- summation of the intersection of parameters of a method with the 
+-- maximum independent set of all parameter types in the class.
+-- UNIMPLEMENTED YET
+
+-- DCC - Direct Class Coupling
+-- Count of the different number of classes that a class is directly related 
+-- to. The metric includes classes that are directly related by attribute 
+-- declarations and message passing (parameters) in methods.
+-- UNIMPLEMENTED YET
+
+-- MCC - Maximum Class Coupling
+-- This metric not only includes classes that are directly related to a class 
+-- by attributes and methods, but also classes that are indirectly related 
+-- through the directly related classes.
+-- UNIMPLEMENTED YET
+
+-- DAC - Direct Attribute Base Coupling
+-- This metric is a direct count of the number of different class types that 
+-- are declared as attribute references inside a class.
+-- UNIMPLEMENTED YET
+
+-- DPC - Direct Parameter Based Coupling
+-- Number of class object types that are required directly for a message 
+-- passing (parameters) to methods in the class.
+-- UNIMPLEMENTED YET
+
+-- MPC - Maximum Parameter Based Coupling
+-- Number of Class object types that are required directly and indirectly 
+-- for message passing (parameters) in the Class.
+-- UNIMPLEMENTED YET
+
+-- CCD - Class Complexity Based on Data
+-- Computes complexity based upon the number of components (attributes) that 
+-- are defined in the class. All component declarations are resolved to the 
+-- basic primitives (integers, doubles and characters). The metric value is 
+-- a count of the number of primitives.
+-- UNIMPLEMENTED YET
+
+-- CCP - Class Complexity Based on Method Parameters
+-- Estimates complexity based upon the number of parameters required to call 
+-- methods of the Class. Inherited method parameters are also included in the 
+-- computation of the metric value.
+-- UNIMPLEMENTED YET
+
+-- CCM - Class Complexity Based on Members
+-- This metric is an aggregate of the data and method parameter complexities.
+-- UNIMPLEMENTED YET
 
 -- -------------------------------------------------------------------------
 -- AUXILIARY HELPERS
@@ -79,59 +349,64 @@ def : IIF() : Real =
 
 -- ancestors of a class, direct and indirect
 helper context simple_OO_concept!Class
-def : Ancestors() : Set(OO_concept!Class) =
+def : Ancestors() : Set(simple_OO_concept!Class) =
 	if self.parents->isEmpty()
 	then Set{}
-	else self.parents->union(self.parents->collect(p | p.Ancestors())->flatten())
+	else self.parents->union(self.parents->collect(p | p.Ancestors())->flatten())->asSet()
 	endif;
+
+-- direct children of a class
+helper context simple_OO_concept!Class
+def : Children() : Set(simple_OO_concept!Class) =
+	simple_OO_concept!Class.allInstances()->select(c | c.parents->includes(self));
 
 -- ***** ATTRIBUTES *****
 
 -- all attributes of a class (local and inherited)
 helper context simple_OO_concept!Class
-def : AllAttributes() : Set(OO_concept!Class) =
+def : AllAttributes() : Set(simple_OO_concept!Class) =
     self.attributes->union(self.InheritedAttributes());
 
 -- attributes defined in the class, that do not override inherited ones
 helper context simple_OO_concept!Class
-def: NewAttributes() : Set(OO_concept!Class) =
-	let inherited_attributes : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+def: NewAttributes() : Set(simple_OO_concept!Class) =
+	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | not inherited_attributes->exists(att2 | att2.name = att.name));
 
 -- inherited attributes of a class, not overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : InheritedAttributes() : Set(OO_concept!Class) =
-	let inherited_attributes : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+def : InheritedAttributes() : Set(simple_OO_concept!Class) =
+	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	inherited_attributes->select(att | not self.attributes->exists(att2 | att.name = att2.name));
 
 -- inherited operations of a class that are overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : OverridenAttributes() : Set(OO_concept!Class) =
-	let inherited_attributes : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+def : OverridenAttributes() : Set(simple_OO_concept!Class) =
+	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | inherited_attributes->exists(att2 | att.name = att2.name));
 
 -- ***** OPERATIONS *****
 
 -- all operations of a class (local and inherited)
 helper context simple_OO_concept!Class
-def : AllOperations() : Set(OO_concept!Class) =
+def : AllOperations() : Set(simple_OO_concept!Class) =
     self.operations->union(self.InheritedOperations());
 
 -- operations defined in the class, that do not override inherited ones
 helper context simple_OO_concept!Class
-def: NewOperations() : Set(OO_concept!Class) =
-	let inherited_operations : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
+def: NewOperations() : Set(simple_OO_concept!Class) =
+	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	self.operations->select(op | not inherited_operations->exists(op2 | op2.name = op.name));
 
 -- inherited operations of a class, not overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : InheritedOperations() : Set(OO_concept!Class) =
-	let inherited_operations : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
+def : InheritedOperations() : Set(simple_OO_concept!Class) =
+	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	inherited_operations->select(op | not self.operations->exists(op2 | op.name = op2.name));
 
 -- inherited operations of a class that are overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : OverridenOperations() : Set(OO_concept!Class) =
-	let inherited_operations : Set(OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
+def : OverridenOperations() : Set(simple_OO_concept!Class) =
+	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	self.operations->select(op | inherited_operations->exists(op2 | op.name = op2.name));
  

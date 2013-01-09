@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
 <simple_OO_concept:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simple_OO_concept="simple_OO_concept" xmi:id="_6KIi8FUKEeKZZP8Ms3f1Ng" name="org">
-  <classes xmi:id="_7uQoIFUKEeKZZP8Ms3f1Ng">
+  <classes xmi:id="_7uQoIFUKEeKZZP8Ms3f1Ng" name="padre" isAbstract="true">
     <attributes xmi:id="_BfGlYFULEeKZZP8Ms3f1Ng" name="a1"/>
     <operations xmi:id="_w5MacFW3EeKcIp6rwqvICw" name="op1"/>
     <operations xmi:id="_MvsnQFW4EeKcIp6rwqvICw" name="op4"/>
   </classes>
-  <classes xmi:id="_9RYAsFUKEeKZZP8Ms3f1Ng" parents="_7uQoIFUKEeKZZP8Ms3f1Ng">
+  <classes xmi:id="_9RYAsFUKEeKZZP8Ms3f1Ng" name="hija 1" parents="_7uQoIFUKEeKZZP8Ms3f1Ng">
     <attributes xmi:id="_0vN6sFXAEeKcIp6rwqvICw" name="a1"/>
     <operations xmi:id="_TnJg4VWwEeKcIp6rwqvICw" name="op1"/>
   </classes>
-  <classes xmi:id="_9kLA4FUKEeKZZP8Ms3f1Ng" parents="_7uQoIFUKEeKZZP8Ms3f1Ng">
+  <classes xmi:id="_9kLA4FUKEeKZZP8Ms3f1Ng" name="hija 2" parents="_7uQoIFUKEeKZZP8Ms3f1Ng">
     <operations xmi:id="_UEVMIFWwEeKcIp6rwqvICw" name="op2"/>
   </classes>
-  <classes xmi:id="_94WhIFUKEeKZZP8Ms3f1Ng" parents="_7uQoIFUKEeKZZP8Ms3f1Ng">
+  <classes xmi:id="_94WhIFUKEeKZZP8Ms3f1Ng" name="hija 3" parents="_7uQoIFUKEeKZZP8Ms3f1Ng">
     <operations xmi:id="_UdghIFWwEeKcIp6rwqvICw" name="op3"/>
   </classes>
+  <classes xmi:id="_gfwd8FqFEeKzroB2XgT6mA" name="nieta" parents="_9RYAsFUKEeKZZP8Ms3f1Ng"/>
+  <classes xmi:id="_UMTdYFqHEeKzroB2XgT6mA" name="vecina"/>
 </simple_OO_concept:Package>
