@@ -15,10 +15,10 @@ Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: genericity.language.gcomponent.resource.gcomponent,
-  genericity.language.gcomponent.resource.gcomponent.analysis,
-  genericity.language.gcomponent.resource.gcomponent.mopp,
-  genericity.language.gcomponent.resource.gcomponent.debug,
-  genericity.language.gcomponent.resource.gcomponent.launch,
-  genericity.language.gcomponent.resource.gcomponent.grammar,
-  genericity.language.gcomponent.resource.gcomponent.util
+ genericity.language.gcomponent.resource.gcomponent.analysis,
+ genericity.language.gcomponent.resource.gcomponent.debug,
+ genericity.language.gcomponent.resource.gcomponent.grammar,
+ genericity.language.gcomponent.resource.gcomponent.launch,
+ genericity.language.gcomponent.resource.gcomponent.mopp,
+ genericity.language.gcomponent.resource.gcomponent.util
 Bundle-Activator: genericity.language.gcomponent.resource.gcomponent.mopp.GcomponentPlugin
