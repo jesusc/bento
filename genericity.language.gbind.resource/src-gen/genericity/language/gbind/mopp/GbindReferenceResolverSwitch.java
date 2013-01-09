@@ -19,6 +19,9 @@ public class GbindReferenceResolverSwitch implements genericity.language.gbind.I
 	protected genericity.language.gbind.analysis.OclModelElementModelReferenceResolver oclModelElementModelReferenceResolver = new genericity.language.gbind.analysis.OclModelElementModelReferenceResolver();
 	protected genericity.language.gbind.analysis.ClassBindingConceptReferenceResolver classBindingConceptReferenceResolver = new genericity.language.gbind.analysis.ClassBindingConceptReferenceResolver();
 	protected genericity.language.gbind.analysis.ClassBindingConcreteReferenceResolver classBindingConcreteReferenceResolver = new genericity.language.gbind.analysis.ClassBindingConcreteReferenceResolver();
+	protected genericity.language.gbind.analysis.IntermediateClassBindingConceptReferenceResolver intermediateClassBindingConceptReferenceResolver = new genericity.language.gbind.analysis.IntermediateClassBindingConceptReferenceResolver();
+	protected genericity.language.gbind.analysis.IntermediateClassBindingConcreteSourceReferenceResolver intermediateClassBindingConcreteSourceReferenceResolver = new genericity.language.gbind.analysis.IntermediateClassBindingConcreteSourceReferenceResolver();
+	protected genericity.language.gbind.analysis.IntermediateClassBindingConcreteTargetReferenceResolver intermediateClassBindingConcreteTargetReferenceResolver = new genericity.language.gbind.analysis.IntermediateClassBindingConcreteTargetReferenceResolver();
 	protected genericity.language.gbind.analysis.BaseFeatureBindingConceptClassReferenceResolver baseFeatureBindingConceptClassReferenceResolver = new genericity.language.gbind.analysis.BaseFeatureBindingConceptClassReferenceResolver();
 	protected genericity.language.gbind.analysis.BaseFeatureBindingQualifierReferenceResolver baseFeatureBindingQualifierReferenceResolver = new genericity.language.gbind.analysis.BaseFeatureBindingQualifierReferenceResolver();
 	protected genericity.language.gbind.analysis.ConceptHelperContextClassReferenceResolver conceptHelperContextClassReferenceResolver = new genericity.language.gbind.analysis.ConceptHelperContextClassReferenceResolver();
@@ -47,6 +50,18 @@ public class GbindReferenceResolverSwitch implements genericity.language.gbind.I
 	
 	public genericity.language.gbind.IGbindReferenceResolver<gbind.dsl.ClassBinding, gbind.dsl.ConcreteMetaclass> getClassBindingConcreteReferenceResolver() {
 		return getResolverChain(gbind.dsl.DslPackage.eINSTANCE.getClassBinding_Concrete(), classBindingConcreteReferenceResolver);
+	}
+	
+	public genericity.language.gbind.IGbindReferenceResolver<gbind.dsl.IntermediateClassBinding, gbind.dsl.ConceptMetaclass> getIntermediateClassBindingConceptReferenceResolver() {
+		return getResolverChain(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding_Concept(), intermediateClassBindingConceptReferenceResolver);
+	}
+	
+	public genericity.language.gbind.IGbindReferenceResolver<gbind.dsl.IntermediateClassBinding, gbind.dsl.ConcreteMetaclass> getIntermediateClassBindingConcreteSourceReferenceResolver() {
+		return getResolverChain(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding_ConcreteSource(), intermediateClassBindingConcreteSourceReferenceResolver);
+	}
+	
+	public genericity.language.gbind.IGbindReferenceResolver<gbind.dsl.IntermediateClassBinding, gbind.dsl.ConcreteMetaclass> getIntermediateClassBindingConcreteTargetReferenceResolver() {
+		return getResolverChain(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding_ConcreteTarget(), intermediateClassBindingConcreteTargetReferenceResolver);
 	}
 	
 	public genericity.language.gbind.IGbindReferenceResolver<gbind.dsl.BaseFeatureBinding, gbind.dsl.ConceptMetaclass> getBaseFeatureBindingConceptClassReferenceResolver() {
@@ -80,6 +95,9 @@ public class GbindReferenceResolverSwitch implements genericity.language.gbind.I
 		oclModelElementModelReferenceResolver.setOptions(options);
 		classBindingConceptReferenceResolver.setOptions(options);
 		classBindingConcreteReferenceResolver.setOptions(options);
+		intermediateClassBindingConceptReferenceResolver.setOptions(options);
+		intermediateClassBindingConcreteSourceReferenceResolver.setOptions(options);
+		intermediateClassBindingConcreteTargetReferenceResolver.setOptions(options);
 		baseFeatureBindingConceptClassReferenceResolver.setOptions(options);
 		baseFeatureBindingQualifierReferenceResolver.setOptions(options);
 		conceptHelperContextClassReferenceResolver.setOptions(options);
@@ -137,6 +155,30 @@ public class GbindReferenceResolverSwitch implements genericity.language.gbind.I
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("concrete")) {
 				classBindingConcreteReferenceResolver.resolve(identifier, (gbind.dsl.ClassBinding) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding().isInstance(container)) {
+			GbindFuzzyResolveResult<gbind.dsl.ConceptMetaclass> frr = new GbindFuzzyResolveResult<gbind.dsl.ConceptMetaclass>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("concept")) {
+				intermediateClassBindingConceptReferenceResolver.resolve(identifier, (gbind.dsl.IntermediateClassBinding) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding().isInstance(container)) {
+			GbindFuzzyResolveResult<gbind.dsl.ConcreteMetaclass> frr = new GbindFuzzyResolveResult<gbind.dsl.ConcreteMetaclass>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("concreteSource")) {
+				intermediateClassBindingConcreteSourceReferenceResolver.resolve(identifier, (gbind.dsl.IntermediateClassBinding) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding().isInstance(container)) {
+			GbindFuzzyResolveResult<gbind.dsl.ConcreteMetaclass> frr = new GbindFuzzyResolveResult<gbind.dsl.ConcreteMetaclass>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("concreteTarget")) {
+				intermediateClassBindingConcreteTargetReferenceResolver.resolve(identifier, (gbind.dsl.IntermediateClassBinding) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (gbind.dsl.DslPackage.eINSTANCE.getBaseFeatureBinding().isInstance(container)) {
@@ -199,6 +241,15 @@ public class GbindReferenceResolverSwitch implements genericity.language.gbind.I
 		}
 		if (reference == gbind.dsl.DslPackage.eINSTANCE.getClassBinding_Concrete()) {
 			return getResolverChain(reference, classBindingConcreteReferenceResolver);
+		}
+		if (reference == gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding_Concept()) {
+			return getResolverChain(reference, intermediateClassBindingConceptReferenceResolver);
+		}
+		if (reference == gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding_ConcreteSource()) {
+			return getResolverChain(reference, intermediateClassBindingConcreteSourceReferenceResolver);
+		}
+		if (reference == gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding_ConcreteTarget()) {
+			return getResolverChain(reference, intermediateClassBindingConcreteTargetReferenceResolver);
 		}
 		if (reference == gbind.dsl.DslPackage.eINSTANCE.getBaseFeatureBinding_ConceptClass()) {
 			return getResolverChain(reference, baseFeatureBindingConceptClassReferenceResolver);

@@ -123,6 +123,13 @@ public class DslSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DslPackage.INTERMEDIATE_CLASS_BINDING: {
+				IntermediateClassBinding intermediateClassBinding = (IntermediateClassBinding)theEObject;
+				T result = caseIntermediateClassBinding(intermediateClassBinding);
+				if (result == null) result = caseConceptBinding(intermediateClassBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DslPackage.BASE_FEATURE_BINDING: {
 				BaseFeatureBinding baseFeatureBinding = (BaseFeatureBinding)theEObject;
 				T result = caseBaseFeatureBinding(baseFeatureBinding);
@@ -272,6 +279,21 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassBinding(ClassBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Intermediate Class Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Intermediate Class Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntermediateClassBinding(IntermediateClassBinding object) {
 		return null;
 	}
 

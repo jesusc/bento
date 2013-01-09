@@ -20,3 +20,4 @@ Bundle-ClassPath: atl.jar,
  jesus/usr/qool/workspace/org.eclectic.javaflow/lib/commons-logging-api-1.1.1.jar
 Export-Package: eclectic,
  genericity.compiler.atl
+Require-Bundle: genericity.language.gbind;bundle-version="1.0.0"

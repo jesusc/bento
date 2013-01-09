@@ -80,6 +80,7 @@ public class GbindSyntaxCoverageInformationProvider {
 			gbind.dsl.DslPackage.eINSTANCE.getBindingModel(),
 			gbind.dsl.DslPackage.eINSTANCE.getMetamodelDeclaration(),
 			gbind.dsl.DslPackage.eINSTANCE.getClassBinding(),
+			gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(),
 			gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(),
 			gbind.dsl.DslPackage.eINSTANCE.getRenamingFeatureBinding(),
 			gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(),

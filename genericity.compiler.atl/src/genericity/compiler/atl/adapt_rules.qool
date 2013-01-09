@@ -18,6 +18,11 @@ model matches
   	ref concreteClass : gbind!ConcreteMetaclass
   end
 
+  class MatchedAtlMatchedRule_IntermediateClass
+	ref rule         : atl!MatchedRule
+	ref classBinding : gbind!IntermediateClassBinding
+  end
+
   class MatchedHelper
 	ref helper        : atl!Helper
 	ref classBinding  : gbind!ClassBinding
@@ -31,7 +36,9 @@ model queue mHelper      : atl!Helper
 model queue mMatchedRule : atl!MatchedRule
 
 // GBind elements
-model queue mClassBinding           : gbind!ClassBinding
+model queue mClassBinding             : gbind!ClassBinding
+model queue mIntermediateClassBinding : gbind!IntermediateClassBinding
+
 //model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
 //model queue mOclFeatureBinding      : gbind!OclFeatureBinding
 
@@ -39,6 +46,7 @@ model queue mClassBinding           : gbind!ClassBinding
 local queue pMatchedAtlMatchedRule1 : matches!MatchedAtlMatchedRule
 local queue pMatchedAtlMatchedRuleN : matches!MatchedAtlMatchedRule
 local queue pMatchedAtlMatchedRuleNone : matches!MatchedAtlMatchedRule
+local queue pMatchedAtlMatchedRuleIntermediateClass : matches!MatchedAtlMatchedRule_IntermediateClass
 local queue pMatchedHelper1         : matches!MatchedHelper
 local queue pMatchedHelperN         : matches!MatchedHelper
 local queue pMatchedHelperNone      : matches!MatchedHelper
@@ -81,6 +89,17 @@ segment findModuleElements
 			    }
 			})			
 		end
+
+		forall icb1 from mIntermediateClassBinding
+			in_pattern_element.type.^model.name.eq(current_mm).if_true {
+			    icb1.concept.name.eq(in_pattern_element.type.name).if_true {
+			    	mi = matches!MatchedAtlMatchedRule_IntermediateClass.new
+			    	mi.rule         = mr
+			    	mi.classBinding = icb1
+				   	emit mi to pMatchedAtlMatchedRuleIntermediateClass
+				}
+			}
+		end
 	end
 
 	forall h from mHelper
@@ -115,9 +134,7 @@ segment findModuleElements
 			}
 		end
 	end
-	//forall h from mHelper
-	
-	//end
+
 
 end
 
@@ -171,6 +188,44 @@ segment RenameRuleN
 	end
 end
 
+segment AdaptRule_IntermediateClass
+	forall mri from pMatchedAtlMatchedRuleIntermediateClass
+		rule = mri.rule
+		in_pattern = rule.inPattern
+		first_pattern = in_pattern.elements.first
+		
+		rename_first_type = {
+			first_ocl_type = first_pattern.type 
+			first_ocl_type.name = mri.classBinding.concreteSource.name
+		}.call
+		
+		create_second_pattern = {
+			second_ocl_type = atl!OclModelElement.new
+			second_ocl_type.name = mri.classBinding.concreteTarget.name
+			second_ocl_type.^model = first_pattern.type.^model
+
+			second_pattern = atl!SimpleInPatternElement.new
+        	second_pattern.varName = first_pattern.varName.concat("__2")
+        	second_pattern.type = second_ocl_type
+
+			in_pattern.elements = second_pattern
+		}.call
+		
+		
+		
+		/*
+		 * 	  ref ConceptMetaclass[1] concept;
+	  ref ConcreteMetaclass[1] concreteSource;
+	  ref ConcreteMetaclass[1] concreteTarget;
+	  attr String[1] referenceName;
+		 */
+		
+		
+		x = {
+		"".println("Created rule [".concat(mri.rule.name).concat("]: Intermediate class"))
+		}.call
+	end
+end
 
 segment RenameHelper1
 	forall m from pMatchedHelper1

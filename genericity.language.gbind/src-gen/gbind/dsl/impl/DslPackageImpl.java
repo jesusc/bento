@@ -16,6 +16,7 @@ import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.DslFactory;
 import gbind.dsl.DslPackage;
+import gbind.dsl.IntermediateClassBinding;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.Metaclass;
 import gbind.dsl.MetamodelDeclaration;
@@ -88,6 +89,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass classBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intermediateClassBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,6 +408,60 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getIntermediateClassBinding() {
+		return intermediateClassBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntermediateClassBinding_Concept() {
+		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntermediateClassBinding_ConcreteSource() {
+		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntermediateClassBinding_ConcreteReferenceSource() {
+		return (EAttribute)intermediateClassBindingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntermediateClassBinding_ConcreteTarget() {
+		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntermediateClassBinding_ConcreteReferenceTarget() {
+		return (EAttribute)intermediateClassBindingEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBaseFeatureBinding() {
 		return baseFeatureBindingEClass;
 	}
@@ -614,6 +676,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		createEReference(classBindingEClass, CLASS_BINDING__CONCRETE);
 		createEReference(classBindingEClass, CLASS_BINDING__WHEN_CLAUSE);
 
+		intermediateClassBindingEClass = createEClass(INTERMEDIATE_CLASS_BINDING);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCEPT);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE);
+		createEAttribute(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET);
+		createEAttribute(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET);
+
 		baseFeatureBindingEClass = createEClass(BASE_FEATURE_BINDING);
 		createEAttribute(baseFeatureBindingEClass, BASE_FEATURE_BINDING__CONCEPT_FEATURE);
 		createEReference(baseFeatureBindingEClass, BASE_FEATURE_BINDING__CONCEPT_CLASS);
@@ -674,6 +743,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		conceptMetaclassEClass.getESuperTypes().add(this.getMetaclass());
 		concreteMetaclassEClass.getESuperTypes().add(this.getMetaclass());
 		classBindingEClass.getESuperTypes().add(this.getConceptBinding());
+		intermediateClassBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		baseFeatureBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		renamingFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
 		oclFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
@@ -709,6 +779,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		initEReference(getClassBinding_Concept(), this.getConceptMetaclass(), null, "concept", null, 1, 1, ClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassBinding_Concrete(), this.getConcreteMetaclass(), null, "concrete", null, 1, -1, ClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassBinding_WhenClause(), theSimpleoclPackage.getOclExpression(), null, "whenClause", null, 1, 1, ClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(intermediateClassBindingEClass, IntermediateClassBinding.class, "IntermediateClassBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIntermediateClassBinding_Concept(), this.getConceptMetaclass(), null, "concept", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateClassBinding_ConcreteSource(), this.getConcreteMetaclass(), null, "concreteSource", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntermediateClassBinding_ConcreteReferenceSource(), ecorePackage.getEString(), "concreteReferenceSource", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateClassBinding_ConcreteTarget(), this.getConcreteMetaclass(), null, "concreteTarget", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntermediateClassBinding_ConcreteReferenceTarget(), ecorePackage.getEString(), "concreteReferenceTarget", null, 0, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseFeatureBindingEClass, BaseFeatureBinding.class, "BaseFeatureBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBaseFeatureBinding_ConceptFeature(), ecorePackage.getEString(), "conceptFeature", null, 1, 1, BaseFeatureBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

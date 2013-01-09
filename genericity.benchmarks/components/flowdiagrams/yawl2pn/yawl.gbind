@@ -2,8 +2,8 @@ binding epc {
 	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
 	metamodel YAWL : "platform:/resource/genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.ecore"
 
-    -- PROBLEMA 1: no podemos mapear FLowEdge en el concepto, a la asociación "flowsInto/flowsOutOf" del meta-modelo (no soportamos la heterogeneidad clase->asociación)
-    -- PROBLEMA 2: un mismo objeto puede ser JOIN y SPLIT a la vez, lo que haría que hubiera dos reglas aplicables para el objeto	
+    -- PROBLEMA 1: no podemos mapear FLowEdge en el concepto, a la asociaciï¿½n "flowsInto/flowsOutOf" del meta-modelo (no soportamos la heterogeneidad clase->asociaciï¿½n)
+    -- PROBLEMA 2: un mismo objeto puede ser JOIN y SPLIT a la vez, lo que harï¿½a que hubiera dos reglas aplicables para el objeto	
 	
 	class FlowDiagram     to Decomposition -- it can also be Specification 
 	class Node            to ProcessControlElement
@@ -14,7 +14,14 @@ binding epc {
 	class ExclusiveChoice to Task when self.splitType = #XOR
 	class SimpleMerge     to Task when self.joinType = #XOR  
 	class MultiChoice     to Task when self.splitType = #OR 
-	class FlowEdge        to None -- heterogeneidad clase->asociacion no soportada -- 
+	class FlowEdge 		  to None
+	
+	-- class FlowEdge        to ProcessControlElement.flowsInto : ProcessControlElement.flowsOut
+	-- feature FlowEdge[ProcessControlElement]."in" = self.flowsInto
+	-- feature FlowEdge[ProcessControlElement].out = self.flowsOut
+	-- Must be qualified (in case the association ends are of different types)
+	
+	-- heterogeneidad clase->asociacion no soportada -- 
 	
 	feature FlowDiagram.nodes is processControlElements 
 	feature FlowDiagram.edges = Sequence{} -- heterogeneidad clase->asociacion no soportada --

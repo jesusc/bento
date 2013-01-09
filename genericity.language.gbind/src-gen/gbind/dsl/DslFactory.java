@@ -71,6 +71,15 @@ public interface DslFactory extends EFactory {
 	ClassBinding createClassBinding();
 
 	/**
+	 * Returns a new object of class '<em>Intermediate Class Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Intermediate Class Binding</em>'.
+	 * @generated
+	 */
+	IntermediateClassBinding createIntermediateClassBinding();
+
+	/**
 	 * Returns a new object of class '<em>Base Feature Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
