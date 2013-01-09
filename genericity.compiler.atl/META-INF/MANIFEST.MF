@@ -20,3 +20,9 @@ Bundle-ClassPath: atl.jar,
  jesus/usr/qool/workspace/org.eclectic.javaflow/lib/commons-logging-api-1.1.1.jar
 Export-Package: eclectic,
  genericity.compiler.atl
+Import-Package: eclectic,
+ org.eclectic.idc.datatypes,
+ org.eclectic.idc.jvm.runtime,
+ org.eclectic.modeling.emf,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource.impl

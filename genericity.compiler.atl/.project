@@ -3,6 +3,7 @@
 	<name>genericity.compiler.atl</name>
 	<comment></comment>
 	<projects>
+		<project>org.eclectic.idc</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
