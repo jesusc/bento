@@ -13,8 +13,8 @@ class CanonicalProcess {
 
 class Net {
    attr int ident;
-   ref  Node[1..*] nodes;
-   ref  Edge[*] edges;
+   val  Node[1..*] nodes;
+   val  Edge[*] edges;
 }
 
 abstract class Node {
