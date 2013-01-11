@@ -92,7 +92,7 @@ rule flowdiagram {
 			     flow.edges.append(
 				 flow.nodes->select(n | n.isSimpleMerge)->collect(n | thisModule.create_transition(n, 1) ))).union( 
 				 flow.nodes->select(n | n.isMultiChoice)->collect(n | n.nodeGenerator)->flatten()->collect(n | thisModule.create_transition(n.source, n.num) )).append(
-				 flow.control)	
+				 flow.control)->flatten()	
 	)
 }
 

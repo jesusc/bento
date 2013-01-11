@@ -16,6 +16,7 @@ import genericity.language.gcomponent.dsl.DefinitionRoot;
 import genericity.language.gcomponent.technologies.AtlParameter;
 import genericity.language.gcomponent.technologies.AtlTemplate;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -117,7 +118,20 @@ public class ComponentExecutor {
 			throw new UnsupportedOperationException();
 		}
 		
-		FileBased atlLoader = new AtlTransformationLoader.FileBased(this.filePathResolver.resolve(atlTemplate));
+		String atlFile = this.filePathResolver.resolve(atlTemplate);		
+		FileBased atlLoader = adaptAtlFile(transformation, atlFile, component.getName() + ".atl");
+
+		String checkFile = atlFile.replace(".atl", "_check.atl");
+		if ( new File(checkFile).exists() ) {
+			adaptAtlFile(transformation, checkFile, component.getName() + "_check.atl");
+		}
+		
+		loaders.put(transformation, atlLoader);
+	}
+
+	private FileBased adaptAtlFile(AdaptedTransformation transformation,
+			String atlFile, String outputFileName) {
+		FileBased atlLoader = new AtlTransformationLoader.FileBased(atlFile);
 		AtlAdapter adapter = new AtlAdapter( atlLoader );
 
 		for(AdaptWithBinding step : transformation.getRequiredAdaptations()) {				
@@ -136,9 +150,8 @@ public class ComponentExecutor {
 		}
 
 		
-		atlLoader.exportAdapted(filePathResolver.createFileNameFromInitial(component.getName() + ".atl") );
-
-		loaders.put(transformation, atlLoader);
+		atlLoader.exportAdapted(filePathResolver.createFileNameFromInitial(outputFileName) );
+		return atlLoader;
 	}
 
 	private void execute(ComponentInstantiation ci) {
