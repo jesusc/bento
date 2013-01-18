@@ -70,6 +70,18 @@ public class AdaptTransformation {
 	public static final String BOUND_METAMODEL_NAME = "FD";
 	public static final String TARGET_METAMODEL_NAME = "EPC";
 
+	// yawl2pn
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "FD";
+//	public static final String TARGET_METAMODEL_NAME = "YAWL";
+
+	// ecore2measure_manual
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "simple_OO_concept";
+//	public static final String TARGET_METAMODEL_NAME = "ECORE";
+
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
 				"org.apache.commons.logging.impl.NoOpLog");

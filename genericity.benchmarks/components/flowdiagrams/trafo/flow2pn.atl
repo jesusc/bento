@@ -1,5 +1,5 @@
--- @path FD=/genericity.atl.transformations/examples/flow_diagrams/metamodels/flow_concept.ecore
--- @path PN=/genericity.atl.transformations/examples/flow_diagrams/metamodels/petri_nets.ecore
+-- @path FD=/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore
+-- @path PN=/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore
 
 module flow2pn;
 create OUT : PN from IN : FD;
@@ -92,7 +92,7 @@ rule flowdiagram {
 			     flow.edges.append(
 				 flow.nodes->select(n | n.isSimpleMerge)->collect(n | thisModule.create_transition(n, 1) ))).union( 
 				 flow.nodes->select(n | n.isMultiChoice)->collect(n | n.nodeGenerator)->flatten()->collect(n | thisModule.create_transition(n.source, n.num) )).append(
-				 flow.control)	
+				 flow.control)->flatten()	
 	)
 }
 

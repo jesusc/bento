@@ -3,15 +3,11 @@
 	<name>genericity.compiler.atl</name>
 	<comment></comment>
 	<projects>
+		<project>org.eclectic.idc</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclectic.builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -40,13 +36,18 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.eclectic.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclectic.nature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>genericity.language.gbind.resource.nature</nature>
 		<nature>genericity.language.gcomponent.resource.gcomponent.nature</nature>
+		<nature>org.eclectic.nature</nature>
 	</natures>
 </projectDescription>

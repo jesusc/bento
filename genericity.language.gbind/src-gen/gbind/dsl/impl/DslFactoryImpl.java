@@ -65,6 +65,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 			case DslPackage.CONCEPT_METACLASS: return createConceptMetaclass();
 			case DslPackage.CONCRETE_METACLASS: return createConcreteMetaclass();
 			case DslPackage.CLASS_BINDING: return createClassBinding();
+			case DslPackage.INTERMEDIATE_CLASS_BINDING: return createIntermediateClassBinding();
 			case DslPackage.BASE_FEATURE_BINDING: return createBaseFeatureBinding();
 			case DslPackage.RENAMING_FEATURE_BINDING: return createRenamingFeatureBinding();
 			case DslPackage.OCL_FEATURE_BINDING: return createOclFeatureBinding();
@@ -124,6 +125,16 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public ClassBinding createClassBinding() {
 		ClassBindingImpl classBinding = new ClassBindingImpl();
 		return classBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntermediateClassBinding createIntermediateClassBinding() {
+		IntermediateClassBindingImpl intermediateClassBinding = new IntermediateClassBindingImpl();
+		return intermediateClassBinding;
 	}
 
 	/**

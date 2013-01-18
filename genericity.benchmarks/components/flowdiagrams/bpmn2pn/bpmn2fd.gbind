@@ -42,8 +42,8 @@ binding bpmn2fd {
 	feature FlowEdge."in" is source
 	feature FlowEdge.out is target
 
-	feature Node."in" is incomingEdges
-	feature Node.out is outgoingEdges
+	feature Node."ins" is incomingEdges
+	feature Node.outs is outgoingEdges
 
 
 	feature Task.isInitial = self.activityType = #EventStartEmpty

@@ -22,6 +22,8 @@ binding sfc {
 	class FlowEdge to Connection
 	
 	class Task        to StepType, TransitionType1 
+	class FinalTask   to NONE
+	-- Not sure, but I think that there are no final tasks in this language
 		     						           
 	class ExclusiveChoice to SelectionDivergenceType
 	-- HOW TO MAP THE SELECTION CONVERGENCE TYPE? -> Not sure about the semantics
@@ -32,12 +34,12 @@ binding sfc {
 
 	class MultiChoice     to NONE	
 	
-	feature FlowDiagram.nodes = self.allNodes
+	feature FlowDiagram.nodes is allNodes
 	-- 
-	feature FlowDiagram.edges = self.transition	
+	feature FlowDiagram.edges is transition	
 
 	feature FlowEdge."in" = SFC!SFCType1.allInstances()->first().allNodes->any(n | n.localId = self.refLocalId) 
-	feature FlowEdge.out  = self.parent
+	feature FlowEdge.out  is parent
 
 	-- feature Node."in" = FD!Connection.allInstances()->select(c | c.parent = self )
 	
@@ -64,10 +66,13 @@ binding sfc {
 	feature Task[StepType].isInitial = self.initialStep
 	feature Task[TransitionType1].isInitial   = false   	
 
-	feature Task[StepType].isFinal   = false   	
-	feature Task[TransitionType1].isFinal   = false   	
-	
+	-- feature Task[StepType].isFinal   = false   	
+	-- feature Task[TransitionType1].isFinal   = false   	
 
+	feature FinalTask.isTerminating = false -- me lo he inventado
+	feature FinalTask.isMandatory = false
+	
+	
 	helper Connection.parent : OclAny = self.refImmediateComposite().refImmediateComposite()
 	
 	helper SFCType1.allNodes : OclAny = self.step.
@@ -76,6 +81,8 @@ binding sfc {
 	                                 union(self.selectionConvergence).
 	                                 union(self.simultaneousDivergence).
 	                                 union(self.simultaneousConvergence)	                                 
+
 }
+
 
 

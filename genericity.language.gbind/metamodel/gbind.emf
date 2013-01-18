@@ -418,6 +418,16 @@ package dsl {
 	  ref ConcreteMetaclass[+] concrete;
 	  val simpleocl.OclExpression[1] whenClause;
 	}
+
+	class IntermediateClassBinding extends ConceptBinding {
+	  ref ConceptMetaclass[1] concept;
+
+	  ref ConcreteMetaclass[1] concreteSource;
+	  attr String[1] concreteReferenceSource;
+
+	  ref ConcreteMetaclass[1] concreteTarget;
+	  attr String[0..1] concreteReferenceTarget;
+	}
 	
 	class BaseFeatureBinding extends ConceptBinding {
 	  attr String[1] conceptFeature;

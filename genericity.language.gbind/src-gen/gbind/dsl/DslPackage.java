@@ -455,6 +455,88 @@ public interface DslPackage extends EPackage {
 	int CLASS_BINDING_FEATURE_COUNT = CONCEPT_BINDING_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.IntermediateClassBindingImpl <em>Intermediate Class Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.IntermediateClassBindingImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getIntermediateClassBinding()
+	 * @generated
+	 */
+	int INTERMEDIATE_CLASS_BINDING = 7;
+
+	/**
+	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__DEBUG_NAME = CONCEPT_BINDING__DEBUG_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Model </b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__MODEL_ = CONCEPT_BINDING__MODEL_;
+
+	/**
+	 * The feature id for the '<em><b>Concept</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__CONCEPT = CONCEPT_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Concrete Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE = CONCEPT_BINDING_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Concrete Reference Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE = CONCEPT_BINDING_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Concrete Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET = CONCEPT_BINDING_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Concrete Reference Target</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET = CONCEPT_BINDING_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Intermediate Class Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING_FEATURE_COUNT = CONCEPT_BINDING_FEATURE_COUNT + 5;
+
+	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.BaseFeatureBindingImpl <em>Base Feature Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,7 +544,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseFeatureBinding()
 	 * @generated
 	 */
-	int BASE_FEATURE_BINDING = 7;
+	int BASE_FEATURE_BINDING = 8;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -526,7 +608,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getRenamingFeatureBinding()
 	 * @generated
 	 */
-	int RENAMING_FEATURE_BINDING = 8;
+	int RENAMING_FEATURE_BINDING = 9;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -599,7 +681,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getOclFeatureBinding()
 	 * @generated
 	 */
-	int OCL_FEATURE_BINDING = 9;
+	int OCL_FEATURE_BINDING = 10;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -672,7 +754,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseHelper()
 	 * @generated
 	 */
-	int BASE_HELPER = 10;
+	int BASE_HELPER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -727,7 +809,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptHelper()
 	 * @generated
 	 */
-	int CONCEPT_HELPER = 11;
+	int CONCEPT_HELPER = 12;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -800,7 +882,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getLocalHelper()
 	 * @generated
 	 */
-	int LOCAL_HELPER = 12;
+	int LOCAL_HELPER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1091,6 +1173,71 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassBinding_WhenClause();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.IntermediateClassBinding <em>Intermediate Class Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Intermediate Class Binding</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding
+	 * @generated
+	 */
+	EClass getIntermediateClassBinding();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConcept <em>Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Concept</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcept()
+	 * @see #getIntermediateClassBinding()
+	 * @generated
+	 */
+	EReference getIntermediateClassBinding_Concept();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConcreteSource <em>Concrete Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Concrete Source</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcreteSource()
+	 * @see #getIntermediateClassBinding()
+	 * @generated
+	 */
+	EReference getIntermediateClassBinding_ConcreteSource();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceSource <em>Concrete Reference Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Concrete Reference Source</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcreteReferenceSource()
+	 * @see #getIntermediateClassBinding()
+	 * @generated
+	 */
+	EAttribute getIntermediateClassBinding_ConcreteReferenceSource();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConcreteTarget <em>Concrete Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Concrete Target</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcreteTarget()
+	 * @see #getIntermediateClassBinding()
+	 * @generated
+	 */
+	EReference getIntermediateClassBinding_ConcreteTarget();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceTarget <em>Concrete Reference Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Concrete Reference Target</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcreteReferenceTarget()
+	 * @see #getIntermediateClassBinding()
+	 * @generated
+	 */
+	EAttribute getIntermediateClassBinding_ConcreteReferenceTarget();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.BaseFeatureBinding <em>Base Feature Binding</em>}'.
@@ -1495,6 +1642,56 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_BINDING__WHEN_CLAUSE = eINSTANCE.getClassBinding_WhenClause();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.IntermediateClassBindingImpl <em>Intermediate Class Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.IntermediateClassBindingImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getIntermediateClassBinding()
+		 * @generated
+		 */
+		EClass INTERMEDIATE_CLASS_BINDING = eINSTANCE.getIntermediateClassBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Concept</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERMEDIATE_CLASS_BINDING__CONCEPT = eINSTANCE.getIntermediateClassBinding_Concept();
+
+		/**
+		 * The meta object literal for the '<em><b>Concrete Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE = eINSTANCE.getIntermediateClassBinding_ConcreteSource();
+
+		/**
+		 * The meta object literal for the '<em><b>Concrete Reference Source</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE = eINSTANCE.getIntermediateClassBinding_ConcreteReferenceSource();
+
+		/**
+		 * The meta object literal for the '<em><b>Concrete Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET = eINSTANCE.getIntermediateClassBinding_ConcreteTarget();
+
+		/**
+		 * The meta object literal for the '<em><b>Concrete Reference Target</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET = eINSTANCE.getIntermediateClassBinding_ConcreteReferenceTarget();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.BaseFeatureBindingImpl <em>Base Feature Binding</em>}' class.

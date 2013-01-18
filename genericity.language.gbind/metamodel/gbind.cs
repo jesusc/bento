@@ -251,6 +251,9 @@ RULES {
 	Dsl.ClassBinding ::= "class" concept[] "to" concrete[] ("," concrete[])* 
 		( "when" whenClause )?;
 
+	Dsl.IntermediateClassBinding ::= "class" concept[] "to" concreteSource[] "." (concreteReferenceSource[]|concreteReferenceSource['"','"','\\']) ":" concreteTarget[] "." (concreteReferenceSource[]|concreteReferenceSource['"','"','\\'])  
+		;
+
 	Dsl.OclFeatureBinding ::= "feature" conceptClass[] (qualifier['[', ']'])? "." (conceptFeature[]|conceptFeature['"','"','\\']) "=" 
 		concrete : Simpleocl.OclExpression; //ocl.OclExpression;
 

@@ -15,6 +15,11 @@
             uri="http://genericity/language/gcomponent/instantiation"
             class="genericity.gcomponent.instantiation.ComponentInstantiationPackage"
             genModel="model/component_instantiation.genmodel"/>
+      <package
+            class="genericity.gcomponent.report.ReportPackage"
+            genModel="model/report.genmodel"
+            uri="http://genericity/language/gcomponent/report">
+      </package>
    </extension>
 
 </plugin>

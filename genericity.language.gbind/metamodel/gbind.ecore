@@ -413,6 +413,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="whenClause" lowerBound="1"
           eType="#//simpleocl/OclExpression" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntermediateClassBinding" eSuperTypes="#//dsl/ConceptBinding">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"
+          eType="#//dsl/ConceptMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concreteSource" lowerBound="1"
+          eType="#//dsl/ConcreteMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteReferenceSource"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concreteTarget" lowerBound="1"
+          eType="#//dsl/ConcreteMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteReferenceTarget"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BaseFeatureBinding" eSuperTypes="#//dsl/ConceptBinding">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="conceptFeature" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

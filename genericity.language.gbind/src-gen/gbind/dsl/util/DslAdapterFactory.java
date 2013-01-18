@@ -104,6 +104,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createClassBindingAdapter();
 			}
 			@Override
+			public Adapter caseIntermediateClassBinding(IntermediateClassBinding object) {
+				return createIntermediateClassBindingAdapter();
+			}
+			@Override
 			public Adapter caseBaseFeatureBinding(BaseFeatureBinding object) {
 				return createBaseFeatureBindingAdapter();
 			}
@@ -258,6 +262,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.IntermediateClassBinding <em>Intermediate Class Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.IntermediateClassBinding
+	 * @generated
+	 */
+	public Adapter createIntermediateClassBindingAdapter() {
 		return null;
 	}
 
