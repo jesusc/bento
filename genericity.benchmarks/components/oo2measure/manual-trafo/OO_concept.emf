@@ -9,7 +9,7 @@ class Package extends NamedElement {
    val Class[*] classes;
 }
 
-class Class extends NamedElement, Type {
+class Class extends NamedElement {
   attr boolean     isAbstract;
   val Attribute[*] attributes;
   val Operation[*] operations;
@@ -17,11 +17,15 @@ class Class extends NamedElement, Type {
 }
 
 class Attribute extends NamedElement {
-  ref Type[0..1] type;
+  ref Class[0..1] type;
 }
 
-class Type {}
+class Operation extends NamedElement {
+  val Parameter[*] parameters; 
+}
 
-class Operation extends NamedElement {}
+class Parameter {
+  ref Class[1] type;
+}
 
 

@@ -5,14 +5,16 @@ binding ecore2oo {
     class NamedElement to ENamedElement 
     class Package to EPackage
     class Class to EClass
-    class Attribute to EStructuralFeature
     class Operation to EOperation
-    class Type to EClassifier
+    class Attribute to EStructuralFeature
+    class Parameter to EParameter
     
     feature NamedElement.name is name
     feature Package.classes = self.eClassifiers->select(c | c.oclIsKindOf(ECORE!EClass))
     feature Class.attributes is eStructuralFeatures
     feature Class.operations is eOperations
     feature Class.parents is eSuperTypes
-    feature Attribute.type is eType
+    feature Operation.parameters is eParameters
+    feature Parameter.type = if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
+    feature Attribute.type = if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
 }

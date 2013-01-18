@@ -32,8 +32,15 @@ rule Class2MeasureSet {
 	to   set : simple_metrics!MetricsSet 
     do {
 		set.name    <- 'class ' + class.name;
+		set.metrics <- thisModule.Metric('CCD', class.CCD());
+		set.metrics <- thisModule.Metric('CCM', class.CCM());
+		set.metrics <- thisModule.Metric('CCP', class.CCP());
+		set.metrics <- thisModule.Metric('CSM', class.CSM());
+		set.metrics <- thisModule.Metric('DAC', class.DAC());
 		set.metrics <- thisModule.Metric('DIT', class.DIT());
 		set.metrics <- thisModule.Metric('MOA', class.MOA());
+		set.metrics <- thisModule.Metric('MCC', class.MCC());
+		set.metrics <- thisModule.Metric('MPC', class.MPC());
 		set.metrics <- thisModule.Metric('NOA', class.NOA());
 		set.metrics <- thisModule.Metric('NOC', class.NOC());
 		set.metrics <- thisModule.Metric('NOD', class.NOD());
@@ -259,12 +266,7 @@ def : ANA() : Real =
 -- @uses Class, Class.attributes, Class.parents, Attribute, Attribute.type, Attribute.name
 helper context simple_OO_concept!Class
 def : MOA() : Real =
-	self.AllAttributes()->select(a | 
-		if a.type.oclIsUndefined() 
-		  then false 
-		  else a.type.oclIsTypeOf(simple_OO_concept!Class) 
-		endif)
-	->size();
+	self.AllAttributes()->select(a | not a.type.oclIsUndefined())->size();
 	
 -- MRM - Modeled Relationship Measure
 -- Measure of the total number of attribute and parameter based relationships 
@@ -298,7 +300,7 @@ def : NOA() : Real =
 -- @uses Class, Class.operations, Operation, Operation.name
 helper context simple_OO_concept!Class
 def : NOM() : Real =
-	self.AllOperations->size();
+	self.AllOperations()->size();
 
 -- CIS - Class Interface Size
 -- Number of public methods in a class.
@@ -319,7 +321,7 @@ def : NOM() : Real =
 -- @uses Class, Class.attributes, Attribute, Attribute.name
 helper context simple_OO_concept!Class
 def : NOD() : Real =
-	self.AllAttributes->size();
+	self.AllAttributes()->size();
 
 -- NAD - Number of Abstract Data Types
 -- Number of user defined objects used as attributes in the class and which 
@@ -332,7 +334,10 @@ def : NOD() : Real =
 
 -- CSM - Class Size Metric
 -- Sum of the number of methods and attributes in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.operations, Operation, Operation.name, Class.attributes, Attribute, Attribute.name
+helper context simple_OO_concept!Class
+def : CSM() : Real =
+	self.NOM() + self.NOD();
 
 -- CAM - Cohesion Among Methods of Class
 -- Computes the relatedness among methods of the class based upon the 
@@ -351,39 +356,66 @@ def : NOD() : Real =
 -- This metric not only includes classes that are directly related to a class 
 -- by attributes and methods, but also classes that are indirectly related 
 -- through the directly related classes.
--- UNIMPLEMENTED YET
+-- @uses Class. Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type 
+helper context simple_OO_concept!Class
+def : MCC() : Integer =
+	self.AllAttributesTypes()->union(self.AllParametersTypes())->
+		iterate(t; acc : Sequence(simple_OO_concept!Class) = Sequence{}|
+			acc->union(t.AllAttributesTypes())->union(t.AllParametersTypes()))->
+				asSet()->size();
 
 -- DAC - Direct Attribute Base Coupling
 -- This metric is a direct count of the number of different class types that 
 -- are declared as attribute references inside a class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type
+helper context simple_OO_concept!Class
+def : DAC() : Integer =
+	self.AllAttributesTypes()->size();
 
 -- DPC - Direct Parameter Based Coupling
 -- Number of class object types that are required directly for a message 
 -- passing (parameters) to methods in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+helper context simple_OO_concept!Class
+def : DPC() : Integer =
+	self.AllParametersTypes()->size();
 
 -- MPC - Maximum Parameter Based Coupling
 -- Number of Class object types that are required directly and indirectly 
 -- for message passing (parameters) in the Class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+helper context simple_OO_concept!Class
+def : MPC() : Integer =
+	self.AllParametersTypes()->
+		iterate(t; acc : Sequence(simple_OO_concept!Class) = Sequence{}|
+			acc->union(t.AllParametersTypes()))->asSet()->size();
 
 -- CCD - Class Complexity Based on Data
 -- Computes complexity based upon the number of components (attributes) that 
 -- are defined in the class. All component declarations are resolved to the 
 -- basic primitives (integers, doubles and characters). The metric value is 
 -- a count of the number of primitives.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type
+helper context simple_OO_concept!Class
+def : CCD() : Integer =
+	self.AllAttributes()->size() + self.AllAttributesTypes()->iterate(t; acc : Integer = 0|
+			acc + t.AllAttributes()->size());
 
 -- CCP - Class Complexity Based on Method Parameters
 -- Estimates complexity based upon the number of parameters required to call 
 -- methods of the Class. Inherited method parameters are also included in the 
 -- computation of the metric value.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter
+helper context simple_OO_concept!Class
+def : CCP() : Real =
+	self.AllParameters()->size();
 
 -- CCM - Class Complexity Based on Members
 -- This metric is an aggregate of the data and method parameter complexities.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter
+helper context simple_OO_concept!Class
+def : CCM() : Integer =
+	self.CCD() + self.CCP();
 
 -- -------------------------------------------------------------------------
 -- AUXILIARY HELPERS
@@ -428,6 +460,12 @@ def : OverridenAttributes() : Set(simple_OO_concept!Class) =
 	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | inherited_attributes->exists(att2 | att.name = att2.name));
 
+-- all types of all attributes of a class
+helper context simple_OO_concept!Class
+def : AllAttributesTypes() : Set(simple_OO_concept!Class) =
+    self.AllAttributes()->collect(a | a.type)->flatten()->
+        select(t | not t.oclIsUndefined())->asSet();
+
 -- ***** OPERATIONS *****
 
 -- all operations of a class (local and inherited)
@@ -453,3 +491,15 @@ def : OverridenOperations() : Set(simple_OO_concept!Class) =
 	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	self.operations->select(op | inherited_operations->exists(op2 | op.name = op2.name));
  
+-- ***** PARAMETERS *****
+
+-- all parameters of all operations of a class
+helper context simple_OO_concept!Class
+def : AllParameters() : Set(simple_OO_concept!Parameter) =
+    self.AllOperations()->collect(o | o.parameters)->flatten()->asSet();
+        
+--all types of all parameters of all operations of a class
+helper context simple_OO_concept!Class
+def : AllParametersTypes() : Set(simple_OO_concept!Class) =
+    self.AllParameters()->collect(p | p.type)->flatten()->
+	   select(t | not t.oclIsUndefined())->asSet();        
