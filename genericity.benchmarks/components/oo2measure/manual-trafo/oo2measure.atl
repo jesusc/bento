@@ -10,11 +10,15 @@ rule Package2MeasureSet {
     do {
 		set.name    <- 'package ' + pck.name;
 		set.metrics <- thisModule.Metric('AIF', pck.AIF());
+		set.metrics <- thisModule.Metric('ADI', pck.ADI());
 		set.metrics <- thisModule.Metric('ANA', pck.ANA());
 		set.metrics <- thisModule.Metric('AWI', pck.AWI());
 		set.metrics <- thisModule.Metric('BPF', pck.BPF());
+		set.metrics <- thisModule.Metric('DSC', pck.DSC());
 		set.metrics <- thisModule.Metric('IIF', pck.IIF());
 		set.metrics <- thisModule.Metric('NAC', pck.NAC());
+		set.metrics <- thisModule.Metric('NNC', pck.NNC());
+		set.metrics <- thisModule.Metric('NOH', pck.NOH());
 		set.metrics <- thisModule.Metric('NIC', pck.NIC());
 		set.metrics <- thisModule.Metric('NLC', pck.NLC());
 		set.metrics <- thisModule.Metric('NSI', pck.NSI());
@@ -28,8 +32,12 @@ rule Class2MeasureSet {
 	to   set : simple_metrics!MetricsSet 
     do {
 		set.name    <- 'class ' + class.name;
+		set.metrics <- thisModule.Metric('DIT', class.DIT());
+		set.metrics <- thisModule.Metric('MOA', class.MOA());
 		set.metrics <- thisModule.Metric('NOA', class.NOA());
 		set.metrics <- thisModule.Metric('NOC', class.NOC());
+		set.metrics <- thisModule.Metric('NOD', class.NOD());
+		set.metrics <- thisModule.Metric('NOM', class.NOM());
     }
 }
 
@@ -121,7 +129,15 @@ def : IIF() : Real =
 -- DIT - Depth of Inheritance Tree
 -- The length of the longest path of inheritance from the current class to 
 -- the root of the tree.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents
+helper context simple_OO_concept!Class
+def : DIT() : Real =	
+	if (self.parents->isEmpty())
+		then 0
+		else
+			let DITs : Set(Integer) = self.parents->collect(p | p.DIT()) in         -- all paths to root
+			1 + DITs->select(value | DITs->forAll(value2 | value>=value2))->first() -- longest path
+	endif;	
 
 -- NOC - Number Of Children
 -- The number of classes that inherit directly from the current class.
@@ -150,11 +166,17 @@ def : NOC() : Real =
 
 -- DSC - Design Size in Classes
 -- Count of the total number of classes in the design.
--- UNIMPLEMENTED YET
+-- uses Package, Package.classes
+helper context simple_OO_concept!Package
+def : DSC() : Real =
+	self.classes->size();
 
 -- NOH - Number of Hierarchies
 -- Count of the number of class hierarchies in the design.
--- UNIMPLEMENTED YET
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : NOH() : Real =
+    self.classes->collect(c | c.Children())->flatten()->asSet()->size(); 
 
 -- NIC - Number of Independent Classes
 -- Count of the number of Classes that are not inherited by any Class in the package.
@@ -173,7 +195,10 @@ def : NSI() : Real =
 -- NNC - Number of Internal Classes
 -- Count of the number of internal classes defined for creating 
 -- generalization-specialization structures in class hierarchies of the design.
--- UNIMPLEMENTED YET
+-- @uses Package, Package.classes, Class, Class.parents
+helper context simple_OO_concept!Package
+def : NNC() : Real =
+	self.NOH();
 
 -- NAC - Number of Abstract Classes
 -- Count of the number of classes that have been defined purely for organizing 
@@ -195,7 +220,10 @@ def : NLC() : Real =
 -- by dividing the summation of maximum path lengths to all classes by the 
 -- number of classes. The path length for a class is the number of edges from 
 -- the root to the class in an inheritance tree representation.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents
+helper context simple_OO_concept!Package
+def : ADI() : Real =
+	self.classes->collect(c | c.DIT())->sum() / self.classes->size();
 
 -- AWI - Average Width of Inheritance
 -- The average number of children per class in the design.
@@ -228,8 +256,16 @@ def : ANA() : Real =
 -- MOA - Measure of Aggregation
 -- Count of the number of data declarations whose types are user defined 
 -- classes.
--- UNIMPLEMENTED YET
-
+-- @uses Class, Class.attributes, Class.parents, Attribute, Attribute.type, Attribute.name
+helper context simple_OO_concept!Class
+def : MOA() : Real =
+	self.AllAttributes()->select(a | 
+		if a.type.oclIsUndefined() 
+		  then false 
+		  else a.type.oclIsTypeOf(simple_OO_concept!Class) 
+		endif)
+	->size();
+	
 -- MRM - Modeled Relationship Measure
 -- Measure of the total number of attribute and parameter based relationships 
 -- in a class.
@@ -259,7 +295,10 @@ def : NOA() : Real =
 
 -- NOM - Number of Methods
 -- Count of all the methods defined in a class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.operations, Operation, Operation.name
+helper context simple_OO_concept!Class
+def : NOM() : Real =
+	self.AllOperations->size();
 
 -- CIS - Class Interface Size
 -- Number of public methods in a class.
@@ -277,7 +316,10 @@ def : NOA() : Real =
 
 -- NOD - Number of Attributes
 -- Number of attributes in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.attributes, Attribute, Attribute.name
+helper context simple_OO_concept!Class
+def : NOD() : Real =
+	self.AllAttributes->size();
 
 -- NAD - Number of Abstract Data Types
 -- Number of user defined objects used as attributes in the class and which 
@@ -374,6 +416,7 @@ def: NewAttributes() : Set(simple_OO_concept!Class) =
 	self.attributes->select(att | not inherited_attributes->exists(att2 | att2.name = att.name));
 
 -- inherited attributes of a class, not overriden by locally defined ones
+-- NOTE: this implementation is wrong, if C1:a <- C2:a <- C3, it yield 2 for C3, but it should be 1
 helper context simple_OO_concept!Class
 def : InheritedAttributes() : Set(simple_OO_concept!Class) =
 	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in

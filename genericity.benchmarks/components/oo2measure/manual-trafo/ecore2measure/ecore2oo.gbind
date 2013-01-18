@@ -7,10 +7,12 @@ binding ecore2oo {
     class Class to EClass
     class Attribute to EStructuralFeature
     class Operation to EOperation
+    class Type to EClassifier
     
     feature NamedElement.name is name
     feature Package.classes = self.eClassifiers->select(c | c.oclIsKindOf(ECORE!EClass))
     feature Class.attributes is eStructuralFeatures
     feature Class.operations is eOperations
     feature Class.parents is eSuperTypes
+    feature Attribute.type is eType
 }

@@ -9,14 +9,19 @@ class Package extends NamedElement {
    val Class[*] classes;
 }
 
-class Class extends NamedElement {
+class Class extends NamedElement, Type {
   attr boolean     isAbstract;
   val Attribute[*] attributes;
   val Operation[*] operations;
   ref Class[*]     parents; 
 }
 
-class Attribute extends NamedElement {}
+class Attribute extends NamedElement {
+  ref Type[0..1] type;
+}
+
+class Type {}
 
 class Operation extends NamedElement {}
+
 
