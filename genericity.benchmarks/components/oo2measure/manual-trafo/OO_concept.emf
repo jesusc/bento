@@ -16,11 +16,17 @@ class Class extends NamedElement {
   ref Class[*]     parents; 
 }
 
-class Attribute extends NamedElement {
+abstract class Feature {
+  attr boolean isPublic;
+  attr boolean isProtected;   
+  attr boolean isPrivate;   
+}
+
+class Attribute extends NamedElement, Feature {
   ref Class[0..1] type;
 }
 
-class Operation extends NamedElement {
+class Operation extends NamedElement, Feature {
   val Parameter[*] parameters; 
 }
 

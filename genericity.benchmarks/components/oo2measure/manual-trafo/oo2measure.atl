@@ -11,6 +11,7 @@ rule Package2MeasureSet {
 		set.name    <- 'package ' + pck.name;
 		set.metrics <- thisModule.Metric('AIF', pck.AIF());
 		set.metrics <- thisModule.Metric('ADI', pck.ADI());
+		set.metrics <- thisModule.Metric('AHF', pck.AHF());
 		set.metrics <- thisModule.Metric('ANA', pck.ANA());
 		set.metrics <- thisModule.Metric('AWI', pck.AWI());
 		set.metrics <- thisModule.Metric('BPF', pck.BPF());
@@ -22,6 +23,7 @@ rule Package2MeasureSet {
 		set.metrics <- thisModule.Metric('NIC', pck.NIC());
 		set.metrics <- thisModule.Metric('NLC', pck.NLC());
 		set.metrics <- thisModule.Metric('NSI', pck.NSI());
+		set.metrics <- thisModule.Metric('OHF', pck.OHF());
 		set.metrics <- thisModule.Metric('OIF', pck.OIF());
     }
 }
@@ -32,19 +34,35 @@ rule Class2MeasureSet {
 	to   set : simple_metrics!MetricsSet 
     do {
 		set.name    <- 'class ' + class.name;
+		set.metrics <- thisModule.Metric('CAM', class.CAM());
+		set.metrics <- thisModule.Metric('CBO', class.CBO());
 		set.metrics <- thisModule.Metric('CCD', class.CCD());
 		set.metrics <- thisModule.Metric('CCM', class.CCM());
 		set.metrics <- thisModule.Metric('CCP', class.CCP());
+		set.metrics <- thisModule.Metric('CIS', class.CIS());
 		set.metrics <- thisModule.Metric('CSM', class.CSM());
 		set.metrics <- thisModule.Metric('DAC', class.DAC());
+		set.metrics <- thisModule.Metric('DAM', class.DAM());
+		set.metrics <- thisModule.Metric('DCC', class.DCC());
 		set.metrics <- thisModule.Metric('DIT', class.DIT());
-		set.metrics <- thisModule.Metric('MOA', class.MOA());
+		set.metrics <- thisModule.Metric('MAA', class.MAA());
+		set.metrics <- thisModule.Metric('MAM', class.MAM());
+		set.metrics <- thisModule.Metric('MAT', class.MAT());
 		set.metrics <- thisModule.Metric('MCC', class.MCC());
+		set.metrics <- thisModule.Metric('MFA', class.MFA());
+		set.metrics <- thisModule.Metric('MOA', class.MOA());
 		set.metrics <- thisModule.Metric('MPC', class.MPC());
+		set.metrics <- thisModule.Metric('MRM', class.MRM());
+		set.metrics <- thisModule.Metric('NAD', class.NAD());
 		set.metrics <- thisModule.Metric('NOA', class.NOA());
 		set.metrics <- thisModule.Metric('NOC', class.NOC());
 		set.metrics <- thisModule.Metric('NOD', class.NOD());
 		set.metrics <- thisModule.Metric('NOM', class.NOM());
+		set.metrics <- thisModule.Metric('NPA', class.NPA());
+		set.metrics <- thisModule.Metric('NPM', class.NPM());
+		set.metrics <- thisModule.Metric('NPT', class.NPT());
+		set.metrics <- thisModule.Metric('OAM', class.OAM());
+		set.metrics <- thisModule.Metric('SIZE2', class.SIZE2());
     }
 }
 
@@ -81,13 +99,35 @@ def : OIF() : Real =
 -- Quotient between the sum of the invisibilities of all attributes defined 
 -- in all classes in the current package and the total number of attributes 
 -- defined in the package.
--- UNIMPLEMENTED, as visibility is not present in metamodels like km3 or ecore
+-- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.isPublic, Attribute.isProtected
+helper context simple_OO_concept!Package
+def : AHF() : Real =
+	if self.classes->size() > 1	
+		then 
+		    let attributes_in_package : Set(simple_OO_concept!Attribute) = self.AllAttributes() in 
+		    if not attributes_in_package->isEmpty()
+				then attributes_in_package->iterate(a; acc : Real = 0|acc + 1 - self.percentage_classes_CanAccessAttribute(a)) / attributes_in_package->size()
+				else 0
+			endif
+		else 0
+	endif;
 
 -- OHF - Operations Hiding Factor
 -- Quotient between the sum of the invisibilities of all operations defined 
 -- in all classes in the current package and the total number of operations 
 -- defined in the package.
--- UNIMPLEMENTED, as visibility is not present in metamodels like km3 or ecore
+-- @uses Package, Package.classes, Class, Class.parents, Class.operations, Operation, Operation.isPublic, Operation.isProtected
+helper context simple_OO_concept!Package
+def : OHF() : Real =
+	if self.classes->size() > 1
+		then 
+		    let operations_in_package : Set(simple_OO_concept!Operation) = self.AllOperations() in 
+		    if not operations_in_package->isEmpty()
+				then operations_in_package->iterate(o; acc : Real = 0|acc + 1 - self.percentage_classes_CanAccessOperation(o)) / operations_in_package->size()
+				else 0
+			endif
+		else 0
+	endif;
 
 -- BPF - Behavioral Polymorphism Factor
 -- Quotient between the actual number of possible different polymorphic 
@@ -103,13 +143,13 @@ def : BPF() : Real =
 -- Quotient between the actual number of coupled class-pairs within the 
 -- package and the maximum possible number of class-pair couplings in the 
 -- package. This coupling is the one not imputable to inheritance.
--- UNIMPLEMENTED yet
+-- UNIMPLEMENTED yet (complex)
 
 -- ICF - Internal Coupling Factor
 -- Quotient between the number of coupling links where both the client 
 -- and supplier classes belong to the current package and the total number 
 -- of coupling links originating in the current package.
--- UNIMPLEMENTED YET
+-- UNIMPLEMENTED yet (complex)
 	
 -- IIF - Internal Inheritance Factor
 -- Quotient between the number of inheritance links where both the child 
@@ -125,13 +165,13 @@ def : IIF() : Real =
 -- Quotient between the cumulative number of the package classes that do 
 -- access the package attributes and the cumulative number of the package 
 -- classes that can access the package attributes.
--- UNIMPLEMENTED YET
+-- UNIMPLEMENTED yet (complex)
 
 -- OHEF - Operations Hiding Effectiveness Factor
 -- Quotient between the cumulative number of the package classes that do 
 -- access the package operations and the cumulative number of the package 
 -- classes that can access the package operations.
--- UNIMPLEMENTED YET
+-- UNIMPLEMENTED yet (complex)
 
 -- DIT - Depth of Inheritance Tree
 -- The length of the longest path of inheritance from the current class to 
@@ -158,18 +198,24 @@ def : NOC() : Real =
 -- classes are coupled when references declared in one class use references 
 -- or instance variables defined by the other class. Or used as a type or 
 -- in reference by other classes.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operation, Operation, Operation.parameters, Parameter, Parameter.type 
+helper context simple_OO_concept!Class
+def : CBO() : Integer =
+	self.CoupledClasses()->size();
 
 -- RFC - Response for a Class
 -- The number of methods in the current class that might respond to a 
 -- message received by its object, including methods both inside and 
 -- outside of this class.
--- UNIMPLEMENTED YET
+-- UNIMPLEMENTED yet (complex)
 
 -- SIZE2
 -- Number of local attributes and operations defined in the class. The 
 -- metric SIZE 1 is code dependant so not adapted to our problem.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.operations, Class.attributes, Operation, Attribute
+helper context simple_OO_concept!Class
+def : SIZE2() : Integer =
+	self.operations->size() + self.attributes->size();
 
 -- DSC - Design Size in Classes
 -- Count of the total number of classes in the design.
@@ -249,16 +295,32 @@ def : ANA() : Real =
 -- MFA - Measure of Functional Abstraction
 -- The ratio of the number of methods inherited by a class to the total 
 -- number of methods accessible by members in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.isPublic, Operation.isProtected
+helper context simple_OO_concept!Class
+def : MFA() : Real =
+	if not self.AllOperations()->isEmpty()
+		then self.InheritedOperations()->size() / self.AllOperations()->select(o | self.CanAccessOperation(o))->size() 
+		else 0
+	endif;
 
 -- MAA - Measure of Attribute Abstraction
 -- The ratio of the number of attributes inherited by a class to the total 
 -- number of attributes in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.isPublic, Attribute.isProtected
+helper context simple_OO_concept!Class
+def : MAA() : Integer =
+	let nbFCV : Integer = self.AllAttributes()->select(a | self.CanAccessOperation(a))->size() in
+	if nbFCV > 0
+		then self.InheritedAttributes->size() / nbFCV
+		else 0
+	endif;
 
 -- MAT - Measure of Abstraction
 -- The average of functional and attribute abstraction measures.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.isPublic, Attribute.isProtected, Class.operations, Operation, Operation.isPublic, Operation.isProtected
+helper context simple_OO_concept!Class
+def : MAT() : Integer =
+	(self.MFA() + self.MAA()) / 2;
 
 -- MOA - Measure of Aggregation
 -- Count of the number of data declarations whose types are user defined 
@@ -271,22 +333,40 @@ def : MOA() : Real =
 -- MRM - Modeled Relationship Measure
 -- Measure of the total number of attribute and parameter based relationships 
 -- in a class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type, Class.attributes, Attribute, Attribute.type
+helper context simple_OO_concept!Class
+def : MRM() : Integer =
+	self.DCC() + self.NAD();
 
 -- DAM - Data Access Metric
 -- The ratio of the number of private attributes to the total number of 
 -- attributes declared in a class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.isPrivate
+helper context simple_OO_concept!Class
+def : DAM() : Real =
+	if not self.AllAttributes()->isEmpty()
+		then self.AllAttributes()->select(a | a.isPrivate)->size() / self.AllAttributes()->size()
+		else 0
+	endif;
 
 -- OAM - Operation Access Metric
 -- The ratio of the number of public methods to the total number of methods 
 -- declared in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.isPublic
+helper context simple_OO_concept!Class
+def : OAM() : Real =
+	if not self.AllOperations()->isEmpty()
+		then self.AllOperations()->select(o | o.isPublic)->size() / self.AllOperations()->size()
+		else 0
+	endif;
 
 -- MAM - Member Access Metric
 -- This metric computes the access to all the members (attributes and methods) 
 -- of a class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.isPrivate, Class.operations, Operation, Operation.isPublic
+helper context simple_OO_concept!Class
+def : MAM() : Real =
+	(1 - self.DAM() + self.OAM()) / 2;
 
 -- NOA - Number of Ancestors
 -- Counts the number of distinct classes which a class inherits.
@@ -304,17 +384,29 @@ def : NOM() : Real =
 
 -- CIS - Class Interface Size
 -- Number of public methods in a class.
--- UNIMPLEMENTED, as visibility is not present in metamodels like km3 or ecore
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.isPublic
+helper context simple_OO_concept!Class
+def : CIS() : Integer =
+	self.AllOperations()->select(o | o.isPublic)->size();
 
 -- NPT - Number of Unique Parameter Types
 -- Number of different parameter types used in the methods of the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+helper context simple_OO_concept!Class
+def : NPT() : Integer =
+	self.AllParametersTypes()->size();
 
 -- NPM - Number of Parameters per Method
 -- Average of the number of parameters per method in the class. Computed by 
 -- summing the parameters of all methods and dividing by the number of methods 
 -- in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter
+helper context simple_OO_concept!Class
+def : NPM() : Integer =
+	if not self.AllOperations()->isEmpty()
+		then self.AllParameters()->size() / self.AllOperations()->size()
+		else 0
+	endif;
 
 -- NOD - Number of Attributes
 -- Number of attributes in the class.
@@ -326,11 +418,17 @@ def : NOD() : Real =
 -- NAD - Number of Abstract Data Types
 -- Number of user defined objects used as attributes in the class and which 
 -- are necessary to instantiate an object instance of the (aggregate) class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type
+helper context simple_OO_concept!Class
+def : NAD() : Integer =
+	self.AllAttributesTypes()->size();
 
 -- NPA - Number of Public Attributes
 -- Number of attributes that are declared as public in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.isPublic
+helper context simple_OO_concept!Class
+def : NPA() : Integer =
+	self.AllAttributes()->select(a | a.isPublic)->size();
 
 -- CSM - Class Size Metric
 -- Sum of the number of methods and attributes in the class.
@@ -344,13 +442,25 @@ def : CSM() : Real =
 -- parameter list of the methods. The metrics is computed using the 
 -- summation of the intersection of parameters of a method with the 
 -- maximum independent set of all parameter types in the class.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+helper context simple_OO_concept!Class
+def : CAM() : Integer =
+	let divisor : Integer =
+		self.AllOperations()->size() * self.AllParametersTypes()->size() in
+	if divisor > 0
+		then self.AllOperations()->iterate(o; acc : Integer = 0|
+			acc + o.AllParametersTypes()->size()) / divisor
+		else 0
+	endif;
 
 -- DCC - Direct Class Coupling
 -- Count of the different number of classes that a class is directly related 
 -- to. The metric includes classes that are directly related by attribute 
 -- declarations and message passing (parameters) in methods.
--- UNIMPLEMENTED YET
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type, Class.attributes, Attribute, Attribute.type
+helper context simple_OO_concept!Class
+def : DCC() : Integer =
+	self.DAC() + self.DPC();
 
 -- MCC - Maximum Class Coupling
 -- This metric not only includes classes that are directly related to a class 
@@ -434,30 +544,40 @@ helper context simple_OO_concept!Class
 def : Children() : Set(simple_OO_concept!Class) =
 	simple_OO_concept!Class.allInstances()->select(c | c.parents->includes(self));
 
+-- classes to which a class is coupled (excluding inheritance)
+helper context simple_OO_concept!Class
+def : CoupledClasses() : Set(simple_OO_concept!Class) =
+    self.AllAttributesTypes()->union(self.AllParametersTypes());
+
 -- ***** ATTRIBUTES *****
+
+-- all attributes of a package
+helper context simple_OO_concept!Package
+def : AllAttributes() : Set(simple_OO_concept!Attribute) =
+    self.classes->collect(c | c.attributes)->flatten();
 
 -- all attributes of a class (local and inherited)
 helper context simple_OO_concept!Class
-def : AllAttributes() : Set(simple_OO_concept!Class) =
+def : AllAttributes() : Set(simple_OO_concept!Attribute) =
     self.attributes->union(self.InheritedAttributes());
 
 -- attributes defined in the class, that do not override inherited ones
 helper context simple_OO_concept!Class
-def: NewAttributes() : Set(simple_OO_concept!Class) =
+def: NewAttributes() : Set(simple_OO_concept!Attribute) =
 	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | not inherited_attributes->exists(att2 | att2.name = att.name));
 
 -- inherited attributes of a class, not overriden by locally defined ones
 -- NOTE: this implementation is wrong, if C1:a <- C2:a <- C3, it yield 2 for C3, but it should be 1
 helper context simple_OO_concept!Class
-def : InheritedAttributes() : Set(simple_OO_concept!Class) =
-	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+def : InheritedAttributes() : Set(simple_OO_concept!Attribute) =
+	let inherited_attributes : Set(simple_OO_concept!Attribute) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	inherited_attributes->select(att | not self.attributes->exists(att2 | att.name = att2.name));
 
 -- inherited operations of a class that are overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : OverridenAttributes() : Set(simple_OO_concept!Class) =
-	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
+def : OverridenAttributes() : Set(simple_OO_concept!Attribute) =
+	let inherited_attributes : Set(simple_OO_concept!Attribute) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | inherited_attributes->exists(att2 | att.name = att2.name));
 
 -- all types of all attributes of a class
@@ -466,31 +586,64 @@ def : AllAttributesTypes() : Set(simple_OO_concept!Class) =
     self.AllAttributes()->collect(a | a.type)->flatten()->
         select(t | not t.oclIsUndefined())->asSet();
 
+-- indicates whether a class can access an attribute
+helper context simple_OO_concept!Class
+def : CanAccessAttribute(a : simple_OO_concept!Attribute) : Boolean =
+	a.isPublic or self.AllAttributes()->includes(a) or (a.isProtected and self.Ancestors()->exists(c | c.AllAttributes()->includes(a)));
+
+-- percentage of classes which can access an attribute (excludes the class that declares the attribute)
+helper context simple_OO_concept!Package
+def : percentage_classes_CanAccessAttribute(a : simple_OO_concept!Attribute) : Real =
+	(self.classes->select(c | c.CanAccessAttribute(a))->size() - 1) /
+	(self.classes->size() - 1);    
+
 -- ***** OPERATIONS *****
+
+-- all operations of a package
+helper context simple_OO_concept!Package
+def : AllOperations() : Set(simple_OO_concept!Operation) =
+    self.classes->collect(c | c.operations)->flatten();
 
 -- all operations of a class (local and inherited)
 helper context simple_OO_concept!Class
-def : AllOperations() : Set(simple_OO_concept!Class) =
+def : AllOperations() : Set(simple_OO_concept!Operation) =
     self.operations->union(self.InheritedOperations());
 
 -- operations defined in the class, that do not override inherited ones
 helper context simple_OO_concept!Class
-def: NewOperations() : Set(simple_OO_concept!Class) =
+def: NewOperations() : Set(simple_OO_concept!Operation) =
 	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	self.operations->select(op | not inherited_operations->exists(op2 | op2.name = op.name));
 
 -- inherited operations of a class, not overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : InheritedOperations() : Set(simple_OO_concept!Class) =
+def : InheritedOperations() : Set(simple_OO_concept!Operation) =
 	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	inherited_operations->select(op | not self.operations->exists(op2 | op.name = op2.name));
 
 -- inherited operations of a class that are overriden by locally defined ones
 helper context simple_OO_concept!Class
-def : OverridenOperations() : Set(simple_OO_concept!Class) =
+def : OverridenOperations() : Set(simple_OO_concept!Operation) =
 	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	self.operations->select(op | inherited_operations->exists(op2 | op.name = op2.name));
- 
+
+--all types of all parameters of an operation
+helper context simple_OO_concept!Operation
+def : AllParametersTypes() : Set(simple_OO_concept!Class) =
+    self.parameters->collect(p | p.type)->flatten()->
+	   select(t | not t.oclIsUndefined())->asSet();
+
+-- indicates whether a class can access an operation
+helper context simple_OO_concept!Class
+def : CanAccessOperation(o : simple_OO_concept!Operation) : Boolean =
+	o.isPublic or self.AllOperations()->includes(o) or (o.isProtected and self.Ancestors()->exists(c | c.AllOperations()->includes(o)));
+
+-- percentage of classes which can access an operation (excludes the class that declares the operation)
+helper context simple_OO_concept!Package
+def : percentage_classes_CanAccessOperation(o : simple_OO_concept!Operation) : Real =
+	(self.classes->select(c | c.CanAccessOperation(o))->size() - 1) / 
+	(self.classes->size() - 1);  
+
 -- ***** PARAMETERS *****
 
 -- all parameters of all operations of a class
@@ -503,3 +656,4 @@ helper context simple_OO_concept!Class
 def : AllParametersTypes() : Set(simple_OO_concept!Class) =
     self.AllParameters()->collect(p | p.type)->flatten()->
 	   select(t | not t.oclIsUndefined())->asSet();        
+

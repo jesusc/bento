@@ -11,10 +11,16 @@ binding ecore2oo {
     
     feature NamedElement.name is name
     feature Package.classes = self.eClassifiers->select(c | c.oclIsKindOf(ECORE!EClass))
+    feature Class.isAbstract is abstract
     feature Class.attributes is eStructuralFeatures
     feature Class.operations is eOperations
     feature Class.parents is eSuperTypes
     feature Operation.parameters is eParameters
     feature Parameter.type = if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
     feature Attribute.type = if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
+    feature Attribute.isPublic    = true  -- there is no visibility in ecore
+    feature Attribute.isProtected = false -- there is no visibility in ecore
+    feature Operation.isPrivate   = true  -- there is no visibility in ecore
+    feature Operation.isProtected = false -- there is no visibility in ecore
+    feature Operation.isPriivate  = false -- there is no visibility in ecore
 }
