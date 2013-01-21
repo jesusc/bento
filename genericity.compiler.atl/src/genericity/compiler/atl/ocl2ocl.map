@@ -36,6 +36,12 @@ mappings ocl2ocl(gbind) -> (atl)
   end
 
   [expr]
+  from gbind : gbind!OclUndefinedExp
+    to   atl :   atl!OclUndefinedExp
+  end
+
+
+  [expr]
   from gbind : gbind!IntegerExp
     to   atl :   atl!IntegerExp
     
