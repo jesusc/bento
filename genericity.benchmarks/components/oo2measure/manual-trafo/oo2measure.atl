@@ -15,7 +15,9 @@ rule Package2MeasureSet {
 		set.metrics <- thisModule.Metric('ANA', pck.ANA());
 		set.metrics <- thisModule.Metric('AWI', pck.AWI());
 		set.metrics <- thisModule.Metric('BPF', pck.BPF());
+		set.metrics <- thisModule.Metric('CCF', pck.CCF());
 		set.metrics <- thisModule.Metric('DSC', pck.DSC());
+		set.metrics <- thisModule.Metric('ICF', pck.ICF());
 		set.metrics <- thisModule.Metric('IIF', pck.IIF());
 		set.metrics <- thisModule.Metric('NAC', pck.NAC());
 		set.metrics <- thisModule.Metric('NNC', pck.NNC());
@@ -143,14 +145,37 @@ def : BPF() : Real =
 -- Quotient between the actual number of coupled class-pairs within the 
 -- package and the maximum possible number of class-pair couplings in the 
 -- package. This coupling is the one not imputable to inheritance.
--- UNIMPLEMENTED yet (complex)
+-- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+helper context simple_OO_concept!Package
+def : CCF() : Real =
+    let classes_in_package : Integer = self.classes->size() in
+	if  classes_in_package > 1
+		then (self.ICL()->size() / (classes_in_package * classes_in_package - classes_in_package)).sqrt()
+		else 0
+	endif;
+
+helper context simple_OO_concept!Package
+def : ICL() : Set(simple_OO_concept!Class) = -- internal coupling links
+	self.classes->iterate(c; acc : Set(simple_OO_concept!Class)= Set{} | 
+	    acc->union(c.CoupledClasses()))->select(c | self.classes->includes(c))->asSet();
 
 -- ICF - Internal Coupling Factor
 -- Quotient between the number of coupling links where both the client 
 -- and supplier classes belong to the current package and the total number 
 -- of coupling links originating in the current package.
--- UNIMPLEMENTED yet (complex)
+-- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+helper context simple_OO_concept!Package
+def : ICF() : Real =
+	let ICLN : Real = self.ICL()->size() in
+	if ICLN > 0
+	    then ICLN / (ICLN + self.ECL(self)->size())        
+		else 0
+	endif;
 	
+helper context simple_OO_concept!Package
+def : ECL(p : simple_OO_concept!Package) : Set(simple_OO_concept!Class) =
+	self.ICL()->union(p.ICL());
+
 -- IIF - Internal Inheritance Factor
 -- Quotient between the number of inheritance links where both the child 
 -- and parent classes belong to the current package and the total number 
@@ -165,13 +190,13 @@ def : IIF() : Real =
 -- Quotient between the cumulative number of the package classes that do 
 -- access the package attributes and the cumulative number of the package 
 -- classes that can access the package attributes.
--- UNIMPLEMENTED yet (complex)
+-- UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
 
 -- OHEF - Operations Hiding Effectiveness Factor
 -- Quotient between the cumulative number of the package classes that do 
 -- access the package operations and the cumulative number of the package 
 -- classes that can access the package operations.
--- UNIMPLEMENTED yet (complex)
+-- UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
 
 -- DIT - Depth of Inheritance Tree
 -- The length of the longest path of inheritance from the current class to 
@@ -207,7 +232,7 @@ def : CBO() : Integer =
 -- The number of methods in the current class that might respond to a 
 -- message received by its object, including methods both inside and 
 -- outside of this class.
--- UNIMPLEMENTED yet (complex)
+-- UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
 
 -- SIZE2
 -- Number of local attributes and operations defined in the class. The 
