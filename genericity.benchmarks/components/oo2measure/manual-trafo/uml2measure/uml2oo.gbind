@@ -1,0 +1,25 @@
+binding uml2oo {  
+	concept   OO  : "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/OO_concept.ecore"
+	metamodel UML : "http://www.eclipse.org/uml2/4.0.0/UML"
+
+    class NamedElement to NamedElement
+    class Package      to Package when self.oclIsTypeOf(UML!Package) or self.oclIsTypeOf(UML!Model)
+    class Class        to Class   when self.oclIsTypeOf(UML!Class)
+    class Feature      to Feature 
+    class Attribute    to Property
+    class Operation    to Operation
+    class Parameter    to Parameter
+    
+    feature NamedElement.name   is name
+    feature Package.classes     = self.packagedElement->select(c | c.oclIsTypeOf(UML!Class))
+    feature Class.isAbstract    is isAbstract
+    feature Class.attributes    is ownedAttribute
+    feature Class.operations    is ownedOperation
+    feature Class.parents       = self.generalization->collect(g | g.general)
+    feature Feature.isPublic    = self.visibility = #public
+    feature Feature.isProtected = self.visibility = #protected
+    feature Feature.isPrivate   = self.visibility = #private
+    feature Attribute.type      = if self.type.oclIsTypeOf(UML!Class) then self.type else OclUndefined endif
+    feature Operation.parameters is ownedParameter
+    feature Parameter.type      = if self.type.oclIsTypeOf(UML!Class) then self.type else OclUndefined endif
+}

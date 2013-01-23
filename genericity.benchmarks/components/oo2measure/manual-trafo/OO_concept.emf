@@ -31,7 +31,7 @@ class Operation extends NamedElement, Feature {
 }
 
 class Parameter {
-  ref Class[1] type;
+  ref Class[0..1] type;
 }
 
 
