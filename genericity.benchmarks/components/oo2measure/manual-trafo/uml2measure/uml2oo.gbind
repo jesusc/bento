@@ -15,11 +15,11 @@ binding uml2oo {
     feature Class.isAbstract    is isAbstract
     feature Class.attributes    is ownedAttribute
     feature Class.operations    is ownedOperation
-    feature Class.parents       = self.generalization->collect(g | g.general)
+    feature Class.parents       = self.generalization->collect(g|g.general)->excluding(self)->asSet()
     feature Feature.isPublic    = self.visibility = #public
     feature Feature.isProtected = self.visibility = #protected
     feature Feature.isPrivate   = self.visibility = #private
-    feature Attribute.type      = if self.type.oclIsTypeOf(UML!Class) then self.type else OclUndefined endif
+    feature Attribute.atttype   = if self.type.oclIsTypeOf(UML!Class) then self.type else OclUndefined endif
     feature Operation.parameters is ownedParameter
-    feature Parameter.type      = if self.type.oclIsTypeOf(UML!Class) then self.type else OclUndefined endif
+    feature Parameter.partype   = if self.type.oclIsTypeOf(UML!Class) then self.type else OclUndefined endif
 }

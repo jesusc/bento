@@ -23,7 +23,7 @@ abstract class Feature {
 }
 
 class Attribute extends NamedElement, Feature {
-  ref Class[0..1] type;
+  ref Class[0..1] atttype;
 }
 
 class Operation extends NamedElement, Feature {
@@ -31,7 +31,7 @@ class Operation extends NamedElement, Feature {
 }
 
 class Parameter {
-  ref Class[0..1] type;
+  ref Class[0..1] partype;
 }
 
 

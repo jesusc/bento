@@ -145,7 +145,7 @@ def : BPF() : Real =
 -- Quotient between the actual number of coupled class-pairs within the 
 -- package and the maximum possible number of class-pair couplings in the 
 -- package. This coupling is the one not imputable to inheritance.
--- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+-- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.atttype, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype
 helper context simple_OO_concept!Package
 def : CCF() : Real =
     let classes_in_package : Integer = self.classes->size() in
@@ -163,7 +163,7 @@ def : ICL() : Set(simple_OO_concept!Class) = -- internal coupling links
 -- Quotient between the number of coupling links where both the client 
 -- and supplier classes belong to the current package and the total number 
 -- of coupling links originating in the current package.
--- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+-- @uses Package, Package.classes, Class, Class.parents, Class.attributes, Attribute, Attribute.atttype, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype
 helper context simple_OO_concept!Package
 def : ICF() : Real =
 	let ICLN : Real = self.ICL()->size() in
@@ -223,7 +223,7 @@ def : NOC() : Real =
 -- classes are coupled when references declared in one class use references 
 -- or instance variables defined by the other class. Or used as a type or 
 -- in reference by other classes.
--- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operation, Operation, Operation.parameters, Parameter, Parameter.type 
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.atttype, Class.operation, Operation, Operation.parameters, Parameter, Parameter.partype 
 helper context simple_OO_concept!Class
 def : CBO() : Integer =
 	self.CoupledClasses()->size();
@@ -334,9 +334,9 @@ def : MFA() : Real =
 -- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.isPublic, Attribute.isProtected
 helper context simple_OO_concept!Class
 def : MAA() : Integer =
-	let nbFCV : Integer = self.AllAttributes()->select(a | self.CanAccessOperation(a))->size() in
+	let nbFCV : Integer = self.AllAttributes()->select(a | self.CanAccessAttribute(a))->size() in
 	if nbFCV > 0
-		then self.InheritedAttributes->size() / nbFCV
+		then self.InheritedAttributes()->size() / nbFCV
 		else 0
 	endif;
 
@@ -350,15 +350,15 @@ def : MAT() : Integer =
 -- MOA - Measure of Aggregation
 -- Count of the number of data declarations whose types are user defined 
 -- classes.
--- @uses Class, Class.attributes, Class.parents, Attribute, Attribute.type, Attribute.name
+-- @uses Class, Class.attributes, Class.parents, Attribute, Attribute.atttype, Attribute.name
 helper context simple_OO_concept!Class
 def : MOA() : Real =
-	self.AllAttributes()->select(a | not a.type.oclIsUndefined())->size();
+	self.AllAttributes()->select(a | not a.atttype.oclIsUndefined())->size();
 	
 -- MRM - Modeled Relationship Measure
 -- Measure of the total number of attribute and parameter based relationships 
 -- in a class.
--- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type, Class.attributes, Attribute, Attribute.type
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype, Class.attributes, Attribute, Attribute.atttype
 helper context simple_OO_concept!Class
 def : MRM() : Integer =
 	self.DCC() + self.NAD();
@@ -416,7 +416,7 @@ def : CIS() : Integer =
 
 -- NPT - Number of Unique Parameter Types
 -- Number of different parameter types used in the methods of the class.
--- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype
 helper context simple_OO_concept!Class
 def : NPT() : Integer =
 	self.AllParametersTypes()->size();
@@ -443,7 +443,7 @@ def : NOD() : Real =
 -- NAD - Number of Abstract Data Types
 -- Number of user defined objects used as attributes in the class and which 
 -- are necessary to instantiate an object instance of the (aggregate) class.
--- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.atttype
 helper context simple_OO_concept!Class
 def : NAD() : Integer =
 	self.AllAttributesTypes()->size();
@@ -467,7 +467,7 @@ def : CSM() : Real =
 -- parameter list of the methods. The metrics is computed using the 
 -- summation of the intersection of parameters of a method with the 
 -- maximum independent set of all parameter types in the class.
--- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype
 helper context simple_OO_concept!Class
 def : CAM() : Integer =
 	let divisor : Integer =
@@ -482,7 +482,7 @@ def : CAM() : Integer =
 -- Count of the different number of classes that a class is directly related 
 -- to. The metric includes classes that are directly related by attribute 
 -- declarations and message passing (parameters) in methods.
--- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type, Class.attributes, Attribute, Attribute.type
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype, Class.attributes, Attribute, Attribute.atttype
 helper context simple_OO_concept!Class
 def : DCC() : Integer =
 	self.DAC() + self.DPC();
@@ -491,7 +491,7 @@ def : DCC() : Integer =
 -- This metric not only includes classes that are directly related to a class 
 -- by attributes and methods, but also classes that are indirectly related 
 -- through the directly related classes.
--- @uses Class. Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type 
+-- @uses Class. Class.parents, Class.attributes, Attribute, Attribute.atttype, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype 
 helper context simple_OO_concept!Class
 def : MCC() : Integer =
 	self.AllAttributesTypes()->union(self.AllParametersTypes())->
@@ -502,7 +502,7 @@ def : MCC() : Integer =
 -- DAC - Direct Attribute Base Coupling
 -- This metric is a direct count of the number of different class types that 
 -- are declared as attribute references inside a class.
--- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.atttype
 helper context simple_OO_concept!Class
 def : DAC() : Integer =
 	self.AllAttributesTypes()->size();
@@ -510,7 +510,7 @@ def : DAC() : Integer =
 -- DPC - Direct Parameter Based Coupling
 -- Number of class object types that are required directly for a message 
 -- passing (parameters) to methods in the class.
--- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype
 helper context simple_OO_concept!Class
 def : DPC() : Integer =
 	self.AllParametersTypes()->size();
@@ -518,7 +518,7 @@ def : DPC() : Integer =
 -- MPC - Maximum Parameter Based Coupling
 -- Number of Class object types that are required directly and indirectly 
 -- for message passing (parameters) in the Class.
--- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.type
+-- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter, Parameter.partype
 helper context simple_OO_concept!Class
 def : MPC() : Integer =
 	self.AllParametersTypes()->
@@ -530,7 +530,7 @@ def : MPC() : Integer =
 -- are defined in the class. All component declarations are resolved to the 
 -- basic primitives (integers, doubles and characters). The metric value is 
 -- a count of the number of primitives.
--- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.atttype
 helper context simple_OO_concept!Class
 def : CCD() : Integer =
 	self.AllAttributes()->size() + self.AllAttributesTypes()->iterate(t; acc : Integer = 0|
@@ -547,7 +547,7 @@ def : CCP() : Real =
 
 -- CCM - Class Complexity Based on Members
 -- This metric is an aggregate of the data and method parameter complexities.
--- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.type, Class.operations, Operation, Operation.parameters, Parameter
+-- @uses Class, Class.parents, Class.attributes, Attribute, Attribute.atttype, Class.operations, Operation, Operation.parameters, Parameter
 helper context simple_OO_concept!Class
 def : CCM() : Integer =
 	self.CCD() + self.CCP();
@@ -585,30 +585,35 @@ def : AllAttributes() : Set(simple_OO_concept!Attribute) =
 helper context simple_OO_concept!Class
 def : AllAttributes() : Set(simple_OO_concept!Attribute) =
     self.attributes->union(self.InheritedAttributes());
+--    self.attributes->union(self.InheritedAttributes()->reject(ia | self.OverridenAttributes()->collect(oa | oa.name)->includes(ia.name)));
 
 -- attributes defined in the class, that do not override inherited ones
 helper context simple_OO_concept!Class
 def: NewAttributes() : Set(simple_OO_concept!Attribute) =
 	let inherited_attributes : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | not inherited_attributes->exists(att2 | att2.name = att.name));
-
+--    self.attributes->select(da | self.InheritedAttributes()->collect(ia | ia.name)->excludes(da.name));
+    
 -- inherited attributes of a class, not overriden by locally defined ones
 -- NOTE: this implementation is wrong, if C1:a <- C2:a <- C3, it yield 2 for C3, but it should be 1
 helper context simple_OO_concept!Class
 def : InheritedAttributes() : Set(simple_OO_concept!Attribute) =
 	let inherited_attributes : Set(simple_OO_concept!Attribute) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	inherited_attributes->select(att | not self.attributes->exists(att2 | att.name = att2.name));
-
+--    self.parents->iterate(p; acc : Sequence(simple_OO_concept!Attribute) = Sequence{} | acc->union(p.NewAttributes()))->
+--        union(self.parents->collect(p | p.InheritedAttributes())->flatten());
+    
 -- inherited operations of a class that are overriden by locally defined ones
 helper context simple_OO_concept!Class
 def : OverridenAttributes() : Set(simple_OO_concept!Attribute) =
 	let inherited_attributes : Set(simple_OO_concept!Attribute) = self.Ancestors()->collect(a | a.attributes)->flatten() in
 	self.attributes->select(att | inherited_attributes->exists(att2 | att.name = att2.name));
-
+--    self.attributes->select(da | self.InheritedAttributes()->collect(ia | ia.name)->includes(da.name));
+    
 -- all types of all attributes of a class
 helper context simple_OO_concept!Class
 def : AllAttributesTypes() : Set(simple_OO_concept!Class) =
-    self.AllAttributes()->collect(a | a.type)->flatten()->
+    self.AllAttributes()->collect(a | a.atttype)->flatten()->
         select(t | not t.oclIsUndefined())->asSet();
 
 -- indicates whether a class can access an attribute
@@ -655,7 +660,7 @@ def : OverridenOperations() : Set(simple_OO_concept!Operation) =
 --all types of all parameters of an operation
 helper context simple_OO_concept!Operation
 def : AllParametersTypes() : Set(simple_OO_concept!Class) =
-    self.parameters->collect(p | p.type)->flatten()->
+    self.parameters->collect(p | p.partype)->flatten()->
 	   select(t | not t.oclIsUndefined())->asSet();
 
 -- indicates whether a class can access an operation
@@ -679,6 +684,6 @@ def : AllParameters() : Set(simple_OO_concept!Parameter) =
 --all types of all parameters of all operations of a class
 helper context simple_OO_concept!Class
 def : AllParametersTypes() : Set(simple_OO_concept!Class) =
-    self.AllParameters()->collect(p | p.type)->flatten()->
+    self.AllParameters()->collect(p | p.partype)->flatten()->
 	   select(t | not t.oclIsUndefined())->asSet();        
 
