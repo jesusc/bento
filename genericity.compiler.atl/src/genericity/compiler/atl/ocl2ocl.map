@@ -21,6 +21,12 @@ mappings ocl2ocl(gbind) -> (atl)
   end
 
   [expr]
+  from gbind : gbind!StringExp
+    to   atl :   atl!StringExp
+	atl.stringSymbol = gbind.stringSymbol
+  end
+
+  [expr]
   from gbind : gbind!OperatorCallExp // There are several empty subclasses: AddOpCallExp, EqOpCallExp, MulOpCallExp
     to   atl :   atl!OperatorCallExp
 	atl.operationName = gbind.operationName

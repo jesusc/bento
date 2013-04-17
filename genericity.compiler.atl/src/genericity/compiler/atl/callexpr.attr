@@ -75,4 +75,4 @@ attribution callexpr(socl) -> (atl)
  	next_call[rest]            <- self[rest].tail
     next_call[previous_result] <- atl_operation_call
   end
-  
+end

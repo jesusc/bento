@@ -6,7 +6,7 @@
 # Binaries
 */bin/*
 */eclectic-gen/*
-
+*.asm
 
 /genericity.atl.transformations/.project
 /genericity.atl.transformations/.project

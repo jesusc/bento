@@ -183,6 +183,12 @@ public class Rewrite1 {
 		public List<Object> allObjectsOf(String metaclass, boolean noSubtypes) {
 			throw new UnsupportedOperationException();
 		}
+
+		@Override
+		public void deleteObject(Object o) {
+			throw new UnsupportedOperationException();
+			
+		}
 	}
 }
 

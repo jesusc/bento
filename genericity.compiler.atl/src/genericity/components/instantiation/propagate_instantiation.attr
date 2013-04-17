@@ -66,4 +66,4 @@ attribution propagate_instantiation(comp) -> (inst)
 
   	self[adaptation] <- t
   end
-  
+end

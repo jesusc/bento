@@ -16,8 +16,11 @@ binding bpmn2fd {
 	feature FlowEdge."in" is source
 	feature FlowEdge.out is target
 
-	feature Node.ins is inEdges
-	feature Node.outs is outEdges
+	--feature Node.ins is inEdges
+	--feature Node.outs is outEdges
+	feature Node.ins = APRO!Edge.allInstances()->select( e | e.target = self )
+	feature Node.outs = APRO!Edge.allInstances()->select( e | e.source = self )
+	
 
 	feature Task.isInitial = self.inEdges->isEmpty()
 	    

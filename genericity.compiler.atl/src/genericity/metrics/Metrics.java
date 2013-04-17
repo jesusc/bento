@@ -54,6 +54,8 @@ public class Metrics {
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpmn2.omg2pn/bpmn2.gbind.xmi";
+
 	// bender2pn
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bender2pn/bender.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
@@ -63,15 +65,18 @@ public class Metrics {
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// grafcet2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+
+	// apromore
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/apromore2pn/apromore2fd.gbind.xmi";
 
 	// epc2pn
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/epc2pn/epc.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// yawl2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// ecore2measure_manual

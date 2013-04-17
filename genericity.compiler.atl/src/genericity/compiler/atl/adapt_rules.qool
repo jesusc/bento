@@ -172,7 +172,7 @@ end
 
 segment RenameRuleN
 	forall mr from pMatchedAtlMatchedRuleN
-		newRule = mr.rule.copy
+		newRule = mr.rule.^copy
 		module = atl!Module.all_instances.first
 		module.elements = newRule
 
@@ -239,7 +239,7 @@ end
 
 segment RenameHelperN
 	forall m from pMatchedHelperN
-		newHelper = m.helper.copy
+		newHelper = m.helper.^copy
 		module = atl!Module.all_instances.first
 		module.elements = newHelper
 				

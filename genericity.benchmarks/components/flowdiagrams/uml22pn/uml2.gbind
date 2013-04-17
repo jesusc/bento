@@ -4,39 +4,33 @@ binding uml2 {
 	metamodel UML  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/uml22pn/UML.ecore"
 	
 	class FlowDiagram to Activity		
-	class Node        to ActivityNode	
-	class FlowEdge    to ActivityEdge
+	class Node        to ActivityNode 	
+	class FlowEdge    to ActivityEdge 
+	-- In the first versions I had ActivityNode and ActivityEdge but ObjectNode and ObjectFlow inherits from them...
+	-- The alternative for "Node -> ExecutableNode, ControlNode" is mapping to ActivityNode and filtering with when
 
-    feature FlowDiagram.isFinalMandatory = true
-
-    -- Naive and wrong (for the checker is fine...)
-    -- class Task to Action
-    -- feature Task.name     is name
-	-- feature Task.isInitial = self.oclIsKindOf(FD!InitialNode)
-    
-	
-	-- Right way of doing it
-	class Task to ActivityNode when self.oclIsKindOf(UML!Action) or self.oclIsKindOf(UML!InitialNode)
-    -- feature Task.name     is name
-	feature Task.isInitial = self.oclIsKindOf(UML!InitialNode)
+	--class Task to ActivityNode when self.oclIsKindOf(UML!ExecutableNode) or self.oclIsKindOf(UML!InitialNode)
+    --feature Task.name     is name
+	--feature Task.isInitial = self.oclIsKindOf(UML!InitialNode)
  	-- TODO: Filter some subclasses of FD!Action (e.g., InterrumpibleAction)
 	
-	-- This is an alternative way of doing this
-	-- class Task            to Action, InitialNode
-	-- feature Task[Action].name is name
-	-- feature Task[Action].isInitial = false
-	-- feature Task[InitialNode].name is 'Initial'
-	-- feature Task[InitialNode].isInitial = true 
+	class Task to ObjectNode, ExecutableNode, InitialNode
+	feature Task[ExecutableNode].name is name
+	feature Task[ExecutableNode].isInitial = false
+	feature Task[ObjectNode].name is name
+	feature Task[ObjectNode].isInitial = false
+	feature Task[InitialNode].name = 'Initial'
+	feature Task[InitialNode].isInitial = true 
 	     					           
 	     					           
 	class ExclusiveChoice to DecisionNode	                                        
 	class ParallelSplit   to ForkNode
-	class Synchronization to NONE
+	class Synchronization to JoinNode 
 	class MultiChoice     to NONE
-	class SimpleMerge     to NONE
+	class SimpleMerge     to MergeNode
 	
-	feature FlowDiagram.nodes = self.node
-	feature FlowDiagram.edges = self.edge
+	feature FlowDiagram.nodes = self.node -- ->select(n | n.oclIsKindOf(UML!ExecutableNode) or n.oclIsKindOf(UML!ControlNode))
+	feature FlowDiagram.edges = self.edge -- ->select(e | e.oclIsKindOf(UML!ControlFlow))
 
 	feature FlowEdge."in" is source
 	feature FlowEdge.out is target
@@ -44,12 +38,22 @@ binding uml2 {
 	feature Node."ins" is incoming
 	feature Node.outs  is outgoing
 
-	
-
-	-- Bindings for final tasks
+			-- Bindings for final tasks
+	-- This is an example when the selection of "isTerminating" feature has to be
+	-- done at runtime...  because a FinalFlowNode is not terminating
 	class FinalTask   to FinalNode
 	feature FinalTask.isTerminating = self.oclIsKindOf(UML!ActivityFinalNode)     
 	feature FinalTask.isMandatory   = false -- In UML2 existence of final tasks doesn't seem compulsory
+
+
+    feature FlowDiagram.isFinalMandatory = false
+
+
+	-- Unsupported elements
+	-- <<decisionInputFlow>>
+	-- JoinNode with joinSpec != 'and'
+	-- I do not think that DataStore works (see http://www.uml-diagrams.org/activity-diagrams-objects.html)
+	-- SequenceNode (StructuredActivityNode)... cannot be mapped
 }
 
 
