@@ -30,7 +30,7 @@ binding bpmn_omg2fd {
 	
 	feature FlowDiagram.nodes = self.flowElements->select(f | f.oclIsKindOf(BPMN!FlowNode) )
 	feature FlowDiagram.edges = self.flowElements->select(f | f.oclIsKindOf(BPMN!SequenceFlow) )
-	
+	-- Works with lanes because a lane does not contain flow nodes, but references them :-)
 	
 	feature Task[Task].isInitial = false
 	feature Task[Task].name is name
@@ -38,12 +38,8 @@ binding bpmn_omg2fd {
 	feature Task[StartEvent].isInitial = true
 	feature Task[StartEvent].name is name
 	
-	feature Task[EndEvent].isInitial = true
-	feature Task[EndEvent].name is name
-	
 	feature Node.outs is outgoing
 	feature Node.ins  is incoming
-	-- look out: pools and lanes!
 	
 	feature FlowEdge."in" is sourceRef
 	feature FlowEdge.out  is targetRef

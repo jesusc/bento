@@ -47,7 +47,7 @@ binding bpmn2fd {
 
 
 	feature Task.isInitial = self.activityType = #EventStartEmpty
-	
+	feature Task.name is name
 	
 	-- feature Task.isFinal   = self.activityType = #EventEndEmpty or self.activityType = #EventEndTerminate    
 	class FinalTask to Activity when self.activityType = #EventEndEmpty or self.activityType = #EventEndTerminate
