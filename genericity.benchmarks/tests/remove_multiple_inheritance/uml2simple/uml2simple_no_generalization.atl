@@ -1,0 +1,49 @@
+module uml_single_inheritance;
+create OUT : SimpleUML from IN : Simple;
+
+rule class2class {
+ from
+  umlClass : Simple!SimpleClass
+ to
+  outClass : SimpleUML!SimpleClass (
+   simpleName <- umlClass.name,
+   generalizations <- thisModule.__convertToSequence__(umlClass.generalization_tuple_convert->first())->collect(__v__ |
+    if __v__.oclType().name = 'Tuple' then
+     if __v__.asMap().get('type__') = 'Generalization' then
+      thisModule.uniqueLazyRuleGeneralization(__v__)
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )
+  )
+}
+
+lazy rule uniqueLazyRuleGeneralization {
+ from
+  gen : Simple!"OclAny"
+ to
+  outgen : SimpleUML!Generalization (
+   reference <- gen.general
+  )
+}
+
+helper def: __convertToSequence__(obj : OclAny) : OclAny =
+ if obj = OclUndefined then
+  Sequence {}
+ else
+  Sequence {obj}->flatten()
+ endif;
+
+helper context Simple!SimpleClass def: generalization_tuple_convert : OclAny =
+ self.generalization->collect(superclasses |
+  Tuple {general = superclasses, type__ = 'Generalization'}
+ );
+
+helper context Simple!SimpleClass def: name : OclAny =
+ self.simpleName;
+
+helper context Simple!SimpleClass def: generalization : OclAny =
+ self.superclasses;

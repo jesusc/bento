@@ -1,0 +1,19 @@
+
+binding uml2simple {  
+	concept   UML    : "platform:/resource/genericity.compiler.atl/metamodels/UML.ecore"
+	metamodel Simple : "platform:/resource/genericity.compiler.atl/metamodels/SimpleUML.ecore"
+	
+	
+	class Class to UMLClass		
+	        
+	feature Class.name is umlName
+	
+	class Generalization to UMLClass."superclasses" / Class.generalization
+      { feature Generalization.general is superclasses
+            -- feature Class.generalizations is superclasses
+      }
+      
+	helper Model.myhelper : Sequence(Simple!Class) = self.things     	
+}
+
+

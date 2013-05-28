@@ -1,0 +1,12 @@
+
+transformation component remove_multiple_inheritance {
+	source concept UML       : "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/metamodels/UML.ecore"
+	target concept SimpleUML : "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/metamodels/SimpleUML.ecore"
+	
+	source model uml : UML
+	target model simple : SimpleUML
+	
+	
+	definition atl "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/trafo/remove_multiple_inheritance.atl" 
+		with IN : UML = uml, OUT : SimpleUML = simple
+}

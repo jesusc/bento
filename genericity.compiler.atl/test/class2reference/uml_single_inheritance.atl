@@ -1,0 +1,18 @@
+module uml_single_inheritance;
+create OUT : UML from IN : UML;
+
+
+rule class2class {
+	from umlClass  : UML!Class
+	to   outClass :  UML!Class (
+		name           <- umlClass.name,	
+   	    generalization <- umlClass.generalization->first()		
+	)
+}
+
+rule generalization2generalization {
+	from gen  : UML!Generalization
+	to   outgen :  UML!Generalization (
+		general <- gen.general
+	)
+}

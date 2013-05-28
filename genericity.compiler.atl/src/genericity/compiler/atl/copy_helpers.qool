@@ -1,0 +1,51 @@
+/**
+ * Copy helpers defined in the binding specification.
+ */
+qool copy_helpers(atl, gbind, params) -> ()
+
+
+
+// rt model for traces if needed!
+// local queue genericQ    : rt!generic
+
+// ATL elements
+// model queue mOclModelElement : atl!OclModelElement
+
+// GBind elements
+model queue mLocalHelper : gbind!LocalHelper
+
+// 	Dsl.LocalHelper ::= "helper" context[]  "." feature[] ":" type "=" body : Simpleocl.OclExpression; //ocl.OclExpression;
+
+
+
+//
+// Begin-of rules
+//
+
+segment CopyHelpers
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName		
+	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+
+	forall m from mLocalHelper
+		ocl_expr = m.body
+		
+		filter_view2 = { |o|
+			o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
+		}		
+		
+		atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+				 input-view-filter filter_view2
+				 output-element ocl_expr[expr.t]
+		
+		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createOclAttributeHelperFromLocalHelper(m, m.context, ocl_model, atl_expr)
+		
+		module = atl!Module.all_instances.first
+		module.elements = helper
+		// conceptFeature
+		// conceptClass : ConceptMetaclass
+		// qualifier... ConcreteMetaclass
+		// concreteFeature
+	end    
+end
+

@@ -1,0 +1,12 @@
+composite component uml2simple_no_generalization {
+	uses "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/remove_multiple_inheritance.gcomponent"  
+	binding bindComponent = "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/uml2simple/uml2simple.gbind"
+			
+	source concept SimpleUML_1  : "SimpleUML.ecore"
+	target concept SimpleUML_2 : "SimpleUML.ecore"
+	source model in  : SimpleUML_1  = "persons.uml" 
+	target model out : SimpleUML_2 = "output-persons.xmi"
+	
+	compose apply remove_multiple_inheritance(bindComponent(in)) -> (out)
+	
+}
