@@ -107,13 +107,22 @@ public interface DslPackage extends EPackage {
 	int BINDING_MODEL__CONCRETE_METACLASSES = 3;
 
 	/**
+	 * The feature id for the '<em><b>Virtual Metaclasses</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_MODEL__VIRTUAL_METACLASSES = 4;
+
+	/**
 	 * The feature id for the '<em><b>Bound Concept</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__BOUND_CONCEPT = 4;
+	int BINDING_MODEL__BOUND_CONCEPT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Bound Metamodel</b></em>' containment reference.
@@ -122,7 +131,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__BOUND_METAMODEL = 5;
+	int BINDING_MODEL__BOUND_METAMODEL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -131,7 +140,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__NAME = 6;
+	int BINDING_MODEL__NAME = 7;
 
 	/**
 	 * The number of structural features of the '<em>Binding Model</em>' class.
@@ -140,7 +149,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL_FEATURE_COUNT = 7;
+	int BINDING_MODEL_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.MetamodelDeclarationImpl <em>Metamodel Declaration</em>}' class.
@@ -492,40 +501,49 @@ public interface DslPackage extends EPackage {
 	int INTERMEDIATE_CLASS_BINDING__CONCEPT = CONCEPT_BINDING_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Concrete Source</b></em>' reference.
+	 * The feature id for the '<em><b>Concrete Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE = CONCEPT_BINDING_FEATURE_COUNT + 1;
+	int INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS = CONCEPT_BINDING_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Concrete Reference Source</b></em>' attribute.
+	 * The feature id for the '<em><b>Concrete Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE = CONCEPT_BINDING_FEATURE_COUNT + 2;
+	int INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE = CONCEPT_BINDING_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Concrete Target</b></em>' reference.
+	 * The feature id for the '<em><b>Concept Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET = CONCEPT_BINDING_FEATURE_COUNT + 3;
+	int INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT = CONCEPT_BINDING_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Concrete Reference Target</b></em>' attribute.
+	 * The feature id for the '<em><b>Concept Reference Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET = CONCEPT_BINDING_FEATURE_COUNT + 4;
+	int INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME = CONCEPT_BINDING_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Feature Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS = CONCEPT_BINDING_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Intermediate Class Binding</em>' class.
@@ -534,7 +552,310 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE_CLASS_BINDING_FEATURE_COUNT = CONCEPT_BINDING_FEATURE_COUNT + 5;
+	int INTERMEDIATE_CLASS_BINDING_FEATURE_COUNT = CONCEPT_BINDING_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.ConcreteReferencDeclaringVarImpl <em>Concrete Referenc Declaring Var</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.ConcreteReferencDeclaringVarImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getConcreteReferencDeclaringVar()
+	 * @generated
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR = 8;
+
+	/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__LINE = SimpleoclPackage.VARIABLE_DECLARATION__LINE;
+
+	/**
+	 * The feature id for the '<em><b>Column</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__COLUMN = SimpleoclPackage.VARIABLE_DECLARATION__COLUMN;
+
+	/**
+	 * The feature id for the '<em><b>Char Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__CHAR_START = SimpleoclPackage.VARIABLE_DECLARATION__CHAR_START;
+
+	/**
+	 * The feature id for the '<em><b>Char End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__CHAR_END = SimpleoclPackage.VARIABLE_DECLARATION__CHAR_END;
+
+	/**
+	 * The feature id for the '<em><b>Var Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__VAR_NAME = SimpleoclPackage.VARIABLE_DECLARATION__VAR_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__TYPE = SimpleoclPackage.VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Variable Exp</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR__VARIABLE_EXP = SimpleoclPackage.VARIABLE_DECLARATION__VARIABLE_EXP;
+
+	/**
+	 * The number of structural features of the '<em>Concrete Referenc Declaring Var</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_REFERENC_DECLARING_VAR_FEATURE_COUNT = SimpleoclPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.VirtualMetaclassImpl <em>Virtual Metaclass</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.VirtualMetaclassImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualMetaclass()
+	 * @generated
+	 */
+	int VIRTUAL_METACLASS = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_METACLASS__NAME = METACLASS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Eclass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_METACLASS__ECLASS = METACLASS__ECLASS;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_METACLASS__REFERENCES = METACLASS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_METACLASS__INIT = METACLASS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Metaclass</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_METACLASS_FEATURE_COUNT = METACLASS_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.VirtualFeatureImpl <em>Virtual Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.VirtualFeatureImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualFeature()
+	 * @generated
+	 */
+	int VIRTUAL_FEATURE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FEATURE__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_FEATURE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.VirtualReferenceImpl <em>Virtual Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.VirtualReferenceImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualReference()
+	 * @generated
+	 */
+	int VIRTUAL_REFERENCE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_REFERENCE__NAME = VIRTUAL_FEATURE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type </b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_REFERENCE__TYPE_ = VIRTUAL_FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_REFERENCE_FEATURE_COUNT = VIRTUAL_FEATURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.VirtualClassBindingImpl <em>Virtual Class Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.VirtualClassBindingImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualClassBinding()
+	 * @generated
+	 */
+	int VIRTUAL_CLASS_BINDING = 12;
+
+	/**
+	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_CLASS_BINDING__DEBUG_NAME = CONCEPT_BINDING__DEBUG_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Model </b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_CLASS_BINDING__MODEL_ = CONCEPT_BINDING__MODEL_;
+
+	/**
+	 * The feature id for the '<em><b>Concept</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_CLASS_BINDING__CONCEPT = CONCEPT_BINDING_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Virtual</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_CLASS_BINDING__VIRTUAL = CONCEPT_BINDING_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Ref Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_CLASS_BINDING__REF_FEATURES = CONCEPT_BINDING_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Class Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_CLASS_BINDING_FEATURE_COUNT = CONCEPT_BINDING_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.ConceptFeatureRefImpl <em>Concept Feature Ref</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.ConceptFeatureRefImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getConceptFeatureRef()
+	 * @generated
+	 */
+	int CONCEPT_FEATURE_REF = 13;
+
+	/**
+	 * The feature id for the '<em><b>Concept Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_FEATURE_REF__CONCEPT_CLASS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_FEATURE_REF__FEATURE_NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Concept Feature Ref</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_FEATURE_REF_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.BaseFeatureBindingImpl <em>Base Feature Binding</em>}' class.
@@ -544,7 +865,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseFeatureBinding()
 	 * @generated
 	 */
-	int BASE_FEATURE_BINDING = 8;
+	int BASE_FEATURE_BINDING = 14;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -608,7 +929,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getRenamingFeatureBinding()
 	 * @generated
 	 */
-	int RENAMING_FEATURE_BINDING = 9;
+	int RENAMING_FEATURE_BINDING = 15;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -681,7 +1002,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getOclFeatureBinding()
 	 * @generated
 	 */
-	int OCL_FEATURE_BINDING = 10;
+	int OCL_FEATURE_BINDING = 16;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -754,7 +1075,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseHelper()
 	 * @generated
 	 */
-	int BASE_HELPER = 11;
+	int BASE_HELPER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -809,7 +1130,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptHelper()
 	 * @generated
 	 */
-	int CONCEPT_HELPER = 12;
+	int CONCEPT_HELPER = 18;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -882,7 +1203,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getLocalHelper()
 	 * @generated
 	 */
-	int LOCAL_HELPER = 13;
+	int LOCAL_HELPER = 19;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -992,6 +1313,17 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBindingModel_ConcreteMetaclasses();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.BindingModel#getVirtualMetaclasses <em>Virtual Metaclasses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Virtual Metaclasses</em>'.
+	 * @see gbind.dsl.BindingModel#getVirtualMetaclasses()
+	 * @see #getBindingModel()
+	 * @generated
+	 */
+	EReference getBindingModel_VirtualMetaclasses();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link gbind.dsl.BindingModel#getBoundConcept <em>Bound Concept</em>}'.
@@ -1196,48 +1528,218 @@ public interface DslPackage extends EPackage {
 	EReference getIntermediateClassBinding_Concept();
 
 	/**
-	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConcreteSource <em>Concrete Source</em>}'.
+	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConcreteClass <em>Concrete Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Concrete Source</em>'.
-	 * @see gbind.dsl.IntermediateClassBinding#getConcreteSource()
+	 * @return the meta object for the reference '<em>Concrete Class</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcreteClass()
 	 * @see #getIntermediateClassBinding()
 	 * @generated
 	 */
-	EReference getIntermediateClassBinding_ConcreteSource();
+	EReference getIntermediateClassBinding_ConcreteClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceSource <em>Concrete Reference Source</em>}'.
+	 * Returns the meta object for the containment reference '{@link gbind.dsl.IntermediateClassBinding#getConcreteReference <em>Concrete Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Concrete Reference Source</em>'.
-	 * @see gbind.dsl.IntermediateClassBinding#getConcreteReferenceSource()
+	 * @return the meta object for the containment reference '<em>Concrete Reference</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConcreteReference()
 	 * @see #getIntermediateClassBinding()
 	 * @generated
 	 */
-	EAttribute getIntermediateClassBinding_ConcreteReferenceSource();
+	EReference getIntermediateClassBinding_ConcreteReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConcreteTarget <em>Concrete Target</em>}'.
+	 * Returns the meta object for the reference '{@link gbind.dsl.IntermediateClassBinding#getConceptContext <em>Concept Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Concrete Target</em>'.
-	 * @see gbind.dsl.IntermediateClassBinding#getConcreteTarget()
+	 * @return the meta object for the reference '<em>Concept Context</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConceptContext()
 	 * @see #getIntermediateClassBinding()
 	 * @generated
 	 */
-	EReference getIntermediateClassBinding_ConcreteTarget();
+	EReference getIntermediateClassBinding_ConceptContext();
 
 	/**
-	 * Returns the meta object for the attribute '{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceTarget <em>Concrete Reference Target</em>}'.
+	 * Returns the meta object for the attribute '{@link gbind.dsl.IntermediateClassBinding#getConceptReferenceName <em>Concept Reference Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Concrete Reference Target</em>'.
-	 * @see gbind.dsl.IntermediateClassBinding#getConcreteReferenceTarget()
+	 * @return the meta object for the attribute '<em>Concept Reference Name</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getConceptReferenceName()
 	 * @see #getIntermediateClassBinding()
 	 * @generated
 	 */
-	EAttribute getIntermediateClassBinding_ConcreteReferenceTarget();
+	EAttribute getIntermediateClassBinding_ConceptReferenceName();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.IntermediateClassBinding#getFeatureBindings <em>Feature Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Feature Bindings</em>'.
+	 * @see gbind.dsl.IntermediateClassBinding#getFeatureBindings()
+	 * @see #getIntermediateClassBinding()
+	 * @generated
+	 */
+	EReference getIntermediateClassBinding_FeatureBindings();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.ConcreteReferencDeclaringVar <em>Concrete Referenc Declaring Var</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concrete Referenc Declaring Var</em>'.
+	 * @see gbind.dsl.ConcreteReferencDeclaringVar
+	 * @generated
+	 */
+	EClass getConcreteReferencDeclaringVar();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.VirtualMetaclass <em>Virtual Metaclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Metaclass</em>'.
+	 * @see gbind.dsl.VirtualMetaclass
+	 * @generated
+	 */
+	EClass getVirtualMetaclass();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.VirtualMetaclass#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see gbind.dsl.VirtualMetaclass#getReferences()
+	 * @see #getVirtualMetaclass()
+	 * @generated
+	 */
+	EReference getVirtualMetaclass_References();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link gbind.dsl.VirtualMetaclass#getInit <em>Init</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Init</em>'.
+	 * @see gbind.dsl.VirtualMetaclass#getInit()
+	 * @see #getVirtualMetaclass()
+	 * @generated
+	 */
+	EReference getVirtualMetaclass_Init();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.VirtualFeature <em>Virtual Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Feature</em>'.
+	 * @see gbind.dsl.VirtualFeature
+	 * @generated
+	 */
+	EClass getVirtualFeature();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.VirtualFeature#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see gbind.dsl.VirtualFeature#getName()
+	 * @see #getVirtualFeature()
+	 * @generated
+	 */
+	EAttribute getVirtualFeature_Name();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.VirtualReference <em>Virtual Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Reference</em>'.
+	 * @see gbind.dsl.VirtualReference
+	 * @generated
+	 */
+	EClass getVirtualReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.VirtualReference#getType_ <em>Type </em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type </em>'.
+	 * @see gbind.dsl.VirtualReference#getType_()
+	 * @see #getVirtualReference()
+	 * @generated
+	 */
+	EReference getVirtualReference_Type_();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.VirtualClassBinding <em>Virtual Class Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Class Binding</em>'.
+	 * @see gbind.dsl.VirtualClassBinding
+	 * @generated
+	 */
+	EClass getVirtualClassBinding();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.VirtualClassBinding#getConcept <em>Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Concept</em>'.
+	 * @see gbind.dsl.VirtualClassBinding#getConcept()
+	 * @see #getVirtualClassBinding()
+	 * @generated
+	 */
+	EReference getVirtualClassBinding_Concept();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.VirtualClassBinding#getVirtual <em>Virtual</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Virtual</em>'.
+	 * @see gbind.dsl.VirtualClassBinding#getVirtual()
+	 * @see #getVirtualClassBinding()
+	 * @generated
+	 */
+	EReference getVirtualClassBinding_Virtual();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.VirtualClassBinding#getRefFeatures <em>Ref Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Ref Features</em>'.
+	 * @see gbind.dsl.VirtualClassBinding#getRefFeatures()
+	 * @see #getVirtualClassBinding()
+	 * @generated
+	 */
+	EReference getVirtualClassBinding_RefFeatures();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.ConceptFeatureRef <em>Concept Feature Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concept Feature Ref</em>'.
+	 * @see gbind.dsl.ConceptFeatureRef
+	 * @generated
+	 */
+	EClass getConceptFeatureRef();
+
+	/**
+	 * Returns the meta object for the reference '{@link gbind.dsl.ConceptFeatureRef#getConceptClass <em>Concept Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Concept Class</em>'.
+	 * @see gbind.dsl.ConceptFeatureRef#getConceptClass()
+	 * @see #getConceptFeatureRef()
+	 * @generated
+	 */
+	EReference getConceptFeatureRef_ConceptClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.ConceptFeatureRef#getFeatureName <em>Feature Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Feature Name</em>'.
+	 * @see gbind.dsl.ConceptFeatureRef#getFeatureName()
+	 * @see #getConceptFeatureRef()
+	 * @generated
+	 */
+	EAttribute getConceptFeatureRef_FeatureName();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.BaseFeatureBinding <em>Base Feature Binding</em>}'.
@@ -1496,6 +1998,14 @@ public interface DslPackage extends EPackage {
 		EReference BINDING_MODEL__CONCRETE_METACLASSES = eINSTANCE.getBindingModel_ConcreteMetaclasses();
 
 		/**
+		 * The meta object literal for the '<em><b>Virtual Metaclasses</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_MODEL__VIRTUAL_METACLASSES = eINSTANCE.getBindingModel_VirtualMetaclasses();
+
+		/**
 		 * The meta object literal for the '<em><b>Bound Concept</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1662,36 +2172,176 @@ public interface DslPackage extends EPackage {
 		EReference INTERMEDIATE_CLASS_BINDING__CONCEPT = eINSTANCE.getIntermediateClassBinding_Concept();
 
 		/**
-		 * The meta object literal for the '<em><b>Concrete Source</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Concrete Class</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE = eINSTANCE.getIntermediateClassBinding_ConcreteSource();
+		EReference INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS = eINSTANCE.getIntermediateClassBinding_ConcreteClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Concrete Reference Source</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Concrete Reference</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE = eINSTANCE.getIntermediateClassBinding_ConcreteReferenceSource();
+		EReference INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE = eINSTANCE.getIntermediateClassBinding_ConcreteReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Concrete Target</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Concept Context</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET = eINSTANCE.getIntermediateClassBinding_ConcreteTarget();
+		EReference INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT = eINSTANCE.getIntermediateClassBinding_ConceptContext();
 
 		/**
-		 * The meta object literal for the '<em><b>Concrete Reference Target</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Concept Reference Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET = eINSTANCE.getIntermediateClassBinding_ConcreteReferenceTarget();
+		EAttribute INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME = eINSTANCE.getIntermediateClassBinding_ConceptReferenceName();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS = eINSTANCE.getIntermediateClassBinding_FeatureBindings();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.ConcreteReferencDeclaringVarImpl <em>Concrete Referenc Declaring Var</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.ConcreteReferencDeclaringVarImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getConcreteReferencDeclaringVar()
+		 * @generated
+		 */
+		EClass CONCRETE_REFERENC_DECLARING_VAR = eINSTANCE.getConcreteReferencDeclaringVar();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualMetaclassImpl <em>Virtual Metaclass</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.VirtualMetaclassImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getVirtualMetaclass()
+		 * @generated
+		 */
+		EClass VIRTUAL_METACLASS = eINSTANCE.getVirtualMetaclass();
+
+		/**
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_METACLASS__REFERENCES = eINSTANCE.getVirtualMetaclass_References();
+
+		/**
+		 * The meta object literal for the '<em><b>Init</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_METACLASS__INIT = eINSTANCE.getVirtualMetaclass_Init();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualFeatureImpl <em>Virtual Feature</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.VirtualFeatureImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getVirtualFeature()
+		 * @generated
+		 */
+		EClass VIRTUAL_FEATURE = eINSTANCE.getVirtualFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VIRTUAL_FEATURE__NAME = eINSTANCE.getVirtualFeature_Name();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualReferenceImpl <em>Virtual Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.VirtualReferenceImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getVirtualReference()
+		 * @generated
+		 */
+		EClass VIRTUAL_REFERENCE = eINSTANCE.getVirtualReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Type </b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_REFERENCE__TYPE_ = eINSTANCE.getVirtualReference_Type_();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualClassBindingImpl <em>Virtual Class Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.VirtualClassBindingImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getVirtualClassBinding()
+		 * @generated
+		 */
+		EClass VIRTUAL_CLASS_BINDING = eINSTANCE.getVirtualClassBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Concept</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_CLASS_BINDING__CONCEPT = eINSTANCE.getVirtualClassBinding_Concept();
+
+		/**
+		 * The meta object literal for the '<em><b>Virtual</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_CLASS_BINDING__VIRTUAL = eINSTANCE.getVirtualClassBinding_Virtual();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref Features</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_CLASS_BINDING__REF_FEATURES = eINSTANCE.getVirtualClassBinding_RefFeatures();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.ConceptFeatureRefImpl <em>Concept Feature Ref</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.ConceptFeatureRefImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getConceptFeatureRef()
+		 * @generated
+		 */
+		EClass CONCEPT_FEATURE_REF = eINSTANCE.getConceptFeatureRef();
+
+		/**
+		 * The meta object literal for the '<em><b>Concept Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCEPT_FEATURE_REF__CONCEPT_CLASS = eINSTANCE.getConceptFeatureRef_ConceptClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONCEPT_FEATURE_REF__FEATURE_NAME = eINSTANCE.getConceptFeatureRef_FeatureName();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.BaseFeatureBindingImpl <em>Base Feature Binding</em>}' class.

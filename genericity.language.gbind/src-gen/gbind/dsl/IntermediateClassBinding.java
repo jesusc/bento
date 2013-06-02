@@ -6,6 +6,8 @@
  */
 package gbind.dsl;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,10 +18,11 @@ package gbind.dsl;
  * The following features are supported:
  * <ul>
  *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcept <em>Concept</em>}</li>
- *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcreteSource <em>Concrete Source</em>}</li>
- *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceSource <em>Concrete Reference Source</em>}</li>
- *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcreteTarget <em>Concrete Target</em>}</li>
- *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceTarget <em>Concrete Reference Target</em>}</li>
+ *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcreteClass <em>Concrete Class</em>}</li>
+ *   <li>{@link gbind.dsl.IntermediateClassBinding#getConcreteReference <em>Concrete Reference</em>}</li>
+ *   <li>{@link gbind.dsl.IntermediateClassBinding#getConceptContext <em>Concept Context</em>}</li>
+ *   <li>{@link gbind.dsl.IntermediateClassBinding#getConceptReferenceName <em>Concept Reference Name</em>}</li>
+ *   <li>{@link gbind.dsl.IntermediateClassBinding#getFeatureBindings <em>Feature Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,107 +58,123 @@ public interface IntermediateClassBinding extends ConceptBinding {
 	void setConcept(ConceptMetaclass value);
 
 	/**
-	 * Returns the value of the '<em><b>Concrete Source</b></em>' reference.
+	 * Returns the value of the '<em><b>Concrete Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Concrete Source</em>' reference isn't clear,
+	 * If the meaning of the '<em>Concrete Class</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Concrete Source</em>' reference.
-	 * @see #setConcreteSource(ConcreteMetaclass)
-	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConcreteSource()
+	 * @return the value of the '<em>Concrete Class</em>' reference.
+	 * @see #setConcreteClass(ConcreteMetaclass)
+	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConcreteClass()
 	 * @model required="true"
 	 * @generated
 	 */
-	ConcreteMetaclass getConcreteSource();
+	ConcreteMetaclass getConcreteClass();
 
 	/**
-	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConcreteSource <em>Concrete Source</em>}' reference.
+	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConcreteClass <em>Concrete Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Concrete Source</em>' reference.
-	 * @see #getConcreteSource()
+	 * @param value the new value of the '<em>Concrete Class</em>' reference.
+	 * @see #getConcreteClass()
 	 * @generated
 	 */
-	void setConcreteSource(ConcreteMetaclass value);
+	void setConcreteClass(ConcreteMetaclass value);
 
 	/**
-	 * Returns the value of the '<em><b>Concrete Reference Source</b></em>' attribute.
+	 * Returns the value of the '<em><b>Concrete Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Concrete Reference Source</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Concrete Reference</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Concrete Reference Source</em>' attribute.
-	 * @see #setConcreteReferenceSource(String)
-	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConcreteReferenceSource()
+	 * @return the value of the '<em>Concrete Reference</em>' containment reference.
+	 * @see #setConcreteReference(ConcreteReferencDeclaringVar)
+	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConcreteReference()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	ConcreteReferencDeclaringVar getConcreteReference();
+
+	/**
+	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConcreteReference <em>Concrete Reference</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Concrete Reference</em>' containment reference.
+	 * @see #getConcreteReference()
+	 * @generated
+	 */
+	void setConcreteReference(ConcreteReferencDeclaringVar value);
+
+	/**
+	 * Returns the value of the '<em><b>Concept Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Concept Context</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Concept Context</em>' reference.
+	 * @see #setConceptContext(ConceptMetaclass)
+	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConceptContext()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getConcreteReferenceSource();
+	ConceptMetaclass getConceptContext();
 
 	/**
-	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceSource <em>Concrete Reference Source</em>}' attribute.
+	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConceptContext <em>Concept Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Concrete Reference Source</em>' attribute.
-	 * @see #getConcreteReferenceSource()
+	 * @param value the new value of the '<em>Concept Context</em>' reference.
+	 * @see #getConceptContext()
 	 * @generated
 	 */
-	void setConcreteReferenceSource(String value);
+	void setConceptContext(ConceptMetaclass value);
 
 	/**
-	 * Returns the value of the '<em><b>Concrete Target</b></em>' reference.
+	 * Returns the value of the '<em><b>Concept Reference Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Concrete Target</em>' reference isn't clear,
+	 * If the meaning of the '<em>Concept Reference Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Concrete Target</em>' reference.
-	 * @see #setConcreteTarget(ConcreteMetaclass)
-	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConcreteTarget()
+	 * @return the value of the '<em>Concept Reference Name</em>' attribute.
+	 * @see #setConceptReferenceName(String)
+	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConceptReferenceName()
 	 * @model required="true"
 	 * @generated
 	 */
-	ConcreteMetaclass getConcreteTarget();
+	String getConceptReferenceName();
 
 	/**
-	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConcreteTarget <em>Concrete Target</em>}' reference.
+	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConceptReferenceName <em>Concept Reference Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Concrete Target</em>' reference.
-	 * @see #getConcreteTarget()
+	 * @param value the new value of the '<em>Concept Reference Name</em>' attribute.
+	 * @see #getConceptReferenceName()
 	 * @generated
 	 */
-	void setConcreteTarget(ConcreteMetaclass value);
+	void setConceptReferenceName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Concrete Reference Target</b></em>' attribute.
+	 * Returns the value of the '<em><b>Feature Bindings</b></em>' containment reference list.
+	 * The list contents are of type {@link gbind.dsl.BaseFeatureBinding}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Concrete Reference Target</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Feature Bindings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Concrete Reference Target</em>' attribute.
-	 * @see #setConcreteReferenceTarget(String)
-	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_ConcreteReferenceTarget()
-	 * @model
+	 * @return the value of the '<em>Feature Bindings</em>' containment reference list.
+	 * @see gbind.dsl.DslPackage#getIntermediateClassBinding_FeatureBindings()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getConcreteReferenceTarget();
-
-	/**
-	 * Sets the value of the '{@link gbind.dsl.IntermediateClassBinding#getConcreteReferenceTarget <em>Concrete Reference Target</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Concrete Reference Target</em>' attribute.
-	 * @see #getConcreteReferenceTarget()
-	 * @generated
-	 */
-	void setConcreteReferenceTarget(String value);
+	EList<BaseFeatureBinding> getFeatureBindings();
 
 } // IntermediateClassBinding

@@ -159,7 +159,7 @@ RULES {
 	@Operator(type="primitive", weight="20", superclass="OclExpression")
 	Simpleocl.TupleExp ::= "Tuple" "{" (tuplePart ("," tuplePart)*)? "}";
 
-	Simpleocl.TuplePart ::= varName[] (":" type)? eq[EQ] initExpression;
+	Simpleocl.TuplePart ::= (varName[]|varName['"','"','\\']) (":" type)? eq[EQ] initExpression;
 
 	@Operator(type="primitive", weight="20", superclass="OclExpression")
 	Simpleocl.MapExp ::= "Map" "{" (elements ("," elements)*)? "}";
@@ -241,7 +241,7 @@ RULES {
 		"{"
 			"concept" boundConcept
 			"metamodel" boundMetamodel
-			
+			(virtualMetaclasses)?
 			bindings*
 			helpers*
 		"}";
@@ -251,8 +251,33 @@ RULES {
 	Dsl.ClassBinding ::= "class" concept[] "to" concrete[] ("," concrete[])* 
 		( "when" whenClause )?;
 
-	Dsl.IntermediateClassBinding ::= "class" concept[] "to" concreteSource[] "." (concreteReferenceSource[]|concreteReferenceSource['"','"','\\']) ":" concreteTarget[] "." (concreteReferenceSource[]|concreteReferenceSource['"','"','\\'])  
-		;
+//	Dsl.IntermediateClassBinding ::= "class" concept[] "to" concreteSource[] "." (concreteReferenceSource[]|concreteReferenceSource['"','"','\\']) ":" concreteTarget[] "." (concreteReferenceSource[]|concreteReferenceSource['"','"','\\'])  
+//		;
+	
+	
+	Dsl.IntermediateClassBinding ::= "class" concept[] "to" concreteClass[] "." concreteReference "/" conceptContext[] "." (conceptReferenceName[]|conceptReferenceName['"','"','\\'])	
+	
+		"{" featureBindings+ "}";
+
+	Dsl.ConcreteReferencDeclaringVar ::= (varName[]|varName['"','"','\\']);
+	
+//-- class FlowEdge to Node.outgoing
+//--      where FlowEdge.in = outgoing
+//--            FlowEdge.out = self
+//--            FlowEdge.isLiteral = 'xxx'
+
+	Dsl.VirtualMetaclass ::= "class" name[] "{"
+		(references)+
+	"}" "init" "=" init;
+	
+	Dsl.VirtualReference ::= "ref" (name[]|name['"','"','\\']) ":" (type_[]|type_['"','"','\\'])
+	;
+
+	Dsl.VirtualClassBinding ::= "class" concept[] "to" "virtual" virtual[]
+		("in" refFeatures ("," refFeatures)* )?
+	;
+	
+	Dsl.ConceptFeatureRef ::= conceptClass[] "." (featureName[]|featureName['"','"','\\']);
 
 	Dsl.OclFeatureBinding ::= "feature" conceptClass[] (qualifier['[', ']'])? "." (conceptFeature[]|conceptFeature['"','"','\\']) "=" 
 		concrete : Simpleocl.OclExpression; //ocl.OclExpression;

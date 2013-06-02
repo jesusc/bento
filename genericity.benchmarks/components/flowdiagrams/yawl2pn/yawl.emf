@@ -1,7 +1,7 @@
 @namespace(uri="http://www.cwi.nl/yawl", prefix="yawl")
 package yawl;
 
-import "platform:/plugin/org.eclipse.xsd/model/XSD.ecore";
+// import "platform:/plugin/org.eclipse.xsd/model/XSD.ecore";
 
 class SpecificationSet {
   val Specification[*] specifications;
@@ -10,7 +10,7 @@ class SpecificationSet {
 class Specification {
   attr String uri;
   val MetaData metaData;
-  val xsd.XSDSchema schema;
+//  val xsd.XSDSchema schema;
   val Decomposition[*] decompositions;
 }
 
@@ -30,6 +30,7 @@ enum CombinationType {
   AND = 0;
   OR = 1;
   XOR = 2;
+  NORMAL = 3; // Added by jesusc
 }
 
 abstract interface ProcessControlElement {

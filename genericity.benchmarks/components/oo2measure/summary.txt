@@ -25,5 +25,35 @@ Some meta-model configurations can make more difficult reusing a transformation 
     heterogeneity that we are not able to solve, if the transformation contains an expression that uses the name of the class.
     UML!Generalization.allInstances()...   
 
+---
+--- Comparison of original (oo2measure-all.atl) and manual version (oo2measure.atl) ---
+---
 
+Package Metrics
+===============
+Original: 20 metrics
+Manual:   18 metrics
+AHEF and OHEF has not been implemented in the manual transformation.
+
+Class Metrics
+=============
+Original: 31 metrics
+Manual: 29 metrics
+DPC and RFC has not been implemented in the manual transformation
+
+
+Original (UML Measure):
+  Total number of helpers: 146
+    * Total nodes: 1614.0
+    * Average nodes: 11.054794520547945
+
+Template:
+  Total number of helpers: 71
+    * Total nodes: 970.0
+    * Average nodes: 13.661971830985916
+
+UML Binding:
+  Total number of helpers: 83
+    * Total nodes: 1052.0
+    * Average nodes: 12.674698795180722
 

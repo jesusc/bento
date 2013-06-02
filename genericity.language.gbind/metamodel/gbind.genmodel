@@ -275,6 +275,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/helpers"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/conceptMetaclasses"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/concreteMetaclasses"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/virtualMetaclasses"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundConcept"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundMetamodel"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/name"/>
@@ -304,11 +305,36 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concept"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concreteSource"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/IntermediateClassBinding/concreteReferenceSource"/>
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concreteClass"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concreteReference"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concreteTarget"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/IntermediateClassBinding/concreteReferenceTarget"/>
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/conceptContext"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/IntermediateClassBinding/conceptReferenceName"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/featureBindings"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConcreteReferencDeclaringVar"/>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualMetaclass">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualMetaclass/references"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualMetaclass/init"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualFeature">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/VirtualFeature/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualReference">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualReference/type_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualClassBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualClassBinding/concept"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualClassBinding/virtual"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualClassBinding/refFeatures"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConceptFeatureRef">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/ConceptFeatureRef/conceptClass"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/ConceptFeatureRef/featureName"/>
       </genClasses>
       <genClasses ecoreClass="gbind.ecore#//dsl/BaseFeatureBinding">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BaseFeatureBinding/conceptFeature"/>

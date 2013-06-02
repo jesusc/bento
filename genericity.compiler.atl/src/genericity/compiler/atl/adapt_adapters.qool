@@ -77,33 +77,42 @@ end
 //  * Ocl bindings (adapters) -> MatchedOclHelper
 segment findBindingFeatures
 	forall r from mRenamingFeatureBinding
-	 where r.conceptFeature.eq(r.concreteFeature).not
+	 where r.conceptFeature.eq(r.concreteFeature).not.and(r.is_normal_feature_binding)
 		m = matches!MatchedRenamingHelper.new
 		m.featureBinding    = r
 
 		r.qualifier.is_nil.if_else({
 			// I would like to use a pattern here...
-			m.concreteMetaclass = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first.concrete.first 		
+			found_cb = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first
+			found_cb.is_nil.if_false {
+				m.concreteMetaclass = found_cb.concrete.first 		
+				emit m to pMatchedRenamingBinding	
+			}
 		}, {
 			m.concreteMetaclass = r.qualifier
+			emit m to pMatchedRenamingBinding
 		})
-		
-		emit m to pMatchedRenamingBinding
 	end
 
 	forall o from mOclFeatureBinding
+		where o.is_normal_feature_binding
+	
 		mo = matches!MatchedOclHelper.new
 		mo.featureBinding    = o
 
 		// the same as above
 		o.qualifier.is_nil.if_else({
 			r = o // TODO: Scoping is wrong: r is "visible" from xText point of view from here, but defined above for another scope
-			mo.concreteMetaclass = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first.concrete.first
+			found_cb = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first
+			found_cb.is_nil.if_false {
+				mo.concreteMetaclass = found_cb.concrete.first
+				emit mo to pMatchedOclBinding
+			}
 		}, {
 			mo.concreteMetaclass = o.qualifier
+			emit mo to pMatchedOclBinding
 		})
 		
-		emit mo to pMatchedOclBinding
 	end
 end 
 //

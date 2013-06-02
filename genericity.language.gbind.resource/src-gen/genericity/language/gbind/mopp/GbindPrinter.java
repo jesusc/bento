@@ -312,6 +312,26 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_dsl_IntermediateClassBinding((gbind.dsl.IntermediateClassBinding) element, globaltab, out);
 			return;
 		}
+		if (element instanceof gbind.dsl.ConcreteReferencDeclaringVar) {
+			print_gbind_dsl_ConcreteReferencDeclaringVar((gbind.dsl.ConcreteReferencDeclaringVar) element, globaltab, out);
+			return;
+		}
+		if (element instanceof gbind.dsl.VirtualMetaclass) {
+			print_gbind_dsl_VirtualMetaclass((gbind.dsl.VirtualMetaclass) element, globaltab, out);
+			return;
+		}
+		if (element instanceof gbind.dsl.VirtualReference) {
+			print_gbind_dsl_VirtualReference((gbind.dsl.VirtualReference) element, globaltab, out);
+			return;
+		}
+		if (element instanceof gbind.dsl.VirtualClassBinding) {
+			print_gbind_dsl_VirtualClassBinding((gbind.dsl.VirtualClassBinding) element, globaltab, out);
+			return;
+		}
+		if (element instanceof gbind.dsl.ConceptFeatureRef) {
+			print_gbind_dsl_ConceptFeatureRef((gbind.dsl.ConceptFeatureRef) element, globaltab, out);
+			return;
+		}
 		if (element instanceof gbind.dsl.OclFeatureBinding) {
 			print_gbind_dsl_OclFeatureBinding((gbind.dsl.OclFeatureBinding) element, globaltab, out);
 			return;
@@ -2687,23 +2707,13 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("varName");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.simpleocl.SimpleoclPackage.TUPLE_PART__VAR_NAME));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.simpleocl.SimpleoclPackage.TUPLE_PART__VAR_NAME), element));
-				out.print(" ");
-			}
-			printCountingMap.put("varName", count - 1);
-		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_simpleocl_TuplePart_0(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
 		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_gbind_simpleocl_TuplePart_0(element, localtab, out1, printCountingMap1);
+		print_gbind_simpleocl_TuplePart_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
 		} else {
@@ -2736,6 +2746,48 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 	}
 	
 	public void print_gbind_simpleocl_TuplePart_0(gbind.simpleocl.TuplePart element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"varName"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"varName"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("varName");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.simpleocl.SimpleoclPackage.TUPLE_PART__VAR_NAME));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.simpleocl.SimpleoclPackage.TUPLE_PART__VAR_NAME), element));
+						out.print(" ");
+					}
+					printCountingMap.put("varName", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("varName");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.simpleocl.SimpleoclPackage.TUPLE_PART__VAR_NAME));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.simpleocl.SimpleoclPackage.TUPLE_PART__VAR_NAME), element));
+					out.print(" ");
+				}
+				printCountingMap.put("varName", count - 1);
+			}
+		}
+	}
+	
+	public void print_gbind_simpleocl_TuplePart_1(gbind.simpleocl.TuplePart element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)
@@ -6178,7 +6230,7 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(7);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(8);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BINDINGS));
 		printCountingMap.put("bindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
@@ -6188,6 +6240,8 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("conceptMetaclasses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__CONCRETE_METACLASSES));
 		printCountingMap.put("concreteMetaclasses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES));
+		printCountingMap.put("virtualMetaclasses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_CONCEPT));
 		printCountingMap.put("boundConcept", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_METAMODEL));
@@ -6196,6 +6250,9 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
 		out.print("binding");
 		out.print(" ");
@@ -6238,6 +6295,19 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			}
 			printCountingMap.put("boundMetamodel", count - 1);
 		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_gbind_dsl_BindingModel_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("bindings");
 		if (count > 0) {
@@ -6271,6 +6341,27 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// DEFINITION PART BEGINS (CsString)
 		out.print("}");
 		out.print(" ");
+	}
+	
+	public void print_gbind_dsl_BindingModel_0(gbind.dsl.BindingModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("virtualMetaclasses");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("virtualMetaclasses", count - 1);
+		}
 	}
 	
 	
@@ -6469,7 +6560,7 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(7);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(8);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__DEBUG_NAME));
 		printCountingMap.put("debugName", temp == null ? 0 : 1);
@@ -6477,14 +6568,16 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("model_", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT));
 		printCountingMap.put("concept", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE));
-		printCountingMap.put("concreteSource", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE));
-		printCountingMap.put("concreteReferenceSource", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET));
-		printCountingMap.put("concreteTarget", temp == null ? 0 : 1);
-		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET));
-		printCountingMap.put("concreteReferenceTarget", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS));
+		printCountingMap.put("concreteClass", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE));
+		printCountingMap.put("concreteReference", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT));
+		printCountingMap.put("conceptContext", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME));
+		printCountingMap.put("conceptReferenceName", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS));
+		printCountingMap.put("featureBindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
@@ -6506,16 +6599,43 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		out.print("to");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("concreteSource");
+		count = printCountingMap.get("concreteClass");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE));
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS));
 			if (o != null) {
 				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getIntermediateClassBindingConcreteSourceReferenceResolver().deResolve((gbind.dsl.ConcreteMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE), element));
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getIntermediateClassBindingConcreteClassReferenceResolver().deResolve((gbind.dsl.ConcreteMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS), element));
 				out.print(" ");
 			}
-			printCountingMap.put("concreteSource", count - 1);
+			printCountingMap.put("concreteClass", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("concreteReference");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("concreteReference", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("/");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("conceptContext");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getIntermediateClassBindingConceptContextReferenceResolver().deResolve((gbind.dsl.ConceptMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT), element));
+				out.print(" ");
+			}
+			printCountingMap.put("conceptContext", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print(".");
@@ -6523,34 +6643,35 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_gbind_dsl_IntermediateClassBinding_0(element, localtab, out, printCountingMap);
 		// DEFINITION PART BEGINS (CsString)
-		out.print(":");
+		out.print("{");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("concreteTarget");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("featureBindings");
 		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET));
-			if (o != null) {
-				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getIntermediateClassBindingConcreteTargetReferenceResolver().deResolve((gbind.dsl.ConcreteMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET), element));
-				out.print(" ");
+			java.util.List<?> list = (java.util.List<?>)element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS));
+			int index  = list.size() - count;
+			if (index < 0) {
+				index = 0;
 			}
-			printCountingMap.put("concreteTarget", count - 1);
+			java.util.ListIterator<?> it  = list.listIterator(index);
+			while (it.hasNext()) {
+				Object o = it.next();
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("featureBindings", 0);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(".");
+		out.print("}");
 		out.print(" ");
-		// DEFINITION PART BEGINS (CompoundDefinition)
-		print_gbind_dsl_IntermediateClassBinding_1(element, localtab, out, printCountingMap);
 	}
 	
 	public void print_gbind_dsl_IntermediateClassBinding_0(gbind.dsl.IntermediateClassBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		int alt = -1;
 		alt = 0;
-		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"concreteReferenceSource"		));
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"conceptReferenceName"		));
 		int tempMatchCount;
-		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"concreteReferenceSource"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"conceptReferenceName"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
 			matches = tempMatchCount;
@@ -6558,41 +6679,62 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		switch(alt) {
 			case 1:			{
 				// DEFINITION PART BEGINS (PlaceholderInQuotes)
-				count = printCountingMap.get("concreteReferenceSource");
+				count = printCountingMap.get("conceptReferenceName");
 				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE));
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME));
 					if (o != null) {
 						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 						resolver.setOptions(getOptions());
-						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE), element));
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME), element));
 						out.print(" ");
 					}
-					printCountingMap.put("concreteReferenceSource", count - 1);
+					printCountingMap.put("conceptReferenceName", count - 1);
 				}
 			}
 			break;
 			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-			count = printCountingMap.get("concreteReferenceSource");
+			count = printCountingMap.get("conceptReferenceName");
 			if (count > 0) {
-				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE));
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME));
 				if (o != null) {
 					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 					resolver.setOptions(getOptions());
-					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE), element));
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME), element));
 					out.print(" ");
 				}
-				printCountingMap.put("concreteReferenceSource", count - 1);
+				printCountingMap.put("conceptReferenceName", count - 1);
 			}
 		}
 	}
 	
-	public void print_gbind_dsl_IntermediateClassBinding_1(gbind.dsl.IntermediateClassBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+	
+	public void print_gbind_dsl_ConcreteReferencDeclaringVar(gbind.dsl.ConcreteReferencDeclaringVar element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(7);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__VAR_NAME));
+		printCountingMap.put("varName", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__TYPE));
+		printCountingMap.put("type", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__VARIABLE_EXP));
+		printCountingMap.put("variableExp", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		// print collected hidden tokens
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_ConcreteReferencDeclaringVar_0(element, localtab, out, printCountingMap);
+	}
+	
+	public void print_gbind_dsl_ConcreteReferencDeclaringVar_0(gbind.dsl.ConcreteReferencDeclaringVar element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
 		int alt = -1;
 		alt = 0;
-		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"concreteReferenceSource"		));
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"varName"		));
 		int tempMatchCount;
-		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"concreteReferenceSource"		));
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"varName"		));
 		if (tempMatchCount > matches) {
 			alt = 1;
 			matches = tempMatchCount;
@@ -6600,30 +6742,461 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		switch(alt) {
 			case 1:			{
 				// DEFINITION PART BEGINS (PlaceholderInQuotes)
-				count = printCountingMap.get("concreteReferenceSource");
+				count = printCountingMap.get("varName");
 				if (count > 0) {
-					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE));
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__VAR_NAME));
 					if (o != null) {
 						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 						resolver.setOptions(getOptions());
-						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE), element));
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__VAR_NAME), element));
 						out.print(" ");
 					}
-					printCountingMap.put("concreteReferenceSource", count - 1);
+					printCountingMap.put("varName", count - 1);
 				}
 			}
 			break;
 			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-			count = printCountingMap.get("concreteReferenceSource");
+			count = printCountingMap.get("varName");
 			if (count > 0) {
-				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE));
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__VAR_NAME));
 				if (o != null) {
 					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 					resolver.setOptions(getOptions());
-					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE), element));
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCRETE_REFERENC_DECLARING_VAR__VAR_NAME), element));
 					out.print(" ");
 				}
-				printCountingMap.put("concreteReferenceSource", count - 1);
+				printCountingMap.put("varName", count - 1);
+			}
+		}
+	}
+	
+	
+	public void print_gbind_dsl_VirtualMetaclass(gbind.dsl.VirtualMetaclass element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__ECLASS));
+		printCountingMap.put("eclass", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__REFERENCES));
+		printCountingMap.put("references", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__INIT));
+		printCountingMap.put("init", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("class");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__NAME));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("name", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("{");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_VirtualMetaclass_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_gbind_dsl_VirtualMetaclass_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("}");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("init");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("=");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("init");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__INIT));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("init", count - 1);
+		}
+	}
+	
+	public void print_gbind_dsl_VirtualMetaclass_0(gbind.dsl.VirtualMetaclass element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("references");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_METACLASS__REFERENCES));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("references", count - 1);
+		}
+	}
+	
+	
+	public void print_gbind_dsl_VirtualReference(gbind.dsl.VirtualReference element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_));
+		printCountingMap.put("type_", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		// DEFINITION PART BEGINS (CsString)
+		out.print("ref");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_VirtualReference_0(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (CsString)
+		out.print(":");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_VirtualReference_1(element, localtab, out, printCountingMap);
+	}
+	
+	public void print_gbind_dsl_VirtualReference_0(gbind.dsl.VirtualReference element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"name"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"name"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("name");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__NAME));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__NAME), element));
+						out.print(" ");
+					}
+					printCountingMap.put("name", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("name");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__NAME));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__NAME), element));
+					out.print(" ");
+				}
+				printCountingMap.put("name", count - 1);
+			}
+		}
+	}
+	
+	public void print_gbind_dsl_VirtualReference_1(gbind.dsl.VirtualReference element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"type_"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"type_"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("type_");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getVirtualReferenceType_ReferenceResolver().deResolve((gbind.dsl.ConcreteMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_), element));
+						out.print(" ");
+					}
+					printCountingMap.put("type_", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("type_");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getVirtualReferenceType_ReferenceResolver().deResolve((gbind.dsl.ConcreteMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_REFERENCE__TYPE_), element));
+					out.print(" ");
+				}
+				printCountingMap.put("type_", count - 1);
+			}
+		}
+	}
+	
+	
+	public void print_gbind_dsl_VirtualClassBinding(gbind.dsl.VirtualClassBinding element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__DEBUG_NAME));
+		printCountingMap.put("debugName", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__MODEL_));
+		printCountingMap.put("model_", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__CONCEPT));
+		printCountingMap.put("concept", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__VIRTUAL));
+		printCountingMap.put("virtual", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__REF_FEATURES));
+		printCountingMap.put("refFeatures", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		// print collected hidden tokens
+		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("class");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("concept");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__CONCEPT));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getVirtualClassBindingConceptReferenceResolver().deResolve((gbind.dsl.ConceptMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__CONCEPT)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__CONCEPT), element));
+				out.print(" ");
+			}
+			printCountingMap.put("concept", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("to");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("virtual");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("virtual");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__VIRTUAL));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getVirtualClassBindingVirtualReferenceResolver().deResolve((gbind.dsl.VirtualMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__VIRTUAL)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__VIRTUAL), element));
+				out.print(" ");
+			}
+			printCountingMap.put("virtual", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_gbind_dsl_VirtualClassBinding_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+	}
+	
+	public void print_gbind_dsl_VirtualClassBinding_0(gbind.dsl.VirtualClassBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("in");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("refFeatures");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__REF_FEATURES));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("refFeatures", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_gbind_dsl_VirtualClassBinding_0_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_gbind_dsl_VirtualClassBinding_0_0(gbind.dsl.VirtualClassBinding element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("refFeatures");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_CLASS_BINDING__REF_FEATURES));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("refFeatures", count - 1);
+		}
+	}
+	
+	
+	public void print_gbind_dsl_ConceptFeatureRef(gbind.dsl.ConceptFeatureRef element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__CONCEPT_CLASS));
+		printCountingMap.put("conceptClass", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__FEATURE_NAME));
+		printCountingMap.put("featureName", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("conceptClass");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__CONCEPT_CLASS));
+			if (o != null) {
+				genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getConceptFeatureRefConceptClassReferenceResolver().deResolve((gbind.dsl.ConceptMetaclass) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__CONCEPT_CLASS)), element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__CONCEPT_CLASS), element));
+				out.print(" ");
+			}
+			printCountingMap.put("conceptClass", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_ConceptFeatureRef_0(element, localtab, out, printCountingMap);
+	}
+	
+	public void print_gbind_dsl_ConceptFeatureRef_0(gbind.dsl.ConceptFeatureRef element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"featureName"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"featureName"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("featureName");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__FEATURE_NAME));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__FEATURE_NAME), element));
+						out.print(" ");
+					}
+					printCountingMap.put("featureName", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("featureName");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__FEATURE_NAME));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.CONCEPT_FEATURE_REF__FEATURE_NAME), element));
+					out.print(" ");
+				}
+				printCountingMap.put("featureName", count - 1);
 			}
 		}
 	}

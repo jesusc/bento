@@ -5,6 +5,18 @@ binding epc {
     -- PROBLEMA 1: no podemos mapear FLowEdge en el concepto, a la asociaci�n "flowsInto/flowsOutOf" del meta-modelo (no soportamos la heterogeneidad clase->asociaci�n)
     -- PROBLEMA 2: un mismo objeto puede ser JOIN y SPLIT a la vez, lo que har�a que hubiera dos reglas aplicables para el objeto	
 	
+	class YawlEdge {
+		ref src : ProcessControlElement
+		ref tgt : ProcessControlElement
+	} init = YAWL!ProcessControlElement.allInstances()->collect(src| src.flowsOutOf->collect(tgt | 
+		-- #MyGeneralization 
+		Tuple { type__ = 'YawlEdge', src = src, tgt = tgt
+			-- Needed for the moment
+			--, in = src,
+			, out = tgt, "in" = src
+		 }
+	))->flatten()
+	
 	class FlowDiagram     to Decomposition -- it can also be Specification 
 	class Node            to ProcessControlElement
 	class Task            to Task, InputCondition when if self.oclIsKindOf(YAWL!Task) then self.splitType.oclIsUndefined() and self.joinType.oclIsUndefined() else true endif
@@ -14,8 +26,28 @@ binding epc {
 	class ExclusiveChoice to Task when self.splitType = #XOR
 	class SimpleMerge     to Task when self.joinType = #XOR  
 	class MultiChoice     to Task when self.splitType = #OR 
-	class FlowEdge 		  to None
-	
+		
+	class FlowEdge to virtual YawlEdge 	
+		
+	-- Different specifications of the same collection of elements
+	-- all them should produce the same result
+--	class FlowEdge to ProcessControlElement."flowsInto" / Node.ins {
+--        feature FlowEdge."in" = self
+--         feature FlowEdge.out = flowsInto
+--    }
+            
+-- 	class FlowEdge to ProcessControlElement."flowsOut" / Node.outs {
+--       feature FlowEdge."out" = self
+--       feature FlowEdge."in" = flowsOut
+--    }
+    
+   
+--	class FlowEdge to Decomposition."processControlElements_as_edges" / FlowDiagram.edges {
+--		feature FlowEdge."in" = processControlElements_as_edges.source
+--		feature FlowEdge."out" = processControlElements_as_edges.target
+--	}
+--    feature FlowDiagram.edges is processControlElements_as_edges
+            
 	-- class FlowEdge        to ProcessControlElement.flowsInto : ProcessControlElement.flowsOut
 	-- feature FlowEdge[ProcessControlElement]."in" = self.flowsInto
 	-- feature FlowEdge[ProcessControlElement].out = self.flowsOut
@@ -24,14 +56,29 @@ binding epc {
 	-- heterogeneidad clase->asociacion no soportada -- 
 	
 	feature FlowDiagram.nodes is processControlElements 
-	feature FlowDiagram.edges = Sequence{} -- heterogeneidad clase->asociacion no soportada --
+		
 	feature FlowDiagram.isFinalMandatory = true
-	feature Node.outs = Sequence{} -- heterogeneidad clase->asociacion no soportada --
-	feature Node.ins = Sequence{}  -- heterogeneidad clase->asociacion no soportada --
+	
+	-- Involved in the virtual class mapping
+	feature FlowDiagram.edges = 
+		self.YawlEdge_AllInstances->select(y | self.processControlElements->exists(p | p = y.src ))	
+	feature Node.outs = self.YawlEdge_AllInstances->select(y | y.src = self) 
+	feature Node.ins  = self.YawlEdge_AllInstances->select(y | y.tgt = self) 
+	feature FlowEdge."in"  is src
+	feature FlowEdge."out" is tgt
+	
+	
 	feature Task.name is name
-	feature Task.isInitial = self.oclKindOf(YAWL!InputCondition)
+	feature Task.isInitial = self.oclIsKindOf(YAWL!InputCondition)
 	feature FinalTask.isTerminating = true
 	feature FinalTask.isMandatory = true
 --	feature FlowEdge."in" 
 --	feature FlowEdge.out      
+
+--    helper Decomposition.processControlElements_as_edges : OclAny = self.processControlElements->collect( p |
+--    	p.flowsOut->collect(t | 
+--    		Tuple { source = p, target = t }
+--    	)
+--    )->flatten() 
+    
 }

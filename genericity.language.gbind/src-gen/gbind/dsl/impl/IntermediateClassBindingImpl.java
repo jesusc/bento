@@ -6,17 +6,24 @@
  */
 package gbind.dsl.impl;
 
+import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.ConcreteMetaclass;
+import gbind.dsl.ConcreteReferencDeclaringVar;
 import gbind.dsl.DslPackage;
 import gbind.dsl.IntermediateClassBinding;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,10 +33,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcept <em>Concept</em>}</li>
- *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcreteSource <em>Concrete Source</em>}</li>
- *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcreteReferenceSource <em>Concrete Reference Source</em>}</li>
- *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcreteTarget <em>Concrete Target</em>}</li>
- *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcreteReferenceTarget <em>Concrete Reference Target</em>}</li>
+ *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcreteClass <em>Concrete Class</em>}</li>
+ *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConcreteReference <em>Concrete Reference</em>}</li>
+ *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConceptContext <em>Concept Context</em>}</li>
+ *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getConceptReferenceName <em>Concept Reference Name</em>}</li>
+ *   <li>{@link gbind.dsl.impl.IntermediateClassBindingImpl#getFeatureBindings <em>Feature Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,64 +55,64 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	protected ConceptMetaclass concept;
 
 	/**
-	 * The cached value of the '{@link #getConcreteSource() <em>Concrete Source</em>}' reference.
+	 * The cached value of the '{@link #getConcreteClass() <em>Concrete Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteSource()
+	 * @see #getConcreteClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected ConcreteMetaclass concreteSource;
+	protected ConcreteMetaclass concreteClass;
 
 	/**
-	 * The default value of the '{@link #getConcreteReferenceSource() <em>Concrete Reference Source</em>}' attribute.
+	 * The cached value of the '{@link #getConcreteReference() <em>Concrete Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteReferenceSource()
+	 * @see #getConcreteReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONCRETE_REFERENCE_SOURCE_EDEFAULT = null;
+	protected ConcreteReferencDeclaringVar concreteReference;
 
 	/**
-	 * The cached value of the '{@link #getConcreteReferenceSource() <em>Concrete Reference Source</em>}' attribute.
+	 * The cached value of the '{@link #getConceptContext() <em>Concept Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteReferenceSource()
+	 * @see #getConceptContext()
 	 * @generated
 	 * @ordered
 	 */
-	protected String concreteReferenceSource = CONCRETE_REFERENCE_SOURCE_EDEFAULT;
+	protected ConceptMetaclass conceptContext;
 
 	/**
-	 * The cached value of the '{@link #getConcreteTarget() <em>Concrete Target</em>}' reference.
+	 * The default value of the '{@link #getConceptReferenceName() <em>Concept Reference Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteTarget()
+	 * @see #getConceptReferenceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected ConcreteMetaclass concreteTarget;
+	protected static final String CONCEPT_REFERENCE_NAME_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getConcreteReferenceTarget() <em>Concrete Reference Target</em>}' attribute.
+	 * The cached value of the '{@link #getConceptReferenceName() <em>Concept Reference Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteReferenceTarget()
+	 * @see #getConceptReferenceName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONCRETE_REFERENCE_TARGET_EDEFAULT = null;
+	protected String conceptReferenceName = CONCEPT_REFERENCE_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getConcreteReferenceTarget() <em>Concrete Reference Target</em>}' attribute.
+	 * The cached value of the '{@link #getFeatureBindings() <em>Feature Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConcreteReferenceTarget()
+	 * @see #getFeatureBindings()
 	 * @generated
 	 * @ordered
 	 */
-	protected String concreteReferenceTarget = CONCRETE_REFERENCE_TARGET_EDEFAULT;
+	protected EList<BaseFeatureBinding> featureBindings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,16 +176,16 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConcreteMetaclass getConcreteSource() {
-		if (concreteSource != null && concreteSource.eIsProxy()) {
-			InternalEObject oldConcreteSource = (InternalEObject)concreteSource;
-			concreteSource = (ConcreteMetaclass)eResolveProxy(oldConcreteSource);
-			if (concreteSource != oldConcreteSource) {
+	public ConcreteMetaclass getConcreteClass() {
+		if (concreteClass != null && concreteClass.eIsProxy()) {
+			InternalEObject oldConcreteClass = (InternalEObject)concreteClass;
+			concreteClass = (ConcreteMetaclass)eResolveProxy(oldConcreteClass);
+			if (concreteClass != oldConcreteClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE, oldConcreteSource, concreteSource));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS, oldConcreteClass, concreteClass));
 			}
 		}
-		return concreteSource;
+		return concreteClass;
 	}
 
 	/**
@@ -185,8 +193,8 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConcreteMetaclass basicGetConcreteSource() {
-		return concreteSource;
+	public ConcreteMetaclass basicGetConcreteClass() {
+		return concreteClass;
 	}
 
 	/**
@@ -194,11 +202,11 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConcreteSource(ConcreteMetaclass newConcreteSource) {
-		ConcreteMetaclass oldConcreteSource = concreteSource;
-		concreteSource = newConcreteSource;
+	public void setConcreteClass(ConcreteMetaclass newConcreteClass) {
+		ConcreteMetaclass oldConcreteClass = concreteClass;
+		concreteClass = newConcreteClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE, oldConcreteSource, concreteSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS, oldConcreteClass, concreteClass));
 	}
 
 	/**
@@ -206,8 +214,8 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getConcreteReferenceSource() {
-		return concreteReferenceSource;
+	public ConcreteReferencDeclaringVar getConcreteReference() {
+		return concreteReference;
 	}
 
 	/**
@@ -215,11 +223,14 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConcreteReferenceSource(String newConcreteReferenceSource) {
-		String oldConcreteReferenceSource = concreteReferenceSource;
-		concreteReferenceSource = newConcreteReferenceSource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE, oldConcreteReferenceSource, concreteReferenceSource));
+	public NotificationChain basicSetConcreteReference(ConcreteReferencDeclaringVar newConcreteReference, NotificationChain msgs) {
+		ConcreteReferencDeclaringVar oldConcreteReference = concreteReference;
+		concreteReference = newConcreteReference;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE, oldConcreteReference, newConcreteReference);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -227,16 +238,35 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConcreteMetaclass getConcreteTarget() {
-		if (concreteTarget != null && concreteTarget.eIsProxy()) {
-			InternalEObject oldConcreteTarget = (InternalEObject)concreteTarget;
-			concreteTarget = (ConcreteMetaclass)eResolveProxy(oldConcreteTarget);
-			if (concreteTarget != oldConcreteTarget) {
+	public void setConcreteReference(ConcreteReferencDeclaringVar newConcreteReference) {
+		if (newConcreteReference != concreteReference) {
+			NotificationChain msgs = null;
+			if (concreteReference != null)
+				msgs = ((InternalEObject)concreteReference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE, null, msgs);
+			if (newConcreteReference != null)
+				msgs = ((InternalEObject)newConcreteReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE, null, msgs);
+			msgs = basicSetConcreteReference(newConcreteReference, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE, newConcreteReference, newConcreteReference));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConceptMetaclass getConceptContext() {
+		if (conceptContext != null && conceptContext.eIsProxy()) {
+			InternalEObject oldConceptContext = (InternalEObject)conceptContext;
+			conceptContext = (ConceptMetaclass)eResolveProxy(oldConceptContext);
+			if (conceptContext != oldConceptContext) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET, oldConcreteTarget, concreteTarget));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT, oldConceptContext, conceptContext));
 			}
 		}
-		return concreteTarget;
+		return conceptContext;
 	}
 
 	/**
@@ -244,8 +274,8 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConcreteMetaclass basicGetConcreteTarget() {
-		return concreteTarget;
+	public ConceptMetaclass basicGetConceptContext() {
+		return conceptContext;
 	}
 
 	/**
@@ -253,11 +283,11 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConcreteTarget(ConcreteMetaclass newConcreteTarget) {
-		ConcreteMetaclass oldConcreteTarget = concreteTarget;
-		concreteTarget = newConcreteTarget;
+	public void setConceptContext(ConceptMetaclass newConceptContext) {
+		ConceptMetaclass oldConceptContext = conceptContext;
+		conceptContext = newConceptContext;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET, oldConcreteTarget, concreteTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT, oldConceptContext, conceptContext));
 	}
 
 	/**
@@ -265,8 +295,8 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getConcreteReferenceTarget() {
-		return concreteReferenceTarget;
+	public String getConceptReferenceName() {
+		return conceptReferenceName;
 	}
 
 	/**
@@ -274,11 +304,39 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConcreteReferenceTarget(String newConcreteReferenceTarget) {
-		String oldConcreteReferenceTarget = concreteReferenceTarget;
-		concreteReferenceTarget = newConcreteReferenceTarget;
+	public void setConceptReferenceName(String newConceptReferenceName) {
+		String oldConceptReferenceName = conceptReferenceName;
+		conceptReferenceName = newConceptReferenceName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET, oldConcreteReferenceTarget, concreteReferenceTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME, oldConceptReferenceName, conceptReferenceName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BaseFeatureBinding> getFeatureBindings() {
+		if (featureBindings == null) {
+			featureBindings = new EObjectContainmentEList<BaseFeatureBinding>(BaseFeatureBinding.class, this, DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS);
+		}
+		return featureBindings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE:
+				return basicSetConcreteReference(null, msgs);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS:
+				return ((InternalEList<?>)getFeatureBindings()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -292,16 +350,18 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT:
 				if (resolve) return getConcept();
 				return basicGetConcept();
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE:
-				if (resolve) return getConcreteSource();
-				return basicGetConcreteSource();
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE:
-				return getConcreteReferenceSource();
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET:
-				if (resolve) return getConcreteTarget();
-				return basicGetConcreteTarget();
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET:
-				return getConcreteReferenceTarget();
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS:
+				if (resolve) return getConcreteClass();
+				return basicGetConcreteClass();
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE:
+				return getConcreteReference();
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT:
+				if (resolve) return getConceptContext();
+				return basicGetConceptContext();
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME:
+				return getConceptReferenceName();
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS:
+				return getFeatureBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,23 +371,28 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT:
 				setConcept((ConceptMetaclass)newValue);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE:
-				setConcreteSource((ConcreteMetaclass)newValue);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS:
+				setConcreteClass((ConcreteMetaclass)newValue);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE:
-				setConcreteReferenceSource((String)newValue);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE:
+				setConcreteReference((ConcreteReferencDeclaringVar)newValue);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET:
-				setConcreteTarget((ConcreteMetaclass)newValue);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT:
+				setConceptContext((ConceptMetaclass)newValue);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET:
-				setConcreteReferenceTarget((String)newValue);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME:
+				setConceptReferenceName((String)newValue);
+				return;
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS:
+				getFeatureBindings().clear();
+				getFeatureBindings().addAll((Collection<? extends BaseFeatureBinding>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -344,17 +409,20 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT:
 				setConcept((ConceptMetaclass)null);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE:
-				setConcreteSource((ConcreteMetaclass)null);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS:
+				setConcreteClass((ConcreteMetaclass)null);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE:
-				setConcreteReferenceSource(CONCRETE_REFERENCE_SOURCE_EDEFAULT);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE:
+				setConcreteReference((ConcreteReferencDeclaringVar)null);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET:
-				setConcreteTarget((ConcreteMetaclass)null);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT:
+				setConceptContext((ConceptMetaclass)null);
 				return;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET:
-				setConcreteReferenceTarget(CONCRETE_REFERENCE_TARGET_EDEFAULT);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME:
+				setConceptReferenceName(CONCEPT_REFERENCE_NAME_EDEFAULT);
+				return;
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS:
+				getFeatureBindings().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -370,14 +438,16 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 		switch (featureID) {
 			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT:
 				return concept != null;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE:
-				return concreteSource != null;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE:
-				return CONCRETE_REFERENCE_SOURCE_EDEFAULT == null ? concreteReferenceSource != null : !CONCRETE_REFERENCE_SOURCE_EDEFAULT.equals(concreteReferenceSource);
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET:
-				return concreteTarget != null;
-			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET:
-				return CONCRETE_REFERENCE_TARGET_EDEFAULT == null ? concreteReferenceTarget != null : !CONCRETE_REFERENCE_TARGET_EDEFAULT.equals(concreteReferenceTarget);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS:
+				return concreteClass != null;
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE:
+				return concreteReference != null;
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT:
+				return conceptContext != null;
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME:
+				return CONCEPT_REFERENCE_NAME_EDEFAULT == null ? conceptReferenceName != null : !CONCEPT_REFERENCE_NAME_EDEFAULT.equals(conceptReferenceName);
+			case DslPackage.INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS:
+				return featureBindings != null && !featureBindings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -392,10 +462,8 @@ public class IntermediateClassBindingImpl extends ConceptBindingImpl implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (concreteReferenceSource: ");
-		result.append(concreteReferenceSource);
-		result.append(", concreteReferenceTarget: ");
-		result.append(concreteReferenceTarget);
+		result.append(" (conceptReferenceName: ");
+		result.append(conceptReferenceName);
 		result.append(')');
 		return result.toString();
 	}

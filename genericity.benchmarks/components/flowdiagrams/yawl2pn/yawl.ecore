@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="yawl" nsURI="http://www.cwi.nl/yawl" nsPrefix="yawl">
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="yawl"
+    nsURI="http://www.cwi.nl/yawl" nsPrefix="yawl">
   <eClassifiers xsi:type="ecore:EClass" name="SpecificationSet">
     <eStructuralFeatures xsi:type="ecore:EReference" name="specifications" upperBound="-1"
         eType="#//Specification" containment="true"/>
@@ -8,8 +10,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Specification">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaData" eType="#//MetaData"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSchema"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="decompositions" upperBound="-1"
         eType="#//Decomposition" containment="true"/>
@@ -29,6 +29,7 @@
     <eLiterals name="AND"/>
     <eLiterals name="OR" value="1"/>
     <eLiterals name="XOR" value="2"/>
+    <eLiterals name="NORMAL" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProcessControlElement" abstract="true"
       interface="true">

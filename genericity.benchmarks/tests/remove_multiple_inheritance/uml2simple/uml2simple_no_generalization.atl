@@ -7,9 +7,9 @@ rule class2class {
  to
   outClass : SimpleUML!SimpleClass (
    simpleName <- umlClass.name,
-   generalizations <- thisModule.__convertToSequence__(umlClass.generalization_tuple_convert->first())->collect(__v__ |
+   generalizations <- thisModule.__convertToSequence__(umlClass.generalization->first())->collect(__v__ |
     if __v__.oclType().name = 'Tuple' then
-     if __v__.asMap().get('type__') = 'Generalization' then
+     if __v__.asMap().get('type__') = 'MyGeneralization' then
       thisModule.uniqueLazyRuleGeneralization(__v__)
      else
       __v__
@@ -21,14 +21,25 @@ rule class2class {
   )
 }
 
-lazy rule uniqueLazyRuleGeneralization {
+unique lazy rule uniqueLazyRuleGeneralization {
  from
   gen : Simple!"OclAny"
+  ( (gen.general2222 = OclUndefined).debug('guarda') )
  to
   outgen : SimpleUML!Generalization (
-   reference <- gen.general
+   reference <- gen.general.debug('g')
   )
 }
+
+helper def: MyGeneralization_AllInstances : OclAny =
+ Simple!SimpleClass.allInstances()->collect(c |
+  c.superclasses->collect(g |
+   Tuple {type__ = 'MyGeneralization', src = c, general = g}
+  )
+ )->flatten();
+
+helper context Simple!SimpleClass def: MyGeneralization_AllInstances : OclAny =
+ thisModule.MyGeneralization_AllInstances;
 
 helper def: __convertToSequence__(obj : OclAny) : OclAny =
  if obj = OclUndefined then
@@ -37,13 +48,10 @@ helper def: __convertToSequence__(obj : OclAny) : OclAny =
   Sequence {obj}->flatten()
  endif;
 
-helper context Simple!SimpleClass def: generalization_tuple_convert : OclAny =
- self.generalization->collect(superclasses |
-  Tuple {general = superclasses, type__ = 'Generalization'}
- );
-
 helper context Simple!SimpleClass def: name : OclAny =
  self.simpleName;
 
 helper context Simple!SimpleClass def: generalization : OclAny =
- self.superclasses;
+ self.MyGeneralization_AllInstances->select(g |
+  g.src = self
+ );

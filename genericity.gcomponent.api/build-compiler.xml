@@ -20,7 +20,33 @@
 				<include name="eclectic/gen_atl*"/>
 				<include name="eclectic/ocl2ocl*"/>
 				<include name="eclectic/callexpr*"/>
+			    <include name="eclectic/copy_helpers*"/>
 				<include name="eclectic/composed_genericity*"/>
+
+				<include name="eclectic/class2reference*"/>
+				<include name="eclectic/virtual_class*"/>
+								
+				<!-- type check classes -->
+				<include name="eclectic/typecheck_atl*"/>			
+				<include name="eclectic/atl_patterns*"/>
+				<include name="eclectic/attr_typecheck_atl*"/>				
+				
+				
+			</fileset>
+
+			<fileset dir="../genericity.compiler.atl/bin" >
+				<include name="genericity/typecheck/atl/TypeCheckLauncher*"/>
+				<include name="genericity/compiler/atl/Class2Reference*"/>
+				<include name="genericity/compiler/atl/VirtualClasses*"/>
+								
+				<include name="genericity/typing/atl_types/*"/>
+				<include name="genericity/typing/atl_types/impl/*"/>
+				<include name="genericity/typing/atl_types/util/*"/>
+
+				<include name="genericity/typing/atl_types/annotations/*"/>
+				<include name="genericity/typing/atl_types/annotations/impl/*"/>
+				<include name="genericity/typing/atl_types/annotations/util/*"/>
+								
 			</fileset>
 
 			<!-- NO BCEL IN THE PATH...

@@ -43,6 +43,25 @@ template createOclHelper(fb : gbind!OclFeatureBinding, concreteMetaclass : gbind
 	}
 end
 
+template createOclAttributeHelperFromLocalHelper(h : gbind!LocalHelper, concreteMetaclass : gbind!ConcreteMetaclass, 
+						 atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = h.feature
+				initExpression = atl_ocl_expr
+				type = atl!OclAnyType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concreteMetaclass.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end
+
 template createWhenClauseHelper(concept : gbind!ConceptMetaclass, atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
 	atl!Helper {
 		definition = atl!OclFeatureDefinition {

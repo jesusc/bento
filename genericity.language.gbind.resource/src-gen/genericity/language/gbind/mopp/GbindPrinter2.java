@@ -452,20 +452,40 @@ public class GbindPrinter2 implements genericity.language.gbind.IGbindTextPrinte
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70, foundFormattingElements);
 			return;
 		}
-		if (element instanceof gbind.dsl.OclFeatureBinding) {
+		if (element instanceof gbind.dsl.ConcreteReferencDeclaringVar) {
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71, foundFormattingElements);
 			return;
 		}
-		if (element instanceof gbind.dsl.RenamingFeatureBinding) {
+		if (element instanceof gbind.dsl.VirtualMetaclass) {
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72, foundFormattingElements);
 			return;
 		}
-		if (element instanceof gbind.dsl.ConceptHelper) {
+		if (element instanceof gbind.dsl.VirtualReference) {
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73, foundFormattingElements);
 			return;
 		}
-		if (element instanceof gbind.dsl.LocalHelper) {
+		if (element instanceof gbind.dsl.VirtualClassBinding) {
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74, foundFormattingElements);
+			return;
+		}
+		if (element instanceof gbind.dsl.ConceptFeatureRef) {
+			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75, foundFormattingElements);
+			return;
+		}
+		if (element instanceof gbind.dsl.OclFeatureBinding) {
+			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76, foundFormattingElements);
+			return;
+		}
+		if (element instanceof gbind.dsl.RenamingFeatureBinding) {
+			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77, foundFormattingElements);
+			return;
+		}
+		if (element instanceof gbind.dsl.ConceptHelper) {
+			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78, foundFormattingElements);
+			return;
+		}
+		if (element instanceof gbind.dsl.LocalHelper) {
+			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79, foundFormattingElements);
 			return;
 		}
 		if (element instanceof gbind.simpleocl.OclMetamodel) {

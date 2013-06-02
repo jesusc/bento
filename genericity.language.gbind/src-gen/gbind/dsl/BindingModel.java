@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link gbind.dsl.BindingModel#getHelpers <em>Helpers</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
+ *   <li>{@link gbind.dsl.BindingModel#getVirtualMetaclasses <em>Virtual Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getBoundConcept <em>Bound Concept</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getName <em>Name</em>}</li>
@@ -100,6 +101,22 @@ public interface BindingModel extends EObject {
 	 * @generated
 	 */
 	EList<ConcreteMetaclass> getConcreteMetaclasses();
+
+	/**
+	 * Returns the value of the '<em><b>Virtual Metaclasses</b></em>' containment reference list.
+	 * The list contents are of type {@link gbind.dsl.VirtualMetaclass}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Virtual Metaclasses</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Virtual Metaclasses</em>' containment reference list.
+	 * @see gbind.dsl.DslPackage#getBindingModel_VirtualMetaclasses()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<VirtualMetaclass> getVirtualMetaclasses();
 
 	/**
 	 * Returns the value of the '<em><b>Bound Concept</b></em>' containment reference.

@@ -90,6 +90,7 @@ segment findModuleElements
 			})			
 		end
 
+		/* 
 		forall icb1 from mIntermediateClassBinding
 			in_pattern_element.type.^model.name.eq(current_mm).if_true {
 			    icb1.concept.name.eq(in_pattern_element.type.name).if_true {
@@ -100,6 +101,7 @@ segment findModuleElements
 				}
 			}
 		end
+		*/
 	end
 
 	forall h from mHelper
@@ -188,6 +190,7 @@ segment RenameRuleN
 	end
 end
 
+/*
 segment AdaptRule_IntermediateClass
 	forall mri from pMatchedAtlMatchedRuleIntermediateClass
 		rule = mri.rule
@@ -211,22 +214,13 @@ segment AdaptRule_IntermediateClass
 			in_pattern.elements = second_pattern
 		}.call
 		
-		
-		
-		/*
-		 * 	  ref ConceptMetaclass[1] concept;
-	  ref ConcreteMetaclass[1] concreteSource;
-	  ref ConcreteMetaclass[1] concreteTarget;
-	  attr String[1] referenceName;
-		 */
-		
-		
 		x = {
 		"".println("Created rule [".concat(mri.rule.name).concat("]: Intermediate class"))
 		}.call
 	end
 end
-
+ */
+ 
 segment RenameHelper1
 	forall m from pMatchedHelper1
 		ocl_type = m.helper.definition.context_.context_

@@ -80,6 +80,60 @@ public interface DslFactory extends EFactory {
 	IntermediateClassBinding createIntermediateClassBinding();
 
 	/**
+	 * Returns a new object of class '<em>Concrete Referenc Declaring Var</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concrete Referenc Declaring Var</em>'.
+	 * @generated
+	 */
+	ConcreteReferencDeclaringVar createConcreteReferencDeclaringVar();
+
+	/**
+	 * Returns a new object of class '<em>Virtual Metaclass</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Metaclass</em>'.
+	 * @generated
+	 */
+	VirtualMetaclass createVirtualMetaclass();
+
+	/**
+	 * Returns a new object of class '<em>Virtual Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Feature</em>'.
+	 * @generated
+	 */
+	VirtualFeature createVirtualFeature();
+
+	/**
+	 * Returns a new object of class '<em>Virtual Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Reference</em>'.
+	 * @generated
+	 */
+	VirtualReference createVirtualReference();
+
+	/**
+	 * Returns a new object of class '<em>Virtual Class Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Class Binding</em>'.
+	 * @generated
+	 */
+	VirtualClassBinding createVirtualClassBinding();
+
+	/**
+	 * Returns a new object of class '<em>Concept Feature Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concept Feature Ref</em>'.
+	 * @generated
+	 */
+	ConceptFeatureRef createConceptFeatureRef();
+
+	/**
 	 * Returns a new object of class '<em>Base Feature Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

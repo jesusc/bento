@@ -383,6 +383,8 @@
           eType="#//dsl/ConceptMetaclass" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="concreteMetaclasses"
           upperBound="-1" eType="#//dsl/ConcreteMetaclass" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="virtualMetaclasses" upperBound="-1"
+          eType="#//dsl/VirtualMetaclass" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundConcept" lowerBound="1"
           eType="#//dsl/MetamodelDeclaration" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundMetamodel" lowerBound="1"
@@ -416,13 +418,44 @@
     <eClassifiers xsi:type="ecore:EClass" name="IntermediateClassBinding" eSuperTypes="#//dsl/ConceptBinding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"
           eType="#//dsl/ConceptMetaclass"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="concreteSource" lowerBound="1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concreteClass" lowerBound="1"
           eType="#//dsl/ConcreteMetaclass"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteReferenceSource"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concreteReference" lowerBound="1"
+          eType="#//dsl/ConcreteReferencDeclaringVar" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conceptContext" lowerBound="1"
+          eType="#//dsl/ConceptMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="conceptReferenceName"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="concreteTarget" lowerBound="1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="featureBindings" upperBound="-1"
+          eType="#//dsl/BaseFeatureBinding" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConcreteReferencDeclaringVar" eSuperTypes="#//simpleocl/VariableDeclaration"/>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualMetaclass" eSuperTypes="#//dsl/Metaclass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+          eType="#//dsl/VirtualReference" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="init" lowerBound="1"
+          eType="#//simpleocl/OclExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualFeature">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualReference" eSuperTypes="#//dsl/VirtualFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type_" lowerBound="1"
           eType="#//dsl/ConcreteMetaclass"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteReferenceTarget"
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualClassBinding" eSuperTypes="#//dsl/ConceptBinding">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"
+          eType="#//dsl/ConceptMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="virtual" lowerBound="1"
+          eType="#//dsl/VirtualMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refFeatures" upperBound="-1"
+          eType="#//dsl/ConceptFeatureRef" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConceptFeatureRef">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conceptClass" lowerBound="1"
+          eType="#//dsl/ConceptMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BaseFeatureBinding" eSuperTypes="#//dsl/ConceptBinding">

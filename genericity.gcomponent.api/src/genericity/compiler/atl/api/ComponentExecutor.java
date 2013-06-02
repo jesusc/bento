@@ -11,6 +11,8 @@ import genericity.gcomponent.instantiation.ExecutableTransformation;
 import genericity.language.gcomponent.GcomponentPackage;
 import genericity.language.gcomponent.core.Component;
 import genericity.language.gcomponent.core.CompositeComponent;
+import genericity.language.gcomponent.core.Metamodel;
+import genericity.language.gcomponent.core.ParameterModel;
 import genericity.language.gcomponent.core.Template;
 import genericity.language.gcomponent.dsl.DefinitionRoot;
 import genericity.language.gcomponent.technologies.AtlParameter;
@@ -146,7 +148,14 @@ public class ComponentExecutor {
 				}
 			}
 			
-			adapter.doAdaptation(loader, atlBoundModel.getAtlMetamodelName());
+			
+			ArrayList<Metamodel> metamodels = new ArrayList<Metamodel>();
+			for (AtlParameter p : template.getParameters()) {
+				ParameterModel pm = (ParameterModel) p.getModel();
+				metamodels.add(pm.getType());
+			}
+			// template.getParameters().get(0).getModel()
+			adapter.doAdaptation(loader, atlBoundModel.getAtlMetamodelName(), metamodels);
 		}
 
 		

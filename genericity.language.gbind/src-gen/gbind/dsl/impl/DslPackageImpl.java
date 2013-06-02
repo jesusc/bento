@@ -11,9 +11,11 @@ import gbind.dsl.BaseHelper;
 import gbind.dsl.BindingModel;
 import gbind.dsl.ClassBinding;
 import gbind.dsl.ConceptBinding;
+import gbind.dsl.ConceptFeatureRef;
 import gbind.dsl.ConceptHelper;
 import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.ConcreteMetaclass;
+import gbind.dsl.ConcreteReferencDeclaringVar;
 import gbind.dsl.DslFactory;
 import gbind.dsl.DslPackage;
 import gbind.dsl.IntermediateClassBinding;
@@ -23,6 +25,11 @@ import gbind.dsl.MetamodelDeclaration;
 import gbind.dsl.OclFeatureBinding;
 import gbind.dsl.RenamingFeatureBinding;
 
+import gbind.dsl.VirtualClassBinding;
+import gbind.dsl.VirtualClassDefinition;
+import gbind.dsl.VirtualFeature;
+import gbind.dsl.VirtualMetaclass;
+import gbind.dsl.VirtualReference;
 import gbind.simpleocl.SimpleoclPackage;
 
 import gbind.simpleocl.impl.SimpleoclPackageImpl;
@@ -96,6 +103,48 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass intermediateClassBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass concreteReferencDeclaringVarEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualMetaclassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualFeatureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualClassBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conceptFeatureRefEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -255,7 +304,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_BoundConcept() {
+	public EReference getBindingModel_VirtualMetaclasses() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -264,7 +313,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_BoundMetamodel() {
+	public EReference getBindingModel_BoundConcept() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -273,8 +322,17 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBindingModel_BoundMetamodel() {
+		return (EReference)bindingModelEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getBindingModel_Name() {
-		return (EAttribute)bindingModelEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)bindingModelEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -426,7 +484,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntermediateClassBinding_ConcreteSource() {
+	public EReference getIntermediateClassBinding_ConcreteClass() {
 		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -435,8 +493,8 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIntermediateClassBinding_ConcreteReferenceSource() {
-		return (EAttribute)intermediateClassBindingEClass.getEStructuralFeatures().get(2);
+	public EReference getIntermediateClassBinding_ConcreteReference() {
+		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -444,7 +502,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntermediateClassBinding_ConcreteTarget() {
+	public EReference getIntermediateClassBinding_ConceptContext() {
 		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -453,8 +511,152 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIntermediateClassBinding_ConcreteReferenceTarget() {
+	public EAttribute getIntermediateClassBinding_ConceptReferenceName() {
 		return (EAttribute)intermediateClassBindingEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntermediateClassBinding_FeatureBindings() {
+		return (EReference)intermediateClassBindingEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConcreteReferencDeclaringVar() {
+		return concreteReferencDeclaringVarEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualMetaclass() {
+		return virtualMetaclassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualMetaclass_References() {
+		return (EReference)virtualMetaclassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualMetaclass_Init() {
+		return (EReference)virtualMetaclassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualFeature() {
+		return virtualFeatureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVirtualFeature_Name() {
+		return (EAttribute)virtualFeatureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualReference() {
+		return virtualReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualReference_Type_() {
+		return (EReference)virtualReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualClassBinding() {
+		return virtualClassBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualClassBinding_Concept() {
+		return (EReference)virtualClassBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualClassBinding_Virtual() {
+		return (EReference)virtualClassBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualClassBinding_RefFeatures() {
+		return (EReference)virtualClassBindingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConceptFeatureRef() {
+		return conceptFeatureRefEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConceptFeatureRef_ConceptClass() {
+		return (EReference)conceptFeatureRefEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConceptFeatureRef_FeatureName() {
+		return (EAttribute)conceptFeatureRefEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -652,6 +854,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		createEReference(bindingModelEClass, BINDING_MODEL__HELPERS);
 		createEReference(bindingModelEClass, BINDING_MODEL__CONCEPT_METACLASSES);
 		createEReference(bindingModelEClass, BINDING_MODEL__CONCRETE_METACLASSES);
+		createEReference(bindingModelEClass, BINDING_MODEL__VIRTUAL_METACLASSES);
 		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_CONCEPT);
 		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_METAMODEL);
 		createEAttribute(bindingModelEClass, BINDING_MODEL__NAME);
@@ -678,10 +881,32 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		intermediateClassBindingEClass = createEClass(INTERMEDIATE_CLASS_BINDING);
 		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCEPT);
-		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_SOURCE);
-		createEAttribute(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_SOURCE);
-		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_TARGET);
-		createEAttribute(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE_TARGET);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_CLASS);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCRETE_REFERENCE);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCEPT_CONTEXT);
+		createEAttribute(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__CONCEPT_REFERENCE_NAME);
+		createEReference(intermediateClassBindingEClass, INTERMEDIATE_CLASS_BINDING__FEATURE_BINDINGS);
+
+		concreteReferencDeclaringVarEClass = createEClass(CONCRETE_REFERENC_DECLARING_VAR);
+
+		virtualMetaclassEClass = createEClass(VIRTUAL_METACLASS);
+		createEReference(virtualMetaclassEClass, VIRTUAL_METACLASS__REFERENCES);
+		createEReference(virtualMetaclassEClass, VIRTUAL_METACLASS__INIT);
+
+		virtualFeatureEClass = createEClass(VIRTUAL_FEATURE);
+		createEAttribute(virtualFeatureEClass, VIRTUAL_FEATURE__NAME);
+
+		virtualReferenceEClass = createEClass(VIRTUAL_REFERENCE);
+		createEReference(virtualReferenceEClass, VIRTUAL_REFERENCE__TYPE_);
+
+		virtualClassBindingEClass = createEClass(VIRTUAL_CLASS_BINDING);
+		createEReference(virtualClassBindingEClass, VIRTUAL_CLASS_BINDING__CONCEPT);
+		createEReference(virtualClassBindingEClass, VIRTUAL_CLASS_BINDING__VIRTUAL);
+		createEReference(virtualClassBindingEClass, VIRTUAL_CLASS_BINDING__REF_FEATURES);
+
+		conceptFeatureRefEClass = createEClass(CONCEPT_FEATURE_REF);
+		createEReference(conceptFeatureRefEClass, CONCEPT_FEATURE_REF__CONCEPT_CLASS);
+		createEAttribute(conceptFeatureRefEClass, CONCEPT_FEATURE_REF__FEATURE_NAME);
 
 		baseFeatureBindingEClass = createEClass(BASE_FEATURE_BINDING);
 		createEAttribute(baseFeatureBindingEClass, BASE_FEATURE_BINDING__CONCEPT_FEATURE);
@@ -744,6 +969,10 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		concreteMetaclassEClass.getESuperTypes().add(this.getMetaclass());
 		classBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		intermediateClassBindingEClass.getESuperTypes().add(this.getConceptBinding());
+		concreteReferencDeclaringVarEClass.getESuperTypes().add(theSimpleoclPackage.getVariableDeclaration());
+		virtualMetaclassEClass.getESuperTypes().add(this.getMetaclass());
+		virtualReferenceEClass.getESuperTypes().add(this.getVirtualFeature());
+		virtualClassBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		baseFeatureBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		renamingFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
 		oclFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
@@ -756,6 +985,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		initEReference(getBindingModel_Helpers(), this.getBaseHelper(), this.getBaseHelper_Model_(), "helpers", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_ConceptMetaclasses(), this.getConceptMetaclass(), null, "conceptMetaclasses", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_ConcreteMetaclasses(), this.getConcreteMetaclass(), null, "concreteMetaclasses", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingModel_VirtualMetaclasses(), this.getVirtualMetaclass(), null, "virtualMetaclasses", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_BoundConcept(), this.getMetamodelDeclaration(), null, "boundConcept", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_BoundMetamodel(), this.getMetamodelDeclaration(), null, "boundMetamodel", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBindingModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -782,10 +1012,32 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		initEClass(intermediateClassBindingEClass, IntermediateClassBinding.class, "IntermediateClassBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIntermediateClassBinding_Concept(), this.getConceptMetaclass(), null, "concept", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntermediateClassBinding_ConcreteSource(), this.getConcreteMetaclass(), null, "concreteSource", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntermediateClassBinding_ConcreteReferenceSource(), ecorePackage.getEString(), "concreteReferenceSource", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntermediateClassBinding_ConcreteTarget(), this.getConcreteMetaclass(), null, "concreteTarget", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIntermediateClassBinding_ConcreteReferenceTarget(), ecorePackage.getEString(), "concreteReferenceTarget", null, 0, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateClassBinding_ConcreteClass(), this.getConcreteMetaclass(), null, "concreteClass", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateClassBinding_ConcreteReference(), this.getConcreteReferencDeclaringVar(), null, "concreteReference", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateClassBinding_ConceptContext(), this.getConceptMetaclass(), null, "conceptContext", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntermediateClassBinding_ConceptReferenceName(), ecorePackage.getEString(), "conceptReferenceName", null, 1, 1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateClassBinding_FeatureBindings(), this.getBaseFeatureBinding(), null, "featureBindings", null, 0, -1, IntermediateClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(concreteReferencDeclaringVarEClass, ConcreteReferencDeclaringVar.class, "ConcreteReferencDeclaringVar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(virtualMetaclassEClass, VirtualMetaclass.class, "VirtualMetaclass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVirtualMetaclass_References(), this.getVirtualReference(), null, "references", null, 0, -1, VirtualMetaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualMetaclass_Init(), theSimpleoclPackage.getOclExpression(), null, "init", null, 1, 1, VirtualMetaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(virtualFeatureEClass, VirtualFeature.class, "VirtualFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVirtualFeature_Name(), ecorePackage.getEString(), "name", null, 1, 1, VirtualFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(virtualReferenceEClass, VirtualReference.class, "VirtualReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVirtualReference_Type_(), this.getConcreteMetaclass(), null, "type_", null, 1, 1, VirtualReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(virtualClassBindingEClass, VirtualClassBinding.class, "VirtualClassBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVirtualClassBinding_Concept(), this.getConceptMetaclass(), null, "concept", null, 1, 1, VirtualClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualClassBinding_Virtual(), this.getVirtualMetaclass(), null, "virtual", null, 1, 1, VirtualClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualClassBinding_RefFeatures(), this.getConceptFeatureRef(), null, "refFeatures", null, 0, -1, VirtualClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conceptFeatureRefEClass, ConceptFeatureRef.class, "ConceptFeatureRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConceptFeatureRef_ConceptClass(), this.getConceptMetaclass(), null, "conceptClass", null, 1, 1, ConceptFeatureRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConceptFeatureRef_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, ConceptFeatureRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseFeatureBindingEClass, BaseFeatureBinding.class, "BaseFeatureBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBaseFeatureBinding_ConceptFeature(), ecorePackage.getEString(), "conceptFeature", null, 1, 1, BaseFeatureBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -1,0 +1,452 @@
+// eclectic class2reference(atl, gbind, type) -> (atl)
+eclectic virtual_classes(atl) -> (atl)
+
+qool virtual_classes_rewrite(atl, gbind, params) -> (atl)
+
+model rt
+  class OperationHelperIsVirtual
+  	ref definition   : atl!OclFeatureDefinition
+	ref feature      : atl!Operation
+    ref binding      : gbind!VirtualClassBinding
+  end
+
+  class AttributeHelperIsVirtual
+  	ref definition   : atl!OclFeatureDefinition  
+	ref feature    : atl!Attribute
+    ref binding    : gbind!VirtualClassBinding
+  end
+
+end
+
+model queue mNavigationOrAttributeCallExp : atl!NavigationOrAttributeCallExp
+model queue mBinding : atl!Binding
+model queue mMatchedRule : atl!MatchedRule!
+model queue mHelper : atl!Helper!
+
+model queue mVirtualMetaclass      : gbind!VirtualMetaclass 
+model queue mVirtualClassBinding   : gbind!VirtualClassBinding
+model queue mConcreteMetaclass     : gbind!ConcreteMetaclass
+
+local queue pAttributeHelperIsVirtual : rt!AttributeHelperIsVirtual
+
+segment generate_virtual_type_init
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+
+	module = atl!Module.all_instances.first
+	
+
+	forall vm from mVirtualMetaclass
+		ocl_expr = vm.init
+		filter_view = { |o|
+			o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
+		}		
+
+		atl_expr = invoke-external ^eclectic.composed_genericity(in = gbind) -> (out = atl)
+				 input-view-filter filter_view
+				 output-element ocl_expr[expr.t]
+
+		helper = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createTupleInit(vm, atl_expr, vm.name.concat("_AllInstances"))
+
+		module.elements = helper
+	end
+
+    // Generates a helper to access the AllInstances of VirtualClasses, just a trick...
+	forall cm from mConcreteMetaclass
+		gbind!VirtualMetaclass.all_instances.each { |virtual| 
+			helper = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createVirtualInstances_Access(cm, virtual.name.concat("_AllInstances"), ocl_model)
+			
+			module.elements = helper
+			
+		}
+	end
+	
+end
+
+segment findNavExpr
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+
+	module = atl!Module.all_instances.first
+	
+	helper_parameter = atl!Parameter.new
+	helper_parameter.varName = "obj"
+	helper_parameter.type = atl!OclAnyType.new
+			
+	invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+		 entrypoint createSequenceConverter(module, helper_parameter) // The module where it must be attached is passed
+	
+	forall atlBinding from mBinding
+
+	 	compatible_cbs = gbind!VirtualClassBinding.all_instances.select { |cb|
+		 	atlBinding.value.hasType(cb.concept.name)
+	 	}
+	 		 	
+	 	compatible_cbs.size.gt(0).if_true {
+	 	
+			atlBinding.value = compatible_cbs.inject(atlBinding.value) { |current_expr, cb|
+				it1 = atl!Iterator.new 
+				it1.varName = "__v__"
+		
+			 	rules = atl!MatchedRule.all_instances.reject { |r| r.kind_of(atl!LazyMatchedRule) }.select { |r|
+			 		inPatternElement  = r.inPattern.elements.first
+			 		ocl_model_element = inPatternElement.type
+		
+					ocl_model_element.^model.name.eq(current_mm).and(
+				    	cb.concept.name.eq(ocl_model_element.name) )
+			 	}
+			 	
+			 	call = rules.inject(atl!OclUndefinedExp.new) { |inner_exp, r|
+					inner_call = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+				     				  entrypoint createThisModuleCall(cb, r.name, it1)
+					r.inPattern.filter.is_nil.if_else({
+						inner_call		
+					}, {
+						check_filter = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+				     				  entrypoint createThisModuleCall(cb, r.name.concat('__filter__'), it1)						
+						if_exp     = atl!IfExp.new
+						if_exp.condition      = check_filter
+						if_exp.thenExpression = inner_call
+						if_exp.elseExpression = inner_exp
+					  	if_exp
+
+					})
+				}	
+							
+				expr = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+					 entrypoint createInvokerForLazyRule(cb, current_expr, it1, call)
+				// Need to to this because createInvokerForLazyRule does not work well
+				inner_if = expr.body.thenExpression
+				inner_if.thenExpression = call 
+			
+				expr
+			}
+	 	}
+		
+		
+	end
+	
+	forall cb2 from mVirtualClassBinding	
+		forall matchedRule from mMatchedRule
+			inPatternElement  = matchedRule.inPattern.elements.first
+			ocl_model_element = inPatternElement.type
+			
+			ocl_model_element.^model.name.eq(current_mm).if_true {
+			    cb2.concept.name.eq(ocl_model_element.name).if_true {
+					matchedRule.name.println("Converted to unique lazy rule: ")
+					
+					filter    = matchedRule.inPattern.filter
+					rule_name = matchedRule.name //"uniqueLazyRule".concat(cb2.concept.name)
+					
+					lazy_rule = atl!LazyMatchedRule.new
+					lazy_rule.variables = matchedRule.variables.map { |v| v }
+
+					lazy_rule.isUnique = true
+					lazy_rule.commentsBefore = "-- Rule from ".concat(matchedRule.name)
+					lazy_rule.name = rule_name
+					lazy_rule.inPattern = matchedRule.inPattern
+					lazy_rule.outPattern = matchedRule.outPattern
+
+					matchedRule.replaceBy(lazy_rule)	
+		
+					// Create filter
+					// Replace the variable declaration by a parameter
+					filter.is_nil.if_false {			
+						// This works by change, because the parameter has the same name as the
+						// replaced varDeclaration, but the elements in the AST does not point
+						// to the new parameter. However, the ATL serializer does not matter because
+						// it just looks at the varName			
+						p = atl!Parameter.new
+						p.varName = inPatternElement.varName
+						p.type = atl!OclAnyType.new
+						// inPatternElement.replaceBy(p)
+						
+						helper = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+						 		      entrypoint createFilterForLazyCall(cb2, filter, rule_name.concat('__filter__'), p)
+						module.elements = helper		
+						
+						rule_name.println("Moved filter to helper: ")				
+					}
+				
+ 
+					// Why if the next goes above fails with no model found...?
+					ocl_model_element.name = 'OclAny'
+		
+
+				
+				}
+			}
+		end		
+	end	
+end
+
+
+segment adapt_context_helpers
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+
+	module = atl!Module.all_instances.first
+
+	// Find helpers that must be rewritten	
+	forall cb2 from mVirtualClassBinding	
+
+		forall helper from mHelper
+	     where helper.definition.context_
+	    
+	    	ocl_model_element = helper.definition.context_.context_
+			ocl_model_element.kind_of(atl!OclModelElement).if_true {
+				ocl_model_element.^model.name.eq(current_mm).if_true {
+				    cb2.concept.name.eq(ocl_model_element.name).if_true {
+						
+						// Remove the context
+						
+						
+						// Add parameter
+						// Case 1: Is an attribute
+						// Case 2: Is an operation -> Not supported yet
+						helper.definition.feature.kind_of(atl!Attribute).if_else({
+							o = rt!AttributeHelperIsVirtual.new
+							o.definition = helper.definition
+							o.feature   = helper.definition.feature
+							o.binding   = cb2
+							emit o to pAttributeHelperIsVirtual
+						}, {
+							helper.println("TODO: Rewrite of operation not supported yet for virtual classes")
+						})
+		
+					}
+				}				     
+			}
+		end
+	end
+	
+	forall attr_match from pAttributeHelperIsVirtual
+							
+		feature_name = attr_match.feature.name
+							
+		op = atl!Operation.new
+		op.name = feature_name
+		op.returnType = attr_match.feature.type
+		param = atl!Parameter.new
+		param.varName = 'self_'
+		param.type = atl!OclAnyType.new
+		op.parameters = param
+		
+		attr_match.feature.down_to(atl!VariableExp) { |v|
+			v.referredVariable.varName.eq('self').if_true {
+				v.referredVariable = param
+			}
+		}
+
+		// Replace usages of helpers attached to a virtual class
+		
+		// This does not work: model not found
+		//forall nav from mNavigationOrAttributeCallExp
+		//  where 
+		atl!NavigationOrAttributeCallExp.all_instances.
+			select { |nav| nav.source.location.is_nil.not }. // Need to check this to avoid asking for something that has no type...
+			select { |nav| 
+				nav.source.typeName.eq(attr_match.binding.concept.name).
+				and(nav.name.eq(feature_name))			      
+			}.each { |nav|
+			
+			opc = atl!OperationCallExp.new 
+			opc.operationName = nav.name
+			this_module = atl!VariableDeclaration.new
+			this_module.varName = "thisModule"
+			receptor = atl!VariableExp.new
+			receptor.referredVariable = this_module
+			opc.source = receptor
+			opc.arguments = nav.source
+			
+			nav.println("Usage of ".concat(feature_name).concat(" at ").concat(nav.location))
+		
+			nav.replaceBy(opc)
+		}
+
+		// This has to be at the end...
+		op.name.println("Replaced attribute by operation: ")
+		op.body = attr_match.feature.initExpression
+		attr_match.feature.replaceBy(op)	
+		attr_match.definition.unset_feature('context_')
+	
+	end
+end
+
+end
+
+
+
+/////////////// CREATION FUNCTIONS ////////////////
+
+tao virtual_class_gen_atl(gbind, atl) -> (atl)
+	template createTupleInit(cb : gbind!VirtualMetaclass, atl_expr : atl!OclExpression, helperName : _!String) 
+		atl!Helper {
+			definition = atl!OclFeatureDefinition {
+				feature = atl!Attribute {
+					name = helperName
+					initExpression = atl_expr
+					type = atl!OclAnyType { }
+				}		
+			}
+		}
+	end
+
+	template createVirtualInstances_Access(cm : gbind!ConcreteMetaclass, helperName : _!String, atl_model : atl!OclModel) 
+		atl!Helper {
+			definition = atl!OclFeatureDefinition {
+				feature = atl!Attribute {
+					name = helperName
+					initExpression = atl!NavigationOrAttributeCallExp {
+						name = helperName
+						source = atl!VariableExp {							
+							referredVariable = atl!VariableDeclaration {
+								varName = "thisModule"
+							}
+						}
+					}
+					type = atl!OclAnyType { }
+				}
+				context_ = atl!OclContextDefinition {
+					context_ = atl!OclModelElement {
+						name = cm.name
+						^model = atl_model
+					}
+				}
+			}	
+		}
+	end
+
+	template createFilterForLazyCall(cb : gbind!VirtualClassBinding, atl_expr : atl!OclExpression, helperName : _!String, parameter : atl!Parameter) 
+		atl!Helper {
+			definition = atl!OclFeatureDefinition {
+				feature = atl!Operation {
+					name = helperName
+					parameters = parameter
+					body = atl_expr
+					returnType = atl!BooleanType { }
+				}		
+			}
+		}
+	end
+
+	template createThisModuleCall(cb : gbind!VirtualClassBinding, ruleName : _!String, it : atl!Iterator) 
+		atl!OperationCallExp {
+			operationName = ruleName
+			source = atl!VariableExp {
+				referredVariable = atl!VariableDeclaration {
+					varName = "thisModule"
+				}
+			}
+			arguments = atl!VariableExp {
+				referredVariable = it
+			}
+		}
+	end
+	
+template createInvokerForLazyRule(cb : gbind!VirtualClassBinding, originalBindingExpr : atl!OclExpression, it : atl!Iterator, lazy_rule_invocation : atl!OclExpression)
+atl!IteratorExp {
+	name = "collect"
+	source = atl!OperationCallExp {
+		operationName = "__convertToSequence__"
+		source = atl!VariableExp {
+			referredVariable = atl!VariableDeclaration {
+				varName = "thisModule"
+			}
+		}
+		arguments = originalBindingExpr
+	}
+	body = atl!IfExp {
+		// 
+		condition = atl!OperatorCallExp {
+			operationName = "="
+			source = atl!NavigationOrAttributeCallExp {
+				name = "name"
+				source = atl!OperationCallExp {
+					operationName = "oclType"
+					source = atl!VariableExp {
+						referredVariable = it // atl!VariableDeclaration { varName = "self" }
+					}
+				}
+			}
+			arguments = atl!StringExp {
+				stringSymbol = "Tuple"
+			}
+		}
+		
+		thenExpression = atl!IfExp {
+
+			condition = atl!OperatorCallExp {
+				operationName = "="
+				source = atl!OperationCallExp {
+					operationName = "get"
+					source = atl!OperationCallExp {
+						operationName = "asMap"
+						source = atl!VariableExp {
+							referredVariable = it
+						}
+					}
+					arguments = atl!StringExp {
+						stringSymbol = "type__"
+					}
+				}
+				arguments = atl!StringExp {
+					stringSymbol = cb.virtual.name
+				}
+			}
+
+			// Fails with invalid code length!!!!
+			// thenExpression = lazy_rule_invocation
+			elseExpression = atl!VariableExp {
+				referredVariable = it
+			}
+		}
+		elseExpression = atl!VariableExp {
+			referredVariable = it
+		}
+	}
+	iterators = it
+	//iterators = it : atl!Iterator {
+	//	varName = "__v__"
+	//}
+	
+}
+
+
+end
+
+
+template createSequenceConverter(module : atl!Module, p : atl!Parameter)
+atl!Helper {
+	module = module
+	definition = atl!OclFeatureDefinition {
+		feature = atl!Operation {
+			name = "__convertToSequence__"
+			parameters = p
+			returnType = atl!OclAnyType { }
+			body = atl!IfExp {
+				thenExpression = atl!SequenceExp { }
+				condition = atl!OperatorCallExp {
+					operationName = "="
+					source = atl!VariableExp { 
+						referredVariable = p
+					}
+					arguments = atl!OclUndefinedExp { }
+				}
+				elseExpression = atl!CollectionOperationCallExp {
+					operationName = "flatten"
+					source = atl!SequenceExp {
+						elements = atl!VariableExp { 
+							referredVariable = p							
+						}
+					}
+				}
+			}
+		}
+	}
+}
+end
+
+end

@@ -126,6 +126,22 @@ mappings ocl2ocl(gbind) -> (atl)
     atl.name = gbind.name
   end
 
+
+  [expr]
+  from gbind : gbind!TupleExp
+    to   atl :   atl!TupleExp
+    
+    atl.tuplePart <- gbind.tuplePart
+  end
+  
+  from gbind : gbind!TuplePart
+    to   atl :   atl!TuplePart
+    
+    atl.varName = gbind.varName
+    atl.initExpression <- gbind.initExpression
+  end
+ 
+
   // This 79works because in ATL abstract syntax you can have as many
   // OclModel as you want, but it is not really clean. Doing this right
   // would require parameterizing this transformation with an initial trace

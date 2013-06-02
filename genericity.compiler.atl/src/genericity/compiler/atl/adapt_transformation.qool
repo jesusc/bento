@@ -29,6 +29,9 @@ segment main
 	invoke-external eclectic.adapt_model_elements(atl = atl, gbind = gbind) -> ()
 		input-view-filter filter_view
 	
+	// copy_helpers
+	invoke-external eclectic.copy_helpers(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
 end
 
 

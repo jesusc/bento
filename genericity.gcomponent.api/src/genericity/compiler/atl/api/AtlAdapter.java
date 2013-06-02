@@ -1,6 +1,8 @@
 package genericity.compiler.atl.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.idc.jvm.runtime.BasicMethodHandler;
@@ -15,12 +17,19 @@ import org.eclectic.modeling.emf.NoModelFoundException;
 import org.eclectic.modeling.emf.Util;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import eclectic.adapt_transformation;
 import gbind.dsl.BindingModel;
+import genericity.compiler.atl.Class2Reference;
+import genericity.compiler.atl.VirtualClasses;
+import genericity.compiler.atl.api.AtlAdapter.BindingData;
+import genericity.language.gcomponent.core.Metamodel;
+import genericity.typecheck.atl.TypeCheckLauncher;
+import genericity.typing.atl_types.AtlTypingPackage;
 
 /**
  * Adapts an existing ATL transformation according to a given binding.
@@ -37,7 +46,7 @@ public class AtlAdapter {
 		this.inout = null;
 	}
 	
-	public void doAdaptation(BindingModelLoader binding, String boundMetamodelName) {
+	public void doAdaptation(BindingModelLoader binding, String boundMetamodelName, ArrayList<Metamodel> metamodels) {
 	    adapt_transformation transformation = new adapt_transformation();
 	    
 	    String concreteMetamodelName = null;
@@ -58,9 +67,31 @@ public class AtlAdapter {
 			e.printStackTrace();
 		}
 		
+		BindingData bindingData = new BindingData(boundMetamodelName, concreteMetamodelName);
 		ParametersModel parameters = new ParametersModel();
-		parameters.addParameterObject(new BindingData(boundMetamodelName, concreteMetamodelName));
+		parameters.addParameterObject(bindingData);
+
+		// If there is class -> reference specifications, the transformation must be first
+		// rewritten and a typecheck phase is needed
+		if ( in.allObjectsOf("IntermediateClassBinding").size() > 0 ) {
+			try {
+				transformClass2Reference(loader, in, inout, metamodels, bindingData);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
 		
+		if ( in.allObjectsOf("VirtualClassBinding").size() > 0 ) {
+			try {
+				transformVirtualClasses(loader, in, inout, metamodels, bindingData);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
 		manager.register("gbind", in);
 		manager.register("socl", in);
@@ -81,6 +112,54 @@ public class AtlAdapter {
 		//System.out.println("Finished " + Rewrite1.class.getSimpleName());
 		
 		System.out.println("Finished Atl Adaptation");
+	}
+
+	private void transformClass2Reference(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
+			ArrayList<Metamodel> metamodels, BindingData bindingData) throws IOException {
+		// TODO Auto-generated method stub
+		List<EPackage> pkgs = new ArrayList<EPackage>();
+		pkgs.add(AtlTypingPackage.eINSTANCE);
+		BasicEMFModel out = loader
+				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
+
+		String[] strMetamodels = new String[metamodels.size()];
+		int i = 0;
+		for (Metamodel meta : metamodels) {
+			strMetamodels[i] = meta.getUri();
+			i++;
+		}
+		
+		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, strMetamodels);
+		new TypeCheckLauncher().launch(mm, atlTransformation, out);
+		
+		Class2Reference.BindingData data = new Class2Reference.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
+		new Class2Reference().launch(atlTransformation, bindingModel, out, data);
+		
+		System.out.println("Finished class2reference transformation...");
+	}
+
+	private void transformVirtualClasses(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
+			ArrayList<Metamodel> metamodels, BindingData bindingData) throws IOException {
+		// TODO Auto-generated method stub
+		List<EPackage> pkgs = new ArrayList<EPackage>();
+		pkgs.add(AtlTypingPackage.eINSTANCE);
+		BasicEMFModel out = loader
+				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
+
+		String[] strMetamodels = new String[metamodels.size()];
+		int i = 0;
+		for (Metamodel meta : metamodels) {
+			strMetamodels[i] = meta.getUri();
+			i++;
+		}
+		
+		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, strMetamodels);
+		new TypeCheckLauncher().launch(mm, atlTransformation, out);
+		
+		VirtualClasses.BindingData data = new VirtualClasses.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
+		new VirtualClasses().launch(atlTransformation, bindingModel, out, data);
+		
+		System.out.println("Finished virtual-classes transformation...");
 	}
 
 	public Resource getResource() {
@@ -108,8 +187,11 @@ public class AtlAdapter {
 			super(model, o);
 		}
 		
-		public Boolean is_child_of(EObject parent) {
-			
+		public Boolean is_normal_feature_binding() {
+			return ((EObject) object).eContainer() instanceof BindingModel;
+		}
+		
+		public Boolean is_child_of(EObject parent) {			
 			return checkIsChild((EObject) object, parent);
 		}
 		

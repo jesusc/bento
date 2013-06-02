@@ -66,6 +66,12 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 			case DslPackage.CONCRETE_METACLASS: return createConcreteMetaclass();
 			case DslPackage.CLASS_BINDING: return createClassBinding();
 			case DslPackage.INTERMEDIATE_CLASS_BINDING: return createIntermediateClassBinding();
+			case DslPackage.CONCRETE_REFERENC_DECLARING_VAR: return createConcreteReferencDeclaringVar();
+			case DslPackage.VIRTUAL_METACLASS: return createVirtualMetaclass();
+			case DslPackage.VIRTUAL_FEATURE: return createVirtualFeature();
+			case DslPackage.VIRTUAL_REFERENCE: return createVirtualReference();
+			case DslPackage.VIRTUAL_CLASS_BINDING: return createVirtualClassBinding();
+			case DslPackage.CONCEPT_FEATURE_REF: return createConceptFeatureRef();
 			case DslPackage.BASE_FEATURE_BINDING: return createBaseFeatureBinding();
 			case DslPackage.RENAMING_FEATURE_BINDING: return createRenamingFeatureBinding();
 			case DslPackage.OCL_FEATURE_BINDING: return createOclFeatureBinding();
@@ -135,6 +141,66 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public IntermediateClassBinding createIntermediateClassBinding() {
 		IntermediateClassBindingImpl intermediateClassBinding = new IntermediateClassBindingImpl();
 		return intermediateClassBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConcreteReferencDeclaringVar createConcreteReferencDeclaringVar() {
+		ConcreteReferencDeclaringVarImpl concreteReferencDeclaringVar = new ConcreteReferencDeclaringVarImpl();
+		return concreteReferencDeclaringVar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VirtualMetaclass createVirtualMetaclass() {
+		VirtualMetaclassImpl virtualMetaclass = new VirtualMetaclassImpl();
+		return virtualMetaclass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VirtualFeature createVirtualFeature() {
+		VirtualFeatureImpl virtualFeature = new VirtualFeatureImpl();
+		return virtualFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VirtualReference createVirtualReference() {
+		VirtualReferenceImpl virtualReference = new VirtualReferenceImpl();
+		return virtualReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VirtualClassBinding createVirtualClassBinding() {
+		VirtualClassBindingImpl virtualClassBinding = new VirtualClassBindingImpl();
+		return virtualClassBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConceptFeatureRef createConceptFeatureRef() {
+		ConceptFeatureRefImpl conceptFeatureRef = new ConceptFeatureRefImpl();
+		return conceptFeatureRef;
 	}
 
 	/**

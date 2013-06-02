@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="uml2simple">
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:VirtualClassBinding" concept="//@conceptMetaclasses.1" virtual="//@virtualMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" concreteFeature="umlName"/>
+  <helpers xsi:type="bindingModel:LocalHelper" feature="myhelper" context="//@concreteMetaclasses.1">
+    <body xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="things"/>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </body>
+    <type xsi:type="simpleocl:SequenceType" name="Sequence">
+      <elementType xsi:type="simpleocl:OclModelElement" name="Class" model="//@boundMetamodel"/>
+    </type>
+  </helpers>
+  <conceptMetaclasses name="Class"/>
+  <conceptMetaclasses name="Generalization"/>
+  <concreteMetaclasses name="SimpleClass"/>
+  <concreteMetaclasses name="Model"/>
+  <virtualMetaclasses name="MyGeneralization">
+    <references name="x" type_="//@concreteMetaclasses.0"/>
+    <init xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="allInstances"/>
+      <calls xsi:type="simpleocl:IteratorExp" name="collect">
+        <body xsi:type="simpleocl:PropertyCallExp">
+          <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="generalization"/>
+          <calls xsi:type="simpleocl:IteratorExp" name="collect">
+            <body xsi:type="simpleocl:TupleExp">
+              <tuplePart varName="general" eq="=">
+                <initExpression xsi:type="simpleocl:PropertyCallExp">
+                  <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="general"/>
+                  <source xsi:type="simpleocl:VariableExp" referredVariable="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@iterators.0"/>
+                </initExpression>
+              </tuplePart>
+            </body>
+            <iterators varName="g" variableExp="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@body/@tuplePart.0/@initExpression/@source"/>
+          </calls>
+          <source xsi:type="simpleocl:VariableExp" referredVariable="//@virtualMetaclasses.0/@init/@calls.1/@iterators.0"/>
+        </body>
+        <iterators varName="c" variableExp="//@virtualMetaclasses.0/@init/@calls.1/@body/@source"/>
+      </calls>
+      <source xsi:type="simpleocl:OclModelElementExp" model="//@boundConcept" name="Class"/>
+    </init>
+  </virtualMetaclasses>
+  <boundConcept name="UML" metamodelURI="platform:/resource/genericity.compiler.atl/metamodels/UML.ecore"/>
+  <boundMetamodel name="Simple" elements="//@helpers.0/@type/@elementType" metamodelURI="platform:/resource/genericity.compiler.atl/metamodels/SimpleUML.ecore"/>
+</bindingModel:BindingModel>

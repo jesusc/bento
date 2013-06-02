@@ -167,6 +167,15 @@ public class GbindTokenStyleInformationProvider {
 		if ("when".equals(tokenName)) {
 			return new genericity.language.gbind.mopp.GbindTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("init".equals(tokenName)) {
+			return new genericity.language.gbind.mopp.GbindTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("ref".equals(tokenName)) {
+			return new genericity.language.gbind.mopp.GbindTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("virtual".equals(tokenName)) {
+			return new genericity.language.gbind.mopp.GbindTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("feature".equals(tokenName)) {
 			return new genericity.language.gbind.mopp.GbindTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}

@@ -1,7 +1,7 @@
 
 transformation component fd2pn {
-	source concept FD  : "FlowDiagram.ecore"
-	target concept PN  : "PetriNet.ecore"
+	source concept FD  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	target concept PN  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore"
 	
 	source model fd : FD
 	target model pn : PN

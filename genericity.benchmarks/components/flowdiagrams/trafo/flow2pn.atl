@@ -4,10 +4,13 @@
 module flow2pn;
 create OUT : PN from IN : FD;
 
+-- This is needed to emulate the casting... and facilitate life to the typechecker
+helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; 
+
 helper context FD!Node def: typeName             : String  = self.oclType().name; 
 helper context FD!Node def: isTask               : Boolean = self.oclIsKindOf(FD!Task);
 helper context FD!Node def: isFinalTask          : Boolean = self.oclIsKindOf(FD!FinalTask);
-helper context FD!Node def: isTerminatingTask    : Boolean = if self.isFinalTask then self.isTerminating else false endif;
+helper context FD!Node def: isTerminatingTask    : Boolean = if self.isFinalTask then self.oclAsType(FD!FinalTask).isTerminating else false endif;
 helper context FD!Node def: isParallelSplit      : Boolean = self.oclIsKindOf(FD!ParallelSplit);
 helper context FD!Node def: isSynchronization    : Boolean = self.oclIsKindOf(FD!Synchronization);
 helper context FD!Node def: isExclusiveChoice    : Boolean = self.oclIsKindOf(FD!ExclusiveChoice);
@@ -69,7 +72,7 @@ rule create_transition(source : FD!Node, num : Integer) {
 
 helper context FD!FlowEdge    def: isConnectedToTerminating : Boolean = self.out.isTerminatingTask;
 helper context FD!Node        def: isConnectedToTerminating : Boolean = self.outs->exists(e | e.isConnectedToTerminating);
-helper context FD!FlowDiagram def: control : OclAny = 
+helper context FD!FlowDiagram def: control : Sequence(PN!Place) = 
 	if self.nodes->exists(n | n.isTerminatingTask) 
 	then Sequence{ thisModule.get_control(self) }
 	else Sequence{} endif;

@@ -14,6 +14,8 @@ import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.DslPackage;
 
 import gbind.dsl.MetamodelDeclaration;
+import gbind.dsl.VirtualMetaclass;
+import gbind.dsl.VirtualClassDefinition;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -42,6 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getHelpers <em>Helpers</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
+ *   <li>{@link gbind.dsl.impl.BindingModelImpl#getVirtualMetaclasses <em>Virtual Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundConcept <em>Bound Concept</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundMetamodel <em>Bound Metamodel</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getName <em>Name</em>}</li>
@@ -90,6 +93,16 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * @ordered
 	 */
 	protected EList<ConcreteMetaclass> concreteMetaclasses;
+
+	/**
+	 * The cached value of the '{@link #getVirtualMetaclasses() <em>Virtual Metaclasses</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVirtualMetaclasses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<VirtualMetaclass> virtualMetaclasses;
 
 	/**
 	 * The cached value of the '{@link #getBoundConcept() <em>Bound Concept</em>}' containment reference.
@@ -196,6 +209,18 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			concreteMetaclasses = new EObjectContainmentEList<ConcreteMetaclass>(ConcreteMetaclass.class, this, DslPackage.BINDING_MODEL__CONCRETE_METACLASSES);
 		}
 		return concreteMetaclasses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<VirtualMetaclass> getVirtualMetaclasses() {
+		if (virtualMetaclasses == null) {
+			virtualMetaclasses = new EObjectContainmentEList<VirtualMetaclass>(VirtualMetaclass.class, this, DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES);
+		}
+		return virtualMetaclasses;
 	}
 
 	/**
@@ -338,6 +363,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return ((InternalEList<?>)getConceptMetaclasses()).basicRemove(otherEnd, msgs);
 			case DslPackage.BINDING_MODEL__CONCRETE_METACLASSES:
 				return ((InternalEList<?>)getConcreteMetaclasses()).basicRemove(otherEnd, msgs);
+			case DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES:
+				return ((InternalEList<?>)getVirtualMetaclasses()).basicRemove(otherEnd, msgs);
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				return basicSetBoundConcept(null, msgs);
 			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
@@ -362,6 +389,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return getConceptMetaclasses();
 			case DslPackage.BINDING_MODEL__CONCRETE_METACLASSES:
 				return getConcreteMetaclasses();
+			case DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES:
+				return getVirtualMetaclasses();
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				return getBoundConcept();
 			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
@@ -397,6 +426,10 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				getConcreteMetaclasses().clear();
 				getConcreteMetaclasses().addAll((Collection<? extends ConcreteMetaclass>)newValue);
 				return;
+			case DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES:
+				getVirtualMetaclasses().clear();
+				getVirtualMetaclasses().addAll((Collection<? extends VirtualMetaclass>)newValue);
+				return;
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				setBoundConcept((MetamodelDeclaration)newValue);
 				return;
@@ -430,6 +463,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			case DslPackage.BINDING_MODEL__CONCRETE_METACLASSES:
 				getConcreteMetaclasses().clear();
 				return;
+			case DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES:
+				getVirtualMetaclasses().clear();
+				return;
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				setBoundConcept((MetamodelDeclaration)null);
 				return;
@@ -459,6 +495,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return conceptMetaclasses != null && !conceptMetaclasses.isEmpty();
 			case DslPackage.BINDING_MODEL__CONCRETE_METACLASSES:
 				return concreteMetaclasses != null && !concreteMetaclasses.isEmpty();
+			case DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES:
+				return virtualMetaclasses != null && !virtualMetaclasses.isEmpty();
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				return boundConcept != null;
 			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:

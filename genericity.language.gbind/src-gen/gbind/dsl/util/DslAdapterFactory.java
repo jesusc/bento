@@ -12,6 +12,7 @@ import gbind.simpleocl.LocatedElement;
 import gbind.simpleocl.NamedElement;
 import gbind.simpleocl.OclMetamodel;
 import gbind.simpleocl.OclModel;
+import gbind.simpleocl.VariableDeclaration;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -108,6 +109,30 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createIntermediateClassBindingAdapter();
 			}
 			@Override
+			public Adapter caseConcreteReferencDeclaringVar(ConcreteReferencDeclaringVar object) {
+				return createConcreteReferencDeclaringVarAdapter();
+			}
+			@Override
+			public Adapter caseVirtualMetaclass(VirtualMetaclass object) {
+				return createVirtualMetaclassAdapter();
+			}
+			@Override
+			public Adapter caseVirtualFeature(VirtualFeature object) {
+				return createVirtualFeatureAdapter();
+			}
+			@Override
+			public Adapter caseVirtualReference(VirtualReference object) {
+				return createVirtualReferenceAdapter();
+			}
+			@Override
+			public Adapter caseVirtualClassBinding(VirtualClassBinding object) {
+				return createVirtualClassBindingAdapter();
+			}
+			@Override
+			public Adapter caseConceptFeatureRef(ConceptFeatureRef object) {
+				return createConceptFeatureRefAdapter();
+			}
+			@Override
 			public Adapter caseBaseFeatureBinding(BaseFeatureBinding object) {
 				return createBaseFeatureBindingAdapter();
 			}
@@ -146,6 +171,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOclMetamodel(OclMetamodel object) {
 				return createOclMetamodelAdapter();
+			}
+			@Override
+			public Adapter caseVariableDeclaration(VariableDeclaration object) {
+				return createVariableDeclarationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -276,6 +305,90 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIntermediateClassBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.ConcreteReferencDeclaringVar <em>Concrete Referenc Declaring Var</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.ConcreteReferencDeclaringVar
+	 * @generated
+	 */
+	public Adapter createConcreteReferencDeclaringVarAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualMetaclass <em>Virtual Metaclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.VirtualMetaclass
+	 * @generated
+	 */
+	public Adapter createVirtualMetaclassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualFeature <em>Virtual Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.VirtualFeature
+	 * @generated
+	 */
+	public Adapter createVirtualFeatureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualReference <em>Virtual Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.VirtualReference
+	 * @generated
+	 */
+	public Adapter createVirtualReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualClassBinding <em>Virtual Class Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.VirtualClassBinding
+	 * @generated
+	 */
+	public Adapter createVirtualClassBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.ConceptFeatureRef <em>Concept Feature Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.ConceptFeatureRef
+	 * @generated
+	 */
+	public Adapter createConceptFeatureRefAdapter() {
 		return null;
 	}
 
@@ -416,6 +529,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOclMetamodelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.VariableDeclaration <em>Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.VariableDeclaration
+	 * @generated
+	 */
+	public Adapter createVariableDeclarationAdapter() {
 		return null;
 	}
 

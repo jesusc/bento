@@ -32,6 +32,7 @@ import eclectic.callexpr;
 import eclectic.composed_genericity;
 import eclectic.ocl2ocl;
 import eclectic.rewrite_class1;
+import gbind.dsl.BindingModel;
 
 public class AdaptTransformation {
 
@@ -65,16 +66,16 @@ public class AdaptTransformation {
 //	public static final String TARGET_METAMODEL_NAME = "SFC";
 
 	// epc2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/epc2pn/epc.gbind.xmi";
-	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
-	public static final String BOUND_METAMODEL_NAME = "FD";
-	public static final String TARGET_METAMODEL_NAME = "EPC";
-
-	// yawl2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/epc2pn/epc.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
-//	public static final String TARGET_METAMODEL_NAME = "YAWL";
+//	public static final String TARGET_METAMODEL_NAME = "EPC";
+
+	// yawl2pn
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+	public static final String BOUND_METAMODEL_NAME = "FD";
+	public static final String TARGET_METAMODEL_NAME = "YAWL";
 
 	// ecore2measure_manual
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
@@ -165,6 +166,10 @@ public class AdaptTransformation {
 			return result;
 		}
 
+		public Boolean is_normal_feature_binding() {
+			return ((EObject) object).eContainer() instanceof BindingModel;
+		}
+		
 		private boolean checkIsChild(EObject o, EObject parent) {
 			if (o == null)
 				return false;

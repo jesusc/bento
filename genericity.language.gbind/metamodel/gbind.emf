@@ -383,6 +383,7 @@ package dsl {
 	
 		val ConceptMetaclass[*]  conceptMetaclasses;
 		val ConcreteMetaclass[*] concreteMetaclasses;
+		val VirtualMetaclass[*] virtualMetaclasses;
 	
 	    //attr String[1] metamodel;
 	    //attr String[0..1] metamodelURI;
@@ -419,16 +420,64 @@ package dsl {
 	  val simpleocl.OclExpression[1] whenClause;
 	}
 
+    //
+	// Begin-of Class2Reference - Attempt 1
+	//
 	class IntermediateClassBinding extends ConceptBinding {
 	  ref ConceptMetaclass[1] concept;
 
-	  ref ConcreteMetaclass[1] concreteSource;
-	  attr String[1] concreteReferenceSource;
-
-	  ref ConcreteMetaclass[1] concreteTarget;
-	  attr String[0..1] concreteReferenceTarget;
+	  ref ConcreteMetaclass[1] concreteClass;
+	  val ConcreteReferencDeclaringVar[1] concreteReference;
+	
+	  ref ConceptMetaclass[1] conceptContext;
+	  attr String[1] conceptReferenceName;
+	  
+	
+	  val BaseFeatureBinding[*] featureBindings;
 	}
 	
+	// The idea is that the name of the reference automatically generates a new
+	// variable to be used by the feature bindings...
+	class ConcreteReferencDeclaringVar extends simpleocl.VariableDeclaration {
+	}
+    //
+	// End-of Class2Reference - Attempt 1
+	//
+		
+    //
+	// Begin-of Class2Reference - Attempt 2
+	//
+	class VirtualMetaclass extends Metaclass {
+	   val VirtualReference[*] references;
+	   val simpleocl.OclExpression[1] init;
+	}
+
+	class VirtualFeature {
+	   attr String[1] name;  
+	}
+	
+	class VirtualReference extends VirtualFeature  {
+		// ref Metaclass[1] type_;   
+		ref ConcreteMetaclass[1] type_;
+	}
+
+	class VirtualClassBinding extends ConceptBinding {
+	  ref ConceptMetaclass[1] concept;
+	  ref VirtualMetaclass[1] virtual;
+	  // val simpleocl.OclExpression[1] whenClause;
+
+	  val ConceptFeatureRef[*] refFeatures;
+	}
+	
+	class ConceptFeatureRef {
+	   ref ConceptMetaclass[1] conceptClass;
+	   attr String[1] featureName;
+	}
+
+    //
+	// End-of Class2Reference - Attempt 2
+	//
+		
 	class BaseFeatureBinding extends ConceptBinding {
 	  attr String[1] conceptFeature;
 	  ref ConceptMetaclass[1] conceptClass;

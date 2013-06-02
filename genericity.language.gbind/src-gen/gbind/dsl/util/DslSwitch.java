@@ -12,6 +12,7 @@ import gbind.simpleocl.LocatedElement;
 import gbind.simpleocl.NamedElement;
 import gbind.simpleocl.OclMetamodel;
 import gbind.simpleocl.OclModel;
+import gbind.simpleocl.VariableDeclaration;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -127,6 +128,47 @@ public class DslSwitch<T> extends Switch<T> {
 				IntermediateClassBinding intermediateClassBinding = (IntermediateClassBinding)theEObject;
 				T result = caseIntermediateClassBinding(intermediateClassBinding);
 				if (result == null) result = caseConceptBinding(intermediateClassBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.CONCRETE_REFERENC_DECLARING_VAR: {
+				ConcreteReferencDeclaringVar concreteReferencDeclaringVar = (ConcreteReferencDeclaringVar)theEObject;
+				T result = caseConcreteReferencDeclaringVar(concreteReferencDeclaringVar);
+				if (result == null) result = caseVariableDeclaration(concreteReferencDeclaringVar);
+				if (result == null) result = caseLocatedElement(concreteReferencDeclaringVar);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.VIRTUAL_METACLASS: {
+				VirtualMetaclass virtualMetaclass = (VirtualMetaclass)theEObject;
+				T result = caseVirtualMetaclass(virtualMetaclass);
+				if (result == null) result = caseMetaclass(virtualMetaclass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.VIRTUAL_FEATURE: {
+				VirtualFeature virtualFeature = (VirtualFeature)theEObject;
+				T result = caseVirtualFeature(virtualFeature);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.VIRTUAL_REFERENCE: {
+				VirtualReference virtualReference = (VirtualReference)theEObject;
+				T result = caseVirtualReference(virtualReference);
+				if (result == null) result = caseVirtualFeature(virtualReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.VIRTUAL_CLASS_BINDING: {
+				VirtualClassBinding virtualClassBinding = (VirtualClassBinding)theEObject;
+				T result = caseVirtualClassBinding(virtualClassBinding);
+				if (result == null) result = caseConceptBinding(virtualClassBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.CONCEPT_FEATURE_REF: {
+				ConceptFeatureRef conceptFeatureRef = (ConceptFeatureRef)theEObject;
+				T result = caseConceptFeatureRef(conceptFeatureRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -298,6 +340,96 @@ public class DslSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Concrete Referenc Declaring Var</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Concrete Referenc Declaring Var</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConcreteReferencDeclaringVar(ConcreteReferencDeclaringVar object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Virtual Metaclass</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Virtual Metaclass</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVirtualMetaclass(VirtualMetaclass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Virtual Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Virtual Feature</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVirtualFeature(VirtualFeature object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Virtual Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Virtual Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVirtualReference(VirtualReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Virtual Class Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Virtual Class Binding</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVirtualClassBinding(VirtualClassBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Concept Feature Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Concept Feature Ref</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConceptFeatureRef(ConceptFeatureRef object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Base Feature Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -444,6 +576,21 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOclMetamodel(OclMetamodel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableDeclaration(VariableDeclaration object) {
 		return null;
 	}
 
