@@ -72,10 +72,16 @@ public class AdaptTransformation {
 //	public static final String TARGET_METAMODEL_NAME = "EPC";
 
 	// yawl2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "FD";
+//	public static final String TARGET_METAMODEL_NAME = "YAWL";
+
+	// ifml2pn
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/ifml/ifml2fd.gbind.xmi";
 	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 	public static final String BOUND_METAMODEL_NAME = "FD";
-	public static final String TARGET_METAMODEL_NAME = "YAWL";
+	public static final String TARGET_METAMODEL_NAME = "IFML";
 
 	// ecore2measure_manual
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
@@ -103,7 +109,8 @@ public class AdaptTransformation {
 				.basicModelFromFile(
 						withDir("../genericity.atl.transformations/metamodels/ATL.ecore"),
 						withDir(ATL_TRANSFORMATION));
-
+		inout.setInplaceMode();
+		
 		ParametersModel parameters = new ParametersModel();
 		parameters.addParameterObject("BindingData", new BindingData());
 

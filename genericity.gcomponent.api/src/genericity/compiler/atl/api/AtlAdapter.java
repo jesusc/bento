@@ -97,6 +97,8 @@ public class AtlAdapter {
 		manager.register("socl", in);
 		manager.register("atl", inout);
 		manager.register("params", parameters);
+
+		inout.setInplaceMode();
 		
 		in.registerMethodHandler(new CustomMethodHandler(manager));
 		inout.registerMethodHandler(new CustomMethodHandler(manager));
