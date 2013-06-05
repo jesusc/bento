@@ -1,0 +1,7 @@
+
+Replace all references to platform:/plugin/.../File.ecore for the file File.ecore
+
+* bpel.ecore
+* partnerlink.ecore
+* WSDL.ecore
+* messageproperties.ecore
