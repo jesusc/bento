@@ -215,6 +215,14 @@ public class DslSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DslPackage.HELPER_PARAMETER: {
+				HelperParameter helperParameter = (HelperParameter)theEObject;
+				T result = caseHelperParameter(helperParameter);
+				if (result == null) result = caseVariableDeclaration(helperParameter);
+				if (result == null) result = caseLocatedElement(helperParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -516,6 +524,21 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLocalHelper(LocalHelper object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Helper Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Helper Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHelperParameter(HelperParameter object) {
 		return null;
 	}
 

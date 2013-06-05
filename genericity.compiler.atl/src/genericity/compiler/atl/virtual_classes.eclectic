@@ -54,6 +54,7 @@ segment generate_virtual_type_init
 
     // Generates a helper to access the AllInstances of VirtualClasses, just a trick...
 	forall cm from mConcreteMetaclass
+	  where cm.name.eq('NONE').not
 		gbind!VirtualMetaclass.all_instances.each { |virtual| 
 			helper = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
 				 entrypoint createVirtualInstances_Access(cm, virtual.name.concat("_AllInstances"), ocl_model)

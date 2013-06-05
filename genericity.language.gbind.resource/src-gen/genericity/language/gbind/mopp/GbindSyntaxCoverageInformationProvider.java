@@ -90,6 +90,7 @@ public class GbindSyntaxCoverageInformationProvider {
 			gbind.dsl.DslPackage.eINSTANCE.getRenamingFeatureBinding(),
 			gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(),
 			gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(),
+			gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(),
 		};
 	}
 	

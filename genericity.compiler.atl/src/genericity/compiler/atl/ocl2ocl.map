@@ -115,8 +115,26 @@ mappings ocl2ocl(gbind) -> (atl)
   end
 
   [expr]
+  from gbind : gbind!LetExp
+    to   atl :   atl!LetExp
+
+	atl.variable <- gbind.variable
+	atl.in_      <- gbind.in_
+  end
+
+  [expr]
+  from gbind : gbind!LocalVariable !
+    to   atl :   atl!VariableDeclaration
+
+	atl.varName = gbind.varName
+	atl.initExpression <- gbind.initExpression
+  	atl.type  <- gbind.type
+  end
+
+  [expr]
   from gbind : gbind!SequenceExp
     to   atl :   atl!SequenceExp
+    atl.elements <- gbind.elements
   end
 
   [expr]
@@ -150,6 +168,32 @@ mappings ocl2ocl(gbind) -> (atl)
     to   atl :   atl!OclModel
 
 	atl.name = gbind.name
+  end
+
+  // This part is to copy local helpers with parameters
+  // I would prefer to parameterize the transformation with the trace of already created
+  // parameters, and let rules just copy expressions, but...
+  [helper]
+  from gbind : gbind!LocalHelper // MetamodelDeclaration perhaps?
+    to   atl :   atl!Helper, def: atl!OclFeatureDefinition, op : atl!Operation
+    linking def.feature = op
+    linking atl.definition = def
+
+	op.name       =  gbind.feature
+	op.parameters <- gbind.parameters
+	op.body       <- gbind.body
+  end
+
+  from gbind : gbind!HelperParameter 
+    to   atl :   atl!Parameter
+
+	atl.varName = gbind.varName
+	atl.type    <- gbind.type
+  end
+
+
+  from gbind : gbind!OclAnyType
+    to   atl :   atl!OclAnyType
   end
 
 // end

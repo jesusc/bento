@@ -490,6 +490,9 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LocalHelper" eSuperTypes="#//dsl/BaseHelper">
       <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//dsl/ConcreteMetaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+          eType="#//dsl/HelperParameter" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HelperParameter" eSuperTypes="#//simpleocl/VariableDeclaration"/>
   </eSubpackages>
 </ecore:EPackage>

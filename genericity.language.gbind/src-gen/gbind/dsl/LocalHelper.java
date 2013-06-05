@@ -6,6 +6,8 @@
  */
 package gbind.dsl;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +18,7 @@ package gbind.dsl;
  * The following features are supported:
  * <ul>
  *   <li>{@link gbind.dsl.LocalHelper#getContext <em>Context</em>}</li>
+ *   <li>{@link gbind.dsl.LocalHelper#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +52,21 @@ public interface LocalHelper extends BaseHelper {
 	 * @generated
 	 */
 	void setContext(ConcreteMetaclass value);
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link gbind.dsl.HelperParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see gbind.dsl.DslPackage#getLocalHelper_Parameters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<HelperParameter> getParameters();
 
 } // LocalHelper

@@ -295,7 +295,9 @@ RULES {
 	// BaseHelper ::= ConceptHelper | LocalHelper;
 	
 	Dsl.ConceptHelper ::= "operation" contextClass[] (qualifier['[', ']'])? "." feature[] ":" type "=" body : Simpleocl.OclExpression; ////ocl.OclExpression;
-	Dsl.LocalHelper ::= "helper" context[]  "." feature[] ":" type "=" body : Simpleocl.OclExpression; //ocl.OclExpression;
+	Dsl.LocalHelper ::= "helper" (context[]|context['"','"','\\'])  "." (feature[]|feature['"','"','\\']) ( "(" (parameters ("," parameters)*)? ")" )? ":" type "=" body : Simpleocl.OclExpression; //ocl.OclExpression;
+	Dsl.HelperParameter ::= varName[] ":" type;
+	
 
 		//template BHelper :	
 		//	"helper" contextClass{refersTo = name, lookIn = #all, autoCreate = ifmissing} 			

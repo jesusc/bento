@@ -188,6 +188,15 @@ public interface DslFactory extends EFactory {
 	LocalHelper createLocalHelper();
 
 	/**
+	 * Returns a new object of class '<em>Helper Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Helper Parameter</em>'.
+	 * @generated
+	 */
+	HelperParameter createHelperParameter();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

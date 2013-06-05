@@ -78,6 +78,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 			case DslPackage.BASE_HELPER: return createBaseHelper();
 			case DslPackage.CONCEPT_HELPER: return createConceptHelper();
 			case DslPackage.LOCAL_HELPER: return createLocalHelper();
+			case DslPackage.HELPER_PARAMETER: return createHelperParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -261,6 +262,16 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public LocalHelper createLocalHelper() {
 		LocalHelperImpl localHelper = new LocalHelperImpl();
 		return localHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HelperParameter createHelperParameter() {
+		HelperParameterImpl helperParameter = new HelperParameterImpl();
+		return helperParameter;
 	}
 
 	/**

@@ -23,22 +23,48 @@ model queue mLocalHelper : gbind!LocalHelper
 //
 
 segment CopyHelpers
-	current_mm = params!BindingData.all_instances.first.boundMetamodelName		
-	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+	concreteMetamodelName = params!BindingData.all_instances.first.concreteMetamodelName		
+	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(concreteMetamodelName) }.first
 
 	forall m from mLocalHelper
 		ocl_expr = m.body
+				
+		helper = m.parameters.size.gt(0).if_else({
+			filter_view = { |o|
+				o.is_child_of(m).or(o.kind_of(gbind!MetamodelDeclaration))
+			}		
+
+			created_helper = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+					 input-view-filter filter_view
+					 output-element m[helper.t]
 		
-		filter_view2 = { |o|
-			o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
-		}		
-		
-		atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
-				 input-view-filter filter_view2
-				 output-element ocl_expr[expr.t]
-		
-		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
-				 entrypoint createOclAttributeHelperFromLocalHelper(m, m.context, ocl_model, atl_expr)
+			// Fill elements of the helper	
+			d = created_helper.definition
+			f = created_helper.definition.feature 
+			f.returnType = atl!OclAnyType.new
+			
+			context_ = atl!OclContextDefinition.new
+			context_2 = atl!OclModelElement.new 
+			context_2.name  = m.context.name
+			context_2.^model = ocl_model
+			context_.context_ = context_2
+			
+			d.context_ = context_
+			
+			created_helper
+			
+		}, {
+			filter_view2 = { |o|
+				o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
+			}		
+
+			atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+					 input-view-filter filter_view2
+					 output-element ocl_expr[expr.t]
+	
+			invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+					 entrypoint createOclAttributeHelperFromLocalHelper(m, m.context, ocl_model, atl_expr)
+		})
 		
 		module = atl!Module.all_instances.first
 		module.elements = helper

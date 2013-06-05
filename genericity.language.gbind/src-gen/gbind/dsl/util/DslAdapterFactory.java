@@ -157,6 +157,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createLocalHelperAdapter();
 			}
 			@Override
+			public Adapter caseHelperParameter(HelperParameter object) {
+				return createHelperParameterAdapter();
+			}
+			@Override
 			public Adapter caseLocatedElement(LocatedElement object) {
 				return createLocatedElementAdapter();
 			}
@@ -473,6 +477,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLocalHelperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.HelperParameter <em>Helper Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.HelperParameter
+	 * @generated
+	 */
+	public Adapter createHelperParameterAdapter() {
 		return null;
 	}
 

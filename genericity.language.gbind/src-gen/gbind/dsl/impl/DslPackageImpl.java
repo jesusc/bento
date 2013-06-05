@@ -18,6 +18,7 @@ import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.ConcreteReferencDeclaringVar;
 import gbind.dsl.DslFactory;
 import gbind.dsl.DslPackage;
+import gbind.dsl.HelperParameter;
 import gbind.dsl.IntermediateClassBinding;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.Metaclass;
@@ -187,6 +188,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass localHelperEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass helperParameterEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -826,6 +834,24 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getLocalHelper_Parameters() {
+		return (EReference)localHelperEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getHelperParameter() {
+		return helperParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DslFactory getDslFactory() {
 		return (DslFactory)getEFactoryInstance();
 	}
@@ -931,6 +957,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		localHelperEClass = createEClass(LOCAL_HELPER);
 		createEReference(localHelperEClass, LOCAL_HELPER__CONTEXT);
+		createEReference(localHelperEClass, LOCAL_HELPER__PARAMETERS);
+
+		helperParameterEClass = createEClass(HELPER_PARAMETER);
 	}
 
 	/**
@@ -978,6 +1007,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		oclFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
 		conceptHelperEClass.getESuperTypes().add(this.getBaseHelper());
 		localHelperEClass.getESuperTypes().add(this.getBaseHelper());
+		helperParameterEClass.getESuperTypes().add(theSimpleoclPackage.getVariableDeclaration());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(bindingModelEClass, BindingModel.class, "BindingModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1062,6 +1092,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		initEClass(localHelperEClass, LocalHelper.class, "LocalHelper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLocalHelper_Context(), this.getConcreteMetaclass(), null, "context", null, 0, 1, LocalHelper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalHelper_Parameters(), this.getHelperParameter(), null, "parameters", null, 0, -1, LocalHelper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(helperParameterEClass, HelperParameter.class, "HelperParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

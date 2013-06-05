@@ -508,5 +508,10 @@ package dsl {
 	// Intended to be attached to a concrete metaclass, i.e., a facility
 	class LocalHelper extends BaseHelper {
 	  ref ConcreteMetaclass context;
+	  val HelperParameter[*] parameters;	  
+	}
+	
+	class HelperParameter extends simpleocl.VariableDeclaration {
+	   
 	}
 }

@@ -364,7 +364,9 @@
       <genClasses ecoreClass="gbind.ecore#//dsl/LocalHelper">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference gbind.ecore#//dsl/LocalHelper/context"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/LocalHelper/parameters"/>
       </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/HelperParameter"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

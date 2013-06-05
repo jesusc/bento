@@ -78,10 +78,15 @@ public class AdaptTransformation {
 //	public static final String TARGET_METAMODEL_NAME = "YAWL";
 
 	// ifml2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/ifml/ifml2fd.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/ifml/ifml2fd.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "FD";
+//	public static final String TARGET_METAMODEL_NAME = "IFML";
+
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpel2pn/bpel2fd.gbind.xmi";
 	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 	public static final String BOUND_METAMODEL_NAME = "FD";
-	public static final String TARGET_METAMODEL_NAME = "IFML";
+	public static final String TARGET_METAMODEL_NAME = "BPEL";
 
 	// ecore2measure_manual
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
@@ -129,6 +134,7 @@ public class AdaptTransformation {
 		transformation.configure_();
 		transformation.start_();
 
+		transformation.printPending();
 		// TODO: Define in/out modes for EMFModels
 		// out.serialize();
 

@@ -488,6 +488,10 @@ public class GbindPrinter2 implements genericity.language.gbind.IGbindTextPrinte
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79, foundFormattingElements);
 			return;
 		}
+		if (element instanceof gbind.dsl.HelperParameter) {
+			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80, foundFormattingElements);
+			return;
+		}
 		if (element instanceof gbind.simpleocl.OclMetamodel) {
 			printInternal(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_4, foundFormattingElements);
 			return;

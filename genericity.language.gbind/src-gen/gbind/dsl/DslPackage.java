@@ -1251,13 +1251,105 @@ public interface DslPackage extends EPackage {
 	int LOCAL_HELPER__CONTEXT = BASE_HELPER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_HELPER__PARAMETERS = BASE_HELPER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Local Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_HELPER_FEATURE_COUNT = BASE_HELPER_FEATURE_COUNT + 1;
+	int LOCAL_HELPER_FEATURE_COUNT = BASE_HELPER_FEATURE_COUNT + 2;
+
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.HelperParameterImpl <em>Helper Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.HelperParameterImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getHelperParameter()
+	 * @generated
+	 */
+	int HELPER_PARAMETER = 20;
+
+	/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__LINE = SimpleoclPackage.VARIABLE_DECLARATION__LINE;
+
+	/**
+	 * The feature id for the '<em><b>Column</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__COLUMN = SimpleoclPackage.VARIABLE_DECLARATION__COLUMN;
+
+	/**
+	 * The feature id for the '<em><b>Char Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__CHAR_START = SimpleoclPackage.VARIABLE_DECLARATION__CHAR_START;
+
+	/**
+	 * The feature id for the '<em><b>Char End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__CHAR_END = SimpleoclPackage.VARIABLE_DECLARATION__CHAR_END;
+
+	/**
+	 * The feature id for the '<em><b>Var Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__VAR_NAME = SimpleoclPackage.VARIABLE_DECLARATION__VAR_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__TYPE = SimpleoclPackage.VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Variable Exp</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER__VARIABLE_EXP = SimpleoclPackage.VARIABLE_DECLARATION__VARIABLE_EXP;
+
+	/**
+	 * The number of structural features of the '<em>Helper Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_PARAMETER_FEATURE_COUNT = SimpleoclPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
 
 
 	/**
@@ -1934,6 +2026,27 @@ public interface DslPackage extends EPackage {
 	EReference getLocalHelper_Context();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.LocalHelper#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see gbind.dsl.LocalHelper#getParameters()
+	 * @see #getLocalHelper()
+	 * @generated
+	 */
+	EReference getLocalHelper_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.HelperParameter <em>Helper Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Helper Parameter</em>'.
+	 * @see gbind.dsl.HelperParameter
+	 * @generated
+	 */
+	EClass getHelperParameter();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2498,6 +2611,24 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOCAL_HELPER__CONTEXT = eINSTANCE.getLocalHelper_Context();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOCAL_HELPER__PARAMETERS = eINSTANCE.getLocalHelper_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.HelperParameterImpl <em>Helper Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.HelperParameterImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getHelperParameter()
+		 * @generated
+		 */
+		EClass HELPER_PARAMETER = eINSTANCE.getHelperParameter();
 
 	}
 

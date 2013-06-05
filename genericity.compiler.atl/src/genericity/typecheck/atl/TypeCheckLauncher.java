@@ -366,6 +366,8 @@ public class TypeCheckLauncher {
 				// Default operations
 				if ( operationName.equals("pow") ) {
 					return (Type) types.createObject(IntegerType.class.getSimpleName());					
+				} else if ( operationName.equals("concat") ) {
+						return (Type) types.createObject(StringType.class.getSimpleName());					
 				} else if ( operationName.equals("toSequence") ) {
 					return copyType(receptorType, true);
 				}

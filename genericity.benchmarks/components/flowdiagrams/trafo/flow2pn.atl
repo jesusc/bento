@@ -103,7 +103,7 @@ rule flowdiagram {
 rule task { 
 	from task  : FD!Task 
  	to   place : PN!Place (
-		name   <- if task.isInitial then 'Initial' else task.name endif,
+		name   <- if task.isInitial then 'Initial: '.concat(task.name) else task.name endif,
 		tokens <- if task.isInitial then 1 else 0 endif
  	    )
 }
