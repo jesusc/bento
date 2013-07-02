@@ -210,6 +210,7 @@ segment CreateHelperForOclFeature
 		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
 				 entrypoint createOclHelper(mo.featureBinding, mo.concreteMetaclass, ocl_model, atl_expr)
 		
+		mo.concreteMetaclass.name.concat('.').concat(mo.featureBinding.conceptFeature).println("Created adapter: ")
 		
 		module = atl!Module.all_instances.first
 		module.elements = helper
