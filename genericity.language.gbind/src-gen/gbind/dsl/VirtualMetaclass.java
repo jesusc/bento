@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link gbind.dsl.VirtualMetaclass#getReferences <em>References</em>}</li>
+ *   <li>{@link gbind.dsl.VirtualMetaclass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link gbind.dsl.VirtualMetaclass#getInit <em>Init</em>}</li>
  * </ul>
  * </p>
@@ -43,6 +44,22 @@ public interface VirtualMetaclass extends Metaclass {
 	 * @generated
 	 */
 	EList<VirtualReference> getReferences();
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+	 * The list contents are of type {@link gbind.dsl.VirtualAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' containment reference list.
+	 * @see gbind.dsl.DslPackage#getVirtualMetaclass_Attributes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<VirtualAttribute> getAttributes();
 
 	/**
 	 * Returns the value of the '<em><b>Init</b></em>' containment reference.

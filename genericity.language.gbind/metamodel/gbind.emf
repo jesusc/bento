@@ -449,6 +449,7 @@ package dsl {
 	//
 	class VirtualMetaclass extends Metaclass {
 	   val VirtualReference[*] references;
+       val VirtualAttribute[*] attributes;
 	   val simpleocl.OclExpression[1] init;
 	}
 
@@ -459,6 +460,11 @@ package dsl {
 	class VirtualReference extends VirtualFeature  {
 		// ref Metaclass[1] type_;   
 		ref ConcreteMetaclass[1] type_;
+	}
+
+	class VirtualAttribute extends VirtualFeature  {
+		// attr String[1] type_;
+		val simpleocl.Primitive[1] type_;
 	}
 
 	class VirtualClassBinding extends ConceptBinding {

@@ -50,6 +50,14 @@ segment generate_virtual_type_init
 				 entrypoint createTupleInit(vm, atl_expr, vm.name.concat("_AllInstances"))
 
 		module.elements = helper
+		
+		it = atl!Iterator.new
+		it.varName = "i"
+		
+		entrypoint_rule = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createEntryPointInit(vm, it, vm.name.concat('ForceTransformation'), vm.name.concat("_AllInstances"))
+		
+		module.elements = entrypoint_rule
 	end
 
     // Generates a helper to access the AllInstances of VirtualClasses, just a trick...
@@ -291,6 +299,40 @@ tao virtual_class_gen_atl(gbind, atl) -> (atl)
 					initExpression = atl_expr
 					type = atl!OclAnyType { }
 				}		
+			}
+		}
+	end
+
+	template createEntryPointInit(cb : gbind!VirtualMetaclass, it : atl!Iterator, ruleName : _!String, helperName : _!String) 
+		atl!CalledRule {
+			name = ruleName
+			isEntrypoint = true
+			variables = atl!RuleVariableDeclaration {
+				varName = "varToForceEvaluation"
+				type = atl!OclAnyType { }
+				initExpression = atl!IteratorExp {
+					name = "collect"
+					source = atl!NavigationOrAttributeCallExp {
+						name = helperName
+						source = atl!VariableExp { 
+							referredVariable = atl!VariableDeclaration {
+								varName = "thisModule"
+							}													
+						}
+					}
+					body = atl!OperationCallExp {
+						operationName = "reference"
+						source = atl!VariableExp {
+							referredVariable = atl!VariableDeclaration {
+								varName = "thisModule"
+							}						
+						}
+						arguments = atl!VariableExp {
+							referredVariable = it
+						}
+					}
+					iterators = it
+				}
 			}
 		}
 	end

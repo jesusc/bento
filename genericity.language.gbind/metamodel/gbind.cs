@@ -267,10 +267,13 @@ RULES {
 //--            FlowEdge.isLiteral = 'xxx'
 
 	Dsl.VirtualMetaclass ::= "class" name[] "{"
-		(references)+
+		(references|attributes)*
 	"}" "init" "=" init;
 	
 	Dsl.VirtualReference ::= "ref" (name[]|name['"','"','\\']) ":" (type_[]|type_['"','"','\\'])
+	;
+
+	Dsl.VirtualAttribute ::= "att" (name[]|name['"','"','\\']) ":" (type_)
 	;
 
 	Dsl.VirtualClassBinding ::= "class" concept[] "to" "virtual" virtual[]

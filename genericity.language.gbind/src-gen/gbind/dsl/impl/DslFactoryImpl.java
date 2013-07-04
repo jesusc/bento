@@ -70,6 +70,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 			case DslPackage.VIRTUAL_METACLASS: return createVirtualMetaclass();
 			case DslPackage.VIRTUAL_FEATURE: return createVirtualFeature();
 			case DslPackage.VIRTUAL_REFERENCE: return createVirtualReference();
+			case DslPackage.VIRTUAL_ATTRIBUTE: return createVirtualAttribute();
 			case DslPackage.VIRTUAL_CLASS_BINDING: return createVirtualClassBinding();
 			case DslPackage.CONCEPT_FEATURE_REF: return createConceptFeatureRef();
 			case DslPackage.BASE_FEATURE_BINDING: return createBaseFeatureBinding();
@@ -182,6 +183,16 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public VirtualReference createVirtualReference() {
 		VirtualReferenceImpl virtualReference = new VirtualReferenceImpl();
 		return virtualReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VirtualAttribute createVirtualAttribute() {
+		VirtualAttributeImpl virtualAttribute = new VirtualAttributeImpl();
+		return virtualAttribute;
 	}
 
 	/**

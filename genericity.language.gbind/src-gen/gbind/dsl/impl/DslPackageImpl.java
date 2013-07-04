@@ -26,6 +26,7 @@ import gbind.dsl.MetamodelDeclaration;
 import gbind.dsl.OclFeatureBinding;
 import gbind.dsl.RenamingFeatureBinding;
 
+import gbind.dsl.VirtualAttribute;
 import gbind.dsl.VirtualClassBinding;
 import gbind.dsl.VirtualClassDefinition;
 import gbind.dsl.VirtualFeature;
@@ -132,6 +133,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass virtualReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualAttributeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -564,8 +572,17 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVirtualMetaclass_Init() {
+	public EReference getVirtualMetaclass_Attributes() {
 		return (EReference)virtualMetaclassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualMetaclass_Init() {
+		return (EReference)virtualMetaclassEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -602,6 +619,24 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 */
 	public EReference getVirtualReference_Type_() {
 		return (EReference)virtualReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualAttribute() {
+		return virtualAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualAttribute_Type_() {
+		return (EReference)virtualAttributeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -917,6 +952,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		virtualMetaclassEClass = createEClass(VIRTUAL_METACLASS);
 		createEReference(virtualMetaclassEClass, VIRTUAL_METACLASS__REFERENCES);
+		createEReference(virtualMetaclassEClass, VIRTUAL_METACLASS__ATTRIBUTES);
 		createEReference(virtualMetaclassEClass, VIRTUAL_METACLASS__INIT);
 
 		virtualFeatureEClass = createEClass(VIRTUAL_FEATURE);
@@ -924,6 +960,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		virtualReferenceEClass = createEClass(VIRTUAL_REFERENCE);
 		createEReference(virtualReferenceEClass, VIRTUAL_REFERENCE__TYPE_);
+
+		virtualAttributeEClass = createEClass(VIRTUAL_ATTRIBUTE);
+		createEReference(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__TYPE_);
 
 		virtualClassBindingEClass = createEClass(VIRTUAL_CLASS_BINDING);
 		createEReference(virtualClassBindingEClass, VIRTUAL_CLASS_BINDING__CONCEPT);
@@ -1001,6 +1040,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		concreteReferencDeclaringVarEClass.getESuperTypes().add(theSimpleoclPackage.getVariableDeclaration());
 		virtualMetaclassEClass.getESuperTypes().add(this.getMetaclass());
 		virtualReferenceEClass.getESuperTypes().add(this.getVirtualFeature());
+		virtualAttributeEClass.getESuperTypes().add(this.getVirtualFeature());
 		virtualClassBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		baseFeatureBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		renamingFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
@@ -1052,6 +1092,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		initEClass(virtualMetaclassEClass, VirtualMetaclass.class, "VirtualMetaclass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVirtualMetaclass_References(), this.getVirtualReference(), null, "references", null, 0, -1, VirtualMetaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualMetaclass_Attributes(), this.getVirtualAttribute(), null, "attributes", null, 0, -1, VirtualMetaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualMetaclass_Init(), theSimpleoclPackage.getOclExpression(), null, "init", null, 1, 1, VirtualMetaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(virtualFeatureEClass, VirtualFeature.class, "VirtualFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1059,6 +1100,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		initEClass(virtualReferenceEClass, VirtualReference.class, "VirtualReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVirtualReference_Type_(), this.getConcreteMetaclass(), null, "type_", null, 1, 1, VirtualReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(virtualAttributeEClass, VirtualAttribute.class, "VirtualAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVirtualAttribute_Type_(), theSimpleoclPackage.getPrimitive(), null, "type_", null, 1, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(virtualClassBindingEClass, VirtualClassBinding.class, "VirtualClassBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVirtualClassBinding_Concept(), this.getConceptMetaclass(), null, "concept", null, 1, 1, VirtualClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

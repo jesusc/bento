@@ -547,6 +547,8 @@ public class TypeCheckLauncher {
 					return (Type) types.createObject(StringType.class.getSimpleName());
 				else if ( classifier.getName().endsWith("Boolean") ) 
 					return (Type) types.createObject(BooleanType.class.getSimpleName());
+				else if ( classifier.getName().endsWith("EInt") ) 
+					return (Type) types.createObject(IntegerType.class.getSimpleName());
 				else throw new UnsupportedOperationException("Type " + classifier.getName() + " not supported");
 			} else if ( classifier == EcorePackage.eINSTANCE.getEObject() ) {
 				return (Type) types.createObject(Unknown.class.getSimpleName());

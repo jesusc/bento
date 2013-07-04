@@ -84,6 +84,7 @@ public class GbindSyntaxCoverageInformationProvider {
 			gbind.dsl.DslPackage.eINSTANCE.getConcreteReferencDeclaringVar(),
 			gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(),
 			gbind.dsl.DslPackage.eINSTANCE.getVirtualReference(),
+			gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(),
 			gbind.dsl.DslPackage.eINSTANCE.getVirtualClassBinding(),
 			gbind.dsl.DslPackage.eINSTANCE.getConceptFeatureRef(),
 			gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(),

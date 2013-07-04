@@ -433,6 +433,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="VirtualMetaclass" eSuperTypes="#//dsl/Metaclass">
       <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
           eType="#//dsl/VirtualReference" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//dsl/VirtualAttribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="init" lowerBound="1"
           eType="#//simpleocl/OclExpression" containment="true"/>
     </eClassifiers>
@@ -443,6 +445,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="VirtualReference" eSuperTypes="#//dsl/VirtualFeature">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type_" lowerBound="1"
           eType="#//dsl/ConcreteMetaclass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualAttribute" eSuperTypes="#//dsl/VirtualFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type_" lowerBound="1"
+          eType="#//simpleocl/Primitive" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VirtualClassBinding" eSuperTypes="#//dsl/ConceptBinding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"

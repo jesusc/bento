@@ -125,6 +125,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createVirtualReferenceAdapter();
 			}
 			@Override
+			public Adapter caseVirtualAttribute(VirtualAttribute object) {
+				return createVirtualAttributeAdapter();
+			}
+			@Override
 			public Adapter caseVirtualClassBinding(VirtualClassBinding object) {
 				return createVirtualClassBindingAdapter();
 			}
@@ -365,6 +369,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVirtualReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualAttribute <em>Virtual Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.VirtualAttribute
+	 * @generated
+	 */
+	public Adapter createVirtualAttributeAdapter() {
 		return null;
 	}
 

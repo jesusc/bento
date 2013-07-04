@@ -7,6 +7,7 @@
 package gbind.dsl.impl;
 
 import gbind.dsl.DslPackage;
+import gbind.dsl.VirtualAttribute;
 import gbind.dsl.VirtualMetaclass;
 import gbind.dsl.VirtualReference;
 
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link gbind.dsl.impl.VirtualMetaclassImpl#getReferences <em>References</em>}</li>
+ *   <li>{@link gbind.dsl.impl.VirtualMetaclassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link gbind.dsl.impl.VirtualMetaclassImpl#getInit <em>Init</em>}</li>
  * </ul>
  * </p>
@@ -51,6 +53,16 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 	 * @ordered
 	 */
 	protected EList<VirtualReference> references;
+
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<VirtualAttribute> attributes;
 
 	/**
 	 * The cached value of the '{@link #getInit() <em>Init</em>}' containment reference.
@@ -91,6 +103,18 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 			references = new EObjectContainmentEList<VirtualReference>(VirtualReference.class, this, DslPackage.VIRTUAL_METACLASS__REFERENCES);
 		}
 		return references;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<VirtualAttribute> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList<VirtualAttribute>(VirtualAttribute.class, this, DslPackage.VIRTUAL_METACLASS__ATTRIBUTES);
+		}
+		return attributes;
 	}
 
 	/**
@@ -146,6 +170,8 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 		switch (featureID) {
 			case DslPackage.VIRTUAL_METACLASS__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
+			case DslPackage.VIRTUAL_METACLASS__ATTRIBUTES:
+				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 			case DslPackage.VIRTUAL_METACLASS__INIT:
 				return basicSetInit(null, msgs);
 		}
@@ -162,6 +188,8 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 		switch (featureID) {
 			case DslPackage.VIRTUAL_METACLASS__REFERENCES:
 				return getReferences();
+			case DslPackage.VIRTUAL_METACLASS__ATTRIBUTES:
+				return getAttributes();
 			case DslPackage.VIRTUAL_METACLASS__INIT:
 				return getInit();
 		}
@@ -181,6 +209,10 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 				getReferences().clear();
 				getReferences().addAll((Collection<? extends VirtualReference>)newValue);
 				return;
+			case DslPackage.VIRTUAL_METACLASS__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends VirtualAttribute>)newValue);
+				return;
 			case DslPackage.VIRTUAL_METACLASS__INIT:
 				setInit((OclExpression)newValue);
 				return;
@@ -199,6 +231,9 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 			case DslPackage.VIRTUAL_METACLASS__REFERENCES:
 				getReferences().clear();
 				return;
+			case DslPackage.VIRTUAL_METACLASS__ATTRIBUTES:
+				getAttributes().clear();
+				return;
 			case DslPackage.VIRTUAL_METACLASS__INIT:
 				setInit((OclExpression)null);
 				return;
@@ -216,6 +251,8 @@ public class VirtualMetaclassImpl extends MetaclassImpl implements VirtualMetacl
 		switch (featureID) {
 			case DslPackage.VIRTUAL_METACLASS__REFERENCES:
 				return references != null && !references.isEmpty();
+			case DslPackage.VIRTUAL_METACLASS__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
 			case DslPackage.VIRTUAL_METACLASS__INIT:
 				return init != null;
 		}

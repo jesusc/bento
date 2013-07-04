@@ -674,13 +674,22 @@ public interface DslPackage extends EPackage {
 	int VIRTUAL_METACLASS__REFERENCES = METACLASS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_METACLASS__ATTRIBUTES = METACLASS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_METACLASS__INIT = METACLASS_FEATURE_COUNT + 1;
+	int VIRTUAL_METACLASS__INIT = METACLASS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Virtual Metaclass</em>' class.
@@ -689,7 +698,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_METACLASS_FEATURE_COUNT = METACLASS_FEATURE_COUNT + 2;
+	int VIRTUAL_METACLASS_FEATURE_COUNT = METACLASS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.VirtualFeatureImpl <em>Virtual Feature</em>}' class.
@@ -757,6 +766,43 @@ public interface DslPackage extends EPackage {
 	int VIRTUAL_REFERENCE_FEATURE_COUNT = VIRTUAL_FEATURE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.VirtualAttributeImpl <em>Virtual Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.VirtualAttributeImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualAttribute()
+	 * @generated
+	 */
+	int VIRTUAL_ATTRIBUTE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_ATTRIBUTE__NAME = VIRTUAL_FEATURE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type </b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_ATTRIBUTE__TYPE_ = VIRTUAL_FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_ATTRIBUTE_FEATURE_COUNT = VIRTUAL_FEATURE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.VirtualClassBindingImpl <em>Virtual Class Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -764,7 +810,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualClassBinding()
 	 * @generated
 	 */
-	int VIRTUAL_CLASS_BINDING = 12;
+	int VIRTUAL_CLASS_BINDING = 13;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -828,7 +874,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptFeatureRef()
 	 * @generated
 	 */
-	int CONCEPT_FEATURE_REF = 13;
+	int CONCEPT_FEATURE_REF = 14;
 
 	/**
 	 * The feature id for the '<em><b>Concept Class</b></em>' reference.
@@ -865,7 +911,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseFeatureBinding()
 	 * @generated
 	 */
-	int BASE_FEATURE_BINDING = 14;
+	int BASE_FEATURE_BINDING = 15;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -929,7 +975,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getRenamingFeatureBinding()
 	 * @generated
 	 */
-	int RENAMING_FEATURE_BINDING = 15;
+	int RENAMING_FEATURE_BINDING = 16;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1002,7 +1048,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getOclFeatureBinding()
 	 * @generated
 	 */
-	int OCL_FEATURE_BINDING = 16;
+	int OCL_FEATURE_BINDING = 17;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1075,7 +1121,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseHelper()
 	 * @generated
 	 */
-	int BASE_HELPER = 17;
+	int BASE_HELPER = 18;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1130,7 +1176,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptHelper()
 	 * @generated
 	 */
-	int CONCEPT_HELPER = 18;
+	int CONCEPT_HELPER = 19;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1203,7 +1249,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getLocalHelper()
 	 * @generated
 	 */
-	int LOCAL_HELPER = 19;
+	int LOCAL_HELPER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1277,7 +1323,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getHelperParameter()
 	 * @generated
 	 */
-	int HELPER_PARAMETER = 20;
+	int HELPER_PARAMETER = 21;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -1706,6 +1752,17 @@ public interface DslPackage extends EPackage {
 	EReference getVirtualMetaclass_References();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.VirtualMetaclass#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see gbind.dsl.VirtualMetaclass#getAttributes()
+	 * @see #getVirtualMetaclass()
+	 * @generated
+	 */
+	EReference getVirtualMetaclass_Attributes();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link gbind.dsl.VirtualMetaclass#getInit <em>Init</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1757,6 +1814,27 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVirtualReference_Type_();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.VirtualAttribute <em>Virtual Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Attribute</em>'.
+	 * @see gbind.dsl.VirtualAttribute
+	 * @generated
+	 */
+	EClass getVirtualAttribute();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link gbind.dsl.VirtualAttribute#getType_ <em>Type </em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type </em>'.
+	 * @see gbind.dsl.VirtualAttribute#getType_()
+	 * @see #getVirtualAttribute()
+	 * @generated
+	 */
+	EReference getVirtualAttribute_Type_();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.VirtualClassBinding <em>Virtual Class Binding</em>}'.
@@ -2353,6 +2431,14 @@ public interface DslPackage extends EPackage {
 		EReference VIRTUAL_METACLASS__REFERENCES = eINSTANCE.getVirtualMetaclass_References();
 
 		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_METACLASS__ATTRIBUTES = eINSTANCE.getVirtualMetaclass_Attributes();
+
+		/**
 		 * The meta object literal for the '<em><b>Init</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2395,6 +2481,24 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VIRTUAL_REFERENCE__TYPE_ = eINSTANCE.getVirtualReference_Type_();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualAttributeImpl <em>Virtual Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.VirtualAttributeImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getVirtualAttribute()
+		 * @generated
+		 */
+		EClass VIRTUAL_ATTRIBUTE = eINSTANCE.getVirtualAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Type </b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_ATTRIBUTE__TYPE_ = eINSTANCE.getVirtualAttribute_Type_();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualClassBindingImpl <em>Virtual Class Binding</em>}' class.

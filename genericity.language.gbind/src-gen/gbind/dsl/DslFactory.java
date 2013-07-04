@@ -116,6 +116,15 @@ public interface DslFactory extends EFactory {
 	VirtualReference createVirtualReference();
 
 	/**
+	 * Returns a new object of class '<em>Virtual Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Attribute</em>'.
+	 * @generated
+	 */
+	VirtualAttribute createVirtualAttribute();
+
+	/**
 	 * Returns a new object of class '<em>Virtual Class Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
