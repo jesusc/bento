@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bio_src:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bio_src="http://miso.es/genericity/benchmarks/bio_src">
+  <experiments contact="Contact1" date="Date1" description="Description">
+    <experimentalData data="Data1" role="Role1"/>
+    <experimentalData data="Data1b" role="Role1b"/>
+  </experiments>
+  <experiments contact="Contact2" date="Date2" description="Description">
+    <experimentalData data="Data2" role="Role2"/>
+    <experimentalData data="Data2b" role="Role2b"/>
+  </experiments>
+  <samples contact="Contact1" date="Date1">
+    <probes data="Probe1" type="Probe1"/>
+  </samples>
+</bio_src:Model>

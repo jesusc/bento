@@ -1,0 +1,32 @@
+@namespace(uri="http://miso.es/genericity/benchmarks/pub_src", prefix="pub_src")
+package pub_src;
+
+// Version 0 -> Unnesting scenario
+class Model {
+	val Reference[*] references;
+}
+
+class Reference {
+   attr String[1] title;
+   attr int[1] year;
+   attr String[1] publishedIn;
+   val Author[*] authors;
+}
+
+class Author {
+   attr String[1] name;
+}
+
+
+// Version 1 -> Nesting scenario
+class Model1 {
+	val Reference1[*] references;
+}
+
+class Reference1 {
+   attr String[1] title;
+   attr int[1] year;
+   attr String[1] publishedIn;
+   
+   attr String[1] name;
+}

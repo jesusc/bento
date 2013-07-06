@@ -1,0 +1,17 @@
+-- @path PUB1=/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore
+-- @path PUB2=/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore
+
+module copypub1;
+create OUT : PUB2 from IN : PUB1;
+
+rule reference {
+	from
+		src : PUB1!Reference1
+	to 
+		tgt : PUB2!Reference1 (
+			title     <- src.title,
+			year      <- src.year,
+			publishedIn <- src.publishedIn,
+			name    <- src.name
+		)
+}

@@ -1,0 +1,33 @@
+binding h_self_join {  
+	concept   BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	metamodel BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	
+	-- From copying
+	class Protein to Protein
+	feature Protein.name      is Name
+	feature Protein.accession is Accession
+	feature Protein.created   is Created
+	
+	
+	-- Self join: very similar to horizontal partition, but the protein value in synonym
+	--            is obtained navigating to the primary gene
+	class Gene to Gene, Synonym 
+	
+	feature Gene[Gene].name is Name
+	feature Gene[Gene].protein is Protein
+	feature Gene[Gene].type = 'primary'
+	 
+	feature Gene[Synonym].name is Name
+	feature Gene[Synonym].protein = 
+		-- Consider the two cases: explicit reference or implicit through WID 
+		if self.Gene.oclIsUndefined() then 
+			-- This is what the benchmark probably wants
+			BIO_TGT!Gene.allInstances()->select(g | g.Name = self.Gene_WID)->first()
+		else 
+			-- This is what it would be in a oo-modeling setting
+			self.Gene
+		endif.Protein
+		
+	feature Gene[Synonym].type = 'synonym'
+	
+ }

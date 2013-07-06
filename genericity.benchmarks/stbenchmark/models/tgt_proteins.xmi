@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bio_tg:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bio_tg="http://miso.es/genericity/benchmarks/bio_tgt">
+  <protein Name="Protein1" Accession="AccessionValue1" Created="18/01/1981"/>
+  <protein Name="Protein2" Accession="AccessionValue2" Created="26/01/2012"/>
+  <protein Name="Protein3" Accession="Accesion3" Created="Created3"/>
+  <genes Name="Gene1" Protein="//@protein.0"/>
+  <synonyms Name="Gene2" Protein="//@protein.1"/>
+  <reactions Entry="Entry reaction1" Name="reaction1" Comment="Comment reaction1" Orthology="Orthology reaction1">
+    <cofactor Definition="cofactor definition reaction1" Equation="cofactor equation reaction1"/>
+  </reactions>
+  <reactions Entry="Entry reaction2" Name="reaction2" Comment="Comment reaction2" Orthology="Orthology reaction2">
+    <cofactor Definition="cofactor definition reaction2" Equation="cofactor equation reaction2"/>
+  </reactions>
+</bio_tg:Model>

@@ -50,14 +50,36 @@ segment generate_virtual_type_init
 				 entrypoint createTupleInit(vm, atl_expr, vm.name.concat("_AllInstances"))
 
 		module.elements = helper
+	end
+
+	// For each converted rule (this should be done in another way) 
+	// create an entry point rule to call it, imitating matched rules	
+	forall cb2 from mVirtualClassBinding	
+		forall matchedRule from mMatchedRule
+			inPatternElement  = matchedRule.inPattern.elements.first
+			ocl_model_element = inPatternElement.type
+			
+			virtual_metaclass = cb2.virtual
+			
+			ocl_model_element.^model.name.eq(current_mm).if_true {
+			    cb2.concept.name.eq(ocl_model_element.name).if_true {
+					matchedRule.name.println("Converted to unique lazy rule: ")
+					
+					filter    = matchedRule.inPattern.filter
+					rule_name = matchedRule.name //"uniqueLazyRule".concat(cb2.concept.name)
 		
-		it = atl!Iterator.new
-		it.varName = "i"
-		
-		entrypoint_rule = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
-				 entrypoint createEntryPointInit(vm, it, vm.name.concat('ForceTransformation'), vm.name.concat("_AllInstances"))
-		
-		module.elements = entrypoint_rule
+					it = atl!Iterator.new
+					it.varName = "i"
+			
+					entrypoint_rule = invoke-external ^eclectic.virtual_class_gen_atl(in = gbind) -> (out = atl)
+						 entrypoint createEntryPointInit(virtual_metaclass, it, rule_name, 
+						 	virtual_metaclass.name.concat("_AllInstances")
+						 )
+			
+					module.elements = entrypoint_rule
+				}
+			}
+		end
 	end
 
     // Generates a helper to access the AllInstances of VirtualClasses, just a trick...
@@ -303,10 +325,10 @@ tao virtual_class_gen_atl(gbind, atl) -> (atl)
 		}
 	end
 
-	template createEntryPointInit(cb : gbind!VirtualMetaclass, it : atl!Iterator, ruleName : _!String, helperName : _!String) 
+	template createEntryPointInit(cb : gbind!VirtualMetaclass, it : atl!Iterator, originalRule : _!String, helperName : _!String) 
 		atl!CalledRule {
-			name = ruleName
-			isEntrypoint = true
+			name = originalRule.concat('_ForceTransformation')
+			isEndpoint = true
 			variables = atl!RuleVariableDeclaration {
 				varName = "varToForceEvaluation"
 				type = atl!OclAnyType { }
@@ -321,7 +343,7 @@ tao virtual_class_gen_atl(gbind, atl) -> (atl)
 						}
 					}
 					body = atl!OperationCallExp {
-						operationName = "reference"
+						operationName = originalRule
 						source = atl!VariableExp {
 							referredVariable = atl!VariableDeclaration {
 								varName = "thisModule"

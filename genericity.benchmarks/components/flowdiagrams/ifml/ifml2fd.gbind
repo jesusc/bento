@@ -7,10 +7,15 @@ binding ifml2fd {
 	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
 	metamodel IFML : "platform:/resource/genericity.benchmarks/components/flowdiagrams/ifml/IFML.ecore"
 
+    class ExtFlow {
+    	ref in_  : InteractionFlowElement
+    } init = true
+
 	class FlowDiagram to InteractionFlowModel	
 	class Node        to InteractionFlowElement --when not self.oclIsKindOf(IFML!ViewContainer)
 	class FlowEdge    to NavigationFlow
-
+	class FlowEdge    to virtual ExtFlow
+	
 	-- So far, only 1:1 mapping
 	class Task            to InteractionFlowElement 
 		when self.inInteractionFlows->size() <= 1 and 
@@ -24,14 +29,15 @@ binding ifml2fd {
 	class MultiChoice     to NONE
 	class SimpleMerge     to NONE
 	
-	feature FlowDiagram.nodes = self.interactionFlowModelElements->select(f | not f.oclIsKindOf(IFML!ViewContainer) )
+	-- self.interactionFlowModelElements->select(f | not f.oclIsKindOf(IFML!ViewContainer) )
+	feature FlowDiagram.nodes = IFML!InteractionFlowElement.allInstances()
 	feature FlowDiagram.edges = IFML!NavigationFlow.allInstances()
 
-	feature FlowEdge."in" is srcInteractionFlowElement
+	feature FlowEdge."in" = self.srcInteractionFlowElement.refImmediateComposite() -- the event's container' 
 	feature FlowEdge.out  is trgtInteractionFlowElement
 
 	feature Node."ins" is inInteractionFlows
-	feature Node.outs  is outInteractionFlows
+	feature Node.outs  = IFML!NavigationFlow.allInstances()->select(n | n."in" = self)
 
 	feature Task.isInitial = self.inInteractionFlows->size() = 0 --sure?
 	feature Task.name is name

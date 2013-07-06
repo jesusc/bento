@@ -1,0 +1,11 @@
+composite component j_keys {
+	uses "platform:/resource/genericity.benchmarks/stbenchmark/copybio_j_keys.gcomponent"  
+	binding bindBIO = "platform:/resource/genericity.benchmarks/stbenchmark/scenarios/j_keys/j_keys.gbind"
+			
+	source concept BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	target concept BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	source model in  : BIO_SRC = "platform:/resource/genericity.benchmarks/stbenchmark/models/src_bio_j0.xmi" 
+	target model out : BIO_TGT = "platform:/resource/genericity.benchmarks/stbenchmark/tmp_"
+	
+	compose apply copybio_j_keys(bindBIO(in)) -> (out)
+}

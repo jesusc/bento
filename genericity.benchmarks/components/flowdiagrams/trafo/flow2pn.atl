@@ -4,8 +4,9 @@
 module flow2pn;
 create OUT : PN from IN : FD;
 
--- This is needed to emulate the casting... and facilitate life to the typechecker
-helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; 
+-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)
+--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; 
+helper context FD!Node def: oclAsType(t : OclAny)  : OclAny  = self; 
 
 helper context FD!Node def: typeName             : String  = self.oclType().name; 
 helper context FD!Node def: isTask               : Boolean = self.oclIsKindOf(FD!Task);

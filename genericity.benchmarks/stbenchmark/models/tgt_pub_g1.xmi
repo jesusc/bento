@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pub_tgt:Model1 xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pub_tgt="http://miso.es/genericity/benchmarks/pub_tgt" xsi:schemaLocation="http://miso.es/genericity/benchmarks/pub_tgt ../metamodels/pub_tgt.ecore">
+  <periods Year="2012">
+    <Authors Name="Juan de Lara">
+      <Publications Title="Flexible ATL Templates" PublishedIn="JOT"/>
+      <Publications Title="Bottom-up Meta-modeling" PublishedIn="MoDELS'12"/>
+    </Authors>
+    <Authors Name="Esther Guerra">
+      <Publications Title="Flexible ATL Templates" PublishedIn="JOT"/>
+      <Publications Title="Bottom-up Meta-modeling" PublishedIn="MoDELS'12"/>
+      <Publications Title="Testing M2M" PublishedIn="ICMT'12"/>
+    </Authors>
+  </periods>
+  <periods Year="2013">
+    <Authors Name="Juan de Lara">
+      <Publications Title="Reusable Abstractions" PublishedIn="Information Systems"/>
+      <Publications Title="Streaming M2M" PublishedIn="ICMT'13"/>
+    </Authors>
+    <Authors Name="Jes&#xfa;s S&#xe1;nchez Cuadrado">
+      <Publications Title="Reusable Abstractions" PublishedIn="Information Systems"/>
+      <Publications Title="Streaming M2M" PublishedIn="ICMT'13"/>
+    </Authors>
+  </periods>
+</pub_tgt:Model1>

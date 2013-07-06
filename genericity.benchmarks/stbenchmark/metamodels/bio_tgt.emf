@@ -1,0 +1,79 @@
+@namespace(uri="http://miso.es/genericity/benchmarks/bio_tgt", prefix="bio_tg")
+package bio;
+
+class Model {
+   val Protein[*] protein;
+   
+   val Gene[*] genes;
+   val Synonym[*] synonyms; // Perhaps a superclass for them
+   val Reaction[*] reactions;
+  
+   val Taxon[*] taxonomies;
+}
+
+
+class Protein {
+	attr String[1] Name;
+	attr String[1] Accession;
+	attr String[1] Created;   
+}
+
+class Gene {
+   attr String[1] Name;
+   ref Protein[1] Protein;
+   attr String[1] WID;
+}
+
+class Synonym {
+   attr String[1] Name;
+   ref Protein[0..1] Protein; // Not used in all scenarios (e.g., in h is not used) 
+
+   attr String[1] WID; // For scenario (c)
+   
+   attr String[1] Gene_WID; // For scenario (h)
+   ref Gene[0..1] Gene;     // Another way of doing the reference for (h)
+}
+
+
+class Reaction {
+   attr String[1] Entry;
+   attr String[1] Name;
+   attr String[1] Comment;
+   attr String[1] Orthology;
+
+   val ChemicalInfo[1] cofactor; // Could be a reference from ChemicalInfo to Reaction but then it would not be 1..1
+}
+
+class ChemicalInfo {
+   attr String[1] Definition;
+   attr String[1] Equation;
+}
+
+class Taxon {
+   attr String[1] ~Id;
+   attr String[1] Name;
+   attr String[1] UniqueName; // ?
+   attr String[1] ~Class;
+
+   attr String[1] ParentID;
+   ref Taxon[0..1] Parent;
+   
+   attr String[1] Rank;
+   attr String[1] EmblCode;
+}
+
+
+class Experiment {
+   // contact & date are the keys
+   attr String[1] Contact;
+   attr String[1] Date;
+   
+   attr String[1] Description;
+   
+   val ExperimentalData[*] ExperimentalData;
+}
+
+class ExperimentalData {
+   attr String[1] Data;
+   attr String[1] Role;
+}

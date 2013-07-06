@@ -1,0 +1,32 @@
+-- @path BIO1=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+-- @path BIO2=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+
+module copybio_i_denormalization;
+create OUT : BIO2 from IN : BIO1;
+
+rule name {
+	from
+		src : BIO1!Name
+	to 
+		tgt : BIO2!Name (
+			id <- src.id,
+			name <- src.uniqueName,
+			class <- src.class
+		)
+}
+
+rule node {
+	from
+		src : BIO1!Node
+	to 
+		tgt : BIO2!Node (
+			taxID      <- src.taxID,
+			tax        <- src.tax,
+			
+			parentId <- src.parentId,
+			parent   <- src.parent,
+	
+			rank      <- src.rank,
+			emblCode  <- src.emblCode
+		)
+}

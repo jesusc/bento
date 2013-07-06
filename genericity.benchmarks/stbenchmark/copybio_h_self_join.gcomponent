@@ -1,0 +1,9 @@
+transformation component copybio_h_self_join {
+	source concept BIO1 : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	target concept BIO2 : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	source model in  : BIO1
+	target model out : BIO2
+	
+	definition atl "platform:/resource/genericity.benchmarks/stbenchmark/trafo/copybio_h_self_join.atl" 
+		with IN : BIO1 = in, BIO2 = out
+}

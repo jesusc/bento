@@ -21,7 +21,9 @@ binding ecore2oo {
     feature Attribute.atttype = if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
     feature Attribute.isPublic    = true  -- there is no visibility in ecore
     feature Attribute.isProtected = false -- there is no visibility in ecore
-    feature Operation.isPrivate   = true  -- there is no visibility in ecore
+    feature Attribute.isPrivate = false -- there is no visibility in ecore
+
+    feature Operation.isPublic   = true  -- there is no visibility in ecore
     feature Operation.isProtected = false -- there is no visibility in ecore
-    feature Operation.isPriivate  = false -- there is no visibility in ecore
+    feature Operation.isPrivate  = false -- there is no visibility in ecore
 }

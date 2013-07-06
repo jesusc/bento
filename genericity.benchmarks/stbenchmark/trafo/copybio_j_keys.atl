@@ -1,0 +1,29 @@
+-- @path BIO1=/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore
+-- @path BIO2=/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore
+
+module copybio_j_keys;
+create OUT : BIO2 from IN : BIO1;
+
+rule experiment {
+	from
+		src : BIO1!Experiment
+	to 
+		tgt : BIO2!Experiment (
+			Contact <- src.Contact,
+			Date    <- src.Date,
+			Description <- src.Description,
+			
+			ExperimentalData <- src.ExperimentalData
+		)
+}
+
+rule experimental_data {
+	from
+		src : BIO1!ExperimentalData
+	to 
+		tgt : BIO2!ExperimentalData (
+			Data  <- src.Data,
+			Role  <- src.Role
+		)
+}
+

@@ -1,0 +1,17 @@
+
+Keys and Object Fusion
+======================
+
+This scenario is implemented using BIO_TGT as concept and BIO_SRC as meta-model.
+The reason is that the reverse situation is impossible because BIO_TGT has less
+information than BIO_SRC and thus it is impossible to reconstruct the model.
+
+  TGT   -->   TGT
+   
+   |           |
+   |           |
+   \/          \/
+   
+  SRC   --->  TGT
+  
+Actually, this is what the benchmark expects...

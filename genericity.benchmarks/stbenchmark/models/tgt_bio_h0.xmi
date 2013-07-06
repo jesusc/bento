@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bio_tg:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bio_tg="http://miso.es/genericity/benchmarks/bio_tgt">
+  <protein Name="Protein1" Accession="AccessionValue1" Created="18/01/1981"/>
+  <protein Name="Protein2" Accession="AccessionValue2" Created="26/01/2012"/>
+  <protein Name="Protein3" Accession="Accesion3" Created="Created3"/>
+  <genes Name="Gene1" Protein="//@protein.0" WID="Gene1WID"/>
+  <genes Name="Gene2" Protein="//@protein.1" WID="Gene2WID"/>
+  <synonyms Name="SynonymGene1" WID="" Gene_WID="Gene1" Gene="//@genes.0"/>
+  <synonyms Name="SynonymGene2" WID="" Gene_WID="Gene2"/>
+</bio_tg:Model>

@@ -1,0 +1,82 @@
+@namespace(uri="http://miso.es/genericity/benchmarks/bio_src", prefix="bio_src")
+package bio_src;
+
+class Model {
+   val Protein[*] protein;
+   val Gene[*] genes;
+   val Reaction[*] reactions;
+
+   val Name[*] names;
+   val Node[*] nodes;
+
+   val Experiment[*] experiments;
+   val FlowCytometrySample[*] samples;
+}
+
+class Protein {
+	attr String[1] name;
+	attr String[1] accession;
+	attr String[1] created;   
+}
+
+class Gene {
+   attr String[1] name;
+   attr String[1] type;
+   
+   ref Protein[1] protein;
+}
+
+class Reaction {
+   attr String[1] entry;
+   attr String[1] name;
+   attr String[1] comment;
+   attr String[1] orthology;
+   attr String[1] definition;
+   attr String[1] equation;
+}
+
+class Name {
+   attr String[1] ~id;
+   attr String[1] name;
+   attr String[1] uniqueName; // ?
+   attr String[1] ~class;
+}
+
+class Node {
+   attr String[1] taxID;
+   attr String[1] parentID;
+   
+   ref Name[0..1] tax;
+   ref Name[0..1] parent;
+   
+   attr String[1] rank;
+   attr String[1] emblCode;
+}
+
+class Experiment {
+   // contact & date are the keys
+   attr String[1] contact;
+   attr String[1] date;
+   
+   attr String[1] description;
+   
+   val ExperimentalData[*] experimentalData;
+}
+
+class ExperimentalData {
+   attr String[1] data;
+   attr String[1] role;
+}
+
+class FlowCytometrySample {
+   // contact & date are the keys
+   attr String[1] contact;
+   attr String[1] date;
+
+   val Probe[*] probes;     
+}
+
+class Probe {
+   attr String[1] data;
+   attr String[1] type;
+}

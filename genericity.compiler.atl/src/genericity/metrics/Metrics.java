@@ -61,7 +61,7 @@ public class Metrics {
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// uml2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// grafcet2pn
@@ -76,7 +76,7 @@ public class Metrics {
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// yawl2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// ecore2measure_manual

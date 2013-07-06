@@ -1,0 +1,65 @@
+binding j_keys {  
+	concept   BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	metamodel BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+
+	class JoinedExperiment {
+		att Contact : String
+		att Date : String
+		att Description : String
+		-- ref ExperimentalData : OclAny
+	} init = BIO_SRC!Experiment.allInstances()->collect( e |
+		let probes : OclAny = BIO_SRC!FlowCytometrySample.allInstances()->select( sample |
+				sample.contact = e.contact and
+				sample.date    = e.date
+			)->collect(sample | sample.probes) 
+		in 	Tuple { 
+				Contact     = e.contact,
+				Date        = e.date, 
+				Description = e.description,
+				ExperimentalData = e.experimentalData.union(probes) 	
+			}
+	)->flatten()
+	
+	class Experiment to virtual JoinedExperiment
+	-- feature Experiment.ExperimentalData is ExperimentalData
+	
+	class ExperimentalData to ExperimentalData, Probe
+	feature ExperimentalData[ExperimentalData].Data is data
+	feature ExperimentalData[ExperimentalData].Role is role
+	
+	feature ExperimentalData[Probe].Data is data
+	feature ExperimentalData[Probe].Role is type
+	
+
+--
+--  This attempt does not work because it just does not do the join of Experiment/FlowCytometrySample
+--
+
+--	class Experiment to Experiment, FlowCytometrySample
+--	feature Experiment[Experiment].Contact is contact
+--	feature Experiment[Experiment].Date    is date
+--	feature Experiment[Experiment].Description is description
+--	feature Experiment[Experiment].ExperimentalData is experimentalData
+
+--	feature Experiment[FlowCytometrySample].Contact is contact
+--	feature Experiment[FlowCytometrySample].Date    is date
+--	feature Experiment[FlowCytometrySample].Description = ''
+--	feature Experiment[FlowCytometrySample].ExperimentalData is probes
+	
+
+--	-- Cannot have the same mapped twice, and with when clause	
+--	class ExperimentalData to ExperimentalData 
+--		when self.refImmediateComposite().oclIsKindOf(BIO_SRC!Experiment) 	
+ 
+--    --class ExperimentalData to Probe
+--    --   when self.refImmediateComposite().oclIsKindOf(BIO_SRC!FlowCytometrySample)
+    
+--    feature ExperimentalData.Data is data
+--    feature ExperimentalData.Role =  
+--    	if self.refImmediateComposite().oclIsKindOf(BIO_SRC!Experiment) then 
+--    		self.role
+--    	else
+--    		self.type
+--    	endif
+
+}
