@@ -17,6 +17,11 @@ segment main
 	invoke-external eclectic.adapt_code(atl = atl, gbind = gbind) -> ()
 		input-view-filter filter_view
 
+	// adapt when clause (must be before rule copy and duplication, to ensure the original model elementas has not
+	// been changed, and then it is seamlessly propagated)
+	invoke-external eclectic.adapt_when_clause(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
 	// adapt rules, copy rules for cardinality N	
 	invoke-external eclectic.adapt_rules(atl = atl, gbind = gbind) -> ()
 		input-view-filter filter_view
