@@ -37,6 +37,11 @@ segment main
 	// copy_helpers
 	invoke-external eclectic.copy_helpers(atl = atl, gbind = gbind) -> ()
 		input-view-filter filter_view
+
+	// modify for class merge if needed
+	invoke-external eclectic.class_merge(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
 end
 
 

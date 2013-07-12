@@ -19,7 +19,8 @@ binding epc {
 	
 	class FlowDiagram     to Decomposition -- it can also be Specification 
 	class Node            to ProcessControlElement
-	class Task            to Task, InputCondition when if self.oclIsKindOf(YAWL!Task) then self.splitType.oclIsUndefined() and self.joinType.oclIsUndefined() else true endif
+	class Task            to Task, InputCondition when 
+		if self.oclIsKindOf(YAWL!Task) then self.splitType = #NORMAL and self.joinType = #NORMAL else true endif
 	class FinalTask       to OutputCondition
 	class ParallelSplit   to Task when self.splitType = #AND
 	class Synchronization to Task when self.joinType = #AND 
@@ -28,32 +29,6 @@ binding epc {
 	class MultiChoice     to Task when self.splitType = #OR 
 		
 	class FlowEdge to virtual YawlEdge 	
-		
-	-- Different specifications of the same collection of elements
-	-- all them should produce the same result
---	class FlowEdge to ProcessControlElement."flowsInto" / Node.ins {
---        feature FlowEdge."in" = self
---         feature FlowEdge.out = flowsInto
---    }
-            
--- 	class FlowEdge to ProcessControlElement."flowsOut" / Node.outs {
---       feature FlowEdge."out" = self
---       feature FlowEdge."in" = flowsOut
---    }
-    
-   
---	class FlowEdge to Decomposition."processControlElements_as_edges" / FlowDiagram.edges {
---		feature FlowEdge."in" = processControlElements_as_edges.source
---		feature FlowEdge."out" = processControlElements_as_edges.target
---	}
---    feature FlowDiagram.edges is processControlElements_as_edges
-            
-	-- class FlowEdge        to ProcessControlElement.flowsInto : ProcessControlElement.flowsOut
-	-- feature FlowEdge[ProcessControlElement]."in" = self.flowsInto
-	-- feature FlowEdge[ProcessControlElement].out = self.flowsOut
-	-- Must be qualified (in case the association ends are of different types)
-	
-	-- heterogeneidad clase->asociacion no soportada -- 
 	
 	feature FlowDiagram.nodes is processControlElements 
 		
@@ -66,19 +41,14 @@ binding epc {
 	feature Node.ins  = self.YawlEdge_AllInstances->select(y | y.tgt = self) 
 	feature FlowEdge."in"  is src
 	feature FlowEdge."out" is tgt
-	
-	
-	feature Task.name is name
-	feature Task.isInitial = self.oclIsKindOf(YAWL!InputCondition)
+		
+	feature Task[Task].name is name
+	feature Task[InputCondition].name = 'input-condition'
+
+	feature Task[Task].isInitial = false -- self.oclIsKindOf(YAWL!InputCondition)
+	feature Task[InputCondition].isInitial = true -- self.oclIsKindOf(YAWL!InputCondition)
 	feature FinalTask.isTerminating = true
 	feature FinalTask.isMandatory = true
---	feature FlowEdge."in" 
---	feature FlowEdge.out      
 
---    helper Decomposition.processControlElements_as_edges : OclAny = self.processControlElements->collect( p |
---    	p.flowsOut->collect(t | 
---    		Tuple { source = p, target = t }
---    	)
---    )->flatten() 
     
 }

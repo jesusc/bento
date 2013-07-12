@@ -1,4 +1,4 @@
-package genericity.compiler.class2reference;
+package genericity.compiler.virtualclasses;
 
 import genericity.compiler.atl.Class2Reference;
 import genericity.compiler.atl.VirtualClasses;
@@ -17,14 +17,12 @@ import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.Util;
 import org.eclipse.emf.ecore.EPackage;
 
-public class TestVirtualClasses_YAWL {
+public class TestVirtualClasses {
 
-	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
-	public static final String SOURCE_METAMODEL = "../genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore";
-	public static final String TARGET_METAMODEL = "../genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore";
-	public static final String BINDING_MODEL    = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
-	private static final String BOUND_METAMODEL_NAME = "YAWL";
-	private static final String SOURCE_METAMODEL_NAME = "FD";
+	public static final String ATL_TRANSFORMATION = "test/virtualclasses/uml_single_inheritance.atl.xmi";
+	public static final String SOURCE_METAMODEL = "fixtures/metamodels/UML.ecore";
+	public static final String TARGET_METAMODEL = "fixtures/metamodels/UML.ecore";
+	public static final String BINDING_MODEL    = "../genericity.compiler.atl/test/virtualclasses/uml2simple.gbind.xmi";
 	
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
@@ -49,7 +47,7 @@ public class TestVirtualClasses_YAWL {
 		
 		out.serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
 		mm.serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
-		System.out.println("Finished typing of " + TestVirtualClasses_YAWL.class.getSimpleName());
+		System.out.println("Finished typing of " + TestVirtualClasses.class.getSimpleName());
 
 		
 		/// 
@@ -61,10 +59,10 @@ public class TestVirtualClasses_YAWL {
 						withDir("../genericity.language.gbind/metamodel/gbind.ecore") },
 						withDir(BINDING_MODEL));
 
-		VirtualClasses.BindingData data = new VirtualClasses.BindingData(SOURCE_METAMODEL_NAME, BOUND_METAMODEL_NAME);
+		VirtualClasses.BindingData data = new VirtualClasses.BindingData("UML", "Simple");
 		new VirtualClasses().launch(atlTransformation, bindingModel, out, data);
 
-		System.out.println("Finished class2reference adaptation of " + TestVirtualClasses_YAWL.class.getSimpleName());
+		System.out.println("Finished class2reference adaptation of " + TestVirtualClasses.class.getSimpleName());
 
 		atlTransformation.serialize(new FileOutputStream("tmp_/virtual_classes.adapted.atl.xmi"));
 	}

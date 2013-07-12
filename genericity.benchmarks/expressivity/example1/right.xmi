@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<targetMM:PublicationTool2 xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:targetMM="http://targetMM" xsi:schemaLocation="http://targetMM ../../Benchmark Examples/equal concept/targetMM.ecore">
-  <profs name="Superprof" bornIn="1956" salary="3970" journals="//@journals.0"/>
-  <profs name="YoungProf" bornIn="2000" salary="2382" journals="//@journals.1"/>
-  <journals name="Paper2"/>
-  <journals name="default"/>
-</targetMM:PublicationTool2>

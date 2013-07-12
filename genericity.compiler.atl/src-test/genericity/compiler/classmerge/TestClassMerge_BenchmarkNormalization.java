@@ -1,6 +1,6 @@
-package genericity.compiler.class2reference;
+package genericity.compiler.classmerge;
 
-import genericity.compiler.atl.Class2Reference;
+import genericity.compiler.atl.ClassMerge;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
 
@@ -16,12 +16,16 @@ import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.Util;
 import org.eclipse.emf.ecore.EPackage;
 
-public class TestClass2Reference {
+public class TestClassMerge_BenchmarkNormalization {
 
-	public static final String ATL_TRANSFORMATION = "test/class2reference/uml_single_inheritance.atl.xmi";
-	public static final String SOURCE_METAMODEL = "fixtures/metamodels/UML.ecore";
-	public static final String TARGET_METAMODEL = "fixtures/metamodels/UML.ecore";
-	public static final String BINDING_MODEL    = "../genericity.compiler.atl/test/class2reference/uml2simple.gbind.xmi";
+	public static final String BINDING_MODEL = "../genericity.benchmarks/stbenchmark/scenarios/i_denormalization/i_denormalization.gbind.xmi";
+	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/stbenchmark/trafo/copybio_i_denormalization.atl.xmi";
+	public static final String BOUND_METAMODEL_NAME = "BIO1";
+	public static final String TARGET_METAMODEL_NAME = "BIO2";
+	private static final String SOURCE_METAMODEL_NAME = "BIO1";
+
+	public static final String SOURCE_METAMODEL = "../genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore";
+	public static final String TARGET_METAMODEL = "../genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore";
 	
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
@@ -46,7 +50,7 @@ public class TestClass2Reference {
 		
 		out.serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
 		mm.serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
-		System.out.println("Finished typing of " + TestClass2Reference.class.getSimpleName());
+		System.out.println("Finished typing of " + TestClassMerge_BenchmarkNormalization.class.getSimpleName());
 
 		
 		/// 
@@ -58,12 +62,12 @@ public class TestClass2Reference {
 						withDir("../genericity.language.gbind/metamodel/gbind.ecore") },
 						withDir(BINDING_MODEL));
 
-		Class2Reference.BindingData data = new Class2Reference.BindingData("UML", "Simple");
-		new Class2Reference().launch(atlTransformation, bindingModel, out, data);
+		ClassMerge.BindingData data = new ClassMerge.BindingData(SOURCE_METAMODEL_NAME, BOUND_METAMODEL_NAME);
+		new ClassMerge().launch(atlTransformation, bindingModel, out, data);
 
-		System.out.println("Finished class2reference adaptation of " + TestClass2Reference.class.getSimpleName());
+		System.out.println("Finished class merge adaptation of " + TestClassMerge_BenchmarkNormalization.class.getSimpleName());
 
-		atlTransformation.serialize(new FileOutputStream("tmp_/class2reference.adapted.atl.xmi"));
+		atlTransformation.serialize(new FileOutputStream("tmp_/virtual_classes.adapted.atl.xmi"));
 	}
 
 	private static String withDir(String path) {

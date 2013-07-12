@@ -4,6 +4,16 @@
 module copybio_i_denormalization;
 create OUT : BIO2 from IN : BIO1;
 
+rule model {
+	from
+		src : BIO1!Model
+	to 
+		tgt : BIO2!Model (
+			names <- src.names,
+			nodes <- src.nodes
+		)
+}
+
 rule name {
 	from
 		src : BIO1!Name
@@ -23,7 +33,7 @@ rule node {
 			taxID      <- src.taxID,
 			tax        <- src.tax,
 			
-			parentId <- src.parentId,
+			parentID <- src.parentID,
 			parent   <- src.parent,
 	
 			rank      <- src.rank,

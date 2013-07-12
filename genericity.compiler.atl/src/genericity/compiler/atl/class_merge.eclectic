@@ -1,0 +1,59 @@
+/**
+ * Rewrites an ATL transformation to avoid conflicting rules.
+ * This should be done after the transformation has been adapted, as it 
+ * does not look the binding for the rewriting, just the rules.
+ */ 
+eclectic class_merge(atl) -> (atl)
+
+qool class_merges_rewrite(atl, gbind, params) -> (atl)
+
+model rt
+  class OperationHelperIsVirtual
+  	ref definition   : atl!OclFeatureDefinition
+	ref feature      : atl!Operation
+    ref binding      : gbind!VirtualClassBinding
+  end
+
+  class AttributeHelperIsVirtual
+  	ref definition   : atl!OclFeatureDefinition  
+	ref feature    : atl!Attribute
+    ref binding    : gbind!VirtualClassBinding
+  end
+
+end
+
+model queue mMatchedRule : atl!MatchedRule!
+
+
+model queue mNavigationOrAttributeCallExp : atl!NavigationOrAttributeCallExp
+model queue mBinding : atl!Binding
+model queue mClassBinding             : gbind!ClassBinding
+
+
+model queue mHelper : atl!Helper!
+
+model queue mVirtualMetaclass      : gbind!VirtualMetaclass 
+model queue mVirtualClassBinding   : gbind!VirtualClassBinding
+model queue mConcreteMetaclass     : gbind!ConcreteMetaclass
+
+local queue pAttributeHelperIsVirtual : rt!AttributeHelperIsVirtual
+
+segment find_conflicting_rules
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	conflicted = _!MutableMap.new
+	forall mr1 from mMatchedRule	
+		in_pattern_element1 = mr1.inPattern.elements.first // assumes rules with one input element
+
+		forall mr2 from mMatchedRule	
+			in_pattern_element2 = mr2.inPattern.elements.first // assumes rules with one input element
+		
+		
+			conflict = in_pattern_element1.type.conflict_with(in_pattern_element2.type)
+			conflict.println(mr1.name.concat('  ').concat(mr2.name))
+		end
+	end
+			    
+end
+
+end
