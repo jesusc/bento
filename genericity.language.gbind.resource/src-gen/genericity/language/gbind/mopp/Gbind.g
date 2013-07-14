@@ -348,6 +348,9 @@ options {
 			if (type.getInstanceClass() == gbind.dsl.BindingModel.class) {
 				return parse_gbind_dsl_BindingModel();
 			}
+			if (type.getInstanceClass() == gbind.dsl.BindingOptions.class) {
+				return parse_gbind_dsl_BindingOptions();
+			}
 			if (type.getInstanceClass() == gbind.dsl.MetamodelDeclaration.class) {
 				return parse_gbind_dsl_MetamodelDeclaration();
 			}
@@ -484,7 +487,7 @@ options {
 				break;
 			}
 		}
-		int followSetID = 453;
+		int followSetID = 456;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
@@ -7459,101 +7462,14 @@ parse_gbind_dsl_BindingModel returns [gbind.dsl.BindingModel element = null]
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2073]);
-	}
-	
-	a3 = 'concept' {
-		if (element == null) {
-			element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
-			startIncompleteElement(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2074]);
-	}
-	
-	(
-		a4_0 = parse_gbind_dsl_MetamodelDeclaration		{
-			if (terminateParsing) {
-				throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
-			}
-			if (element == null) {
-				element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
-				startIncompleteElement(element);
-			}
-			if (a4_0 != null) {
-				if (a4_0 != null) {
-					Object value = a4_0;
-					element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_CONCEPT), value);
-					completedElement(value, true);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_4, a4_0, true);
-				copyLocalizationInfos(a4_0, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2075]);
-	}
-	
-	a5 = 'metamodel' {
-		if (element == null) {
-			element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
-			startIncompleteElement(element);
-		}
-		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
-	}
-	{
-		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2076]);
-	}
-	
-	(
-		a6_0 = parse_gbind_dsl_MetamodelDeclaration		{
-			if (terminateParsing) {
-				throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
-			}
-			if (element == null) {
-				element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
-				startIncompleteElement(element);
-			}
-			if (a6_0 != null) {
-				if (a6_0 != null) {
-					Object value = a6_0;
-					element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_METAMODEL), value);
-					completedElement(value, true);
-				}
-				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_6, a6_0, true);
-				copyLocalizationInfos(a6_0, element);
-			}
-		}
-	)
-	{
-		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2077]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2078]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2079]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2080]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2081]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2082]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2083]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2084]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2085]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2073]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2074]);
 	}
 	
 	(
 		(
 			(
-				a7_0 = parse_gbind_dsl_VirtualMetaclass				{
+				a3_0 = parse_gbind_dsl_BindingOptions				{
 					if (terminateParsing) {
 						throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
 					}
@@ -7561,82 +7477,170 @@ parse_gbind_dsl_BindingModel returns [gbind.dsl.BindingModel element = null]
 						element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
 						startIncompleteElement(element);
 					}
-					if (a7_0 != null) {
-						if (a7_0 != null) {
-							Object value = a7_0;
-							addObjectToList(element, gbind.dsl.DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES, value);
+					if (a3_0 != null) {
+						if (a3_0 != null) {
+							Object value = a3_0;
+							element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__OPTIONS), value);
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_7_0_0_0, a7_0, true);
-						copyLocalizationInfos(a7_0, element);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_3_0_0_0, a3_0, true);
+						copyLocalizationInfos(a3_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2086]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2087]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2088]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2089]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2090]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2091]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2092]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2093]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2075]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2094]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2095]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2096]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2076]);
+	}
+	
+	a4 = 'concept' {
+		if (element == null) {
+			element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_4, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2077]);
+	}
+	
+	(
+		a5_0 = parse_gbind_dsl_MetamodelDeclaration		{
+			if (terminateParsing) {
+				throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
+			}
+			if (element == null) {
+				element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
+				startIncompleteElement(element);
+			}
+			if (a5_0 != null) {
+				if (a5_0 != null) {
+					Object value = a5_0;
+					element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_CONCEPT), value);
+					completedElement(value, true);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_5, a5_0, true);
+				copyLocalizationInfos(a5_0, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2078]);
+	}
+	
+	a6 = 'metamodel' {
+		if (element == null) {
+			element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_6, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2079]);
+	}
+	
+	(
+		a7_0 = parse_gbind_dsl_MetamodelDeclaration		{
+			if (terminateParsing) {
+				throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
+			}
+			if (element == null) {
+				element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
+				startIncompleteElement(element);
+			}
+			if (a7_0 != null) {
+				if (a7_0 != null) {
+					Object value = a7_0;
+					element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BOUND_METAMODEL), value);
+					completedElement(value, true);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_7, a7_0, true);
+				copyLocalizationInfos(a7_0, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2080]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2081]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2082]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2083]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2084]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2085]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2086]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2087]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2088]);
+	}
+	
+	(
+		(
+			(
+				a8_0 = parse_gbind_dsl_VirtualMetaclass				{
+					if (terminateParsing) {
+						throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
+					}
+					if (element == null) {
+						element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
+						startIncompleteElement(element);
+					}
+					if (a8_0 != null) {
+						if (a8_0 != null) {
+							Object value = a8_0;
+							addObjectToList(element, gbind.dsl.DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES, value);
+							completedElement(value, true);
+						}
+						collectHiddenTokens(element);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_8_0_0_0, a8_0, true);
+						copyLocalizationInfos(a8_0, element);
+					}
+				}
+			)
+			{
+				// expected elements (follow set)
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2089]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2090]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2091]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2092]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2093]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2094]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2095]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2096]);
+			}
+			
+		)
+		
+	)?	{
+		// expected elements (follow set)
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2097]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2098]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2099]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2100]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2101]);
-	}
-	
-	(
-		(
-			a8_0 = parse_gbind_dsl_ConceptBinding			{
-				if (terminateParsing) {
-					throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
-				}
-				if (element == null) {
-					element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
-					startIncompleteElement(element);
-				}
-				if (a8_0 != null) {
-					if (a8_0 != null) {
-						Object value = a8_0;
-						addObjectToList(element, gbind.dsl.DslPackage.BINDING_MODEL__BINDINGS, value);
-						completedElement(value, true);
-					}
-					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_8, a8_0, true);
-					copyLocalizationInfos(a8_0, element);
-				}
-			}
-		)
-		
-	)*	{
-		// expected elements (follow set)
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2101]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2102]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2103]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2104]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2105]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2106]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2107]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2108]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2109]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2104]);
 	}
 	
 	(
 		(
-			a9_0 = parse_gbind_dsl_BaseHelper			{
+			a9_0 = parse_gbind_dsl_ConceptBinding			{
 				if (terminateParsing) {
 					throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
 				}
@@ -7647,7 +7651,7 @@ parse_gbind_dsl_BindingModel returns [gbind.dsl.BindingModel element = null]
 				if (a9_0 != null) {
 					if (a9_0 != null) {
 						Object value = a9_0;
-						addObjectToList(element, gbind.dsl.DslPackage.BINDING_MODEL__HELPERS, value);
+						addObjectToList(element, gbind.dsl.DslPackage.BINDING_MODEL__BINDINGS, value);
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
@@ -7659,22 +7663,89 @@ parse_gbind_dsl_BindingModel returns [gbind.dsl.BindingModel element = null]
 		
 	)*	{
 		// expected elements (follow set)
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2105]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2106]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2107]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2108]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2109]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2110]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2111]);
 		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2112]);
 	}
 	
-	a10 = '}' {
+	(
+		(
+			a10_0 = parse_gbind_dsl_BaseHelper			{
+				if (terminateParsing) {
+					throw new genericity.language.gbind.mopp.GbindTerminateParsingException();
+				}
+				if (element == null) {
+					element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
+					startIncompleteElement(element);
+				}
+				if (a10_0 != null) {
+					if (a10_0 != null) {
+						Object value = a10_0;
+						addObjectToList(element, gbind.dsl.DslPackage.BINDING_MODEL__HELPERS, value);
+						completedElement(value, true);
+					}
+					collectHiddenTokens(element);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_10, a10_0, true);
+					copyLocalizationInfos(a10_0, element);
+				}
+			}
+		)
+		
+	)*	{
+		// expected elements (follow set)
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2113]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2114]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2115]);
+	}
+	
+	a11 = '}' {
 		if (element == null) {
 			element = gbind.dsl.DslFactory.eINSTANCE.createBindingModel();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_10, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_67_0_0_11, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
 	}
 	{
 		// expected elements (follow set)
+	}
+	
+;
+
+parse_gbind_dsl_BindingOptions returns [gbind.dsl.BindingOptions element = null]
+@init{
+}
+:
+	(
+		(
+			a0 = 'enable-class-merge' {
+				if (element == null) {
+					element = gbind.dsl.DslFactory.eINSTANCE.createBindingOptions();
+					startIncompleteElement(element);
+					// initialize boolean attribute
+					{
+						Object value = false;
+						element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_OPTIONS__ENABLE_CLASS_MERGE), value);
+					}
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_68_0_0_0, true, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
+				// set value of boolean attribute
+				Object value = true;
+				element.eSet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_OPTIONS__ENABLE_CLASS_MERGE), value);
+				completedElement(value, false);
+			}
+		)?	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2116]);
 	}
 	
 ;
@@ -7709,14 +7780,14 @@ parse_gbind_dsl_MetamodelDeclaration returns [gbind.dsl.MetamodelDeclaration ele
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_68_0_0_0, resolved, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_0, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2113]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2117]);
 	}
 	
 	a1 = ':' {
@@ -7725,12 +7796,12 @@ parse_gbind_dsl_MetamodelDeclaration returns [gbind.dsl.MetamodelDeclaration ele
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_68_0_0_1, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2114]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2118]);
 	}
 	
 	(
@@ -7759,20 +7830,20 @@ parse_gbind_dsl_MetamodelDeclaration returns [gbind.dsl.MetamodelDeclaration ele
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_68_0_0_2, resolved, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_2, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2115]);
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2116]);
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2117]);
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2118]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2119]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2120]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2121]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2121]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2122]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2123]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getModule(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2124]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2125]);
 	}
 	
 ;
@@ -7787,12 +7858,12 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2122]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2126]);
 	}
 	
 	(
@@ -7824,7 +7895,7 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_1, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_1, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 			}
@@ -7832,7 +7903,7 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2123]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2127]);
 	}
 	
 	a2 = 'to' {
@@ -7841,12 +7912,12 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2124]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2128]);
 	}
 	
 	(
@@ -7878,7 +7949,7 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_3, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_3, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
 			}
@@ -7886,16 +7957,16 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2125]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2126]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2127]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2128]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2129]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2130]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2129]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2130]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2131]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2132]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2133]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2134]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2134]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2135]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2136]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2137]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2138]);
 	}
 	
 	(
@@ -7906,12 +7977,12 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_4_0_0_0, null, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_4_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2135]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2139]);
 			}
 			
 			(
@@ -7943,7 +8014,7 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_4_0_0_1, proxy, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_4_0_0_1, proxy, true);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
 					}
@@ -7951,32 +8022,32 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2136]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2137]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2138]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2139]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2140]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2141]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2140]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2141]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2142]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2143]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2144]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2145]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2145]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2146]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2147]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2148]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2149]);
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2146]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2147]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2148]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2149]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2150]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2151]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2150]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2151]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2152]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2153]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2154]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2155]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2155]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2156]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2157]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2158]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2159]);
 	}
 	
 	(
@@ -7987,15 +8058,11 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_5_0_0_0, null, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_5_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2156]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2157]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2158]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2159]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2160]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2161]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2162]);
@@ -8031,6 +8098,10 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2192]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2193]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2194]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2195]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2196]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2197]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2198]);
 			}
 			
 			(
@@ -8049,35 +8120,35 @@ parse_gbind_dsl_ClassBinding returns [gbind.dsl.ClassBinding element = null]
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_69_0_0_5_0_0_1, a7_0, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_5_0_0_1, a7_0, true);
 						copyLocalizationInfos(a7_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2195]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2196]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2197]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2198]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2199]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2200]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2201]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2202]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2202]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2203]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2204]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2205]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2206]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2203]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2204]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2205]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2206]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2207]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2208]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2209]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2210]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2210]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2211]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2212]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2213]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2214]);
 	}
 	
 ;
@@ -8092,12 +8163,12 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2211]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2215]);
 	}
 	
 	(
@@ -8129,7 +8200,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_1, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_1, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 			}
@@ -8137,7 +8208,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2212]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2216]);
 	}
 	
 	a2 = 'to' {
@@ -8146,12 +8217,12 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2213]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2217]);
 	}
 	
 	(
@@ -8183,7 +8254,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_3, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_3, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, proxy);
 			}
@@ -8191,7 +8262,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2214]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2218]);
 	}
 	
 	a4 = '.' {
@@ -8200,13 +8271,13 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_4, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_4, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2215]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2216]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2219]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2220]);
 	}
 	
 	(
@@ -8225,14 +8296,14 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_5, a5_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_5, a5_0, true);
 				copyLocalizationInfos(a5_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2217]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2221]);
 	}
 	
 	a6 = '/' {
@@ -8241,12 +8312,12 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_6, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_6, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2218]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2222]);
 	}
 	
 	(
@@ -8278,7 +8349,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_7, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_7, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, proxy);
 			}
@@ -8286,7 +8357,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2219]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2223]);
 	}
 	
 	a8 = '.' {
@@ -8295,13 +8366,13 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_8, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_8, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2220]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2221]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2224]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2225]);
 	}
 	
 	(
@@ -8331,14 +8402,14 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_9_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_9_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a9, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2222]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2226]);
 		}
 		
 		
@@ -8368,20 +8439,20 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_9_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_9_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a10, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2223]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2227]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2224]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2228]);
 	}
 	
 	a11 = '{' {
@@ -8390,13 +8461,13 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_10, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_10, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2225]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2226]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2229]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2230]);
 	}
 	
 	(
@@ -8416,7 +8487,7 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_11, a12_0, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_11, a12_0, true);
 					copyLocalizationInfos(a12_0, element);
 				}
 			}
@@ -8424,9 +8495,9 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 		
 	)+	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2227]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2228]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2229]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2231]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2232]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2233]);
 	}
 	
 	a13 = '}' {
@@ -8435,19 +8506,19 @@ parse_gbind_dsl_IntermediateClassBinding returns [gbind.dsl.IntermediateClassBin
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_70_0_0_12, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_12, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2230]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2231]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2232]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2233]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2234]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2235]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2236]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2237]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2237]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2238]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2239]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2240]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2241]);
 	}
 	
 ;
@@ -8483,14 +8554,14 @@ parse_gbind_dsl_ConcreteReferencDeclaringVar returns [gbind.dsl.ConcreteReferenc
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_0_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_0_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2238]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2242]);
 		}
 		
 		
@@ -8520,20 +8591,20 @@ parse_gbind_dsl_ConcreteReferencDeclaringVar returns [gbind.dsl.ConcreteReferenc
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_71_0_0_0_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_0_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2239]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2243]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2240]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2244]);
 	}
 	
 ;
@@ -8548,12 +8619,12 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2241]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2245]);
 	}
 	
 	(
@@ -8582,14 +8653,14 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_1, resolved, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_1, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2242]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2246]);
 	}
 	
 	a2 = '{' {
@@ -8598,14 +8669,14 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2243]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2244]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2245]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2247]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2248]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2249]);
 	}
 	
 	(
@@ -8626,16 +8697,16 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_3_0_0_0, a3_0, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_3_0_0_0, a3_0, true);
 						copyLocalizationInfos(a3_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2246]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2247]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2248]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2250]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2251]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2252]);
 			}
 			
 			
@@ -8655,25 +8726,25 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_3_0_1_0, a4_0, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_3_0_1_0, a4_0, true);
 						copyLocalizationInfos(a4_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2249]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2250]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2251]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2253]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2254]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2255]);
 			}
 			
 		)
 		
 	)*	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2252]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2253]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2254]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2256]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2257]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2258]);
 	}
 	
 	a5 = '}' {
@@ -8682,12 +8753,12 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_4, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_4, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2255]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2259]);
 	}
 	
 	a6 = 'init' {
@@ -8696,12 +8767,12 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_5, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2256]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2260]);
 	}
 	
 	a7 = '=' {
@@ -8710,15 +8781,11 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_6, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_6, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2257]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2258]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2259]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2260]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2261]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2262]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2263]);
@@ -8754,6 +8821,10 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2293]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2294]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2295]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2296]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2297]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2298]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2299]);
 	}
 	
 	(
@@ -8772,21 +8843,21 @@ parse_gbind_dsl_VirtualMetaclass returns [gbind.dsl.VirtualMetaclass element = n
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_72_0_0_7, a8_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_7, a8_0, true);
 				copyLocalizationInfos(a8_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2296]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2297]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2298]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2299]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2300]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2301]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2302]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2303]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2303]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2304]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2305]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2306]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2307]);
 	}
 	
 ;
@@ -8801,13 +8872,13 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2304]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2305]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2308]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2309]);
 	}
 	
 	(
@@ -8837,14 +8908,14 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_1_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_1_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2306]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2310]);
 		}
 		
 		
@@ -8874,20 +8945,20 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_1_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_1_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2307]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2311]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2308]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2312]);
 	}
 	
 	a3 = ':' {
@@ -8896,13 +8967,13 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2309]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2310]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2313]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2314]);
 	}
 	
 	(
@@ -8935,7 +9006,7 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_3_0_0_0, proxy, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_3_0_0_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, proxy);
 				}
@@ -8943,9 +9014,9 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2311]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2312]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2313]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2315]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2316]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2317]);
 		}
 		
 		
@@ -8978,7 +9049,7 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_73_0_0_3_0_1_0, proxy, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_3_0_1_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, proxy);
 				}
@@ -8986,17 +9057,17 @@ parse_gbind_dsl_VirtualReference returns [gbind.dsl.VirtualReference element = n
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2314]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2315]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2316]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2318]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2319]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2320]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2317]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2318]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2319]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2321]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2322]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2323]);
 	}
 	
 ;
@@ -9011,13 +9082,13 @@ parse_gbind_dsl_VirtualAttribute returns [gbind.dsl.VirtualAttribute element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2320]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2321]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2324]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2325]);
 	}
 	
 	(
@@ -9047,14 +9118,14 @@ parse_gbind_dsl_VirtualAttribute returns [gbind.dsl.VirtualAttribute element = n
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_1_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_1_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2322]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2326]);
 		}
 		
 		
@@ -9084,20 +9155,20 @@ parse_gbind_dsl_VirtualAttribute returns [gbind.dsl.VirtualAttribute element = n
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_1_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_1_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2323]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2327]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2324]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2328]);
 	}
 	
 	a3 = ':' {
@@ -9106,15 +9177,15 @@ parse_gbind_dsl_VirtualAttribute returns [gbind.dsl.VirtualAttribute element = n
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2325]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2326]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2327]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2328]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2329]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2330]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2331]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualAttribute(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2332]);
 	}
 	
 	(
@@ -9134,24 +9205,24 @@ parse_gbind_dsl_VirtualAttribute returns [gbind.dsl.VirtualAttribute element = n
 						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_74_0_0_3_0_0_0, a4_0, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_3_0_0_0, a4_0, true);
 					copyLocalizationInfos(a4_0, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2329]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2330]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2331]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2333]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2334]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2335]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2332]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2333]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2334]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2336]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualMetaclass(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2337]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2338]);
 	}
 	
 ;
@@ -9166,12 +9237,12 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2335]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2339]);
 	}
 	
 	(
@@ -9203,7 +9274,7 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_1, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_1, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 			}
@@ -9211,7 +9282,7 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2336]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2340]);
 	}
 	
 	a2 = 'to' {
@@ -9220,12 +9291,12 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2337]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2341]);
 	}
 	
 	a3 = 'virtual' {
@@ -9234,12 +9305,12 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_3, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2338]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2342]);
 	}
 	
 	(
@@ -9271,7 +9342,7 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_4, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_4, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, proxy);
 			}
@@ -9279,15 +9350,15 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2339]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2340]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2341]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2342]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2343]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2343]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2344]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2345]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2346]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2347]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2347]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2348]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2349]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2350]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2351]);
 	}
 	
 	(
@@ -9298,12 +9369,12 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_5_0_0_0, null, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_5_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2348]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2352]);
 			}
 			
 			(
@@ -9322,22 +9393,22 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_5_0_0_1, a6_0, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_5_0_0_1, a6_0, true);
 						copyLocalizationInfos(a6_0, element);
 					}
 				}
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2349]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2350]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2351]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2352]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2353]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2353]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2354]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2355]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2356]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2357]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2357]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2358]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2359]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2360]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2361]);
 			}
 			
 			(
@@ -9348,12 +9419,12 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 							startIncompleteElement(element);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_5_0_0_2_0_0_0, null, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_5_0_0_2_0_0_0, null, true);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
 					}
 					{
 						// expected elements (follow set)
-						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2358]);
+						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getVirtualClassBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2362]);
 					}
 					
 					(
@@ -9372,51 +9443,51 @@ parse_gbind_dsl_VirtualClassBinding returns [gbind.dsl.VirtualClassBinding eleme
 									completedElement(value, true);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_75_0_0_5_0_0_2_0_0_1, a8_0, true);
+								retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_5_0_0_2_0_0_1, a8_0, true);
 								copyLocalizationInfos(a8_0, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2359]);
-						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2360]);
-						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2361]);
-						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2362]);
-						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2363]);
+						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2363]);
 						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2364]);
 						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2365]);
 						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2366]);
-						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2367]);
+						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2367]);
+						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2368]);
+						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2369]);
+						addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2370]);
+						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2371]);
 					}
 					
 				)
 				
 			)*			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2368]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2369]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2370]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2371]);
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2372]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2372]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2373]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2374]);
 				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2375]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2376]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2376]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2377]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2378]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2379]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2380]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2377]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2378]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2379]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2380]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2381]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2382]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2383]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2384]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2384]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2385]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2386]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2387]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2388]);
 	}
 	
 ;
@@ -9454,7 +9525,7 @@ parse_gbind_dsl_ConceptFeatureRef returns [gbind.dsl.ConceptFeatureRef element =
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_0, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 			}
@@ -9462,7 +9533,7 @@ parse_gbind_dsl_ConceptFeatureRef returns [gbind.dsl.ConceptFeatureRef element =
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2385]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2389]);
 	}
 	
 	a1 = '.' {
@@ -9471,13 +9542,13 @@ parse_gbind_dsl_ConceptFeatureRef returns [gbind.dsl.ConceptFeatureRef element =
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_1, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2386]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2387]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2390]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2391]);
 	}
 	
 	(
@@ -9507,22 +9578,22 @@ parse_gbind_dsl_ConceptFeatureRef returns [gbind.dsl.ConceptFeatureRef element =
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_2_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_2_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2388]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2389]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2390]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2391]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2392]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2392]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2393]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2394]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2395]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2396]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2396]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2397]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2398]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2399]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2400]);
 		}
 		
 		
@@ -9552,36 +9623,36 @@ parse_gbind_dsl_ConceptFeatureRef returns [gbind.dsl.ConceptFeatureRef element =
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_76_0_0_2_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_2_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2397]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2398]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2399]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2400]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2401]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2401]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2402]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2403]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2404]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2405]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2405]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2406]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2407]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2408]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2409]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2406]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2407]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2408]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2409]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2410]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2410]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2411]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2412]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2413]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2414]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2414]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2415]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2416]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2417]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2418]);
 	}
 	
 ;
@@ -9596,12 +9667,12 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2415]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2419]);
 	}
 	
 	(
@@ -9633,7 +9704,7 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_1, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_1, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 			}
@@ -9641,8 +9712,8 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2416]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2417]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2420]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2421]);
 	}
 	
 	(
@@ -9676,7 +9747,7 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_2_0_0_0, proxy, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_2_0_0_0, proxy, true);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 					}
@@ -9684,14 +9755,14 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2418]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2422]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2419]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2423]);
 	}
 	
 	a3 = '.' {
@@ -9700,13 +9771,13 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_3, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2420]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2421]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2424]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2425]);
 	}
 	
 	(
@@ -9736,14 +9807,14 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_4_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_4_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2422]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2426]);
 		}
 		
 		
@@ -9773,20 +9844,20 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_4_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_4_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2423]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2427]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2424]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2428]);
 	}
 	
 	a6 = '=' {
@@ -9795,15 +9866,11 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_5, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2425]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2426]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2427]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2428]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2429]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2430]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2431]);
@@ -9839,6 +9906,10 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2461]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2462]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2463]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2464]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2465]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2466]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getOclFeatureBinding(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2467]);
 	}
 	
 	(
@@ -9857,22 +9928,22 @@ parse_gbind_dsl_OclFeatureBinding returns [gbind.dsl.OclFeatureBinding element =
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_77_0_0_6, a7_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_6, a7_0, true);
 				copyLocalizationInfos(a7_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2464]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2465]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2466]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2467]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2468]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2469]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2470]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2471]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2472]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2471]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2472]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2473]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2474]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2475]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2476]);
 	}
 	
 ;
@@ -9887,12 +9958,12 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2473]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2477]);
 	}
 	
 	(
@@ -9924,7 +9995,7 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_1, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_1, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 			}
@@ -9932,8 +10003,8 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2474]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2475]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2478]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2479]);
 	}
 	
 	(
@@ -9967,7 +10038,7 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_2_0_0_0, proxy, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_2_0_0_0, proxy, true);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 					}
@@ -9975,14 +10046,14 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2476]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2480]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2477]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2481]);
 	}
 	
 	a3 = '.' {
@@ -9991,13 +10062,13 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_3, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2478]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2479]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2482]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2483]);
 	}
 	
 	(
@@ -10027,14 +10098,14 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_4_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_4_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2480]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2484]);
 		}
 		
 		
@@ -10064,20 +10135,20 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_4_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_4_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2481]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2485]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2482]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2486]);
 	}
 	
 	a6 = 'is' {
@@ -10086,13 +10157,13 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_5, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2483]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2484]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2487]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2488]);
 	}
 	
 	(
@@ -10122,22 +10193,22 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_6_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_6_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2485]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2486]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2487]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2488]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2489]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2490]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2491]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2492]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2493]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2492]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2493]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2494]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2495]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2496]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2497]);
 		}
 		
 		
@@ -10167,36 +10238,36 @@ parse_gbind_dsl_RenamingFeatureBinding returns [gbind.dsl.RenamingFeatureBinding
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_78_0_0_6_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_6_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2494]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2495]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2496]);
-			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2497]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2498]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2499]);
 			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2500]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2501]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2502]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2501]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2502]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2503]);
+			addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2504]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2505]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2506]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2503]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2504]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2505]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2506]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2507]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2508]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2509]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2510]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2511]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2510]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2511]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2512]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2513]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2514]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2515]);
 	}
 	
 ;
@@ -10211,12 +10282,12 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2512]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2516]);
 	}
 	
 	(
@@ -10248,7 +10319,7 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_1, proxy, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_1, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 			}
@@ -10256,8 +10327,8 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2513]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2514]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2517]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2518]);
 	}
 	
 	(
@@ -10291,7 +10362,7 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_2_0_0_0, proxy, true);
+						retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_2_0_0_0, proxy, true);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 					}
@@ -10299,14 +10370,14 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 			)
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2515]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2519]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2516]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2520]);
 	}
 	
 	a3 = '.' {
@@ -10315,12 +10386,12 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_3, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2517]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2521]);
 	}
 	
 	(
@@ -10349,14 +10420,14 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_4, resolved, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_4, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2518]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2522]);
 	}
 	
 	a5 = ':' {
@@ -10365,15 +10436,11 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_5, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2519]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2520]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2521]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2522]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2523]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2524]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2525]);
@@ -10387,6 +10454,10 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2533]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2534]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2535]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2536]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2537]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2538]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2539]);
 	}
 	
 	(
@@ -10405,14 +10476,14 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_6, a6_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_6, a6_0, true);
 				copyLocalizationInfos(a6_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2536]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2540]);
 	}
 	
 	a7 = '=' {
@@ -10421,15 +10492,11 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_7, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_7, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2537]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2538]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2539]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2540]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2541]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2542]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2543]);
@@ -10465,6 +10532,10 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2573]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2574]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2575]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2576]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2577]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2578]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getConceptHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2579]);
 	}
 	
 	(
@@ -10483,16 +10554,16 @@ parse_gbind_dsl_ConceptHelper returns [gbind.dsl.ConceptHelper element = null]
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_79_0_0_8, a8_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_8, a8_0, true);
 				copyLocalizationInfos(a8_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2576]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2577]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2578]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2580]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2581]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2582]);
 	}
 	
 ;
@@ -10507,13 +10578,13 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_0, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2579]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2580]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2583]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2584]);
 	}
 	
 	(
@@ -10546,7 +10617,7 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_1_0_0_0, proxy, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_1_0_0_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, proxy);
 				}
@@ -10554,7 +10625,7 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2581]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2585]);
 		}
 		
 		
@@ -10587,7 +10658,7 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_1_0_1_0, proxy, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_1_0_1_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, proxy);
 				}
@@ -10595,13 +10666,13 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2582]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2586]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2583]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2587]);
 	}
 	
 	a3 = '.' {
@@ -10610,13 +10681,13 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_2, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2584]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2585]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2588]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2589]);
 	}
 	
 	(
@@ -10646,15 +10717,15 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_3_0_0_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_3_0_0_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2586]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2587]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2590]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2591]);
 		}
 		
 		
@@ -10684,22 +10755,22 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_3_0_1_0, resolved, true);
+					retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_3_0_1_0, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
 				}
 			}
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2588]);
-			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2589]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2592]);
+			addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2593]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2590]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2591]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2594]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2595]);
 	}
 	
 	(
@@ -10710,13 +10781,13 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_4_0_0_0, null, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_4_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2592]);
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2593]);
+				addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2596]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2597]);
 			}
 			
 			(
@@ -10737,15 +10808,15 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 									completedElement(value, true);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_4_0_0_1_0_0_0, a7_0, true);
+								retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_4_0_0_1_0_0_0, a7_0, true);
 								copyLocalizationInfos(a7_0, element);
 							}
 						}
 					)
 					{
 						// expected elements (follow set)
-						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2594]);
-						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2595]);
+						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2598]);
+						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2599]);
 					}
 					
 					(
@@ -10756,12 +10827,12 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 									startIncompleteElement(element);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_4_0_0_1_0_0_1_0_0_0, null, true);
+								retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_4_0_0_1_0_0_1_0_0_0, null, true);
 								copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
 							}
 							{
 								// expected elements (follow set)
-								addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2596]);
+								addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2600]);
 							}
 							
 							(
@@ -10780,30 +10851,30 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 											completedElement(value, true);
 										}
 										collectHiddenTokens(element);
-										retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_4_0_0_1_0_0_1_0_0_1, a9_0, true);
+										retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_4_0_0_1_0_0_1_0_0_1, a9_0, true);
 										copyLocalizationInfos(a9_0, element);
 									}
 								}
 							)
 							{
 								// expected elements (follow set)
-								addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2597]);
-								addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2598]);
+								addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2601]);
+								addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2602]);
 							}
 							
 						)
 						
 					)*					{
 						// expected elements (follow set)
-						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2599]);
-						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2600]);
+						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2603]);
+						addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2604]);
 					}
 					
 				)
 				
 			)?			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2601]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2605]);
 			}
 			
 			a10 = ')' {
@@ -10812,19 +10883,19 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 					startIncompleteElement(element);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_4_0_0_2, null, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_4_0_0_2, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
 			}
 			{
 				// expected elements (follow set)
-				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2602]);
+				addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2606]);
 			}
 			
 		)
 		
 	)?	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2603]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2607]);
 	}
 	
 	a11 = ':' {
@@ -10833,15 +10904,11 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_5, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2604]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2605]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2606]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2607]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2608]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2609]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2610]);
@@ -10855,6 +10922,10 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2618]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2619]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2620]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2621]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2622]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2623]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2624]);
 	}
 	
 	(
@@ -10873,14 +10944,14 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_6, a12_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_6, a12_0, true);
 				copyLocalizationInfos(a12_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2621]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2625]);
 	}
 	
 	a13 = '=' {
@@ -10889,15 +10960,11 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_7, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_7, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2622]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2623]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2624]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2625]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2626]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2627]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2628]);
@@ -10933,6 +11000,10 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2658]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2659]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2660]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2661]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2662]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2663]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getLocalHelper(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2664]);
 	}
 	
 	(
@@ -10951,16 +11022,16 @@ parse_gbind_dsl_LocalHelper returns [gbind.dsl.LocalHelper element = null]
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_80_0_0_8, a14_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_8, a14_0, true);
 				copyLocalizationInfos(a14_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2661]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2662]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2663]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2665]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2666]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2667]);
 	}
 	
 ;
@@ -10995,14 +11066,14 @@ parse_gbind_dsl_HelperParameter returns [gbind.dsl.HelperParameter element = nul
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_0, resolved, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_82_0_0_0, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2664]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2668]);
 	}
 	
 	a1 = ':' {
@@ -11011,15 +11082,11 @@ parse_gbind_dsl_HelperParameter returns [gbind.dsl.HelperParameter element = nul
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_1, null, true);
+		retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_82_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2665]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2666]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2667]);
-		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2668]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2669]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2670]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2671]);
@@ -11033,6 +11100,10 @@ parse_gbind_dsl_HelperParameter returns [gbind.dsl.HelperParameter element = nul
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2679]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2680]);
 		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2681]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2682]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2683]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2684]);
+		addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getHelperParameter(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2685]);
 	}
 	
 	(
@@ -11051,15 +11122,15 @@ parse_gbind_dsl_HelperParameter returns [gbind.dsl.HelperParameter element = nul
 					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_81_0_0_2, a2_0, true);
+				retrieveLayoutInformation(element, genericity.language.gbind.grammar.GbindGrammarInformationProvider.GBIND_82_0_0_2, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2682]);
-		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2683]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2686]);
+		addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2687]);
 	}
 	
 ;
@@ -11104,10 +11175,6 @@ parseop_OclExpression_level_1 returns [gbind.simpleocl.OclExpression element = n
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2684]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2685]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2686]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2687]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2688]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2689]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2690]);
@@ -11143,6 +11210,10 @@ parseop_OclExpression_level_1 returns [gbind.simpleocl.OclExpression element = n
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2720]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2721]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2722]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2723]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2724]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2725]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOperatorCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2726]);
 		}
 		
 		rightArg = parseop_OclExpression_level_2		{
@@ -11230,10 +11301,6 @@ leftArg = parseop_OclExpression_level_3((
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2723]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2724]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2725]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2726]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2727]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2728]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2729]);
@@ -11269,6 +11336,10 @@ leftArg = parseop_OclExpression_level_3((
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2759]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2760]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2761]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2762]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2763]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2764]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2765]);
 		}
 		
 		
@@ -11305,10 +11376,6 @@ leftArg = parseop_OclExpression_level_3((
 		)
 		{
 			// expected elements (follow set)
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2762]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2763]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2764]);
-			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2765]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2766]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2767]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2768]);
@@ -11344,15 +11411,15 @@ leftArg = parseop_OclExpression_level_3((
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2798]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2799]);
 			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2800]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2801]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2802]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2803]);
+			addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2804]);
 		}
 		
 	)
 	{
 		// expected elements (follow set)
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2801]);
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2802]);
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2803]);
-		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2804]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2805]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2806]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2807]);
@@ -11388,6 +11455,10 @@ leftArg = parseop_OclExpression_level_3((
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2837]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2838]);
 		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2839]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2840]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2841]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2842]);
+		addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEqOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2843]);
 	}
 	
 	rightArg = parseop_OclExpression_level_3	{
@@ -11474,10 +11545,6 @@ leftArg = parseop_OclExpression_level_4((
 )
 {
 	// expected elements (follow set)
-	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2840]);
-	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2841]);
-	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2842]);
-	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2843]);
 	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2844]);
 	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2845]);
 	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2846]);
@@ -11513,6 +11580,10 @@ leftArg = parseop_OclExpression_level_4((
 	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2876]);
 	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2877]);
 	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2878]);
+	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2879]);
+	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2880]);
+	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2881]);
+	addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getRelOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2882]);
 }
 
 rightArg = parseop_OclExpression_level_4{
@@ -11599,10 +11670,6 @@ a0 = ADDOP
 )
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2879]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2880]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2881]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2882]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2883]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2884]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2885]);
@@ -11638,6 +11705,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(),
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2915]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2916]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2917]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2918]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2919]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2920]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getAddOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2921]);
 }
 
 rightArg = parseop_OclExpression_level_5{
@@ -11724,10 +11795,6 @@ if (a0 != null) {
 )
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2918]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2919]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2920]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2921]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2922]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2923]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2924]);
@@ -11763,6 +11830,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(),
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2954]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2955]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2956]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2957]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2958]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2959]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIntOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2960]);
 }
 
 rightArg = parseop_OclExpression_level_6{
@@ -11849,10 +11920,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2957]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2958]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2959]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2960]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2961]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2962]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2963]);
@@ -11888,6 +11955,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(),
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2993]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2994]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2995]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2996]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2997]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2998]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMulOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2999]);
 }
 
 rightArg = parseop_OclExpression_level_7{
@@ -11971,10 +12042,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2996]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2997]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2998]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[2999]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3000]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3001]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3002]);
@@ -12010,6 +12077,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(),
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3032]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3033]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3034]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3035]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3036]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3037]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getNotOpCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3038]);
 }
 
 arg = parseop_OclExpression_level_10{
@@ -12066,15 +12137,11 @@ copyLocalizationInfos(a0_0, element);
 
 )+{
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3035]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3036]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3037]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3038]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3039]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3040]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3041]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3042]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3043]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3040]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3041]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3042]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3043]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3044]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3045]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3046]);
@@ -12104,15 +12171,19 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3070]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3071]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3072]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3073]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3074]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3075]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3076]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3073]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3074]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3075]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3076]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3077]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3078]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3079]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3080]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3081]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3080]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3081]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3082]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3083]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3084]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3085]);
 }
 
 {
@@ -12208,7 +12279,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3082]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3086]);
 }
 
 a1 = '!' {
@@ -12222,8 +12293,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3083]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3084]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3087]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3088]);
 }
 
 (
@@ -12260,10 +12331,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3085]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3086]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3087]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3088]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3089]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3090]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3091]);
@@ -12288,25 +12355,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3110]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3111]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3112]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3113]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3114]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3115]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3116]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3113]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3114]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3115]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3116]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3117]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3118]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3119]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3120]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3121]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3118]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3119]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3120]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3121]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3122]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3123]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3124]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3125]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3126]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3123]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3124]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3125]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3126]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3127]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3128]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3129]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3130]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3131]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3130]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3131]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3132]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3133]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3134]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3135]);
 }
 
 
@@ -12343,10 +12414,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3132]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3133]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3134]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3135]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3136]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3137]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3138]);
@@ -12371,34 +12438,34 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3157]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3158]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3159]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3160]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3161]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3162]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3163]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3160]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3161]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3162]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3163]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3164]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3165]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3166]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3167]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3168]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3165]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3166]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3167]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3168]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3169]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3170]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3171]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3172]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3173]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3170]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3171]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3172]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3173]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3174]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3175]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3176]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3177]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3178]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3177]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3178]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3179]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3180]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3181]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3182]);
 }
 
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3179]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3180]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3181]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3182]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3183]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3184]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3185]);
@@ -12423,25 +12490,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3204]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3205]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3206]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3207]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3208]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3209]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3210]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3207]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3208]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3209]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3210]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3211]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3212]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3213]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3214]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3215]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3212]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3213]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3214]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3215]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3216]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3217]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3218]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3219]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3220]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3217]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3218]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3219]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3220]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3221]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3222]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3223]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3224]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3225]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3224]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3225]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3226]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3227]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3228]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3229]);
 }
 
 ;
@@ -12487,7 +12558,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3226]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3230]);
 }
 
 a1 = '(' {
@@ -12501,10 +12572,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3227]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3228]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3229]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3230]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3231]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3232]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3233]);
@@ -12540,7 +12607,11 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp()
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3263]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3264]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3265]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3266]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3266]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3267]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3268]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3269]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3270]);
 }
 
 (
@@ -12568,8 +12639,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3267]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3268]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3271]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3272]);
 }
 
 (
@@ -12585,10 +12656,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3269]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3270]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3271]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3272]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3273]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3274]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3275]);
@@ -12624,6 +12691,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp()
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3305]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3306]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3307]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3308]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3309]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3310]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3311]);
 }
 
 (
@@ -12649,23 +12720,23 @@ a4_0 = parse_gbind_simpleocl_OclExpression{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3308]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3309]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3312]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3313]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3310]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3311]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3314]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3315]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3312]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3316]);
 }
 
 a5 = ')' {
@@ -12679,10 +12750,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3313]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3314]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3315]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3316]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3317]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3318]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3319]);
@@ -12707,25 +12774,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3338]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3339]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3340]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3341]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3342]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3343]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3344]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3341]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3342]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3343]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3344]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3345]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3346]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3347]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3348]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3349]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3346]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3347]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3348]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3349]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3350]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3351]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3352]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3353]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3354]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3351]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3352]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3353]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3354]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3355]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3356]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3357]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3358]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3359]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3358]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3359]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3360]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3361]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3362]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3363]);
 }
 
 ;
@@ -12771,10 +12842,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, proxy);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3360]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3361]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3362]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3363]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3364]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3365]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3366]);
@@ -12799,25 +12866,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3385]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3386]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3387]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3388]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3389]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3390]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3391]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3388]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3389]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3390]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3391]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3392]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3393]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3394]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3395]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3396]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3393]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3394]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3395]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3396]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3397]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3398]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3399]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3400]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3401]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3398]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3399]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3400]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3401]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3402]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3403]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3404]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3405]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3406]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3405]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3406]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3407]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3408]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3409]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3410]);
 }
 
 ;
@@ -12837,10 +12908,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3407]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3408]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3409]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3410]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3411]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3412]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3413]);
@@ -12865,25 +12932,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3432]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3433]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3434]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3435]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3436]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3437]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3438]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3435]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3436]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3437]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3438]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3439]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3440]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3441]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3442]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3443]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3440]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3441]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3442]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3443]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3444]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3445]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3446]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3447]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3448]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3445]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3446]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3447]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3448]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3449]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3450]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3451]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3452]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3453]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3452]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3453]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3454]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3455]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3456]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3457]);
 }
 
 ;
@@ -12903,10 +12974,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3454]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3455]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3456]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3457]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3458]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3459]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3460]);
@@ -12931,25 +12998,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3479]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3480]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3481]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3482]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3483]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3484]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3485]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3482]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3483]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3484]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3485]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3486]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3487]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3488]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3489]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3490]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3487]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3488]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3489]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3490]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3491]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3492]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3493]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3494]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3495]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3492]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3493]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3494]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3495]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3496]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3497]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3498]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3499]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3500]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3499]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3500]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3501]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3502]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3503]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3504]);
 }
 
 ;
@@ -12969,10 +13040,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3501]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3502]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3503]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3504]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3505]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3506]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3507]);
@@ -12997,25 +13064,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3526]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3527]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3528]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3529]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3530]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3531]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3532]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3529]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3530]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3531]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3532]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3533]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3534]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3535]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3536]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3537]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3534]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3535]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3536]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3537]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3538]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3539]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3540]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3541]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3542]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3539]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3540]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3541]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3542]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3543]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3544]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3545]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3546]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3547]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3546]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3547]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3548]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3549]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3550]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3551]);
 }
 
 ;
@@ -13057,10 +13128,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3548]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3549]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3550]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3551]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3552]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3553]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3554]);
@@ -13085,25 +13152,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3573]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3574]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3575]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3576]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3577]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3578]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3579]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3576]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3577]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3578]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3579]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3580]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3581]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3582]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3583]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3584]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3581]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3582]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3583]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3584]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3585]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3586]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3587]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3588]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3589]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3586]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3587]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3588]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3589]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3590]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3591]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3592]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3593]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3594]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3593]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3594]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3595]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3596]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3597]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3598]);
 }
 
 ;
@@ -13144,10 +13215,6 @@ completedElement(value, false);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3595]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3596]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3597]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3598]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3599]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3600]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3601]);
@@ -13172,25 +13239,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3620]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3621]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3622]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3623]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3624]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3625]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3626]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3623]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3624]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3625]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3626]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3627]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3628]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3629]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3630]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3631]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3628]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3629]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3630]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3631]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3632]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3633]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3634]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3635]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3636]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3633]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3634]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3635]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3636]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3637]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3638]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3639]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3640]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3641]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3640]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3641]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3642]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3643]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3644]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3645]);
 }
 
 ;
@@ -13232,10 +13303,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3642]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3643]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3644]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3645]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3646]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3647]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3648]);
@@ -13260,25 +13327,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3667]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3668]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3669]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3670]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3671]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3672]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3673]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3670]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3671]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3672]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3673]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3674]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3675]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3676]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3677]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3678]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3675]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3676]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3677]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3678]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3679]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3680]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3681]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3682]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3683]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3680]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3681]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3682]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3683]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3684]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3685]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3686]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3687]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3688]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3687]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3688]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3689]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3690]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3691]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3692]);
 }
 
 ;
@@ -13320,10 +13391,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3689]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3690]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3691]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3692]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3693]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3694]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3695]);
@@ -13348,25 +13415,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3714]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3715]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3716]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3717]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3718]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3719]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3720]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3717]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3718]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3719]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3720]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3721]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3722]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3723]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3724]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3725]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3722]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3723]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3724]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3725]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3726]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3727]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3728]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3729]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3730]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3727]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3728]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3729]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3730]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3731]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3732]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3733]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3734]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3735]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3734]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3735]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3736]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3737]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3738]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3739]);
 }
 
 ;
@@ -13386,7 +13457,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3736]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3740]);
 }
 
 a1 = '{' {
@@ -13400,10 +13471,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3737]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3738]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3739]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3740]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3741]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3742]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3743]);
@@ -13439,7 +13506,11 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), gener
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3773]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3774]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3775]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3776]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3776]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3777]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3778]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3779]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3780]);
 }
 
 (
@@ -13467,8 +13538,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3777]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3778]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3781]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3782]);
 }
 
 (
@@ -13484,10 +13555,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3779]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3780]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3781]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3782]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3783]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3784]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3785]);
@@ -13523,6 +13590,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), gener
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3815]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3816]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3817]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3818]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3819]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3820]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBagExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3821]);
 }
 
 (
@@ -13548,23 +13619,23 @@ a4_0 = parse_gbind_simpleocl_OclExpression{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3818]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3819]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3822]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3823]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3820]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3821]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3824]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3825]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3822]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3826]);
 }
 
 a5 = '}' {
@@ -13578,10 +13649,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3823]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3824]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3825]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3826]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3827]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3828]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3829]);
@@ -13606,25 +13673,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3848]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3849]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3850]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3851]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3852]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3853]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3854]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3851]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3852]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3853]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3854]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3855]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3856]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3857]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3858]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3859]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3856]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3857]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3858]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3859]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3860]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3861]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3862]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3863]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3864]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3861]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3862]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3863]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3864]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3865]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3866]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3867]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3868]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3869]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3868]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3869]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3870]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3871]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3872]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3873]);
 }
 
 ;
@@ -13644,7 +13715,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3870]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3874]);
 }
 
 a1 = '{' {
@@ -13658,10 +13729,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3871]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3872]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3873]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3874]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3875]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3876]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3877]);
@@ -13697,7 +13764,11 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp()
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3907]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3908]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3909]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3910]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3910]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3911]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3912]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3913]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3914]);
 }
 
 (
@@ -13725,8 +13796,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3911]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3912]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3915]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3916]);
 }
 
 (
@@ -13742,10 +13813,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3913]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3914]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3915]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3916]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3917]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3918]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3919]);
@@ -13781,6 +13848,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp()
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3949]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3950]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3951]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3952]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3953]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3954]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getOrderedSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3955]);
 }
 
 (
@@ -13806,23 +13877,23 @@ a4_0 = parse_gbind_simpleocl_OclExpression{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3952]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3953]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3956]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3957]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3954]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3955]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3958]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3959]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3956]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3960]);
 }
 
 a5 = '}' {
@@ -13836,10 +13907,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3957]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3958]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3959]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3960]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3961]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3962]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3963]);
@@ -13864,25 +13931,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3982]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3983]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3984]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3985]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3986]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3987]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3988]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3985]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3986]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3987]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3988]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3989]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3990]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3991]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3992]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3993]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3990]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3991]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3992]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3993]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3994]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3995]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3996]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3997]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3998]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3995]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3996]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3997]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3998]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[3999]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4000]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4001]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4002]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4003]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4002]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4003]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4004]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4005]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4006]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4007]);
 }
 
 ;
@@ -13902,7 +13973,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4004]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4008]);
 }
 
 a1 = '{' {
@@ -13916,10 +13987,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4005]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4006]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4007]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4008]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4009]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4010]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4011]);
@@ -13955,7 +14022,11 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), 
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4041]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4042]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4043]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4044]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4044]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4045]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4046]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4047]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4048]);
 }
 
 (
@@ -13983,8 +14054,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4045]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4046]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4049]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4050]);
 }
 
 (
@@ -14000,10 +14071,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4047]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4048]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4049]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4050]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4051]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4052]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4053]);
@@ -14039,6 +14106,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), 
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4083]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4084]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4085]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4086]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4087]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4088]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSequenceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4089]);
 }
 
 (
@@ -14064,23 +14135,23 @@ a4_0 = parse_gbind_simpleocl_OclExpression{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4086]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4087]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4090]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4091]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4088]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4089]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4092]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4093]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4090]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4094]);
 }
 
 a5 = '}' {
@@ -14094,10 +14165,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4091]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4092]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4093]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4094]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4095]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4096]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4097]);
@@ -14122,25 +14189,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4116]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4117]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4118]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4119]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4120]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4121]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4122]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4119]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4120]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4121]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4122]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4123]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4124]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4125]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4126]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4127]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4124]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4125]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4126]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4127]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4128]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4129]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4130]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4131]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4132]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4129]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4130]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4131]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4132]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4133]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4134]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4135]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4136]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4137]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4136]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4137]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4138]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4139]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4140]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4141]);
 }
 
 ;
@@ -14160,7 +14231,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4138]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4142]);
 }
 
 a1 = '{' {
@@ -14174,10 +14245,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4139]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4140]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4141]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4142]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4143]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4144]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4145]);
@@ -14213,7 +14280,11 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), gener
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4175]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4176]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4177]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4178]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4178]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4179]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4180]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4181]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4182]);
 }
 
 (
@@ -14241,8 +14312,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4179]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4180]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4183]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4184]);
 }
 
 (
@@ -14258,10 +14329,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4181]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4182]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4183]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4184]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4185]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4186]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4187]);
@@ -14297,6 +14364,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), gener
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4217]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4218]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4219]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4220]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4221]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4222]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getSetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4223]);
 }
 
 (
@@ -14322,23 +14393,23 @@ a4_0 = parse_gbind_simpleocl_OclExpression{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4220]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4221]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4224]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4225]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4222]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4223]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4226]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4227]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4224]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4228]);
 }
 
 a5 = '}' {
@@ -14352,10 +14423,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4225]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4226]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4227]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4228]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4229]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4230]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4231]);
@@ -14380,25 +14447,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4250]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4251]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4252]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4253]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4254]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4255]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4256]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4253]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4254]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4255]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4256]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4257]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4258]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4259]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4260]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4261]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4258]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4259]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4260]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4261]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4262]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4263]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4264]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4265]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4266]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4263]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4264]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4265]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4266]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4267]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4268]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4269]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4270]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4271]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4270]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4271]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4272]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4273]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4274]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4275]);
 }
 
 ;
@@ -14418,7 +14489,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4272]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4276]);
 }
 
 a1 = '{' {
@@ -14432,9 +14503,9 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4273]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4274]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4275]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4277]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4278]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4279]);
 }
 
 (
@@ -14462,8 +14533,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4276]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4277]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4280]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4281]);
 }
 
 (
@@ -14479,8 +14550,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4278]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4279]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4282]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getTupleExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4283]);
 }
 
 (
@@ -14506,23 +14577,23 @@ a4_0 = parse_gbind_simpleocl_TuplePart{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4280]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4281]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4284]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4285]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4282]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4283]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4286]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4287]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4284]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4288]);
 }
 
 a5 = '}' {
@@ -14536,10 +14607,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4285]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4286]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4287]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4288]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4289]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4290]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4291]);
@@ -14564,25 +14631,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4310]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4311]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4312]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4313]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4314]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4315]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4316]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4313]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4314]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4315]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4316]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4317]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4318]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4319]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4320]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4321]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4318]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4319]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4320]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4321]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4322]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4323]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4324]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4325]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4326]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4323]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4324]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4325]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4326]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4327]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4328]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4329]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4330]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4331]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4330]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4331]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4332]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4333]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4334]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4335]);
 }
 
 ;
@@ -14602,7 +14673,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4332]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4336]);
 }
 
 a1 = '{' {
@@ -14616,8 +14687,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMapExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4333]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4334]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMapExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4337]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4338]);
 }
 
 (
@@ -14645,8 +14716,8 @@ copyLocalizationInfos(a2_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4335]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4336]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4339]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4340]);
 }
 
 (
@@ -14662,7 +14733,7 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMapExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4337]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getMapExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4341]);
 }
 
 (
@@ -14688,23 +14759,23 @@ a4_0 = parse_gbind_simpleocl_MapElement{
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4338]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4339]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4342]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4343]);
 }
 
 )
 
 )*{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4340]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4341]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4344]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4345]);
 }
 
 )
 
 )?{
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4342]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4346]);
 }
 
 a5 = '}' {
@@ -14718,10 +14789,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4343]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4344]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4345]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4346]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4347]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4348]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4349]);
@@ -14746,25 +14813,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4368]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4369]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4370]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4371]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4372]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4373]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4374]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4371]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4372]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4373]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4374]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4375]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4376]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4377]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4378]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4379]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4376]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4377]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4378]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4379]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4380]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4381]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4382]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4383]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4384]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4381]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4382]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4383]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4384]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4385]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4386]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4387]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4388]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4389]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4388]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4389]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4390]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4391]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4392]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4393]);
 }
 
 ;
@@ -14784,8 +14855,8 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4390]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4391]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4394]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4395]);
 }
 
 (
@@ -14822,10 +14893,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4392]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4393]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4394]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4395]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4396]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4397]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4398]);
@@ -14850,25 +14917,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4417]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4418]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4419]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4420]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4421]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4422]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4423]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4420]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4421]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4422]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4423]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4424]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4425]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4426]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4427]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4428]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4425]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4426]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4427]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4428]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4429]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4430]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4431]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4432]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4433]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4430]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4431]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4432]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4433]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4434]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4435]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4436]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4437]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4438]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4437]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4438]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4439]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4440]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4441]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4442]);
 }
 
 
@@ -14905,10 +14976,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4439]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4440]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4441]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4442]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4443]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4444]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4445]);
@@ -14933,34 +15000,34 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4464]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4465]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4466]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4467]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4468]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4469]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4470]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4467]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4468]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4469]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4470]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4471]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4472]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4473]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4474]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4475]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4472]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4473]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4474]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4475]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4476]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4477]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4478]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4479]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4480]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4477]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4478]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4479]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4480]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4481]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4482]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4483]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4484]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4485]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4484]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4485]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4486]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4487]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4488]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4489]);
 }
 
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4486]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4487]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4488]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4489]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4490]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4491]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4492]);
@@ -14985,25 +15052,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4511]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4512]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4513]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4514]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4515]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4516]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4517]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4514]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4515]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4516]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4517]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4518]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4519]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4520]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4521]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4522]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4519]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4520]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4521]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4522]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4523]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4524]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4525]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4526]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4527]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4524]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4525]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4526]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4527]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4528]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4529]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4530]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4531]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4532]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4531]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4532]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4533]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4534]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4535]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4536]);
 }
 
 ;
@@ -15023,10 +15094,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4533]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4534]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4535]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4536]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4537]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4538]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4539]);
@@ -15051,25 +15118,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4558]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4559]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4560]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4561]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4562]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4563]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4564]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4561]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4562]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4563]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4564]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4565]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4566]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4567]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4568]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4569]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4566]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4567]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4568]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4569]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4570]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4571]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4572]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4573]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4574]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4571]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4572]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4573]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4574]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4575]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4576]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4577]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4578]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4579]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4578]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4579]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4580]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4581]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4582]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4583]);
 }
 
 ;
@@ -15089,9 +15160,9 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4580]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4581]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4582]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4584]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4585]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4586]);
 }
 
 (
@@ -15117,7 +15188,7 @@ copyLocalizationInfos(a1_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4583]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4587]);
 }
 
 a2 = 'in' {
@@ -15131,10 +15202,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4584]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4585]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4586]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4587]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4588]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4589]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4590]);
@@ -15170,6 +15237,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), gener
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4620]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4621]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4622]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4623]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4624]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4625]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLetExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4626]);
 }
 
 (
@@ -15195,10 +15266,6 @@ copyLocalizationInfos(a3_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4623]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4624]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4625]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4626]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4627]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4628]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4629]);
@@ -15223,25 +15290,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4648]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4649]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4650]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4651]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4652]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4653]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4654]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4651]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4652]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4653]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4654]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4655]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4656]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4657]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4658]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4659]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4656]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4657]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4658]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4659]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4660]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4661]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4662]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4663]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4664]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4661]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4662]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4663]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4664]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4665]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4666]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4667]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4668]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4669]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4668]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4669]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4670]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4671]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4672]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4673]);
 }
 
 ;
@@ -15261,10 +15332,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4670]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4671]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4672]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4673]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4674]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4675]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4676]);
@@ -15300,6 +15367,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), generi
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4706]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4707]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4708]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4709]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4710]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4711]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4712]);
 }
 
 (
@@ -15325,7 +15396,7 @@ copyLocalizationInfos(a1_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4709]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4713]);
 }
 
 a2 = 'then' {
@@ -15339,10 +15410,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4710]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4711]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4712]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4713]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4714]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4715]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4716]);
@@ -15378,6 +15445,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), generi
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4746]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4747]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4748]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4749]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4750]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4751]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4752]);
 }
 
 (
@@ -15403,7 +15474,7 @@ copyLocalizationInfos(a3_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4749]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4753]);
 }
 
 a4 = 'else' {
@@ -15417,10 +15488,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4750]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4751]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4752]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4753]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4754]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4755]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4756]);
@@ -15456,6 +15523,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), generi
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4786]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4787]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4788]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4789]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4790]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4791]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getIfExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4792]);
 }
 
 (
@@ -15481,7 +15552,7 @@ copyLocalizationInfos(a5_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4789]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4793]);
 }
 
 a6 = 'endif' {
@@ -15495,10 +15566,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4790]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4791]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4792]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4793]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4794]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4795]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4796]);
@@ -15523,25 +15590,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4815]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4816]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4817]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4818]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4819]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4820]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4821]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4818]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4819]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4820]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4821]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4822]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4823]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4824]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4825]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4826]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4823]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4824]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4825]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4826]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4827]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4828]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4829]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4830]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4831]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4828]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4829]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4830]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4831]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4832]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4833]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4834]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4835]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4836]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4835]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4836]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4837]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4838]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4839]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4840]);
 }
 
 ;
@@ -15561,10 +15632,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4837]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4838]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4839]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4840]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4841]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4842]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4843]);
@@ -15600,6 +15667,10 @@ addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), gen
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4873]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4874]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4875]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4876]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4877]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4878]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getBraceExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4879]);
 }
 
 (
@@ -15625,7 +15696,7 @@ copyLocalizationInfos(a1_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4876]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4880]);
 }
 
 a2 = ')' {
@@ -15639,10 +15710,6 @@ copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4877]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4878]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4879]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4880]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4881]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4882]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4883]);
@@ -15667,25 +15734,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4902]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4903]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4904]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4905]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4906]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4907]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4908]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4905]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4906]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4907]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4908]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4909]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4910]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4911]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4912]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4913]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4910]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4911]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4912]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4913]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4914]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4915]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4916]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4917]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4918]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4915]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4916]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4917]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4918]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4919]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4920]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4921]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4922]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4923]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4922]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4923]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4924]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4925]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4926]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4927]);
 }
 
 ;
@@ -15717,8 +15788,8 @@ copyLocalizationInfos(a0_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getStaticPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4924]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getStaticPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4925]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getStaticPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4928]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getStaticPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4929]);
 }
 
 (
@@ -15744,10 +15815,6 @@ copyLocalizationInfos(a1_0, element);
 )
 {
 // expected elements (follow set)
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4926]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4927]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4928]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4929]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4930]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4931]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4932]);
@@ -15772,25 +15839,29 @@ addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstant
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4951]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4952]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4953]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4954]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4955]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4956]);
-addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4957]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4954]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4955]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4956]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4957]);
 addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4958]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4959]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4960]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4961]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4962]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4959]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4960]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4961]);
+addExpectedElement(gbind.simpleocl.SimpleoclPackage.eINSTANCE.getPropertyCallExp(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4962]);
 addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4963]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4964]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4965]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4966]);
-addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4967]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4964]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4965]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4966]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4967]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4968]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4969]);
 addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4970]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4971]);
-addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4972]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4971]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4972]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4973]);
+addExpectedElement(gbind.dsl.DslPackage.eINSTANCE.getBindingModel(), genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4974]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4975]);
+addExpectedElement(null, genericity.language.gbind.mopp.GbindExpectationConstants.EXPECTATIONS[4976]);
 }
 
 ;

@@ -166,7 +166,7 @@ segment findNavExpr
 			
 			ocl_model_element.^model.name.eq(current_mm).if_true {
 			    cb2.concept.name.eq(ocl_model_element.name).if_true {
-					matchedRule.name.println("Converted to unique lazy rule: ")
+					matchedRule.name.println("Converted to unique lazy rule (virtual-class): ")
 					
 					filter    = matchedRule.inPattern.filter
 					rule_name = matchedRule.name //"uniqueLazyRule".concat(cb2.concept.name)

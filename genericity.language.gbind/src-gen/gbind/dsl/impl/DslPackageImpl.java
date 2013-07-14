@@ -9,6 +9,7 @@ package gbind.dsl.impl;
 import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.BaseHelper;
 import gbind.dsl.BindingModel;
+import gbind.dsl.BindingOptions;
 import gbind.dsl.ClassBinding;
 import gbind.dsl.ConceptBinding;
 import gbind.dsl.ConceptFeatureRef;
@@ -25,13 +26,12 @@ import gbind.dsl.Metaclass;
 import gbind.dsl.MetamodelDeclaration;
 import gbind.dsl.OclFeatureBinding;
 import gbind.dsl.RenamingFeatureBinding;
-
 import gbind.dsl.VirtualAttribute;
 import gbind.dsl.VirtualClassBinding;
-import gbind.dsl.VirtualClassDefinition;
 import gbind.dsl.VirtualFeature;
 import gbind.dsl.VirtualMetaclass;
 import gbind.dsl.VirtualReference;
+
 import gbind.simpleocl.SimpleoclPackage;
 
 import gbind.simpleocl.impl.SimpleoclPackageImpl;
@@ -56,6 +56,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass bindingModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingOptionsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -349,6 +356,33 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 */
 	public EAttribute getBindingModel_Name() {
 		return (EAttribute)bindingModelEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingModel_Options() {
+		return (EReference)bindingModelEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBindingOptions() {
+		return bindingOptionsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBindingOptions_EnableClassMerge() {
+		return (EAttribute)bindingOptionsEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -919,6 +953,10 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_CONCEPT);
 		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_METAMODEL);
 		createEAttribute(bindingModelEClass, BINDING_MODEL__NAME);
+		createEReference(bindingModelEClass, BINDING_MODEL__OPTIONS);
+
+		bindingOptionsEClass = createEClass(BINDING_OPTIONS);
+		createEAttribute(bindingOptionsEClass, BINDING_OPTIONS__ENABLE_CLASS_MERGE);
 
 		metamodelDeclarationEClass = createEClass(METAMODEL_DECLARATION);
 		createEAttribute(metamodelDeclarationEClass, METAMODEL_DECLARATION__METAMODEL_URI);
@@ -1059,6 +1097,10 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		initEReference(getBindingModel_BoundConcept(), this.getMetamodelDeclaration(), null, "boundConcept", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_BoundMetamodel(), this.getMetamodelDeclaration(), null, "boundMetamodel", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBindingModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingModel_Options(), this.getBindingOptions(), null, "options", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bindingOptionsEClass, BindingOptions.class, "BindingOptions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBindingOptions_EnableClassMerge(), ecorePackage.getEBoolean(), "enableClassMerge", "false", 0, 1, BindingOptions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metamodelDeclarationEClass, MetamodelDeclaration.class, "MetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetamodelDeclaration_MetamodelURI(), ecorePackage.getEString(), "metamodelURI", null, 0, 1, MetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

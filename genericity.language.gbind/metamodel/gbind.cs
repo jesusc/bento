@@ -239,12 +239,17 @@ RULES {
 
 	Dsl.BindingModel ::= "binding" name[] 
 		"{"
+			(options)?
+
 			"concept" boundConcept
 			"metamodel" boundMetamodel
 			(virtualMetaclasses)?
 			bindings*
 			helpers*
+			
 		"}";
+	
+	Dsl.BindingOptions ::= enableClassMerge["enable-class-merge": ""];
 	
 	Dsl.MetamodelDeclaration ::= name[] ":" metamodelURI['"','"','\\'];
 	

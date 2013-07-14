@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link gbind.dsl.BindingModel#getBoundConcept <em>Bound Concept</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getName <em>Name</em>}</li>
+ *   <li>{@link gbind.dsl.BindingModel#getOptions <em>Options</em>}</li>
  * </ul>
  * </p>
  *
@@ -195,5 +196,31 @@ public interface BindingModel extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Options</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Options</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Options</em>' containment reference.
+	 * @see #setOptions(BindingOptions)
+	 * @see gbind.dsl.DslPackage#getBindingModel_Options()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	BindingOptions getOptions();
+
+	/**
+	 * Sets the value of the '{@link gbind.dsl.BindingModel#getOptions <em>Options</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Options</em>' containment reference.
+	 * @see #getOptions()
+	 * @generated
+	 */
+	void setOptions(BindingOptions value);
 
 } // BindingModel

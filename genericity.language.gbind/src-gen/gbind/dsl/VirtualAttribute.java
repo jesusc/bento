@@ -8,7 +8,6 @@ package gbind.dsl;
 
 import gbind.simpleocl.Primitive;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Virtual Attribute</b></em>'.
@@ -30,7 +29,7 @@ public interface VirtualAttribute extends VirtualFeature {
 	 * Returns the value of the '<em><b>Type </b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type </em>' attribute isn't clear,
+	 * If the meaning of the '<em>Type </em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

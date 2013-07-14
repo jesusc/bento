@@ -78,6 +78,7 @@ public class GbindSyntaxCoverageInformationProvider {
 			gbind.simpleocl.SimpleoclPackage.eINSTANCE.getLambdaType(),
 			gbind.simpleocl.SimpleoclPackage.eINSTANCE.getEnvType(),
 			gbind.dsl.DslPackage.eINSTANCE.getBindingModel(),
+			gbind.dsl.DslPackage.eINSTANCE.getBindingOptions(),
 			gbind.dsl.DslPackage.eINSTANCE.getMetamodelDeclaration(),
 			gbind.dsl.DslPackage.eINSTANCE.getClassBinding(),
 			gbind.dsl.DslPackage.eINSTANCE.getIntermediateClassBinding(),

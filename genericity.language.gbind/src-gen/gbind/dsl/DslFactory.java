@@ -35,6 +35,15 @@ public interface DslFactory extends EFactory {
 	BindingModel createBindingModel();
 
 	/**
+	 * Returns a new object of class '<em>Binding Options</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binding Options</em>'.
+	 * @generated
+	 */
+	BindingOptions createBindingOptions();
+
+	/**
 	 * Returns a new object of class '<em>Metamodel Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -8,14 +8,14 @@ package gbind.dsl.impl;
 
 import gbind.dsl.BaseHelper;
 import gbind.dsl.BindingModel;
+import gbind.dsl.BindingOptions;
 import gbind.dsl.ConceptBinding;
 import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.DslPackage;
-
 import gbind.dsl.MetamodelDeclaration;
 import gbind.dsl.VirtualMetaclass;
-import gbind.dsl.VirtualClassDefinition;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -48,6 +48,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundConcept <em>Bound Concept</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundMetamodel <em>Bound Metamodel</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link gbind.dsl.impl.BindingModelImpl#getOptions <em>Options</em>}</li>
  * </ul>
  * </p>
  *
@@ -143,6 +144,16 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOptions() <em>Options</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected BindingOptions options;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -335,6 +346,49 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BindingOptions getOptions() {
+		return options;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOptions(BindingOptions newOptions, NotificationChain msgs) {
+		BindingOptions oldOptions = options;
+		options = newOptions;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__OPTIONS, oldOptions, newOptions);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOptions(BindingOptions newOptions) {
+		if (newOptions != options) {
+			NotificationChain msgs = null;
+			if (options != null)
+				msgs = ((InternalEObject)options).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DslPackage.BINDING_MODEL__OPTIONS, null, msgs);
+			if (newOptions != null)
+				msgs = ((InternalEObject)newOptions).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DslPackage.BINDING_MODEL__OPTIONS, null, msgs);
+			msgs = basicSetOptions(newOptions, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__OPTIONS, newOptions, newOptions));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -369,6 +423,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return basicSetBoundConcept(null, msgs);
 			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
 				return basicSetBoundMetamodel(null, msgs);
+			case DslPackage.BINDING_MODEL__OPTIONS:
+				return basicSetOptions(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -397,6 +453,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return getBoundMetamodel();
 			case DslPackage.BINDING_MODEL__NAME:
 				return getName();
+			case DslPackage.BINDING_MODEL__OPTIONS:
+				return getOptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -439,6 +497,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			case DslPackage.BINDING_MODEL__NAME:
 				setName((String)newValue);
 				return;
+			case DslPackage.BINDING_MODEL__OPTIONS:
+				setOptions((BindingOptions)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -475,6 +536,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			case DslPackage.BINDING_MODEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case DslPackage.BINDING_MODEL__OPTIONS:
+				setOptions((BindingOptions)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -503,6 +567,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return boundMetamodel != null;
 			case DslPackage.BINDING_MODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case DslPackage.BINDING_MODEL__OPTIONS:
+				return options != null;
 		}
 		return super.eIsSet(featureID);
 	}

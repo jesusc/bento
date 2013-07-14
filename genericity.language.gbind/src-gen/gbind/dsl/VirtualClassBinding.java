@@ -8,7 +8,6 @@ package gbind.dsl;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Virtual Class Binding</b></em>'.

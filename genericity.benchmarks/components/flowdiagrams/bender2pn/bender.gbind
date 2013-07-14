@@ -2,6 +2,8 @@
 -- Binding between FlowDiagram concept and BENDER 
 --
 binding bender2fd {  
+	enable-class-merge
+	
 	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
 	metamodel BENDER : "platform:/resource/genericity.benchmarks/components/flowdiagrams/bender2pn/StateMachine.ecore"
 
@@ -36,7 +38,7 @@ binding bender2fd {
 	feature Task.name is nombre
 	
 	-- feature Node[State].name = self.nombre
-	feature Node[State].ins  = FD!Transition.allInstances->any(t | t.defaultTar = self)
+	feature Node[State].ins  = FD!Transition.allInstances()->select(t | t.defaultTar = self)
 	feature Node[State].outs  is outs
 
 	-- feature Node[Collected].name = 'collected'
@@ -49,8 +51,9 @@ binding bender2fd {
 	feature Task[Collected].isInitial = false
 	-- feature Task[Collected].isFinal   = false    
 
-	feature FinalTask.isTerminating = true
-	feature FinalTask.isMandatory = true
+	-- Don't know the actual semantics of Bender, so false which seems to generate a simpler petri net
+	feature FinalTask.isTerminating = false
+	feature FinalTask.isMandatory = false
 
 }
 

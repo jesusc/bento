@@ -24,7 +24,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import eclectic.adapt_transformation;
 import gbind.dsl.BindingModel;
+import gbind.dsl.MetamodelDeclaration;
+import gbind.dsl.BindingOptions;
 import genericity.compiler.atl.Class2Reference;
+import genericity.compiler.atl.ClassMerge;
 import genericity.compiler.atl.VirtualClasses;
 import genericity.compiler.atl.api.AtlAdapter.BindingData;
 import genericity.language.gcomponent.core.Metamodel;
@@ -50,6 +53,7 @@ public class AtlAdapter {
 	    adapt_transformation transformation = new adapt_transformation();
 	    
 	    String concreteMetamodelName = null;
+	    MetamodelDeclaration boundMetamodel = null;
 	    
 	    Util.registerResourceFactory();
 		ModelManager manager = new ModelManager();
@@ -57,7 +61,8 @@ public class AtlAdapter {
 		BasicEMFModel in = null;
 		try {
 			in = binding.load(loader);
-			concreteMetamodelName = ((BindingModel) in.allObjectsOf(BindingModel.class.getSimpleName()).get(0)).getBoundMetamodel().getName();
+			boundMetamodel = ((BindingModel) in.allObjectsOf(BindingModel.class.getSimpleName()).get(0)).getBoundMetamodel();
+			concreteMetamodelName = boundMetamodel.getName();
 			
 			// Atl model is only loaded once, the other times the transformation is re-applied 
 			if ( inout == null )
@@ -71,6 +76,7 @@ public class AtlAdapter {
 		ParametersModel parameters = new ParametersModel();
 		parameters.addParameterObject(bindingData);
 
+		/*
 		// If there is class -> reference specifications, the transformation must be first
 		// rewritten and a typecheck phase is needed
 		if ( in.allObjectsOf("IntermediateClassBinding").size() > 0 ) {
@@ -80,6 +86,21 @@ public class AtlAdapter {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw new RuntimeException(e);
+			}
+		}
+		*/
+		
+		List<EObject> optionsList = in.allObjectsOf("BindingOptions");
+		if ( optionsList.size() > 0 ) {
+			BindingOptions options = (BindingOptions) optionsList.get(0);
+			if ( options.isEnableClassMerge() ) {
+				try {
+					transformClassMerge(loader, in, inout, metamodels, boundMetamodel, bindingData);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}				
 			}
 		}
 		
@@ -116,6 +137,7 @@ public class AtlAdapter {
 		System.out.println("Finished Atl Adaptation");
 	}
 
+	/*
 	private void transformClass2Reference(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
 			ArrayList<Metamodel> metamodels, BindingData bindingData) throws IOException {
 		// TODO Auto-generated method stub
@@ -139,7 +161,8 @@ public class AtlAdapter {
 		
 		System.out.println("Finished class2reference transformation...");
 	}
-
+	*/
+	
 	private void transformVirtualClasses(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
 			ArrayList<Metamodel> metamodels, BindingData bindingData) throws IOException {
 		// TODO Auto-generated method stub
@@ -162,6 +185,32 @@ public class AtlAdapter {
 		new VirtualClasses().launch(atlTransformation, bindingModel, out, data);
 		
 		System.out.println("Finished virtual-classes transformation...");
+	}
+
+	private void transformClassMerge(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
+			ArrayList<Metamodel> metamodels, MetamodelDeclaration boundMetamodel, BindingData bindingData) throws IOException {
+		// TODO Auto-generated method stub
+		List<EPackage> pkgs = new ArrayList<EPackage>();
+		pkgs.add(AtlTypingPackage.eINSTANCE);
+		BasicEMFModel out = loader
+				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
+
+		String[] strMetamodels = new String[metamodels.size()];
+		int i = 0;
+		for (Metamodel meta : metamodels) {
+			strMetamodels[i] = meta.getUri();
+			i++;
+		}
+		
+		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, strMetamodels);
+		new TypeCheckLauncher().launch(mm, atlTransformation, out);
+		
+		BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, boundMetamodel.getMetamodelURI());
+		
+		ClassMerge.BindingData data = new ClassMerge.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
+		new ClassMerge().launch(atlTransformation, bindingModel, out, boundMM, data);
+		
+		System.out.println("Finished class-merge transformation...");
 	}
 
 	public Resource getResource() {

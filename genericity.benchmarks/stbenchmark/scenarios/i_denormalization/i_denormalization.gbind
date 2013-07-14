@@ -1,4 +1,6 @@
 binding h_self_join {  
+	enable-class-merge
+
 	concept   BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
 	metamodel BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
 	
@@ -17,4 +19,10 @@ binding h_self_join {
 	feature Node.parent   is Parent
 	feature Node.rank     is Rank
 	feature Node.emblCode is EmblCode	
+	
+	-- Added to test binding resolution in class merge
+	class Model to Model
+	feature Model.names = self.taxonomies
+ 	feature Model.nodes = self.taxonomies
+ 
  }

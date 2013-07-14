@@ -23,8 +23,11 @@
 			    <include name="eclectic/copy_helpers*"/>
 				<include name="eclectic/composed_genericity*"/>
 
+				<!--
 				<include name="eclectic/class2reference*"/>
+				-->
 				<include name="eclectic/virtual_class*"/>
+				<include name="eclectic/class_merge*"/>
 								
 				<!-- type check classes -->
 				<include name="eclectic/typecheck_atl*"/>			
@@ -38,6 +41,7 @@
 				<include name="genericity/typecheck/atl/TypeCheckLauncher*"/>
 				<include name="genericity/compiler/atl/Class2Reference*"/>
 				<include name="genericity/compiler/atl/VirtualClasses*"/>
+				<include name="genericity/compiler/atl/ClassMerge*"/>
 								
 				<include name="genericity/typing/atl_types/*"/>
 				<include name="genericity/typing/atl_types/impl/*"/>

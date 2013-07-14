@@ -7,9 +7,7 @@
 package gbind.dsl.impl;
 
 import gbind.dsl.ConcreteMetaclass;
-import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.DslPackage;
-import gbind.dsl.Metaclass;
 import gbind.dsl.VirtualReference;
 
 import org.eclipse.emf.common.notify.Notification;

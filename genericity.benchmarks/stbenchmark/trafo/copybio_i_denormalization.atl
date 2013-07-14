@@ -16,7 +16,8 @@ rule model {
 
 rule name {
 	from
-		src : BIO1!Name
+		-- The filter is just to check that class merge rewriting works fine
+		src : BIO1!Name ( src.oclIsKindOf(BIO1!Name) )
 	to 
 		tgt : BIO2!Name (
 			id <- src.id,

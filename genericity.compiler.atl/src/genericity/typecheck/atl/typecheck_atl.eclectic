@@ -175,6 +175,9 @@ attribution attr_typecheck_atl(atl) -> (typ)
 	// Rules
 	rule atl!Binding
 		t = type[self.value]
+		bt = typ!BindingAnnotation.new		
+		bt.binding = self
+		bt.sourceType = t
 		//x = self.createBinding(type[self.value])
 		//self.println(x)
 		//type[self] <- self.createBinding(t)

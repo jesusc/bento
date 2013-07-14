@@ -300,6 +300,10 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_dsl_BindingModel((gbind.dsl.BindingModel) element, globaltab, out);
 			return;
 		}
+		if (element instanceof gbind.dsl.BindingOptions) {
+			print_gbind_dsl_BindingOptions((gbind.dsl.BindingOptions) element, globaltab, out);
+			return;
+		}
 		if (element instanceof gbind.dsl.MetamodelDeclaration) {
 			print_gbind_dsl_MetamodelDeclaration((gbind.dsl.MetamodelDeclaration) element, globaltab, out);
 			return;
@@ -6238,7 +6242,7 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(8);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(9);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BINDINGS));
 		printCountingMap.put("bindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
@@ -6256,6 +6260,8 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("boundMetamodel", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__OPTIONS));
+		printCountingMap.put("options", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		java.io.StringWriter sWriter = null;
@@ -6279,6 +6285,19 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// DEFINITION PART BEGINS (CsString)
 		out.print("{");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_gbind_dsl_BindingModel_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print("concept");
 		out.print(" ");
@@ -6307,7 +6326,7 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
 		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_gbind_dsl_BindingModel_0(element, localtab, out1, printCountingMap1);
+		print_gbind_dsl_BindingModel_1(element, localtab, out1, printCountingMap1);
 		if (printCountingMap.equals(printCountingMap1)) {
 			out1.close();
 		} else {
@@ -6355,6 +6374,20 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("options");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__OPTIONS));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("options", count - 1);
+		}
+	}
+	
+	public void print_gbind_dsl_BindingModel_1(gbind.dsl.BindingModel element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("virtualMetaclasses");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__VIRTUAL_METACLASSES));
@@ -6369,6 +6402,29 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("virtualMetaclasses", count - 1);
+		}
+	}
+	
+	
+	public void print_gbind_dsl_BindingOptions(gbind.dsl.BindingOptions element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_OPTIONS__ENABLE_CLASS_MERGE));
+		printCountingMap.put("enableClassMerge", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (BooleanTerminal)
+		count = printCountingMap.get("enableClassMerge");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_OPTIONS__ENABLE_CLASS_MERGE));
+			if (o != null) {
+			}
+			printCountingMap.put("enableClassMerge", count - 1);
 		}
 	}
 	

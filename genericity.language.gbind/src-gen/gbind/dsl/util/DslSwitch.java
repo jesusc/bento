@@ -13,6 +13,7 @@ import gbind.simpleocl.NamedElement;
 import gbind.simpleocl.OclMetamodel;
 import gbind.simpleocl.OclModel;
 import gbind.simpleocl.VariableDeclaration;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -78,6 +79,12 @@ public class DslSwitch<T> extends Switch<T> {
 			case DslPackage.BINDING_MODEL: {
 				BindingModel bindingModel = (BindingModel)theEObject;
 				T result = caseBindingModel(bindingModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.BINDING_OPTIONS: {
+				BindingOptions bindingOptions = (BindingOptions)theEObject;
+				T result = caseBindingOptions(bindingOptions);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,6 +253,21 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBindingModel(BindingModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Options</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Options</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingOptions(BindingOptions object) {
 		return null;
 	}
 

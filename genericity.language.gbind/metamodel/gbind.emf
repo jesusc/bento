@@ -392,6 +392,12 @@ package dsl {
 	    
 	    attr String[1] name;
 		//attr String[0..1] componentURI;
+
+		val BindingOptions[1] options;
+	}
+	
+	class BindingOptions {
+		attr boolean[0..1] enableClassMerge = false;   
 	}
 	
 	class MetamodelDeclaration extends simpleocl.OclMetamodel {

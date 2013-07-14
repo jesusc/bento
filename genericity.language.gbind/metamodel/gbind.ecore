@@ -391,6 +391,12 @@
           eType="#//dsl/MetamodelDeclaration" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="options" lowerBound="1"
+          eType="#//dsl/BindingOptions" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingOptions">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableClassMerge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MetamodelDeclaration" eSuperTypes="#//simpleocl/OclMetamodel">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

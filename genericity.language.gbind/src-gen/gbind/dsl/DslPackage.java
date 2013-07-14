@@ -7,6 +7,7 @@
 package gbind.dsl;
 
 import gbind.simpleocl.SimpleoclPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -143,13 +144,50 @@ public interface DslPackage extends EPackage {
 	int BINDING_MODEL__NAME = 7;
 
 	/**
+	 * The feature id for the '<em><b>Options</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_MODEL__OPTIONS = 8;
+
+	/**
 	 * The number of structural features of the '<em>Binding Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL_FEATURE_COUNT = 8;
+	int BINDING_MODEL_FEATURE_COUNT = 9;
+
+	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.BindingOptionsImpl <em>Binding Options</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.BindingOptionsImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getBindingOptions()
+	 * @generated
+	 */
+	int BINDING_OPTIONS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Enable Class Merge</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_OPTIONS__ENABLE_CLASS_MERGE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Binding Options</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_OPTIONS_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.MetamodelDeclarationImpl <em>Metamodel Declaration</em>}' class.
@@ -159,7 +197,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getMetamodelDeclaration()
 	 * @generated
 	 */
-	int METAMODEL_DECLARATION = 1;
+	int METAMODEL_DECLARATION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -259,7 +297,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 2;
+	int METACLASS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -296,7 +334,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptMetaclass()
 	 * @generated
 	 */
-	int CONCEPT_METACLASS = 3;
+	int CONCEPT_METACLASS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -333,7 +371,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConcreteMetaclass()
 	 * @generated
 	 */
-	int CONCRETE_METACLASS = 4;
+	int CONCRETE_METACLASS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -370,7 +408,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptBinding()
 	 * @generated
 	 */
-	int CONCEPT_BINDING = 5;
+	int CONCEPT_BINDING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -407,7 +445,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getClassBinding()
 	 * @generated
 	 */
-	int CLASS_BINDING = 6;
+	int CLASS_BINDING = 7;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -471,7 +509,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getIntermediateClassBinding()
 	 * @generated
 	 */
-	int INTERMEDIATE_CLASS_BINDING = 7;
+	int INTERMEDIATE_CLASS_BINDING = 8;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -562,7 +600,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConcreteReferencDeclaringVar()
 	 * @generated
 	 */
-	int CONCRETE_REFERENC_DECLARING_VAR = 8;
+	int CONCRETE_REFERENC_DECLARING_VAR = 9;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -644,7 +682,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualMetaclass()
 	 * @generated
 	 */
-	int VIRTUAL_METACLASS = 9;
+	int VIRTUAL_METACLASS = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -708,7 +746,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualFeature()
 	 * @generated
 	 */
-	int VIRTUAL_FEATURE = 10;
+	int VIRTUAL_FEATURE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -736,7 +774,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualReference()
 	 * @generated
 	 */
-	int VIRTUAL_REFERENCE = 11;
+	int VIRTUAL_REFERENCE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -773,7 +811,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualAttribute()
 	 * @generated
 	 */
-	int VIRTUAL_ATTRIBUTE = 12;
+	int VIRTUAL_ATTRIBUTE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -810,7 +848,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualClassBinding()
 	 * @generated
 	 */
-	int VIRTUAL_CLASS_BINDING = 13;
+	int VIRTUAL_CLASS_BINDING = 14;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -874,7 +912,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptFeatureRef()
 	 * @generated
 	 */
-	int CONCEPT_FEATURE_REF = 14;
+	int CONCEPT_FEATURE_REF = 15;
 
 	/**
 	 * The feature id for the '<em><b>Concept Class</b></em>' reference.
@@ -911,7 +949,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseFeatureBinding()
 	 * @generated
 	 */
-	int BASE_FEATURE_BINDING = 15;
+	int BASE_FEATURE_BINDING = 16;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -975,7 +1013,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getRenamingFeatureBinding()
 	 * @generated
 	 */
-	int RENAMING_FEATURE_BINDING = 16;
+	int RENAMING_FEATURE_BINDING = 17;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1048,7 +1086,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getOclFeatureBinding()
 	 * @generated
 	 */
-	int OCL_FEATURE_BINDING = 17;
+	int OCL_FEATURE_BINDING = 18;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1121,7 +1159,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseHelper()
 	 * @generated
 	 */
-	int BASE_HELPER = 18;
+	int BASE_HELPER = 19;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1176,7 +1214,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptHelper()
 	 * @generated
 	 */
-	int CONCEPT_HELPER = 19;
+	int CONCEPT_HELPER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1249,7 +1287,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getLocalHelper()
 	 * @generated
 	 */
-	int LOCAL_HELPER = 20;
+	int LOCAL_HELPER = 21;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1314,7 +1352,6 @@ public interface DslPackage extends EPackage {
 	 */
 	int LOCAL_HELPER_FEATURE_COUNT = BASE_HELPER_FEATURE_COUNT + 2;
 
-
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.HelperParameterImpl <em>Helper Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -1323,7 +1360,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getHelperParameter()
 	 * @generated
 	 */
-	int HELPER_PARAMETER = 21;
+	int HELPER_PARAMETER = 22;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -1495,6 +1532,38 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBindingModel_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link gbind.dsl.BindingModel#getOptions <em>Options</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Options</em>'.
+	 * @see gbind.dsl.BindingModel#getOptions()
+	 * @see #getBindingModel()
+	 * @generated
+	 */
+	EReference getBindingModel_Options();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.BindingOptions <em>Binding Options</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Binding Options</em>'.
+	 * @see gbind.dsl.BindingOptions
+	 * @generated
+	 */
+	EClass getBindingOptions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.BindingOptions#isEnableClassMerge <em>Enable Class Merge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Enable Class Merge</em>'.
+	 * @see gbind.dsl.BindingOptions#isEnableClassMerge()
+	 * @see #getBindingOptions()
+	 * @generated
+	 */
+	EAttribute getBindingOptions_EnableClassMerge();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.MetamodelDeclaration <em>Metamodel Declaration</em>}'.
@@ -2219,6 +2288,32 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BINDING_MODEL__NAME = eINSTANCE.getBindingModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Options</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_MODEL__OPTIONS = eINSTANCE.getBindingModel_Options();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.BindingOptionsImpl <em>Binding Options</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.BindingOptionsImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getBindingOptions()
+		 * @generated
+		 */
+		EClass BINDING_OPTIONS = eINSTANCE.getBindingOptions();
+
+		/**
+		 * The meta object literal for the '<em><b>Enable Class Merge</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BINDING_OPTIONS__ENABLE_CLASS_MERGE = eINSTANCE.getBindingOptions_EnableClassMerge();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.MetamodelDeclarationImpl <em>Metamodel Declaration</em>}' class.

@@ -13,6 +13,7 @@ import gbind.simpleocl.NamedElement;
 import gbind.simpleocl.OclMetamodel;
 import gbind.simpleocl.OclModel;
 import gbind.simpleocl.VariableDeclaration;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -79,6 +80,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBindingModel(BindingModel object) {
 				return createBindingModelAdapter();
+			}
+			@Override
+			public Adapter caseBindingOptions(BindingOptions object) {
+				return createBindingOptionsAdapter();
 			}
 			@Override
 			public Adapter caseMetamodelDeclaration(MetamodelDeclaration object) {
@@ -215,6 +220,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBindingModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.BindingOptions <em>Binding Options</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.BindingOptions
+	 * @generated
+	 */
+	public Adapter createBindingOptionsAdapter() {
 		return null;
 	}
 

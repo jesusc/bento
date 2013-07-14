@@ -16,17 +16,19 @@ import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.Util;
 import org.eclipse.emf.ecore.EPackage;
 
-public class TestClassMerge_BenchmarkNormalization {
+public class TestClassMerge_Bender {
 
-	public static final String BINDING_MODEL = "../genericity.benchmarks/stbenchmark/scenarios/i_denormalization/i_denormalization.gbind.xmi";
-	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/stbenchmark/trafo/copybio_i_denormalization.atl.xmi";
-	public static final String BOUND_METAMODEL_NAME = "BIO1";
-	public static final String TARGET_METAMODEL_NAME = "BIO2";
-	private static final String SOURCE_METAMODEL_NAME = "BIO1";
+	public static final String ATL_TRANSFORMATION = "../genericity.compiler.atl/test/classmerge/flow2pn.atl.xmi";
+	public static final String SOURCE_METAMODEL = "../genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore";
+	public static final String TARGET_METAMODEL = "../genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore";
+	public static final String BOUND_METAMODEL  = "../genericity.benchmarks/components/flowdiagrams/bender2pn/StateMachine.ecore";
 
-	public static final String BOUND_METAMODEL  = "../genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore";
-	public static final String SOURCE_METAMODEL = "../genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore";
-	public static final String TARGET_METAMODEL = "../genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore";
+	public static final String BINDING_MODEL    = "../genericity.benchmarks/components/flowdiagrams/bender2pn/bender.gbind.xmi";
+
+	private static final String BOUND_METAMODEL_NAME = "BENDER";
+	private static final String SOURCE_METAMODEL_NAME = "FD";
+	public static final String TARGET_METAMODEL_NAME = "PN";
+
 	
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
@@ -52,7 +54,7 @@ public class TestClassMerge_BenchmarkNormalization {
 		
 		out.serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
 		mm.serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
-		System.out.println("Finished typing of " + TestClassMerge_BenchmarkNormalization.class.getSimpleName());
+		System.out.println("Finished typing of " + TestClassMerge_Bender.class.getSimpleName());
 
 		
 		/// 
@@ -68,9 +70,9 @@ public class TestClassMerge_BenchmarkNormalization {
 		ClassMerge.BindingData data = new ClassMerge.BindingData(SOURCE_METAMODEL_NAME, BOUND_METAMODEL_NAME);
 		new ClassMerge().launch(atlTransformation, bindingModel, out, boundMM, data);
 
-		System.out.println("Finished class merge adaptation of " + TestClassMerge_BenchmarkNormalization.class.getSimpleName());
+		System.out.println("Finished class merge adaptation of " + TestClassMerge_Bender.class.getSimpleName());
 
-		atlTransformation.serialize(new FileOutputStream("tmp_/class_merge.adapted.atl.xmi"));
+		atlTransformation.serialize(new FileOutputStream("tmp_/bender.adapted.atl.xmi"));
 	}
 
 	private static String withDir(String path) {
