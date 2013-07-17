@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import examples.flow_diagrams.report.Place;
+import examples.flow_diagrams.report.ReportFactory;
+
 import pipe.calculations.StateSpaceGenerator;
 import pipe.calculations.myTree;
 import pipe.io.IncorrectFileFormatException;
@@ -100,7 +103,7 @@ public class ReachabilityGraph {
 					transitions.add(idtransition);                            // transition has been fired
 				}	
 				
-				//System.out.println(fromState+"--("+idtransition+")-->"+toState);
+				System.out.println(fromState+"--("+idtransition+")-->"+toState);
 			}
 		}
 		catch (Exception e) {
@@ -108,7 +111,8 @@ public class ReachabilityGraph {
 		}
 		finally {
 			if (reachabilityGraph.exists()) reachabilityGraph.delete();
-		}		
+		}
+		System.out.println("Deadlocks: "+deadlocks);
 	}	
 	
 	/**
@@ -184,7 +188,8 @@ public class ReachabilityGraph {
 		}
 
 		public boolean isdeadlock() {
-			return next.size()==0;
+			return next.isEmpty();
 		}
+				
 	}
 }

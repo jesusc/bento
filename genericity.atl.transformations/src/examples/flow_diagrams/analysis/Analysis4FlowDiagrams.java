@@ -3,6 +3,10 @@ package examples.flow_diagrams.analysis;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+
 import pipe.controllers.PetriNetController;
 import pipe.models.PetriNet;
 import pipe.utilities.transformers.PNMLTransformer;
@@ -10,20 +14,24 @@ import pipe.views.PetriNetView;
 import pipe.views.PlaceView;
 import pipe.views.TransitionView;
 import examples.flow_diagrams.analysis.ReachabilityGraph.State;
+import examples.flow_diagrams.report.*;
 
 public class Analysis4FlowDiagrams {
 	
+	private static String folder = "C:/research/genericity-workspace/pruebas/";
+	
 	public static void main(String[] args) {
 		String  filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/models/net.xml";
-		filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_deadlock.xml";
+		/*filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_deadlock.xml";
 		filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_deadlock_car.xml";
 		filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_deadlock2.xml";
-		filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_parallel.xml";
-		filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_xor_main.xml";
+		filenet = "c:/proyectos/genericity/genericity.atl.transformations/examples/flow_diagrams/pruebas/pruebas/test_parallel.xml";*/
+		filenet = folder+"test_deadlock_car.xml";
 		if ( args.length > 0 ) {
 			filenet = args[0];
 		}
 		
+	
 		// STEP 1: is the net a WF-net?
 		//         (i)  it has one input and one output place exactly
 		//         (ii) the extended net (connecting the output to the input place) is strongly connected,
@@ -42,10 +50,13 @@ public class Analysis4FlowDiagrams {
 			a4fd.hasOptionToComplete();
 			a4fd.hasProperCompletion();
 			a4fd.hasNoNeedlessElements();
+			a4fd.saveResource();
+			System.out.println("end");
 		} catch (Exception e) {
 			//System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+		// now we save the report		
 	}
 	
 	private String            filenet     = null;
@@ -53,9 +64,21 @@ public class Analysis4FlowDiagrams {
 	private List<PlaceView>   finalplaces = null;  // final places in the petri net
 	private ReachabilityGraph rgraph      = null;  // reachability graph
 	private List<State>       finalstates = null;  // final states in the reachability graph (deadlock + final place reached)
+	private Report            report;			   // the report to be written
+	private Resource          reportResource;
 	
 	public Analysis4FlowDiagrams (String filenet) {
 		this.filenet = filenet;
+		
+		ResourceSet rs = new ResourceSetImpl();
+		String fileName = filenet.replace(".xml", ".report");
+		this.reportResource = EMFHelper.createAndAddResource(fileName, new String[] {"report", "xmi"}, rs);
+		this.report = ReportFactory.eINSTANCE.createReport();
+		this.reportResource.getContents().add(this.report);		
+	}
+	
+	private void saveResource() {
+		EMFHelper.saveResource(this.reportResource);
 	}
 	
 	/**
@@ -76,8 +99,17 @@ public class Analysis4FlowDiagrams {
 		
 		// states that do not reach a final state (all / maycomplete)
 		for (State state : rgraph.states())
-			if (!maycomplete.contains(state))
+			if (!maycomplete.contains(state)) {
 				System.out.println("ERROR no option to complete: the diagram may reach state " + toString(state) + ", which cannot be completed");
+				
+				NoOptionToComplete no2c = ReportFactory.eINSTANCE.createNoOptionToComplete();
+				no2c.setProblemKind(ProblemKind.ERROR_LITERAL);
+				examples.flow_diagrams.report.State errState = ReportFactory.eINSTANCE.createState();
+				//List<examples.flow_diagrams.report.report.Place> places = state.marking2Place();
+				errState.getPlaces().addAll(marking2Places(state));
+				no2c.getStates().add(errState);
+				this.report.getErrors().add(no2c);
+			}
 	}
 	
 	/**
@@ -92,7 +124,15 @@ public class Analysis4FlowDiagrams {
 		for (State state : rgraph.deadlock()) {
 		// ... at least one final place must have been reached
 		//     TODO: hasOptionToComplete subsumes this checking, and therefore it can be removed	
-			if (!finalstates.contains(state)) System.out.println("ERROR no proper completion: the execution of the diagram may finish without reaching a final state --> active nodes = " + toString(state));
+			if (!finalstates.contains(state)) {
+				System.out.println("ERROR no proper completion: the execution of the diagram may finish without reaching a final state --> active nodes = " + toString(state));
+				NoProperCompletion no2c = ReportFactory.eINSTANCE.createNoProperCompletion();
+				no2c.setProblemKind(ProblemKind.WARNING_LITERAL);
+				examples.flow_diagrams.report.State errState = ReportFactory.eINSTANCE.createState();
+				no2c.getStates().add(errState);
+				errState.getPlaces().addAll(this.marking2Places(state));
+				this.report.getErrors().add(no2c);
+			}
 		// ... only the final places may have tokens 
 			else {
 				boolean finalIsTerminating = false;
@@ -100,15 +140,26 @@ public class Analysis4FlowDiagrams {
 				int[]              marking = state.getMarking();
 				for (int idplace=0; idplace<marking.length; idplace++) {
 					if (marking[idplace]!=0) {
-						PlaceView place = getPlace(idplace);
+						PlaceView place = this.net.getPlace(idplace);
+						//PlaceView place = getPlace(idplace);
 						if (isTerminating(place)) finalIsTerminating = true;
 						if (!isFinal(place) && !isControl(place)) errors.add(place);
 					}
 				}
-				if (!errors.isEmpty()) {
+				if (!errors.isEmpty()) {					
+					NoProperCompletion no2c = ReportFactory.eINSTANCE.createNoProperCompletion();
+					no2c.setProblemKind(ProblemKind.WARNING_LITERAL);
+					examples.flow_diagrams.report.State errState = ReportFactory.eINSTANCE.createState();
+					//List<examples.flow_diagrams.report.report.Place> places = state.marking2Place();					
 					String errorlevel = finalIsTerminating? "WARNING" : "ERROR"; // just warning if final place is terminating
-					for (PlaceView place : errors) 
-						System.out.print(errorlevel + " no proper completion: the execution of the diagram may finish without completing " + place.getName() + " --> active nodes = " + toString(state));
+					for (PlaceView place : errors) {
+						System.out.println(errorlevel + " no proper completion: the execution of the diagram may finish without completing " + place.getName() + " --> active nodes = " + toString(state));
+						Place p = ReportFactory.eINSTANCE.createPlace();
+						p.setName(place.getName());
+						errState.getPlaces().add(p);
+					}
+					no2c.getStates().add(errState);
+					this.report.getErrors().add(no2c);
 				}
 			}
 		}
@@ -140,6 +191,8 @@ public class Analysis4FlowDiagrams {
 	public void hasNoNeedlessElements () throws Exception {
 		init ();
 		
+		HasNeedlessElements hne = null;
+		
 		// all places will have eventually a token
 		int numplaces = net.getPlacesArrayList().size();
 		for (int idplace=0; idplace<numplaces; idplace++) {
@@ -149,13 +202,26 @@ public class Analysis4FlowDiagrams {
 					reached = true;
 					break;
 				}
-			if (!reached) System.out.println("ERROR needless element: " + getPlace(idplace).getName());
+			if (!reached) {				
+				System.out.println("ERROR needless element: " + getPlace(idplace).getName());
+				if (hne == null) ReportFactory.eINSTANCE.createHasNeedlessElements();
+				Place p = ReportFactory.eINSTANCE.createPlace();
+				p.setName(getPlace(idplace).getName());
+			}
 		}
 		
 		// all transitions will be eventually fired
 		for (TransitionView transition : net.getTransitionsArrayList())
-			if (!rgraph.transitions().contains(Integer.parseInt(getIdTransition(transition))))
+			if (!rgraph.transitions().contains(Integer.parseInt(getIdTransition(transition)))) {
 				System.out.println("ERROR needless element: " + transition.getName());
+				if (hne == null) ReportFactory.eINSTANCE.createHasNeedlessElements();
+				Transition t = ReportFactory.eINSTANCE.createTransition();
+				t.setName(transition.getName());
+			}
+		
+		if (hne!=null) 
+			this.report.getErrors().add(hne);
+		
 	}
 	
 	/**
@@ -215,7 +281,8 @@ public class Analysis4FlowDiagrams {
 	 * It returns the place with a given id
 	 */
 	private PlaceView getPlace (int idplace) {
-		return net!=null? net.getPlaceById("Place"+idplace) : null;
+		//return net!=null? net.getPlaceById("Place"+idplace) : null;
+		return net!=null? net.getPlace(idplace) : null;
 	}
 
 	/**
@@ -251,5 +318,17 @@ public class Analysis4FlowDiagrams {
 				str += "," + getPlace(idplace).getName();
 		
 		return "{" + (str.isEmpty()? str : str.substring(1)) + "}";
+	}
+	
+	private List<Place> marking2Places(State s) {
+		List<Place> ret = new ArrayList<Place>();
+		int[] marking = s.getMarking();
+		for (int idplace=0; idplace<marking.length; idplace++)
+			if (marking[idplace]!=0) {
+				Place p = ReportFactory.eINSTANCE.createPlace();
+				p.setName(this.getPlace(idplace).getName());
+				ret.add(p);
+			}
+		return ret;
 	}
 }

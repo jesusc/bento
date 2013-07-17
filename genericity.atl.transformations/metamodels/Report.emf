@@ -1,0 +1,39 @@
+@namespace(uri="http://petrinet.report", prefix="report")
+package report;
+
+enum ProblemKind {
+   ERROR; WARNING;
+}
+
+class Report { // root class
+   val Problem[*] errors;
+}
+
+abstract class Problem {
+   attr ProblemKind problemKind; 
+} 
+
+class State {
+   val Place[*] places;
+}
+
+class Place {
+   attr String name;
+}
+
+class Transition {
+   attr String name;
+}
+
+class NoOptionToComplete extends Problem {
+   val State[*] states;
+}
+
+class NoProperCompletion extends Problem {
+   val State[*] states;
+}
+
+class HasNeedlessElements extends Problem {
+   val Place[*] needlessPlaces;
+   val Transition[*] needlessTransitions;
+}
