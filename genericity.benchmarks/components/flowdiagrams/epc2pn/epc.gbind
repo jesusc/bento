@@ -1,4 +1,5 @@
 binding epc {  
+	enable-class-merge
 	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
 	metamodel EPC  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/epc2pn/epc.ecore"
 	

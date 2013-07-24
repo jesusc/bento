@@ -26,41 +26,41 @@ helper context BPMN!FlowNode def: isTerminatingTask : Boolean =
  endif;
 
 helper context BPMN!FlowNode def: isParallelSplit : Boolean =
- let __unique_id___0 : OclAny = self in
- if __unique_id___0.oclIsKindOf(BPMN!ParallelGateway) then
-  __unique_id___0.ParallelSplit__filter__
+ let __unique_id___7 : OclAny = self in
+ if __unique_id___7.oclIsKindOf(BPMN!ParallelGateway) then
+  __unique_id___7.ParallelSplit__filter__
  else
   false
  endif;
 
 helper context BPMN!FlowNode def: isSynchronization : Boolean =
- let __unique_id___1 : OclAny = self in
- if __unique_id___1.oclIsKindOf(BPMN!ParallelGateway) then
-  __unique_id___1.Synchronization__filter__
+ let __unique_id___8 : OclAny = self in
+ if __unique_id___8.oclIsKindOf(BPMN!ParallelGateway) then
+  __unique_id___8.Synchronization__filter__
  else
   false
  endif;
 
 helper context BPMN!FlowNode def: isExclusiveChoice : Boolean =
- let __unique_id___2 : OclAny = self in
- if __unique_id___2.oclIsKindOf(BPMN!Gateway) then
-  __unique_id___2.ExclusiveChoice__filter__
+ let __unique_id___9 : OclAny = self in
+ if __unique_id___9.oclIsKindOf(BPMN!Gateway) then
+  __unique_id___9.ExclusiveChoice__filter__
  else
   false
  endif;
 
 helper context BPMN!FlowNode def: isSimpleMerge : Boolean =
- let __unique_id___3 : OclAny = self in
- if __unique_id___3.oclIsKindOf(BPMN!InclusiveGateway) then
-  __unique_id___3.SimpleMerge__filter__
+ let __unique_id___10 : OclAny = self in
+ if __unique_id___10.oclIsKindOf(BPMN!InclusiveGateway) then
+  __unique_id___10.SimpleMerge__filter__
  else
   false
  endif;
 
 helper context BPMN!FlowNode def: isMultiChoice : Boolean =
- let __unique_id___4 : OclAny = self in
- if __unique_id___4.oclIsKindOf(BPMN!InclusiveGateway) then
-  __unique_id___4.MultiChoice__filter__
+ let __unique_id___11 : OclAny = self in
+ if __unique_id___11.oclIsKindOf(BPMN!InclusiveGateway) then
+  __unique_id___11.MultiChoice__filter__
  else
   false
  endif;
@@ -433,14 +433,3 @@ helper context BPMN!EndEvent def: isTerminating : OclAny =
 
 helper context BPMN!EndEvent def: isMandatory : OclAny =
  false;
-
-endpoint rule Rule2_ForceTransformation() {
- 
-}
-
-helper def: __convertToSequence__(obj : OclAny) : OclAny =
- if obj = OclUndefined then
-  Sequence {}
- else
-  Sequence {obj}->flatten()
- endif;

@@ -1,0 +1,30 @@
+binding km32oo {  
+	concept   OO    : "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/OO_concept.ecore"
+	metamodel KM3 : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/KM3.ecore"
+		
+		
+    class NamedElement to ModelElement 
+    class Package to Package 
+    class Class to Class
+    class Operation to Operation
+    class Attribute to StructuralFeature
+    -- binding from Attribute to EReference to obtain the same metrics for references, as done in KM3
+    class Parameter to Parameter
+    
+    feature NamedElement.name is name
+    feature Package.classes = self.contents->select(c | c.oclIsKindOf(KM3!Class))
+    feature Class.isAbstract is isAbstract
+    feature Class.attributes is structuralFeatures
+    feature Class.operations is operations
+    feature Class.parents is supertypes
+    feature Operation.parameters is parameters
+    feature Parameter.partype = if self.type.oclIsKindOf(KM3!Class) then self.type else OclUndefined endif
+    feature Attribute.atttype = if self.type.oclIsKindOf(KM3!Class) then self.type else OclUndefined endif
+    feature Attribute.isPublic    = true  -- there is no visibility in ecore
+    feature Attribute.isProtected = false -- there is no visibility in ecore
+    feature Attribute.isPrivate = false -- there is no visibility in ecore
+
+    feature Operation.isPublic   = true  -- there is no visibility in ecore
+    feature Operation.isProtected = false -- there is no visibility in ecore
+    feature Operation.isPrivate  = false -- there is no visibility in ecore
+}

@@ -266,6 +266,52 @@ public interface AtlTypingPackage extends EPackage {
 	int TUPLE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.MapTypeImpl <em>Map Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.MapTypeImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMapType()
+	 * @generated
+	 */
+	int MAP_TYPE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Key Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_TYPE__KEY_TYPE = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_TYPE__VALUE_TYPE = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Map Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.TupleAttributeImpl <em>Tuple Attribute</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -273,7 +319,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getTupleAttribute()
 	 * @generated
 	 */
-	int TUPLE_ATTRIBUTE = 7;
+	int TUPLE_ATTRIBUTE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -310,7 +356,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getRefType()
 	 * @generated
 	 */
-	int REF_TYPE = 8;
+	int REF_TYPE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -338,7 +384,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnknown()
 	 * @generated
 	 */
-	int UNKNOWN = 9;
+	int UNKNOWN = 10;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -366,7 +412,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEmptyCollection()
 	 * @generated
 	 */
-	int EMPTY_COLLECTION = 10;
+	int EMPTY_COLLECTION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -387,6 +433,52 @@ public interface AtlTypingPackage extends EPackage {
 	int EMPTY_COLLECTION_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.EnumTypeImpl <em>Enum Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.EnumTypeImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEnumType()
+	 * @generated
+	 */
+	int ENUM_TYPE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Eenum</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE__EENUM = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Enum Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.MetaclassImpl <em>Metaclass</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -394,7 +486,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 11;
+	int METACLASS = 13;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -441,7 +533,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveType()
 	 * @generated
 	 */
-	int REFLECTIVE_TYPE = 12;
+	int REFLECTIVE_TYPE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -469,7 +561,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnionType()
 	 * @generated
 	 */
-	int UNION_TYPE = 13;
+	int UNION_TYPE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -506,7 +598,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getThisModuleType()
 	 * @generated
 	 */
-	int THIS_MODULE_TYPE = 14;
+	int THIS_MODULE_TYPE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -534,7 +626,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveClass()
 	 * @generated
 	 */
-	int REFLECTIVE_CLASS = 15;
+	int REFLECTIVE_CLASS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -648,6 +740,38 @@ public interface AtlTypingPackage extends EPackage {
 	EReference getTupleType_Attributes();
 
 	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.MapType <em>Map Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Map Type</em>'.
+	 * @see genericity.typing.atl_types.MapType
+	 * @generated
+	 */
+	EClass getMapType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.MapType#getKeyType <em>Key Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Key Type</em>'.
+	 * @see genericity.typing.atl_types.MapType#getKeyType()
+	 * @see #getMapType()
+	 * @generated
+	 */
+	EReference getMapType_KeyType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.MapType#getValueType <em>Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value Type</em>'.
+	 * @see genericity.typing.atl_types.MapType#getValueType()
+	 * @see #getMapType()
+	 * @generated
+	 */
+	EReference getMapType_ValueType();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.TupleAttribute <em>Tuple Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -708,6 +832,38 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEmptyCollection();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.EnumType <em>Enum Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enum Type</em>'.
+	 * @see genericity.typing.atl_types.EnumType
+	 * @generated
+	 */
+	EClass getEnumType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.EnumType#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see genericity.typing.atl_types.EnumType#getName()
+	 * @see #getEnumType()
+	 * @generated
+	 */
+	EAttribute getEnumType_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.EnumType#getEenum <em>Eenum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Eenum</em>'.
+	 * @see genericity.typing.atl_types.EnumType#getEenum()
+	 * @see #getEnumType()
+	 * @generated
+	 */
+	EReference getEnumType_Eenum();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.Metaclass <em>Metaclass</em>}'.
@@ -901,6 +1057,32 @@ public interface AtlTypingPackage extends EPackage {
 		EReference TUPLE_TYPE__ATTRIBUTES = eINSTANCE.getTupleType_Attributes();
 
 		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.MapTypeImpl <em>Map Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.MapTypeImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMapType()
+		 * @generated
+		 */
+		EClass MAP_TYPE = eINSTANCE.getMapType();
+
+		/**
+		 * The meta object literal for the '<em><b>Key Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAP_TYPE__KEY_TYPE = eINSTANCE.getMapType_KeyType();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAP_TYPE__VALUE_TYPE = eINSTANCE.getMapType_ValueType();
+
+		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.TupleAttributeImpl <em>Tuple Attribute</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -955,6 +1137,32 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EMPTY_COLLECTION = eINSTANCE.getEmptyCollection();
+
+		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.EnumTypeImpl <em>Enum Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.EnumTypeImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEnumType()
+		 * @generated
+		 */
+		EClass ENUM_TYPE = eINSTANCE.getEnumType();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENUM_TYPE__NAME = eINSTANCE.getEnumType_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Eenum</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUM_TYPE__EENUM = eINSTANCE.getEnumType_Eenum();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.MetaclassImpl <em>Metaclass</em>}' class.

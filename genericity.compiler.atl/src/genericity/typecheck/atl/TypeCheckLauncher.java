@@ -3,7 +3,10 @@ package genericity.typecheck.atl;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.EmptyCollection;
+import genericity.typing.atl_types.EnumType;
+import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
+import genericity.typing.atl_types.MapType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.RefType;
@@ -36,6 +39,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -131,21 +135,34 @@ public class TypeCheckLauncher {
 			this.mm = mm;
 			this.types = types;
 		}
-		
-		public EClass eClass() {
+
+		public Boolean is_eclass(EClassifier c) {
+			return c instanceof EClass;
+		}
+
+		public EClassifier eClass() {
 			// Assume type is OclModelElement
 			String name = (String) model.getFeature(object, "name");
 			return findMetaclass(name);
 		}
 
-
-		private EClass findMetaclass(String name) {
+		
+		private EClassifier findMetaclass(String name) {
 			List<EObject> classes = mm.allObjectsOf("EClass");
 			for (EObject eObject : classes) {
 				EClass eclass = (EClass) eObject;
 				if ( eclass.getName().equals(name) ) 
 					return eclass;
 			}
+			
+			System.out.println("EClass " + name + " not found. Looking up enumerated types");
+			List<EObject> enums = mm.allObjectsOf("EEnum");
+			for (EObject eObject : enums) {
+				EEnum eenum = (EEnum) eObject;
+				if ( eenum.getName().equals(name) ) 
+					return eenum;
+			}
+			
 			throw new RuntimeException("EClass " + name + " not found");
 		}
 
@@ -153,7 +170,7 @@ public class TypeCheckLauncher {
 			if ( t1 instanceof RefType && t2 instanceof RefType) {
 				
 				if ( t1 instanceof Unknown || t2 instanceof Unknown ) 
-					return (Type) model.createObject(Unknown.class.getSimpleName());
+					return (Type) types.createObject(Unknown.class.getSimpleName());
 			
 				Metaclass t1m = (Metaclass) t1;
 				Metaclass t2m = (Metaclass) t2;
@@ -238,6 +255,14 @@ public class TypeCheckLauncher {
 				metaclass.setName(original.getName());
 				metaclass.setMultivalued(multivalued);
 				return metaclass;				
+			} else if ( type instanceof EnumType ) {
+				EnumType original = (EnumType) type;
+					
+				EnumType eenum = (EnumType) types.createObject(EnumType.class.getSimpleName());
+				eenum.setEenum(original.getEenum());
+				eenum.setName(original.getName());
+				eenum.setMultivalued(multivalued);
+				return eenum;				
 			} else if ( type instanceof PrimitiveType ) {
 				PrimitiveType pt = (PrimitiveType) types.createObject(type.eClass().getName());
 				pt.setMultivalued(multivalued);
@@ -274,7 +299,8 @@ public class TypeCheckLauncher {
 		public Type iteratorType(String iteratorName, Type receptorType, Type bodyType, ImmutableList restOfIterators) {
 			if ( iteratorName.equals("collect") ) {
 				return copyType(bodyType, true);
-			} else if ( iteratorName.equals("select") ) {
+			} else if ( iteratorName.equals("select") || iteratorName.equals("reject") ) {
+				// This could be wiser, detecting filtering based on oclIsKindOf!!
 				return copyType(receptorType, true);
 			} else if ( iteratorName.equals("iterate") ) {
 				Type iteratorVar = (Type) restOfIterators.first();
@@ -297,6 +323,10 @@ public class TypeCheckLauncher {
 				throw new IllegalArgumentException("Trying to apply operation " + operationName + " to tuple " + model.getFeature(object, "location"));
 			}
 
+			if ( receptorType instanceof MapType ) {
+				return mapOperationType((MapType) receptorType, operationName, arguments);
+			}
+						
 			// Default operations
 			if ( operationName.equals("allInstances") ) {
 				// Receptor type must be a ...?
@@ -305,7 +335,8 @@ public class TypeCheckLauncher {
 				return copyType((Type) arguments.first(), false);
 			} else if ( operationName.equals("oclType") ) {
 				return (Type) types.createObject(ReflectiveClass.class.getSimpleName());
-			} else if ( operationName.equals("oclIsKindOf") || operationName.equals("oclIsTypeOf") ) {
+			} else if ( operationName.equals("oclIsKindOf") || operationName.equals("oclIsTypeOf") || 
+					    operationName.equals("oclIsUndefined")) {
 				return createBooleanType();
 			} else if ( operationName.equals("+") ) {
 				return receptorType; // TODO: Coercions?
@@ -366,15 +397,20 @@ public class TypeCheckLauncher {
 				// Default operations
 				if ( operationName.equals("pow") ) {
 					return (Type) types.createObject(IntegerType.class.getSimpleName());					
+				} else if ( operationName.equals("sqrt") ) {
+					return (Type) types.createObject(FloatType.class.getSimpleName());					
 				} else if ( operationName.equals("concat") ) {
 						return (Type) types.createObject(StringType.class.getSimpleName());					
+				} else if ( operationName.equals("oclIsUndefined") ) {
+					return (Type) types.createObject(BooleanType.class.getSimpleName());					
 				} else if ( operationName.equals("toSequence") ) {
 					return copyType(receptorType, true);
+				} else if ( operationName.equals("debug") ) {
+					return copyType(receptorType, receptorType.isMultivalued());
 				}
-				
-				throw new RuntimeException("No primitive operation " + operationName);
+				throw new RuntimeException("No primitive operation " + operationName + " at " + model.getFeature(object, "location"));
 			}
-			
+
 			EClass clazz = ((Metaclass) receptorType).getKlass();
 			ArrayList<EClass> inheritanceChain = new ArrayList<EClass>();
 			inheritanceChain.add(clazz);
@@ -408,19 +444,40 @@ public class TypeCheckLauncher {
 		}
 
 		// Assume type is NavigationOrAttributeCallExp
-		public Type featureType(Type receptortype, ImmutableList helpers) {
+		public Type featureType(Type receptortype, ImmutableList helpers, ImmutableList operations) {
 			String featureName = (String) model.getFeature(object, "name");
 
 			if ( receptortype instanceof TupleType ) {
 				return tupleAccessType((TupleType) receptortype, featureName);
 			}
+
 			
+			if ( receptortype instanceof ThisModuleType) {
+				if ( helpers.size() < 1 ) {
+					throw new UnsupportedOperationException("Attribute " + featureName + " not found in module");					
+				} else {
+					Type t = null;
+					for (Object h : helpers) {
+						Object ctx = model.getFeature(h, "context_");
+						if ( ctx == null ) {
+							if ( t != null ) {
+								throw new UnsupportedOperationException("Too many attributes " + featureName + " found in module");													
+							}
+							t = findOclFeatureType((EObject) model.getFeature(helpers.first(), "feature"));
+						}
+					}
+					
+					return t;
+				}
+			}
+
 			if ( receptortype instanceof ReflectiveClass) {
 				if ( featureName.equals("name") ) {
 					return (Type) types.createObject(StringType.class.getSimpleName());	
 				}
 				throw new UnsupportedOperationException("Feature " + featureName + " not supported for reflective object");
 			}
+			
 			
 			if ( ! (receptortype instanceof Metaclass) ) {
 				throw new UnsupportedOperationException("Unsupported " + receptortype + " "  + featureName + " at " + model.getFeature(object, "location"));
@@ -455,8 +512,18 @@ public class TypeCheckLauncher {
 					Type t = findOclFeatureType((EObject) model.getFeature(helpers.first(), "feature"));
 					System.out.println("Assuming helper " + featureName + " at " + model.getFeature(object, "location") +
 							" with type " + t);
-					return t;					
+					return t;				
+				} else if ( helpers.size() > 1 ) {
+					throw new RuntimeException("Too many " + featureName + " " + clazz.getName() + " : " + object + " " + model.getFeature(object, "location"));				
 				} else { 
+					if ( operations.size() == 1 && 
+							((ImmutableList) model.getFeature(model.getFeature(operations.first(), "feature"), "parameters")).size() == 0) {
+						Object op = operations.first();
+						Type t = findOclFeatureType((EObject) model.getFeature(operations.first(), "feature"));
+						System.out.println("Assuming operation " + featureName + " at " + model.getFeature(object, "location") +
+								" with type " + t);
+						return t;							
+					}
 					throw new RuntimeException("No feature " + featureName + " " + clazz.getName() + " : " + object + " " + model.getFeature(object, "location"));
 				}
 			}
@@ -504,10 +571,23 @@ public class TypeCheckLauncher {
 				return (Type) types.createObject(StringType.class.getSimpleName());
 			} else if ( name.equals("IntegerType") ) {
 				return (Type) types.createObject(IntegerType.class.getSimpleName());
-			} else if ( name.equals("SequenceType") ) {
+			} else if ( name.equals("RealType") ) {
+				return (Type) types.createObject(FloatType.class.getSimpleName());
+			} else if ( name.equals("SequenceType") || name.equals("SetType") ) {
+				// TODO: Mark the type with a flag indicating the type of collection
 				Type t = createTypeFromAtlTypeDefinition((EObject) model.getFeature(oclType, "elementType"));
 				t.setMultivalued(true);
 				return t;
+			} else if ( name.equals("MapType") ) {
+				// TODO: This is also implemented as a rule in the transformation!
+				MapType mt = (MapType) types.createObject(MapType.class.getSimpleName());
+				EObject kt = (EObject) model.getFeature(oclType, "keyType");
+				EObject vt = (EObject) model.getFeature(oclType, "valueType");
+
+				mt.setKeyType( createTypeFromAtlTypeDefinition(kt) );
+				mt.setValueType( createTypeFromAtlTypeDefinition(vt) );
+				
+				return mt;
 			} else if ( name.equals("TupleType") ) {
 				// TODO: This is also implemented as a rule in the transformation!
 				TupleType tt = (TupleType) types.createObject(TupleType.class.getSimpleName());
@@ -542,7 +622,12 @@ public class TypeCheckLauncher {
 
 		// Assume type is NavigationOrAttributeCallExp
 		public Type createType(EClassifier classifier, boolean multivalued) {
-			if ( classifier instanceof EDataType ) {
+			if ( classifier instanceof EEnum ) {
+				EnumType e = (EnumType) types.createObject(EnumType.class.getSimpleName());
+				e.setEenum((EEnum) classifier);
+				e.setName(classifier.getName());
+				return e;				
+			} else if ( classifier instanceof EDataType ) {
 				if ( classifier.getName().endsWith("String") ) 
 					return (Type) types.createObject(StringType.class.getSimpleName());
 				else if ( classifier.getName().endsWith("Boolean") ) 
@@ -561,15 +646,51 @@ public class TypeCheckLauncher {
 			}
 		}
 
+		private Type mapOperationType(MapType mt, String operationName, ImmutableList arguments) {
+			if ( operationName.equals("including") ) {
+				Type keyType = (Type) arguments.first();
+				
+				// TODO: This is probably not perfectly fince, since one unknown types leads to unknown...
+				Type valueType = findCommonTypeAux(mt.getValueType(), (Type) arguments.tail().first(), true);
+
+				MapType newMt = (MapType) types.createObject(MapType.class.getSimpleName());
+
+				// newMt.setKeyType( copyType(mt.getKeyType(), false ) );
+
+				// TODO: Not assume the key type is always consistent. 
+				newMt.setKeyType( copyType(keyType, false ) );
+				newMt.setValueType( copyType(valueType, false) );
+				
+				return mt;
+			}
+			else if ( operationName.equals("get") ) {
+				return copyType(mt.getValueType(), mt.getValueType().isMultivalued());
+			}
+			
+			throw new RuntimeException("No operation " + operationName + " for Map: " + model.getFeature(object, "location"));
+		}
+
 		public Type collectionOperationType(Type t, ImmutableList arguments) {
 			String operationName = (String) model.getFeature(object, "operationName");
 			if ( operationName.equals("first") || 
 				 operationName.equals("at") ) {
 				return copyType(t, false); // should I copy it...
+
 			} else if ( operationName.equals("flatten") ) {
 				return copyType(t, true);
+			} else if ( operationName.equals("asSet") ) {
+				return copyType(t, true);
+				
+			} else if ( operationName.equals("excludes") || operationName.equals("includes") ||
+					    operationName.equals("isEmpty")  || operationName.equals("notEmpty")) {
+				return (Type) types.createObject(BooleanType.class.getSimpleName());
+				
 			} else if ( operationName.equals("size") ) {
 				return (Type) types.createObject(IntegerType.class.getSimpleName());
+
+			} else if ( operationName.equals("excluding") ) {
+				return copyType(t, true);
+
 			} else if ( operationName.equals("including") || operationName.equals("append") || operationName.equals("union")  ) {
 				Type ct = findCommonTypeAux(t, (Type) arguments.first(), true);
 				if ( ct == null ) {

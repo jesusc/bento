@@ -384,14 +384,3 @@ helper context UML!FinalNode def: isMandatory : OclAny =
 
 helper context UML!Activity def: isFinalMandatory : OclAny =
  false;
-
-endpoint rule Rule2_ForceTransformation() {
- 
-}
-
-helper def: __convertToSequence__(obj : OclAny) : OclAny =
- if obj = OclUndefined then
-  Sequence {}
- else
-  Sequence {obj}->flatten()
- endif;

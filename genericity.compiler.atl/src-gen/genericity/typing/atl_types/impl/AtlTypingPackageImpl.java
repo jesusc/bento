@@ -10,8 +10,10 @@ import genericity.typing.atl_types.AtlTypingFactory;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.EmptyCollection;
+import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
+import genericity.typing.atl_types.MapType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.RefType;
@@ -95,6 +97,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass mapTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tupleAttributeEClass = null;
 
 	/**
@@ -117,6 +126,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * @generated
 	 */
 	private EClass emptyCollectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -305,6 +321,33 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMapType() {
+		return mapTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMapType_KeyType() {
+		return (EReference)mapTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMapType_ValueType() {
+		return (EReference)mapTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTupleAttribute() {
 		return tupleAttributeEClass;
 	}
@@ -352,6 +395,33 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 */
 	public EClass getEmptyCollection() {
 		return emptyCollectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEnumType() {
+		return enumTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEnumType_Name() {
+		return (EAttribute)enumTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEnumType_Eenum() {
+		return (EReference)enumTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -470,6 +540,10 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		tupleTypeEClass = createEClass(TUPLE_TYPE);
 		createEReference(tupleTypeEClass, TUPLE_TYPE__ATTRIBUTES);
 
+		mapTypeEClass = createEClass(MAP_TYPE);
+		createEReference(mapTypeEClass, MAP_TYPE__KEY_TYPE);
+		createEReference(mapTypeEClass, MAP_TYPE__VALUE_TYPE);
+
 		tupleAttributeEClass = createEClass(TUPLE_ATTRIBUTE);
 		createEAttribute(tupleAttributeEClass, TUPLE_ATTRIBUTE__NAME);
 		createEReference(tupleAttributeEClass, TUPLE_ATTRIBUTE__TYPE);
@@ -479,6 +553,10 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		unknownEClass = createEClass(UNKNOWN);
 
 		emptyCollectionEClass = createEClass(EMPTY_COLLECTION);
+
+		enumTypeEClass = createEClass(ENUM_TYPE);
+		createEAttribute(enumTypeEClass, ENUM_TYPE__NAME);
+		createEReference(enumTypeEClass, ENUM_TYPE__EENUM);
 
 		metaclassEClass = createEClass(METACLASS);
 		createEAttribute(metaclassEClass, METACLASS__NAME);
@@ -534,9 +612,11 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		stringTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		floatTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		tupleTypeEClass.getESuperTypes().add(this.getType());
+		mapTypeEClass.getESuperTypes().add(this.getType());
 		refTypeEClass.getESuperTypes().add(this.getType());
 		unknownEClass.getESuperTypes().add(this.getRefType());
 		emptyCollectionEClass.getESuperTypes().add(this.getType());
+		enumTypeEClass.getESuperTypes().add(this.getType());
 		metaclassEClass.getESuperTypes().add(this.getRefType());
 		reflectiveTypeEClass.getESuperTypes().add(this.getType());
 		unionTypeEClass.getESuperTypes().add(this.getType());
@@ -560,6 +640,10 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEClass(tupleTypeEClass, TupleType.class, "TupleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTupleType_Attributes(), this.getTupleAttribute(), null, "attributes", null, 0, -1, TupleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(mapTypeEClass, MapType.class, "MapType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMapType_KeyType(), this.getType(), null, "keyType", null, 1, 1, MapType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapType_ValueType(), this.getType(), null, "valueType", null, 1, 1, MapType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(tupleAttributeEClass, TupleAttribute.class, "TupleAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTupleAttribute_Name(), ecorePackage.getEString(), "name", null, 1, 1, TupleAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTupleAttribute_Type(), this.getType(), null, "type", null, 1, 1, TupleAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -569,6 +653,10 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEClass(unknownEClass, Unknown.class, "Unknown", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(emptyCollectionEClass, EmptyCollection.class, "EmptyCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(enumTypeEClass, EnumType.class, "EnumType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEnumType_Name(), ecorePackage.getEString(), "name", null, 1, 1, EnumType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEnumType_Eenum(), ecorePackage.getEObject(), null, "eenum", null, 1, 1, EnumType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaclassEClass, Metaclass.class, "Metaclass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaclass_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

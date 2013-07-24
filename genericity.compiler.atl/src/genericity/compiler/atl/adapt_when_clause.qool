@@ -84,6 +84,42 @@ segment AdaptRuleForAttribute2ClassBinding
 		})
 	end
 
+	// For some reason this generates ".allInstances()->select()->select()" 
+	// (tested in a transformation with a class merge, this happens in the force endpoint rule...)
+	forall op from mOperationCallExp
+	 where op.operationName.eq("allInstances") // TODO: what about oclIsTypeOf!!!
+    
+		ocl_model_element = op.source
+		ocl_model_element.^model.name.eq(current_mm).if_true {	
+			cb = gbind!ClassBinding.all_instances.select { |cb1| cb1.concept.name.eq(ocl_model_element.name).and(cb1.whenClause.is_nil.not) }.first
+			cb.is_nil.if_false {
+
+			    type = ocl_model_element
+      			container = op._refContainer
+      			containing_property = op.containing_property
+				
+				select = atl!IteratorExp.new
+				select.name = 'select'
+				select.source = op
+				
+				it1 = atl!Iterator.new 
+				it1.varName = "__v__"
+	
+				select.iterators = it1
+							
+			    call = atl!NavigationOrAttributeCallExp.new
+      			call.name = type.name.concat("__filter__")
+      			v_exp2 = atl!VariableExp.new
+      			v_exp2.referredVariable = it1
+				call.source = v_exp2
+
+				select.body = call
+      			container.set_inner_expression(select, containing_property)
+				
+			}	
+		}    
+    end
+
 	forall op from mOperationCallExp
 	 where op.operationName.eq("oclIsKindOf") // TODO: what about oclIsTypeOf!!!
 	

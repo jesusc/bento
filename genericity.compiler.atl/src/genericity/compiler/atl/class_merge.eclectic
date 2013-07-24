@@ -42,6 +42,11 @@ segment find_conflicting_rules
 			    cb.concept.name.eq(in_pattern_element_.type.name))
 	}
 
+	rule_types_are_overlapped = { |in_pattern_element_1, in_pattern_element_2|
+		in_pattern_element_1.type.^model.name.eq(in_pattern_element_2.type.^model.name).and(
+			    in_pattern_element_2.type.name.eq(in_pattern_element_1.type.name))
+	}
+
 
 	conflicted = _!MutableMap.new
 	forall mr1 from mMatchedRule	
@@ -57,13 +62,21 @@ segment find_conflicting_rules
 			       and(conflicted.include(mr2.name).not)
 			       
 				in_pattern_element2 = mr2.inPattern.elements.first 
-		
-				cb2 = gbind!ClassBinding.all_instances.select { |cb| check_binding_applicable_to_rule.call(in_pattern_element2, cb) }.first
-				cb2.if_true {
-					cb1.conflict_with(cb2).if_true {
-						conflicted.^put(mr1.name, true)
-						conflicted.^put(mr2.name, true)
+
+				// Check if the types of the rules already overlap, in such case they are not
+				// selected since the designer should have been aware of the conflicts 
+				// (so proper filers should have been written)		
+				rule_types_are_overlapped.call(in_pattern_element1, in_pattern_element2).if_false {
+
+					cb2 = gbind!ClassBinding.all_instances.select { |cb| check_binding_applicable_to_rule.call(in_pattern_element2, cb) }.first
+					cb2.if_true {
+						cb1.conflict_with(cb2).if_true {
+							" rule ".concat(mr1.name).concat(" conflict with ").println(mr2.name)
+							conflicted.^put(mr1.name, true)
+							conflicted.^put(mr2.name, true)
+						}
 					}
+				
 				}
 			end
 		}
@@ -145,7 +158,7 @@ segment create_end_point_rules
   */
   
  	endpoint = atl!CalledRule.new
-	endpoint.name = "Rule2".concat('_ForceTransformation')
+	endpoint.name = "Rule_To_".concat('_ForceTransformation')
 	endpoint.isEndpoint = true
 
 	module.elements = endpoint
@@ -158,7 +171,7 @@ segment create_end_point_rules
 		it.varName = "i"
 
 		filter_condition = cf.has_filter.if_else({
-			check_filter = invoke-external ^eclectic.class_merge_gen_atl(in = gbind) -> (out = atl)
+			invoke-external ^eclectic.class_merge_gen_atl(in = gbind) -> (out = atl)
 		    			  entrypoint createThisModuleCall_ForClassMerge(module, rule_name.concat('__filter__'), it)						
 		}, {	
 			b = atl!BooleanExp.new

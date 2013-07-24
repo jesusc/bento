@@ -429,14 +429,3 @@ helper context BPMN!Activity def: isTerminating : OclAny =
 
 helper context BPMN!Activity def: isMandatory : OclAny =
  true;
-
-endpoint rule Rule2_ForceTransformation() {
- 
-}
-
-helper def: __convertToSequence__(obj : OclAny) : OclAny =
- if obj = OclUndefined then
-  Sequence {}
- else
-  Sequence {obj}->flatten()
- endif;

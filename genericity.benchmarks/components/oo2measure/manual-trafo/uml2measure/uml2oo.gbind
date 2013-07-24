@@ -4,7 +4,7 @@ binding uml2oo {
 
     class NamedElement to NamedElement
     class Package      to Package when self.oclIsTypeOf(UML!Package) or self.oclIsTypeOf(UML!Model)
-    class Class        to Class   when self.oclIsTypeOf(UML!Class)
+    class Class        to Class   when self.oclIsTypeOf(UML!Class) -- jesusc: por que?
     class Feature      to Feature 
     class Attribute    to Property
     class Operation    to Operation

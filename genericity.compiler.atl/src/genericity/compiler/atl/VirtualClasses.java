@@ -34,6 +34,7 @@ import eclectic.composed_genericity;
 import eclectic.ocl2ocl;
 import eclectic.rewrite_class1;
 import gbind.dsl.BindingModel;
+import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.Type;
@@ -174,7 +175,7 @@ public class VirtualClasses {
 			if ( type instanceof Metaclass ) {
 				Metaclass m = (Metaclass) type;
 				return m.getKlass().getName().equals(typeName);
-			} else if ( type instanceof PrimitiveType ) {
+			} else if ( type instanceof PrimitiveType || type instanceof EnumType) {
 				return false;
 			} else if ( type instanceof UnionType ) {
 				UnionType unionType = (UnionType) type;

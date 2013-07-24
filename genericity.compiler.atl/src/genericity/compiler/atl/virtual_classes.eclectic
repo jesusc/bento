@@ -22,6 +22,7 @@ model queue mNavigationOrAttributeCallExp : atl!NavigationOrAttributeCallExp
 model queue mBinding : atl!Binding
 model queue mMatchedRule : atl!MatchedRule!
 model queue mHelper : atl!Helper!
+model queue mOperationCallExp : atl!OperationCallExp
 
 model queue mVirtualMetaclass      : gbind!VirtualMetaclass 
 model queue mVirtualClassBinding   : gbind!VirtualClassBinding
@@ -55,6 +56,7 @@ segment generate_virtual_type_init
 	// For each converted rule (this should be done in another way) 
 	// create an entry point rule to call it, imitating matched rules	
 	forall cb2 from mVirtualClassBinding	
+
 		forall matchedRule from mMatchedRule
 			inPatternElement  = matchedRule.inPattern.elements.first
 			ocl_model_element = inPatternElement.type
@@ -79,6 +81,34 @@ segment generate_virtual_type_init
 					module.elements = entrypoint_rule
 				}
 			}
+		end
+
+		// Adapt calls to allInstances
+		forall op from mOperationCallExp
+			 where op.operationName.eq("allInstances") // TODO: what about oclIsTypeOf!!!
+
+			ocl_model_element = op.source
+			
+			ocl_model_element.^model.name.eq(current_mm).if_true {
+			    cb2.concept.name.eq(ocl_model_element.name).if_true {
+					att_call = atl!NavigationOrAttributeCallExp.new				
+					att_call.name = cb2.virtual.name.concat("_AllInstances")
+
+					this_module = atl!VariableDeclaration.new
+					this_module.varName = "thisModule"
+					receptor = atl!VariableExp.new
+					receptor.referredVariable = this_module
+
+					att_call.source = receptor
+					
+					op.replaceBy(att_call)
+	    			// replace
+	      			//container = op._refContainer
+    	  			//containing_property = op.containing_property
+		   			//container.set_inner_expression(att_call, containing_property)
+					
+				}
+			}    
 		end
 	end
 

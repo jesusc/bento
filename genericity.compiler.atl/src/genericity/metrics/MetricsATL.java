@@ -42,8 +42,10 @@ import gbind.simpleocl.OclFeature;
 
 public class MetricsATL {
 
+	public static final String TRANSFORMATION_MODEL = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+
 	// public static final String TRANSFORMATION_MODEL = "../genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl.xmi";
-	public static final String TRANSFORMATION_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl.xmi";
+	// public static final String TRANSFORMATION_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl.xmi";
 	// public static final String TRANSFORMATION_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/uml2measure/uml2measure.atl.xmi";
 	// public static final String TRANSFORMATION_MODEL = "/home/jesus/usr/genericity2/runtime-New_configuration/ATL 2 Metrics/Code/UML22Measure_All.atl.xmi";	
 	
@@ -63,10 +65,28 @@ public class MetricsATL {
 						TRANSFORMATION_MODEL);
 						//withDir(TRANSFORMATION_MODEL));
 	
-		measure(in);
+		measureElementKind(in, "Helper");
+		measureElementKind(in, "Rule");
+
 	}
 
-	private static void measure(BasicEMFModel in) {
+	private static void measureElementKind(BasicEMFModel in, String type) {
+		List<EObject> elements = in.allObjectsOf(type);
+		
+		double totalElements = 0;
+		for (EObject e : elements) {
+			int count = countExpressions(in, e);
+			totalElements += count;
+			//System.out.println("Feature " + f.getConceptFeature() + " = " + count);
+		}
+		
+		System.out.println();
+		System.out.println("Total number of " + type.toLowerCase() + "s: " + elements.size());
+		System.out.println("  * Total nodes: " + totalElements);
+		System.out.println("  * Average nodes: " + totalElements / elements.size());
+	}
+
+	private static void measureAttributeHelpers(BasicEMFModel in) {
 		List<EObject> helpers = in.allObjectsOf("Helper");
 		ListIterator<EObject> it = helpers.listIterator();
 		while ( it.hasNext() ) {
@@ -83,8 +103,6 @@ public class MetricsATL {
 			totalHelpers += count;
 			//System.out.println("Feature " + f.getConceptFeature() + " = " + count);
 		}
-
-		
 		
 		System.out.println();
 		System.out.println("Total number of helpers: " + helpers.size());

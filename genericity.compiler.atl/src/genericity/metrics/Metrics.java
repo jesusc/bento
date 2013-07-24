@@ -61,11 +61,11 @@ public class Metrics {
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// uml2pn
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// grafcet2pn
-	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
+//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
 	// apromore
@@ -79,6 +79,18 @@ public class Metrics {
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 
+	//////////
+	// METRICS
+	///////////
+	
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/km32measure/km32oo.gbind.xmi";
+	
+	// public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/uml2measure/uml2oo.gbind.xmi";
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
+	
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/km32measure/km32oo.gbind.xmi";
+	
 	// ecore2measure_manual
 //	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
 //	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl.xmi";
@@ -128,7 +140,11 @@ public class Metrics {
 		}
 		
 		
-		System.out.println();
+		System.out.println(BINDING_MODEL);
+		System.out.println("    Total Ocl Expressions: ");
+		System.out.println("      * Total features: " + totalFeatures);
+		System.out.println("      * Total class bindings: " + totalClassBindings);
+		System.out.println("      * Total all: " + (totalFeatures + totalClassBindings));
 		System.out.println("    Average Ocl Expressions: ");
 		System.out.println("      * Average features: " + totalFeatures / fbindings.size());
 		System.out.println("      * Average class bindings: " + totalClassBindings / whenBindingsSize);

@@ -2,37 +2,51 @@ binding km32oo {
 	concept   OO  : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"
 	metamodel KM3 : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/KM3.ecore"
 	
+	class KM3Generalization {
+		ref general  : Class
+		ref specific : Class
+	} init = KM3!Class.allInstances()->collect(specific| specific.superypes->collect(general | 
+		Tuple { 
+			type__ = 'KM3Generalization', 
+			general = general, specific = specific
+		}
+	))->flatten()
+	
 	class PackageableElement to ModelElement
     class Package to Package 
     class Class to Class 
     class NamedElement to ModelElement -- class merge (PackageableElement & NamedElement are bound to ModelElement) 
-    class Model to None --- !!! 
+    class Model to NONE --- !!! 
     class Operation to Operation 
     class Feature to StructuralFeature 
     class Property to Attribute 
     class Parameter to Parameter     
-    class Generalization to None --- !!! No sé si habría que poner supertypes o no, ya que también se mapea Class.nestedClassifier
-    class Dependency to None -- Relationship that signifies that a single or a set of model elements requires other model elements for their specification or implementation (???)
+    class Generalization to virtual KM3Generalization 
+    class Dependency to NONE -- Relationship that signifies that a single or a set of model elements requires other model elements for their specification or implementation (???)
     class Classifier to Classifier 
     class TypedElement to TypedElement 
     class Type to Classifier -- class merge (Classifier & Type are bound to Classifier) 
     class BehavioralFeature to Operation 
-    class Behavior to None -- ni idea de a qué mapearlo... 
-    class VisibilityKind to None -- en km3 no hay visibilidad 
+    class Behavior to NONE -- ni idea de a quï¿½ mapearlo... 
+    class VisibilityKind to NONE -- en km3 no hay visibilidad 
        
     feature Package.packagedElement is contents   
     feature Class.ownedOperation is operations    
     feature Class.ownedAttribute is structuralFeatures    
-    feature Class.nestedClassifier = KM3!Class.allInstances()->select(c | c.supertypes->includes(self)) -- References all the Classifiers that are defined (nested) within the Class 
+
+    -- jesusc: I believe that the mapping is just Sequence {} because there is no notion of nested classifier in KM3
+    -- feature Class.nestedClassifier = KM3!Class.allInstances()->select(c | c.supertypes->includes(self)) -- References all the Classifiers that are defined (nested) within the Class 
+    feature Class.nestedClassifier = Sequence { }
+    
     feature NamedElement.name is name 
-    feature NamedElement.isAbstract = if self.oclIsKindOf(KM3!Class) then self.isAbstract else true endif -- atributo definido sólo en una de las subclases
-    feature NamedElement.visibility = true -- en km3 no hay visibilidad 
+    feature NamedElement.isAbstract = if self.oclIsKindOf(KM3!Class) then self.isAbstract else true endif -- atributo definido sï¿½lo en una de las subclases
+    feature NamedElement.visibility = #public --true -- en km3 no hay visibilidad 
     feature Operation.ownedParameter is parameters 
 --    feature Generalization.general is -- no hemos mapeado Generalization
 --    feature Generalization.specific is  -- no hemos mapeado Generalization 
 --    feature Dependency.supplier is -- no hemos mapeado Dependency
 --    feature Dependency.client is -- no hemos mapeado Dependency
-    feature Classifier.generalization = Sequence{} -- porque no hemos mapeado Generalization    
+    feature Classifier.generalization = self.KM3Generalization_AllInstances->select(g | g.specific = self) 
     feature TypedElement.type is type 
     feature BehavioralFeature.method = Sequence{} -- no hemos mapeado Behavior (es el tipo del atributo) 
 }

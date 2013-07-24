@@ -26,6 +26,11 @@ class TupleType extends Type {
    val TupleAttribute[*] attributes;
 }
 
+class MapType extends Type {
+   val Type[1] keyType;
+   val Type[1] valueType;
+}
+
 class TupleAttribute {
    attr String[1] name;
    val Type[1] type;
@@ -41,6 +46,11 @@ class Unknown extends RefType {
 
 class EmptyCollection extends Type {
    
+}
+
+class EnumType extends Type {
+   attr String[1] name;
+   ref EObject[1] eenum;      
 }
 
 class Metaclass extends RefType {

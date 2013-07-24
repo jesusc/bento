@@ -100,6 +100,10 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createTupleTypeAdapter();
 			}
 			@Override
+			public Adapter caseMapType(MapType object) {
+				return createMapTypeAdapter();
+			}
+			@Override
 			public Adapter caseTupleAttribute(TupleAttribute object) {
 				return createTupleAttributeAdapter();
 			}
@@ -114,6 +118,10 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEmptyCollection(EmptyCollection object) {
 				return createEmptyCollectionAdapter();
+			}
+			@Override
+			public Adapter caseEnumType(EnumType object) {
+				return createEnumTypeAdapter();
 			}
 			@Override
 			public Adapter caseMetaclass(Metaclass object) {
@@ -254,6 +262,20 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.MapType <em>Map Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.MapType
+	 * @generated
+	 */
+	public Adapter createMapTypeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.TupleAttribute <em>Tuple Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -306,6 +328,20 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEmptyCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.EnumType <em>Enum Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.EnumType
+	 * @generated
+	 */
+	public Adapter createEnumTypeAdapter() {
 		return null;
 	}
 

@@ -98,10 +98,18 @@ attribution attr_typecheck_atl(atl) -> (typ)
 	end
 
 	rule atl!OclModelElement
-		m = typ!Metaclass.new
-		m.name = self.name
-		m.klass = self.eClass
-		type[self] <- m
+		eType = self.eClass
+		self.is_eclass(eType).if_else({
+			m = typ!Metaclass.new
+			m.name = self.name
+			m.klass = eType
+			type[self] <- m			
+		}, {
+			m = typ!EnumType.new
+			m.name = self.name
+			m.eenum = eType
+			type[self] <- m						
+		})		
 	end
 
 	// Expressions
@@ -141,8 +149,10 @@ attribution attr_typecheck_atl(atl) -> (typ)
 
 		// This only works because the pattern module is at the beginning... 
 		// (otherwise, it returns an empty collection (QoolTransformationBase access the queue to retrieve the objects))
-		helpers = atl_patterns!AttributeHelper.all_instances.select { |h| h.feature.name.eq(self.name) }
-		ft = self.featureType(t, helpers)
+		helpers    = atl_patterns!AttributeHelper.all_instances.select { |h| h.feature.name.eq(self.name) }
+		operations = atl_patterns!OperationHelper.all_instances.select { |h| h.feature.name.eq(self.name) }
+
+		ft = self.featureType(t, helpers, operations)
 		// I am not passing the types of the helpers... So it is important to provide accurate return types
 		
 		//match ft
@@ -189,6 +199,10 @@ attribution attr_typecheck_atl(atl) -> (typ)
 		type[self] <- typ!IntegerType.new
 	end
 
+	rule atl!RealType
+		type[self] <- typ!FloatType.new
+	end
+
 	rule atl!StringExp
 		type[self] <- typ!StringType.new
 	end
@@ -214,6 +228,26 @@ attribution attr_typecheck_atl(atl) -> (typ)
 			// self.println(self.location)
 			// type[self] <- typ!TODO_COMPUTE_UNION_OF_EXPRESSION.new			
 		})
+	end
+
+	rule atl!OclUndefinedExp
+		type[self] <- typ!Unknown.new
+	end
+
+	rule atl!EnumLiteralExp
+		t = typ!EnumType.new
+		t.name = 'enum-type-todo:get-the-type-from-the-literal'
+		type[self] <- t
+		
+		// type[self] <- typ!Unknown.new
+	end
+
+	rule atl!MapExp
+		// TODO: Compute the type based on the elements (if any)
+		mt = typ!MapType.new
+		mt.keyType   = typ!Unknown.new
+		mt.valueType = typ!Unknown.new
+		type[self] <- mt
 	end
 
 	// For the moment, unknown
@@ -245,6 +279,15 @@ attribution attr_typecheck_atl(atl) -> (typ)
 		tt.attributes = attributes
 	
 		type[self] <- tt
+	end
+
+	rule atl!MapType
+		mt = typ!MapType.new
+		kt = type[self.keyType]
+		vt = type[self.valueType]
+		mt.keyType   = kt
+		mt.valueType = vt
+		type[self] <- mt
 	end
 
 	rule atl!IntegerType

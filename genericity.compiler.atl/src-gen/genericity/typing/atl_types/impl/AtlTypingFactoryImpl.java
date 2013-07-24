@@ -65,10 +65,12 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 			case AtlTypingPackage.STRING_TYPE: return createStringType();
 			case AtlTypingPackage.FLOAT_TYPE: return createFloatType();
 			case AtlTypingPackage.TUPLE_TYPE: return createTupleType();
+			case AtlTypingPackage.MAP_TYPE: return createMapType();
 			case AtlTypingPackage.TUPLE_ATTRIBUTE: return createTupleAttribute();
 			case AtlTypingPackage.REF_TYPE: return createRefType();
 			case AtlTypingPackage.UNKNOWN: return createUnknown();
 			case AtlTypingPackage.EMPTY_COLLECTION: return createEmptyCollection();
+			case AtlTypingPackage.ENUM_TYPE: return createEnumType();
 			case AtlTypingPackage.METACLASS: return createMetaclass();
 			case AtlTypingPackage.UNION_TYPE: return createUnionType();
 			case AtlTypingPackage.THIS_MODULE_TYPE: return createThisModuleType();
@@ -133,6 +135,16 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public MapType createMapType() {
+		MapTypeImpl mapType = new MapTypeImpl();
+		return mapType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TupleAttribute createTupleAttribute() {
 		TupleAttributeImpl tupleAttribute = new TupleAttributeImpl();
 		return tupleAttribute;
@@ -166,6 +178,16 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	public EmptyCollection createEmptyCollection() {
 		EmptyCollectionImpl emptyCollection = new EmptyCollectionImpl();
 		return emptyCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumType createEnumType() {
+		EnumTypeImpl enumType = new EnumTypeImpl();
+		return enumType;
 	}
 
 	/**

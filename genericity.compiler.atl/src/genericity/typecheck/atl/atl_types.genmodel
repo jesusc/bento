@@ -18,6 +18,10 @@
     <genClasses ecoreClass="atl_types.ecore#//TupleType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//TupleType/attributes"/>
     </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//MapType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//MapType/keyType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//MapType/valueType"/>
+    </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//TupleAttribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//TupleAttribute/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//TupleAttribute/type"/>
@@ -25,6 +29,10 @@
     <genClasses ecoreClass="atl_types.ecore#//RefType"/>
     <genClasses ecoreClass="atl_types.ecore#//Unknown"/>
     <genClasses ecoreClass="atl_types.ecore#//EmptyCollection"/>
+    <genClasses ecoreClass="atl_types.ecore#//EnumType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//EnumType/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//EnumType/eenum"/>
+    </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//Metaclass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//Metaclass/klass"/>

@@ -71,6 +71,15 @@ public interface AtlTypingFactory extends EFactory {
 	TupleType createTupleType();
 
 	/**
+	 * Returns a new object of class '<em>Map Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map Type</em>'.
+	 * @generated
+	 */
+	MapType createMapType();
+
+	/**
 	 * Returns a new object of class '<em>Tuple Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,6 +114,15 @@ public interface AtlTypingFactory extends EFactory {
 	 * @generated
 	 */
 	EmptyCollection createEmptyCollection();
+
+	/**
+	 * Returns a new object of class '<em>Enum Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Type</em>'.
+	 * @generated
+	 */
+	EnumType createEnumType();
 
 	/**
 	 * Returns a new object of class '<em>Metaclass</em>'.

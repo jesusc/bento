@@ -211,7 +211,8 @@ public class ClassMerge {
 					EClass e1 = findEClass(concreteMetaclass1.getName());
 					EClass e2 = findEClass(concreteMetaclass2.getName());
 			
-					if ( e1.isSuperTypeOf(e2) ) {
+					//if ( e1.isSuperTypeOf(e2) ) {
+					if ( e2.isSuperTypeOf(e1) ) {
 						return true;
 					}
 					

@@ -122,6 +122,13 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlTypingPackage.MAP_TYPE: {
+				MapType mapType = (MapType)theEObject;
+				T result = caseMapType(mapType);
+				if (result == null) result = caseType(mapType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlTypingPackage.TUPLE_ATTRIBUTE: {
 				TupleAttribute tupleAttribute = (TupleAttribute)theEObject;
 				T result = caseTupleAttribute(tupleAttribute);
@@ -147,6 +154,13 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				EmptyCollection emptyCollection = (EmptyCollection)theEObject;
 				T result = caseEmptyCollection(emptyCollection);
 				if (result == null) result = caseType(emptyCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlTypingPackage.ENUM_TYPE: {
+				EnumType enumType = (EnumType)theEObject;
+				T result = caseEnumType(enumType);
+				if (result == null) result = caseType(enumType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -297,6 +311,21 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Map Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Map Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMapType(MapType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tuple Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -353,6 +382,21 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEmptyCollection(EmptyCollection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumType(EnumType object) {
 		return null;
 	}
 

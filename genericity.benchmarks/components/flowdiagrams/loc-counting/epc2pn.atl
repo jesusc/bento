@@ -16,12 +16,7 @@ helper context EPC!ProcessObject def: isTask : Boolean =
  __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event);
 
 helper context EPC!ProcessObject def: isFinalTask : Boolean =
- let __unique_id___5 : OclAny = self in
- if __unique_id___5.oclIsKindOf(EPC!Event) then
-  __unique_id___5.FinalTask__filter__
- else
-  false
- endif;
+ self.oclIsKindOf(EPC!Event);
 
 helper context EPC!ProcessObject def: isTerminatingTask : Boolean =
  if self.isFinalTask then
@@ -31,44 +26,19 @@ helper context EPC!ProcessObject def: isTerminatingTask : Boolean =
  endif;
 
 helper context EPC!ProcessObject def: isParallelSplit : Boolean =
- let __unique_id___6 : OclAny = self in
- if __unique_id___6.oclIsKindOf(EPC!And) then
-  __unique_id___6.ParallelSplit__filter__
- else
-  false
- endif;
+ self.oclIsKindOf(EPC!And);
 
 helper context EPC!ProcessObject def: isSynchronization : Boolean =
- let __unique_id___7 : OclAny = self in
- if __unique_id___7.oclIsKindOf(EPC!And) then
-  __unique_id___7.Synchronization__filter__
- else
-  false
- endif;
+ self.oclIsKindOf(EPC!And);
 
 helper context EPC!ProcessObject def: isExclusiveChoice : Boolean =
- let __unique_id___8 : OclAny = self in
- if __unique_id___8.oclIsKindOf(EPC!Xor) then
-  __unique_id___8.ExclusiveChoice__filter__
- else
-  false
- endif;
+ self.oclIsKindOf(EPC!Xor);
 
 helper context EPC!ProcessObject def: isSimpleMerge : Boolean =
- let __unique_id___9 : OclAny = self in
- if __unique_id___9.oclIsKindOf(EPC!Xor) then
-  __unique_id___9.SimpleMerge__filter__
- else
-  false
- endif;
+ self.oclIsKindOf(EPC!Xor);
 
 helper context EPC!ProcessObject def: isMultiChoice : Boolean =
- let __unique_id___10 : OclAny = self in
- if __unique_id___10.oclIsKindOf(EPC!Or) then
-  __unique_id___10.MultiChoice__filter__
- else
-  false
- endif;
+ self.oclIsKindOf(EPC!Or);
 
 helper context EPC!ProcessObject def: toPlaceAsInput : Boolean =
  self.isTask or self.isFinalTask or self.isExclusiveChoice or self.isSimpleMerge or self.isMultiChoice;
@@ -133,8 +103,43 @@ rule create_transition(source : EPC!ProcessObject, num : Integer) {
  to
   transition : PN!Transition (
    name <- source.typeName + ' ' + num,
-   in <- icontrol.append(source),
-   out <- source.outs->size().toSequence()->iterate(i; result : Sequence(EPC!ProcessObject) = Sequence {} |
+   in <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(icontrol.append(source))->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten(),
+   out <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(source.outs->size().toSequence()->iterate(i; result : Sequence(EPC!ProcessObject) = Sequence {} |
     if choices->at(i) = true then
      result->append(if source.outs->at(i).out.toPlaceAsInput then
       source.outs.at(i).out
@@ -144,7 +149,42 @@ rule create_transition(source : EPC!ProcessObject, num : Integer) {
     else
      result
     endif
-   ).append(ocontrol)
+   ).append(ocontrol))->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten()
   )
  do {
   -- This is important, it is the result value...
@@ -191,7 +231,7 @@ rule flowdiagram {
   flow : EPC!EPCDiagram
  to
   net : PN!PetriNet (
-   elems <- flow.nodes.append(flow.edges.append(flow.nodes->select(n |
+   elems <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(flow.nodes.append(flow.edges.append(flow.nodes->select(n |
     n.isSimpleMerge
    )->collect(n |
     thisModule.create_transition(n, 1)
@@ -201,11 +241,46 @@ rule flowdiagram {
     n.nodeGenerator
    )->flatten()->collect(n |
     thisModule.create_transition(n.source, n.num)
-   )).append(flow.control)->flatten()
+   )).append(flow.control)->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten()
   )
 } -- each task is transformed into a place, with 1 token if it is initial
--- each task is transformed into a place, with 1 token if it is initial
-rule task {
+-- Rule from task
+unique lazy rule task {
  from
   task : EPC!Function
   (
@@ -224,9 +299,10 @@ rule task {
     0
    endif
   )
-} -- each final task is transformed into a place
--- each final task is transformed into a place
-rule finaltask {
+}
+
+-- Rule from finaltask
+unique lazy rule finaltask {
  from
   task : EPC!Event
   (
@@ -246,16 +322,12 @@ rule finaltask {
    endif,
    tokens <- 0
   )
-} -- each parallel split  (i.e. fork) is transformed into a transition
--- each synchronization (i.e. join) is transformed into a transition
--- each parallel split  (i.e. fork) is transformed into a transition
--- each synchronization (i.e. join) is transformed into a transition
-rule synchronization_all {
+}
+
+-- Rule from synchronization_all
+unique lazy rule synchronization_all {
  from
   synch : EPC!ProcessObject
-  (
-   synch.isParallelSplit or synch.isSynchronization
-  )
  using
  {
   icontrol : Sequence(OclAny) = synch.parentFlowDiagram.control;
@@ -268,7 +340,7 @@ rule synchronization_all {
  to
   transition : PN!Transition (
    name <- synch.typeName,
-   in <- synch.ins->select(e |
+   in <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(synch.ins->select(e |
     e.in.toPlaceAsOutput
    )->collect(e |
     e.in
@@ -276,19 +348,90 @@ rule synchronization_all {
    ->union(synch.ins->select(e |
     e.in.toTransitionAsOutput
    )) -- connect to input transitions
-   .append(icontrol),
+   .append(icontrol))->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten(),
    -- connect to control place   				
-   out <- synch.outs->select(e |
+   out <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(synch.outs->select(e |
     e.out.toPlaceAsInput
    )->collect(e |
     e.out
    )->union(synch.outs->select(e |
     e.out.toTransitionAsInput
-   )).append(ocontrol)
+   )).append(ocontrol))->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten()
   )
-} -- each exclusive choice is transformed into a place
--- each exclusive choice is transformed into a place
-rule exclusive_choice {
+}
+
+-- Rule from exclusive_choice
+unique lazy rule exclusive_choice {
  from
   choice : EPC!Xor
   (
@@ -299,11 +442,10 @@ rule exclusive_choice {
    name <- choice.typeName,
    tokens <- 0
   )
-} -- each simple merge is transformed into a place connected to a transition;
--- the transition is created by rule create_transition, invoked from rule flow_diagram
--- each simple merge is transformed into a place connected to a transition;
--- the transition is created by rule create_transition, invoked from rule flow_diagram
-rule simple_merge {
+}
+
+-- Rule from simple_merge
+unique lazy rule simple_merge {
  from
   merge : EPC!Xor
   (
@@ -314,8 +456,8 @@ rule simple_merge {
    name <- merge.typeName,
    tokens <- 0
   )
-} -- each multi choice is transformed into a place connected to (2^n)-1 transitions;
--- the transitions are created by rule create_transition, invoked from rule flow_diagram
+}
+
 -- each multi choice is transformed into a place connected to (2^n)-1 transitions;
 -- the transitions are created by rule create_transition, invoked from rule flow_diagram
 rule multi_choice {
@@ -352,8 +494,78 @@ rule place_place {
  }
  to
   transition : PN!Transition (
-   in <- icontrol.append(edge.in),
-   out <- ocontrol.append(edge.out)
+   in <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(icontrol.append(edge.in))->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten(),
+   out <- thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(thisModule.__convertToSequence__(ocontrol.append(edge.out))->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!ProcessObject) then
+     if thisModule.synchronization_all__filter__(__v__) then
+      Sequence {thisModule.synchronization_all(__v__), __v__}
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.exclusive_choice(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if let __unique_id__ : OclAny = __v__ in
+    __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.task(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Xor) then
+     Sequence {thisModule.simple_merge(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten())->collect(__v__ |
+    if __v__.oclIsKindOf(EPC!Event) then
+     Sequence {thisModule.finaltask(__v__), __v__}
+    else
+     __v__
+    endif
+   )->flatten()
   )
 } -- flow edges connecting nodes that are transformed into transitions, 
 -- are transformed into places
@@ -373,6 +585,73 @@ rule transition_transition {
    tokens <- 0
   )
 }
+
+helper def: synchronization_all__filter__(synch : OclAny) : Boolean =
+ synch.isParallelSplit or synch.isSynchronization;
+
+endpoint rule Rule_To__ForceTransformation() {
+ using
+ {
+  synchronization_all_varToForceEvaluation : OclAny = EPC!ProcessObject.allInstances()->collect(i |
+   if thisModule.synchronization_all__filter__(i) then
+    thisModule.synchronization_all(i)
+   else
+    i
+   endif
+  );
+  exclusive_choice_varToForceEvaluation : OclAny = EPC!Xor.allInstances()->select(__v__ |
+   __v__.ExclusiveChoice__filter__
+  )->select(__v__ |
+   __v__.ExclusiveChoice__filter__
+  )->collect(i |
+   if true then
+    thisModule.exclusive_choice(i)
+   else
+    i
+   endif
+  );
+  task_varToForceEvaluation : OclAny = EPC!Function.allInstances()->select(__v__ |
+   __v__.Task__filter__
+  )->select(__v__ |
+   __v__.Task__filter__
+  )->collect(i |
+   if true then
+    thisModule.task(i)
+   else
+    i
+   endif
+  );
+  simple_merge_varToForceEvaluation : OclAny = EPC!Xor.allInstances()->select(__v__ |
+   __v__.SimpleMerge__filter__
+  )->select(__v__ |
+   __v__.SimpleMerge__filter__
+  )->collect(i |
+   if true then
+    thisModule.simple_merge(i)
+   else
+    i
+   endif
+  );
+  finaltask_varToForceEvaluation : OclAny = EPC!Event.allInstances()->select(__v__ |
+   __v__.FinalTask__filter__
+  )->select(__v__ |
+   __v__.FinalTask__filter__
+  )->collect(i |
+   if true then
+    thisModule.finaltask(i)
+   else
+    i
+   endif
+  );
+ }
+}
+
+helper def: __convertToSequence__(obj : OclAny) : OclAny =
+ if obj = OclUndefined then
+  Sequence {}
+ else
+  Sequence {obj}->flatten()
+ endif;
 
 helper context EPC!Function def: Task__filter__ : Boolean =
  if self.oclIsKindOf(EPC!Event) then
@@ -399,8 +678,8 @@ helper context EPC!Xor def: SimpleMerge__filter__ : Boolean =
 helper context EPC!Or def: MultiChoice__filter__ : Boolean =
  self.incoming->size() = 1 and self.outgoing->size() > 1;
 
--- each task is transformed into a place, with 1 token if it is initial
-rule task_Event {
+-- Rule from task
+unique lazy rule task_Event {
  from
   task : EPC!Event
   (
@@ -419,7 +698,8 @@ rule task_Event {
     0
    endif
   )
-} -- each final task is transformed into a place
+}
+
 helper context EPC!Event def: Task__filter__ : Boolean =
  if self.oclIsKindOf(EPC!Event) then
   self.outgoing->size() > 0
@@ -483,15 +763,4 @@ helper context EPC!ControlFlow def: out : OclAny =
   else
    self.ltarget
   endif
- endif;
-
-endpoint rule Rule2_ForceTransformation() {
- 
-}
-
-helper def: __convertToSequence__(obj : OclAny) : OclAny =
- if obj = OclUndefined then
-  Sequence {}
- else
-  Sequence {obj}->flatten()
  endif;
