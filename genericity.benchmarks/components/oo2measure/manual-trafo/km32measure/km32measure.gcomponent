@@ -1,4 +1,4 @@
-composite component km32measure_uml {
+composite component km32measure_oo {
 	uses "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.gcomponent"    
 	binding bindKM3 = "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/km32measure/km32oo.gbind"
 			

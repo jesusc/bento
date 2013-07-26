@@ -29,8 +29,8 @@ binding uml2 {
 	class MultiChoice     to NONE
 	class SimpleMerge     to MergeNode
 	
-	feature FlowDiagram.nodes = self.node -- ->select(n | n.oclIsKindOf(UML!ExecutableNode) or n.oclIsKindOf(UML!ControlNode))
-	feature FlowDiagram.edges = self.edge -- ->select(e | e.oclIsKindOf(UML!ControlFlow))
+	feature FlowDiagram.nodes is node -- ->select(n | n.oclIsKindOf(UML!ExecutableNode) or n.oclIsKindOf(UML!ControlNode))
+	feature FlowDiagram.edges is edge -- ->select(e | e.oclIsKindOf(UML!ControlFlow))
 
 	feature FlowEdge."in" is source
 	feature FlowEdge.out is target

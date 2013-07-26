@@ -21,7 +21,7 @@ binding bender2fd {
 	class MultiChoice     to NONE
 	class SimpleMerge     to NONE
 	
-	feature FlowDiagram.nodes = self.states
+	feature FlowDiagram.nodes is states
 	feature FlowDiagram.edges = self.states->collect(s | s.outs).flatten()
 
 	feature FlowEdge[Transition]."in" is src

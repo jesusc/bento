@@ -20,21 +20,21 @@ binding ecore2oo {
     class Model to NONE --- !!! 
     class Operation to EOperation 
     class Feature to EStructuralFeature 
-    class Property to EAttribute 
+    class Property to EAttribute, EReference 
     class Parameter to EParameter     
-    -- class Generalization to None --- !!! No s� si habr�a que poner eSuperTypes o no ya que tambi�n se mapea Class.nestedClassifier
+   
     class Generalization to virtual EcoreGeneralization
     class Dependency to NONE -- Relationship that signifies that a single or a set of model elements requires other model elements for their specification or implementation (???)
     class Classifier to EClassifier 
     class TypedElement to ETypedElement 
     class Type to EClassifier 
     class BehavioralFeature to EOperation 
-    class Behavior to NONE -- ni idea de a qu� mapearlo... 
+    class Behavior to NONE 
     class VisibilityKind to NONE -- en ecore no hay visibilidad 
        
     feature Package.packagedElement = self.eSubpackages->union(self.eClassifiers)   
     feature Class.ownedOperation is eOperations    
-    feature Class.ownedAttribute is eAttributes    
+    feature Class.ownedAttribute is eStructuralFeatures    
     
     -- jesusc: I believe that the mapping is just Sequence {} because there is no notion of nested classifier in Ecore
     -- feature Class.nestedClassifier = ECORE!EClass.allInstances()->select(c | c.eSuperTypes->includes(self)) -- References all the Classifiers that are defined (nested) within the Class 
@@ -45,9 +45,10 @@ binding ecore2oo {
     feature NamedElement.visibility = #public -- 0 -- true -- en ecore no hay visibilidad 
     feature Operation.ownedParameter is eParameters 
 
---  Implicit by the name of virtual class attributes, not mapped because of a limitation of the implementation
---    feature Generalization.general is general
---    feature Generalization.specific is  specific 
+--  Implicit by the name of virtual class attributes, only mapped because they have the same name
+--  and the rewriting does nothing, otherwise it does not work yet...
+    feature Generalization.general is general
+    feature Generalization.specific is  specific 
 
 --    feature Dependency.supplier is -- no hemos mapeado Dependency
 --    feature Dependency.client is -- no hemos mapeado Dependency

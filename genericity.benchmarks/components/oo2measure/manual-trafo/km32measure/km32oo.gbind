@@ -27,4 +27,12 @@ binding km32oo {
     feature Operation.isPublic   = true  -- there is no visibility in ecore
     feature Operation.isProtected = false -- there is no visibility in ecore
     feature Operation.isPrivate  = false -- there is no visibility in ecore
+
+	-- Added to consider Dependency and Behaviour
+	feature Package.dependencies = Sequence { }
+    feature Operation.method     = Sequence { }
+ 
+    class Dependency to NONE
+    class Behaviour  to NONE
+
 }

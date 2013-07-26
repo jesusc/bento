@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="OO_concept" nsURI="OO_concept" nsPrefix="OO_concept">
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="OO_concept"
+    nsURI="OO_concept" nsPrefix="OO_concept">
   <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//PackageableElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElement" upperBound="-1"
@@ -34,7 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="specific" lowerBound="1"
         eType="#//Classifier" eOpposite="#//Classifier/generalization"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Dependency">
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//PackageableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" lowerBound="1"
         upperBound="-1" eType="#//NamedElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="client" lowerBound="1"

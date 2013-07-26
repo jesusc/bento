@@ -42,7 +42,7 @@ class Generalization {
   ref Classifier[1]#generalization specific;  
 }
 
-class Dependency {   
+class Dependency extends PackageableElement {   
   ref NamedElement[1..*] supplier;
   ref NamedElement[1..*] client;
 }

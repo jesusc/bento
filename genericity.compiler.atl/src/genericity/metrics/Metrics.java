@@ -86,9 +86,8 @@ public class Metrics {
 	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
 	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/km32measure/km32oo.gbind.xmi";
 	
-	// public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/uml2measure/uml2oo.gbind.xmi";
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
-	
+	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/uml2measure/uml2oo.gbind.xmi";
+	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
 	//public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/km32measure/km32oo.gbind.xmi";
 	
 	// ecore2measure_manual

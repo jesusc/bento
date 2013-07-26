@@ -21,7 +21,7 @@ binding bpmn2fd {
 	feature Node.ins = APRO!Edge.allInstances()->select( e | e.target = self )
 	feature Node.outs = APRO!Edge.allInstances()->select( e | e.source = self )
 	
-
+	feature Task.name is name
 	feature Task.isInitial = self.inEdges->isEmpty()
 	    
 	class FinalTask to Task when self.outEdges->isEmpty()

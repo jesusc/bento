@@ -27,6 +27,11 @@ rule Package2MeasureSet {
 		set.metrics <- thisModule.Metric('NSI', pck.NSI());
 		set.metrics <- thisModule.Metric('OHF', pck.OHF());
 		set.metrics <- thisModule.Metric('OIF', pck.OIF());
+   
+		-- added by jesusc
+    	set.metrics <- thisModule.Metric('AHEF',pck.AHEF());
+		set.metrics <- thisModule.Metric('OHEF',pck.OHEF());
+		
     }
 }
 
@@ -65,6 +70,10 @@ rule Class2MeasureSet {
 		set.metrics <- thisModule.Metric('NPT', class.NPT());
 		set.metrics <- thisModule.Metric('OAM', class.OAM());
 		set.metrics <- thisModule.Metric('SIZE2', class.SIZE2());
+    
+		-- Added by jesusc
+    	set.metrics <- thisModule.Metric('RFC',class.RFC());
+		
     }
 }
 
@@ -95,7 +104,7 @@ def : AIF() : Real =
 helper context simple_OO_concept!Package
 def : OIF() : Real =
 	self.classes->collect(c | c.InheritedOperations()->size())->sum() / -- # inherited operations for all classes /
-	self.classes->collect(c | c.AllOperations()->size())->sum()       ; -- # available operations (local and inherited) for all classes
+	self.classes->collect(c | c.AllOperations->size())->sum()       ; -- # available operations (local and inherited) for all classes
 	
 -- AHF - Attributes Hiding Factor
 -- Quotient between the sum of the invisibilities of all attributes defined 
@@ -123,7 +132,7 @@ helper context simple_OO_concept!Package
 def : OHF() : Real =
 	if self.classes->size() > 1
 		then 
-		    let operations_in_package : Set(simple_OO_concept!Operation) = self.AllOperations() in 
+		    let operations_in_package : Set(simple_OO_concept!Operation) = self.AllOperations in 
 		    if not operations_in_package->isEmpty()
 				then operations_in_package->iterate(o; acc : Real = 0|acc + 1 - self.percentage_classes_CanAccessOperation(o)) / operations_in_package->size()
 				else 0
@@ -139,7 +148,7 @@ def : OHF() : Real =
 helper context simple_OO_concept!Package
 def : BPF() : Real =
 	self.classes->collect(c | c.OverridenOperations()->size())->sum() / -- # total operations overriden /
-	self.classes->collect(c | c.AllOperations()->size())->sum()       ; -- # total operations available
+	self.classes->collect(c | c.AllOperations->size())->sum()       ; -- # total operations available
 	
 -- CCF - Class Coupling Factor
 -- Quotient between the actual number of coupled class-pairs within the 
@@ -190,13 +199,33 @@ def : IIF() : Real =
 -- Quotient between the cumulative number of the package classes that do 
 -- access the package attributes and the cumulative number of the package 
 -- classes that can access the package attributes.
--- UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
+-- ORIGINALLY UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
+helper context simple_OO_concept!Package
+def : AHEF() : Real =
+	let avnSum : Integer = 
+		self.AllAttributes()->iterate(a; acc : Integer = 0|
+			acc + self.total_classes_CanAccessAttribute(a)) in
+	if avnSum > 0
+		then self.AllAttributes()->iterate(a; acc : Integer = 0|
+			acc + a.AUN()) / avnSum
+		else 0
+	endif;
 
 -- OHEF - Operations Hiding Effectiveness Factor
 -- Quotient between the cumulative number of the package classes that do 
 -- access the package operations and the cumulative number of the package 
 -- classes that can access the package operations.
--- UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
+-- ORIGINALLY UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
+helper context simple_OO_concept!Package
+def : OHEF() : Real =
+	let ovnSum : Integer = 
+		self.AllOperations->iterate(op; acc : Integer = 0|
+			acc + self.total_classes_CanAccessOperation(op)) in
+	if ovnSum > 0
+		then self.AllOperations->iterate(op; acc : Integer = 0|
+			acc + op.OUN()) / ovnSum
+		else 0
+	endif;
 
 -- DIT - Depth of Inheritance Tree
 -- The length of the longest path of inheritance from the current class to 
@@ -232,7 +261,14 @@ def : CBO() : Integer =
 -- The number of methods in the current class that might respond to a 
 -- message received by its object, including methods both inside and 
 -- outside of this class.
--- UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
+-- ORGINALLY UNIMPLEMENTED: it is defined for UML but not KM3 (it uses class Dependency)
+helper context simple_OO_concept!Class
+def : RFC() : Integer =
+	self.AllOperations->
+		union(self.AllOperations->
+			collect(o|o.method->collect(m|m.AllClients)->
+				flatten()->asSet()->select(c|c.simple_OO_concept(simple_OO_concept!Operation))))->
+					flatten()->asSet()->size();
 
 -- SIZE2
 -- Number of local attributes and operations defined in the class. The 
@@ -323,8 +359,8 @@ def : ANA() : Real =
 -- @uses Class, Class.parents, Class.operations, Operation, Operation.isPublic, Operation.isProtected
 helper context simple_OO_concept!Class
 def : MFA() : Real =
-	if not self.AllOperations()->isEmpty()
-		then self.InheritedOperations()->size() / self.AllOperations()->select(o | self.CanAccessOperation(o))->size() 
+	if not self.AllOperations->isEmpty()
+		then self.InheritedOperations()->size() / self.AllOperations->select(o | self.CanAccessOperation(o))->size() 
 		else 0
 	endif;
 
@@ -380,8 +416,8 @@ def : DAM() : Real =
 -- @uses Class, Class.parents, Class.operations, Operation, Operation.isPublic
 helper context simple_OO_concept!Class
 def : OAM() : Real =
-	if not self.AllOperations()->isEmpty()
-		then self.AllOperations()->select(o | o.isPublic)->size() / self.AllOperations()->size()
+	if not self.AllOperations->isEmpty()
+		then self.AllOperations->select(o | o.isPublic)->size() / self.AllOperations->size()
 		else 0
 	endif;
 
@@ -405,14 +441,14 @@ def : NOA() : Real =
 -- @uses Class, Class.operations, Operation, Operation.name
 helper context simple_OO_concept!Class
 def : NOM() : Real =
-	self.AllOperations()->size();
+	self.AllOperations->size();
 
 -- CIS - Class Interface Size
 -- Number of public methods in a class.
 -- @uses Class, Class.parents, Class.operations, Operation, Operation.isPublic
 helper context simple_OO_concept!Class
 def : CIS() : Integer =
-	self.AllOperations()->select(o | o.isPublic)->size();
+	self.AllOperations->select(o | o.isPublic)->size();
 
 -- NPT - Number of Unique Parameter Types
 -- Number of different parameter types used in the methods of the class.
@@ -428,8 +464,8 @@ def : NPT() : Integer =
 -- @uses Class, Class.parents, Class.operations, Operation, Operation.parameters, Parameter
 helper context simple_OO_concept!Class
 def : NPM() : Integer =
-	if not self.AllOperations()->isEmpty()
-		then self.AllParameters()->size() / self.AllOperations()->size()
+	if not self.AllOperations->isEmpty()
+		then self.AllParameters()->size() / self.AllOperations->size()
 		else 0
 	endif;
 
@@ -471,9 +507,9 @@ def : CSM() : Real =
 helper context simple_OO_concept!Class
 def : CAM() : Integer =
 	let divisor : Integer =
-		self.AllOperations()->size() * self.AllParametersTypes()->size() in
+		self.AllOperations->size() * self.AllParametersTypes()->size() in
 	if divisor > 0
-		then self.AllOperations()->iterate(o; acc : Integer = 0|
+		then self.AllOperations->iterate(o; acc : Integer = 0|
 			acc + o.AllParametersTypes()->size()) / divisor
 		else 0
 	endif;
@@ -631,17 +667,17 @@ def : percentage_classes_CanAccessAttribute(a : simple_OO_concept!Attribute) : R
 
 -- all operations of a package
 helper context simple_OO_concept!Package
-def : AllOperations() : Set(simple_OO_concept!Operation) =
+def : AllOperations : Set(simple_OO_concept!Operation) =
     self.classes->collect(c | c.operations)->flatten();
 
 -- all operations of a class (local and inherited)
 helper context simple_OO_concept!Class
-def : AllOperations() : Set(simple_OO_concept!Operation) =
+def : AllOperations : Set(simple_OO_concept!Operation) =
     self.operations->union(self.InheritedOperations());
 
 -- operations defined in the class, that do not override inherited ones
 helper context simple_OO_concept!Class
-def: NewOperations() : Set(simple_OO_concept!Operation) =
+def: NewOperations : Set(simple_OO_concept!Operation) =
 	let inherited_operations : Set(simple_OO_concept!Class) = self.Ancestors()->collect(a | a.operations)->flatten() in
 	self.operations->select(op | not inherited_operations->exists(op2 | op2.name = op.name));
 
@@ -666,7 +702,7 @@ def : AllParametersTypes() : Set(simple_OO_concept!Class) =
 -- indicates whether a class can access an operation
 helper context simple_OO_concept!Class
 def : CanAccessOperation(o : simple_OO_concept!Operation) : Boolean =
-	o.isPublic or self.AllOperations()->includes(o) or (o.isProtected and self.Ancestors()->exists(c | c.AllOperations()->includes(o)));
+	o.isPublic or self.AllOperations->includes(o) or (o.isProtected and self.Ancestors()->exists(c | c.AllOperations->includes(o)));
 
 -- percentage of classes which can access an operation (excludes the class that declares the operation)
 helper context simple_OO_concept!Package
@@ -674,12 +710,13 @@ def : percentage_classes_CanAccessOperation(o : simple_OO_concept!Operation) : R
 	(self.classes->select(c | c.CanAccessOperation(o))->size() - 1) / 
 	(self.classes->size() - 1);  
 
+
 -- ***** PARAMETERS *****
 
 -- all parameters of all operations of a class
 helper context simple_OO_concept!Class
 def : AllParameters() : Set(simple_OO_concept!Parameter) =
-    self.AllOperations()->collect(o | o.parameters)->flatten()->asSet();
+    self.AllOperations->collect(o | o.parameters)->flatten()->asSet();
         
 --all types of all parameters of all operations of a class
 helper context simple_OO_concept!Class
@@ -687,3 +724,50 @@ def : AllParametersTypes() : Set(simple_OO_concept!Class) =
     self.AllParameters()->collect(p | p.partype)->flatten()->
 	   select(t | not t.oclIsUndefined())->asSet();        
 
+
+-- Added by jesusc
+
+-- ******* Dependencies ******
+
+-- Set containing all direct clients of the NamedElement.
+helper context simple_OO_concept!NamedElement
+def : Client : Set(simple_OO_concept!NamedElement) =
+    simple_OO_concept!Dependency.allInstances()->
+        select(d|d.supplier->includes(self))->collect(d|d.Client)->
+            flatten()->asSet();
+
+-- Set containing all the NamedElements that are clients of this NamedElement, including the clients of these NamedElements. This is the transitive closure.
+helper context simple_OO_concept!NamedElement
+def : AllClients : Set(simple_OO_concept!NamedElement) =
+    self.Client->union(self.Client->collect(ne|ne.AllClients)->
+        flatten())->asSet();
+
+-- ********** Helpers for AHEF ***************
+
+-- Number of NamedElement that use the Property (excludes the NamedElement where the Property is declared).
+helper context simple_OO_concept!Attribute
+def : AUN() : Integer =
+	self.FUN();
+
+-- Number of NamedElement that use the Feature (excludes the NamedElement where the Feature is declared).
+helper context simple_OO_concept!Attribute
+def : FUN() : Integer =
+	self.AllClients->size();
+
+-- Number of Classes in the considered Package where the Attribute can be accessed.
+helper context simple_OO_concept!Package
+def : total_classes_CanAccessAttribute(a : simple_OO_concept!Attribute) : Real =
+	(self.classes->select(c | c.CanAccessAttribute(a))->size() - 1) ;
+
+
+-- Number of Classes in the considered Operation where the Feature can be accessed.
+helper context simple_OO_concept!Package
+def : total_classes_CanAccessOperation(o : simple_OO_concept!Operation) : Real =
+	(self.classes->select(c | c.CanAccessOperation(o))->size() - 1);  
+
+
+
+-- Number of NamedElement that use the Operation (excludes the NamedElement where the Feature is declared).
+helper context simple_OO_concept!Operation
+def : OUN() : Integer =
+	self.FUN();

@@ -29,8 +29,8 @@ binding sfc {
 	-- HOW TO MAP THE SELECTION CONVERGENCE TYPE? -> Not sure about the semantics
 	class SimpleMerge     to SelectionConvergenceType
 	                                        
-	class ParallelSplit     to SimultaneousDivergenceType
 	class Synchronization   to SimultaneousConvergenceType
+	class ParallelSplit     to SimultaneousDivergenceType
 
 	class MultiChoice     to NONE	
 	
@@ -63,7 +63,7 @@ binding sfc {
 
 
 	-- I forgot to use [ ] to qualify the isInitial/final
-	feature Task[StepType].isInitial = self.initialStep
+	feature Task[StepType].isInitial is initialStep
 	feature Task[TransitionType1].isInitial   = false   	
 
 	-- feature Task[StepType].isFinal   = false   	
