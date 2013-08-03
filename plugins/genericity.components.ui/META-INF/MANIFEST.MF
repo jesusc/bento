@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Genericity User Interface
 Bundle-SymbolicName: genericity.components.ui; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: genericity.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
- genericity.language.gbind.resource;bundle-version="1.0.0",
+ genericity.language.gbind.resource;bundle-version="0.5.0",
  org.eclipse.emf;bundle-version="2.6.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
  org.eclipse.m2m.atl.dsls;bundle-version="3.2.1",
@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.m2m.atl;bundle-version="3.2.1",
  org.eclipse.m2m.atl.common;bundle-version="3.2.1",
  org.eclipse.m2m.atl.engine;bundle-version="3.2.1",
- genericity.gcomponent.api;bundle-version="1.0.0",
- genericity.language.gcomponent;bundle-version="1.0.0"
+ genericity.gcomponent.api;bundle-version="0.5.0",
+ genericity.language.gcomponent;bundle-version="0.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

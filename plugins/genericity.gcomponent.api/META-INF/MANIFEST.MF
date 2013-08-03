@@ -2,12 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Genericity GComponent Api
 Bundle-SymbolicName: genericity.gcomponent.api;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: genericity.gcomponent.api.Activator
 Require-Bundle: org.eclipse.core.runtime,
- genericity.language.gcomponent;bundle-version="1.0.0",
- genericity.language.gbind;bundle-version="1.0.0",
- org.eclectic.apidesc.language;bundle-version="0.8.1",
+ genericity.language.gcomponent;bundle-version="0.5.0",
+ genericity.language.gbind;bundle-version="0.5.0",
  org.eclectic.idc;bundle-version="0.8.1",
  org.eclectic.javaflow;bundle-version="0.8.1",
  org.eclectic.modeling;bundle-version="0.8.1",
@@ -20,12 +19,24 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.m2m.atl.engine.emfvm;bundle-version="3.2.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: genericity.compiler.atl.api,
+Export-Package: eclectic,
+ genericity.compiler.atl,
+ genericity.compiler.atl.api,
  genericity.gcomponent,
  genericity.gcomponent.api,
  genericity.gcomponent.instantiation,
  genericity.gcomponent.instantiation.impl,
- genericity.gcomponent.instantiation.util
+ genericity.gcomponent.instantiation.util,
+ genericity.gcomponent.report,
+ genericity.gcomponent.report.impl,
+ genericity.gcomponent.report.util,
+ genericity.typecheck.atl,
+ genericity.typing.atl_types,
+ genericity.typing.atl_types.annotations,
+ genericity.typing.atl_types.annotations.impl,
+ genericity.typing.atl_types.annotations.util,
+ genericity.typing.atl_types.impl,
+ genericity.typing.atl_types.util
 Bundle-ClassPath: lib/genericity-atl.jar,
  lib/genericity-instantiation.jar,
  .

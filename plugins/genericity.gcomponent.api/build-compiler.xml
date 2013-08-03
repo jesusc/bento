@@ -15,7 +15,7 @@
 
 	<target name="generate-jar">
 		<jar destfile="lib/genericity-atl.jar">
-			<fileset dir="../genericity.compiler.atl/eclectic-gen" >
+			<fileset dir="../../compiler/genericity.compiler.atl/eclectic-gen" >
 				<include name="eclectic/adapt_*"/>
 				<include name="eclectic/gen_atl*"/>
 				<include name="eclectic/ocl2ocl*"/>
@@ -37,7 +37,7 @@
 				
 			</fileset>
 
-			<fileset dir="../genericity.compiler.atl/bin" >
+			<fileset dir="../../compiler/genericity.compiler.atl/bin" >
 				<include name="genericity/typecheck/atl/TypeCheckLauncher*"/>
 				<include name="genericity/compiler/atl/Class2Reference*"/>
 				<include name="genericity/compiler/atl/VirtualClasses*"/>
@@ -61,7 +61,7 @@
 		</jar>
 
 		<jar destfile="lib/genericity-instantiation.jar">
-			<fileset dir="../genericity.compiler.atl/eclectic-gen" >
+			<fileset dir="../../compiler/genericity.compiler.atl/eclectic-gen" >
 				<include name="eclectic/propagate_instantiation*"/>
 			</fileset>
 
