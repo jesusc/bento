@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="genericity.language.gbind.mopp.GbindMetaInformation" id="genericity.language.gbind.mopp.GbindMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="genericity.language.gbind.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="genericity.language.gbind.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="genericity.language.gbind.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="genericity.language.gbind.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="genericity.language.gbind.resource.problem">
+		</super>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.nature" name="gbind nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="genericity.language.gbind.mopp.GbindNature">
+			</run>
+		</runtime>
+		<builder id="genericity.language.gbind.resource.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="genericity.language.gbind.resource.builder" name="gbind Builder">
+		<builder hasNature="true">
+			<run class="genericity.language.gbind.mopp.GbindBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="genericity.language.gbind.resource.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="genericity.language.gbind.mopp.GbindResourceFactoryDelegator" type="gbind">
+		</parser>
+	</extension>
+	
+	<extension-point id="genericity.language.gbind.resource.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="genericity.language.gbind.debug.GbindLineBreakpoint" id="genericity.language.gbind.resource.debug.breakpoint" markerType="genericity.language.gbind.resource.debug.lineBreakpoint.marker" name="gbind Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="genericity.language.gbind.resource.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+</plugin>

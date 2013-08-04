@@ -1,0 +1,259 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ * It follows this strategy:
+ * 
+ *   - Match rules and helpers whose context must be rewritten
+ */
+qool adapt_rules(atl, gbind, params) -> ()
+
+//segment main
+//	rule    = params!Value.all_instances.first.rule
+//	binding = params!Value.all_instances.first.binding
+//end
+
+model matches
+  class MatchedAtlMatchedRule
+	ref rule         : atl!MatchedRule
+	ref classBinding : gbind!ClassBinding
+  	ref concreteClass : gbind!ConcreteMetaclass
+  end
+
+  class MatchedAtlMatchedRule_IntermediateClass
+	ref rule         : atl!MatchedRule
+	ref classBinding : gbind!IntermediateClassBinding
+  end
+
+  class MatchedHelper
+	ref helper        : atl!Helper
+	ref classBinding  : gbind!ClassBinding
+  	ref concreteClass : gbind!ConcreteMetaclass
+  end
+end
+
+
+// ATL elements
+model queue mHelper      : atl!Helper
+model queue mMatchedRule : atl!MatchedRule
+
+// GBind elements
+model queue mClassBinding             : gbind!ClassBinding
+model queue mIntermediateClassBinding : gbind!IntermediateClassBinding
+
+//model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
+//model queue mOclFeatureBinding      : gbind!OclFeatureBinding
+
+// Pattern queues
+local queue pMatchedAtlMatchedRule1 : matches!MatchedAtlMatchedRule
+local queue pMatchedAtlMatchedRuleN : matches!MatchedAtlMatchedRule
+local queue pMatchedAtlMatchedRuleNone : matches!MatchedAtlMatchedRule
+local queue pMatchedAtlMatchedRuleIntermediateClass : matches!MatchedAtlMatchedRule_IntermediateClass
+local queue pMatchedHelper1         : matches!MatchedHelper
+local queue pMatchedHelperN         : matches!MatchedHelper
+local queue pMatchedHelperNone      : matches!MatchedHelper
+
+//
+// Begin-of PATTERNS
+//
+
+segment findModuleElements
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall mr from mMatchedRule
+		in_pattern_element = mr.inPattern.elements.first // assumes rules with one input element
+		forall cb1 from mClassBinding
+			//" <- mr: ".println(in_pattern_element.type.^model.name)
+			//" <- mr: ".println(in_pattern_element.type.name)
+			//" <- cb: ".println(cb1.concept.name)
+		
+			in_pattern_element.type.^model.name.eq(current_mm).if_true({
+			    cb1.concept.name.eq(in_pattern_element.type.name).if_true {
+			    	m = matches!MatchedAtlMatchedRule.new
+			    	m.rule         = mr
+			    	m.classBinding = cb1
+			        m.concreteClass = cb1.concrete.first
+
+	   				is_none = cb1.concrete.first.name.eq("NONE").or(cb1.concrete.first.name.eq("None"))
+					is_none.if_else({
+						emit m to pMatchedAtlMatchedRuleNone
+					}, {
+			    		emit m to pMatchedAtlMatchedRule1 						
+					})
+
+                    cb1.concrete.tail.each { |cm|
+				    	m2 = matches!MatchedAtlMatchedRule.new
+				    	m2.rule         = mr
+				    	m2.classBinding = cb1
+				        m2.concreteClass = cm
+				    	emit m2 to pMatchedAtlMatchedRuleN
+                    }
+			    }
+			})			
+		end
+
+		/* 
+		forall icb1 from mIntermediateClassBinding
+			in_pattern_element.type.^model.name.eq(current_mm).if_true {
+			    icb1.concept.name.eq(in_pattern_element.type.name).if_true {
+			    	mi = matches!MatchedAtlMatchedRule_IntermediateClass.new
+			    	mi.rule         = mr
+			    	mi.classBinding = icb1
+				   	emit mi to pMatchedAtlMatchedRuleIntermediateClass
+				}
+			}
+		end
+		*/
+	end
+
+	forall h from mHelper
+	 where h.definition.context_.is_nil.not
+		ocl_type = h.definition.context_.context_
+		forall cb2 from mClassBinding
+		 where ocl_type.kind_of(atl!OclModelElement) // not very efficient :-(
+		 
+			ocl_type.^model.name.eq(current_mm).if_true {
+			    cb2.concept.name.eq(ocl_type.name).if_true {
+
+			    	m = matches!MatchedHelper.new
+			    	m.helper = h
+			    	m.classBinding = cb2
+			        m.concreteClass = cb2.concrete.first
+
+	   				is_none = cb2.concrete.first.name.eq("NONE").or(cb2.concrete.first.name.eq("None"))
+					is_none.if_else({
+				    	emit m to pMatchedHelperNone						
+					}, {
+				    	emit m to pMatchedHelper1						
+					})
+					
+                    cb2.concrete.tail.each { |cm|
+				    	m2 = matches!MatchedHelper.new
+				    	m2.helper       = h
+				    	m2.classBinding = cb2
+				        m2.concreteClass = cm
+				    	emit m2 to pMatchedHelperN
+                    }
+				}				
+			}
+		end
+	end
+
+
+end
+
+// End-of Patterns
+
+
+// Begin-of rules
+segment RenameRule1
+	forall m from pMatchedAtlMatchedRule1
+		//current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+		in_pattern_element_type = m.rule.inPattern.elements.first.type 
+		
+		"".println("In rule [".concat(m.rule.name).concat("]: ").concat(in_pattern_element_type.name).concat(" -> ").concat(m.concreteClass.name))
+				
+		in_pattern_element_type.name = m.concreteClass.name
+		
+		// Ideas:
+		//   - A syntax to objects/models models on the fly... 
+		//           model!type { prop = value, prop2 = value }
+		//   - Allow passing an internal model/on the fly model as a model parameter
+		//     instead of an special syntax for passing primitive parameters
+		//
+		// 
+		// filter_view = { |o|
+		// 	1.eq(1)
+		// }		
+		//
+		//invoke-external eclectic.adapt_rule(atl = atl, gbind = gbind) -> () + (rule = m_atl.rule, binding = m_atl.classBinding)
+		//		 input-view-filter filter_view
+		// I need parameters to establish which of the concrete metaclasses is to be used for the rewrite
+		// View filters to ensure that only the copied rule is rewritten		
+	end
+end
+
+segment RenameRuleN
+	forall mr from pMatchedAtlMatchedRuleN
+		newRule = mr.rule.^copy
+		module = atl!Module.all_instances.first
+		module.elements = newRule
+
+		rename = { 
+			ocl_type = newRule.inPattern.elements.first.type 
+			ocl_type.name = mr.concreteClass.name
+			newRule.name = newRule.name.concat("_").concat(mr.concreteClass.name)
+		}.call
+		
+		x = {
+		"".println("Duplicated rule [".concat(mr.rule.name).concat("]: ").concat(mr.rule.inPattern.elements.first.type.name).concat(" -> ").concat(mr.concreteClass.name))
+		}.call
+	end
+end
+
+/*
+segment AdaptRule_IntermediateClass
+	forall mri from pMatchedAtlMatchedRuleIntermediateClass
+		rule = mri.rule
+		in_pattern = rule.inPattern
+		first_pattern = in_pattern.elements.first
+		
+		rename_first_type = {
+			first_ocl_type = first_pattern.type 
+			first_ocl_type.name = mri.classBinding.concreteSource.name
+		}.call
+		
+		create_second_pattern = {
+			second_ocl_type = atl!OclModelElement.new
+			second_ocl_type.name = mri.classBinding.concreteTarget.name
+			second_ocl_type.^model = first_pattern.type.^model
+
+			second_pattern = atl!SimpleInPatternElement.new
+        	second_pattern.varName = first_pattern.varName.concat("__2")
+        	second_pattern.type = second_ocl_type
+
+			in_pattern.elements = second_pattern
+		}.call
+		
+		x = {
+		"".println("Created rule [".concat(mri.rule.name).concat("]: Intermediate class"))
+		}.call
+	end
+end
+ */
+ 
+segment RenameHelper1
+	forall m from pMatchedHelper1
+		ocl_type = m.helper.definition.context_.context_
+		x = { 
+			"".println("In helper [".concat(m.helper.definition.feature.name).concat("]: ").concat(ocl_type.name).concat(" -> ").concat(m.concreteClass.name)) 
+		}.call
+		ocl_type.name = m.concreteClass.name
+	end
+end
+
+segment RenameHelperN
+	forall m from pMatchedHelperN
+		newHelper = m.helper.^copy
+		module = atl!Module.all_instances.first
+		module.elements = newHelper
+				
+		ocl_type = newHelper.definition.context_.context_
+		ocl_type.name = m.concreteClass.name
+	
+		x = {
+		"".println("Duplicated helper [".concat(m.helper.definition.feature.name).concat("]: ").concat(m.helper.definition.context_.context_.name).concat(" -> ").concat(m.concreteClass.name))
+		}.call
+	end
+end
+
+
+segment RemoveNones
+	forall m3 from pMatchedAtlMatchedRuleNone
+		m3.rule.deattach
+	end
+
+	forall m4 from pMatchedHelperNone
+		m4.helper.deattach
+	end
+
+end

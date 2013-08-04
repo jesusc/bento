@@ -1,0 +1,38 @@
+binding ecore2oo {  
+	concept   OO    : "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/OO_concept.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	
+    class NamedElement to ENamedElement 
+    class Package to EPackage
+    class Class to EClass
+    class Operation to EOperation
+    
+    class Feature   to EStructuralFeature
+    class Attribute to EReference
+    -- binding from Attribute to EReference to obtain the same metrics for references, as done in KM3
+    class Parameter to EParameter
+    
+    feature NamedElement.name is name
+    feature Package.classes = self.eClassifiers->select(c | c.oclIsKindOf(ECORE!EClass))
+    feature Class.isAbstract is abstract
+    -- feature Class.attributes is eStructuralFeatures
+    feature Class.attributes = self.eStructuralFeatures->select(e | e.oclIsKindOf(ECORE!EReference))
+    
+    feature Class.operations is eOperations
+    feature Class.parents is eSuperTypes
+    feature Operation.parameters is eParameters
+    feature Parameter.partype = if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
+    feature Attribute.atttype is eType -- if self.eType.oclIsKindOf(ECORE!EClass) then self.eType else OclUndefined endif
+
+    feature Feature.isPublic    = true  -- there is no visibility in ecore
+    feature Feature.isProtected = false -- there is no visibility in ecore
+    feature Feature.isPrivate = false -- there is no visibility in ecore
+
+	-- Added to consider Dependency and Behaviour
+	feature Package.dependencies = Sequence { }
+    feature Operation.method     = Sequence { }
+ 
+    class Dependency to NONE
+    class Behaviour  to NONE
+
+}

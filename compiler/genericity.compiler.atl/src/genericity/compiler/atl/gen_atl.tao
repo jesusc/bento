@@ -1,0 +1,81 @@
+tao gen_atl(gbind, atl) -> (atl)
+	// TODO: Need to access core meta-model...
+
+template createRenamingHelper(fb : gbind!RenamingFeatureBinding, concreteMetaclass : gbind!ConcreteMetaclass, atl_model : atl!OclModel) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = fb.conceptFeature
+				initExpression = atl!NavigationOrAttributeCallExp {
+					name = fb.concreteFeature
+					source = atl!VariableExp {
+						referredVariable = atl!VariableDeclaration { varName = "self" }
+					}
+				}
+				type = atl!OclAnyType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concreteMetaclass.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end
+
+template createOclHelper(fb : gbind!OclFeatureBinding, concreteMetaclass : gbind!ConcreteMetaclass, 
+						 atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = fb.conceptFeature
+				initExpression = atl_ocl_expr
+				type = atl!OclAnyType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concreteMetaclass.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end
+
+template createOclAttributeHelperFromLocalHelper(h : gbind!LocalHelper, concreteMetaclass : gbind!ConcreteMetaclass, 
+						 atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = h.feature
+				initExpression = atl_ocl_expr
+				type = atl!OclAnyType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concreteMetaclass.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end
+
+template createWhenClauseHelper(concept : gbind!ConceptMetaclass, atl_model : atl!OclModel, atl_ocl_expr : atl!OclExpression) 
+	atl!Helper {
+		definition = atl!OclFeatureDefinition {
+			feature = atl!Attribute {
+				name = concept.name.concat("__filter__")
+				initExpression = atl_ocl_expr
+				type = atl!BooleanType { }
+			}
+			context_ = atl!OclContextDefinition {
+				context_ = atl!OclModelElement { 
+					name  = concept.name
+					model = atl_model 
+				}
+			}		
+		}
+	}
+end

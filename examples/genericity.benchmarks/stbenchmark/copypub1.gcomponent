@@ -1,0 +1,9 @@
+transformation component copypub1 {
+	source concept PUB1 : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore"
+	target concept PUB2 : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore"
+	source model in  : PUB1
+	target model out : PUB2
+	
+	definition atl "platform:/resource/genericity.benchmarks/stbenchmark/trafo/copypub1.atl" 
+		with IN : PUB1 = in, PUB2 = out
+}

@@ -1,0 +1,88 @@
+--
+-- Binding between FlowDiagram concept and SFC
+-- 
+-- Notes:
+-- 		This binding is complex, but writing a transformation for this XSD-based meta-model
+--		would have been a lot more, because it would have mixed both concerns: dealing with
+--      a degenerated meta-model and transforming to petri-nets. In some way, this binding
+--      is just fixing the meta-model.
+binding sfc {  
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel SFC  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/sfc2pn/tc60201.ecore"
+	
+	class FlowDiagram to SFCType1	
+	class Node        to StepType, TransitionType1, -- Important to add here every "virtual subclass"
+	                     SelectionDivergenceType, SelectionConvergenceType, 
+	                     SimultaneousDivergenceType, SimultaneousConvergenceType 
+	
+	-- Edges are not transitions (which has a different semantics), 
+	-- but Connection/ConnectionPointIn which is an structural concept to link "SFC nodes" 
+	-- (which include transitions)
+	-- class FlowEdge    to TransitionType
+	class FlowEdge to Connection
+	
+	class Task        to StepType, TransitionType1 
+	class FinalTask   to NONE
+	-- Not sure, but I think that there are no final tasks in this language
+		     						           
+	class ExclusiveChoice to SelectionDivergenceType
+	-- HOW TO MAP THE SELECTION CONVERGENCE TYPE? -> Not sure about the semantics
+	class SimpleMerge     to SelectionConvergenceType
+	                                        
+	class Synchronization   to SimultaneousConvergenceType
+	class ParallelSplit     to SimultaneousDivergenceType
+
+	class MultiChoice     to NONE	
+	
+	feature FlowDiagram.nodes is allNodes
+	-- 
+	feature FlowDiagram.edges is transition	
+
+	feature FlowEdge."in" = SFC!SFCType1.allInstances()->first().allNodes->any(n | n.localId = self.refLocalId) 
+	feature FlowEdge.out  is parent
+
+	-- feature Node."in" = FD!Connection.allInstances()->select(c | c.parent = self )
+	
+	feature Node[StepType]."in" = self.connectionPointIn.connection 
+	feature Node[StepType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[TransitionType1]."in" = self.connectionPointIn.connection 
+	feature Node[TransitionType1].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SelectionDivergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SelectionDivergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SelectionConvergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SelectionConvergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SimultaneousDivergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SimultaneousDivergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SimultaneousConvergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SimultaneousConvergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+
+	-- I forgot to use [ ] to qualify the isInitial/final
+	feature Task[StepType].isInitial is initialStep
+	feature Task[TransitionType1].isInitial   = false   	
+
+	-- feature Task[StepType].isFinal   = false   	
+	-- feature Task[TransitionType1].isFinal   = false   	
+
+	feature FinalTask.isTerminating = false -- me lo he inventado
+	feature FinalTask.isMandatory = false
+	
+	
+	helper Connection.parent : OclAny = self.refImmediateComposite().refImmediateComposite()
+	
+	helper SFCType1.allNodes : OclAny = self.step.
+									 union(self.transition).
+	                                 union(self.selectionDivergence).
+	                                 union(self.selectionConvergence).
+	                                 union(self.simultaneousDivergence).
+	                                 union(self.simultaneousConvergence)	                                 
+
+}
+
+
+

@@ -1,0 +1,11 @@
+composite component uml2measure {
+	uses "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.gcomponent"  
+	binding bindUML = "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/uml2measure/uml2oo.gbind"
+			
+	source concept UML:     "http://www.eclipse.org/uml2/4.0.0/UML"
+	target concept METRICS: "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/metric.ecore"
+	source model in  : UML     = "platform:/resource/genericity.benchmarks/components/oo2measure/models/example-ecore.ecore" 
+	target model out : METRICS = "platform:/resource/genericity.benchmarks/components/oo2measure/models/output.xmi"
+	
+	compose apply oo2measure(bindUML(in)) -> (out)
+}

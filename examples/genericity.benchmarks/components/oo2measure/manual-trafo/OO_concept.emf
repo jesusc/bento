@@ -1,0 +1,50 @@
+@namespace(uri="simple_OO_concept", prefix="simple_OO_concept")
+package simple_OO_concept;
+
+abstract class NamedElement {
+   attr String name;
+}
+
+class Package extends NamedElement {
+   val Class[*] classes;
+   val Dependency[*] dependencies;
+}
+
+// UML-specific
+class Dependency {   
+  ref NamedElement[1..*] supplier;
+  ref NamedElement[1..*] client;
+}
+
+class Class extends NamedElement {
+  attr boolean     isAbstract;
+  val Attribute[*] attributes;
+  val Operation[*] operations;
+  ref Class[*]     parents; 
+}
+
+abstract class Feature {
+  attr boolean isPublic;
+  attr boolean isProtected;   
+  attr boolean isPrivate;   
+}
+
+class Attribute extends NamedElement, Feature {
+  ref Class[0..1] atttype;
+}
+
+class Operation extends NamedElement, Feature {
+  val Parameter[*] parameters; 
+
+  // Indicates a class that executes the behaviour of the operation
+  ref Behavior[*] method;   
+}
+
+class Behavior extends Class {   
+}
+
+class Parameter {
+  ref Class[0..1] partype;
+}
+
+

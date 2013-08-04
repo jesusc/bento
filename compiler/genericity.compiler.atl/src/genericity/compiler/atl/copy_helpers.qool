@@ -1,0 +1,77 @@
+/**
+ * Copy helpers defined in the binding specification.
+ */
+qool copy_helpers(atl, gbind, params) -> ()
+
+
+
+// rt model for traces if needed!
+// local queue genericQ    : rt!generic
+
+// ATL elements
+// model queue mOclModelElement : atl!OclModelElement
+
+// GBind elements
+model queue mLocalHelper : gbind!LocalHelper
+
+// 	Dsl.LocalHelper ::= "helper" context[]  "." feature[] ":" type "=" body : Simpleocl.OclExpression; //ocl.OclExpression;
+
+
+
+//
+// Begin-of rules
+//
+
+segment CopyHelpers
+	concreteMetamodelName = params!BindingData.all_instances.first.concreteMetamodelName		
+	ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(concreteMetamodelName) }.first
+
+	forall m from mLocalHelper
+		ocl_expr = m.body
+				
+		helper = m.parameters.size.gt(0).if_else({
+			filter_view = { |o|
+				o.is_child_of(m).or(o.kind_of(gbind!MetamodelDeclaration))
+			}		
+
+			created_helper = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+					 input-view-filter filter_view
+					 output-element m[helper.t]
+		
+			// Fill elements of the helper	
+			d = created_helper.definition
+			f = created_helper.definition.feature 
+			f.returnType = atl!OclAnyType.new
+			
+			context_ = atl!OclContextDefinition.new
+			context_2 = atl!OclModelElement.new 
+			context_2.name  = m.context.name
+			context_2.^model = ocl_model
+			context_.context_ = context_2
+			
+			d.context_ = context_
+			
+			created_helper
+			
+		}, {
+			filter_view2 = { |o|
+				o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
+			}		
+
+			atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+					 input-view-filter filter_view2
+					 output-element ocl_expr[expr.t]
+	
+			invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+					 entrypoint createOclAttributeHelperFromLocalHelper(m, m.context, ocl_model, atl_expr)
+		})
+		
+		module = atl!Module.all_instances.first
+		module.elements = helper
+		// conceptFeature
+		// conceptClass : ConceptMetaclass
+		// qualifier... ConcreteMetaclass
+		// concreteFeature
+	end    
+end
+

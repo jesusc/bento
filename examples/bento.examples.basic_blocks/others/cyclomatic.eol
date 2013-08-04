@@ -1,0 +1,15 @@
+-- Calculates the cyclomatic complexity of each BlockChunck
+
+for (c in BlockChunk.all) {
+  ('Cyclomatic complexity of '+c.identifier.first()+' = '+CComplexity(c)).println();
+}
+
+operation CComplexity(c : BlockChunk) : Integer {
+  var nodes : Integer := c.blocks.size();
+  var edges : Integer := 0;
+  
+  for (n in c.blocks) 
+    edges := edges + n.edges.size();  
+  
+  return edges-nodes+2;
+}

@@ -1,0 +1,11 @@
+composite component km32measure_oo {
+	uses "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.gcomponent"    
+	binding bindKM3 = "platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/km32measure/km32oo.gbind"
+			
+	source concept KM3     : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/KM3.ecore"
+	target concept Measure : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/Measure.ecore"
+	source model in  : KM3     = "platform:/resource/genericity.benchmarks/components/oo2measure/models/example-km3.model" 
+	target model out : Measure = "platform:/resource/genericity.benchmarks/components/oo2measure/models/output3.xmi"
+	
+	compose apply oo2measure(bindKM3(in)) -> (out)
+}

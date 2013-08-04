@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bio_src:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bio_src="http://miso.es/genericity/benchmarks/bio_src">
+  <protein name="Protein1"/>
+  <protein name="Protein2"/>
+  <protein name="Protein3"/>
+  <genes name="Gen1" type="primary" protein="//@protein.0"/>
+  <genes name="Gen2" type="synonym" protein="//@protein.1"/>
+</bio_src:Model>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simpleUML:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simpleUML="http://genericity/examples/simpleUML" xsi:schemaLocation="http://genericity/examples/simpleUML ../../metamodels/SimpleUML.ecore">
+  <classes simpleName="A"/>
+  <classes simpleName="B" superclasses="//@classes.0"/>
+  <classes simpleName="C"/>
+  <classes simpleName="D" superclasses="//@classes.1 //@classes.2"/>
+</simpleUML:Model>

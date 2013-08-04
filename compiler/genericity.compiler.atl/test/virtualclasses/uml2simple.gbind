@@ -1,0 +1,26 @@
+
+binding uml2simple {  
+	concept   UML    : "platform:/resource/genericity.compiler.atl/metamodels/UML.ecore"
+	metamodel Simple : "platform:/resource/genericity.compiler.atl/metamodels/SimpleUML.ecore"
+	
+	
+	class MyGeneralization {
+		ref src     : SimpleClass
+		ref general : SimpleClass
+	} init = UML!Class.allInstances->collect(c| c.generalization->collect(g | 
+		-- #MyGeneralization 
+		Tuple { src = c, general = g.general }
+	))
+	
+	class Class to SimpleClass		
+	class Generalization to virtual MyGeneralization
+	   -- in Class.generalization
+	
+	feature Class.name is umlName
+	-- feature Class.generalization = self.generalization_is_src
+	feature Class.generalization = Simple!MyGeneralization.allInstances
+	  
+	-- helper Class.find_by_src(param : String) : Sequence(Simple!Class) = self.things     	
+}
+
+

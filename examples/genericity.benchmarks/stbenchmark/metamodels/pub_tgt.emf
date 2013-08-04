@@ -1,0 +1,36 @@
+@namespace(uri="http://miso.es/genericity/benchmarks/pub_tgt", prefix="pub_tgt")
+package pub_tgt;
+
+// Version 0 -> Unnesting scenario
+class Model {
+	val Publication[*] publications;
+}
+
+class Publication {
+	attr String[1] Title;
+	attr int[1] Year;
+	attr String[1] PublishedIn;
+	
+	attr String[1] AuthorName;
+}
+
+
+// Version 1 -> Unnesting scenario
+class Model1 {
+	val Period1[*] periods;
+}
+
+class Period1 {
+   attr int Year;
+   val Author1[*] Authors;
+}
+
+class Author1 {
+   attr String[1] Name;
+   val Publication1[*] Publications;
+}
+
+class Publication1 {
+	attr String[1] Title;
+	attr String[1] PublishedIn;
+}

@@ -1,0 +1,35 @@
+binding f_unnesting {  
+	concept   PUB_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore"
+	metamodel PUB_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_tgt.ecore"
+		
+	-- In mapping tools this cross-product is specified in a visual editor...
+	-- Curiosly, for the nesting scenario one needs to perform an unnesting... 
+	--   * Our way of specifying mappings is: "tell me what I need to do to see TGT as SRC"
+	--   * while classic mapping tools is "tell me what I need to do transform SRC into TGT"
+	
+	class UnnestedPeriodAuthorPublication {
+		att title : String
+		att name : String
+		att publishedIn : String
+		att year : Integer
+	} init = PUB_TGT!Period1.allInstances()->collect(p|
+		p.Authors->collect(a |
+			a.Publications->collect(pub|
+				Tuple { 
+					year  = p.Year,
+					title = pub.Title, 
+					name  = a.Name,
+					publishedIn = pub.PublishedIn
+				}
+			)
+		)->flatten()
+	)->flatten()
+	
+	class Reference1 to virtual UnnestedPeriodAuthorPublication
+	
+	-- feature Reference.title is Title
+	-- feature Reference.year  is Year
+	-- feature Reference.publishedIn is PublishedIn
+	-- feature Reference.name is Name
+	
+ }

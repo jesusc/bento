@@ -1,0 +1,24 @@
+binding c_horizontal_partition {  
+	concept   BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	metamodel BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	
+	-- From copying benchmark
+	class Protein to Protein
+	feature Protein.name      is Name
+	feature Protein.accession is Accession
+	feature Protein.created   is Created
+	
+	
+	-- Horizontal partition
+	class Gene to Gene, Synonym 
+	
+	feature Gene[Gene].name is Name
+	feature Gene[Gene].protein is Protein
+	feature Gene[Gene].type = 'primary'
+	 
+	feature Gene[Synonym].name is Name
+	feature Gene[Synonym].protein is Protein
+	feature Gene[Synonym].type = 'synonym'
+	 
+	
+}

@@ -1,0 +1,65 @@
+--
+-- Binding between FlowDiagram concept and BENDER 
+--
+binding bender2fd {  
+	enable-class-merge
+	
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel BENDER : "platform:/resource/genericity.benchmarks/components/flowdiagrams/bender2pn/StateMachine.ecore"
+
+	class FlowDiagram to StateMachine	
+	class Node        to State, Collected
+	class FlowEdge    to Transition, Branch
+	
+	class Task            to State	    
+						--- when self.oclIsTypeOf(FD!State)  						          
+	class ExclusiveChoice to Collected
+	class FinalTask       to FinalState    
+	                                        
+	class ParallelSplit   to NONE
+	class Synchronization to NONE
+	class MultiChoice     to NONE
+	class SimpleMerge     to NONE
+	
+	feature FlowDiagram.nodes is states
+	feature FlowDiagram.edges = self.states->collect(s | s.outs).flatten()
+
+	feature FlowEdge[Transition]."in" is src
+	feature FlowEdge[Transition].out = 
+		if self.oclIsKindOf(FD!Collected) then 
+			self --> the transition goes to itself, but seen as a node 
+		else 
+			self.defaultTar
+		endif
+
+	feature FlowEdge[Branch]."in" = self.refImmediateComposite
+	feature FlowEdge[Branch].out is out
+
+	feature Task.name is nombre
+	
+	-- feature Node[State].name = self.nombre
+	feature Node[State].ins  = FD!Transition.allInstances()->select(t | t.defaultTar = self)
+	feature Node[State].outs  is outs
+
+	-- feature Node[Collected].name = 'collected'
+	feature Node[Collected].ins = Sequence { self } -- This is weird (it returns itself as a transition)
+	feature Node[Collected].outs  is branches
+
+	feature Task[State].isInitial = self.oclIsKindOf(BENDER!InitialState)
+	-- feature Task[State].isFinal   = self.oclIsKindOf(BENDER!FinalState)    
+
+	feature Task[Collected].isInitial = false
+	-- feature Task[Collected].isFinal   = false    
+
+	-- Don't know the actual semantics of Bender, so false which seems to generate a simpler petri net
+	feature FinalTask.isTerminating = false
+	feature FinalTask.isMandatory = false
+
+}
+
+-- The need for changing in/out -> ins/outs to avoid name conflicts is because
+-- in some way we are making Collected to inherit both from Node and Transition,
+-- so the issue with multiple inheritance of choosing one implementation for the
+-- same method appears.
+
+

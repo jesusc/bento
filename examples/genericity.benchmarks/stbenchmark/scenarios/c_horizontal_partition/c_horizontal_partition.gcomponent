@@ -1,0 +1,11 @@
+composite component c_horizontal_partition {
+	uses "platform:/resource/genericity.benchmarks/stbenchmark/copybio_c_horizontal_partition.gcomponent"  
+	binding bindBIO = "platform:/resource/genericity.benchmarks/stbenchmark/scenarios/c_horizontal_partition/c_horizontal_partition.gbind"
+			
+	source concept BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	target concept BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	source model in  : BIO_TGT = "platform:/resource/genericity.benchmarks/stbenchmark/models/tgt_proteins.xmi" 
+	target model out : BIO_SRC = "platform:/resource/genericity.benchmarks/stbenchmark/tmp_"
+	
+	compose apply copybio_c_horizontal_partition(bindBIO(in)) -> (out)
+}

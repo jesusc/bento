@@ -1,0 +1,36 @@
+binding f_unnesting {  
+	concept   PUB_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore"
+	metamodel PUB_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_tgt.ecore"
+	
+	-- In mapping tools this cross-product is specified in a visual editor...
+	--class AuthorPublication {
+	--	att Title : String
+	--	att AuthorName : String
+	--	att PublishedIn : String
+	--	att Year : Integer
+	--} init = PUB_TGT!Reference.allInstances()->collect(r|
+	--	r.authors->collect(a|
+	--		Tuple { 
+	--			Title = r.title, 
+	--			Name  = r.name,
+	--			PublishedIn = r.publishedIn,
+	--			AuthorName = a.name
+	--		}
+	--	)->flatten()
+	--)
+	
+	
+	-- Unnesting
+	-- A class merge is performed because the reference/author appears merged in Publication 
+	-- * This is different to what the STBenchmark expects, which is to perform the cross-product of Reference/Author.
+	--   However, this mapping has a different nature as we do not want to transform, but to induce an adaptation
+	class Reference to Publication
+	feature Reference.title is Title
+	feature Reference.year  is Year
+	feature Reference.publishedIn is PublishedIn
+	feature Reference.authors = Sequence { self } -- Sometimes class merge requires things like this...
+	
+	class Author to Publication
+	feature Author.name is AuthorName
+	
+ }

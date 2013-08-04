@@ -1,0 +1,41 @@
+-- @path BIO1=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+-- @path BIO2=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+
+module copybio;
+create OUT : BIO2 from IN : BIO1;
+
+rule protein {
+	from
+		src : BIO1!Protein
+	to 
+		tgt : BIO2!Protein (
+			name      <- src.name,
+			accession <- src.accession,
+			created   <- src.created
+		)
+}
+
+rule gene {
+	from
+		src : BIO1!Gene
+	to 
+		tgt : BIO2!Gene (
+			name <- src.name,
+			type <- src.type,
+			protein <- src.protein
+		)
+}
+
+rule reaction {
+	from
+		src : BIO1!Reaction
+	to 
+		tgt : BIO2!Reaction (
+			entry <- src.entry,
+			name <- src.name,
+			comment <- src.comment,
+			orthology <- src.orthology,
+			definition <- src.definition,
+			equation <- src.equation
+		)
+}

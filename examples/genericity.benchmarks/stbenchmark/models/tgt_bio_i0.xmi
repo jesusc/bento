@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bio_tg:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bio_tg="http://miso.es/genericity/benchmarks/bio_tgt" xsi:schemaLocation="http://miso.es/genericity/benchmarks/bio_tgt ../metamodels/bio_tgt.ecore">
+  <taxonomies Name="Taxonomy0" Class=""/>
+</bio_tg:Model>

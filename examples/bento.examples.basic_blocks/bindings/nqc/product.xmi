@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ASCII"?>
+<NQC_NS_Prefix:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:NQC_NS_Prefix="NQC_URI">
+  <Functions Name="product">
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Functions.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Functions.0/@LocalVariables.1"/>
+      <Expression xsi:type="NQC_NS_Prefix:IntegerConstant"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Label Label="start_loop"/>
+      <Variable Variable="//@Functions.0/@LocalVariables.0"/>
+      <Expression xsi:type="NQC_NS_Prefix:BinaryExpression">
+        <Operand1 xsi:type="NQC_NS_Prefix:VariableExpression" Variable="//@Functions.0/@LocalVariables.0"/>
+        <Operand2 xsi:type="NQC_NS_Prefix:BinaryExpression" Operator="times">
+          <Operand1 xsi:type="NQC_NS_Prefix:ArrayExpression" Variable="//@Functions.0/@Parameters.0">
+            <index xsi:type="NQC_NS_Prefix:VariableExpression" Variable="//@Functions.0/@LocalVariables.1"/>
+          </Operand1>
+          <Operand2 xsi:type="NQC_NS_Prefix:ArrayExpression" Variable="//@Functions.0/@Parameters.1">
+            <index xsi:type="NQC_NS_Prefix:VariableExpression" Variable="//@Functions.0/@LocalVariables.1"/>
+          </Operand2>
+        </Operand2>
+      </Expression>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:AssignmentStatement">
+      <Variable Variable="//@Functions.0/@LocalVariables.1"/>
+      <Expression xsi:type="NQC_NS_Prefix:BinaryExpression">
+        <Operand1 xsi:type="NQC_NS_Prefix:VariableExpression" Variable="//@Functions.0/@LocalVariables.1"/>
+        <Operand2 xsi:type="NQC_NS_Prefix:IntegerConstant" Value="1"/>
+      </Expression>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:IfStatement">
+      <Condition xsi:type="NQC_NS_Prefix:BinaryExpression" Operator="less">
+        <Operand1 xsi:type="NQC_NS_Prefix:VariableExpression" Variable="//@Functions.0/@LocalVariables.1"/>
+        <Operand2 xsi:type="NQC_NS_Prefix:IntegerConstant" Value="20"/>
+      </Condition>
+      <Consequence xsi:type="NQC_NS_Prefix:GoToStatement" JumpLabel="//@Functions.0/@Statements.2/@Label"/>
+    </Statements>
+    <Statements xsi:type="NQC_NS_Prefix:FunctionCall" Callee="//@Functions.1">
+      <Parameters xsi:type="NQC_NS_Prefix:VariableExpression" Variable="//@Functions.0/@LocalVariables.0"/>
+    </Statements>
+    <LocalVariables Name="prod"/>
+    <LocalVariables Name="i"/>
+    <Parameters Name="a" Type="IntegerArray"/>
+    <Parameters Name="b" Type="IntegerArray"/>
+  </Functions>
+  <Functions Name="println">
+    <Statements xsi:type="NQC_NS_Prefix:EmptyStatement"/>
+  </Functions>
+</NQC_NS_Prefix:Program>

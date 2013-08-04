@@ -1,0 +1,11 @@
+composite component i_denormalization {
+	uses "platform:/resource/genericity.benchmarks/stbenchmark/copybio_i_denormalization.gcomponent"  
+	binding bindBIO = "platform:/resource/genericity.benchmarks/stbenchmark/scenarios/i_denormalization/i_denormalization.gbind"
+			
+	source concept BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	target concept BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	source model in  : BIO_TGT = "platform:/resource/genericity.benchmarks/stbenchmark/models/tgt_proteins.xmi" 
+	target model out : BIO_SRC = "platform:/resource/genericity.benchmarks/stbenchmark/tmp_"
+	
+	compose apply copybio_i_denormalization(bindBIO(in)) -> (out)
+}

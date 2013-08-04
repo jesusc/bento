@@ -1,0 +1,11 @@
+composite component basic_blocks_plsql {
+	uses "platform:/resource/bento.examples.basic_blocks/basic_blocks.gcomponent"    
+	binding bindPLSQL = "platform:/resource/bento.examples.basic_blocks/bindings/plsql/plsql.gbind"
+			
+	source concept plsql : "platform:/resource/bento.examples.basic_blocks/bindings/plsql/plsql.ecore"
+	target concept BBL    : "platform:/resource/bento.examples.basic_blocks/metamodels/BasicBlocks.ecore"
+	source model in  : plsql = "platform:/resource/bento.examples.basic_blocks/bindings/plsql/when_checkbox_changed.xmi" 
+	target model out : BBL = "platform:/resource/bento.examples.basic_blocks/tmp_/output.xmi"
+	
+	compose apply basic_blocks(bindPLSQL(in)) -> (out)
+}

@@ -1,0 +1,10 @@
+
+transformation component uml2java {
+	source concept uml  : "Class.ecore"
+	target concept java_ : "Java.ecore"
+	source model in : uml
+	target model out : java_
+		
+	definition atl "uml2java.atl"
+			with IN = in, OUT = out 
+}

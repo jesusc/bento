@@ -1,0 +1,15 @@
+
+binding class2java {
+	concept    OO  : "OO.ecore"
+	metamodel  UML : "UML.ecore"
+ 
+	class Class to UMLClass
+	class Attribute to UMLAttribute
+	
+	feature Class[UMLClass].name is umlName
+
+	-- feature Attribute.name is umlName
+
+	feature Attribute.name = self.umlName
+    feature Class.superclasses = self.generalizations->collect(g | g.reference)
+}

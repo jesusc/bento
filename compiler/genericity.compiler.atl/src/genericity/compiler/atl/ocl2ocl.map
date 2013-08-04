@@ -1,0 +1,199 @@
+mappings ocl2ocl(gbind) -> (atl)
+  uses callexpr as callexpr
+
+  [expr]
+  delegate from _ : gbind!PropertyCallExp 
+             to callexpr!result
+  
+  [expr]
+  from gbind : gbind!IteratorExp
+    to   atl :   atl!IteratorExp
+    
+	atl.name = gbind.name
+	atl.body      <- gbind.body
+	atl.iterators <- gbind.iterators
+  end
+               
+  [expr]
+  from gbind : gbind!RealExp
+    to   atl :   atl!RealExp
+	atl.realSymbol = gbind.realSymbol
+  end
+
+  [expr]
+  from gbind : gbind!StringExp
+    to   atl :   atl!StringExp
+	atl.stringSymbol = gbind.stringSymbol
+  end
+
+  [expr]
+  from gbind : gbind!OperatorCallExp // There are several empty subclasses: AddOpCallExp, EqOpCallExp, MulOpCallExp
+    to   atl :   atl!OperatorCallExp
+	atl.operationName = gbind.operationName
+	atl.source    <- gbind.source
+	atl.arguments <- gbind.argument  
+  end
+
+  [expr]
+  from gbind : gbind!BooleanExp
+    to   atl :   atl!BooleanExp
+    
+	atl.booleanSymbol = gbind.booleanSymbol
+  end
+
+  [expr]
+  from gbind : gbind!OclUndefinedExp
+    to   atl :   atl!OclUndefinedExp
+  end
+
+
+  [expr]
+  from gbind : gbind!IntegerExp
+    to   atl :   atl!IntegerExp
+    
+	atl.integerSymbol = gbind.integerSymbol
+  end
+
+  [expr]
+  from gbind : gbind!VariableExp
+    to   atl :   atl!VariableExp
+    
+	atl.referredVariable <- gbind.referredVariable  	  
+  end
+
+  [expr]
+  from gbind : gbind!SelfExp
+    to   atl :   atl!VariableExp, selfDcl : atl!VariableDeclaration
+    linking atl.referredVariable = selfDcl
+    
+    selfDcl.varName = 'self'
+    
+	// atl.referredVariable <- gbind.referredVariable  	  
+  end
+
+  from gbind : gbind!Iterator
+    to   atl :   atl!Iterator
+    
+    atl.varName = gbind.varName
+    // atl.variableExp <- gbind.variableExp
+  end
+
+  [expr]
+  from gbind : gbind!OperationCall !
+    to   atl :   atl!OperationCallExp
+
+	atl.operationName = gbind.operationName
+  	atl.arguments <- gbind.arguments
+  end
+
+  // TODO: Add "dynamic dispatch" to queues, because CollectionOperationCall
+  //       inherits from OperationCall, so both rules are applied 
+  //       Quick hack: put CollectionOperationCall the last one..
+  [expr]
+  from gbind : gbind!CollectionOperationCall
+    to   atl :   atl!CollectionOperationCallExp
+
+	atl.operationName = gbind.operationName
+	atl.arguments <- gbind.arguments
+  end
+
+  [expr]
+  from gbind : gbind!OclModelElementExp
+    to   atl :   atl!OclModelElement
+
+	atl.name = gbind.name
+	atl.model <- gbind.model
+  end
+
+  [expr]
+  from gbind : gbind!IfExp
+    to   atl :   atl!IfExp
+
+	atl.thenExpression <- gbind.thenExpression
+	atl.condition      <- gbind.condition
+	atl.elseExpression <- gbind.elseExpression
+  end
+
+  [expr]
+  from gbind : gbind!LetExp
+    to   atl :   atl!LetExp
+
+	atl.variable <- gbind.variable
+	atl.in_      <- gbind.in_
+  end
+
+  [expr]
+  from gbind : gbind!LocalVariable !
+    to   atl :   atl!VariableDeclaration
+
+	atl.varName = gbind.varName
+	atl.initExpression <- gbind.initExpression
+  	atl.type  <- gbind.type
+  end
+
+  [expr]
+  from gbind : gbind!SequenceExp
+    to   atl :   atl!SequenceExp
+    atl.elements <- gbind.elements
+  end
+
+  [expr]
+  from gbind : gbind!EnumLiteralExp
+    to   atl :   atl!EnumLiteralExp
+    
+    atl.name = gbind.name
+  end
+
+
+  [expr]
+  from gbind : gbind!TupleExp
+    to   atl :   atl!TupleExp
+    
+    atl.tuplePart <- gbind.tuplePart
+  end
+  
+  from gbind : gbind!TuplePart
+    to   atl :   atl!TuplePart
+    
+    atl.varName = gbind.varName
+    atl.initExpression <- gbind.initExpression
+  end
+ 
+
+  // This 79works because in ATL abstract syntax you can have as many
+  // OclModel as you want, but it is not really clean. Doing this right
+  // would require parameterizing this transformation with an initial trace
+  // model that contains the mappings for the source OclModels.
+  from gbind : gbind!OclModel // MetamodelDeclaration perhaps?
+    to   atl :   atl!OclModel
+
+	atl.name = gbind.name
+  end
+
+  // This part is to copy local helpers with parameters
+  // I would prefer to parameterize the transformation with the trace of already created
+  // parameters, and let rules just copy expressions, but...
+  [helper]
+  from gbind : gbind!LocalHelper // MetamodelDeclaration perhaps?
+    to   atl :   atl!Helper, def: atl!OclFeatureDefinition, op : atl!Operation
+    linking def.feature = op
+    linking atl.definition = def
+
+	op.name       =  gbind.feature
+	op.parameters <- gbind.parameters
+	op.body       <- gbind.body
+  end
+
+  from gbind : gbind!HelperParameter 
+    to   atl :   atl!Parameter
+
+	atl.varName = gbind.varName
+	atl.type    <- gbind.type
+  end
+
+
+  from gbind : gbind!OclAnyType
+    to   atl :   atl!OclAnyType
+  end
+
+// end

@@ -1,0 +1,11 @@
+composite component basic_blocks_nqc {
+	uses "platform:/resource/bento.examples.basic_blocks/basic_blocks.gcomponent"    
+	binding bindNQC = "platform:/resource/bento.examples.basic_blocks/bindings/nqc/nqc.gbind"
+			
+	source concept NQC : "platform:/resource/bento.examples.basic_blocks/bindings/nqc/NQC.ecore"
+	target concept BBL    : "platform:/resource/bento.examples.basic_blocks/metamodels/BasicBlocks.ecore"
+	source model in  : NQC = "platform:/resource/bento.examples.basic_blocks/bindings/nqc/simple_nqc_program_1.xmi" 
+	target model out : BBL = "platform:/resource/bento.examples.basic_blocks/tmp_/output.xmi"
+	
+	compose apply basic_blocks(bindNQC(in)) -> (out)
+}

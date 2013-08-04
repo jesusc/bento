@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.compiler.atl/src-gen"
+    modelPluginID="genericity.compiler.atl" modelName="Atl_types" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>atl_types.ecore</foreignModel>
+  <genPackages prefix="AtlTyping" basePackage="genericity.typing" disposableProviderFactory="true"
+      ecorePackage="atl_types.ecore#/">
+    <genClasses image="false" ecoreClass="atl_types.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Type/multivalued"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="atl_types.ecore#//PrimitiveType"/>
+    <genClasses ecoreClass="atl_types.ecore#//BooleanType"/>
+    <genClasses ecoreClass="atl_types.ecore#//IntegerType"/>
+    <genClasses ecoreClass="atl_types.ecore#//StringType"/>
+    <genClasses ecoreClass="atl_types.ecore#//FloatType"/>
+    <genClasses ecoreClass="atl_types.ecore#//TupleType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//TupleType/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//MapType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//MapType/keyType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//MapType/valueType"/>
+    </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//TupleAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//TupleAttribute/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//TupleAttribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//RefType"/>
+    <genClasses ecoreClass="atl_types.ecore#//Unknown"/>
+    <genClasses ecoreClass="atl_types.ecore#//EmptyCollection"/>
+    <genClasses ecoreClass="atl_types.ecore#//EnumType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//EnumType/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//EnumType/eenum"/>
+    </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//Metaclass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//Metaclass/klass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="atl_types.ecore#//ReflectiveType"/>
+    <genClasses ecoreClass="atl_types.ecore#//UnionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//UnionType/possibleTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//ThisModuleType"/>
+    <genClasses ecoreClass="atl_types.ecore#//ReflectiveClass"/>
+    <nestedGenPackages prefix="Annotations" basePackage="genericity.typing.atl_types"
+        disposableProviderFactory="true" ecorePackage="atl_types.ecore#//annotations">
+      <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/AtlAnnotation"/>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/HelperAnnotation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnnotation/helper"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/HelperAnnotation/name"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnnotation/type"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/BindingAnnotation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/rule"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/binding"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/BindingAnnotation/name"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/sourceType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/targetType"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/ExpressionAnnotation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/expr"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/type"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

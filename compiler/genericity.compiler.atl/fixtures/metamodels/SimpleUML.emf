@@ -1,0 +1,24 @@
+@namespace(uri="http://genericity/examples/simpleUML", prefix="simpleUML")
+package simpleUML;
+
+class Model {
+  val UMLClass[*] classes;
+}
+
+class UMLClass {
+  attr String[1] umlName;
+  
+  ref UMLClass[*] superclasses;
+  
+  val Generalization[*] generalizations;
+  val UMLAttribute[*] attributes;
+}
+
+class UMLAttribute {
+  attr String[1] umlName;
+}
+
+class Generalization {
+  ref UMLClass[1] reference;
+}
+

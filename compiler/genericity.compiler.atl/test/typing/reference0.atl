@@ -1,0 +1,15 @@
+-- @path UML=/genericity.compiler.atl/fixtures/metamodels/SimpleUML.ecore
+-- @path UML2=/genericity.compiler.atl/fixtures/metamodels/SimpleUML.ecore
+
+module references0;
+create OUT : UML2 from IN : UML;
+
+rule simple_rule {
+	from
+		in_ : UML!Class
+	to 
+		out_ : UML2!Class (
+			umlName <- in_.name,
+			generalizations <- in_.generalization->first()
+		)
+}

@@ -1,0 +1,13 @@
+@namespace(uri="simple_metrics", prefix="simple_metrics")
+package simple_metrics;
+
+class MetricsSet { 
+   attr String name;
+   val Metric[*] metrics;
+}
+
+class Metric {
+  attr String name;
+  attr Double value; 
+}
+

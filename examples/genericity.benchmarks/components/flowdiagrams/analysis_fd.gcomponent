@@ -1,0 +1,33 @@
+
+composite component WorkflowAnalysis {
+	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/fd2pn.gcomponent"  
+	uses "platform:/resource/genericity.benchmarks/components/flowdiagrams/analysis_pipe.gcomponent"
+	uses "platform:/resource/genericity.benchmarks/components/layout/graphlayouts.gcomponent" 
+	binding bindPIPE = "platform:/resource/genericity.benchmarks/components/flowdiagrams/bindPIPE.gbind"
+	
+	source concept FD : "FlowDiagram.ecore" // where concepts come from?, they could be shared...
+	target concept Analysis : "Analysis.ecore"
+	source model in : FD
+	target model out : Analysis
+	
+	// copied from fd2pn
+	variants 
+		+ finalStateSemantics xor
+			- terminating
+			- nonTerminating
+					
+	// TODO: apply should be something like "apply circle(bindGraph(graph))" 
+	// Maybe we should be allowed to create bindings inline
+	compose seq
+	  // apply fd2pn(in) -> (pipe : analysis_pipe::PIPE[bindPIPE])
+	  apply fd2pn(in) -> (pn)
+	  apply GraphLayouts(pn) -> (lpn) 
+	  apply analysis_pipe(bindPIPE(lpn)) -> (out)
+
+	  // There is another option... 
+	  // apply fd2pn(in) -> (pn)
+	  // apply analysis_pipe(pn : analysis_pipe::PIPE[bindPIPE]) -> (out)
+	  
+
+	  // positional arguments seem simpler
+}

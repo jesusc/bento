@@ -1,0 +1,253 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ */
+qool rewrite_class1(atl, gbind, params) -> ()
+
+model matches
+  class MatchedClassBinding
+	ref oclModelElement : atl!OclModelElement
+	ref classBinding    : gbind!ClassBinding
+  end
+
+  class MatchedRenamingHelper
+	ref featureBinding    : gbind!RenamingFeatureBinding
+	ref concreteMetaclass : gbind!ConcreteMetaclass
+  end
+
+  class MatchedOclHelper
+	ref featureBinding    : gbind!OclFeatureBinding
+	ref concreteMetaclass : gbind!ConcreteMetaclass
+  end
+end
+
+// rt model for traces if needed!
+// local queue genericQ    : rt!generic
+
+// ATL elements
+model queue mOclModelElement : atl!OclModelElement
+
+// GBind elements
+model queue mClassBinding           : gbind!ClassBinding
+model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
+model queue mOclFeatureBinding      : gbind!OclFeatureBinding
+
+// Pattern queues
+local queue pRelevantOclModelElements : atl!OclModelElement
+local queue pMatchedClassBinding1     : matches!MatchedClassBinding
+local queue pMatchedClassBindingN     : matches!MatchedClassBinding
+local queue pMatchedRenamingBinding   : matches!MatchedRenamingHelper
+local queue pMatchedOclBinding        : matches!MatchedOclHelper
+
+//
+// Begin-of PATTERNS
+//
+
+/**
+ * Finds all OclModelElements that refers to the meta-model
+ * being bound (i.e., the meta-model that the binding DSL refers to)
+ */
+segment findRelevantOclModelElements
+	// current_mm = gbind!BindingModel.all_instances.get(0).metamodel.name
+	// TODO: This will be like this when IdcMetaclass is created by an IModel method, now it is not very extensible
+	// current_mm = params!BindingData.boundMetamodelName
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall o from mOclModelElement
+		o.^model.is_nil.if_false {
+			o.^model.name.eq(current_mm).if_true({
+				emit o to pRelevantOclModelElements				
+			})
+		}
+	end    
+end
+
+/**
+ * Matches OclModelElements related to a ClassBinding that
+ * specifies its binding to a concrete metaclass.
+ */
+segment findConceptRef
+	forall o from pRelevantOclModelElements
+		// TODO: Restrict to 1:1 class bindings (probably another pattern)
+		forall cb from mClassBinding		
+		    cb.concept.name.eq(o.name).if_true {
+		    	m = matches!MatchedClassBinding.new
+		    	m.oclModelElement = o
+		    	m.classBinding    = cb
+		    	cb.concrete.size.eq(1).if_else({
+		    		emit m to pMatchedClassBinding1 
+		    	}, {
+		    		emit m to pMatchedClassBindingN
+		    	})
+		    }
+		end
+	end    
+end
+
+
+//
+// End-of Patterns
+//
+
+// =============================================================== //
+
+//
+// Begin-of rules
+//
+
+segment RenameConceptClass		
+
+	// Renames a bound concept element. If it has been bound to
+	// several metaclasses, the first one is picked for the renaming
+	// The rest must be handled by other rules
+	forall m from pMatchedClassBinding1
+		oclModelElement = m.oclModelElement		
+		oclModelElement.name = m.classBinding.concrete.first.name			
+	    oclModelElement.name.println("Changed: ")
+	end
+
+	forall m_n from pMatchedClassBindingN
+	    //emit m to pMatchedClassBinding1
+	    // One thing I could do is to copy everything, using a special 
+	    // copy-transformation (which actually could be just implemented in Java and provided
+	    // as a regular transformation in the form of a library).
+	    // 
+	    // Then, I would invoke this transformation again with a view...
+	    // The view has to be quite smart, because it has to deal with this binding
+	    // as a a 1-to-1 binding. Perhaps a better idea is to invoke another transformation
+	    // that does the rewriting, and perhaps other manipulations... 
+	    oclModelElement = m_n.oclModelElement		
+	    oclModelElement.name.println("Not changed: ")
+	end
+
+end
+
+
+
+// Find features that needs to be transformed to helpers
+// 	* Renaming bindings       -> MatchedRenamingHelper
+//  * Ocl bindings (adapters) -> MatchedOclHelper
+segment findBindingFeatures
+	forall r from mRenamingFeatureBinding
+		m = matches!MatchedRenamingHelper.new
+		m.featureBinding    = r
+
+		r.qualifier.is_nil.if_else({
+			// I would like to use a pattern here...
+			m.concreteMetaclass = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first.concrete.first 		
+		}, {
+			m.concreteMetaclass = r.qualifier
+		})
+		
+		emit m to pMatchedRenamingBinding
+	end
+
+	forall o from mOclFeatureBinding
+		mo = matches!MatchedOclHelper.new
+		mo.featureBinding    = o
+
+		// the same as above
+		o.qualifier.is_nil.if_else({
+			r = o // TODO: Scoping is wrong: r is "visible" from xText point of view from here, but defined above for another scope
+			mo.concreteMetaclass = gbind!ClassBinding.all_instances.select { |cb| cb.concept.name.eq(r.conceptClass.name) }.first.concrete.first
+		}, {
+			mo.concreteMetaclass = o.qualifier
+		})
+		
+		emit mo to pMatchedOclBinding
+	end
+end 
+
+segment CreateHelperForRenamingFeature
+	forall m from pMatchedRenamingBinding
+		// ref featureBinding    : gbind!RenamingFeatureBinding
+		// ref concreteMetaclass : gbind!ConcreteMetaclass
+
+		// invoke gen_atl[atl, gbind].createRenamingHelper(m.featureBinding, m.concreteMetaclass, m)
+		
+		// some transformations has an entrypoint, some they don't
+		
+		// two basic kinds of invocation + variants
+		// schedule external 
+		// schedule internal
+		// invoke   external
+		// invoke   internal
+		// * what is the meaning of external -> the trace is not shared with this transformation
+		//                                      it is an independent transformation -> do something and return a value
+		//
+		// * how to integrate the result with this transformation
+		//        1. get a value and assign somewhere
+		//        2. re-apply a pattern to lookup a value (weird if we invoke a m2m) 
+		//           it could be interesting to be able to find an interesting value in the generated ones
+		//           (I may need to delete elements...)
+		//
+		// * instantiation, then invocation 
+		//     - invocation may need to call an entry point... (e.g., templates)
+		
+		current_mm = params!BindingData.all_instances.first.boundMetamodelName
+		
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+		
+		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createRenamingHelper(m.featureBinding, m.concreteMetaclass, ocl_model)
+		
+		
+		module = atl!Module.all_instances.first
+		module.elements = helper
+		// conceptFeature
+		// conceptClass : ConceptMetaclass
+		// qualifier... ConcreteMetaclass
+		// concreteFeature
+	end    
+end
+
+
+
+segment CreateHelperForOclFeature
+	forall mo from pMatchedOclBinding
+		current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+		ocl_expr  = mo.featureBinding.concrete
+		
+		/*
+		 * Recursive closures are not supported yet!
+		 * 
+		filter_view = { |o|
+			o.eq(ocl_expr).if_else({
+				1.eq(1) // true				
+			}, {
+				o._container.is_nil.if_true({
+					0.eq(1) // false
+				}, {
+					filter_view.call(o._container)
+				})
+			})
+		}
+		*/
+
+		// The same using a Java helper
+		filter_view = { |o|
+			o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
+		}		
+
+
+		// Creating a view
+		//   1. One way would be to pass a queue that contains the elements that contains (or will contain) the elements
+		//      which form of the model seen by the invoked transformation, thus acting as a filter. The problem of this
+		//      is that I needed a new queue per invocation, and now queues are instantiated once at the beginning of the
+		//	    the transformation. New kind of queue -> dynamic queue??
+		//   2. Declarative approach: a set of constructs to describe what is visible: e.g., containedIn, referencedBy, etc.
+		//   3. A closure with a filter expression 
+		atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+				 input-view-filter filter_view
+				 output-element ocl_expr[expr.t]
+
+		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createOclHelper(mo.featureBinding, mo.concreteMetaclass, ocl_model, atl_expr)
+		
+		
+		module = atl!Module.all_instances.first
+		module.elements = helper
+	end
+end
+// End-of rules

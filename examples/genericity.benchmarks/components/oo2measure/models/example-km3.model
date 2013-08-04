@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<KM3:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:KM3="KM3" xmi:id="_7nmE4U93EeKCLtcVwn6CRA" name="org">
+  <contents xsi:type="KM3:Package" xmi:id="_OrloUE96EeKCLtcVwn6CRA" name="eclipse">
+    <contents xsi:type="KM3:Package" xmi:id="_QC9D4E96EeKCLtcVwn6CRA" name="core">
+      <contents xsi:type="KM3:Package" xmi:id="_SWga4E96EeKCLtcVwn6CRA" name="internal">
+        <contents xsi:type="KM3:Package" xmi:id="_TvCUEE96EeKCLtcVwn6CRA" name="preferences">
+          <contents xsi:type="KM3:Package" xmi:id="_VW1YUE96EeKCLtcVwn6CRA" name="legacy">
+            <contents xsi:type="KM3:Class" xmi:id="_XMX9oE96EeKCLtcVwn6CRA" name="InitLegacyPreferences" isAbstract="false" supertypes="_cdWIAE96EeKCLtcVwn6CRA">
+              <structuralFeatures xsi:type="KM3:Attribute" xmi:id="_BALLwE97EeKCLtcVwn6CRA" name="att1"/>
+              <operations xmi:id="_3NMOwE96EeKCLtcVwn6CRA" name="&lt;init>">
+                <parameters xmi:id="_6pGU8E96EeKCLtcVwn6CRA" name="arg0"/>
+                <parameters xmi:id="_6-rjYE96EeKCLtcVwn6CRA" name="arg1" type="_cdWIAE96EeKCLtcVwn6CRA"/>
+              </operations>
+            </contents>
+            <contents xsi:type="KM3:Class" xmi:id="_cdWIAE96EeKCLtcVwn6CRA" location="" name="clase2" isAbstract="true">
+              <operations xmi:id="_kHqIUE96EeKCLtcVwn6CRA" name="&lt;start>" type="_XMX9oE96EeKCLtcVwn6CRA"/>
+            </contents>
+          </contents>
+        </contents>
+      </contents>
+    </contents>
+  </contents>
+</KM3:Package>

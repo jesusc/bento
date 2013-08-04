@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pub_tgt:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:pub_tgt="http://miso.es/genericity/benchmarks/pub_tgt">
+  <publications Title="Reusable Abstractions for Modeling Languages" Year="2013" PublishedIn="Information Systems" AuthorName="Juan de Lara"/>
+  <publications Title="Reusable Abstractions for Modeling Languages" Year="2013" PublishedIn="Information Systems" AuthorName="Esther Guerra"/>
+  <publications Title="Towards a Family of Transformation Languages" Year="2012" PublishedIn="ICMT'12" AuthorName="Jes&#xfa;s S&#xe1;nchez Cuadrado"/>
+  <publications Title="Bottom-up Meta-modeling" Year="2012" PublishedIn="MoDELs'12" AuthorName="Juan de Lara"/>
+  <publications Title="Bottom-up Meta-modeling" Year="2012" PublishedIn="MoDELs'12" AuthorName="Esther Guerra"/>
+  <publications Title="Bottom-up Meta-modeling" Year="2012" PublishedIn="MoDELs'12" AuthorName="Jes&#xfa;s S&#xe1;nchez Cuadrado"/>
+</pub_tgt:Model>

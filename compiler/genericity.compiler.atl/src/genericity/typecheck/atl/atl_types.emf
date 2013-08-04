@@ -1,0 +1,107 @@
+@namespace(uri="http://genericity/types/atl", prefix="atl_types")
+package atl_types;
+
+//import "http://www.eclipse.org/emf/2002/Ecore";
+
+abstract class Type {
+	attr boolean[1] multivalued = false;
+}
+
+abstract class PrimitiveType extends Type {
+}
+
+class BooleanType extends PrimitiveType {
+}
+
+class IntegerType extends PrimitiveType {
+}
+
+class StringType extends PrimitiveType {
+}
+
+class FloatType extends PrimitiveType {
+}
+
+class TupleType extends Type {
+   val TupleAttribute[*] attributes;
+}
+
+class MapType extends Type {
+   val Type[1] keyType;
+   val Type[1] valueType;
+}
+
+class TupleAttribute {
+   attr String[1] name;
+   val Type[1] type;
+}
+
+class RefType extends Type {
+   
+}
+
+class Unknown extends RefType {
+   
+}
+
+class EmptyCollection extends Type {
+   
+}
+
+class EnumType extends Type {
+   attr String[1] name;
+   ref EObject[1] eenum;      
+}
+
+class Metaclass extends RefType {
+   attr String[1] name;
+   ref EClass[1] klass;   
+}
+
+abstract class ReflectiveType extends Type {
+   
+}
+
+class UnionType extends Type {
+	val Type[*] possibleTypes;   
+}
+
+class ThisModuleType extends Type {
+   
+   
+}
+
+/**
+ * This is to support oclType()
+ */
+class ReflectiveClass extends ReflectiveType {
+   
+}
+
+@namespace(uri="http://genericity/types/atl/annotations", prefix="atl_types_annotations")
+package annotations {
+  abstract class AtlAnnotation {
+  }
+
+  class HelperAnnotation extends AtlAnnotation {
+    ref EObject helper;
+	attr String[0..1] name;
+	ref Type[1] type;
+  }
+
+
+  class BindingAnnotation extends AtlAnnotation {
+    ref EObject rule;
+	ref EObject binding;
+	attr String[0..1] name;
+	ref Type[1] sourceType;
+	ref Type[1] targetType;
+  }
+
+  class ExpressionAnnotation extends AtlAnnotation {
+    ref EObject expr;
+	ref Type[1] type;
+  }
+
+}
+

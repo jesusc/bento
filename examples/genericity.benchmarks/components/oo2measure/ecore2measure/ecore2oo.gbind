@@ -1,0 +1,59 @@
+binding ecore2oo {  
+	concept   OO    : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	
+	class EcoreGeneralization {
+		ref general  : EClass
+		ref specific : EClass
+	} init = ECORE!EClass.allInstances()->collect(specific| specific.eSuperTypes->collect(general | 
+		Tuple { 
+			type__ = 'EcoreGeneralization', 
+			general = general, specific = specific
+		}
+	))->flatten()
+	
+	
+	class PackageableElement to EPackage, ENamedElement -- (Class split) named element that may be owned by a package
+    class Package to EPackage 
+    class Class to EClass 
+    class NamedElement to ENamedElement 
+    class Model to NONE --- !!! 
+    class Operation to EOperation 
+    class Feature to EStructuralFeature 
+    class Property to EAttribute, EReference 
+    class Parameter to EParameter     
+   
+    class Generalization to virtual EcoreGeneralization
+    class Dependency to NONE -- Relationship that signifies that a single or a set of model elements requires other model elements for their specification or implementation (???)
+    class Classifier to EClassifier 
+    class TypedElement to ETypedElement 
+    class Type to EClassifier 
+    class BehavioralFeature to EOperation 
+    class Behavior to NONE 
+    class VisibilityKind to NONE -- en ecore no hay visibilidad 
+       
+    feature Package.packagedElement = self.eSubpackages->union(self.eClassifiers)   
+    feature Class.ownedOperation is eOperations    
+    feature Class.ownedAttribute is eStructuralFeatures    
+    
+    -- jesusc: I believe that the mapping is just Sequence {} because there is no notion of nested classifier in Ecore
+    -- feature Class.nestedClassifier = ECORE!EClass.allInstances()->select(c | c.eSuperTypes->includes(self)) -- References all the Classifiers that are defined (nested) within the Class 
+    feature Class.nestedClassifier = Sequence { }
+    
+    feature NamedElement.name is name 
+    feature NamedElement.isAbstract = if self.oclIsKindOf(ECORE!EClass) then self.abstract else true endif -- atributo definido s�lo en una de las subclases
+    feature NamedElement.visibility = #public -- 0 -- true -- en ecore no hay visibilidad 
+    feature Operation.ownedParameter is eParameters 
+
+--  Implicit by the name of virtual class attributes, only mapped because they have the same name
+--  and the rewriting does nothing, otherwise it does not work yet...
+    feature Generalization.general is general
+    feature Generalization.specific is  specific 
+
+--    feature Dependency.supplier is -- no hemos mapeado Dependency
+--    feature Dependency.client is -- no hemos mapeado Dependency
+    feature Classifier.generalization = self.EcoreGeneralization_AllInstances->select(g | g.specific = self)
+    
+    feature TypedElement.type is eType 
+    feature BehavioralFeature.method = Sequence{} -- no hemos mapeado Behavior (es el tipo del atributo) 
+}

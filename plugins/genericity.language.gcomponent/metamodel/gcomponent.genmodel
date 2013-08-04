@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.language.gcomponent/src-gen"
+    modelPluginID="genericity.language.gcomponent" modelName="gcomponent" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>gcomponent.ecore</foreignModel>
+  <genPackages prefix="Gcomponent" basePackage="genericity.language" disposableProviderFactory="true"
+      ecorePackage="gcomponent.ecore#/">
+    <genClasses ecoreClass="gcomponent.ecore#//DummyClass"/>
+    <nestedGenPackages prefix="Core" basePackage="genericity.language.gcomponent"
+        disposableProviderFactory="true" ecorePackage="gcomponent.ecore#//core">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="gcomponent.ecore#//core/Status">
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//core/Status/UNKNOWN"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//core/Status/ALPHA"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//core/Status/BETA"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//core/Status/RELEASE"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//core/NamedElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/NamedElement/name"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Component">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/Component/owner"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/Component/maintainer"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/Component/version"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/Component/status"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Component/source"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Component/target"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Component/sourceModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Component/targetModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Component/generateModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Component/formalParameters"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Model"/>
+      <genClasses ecoreClass="gcomponent.ecore#//core/ParameterModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//core/ParameterModel/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/ParameterModel/resourceName"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/GeneratedModel"/>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Tagged">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Tagged/tags"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/TransformationComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/TransformationComponent/isM2M"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/TransformationComponent/template"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/TransformationComponent/constraints"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/CompositeComponent">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//core/CompositeComponent/uses"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/CompositeComponent/composition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/CompositeComponent/bindings"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/BindingDeclaration">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/BindingDeclaration/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/BindingDeclaration/fileName"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Template"/>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//core/Constraint"/>
+      <genClasses ecoreClass="gcomponent.ecore#//core/OclConstraint"/>
+      <genClasses ecoreClass="gcomponent.ecore#//core/Metamodel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/Metamodel/uri"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//core/Metamodel/constraints"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/Tag">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//core/Tag/value"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//core/Concept"/>
+      <genClasses ecoreClass="gcomponent.ecore#//core/Documentation"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Variants" basePackage="genericity.language.gcomponent"
+        disposableProviderFactory="true" ecorePackage="gcomponent.ecore#//variants">
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//variants/Parameter"/>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//variants/Feature"/>
+      <genClasses ecoreClass="gcomponent.ecore#//variants/SingleFeature"/>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//variants/CompositeFeature">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//variants/CompositeFeature/children"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//variants/XorFeature"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Flowcontrol" basePackage="genericity.language.gcomponent"
+        disposableProviderFactory="true" ecorePackage="gcomponent.ecore#//flowcontrol">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="gcomponent.ecore#//flowcontrol/BooleanOperator">
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/AND"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/OR"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/LESS"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/LESS_THAN"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/GREATER"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/GREATER_THAN"/>
+        <genEnumLiterals ecoreEnumLiteral="gcomponent.ecore#//flowcontrol/BooleanOperator/EQUAL"/>
+      </genEnums>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/Composition">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Composition/step"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//flowcontrol/CompositionStep"/>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/Apply">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Apply/component"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Apply/inputModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Apply/outputModels"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/ApplyParameter">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/model"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/boundConceptQualifier"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/boundConcept"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/ApplyParameter/binding"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/Seq">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Seq/steps"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/Xor">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/Xor/conditions"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/XorCond">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/XorCond/value"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/XorCond/step"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/Par"/>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//flowcontrol/Expression"/>
+      <genClasses image="false" ecoreClass="gcomponent.ecore#//flowcontrol/Value"/>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/BooleanValue"/>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/BooleanExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/BooleanExpression/left"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/BooleanExpression/right"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//flowcontrol/BooleanExpression/operator"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//flowcontrol/FeatureRef">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//flowcontrol/FeatureRef/feature"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Dsl" basePackage="genericity.language.gcomponent" disposableProviderFactory="true"
+        ecorePackage="gcomponent.ecore#//dsl">
+      <genClasses ecoreClass="gcomponent.ecore#//dsl/DefinitionRoot">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//dsl/DefinitionRoot/component"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Technologies" basePackage="genericity.language.gcomponent"
+        disposableProviderFactory="true" ecorePackage="gcomponent.ecore#//technologies">
+      <genClasses ecoreClass="gcomponent.ecore#//technologies/AtlTemplate">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlTemplate/template"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gcomponent.ecore#//technologies/AtlTemplate/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//technologies/AtlParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlParameter/atlModelName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/AtlParameter/atlMetamodelName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gcomponent.ecore#//technologies/AtlParameter/model"/>
+      </genClasses>
+      <genClasses ecoreClass="gcomponent.ecore#//technologies/JavaTemplate">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gcomponent.ecore#//technologies/JavaTemplate/qualifiedClassname"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,30 @@
+
+binding uml2simple {  
+	concept   UML    : "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/metamodels/UML.ecore"
+	metamodel Simple : "platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/metamodels/SimpleUML.ecore"
+	
+	class MyGeneralization {
+		ref "x" : "SimpleClass"
+	} init = UML!Class.allInstances()->collect(c| c.superclasses->collect(g | 
+		-- #MyGeneralization 
+		Tuple { type__ = 'MyGeneralization', src = c, general = g }
+	))->flatten()
+	
+	class Class to SimpleClass		
+	        
+	feature Class.name is simpleName
+	-- feature Class.generalization is superclasses -- TODO: Generate from the class2ref construct
+	feature Class.generalization = self.MyGeneralization_AllInstances->select(g | g.src = self)
+	
+	
+	class Generalization to virtual MyGeneralization
+	
+--	class Generalization to SimpleClass."superclasses" / Class.generalization {
+--      feature Generalization.general is superclasses
+--            -- feature Class.generalizations is superclasses
+--    }
+    
+	--helper Model.myhelper : Sequence(Simple!Class) = self.things
+}
+
+

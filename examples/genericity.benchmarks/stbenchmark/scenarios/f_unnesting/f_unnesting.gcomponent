@@ -1,0 +1,11 @@
+composite component f_unnesting {
+	uses "platform:/resource/genericity.benchmarks/stbenchmark/copypub.gcomponent"  
+	binding bindPUB = "platform:/resource/genericity.benchmarks/stbenchmark/scenarios/f_unnesting/f_unnesting.gbind"
+			
+	source concept BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_tgt.ecore"
+	target concept BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore"
+	source model in  : BIO_TGT = "platform:/resource/genericity.benchmarks/stbenchmark/models/tgt_pub.xmi" 
+	target model out : BIO_SRC = "platform:/resource/genericity.benchmarks/stbenchmark/tmp_"
+	
+	compose apply copypub(bindPUB(in)) -> (out)
+}

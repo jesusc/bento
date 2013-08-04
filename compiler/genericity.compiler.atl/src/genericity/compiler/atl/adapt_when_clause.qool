@@ -1,0 +1,218 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ */
+qool adapt_when_clause(atl, gbind, params) -> ()
+
+model matches
+  class MatchedAttribute2ClassBindingRule
+	ref rule          : gbind!MatchedRule
+	ref classBinding  : gbind!ClassBinding
+  end
+end
+
+// rt model for traces if needed!
+// local queue genericQ    : rt!generic
+
+// ATL elements
+// model queue mOclModelElement : atl!OclModelElement
+
+// GBind elements
+//model queue mClassBinding           : gbind!ClassBinding
+model queue mRenamingFeatureBinding : gbind!RenamingFeatureBinding
+model queue mOclFeatureBinding      : gbind!OclFeatureBinding
+model queue mMatchedRule : atl!MatchedRule
+model queue mClassBinding           : gbind!ClassBinding
+model queue mOperationCallExp : atl!OperationCallExp
+
+
+
+// Pattern queues
+local queue pMatchedAttribute2ClassBindingRule : matches!MatchedAttribute2ClassBindingRule
+local queue pClassBinding_Class2Attribute           : gbind!ClassBinding
+
+//
+// Begin-of patterns
+//
+
+segment findRulesForWhewnClause
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall cb1 from mClassBinding
+	 where cb1.whenClause.is_nil.not
+
+		emit cb1 to pClassBinding_Class2Attribute
+		
+		forall mr from mMatchedRule
+			in_pattern_element = mr.inPattern.elements.first // assumes rules with one input element
+
+			in_pattern_element.type.^model.name.eq(current_mm).if_true {
+			    cb1.concept.name.eq(in_pattern_element.type.name).if_true {
+			    	m = matches!MatchedAttribute2ClassBindingRule.new
+			    	m.rule         = mr
+			    	m.classBinding = cb1
+			    	emit m to pMatchedAttribute2ClassBindingRule
+				}
+			}
+		end
+	end
+end
+
+
+segment AdaptRuleForAttribute2ClassBinding
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+	forall ma1 from pMatchedAttribute2ClassBindingRule
+		rule = ma1.rule
+		// type_name = rule.inPattern.elements.first.type.name
+        // Better to get the type from the binding, which does not change, so scheduling issues arise
+        type_name = ma1.classBinding.concept.name
+      
+      	call = atl!NavigationOrAttributeCallExp.new
+      	call.name = type_name.concat('__filter__')
+      	v = atl!VariableExp.new 
+        v.referredVariable = rule.inPattern.elements.first      	
+      	call.source = v
+
+		rule.inPattern.filter.is_nil.if_else({
+			inP = rule.inPattern
+        	inP.filter = call      			
+		}, {
+	        operator = atl!OperatorCallExp.new
+	        operator.operationName = 'and'
+	        operator.source = rule.inPattern.filter
+	        operator.arguments = call			
+		})
+	end
+
+	// For some reason this generates ".allInstances()->select()->select()" 
+	// (tested in a transformation with a class merge, this happens in the force endpoint rule...)
+	forall op from mOperationCallExp
+	 where op.operationName.eq("allInstances") // TODO: what about oclIsTypeOf!!!
+    
+		ocl_model_element = op.source
+		ocl_model_element.^model.name.eq(current_mm).if_true {	
+			cb = gbind!ClassBinding.all_instances.select { |cb1| cb1.concept.name.eq(ocl_model_element.name).and(cb1.whenClause.is_nil.not) }.first
+			cb.is_nil.if_false {
+
+			    type = ocl_model_element
+      			container = op._refContainer
+      			containing_property = op.containing_property
+				
+				select = atl!IteratorExp.new
+				select.name = 'select'
+				select.source = op
+				
+				it1 = atl!Iterator.new 
+				it1.varName = "__v__"
+	
+				select.iterators = it1
+							
+			    call = atl!NavigationOrAttributeCallExp.new
+      			call.name = type.name.concat("__filter__")
+      			v_exp2 = atl!VariableExp.new
+      			v_exp2.referredVariable = it1
+				call.source = v_exp2
+
+				select.body = call
+      			container.set_inner_expression(select, containing_property)
+				
+			}	
+		}    
+    end
+
+	forall op from mOperationCallExp
+	 where op.operationName.eq("oclIsKindOf") // TODO: what about oclIsTypeOf!!!
+	
+		ocl_model_element = op.arguments.first
+
+		ocl_model_element.^model.name.eq(current_mm).if_true {	
+			cb = gbind!ClassBinding.all_instances.select { |cb1| cb1.concept.name.eq(ocl_model_element.name).and(cb1.whenClause.is_nil.not) }.first
+			cb.is_nil.if_false {
+				
+				// TODO: Decide where to put this adaptation (in this module...?)
+				// Adapt
+			    type = ocl_model_element
+      			container = op._refContainer
+      			containing_property = op.containing_property
+      			
+      			create_let = { 
+      				let_exp = atl!LetExp.new
+					vd = atl!VariableDeclaration.new
+			        vd.id = "__unique_id__".next_id
+		    	    vd.varName = vd.id
+		        	vd.type = atl!OclAnyType.new        
+		        	vd.initExpression = op.source 
+      				let_exp.variable = vd
+      				let_exp
+      			}
+      			let = create_let.call
+      			
+			    // Re-arrange oclIsKindOf -> source now is Let variable
+      			v_exp = atl!VariableExp.new 
+		        v_exp.referredVariable = let.variable
+      			v_exp = op.source 
+
+			    call = atl!NavigationOrAttributeCallExp.new
+      			call.name = type.name.concat("__filter__")
+      			v_exp2 = atl!VariableExp.new
+      			v_exp2.referredVariable = let.variable
+				call.source = v_exp2
+
+      			//let.in_ = call
+
+				if_exp = atl!IfExp.new
+				condition = op
+      			v_exp3 = atl!VariableExp.new 
+		        v_exp3.referredVariable = let.variable
+				op.source = v_exp3
+				
+				if_exp.condition      = condition
+				if_exp.thenExpression = call
+				false_value = atl!BooleanExp.new
+				if_exp.elseExpression = false_value
+				
+				let.in_ = if_exp
+     
+      			container.set_inner_expression(let, containing_property)
+      			//container.put_expression_in_container(let)
+				
+
+				// End-of adaptation 
+			}
+		}	
+
+	end
+end
+
+segment CreateHelperForAttribute2ClassBinding
+	current_mm = params!BindingData.all_instances.first.boundMetamodelName
+
+// This fails with: Incompatible stack heights
+//	forall cb2 from mClassBinding
+//	 where cb2.whenClause.is_nil.not
+
+	forall cb_c2a from pClassBinding_Class2Attribute
+		ocl_model = atl!OclModel.all_instances.select { |atl_model| atl_model.name.eq(current_mm) }.first
+		ocl_expr  = cb_c2a.whenClause
+		
+		// The same using a Java helper
+		filter_view2 = { |o|
+			o.is_child_of(ocl_expr).or(o.kind_of(gbind!MetamodelDeclaration))
+		}		
+
+		atl_expr = invoke-external eclectic.composed_genericity(in = gbind) -> (out = atl)
+				 input-view-filter filter_view2
+				 output-element ocl_expr[expr.t]
+
+		// The helper is attached to the concept class, expecting it to be renamed in subsequent phases
+		helper = invoke-external eclectic.gen_atl(in = gbind) -> (out = atl)
+				 entrypoint createWhenClauseHelper(cb_c2a.concept, ocl_model, atl_expr)
+		
+		
+		module = atl!Module.all_instances.first
+		module.elements = helper
+	end
+end
+
+
+// End-of rules

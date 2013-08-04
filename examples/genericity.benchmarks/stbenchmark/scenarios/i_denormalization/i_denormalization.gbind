@@ -1,0 +1,28 @@
+binding h_self_join {  
+	enable-class-merge
+
+	concept   BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	metamodel BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	
+	-- Class merge without lazy rules... not quite working
+	class Name to Taxon
+	feature Name.id   is Id
+	feature Name.name is Name
+	feature Name.uniqueName is UniqueName
+	feature Name."class" is Class 
+	
+	class Node to Taxon
+	feature Node.taxID is Id
+	feature Node.tax   = self
+	
+	feature Node.parentID is ParentID
+	feature Node.parent   is Parent
+	feature Node.rank     is Rank
+	feature Node.emblCode is EmblCode	
+	
+	-- Added to test binding resolution in class merge
+	class Model to Model
+	feature Model.names = self.taxonomies
+ 	feature Model.nodes = self.taxonomies
+ 
+ }

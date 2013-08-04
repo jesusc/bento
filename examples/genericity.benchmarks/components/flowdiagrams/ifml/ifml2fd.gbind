@@ -1,0 +1,50 @@
+--
+-- Binding between FlowDiagram concept and IFML
+-- 
+-- Some links about IFML:
+--   http://www.ifml.org/?page_id=99
+binding ifml2fd {  
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel IFML : "platform:/resource/genericity.benchmarks/components/flowdiagrams/ifml/IFML.ecore"
+
+    class ExtFlow {
+    	ref in_  : InteractionFlowElement
+    } init = true
+
+	class FlowDiagram to InteractionFlowModel	
+	class Node        to InteractionFlowElement --when not self.oclIsKindOf(IFML!ViewContainer)
+	class FlowEdge    to NavigationFlow
+	class FlowEdge    to virtual ExtFlow
+	
+	-- So far, only 1:1 mapping
+	class Task            to InteractionFlowElement 
+		when self.inInteractionFlows->size() <= 1 and 
+	         self.outInteractionFlows->size() <= 1
+	         						           
+	class ExclusiveChoice to InteractionFlowElement 
+		when self.outInteractionFlows->size() > 1
+	                                                 
+	class ParallelSplit   to NONE
+	class Synchronization to NONE
+	class MultiChoice     to NONE
+	class SimpleMerge     to NONE
+	
+	-- self.interactionFlowModelElements->select(f | not f.oclIsKindOf(IFML!ViewContainer) )
+	feature FlowDiagram.nodes = IFML!InteractionFlowElement.allInstances()
+	feature FlowDiagram.edges = IFML!NavigationFlow.allInstances()
+
+	feature FlowEdge."in" = self.srcInteractionFlowElement.refImmediateComposite() -- the event's container' 
+	feature FlowEdge.out  is trgtInteractionFlowElement
+
+	feature Node."ins" is inInteractionFlows
+	feature Node.outs  = IFML!NavigationFlow.allInstances()->select(n | n."in" = self)
+
+	feature Task.isInitial = self.inInteractionFlows->size() = 0 --sure?
+	feature Task.name is name
+	
+	class FinalTask to NONE -- Or look for  InteractionFlowElement with no outs
+	--feature FinalTask.isTerminating = false
+	--feature FinalTask.isMandatory   = false
+}
+
+

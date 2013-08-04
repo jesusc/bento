@@ -1,0 +1,35 @@
+@namespace(uri="http://genericity/examples/simpleImperative", prefix="simpleImperative")
+package simpleProcedure;
+
+class Program {
+   val Procedure[*] procedures;
+}
+
+class Procedure {
+   attr String[1] name;
+   val  Statement[*] statements_;   
+}
+
+abstract class Label {
+   
+}
+
+abstract class Statement extends Label {
+      
+}
+
+abstract class Goto {
+   ref Label[1] target;
+}
+
+class UnconditionalGoto extends Goto { }
+class   ConditionalGoto extends Goto { 
+   /* Expression... Shall I need it? */
+}
+
+class If extends Statement {
+   val Statement[*] ifStatements_;
+   val Statement[*] elseStatements_;
+}
+
+

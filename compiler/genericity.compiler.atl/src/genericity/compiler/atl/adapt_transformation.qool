@@ -1,0 +1,51 @@
+/**
+ * Rewrites an ATL transformation according to a binding model.
+ * It follows this strategy:
+ * 
+ *   - Match rules and helpers whose context must be rewritten
+ */
+qool adapt_transformation(atl, gbind, params) -> ()
+
+model queue mHelper : atl!Helper // Whatever
+
+segment main
+	filter_view = { |o|
+		1.eq(1)
+	}		
+
+	// adapt the code of all rules and helpers, e.g., oclIsKindOf...
+	invoke-external eclectic.adapt_code(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
+	// adapt when clause (must be before rule copy and duplication, to ensure the original model elementas has not
+	// been changed, and then it is seamlessly propagated)
+	invoke-external eclectic.adapt_when_clause(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
+	// adapt rules, copy rules for cardinality N	
+	invoke-external eclectic.adapt_rules(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
+	// create adapters (this has to be after adapt rules becuase the adapter helpers must not be replicated)
+	invoke-external eclectic.adapt_adapters(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+		
+	// adapt the rest of ocl model elements
+	invoke-external eclectic.adapt_model_elements(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+	
+	// copy_helpers
+	invoke-external eclectic.copy_helpers(atl = atl, gbind = gbind) -> ()
+		input-view-filter filter_view
+
+	// modify for class merge if needed
+	//invoke-external eclectic.class_merge(atl = atl, gbind = gbind) -> ()
+	//	input-view-filter filter_view
+
+end
+
+
+// TODO: 
+//   * The target type of helpers has to be rewritten to OclAny
+//   * Attribute to class binding
+//   * None 

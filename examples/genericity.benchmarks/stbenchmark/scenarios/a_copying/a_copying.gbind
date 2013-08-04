@@ -1,0 +1,12 @@
+binding a_copying {  
+	concept   BIO_SRC : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"
+	metamodel BIO_TGT : "platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"
+	
+	class Protein to Protein
+	
+	feature Protein.name      is Name
+	feature Protein.accession is Accession
+	feature Protein.created   is Created
+	
+	
+}

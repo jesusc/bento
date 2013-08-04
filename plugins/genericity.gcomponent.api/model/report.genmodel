@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.gcomponent.api/src-gen"
+    modelPluginID="genericity.gcomponent.api" modelName="Report" modelPluginClass=""
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>report.ecore</foreignModel>
+  <genPackages prefix="Report" basePackage="genericity.gcomponent" disposableProviderFactory="true"
+      ecorePackage="report.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="report.ecore#//ReportKind">
+      <genEnumLiterals ecoreEnumLiteral="report.ecore#//ReportKind/WARNING"/>
+      <genEnumLiterals ecoreEnumLiteral="report.ecore#//ReportKind/ERROR"/>
+    </genEnums>
+    <genClasses ecoreClass="report.ecore#//ReportElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute report.ecore#//ReportElement/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute report.ecore#//ReportElement/kind"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference report.ecore#//ReportElement/object"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

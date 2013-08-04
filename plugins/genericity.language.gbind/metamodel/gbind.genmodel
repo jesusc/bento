@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.language.gbind/src-gen"
+    modelPluginID="genericity.language.gbind" modelName="Gbind" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>gbind.ecore</foreignModel>
+  <genPackages prefix="Gbind" basePackage="genericity.language" disposableProviderFactory="true"
+      ecorePackage="gbind.ecore#/">
+    <nestedGenPackages prefix="Simpleocl" basePackage="gbind" disposableProviderFactory="true"
+        ecorePackage="gbind.ecore#//simpleocl">
+      <genDataTypes ecoreDataType="gbind.ecore#//simpleocl/Boolean"/>
+      <genDataTypes ecoreDataType="gbind.ecore#//simpleocl/Double"/>
+      <genDataTypes ecoreDataType="gbind.ecore#//simpleocl/Integer"/>
+      <genDataTypes ecoreDataType="gbind.ecore#//simpleocl/String"/>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/LocatedElement">
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/LocatedElement/line"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/LocatedElement/column"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/LocatedElement/charStart"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/LocatedElement/charEnd"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/NamedElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/NamedElement/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/Module">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Module/metamodels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Module/imports"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Module/elements"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/ModuleElement">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/ModuleElement/module"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/Import">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Import/module"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/OclExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/type"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/ifExp3"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/appliedProperty"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/collection"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/letExp"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/loopExp"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/parentOperation"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/initializedVariable"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/ifExp2"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/owningOperation"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/ifExp1"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/owningAttribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclExpression/appliedOperator"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/VariableExp">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/VariableExp/referredVariable"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/SuperExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/SelfExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/EnvExp"/>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/PrimitiveExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/StringExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/StringExp/stringSymbol"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/BooleanExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/BooleanExp/booleanSymbol"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/NumericExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/RealExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/RealExp/realSymbol"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/IntegerExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/IntegerExp/integerSymbol"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/CollectionExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/CollectionExp/elements"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/BagExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OrderedSetExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/SequenceExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/SetExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/TupleExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/TupleExp/tuplePart"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/TuplePart">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/TuplePart/tuple"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/MapExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/MapExp/elements"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/MapElement">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/MapElement/map"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/MapElement/key"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/MapElement/value"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/EnumLiteralExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/EnumLiteralExp/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclUndefinedExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/StaticPropertyCallExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/StaticPropertyCallExp/source"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/StaticPropertyCallExp/staticCall"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/StaticPropertyCall">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/StaticPropertyCall/staticCallExp"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/StaticNavigationOrAttributeCall">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/StaticNavigationOrAttributeCall/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/StaticOperationCall">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/StaticOperationCall/arguments"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/StaticOperationCall/operationName"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/PropertyCallExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/PropertyCallExp/calls"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/PropertyCallExp/source"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/PropertyCall">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/PropertyCall/callExp"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/NavigationOrAttributeCall">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/NavigationOrAttributeCall/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OperationCall">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OperationCall/arguments"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OperationCall/operationName"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OperatorCallExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OperatorCallExp/argument"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OperatorCallExp/operationName"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OperatorCallExp/source"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/NotOpCallExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/RelOpCallExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/EqOpCallExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/AddOpCallExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/IntOpCallExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/MulOpCallExp"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/LambdaCallExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LambdaCallExp/arguments"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/BraceExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/BraceExp/exp"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/CollectionOperationCall"/>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/LoopExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LoopExp/body"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LoopExp/iterators"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/IterateExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/IterateExp/result"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/IteratorExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/IteratorExp/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/LetExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LetExp/variable"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LetExp/in_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/IfExp">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/IfExp/thenExpression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/IfExp/condition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/IfExp/elseExpression"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/VariableDeclaration">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/VariableDeclaration/varName"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/VariableDeclaration/type"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/VariableDeclaration/variableExp"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/LocalVariable">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LocalVariable/letExp"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LocalVariable/initExpression"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LocalVariable/baseExp"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/LocalVariable/eq"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/Iterator">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Iterator/loopExpr"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/Parameter">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Parameter/operation"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/CollectionType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/CollectionType/elementType"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OclType/name"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/definitions"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/oclExpression"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/operation"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/mapType2"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/attribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/mapType"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/collectionTypes"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/tupleTypeAttribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/variableDeclaration"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/lambdaReturnType"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/lambdaArgType"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclType/staticPropertyCall"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclModelElementExp">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclModelElementExp/model"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OclModelElementExp/name"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/Primitive"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/StringType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/BooleanType"/>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/NumericType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/IntegerType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/RealType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/BagType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OrderedSetType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/SequenceType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/SetType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclAnyType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/TupleType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/TupleType/attributes"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/TupleTypeAttribute">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/TupleTypeAttribute/type"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/TupleTypeAttribute/tupleType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/TupleTypeAttribute/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclModelElement">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclModelElement/model"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/MapType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/MapType/valueType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/MapType/keyType"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/LambdaType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LambdaType/returnType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/LambdaType/argumentTypes"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/EnvType"/>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclFeatureDefinition">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclFeatureDefinition/feature"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclFeatureDefinition/context_"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OclFeatureDefinition/static"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclContextDefinition">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclContextDefinition/definition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclContextDefinition/context_"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/OclFeature">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclFeature/definition"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OclFeature/eq"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/Attribute">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Attribute/initExpression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Attribute/type"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/Operation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Operation/parameters"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Operation/returnType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/Operation/body"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//simpleocl/OclModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclModel/elements"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclMetamodel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclMetamodel/model"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//simpleocl/OclMetamodel/uri"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//simpleocl/OclInstanceModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//simpleocl/OclInstanceModel/metamodel"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Dsl" basePackage="gbind" disposableProviderFactory="true"
+        ecorePackage="gbind.ecore#//dsl">
+      <genClasses ecoreClass="gbind.ecore#//dsl/BindingModel">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/bindings"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/helpers"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/conceptMetaclasses"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/concreteMetaclasses"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/virtualMetaclasses"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundConcept"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundMetamodel"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/options"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/BindingOptions">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingOptions/enableClassMerge"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/MetamodelDeclaration">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/MetamodelDeclaration/metamodelURI"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gbind.ecore#//dsl/Metaclass">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/Metaclass/name"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/Metaclass/eclass"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConceptMetaclass"/>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConcreteMetaclass"/>
+      <genClasses image="false" ecoreClass="gbind.ecore#//dsl/ConceptBinding">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/ConceptBinding/debugName"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//dsl/ConceptBinding/model_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ClassBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/ClassBinding/concept"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/ClassBinding/concrete"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/ClassBinding/whenClause"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/IntermediateClassBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concept"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concreteClass"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/concreteReference"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/conceptContext"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/IntermediateClassBinding/conceptReferenceName"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/IntermediateClassBinding/featureBindings"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConcreteReferencDeclaringVar"/>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualMetaclass">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualMetaclass/references"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualMetaclass/attributes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualMetaclass/init"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualFeature">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/VirtualFeature/name"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualReference">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualReference/type_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualAttribute/type_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualClassBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualClassBinding/concept"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualClassBinding/virtual"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualClassBinding/refFeatures"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConceptFeatureRef">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/ConceptFeatureRef/conceptClass"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/ConceptFeatureRef/featureName"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/BaseFeatureBinding">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BaseFeatureBinding/conceptFeature"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/BaseFeatureBinding/conceptClass"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/BaseFeatureBinding/qualifier"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/RenamingFeatureBinding">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/RenamingFeatureBinding/concreteFeature"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/OclFeatureBinding">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/OclFeatureBinding/concrete"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/BaseHelper">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BaseHelper/feature"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BaseHelper/body"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BaseHelper/type"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BaseHelper/model_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/ConceptHelper">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/ConceptHelper/qualifier"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/ConceptHelper/contextClass"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/LocalHelper">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gbind.ecore#//dsl/LocalHelper/context"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/LocalHelper/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/HelperParameter"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

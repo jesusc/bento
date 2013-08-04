@@ -1,0 +1,28 @@
+
+chain genericity(gbind, atl) -> (atl)
+  composite composed_genericity(gbind) -> (atl)
+    atl = ocl2ocl(gbind)
+    atl = callexpr(gbind)  
+  end
+  
+  atl = composed_genericity(gbind) 
+end
+
+// functional manipulation of transformations
+//map -> tal vez map permita la parelización, e iterate la secuencia
+
+
+// in-place transformation
+//iterate(ClassBindingAndRule) { |cbr| // objeto
+	
+//}
+
+
+/*
+ 
+ forall cb : gbind!ClassBinding | cb.isSimple
+ 
+ end 
+ 
+  
+ */

@@ -1,0 +1,431 @@
+-- @path FD=/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore
+-- @path PN=/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore
+module flow2pn;
+create OUT : PN from IN : BPMN;
+
+-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)
+--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; 
+helper context BPMN!Vertex def: oclAsType(t : OclAny) : OclAny =
+ self;
+
+helper context BPMN!Vertex def: typeName : String =
+ self.oclType().name;
+
+helper context BPMN!Vertex def: isTask : Boolean =
+ let __unique_id___0 : OclAny = self in
+ if __unique_id___0.oclIsKindOf(BPMN!Activity) then
+  __unique_id___0.Task__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isFinalTask : Boolean =
+ let __unique_id___1 : OclAny = self in
+ if __unique_id___1.oclIsKindOf(BPMN!Activity) then
+  __unique_id___1.FinalTask__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isTerminatingTask : Boolean =
+ if self.isFinalTask then
+  self.oclAsType(BPMN!Activity).isTerminating
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isParallelSplit : Boolean =
+ let __unique_id___2 : OclAny = self in
+ if __unique_id___2.oclIsKindOf(BPMN!Activity) then
+  __unique_id___2.ParallelSplit__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isSynchronization : Boolean =
+ let __unique_id___3 : OclAny = self in
+ if __unique_id___3.oclIsKindOf(BPMN!Activity) then
+  __unique_id___3.Synchronization__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isExclusiveChoice : Boolean =
+ let __unique_id___4 : OclAny = self in
+ if __unique_id___4.oclIsKindOf(BPMN!Activity) then
+  __unique_id___4.ExclusiveChoice__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isSimpleMerge : Boolean =
+ let __unique_id___5 : OclAny = self in
+ if __unique_id___5.oclIsKindOf(BPMN!Activity) then
+  __unique_id___5.SimpleMerge__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: isMultiChoice : Boolean =
+ let __unique_id___6 : OclAny = self in
+ if __unique_id___6.oclIsKindOf(BPMN!Activity) then
+  __unique_id___6.MultiChoice__filter__
+ else
+  false
+ endif;
+
+helper context BPMN!Vertex def: toPlaceAsInput : Boolean =
+ self.isTask or self.isFinalTask or self.isExclusiveChoice or self.isSimpleMerge or self.isMultiChoice;
+
+helper context BPMN!Vertex def: toPlaceAsOutput : Boolean =
+ self.isTask or self.isFinalTask or self.isExclusiveChoice;
+
+helper context BPMN!Vertex def: toTransitionAsInput : Boolean =
+ self.isSynchronization or self.isParallelSplit;
+
+helper context BPMN!Vertex def: toTransitionAsOutput : Boolean =
+ self.isSynchronization or self.isParallelSplit or self.isSimpleMerge or self.isMultiChoice;
+
+helper context BPMN!Vertex def: parentFlowDiagram : BPMN!BpmnDiagram =
+ BPMN!BpmnDiagram.allInstances()->first();
+
+helper context BPMN!SequenceEdge def: parentFlowDiagram : BPMN!BpmnDiagram =
+ BPMN!BpmnDiagram.allInstances()->first();
+
+helper context Integer def: pow(m : Integer) : Integer =
+ if m > 1 then
+  self * self.pow(m - 1)
+ else
+  self
+ endif; -- n^m
+-- n^m
+helper context Integer def: toSequence() : Sequence(Integer) =
+ if self <= 0 then
+  Sequence {}
+ else
+  Sequence {self}.union((self - 1).toSequence())
+ endif; -- Sequence{1, 2..., n}
+-- Sequence{1, 2..., n}
+helper context Integer def: choices() : Sequence(Sequence(Boolean)) =
+ if self > 1 then
+  (self - 1).choices()->collect(n |
+   n->append(true)
+  )->union((self - 1).choices()->collect(n |
+   n->append(false)
+  ))
+ else
+  Sequence {Sequence {true}, Sequence {false}}
+ endif;
+
+helper context BPMN!Activity def: nodeGenerator : Sequence(TupleType(source : BPMN!Vertex, num : Integer)) =
+ (2.pow(self.outs->size()) - 1).toSequence()->iterate(n; result : Sequence(TupleType(source : BPMN!Vertex, num : Integer)) = Sequence {} |
+  let tuple : OclAny = Tuple {source : BPMN!Vertex = self, num : Integer = n} in
+  result.including(tuple)
+ );
+
+rule create_transition(source : BPMN!Vertex, num : Integer) {
+ using
+ {
+  choices : Sequence(Boolean) = source.outs->size().choices()->at(num);
+  icontrol : Sequence(OclAny) = source.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if source.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   name <- source.typeName + ' ' + num,
+   in <- icontrol.append(source),
+   out <- source.outs->size().toSequence()->iterate(i; result : Sequence(BPMN!Vertex) = Sequence {} |
+    if choices->at(i) = true then
+     result->append(if source.outs->at(i).out.toPlaceAsInput then
+      source.outs.at(i).out
+     else
+      source.outs.at(i)
+     endif)
+    else
+     result
+    endif
+   ).append(ocontrol)
+  )
+ do {
+  -- This is important, it is the result value...
+  -- This is important, it is the result value...
+  transition;
+ }
+} -- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if the transition is not connected to a terminating final task
+-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if the transition is not connected to a terminating final task
+helper context BPMN!SequenceEdge def: isConnectedToTerminating : Boolean =
+ self.out.isTerminatingTask;
+
+helper context BPMN!Vertex def: isConnectedToTerminating : Boolean =
+ self.outs->exists(e |
+  e.isConnectedToTerminating
+ );
+
+helper context BPMN!BpmnDiagram def: control : Sequence(PN!Place) =
+ if self.nodes->exists(n |
+  n.isTerminatingTask
+ ) then
+  Sequence {thisModule.get_control(self)}
+ else
+  Sequence {}
+ endif;
+
+unique lazy rule get_control {
+ from
+  flow : BPMN!BpmnDiagram
+ to
+  place : PN!Place (
+   name <- 'Control',
+   tokens <- 1
+  )
+} -- BUILDING BLOCKS ---------------------------------------------------------------------------------------------
+-- the flow diagram is transformed into a Petri net 
+-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------
+-- the flow diagram is transformed into a Petri net 
+rule flowdiagram {
+ from
+  flow : BPMN!BpmnDiagram
+ to
+  net : PN!PetriNet (
+   elems <- flow.nodes.append(flow.edges.append(flow.nodes->select(n |
+    n.isSimpleMerge
+   )->collect(n |
+    thisModule.create_transition(n, 1)
+   ))).union(flow.nodes->select(n |
+    n.isMultiChoice
+   )->collect(n |
+    n.nodeGenerator
+   )->flatten()->collect(n |
+    thisModule.create_transition(n.source, n.num)
+   )).append(flow.control)->flatten()
+  )
+} -- each task is transformed into a place, with 1 token if it is initial
+-- each task is transformed into a place, with 1 token if it is initial
+rule task {
+ from
+  task : BPMN!Activity
+  (
+   task.Task__filter__
+  )
+ to
+  place : PN!Place (
+   name <- if task.isInitial then
+    'Initial: '.concat(task.name)
+   else
+    task.name
+   endif,
+   tokens <- if task.isInitial then
+    1
+   else
+    0
+   endif
+  )
+} -- each final task is transformed into a place
+-- each final task is transformed into a place
+rule finaltask {
+ from
+  task : BPMN!Activity
+  (
+   task.FinalTask__filter__
+  )
+ to
+  place : PN!Place (
+   --name   <- if task.isTerminating then 'Final Terminating' else 'Final' endif,
+   name <- 'Final' + if task.isTerminating then
+    ' Terminating'
+   else
+    ''
+   endif + if task.isMandatory then
+    ' Mandatory'
+   else
+    ''
+   endif,
+   tokens <- 0
+  )
+} -- each parallel split  (i.e. fork) is transformed into a transition
+-- each synchronization (i.e. join) is transformed into a transition
+-- each parallel split  (i.e. fork) is transformed into a transition
+-- each synchronization (i.e. join) is transformed into a transition
+rule synchronization_all {
+ from
+  synch : BPMN!Vertex
+  (
+   synch.isParallelSplit or synch.isSynchronization
+  )
+ using
+ {
+  icontrol : Sequence(OclAny) = synch.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if synch.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   name <- synch.typeName,
+   in <- synch.ins->select(e |
+    e.in.toPlaceAsOutput
+   )->collect(e |
+    e.in
+   ) -- connect to input places
+   ->union(synch.ins->select(e |
+    e.in.toTransitionAsOutput
+   )) -- connect to input transitions
+   .append(icontrol),
+   -- connect to control place   				
+   out <- synch.outs->select(e |
+    e.out.toPlaceAsInput
+   )->collect(e |
+    e.out
+   )->union(synch.outs->select(e |
+    e.out.toTransitionAsInput
+   )).append(ocontrol)
+  )
+} -- each exclusive choice is transformed into a place
+-- each exclusive choice is transformed into a place
+rule exclusive_choice {
+ from
+  choice : BPMN!Activity
+  (
+   choice.ExclusiveChoice__filter__
+  )
+ to
+  place : PN!Place (
+   name <- choice.typeName,
+   tokens <- 0
+  )
+} -- each simple merge is transformed into a place connected to a transition;
+-- the transition is created by rule create_transition, invoked from rule flow_diagram
+-- each simple merge is transformed into a place connected to a transition;
+-- the transition is created by rule create_transition, invoked from rule flow_diagram
+rule simple_merge {
+ from
+  merge : BPMN!Activity
+  (
+   merge.SimpleMerge__filter__
+  )
+ to
+  place : PN!Place (
+   name <- merge.typeName,
+   tokens <- 0
+  )
+} -- each multi choice is transformed into a place connected to (2^n)-1 transitions;
+-- the transitions are created by rule create_transition, invoked from rule flow_diagram
+-- each multi choice is transformed into a place connected to (2^n)-1 transitions;
+-- the transitions are created by rule create_transition, invoked from rule flow_diagram
+rule multi_choice {
+ from
+  choice : BPMN!Activity
+  (
+   choice.MultiChoice__filter__
+  )
+ to
+  place : PN!Place (
+   name <- choice.typeName,
+   tokens <- 0
+  )
+} -- INTERCONNECTIONS --------------------------------------------------------------------------------------------
+-- flow edges connecting nodes that are transformed into places, 
+-- are transformed into transitions
+-- INTERCONNECTIONS --------------------------------------------------------------------------------------------
+-- flow edges connecting nodes that are transformed into places, 
+-- are transformed into transitions
+rule place_place {
+ from
+  edge : BPMN!SequenceEdge
+  (
+   edge.in.toPlaceAsOutput and edge.out.toPlaceAsInput
+  )
+ using
+ {
+  icontrol : Sequence(OclAny) = edge.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if edge.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   in <- icontrol.append(edge.in),
+   out <- ocontrol.append(edge.out)
+  )
+} -- flow edges connecting nodes that are transformed into transitions, 
+-- are transformed into places
+-- flow edges connecting nodes that are transformed into transitions, 
+-- are transformed into places
+rule transition_transition {
+ from
+  edge : BPMN!SequenceEdge
+  (
+   edge.in.toTransitionAsOutput and edge.out.toTransitionAsInput
+  )
+ -- should we differentiate transitionAsOutput when SimpleMerge???
+ -- should we differentiate transitionAsOutput when SimpleMerge???
+ to
+  place : PN!Place (
+   name <- edge.in.typeName + '-' + edge.out.typeName,
+   tokens <- 0
+  )
+}
+
+helper context BPMN!Activity def: Task__filter__ : Boolean =
+ self.activityType = #Task or self.activityType = #EventStartEmpty;
+
+helper context BPMN!Activity def: ExclusiveChoice__filter__ : Boolean =
+ self.activityType = #GatewayDataBasedExclusive or self.activityType = #GatewayEventBasedExclusive;
+
+helper context BPMN!Activity def: ParallelSplit__filter__ : Boolean =
+ self.activityType = #GatewayParallel and self.incomingEdges.size() = 1 and self.outgoingEdges.size() > 1;
+
+helper context BPMN!Activity def: Synchronization__filter__ : Boolean =
+ self.activityType = #GatewayParallel and self.outgoingEdges.size() = 1 and self.incomingEdges.size() > 1;
+
+helper context BPMN!Activity def: MultiChoice__filter__ : Boolean =
+ self.activityType = #GatewayDataBasedInclusive and self.outgoingEdges.size() > 1 and self.incomingEdges.size() = 1;
+
+helper context BPMN!Activity def: SimpleMerge__filter__ : Boolean =
+ self.activityType = #GatewayDataBasedInclusive and self.outgoingEdges.size() = 1 and self.incomingEdges.size() > 1;
+
+helper context BPMN!Activity def: FinalTask__filter__ : Boolean =
+ self.activityType = #EventEndEmpty or self.activityType = #EventEndTerminate;
+
+helper context BPMN!SequenceEdge def: "in" : OclAny =
+ self.source;
+
+helper context BPMN!SequenceEdge def: out : OclAny =
+ self.target;
+
+helper context BPMN!Vertex def: ins : OclAny =
+ self.incomingEdges;
+
+helper context BPMN!Vertex def: outs : OclAny =
+ self.outgoingEdges;
+
+helper context BPMN!BpmnDiagram def: nodes : OclAny =
+ self.pools->collect(p |
+  p.vertices
+ ).flatten();
+
+helper context BPMN!BpmnDiagram def: edges : OclAny =
+ self.pools->collect(p |
+  p.sequenceEdges
+ ).flatten();
+
+helper context BPMN!Activity def: isInitial : OclAny =
+ self.activityType = #EventStartEmpty;
+
+helper context BPMN!Activity def: isTerminating : OclAny =
+ true;
+
+helper context BPMN!Activity def: isMandatory : OclAny =
+ true;

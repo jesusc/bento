@@ -1,0 +1,24 @@
+@namespace(uri="flow_diagrams_without_edge", prefix="flow_diagrams_without_edge")
+package flow_diagrams_with_edge;
+
+// REMOVE THIS CLASS ---------
+class FlowDiagram {
+   val  Node[*]     nodes;
+} 
+// ---------------------------
+
+// Names in/out changed for ins/outs to avoid conflict in double role het.
+abstract class Node {
+   ref Node[*]#ins outs;
+   ref Node[*]#outs ins;
+   
+   //ref Node#outs in; 
+   //ref Node#ins  out; 
+}
+
+@cardinality(min="0",max="*")
+class Task extends Node {
+   attr String[1]  name;
+   attr boolean[1] isInitial;
+}
+

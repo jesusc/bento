@@ -1,0 +1,186 @@
+module basicblocks;
+create OUT : BBL from IN : Imp;
+
+--- isLeader conditions:
+---		0. Control structures are leaders (if, while, etc.)
+--- 	1. Any statement pointed by a Goto statement is a leader 
+---		2. Any statement after a Goto is a leader
+helper context Imp!Statement def: isLeader : Boolean =
+	if self.isControl then
+ 		true
+	else
+ 		let isTarget : Boolean = 
+ 			Imp!GoToStatement.allInstances()->any(g | g.target = self.self_label) 
+		in
+		if isTarget.oclIsUndefined() then
+  			self.previousIsGoto
+ 		else
+  			true
+ 		endif 
+	endif
+;		 
+
+--- Check whether the previous statement is a goto.
+helper context Imp!Statement def: previousIsGoto : Boolean =
+	let siblings : Sequence(Imp!Statement) = self.siblingStatements in
+	let idx      : Integer                 = siblings.indexOf(self) in
+		if idx = 0 or idx = -1 then 
+ 			false.debug('WARNING: In previousIsGoto, statement not found.')
+ 		else 
+ 			if idx = 1 then
+				-- The first statement is a leader
+ 				true 
+ 			else
+  				siblings->at(idx - 1).oclIsKindOf(Imp!GoToStatement) or
+                siblings->at(idx - 1).isControl
+ 			endif
+		endif
+; 
+
+
+helper context Imp!Procedure def: allStatements : Sequence(Imp!Statement) =
+ self.statements_->collect(s | s.allStatements)->flatten();
+
+helper context Imp!Statement def: allStatements : Sequence(Imp!Statement) =
+ Sequence { self };
+
+helper context Imp!IfStatement def: allStatements : Sequence(Imp!Statement) =
+ self.ifStatements_->collect(s | s.allStatements)->flatten().union(
+ 	self.elseStatements_->collect(s | s.allStatements)->flatten() ).prepend(self); 
+ 
+helper context Imp!Statement def: nextSiblingStatements : OclAny =
+  let siblings : Sequence(Imp!Statement) = self.siblingStatements in
+  let position : Integer = siblings->indexOf(self) in
+   	if ( siblings.size() <= position ) then 
+ 		Sequence {}
+ 	else
+ 		siblings->subSequence(position + 1, siblings->size())
+	endif;
+  
+helper context Imp!Statement def: siblingStatements : OclAny =
+ self.statementContainer.siblingsOf(self); 
+
+helper context Imp!Procedure def: siblingsOf(s : Imp!Statement) : Sequence(Imp!Statement) =
+	self.statements_;
+
+helper context Imp!IfStatement def: siblingsOf(s : Imp!Statement) : Sequence(Imp!Statement) =
+	if self.ifStatements_->includes(s) then 
+		self.ifStatements_ 
+	else
+		self.elseStatements_
+	endif;
+
+helper context Imp!Statement def: isControl : Boolean =
+ self.oclIsKindOf(Imp!IfStatement);
+
+helper context Imp!UnconditionalGoto def: target_statement : OclAny =
+	self.target
+;
+
+helper context Imp!Statement def: self_label : Imp!Label =
+	self;
+
+helper context Imp!Statement def: behaveAsStatement : Boolean =
+	true;
+
+rule procedure2chunk {
+	from proc  : Imp!Procedure
+ 	to block : BBL!BlockChunk (
+		identifier <- proc.name,
+		blocks <- proc.allStatements  
+	)	
+}
+
+rule statement2basicblock {
+	from stm : Imp!Statement (
+		if (not stm.isControl) and stm.behaveAsStatement then   	
+			stm.isLeader
+		else
+			false
+		endif )
+ 	using {
+		allRest  : OclAny                  = stm.nextSiblingStatements;
+		nextLeader : Imp!Statement         = allRest->any(s |
+			if s.behaveAsStatement then
+				s.isLeader
+			else
+				false
+			endif);
+		contents : Sequence(Imp!Statement) = 
+			if nextLeader.oclIsUndefined() then
+				Sequence {stm}.union(allRest)
+			else				
+				-- allRest->subSequence(1, allRest->indexOf(nextLeader) )->prepend(stm)
+				allRest->subSequence(1, allRest->indexOf(nextLeader) - 1 )->prepend(stm)
+				-- Never sure if -1 always work. If no -1, then the leader of the next basic 
+				-- blocks appears in this one...
+			endif;
+ 	}
+	to block : BBL!BasicBlock (
+		edges <- 
+			if contents->last().oclIsKindOf(Imp!UnconditionalGoto) then
+    			Sequence { thisModule.goto_statement2edge(contents->last()) }
+   			else
+   	  			if nextLeader.oclIsUndefined() then
+	  				Sequence { } -- Nothing for the moment 
+   	  			else  		
+   	    			Sequence { thisModule.statement2edge( nextLeader, stm ) }   	  	
+   	  			endif
+   			endif,
+   		identifier <- contents->iterate(cstm; str : String = '' |
+    		str + cstm.toInfo + if ( cstm <> contents->last() ) then '\\n' else '' endif 
+   		)
+  )
+} 
+
+rule if_statement2basicblock  { 
+	from   stm : Imp!IfStatement 
+ 	to   block : BBL!BasicBlock (
+		edges <- Sequence {branch1, branch2},
+		identifier <- stm.toInfo
+ 	),
+ 	branch1 : BBL!DirectedEdge (
+ 		source <- stm,
+   		target <- stm.ifStatements_->first()	
+ 	),
+ 	branch2 : BBL!DirectedEdge (
+ 		source <- stm,
+   		target <- -- if stm.Alternative.flattenize.isEmpty()
+             if stm.elseStatements_.isEmpty() then 
+			     -- TODO: If there isn't anything after the if, it will fail
+    			stm.nextSiblingStatements.first()
+			 else
+			 	stm.elseStatements_->first()	
+			 endif
+ 	)
+}
+
+--- Creates an edge towards the given statement, stm.
+---
+lazy rule statement2edge {
+ from
+  stm : Imp!Statement,
+  source : Imp!Statement
+ to
+  edge : BBL!DirectedEdge (
+  	source <- source,
+    target <- stm
+  )
+}
+
+--- Creates an edge towards the 
+---
+--- There is a goto (conditional or unconditional)
+--- from the last statement of of B1 to the first
+--- of B2
+---
+--- Because of rule 3 ("any statement after a goto is a leader")
+--- a goto is always the last one of a basic block, so
+--- no further check is needed.
+lazy rule goto_statement2edge {
+ from goto : Imp!GotoStatement
+ to   edge : BBL!DirectedEdge (
+ 	source <- goto,
+   target <- goto.target_statement
+  )
+}

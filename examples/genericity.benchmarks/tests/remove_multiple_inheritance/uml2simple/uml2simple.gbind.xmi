@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="uml2simple">
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" concreteFeature="simpleName"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="generalization" conceptClass="//@conceptMetaclasses.0" concreteFeature="superclasses"/>
+  <bindings xsi:type="bindingModel:IntermediateClassBinding" concept="//@conceptMetaclasses.1" concreteClass="//@concreteMetaclasses.0" conceptContext="//@conceptMetaclasses.0" conceptReferenceName="generalization">
+    <concreteReference varName="superclasses"/>
+    <featureBindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="general" conceptClass="//@conceptMetaclasses.1" concreteFeature="superclasses"/>
+  </bindings>
+  <helpers xsi:type="bindingModel:LocalHelper" feature="myhelper" context="//@concreteMetaclasses.1">
+    <body xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="things"/>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </body>
+    <type xsi:type="simpleocl:SequenceType" name="Sequence">
+      <elementType xsi:type="simpleocl:OclModelElement" name="Class" model="//@boundMetamodel"/>
+    </type>
+  </helpers>
+  <conceptMetaclasses name="Class"/>
+  <conceptMetaclasses name="Generalization"/>
+  <concreteMetaclasses name="SimpleClass"/>
+  <concreteMetaclasses name="Model"/>
+  <boundConcept name="UML" metamodelURI="platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/metamodels/UML.ecore"/>
+  <boundMetamodel name="Simple" elements="//@helpers.0/@type/@elementType" metamodelURI="platform:/resource/genericity.benchmarks/tests/remove_multiple_inheritance/metamodels/SimpleUML.ecore"/>
+</bindingModel:BindingModel>

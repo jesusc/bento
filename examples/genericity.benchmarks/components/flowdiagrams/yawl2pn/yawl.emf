@@ -1,0 +1,61 @@
+@namespace(uri="http://www.cwi.nl/yawl", prefix="yawl")
+package yawl;
+
+// import "platform:/plugin/org.eclipse.xsd/model/XSD.ecore";
+
+class SpecificationSet {
+  val Specification[*] specifications;
+}
+
+class Specification {
+  attr String uri;
+  val MetaData metaData;
+//  val xsd.XSDSchema schema;
+  val Decomposition[*] decompositions;
+}
+
+class Decomposition {
+  attr FactsType type;
+  attr boolean rootNet;
+  val ProcessControlElement[*] processControlElements;
+  attr String name;
+}
+
+enum FactsType {
+  NetFacts = 0;
+  WebServiceGatewayFacts = 1;
+}
+
+enum CombinationType {
+  AND = 0;
+  OR = 1;
+  XOR = 2;
+  NORMAL = 3; // Added by jesusc
+}
+
+abstract interface ProcessControlElement {
+  ref ProcessControlElement[*]#flowsOutOf flowsInto;
+  ref ProcessControlElement[*]#flowsInto flowsOutOf;
+  ref Decomposition decomposesTo;
+}
+
+class Task extends ProcessControlElement {
+  attr String name;
+  attr CombinationType[0..1] joinType;
+  attr CombinationType[0..1] splitType;
+}
+
+class InputCondition extends ProcessControlElement {
+}
+
+class OutputCondition extends ProcessControlElement {
+}
+
+class MetaData {
+  attr String title;
+  attr String creator;
+  attr String description;
+  attr String validFrom;
+  attr String version;
+}
+

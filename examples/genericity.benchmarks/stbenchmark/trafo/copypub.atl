@@ -1,0 +1,35 @@
+-- @path PUB1=/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore
+-- @path PUB2=/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore
+
+module copypub;
+create OUT : PUB2 from IN : PUB1;
+
+rule reference {
+	from
+		src : PUB1!Reference
+	to 
+		tgt : PUB2!Reference (
+			title     <- src.title,
+			year      <- src.year,
+			publishedIn <- src.publishedIn,
+			authors    <- src.authors->collect(a | thisModule.convertAuthor(a))
+--			authors    <- src.authors
+		)
+}
+
+lazy rule convertAuthor {
+	from src : PUB1!Author
+	to   tgt : PUB2!Author (
+		name <- src.name	
+	)
+}
+
+-- Converted to lazy rule, because authors are contained in references,
+-- but overall, it is needed for class merge to work with the current implementation!
+--
+--rule author {
+--	from src : PUB1!Author
+--	to   tgt : PUB2!Author (
+--		name <- src.name	
+--	)
+--}
