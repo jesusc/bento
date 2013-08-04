@@ -1,7 +1,0 @@
-
-binding class2java for UML { 
-	class Class to UMLClass
-	
-	feature Class[UMLClass].name is umlName
-    feature Class.superclasses = generalizations->collect(g | g.reference)
-}

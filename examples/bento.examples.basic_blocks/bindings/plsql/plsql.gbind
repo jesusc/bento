@@ -1,0 +1,43 @@
+
+binding basicblocks_plsql {  
+	concept   IMP   : "platform:/resource/bento.examples.basic_blocks/metamodels/BasicBlocks.ecore"
+	metamodel PLSQL : "platform:/resource/bento.examples.basic_blocks/bindings/plsql/plsql.ecore"
+
+	class GoToStatement to GotoStatement -- PROBAR A QUITARLO	
+	class UnconditionalGoto to GotoStatement
+	class Procedure to TriggerBlock
+
+	class Statement to Statement
+	class IfStatement to IfStatement
+
+	-- feature Procedure.name is name
+	-- feature UnconditionalGoto.target is JumpLabel
+	-- feature Statement.self_label is Label
+	-- feature UnconditionalGoto.target_statement  = self.JumpLabel.refImmediateComposite()
+
+	-- Deberia duplicarse en Function y Subroutine
+	feature Procedure.statements_ = 	self.refGetValue('statements')->collect(s | 
+  		if s.oclIsTypeOf(PLSQL!BlockStatement) then
+			s.refGetValue('statements')
+		else
+			s
+		endif)->flatten()
+
+	feature Statement.statementContainer =  let c : OclAny = self.refImmediateComposite() in
+ 		--if c.oclIsKindOf(PLSQL!BlockStatement) then
+		--	c.refImmediateComposite() 
+		--else
+			c	
+		--endif
+
+	feature IfStatement.ifStatements_   = self.ifStatements
+	feature IfStatement.elseStatements_ = self.elseStatements
+
+	-- Holes, which are defined on concrete metaclasses
+	helper Expression.behaveAsStatement   : Boolean = false
+	helper TriggerBlock.behaveAsStatement : Boolean = false
+
+    helper Statement.toInfo : String = self.oclType().name
+}
+
+

@@ -1,0 +1,11 @@
+
+transformation component basic_blocks {
+	source concept IMP  : "platform:/resource/bento.examples.basic_blocks/metamodels/SimpleImperative.ecore"
+	target concept BBL  : "platform:/resource/bento.examples.basic_blocks/metamodels/BasicBlocks.ecore"
+	
+	source model imp : IMP
+	target model bbl : BBL
+	
+	definition atl "platform:/resource/bento.examples.basic_blocks/trafo/basicblocks.atl" 
+		with IN : Imp = imp, OUT : BBL = bbl
+}

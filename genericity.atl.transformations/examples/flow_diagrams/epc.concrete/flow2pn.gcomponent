@@ -1,8 +1,0 @@
-transformation component oo2measure {
-	source concept FD : "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/metamodels/flow_concept.ecore"
-	target concept PN : "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/metamodels/petri_nets.ecore"
-	source model in  : FD
-	target model out : PN
-	
-	definition atl "platform:/resource/genericity.atl.transformations/examples/flow_diagrams/flow2pn.atl" with IN : FD = in, PN = out
-}

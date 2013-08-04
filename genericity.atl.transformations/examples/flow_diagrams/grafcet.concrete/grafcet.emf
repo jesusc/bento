@@ -1,5 +1,0 @@
-@namespace(uri="http://atl-zoo/grafcet/", prefix="atl_zoo_grafcet")
-package grafcet;
-
-
-

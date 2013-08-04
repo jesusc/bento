@@ -1,0 +1,22 @@
+
+binding basicblocks_target {  
+	concept   BBL    : "platform:/resource/bento.examples.basic_blocks/metamodels/BasicBlocks.ecore"
+	metamodel DGRAPH : "platform:/resource/bento.examples.basic_blocks/bindings/dgraph/dgraph.ecore"
+
+	class BlockChunk to Graph 
+	class BasicBlock to Node
+	class DirectedEdge to Edge
+
+	feature BlockChunk.identifier is NONE
+	feature BlockChunk.blocks is contents
+	
+	feature BasicBlock.identifier is label
+	feature BasicBlock.edges is outgoing
+	
+	
+	-- Target features
+	feature DirectedEdge.label = 'nothing'
+	feature DirectedEdge.weight = 1	
+}
+
+
