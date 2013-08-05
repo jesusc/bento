@@ -1,0 +1,11 @@
+composite component epc2pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"    
+	binding bindEPC = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/epc2pn/epc.gbind"
+			
+	source concept EPC : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/epc2pn/epc.ecore"
+	target concept PN    : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : EPC = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/epc2pn/examples/example-epc.model" 
+	target model out : PN = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp_/epc-output.xmi"
+	
+	compose apply fd2pn(bindEPC(in)) -> (out)
+}

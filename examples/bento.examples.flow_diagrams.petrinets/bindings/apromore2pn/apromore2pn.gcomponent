@@ -1,0 +1,11 @@
+composite component apromore2pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"    
+	binding bindAPRO = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/apromore2pn/apromore2fd.gbind"
+			
+	source concept EPC : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/apromore2pn/apromore.ecore"
+	target concept PN    : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : EPC = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/apromore2pn/examples/example-apro.model" 
+	target model out : PN = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp_/output_test.xmi"
+	
+	compose apply fd2pn(bindAPRO(in)) -> (out)
+}
