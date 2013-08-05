@@ -66,7 +66,7 @@ segment AdaptRuleForAttribute2ClassBinding
 		// type_name = rule.inPattern.elements.first.type.name
         // Better to get the type from the binding, which does not change, so scheduling issues arise
         type_name = ma1.classBinding.concept.name
-      
+
       	call = atl!NavigationOrAttributeCallExp.new
       	call.name = type_name.concat('__filter__')
       	v = atl!VariableExp.new 
@@ -81,6 +81,9 @@ segment AdaptRuleForAttribute2ClassBinding
 	        operator.operationName = 'and'
 	        operator.source = rule.inPattern.filter
 	        operator.arguments = call			
+
+			inP = rule.inPattern
+	        inP.filter = operator
 		})
 	end
 
@@ -120,10 +123,10 @@ segment AdaptRuleForAttribute2ClassBinding
 		}    
     end
 
-	forall op from mOperationCallExp
-	 where op.operationName.eq("oclIsKindOf") // TODO: what about oclIsTypeOf!!!
+	forall op_kindof from mOperationCallExp
+	 where op_kindof.operationName.eq("oclIsKindOf") // TODO: what about oclIsTypeOf!!!
 	
-		ocl_model_element = op.arguments.first
+		ocl_model_element = op_kindof.arguments.first
 
 		ocl_model_element.^model.name.eq(current_mm).if_true {	
 			cb = gbind!ClassBinding.all_instances.select { |cb1| cb1.concept.name.eq(ocl_model_element.name).and(cb1.whenClause.is_nil.not) }.first
@@ -132,8 +135,8 @@ segment AdaptRuleForAttribute2ClassBinding
 				// TODO: Decide where to put this adaptation (in this module...?)
 				// Adapt
 			    type = ocl_model_element
-      			container = op._refContainer
-      			containing_property = op.containing_property
+      			container = op_kindof._refContainer
+      			containing_property = op_kindof.containing_property
       			
       			create_let = { 
       				let_exp = atl!LetExp.new
@@ -141,7 +144,7 @@ segment AdaptRuleForAttribute2ClassBinding
 			        vd.id = "__unique_id__".next_id
 		    	    vd.varName = vd.id
 		        	vd.type = atl!OclAnyType.new        
-		        	vd.initExpression = op.source 
+		        	vd.initExpression = op_kindof.source 
       				let_exp.variable = vd
       				let_exp
       			}
@@ -150,7 +153,7 @@ segment AdaptRuleForAttribute2ClassBinding
 			    // Re-arrange oclIsKindOf -> source now is Let variable
       			v_exp = atl!VariableExp.new 
 		        v_exp.referredVariable = let.variable
-      			v_exp = op.source 
+      			v_exp = op_kindof.source 
 
 			    call = atl!NavigationOrAttributeCallExp.new
       			call.name = type.name.concat("__filter__")
@@ -161,10 +164,10 @@ segment AdaptRuleForAttribute2ClassBinding
       			//let.in_ = call
 
 				if_exp = atl!IfExp.new
-				condition = op
+				condition = op_kindof
       			v_exp3 = atl!VariableExp.new 
 		        v_exp3.referredVariable = let.variable
-				op.source = v_exp3
+				op_kindof.source = v_exp3
 				
 				if_exp.condition      = condition
 				if_exp.thenExpression = call

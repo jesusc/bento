@@ -1,0 +1,11 @@
+composite component bpmn2pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"  
+	binding bindBPMN = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpmn2pn/bpmn2fd.gbind"
+			
+	source concept BPMN  : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpmn2pn/bpmn.ecore"
+	target concept PN    : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : BPMN  = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpmn2pn/examples/test_xor_mail.bpmn" 
+	target model out : PN    = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp_/bpmn_intalio-output.xmi" 
+	
+	compose apply fd2pn(bindBPMN(in)) -> (out)
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ASCII"?>
+<epc:EPCDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:epc="epc" xmi:id="_kkSN8VJvEeK_yoaoTuMBUg">
+  <flows xsi:type="epc:ControlFlow" xmi:id="_xKBJ8FJwEeK_yoaoTuMBUg" ftarget="_gCclAFJwEeK_yoaoTuMBUg" esource="_OXUAAFJwEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_DP2RcFJyEeK_yoaoTuMBUg" fsource="_gCclAFJwEeK_yoaoTuMBUg" etarget="_Fx-scFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_JJSKAFJyEeK_yoaoTuMBUg" ftarget="_cy_J8FJxEeK_yoaoTuMBUg" esource="_Fx-scFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_NeJRcFJyEeK_yoaoTuMBUg" fsource="_cy_J8FJxEeK_yoaoTuMBUg" etarget="_KjjlEFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_SK-M8FJyEeK_yoaoTuMBUg" ftarget="_faND0FJxEeK_yoaoTuMBUg" esource="_KjjlEFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_XawEgFJyEeK_yoaoTuMBUg" fsource="_faND0FJxEeK_yoaoTuMBUg" ltarget="_AHARMFJyEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_dWtsoFJyEeK_yoaoTuMBUg" lsource="_AHARMFJyEeK_yoaoTuMBUg" etarget="_M9sFMFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_gy6GsFJyEeK_yoaoTuMBUg" ftarget="_hK0s4FJxEeK_yoaoTuMBUg" esource="_M9sFMFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_kS9GAFJyEeK_yoaoTuMBUg" fsource="_hK0s4FJxEeK_yoaoTuMBUg" ltarget="_Asot0FJyEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_nJpmUFJyEeK_yoaoTuMBUg" lsource="_AHARMFJyEeK_yoaoTuMBUg" etarget="_OwYx4FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_wEWQcFJyEeK_yoaoTuMBUg" ftarget="_jHpl8FJxEeK_yoaoTuMBUg" esource="_OwYx4FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_yl6OQFJyEeK_yoaoTuMBUg" fsource="_jHpl8FJxEeK_yoaoTuMBUg" ltarget="_Asot0FJyEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_05gBgFJyEeK_yoaoTuMBUg" lsource="_Asot0FJyEeK_yoaoTuMBUg" etarget="_Q-xVAFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_4DOykFJyEeK_yoaoTuMBUg" ftarget="_lSmakFJxEeK_yoaoTuMBUg" esource="_Q-xVAFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_6EEo8FJyEeK_yoaoTuMBUg" fsource="_lSmakFJxEeK_yoaoTuMBUg" etarget="_SwIk8FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_8Rs-IFJyEeK_yoaoTuMBUg" ftarget="_pEW08FJxEeK_yoaoTuMBUg" esource="_SwIk8FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_-TlWUFJyEeK_yoaoTuMBUg" fsource="_pEW08FJxEeK_yoaoTuMBUg" ltarget="_BMU6gFJyEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_BFXhcFJzEeK_yoaoTuMBUg" lsource="_BMU6gFJyEeK_yoaoTuMBUg" etarget="_Wp658FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_DIvHYFJzEeK_yoaoTuMBUg" ftarget="_qY3JwFJxEeK_yoaoTuMBUg" esource="_Wp658FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_FT-28FJzEeK_yoaoTuMBUg" fsource="_qY3JwFJxEeK_yoaoTuMBUg" ltarget="_BvSdoFJyEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_HM78oFJzEeK_yoaoTuMBUg" lsource="_BMU6gFJyEeK_yoaoTuMBUg" etarget="_YzPW4FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_JT3z8FJzEeK_yoaoTuMBUg" ftarget="_sAtRUFJxEeK_yoaoTuMBUg" esource="_YzPW4FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_LvC14FJzEeK_yoaoTuMBUg" fsource="_sAtRUFJxEeK_yoaoTuMBUg" ltarget="_BvSdoFJyEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:ControlFlow" xmi:id="_Nmqe0FJzEeK_yoaoTuMBUg" lsource="_BvSdoFJyEeK_yoaoTuMBUg" etarget="_anlCUFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_C33EsFJxEeK_yoaoTuMBUg" target="_gCclAFJwEeK_yoaoTuMBUg" source="_4ddiYFJwEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_Q4SAkFJzEeK_yoaoTuMBUg" target="_cy_J8FJxEeK_yoaoTuMBUg" source="_uDBuYFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_U18I8FJzEeK_yoaoTuMBUg" target="_faND0FJxEeK_yoaoTuMBUg" source="_2LS2AFJxEeK_yoaoTuMBUg _7I7NoFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_X2wOkFJzEeK_yoaoTuMBUg" target="_hK0s4FJxEeK_yoaoTuMBUg" source="_9dGPsFJxEeK_yoaoTuMBUg _5pZ7oFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_bDKgMFJzEeK_yoaoTuMBUg" target="_jHpl8FJxEeK_yoaoTuMBUg" source="_58J4gFJxEeK_yoaoTuMBUg _9uNN0FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_qeuPQFJzEeK_yoaoTuMBUg" target="_lSmakFJxEeK_yoaoTuMBUg" source="_6MrAwFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_tT7h0FJzEeK_yoaoTuMBUg" target="_pEW08FJxEeK_yoaoTuMBUg" source="_6ehlwFJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_xAxnAFJzEeK_yoaoTuMBUg" target="_qY3JwFJxEeK_yoaoTuMBUg" source="_1Wn30FJxEeK_yoaoTuMBUg"/>
+  <flows xsi:type="epc:OrganizationalFlow" xmi:id="_0Ib7gFJzEeK_yoaoTuMBUg" target="_sAtRUFJxEeK_yoaoTuMBUg" source="_-WYBEFJxEeK_yoaoTuMBUg _1ymCIFJxEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_OXUAAFJwEeK_yoaoTuMBUg" name="Home care order received" outgoing="_xKBJ8FJwEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_Fx-scFJxEeK_yoaoTuMBUg" name="Order information checked" outgoing="_JJSKAFJyEeK_yoaoTuMBUg" incoming="_DP2RcFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_KjjlEFJxEeK_yoaoTuMBUg" name="Appointment made" outgoing="_SK-M8FJyEeK_yoaoTuMBUg" incoming="_NeJRcFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_M9sFMFJxEeK_yoaoTuMBUg" name="Medical care planned" outgoing="_gy6GsFJyEeK_yoaoTuMBUg" incoming="_dWtsoFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_OwYx4FJxEeK_yoaoTuMBUg" name="Non-medical care planned" outgoing="_wEWQcFJyEeK_yoaoTuMBUg" incoming="_nJpmUFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_Q-xVAFJxEeK_yoaoTuMBUg" name="Home care defined" outgoing="_4DOykFJyEeK_yoaoTuMBUg" incoming="_05gBgFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_SwIk8FJxEeK_yoaoTuMBUg" name="Patient is checked up / Report from hospital received" outgoing="_8Rs-IFJyEeK_yoaoTuMBUg" incoming="_6EEo8FJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_Wp658FJxEeK_yoaoTuMBUg" name="Care need grade is high" outgoing="_DIvHYFJzEeK_yoaoTuMBUg" incoming="_BFXhcFJzEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_YzPW4FJxEeK_yoaoTuMBUg" name="Care need grade is low" outgoing="_JT3z8FJzEeK_yoaoTuMBUg" incoming="_HM78oFJzEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Event" xmi:id="_anlCUFJxEeK_yoaoTuMBUg" name="Medical plan confirmed" incoming="_Nmqe0FJzEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_gCclAFJwEeK_yoaoTuMBUg" name="Check order information" outgoing="_DP2RcFJyEeK_yoaoTuMBUg" incoming="_xKBJ8FJwEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_cy_J8FJxEeK_yoaoTuMBUg" name="Make an appointment with patient" outgoing="_NeJRcFJyEeK_yoaoTuMBUg" incoming="_JJSKAFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_faND0FJxEeK_yoaoTuMBUg" name="Discuss care plan" outgoing="_XawEgFJyEeK_yoaoTuMBUg" incoming="_SK-M8FJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_hK0s4FJxEeK_yoaoTuMBUg" name="Plan the medical care" outgoing="_kS9GAFJyEeK_yoaoTuMBUg" incoming="_gy6GsFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_jHpl8FJxEeK_yoaoTuMBUg" name="Plan the non-medical care" outgoing="_yl6OQFJyEeK_yoaoTuMBUg" incoming="_wEWQcFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_lSmakFJxEeK_yoaoTuMBUg" name="Assign the patient to hospital to get a report about his care need grade" outgoing="_6EEo8FJyEeK_yoaoTuMBUg" incoming="_4DOykFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_pEW08FJxEeK_yoaoTuMBUg" name="Check report" outgoing="_-TlWUFJyEeK_yoaoTuMBUg" incoming="_8Rs-IFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_qY3JwFJxEeK_yoaoTuMBUg" name="Contact state" outgoing="_FT-28FJzEeK_yoaoTuMBUg" incoming="_DIvHYFJzEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:BasicFunction" xmi:id="_sAtRUFJxEeK_yoaoTuMBUg" name="Discuss cost plan" outgoing="_LvC14FJzEeK_yoaoTuMBUg" incoming="_JT3z8FJzEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:And" xmi:id="_AHARMFJyEeK_yoaoTuMBUg" outgoing="_dWtsoFJyEeK_yoaoTuMBUg _nJpmUFJyEeK_yoaoTuMBUg" incoming="_XawEgFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:And" xmi:id="_Asot0FJyEeK_yoaoTuMBUg" outgoing="_05gBgFJyEeK_yoaoTuMBUg" incoming="_kS9GAFJyEeK_yoaoTuMBUg _yl6OQFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Xor" xmi:id="_BMU6gFJyEeK_yoaoTuMBUg" outgoing="_BFXhcFJzEeK_yoaoTuMBUg _HM78oFJzEeK_yoaoTuMBUg" incoming="_-TlWUFJyEeK_yoaoTuMBUg"/>
+  <objects xsi:type="epc:Xor" xmi:id="_BvSdoFJyEeK_yoaoTuMBUg" outgoing="_Nmqe0FJzEeK_yoaoTuMBUg" incoming="_FT-28FJzEeK_yoaoTuMBUg _LvC14FJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_4ddiYFJwEeK_yoaoTuMBUg" name="HCPC Employee" outgoing="_C33EsFJxEeK_yoaoTuMBUg"/>
+  <units xmi:id="_uDBuYFJxEeK_yoaoTuMBUg" name="HCPC Employee" outgoing="_Q4SAkFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_1Wn30FJxEeK_yoaoTuMBUg" name="HCPC Employee" outgoing="_xAxnAFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_1ymCIFJxEeK_yoaoTuMBUg" name="HCPC Employee" outgoing="_0Ib7gFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_2LS2AFJxEeK_yoaoTuMBUg" name="HCPC Doctor" outgoing="_U18I8FJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_5pZ7oFJxEeK_yoaoTuMBUg" name="HCPC Doctor" outgoing="_X2wOkFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_58J4gFJxEeK_yoaoTuMBUg" name="HCPC Doctor" outgoing="_bDKgMFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_6MrAwFJxEeK_yoaoTuMBUg" name="HCPC Doctor" outgoing="_qeuPQFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_6ehlwFJxEeK_yoaoTuMBUg" name="HCPC Doctor" outgoing="_tT7h0FJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_7I7NoFJxEeK_yoaoTuMBUg" name="HCPC Patient" outgoing="_U18I8FJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_9dGPsFJxEeK_yoaoTuMBUg" name="HCPC Patient" outgoing="_X2wOkFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_9uNN0FJxEeK_yoaoTuMBUg" name="HCPC Patient" outgoing="_bDKgMFJzEeK_yoaoTuMBUg"/>
+  <units xmi:id="_-WYBEFJxEeK_yoaoTuMBUg" name="HCPC Patient" outgoing="_0Ib7gFJzEeK_yoaoTuMBUg"/>
+</epc:EPCDiagram>

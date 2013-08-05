@@ -1,0 +1,14 @@
+//
+// SFC (Sequential Flow Charts) is the standard version of Grafcet
+//
+composite component sfc2pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"    
+	binding bindSFC = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/sfc2pn/sfc.gbind"
+			
+	source concept SFC : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/sfc2pn/tc60201.ecore"
+	target concept PN    : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : SFC = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/sfc2pn/examples/plc.xml" 
+	target model out : PN = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp_/grafcet-output.xmi"
+	
+	compose apply fd2pn(bindSFC(in)) -> (out)
+}

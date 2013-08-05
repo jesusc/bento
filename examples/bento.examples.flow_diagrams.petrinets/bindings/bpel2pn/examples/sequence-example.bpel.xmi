@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bpws:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable" name="example" targetNamespace="http://genericity/example" suppressJoinFailure="true">
+  <partnerLinks>
+    <children name="client">
+      <myRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/bpel/travel/}travelLT:travelService"/>
+      <partnerRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/bpel/travel/}travelLT:travelServiceCustomer"/>
+      <PartnerLinkType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#PartnerLinkType{http://packtpub.com/bpel/travel/}travelLT"/>
+    </children>
+    <children name="employeeTravelStatus">
+      <partnerRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/service/employee/}employeeLT:employeeTravelStatusService"/>
+      <PartnerLinkType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#PartnerLinkType{http://packtpub.com/service/employee/}employeeLT"/>
+    </children>
+    <children name="AmericanAirlines">
+      <myRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/service/airline/}flightLT:airlineCustomer"/>
+      <partnerRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/service/airline/}flightLT:airlineService"/>
+      <PartnerLinkType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#PartnerLinkType{http://packtpub.com/service/airline/}flightLT"/>
+    </children>
+    <children name="DeltaAirlines">
+      <myRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/service/airline/}flightLT:airlineCustomer"/>
+      <partnerRole href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Role{http://packtpub.com/service/airline/}flightLT:airlineService"/>
+      <PartnerLinkType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#PartnerLinkType{http://packtpub.com/service/airline/}flightLT"/>
+    </children>
+  </partnerLinks>
+  <variables>
+    <children name="TravelRequest">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/bpel/travel/}TravelRequestMessage"/>
+    </children>
+    <children name="EmployeeTravelStatusRequest">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/service/employee/}EmployeeTravelStatusRequestMessage"/>
+    </children>
+    <children name="EmployeeTravelStatusResponse">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/service/employee/}EmployeeTravelStatusResponseMessage"/>
+    </children>
+    <children name="FlightDetails">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/service/airline/}FlightTicketRequestMessage"/>
+    </children>
+    <children name="FlightResponseAA">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/service/airline/}TravelResponseMessage"/>
+    </children>
+    <children name="FlightResponseDA">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/service/airline/}TravelResponseMessage"/>
+    </children>
+    <children name="TravelResponse">
+      <messageType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Message{http://packtpub.com/service/airline/}TravelResponseMessage"/>
+    </children>
+  </variables>
+  <activity xsi:type="bpws:Sequence" name="main">
+    <activities xsi:type="bpws:Receive" partnerLink="//@partnerLinks/@children.0" createInstance="true" variable="//@variables/@children.0">
+      <portType href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#PortType{http://packtpub.com/bpel/travel/}TravelApprovalPT"/>
+      <operation href="file:/home/jesus/usr/editors/bpel/workspace/bpel-example/example/example.bpel#Operation{http://packtpub.com/bpel/travel/}TravelApprovalPT:TravelApproval"/>
+    </activities>
+    <activities xsi:type="bpws:Assign">
+      <copy>
+        <to variable="//@variables/@children.1"/>
+        <from variable="//@variables/@children.0">
+          <expression/>
+        </from>
+      </copy>
+    </activities>
+    <activities xsi:type="bpws:Invoke" name="Invoke a webservice"/>
+  </activity>
+  <imports namespace="http://genericity/example" location="exampleArtifacts.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+</bpws:Process>

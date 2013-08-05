@@ -37,62 +37,62 @@ import gbind.dsl.BindingModel;
 public class AdaptTransformation {
 
 	// public static final String BINDING_MODEL =
-	// "../genericity.benchmarks/components/oo2java/component2java/component2oo.gbind.xmi";
+	// "../../examples/genericity.benchmarks/components/oo2java/component2java/component2oo.gbind.xmi";
 	// public static final String ATL_TRANSFORMATION =
-	// "../genericity.benchmarks/components/oo2java/oo2java.atl.xmi";
+	// "../../examples/genericity.benchmarks/components/oo2java/oo2java.atl.xmi";
 
 	// oo2measure
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/oo2measure/ecore2measure/ecore2oo.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "UML2";
 //	public static final String TARGET_METAMODEL_NAME = "ECORE";
 
 	// bpmn2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
-//	public static final String BOUND_METAMODEL_NAME = "FD";
-//	public static final String TARGET_METAMODEL_NAME = "BPMN";
+	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn2fd.gbind.xmi";
+	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+	public static final String BOUND_METAMODEL_NAME = "FD";
+	public static final String TARGET_METAMODEL_NAME = "BPMN";
 
 	// uml2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/uml22pn/uml2.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
 //	public static final String TARGET_METAMODEL_NAME = "UML";
 
 	// grafcet2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/sfc2pn/sfc.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
 //	public static final String TARGET_METAMODEL_NAME = "SFC";
 
 	// epc2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/epc2pn/epc.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/epc2pn/epc.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
 //	public static final String TARGET_METAMODEL_NAME = "EPC";
 
 	// yawl2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/yawl2pn/yawl.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
 //	public static final String TARGET_METAMODEL_NAME = "YAWL";
 
 	// ifml2pn
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/ifml/ifml2fd.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/ifml/ifml2fd.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
 //	public static final String TARGET_METAMODEL_NAME = "IFML";
 
-//	public static final String BINDING_MODEL = "../genericity.benchmarks/components/flowdiagrams/bpel2pn/bpel2fd.gbind.xmi";
-//	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/flowdiagrams/bpel2pn/bpel2fd.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl.xmi";
 //	public static final String BOUND_METAMODEL_NAME = "FD";
 //	public static final String TARGET_METAMODEL_NAME = "BPEL";
 
 	// ecore2measure_manual
-	public static final String BINDING_MODEL = "../genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
-	public static final String ATL_TRANSFORMATION = "../genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl.xmi";
-	public static final String BOUND_METAMODEL_NAME = "simple_OO_concept";
-	public static final String TARGET_METAMODEL_NAME = "ECORE";
+//	public static final String BINDING_MODEL = "../../examples/genericity.benchmarks/components/oo2measure/manual-trafo/ecore2measure/ecore2oo.gbind.xmi";
+//	public static final String ATL_TRANSFORMATION = "../../examples/genericity.benchmarks/components/oo2measure/manual-trafo/oo2measure.atl.xmi";
+//	public static final String BOUND_METAMODEL_NAME = "simple_OO_concept";
+//	public static final String TARGET_METAMODEL_NAME = "ECORE";
 
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
@@ -107,12 +107,12 @@ public class AdaptTransformation {
 				.basicModelFromFile(
 						new String[] {
 						// withDir("../be.ac.vub.simpleocl/metamodel/simpleocl.ecore"),
-						withDir("../genericity.language.gbind/metamodel/gbind.ecore") },
+						withDir("../../plugins/genericity.language.gbind/metamodel/gbind.ecore") },
 						withDir(BINDING_MODEL));
 
 		BasicEMFModel inout = loader
 				.basicModelFromFile(
-						withDir("../genericity.atl.transformations/metamodels/ATL.ecore"),
+						withDir("metamodels/ATL.ecore"),
 						withDir(ATL_TRANSFORMATION));
 		inout.setInplaceMode();
 		

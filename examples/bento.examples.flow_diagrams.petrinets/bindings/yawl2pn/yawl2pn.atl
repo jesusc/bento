@@ -1,0 +1,568 @@
+-- @path FD=/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore
+-- @path PN=/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore
+module flow2pn;
+create OUT : PN from IN : YAWL;
+
+-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)
+--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; 
+helper context YAWL!ProcessControlElement def: oclAsType(t : OclAny) : OclAny =
+ self;
+
+helper context YAWL!ProcessControlElement def: typeName : String =
+ self.oclType().name;
+
+helper context YAWL!ProcessControlElement def: isTask : Boolean =
+ let __unique_id__ : OclAny = self in
+ let __unique_id___27 : OclAny = __unique_id__ in
+ if __unique_id___27.oclIsKindOf(YAWL!Task) then
+  __unique_id___27.Task__filter__
+ else
+  false
+ endif or __unique_id__.oclIsKindOf(YAWL!InputCondition);
+
+helper context YAWL!ProcessControlElement def: isFinalTask : Boolean =
+ self.oclIsKindOf(YAWL!OutputCondition);
+
+helper context YAWL!ProcessControlElement def: isTerminatingTask : Boolean =
+ if self.isFinalTask then
+  self.oclAsType(YAWL!OutputCondition).isTerminating
+ else
+  false
+ endif;
+
+helper context YAWL!ProcessControlElement def: isParallelSplit : Boolean =
+ let __unique_id___28 : OclAny = self in
+ if __unique_id___28.oclIsKindOf(YAWL!Task) then
+  __unique_id___28.ParallelSplit__filter__
+ else
+  false
+ endif;
+
+helper context YAWL!ProcessControlElement def: isSynchronization : Boolean =
+ let __unique_id___29 : OclAny = self in
+ if __unique_id___29.oclIsKindOf(YAWL!Task) then
+  __unique_id___29.Synchronization__filter__
+ else
+  false
+ endif;
+
+helper context YAWL!ProcessControlElement def: isExclusiveChoice : Boolean =
+ let __unique_id___30 : OclAny = self in
+ if __unique_id___30.oclIsKindOf(YAWL!Task) then
+  __unique_id___30.ExclusiveChoice__filter__
+ else
+  false
+ endif;
+
+helper context YAWL!ProcessControlElement def: isSimpleMerge : Boolean =
+ let __unique_id___31 : OclAny = self in
+ if __unique_id___31.oclIsKindOf(YAWL!Task) then
+  __unique_id___31.SimpleMerge__filter__
+ else
+  false
+ endif;
+
+helper context YAWL!ProcessControlElement def: isMultiChoice : Boolean =
+ let __unique_id___32 : OclAny = self in
+ if __unique_id___32.oclIsKindOf(YAWL!Task) then
+  __unique_id___32.MultiChoice__filter__
+ else
+  false
+ endif;
+
+helper context YAWL!ProcessControlElement def: toPlaceAsInput : Boolean =
+ self.isTask or self.isFinalTask or self.isExclusiveChoice or self.isSimpleMerge or self.isMultiChoice;
+
+helper context YAWL!ProcessControlElement def: toPlaceAsOutput : Boolean =
+ self.isTask or self.isFinalTask or self.isExclusiveChoice;
+
+helper context YAWL!ProcessControlElement def: toTransitionAsInput : Boolean =
+ self.isSynchronization or self.isParallelSplit;
+
+helper context YAWL!ProcessControlElement def: toTransitionAsOutput : Boolean =
+ self.isSynchronization or self.isParallelSplit or self.isSimpleMerge or self.isMultiChoice;
+
+helper context YAWL!ProcessControlElement def: parentFlowDiagram : YAWL!Decomposition =
+ YAWL!Decomposition.allInstances()->first();
+
+helper def: parentFlowDiagram(self_ : OclAny) : YAWL!Decomposition =
+ YAWL!Decomposition.allInstances()->first();
+
+helper context Integer def: pow(m : Integer) : Integer =
+ if m > 1 then
+  self * self.pow(m - 1)
+ else
+  self
+ endif; -- n^m
+-- n^m
+helper context Integer def: toSequence() : Sequence(Integer) =
+ if self <= 0 then
+  Sequence {}
+ else
+  Sequence {self}.union((self - 1).toSequence())
+ endif; -- Sequence{1, 2..., n}
+-- Sequence{1, 2..., n}
+helper context Integer def: choices() : Sequence(Sequence(Boolean)) =
+ if self > 1 then
+  (self - 1).choices()->collect(n |
+   n->append(true)
+  )->union((self - 1).choices()->collect(n |
+   n->append(false)
+  ))
+ else
+  Sequence {Sequence {true}, Sequence {false}}
+ endif;
+
+helper context YAWL!Task def: nodeGenerator : Sequence(TupleType(source : YAWL!ProcessControlElement, num : Integer)) =
+ (2.pow(self.outs->size()) - 1).toSequence()->iterate(n; result : Sequence(TupleType(source : YAWL!ProcessControlElement, num : Integer)) = Sequence {} |
+  let tuple : OclAny = Tuple {source : YAWL!ProcessControlElement = self, num : Integer = n} in
+  result.including(tuple)
+ );
+
+rule create_transition(source : YAWL!ProcessControlElement, num : Integer) {
+ using
+ {
+  choices : Sequence(Boolean) = source.outs->size().choices()->at(num);
+  icontrol : Sequence(OclAny) = source.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if source.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   name <- source.typeName + ' ' + num,
+   in <- icontrol.append(source),
+   out <- source.outs->size().toSequence()->iterate(i; result : Sequence(YAWL!ProcessControlElement) = Sequence {} |
+    if choices->at(i) = true then
+     result->append(if source.outs->at(i).out.toPlaceAsInput then
+      source.outs.at(i).out
+     else
+      source.outs.at(i)
+     endif)
+    else
+     result
+    endif
+   ).append(ocontrol)
+  )
+ do {
+  -- This is important, it is the result value...
+  -- This is important, it is the result value...
+  transition;
+ }
+} -- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if the transition is not connected to a terminating final task
+-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if the transition is not connected to a terminating final task
+helper def: isConnectedToTerminating(self_ : OclAny) : Boolean =
+ self_.out.isTerminatingTask;
+
+helper context YAWL!ProcessControlElement def: isConnectedToTerminating : Boolean =
+ self.outs->exists(e |
+  thisModule.isConnectedToTerminating(e)
+ );
+
+helper context YAWL!Decomposition def: control : Sequence(PN!Place) =
+ if self.nodes->exists(n |
+  n.isTerminatingTask
+ ) then
+  Sequence {thisModule.get_control(self)}
+ else
+  Sequence {}
+ endif;
+
+unique lazy rule get_control {
+ from
+  flow : YAWL!Decomposition
+ to
+  place : PN!Place (
+   name <- 'Control',
+   tokens <- 1
+  )
+} -- BUILDING BLOCKS ---------------------------------------------------------------------------------------------
+-- the flow diagram is transformed into a Petri net 
+-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------
+-- the flow diagram is transformed into a Petri net 
+rule flowdiagram {
+ from
+  flow : YAWL!Decomposition
+ to
+  net : PN!PetriNet (
+   elems <- thisModule.__convertToSequence__(flow.nodes.append(flow.edges.append(flow.nodes->select(n |
+    n.isSimpleMerge
+   )->collect(n |
+    thisModule.create_transition(n, 1)
+   ))).union(flow.nodes->select(n |
+    n.isMultiChoice
+   )->collect(n |
+    n.nodeGenerator
+   )->flatten()->collect(n |
+    thisModule.create_transition(n.source, n.num)
+   )).append(flow.control)->flatten())->collect(__v__ |
+    if __v__.oclType().name = 'Tuple' then
+     if __v__.asMap().get('type__') = 'YawlEdge' then
+      if thisModule.transition_transition__filter__(__v__) then
+       thisModule.transition_transition(__v__)
+      else
+       if thisModule.place_place__filter__(__v__) then
+        thisModule.place_place(__v__)
+       else
+        OclUndefined
+       endif
+      endif
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )
+  )
+} -- each task is transformed into a place, with 1 token if it is initial
+-- each task is transformed into a place, with 1 token if it is initial
+rule task {
+ from
+  task : YAWL!Task
+  (
+   task.Task__filter__
+  )
+ to
+  place : PN!Place (
+   name <- if task.isInitial then
+    'Initial: '.concat(task.name)
+   else
+    task.name
+   endif,
+   tokens <- if task.isInitial then
+    1
+   else
+    0
+   endif
+  )
+} -- each final task is transformed into a place
+-- each final task is transformed into a place
+rule finaltask {
+ from
+  task : YAWL!OutputCondition
+ to
+  place : PN!Place (
+   --name   <- if task.isTerminating then 'Final Terminating' else 'Final' endif,
+   name <- 'Final' + if task.isTerminating then
+    ' Terminating'
+   else
+    ''
+   endif + if task.isMandatory then
+    ' Mandatory'
+   else
+    ''
+   endif,
+   tokens <- 0
+  )
+} -- each parallel split  (i.e. fork) is transformed into a transition
+-- each synchronization (i.e. join) is transformed into a transition
+-- each parallel split  (i.e. fork) is transformed into a transition
+-- each synchronization (i.e. join) is transformed into a transition
+rule synchronization_all {
+ from
+  synch : YAWL!ProcessControlElement
+  (
+   synch.isParallelSplit or synch.isSynchronization
+  )
+ using
+ {
+  icontrol : Sequence(OclAny) = synch.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if synch.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   name <- synch.typeName,
+   in <- thisModule.__convertToSequence__(synch.ins->select(e |
+    e.in.toPlaceAsOutput
+   )->collect(e |
+    e.in
+   ) -- connect to input places
+   ->union(synch.ins->select(e |
+    e.in.toTransitionAsOutput
+   )) -- connect to input transitions
+   .append(icontrol))->collect(__v__ |
+    if __v__.oclType().name = 'Tuple' then
+     if __v__.asMap().get('type__') = 'YawlEdge' then
+      if thisModule.transition_transition__filter__(__v__) then
+       thisModule.transition_transition(__v__)
+      else
+       if thisModule.place_place__filter__(__v__) then
+        thisModule.place_place(__v__)
+       else
+        OclUndefined
+       endif
+      endif
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   ),
+   -- connect to control place   				
+   out <- thisModule.__convertToSequence__(synch.outs->select(e |
+    e.out.toPlaceAsInput
+   )->collect(e |
+    e.out
+   )->union(synch.outs->select(e |
+    e.out.toTransitionAsInput
+   )).append(ocontrol))->collect(__v__ |
+    if __v__.oclType().name = 'Tuple' then
+     if __v__.asMap().get('type__') = 'YawlEdge' then
+      if thisModule.transition_transition__filter__(__v__) then
+       thisModule.transition_transition(__v__)
+      else
+       if thisModule.place_place__filter__(__v__) then
+        thisModule.place_place(__v__)
+       else
+        OclUndefined
+       endif
+      endif
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   )
+  )
+} -- each exclusive choice is transformed into a place
+-- each exclusive choice is transformed into a place
+rule exclusive_choice {
+ from
+  choice : YAWL!Task
+  (
+   choice.ExclusiveChoice__filter__
+  )
+ to
+  place : PN!Place (
+   name <- choice.typeName,
+   tokens <- 0
+  )
+} -- each simple merge is transformed into a place connected to a transition;
+-- the transition is created by rule create_transition, invoked from rule flow_diagram
+-- each simple merge is transformed into a place connected to a transition;
+-- the transition is created by rule create_transition, invoked from rule flow_diagram
+rule simple_merge {
+ from
+  merge : YAWL!Task
+  (
+   merge.SimpleMerge__filter__
+  )
+ to
+  place : PN!Place (
+   name <- merge.typeName,
+   tokens <- 0
+  )
+} -- each multi choice is transformed into a place connected to (2^n)-1 transitions;
+-- the transitions are created by rule create_transition, invoked from rule flow_diagram
+-- each multi choice is transformed into a place connected to (2^n)-1 transitions;
+-- the transitions are created by rule create_transition, invoked from rule flow_diagram
+rule multi_choice {
+ from
+  choice : YAWL!Task
+  (
+   choice.MultiChoice__filter__
+  )
+ to
+  place : PN!Place (
+   name <- choice.typeName,
+   tokens <- 0
+  )
+} -- INTERCONNECTIONS --------------------------------------------------------------------------------------------
+-- flow edges connecting nodes that are transformed into places, 
+-- are transformed into transitions
+-- Rule from place_place
+unique lazy rule place_place {
+ from
+  edge : YAWL!"OclAny"
+ using
+ {
+  icontrol : Sequence(OclAny) = thisModule.parentFlowDiagram(edge).control;
+  ocontrol : Sequence(OclAny) = if thisModule.isConnectedToTerminating(edge) then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   in <- icontrol.append(edge.in),
+   out <- ocontrol.append(edge.out)
+  )
+}
+
+-- Rule from transition_transition
+unique lazy rule transition_transition {
+ from
+  edge : YAWL!"OclAny"
+ -- should we differentiate transitionAsOutput when SimpleMerge???
+ -- should we differentiate transitionAsOutput when SimpleMerge???
+ to
+  place : PN!Place (
+   name <- edge.in.typeName + '-' + edge.out.typeName,
+   tokens <- 0
+  )
+}
+
+helper def: YawlEdge_AllInstances : OclAny =
+ YAWL!ProcessControlElement.allInstances()->collect(src |
+  src.flowsOutOf->collect(tgt |
+   Tuple {type__ = 'YawlEdge', src = src, tgt = tgt, out = tgt, in = src}
+  )
+ )->flatten();
+
+endpoint rule place_place_ForceTransformation() {
+ using
+ {
+  varToForceEvaluation : OclAny = thisModule.YawlEdge_AllInstances->collect(i |
+   thisModule.place_place(i)
+  );
+ }
+}
+
+endpoint rule transition_transition_ForceTransformation() {
+ using
+ {
+  varToForceEvaluation : OclAny = thisModule.YawlEdge_AllInstances->collect(i |
+   thisModule.transition_transition(i)
+  );
+ }
+}
+
+helper context YAWL!Decomposition def: YawlEdge_AllInstances : OclAny =
+ thisModule.YawlEdge_AllInstances;
+
+helper context YAWL!ProcessControlElement def: YawlEdge_AllInstances : OclAny =
+ thisModule.YawlEdge_AllInstances;
+
+helper context YAWL!Task def: YawlEdge_AllInstances : OclAny =
+ thisModule.YawlEdge_AllInstances;
+
+helper context YAWL!InputCondition def: YawlEdge_AllInstances : OclAny =
+ thisModule.YawlEdge_AllInstances;
+
+helper context YAWL!OutputCondition def: YawlEdge_AllInstances : OclAny =
+ thisModule.YawlEdge_AllInstances;
+
+helper def: __convertToSequence__(obj : OclAny) : OclAny =
+ if obj = OclUndefined then
+  Sequence {}
+ else
+  Sequence {obj}->flatten()
+ endif;
+
+helper def: place_place__filter__(edge : OclAny) : Boolean =
+ edge.in.toPlaceAsOutput and edge.out.toPlaceAsInput;
+
+helper def: transition_transition__filter__(edge : OclAny) : Boolean =
+ edge.in.toTransitionAsOutput and edge.out.toTransitionAsInput;
+
+helper context YAWL!Task def: Task__filter__ : Boolean =
+ if self.oclIsKindOf(YAWL!Task) then
+  self.splitType = #NORMAL and self.joinType = #NORMAL
+ else
+  true
+ endif;
+
+helper context YAWL!Task def: ParallelSplit__filter__ : Boolean =
+ self.splitType = #AND;
+
+helper context YAWL!Task def: Synchronization__filter__ : Boolean =
+ self.joinType = #AND;
+
+helper context YAWL!Task def: ExclusiveChoice__filter__ : Boolean =
+ self.splitType = #XOR;
+
+helper context YAWL!Task def: SimpleMerge__filter__ : Boolean =
+ self.joinType = #XOR;
+
+helper context YAWL!Task def: MultiChoice__filter__ : Boolean =
+ self.splitType = #OR;
+
+-- each task is transformed into a place, with 1 token if it is initial
+rule task_InputCondition {
+ from
+  task : YAWL!InputCondition
+  (
+   task.Task__filter__
+  )
+ to
+  place : PN!Place (
+   name <- if task.isInitial then
+    'Initial: '.concat(task.name)
+   else
+    task.name
+   endif,
+   tokens <- if task.isInitial then
+    1
+   else
+    0
+   endif
+  )
+} -- each final task is transformed into a place
+helper context YAWL!InputCondition def: YawlEdge_AllInstances : OclAny =
+ thisModule.YawlEdge_AllInstances;
+
+helper context YAWL!InputCondition def: Task__filter__ : Boolean =
+ if self.oclIsKindOf(YAWL!Task) then
+  self.splitType = #NORMAL and self.joinType = #NORMAL
+ else
+  true
+ endif;
+
+helper context YAWL!InputCondition def: Task__filter__ : Boolean =
+ if self.oclIsKindOf(YAWL!Task) then
+  self.splitType = #NORMAL and self.joinType = #NORMAL
+ else
+  true
+ endif;
+
+helper context YAWL!Decomposition def: nodes : OclAny =
+ self.processControlElements;
+
+helper context YAWL!Decomposition def: isFinalMandatory : OclAny =
+ true;
+
+helper context YAWL!Decomposition def: edges : OclAny =
+ self.YawlEdge_AllInstances->select(y |
+  self.processControlElements->exists(p |
+   p = y.src
+  )
+ );
+
+helper context YAWL!ProcessControlElement def: outs : OclAny =
+ self.YawlEdge_AllInstances->select(y |
+  y.src = self
+ );
+
+helper context YAWL!ProcessControlElement def: ins : OclAny =
+ self.YawlEdge_AllInstances->select(y |
+  y.tgt = self
+ );
+
+helper context YAWL!InputCondition def: name : OclAny =
+ 'input-condition';
+
+helper context YAWL!Task def: isInitial : OclAny =
+ false;
+
+helper context YAWL!InputCondition def: isInitial : OclAny =
+ true;
+
+helper context YAWL!OutputCondition def: isTerminating : OclAny =
+ true;
+
+helper context YAWL!OutputCondition def: isMandatory : OclAny =
+ true;

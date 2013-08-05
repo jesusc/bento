@@ -1,0 +1,11 @@
+composite component bpel2pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"  
+	binding bindBPEL = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpel2pn/bpel2fd.gbind"
+			
+	source concept BPEL  : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpel2pn/model/bpel.ecore"
+	target concept PN    : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : BPEL  = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpel2pn/examples/process1.xmi" 
+	target model out : PN    = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp/output-bpel.xmi" 
+	
+	compose apply fd2pn(bindBPEL(in)) -> (out)
+}

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bpmn="http://stp.eclipse.org/bpmn" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_o6NMYAVWEeGZu6mIlZx-pQ" type="Bpmn" name="test_deadlock_car.bpmn_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_o6YykAVWEeGZu6mIlZx-pQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_o6anwAVWEeGZu6mIlZx-pQ" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_o6bO0AVWEeGZu6mIlZx-pQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_o6drEAVWEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_o6e5MAVWEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_o6eSIAVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_o6eSIQVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_o6eSIgVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_o6eSIwVWEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_o6W9YQVWEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_o6e5MQVWEeGZu6mIlZx-pQ" x="132" y="77" width="111" height="61"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_rj3WQAVWEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_rj39VQVWEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_rj39UAVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_rj39UQVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_rj39UgVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_rj39UwVWEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_rjydwAVWEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rj39VAVWEeGZu6mIlZx-pQ" x="29" y="91"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1-SGsAVWEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_1-TU0AVWEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_1-SGsQVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_1-SGsgVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_1-SGswVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_1-SGtAVWEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_1-Q4kQVWEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1-SGtQVWEeGZu6mIlZx-pQ" x="381" y="81"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5TwNsAVWEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_5Txb0AVWEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_5TwNsQVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_5TwNsgVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_5TwNswVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_5TwNtAVWEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_5Tu_kQVWEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5TwNtQVWEeGZu6mIlZx-pQ" x="571" y="25"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5j7XsAVWEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_5j8l0AVWEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_5j7XsQVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_5j7XsgVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_5j7XswVWEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_5j7XtAVWEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_5j6JkQVWEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5j7XtQVWEeGZu6mIlZx-pQ" x="571" y="120"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_G8BaMAVXEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_G8CoUAVXEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_G8BaMQVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_G8BaMgVXEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_G8BaMwVXEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_G8BaNAVXEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_G8AMEQVXEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_G8BaNQVXEeGZu6mIlZx-pQ" x="849" y="77"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OI_-QAVXEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_OJAlUAVXEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_OI_-QQVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_OI_-QgVXEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_OI_-QwVXEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_OI_-RAVXEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_OI-JEAVXEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OI_-RQVXEeGZu6mIlZx-pQ" x="753" y="81"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Rr9usAVXEeGZu6mIlZx-pQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_Rr-VwAVXEeGZu6mIlZx-pQ" type="4001"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_Rr9usQVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_Rr9usgVXEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_Rr9uswVXEeGZu6mIlZx-pQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_Rr9utAVXEeGZu6mIlZx-pQ" lineColor="0"/>
+        <element xmi:type="bpmn:Activity" href="test_deadlock_car.bpmn#_Rr9HoQVXEeGZu6mIlZx-pQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rr9utQVXEeGZu6mIlZx-pQ" x="1050" y="86"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_o6bO0QVWEeGZu6mIlZx-pQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_o6bO0gVWEeGZu6mIlZx-pQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_o6bO0wVWEeGZu6mIlZx-pQ"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_o6YykQVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_o6YykgVWEeGZu6mIlZx-pQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_o6YykwVWEeGZu6mIlZx-pQ" fillColor="16771304"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_o6YylAVWEeGZu6mIlZx-pQ" lineColor="11119017"/>
+    <element xmi:type="bpmn:Pool" href="test_deadlock_car.bpmn#_o6VvQQVWEeGZu6mIlZx-pQ"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_o6bO1AVWEeGZu6mIlZx-pQ" x="16" y="16" width="1500" height="200"/>
+  </children>
+  <styles xmi:type="notation:PageStyle" xmi:id="_o6NMYQVWEeGZu6mIlZx-pQ"/>
+  <styles xmi:type="notation:GuideStyle" xmi:id="_o6NMYgVWEeGZu6mIlZx-pQ"/>
+  <styles xmi:type="notation:DescriptionStyle" xmi:id="_o6NMYwVWEeGZu6mIlZx-pQ"/>
+  <element xmi:type="bpmn:BpmnDiagram" href="test_deadlock_car.bpmn#_o5_J8AVWEeGZu6mIlZx-pQ"/>
+  <edges xmi:type="notation:Edge" xmi:id="_sAlugAVWEeGZu6mIlZx-pQ" type="3001" source="_rj3WQAVWEeGZu6mIlZx-pQ" target="_o6drEAVWEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_sAnjsAVWEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_sAnjsQVWEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_sAnjsgVWEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_sAnjswVWEeGZu6mIlZx-pQ" y="-10"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_sAlugQVWEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_sAluggVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_sAlugwVWEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_sAirMQVWEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_sAluhAVWEeGZu6mIlZx-pQ" points="[-1, 0, -75, 7]$[36, 0, -38, 7]$[36, -7, -38, 0]$[74, -7, 0, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_3khEsAVWEeGZu6mIlZx-pQ" type="3001" source="_o6drEAVWEeGZu6mIlZx-pQ" target="_1-SGsAVWEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_3khrxAVWEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_3kiS0AVWEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_3kiS0QVWEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3kiS0gVWEeGZu6mIlZx-pQ" y="-10"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_3khrwAVWEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3khrwQVWEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_3khrwgVWEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_3kf2kQVWEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3khrwwVWEeGZu6mIlZx-pQ" points="[54, 2, -206, -9]$[261, 35, 1, 24]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_H8qX0AVXEeGZu6mIlZx-pQ" type="3001" source="_1-SGsAVWEeGZu6mIlZx-pQ" target="_5TwNsAVWEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_H8q-4AVXEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_H8q-4QVXEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_H8q-4gVXEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_H8q-4wVXEeGZu6mIlZx-pQ" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_H8qX0QVXEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_H8qX0gVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_H8qX0wVXEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_H8oioQVXEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_H8qX1AVXEeGZu6mIlZx-pQ" points="[20, -5, -198, 48]$[167, -24, -51, 29]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_IR7dMAVXEeGZu6mIlZx-pQ" type="3001" source="_1-SGsAVWEeGZu6mIlZx-pQ" target="_5j7XsAVWEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_IR7dNQVXEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_IR7dNgVXEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_IR7dNwVXEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_IR7dOAVXEeGZu6mIlZx-pQ" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_IR7dMQVXEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_IR7dMgVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_IR7dMwVXEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_IR6PEQVXEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_IR7dNAVXEeGZu6mIlZx-pQ" points="[19, 5, -199, -37]$[165, 50, -53, 8]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_OzklQAVXEeGZu6mIlZx-pQ" type="3001" source="_5TwNsAVWEeGZu6mIlZx-pQ" target="_OI_-QAVXEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_OzlzYAVXEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_OzlzYQVXEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_OzlzYgVXEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_OzlzYwVXEeGZu6mIlZx-pQ" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_OzlMUAVXEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_OzlMUQVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_OzlMUgVXEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_OzjXIQVXEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OzlMUwVXEeGZu6mIlZx-pQ" points="[54, 17, -100, -36]$[179, 53, 25, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_PMXfwAVXEeGZu6mIlZx-pQ" type="3001" source="_5j7XsAVWEeGZu6mIlZx-pQ" target="_OI_-QAVXEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_PMYt4AVXEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_PMYt4QVXEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_PMYt4gVXEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_PMYt4wVXEeGZu6mIlZx-pQ" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_PMXfwQVXEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_PMXfwgVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_PMYG0AVXEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_PMWRoQVXEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PMYG0QVXEeGZu6mIlZx-pQ" points="[54, -16, -100, 26]$[129, -42, -25, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_PgShUAVXEeGZu6mIlZx-pQ" type="3001" source="_OI_-QAVXEeGZu6mIlZx-pQ" target="_G8BaMAVXEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_PgTIYAVXEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_PgTIYQVXEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_PgTvcAVXEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_PgTvcQVXEeGZu6mIlZx-pQ" y="-10"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_PgShUQVXEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_PgShUgVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_PgShUwVXEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_PgQFEQVXEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PgShVAVXEeGZu6mIlZx-pQ" points="[23, -2, -109, -1]$[79, -7, -53, -6]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_RsBZEAVXEeGZu6mIlZx-pQ" type="3001" source="_G8BaMAVXEeGZu6mIlZx-pQ" target="_Rr9usAVXEeGZu6mIlZx-pQ">
+    <children xmi:type="notation:Node" xmi:id="_RsCAIAVXEeGZu6mIlZx-pQ" type="4012">
+      <styles xmi:type="notation:FillStyle" xmi:id="_RsCAIQVXEeGZu6mIlZx-pQ" fillColor="16776959"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_RsCAIgVXEeGZu6mIlZx-pQ" lineColor="16776959"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_RsCAIwVXEeGZu6mIlZx-pQ" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_RsBZEQVXEeGZu6mIlZx-pQ" routing="Rectilinear" smoothness="Normal" closestDistance="true"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_RsBZEgVXEeGZu6mIlZx-pQ" fontName="Arial"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_RsBZEwVXEeGZu6mIlZx-pQ" lineColor="0"/>
+    <element xmi:type="bpmn:SequenceEdge" href="test_deadlock_car.bpmn#_RsAyAQVXEeGZu6mIlZx-pQ"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RsBZFAVXEeGZu6mIlZx-pQ" points="[-53, -7, 851, 100]$[-902, -107, 2, 0]"/>
+  </edges>
+</notation:Diagram>

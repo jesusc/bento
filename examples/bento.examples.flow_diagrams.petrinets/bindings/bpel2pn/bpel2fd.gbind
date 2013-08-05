@@ -1,0 +1,74 @@
+
+binding bpel2fd {  
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel BPEL : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bpel2pn/model/bpel.ecore"
+
+	class BPELEdge {
+		ref "in" : Activity
+		ref out  : Activity
+	} init = 
+		let start : OclAny = BPEL!"Sequence".allInstances()->any(seq | seq.refImmediateComposite().oclIsKindOf(BPEL!Process)) 
+		in start.createSequenceEdges(OclUndefined, OclUndefined, 1)
+		--))->flatten();
+
+	class FlowDiagram to Process	
+	class Node        to Activity
+	class FlowEdge    to virtual BPELEdge
+
+	class Task            to Activity 
+		when not self.isContainer and self.outs->size() > 0
+
+	class ExclusiveChoice to NONE                         
+	class ParallelSplit   to NONE
+	class Synchronization to NONE
+	class MultiChoice     to NONE
+	class SimpleMerge     to NONE
+	
+	feature FlowDiagram.nodes = BPEL!Activity.allInstances()
+	feature FlowDiagram.edges = self.BPELEdge_AllInstances
+
+	feature FlowEdge."in" is "in"
+	feature FlowEdge.out  is out
+
+	feature Node."ins" = self.BPELEdge_AllInstances->select(y | y."out" = self)
+	feature Node.outs  = self.BPELEdge_AllInstances->select(y | y."in" = self)
+
+	feature Task.isInitial = 
+		self.ins->size() = 0
+	feature Task.name is name
+	
+	class FinalTask to Activity when 
+		not self.isContainer and self.outs->size() = 0
+		
+	feature FinalTask.isTerminating = false
+	feature FinalTask.isMandatory   = false
+
+	-- Operations to create elements
+
+    helper Activity.isContainer : Boolean = self.oclIsKindOf(BPEL!"Sequence") 
+
+	
+    helper "Sequence".createSequenceEdges(previous : OclAny, following : OclAny, idx : OclAny) : OclAny = 
+    	let a : OclAny = self.activities->at(idx) in 
+	    let current : OclAny = if previous <> OclUndefined then
+	    						Sequence { a.createEdge(previous, a) }
+	    					else
+	    						Sequence { }
+	    					endif in
+	    let next : OclAny = if self.activities.size() > idx then
+	    						self.createSequenceEdges(a, following, idx + 1)
+	    					else
+	    						Sequence { }
+	    					endif in
+	    let last : OclAny =	if self.activities.size() = idx and following <> OclUndefined then
+	    						Sequence { a.createEdge(a, following) }
+	    					else
+	    						Sequence { }
+	    					endif
+	    in current->union(next)->union(last)    	
+    	
+	helper Activity.createEdge(src : OclAny, tgt : OclAny) : OclAny = 
+		Tuple { type__ = 'BPELEdge', "in" = src, out = tgt }
+}
+
+

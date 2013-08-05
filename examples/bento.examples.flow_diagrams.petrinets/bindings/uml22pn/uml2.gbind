@@ -1,0 +1,48 @@
+
+binding uml2 {  
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel UML  : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/uml22pn/UML.ecore"
+	
+	class FlowDiagram to Activity		
+	class Node        to ActivityNode 	
+	class FlowEdge    to ActivityEdge 
+		
+	class Task to ObjectNode, ExecutableNode, InitialNode
+	feature Task[ExecutableNode].name is name
+	feature Task[ExecutableNode].isInitial = false
+	feature Task[ObjectNode].name is name
+	feature Task[ObjectNode].isInitial = false
+	feature Task[InitialNode].name = 'Initial'
+	feature Task[InitialNode].isInitial = true 
+	     					           
+	     					           
+	class ExclusiveChoice to DecisionNode	                                        
+	class ParallelSplit   to ForkNode
+	class Synchronization to JoinNode 
+	class MultiChoice     to NONE
+	class SimpleMerge     to MergeNode
+	
+	feature FlowDiagram.nodes is node
+	feature FlowDiagram.edges is edge
+
+	feature FlowEdge."in" is source
+	feature FlowEdge.out is target
+
+	feature Node."ins" is incoming
+	feature Node.outs  is outgoing
+
+	-- This is an example when the selection of "isTerminating" feature has to be
+	-- done at runtime...  because a FinalFlowNode is not terminating
+	class FinalTask   to FinalNode
+	feature FinalTask.isTerminating = self.oclIsKindOf(UML!ActivityFinalNode)     
+	feature FinalTask.isMandatory   = false -- In UML2 existence of final tasks doesn't seem compulsory
+
+
+	-- Unsupported elements
+	-- <<decisionInputFlow>>
+	-- JoinNode with joinSpec != 'and'
+	-- I do not think that DataStore works (see http://www.uml-diagrams.org/activity-diagrams-objects.html)
+	-- SequenceNode (StructuredActivityNode)... cannot be mapped
+}
+
+

@@ -1,0 +1,11 @@
+composite component yawl2pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"    
+	binding bindYAWL = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/yawl2pn/yawl.gbind"
+			
+	source concept YAWL : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/yawl2pn/yawl.ecore"
+	target concept PN   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : YAWL = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/yawl2pn/examples/yawl_ex1.model" 
+	target model out : PN   = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp_/yawl-output.xmi"
+	
+	compose apply fd2pn(bindYAWL(in)) -> (out)
+}

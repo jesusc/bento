@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<bpws:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xsi:schemaLocation="http://docs.oasis-open.org/wsbpel/2.0/process/executable ../model/bpel.ecore">
-  <activity xsi:type="bpws:Sequence" name="main">
-    <activities xsi:type="bpws:Receive" name="receive a message"/>
-    <activities xsi:type="bpws:Assign" name="assign a variable" suppressJoinFailure="false"/>
-    <activities xsi:type="bpws:Reply" name="reply to the invoking service"/>
-  </activity>
-</bpws:Process>
