@@ -1,7 +1,7 @@
 
 transformation component fd2pn {
-	source concept FD  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
-	target concept PN  : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore"
+	source concept FD  : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	target concept PN  : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
 	
 	source model fd : FD
 	target model pn : PN
@@ -11,6 +11,6 @@ transformation component fd2pn {
 			- terminating
 			- nonTerminating
 	
-	definition atl "platform:/resource/genericity.benchmarks/components/flowdiagrams/trafo/flow2pn.atl" 
+	definition atl "platform:/resource/bento.examples.flow_diagrams.petrinets/trafo/flow2pn.atl" 
 		with IN : FD = fd, OUT : PN = pn
 }
