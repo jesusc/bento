@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import bento.componetization.atl.ConceptExtractor.Strategy;
+
 public class ConceptExtractor {
 
 	private String slicedURI;
@@ -37,7 +39,7 @@ public class ConceptExtractor {
 
 	protected HashMap<EClass, EClass> traceClass = new HashMap<EClass, EClass>();
 	
-	private Strategy strategy = Strategy.EFFECTIVE_METAMODEL;
+	private Strategy strategy = Strategy.CALLSITES_STRATEGY;
 	
 	/**
 	 * 
@@ -98,10 +100,6 @@ public class ConceptExtractor {
 			}
 		}
 		
-		for (EClass c : directUsedTypes) {
-			System.out.println(c.getName());
-		}
-
 		conceptPkg = EcoreFactory.eINSTANCE.createEPackage();
 		conceptPkg.setName(name);
 		conceptPkg.setNsURI(conceptURI);
@@ -216,9 +214,10 @@ public class ConceptExtractor {
 	// But the enclosing type does not seem to be available :-(
 	public enum Strategy {
 		
-		EFFECTIVE_METAMODEL() {
+		REALFEATURE_STRATEGY() {
 			public void transform(ConceptExtractor extractor) {
 				for(EStructuralFeature f : extractor.getUsedFeatures()) {
+					// This is to rule out classes that belongs to other meta-models of the transformation
 					if ( ! extractor.classInMetamodel(f.getEContainingClass() ) ) continue;
 					
 					extractor.copyClass( f.getEContainingClass() );
@@ -236,13 +235,37 @@ public class ConceptExtractor {
 			}
 		},
 
-		CONSTRAINED_METAMODEL() {
+		CALLSITES_STRATEGY() {
+
+			/**
+			 * This version uses the call sites...
+			 */
 			public void transform(ConceptExtractor extractor) {
-				throw new UnsupportedOperationException();
+				for(CallSite site : extractor.callSites ) {
+					System.out.println(site);
+					if ( ! extractor.classInMetamodel( site.getReceptor() ) ) continue;
+					
+					extractor.copyClass( site.getReceptor() );
+					if ( site.getFeature() instanceof EReference ) {
+						// This creates the target type even if it is not used effectively in the transformation
+						// TODO: Another strategy: Use the "implicitly used types" to restrict this...??
+						extractor.copyClass( ((EReference) site.getFeature()).getEReferenceType() );
+					}
+					extractor.copyFeature( site.getReceptor(), site.getFeature() );
+				}
+				
+				for(EClass original : extractor.traceClass.keySet() ) {
+					extractor.setInheritanceLinks(original, extractor.traceClass.get(original));
+				}
 			}
 		};
 
 		public abstract void transform(ConceptExtractor extractor);
+	}
+
+
+	public void setStrategy(Strategy strategy) {
+		this.strategy = strategy;
 	}
 
 //	private void fillFeatures(HashSet<EClass> usedTypes) {

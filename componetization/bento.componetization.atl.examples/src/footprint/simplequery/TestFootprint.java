@@ -18,9 +18,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
+import tests.base.BaseTest;
+
+import zoo.uml2measure.TestUML2Measure;
+
 import bento.componetization.atl.ConceptExtractor;
 
-public class TestFootprint {
+public class TestFootprint extends BaseTest {
 	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery1.atl.xmi";
 	public static final String TARGET_METAMODEL_NAME = "NOTHING_FOR_LIBRARIES";
 	private static final String SOURCE_METAMODEL_NAME = "CD";
@@ -31,42 +35,26 @@ public class TestFootprint {
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
 				"org.apache.commons.logging.impl.NoOpLog");
-
 		Util.registerResourceFactory();
-		EMFLoader loader = new EMFLoader(new JavaListConverter());
-	
-		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, SOURCE_METAMODEL); //, TARGET_METAMODEL);
-				
-		BasicEMFModel atlTransformation = loader
-				.basicModelFromFile(
-						withDir("../../compiler/genericity.compiler.atl/src/genericity/typecheck/atl/ATL.ecore"),
-						withDir(ATL_TRANSFORMATION));
-
-		List<EPackage> pkgs = new ArrayList<EPackage>();
-		pkgs.add(AtlTypingPackage.eINSTANCE);
-		BasicEMFModel out = loader
-				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
-
-		new TypeCheckLauncher().launch(mm, atlTransformation, out);
 		
-		out.serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
-		mm.serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
+		new TestFootprint().run();
+	}
+	
+	public void run() throws IOException {
+		// typing
+		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		
+		getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
+		getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
+
 		System.out.println("Finished typing of " + TestFootprint.class.getSimpleName());
 
-		
-		// Extractor
-		ConceptExtractor extractor = new ConceptExtractor(atlTransformation, mm, out, "http://bento/componetization/simplequery/classcd");
-		EPackage pkg = extractor.extractSource("classdiag", "http://bento/footprint/simplequery1_concept", "classdiag_concept");
-
-		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(withDir("tmp_/simple_query1_concept.ecore")));
-		r.getContents().add(pkg);
-		r.save(null);
-		
+		// Call sites
+		extractConcept("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag",
+				ConceptExtractor.Strategy.CALLSITES_STRATEGY);
+		saveConcept(withDir("tmp_/concept_simplequery1_sites.ecore"));
 		System.out.println("Finished extracting of " + TestFootprint.class.getSimpleName());
 
 	}
 
-	private static String withDir(String path) {
-		return "." + File.separator + path;
-	}
 }

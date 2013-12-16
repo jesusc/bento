@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import bento.componetization.atl.ConceptExtractor;
+import bento.componetization.atl.ConceptExtractor.Strategy;
 
 public abstract class BaseTest {
 
@@ -47,15 +48,16 @@ public abstract class BaseTest {
 	}
 	
 	public void saveConcept(String conceptFilename) throws IOException {
-		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(withDir("tmp_/concept_uml2measure.ecore")));
+		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(conceptFilename));
 		r.getContents().add(conceptPkg);
 		r.save(null);
 	}
 
-	public void extractConcept(String uri, String newURI, String newName) {
+	public void extractConcept(String uri, String newURI, String newName, Strategy strategy) {
 		// Extractor
 		ConceptExtractor extractor = new ConceptExtractor(atlTransformation, 
 				getTransformationMetamodels(), getTypingModel(), uri);
+		extractor.setStrategy(strategy);
 		conceptPkg = extractor.extractSource(newName, newURI, newName);
 		
 	}

@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;
 
+import bento.componetization.atl.ConceptExtractor;
+
 import tests.base.BaseTest;
 
 public class TestUML2Measure extends BaseTest {
@@ -32,9 +34,16 @@ public class TestUML2Measure extends BaseTest {
 
 		System.out.println("Finished typing of " + TestUML2Measure.class.getSimpleName());
 
-		// conceptExtraction
-		extractConcept("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classdiag_concept");
-		saveConcept(withDir("tmp_/concept_uml2measure.ecore"));
+		// conceptExtraction - RealFeature
+		extractConcept("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classdiag_concept",
+				ConceptExtractor.Strategy.REALFEATURE_STRATEGY);
+		saveConcept(withDir("tmp_/concept_uml2measure_real.ecore"));
+		System.out.println("Finished extracting of " + TestUML2Measure.class.getSimpleName());
+
+		// Call sites
+		extractConcept("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classdiag_concept",
+				ConceptExtractor.Strategy.CALLSITES_STRATEGY);
+		saveConcept(withDir("tmp_/concept_uml2measure_sites.ecore"));
 		System.out.println("Finished extracting of " + TestUML2Measure.class.getSimpleName());
 
 	}
