@@ -1,0 +1,4 @@
+library simplequery1;
+
+helper context CD!Class def : myQuery() : OclAny = 
+	self.features->select(f|f.name = 'X');

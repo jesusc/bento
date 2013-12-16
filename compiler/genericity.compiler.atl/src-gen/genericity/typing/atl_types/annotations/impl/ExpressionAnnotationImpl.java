@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getUsedFeature <em>Used Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,6 +53,16 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 	 * @ordered
 	 */
 	protected Type type;
+
+	/**
+	 * The cached value of the '{@link #getUsedFeature() <em>Used Feature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUsedFeature()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject usedFeature;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,6 +164,44 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EObject getUsedFeature() {
+		if (usedFeature != null && usedFeature.eIsProxy()) {
+			InternalEObject oldUsedFeature = (InternalEObject)usedFeature;
+			usedFeature = eResolveProxy(oldUsedFeature);
+			if (usedFeature != oldUsedFeature) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE, oldUsedFeature, usedFeature));
+			}
+		}
+		return usedFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetUsedFeature() {
+		return usedFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUsedFeature(EObject newUsedFeature) {
+		EObject oldUsedFeature = usedFeature;
+		usedFeature = newUsedFeature;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE, oldUsedFeature, usedFeature));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -162,6 +211,9 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
+				if (resolve) return getUsedFeature();
+				return basicGetUsedFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,6 +231,9 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 				return;
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__TYPE:
 				setType((Type)newValue);
+				return;
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
+				setUsedFeature((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -198,6 +253,9 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__TYPE:
 				setType((Type)null);
 				return;
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
+				setUsedFeature((EObject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -214,6 +272,8 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 				return expr != null;
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__TYPE:
 				return type != null;
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
+				return usedFeature != null;
 		}
 		return super.eIsSet(featureID);
 	}

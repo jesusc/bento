@@ -256,6 +256,15 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExpressionAnnotation_UsedFeature() {
+		return (EReference)expressionAnnotationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AnnotationsFactory getAnnotationsFactory() {
 		return (AnnotationsFactory)getEFactoryInstance();
 	}
@@ -296,6 +305,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		expressionAnnotationEClass = createEClass(EXPRESSION_ANNOTATION);
 		createEReference(expressionAnnotationEClass, EXPRESSION_ANNOTATION__EXPR);
 		createEReference(expressionAnnotationEClass, EXPRESSION_ANNOTATION__TYPE);
+		createEReference(expressionAnnotationEClass, EXPRESSION_ANNOTATION__USED_FEATURE);
 	}
 
 	/**
@@ -351,6 +361,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEClass(expressionAnnotationEClass, ExpressionAnnotation.class, "ExpressionAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpressionAnnotation_Expr(), ecorePackage.getEObject(), null, "expr", null, 0, 1, ExpressionAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExpressionAnnotation_Type(), theAtlTypingPackage.getType(), null, "type", null, 1, 1, ExpressionAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpressionAnnotation_UsedFeature(), ecorePackage.getEObject(), null, "usedFeature", null, 0, 1, ExpressionAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //AnnotationsPackageImpl

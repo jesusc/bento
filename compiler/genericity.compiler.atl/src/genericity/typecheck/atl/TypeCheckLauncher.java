@@ -125,6 +125,9 @@ public class TypeCheckLauncher {
 		}
 	}
 
+	// I don't like this...
+	private static EStructuralFeature lastNavigatedFeature;
+
 	public static class CustomMethodWrapper extends
 			org.eclectic.idc.jvm.runtime.BasicMethodWrapper {
 		private BasicEMFModel mm;
@@ -445,6 +448,8 @@ public class TypeCheckLauncher {
 
 		// Assume type is NavigationOrAttributeCallExp
 		public Type featureType(Type receptortype, ImmutableList helpers, ImmutableList operations) {
+			lastNavigatedFeature = null;
+			
 			String featureName = (String) model.getFeature(object, "name");
 
 			if ( receptortype instanceof TupleType ) {
@@ -527,9 +532,17 @@ public class TypeCheckLauncher {
 					throw new RuntimeException("No feature " + featureName + " " + clazz.getName() + " : " + object + " " + model.getFeature(object, "location"));
 				}
 			}
+			
+			// Cache the structural feature... just as a way to have multiple return values
+			// The value is queried with getLastNavigatedFeature
+			lastNavigatedFeature = f;
 			return createType( f.getEType(), f.getUpperBound() == -1 || f.getUpperBound() > 1 );
 		}
 
+		public EStructuralFeature getLastNavigatedFeature() {
+			return lastNavigatedFeature;
+		}
+		
 		public Type tupleAccessType(TupleType tuple, String featureName) {
 			String attrNames = "";
 			EList<TupleAttribute> attributes = tuple.getAttributes();

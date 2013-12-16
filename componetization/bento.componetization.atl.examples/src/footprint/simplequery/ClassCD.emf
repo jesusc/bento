@@ -1,0 +1,34 @@
+@namespace(
+	uri="http://bento/componetization/simplequery/classcd",
+	prefix="classcd")
+package classcd;
+
+abstract class NamedElt {
+   attr String[1] name;
+}
+
+abstract class TypedElt extends NamedElt {
+   
+}
+
+abstract class Classifier extends TypedElt {
+   
+}
+
+class DataType extends Classifier {
+   
+}
+
+class Class extends Classifier {
+	val Feature[*] features;   
+}
+
+class Feature extends TypedElt {
+   attr int[1] upperBound = 1;
+   attr int[1] lowerBound = 0;
+}
+
+
+
+
+

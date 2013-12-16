@@ -101,6 +101,9 @@ package annotations {
   class ExpressionAnnotation extends AtlAnnotation {
     ref EObject expr;
 	ref Type[1] type;
+	
+	// Reference to EStructuralFeature
+	ref EObject[0..1] usedFeature;
   }
 
 }

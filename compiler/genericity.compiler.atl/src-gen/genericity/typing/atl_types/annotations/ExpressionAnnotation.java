@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getExpr <em>Expr</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getType <em>Type</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getUsedFeature <em>Used Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +79,31 @@ public interface ExpressionAnnotation extends AtlAnnotation {
 	 * @generated
 	 */
 	void setType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>Used Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Feature</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Feature</em>' reference.
+	 * @see #setUsedFeature(EObject)
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getExpressionAnnotation_UsedFeature()
+	 * @model
+	 * @generated
+	 */
+	EObject getUsedFeature();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getUsedFeature <em>Used Feature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Used Feature</em>' reference.
+	 * @see #getUsedFeature()
+	 * @generated
+	 */
+	void setUsedFeature(EObject value);
 
 } // ExpressionAnnotation

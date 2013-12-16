@@ -25,6 +25,7 @@ attribution attr_typecheck_atl(atl) -> (typ)
 	uses atl_patterns as atl_patterns
 	
 	syn type : typ!Type
+	syn navFeature : typ!EStructuralFeature // Works because the compiler does not check...
 	
 	// Setters
 	rule atl!OclExpression
@@ -33,6 +34,11 @@ attribution attr_typecheck_atl(atl) -> (typ)
 		ann  = typ!ExpressionAnnotation.new
 		ann.type = type
 		ann.expr = self
+		
+		self.kind_of(atl!NavigationOrAttributeCallExp).if_true {
+			f = navFeature[self]
+			ann.usedFeature = f
+		}
 	end 
 	
 	// Helpers
@@ -46,7 +52,7 @@ attribution attr_typecheck_atl(atl) -> (typ)
 	end
 
 	// Rules
-	// Include SimpleInPatternElement
+	// Includes SimpleInPatternElement
 	rule atl!VariableDeclaration 
 		self.varName.eq("self").or(self.varName.eq("thisModule")).or(self.kind_of(atl!Iterator)).if_false {
 			self.initExpression.is_nil.if_else({
@@ -154,7 +160,9 @@ attribution attr_typecheck_atl(atl) -> (typ)
 
 		ft = self.featureType(t, helpers, operations)
 		// I am not passing the types of the helpers... So it is important to provide accurate return types
-		
+
+		// Get the navigated feature, cached by featureType
+		navFeature[self] <- self.getLastNavigatedFeature
 		//match ft
 		//case EDataType => 
 		//case EClass    =>
