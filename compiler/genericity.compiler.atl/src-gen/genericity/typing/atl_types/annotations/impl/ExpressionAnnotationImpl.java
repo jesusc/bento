@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getType <em>Type</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getUsedFeature <em>Used Feature</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl#getReceptorType <em>Receptor Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +64,16 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 	 * @ordered
 	 */
 	protected EObject usedFeature;
+
+	/**
+	 * The cached value of the '{@link #getReceptorType() <em>Receptor Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReceptorType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject receptorType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -202,6 +213,44 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EObject getReceptorType() {
+		if (receptorType != null && receptorType.eIsProxy()) {
+			InternalEObject oldReceptorType = (InternalEObject)receptorType;
+			receptorType = eResolveProxy(oldReceptorType);
+			if (receptorType != oldReceptorType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnnotationsPackage.EXPRESSION_ANNOTATION__RECEPTOR_TYPE, oldReceptorType, receptorType));
+			}
+		}
+		return receptorType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetReceptorType() {
+		return receptorType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReceptorType(EObject newReceptorType) {
+		EObject oldReceptorType = receptorType;
+		receptorType = newReceptorType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.EXPRESSION_ANNOTATION__RECEPTOR_TYPE, oldReceptorType, receptorType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -214,6 +263,9 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
 				if (resolve) return getUsedFeature();
 				return basicGetUsedFeature();
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__RECEPTOR_TYPE:
+				if (resolve) return getReceptorType();
+				return basicGetReceptorType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,6 +286,9 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 				return;
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
 				setUsedFeature((EObject)newValue);
+				return;
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__RECEPTOR_TYPE:
+				setReceptorType((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -256,6 +311,9 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
 				setUsedFeature((EObject)null);
 				return;
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__RECEPTOR_TYPE:
+				setReceptorType((EObject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -274,6 +332,8 @@ public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements Expre
 				return type != null;
 			case AnnotationsPackage.EXPRESSION_ANNOTATION__USED_FEATURE:
 				return usedFeature != null;
+			case AnnotationsPackage.EXPRESSION_ANNOTATION__RECEPTOR_TYPE:
+				return receptorType != null;
 		}
 		return super.eIsSet(featureID);
 	}

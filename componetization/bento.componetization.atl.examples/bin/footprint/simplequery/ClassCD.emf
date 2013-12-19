@@ -23,11 +23,18 @@ class Class extends Classifier {
 	val Feature[*] features;   
 }
 
-class Feature extends TypedElt {
+abstract class Feature extends TypedElt {
    attr int[1] upperBound = 1;
    attr int[1] lowerBound = 0;
 }
 
+class Reference extends Feature {
+    attr Boolean[1] allowNull = false;
+}
+
+class Attribute extends Feature {
+	attr String[0..1] defaultValueLiteral;   
+}
 
 
 

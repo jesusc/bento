@@ -91,8 +91,8 @@ public class ConceptExtractor {
 					usedAttributes.add((EAttribute) f);
 				}
 				
-				if ( ann.getType() instanceof Metaclass ) {
-					Metaclass receptor = (Metaclass) ann.getType();
+				if ( ann.getReceptorType() instanceof Metaclass ) {
+					Metaclass receptor = (Metaclass) ann.getReceptorType();
 					CallSite callSite = new CallSite(receptor.getKlass(), f);
 				
 					callSites.add(callSite);

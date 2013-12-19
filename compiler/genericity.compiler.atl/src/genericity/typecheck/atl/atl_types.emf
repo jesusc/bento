@@ -102,8 +102,10 @@ package annotations {
     ref EObject expr;
 	ref Type[1] type;
 	
-	// Reference to EStructuralFeature
+	// Reference to EStructuralFeature and the type of the static receptor
 	ref EObject[0..1] usedFeature;
+	ref EObject[0..1] receptorType;
+	
   }
 
 }

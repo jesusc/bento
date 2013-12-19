@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getExpr <em>Expr</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getType <em>Type</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getUsedFeature <em>Used Feature</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getReceptorType <em>Receptor Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +106,31 @@ public interface ExpressionAnnotation extends AtlAnnotation {
 	 * @generated
 	 */
 	void setUsedFeature(EObject value);
+
+	/**
+	 * Returns the value of the '<em><b>Receptor Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Receptor Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Receptor Type</em>' reference.
+	 * @see #setReceptorType(EObject)
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getExpressionAnnotation_ReceptorType()
+	 * @model
+	 * @generated
+	 */
+	EObject getReceptorType();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getReceptorType <em>Receptor Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Receptor Type</em>' reference.
+	 * @see #getReceptorType()
+	 * @generated
+	 */
+	void setReceptorType(EObject value);
 
 } // ExpressionAnnotation

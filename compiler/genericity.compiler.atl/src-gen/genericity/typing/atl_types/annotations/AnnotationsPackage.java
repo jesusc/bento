@@ -228,13 +228,22 @@ public interface AnnotationsPackage extends EPackage {
 	int EXPRESSION_ANNOTATION__USED_FEATURE = ATL_ANNOTATION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Receptor Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_ANNOTATION__RECEPTOR_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Expression Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_ANNOTATION_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 3;
+	int EXPRESSION_ANNOTATION_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 4;
 
 
 	/**
@@ -399,6 +408,17 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getExpressionAnnotation_UsedFeature();
 
 	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.annotations.ExpressionAnnotation#getReceptorType <em>Receptor Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Receptor Type</em>'.
+	 * @see genericity.typing.atl_types.annotations.ExpressionAnnotation#getReceptorType()
+	 * @see #getExpressionAnnotation()
+	 * @generated
+	 */
+	EReference getExpressionAnnotation_ReceptorType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -547,6 +567,14 @@ public interface AnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPRESSION_ANNOTATION__USED_FEATURE = eINSTANCE.getExpressionAnnotation_UsedFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Receptor Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPRESSION_ANNOTATION__RECEPTOR_TYPE = eINSTANCE.getExpressionAnnotation_ReceptorType();
 
 	}
 

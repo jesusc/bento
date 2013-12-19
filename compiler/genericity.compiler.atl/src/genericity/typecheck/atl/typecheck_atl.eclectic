@@ -38,6 +38,9 @@ attribution attr_typecheck_atl(atl) -> (typ)
 		self.kind_of(atl!NavigationOrAttributeCallExp).if_true {
 			f = navFeature[self]
 			ann.usedFeature = f
+			
+			r = type[self.source]
+			ann.receptorType = r
 		}
 	end 
 	

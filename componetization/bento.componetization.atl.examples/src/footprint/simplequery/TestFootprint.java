@@ -1,31 +1,20 @@
 package footprint.simplequery;
 
 
-import genericity.typecheck.atl.TypeCheckLauncher;
-import genericity.typing.atl_types.AtlTypingPackage;
-
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.eclectic.idc.datatypes.JavaListConverter;
-import org.eclectic.modeling.emf.BasicEMFModel;
-import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.Util;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import tests.base.BaseTest;
-
-import zoo.uml2measure.TestUML2Measure;
-
 import bento.componetization.atl.ConceptExtractor;
 
 public class TestFootprint extends BaseTest {
-	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery1.atl.xmi";
+	// public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery1.atl.xmi";
+
+	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery2.atl.xmi";
+
+	
 	public static final String TARGET_METAMODEL_NAME = "NOTHING_FOR_LIBRARIES";
 	private static final String SOURCE_METAMODEL_NAME = "CD";
 
@@ -52,7 +41,7 @@ public class TestFootprint extends BaseTest {
 		// Call sites
 		extractConcept("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag",
 				ConceptExtractor.Strategy.CALLSITES_STRATEGY);
-		saveConcept(withDir("tmp_/concept_simplequery1_sites.ecore"));
+		saveConcept(withDir("tmp_/concept_simplequery1.ecore"));
 		System.out.println("Finished extracting of " + TestFootprint.class.getSimpleName());
 
 	}
