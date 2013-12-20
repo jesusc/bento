@@ -1,0 +1,12 @@
+@namespace(uri="http://bento/componetization/paper/metrics", prefix="metrics")
+package metrics;
+
+class MetricsSet {
+   attr String[1] name;
+   val Metric[*] metrics;
+}
+
+class Metric {
+   attr String[1] name;
+   attr Double[1] value;
+}

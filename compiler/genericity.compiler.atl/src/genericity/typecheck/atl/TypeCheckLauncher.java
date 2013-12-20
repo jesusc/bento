@@ -310,7 +310,10 @@ public class TypeCheckLauncher {
 				return copyType(iteratorVar, iteratorVar.isMultivalued());
 			} else if ( iteratorName.equals("exists") ) {
 				return createBooleanType();
+			} else if ( iteratorName.equals("forAll") ) {
+				return createBooleanType();
 			}
+			
 			throw new UnsupportedOperationException("Iterator " + iteratorName + " not supported");			
 		}
 		

@@ -1,0 +1,9 @@
+library simplequery1;
+
+helper context CD!Class def : myQuery() : OclAny = 
+	self.features->select(f|f.name = 'X');
+
+helper context CD!Class def: super_ : OclAny =
+ self.generalization->collect(g | g.general)->
+    select(c | c.isActive);
+ 	--select(c | c.oclIsKindOf(CD!Interface));
