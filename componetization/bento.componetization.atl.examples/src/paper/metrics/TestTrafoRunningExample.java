@@ -38,12 +38,19 @@ public class TestTrafoRunningExample extends BaseTest {
 
 		System.out.println("Finished typing of " + TestTrafoRunningExample.class.getSimpleName());
 
-		// Call sites
-		extractConcept("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml",
+		// Effective meta-model
+		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml",
 				// ConceptExtractor.Strategy.CALLSITES_STRATEGY);
 				ConceptExtractor.Strategy.REALFEATURE_STRATEGY);
 
+		
+		// Refactor
+		ex.refactor();
+		
 		saveConcept(withDir("tmp_/concept_paper_running_example.ecore"));
+		
+		
+		
 		System.out.println("Finished extracting of " + TestTrafoRunningExample.class.getSimpleName());
 
 	}

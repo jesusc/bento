@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import bento.componetization.atl.ConceptExtractor;
-import bento.componetization.atl.ConceptExtractor.Strategy;
+import bento.componetization.atl.MetamodelPrunner.Strategy;
 
 public abstract class BaseTest {
 
@@ -53,13 +53,14 @@ public abstract class BaseTest {
 		r.save(null);
 	}
 
-	public void extractConcept(String uri, String newURI, String newName, Strategy strategy) {
+	public ConceptExtractor extractConcept(String uri, String newURI, String newName, Strategy strategy) {
 		// Extractor
 		ConceptExtractor extractor = new ConceptExtractor(atlTransformation, 
 				getTransformationMetamodels(), getTypingModel(), uri);
 		extractor.setStrategy(strategy);
 		conceptPkg = extractor.extractSource(newName, newURI, newName);
 		
+		return extractor;
 	}
 	
 	public BasicEMFModel getAtlTransformation() {
