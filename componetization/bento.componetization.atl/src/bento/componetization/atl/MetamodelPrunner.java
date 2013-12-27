@@ -148,13 +148,15 @@ public class MetamodelPrunner {
 			
 			if ( tgtType == null ) throw new IllegalStateException("Not found target type " + usedFeature.getEType().getName() + " of reference " + usedFeature.getName());
 			
+			((EReference) copy).setContainment( ((EReference) usedFeature).isContainment() );
 			copy.setEType( tgtType );
 		}
 	
 		copy.setName( usedFeature.getName() );
 		copy.setLowerBound( usedFeature.getLowerBound() );
 		copy.setUpperBound( usedFeature.getUpperBound() );
-	
+		
+		
 		if ( conceptClass == null ) {
 			throw new IllegalStateException("No class " + klass.getName() + ". Copying feature " + usedFeature.getName());
 		}

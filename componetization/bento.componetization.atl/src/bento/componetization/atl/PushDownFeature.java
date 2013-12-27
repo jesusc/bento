@@ -12,32 +12,27 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-public class PullDownFeature implements IConceptRefactoring {
+public class PushDownFeature extends BaseRefactoring {
 
 	private int maxFeatureUses = 1;
 	
-	private IStaticAnalysisInfo analysis;
-	private IPruningInfo pruner;
-
-	private List<? extends IMatch> storedMatches = null;
-
-	public PullDownFeature(IStaticAnalysisInfo analysis, IPruningInfo pruner) {
-		this.analysis = analysis;
-		this.pruner   = pruner;
+	public PushDownFeature(IStaticAnalysisInfo analysis, IPruningInfo prunner) {
+		super(analysis, prunner);
 	}
+
  	
 	@Override
 	public boolean match() {
-		List<PullDownFeatureMatch> matches = new ArrayList<PullDownFeatureMatch>();
+		List<PushDownFeatureMatch> matches = new ArrayList<PushDownFeatureMatch>();
 		
-		Set<EClass> classes = pruner.getSelectedClasses();
-		Set<EStructuralFeature> features = pruner.getSelectedFeatures();
+		Set<EClass> classes = prunner.getSelectedClasses();
+		Set<EStructuralFeature> features = prunner.getSelectedFeatures();
 		for (EClass eClass : classes) {
 			for(EStructuralFeature f : eClass.getEStructuralFeatures()) {
 				if ( features.contains(f) ) {
 					Set<CallSite> occurences = findFeatureInCallSites(f);
 					if ( occurences != null ) {
-						matches.add( new PullDownFeatureMatch(f, occurences) );
+						matches.add( new PushDownFeatureMatch(f, occurences) );
 					}
 				}
 			}
@@ -46,23 +41,6 @@ public class PullDownFeature implements IConceptRefactoring {
 		return save(matches);
 	}
 	
-	private boolean save(List<? extends IMatch> matches) {
-		if ( matches.size() == 0 )
-			return false;
-		
-		this.storedMatches  = matches;
-		return true;
-	}
-
-	@Override
-	public void apply() {
-		if ( storedMatches == null ) throw new IllegalStateException();
-		
-		for (IMatch m : storedMatches) {
-			m.apply();
-		}
-		
-	}
 	
 	private Set<CallSite> findFeatureInCallSites(EStructuralFeature f) {
 		HashSet<CallSite> sites = new HashSet<CallSite>();
@@ -88,12 +66,12 @@ public class PullDownFeature implements IConceptRefactoring {
 		return null;
 	}
 
-	public class PullDownFeatureMatch implements IMatch {
+	public class PushDownFeatureMatch implements IMatch {
 
 		private Set<CallSite> occurrences;
 		private EStructuralFeature feature;
 
-		public PullDownFeatureMatch(EStructuralFeature f, Set<CallSite> occurrences) {
+		public PushDownFeatureMatch(EStructuralFeature f, Set<CallSite> occurrences) {
 			System.out.println("Found " + occurrences);
 			this.feature     = f;
 			this.occurrences = occurrences;
@@ -101,10 +79,10 @@ public class PullDownFeature implements IConceptRefactoring {
 
 		@Override
 		public void apply() {
-			EStructuralFeature targetFeature = pruner.getTargetFeature(feature);
+			EStructuralFeature targetFeature = prunner.getTargetFeature(feature);
 		
 			for (CallSite site : occurrences) {
-				EClass targetClass = pruner.getTargetClass(site.getReceptor());
+				EClass targetClass = prunner.getTargetClass(site.getReceptor());
 				
 				targetClass.getEStructuralFeatures().add( copyFeature(targetFeature) );
 			}

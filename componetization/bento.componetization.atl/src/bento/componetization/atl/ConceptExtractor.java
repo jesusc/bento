@@ -31,7 +31,8 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 
 	public void refactor() {
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
-				new PullDownFeature(this, this)
+				new PushDownFeature(this, this),
+				new RemoveEmptyClass(this, this)
 		};
 		
 		for (int i = 0; i < refactorings.length; i++) {
@@ -51,6 +52,13 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 		return (Set<CallSite>) this.callSites.clone();
 	}
 
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Set<EClass> getExplicitlyUsedTypes() {
+		return (Set<EClass>) this.directUsedTypes.clone();
+	}
+	
 	//
 	// IPruningInfo
 	//
