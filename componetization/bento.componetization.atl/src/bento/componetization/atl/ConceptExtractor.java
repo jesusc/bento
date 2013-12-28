@@ -21,6 +21,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import bento.componetization.atl.refactorings.IConceptRefactoring;
+import bento.componetization.atl.refactorings.PushDownFeature;
+import bento.componetization.atl.refactorings.RemoveEmptyClass;
+
 public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysisInfo, IPruningInfo {
 	
 	public ConceptExtractor(BasicEMFModel atlTransformation, BasicEMFModel mm,

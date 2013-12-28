@@ -2,6 +2,9 @@ package bento.componetization.atl;
 
 import java.util.List;
 
+import bento.componetization.atl.refactorings.IConceptRefactoring;
+import bento.componetization.atl.refactorings.IMatch;
+
 public abstract class BaseRefactoring implements IConceptRefactoring {
 
 	protected IStaticAnalysisInfo analysis;

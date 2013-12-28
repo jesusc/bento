@@ -1,4 +1,4 @@
-package bento.componetization.atl;
+package bento.componetization.atl.refactorings;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,7 +12,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import bento.componetization.atl.PushDownFeature.PushDownFeatureMatch;
+import bento.componetization.atl.BaseRefactoring;
+import bento.componetization.atl.IPruningInfo;
+import bento.componetization.atl.IStaticAnalysisInfo;
+import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMatch;
 
 /**
  * This refactoring remove empty classes in an inheritance hierarchy,

@@ -1,4 +1,4 @@
-package bento.componetization.atl;
+package bento.componetization.atl.refactorings;
 
 public interface IConceptRefactoring {
 
