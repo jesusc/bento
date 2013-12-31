@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Componetization Editor"
+            extensions="componetize"
+            icon="icons/sample.gif"
+            contributorClass="bento.componetization.ui.editors.ComponetizationEditorContributor"
+            class="bento.componetization.ui.editors.ComponetizationEditor"
+            id="bento.componetization.ui.editors.ComponetizationEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Bento"
+            id="bento.componetization.ui">
+      </category>
+      <wizard
+            name="Componetize transformation"
+            icon="icons/sample.gif"
+            category="bento.componetization.ui"
+            class="bento.componetization.ui.wizards.ComponetizationWizard"
+            id="bento.componetization.ui.wizards.ComponetizationWizard">
+      </wizard>
+   </extension>
+
+</plugin>

@@ -15,6 +15,7 @@ import bento.componetization.atl.refactorings.IMatch;
  * An intermediate a class typically includes a reference to navigate to the
  * associated class ("navigation reference"), and we assume that it is referenced
  * by a containment reference only once.
+ * 
  * To apply the refactoring, the intermediate class must not be used explicitly
  * in the transformation, and no feature must be used except the "navigation reference".
  * 

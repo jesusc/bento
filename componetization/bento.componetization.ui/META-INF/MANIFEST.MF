@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bento Componetization UI
+Bundle-SymbolicName: bento.componetization.ui; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: bento.componetization.ui.Activator
+Bundle-Vendor: Miso Team
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.core.resources,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.forms;bundle-version="3.5.100"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ swing2swt.jar,
+ swt-grouplayout.jar
