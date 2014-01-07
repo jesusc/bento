@@ -1,7 +1,9 @@
 package bento.componetization.ui.editors;
 
 
+import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URI;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,9 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -33,6 +38,9 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.ide.IDE;
 
+import bento.componetization.reveng.RevengFactory;
+import bento.componetization.reveng.RevengModel;
+import bento.componetization.reveng.RevengPackage;
 import bento.componetization.ui.forms.TransformationConfigurationPage;
 
 /**
@@ -46,10 +54,31 @@ import bento.componetization.ui.forms.TransformationConfigurationPage;
  */
 public class ComponetizationEditor extends FormEditor {
 
+	private Resource resource;
+
+	@Override
+	protected void setInput(IEditorInput input) {
+		super.setInput(input);
+		FileEditorInput fei = (FileEditorInput) input;
+
+		ResourceSetImpl rs = new ResourceSetImpl();
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put(RevengPackage.eINSTANCE.getNsURI(), RevengFactory.eINSTANCE);
+		
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(fei.getFile().getFullPath().toString(), true);
+		try {
+			this.resource = rs.getResource(uri, true);
+		} catch ( Exception e ) {
+			this.resource = rs.createResource(uri);
+			RevengModel m = RevengFactory.eINSTANCE.createRevengModel();
+			this.resource.getContents().add(m);
+		}
+	}
+	
 	@Override
 	protected void addPages() {
 		try {
-			addPage(new TransformationConfigurationPage(this, "conf", "Transformation configuration"));
+			RevengModel m = (RevengModel) this.resource.getContents().get(0);			
+			addPage(new TransformationConfigurationPage(this, "conf", m));
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,19 +87,21 @@ public class ComponetizationEditor extends FormEditor {
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
-		// TODO Auto-generated method stub
-		
+		try {
+			resource.save(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void doSaveAs() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean isSaveAsAllowed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

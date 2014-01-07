@@ -1,0 +1,16 @@
+@namespace(
+	uri="http://bento/componetization/reveng_model",
+	prefix="reveng_model")
+package reveng;
+
+class RevengModel {
+   val Transformation[1] transformation; 
+}
+
+abstract class Transformation {
+   attr String[1] path;
+}
+
+class AtlTransformation extends Transformation {
+   
+}
