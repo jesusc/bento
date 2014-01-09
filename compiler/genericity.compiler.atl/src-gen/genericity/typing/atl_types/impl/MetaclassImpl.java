@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getName <em>Name</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#isExplicitOcurrence <em>Explicit Ocurrence</em>}</li>
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getKlass <em>Klass</em>}</li>
  * </ul>
  * </p>
@@ -50,6 +51,26 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isExplicitOcurrence() <em>Explicit Ocurrence</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitOcurrence()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXPLICIT_OCURRENCE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExplicitOcurrence() <em>Explicit Ocurrence</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitOcurrence()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean explicitOcurrence = EXPLICIT_OCURRENCE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getKlass() <em>Klass</em>}' reference.
@@ -106,6 +127,27 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExplicitOcurrence() {
+		return explicitOcurrence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExplicitOcurrence(boolean newExplicitOcurrence) {
+		boolean oldExplicitOcurrence = explicitOcurrence;
+		explicitOcurrence = newExplicitOcurrence;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.METACLASS__EXPLICIT_OCURRENCE, oldExplicitOcurrence, explicitOcurrence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKlass() {
 		if (klass != null && klass.eIsProxy()) {
 			InternalEObject oldKlass = (InternalEObject)klass;
@@ -149,6 +191,8 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 		switch (featureID) {
 			case AtlTypingPackage.METACLASS__NAME:
 				return getName();
+			case AtlTypingPackage.METACLASS__EXPLICIT_OCURRENCE:
+				return isExplicitOcurrence();
 			case AtlTypingPackage.METACLASS__KLASS:
 				if (resolve) return getKlass();
 				return basicGetKlass();
@@ -166,6 +210,9 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 		switch (featureID) {
 			case AtlTypingPackage.METACLASS__NAME:
 				setName((String)newValue);
+				return;
+			case AtlTypingPackage.METACLASS__EXPLICIT_OCURRENCE:
+				setExplicitOcurrence((Boolean)newValue);
 				return;
 			case AtlTypingPackage.METACLASS__KLASS:
 				setKlass((EClass)newValue);
@@ -185,6 +232,9 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 			case AtlTypingPackage.METACLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case AtlTypingPackage.METACLASS__EXPLICIT_OCURRENCE:
+				setExplicitOcurrence(EXPLICIT_OCURRENCE_EDEFAULT);
+				return;
 			case AtlTypingPackage.METACLASS__KLASS:
 				setKlass((EClass)null);
 				return;
@@ -202,6 +252,8 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 		switch (featureID) {
 			case AtlTypingPackage.METACLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case AtlTypingPackage.METACLASS__EXPLICIT_OCURRENCE:
+				return explicitOcurrence != EXPLICIT_OCURRENCE_EDEFAULT;
 			case AtlTypingPackage.METACLASS__KLASS:
 				return klass != null;
 		}
@@ -220,6 +272,8 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", explicitOcurrence: ");
+		result.append(explicitOcurrence);
 		result.append(')');
 		return result.toString();
 	}

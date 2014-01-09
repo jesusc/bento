@@ -1,58 +1,36 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
-  <atl:Library location="1:1-8:28" name="simplequery1">
+  <atl:Library location="1:1-9:28" name="simplequery1">
     <commentsAfter>--select(c | c.oclIsKindOf(CD!Interface));</commentsAfter>
-    <helpers location="3:1-4:40">
-      <definition location="3:8-4:39">
-        <feature xsi:type="ocl:Operation" location="3:31-4:39" name="myQuery">
-          <returnType xsi:type="ocl:OclAnyType" location="3:43-3:49"/>
-          <body xsi:type="ocl:IteratorExp" location="4:2-4:39" name="select">
-            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="4:2-4:15" name="features">
-              <source xsi:type="ocl:VariableExp" location="4:2-4:6" referredVariable="/2"/>
-            </source>
-            <body xsi:type="ocl:OperatorCallExp" location="4:26-4:38" operationName="=">
-              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="4:26-4:32" name="name">
-                <source xsi:type="ocl:VariableExp" location="4:26-4:27" referredVariable="/0/@helpers.0/@definition/@feature/@body/@iterators.0"/>
-              </source>
-              <arguments xsi:type="ocl:StringExp" location="4:35-4:38" stringSymbol="X"/>
-            </body>
-            <iterators location="4:24-4:25" varName="f" variableExp="/0/@helpers.0/@definition/@feature/@body/@body/@source/@source"/>
-          </body>
-        </feature>
-        <context_ location="3:8-3:24">
-          <context_ xsi:type="ocl:OclModelElement" location="3:16-3:24" name="Class" model="/1"/>
-        </context_>
-      </definition>
-    </helpers>
-    <helpers location="6:1-8:28">
+    <helpers location="6:1-9:28">
+      <commentsBefore>-- helper context CD!Class def : myQuery() : OclAny = </commentsBefore>
+      <commentsBefore>--	self.features->select(f|f.name = 'X');</commentsBefore>
       <commentsAfter>--select(c | c.oclIsKindOf(CD!Interface));</commentsAfter>
-      <definition location="6:8-8:27">
-        <feature xsi:type="ocl:Attribute" location="6:30-8:27" name="super_">
-          <initExpression xsi:type="ocl:IteratorExp" location="7:2-8:27" name="select">
+      <definition location="6:8-9:27">
+        <feature xsi:type="ocl:Attribute" location="6:30-9:27" name="super_">
+          <initExpression xsi:type="ocl:IteratorExp" location="7:2-9:27" name="select">
             <source xsi:type="ocl:IteratorExp" location="7:2-7:45" name="collect">
               <source xsi:type="ocl:NavigationOrAttributeCallExp" location="7:2-7:21" name="generalization">
-                <source xsi:type="ocl:VariableExp" location="7:2-7:6" referredVariable="/4"/>
+                <source xsi:type="ocl:VariableExp" location="7:2-7:6" referredVariable="/2"/>
               </source>
               <body xsi:type="ocl:NavigationOrAttributeCallExp" location="7:35-7:44" name="general">
-                <source xsi:type="ocl:VariableExp" location="7:35-7:36" referredVariable="/0/@helpers.1/@definition/@feature/@initExpression/@source/@iterators.0"/>
+                <source xsi:type="ocl:VariableExp" location="7:35-7:36" referredVariable="/0/@helpers.0/@definition/@feature/@initExpression/@source/@iterators.0"/>
               </body>
-              <iterators location="7:31-7:32" varName="g" variableExp="/0/@helpers.1/@definition/@feature/@initExpression/@source/@body/@source"/>
+              <iterators location="7:31-7:32" varName="g" variableExp="/0/@helpers.0/@definition/@feature/@initExpression/@source/@body/@source"/>
             </source>
-            <body xsi:type="ocl:NavigationOrAttributeCallExp" location="8:16-8:26" name="isActive">
-              <source xsi:type="ocl:VariableExp" location="8:16-8:17" referredVariable="/0/@helpers.1/@definition/@feature/@initExpression/@iterators.0"/>
+            <body xsi:type="ocl:NavigationOrAttributeCallExp" location="9:16-9:26" name="isActive">
+              <source xsi:type="ocl:VariableExp" location="9:16-9:17" referredVariable="/0/@helpers.0/@definition/@feature/@initExpression/@iterators.0"/>
             </body>
-            <iterators location="8:12-8:13" varName="c" variableExp="/0/@helpers.1/@definition/@feature/@initExpression/@body/@source"/>
+            <iterators location="9:12-9:13" varName="c" variableExp="/0/@helpers.0/@definition/@feature/@initExpression/@body/@source"/>
           </initExpression>
           <type xsi:type="ocl:OclAnyType" location="6:39-6:45"/>
         </feature>
         <context_ location="6:8-6:24">
-          <context_ xsi:type="ocl:OclModelElement" location="6:16-6:24" name="Class" model="/3"/>
+          <context_ xsi:type="ocl:OclModelElement" location="6:16-6:24" name="Class" model="/1"/>
         </context_>
       </definition>
     </helpers>
   </atl:Library>
-  <ocl:OclModel location="3:16-3:18" name="CD" elements="/0/@helpers.0/@definition/@context_/@context_"/>
-  <ocl:VariableDeclaration location="4:2-4:6" varName="self" variableExp="/0/@helpers.0/@definition/@feature/@body/@source/@source"/>
-  <ocl:OclModel location="6:16-6:18" name="CD" elements="/0/@helpers.1/@definition/@context_/@context_"/>
-  <ocl:VariableDeclaration location="7:2-7:6" varName="self" variableExp="/0/@helpers.1/@definition/@feature/@initExpression/@source/@source/@source"/>
+  <ocl:OclModel location="6:16-6:18" name="CD" elements="/0/@helpers.0/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="7:2-7:6" varName="self" variableExp="/0/@helpers.0/@definition/@feature/@initExpression/@source/@source/@source"/>
 </xmi:XMI>

@@ -1,6 +1,7 @@
 package bento.componetization.atl;
 
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.UnknownFeature;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import java.util.HashMap;
@@ -31,6 +32,8 @@ public class MetamodelPrunner {
 	protected HashSet<EClass> indirectUsedTypes = new HashSet<EClass>();
 	protected HashSet<EReference> usedReferences = new HashSet<EReference>();
 	protected HashSet<EAttribute> usedAttributes = new HashSet<EAttribute>();
+	protected HashSet<UnknownFeature> unknownFeatures = new HashSet<UnknownFeature>();
+	
 	protected HashSet<CallSite> callSites = new HashSet<CallSite>();
 
 	protected HashMap<EClass, EClass> traceClass   = new HashMap<EClass, EClass>();
@@ -51,7 +54,7 @@ public class MetamodelPrunner {
 		this.mm = mm;
 		this.typing = typing;
 		this.slicedURI = slicedURI;
-	
+		
 		List<EObject> pkgs = mm.allObjectsOf(EPackage.class.getSimpleName());
 		for (EObject obj : pkgs) {
 			EPackage pkg = (EPackage) obj;
@@ -69,7 +72,7 @@ public class MetamodelPrunner {
 		List<EObject> metaclasses = typing.allObjectsOf(Metaclass.class.getSimpleName());
 		for (EObject obj : metaclasses) {
 			Metaclass m = (Metaclass) obj;
-			if ( EcoreUtil.isAncestor(pkg, m.getKlass()) ) {
+			if ( EcoreUtil.isAncestor(pkg, m.getKlass()) && m.isExplicitOcurrence() ) {
 				directUsedTypes.add(m.getKlass());
 			}
 		}
@@ -85,8 +88,11 @@ public class MetamodelPrunner {
 					usedReferences.add((EReference) f);
 					indirectUsedTypes.add((EClass) f.getEType());
 				}
-				else {
+				else if ( f instanceof EAttribute) {  
 					usedAttributes.add((EAttribute) f);
+				} else {
+					// TODO: Unknown features will be replicated if accesed several times!
+					unknownFeatures.add((UnknownFeature) f);
 				}
 				
 				if ( ann.getReceptorType() instanceof Metaclass ) {
@@ -114,7 +120,7 @@ public class MetamodelPrunner {
 	}
 
 
-	private HashSet<EStructuralFeature> getUsedFeatures() {
+	public HashSet<EStructuralFeature> getUsedFeatures() {
 		HashSet<EStructuralFeature> s = new HashSet<EStructuralFeature>();
 		s.addAll(usedAttributes);
 		s.addAll(usedReferences);
@@ -142,10 +148,11 @@ public class MetamodelPrunner {
 		if ( usedFeature instanceof EAttribute ) {
 			copy = EcoreFactory.eINSTANCE.createEAttribute();
 			copy.setEType( usedFeature.getEType() );
-		} else {
+		} else if ( usedFeature instanceof EReference )  {
 			copy = EcoreFactory.eINSTANCE.createEReference();
 			EClass tgtType = traceClass.get( usedFeature.getEType() );
 			
+			if ( usedFeature.getEType() == null ) throw new IllegalStateException("No type for feature " + usedFeature.getName());
 			if ( tgtType == null ) throw new IllegalStateException("Not found target type " + usedFeature.getEType().getName() + " of reference " + usedFeature.getName());
 			
 			((EReference) copy).setContainment( ((EReference) usedFeature).isContainment() );
@@ -257,7 +264,7 @@ public class MetamodelPrunner {
 				}
 				
 				for(CallSite site : extractor.callSites ) {
-					System.out.println(site);
+					// System.out.println(site);
 					if ( ! extractor.classInMetamodel( site.getReceptor() ) ) continue;
 					
 					extractor.copyClass( site.getReceptor() );
@@ -265,7 +272,9 @@ public class MetamodelPrunner {
 						// This creates the target type even if it is not used effectively in the transformation
 						// TODO: Another strategy: Use the "implicitly used types" to restrict this...??
 						extractor.copyClass( ((EReference) site.getFeature()).getEReferenceType() );
-					}
+					} else if ( site.getFeature() instanceof UnknownFeature ) 
+						continue;
+					
 					extractor.copyFeature( site.getReceptor(), site.getFeature() );
 				}
 				

@@ -107,6 +107,15 @@ public interface AtlTypingFactory extends EFactory {
 	Unknown createUnknown();
 
 	/**
+	 * Returns a new object of class '<em>Unknown Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Feature</em>'.
+	 * @generated
+	 */
+	UnknownFeature createUnknownFeature();
+
+	/**
 	 * Returns a new object of class '<em>Empty Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

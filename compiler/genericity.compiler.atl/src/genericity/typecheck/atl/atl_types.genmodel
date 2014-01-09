@@ -28,6 +28,9 @@
     </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//RefType"/>
     <genClasses ecoreClass="atl_types.ecore#//Unknown"/>
+    <genClasses ecoreClass="atl_types.ecore#//UnknownFeature">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//UnknownFeature/theContainingClass"/>
+    </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//EmptyCollection"/>
     <genClasses ecoreClass="atl_types.ecore#//EnumType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//EnumType/name"/>
@@ -35,6 +38,7 @@
     </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//Metaclass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/explicitOcurrence"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//Metaclass/klass"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_types.ecore#//ReflectiveType"/>
@@ -69,6 +73,10 @@
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/expr"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/type"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/usedFeature"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/receptorType"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

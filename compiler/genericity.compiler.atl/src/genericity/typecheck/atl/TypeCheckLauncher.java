@@ -18,6 +18,7 @@ import genericity.typing.atl_types.TupleType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
+import genericity.typing.atl_types.UnknownFeature;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,7 +65,12 @@ public class TypeCheckLauncher {
 		return mm;
 	}
 	
+	private boolean isWarningMode = false;
+
+	public void setWarningMode() { isWarningMode = true; }
+	
 	public void launch(BasicEMFModel mm, BasicEMFModel atlTransformation, BasicEMFModel out) throws IOException {
+
 		eclectic.typecheck_atl transformation = new eclectic.typecheck_atl();
 
 		Util.registerResourceFactory();
@@ -89,7 +95,7 @@ public class TypeCheckLauncher {
 		// in.registerMethodHandler(new
 		// org.eclectic.idc.jvm.runtime.BasicMethodHandler(manager));
 		// in.registerMethodHandler(new BasicMethodHandler(manager));
-		in.registerMethodHandler(new CustomMethodHandler(mm, out, manager));
+		in.registerMethodHandler(new CustomMethodHandler(mm, out, manager, isWarningMode));
 		transformation.setModelManager(manager);
 
 		transformation.configure_();
@@ -108,17 +114,19 @@ public class TypeCheckLauncher {
 			org.eclectic.idc.jvm.runtime.BasicMethodHandler {
 		private BasicEMFModel mm;
 		private BasicEMFModel types;
+		private boolean isWarningMode;
 
-		public CustomMethodHandler(BasicEMFModel mm, BasicEMFModel types, ModelManager m) {
+		public CustomMethodHandler(BasicEMFModel mm, BasicEMFModel types, ModelManager m, boolean isWarningMode) {
 			super(m);
 			this.mm = mm;
 			this.types = types;
+			this.isWarningMode = isWarningMode;
 		}
 
 		@Override
 		public IMethodWrapper wrap(Object o) {
 			try {
-				return new CustomMethodWrapper(mm, types, manager.getNamespace(o), o);
+				return new CustomMethodWrapper(mm, types, manager.getNamespace(o), o, isWarningMode);
 			} catch (NoModelFoundException e) {
 				throw new IdcException(e);
 			}
@@ -132,11 +140,13 @@ public class TypeCheckLauncher {
 			org.eclectic.idc.jvm.runtime.BasicMethodWrapper {
 		private BasicEMFModel mm;
 		private BasicEMFModel types;
+		private boolean isWarningMode;
 
-		public CustomMethodWrapper(BasicEMFModel mm, BasicEMFModel types, IModel<?, ?> model, Object o) {
+		public CustomMethodWrapper(BasicEMFModel mm, BasicEMFModel types, IModel<?, ?> model, Object o, boolean isWarningMode) {
 			super(model, o);
 			this.mm = mm;
 			this.types = types;
+			this.isWarningMode = isWarningMode;
 		}
 
 		public Boolean is_eclass(EClassifier c) {
@@ -532,7 +542,8 @@ public class TypeCheckLauncher {
 								" with type " + t);
 						return t;							
 					}
-					throw new RuntimeException("No feature " + featureName + " " + clazz.getName() + " : " + object + " " + model.getFeature(object, "location"));
+					
+					return signalNoFeatureError(clazz, featureName);
 				}
 			}
 			
@@ -540,6 +551,43 @@ public class TypeCheckLauncher {
 			// The value is queried with getLastNavigatedFeature
 			lastNavigatedFeature = f;
 			return createType( f.getEType(), f.getUpperBound() == -1 || f.getUpperBound() > 1 );
+		}
+
+		private Type signalNoFeatureError(EClass clazz, String featureName) {
+			Type t = null;
+			List<EObject> allEClasses = mm.allObjectsOf("EClass");
+			for (EObject obj : allEClasses) {
+				EClass eClass = (EClass) obj;
+				if ( eClass.getEAllSuperTypes().contains(clazz) ) {
+					// Es un subtipo
+					EStructuralFeature f = eClass.getEStructuralFeature(featureName);
+					if ( f != null ) {
+						lastNavigatedFeature = f;
+						return createType( f.getEType(), f.getUpperBound() == -1 || f.getUpperBound() > 1 );						
+					}
+				}
+			}
+			
+			// The feature not found in subclasses
+			if ( t == null ) {
+				UnknownFeature unknown = (UnknownFeature) types.createObject(UnknownFeature.class.getSimpleName());
+				unknown.setTheContainingClass(clazz);
+				unknown.setName(featureName);
+				unknown.setEType(AtlTypingPackage.Literals.UNKNOWN);
+				
+				lastNavigatedFeature = unknown;
+				t = (Type) types.createObject(Unknown.class.getSimpleName());
+			}
+			return signalError("No feature " + clazz.getName() + "." + featureName + "in line " + model.getFeature(object, "location") + " : " + object, t);
+		}
+
+		private Type signalError(String str, Type t) {
+			if ( isWarningMode ) { 
+				System.err.println("ANALYSIS WARNING: " + str);
+				
+				return t;
+			}
+			throw new RuntimeException(str);
 		}
 
 		public EStructuralFeature getLastNavigatedFeature() {

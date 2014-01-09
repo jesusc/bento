@@ -8,9 +8,13 @@ package genericity.typing.atl_types.util;
 
 import genericity.typing.atl_types.*;
 
+import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.Switch;
 
 /**
@@ -147,6 +151,16 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				T result = caseUnknown(unknown);
 				if (result == null) result = caseRefType(unknown);
 				if (result == null) result = caseType(unknown);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlTypingPackage.UNKNOWN_FEATURE: {
+				UnknownFeature unknownFeature = (UnknownFeature)theEObject;
+				T result = caseUnknownFeature(unknownFeature);
+				if (result == null) result = caseEStructuralFeature(unknownFeature);
+				if (result == null) result = caseETypedElement(unknownFeature);
+				if (result == null) result = caseENamedElement(unknownFeature);
+				if (result == null) result = caseEModelElement(unknownFeature);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -371,6 +385,21 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unknown Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unknown Feature</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnknownFeature(UnknownFeature object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Empty Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -472,6 +501,66 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReflectiveClass(ReflectiveClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EModel Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EModel Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEModelElement(EModelElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseENamedElement(ENamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>ETyped Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>ETyped Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseETypedElement(ETypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EStructural Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EStructural Feature</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEStructuralFeature(EStructuralFeature object) {
 		return null;
 	}
 

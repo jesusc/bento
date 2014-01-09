@@ -27,6 +27,7 @@ import genericity.typing.atl_types.Type;
 
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
+import genericity.typing.atl_types.UnknownFeature;
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
 import genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
@@ -119,6 +120,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * @generated
 	 */
 	private EClass unknownEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unknownFeatureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -393,6 +401,24 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnknownFeature() {
+		return unknownFeatureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnknownFeature_TheContainingClass() {
+		return (EReference)unknownFeatureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEmptyCollection() {
 		return emptyCollectionEClass;
 	}
@@ -447,8 +473,17 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMetaclass_ExplicitOcurrence() {
+		return (EAttribute)metaclassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMetaclass_Klass() {
-		return (EReference)metaclassEClass.getEStructuralFeatures().get(1);
+		return (EReference)metaclassEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -552,6 +587,9 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		unknownEClass = createEClass(UNKNOWN);
 
+		unknownFeatureEClass = createEClass(UNKNOWN_FEATURE);
+		createEReference(unknownFeatureEClass, UNKNOWN_FEATURE__THE_CONTAINING_CLASS);
+
 		emptyCollectionEClass = createEClass(EMPTY_COLLECTION);
 
 		enumTypeEClass = createEClass(ENUM_TYPE);
@@ -560,6 +598,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		metaclassEClass = createEClass(METACLASS);
 		createEAttribute(metaclassEClass, METACLASS__NAME);
+		createEAttribute(metaclassEClass, METACLASS__EXPLICIT_OCURRENCE);
 		createEReference(metaclassEClass, METACLASS__KLASS);
 
 		reflectiveTypeEClass = createEClass(REFLECTIVE_TYPE);
@@ -615,6 +654,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		mapTypeEClass.getESuperTypes().add(this.getType());
 		refTypeEClass.getESuperTypes().add(this.getType());
 		unknownEClass.getESuperTypes().add(this.getRefType());
+		unknownFeatureEClass.getESuperTypes().add(ecorePackage.getEStructuralFeature());
 		emptyCollectionEClass.getESuperTypes().add(this.getType());
 		enumTypeEClass.getESuperTypes().add(this.getType());
 		metaclassEClass.getESuperTypes().add(this.getRefType());
@@ -652,6 +692,9 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		initEClass(unknownEClass, Unknown.class, "Unknown", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(unknownFeatureEClass, UnknownFeature.class, "UnknownFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnknownFeature_TheContainingClass(), ecorePackage.getEClass(), null, "theContainingClass", null, 1, 1, UnknownFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(emptyCollectionEClass, EmptyCollection.class, "EmptyCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(enumTypeEClass, EnumType.class, "EnumType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -660,6 +703,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		initEClass(metaclassEClass, Metaclass.class, "Metaclass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaclass_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaclass_ExplicitOcurrence(), ecorePackage.getEBoolean(), "explicitOcurrence", null, 0, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaclass_Klass(), ecorePackage.getEClass(), null, "klass", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reflectiveTypeEClass, ReflectiveType.class, "ReflectiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

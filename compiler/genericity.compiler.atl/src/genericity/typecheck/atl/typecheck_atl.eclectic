@@ -112,6 +112,7 @@ attribution attr_typecheck_atl(atl) -> (typ)
 			m = typ!Metaclass.new
 			m.name = self.name
 			m.klass = eType
+			m.explicitOcurrence = true
 			type[self] <- m			
 		}, {
 			m = typ!EnumType.new

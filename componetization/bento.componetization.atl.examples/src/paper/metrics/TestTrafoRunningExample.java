@@ -43,7 +43,7 @@ public class TestTrafoRunningExample extends BaseTest {
 				// ConceptExtractor.Strategy.CALLSITES_STRATEGY);
 				ConceptExtractor.Strategy.REALFEATURE_STRATEGY);
 
-		
+		printAnalysisInfo(ex);		
 		// Refactor
 		ex.refactor();
 		

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -405,6 +406,196 @@ public interface AtlTypingPackage extends EPackage {
 	int UNKNOWN_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.UnknownFeatureImpl <em>Unknown Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.UnknownFeatureImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnknownFeature()
+	 * @generated
+	 */
+	int UNKNOWN_FEATURE = 11;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__EANNOTATIONS = EcorePackage.ESTRUCTURAL_FEATURE__EANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__NAME = EcorePackage.ESTRUCTURAL_FEATURE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__ORDERED = EcorePackage.ESTRUCTURAL_FEATURE__ORDERED;
+
+	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__UNIQUE = EcorePackage.ESTRUCTURAL_FEATURE__UNIQUE;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__LOWER_BOUND = EcorePackage.ESTRUCTURAL_FEATURE__LOWER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__UPPER_BOUND = EcorePackage.ESTRUCTURAL_FEATURE__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__MANY = EcorePackage.ESTRUCTURAL_FEATURE__MANY;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__REQUIRED = EcorePackage.ESTRUCTURAL_FEATURE__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>EType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__ETYPE = EcorePackage.ESTRUCTURAL_FEATURE__ETYPE;
+
+	/**
+	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__EGENERIC_TYPE = EcorePackage.ESTRUCTURAL_FEATURE__EGENERIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Changeable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__CHANGEABLE = EcorePackage.ESTRUCTURAL_FEATURE__CHANGEABLE;
+
+	/**
+	 * The feature id for the '<em><b>Volatile</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__VOLATILE = EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE;
+
+	/**
+	 * The feature id for the '<em><b>Transient</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__TRANSIENT = EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__DEFAULT_VALUE_LITERAL = EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
+
+	/**
+	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__DEFAULT_VALUE = EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Unsettable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__UNSETTABLE = EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE;
+
+	/**
+	 * The feature id for the '<em><b>Derived</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__DERIVED = EcorePackage.ESTRUCTURAL_FEATURE__DERIVED;
+
+	/**
+	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__ECONTAINING_CLASS = EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>The Containing Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE__THE_CONTAINING_CLASS = EcorePackage.ESTRUCTURAL_FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unknown Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_FEATURE_FEATURE_COUNT = EcorePackage.ESTRUCTURAL_FEATURE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.EmptyCollectionImpl <em>Empty Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -412,7 +603,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEmptyCollection()
 	 * @generated
 	 */
-	int EMPTY_COLLECTION = 11;
+	int EMPTY_COLLECTION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -440,7 +631,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEnumType()
 	 * @generated
 	 */
-	int ENUM_TYPE = 12;
+	int ENUM_TYPE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -486,7 +677,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 13;
+	int METACLASS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -507,13 +698,22 @@ public interface AtlTypingPackage extends EPackage {
 	int METACLASS__NAME = REF_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Ocurrence</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS__EXPLICIT_OCURRENCE = REF_TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Klass</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METACLASS__KLASS = REF_TYPE_FEATURE_COUNT + 1;
+	int METACLASS__KLASS = REF_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Metaclass</em>' class.
@@ -522,7 +722,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METACLASS_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 2;
+	int METACLASS_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 3;
 
 
 	/**
@@ -533,7 +733,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveType()
 	 * @generated
 	 */
-	int REFLECTIVE_TYPE = 14;
+	int REFLECTIVE_TYPE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -561,7 +761,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnionType()
 	 * @generated
 	 */
-	int UNION_TYPE = 15;
+	int UNION_TYPE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -598,7 +798,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getThisModuleType()
 	 * @generated
 	 */
-	int THIS_MODULE_TYPE = 16;
+	int THIS_MODULE_TYPE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -626,7 +826,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveClass()
 	 * @generated
 	 */
-	int REFLECTIVE_CLASS = 17;
+	int REFLECTIVE_CLASS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -824,6 +1024,27 @@ public interface AtlTypingPackage extends EPackage {
 	EClass getUnknown();
 
 	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.UnknownFeature <em>Unknown Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unknown Feature</em>'.
+	 * @see genericity.typing.atl_types.UnknownFeature
+	 * @generated
+	 */
+	EClass getUnknownFeature();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.UnknownFeature#getTheContainingClass <em>The Containing Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>The Containing Class</em>'.
+	 * @see genericity.typing.atl_types.UnknownFeature#getTheContainingClass()
+	 * @see #getUnknownFeature()
+	 * @generated
+	 */
+	EReference getUnknownFeature_TheContainingClass();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.EmptyCollection <em>Empty Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -885,6 +1106,17 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMetaclass_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.Metaclass#isExplicitOcurrence <em>Explicit Ocurrence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Ocurrence</em>'.
+	 * @see genericity.typing.atl_types.Metaclass#isExplicitOcurrence()
+	 * @see #getMetaclass()
+	 * @generated
+	 */
+	EAttribute getMetaclass_ExplicitOcurrence();
 
 	/**
 	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.Metaclass#getKlass <em>Klass</em>}'.
@@ -1129,6 +1361,24 @@ public interface AtlTypingPackage extends EPackage {
 		EClass UNKNOWN = eINSTANCE.getUnknown();
 
 		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.UnknownFeatureImpl <em>Unknown Feature</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.UnknownFeatureImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnknownFeature()
+		 * @generated
+		 */
+		EClass UNKNOWN_FEATURE = eINSTANCE.getUnknownFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>The Containing Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNKNOWN_FEATURE__THE_CONTAINING_CLASS = eINSTANCE.getUnknownFeature_TheContainingClass();
+
+		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.EmptyCollectionImpl <em>Empty Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1181,6 +1431,14 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute METACLASS__NAME = eINSTANCE.getMetaclass_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Ocurrence</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METACLASS__EXPLICIT_OCURRENCE = eINSTANCE.getMetaclass_ExplicitOcurrence();
 
 		/**
 		 * The meta object literal for the '<em><b>Klass</b></em>' reference feature.

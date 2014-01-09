@@ -13,7 +13,11 @@ import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
+import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -116,6 +120,10 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createUnknownAdapter();
 			}
 			@Override
+			public Adapter caseUnknownFeature(UnknownFeature object) {
+				return createUnknownFeatureAdapter();
+			}
+			@Override
 			public Adapter caseEmptyCollection(EmptyCollection object) {
 				return createEmptyCollectionAdapter();
 			}
@@ -142,6 +150,22 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseReflectiveClass(ReflectiveClass object) {
 				return createReflectiveClassAdapter();
+			}
+			@Override
+			public Adapter caseEModelElement(EModelElement object) {
+				return createEModelElementAdapter();
+			}
+			@Override
+			public Adapter caseENamedElement(ENamedElement object) {
+				return createENamedElementAdapter();
+			}
+			@Override
+			public Adapter caseETypedElement(ETypedElement object) {
+				return createETypedElementAdapter();
+			}
+			@Override
+			public Adapter caseEStructuralFeature(EStructuralFeature object) {
+				return createEStructuralFeatureAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -318,6 +342,20 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.UnknownFeature <em>Unknown Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.UnknownFeature
+	 * @generated
+	 */
+	public Adapter createUnknownFeatureAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.EmptyCollection <em>Empty Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -412,6 +450,62 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReflectiveClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.ecore.EModelElement <em>EModel Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.ecore.EModelElement
+	 * @generated
+	 */
+	public Adapter createEModelElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.ecore.ENamedElement <em>ENamed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.ecore.ENamedElement
+	 * @generated
+	 */
+	public Adapter createENamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.ecore.ETypedElement <em>ETyped Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.ecore.ETypedElement
+	 * @generated
+	 */
+	public Adapter createETypedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.emf.ecore.EStructuralFeature <em>EStructural Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.emf.ecore.EStructuralFeature
+	 * @generated
+	 */
+	public Adapter createEStructuralFeatureAdapter() {
 		return null;
 	}
 

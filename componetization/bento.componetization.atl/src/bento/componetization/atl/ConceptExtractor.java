@@ -62,7 +62,12 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 	public Set<EClass> getExplicitlyUsedTypes() {
 		return (Set<EClass>) this.directUsedTypes.clone();
 	}
-	
+
+	@Override
+	public Set<EClass> getImplicitlyUsedTypes() {
+		return (Set<EClass>) this.indirectUsedTypes.clone();
+	}
+
 	//
 	// IPruningInfo
 	//
@@ -79,8 +84,6 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 
 	@Override
 	public EStructuralFeature getTargetFeature(EStructuralFeature feature) { return traceFeature.get(feature); }
-	
-
 
 
 //	private void fillFeatures(HashSet<EClass> usedTypes) {

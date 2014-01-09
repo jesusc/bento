@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
  * The following features are supported:
  * <ul>
  *   <li>{@link genericity.typing.atl_types.Metaclass#getName <em>Name</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.Metaclass#isExplicitOcurrence <em>Explicit Ocurrence</em>}</li>
  *   <li>{@link genericity.typing.atl_types.Metaclass#getKlass <em>Klass</em>}</li>
  * </ul>
  * </p>
@@ -52,6 +53,32 @@ public interface Metaclass extends RefType {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Ocurrence</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Ocurrence</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Ocurrence</em>' attribute.
+	 * @see #setExplicitOcurrence(boolean)
+	 * @see genericity.typing.atl_types.AtlTypingPackage#getMetaclass_ExplicitOcurrence()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitOcurrence();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.Metaclass#isExplicitOcurrence <em>Explicit Ocurrence</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Ocurrence</em>' attribute.
+	 * @see #isExplicitOcurrence()
+	 * @generated
+	 */
+	void setExplicitOcurrence(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Klass</b></em>' reference.

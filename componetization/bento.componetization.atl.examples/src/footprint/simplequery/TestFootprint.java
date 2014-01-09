@@ -3,8 +3,10 @@ package footprint.simplequery;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Set;
 
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.ecore.EClass;
 
 import tests.base.BaseTest;
 import bento.componetization.atl.ConceptExtractor;
@@ -36,11 +38,14 @@ public class TestFootprint extends BaseTest {
 		getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
 
-		System.out.println("Finished typing of " + TestFootprint.class.getSimpleName());
+		System.out.println("Finished analysis of " + TestFootprint.class.getSimpleName());
 
 		// Call sites
-		extractConcept("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag",
-				ConceptExtractor.Strategy.CALLSITES_STRATEGY);
+		ConceptExtractor extractor = extractConcept("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag",
+				ConceptExtractor.Strategy.REALFEATURE_STRATEGY);
+		
+		printAnalysisInfo(extractor);
+		
 		saveConcept(withDir("tmp_/concept_simplequery1.ecore"));
 		System.out.println("Finished extracting of " + TestFootprint.class.getSimpleName());
 

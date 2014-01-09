@@ -20,7 +20,14 @@ class DataType extends Classifier {
 }
 
 class Class extends Classifier {
+	val Generalization[*] generalization;
 	val Feature[*] features;   
+
+	attr String[1] isActive = false;
+}
+
+class Generalization {
+   ref Classifier[1] general;
 }
 
 abstract class Feature extends TypedElt {

@@ -44,6 +44,10 @@ class Unknown extends RefType {
    
 }
 
+class UnknownFeature extends ecore.EStructuralFeature {
+   ref EClass[1] theContainingClass;
+}
+
 class EmptyCollection extends Type {
    
 }
@@ -55,6 +59,7 @@ class EnumType extends Type {
 
 class Metaclass extends RefType {
    attr String[1] name;
+   attr boolean explicitOcurrence;
    ref EClass[1] klass;   
 }
 
