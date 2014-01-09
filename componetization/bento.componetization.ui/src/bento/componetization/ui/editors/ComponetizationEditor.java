@@ -55,6 +55,7 @@ import bento.componetization.ui.forms.TransformationConfigurationPage;
 public class ComponetizationEditor extends FormEditor {
 
 	private Resource resource;
+	private TransformationConfigurationPage configurationPage;
 
 	@Override
 	protected void setInput(IEditorInput input) {
@@ -78,7 +79,8 @@ public class ComponetizationEditor extends FormEditor {
 	protected void addPages() {
 		try {
 			RevengModel m = (RevengModel) this.resource.getContents().get(0);			
-			addPage(new TransformationConfigurationPage(this, "conf", m));
+			configurationPage = new TransformationConfigurationPage(this, "conf", m);
+			addPage(configurationPage);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,6 +91,7 @@ public class ComponetizationEditor extends FormEditor {
 	public void doSave(IProgressMonitor monitor) {
 		try {
 			resource.save(null);
+			configurationPage.saved();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

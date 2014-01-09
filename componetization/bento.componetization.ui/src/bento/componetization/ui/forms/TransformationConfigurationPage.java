@@ -50,7 +50,11 @@ import bento.componetization.reveng.RevengModel;
 import bento.componetization.ui.Activator;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.IValueChangeListener;
+import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.conversion.Converter;
@@ -64,6 +68,8 @@ public class TransformationConfigurationPage extends FormPage {
 	private RevengModel revengModel;
 	private AtlTransformation atlTransformation;
 
+	boolean isDirtyPage = false;
+
 	/**
 	 * Create the form page.
 	 * @param id
@@ -73,13 +79,39 @@ public class TransformationConfigurationPage extends FormPage {
 		super(id, "Transformation configuration");
 		this.revengModel = m;
 
+/*
+		EMFObservables.observeValue(m, Literals.REVENG_MODEL__TRANSFORMATION).addChangeListener(new IChangeListener() {			
+			@Override
+			public void handleChange(ChangeEvent event) {
+				getManagedForm().dirtyStateChanged();
+				isDirtyPage = true;
+				System.out.println("----------> CHANGE EVENT");
+			}
+		});
+
+
+		EMFObservables.observeValue(m, Literals.REVENG_MODEL__TRANSFORMATION).addChangeListener(new IChangeListener() {			
+			@Override
+			public void handleChange(ChangeEvent event) {
+				getManagedForm().dirtyStateChanged();
+				isDirtyPage = true;
+				System.out.println("----------> CHANGE value");
+
+			}
+		});
+*/		
 		// getManagedForm().dirtyStateChanged();
 	}
 	
 	@Override
 	public boolean isDirty() {
-		System.out.println("TransformationConfigurationPage.isDirty()");
-		return true;
+		// System.out.println("TransformationConfigurationPage.isDirty()");
+		return isDirtyPage;
+	}
+
+	public void saved() {
+		isDirtyPage = false;
+		getManagedForm().dirtyStateChanged();
 	}
 	
 	/**
@@ -240,22 +272,13 @@ public class TransformationConfigurationPage extends FormPage {
 		txtAtlFile.setText( r.getFullPath().toPortableString() );
 	}	
 	
+	/*
 	public void setIsModifiedForm() {
 		 getManagedForm().dirtyStateChanged();
 	}
+	*/
 	
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
-		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
-		bindingContext.bindValue(observeTextTxtAtlFileObserveWidget, revengModelTransformationObserveValue, null, null);
-		//
-		
-		return bindingContext;
-	}
-	
-	public class TextToTransformationConverter extends Converter {
+	public static class TextToTransformationConverter extends Converter {
 		public TextToTransformationConverter() { super(String.class, AtlTransformation.class); }
 		
 		@Override
@@ -267,7 +290,7 @@ public class TransformationConfigurationPage extends FormPage {
 		}		
 	}
 	
-	public class TransformationToTextConverter extends Converter {
+	public static class TransformationToTextConverter extends Converter {
 		public TransformationToTextConverter() { super(AtlTransformation.class, String.class); }
 
 		@Override
@@ -277,4 +300,28 @@ public class TransformationConfigurationPage extends FormPage {
 		}		
 	}
 	
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
+		//
+		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
+		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
+		UpdateValueStrategy strategy = new UpdateValueStrategy();
+		strategy.setConverter(new TextToTransformationConverter());
+		UpdateValueStrategy strategy_1 = new UpdateValueStrategy();
+		strategy_1.setConverter(new TransformationToTextConverter());
+		bindingContext.bindValue(observeTextTxtAtlFileObserveWidget, revengModelTransformationObserveValue, strategy, strategy_1);
+		//
+		
+		revengModelTransformationObserveValue.addValueChangeListener(new IValueChangeListener() {
+			
+			@Override
+			public void handleValueChange(ValueChangeEvent event) {
+				getManagedForm().dirtyStateChanged();
+				isDirtyPage = true;
+			}
+		});
+		
+		return bindingContext;
+	}
+
 }
