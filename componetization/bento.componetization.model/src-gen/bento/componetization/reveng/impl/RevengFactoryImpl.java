@@ -62,6 +62,7 @@ public class RevengFactoryImpl extends EFactoryImpl implements RevengFactory {
 		switch (eClass.getClassifierID()) {
 			case RevengPackage.REVENG_MODEL: return createRevengModel();
 			case RevengPackage.ATL_TRANSFORMATION: return createAtlTransformation();
+			case RevengPackage.METAMODEL: return createMetamodel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,6 +86,16 @@ public class RevengFactoryImpl extends EFactoryImpl implements RevengFactory {
 	public AtlTransformation createAtlTransformation() {
 		AtlTransformationImpl atlTransformation = new AtlTransformationImpl();
 		return atlTransformation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Metamodel createMetamodel() {
+		MetamodelImpl metamodel = new MetamodelImpl();
+		return metamodel;
 	}
 
 	/**

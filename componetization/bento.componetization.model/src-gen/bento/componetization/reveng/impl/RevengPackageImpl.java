@@ -7,6 +7,7 @@
 package bento.componetization.reveng.impl;
 
 import bento.componetization.reveng.AtlTransformation;
+import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage;
@@ -46,6 +47,13 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * @generated
 	 */
 	private EClass atlTransformationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metamodelEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -158,6 +166,42 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAtlTransformation_Metamodels() {
+		return (EReference)atlTransformationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMetamodel() {
+		return metamodelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetamodel_Name() {
+		return (EAttribute)metamodelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetamodel_URI() {
+		return (EAttribute)metamodelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public RevengFactory getRevengFactory() {
 		return (RevengFactory)getEFactoryInstance();
 	}
@@ -188,6 +232,11 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 		createEAttribute(transformationEClass, TRANSFORMATION__PATH);
 
 		atlTransformationEClass = createEClass(ATL_TRANSFORMATION);
+		createEReference(atlTransformationEClass, ATL_TRANSFORMATION__METAMODELS);
+
+		metamodelEClass = createEClass(METAMODEL);
+		createEAttribute(metamodelEClass, METAMODEL__NAME);
+		createEAttribute(metamodelEClass, METAMODEL__URI);
 	}
 
 	/**
@@ -228,6 +277,11 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 		initEAttribute(getTransformation_Path(), ecorePackage.getEString(), "path", null, 1, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(atlTransformationEClass, AtlTransformation.class, "AtlTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAtlTransformation_Metamodels(), this.getMetamodel(), null, "metamodels", null, 0, -1, AtlTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metamodelEClass, Metamodel.class, "Metamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMetamodel_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetamodel_URI(), ecorePackage.getEString(), "URI", null, 1, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

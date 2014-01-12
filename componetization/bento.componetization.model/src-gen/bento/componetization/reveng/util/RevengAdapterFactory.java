@@ -84,6 +84,10 @@ public class RevengAdapterFactory extends AdapterFactoryImpl {
 				return createAtlTransformationAdapter();
 			}
 			@Override
+			public Adapter caseMetamodel(Metamodel object) {
+				return createMetamodelAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -142,6 +146,20 @@ public class RevengAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAtlTransformationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.componetization.reveng.Metamodel <em>Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.componetization.reveng.Metamodel
+	 * @generated
+	 */
+	public Adapter createMetamodelAdapter() {
 		return null;
 	}
 

@@ -13,6 +13,12 @@
     <genClasses image="false" ecoreClass="reveng.ecore#//Transformation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Transformation/path"/>
     </genClasses>
-    <genClasses ecoreClass="reveng.ecore#//AtlTransformation"/>
+    <genClasses ecoreClass="reveng.ecore#//AtlTransformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//AtlTransformation/metamodels"/>
+    </genClasses>
+    <genClasses ecoreClass="reveng.ecore#//Metamodel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/URI"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

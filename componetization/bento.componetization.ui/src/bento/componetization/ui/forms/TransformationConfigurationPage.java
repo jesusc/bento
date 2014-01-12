@@ -221,8 +221,9 @@ public class TransformationConfigurationPage extends FormPage {
 	//
 	
 	protected void addMetamodel() {
-		// TODO Auto-generated method stub
-		
+		MetamodelInfoDialog dialog = new MetamodelInfoDialog(this.getSite().getShell());
+		dialog.open();
+		System.out.println(dialog.getFirstName());
 	}
 	
 	private void showBrowseAtlFileDialog() {

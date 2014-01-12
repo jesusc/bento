@@ -12,5 +12,10 @@ abstract class Transformation {
 }
 
 class AtlTransformation extends Transformation {
-   
+	val Metamodel[*] metamodels;   
+}
+
+class Metamodel {
+   attr String[1] name;
+   attr String[1] URI;
 }

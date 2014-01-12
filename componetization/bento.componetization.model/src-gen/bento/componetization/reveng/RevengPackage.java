@@ -135,13 +135,60 @@ public interface RevengPackage extends EPackage {
 	int ATL_TRANSFORMATION__PATH = TRANSFORMATION__PATH;
 
 	/**
+	 * The feature id for the '<em><b>Metamodels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATL_TRANSFORMATION__METAMODELS = TRANSFORMATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Atl Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATL_TRANSFORMATION_FEATURE_COUNT = TRANSFORMATION_FEATURE_COUNT + 0;
+	int ATL_TRANSFORMATION_FEATURE_COUNT = TRANSFORMATION_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link bento.componetization.reveng.impl.MetamodelImpl <em>Metamodel</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.componetization.reveng.impl.MetamodelImpl
+	 * @see bento.componetization.reveng.impl.RevengPackageImpl#getMetamodel()
+	 * @generated
+	 */
+	int METAMODEL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__URI = 1;
+
+	/**
+	 * The number of structural features of the '<em>Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL_FEATURE_COUNT = 2;
 
 
 	/**
@@ -195,6 +242,49 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAtlTransformation();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link bento.componetization.reveng.AtlTransformation#getMetamodels <em>Metamodels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Metamodels</em>'.
+	 * @see bento.componetization.reveng.AtlTransformation#getMetamodels()
+	 * @see #getAtlTransformation()
+	 * @generated
+	 */
+	EReference getAtlTransformation_Metamodels();
+
+	/**
+	 * Returns the meta object for class '{@link bento.componetization.reveng.Metamodel <em>Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metamodel</em>'.
+	 * @see bento.componetization.reveng.Metamodel
+	 * @generated
+	 */
+	EClass getMetamodel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see bento.componetization.reveng.Metamodel#getName()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EAttribute getMetamodel_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#getURI <em>URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>URI</em>'.
+	 * @see bento.componetization.reveng.Metamodel#getURI()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EAttribute getMetamodel_URI();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -263,6 +353,40 @@ public interface RevengPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ATL_TRANSFORMATION = eINSTANCE.getAtlTransformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATL_TRANSFORMATION__METAMODELS = eINSTANCE.getAtlTransformation_Metamodels();
+
+		/**
+		 * The meta object literal for the '{@link bento.componetization.reveng.impl.MetamodelImpl <em>Metamodel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.componetization.reveng.impl.MetamodelImpl
+		 * @see bento.componetization.reveng.impl.RevengPackageImpl#getMetamodel()
+		 * @generated
+		 */
+		EClass METAMODEL = eINSTANCE.getMetamodel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METAMODEL__NAME = eINSTANCE.getMetamodel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>URI</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METAMODEL__URI = eINSTANCE.getMetamodel_URI();
 
 	}
 

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
 import bento.componetization.atl.refactorings.PushDownFeature;
 import bento.componetization.atl.refactorings.RemoveEmptyClass;
@@ -36,7 +37,8 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 	public void refactor() {
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
 				new PushDownFeature(this, this),
-				new RemoveEmptyClass(this, this)
+				new RemoveEmptyClass(this, this),
+				new RemoveAssociationClass(this, this)
 		};
 		
 		for (int i = 0; i < refactorings.length; i++) {
