@@ -312,7 +312,7 @@ public class TypeCheckLauncher {
 		public Type iteratorType(String iteratorName, Type receptorType, Type bodyType, ImmutableList restOfIterators) {
 			if ( iteratorName.equals("collect") ) {
 				return copyType(bodyType, true);
-			} else if ( iteratorName.equals("select") || iteratorName.equals("reject") ) {
+			} else if ( iteratorName.equals("select") || iteratorName.equals("reject") || iteratorName.equals("any")) {
 				// This could be wiser, detecting filtering based on oclIsKindOf!!
 				return copyType(receptorType, true);
 			} else if ( iteratorName.equals("iterate") ) {
@@ -396,6 +396,11 @@ public class TypeCheckLauncher {
 					}
 				}
 				
+				if ( operationName.equals("resolveTemp") ) {
+					System.err.println("WARNING! resolvedTemp ignored");
+					return (Type) types.createObject(Unknown.class.getSimpleName());
+				}
+				
 				throw new RuntimeException("No module operation " + operationName);
 			}
 			
@@ -423,7 +428,10 @@ public class TypeCheckLauncher {
 					return copyType(receptorType, true);
 				} else if ( operationName.equals("debug") ) {
 					return copyType(receptorType, receptorType.isMultivalued());
+				} else if ( operationName.equals("toString") ) {
+					return (Type) types.createObject(StringType.class.getSimpleName());	
 				}
+				
 				throw new RuntimeException("No primitive operation " + operationName + " at " + model.getFeature(object, "location"));
 			}
 
@@ -698,6 +706,12 @@ public class TypeCheckLauncher {
 					return (Type) types.createObject(BooleanType.class.getSimpleName());
 				else if ( classifier.getName().endsWith("EInt") ) 
 					return (Type) types.createObject(IntegerType.class.getSimpleName());
+
+				// This should probably be a user-defined typing
+				else if ( classifier.getName().endsWith("UnlimitedNatural") || classifier.getName().startsWith("Integer") ) 
+					return (Type) types.createObject(IntegerType.class.getSimpleName());
+
+				
 				else throw new UnsupportedOperationException("Type " + classifier.getName() + " not supported");
 			} else if ( classifier == EcorePackage.eINSTANCE.getEObject() ) {
 				return (Type) types.createObject(Unknown.class.getSimpleName());
@@ -742,7 +756,7 @@ public class TypeCheckLauncher {
 
 			} else if ( operationName.equals("flatten") ) {
 				return copyType(t, true);
-			} else if ( operationName.equals("asSet") ) {
+			} else if ( operationName.equals("asSet") || operationName.equals("asSequence") ) {
 				return copyType(t, true);
 				
 			} else if ( operationName.equals("excludes") || operationName.equals("includes") ||

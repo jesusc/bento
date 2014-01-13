@@ -189,7 +189,7 @@ attribution attr_typecheck_atl(atl) -> (typ)
 			self.referredVariable.varName.eq("thisModule").if_else({
 				type[self] <- typ!ThisModuleType.new
 			}, {
-				type[self] <- type[self.referredVariable]				
+				type[self] <- type[self.referredVariable]
 			})
 		})
 	end
