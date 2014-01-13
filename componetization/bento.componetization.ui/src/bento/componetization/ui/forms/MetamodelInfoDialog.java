@@ -98,11 +98,11 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	public String getFirstName() {
+	public String getMetamodelName() {
 		return metamodelName;
 	}
 
-	public String getLastName() {
+	public String getMetamodelURI() {
 		return metamodelURI;
 	}
 

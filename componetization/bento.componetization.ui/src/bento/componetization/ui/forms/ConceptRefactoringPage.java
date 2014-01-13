@@ -60,10 +60,11 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.events.IHyperlinkListener;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.swt.layout.RowLayout;
 
-public class TransformationConfigurationPage extends FormPage {
+public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
-	private Text txtAtlFile;
+	private Text txtConceptMetamodelFile;
 	
 	private RevengModel revengModel;
 	private AtlTransformation atlTransformation;
@@ -76,7 +77,7 @@ public class TransformationConfigurationPage extends FormPage {
 	 * @param id
 	 * @param title
 	 */
-	public TransformationConfigurationPage(String id, RevengModel m) {
+	public ConceptRefactoringPage(String id, RevengModel m) {
 		super(id, "Transformation configuration");
 		this.revengModel = m;
 	}
@@ -101,7 +102,7 @@ public class TransformationConfigurationPage extends FormPage {
 	 * @wbp.eval.method.parameter id "Some id"
 	 * @wbp.eval.method.parameter title "Some title"
 	 */
-	public TransformationConfigurationPage(FormEditor editor, String id, RevengModel m) {
+	public ConceptRefactoringPage(FormEditor editor, String id, RevengModel m) {
 		super(editor, id, "Transformation configuration");
 		this.revengModel = m;
 		this.atlTransformation = (AtlTransformation) m.getTransformation();
@@ -118,40 +119,16 @@ public class TransformationConfigurationPage extends FormPage {
 		form.setText("Configure transformation");
 		managedForm.getForm().getBody().setLayout(new FillLayout(SWT.VERTICAL));
 		
-		Section sctnTransformation = managedForm.getToolkit().createSection(managedForm.getForm().getBody(), Section.TWISTIE | Section.TITLE_BAR);
-		managedForm.getToolkit().paintBordersFor(sctnTransformation);
-		sctnTransformation.setText("Transformation");
-		sctnTransformation.setExpanded(true);
+		Section secRefactoring = managedForm.getToolkit().createSection(managedForm.getForm().getBody(), Section.TWISTIE | Section.TITLE_BAR);
+		managedForm.getToolkit().paintBordersFor(secRefactoring);
+		secRefactoring.setText("Refactorings");
+		secRefactoring.setExpanded(true);
 		
-		Composite composite = managedForm.getToolkit().createComposite(sctnTransformation, SWT.NONE);
+		Composite composite = managedForm.getToolkit().createComposite(secRefactoring, SWT.NONE);
 		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		managedForm.getToolkit().paintBordersFor(composite);
-		sctnTransformation.setClient(composite);
+		secRefactoring.setClient(composite);
 		composite.setLayout(new GridLayout(1, false));
-		
-		Composite compAtlFile = new Composite(composite, SWT.NONE);
-		compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		managedForm.getToolkit().adapt(compAtlFile);
-		managedForm.getToolkit().paintBordersFor(compAtlFile);
-		GridLayout gl_compAtlFile = new GridLayout(3, false);
-		compAtlFile.setLayout(gl_compAtlFile);
-		
-		Label lblAtlFile = managedForm.getToolkit().createLabel(compAtlFile, "ATL File: ", SWT.NONE);
-		
-		txtAtlFile = managedForm.getToolkit().createText(compAtlFile, "", SWT.NONE);
-		GridData gd_txtAtlFile = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_txtAtlFile.minimumWidth = 200;
-		gd_txtAtlFile.heightHint = 19;
-		gd_txtAtlFile.widthHint = 0;
-		txtAtlFile.setLayoutData(gd_txtAtlFile);
-		
-		Button btnBrowse = managedForm.getToolkit().createButton(compAtlFile, "Browse...", SWT.NONE);
-		btnBrowse.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				showBrowseAtlFileDialog();
-			}
-		});
 		
 		Composite composite_1 = new Composite(composite, SWT.NONE);
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -159,10 +136,10 @@ public class TransformationConfigurationPage extends FormPage {
 		managedForm.getToolkit().paintBordersFor(composite_1);
 		composite_1.setLayout(new GridLayout(2, false));
 		
-		Label lblMetamodels = new Label(composite_1, SWT.NONE);
-		lblMetamodels.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1));
-		managedForm.getToolkit().adapt(lblMetamodels, true, true);
-		lblMetamodels.setText("Metamodels");
+		Label lblRefactorings = new Label(composite_1, SWT.NONE);
+		lblRefactorings.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1));
+		managedForm.getToolkit().adapt(lblRefactorings, true, true);
+		lblRefactorings.setText("Applicable refactorings");
 		
 		listMetamodels = new TableViewer(composite_1, SWT.BORDER);
 		listMetamodels.setColumnProperties(new String[] {"Name", "URI"});
@@ -181,42 +158,59 @@ public class TransformationConfigurationPage extends FormPage {
 		TableColumn tblclmnUri = tableViewerColumn_1.getColumn();
 		tblclmnUri.setWidth(100);
 		tblclmnUri.setText("URI");
-
-		listMetamodels.setContentProvider(new MetamodelListProvider());
-		listMetamodels.setLabelProvider(new MetamodelListProvider());
-		listMetamodels.setInput(revengModel);		
 		
-		Button btnAdd = managedForm.getToolkit().createButton(composite_1, "Add...", SWT.NONE);
-		btnAdd.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		btnAdd.addSelectionListener(new SelectionAdapter() {
+				listMetamodels.setContentProvider(new MetamodelListProvider());
+				listMetamodels.setLabelProvider(new MetamodelListProvider());
+				listMetamodels.setInput(revengModel);
+				new Label(composite_1, SWT.NONE);
+				new Label(composite_1, SWT.NONE);
+				new Label(composite_1, SWT.NONE);
+				
+				Hyperlink hprlnkFindAgainRefactorings = managedForm.getToolkit().createHyperlink(composite, "Find new refactorings", SWT.NONE);
+				hprlnkFindAgainRefactorings.addHyperlinkListener(new IHyperlinkListener() {
+					public void linkActivated(HyperlinkEvent e) {
+						createConceptPages();
+					}
+					public void linkEntered(HyperlinkEvent e) {
+					}
+					public void linkExited(HyperlinkEvent e) {
+					}
+				});
+				managedForm.getToolkit().paintBordersFor(hprlnkFindAgainRefactorings);
+		
+		Section sctnConceptInformation = managedForm.getToolkit().createSection(managedForm.getForm().getBody(), Section.TWISTIE | Section.TITLE_BAR);
+		managedForm.getToolkit().paintBordersFor(sctnConceptInformation);
+		sctnConceptInformation.setText("Concept information");
+		sctnConceptInformation.setExpanded(true);
+		
+		Composite composite_2 = managedForm.getToolkit().createComposite(sctnConceptInformation, SWT.NONE);
+		managedForm.getToolkit().paintBordersFor(composite_2);
+		sctnConceptInformation.setClient(composite_2);
+		composite_2.setLayout(new GridLayout(1, false));
+		
+		Composite compAtlFile = new Composite(composite_2, SWT.NONE);
+		compAtlFile.setSize(572, 39);
+		managedForm.getToolkit().adapt(compAtlFile);
+		managedForm.getToolkit().paintBordersFor(compAtlFile);
+		GridLayout gl_compAtlFile = new GridLayout(3, false);
+		compAtlFile.setLayout(gl_compAtlFile);
+		
+		Label lblConceptMetamodelFile = managedForm.getToolkit().createLabel(compAtlFile, "Metamodel file: ", SWT.NONE);
+		
+		txtConceptMetamodelFile = managedForm.getToolkit().createText(compAtlFile, "", SWT.NONE);
+		GridData gd_txtConceptMetamodelFile = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_txtConceptMetamodelFile.minimumWidth = 200;
+		gd_txtConceptMetamodelFile.heightHint = 19;
+		gd_txtConceptMetamodelFile.widthHint = 0;
+		txtConceptMetamodelFile.setLayoutData(gd_txtConceptMetamodelFile);
+		
+		Button btnBrowse = managedForm.getToolkit().createButton(compAtlFile, "Browse...", SWT.NONE);
+		btnBrowse.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				addMetamodel();
+				showBrowseAtlFileDialog();
 			}
 		});
-		
-		Button btnEdit = managedForm.getToolkit().createButton(composite_1, "Edit...", SWT.NONE);
-		btnEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		btnEdit.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		
-		Button btnRemove = managedForm.getToolkit().createButton(composite_1, "Remove", SWT.NONE);
-		btnRemove.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-		
-		Hyperlink hprlnkCreateConceptPages = managedForm.getToolkit().createHyperlink(composite, "Create concept pages", SWT.NONE);
-		hprlnkCreateConceptPages.addHyperlinkListener(new IHyperlinkListener() {
-			public void linkActivated(HyperlinkEvent e) {
-				createConceptPages();
-			}
-			public void linkEntered(HyperlinkEvent e) {
-			}
-			public void linkExited(HyperlinkEvent e) {
-			}
-		});
-		managedForm.getToolkit().paintBordersFor(hprlnkCreateConceptPages);
 		toolkit.decorateFormHeading(form.getForm());
 		m_bindingContext = initDataBindings();
 		
@@ -235,27 +229,6 @@ public class TransformationConfigurationPage extends FormPage {
 	private void markAsDirty() {
 		getManagedForm().dirtyStateChanged();
 		isDirtyPage = true;
-	}
-
-	
-	//
-	// Event handling
-	//
-	
-	protected void addMetamodel() {
-		MetamodelInfoDialog dialog = new MetamodelInfoDialog(this.getSite().getShell());
-		if ( dialog.open() == MetamodelInfoDialog.OK ) {
-			
-			Metamodel mm = RevengFactory.eINSTANCE.createMetamodel();
-			mm.setName( dialog.getMetamodelName() );
-			mm.setURI( dialog.getMetamodelURI() );
-			
-			this.atlTransformation.getMetamodels().add(mm);
-			
-			markAsDirty();
-			
-			listMetamodels.refresh();
-		}
 	}
 
 	protected void createConceptPages() {
@@ -306,7 +279,7 @@ public class TransformationConfigurationPage extends FormPage {
 		listDialog.open();				
 		
 		IResource r = (IResource) listDialog.getResult()[0];
-		txtAtlFile.setText( r.getFullPath().toPortableString() );
+		txtConceptMetamodelFile.setText( r.getFullPath().toPortableString() );
 	}	
 	
 	/*
@@ -340,7 +313,7 @@ public class TransformationConfigurationPage extends FormPage {
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
+		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConceptMetamodelFile);
 		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
 		UpdateValueStrategy strategy = new UpdateValueStrategy();
 		strategy.setConverter(new TextToTransformationConverter());

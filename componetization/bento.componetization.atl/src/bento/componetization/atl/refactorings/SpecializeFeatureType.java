@@ -67,7 +67,7 @@ public class SpecializeFeatureType extends BaseRefactoring {
 
 	private EClass findMostConcreteSubclass(Set<EClass> allClasses, EClass type) {
 		ArrayList<EClass> directSubclasses = new ArrayList<EClass>();
-		
+
 		for (EClass subclass : allClasses) {
 			if ( subclass.getESuperTypes().contains( type ) ) {
 				directSubclasses.add(subclass);

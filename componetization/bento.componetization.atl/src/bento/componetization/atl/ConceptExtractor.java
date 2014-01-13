@@ -40,9 +40,9 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 				new RemoveAssociationClass(this, this),
 				new PushDownFeature(this, this),
 
-				new RemoveEmptyClass(this, this),
-				new SpecializeFeatureType(this, this),
 				new RemoveEmptyClass(this, this)
+//				new SpecializeFeatureType(this, this),
+//				new RemoveEmptyClass(this, this)
 		};
 		
 		for (int i = 0; i < refactorings.length; i++) {
