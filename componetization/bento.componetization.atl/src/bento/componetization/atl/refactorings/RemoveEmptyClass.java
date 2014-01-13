@@ -94,9 +94,12 @@ public class RemoveEmptyClass extends BaseRefactoring {
 		
 		@Override
 		public void apply() {
+			System.out.println("REFACTORING: Remove empty class " + tgtClass.getName());
+
 			EcoreUtil.delete(tgtClass);
 			// EcoreUtil.remove(tgtClass);
 			// prunner.removeClass(tgtClass);
+		
 		}
 	}	
 }

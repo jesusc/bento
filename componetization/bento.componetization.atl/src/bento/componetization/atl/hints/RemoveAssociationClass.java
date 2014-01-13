@@ -7,6 +7,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.CallSite;
@@ -50,6 +51,11 @@ public class RemoveAssociationClass extends BaseRefactoring {
 		Set<EClass> classes = prunner.getSelectedClasses();
 		Set<EStructuralFeature> features = prunner.getSelectedFeatures();
 		for (EClass intermediate : classes) {
+			if ( analysis.getExplicitlyUsedTypes().contains(intermediate) ) {
+				continue;
+			}
+
+			
 			EReference pointingFeature = null;
 			
 			for(EStructuralFeature f : features) {
@@ -68,18 +74,50 @@ public class RemoveAssociationClass extends BaseRefactoring {
 				EClass prunnedClass = prunner.getTargetClass(intermediate);
 				if ( prunnedClass.getEReferences().size() == 1 &&   
 					 prunnedClass.getEAttributes().size() == 0 ) {
-					
-					System.out.println("FOUND FOR " + intermediate.getName());
-					
+
+					System.out.println(pointingFeature);
+					System.out.println((EReference) prunner.getTargetFeature(pointingFeature));
+					matches.add( new RemoveAssociationClassMatch( 
+							prunnedClass, 
+							(EReference) prunner.getTargetFeature(pointingFeature) ) );
+					// System.out.println("FOUND FOR " + intermediate.getName());					
 				}
 			}
 			
+			// TODO: Additional checks: no subclasses
+			
 		}
 	
-		
-		
-		
 		return save(matches);
 	}
 
+	public class RemoveAssociationClassMatch implements IMatch {
+
+		private EClass prunnedClass;
+		private EReference pointingFeature;
+
+		/**
+		 * Takes a prunned class and a feature pointing to such class.
+		 * The prunned class is assumed to have only one reference.
+		 * 
+		 * @param prunnedClass
+		 * @param targetFeature
+		 */
+		public RemoveAssociationClassMatch(EClass prunnedClass,
+				EReference pointingFeature) {
+			
+			this.prunnedClass  = prunnedClass;
+			this.pointingFeature = pointingFeature;
+		}
+
+		@Override
+		public void apply() {
+			System.out.println("REFACTORING: Remove association class " + prunnedClass.getName());
+
+			pointingFeature.setContainment(false);
+			pointingFeature.setEType( prunnedClass.getEReferences().get(0).getEType()  );
+			System.out.println(pointingFeature.getEType().getName());
+			EcoreUtil.delete(prunnedClass);
+		}
+	}
 }

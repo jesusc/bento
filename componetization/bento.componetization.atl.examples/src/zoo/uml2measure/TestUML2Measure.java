@@ -35,17 +35,24 @@ public class TestUML2Measure extends BaseTest {
 		System.out.println("Finished typing of " + TestUML2Measure.class.getSimpleName());
 
 		// conceptExtraction - RealFeature
-		extractConcept("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classdiag_concept",
+		ConceptExtractor ex = extractConcept("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classdiag_concept",
 				ConceptExtractor.Strategy.REALFEATURE_STRATEGY);
-		saveConcept(withDir("tmp_/concept_uml2measure_real.ecore"));
+
+		printAnalysisInfo(ex);		
+		
+		// Refactor
+		ex.refactor();
+		
+		saveConcept(withDir("tmp_/concept_uml2measure.ecore"));
 		System.out.println("Finished extracting of " + TestUML2Measure.class.getSimpleName());
 
+		/*
 		// Call sites
 		extractConcept("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classdiag_concept",
 				ConceptExtractor.Strategy.CALLSITES_STRATEGY);
 		saveConcept(withDir("tmp_/concept_uml2measure_sites.ecore"));
 		System.out.println("Finished extracting of " + TestUML2Measure.class.getSimpleName());
-
+		*/
 	}
 
 }

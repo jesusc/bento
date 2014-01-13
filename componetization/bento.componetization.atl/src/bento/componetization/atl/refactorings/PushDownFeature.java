@@ -84,6 +84,8 @@ public class PushDownFeature extends BaseRefactoring {
 
 		@Override
 		public void apply() {
+			System.out.println("REFACTORING: Push down feature " + feature.getEContainingClass().getName() + "." + feature.getName());
+
 			EStructuralFeature targetFeature = prunner.getTargetFeature(feature);
 		
 			for (CallSite site : occurrences) {

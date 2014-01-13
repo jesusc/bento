@@ -25,6 +25,7 @@ import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
 import bento.componetization.atl.refactorings.PushDownFeature;
 import bento.componetization.atl.refactorings.RemoveEmptyClass;
+import bento.componetization.atl.refactorings.SpecializeFeatureType;
 
 public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysisInfo, IPruningInfo {
 	
@@ -36,9 +37,12 @@ public class ConceptExtractor extends MetamodelPrunner implements IStaticAnalysi
 
 	public void refactor() {
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
+				new RemoveAssociationClass(this, this),
 				new PushDownFeature(this, this),
+
 				new RemoveEmptyClass(this, this),
-				new RemoveAssociationClass(this, this)
+				new SpecializeFeatureType(this, this),
+				new RemoveEmptyClass(this, this)
 		};
 		
 		for (int i = 0; i < refactorings.length; i++) {
