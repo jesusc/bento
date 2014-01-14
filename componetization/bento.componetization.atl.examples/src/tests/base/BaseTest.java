@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
+import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.atl.MetamodelPrunner.Strategy;
 
 public abstract class BaseTest {
@@ -28,6 +29,7 @@ public abstract class BaseTest {
 	protected BasicEMFModel atlTransformation;
 	protected BasicEMFModel typingModel;
 	private EPackage conceptPkg;
+	private EPackage metamodelPkg;
 	
 	
 	public void typing(String atlTransformationFile, String... metamodels) throws IOException {
@@ -60,13 +62,31 @@ public abstract class BaseTest {
 		r.save(null);
 	}
 
-	public ConceptExtractor extractConcept(String uri, String newURI, String newName, Strategy strategy) {
+
+	public void savePrunnedMetamodel(String filename) throws IOException {
+		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(filename));
+		r.getContents().add(metamodelPkg);
+		r.save(null);
+	}
+	
+	public MetamodelPrunner pruneMetamodel(String uri, String newURI, String newName) {
+		MetamodelPrunner prunner = new MetamodelPrunner (atlTransformation, 
+				getTransformationMetamodels(), getTypingModel(), uri);
+		metamodelPkg = prunner.extractSource(newName, newURI, newName);
+		
+		return prunner ;
+	}
+	
+	public ConceptExtractor extractConcept(String uri, String newURI, String newName) {
 		// Extractor
 		ConceptExtractor extractor = new ConceptExtractor(atlTransformation, 
 				getTransformationMetamodels(), getTypingModel(), uri);
-		extractor.setStrategy(strategy);
-		conceptPkg = extractor.extractSource(newName, newURI, newName);
+
+		printAnalysisInfo(extractor);		
+		// Re-typing is needed after: PushDownFeature
 		
+		conceptPkg = extractor.refactor();
+
 		return extractor;
 	}
 

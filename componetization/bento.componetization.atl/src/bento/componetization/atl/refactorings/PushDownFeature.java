@@ -14,15 +14,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.CallSite;
-import bento.componetization.atl.IPruningInfo;
+import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 
+/**
+ * Moves a feature to a subclass if it is used only by N subclasses,
+ * where is a parameter of the refactoring.
+ * 
+ * @author jesus
+ *
+ */
 public class PushDownFeature extends BaseRefactoring {
 
 	private int maxFeatureUses = 1;
 	
-	public PushDownFeature(IStaticAnalysisInfo analysis, IPruningInfo prunner) {
-		super(analysis, prunner);
+	public PushDownFeature(IStaticAnalysisInfo analysis, IMetamodelInfo metamodel) {
+		super(analysis, metamodel);
 	}
 
  	
@@ -30,8 +37,8 @@ public class PushDownFeature extends BaseRefactoring {
 	public boolean match() {
 		List<PushDownFeatureMatch> matches = new ArrayList<PushDownFeatureMatch>();
 		
-		Set<EClass> classes = prunner.getSelectedClasses();
-		Set<EStructuralFeature> features = prunner.getSelectedFeatures();
+		Set<EClass> classes = metamodel.getClasses();
+		Set<EStructuralFeature> features = metamodel.getFeatures();
 		for (EClass eClass : classes) {
 			for(EStructuralFeature f : eClass.getEStructuralFeatures()) {
 				if ( features.contains(f) ) {
@@ -77,7 +84,6 @@ public class PushDownFeature extends BaseRefactoring {
 		private EStructuralFeature feature;
 
 		public PushDownFeatureMatch(EStructuralFeature f, Set<CallSite> occurrences) {
-			System.out.println("Found " + occurrences);
 			this.feature     = f;
 			this.occurrences = occurrences;
 		}
@@ -86,15 +92,14 @@ public class PushDownFeature extends BaseRefactoring {
 		public void apply() {
 			System.out.println("REFACTORING: Push down feature " + feature.getEContainingClass().getName() + "." + feature.getName());
 
-			EStructuralFeature targetFeature = prunner.getTargetFeature(feature);
 		
 			for (CallSite site : occurrences) {
-				EClass targetClass = prunner.getTargetClass(site.getReceptor());
+				EClass siteClass = site.getReceptor();
 				
-				targetClass.getEStructuralFeatures().add( copyFeature(targetFeature) );
+				siteClass.getEStructuralFeatures().add( copyFeature(feature) );
 			}
 		
-			EcoreUtil.remove(targetFeature);
+			EcoreUtil.remove(feature);
 		}
 		
 		private EStructuralFeature copyFeature(EStructuralFeature targetOriginal) {

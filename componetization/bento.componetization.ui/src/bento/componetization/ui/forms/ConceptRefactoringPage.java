@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.conversion.Converter;
-import org.eclipse.core.databinding.observable.Realm;
-import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.IValueChangeListener;
 import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
@@ -18,13 +16,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.jface.viewers.IContentProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -36,7 +33,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
@@ -44,7 +41,10 @@ import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
+import org.eclipse.ui.forms.events.HyperlinkEvent;
+import org.eclipse.ui.forms.events.IHyperlinkListener;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -55,12 +55,9 @@ import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.Activator;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.ui.forms.widgets.Hyperlink;
-import org.eclipse.ui.forms.events.IHyperlinkListener;
-import org.eclipse.ui.forms.events.HyperlinkEvent;
-import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.jface.viewers.TreeViewer;
 
 public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -119,7 +116,15 @@ public class ConceptRefactoringPage extends FormPage {
 		form.setText("Configure transformation");
 		managedForm.getForm().getBody().setLayout(new FillLayout(SWT.VERTICAL));
 		
-		Section secRefactoring = managedForm.getToolkit().createSection(managedForm.getForm().getBody(), Section.TWISTIE | Section.TITLE_BAR);
+		SashForm sashForm_1 = new SashForm(managedForm.getForm().getBody(), SWT.NONE);
+		managedForm.getToolkit().adapt(sashForm_1);
+		managedForm.getToolkit().paintBordersFor(sashForm_1);
+		
+		SashForm sashForm = new SashForm(sashForm_1, SWT.VERTICAL);
+		managedForm.getToolkit().adapt(sashForm);
+		managedForm.getToolkit().paintBordersFor(sashForm);
+		
+		Section secRefactoring = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
 		managedForm.getToolkit().paintBordersFor(secRefactoring);
 		secRefactoring.setText("Refactorings");
 		secRefactoring.setExpanded(true);
@@ -134,7 +139,7 @@ public class ConceptRefactoringPage extends FormPage {
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		managedForm.getToolkit().adapt(composite_1);
 		managedForm.getToolkit().paintBordersFor(composite_1);
-		composite_1.setLayout(new GridLayout(2, false));
+		composite_1.setLayout(new GridLayout(3, false));
 		
 		Label lblRefactorings = new Label(composite_1, SWT.NONE);
 		lblRefactorings.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1));
@@ -162,6 +167,10 @@ public class ConceptRefactoringPage extends FormPage {
 				listMetamodels.setContentProvider(new MetamodelListProvider());
 				listMetamodels.setLabelProvider(new MetamodelListProvider());
 				listMetamodels.setInput(revengModel);
+				
+				Button btnApplyAll = managedForm.getToolkit().createButton(composite_1, "Apply all", SWT.NONE);
+				new Label(composite_1, SWT.NONE);
+				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
@@ -177,40 +186,60 @@ public class ConceptRefactoringPage extends FormPage {
 					}
 				});
 				managedForm.getToolkit().paintBordersFor(hprlnkFindAgainRefactorings);
-		
-		Section sctnConceptInformation = managedForm.getToolkit().createSection(managedForm.getForm().getBody(), Section.TWISTIE | Section.TITLE_BAR);
-		managedForm.getToolkit().paintBordersFor(sctnConceptInformation);
-		sctnConceptInformation.setText("Concept information");
-		sctnConceptInformation.setExpanded(true);
-		
-		Composite composite_2 = managedForm.getToolkit().createComposite(sctnConceptInformation, SWT.NONE);
-		managedForm.getToolkit().paintBordersFor(composite_2);
-		sctnConceptInformation.setClient(composite_2);
-		composite_2.setLayout(new GridLayout(1, false));
-		
-		Composite compAtlFile = new Composite(composite_2, SWT.NONE);
-		compAtlFile.setSize(572, 39);
-		managedForm.getToolkit().adapt(compAtlFile);
-		managedForm.getToolkit().paintBordersFor(compAtlFile);
-		GridLayout gl_compAtlFile = new GridLayout(3, false);
-		compAtlFile.setLayout(gl_compAtlFile);
-		
-		Label lblConceptMetamodelFile = managedForm.getToolkit().createLabel(compAtlFile, "Metamodel file: ", SWT.NONE);
-		
-		txtConceptMetamodelFile = managedForm.getToolkit().createText(compAtlFile, "", SWT.NONE);
-		GridData gd_txtConceptMetamodelFile = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_txtConceptMetamodelFile.minimumWidth = 200;
-		gd_txtConceptMetamodelFile.heightHint = 19;
-		gd_txtConceptMetamodelFile.widthHint = 0;
-		txtConceptMetamodelFile.setLayoutData(gd_txtConceptMetamodelFile);
-		
-		Button btnBrowse = managedForm.getToolkit().createButton(compAtlFile, "Browse...", SWT.NONE);
-		btnBrowse.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				showBrowseAtlFileDialog();
-			}
-		});
+				
+				Section sctnConceptInformation = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
+				managedForm.getToolkit().paintBordersFor(sctnConceptInformation);
+				sctnConceptInformation.setText("Concept information");
+				sctnConceptInformation.setExpanded(true);
+				
+				Composite composite_2 = managedForm.getToolkit().createComposite(sctnConceptInformation, SWT.NONE);
+				managedForm.getToolkit().paintBordersFor(composite_2);
+				sctnConceptInformation.setClient(composite_2);
+				composite_2.setLayout(new GridLayout(1, false));
+				
+				Composite compAtlFile = new Composite(composite_2, SWT.NONE);
+				compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+				compAtlFile.setSize(572, 39);
+				managedForm.getToolkit().adapt(compAtlFile);
+				managedForm.getToolkit().paintBordersFor(compAtlFile);
+				GridLayout gl_compAtlFile = new GridLayout(3, false);
+				compAtlFile.setLayout(gl_compAtlFile);
+				
+				Label lblConceptMetamodelFile = managedForm.getToolkit().createLabel(compAtlFile, "Metamodel file: ", SWT.NONE);
+				
+				txtConceptMetamodelFile = managedForm.getToolkit().createText(compAtlFile, "", SWT.NONE);
+				GridData gd_txtConceptMetamodelFile = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+				gd_txtConceptMetamodelFile.minimumWidth = 200;
+				gd_txtConceptMetamodelFile.heightHint = 19;
+				gd_txtConceptMetamodelFile.widthHint = 0;
+				txtConceptMetamodelFile.setLayoutData(gd_txtConceptMetamodelFile);
+				
+				Button btnBrowse = managedForm.getToolkit().createButton(compAtlFile, "Browse...", SWT.NONE);
+				btnBrowse.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						showBrowseAtlFileDialog();
+					}
+				});
+				sashForm.setWeights(new int[] {1, 1});
+				
+				Section sctnConcept = managedForm.getToolkit().createSection(sashForm_1, Section.TWISTIE | Section.TITLE_BAR);
+				managedForm.getToolkit().paintBordersFor(sctnConcept);
+				sctnConcept.setText("Concept");
+				sctnConcept.setExpanded(true);
+				
+				Composite composite_3 = managedForm.getToolkit().createComposite(sctnConcept, SWT.NONE);
+				managedForm.getToolkit().paintBordersFor(composite_3);
+				sctnConcept.setClient(composite_3);
+				composite_3.setLayout(new GridLayout(1, false));
+				
+				TreeViewer treeViewer = new TreeViewer(composite_3, SWT.BORDER);
+				Tree tree = treeViewer.getTree();
+				GridData gd_tree = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+				gd_tree.heightHint = 100;
+				tree.setLayoutData(gd_tree);
+				managedForm.getToolkit().paintBordersFor(tree);
+		sashForm_1.setWeights(new int[] {1, 1});
 		toolkit.decorateFormHeading(form.getForm());
 		m_bindingContext = initDataBindings();
 		

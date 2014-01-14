@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
-import bento.componetization.atl.IPruningInfo;
+import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMatch;
 
@@ -31,23 +31,21 @@ import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMat
  */
 public class RemoveEmptyClass extends BaseRefactoring {
 
-	public RemoveEmptyClass(IStaticAnalysisInfo analysis, IPruningInfo prunner) {
-		super(analysis, prunner);
+	public RemoveEmptyClass(IStaticAnalysisInfo analysis, IMetamodelInfo metamodel) {
+		super(analysis, metamodel);
 	}
 
 	@Override
 	public boolean match() {
 		List<IMatch> matches = new ArrayList<IMatch>();
-		
-		Set<EClass> classes = prunner.getSelectedClasses();
-		for (EClass srcClass : classes) {
-			EClass tgtClass = prunner.getTargetClass(srcClass);
-			if ( tgtClass.getEStructuralFeatures().size() == 0 ) {
-				if ( analysis.getExplicitlyUsedTypes().contains(srcClass) )
+
+		Set<EClass> classes = metamodel.getClasses();
+		for (EClass eClass : classes) {
+			if ( eClass.getEStructuralFeatures().size() == 0 ) {
+				if ( analysis.getExplicitlyUsedTypes().contains(eClass) )
 					continue;
-				
-				
-				IMatch m = checkMatchType(srcClass, tgtClass);
+								
+				IMatch m = checkMatchType(eClass);
 				if ( m != null )
 					matches.add(m);
 			}
@@ -57,46 +55,53 @@ public class RemoveEmptyClass extends BaseRefactoring {
 		return save(matches);
 	}
 
-	private IMatch checkMatchType(EClass srcClass, EClass tgtClass) {
+	private IMatch checkMatchType(EClass eClass) {
 		List<EReference> pointers = new ArrayList<EReference>();
 		
-		// This is an indirect way of getting all created target features 
-		// (through the original source)
-		for(EStructuralFeature f : prunner.getSelectedFeatures()) {
+		for(EStructuralFeature f : metamodel.getFeatures()) {
 			if ( f instanceof EReference ) {
-				EReference r = (EReference) prunner.getTargetFeature(f);
-				if ( r.getEReferenceType() == tgtClass ) {
+				EReference r = (EReference) f;
+				if ( r.getEReferenceType() == eClass ) {
 					pointers.add(r);
 				}
 			}
 		}
 
 		if ( pointers.size() == 0 )
-			return new RemoveEmptyClassMatch_NoPointer(tgtClass);
+			return new RemoveEmptyClassMatch_NoPointer(eClass);
 		
-		/*
-		if ( pointers.size() <= maxPointersToEmptyClass ) 
-			return new RemoveEmptyClassMatch_Pointer(tgtClass, pointers);
-		*/
+		//if ( pointers.size() <= maxPointersToEmptyClass ) 
+		//	return new RemoveEmptyClassMatch_Pointer(tgtClass, pointers);
+		
 		
 		return null;
 	}
 
 		
 	public class RemoveEmptyClassMatch_NoPointer implements IMatch {
-		private EClass tgtClass;
+		private EClass eClass;
 
 
-		public RemoveEmptyClassMatch_NoPointer(EClass tgtClass) {
-			this.tgtClass = tgtClass;
+		public RemoveEmptyClassMatch_NoPointer(EClass eClass) {
+			this.eClass = eClass;
 		}
 
 		
 		@Override
 		public void apply() {
-			System.out.println("REFACTORING: Remove empty class " + tgtClass.getName());
+			System.out.println("REFACTORING: Remove empty class " + eClass.getName());
 			
-			EcoreUtil.delete(tgtClass, true);
+			Set<EClass> classes = metamodel.getClasses();
+			for (EClass possibleSubclass : classes) {
+				if ( possibleSubclass.getESuperTypes().contains(eClass) ) {
+					possibleSubclass.getESuperTypes().remove(eClass);
+					for(EClass superclass : eClass.getESuperTypes() ) {
+						possibleSubclass.getESuperTypes().add(superclass);
+					}
+				}
+			}
+			
+			EcoreUtil.delete(eClass, true);
 			// EcoreUtil.remove(tgtClass);
 			// prunner.removeClass(tgtClass);
 		

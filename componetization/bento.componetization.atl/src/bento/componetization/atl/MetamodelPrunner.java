@@ -1,46 +1,34 @@
 package bento.componetization.atl;
 
-import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.UnknownFeature;
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-public class MetamodelPrunner {
+public class MetamodelPrunner extends FootprintComputation {
 
-	private String slicedURI;
-	private BasicEMFModel typing;
-	private BasicEMFModel mm;
-	private BasicEMFModel atlTransformation;
-	private EPackage pkg;
+
 	private EPackage conceptPkg;
 
-	protected HashSet<EClass> directUsedTypes   = new HashSet<EClass>();
-	protected HashSet<EClass> indirectUsedTypes = new HashSet<EClass>();
-	protected HashSet<EReference> usedReferences = new HashSet<EReference>();
-	protected HashSet<EAttribute> usedAttributes = new HashSet<EAttribute>();
-	protected HashSet<UnknownFeature> unknownFeatures = new HashSet<UnknownFeature>();
-	
-	protected HashSet<CallSite> callSites = new HashSet<CallSite>();
-
 	protected HashMap<EClass, EClass> traceClass   = new HashMap<EClass, EClass>();
+	protected HashMap<EDataType, EDataType> traceDataType   = new HashMap<EDataType, EDataType>();
+
 	protected HashMap<EStructuralFeature, EStructuralFeature> traceFeature = new HashMap<EStructuralFeature, EStructuralFeature>();
-	
-	
-	private Strategy strategy = Strategy.CALLSITES_STRATEGY;
+		
+	private Strategy strategy = Strategy.REALFEATURE_STRATEGY;
 	
 	/**
 	 * 
@@ -50,59 +38,11 @@ public class MetamodelPrunner {
 	 * @param slicedURI The URI of the meta-model of interest
 	 */
 	public MetamodelPrunner(BasicEMFModel atlTransformation, BasicEMFModel mm, BasicEMFModel typing, String slicedURI) {
-		this.atlTransformation = atlTransformation;
-		this.mm = mm;
-		this.typing = typing;
-		this.slicedURI = slicedURI;
-		
-		List<EObject> pkgs = mm.allObjectsOf(EPackage.class.getSimpleName());
-		for (EObject obj : pkgs) {
-			EPackage pkg = (EPackage) obj;
-			if ( pkg.getNsURI().equals(slicedURI) ) {
-				this.pkg = pkg;
-				break;
-			}
-		}
-		if ( pkg == null ) throw new IllegalArgumentException("No package with URI " + slicedURI);
+		super(atlTransformation, mm, typing, slicedURI);
 	}
 
 	public EPackage extractSource(String name, String conceptURI, String conceptPrefix) {
-		
-		// Compute direct used types
-		List<EObject> metaclasses = typing.allObjectsOf(Metaclass.class.getSimpleName());
-		for (EObject obj : metaclasses) {
-			Metaclass m = (Metaclass) obj;
-			if ( EcoreUtil.isAncestor(pkg, m.getKlass()) && m.isExplicitOcurrence() ) {
-				directUsedTypes.add(m.getKlass());
-			}
-		}
-		
-		// Compute indirect used types
-		List<EObject> annotations = typing.allObjectsOf(ExpressionAnnotation.class.getSimpleName());
-		
-		for (EObject eObject : annotations) {
-			ExpressionAnnotation ann = (ExpressionAnnotation) eObject;
-			if ( ann.getUsedFeature() != null ) {
-				EStructuralFeature f = (EStructuralFeature) ann.getUsedFeature();
-				if ( f instanceof EReference ) {
-					usedReferences.add((EReference) f);
-					indirectUsedTypes.add((EClass) f.getEType());
-				}
-				else if ( f instanceof EAttribute) {  
-					usedAttributes.add((EAttribute) f);
-				} else {
-					// TODO: Unknown features will be replicated if accesed several times!
-					unknownFeatures.add((UnknownFeature) f);
-				}
-				
-				if ( ann.getReceptorType() instanceof Metaclass ) {
-					Metaclass receptor = (Metaclass) ann.getReceptorType();
-					CallSite callSite = new CallSite(receptor.getKlass(), f);
-				
-					callSites.add(callSite);
-				}
-			}
-		}
+		computeFootprint();
 		
 		conceptPkg = EcoreFactory.eINSTANCE.createEPackage();
 		conceptPkg.setName(name);
@@ -117,14 +57,6 @@ public class MetamodelPrunner {
 		// fillFeatures(directUsedTypes);
 		
 		return conceptPkg;
-	}
-
-
-	public HashSet<EStructuralFeature> getUsedFeatures() {
-		HashSet<EStructuralFeature> s = new HashSet<EStructuralFeature>();
-		s.addAll(usedAttributes);
-		s.addAll(usedReferences);
-		return s;
 	}
 	
 	private void copyReferences(HashSet<EClass> usedTypes) {
@@ -147,7 +79,9 @@ public class MetamodelPrunner {
 		
 		if ( usedFeature instanceof EAttribute ) {
 			copy = EcoreFactory.eINSTANCE.createEAttribute();
-			copy.setEType( usedFeature.getEType() );
+			
+			copy.setEType( copyDataTypeIfNeeded((EDataType) usedFeature.getEType()) );
+			
 		} else if ( usedFeature instanceof EReference )  {
 			copy = EcoreFactory.eINSTANCE.createEReference();
 			EClass tgtType = traceClass.get( usedFeature.getEType() );
@@ -171,6 +105,22 @@ public class MetamodelPrunner {
 		traceFeature.put(usedFeature, copy);
 		
 		conceptClass.getEStructuralFeatures().add(copy);
+	}
+
+	private EClassifier copyDataTypeIfNeeded(EDataType type) {
+		if (traceDataType.containsKey(type) )
+			return traceDataType.get(type);
+		
+		if ( EcoreUtil.isAncestor(pkg, type) ) {
+			EDataType copied = EcoreUtil.copy(type);
+
+			traceDataType.put(type, copied);
+			conceptPkg.getEClassifiers().add( copied );
+		
+			return copied;
+		}
+		
+		return type;
 	}
 
 	private void copyClasses(HashSet<EClass> usedTypes) {
@@ -206,14 +156,32 @@ public class MetamodelPrunner {
 	private void setInheritanceLinks(EClass eclass, EClass copied) {
 		EList<EClass> supertypes = eclass.getESuperTypes();
 		for (EClass superType : supertypes) {
+			// Not sure why proxies are not resolved...
+			if ( superType.eIsProxy() ) {
+				
+				System.out.println( ((InternalEObject) superType).eProxyURI() );
+				superType = (EClass) EcoreUtil.resolve(superType, mm.getHandler().getResource());
+			}
+			
+			EClass copiedSuperType = traceClass.get(superType);
+			if ( copiedSuperType == null ) {
+				copiedSuperType = copyClass(superType);
+			}
+			
+			copied.getESuperTypes().add(copiedSuperType);
+			setInheritanceLinks(superType, copiedSuperType);
+				
+			/*
 			EClass originalTranslated = someInHierarchyTranslated(superType);
 			if ( originalTranslated != null ) {
 				copied.getESuperTypes().add(traceClass.get(originalTranslated));
 			}
+			*/
 		}
 	}
 	
 	
+	/*
 	private EClass someInHierarchyTranslated(EClass superType) {
 		if ( traceClass.containsKey(superType) ) return superType;
 		for (EClass c : superType.getESuperTypes()) {
@@ -222,7 +190,7 @@ public class MetamodelPrunner {
 		}
 		return null;
 	}
-
+	*/
 
 	// Very compact way of implementing the state / strategy pattern!
 	// But the enclosing type does not seem to be available :-(
@@ -247,7 +215,7 @@ public class MetamodelPrunner {
 					extractor.copyFeature( f.getEContainingClass(), f);
 				}
 				
-				for(EClass original : extractor.traceClass.keySet() ) {
+				for(EClass original : new HashSet<EClass>(extractor.traceClass.keySet()) ) {
 					extractor.setInheritanceLinks(original, extractor.traceClass.get(original));
 				}
 			}
@@ -292,4 +260,5 @@ public class MetamodelPrunner {
 		this.strategy = strategy;
 	}
 
+	
 }

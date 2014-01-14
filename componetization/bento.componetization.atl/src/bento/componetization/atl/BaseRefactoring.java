@@ -8,13 +8,13 @@ import bento.componetization.atl.refactorings.IMatch;
 public abstract class BaseRefactoring implements IConceptRefactoring {
 
 	protected IStaticAnalysisInfo analysis;
-	protected IPruningInfo prunner;
-
+	protected IMetamodelInfo metamodel;
+	
 	protected List<? extends IMatch> storedMatches = null;
 
-	public BaseRefactoring(IStaticAnalysisInfo analysis, IPruningInfo prunner) {
+	public BaseRefactoring(IStaticAnalysisInfo analysis, IMetamodelInfo metamodel) {
 		this.analysis = analysis;
-		this.prunner   = prunner;
+		this.metamodel = metamodel;
 	}
 	
 	protected boolean save(List<? extends IMatch> matches) {

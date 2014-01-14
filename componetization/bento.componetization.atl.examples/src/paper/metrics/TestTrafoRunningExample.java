@@ -8,6 +8,7 @@ import org.eclectic.modeling.emf.Util;
 
 import tests.base.BaseTest;
 import bento.componetization.atl.ConceptExtractor;
+import bento.componetization.atl.MetamodelPrunner;
 
 public class TestTrafoRunningExample extends BaseTest {
 	// public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery1.atl.xmi";
@@ -20,6 +21,9 @@ public class TestTrafoRunningExample extends BaseTest {
 
 	public static final String SOURCE_METAMODEL = "../bento.componetization.atl.examples/src/paper/metrics/SimpleUML.ecore";
 	public static final String TARGET_METAMODEL = "../bento.componetization.atl.examples/src/paper/metrics/Metrics.ecore";
+
+	public static final String PRUNED_SOURCE_METAMODEL = "tmp_/SimpleUML_concept.ecore";
+
 	
 	public static void main(String[] args) throws IOException {
 		System.setProperty("org.apache.commons.logging.Log",
@@ -30,20 +34,29 @@ public class TestTrafoRunningExample extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		// typing
+		// initial typing
 		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
 		
-		getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
-		getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
+		// getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
+		// getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
 
-		System.out.println("Finished typing of " + TestTrafoRunningExample.class.getSimpleName());
+		System.out.println("Typing of " + TestTrafoRunningExample.class.getSimpleName());
 
+		// Meta-model prunning
+		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
+		savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);
+		
+		
+		System.out.println("Meta-model prunned");
+		
+		// Re-typing
+		typing(ATL_TRANSFORMATION, PRUNED_SOURCE_METAMODEL, TARGET_METAMODEL);
+		System.out.println("Re-Typing of " + TestTrafoRunningExample.class.getSimpleName());
+		
+		
 		// Effective meta-model
-		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml",
-				// ConceptExtractor.Strategy.CALLSITES_STRATEGY);
-				ConceptExtractor.Strategy.REALFEATURE_STRATEGY);
-
-		printAnalysisInfo(ex);		
+		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml_concept", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
+		
 		// Refactor
 		ex.refactor();
 		

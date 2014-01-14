@@ -1,0 +1,10 @@
+
+* Refactorings we would like to apply
+
+- Remove empty class "Feature" -> This implies changing the template, can this be done safely?
+
+- Remove empty class "Classifier" -> Requires specialising general/specific features to Class
+
+- Merge Model and Package, how??
+
+- Remove empty class "Type" -> Requires specialising TypedElement.type to Class 

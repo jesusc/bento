@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.CallSite;
-import bento.componetization.atl.IPruningInfo;
+import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 
 /**
@@ -28,15 +28,15 @@ public class SpecializeFeatureType extends BaseRefactoring {
 
 	private int maxFeatureUses = 1;
 	
-	public SpecializeFeatureType(IStaticAnalysisInfo analysis, IPruningInfo prunner) {
-		super(analysis, prunner);
+	public SpecializeFeatureType(IStaticAnalysisInfo analysis, IMetamodelInfo metamodel) {
+		super(analysis, metamodel);
 	}
 
  	
 	@Override
 	public boolean match() {
 		List<SpecializeFeatureTypeMatch> matches = new ArrayList<SpecializeFeatureTypeMatch>();
-		
+		/*
 		Set<EClass> explicit   = analysis.getExplicitlyUsedTypes();
 		Set<EClass> allSrcClass = prunner.getSelectedClasses();
 		Set<EClass> allTgtClass = new HashSet<EClass>();
@@ -60,7 +60,7 @@ public class SpecializeFeatureType extends BaseRefactoring {
 				
 			}
 		}
-	
+		*/
 		return save(matches);
 	}
 

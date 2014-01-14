@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.CallSite;
-import bento.componetization.atl.IPruningInfo;
+import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.atl.refactorings.IMatch;
 import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMatch;
@@ -40,22 +40,21 @@ import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMat
  */
 public class RemoveAssociationClass extends BaseRefactoring {
 
-	public RemoveAssociationClass(IStaticAnalysisInfo analysis, IPruningInfo prunner) {
-		super(analysis, prunner);
+	public RemoveAssociationClass(IStaticAnalysisInfo analysis, IMetamodelInfo metamodel) {
+		super(analysis, metamodel);
 	}
 
 	@Override
 	public boolean match() {
 		List<IMatch> matches = new ArrayList<IMatch>();
 		
-		Set<EClass> classes = prunner.getSelectedClasses();
-		Set<EStructuralFeature> features = prunner.getSelectedFeatures();
+		Set<EClass> classes = metamodel.getClasses();
+		Set<EStructuralFeature> features = metamodel.getFeatures();
 		for (EClass intermediate : classes) {
 			if ( analysis.getExplicitlyUsedTypes().contains(intermediate) ) {
 				continue;
 			}
 
-			
 			EReference pointingFeature = null;
 			
 			for(EStructuralFeature f : features) {
@@ -71,15 +70,11 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			}
 			
 			if ( pointingFeature != null && pointingFeature.isContainment() )  {
-				EClass prunnedClass = prunner.getTargetClass(intermediate);
-				if ( prunnedClass.getEReferences().size() == 1 &&   
-					 prunnedClass.getEAttributes().size() == 0 ) {
+				if ( intermediate.getEReferences().size() == 1 &&   
+					 intermediate.getEAttributes().size() == 0 ) {
 
-					System.out.println(pointingFeature);
-					System.out.println((EReference) prunner.getTargetFeature(pointingFeature));
 					matches.add( new RemoveAssociationClassMatch( 
-							prunnedClass, 
-							(EReference) prunner.getTargetFeature(pointingFeature) ) );
+							intermediate, pointingFeature) );
 					// System.out.println("FOUND FOR " + intermediate.getName());					
 				}
 			}
@@ -87,13 +82,14 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			// TODO: Additional checks: no subclasses
 			
 		}
-	
+		
+		
 		return save(matches);
 	}
 
 	public class RemoveAssociationClassMatch implements IMatch {
 
-		private EClass prunnedClass;
+		private EClass intermediateClass;
 		private EReference pointingFeature;
 
 		/**
@@ -103,21 +99,20 @@ public class RemoveAssociationClass extends BaseRefactoring {
 		 * @param prunnedClass
 		 * @param targetFeature
 		 */
-		public RemoveAssociationClassMatch(EClass prunnedClass,
+		public RemoveAssociationClassMatch(EClass intermediateClass,
 				EReference pointingFeature) {
 			
-			this.prunnedClass  = prunnedClass;
+			this.intermediateClass  = intermediateClass;
 			this.pointingFeature = pointingFeature;
 		}
 
 		@Override
 		public void apply() {
-			System.out.println("REFACTORING: Remove association class " + prunnedClass.getName());
+			System.out.println("REFACTORING: Remove association class " + intermediateClass.getName());
 
 			pointingFeature.setContainment(false);
-			pointingFeature.setEType( prunnedClass.getEReferences().get(0).getEType()  );
-			System.out.println(pointingFeature.getEType().getName());
-			EcoreUtil.delete(prunnedClass);
+			pointingFeature.setEType( intermediateClass.getEReferences().get(0).getEType()  );
+			EcoreUtil.delete(intermediateClass);
 		}
 	}
 }

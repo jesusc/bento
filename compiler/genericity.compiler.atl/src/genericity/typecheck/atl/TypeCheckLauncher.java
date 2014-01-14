@@ -53,7 +53,12 @@ public class TypeCheckLauncher {
 	public static BasicEMFModel loadTransformationMetamodels(EMFLoader loader, String... metamodels) throws IOException {
 		ResourceSetImpl rs = new ResourceSetImpl();
 		Resource merged = rs.createResource(URI.createURI("typing_metamodels.ecore"));
-
+		
+		// This is needed when there are cross references to Ecore but the metamodel 
+		// the application is launch in standalone mode
+		if ( !  rs.getPackageRegistry().containsKey( "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore" ) )
+			rs.getPackageRegistry().put("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore", EcorePackage.eINSTANCE);
+		
 		for (String path : metamodels) {
 			Resource r1 = rs.getResource(URI.createURI(path), true);
 
