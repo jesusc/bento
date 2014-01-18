@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
+import org.eclectic.modeling.emf.IModel;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -19,7 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 public abstract class FootprintComputation {
 	protected String slicedURI;
 	protected BasicEMFModel typing;
-	protected BasicEMFModel mm;
+	protected IModel mm;
 	protected BasicEMFModel atlTransformation;
 	protected EPackage pkg;
 
@@ -31,7 +32,7 @@ public abstract class FootprintComputation {
 	
 	protected HashSet<CallSite> callSites = new HashSet<CallSite>();
 
-	public FootprintComputation(BasicEMFModel atlTransformation, BasicEMFModel mm, BasicEMFModel typing, String slicedURI) {
+	public FootprintComputation(BasicEMFModel atlTransformation, IModel mm, BasicEMFModel typing, String slicedURI) {
 		this.atlTransformation = atlTransformation;
 		this.mm = mm;
 		this.typing = typing;

@@ -18,6 +18,7 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 	private String metamodelURI;
 	private Text txtMetamodelName;
 	private Text txtMetamodelURI;
+	private Button btnConceptualize;
 
 	/**
 	 * Create the dialog.
@@ -60,6 +61,12 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 				
 				Button btnBrowse = new Button(container, SWT.NONE);
 				btnBrowse.setText("Browse...");
+				new Label(container, SWT.NONE);
+				
+				btnConceptualize = new Button(container, SWT.CHECK);
+				btnConceptualize.setSelection(true);
+				btnConceptualize.setText("Conceptualize");
+				new Label(container, SWT.NONE);
 
 		return area;
 	}
@@ -106,4 +113,7 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		return metamodelURI;
 	}
 
+	public boolean isConcept() {
+		return btnConceptualize.getSelection();
+	}
 }

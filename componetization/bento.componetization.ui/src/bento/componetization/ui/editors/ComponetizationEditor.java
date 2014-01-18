@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -41,6 +43,8 @@ import org.eclipse.ui.ide.IDE;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage;
+import bento.componetization.ui.RevengProcessManager;
+import bento.componetization.ui.WorkspaceLogger;
 import bento.componetization.ui.forms.TransformationConfigurationPage;
 
 /**
@@ -54,9 +58,9 @@ import bento.componetization.ui.forms.TransformationConfigurationPage;
  */
 public class ComponetizationEditor extends FormEditor {
 
-	private Resource resource;
 	private TransformationConfigurationPage configurationPage;
-
+	private RevengProcessManager manager;
+	
 	@Override
 	protected void setInput(IEditorInput input) {
 		super.setInput(input);
@@ -66,20 +70,22 @@ public class ComponetizationEditor extends FormEditor {
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put(RevengPackage.eINSTANCE.getNsURI(), RevengFactory.eINSTANCE);
 		
 		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(fei.getFile().getFullPath().toString(), true);
+		Resource resource;
 		try {
-			this.resource = rs.getResource(uri, true);
+			resource = rs.getResource(uri, true);
 		} catch ( Exception e ) {
-			this.resource = rs.createResource(uri);
+			resource = rs.createResource(uri);
 			RevengModel m = RevengFactory.eINSTANCE.createRevengModel();
-			this.resource.getContents().add(m);
+			resource.getContents().add(m);
 		}
+		
+		manager = new RevengProcessManager(resource, fei.getPath());
 	}
 	
 	@Override
 	protected void addPages() {
-		try {
-			RevengModel m = (RevengModel) this.resource.getContents().get(0);			
-			configurationPage = new TransformationConfigurationPage(this, "conf", m);
+		try {	
+			configurationPage = new TransformationConfigurationPage(this, "conf", manager);
 			addPage(configurationPage);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
@@ -90,11 +96,10 @@ public class ComponetizationEditor extends FormEditor {
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			resource.save(null);
+			manager.save();
 			configurationPage.saved();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			WorkspaceLogger.generarEntradaLog(IStatus.ERROR, e);
 		}
 	}
 

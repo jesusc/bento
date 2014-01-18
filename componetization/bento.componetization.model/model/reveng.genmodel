@@ -12,13 +12,17 @@
     </genClasses>
     <genClasses image="false" ecoreClass="reveng.ecore#//Transformation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Transformation/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//Transformation/metamodels"/>
     </genClasses>
-    <genClasses ecoreClass="reveng.ecore#//AtlTransformation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//AtlTransformation/metamodels"/>
+    <genClasses ecoreClass="reveng.ecore#//AtlTransformation"/>
+    <genClasses image="false" ecoreClass="reveng.ecore#//Resource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Resource/URI"/>
     </genClasses>
     <genClasses ecoreClass="reveng.ecore#//Metamodel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/URI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/becomeConcept"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//Metamodel/extractedConcept"/>
     </genClasses>
+    <genClasses ecoreClass="reveng.ecore#//Concept"/>
   </genPackages>
 </genmodel:GenModel>

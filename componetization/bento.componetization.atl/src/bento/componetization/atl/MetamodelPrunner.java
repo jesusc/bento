@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
+import org.eclectic.modeling.emf.IModel;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -37,7 +38,7 @@ public class MetamodelPrunner extends FootprintComputation {
 	 * @param typing The model containing the typing information
 	 * @param slicedURI The URI of the meta-model of interest
 	 */
-	public MetamodelPrunner(BasicEMFModel atlTransformation, BasicEMFModel mm, BasicEMFModel typing, String slicedURI) {
+	public MetamodelPrunner(BasicEMFModel atlTransformation, IModel mm, BasicEMFModel typing, String slicedURI) {
 		super(atlTransformation, mm, typing, slicedURI);
 	}
 
@@ -160,7 +161,8 @@ public class MetamodelPrunner extends FootprintComputation {
 			if ( superType.eIsProxy() ) {
 				
 				System.out.println( ((InternalEObject) superType).eProxyURI() );
-				superType = (EClass) EcoreUtil.resolve(superType, mm.getHandler().getResource());
+				System.out.println("Proxy not resolved: MetamodelPrunner");
+				continue;
 			}
 			
 			EClass copiedSuperType = traceClass.get(superType);

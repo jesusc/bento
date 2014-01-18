@@ -6,6 +6,7 @@
  */
 package bento.componetization.reveng;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link bento.componetization.reveng.Transformation#getPath <em>Path</em>}</li>
+ *   <li>{@link bento.componetization.reveng.Transformation#getMetamodels <em>Metamodels</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +52,21 @@ public interface Transformation extends EObject {
 	 * @generated
 	 */
 	void setPath(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Metamodels</b></em>' containment reference list.
+	 * The list contents are of type {@link bento.componetization.reveng.Metamodel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metamodels</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metamodels</em>' containment reference list.
+	 * @see bento.componetization.reveng.RevengPackage#getTransformation_Metamodels()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Metamodel> getMetamodels();
 
 } // Transformation

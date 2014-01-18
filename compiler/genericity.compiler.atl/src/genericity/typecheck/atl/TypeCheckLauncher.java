@@ -74,7 +74,7 @@ public class TypeCheckLauncher {
 
 	public void setWarningMode() { isWarningMode = true; }
 	
-	public void launch(BasicEMFModel mm, BasicEMFModel atlTransformation, BasicEMFModel out) throws IOException {
+	public void launch(IModel mm, BasicEMFModel atlTransformation, BasicEMFModel out) throws IOException {
 
 		eclectic.typecheck_atl transformation = new eclectic.typecheck_atl();
 
@@ -117,11 +117,11 @@ public class TypeCheckLauncher {
 
 	public static class CustomMethodHandler extends
 			org.eclectic.idc.jvm.runtime.BasicMethodHandler {
-		private BasicEMFModel mm;
+		private IModel mm;
 		private BasicEMFModel types;
 		private boolean isWarningMode;
 
-		public CustomMethodHandler(BasicEMFModel mm, BasicEMFModel types, ModelManager m, boolean isWarningMode) {
+		public CustomMethodHandler(IModel mm, BasicEMFModel types, ModelManager m, boolean isWarningMode) {
 			super(m);
 			this.mm = mm;
 			this.types = types;
@@ -143,11 +143,11 @@ public class TypeCheckLauncher {
 
 	public static class CustomMethodWrapper extends
 			org.eclectic.idc.jvm.runtime.BasicMethodWrapper {
-		private BasicEMFModel mm;
+		private IModel mm;
 		private BasicEMFModel types;
 		private boolean isWarningMode;
 
-		public CustomMethodWrapper(BasicEMFModel mm, BasicEMFModel types, IModel<?, ?> model, Object o, boolean isWarningMode) {
+		public CustomMethodWrapper(IModel mm, BasicEMFModel types, IModel<?, ?> model, Object o, boolean isWarningMode) {
 			super(model, o);
 			this.mm = mm;
 			this.types = types;

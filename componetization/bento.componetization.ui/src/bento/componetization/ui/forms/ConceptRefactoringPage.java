@@ -55,6 +55,8 @@ import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.Activator;
+import bento.componetization.ui.RevengProcessManager;
+
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -63,22 +65,38 @@ public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
 	private Text txtConceptMetamodelFile;
 	
-	private RevengModel revengModel;
-	private AtlTransformation atlTransformation;
+	private RevengProcessManager manager;
+	private Metamodel metamodel;
 
 	boolean isDirtyPage = false;
-	private TableViewer listMetamodels;
+	private TableViewer listRefactorings;
 
 	/**
 	 * Create the form page.
 	 * @param id
 	 * @param title
 	 */
-	public ConceptRefactoringPage(String id, RevengModel m) {
-		super(id, "Transformation configuration");
-		this.revengModel = m;
+	public ConceptRefactoringPage(String id, RevengProcessManager m, Metamodel metamodel) {
+		super(id, metamodel.getName());
+		this.manager = m;
+		this.metamodel = metamodel;
 	}
-	
+
+	/**
+	 * Create the form page.
+	 * @param editor
+	 * @param id
+	 * @param title
+	 * @wbp.parser.constructor
+	 * @wbp.eval.method.parameter id "Some id"
+	 * @wbp.eval.method.parameter title "Some title"
+	 */
+	public ConceptRefactoringPage(FormEditor editor, String id, RevengProcessManager m, Metamodel metamodel) {
+		super(editor, id, metamodel.getName());
+		this.manager = m;
+		this.metamodel   = metamodel;
+	}
+
 	@Override
 	public boolean isDirty() {
 		// System.out.println("TransformationConfigurationPage.isDirty()");
@@ -90,20 +108,6 @@ public class ConceptRefactoringPage extends FormPage {
 		getManagedForm().dirtyStateChanged();
 	}
 	
-	/**
-	 * Create the form page.
-	 * @param editor
-	 * @param id
-	 * @param title
-	 * @wbp.parser.constructor
-	 * @wbp.eval.method.parameter id "Some id"
-	 * @wbp.eval.method.parameter title "Some title"
-	 */
-	public ConceptRefactoringPage(FormEditor editor, String id, RevengModel m) {
-		super(editor, id, "Transformation configuration");
-		this.revengModel = m;
-		this.atlTransformation = (AtlTransformation) m.getTransformation();
-	}
 
 	/**
 	 * Create contents of the form.
@@ -113,7 +117,7 @@ public class ConceptRefactoringPage extends FormPage {
 	protected void createFormContent(IManagedForm managedForm) {
 		FormToolkit toolkit = managedForm.getToolkit();
 		ScrolledForm form = managedForm.getForm();
-		form.setText("Configure transformation");
+		form.setText("Create concept");
 		managedForm.getForm().getBody().setLayout(new FillLayout(SWT.VERTICAL));
 		
 		SashForm sashForm_1 = new SashForm(managedForm.getForm().getBody(), SWT.NONE);
@@ -146,31 +150,29 @@ public class ConceptRefactoringPage extends FormPage {
 		managedForm.getToolkit().adapt(lblRefactorings, true, true);
 		lblRefactorings.setText("Applicable refactorings");
 		
-		listMetamodels = new TableViewer(composite_1, SWT.BORDER);
-		listMetamodels.setColumnProperties(new String[] {"Name", "URI"});
+		listRefactorings = new TableViewer(composite_1, SWT.BORDER);
+		listRefactorings.setColumnProperties(new String[] {"Name", "URI"});
 		GridData gd_listMetamodels = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 3);
 		gd_listMetamodels.heightHint = 150;
 		gd_listMetamodels.widthHint = 0;
-		listMetamodels.getTable().setLayoutData(gd_listMetamodels);
-		managedForm.getToolkit().adapt(listMetamodels.getTable(), true, true);
+		listRefactorings.getTable().setLayoutData(gd_listMetamodels);
+		managedForm.getToolkit().adapt(listRefactorings.getTable(), true, true);
 		
-		TableViewerColumn tableViewerColumn = new TableViewerColumn(listMetamodels, SWT.NONE);
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(listRefactorings, SWT.NONE);
 		TableColumn tblclmnName = tableViewerColumn.getColumn();
 		tblclmnName.setWidth(100);
 		tblclmnName.setText("Name");
 		
-		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(listMetamodels, SWT.NONE);
+		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(listRefactorings, SWT.NONE);
 		TableColumn tblclmnUri = tableViewerColumn_1.getColumn();
 		tblclmnUri.setWidth(100);
 		tblclmnUri.setText("URI");
-		
-				listMetamodels.setContentProvider(new MetamodelListProvider());
-				listMetamodels.setLabelProvider(new MetamodelListProvider());
-				listMetamodels.setInput(revengModel);
+				
+				Button btnApplySelected = managedForm.getToolkit().createButton(composite_1, "Apply selected", SWT.NONE);
+				new Label(composite_1, SWT.NONE);
 				
 				Button btnApplyAll = managedForm.getToolkit().createButton(composite_1, "Apply all", SWT.NONE);
-				new Label(composite_1, SWT.NONE);
-				new Label(composite_1, SWT.NONE);
+				btnApplyAll.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
@@ -245,7 +247,7 @@ public class ConceptRefactoringPage extends FormPage {
 		
 
 		// Get Dirty flag...
-		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
+		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(manager.getModel(), Literals.REVENG_MODEL__TRANSFORMATION);
 		revengModelTransformationObserveValue.addValueChangeListener(new IValueChangeListener() {
 			@Override
 			public void handleValueChange(ValueChangeEvent event) {
@@ -342,70 +344,7 @@ public class ConceptRefactoringPage extends FormPage {
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConceptMetamodelFile);
-		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
-		UpdateValueStrategy strategy = new UpdateValueStrategy();
-		strategy.setConverter(new TextToTransformationConverter());
-		UpdateValueStrategy strategy_1 = new UpdateValueStrategy();
-		strategy_1.setConverter(new TransformationToTextConverter());
-		bindingContext.bindValue(observeTextTxtAtlFileObserveWidget, revengModelTransformationObserveValue, strategy, strategy_1);
-		//
 		return bindingContext;
 	}
-	
-	
-	/**
-	 * 
-	 * @author jesus
-	 *
-	 */
-	public class MetamodelListProvider implements ITableLabelProvider, IStructuredContentProvider {
-		@Override
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			System.out.println(oldInput + " - " + newInput);
-		}
-
-		@Override
-		public Object[] getElements(Object inputElement) {
-			if ( atlTransformation != null && atlTransformation.getMetamodels().size() > 0 ) 
-				return atlTransformation.getMetamodels().toArray();
-			
-			return null;
-		}
 		
-		
-		@Override
-		public void addListener(ILabelProviderListener listener) { }
-
-		@Override
-		public void dispose() { }
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) { }
-
-		@Override
-		public Image getColumnImage(Object element, int columnIndex) {
-			return null;
-		}
-
-		@Override
-		public String getColumnText(Object element, int columnIndex) {
-			Metamodel mm = (Metamodel) element;
-			switch (columnIndex) {
-			case 0:
-				return mm.getName();
-			case 1:
-				return mm.getURI();
-			}
-			return null;
-		}
-
-		
-	}
-	
 }

@@ -8,7 +8,7 @@ Bundle-Vendor: Miso Team
 Require-Bundle: org.eclipse.core.runtime,
  org.eclectic.modeling;bundle-version="0.8.6",
  org.eclipse.emf.ecore;visibility:=reexport,
- genericity.compiler.atl;bundle-version="1.0.0"
+ genericity.compiler.atl.typing;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: bento.componetization.atl

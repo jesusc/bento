@@ -17,7 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link bento.componetization.reveng.Metamodel#getName <em>Name</em>}</li>
- *   <li>{@link bento.componetization.reveng.Metamodel#getURI <em>URI</em>}</li>
+ *   <li>{@link bento.componetization.reveng.Metamodel#isBecomeConcept <em>Become Concept</em>}</li>
+ *   <li>{@link bento.componetization.reveng.Metamodel#getExtractedConcept <em>Extracted Concept</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Metamodel extends EObject {
+public interface Metamodel extends Resource {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -53,29 +54,55 @@ public interface Metamodel extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>URI</b></em>' attribute.
+	 * Returns the value of the '<em><b>Become Concept</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>URI</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Become Concept</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>URI</em>' attribute.
-	 * @see #setURI(String)
-	 * @see bento.componetization.reveng.RevengPackage#getMetamodel_URI()
-	 * @model required="true"
+	 * @return the value of the '<em>Become Concept</em>' attribute.
+	 * @see #setBecomeConcept(boolean)
+	 * @see bento.componetization.reveng.RevengPackage#getMetamodel_BecomeConcept()
+	 * @model
 	 * @generated
 	 */
-	String getURI();
+	boolean isBecomeConcept();
 
 	/**
-	 * Sets the value of the '{@link bento.componetization.reveng.Metamodel#getURI <em>URI</em>}' attribute.
+	 * Sets the value of the '{@link bento.componetization.reveng.Metamodel#isBecomeConcept <em>Become Concept</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>URI</em>' attribute.
-	 * @see #getURI()
+	 * @param value the new value of the '<em>Become Concept</em>' attribute.
+	 * @see #isBecomeConcept()
 	 * @generated
 	 */
-	void setURI(String value);
+	void setBecomeConcept(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Extracted Concept</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extracted Concept</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extracted Concept</em>' containment reference.
+	 * @see #setExtractedConcept(Concept)
+	 * @see bento.componetization.reveng.RevengPackage#getMetamodel_ExtractedConcept()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Concept getExtractedConcept();
+
+	/**
+	 * Sets the value of the '{@link bento.componetization.reveng.Metamodel#getExtractedConcept <em>Extracted Concept</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extracted Concept</em>' containment reference.
+	 * @see #getExtractedConcept()
+	 * @generated
+	 */
+	void setExtractedConcept(Concept value);
 
 } // Metamodel

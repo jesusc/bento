@@ -7,14 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: genericity.typecheck.atl,
- genericity.typing.atl_types,
- genericity.typing.atl_types.annotations,
- genericity.typing.atl_types.annotations.impl,
- genericity.typing.atl_types.annotations.util,
- genericity.typing.atl_types.impl,
- genericity.typing.atl_types.util
+Export-Package: genericity.typecheck.atl
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- genericity.language.gbind;bundle-version="0.5.0"
+ genericity.language.gbind;bundle-version="0.5.0",
+ genericity.compiler.atl.typing;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

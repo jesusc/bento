@@ -46,13 +46,11 @@ public class TestTrafoRunningExample extends BaseTest {
 		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
 		savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);
 		
-		
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
 		typing(ATL_TRANSFORMATION, PRUNED_SOURCE_METAMODEL, TARGET_METAMODEL);
 		System.out.println("Re-Typing of " + TestTrafoRunningExample.class.getSimpleName());
-		
 		
 		// Effective meta-model
 		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml_concept", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");

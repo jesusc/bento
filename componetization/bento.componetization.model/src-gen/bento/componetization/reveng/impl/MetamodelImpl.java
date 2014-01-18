@@ -6,13 +6,16 @@
  */
 package bento.componetization.reveng.impl;
 
+import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.RevengPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
@@ -24,13 +27,14 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getName <em>Name</em>}</li>
- *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getURI <em>URI</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#isBecomeConcept <em>Become Concept</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getExtractedConcept <em>Extracted Concept</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MetamodelImpl extends EObjectImpl implements Metamodel {
+public class MetamodelImpl extends ResourceImpl implements Metamodel {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -52,24 +56,34 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getURI() <em>URI</em>}' attribute.
+	 * The default value of the '{@link #isBecomeConcept() <em>Become Concept</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getURI()
+	 * @see #isBecomeConcept()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String URI_EDEFAULT = null;
+	protected static final boolean BECOME_CONCEPT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #getURI() <em>URI</em>}' attribute.
+	 * The cached value of the '{@link #isBecomeConcept() <em>Become Concept</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getURI()
+	 * @see #isBecomeConcept()
 	 * @generated
 	 * @ordered
 	 */
-	protected String uri = URI_EDEFAULT;
+	protected boolean becomeConcept = BECOME_CONCEPT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExtractedConcept() <em>Extracted Concept</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtractedConcept()
+	 * @generated
+	 * @ordered
+	 */
+	protected Concept extractedConcept;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,8 +130,8 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getURI() {
-		return uri;
+	public boolean isBecomeConcept() {
+		return becomeConcept;
 	}
 
 	/**
@@ -125,11 +139,68 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setURI(String newURI) {
-		String oldURI = uri;
-		uri = newURI;
+	public void setBecomeConcept(boolean newBecomeConcept) {
+		boolean oldBecomeConcept = becomeConcept;
+		becomeConcept = newBecomeConcept;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__URI, oldURI, uri));
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__BECOME_CONCEPT, oldBecomeConcept, becomeConcept));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Concept getExtractedConcept() {
+		return extractedConcept;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExtractedConcept(Concept newExtractedConcept, NotificationChain msgs) {
+		Concept oldExtractedConcept = extractedConcept;
+		extractedConcept = newExtractedConcept;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__EXTRACTED_CONCEPT, oldExtractedConcept, newExtractedConcept);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtractedConcept(Concept newExtractedConcept) {
+		if (newExtractedConcept != extractedConcept) {
+			NotificationChain msgs = null;
+			if (extractedConcept != null)
+				msgs = ((InternalEObject)extractedConcept).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RevengPackage.METAMODEL__EXTRACTED_CONCEPT, null, msgs);
+			if (newExtractedConcept != null)
+				msgs = ((InternalEObject)newExtractedConcept).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RevengPackage.METAMODEL__EXTRACTED_CONCEPT, null, msgs);
+			msgs = basicSetExtractedConcept(newExtractedConcept, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__EXTRACTED_CONCEPT, newExtractedConcept, newExtractedConcept));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
+				return basicSetExtractedConcept(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -142,8 +213,10 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 		switch (featureID) {
 			case RevengPackage.METAMODEL__NAME:
 				return getName();
-			case RevengPackage.METAMODEL__URI:
-				return getURI();
+			case RevengPackage.METAMODEL__BECOME_CONCEPT:
+				return isBecomeConcept();
+			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
+				return getExtractedConcept();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,8 +232,11 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 			case RevengPackage.METAMODEL__NAME:
 				setName((String)newValue);
 				return;
-			case RevengPackage.METAMODEL__URI:
-				setURI((String)newValue);
+			case RevengPackage.METAMODEL__BECOME_CONCEPT:
+				setBecomeConcept((Boolean)newValue);
+				return;
+			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
+				setExtractedConcept((Concept)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,8 +253,11 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 			case RevengPackage.METAMODEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case RevengPackage.METAMODEL__URI:
-				setURI(URI_EDEFAULT);
+			case RevengPackage.METAMODEL__BECOME_CONCEPT:
+				setBecomeConcept(BECOME_CONCEPT_EDEFAULT);
+				return;
+			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
+				setExtractedConcept((Concept)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -194,8 +273,10 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 		switch (featureID) {
 			case RevengPackage.METAMODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case RevengPackage.METAMODEL__URI:
-				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case RevengPackage.METAMODEL__BECOME_CONCEPT:
+				return becomeConcept != BECOME_CONCEPT_EDEFAULT;
+			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
+				return extractedConcept != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,8 +293,8 @@ public class MetamodelImpl extends EObjectImpl implements Metamodel {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", URI: ");
-		result.append(uri);
+		result.append(", becomeConcept: ");
+		result.append(becomeConcept);
 		result.append(')');
 		return result.toString();
 	}

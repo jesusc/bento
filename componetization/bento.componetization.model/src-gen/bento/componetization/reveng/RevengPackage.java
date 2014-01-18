@@ -107,13 +107,22 @@ public interface RevengPackage extends EPackage {
 	int TRANSFORMATION__PATH = 0;
 
 	/**
+	 * The feature id for the '<em><b>Metamodels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__METAMODELS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = 1;
+	int TRANSFORMATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link bento.componetization.reveng.impl.AtlTransformationImpl <em>Atl Transformation</em>}' class.
@@ -141,7 +150,7 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATL_TRANSFORMATION__METAMODELS = TRANSFORMATION_FEATURE_COUNT + 0;
+	int ATL_TRANSFORMATION__METAMODELS = TRANSFORMATION__METAMODELS;
 
 	/**
 	 * The number of structural features of the '<em>Atl Transformation</em>' class.
@@ -150,8 +159,36 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATL_TRANSFORMATION_FEATURE_COUNT = TRANSFORMATION_FEATURE_COUNT + 1;
+	int ATL_TRANSFORMATION_FEATURE_COUNT = TRANSFORMATION_FEATURE_COUNT + 0;
 
+
+	/**
+	 * The meta object id for the '{@link bento.componetization.reveng.impl.ResourceImpl <em>Resource</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.componetization.reveng.impl.ResourceImpl
+	 * @see bento.componetization.reveng.impl.RevengPackageImpl#getResource()
+	 * @generated
+	 */
+	int RESOURCE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE__PATH = 0;
+
+	/**
+	 * The number of structural features of the '<em>Resource</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link bento.componetization.reveng.impl.MetamodelImpl <em>Metamodel</em>}' class.
@@ -161,7 +198,16 @@ public interface RevengPackage extends EPackage {
 	 * @see bento.componetization.reveng.impl.RevengPackageImpl#getMetamodel()
 	 * @generated
 	 */
-	int METAMODEL = 3;
+	int METAMODEL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__PATH = RESOURCE__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -170,16 +216,25 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__NAME = 0;
+	int METAMODEL__NAME = RESOURCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>URI</b></em>' attribute.
+	 * The feature id for the '<em><b>Become Concept</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__URI = 1;
+	int METAMODEL__BECOME_CONCEPT = RESOURCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Extracted Concept</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__EXTRACTED_CONCEPT = RESOURCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Metamodel</em>' class.
@@ -188,7 +243,45 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_FEATURE_COUNT = 2;
+	int METAMODEL_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 3;
+
+
+	/**
+	 * The meta object id for the '{@link bento.componetization.reveng.impl.ConceptImpl <em>Concept</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.componetization.reveng.impl.ConceptImpl
+	 * @see bento.componetization.reveng.impl.RevengPackageImpl#getConcept()
+	 * @generated
+	 */
+	int CONCEPT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT__PATH = RESOURCE__PATH;
+
+	/**
+	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT__NS_URI = RESOURCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Concept</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 1;
 
 
 	/**
@@ -234,6 +327,17 @@ public interface RevengPackage extends EPackage {
 	EAttribute getTransformation_Path();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link bento.componetization.reveng.Transformation#getMetamodels <em>Metamodels</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Metamodels</em>'.
+	 * @see bento.componetization.reveng.Transformation#getMetamodels()
+	 * @see #getTransformation()
+	 * @generated
+	 */
+	EReference getTransformation_Metamodels();
+
+	/**
 	 * Returns the meta object for class '{@link bento.componetization.reveng.AtlTransformation <em>Atl Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -244,15 +348,25 @@ public interface RevengPackage extends EPackage {
 	EClass getAtlTransformation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link bento.componetization.reveng.AtlTransformation#getMetamodels <em>Metamodels</em>}'.
+	 * Returns the meta object for class '{@link bento.componetization.reveng.Resource <em>Resource</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Metamodels</em>'.
-	 * @see bento.componetization.reveng.AtlTransformation#getMetamodels()
-	 * @see #getAtlTransformation()
+	 * @return the meta object for class '<em>Resource</em>'.
+	 * @see bento.componetization.reveng.Resource
 	 * @generated
 	 */
-	EReference getAtlTransformation_Metamodels();
+	EClass getResource();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Resource#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path</em>'.
+	 * @see bento.componetization.reveng.Resource#getPath()
+	 * @see #getResource()
+	 * @generated
+	 */
+	EAttribute getResource_Path();
 
 	/**
 	 * Returns the meta object for class '{@link bento.componetization.reveng.Metamodel <em>Metamodel</em>}'.
@@ -276,15 +390,47 @@ public interface RevengPackage extends EPackage {
 	EAttribute getMetamodel_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#getURI <em>URI</em>}'.
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#isBecomeConcept <em>Become Concept</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>URI</em>'.
-	 * @see bento.componetization.reveng.Metamodel#getURI()
+	 * @return the meta object for the attribute '<em>Become Concept</em>'.
+	 * @see bento.componetization.reveng.Metamodel#isBecomeConcept()
 	 * @see #getMetamodel()
 	 * @generated
 	 */
-	EAttribute getMetamodel_URI();
+	EAttribute getMetamodel_BecomeConcept();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link bento.componetization.reveng.Metamodel#getExtractedConcept <em>Extracted Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Extracted Concept</em>'.
+	 * @see bento.componetization.reveng.Metamodel#getExtractedConcept()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EReference getMetamodel_ExtractedConcept();
+
+	/**
+	 * Returns the meta object for class '{@link bento.componetization.reveng.Concept <em>Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concept</em>'.
+	 * @see bento.componetization.reveng.Concept
+	 * @generated
+	 */
+	EClass getConcept();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Concept#getNsURI <em>Ns URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ns URI</em>'.
+	 * @see bento.componetization.reveng.Concept#getNsURI()
+	 * @see #getConcept()
+	 * @generated
+	 */
+	EAttribute getConcept_NsURI();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -345,6 +491,14 @@ public interface RevengPackage extends EPackage {
 		EAttribute TRANSFORMATION__PATH = eINSTANCE.getTransformation_Path();
 
 		/**
+		 * The meta object literal for the '<em><b>Metamodels</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION__METAMODELS = eINSTANCE.getTransformation_Metamodels();
+
+		/**
 		 * The meta object literal for the '{@link bento.componetization.reveng.impl.AtlTransformationImpl <em>Atl Transformation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -355,12 +509,22 @@ public interface RevengPackage extends EPackage {
 		EClass ATL_TRANSFORMATION = eINSTANCE.getAtlTransformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Metamodels</b></em>' containment reference list feature.
+		 * The meta object literal for the '{@link bento.componetization.reveng.impl.ResourceImpl <em>Resource</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.componetization.reveng.impl.ResourceImpl
+		 * @see bento.componetization.reveng.impl.RevengPackageImpl#getResource()
+		 * @generated
+		 */
+		EClass RESOURCE = eINSTANCE.getResource();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ATL_TRANSFORMATION__METAMODELS = eINSTANCE.getAtlTransformation_Metamodels();
+		EAttribute RESOURCE__PATH = eINSTANCE.getResource_Path();
 
 		/**
 		 * The meta object literal for the '{@link bento.componetization.reveng.impl.MetamodelImpl <em>Metamodel</em>}' class.
@@ -381,12 +545,38 @@ public interface RevengPackage extends EPackage {
 		EAttribute METAMODEL__NAME = eINSTANCE.getMetamodel_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>URI</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Become Concept</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute METAMODEL__URI = eINSTANCE.getMetamodel_URI();
+		EAttribute METAMODEL__BECOME_CONCEPT = eINSTANCE.getMetamodel_BecomeConcept();
+
+		/**
+		 * The meta object literal for the '<em><b>Extracted Concept</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METAMODEL__EXTRACTED_CONCEPT = eINSTANCE.getMetamodel_ExtractedConcept();
+
+		/**
+		 * The meta object literal for the '{@link bento.componetization.reveng.impl.ConceptImpl <em>Concept</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.componetization.reveng.impl.ConceptImpl
+		 * @see bento.componetization.reveng.impl.RevengPackageImpl#getConcept()
+		 * @generated
+		 */
+		EClass CONCEPT = eINSTANCE.getConcept();
+
+		/**
+		 * The meta object literal for the '<em><b>Ns URI</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONCEPT__NS_URI = eINSTANCE.getConcept_NsURI();
 
 	}
 

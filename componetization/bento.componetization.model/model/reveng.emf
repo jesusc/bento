@@ -8,14 +8,24 @@ class RevengModel {
 }
 
 abstract class Transformation {
-   attr String[1] path;
-}
-
-class AtlTransformation extends Transformation {
+   	attr String[1] path;
 	val Metamodel[*] metamodels;   
 }
 
-class Metamodel {
+class AtlTransformation extends Transformation {
+}
+
+abstract class Resource {
+   attr String[1] path; /* Can be a path or a URI */   
+}
+
+class Metamodel extends Resource {
    attr String[1] name;
-   attr String[1] URI;
+   attr boolean becomeConcept;
+   
+   val Concept[0..1] extractedConcept;
+}
+
+class Concept extends Resource {
+   attr String[1] nsURI;
 }

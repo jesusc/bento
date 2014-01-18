@@ -42,7 +42,8 @@
 				<include name="genericity/compiler/atl/Class2Reference*"/>
 				<include name="genericity/compiler/atl/VirtualClasses*"/>
 				<include name="genericity/compiler/atl/ClassMerge*"/>
-								
+
+				<!--
 				<include name="genericity/typing/atl_types/*"/>
 				<include name="genericity/typing/atl_types/impl/*"/>
 				<include name="genericity/typing/atl_types/util/*"/>
@@ -50,7 +51,7 @@
 				<include name="genericity/typing/atl_types/annotations/*"/>
 				<include name="genericity/typing/atl_types/annotations/impl/*"/>
 				<include name="genericity/typing/atl_types/annotations/util/*"/>
-								
+				-->				
 			</fileset>
 
 			<!-- NO BCEL IN THE PATH...

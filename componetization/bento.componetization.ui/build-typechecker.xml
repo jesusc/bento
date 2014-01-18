@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     01/01/2012 23:58:17                                                        
+
+     project    
+     description
+                   
+     jesusc                                                                
+     ====================================================================== -->
+<project name="project" default="default">
+    <description>
+		Package the genericity compiler for ATL into a jar file.
+    </description>
+
+	<!-- This is copied from genericity.gcomponent.api, but I am not able to 
+	     use the class files of the jar stored in such plug-in -->
+	<target name="generate-jar">
+		<jar destfile="lib/typechecker-atl.jar">
+			<fileset dir="../../compiler/genericity.compiler.atl/bin" >
+				<include name="genericity/typecheck/atl/TypeCheckLauncher*"/>
+				
+				<!-- Types are now got from the typing project -->
+				<!--
+				<include name="genericity/typing/atl_types/*"/>
+				<include name="genericity/typing/atl_types/impl/*"/>
+				<include name="genericity/typing/atl_types/util/*"/>
+
+				<include name="genericity/typing/atl_types/annotations/*"/>
+				<include name="genericity/typing/atl_types/annotations/impl/*"/>
+				<include name="genericity/typing/atl_types/annotations/util/*"/>
+				-->				
+			</fileset>
+		</jar>
+
+	</target>
+	
+	<target name="default" depends="generate-jar">
+	</target>
+	
+    <target name="depends">
+    </target>
+
+</project>
