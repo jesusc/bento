@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
+import org.eclectic.modeling.emf.IModel;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
@@ -30,7 +31,7 @@ import bento.componetization.atl.refactorings.SpecializeFeatureType;
 
 public class ConceptExtractor extends FootprintComputation implements IStaticAnalysisInfo, IMetamodelInfo {
 	
-	public ConceptExtractor(BasicEMFModel atlTransformation, BasicEMFModel mm,
+	public ConceptExtractor(BasicEMFModel atlTransformation, IModel mm,
 			BasicEMFModel typing, String slicedURI) {
 		super(atlTransformation, mm, typing, slicedURI);
 		// TODO Auto-generated constructor stub

@@ -430,7 +430,7 @@ public class TransformationConfigurationPage extends FormPage {
 					}
 					
 				} catch (PartInitException e) {
-					WorkspaceLogger.generarEntradaLog(Status.ERROR, e);
+					WorkspaceLogger.generateLogEntry(Status.ERROR, e);
 				}				
 			}
 		});
@@ -532,7 +532,7 @@ public class TransformationConfigurationPage extends FormPage {
 	public class MetamodelListProvider implements ITableLabelProvider, IStructuredContentProvider {
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			System.out.println(oldInput + " - " + newInput);
+			// System.out.println(oldInput + " - " + newInput);
 		}
 
 		@Override

@@ -99,7 +99,7 @@ public class ComponetizationEditor extends FormEditor {
 			manager.save();
 			configurationPage.saved();
 		} catch (IOException e) {
-			WorkspaceLogger.generarEntradaLog(IStatus.ERROR, e);
+			WorkspaceLogger.generateLogEntry(IStatus.ERROR, e);
 		}
 	}
 

@@ -32,7 +32,13 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.internal.MessageLine;
 
+import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
+import bento.componetization.atl.hints.RemoveAssociationClass;
+import bento.componetization.atl.refactorings.IConceptRefactoring;
+import bento.componetization.atl.refactorings.IMatch;
+import bento.componetization.atl.refactorings.PushDownFeature;
+import bento.componetization.atl.refactorings.RemoveEmptyClass;
 import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.RevengFactory;
@@ -213,5 +219,29 @@ public class RevengProcessManager {
 
         return new MetamodelModel(metamodelResources.values());
     }
+
+	public List<MatchInfo> findRefactorings(Metamodel metamodel) {
+		ConceptExtractor ex = new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
+
+		List<MatchInfo> matches = new ArrayList<MatchInfo>();
+		
+		// TODO: Have a place to configure the available refactorings 
+		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
+				new PushDownFeature(ex, ex),
+				new RemoveAssociationClass(ex, ex),
+				new RemoveEmptyClass(ex, ex),
+		};
+		
+		for (int i = 0; i < refactorings.length; i++) {
+			IConceptRefactoring r = refactorings[i];			
+			if ( r.match() ) {
+				for(IMatch m: r.getAllMatches() ) {
+					matches.add(new MatchInfo(r, m));
+				}
+			}			
+		}
+	
+		return matches;
+	}
 	
 }

@@ -11,5 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  genericity.compiler.atl.typing;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: bento.componetization.atl
+Export-Package: bento.componetization.atl,
+ bento.componetization.atl.hints,
+ bento.componetization.atl.refactorings
 Import-Package: org.eclectic.idc.datatypes

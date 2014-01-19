@@ -1,6 +1,7 @@
 package bento.componetization.ui.forms;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
@@ -55,11 +56,15 @@ import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.Activator;
+import bento.componetization.ui.MatchInfo;
 import bento.componetization.ui.RevengProcessManager;
 
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
+import org.eclipse.swt.widgets.Table;
 
 public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -151,6 +156,8 @@ public class ConceptRefactoringPage extends FormPage {
 		lblRefactorings.setText("Applicable refactorings");
 		
 		listRefactorings = new TableViewer(composite_1, SWT.BORDER);
+		Table table = listRefactorings.getTable();
+		table.setHeaderVisible(true);
 		listRefactorings.setColumnProperties(new String[] {"Name", "URI"});
 		GridData gd_listMetamodels = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 3);
 		gd_listMetamodels.heightHint = 150;
@@ -164,9 +171,11 @@ public class ConceptRefactoringPage extends FormPage {
 		tblclmnName.setText("Name");
 		
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(listRefactorings, SWT.NONE);
-		TableColumn tblclmnUri = tableViewerColumn_1.getColumn();
-		tblclmnUri.setWidth(100);
-		tblclmnUri.setText("URI");
+		TableColumn tblclmnExplanation = tableViewerColumn_1.getColumn();
+		tblclmnExplanation.setWidth(100);
+		tblclmnExplanation.setText("Explanation");
+		listRefactorings.setLabelProvider(new RefactoringListProvider());
+		listRefactorings.setContentProvider(new RefactoringListProvider());
 				
 				Button btnApplySelected = managedForm.getToolkit().createButton(composite_1, "Apply selected", SWT.NONE);
 				new Label(composite_1, SWT.NONE);
@@ -180,7 +189,7 @@ public class ConceptRefactoringPage extends FormPage {
 				Hyperlink hprlnkFindAgainRefactorings = managedForm.getToolkit().createHyperlink(composite, "Find new refactorings", SWT.NONE);
 				hprlnkFindAgainRefactorings.addHyperlinkListener(new IHyperlinkListener() {
 					public void linkActivated(HyperlinkEvent e) {
-						createConceptPages();
+						findNewRefactorings();
 					}
 					public void linkEntered(HyperlinkEvent e) {
 					}
@@ -262,8 +271,13 @@ public class ConceptRefactoringPage extends FormPage {
 		isDirtyPage = true;
 	}
 
-	protected void createConceptPages() {
-		// this.getEditor().
+	//
+	// Event handlers
+	//
+	
+	protected void findNewRefactorings() {
+		List<MatchInfo> matches = manager.findRefactorings(this.metamodel);
+		listRefactorings.setInput(matches);
 	}
 
 	private void showBrowseAtlFileDialog() {
@@ -312,39 +326,70 @@ public class ConceptRefactoringPage extends FormPage {
 		IResource r = (IResource) listDialog.getResult()[0];
 		txtConceptMetamodelFile.setText( r.getFullPath().toPortableString() );
 	}	
-	
-	/*
-	public void setIsModifiedForm() {
-		 getManagedForm().dirtyStateChanged();
-	}
-	*/
-	
-	public static class TextToTransformationConverter extends Converter {
-		public TextToTransformationConverter() { super(String.class, AtlTransformation.class); }
 		
-		@Override
-		public Object convert(Object fromObject) {
-			String text = (String) fromObject;
-			AtlTransformation atl = RevengFactory.eINSTANCE.createAtlTransformation();
-			atl.setPath(text);
-			return atl;
-		}		
-	}
-	
-	public static class TransformationToTextConverter extends Converter {
-		public TransformationToTextConverter() { super(AtlTransformation.class, String.class); }
-
-		@Override
-		public Object convert(Object fromObject) {
-			AtlTransformation t = (AtlTransformation) fromObject;
-			return t.getPath();
-		}		
-	}
-
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
+		IObservableValue observeTextTxtConceptMetamodelFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConceptMetamodelFile);
+		IObservableValue metamodelPathObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.RESOURCE__PATH)).observe(metamodel);
+		bindingContext.bindValue(observeTextTxtConceptMetamodelFileObserveWidget, metamodelPathObserveValue, null, null);
+		//
 		return bindingContext;
 	}
-		
+	
+	/**
+	 * 
+	 * @author jesus
+	 *
+	 */
+	public class RefactoringListProvider implements ITableLabelProvider, IStructuredContentProvider {
+
+		private List<MatchInfo> input = new ArrayList<MatchInfo>();
+
+		@Override
+		public void addListener(ILabelProviderListener listener) { }
+
+		@Override
+		public void dispose() { }
+
+		@Override
+		public boolean isLabelProperty(Object element, String property) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void removeListener(ILabelProviderListener listener) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			this.input = (List<MatchInfo>) newInput;
+		}
+
+		@Override
+		public Object[] getElements(Object inputElement) {
+			return input.toArray();
+		}
+
+		@Override
+		public Image getColumnImage(Object element, int columnIndex) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getColumnText(Object element, int columnIndex) {
+			MatchInfo info = (MatchInfo) element;
+			switch (columnIndex) {
+			case 1:
+				return info.getRefactoring();
+			default:
+				break;
+			}
+			return "";
+		}
+	}
 }

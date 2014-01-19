@@ -21,7 +21,7 @@ public interface ITask {
 						task.run(monitor);
 					} catch (Throwable e) {
 						e.printStackTrace();
-						WorkspaceLogger.generarEntradaLog(IStatus.ERROR, e);
+						WorkspaceLogger.generateLogEntry(IStatus.ERROR, e);
 					} finally {
 						monitor.done();
 					}
@@ -37,7 +37,7 @@ public interface ITask {
 							task.guiAction();
 						} catch (Exception e) {
 							e.printStackTrace();
-							WorkspaceLogger.generarEntradaLog(IStatus.ERROR, e);
+							WorkspaceLogger.generateLogEntry(IStatus.ERROR, e);
 						}
 		              }
 		        });				

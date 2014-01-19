@@ -1,5 +1,6 @@
 package bento.componetization.atl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bento.componetization.atl.refactorings.IConceptRefactoring;
@@ -25,7 +26,11 @@ public abstract class BaseRefactoring implements IConceptRefactoring {
 		return true;
 	}
 
-
+	@Override
+	public List<IMatch> getAllMatches() {
+		return new ArrayList<IMatch>(storedMatches);
+	}
+	
 	@Override
 	public void apply() {
 		if ( storedMatches == null ) throw new IllegalStateException();
