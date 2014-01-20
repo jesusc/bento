@@ -1,6 +1,7 @@
 package bento.componetization.atl.refactorings;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -86,6 +87,12 @@ public class RemoveEmptyClass extends BaseRefactoring {
 			this.eClass = eClass;
 		}
 
+		@Override
+		public Collection<EClass> getAffectedClasses() {
+			ArrayList<EClass> info = new ArrayList<EClass>();
+			info.add(eClass);
+			return info;
+		}
 		
 		@Override
 		public void apply() {
@@ -107,4 +114,5 @@ public class RemoveEmptyClass extends BaseRefactoring {
 		
 		}
 	}	
+	
 }

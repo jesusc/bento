@@ -326,8 +326,8 @@ public class TransformationConfigurationPage extends FormPage {
 	}
 
 	private void markAsDirty() {
-		getManagedForm().dirtyStateChanged();
 		isDirtyPage = true;
+		getManagedForm().dirtyStateChanged();
 	}
 
 	

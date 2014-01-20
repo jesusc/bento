@@ -1,6 +1,7 @@
 package bento.componetization.atl.hints;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -106,6 +107,13 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			this.pointingFeature = pointingFeature;
 		}
 
+		@Override
+		public Collection<EClass> getAffectedClasses() {
+			ArrayList<EClass> info = new ArrayList<EClass>();
+			info.add(intermediateClass);
+			return info;
+		}
+		
 		@Override
 		public void apply() {
 			System.out.println("REFACTORING: Remove association class " + intermediateClass.getName());

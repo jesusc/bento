@@ -17,6 +17,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.CheckboxTableViewer;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnViewer;
+import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -50,6 +55,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import bento.componetization.atl.refactorings.IMatch;
 import bento.componetization.reveng.AtlTransformation;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.RevengFactory;
@@ -64,7 +70,11 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.xml.type.internal.RegEx.Match;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.jface.viewers.CheckboxCellEditor;
+import org.eclipse.jface.viewers.CheckboxTreeViewer;
 
 public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -74,7 +84,8 @@ public class ConceptRefactoringPage extends FormPage {
 	private Metamodel metamodel;
 
 	boolean isDirtyPage = false;
-	private TableViewer listRefactorings;
+	private Table table_1;
+	private CheckboxTableViewer listRefactorings;
 
 	/**
 	 * Create the form page.
@@ -148,40 +159,54 @@ public class ConceptRefactoringPage extends FormPage {
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		managedForm.getToolkit().adapt(composite_1);
 		managedForm.getToolkit().paintBordersFor(composite_1);
-		composite_1.setLayout(new GridLayout(3, false));
+		composite_1.setLayout(new GridLayout(5, false));
 		
 		Label lblRefactorings = new Label(composite_1, SWT.NONE);
-		lblRefactorings.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1));
+		lblRefactorings.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 5, 1));
 		managedForm.getToolkit().adapt(lblRefactorings, true, true);
 		lblRefactorings.setText("Applicable refactorings");
-		
-		listRefactorings = new TableViewer(composite_1, SWT.BORDER);
-		Table table = listRefactorings.getTable();
-		table.setHeaderVisible(true);
-		listRefactorings.setColumnProperties(new String[] {"Name", "URI"});
-		GridData gd_listMetamodels = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 3);
-		gd_listMetamodels.heightHint = 150;
-		gd_listMetamodels.widthHint = 0;
-		listRefactorings.getTable().setLayoutData(gd_listMetamodels);
-		managedForm.getToolkit().adapt(listRefactorings.getTable(), true, true);
-		
-		TableViewerColumn tableViewerColumn = new TableViewerColumn(listRefactorings, SWT.NONE);
-		TableColumn tblclmnName = tableViewerColumn.getColumn();
-		tblclmnName.setWidth(100);
-		tblclmnName.setText("Name");
-		
-		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(listRefactorings, SWT.NONE);
-		TableColumn tblclmnExplanation = tableViewerColumn_1.getColumn();
-		tblclmnExplanation.setWidth(100);
-		tblclmnExplanation.setText("Explanation");
-		listRefactorings.setLabelProvider(new RefactoringListProvider());
-		listRefactorings.setContentProvider(new RefactoringListProvider());
+				new Label(composite_1, SWT.NONE);
+				
+				listRefactorings = CheckboxTableViewer.newCheckList(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+				table_1 = listRefactorings.getTable();
+				table_1.setHeaderVisible(true);
+				GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 3);
+				gd_table_1.heightHint = 150;
+				table_1.setLayoutData(gd_table_1);
+				managedForm.getToolkit().paintBordersFor(table_1);
+				
+				TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(listRefactorings, SWT.NONE);
+				TableColumn tblclmnSelected = tableViewerColumn_3.getColumn();
+				tblclmnSelected.setWidth(20);
+				
+				TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(listRefactorings, SWT.NONE);
+				TableColumn tblclmnName_1 = tableViewerColumn_4.getColumn();
+				tblclmnName_1.setWidth(100);
+				tblclmnName_1.setText("Name");
+				
+				TableViewerColumn tableViewerColumn_5 = new TableViewerColumn(listRefactorings, SWT.NONE);
+				TableColumn tblclmnExplanation_1 = tableViewerColumn_5.getColumn();
+				tblclmnExplanation_1.setWidth(100);
+				tblclmnExplanation_1.setText("Explanation");
+				listRefactorings.setContentProvider(new RefactoringListProvider());
+				listRefactorings.setLabelProvider(new RefactoringListProvider());
+				new Label(composite_1, SWT.NONE);
 				
 				Button btnApplySelected = managedForm.getToolkit().createButton(composite_1, "Apply selected", SWT.NONE);
+				btnApplySelected.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						applySelectedRefactorings();
+					}
+				});
+				new Label(composite_1, SWT.NONE);
+				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				
 				Button btnApplyAll = managedForm.getToolkit().createButton(composite_1, "Apply all", SWT.NONE);
 				btnApplyAll.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
+				new Label(composite_1, SWT.NONE);
+				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
@@ -232,7 +257,7 @@ public class ConceptRefactoringPage extends FormPage {
 						showBrowseAtlFileDialog();
 					}
 				});
-				sashForm.setWeights(new int[] {1, 1});
+				sashForm.setWeights(new int[] {3, 1});
 				
 				Section sctnConcept = managedForm.getToolkit().createSection(sashForm_1, Section.TWISTIE | Section.TITLE_BAR);
 				managedForm.getToolkit().paintBordersFor(sctnConcept);
@@ -266,9 +291,10 @@ public class ConceptRefactoringPage extends FormPage {
 
 	}
 
+
 	private void markAsDirty() {
-		getManagedForm().dirtyStateChanged();
 		isDirtyPage = true;
+		getManagedForm().dirtyStateChanged();
 	}
 
 	//
@@ -278,8 +304,25 @@ public class ConceptRefactoringPage extends FormPage {
 	protected void findNewRefactorings() {
 		List<MatchInfo> matches = manager.findRefactorings(this.metamodel);
 		listRefactorings.setInput(matches);
+		listRefactorings.setAllChecked(true);
 	}
 
+
+	protected void applySelectedRefactorings() {
+		List<IMatch> matches = new ArrayList<IMatch>();
+		List<IMatch> uncheckedMatches = new ArrayList<IMatch>((List<IMatch>) listRefactorings.getInput());
+		for(Object o : listRefactorings.getCheckedElements()) {
+			matches.add( ((MatchInfo) o).getMatch() );
+			uncheckedMatches.remove(o);
+		}
+		
+		manager.applyRefactorings(this.metamodel, matches);
+		listRefactorings.setInput(uncheckedMatches);
+		listRefactorings.refresh();
+
+		markAsDirty();
+	}
+	
 	private void showBrowseAtlFileDialog() {
 		final ArrayList<IResource> resources = new ArrayList<IResource>();
 		
@@ -337,6 +380,45 @@ public class ConceptRefactoringPage extends FormPage {
 		return bindingContext;
 	}
 	
+	/*
+	public class SelectRefactoringEditingSupport extends EditingSupport {
+		public SelectRefactoringEditingSupport(ColumnViewer viewer) {
+			super(viewer);
+		}
+
+		private CheckboxCellEditor editor = new CheckboxCellEditor() {
+			protected org.eclipse.swt.widgets.Control createControl(Composite parent) {
+				return new Button(parent, SWT.CHECK);
+			};
+		};
+		
+		//new CheckboxCellEditor(null, SWT.CHECK);
+		
+		@Override
+		protected CellEditor getCellEditor(Object element) {
+			return editor;
+		}
+
+		@Override
+		protected boolean canEdit(Object element) {
+			return true;
+		}
+
+		@Override
+		protected Object getValue(Object element) {
+			MatchInfo info = (MatchInfo) element;
+			return info.isSelected();
+		}
+
+		@Override
+		protected void setValue(Object element, Object value) {
+			MatchInfo info = (MatchInfo) element;
+			info.setSelected((Boolean) value);
+		}
+		
+	}
+	*/
+
 	/**
 	 * 
 	 * @author jesus
@@ -385,7 +467,9 @@ public class ConceptRefactoringPage extends FormPage {
 			MatchInfo info = (MatchInfo) element;
 			switch (columnIndex) {
 			case 1:
-				return info.getRefactoring();
+				return info.getRefactoringHumanName();
+			case 2:
+				return info.getText();
 			default:
 				break;
 			}

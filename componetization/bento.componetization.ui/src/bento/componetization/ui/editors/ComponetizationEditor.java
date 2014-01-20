@@ -45,6 +45,7 @@ import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage;
 import bento.componetization.ui.RevengProcessManager;
 import bento.componetization.ui.WorkspaceLogger;
+import bento.componetization.ui.forms.ConceptRefactoringPage;
 import bento.componetization.ui.forms.TransformationConfigurationPage;
 
 /**
@@ -86,7 +87,7 @@ public class ComponetizationEditor extends FormEditor {
 	protected void addPages() {
 		try {	
 			configurationPage = new TransformationConfigurationPage(this, "conf", manager);
-			addPage(configurationPage);
+			addPage(configurationPage);			
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,6 +99,11 @@ public class ComponetizationEditor extends FormEditor {
 		try {
 			manager.save();
 			configurationPage.saved();
+			for(Object o : pages) {
+				if ( o instanceof ConceptRefactoringPage) {
+					((ConceptRefactoringPage) o).saved();
+				}
+			}
 		} catch (IOException e) {
 			WorkspaceLogger.generateLogEntry(IStatus.ERROR, e);
 		}

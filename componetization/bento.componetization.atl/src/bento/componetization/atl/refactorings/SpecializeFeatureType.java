@@ -1,6 +1,7 @@
 package bento.componetization.atl.refactorings;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -90,6 +91,13 @@ public class SpecializeFeatureType extends BaseRefactoring {
 			this.newFeatureType = newFeatureType;
 		}
 
+		@Override
+		public Collection<EClass> getAffectedClasses() {
+			ArrayList<EClass> info = new ArrayList<EClass>();
+			info.add(feature.getEContainingClass());
+			return info;
+		}
+		
 		@Override
 		public void apply() {
 			if ( feature.getEContainingClass() == null ) {				

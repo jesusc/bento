@@ -7,7 +7,6 @@ import genericity.compiler.atl.api.AtlTransformationLoader.FileBased;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.IModel;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -27,10 +25,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.internal.MessageLine;
 
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -43,7 +39,6 @@ import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
-import bento.componetization.reveng.RevengPackage;
 
 /**
  * This class is in charge of checking the consistency
@@ -85,6 +80,9 @@ public class RevengProcessManager {
 
 	public void save() throws IOException {
 		resource.save(null);
+		for(Resource r : conceptResources.values()) {
+			r.save(null);
+		}
 	}
 
 	public String getTypeModelURI() {
@@ -212,9 +210,26 @@ public class RevengProcessManager {
         	else
         		path = m.getExtractedConcept().getPath();
         		
-        	Resource r1 = rs.getResource(URI.createURI(path), true);
-
+        	Resource r1 = null;
+        	try {
+        		r1 = rs.getResource(URI.createURI(path), true);
+        	} catch ( Exception e ) { // Expected a ResourceException from EMF...
+        		if ( m.getExtractedConcept() != null ) {
+        			path = m.getPath(); 
+        			r1 = rs.getResource(URI.createURI(path), true);
+        			System.err.println("Could not load concept, loading normal meta-model (pruning required): " + path);
+        			m.setExtractedConcept(null);
+        		} else {
+        			// TODO: SHOW A NICE MESSAGE
+        			throw new RuntimeException(e);
+        		}
+        	}
+        	
         	metamodelResources.put(m, r1);
+        	
+        	if ( m.getExtractedConcept() != null ) {
+        		this.conceptResources.put(m.getExtractedConcept(), r1);
+        	}
         }
 
         return new MetamodelModel(metamodelResources.values());
@@ -242,6 +257,15 @@ public class RevengProcessManager {
 		}
 	
 		return matches;
+	}
+
+	public void applyRefactorings(Metamodel metamodel, List<IMatch> matches) {
+		// Not needed... each match stores the reference to the meta-model
+		// ConceptExtractor ex = new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
+
+		for (IMatch m : matches) {
+			m.apply();
+		}
 	}
 	
 }
