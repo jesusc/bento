@@ -131,17 +131,24 @@ public class RemoveAssociationClass extends BaseRefactoring {
 
 		private boolean evolveTransformation() {
 			ATLModel atlModel = analysis.getATL();
-
+			EReference intermediateReference = intermediateClass.getEReferences().get(0);
+			EClass targetType = intermediateReference.getEReferenceType();
+			
+			
 			List<? extends NavigationOrAttributeCallExp> navs = atlModel.allObjectsOf(NavigationOrAttributeCallExp.class);
 			
 			for (NavigationOrAttributeCallExp nav : navs) {
 				ExpressionAnnotation ann = analysis.findExpressionAnnotation(nav.original());
 				if ( ann.getUsedFeature() == pointingFeature ) {
-					System.out.println("FOUND!!");
+					findClosingExpression(nav, ann);
 				}
 			}
 			
 			return false;
+		}
+
+		private void findClosingExpression(NavigationOrAttributeCallExp nav, ExpressionAnnotation ann) {
+			
 		}
 
 	}

@@ -336,7 +336,12 @@ public class TransformationConfigurationPage extends FormPage {
 			}
 
 			@Override
-			public void guiAction() throws Exception { }
+			public void guiAction() throws Exception { 
+				
+				TemplatePage page = new TemplatePage(getEditor(), manager);
+				getEditor().addPage(1, page);
+				
+			}
 		});
 	}
 

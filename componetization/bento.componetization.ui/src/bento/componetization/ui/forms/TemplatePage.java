@@ -85,6 +85,8 @@ import org.eclipse.ui.internal.dialogs.DialogUtil;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.ui.forms.widgets.FormText;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 
 public class TemplatePage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -96,35 +98,19 @@ public class TemplatePage extends FormPage {
 	boolean isDirtyPage = false;
 	private RevengProcessManager manager;
 	private Table table_1;
-
+	public static final String ID = "TemplatePage";
+	
 	/**
 	 * Create the form page.
 	 * @param id
 	 * @param title
 	 */
-	public TemplatePage(String id, RevengProcessManager manager) {
-		super(id, "Transformation configuration");
+	public TemplatePage(FormEditor editor, RevengProcessManager manager) {
+		super(editor, ID, "Template");
 		this.manager     = manager;
 		this.revengModel = manager.getModel();
 	}
-
-	/**
-	 * Create the form page.
-	 * @param editor
-	 * @param id
-	 * @param title
-	 * @wbp.parser.constructor
-	 * @wbp.eval.method.parameter id "Some id"
-	 * @wbp.eval.method.parameter title "Some title"
-	 */
-	public TemplatePage(FormEditor editor, String id, RevengProcessManager manager) {
-		super(editor, id, "Transformation configuration");
-		
-		this.manager     = manager;
-		this.revengModel = manager.getModel();
-		this.atlTransformation = (AtlTransformation) revengModel.getTransformation();
-	}
-
+	
 	@Override
 	public boolean isDirty() {
 		// System.out.println("TransformationConfigurationPage.isDirty()");
@@ -295,20 +281,13 @@ public class TemplatePage extends FormPage {
 			return t.getPath();
 		}		
 	}
-
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
-		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
-		// UpdateValueStrategy strategy = new UpdateValueStrategy();
-		// strategy.setConverter(new TextToTransformationConverter());
-		UpdateValueStrategy strategy_1 = new UpdateValueStrategy();
-		strategy_1.setConverter(new TransformationToTextConverter());
-		bindingContext.bindValue(observeTextTxtAtlFileObserveWidget, revengModelTransformationObserveValue, null, strategy_1);
+		IObservableValue observeTextTxtAtlFileObserveWidget_1 = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
+		IObservableValue revengModelPathObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.REVENG_MODEL__TEMPLATE, Literals.TRANSFORMATION__PATH)).observe(revengModel);
+		bindingContext.bindValue(observeTextTxtAtlFileObserveWidget_1, revengModelPathObserveValue, null, null);
 		//
 		return bindingContext;
 	}
-	
-	
 }

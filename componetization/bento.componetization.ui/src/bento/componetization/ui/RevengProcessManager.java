@@ -18,8 +18,10 @@ import org.eclectic.modeling.emf.EMFLoader;
 import org.eclectic.modeling.emf.IModel;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -40,6 +42,7 @@ import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
+import bento.componetization.ui.forms.TemplatePage;
 
 /**
  * This class is in charge of checking the consistency
@@ -108,6 +111,27 @@ public class RevengProcessManager {
 			MessageDialog.openError(null, "ATL loading", "Could not load " + model.getTransformation().getPath());
 			return;
 		}
+		
+		if ( model.getTemplate() == null ) {
+			String path = model.getTransformation().getPath();
+			
+			this.model.setTemplate( RevengFactory.eINSTANCE.createAtlTransformation() );
+			
+			IFolder f = project.getFolder(new Path("template"));
+			try {
+				if ( ! f.exists() )
+					f.create(false, true, null);
+			} catch (CoreException e) {
+				throw new RuntimeException(e);
+			}
+			
+			String fileName = new Path(path).lastSegment();
+			
+			IPath templatePath = f.getLocation().append(fileName);
+
+			this.model.getTemplate().setPath( f.getFile(templatePath).getFullPath().toPortableString() );
+		}
+				
 		
 		EMFLoader    loader  = new EMFLoader(new JavaListConverter());
 		
@@ -267,6 +291,10 @@ public class RevengProcessManager {
 		for (IMatch m : matches) {
 			m.apply();
 		}
+	}
+
+	public Resource getConcept(Metamodel metamodel) {
+		return conceptResources.get(metamodel.getExtractedConcept());
 	}
 	
 }
