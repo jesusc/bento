@@ -16,26 +16,30 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
+import bento.componetization.atl.MetamodelModel;
 import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.atl.MetamodelPrunner.Strategy;
 
 public abstract class BaseTest {
 
-	protected BasicEMFModel transformationMetamodels;
+	protected MetamodelModel transformationMetamodels;
 	protected BasicEMFModel atlTransformation;
 	protected BasicEMFModel typingModel;
 	private EPackage conceptPkg;
 	private EPackage metamodelPkg;
+	ResourceSet rs = new ResourceSetImpl();	
 	
-	
-	public void typing(String atlTransformationFile, String... metamodels) throws IOException {
-		EMFLoader loader = new EMFLoader(new JavaListConverter());
+	public void typing(String atlTransformationFile, Object... metamodels) throws IOException {
+		EMFLoader loader = new EMFLoader(new JavaListConverter(), rs);
 		
-		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
+		MetamodelModel mm = loadMetamodels(metamodels); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
 		// BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, BOUND_METAMODEL);
 				
 		atlTransformation = loader
@@ -53,9 +57,23 @@ public abstract class BaseTest {
 		launcher.launch(mm, atlTransformation, out);		
 	
 		transformationMetamodels = mm;
-		typingModel = out;
+		typingModel = out;	
 	}
 	
+	private MetamodelModel loadMetamodels(Object[] metamodels) {
+		ArrayList<Resource> resources = new ArrayList<Resource>();
+		for (Object fileOrResource : metamodels) {
+			Resource r = null;
+			if ( fileOrResource instanceof String ) {
+				r = rs.getResource(URI.createURI((String) fileOrResource), true);
+			} else {
+				r = (Resource) fileOrResource;
+			}
+			resources.add(r);
+		}
+		return new MetamodelModel(resources);
+	}
+
 	public void saveConcept(String conceptFilename) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(conceptFilename));
 		r.getContents().add(conceptPkg);
@@ -63,17 +81,20 @@ public abstract class BaseTest {
 	}
 
 
-	public void savePrunnedMetamodel(String filename) throws IOException {
-		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(filename));
+	public Resource savePrunnedMetamodel(String filename) throws IOException {
+		// XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(filename));
+		Resource r = rs.createResource(URI.createURI(filename));
 		r.getContents().add(metamodelPkg);
 		r.save(null);
+		
+		return r;
 	}
 	
 	public MetamodelPrunner pruneMetamodel(String uri, String newURI, String newName) {
 		MetamodelPrunner prunner = new MetamodelPrunner (atlTransformation, 
 				getTransformationMetamodels(), getTypingModel(), uri);
 		metamodelPkg = prunner.extractSource(newName, newURI, newName);
-		
+		System.out.println(metamodelPkg);
 		return prunner ;
 	}
 	
@@ -125,7 +146,7 @@ public abstract class BaseTest {
 		return atlTransformation;
 	}
 	
-	public BasicEMFModel getTransformationMetamodels() {
+	public MetamodelModel getTransformationMetamodels() {
 		return transformationMetamodels;
 	}
 	

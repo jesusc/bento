@@ -155,6 +155,15 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRevengModel_Template() {
+		return (EReference)revengModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransformation() {
 		return transformationEClass;
 	}
@@ -288,6 +297,7 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 		// Create classes and their features
 		revengModelEClass = createEClass(REVENG_MODEL);
 		createEReference(revengModelEClass, REVENG_MODEL__TRANSFORMATION);
+		createEReference(revengModelEClass, REVENG_MODEL__TEMPLATE);
 
 		transformationEClass = createEClass(TRANSFORMATION);
 		createEAttribute(transformationEClass, TRANSFORMATION__PATH);
@@ -342,6 +352,7 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(revengModelEClass, RevengModel.class, "RevengModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRevengModel_Transformation(), this.getTransformation(), null, "transformation", null, 1, 1, RevengModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRevengModel_Template(), this.getTransformation(), null, "template", null, 0, 1, RevengModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformationEClass, Transformation.class, "Transformation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransformation_Path(), ecorePackage.getEString(), "path", null, 1, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -5,6 +5,7 @@ package reveng;
 
 class RevengModel {
    val Transformation[1] transformation; 
+   val Transformation[0..1] template;
 }
 
 abstract class Transformation {

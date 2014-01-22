@@ -57,6 +57,8 @@ public abstract class FootprintComputation {
 			Metaclass m = (Metaclass) obj;
 			if ( EcoreUtil.isAncestor(pkg, m.getKlass()) && m.isExplicitOcurrence() ) {
 				directUsedTypes.add(m.getKlass());
+			} else {
+				// System.out.println("Not ancestor");
 			}
 		}
 		
@@ -70,6 +72,15 @@ public abstract class FootprintComputation {
 				if ( f instanceof EReference ) {
 					usedReferences.add((EReference) f);
 					indirectUsedTypes.add((EClass) f.getEType());
+				
+					List refs = mm.allObjectsOf("EReference");
+					if ( ! refs.contains(f) ) {
+						System.out.println("Feature " + f + " NOT FOUND");
+					} else {
+						System.out.println("==> " + ann);
+						System.out.println("@@@> " + ann.getUsedFeature());
+						
+					}
 				}
 				else if ( f instanceof EAttribute) {  
 					usedAttributes.add((EAttribute) f);

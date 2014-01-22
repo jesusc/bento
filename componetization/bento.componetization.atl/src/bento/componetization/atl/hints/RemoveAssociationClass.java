@@ -1,5 +1,7 @@
 package bento.componetization.atl.hints;
 
+import genericity.typing.atl_types.annotations.ExpressionAnnotation;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,12 +12,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import atl.metamodel.ATLModel;
+import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import bento.componetization.atl.BaseRefactoring;
-import bento.componetization.atl.CallSite;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.atl.refactorings.IMatch;
-import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMatch;
 
 /**
  * This hints indicates the removal of a class that is between two classes
@@ -116,11 +118,31 @@ public class RemoveAssociationClass extends BaseRefactoring {
 		
 		@Override
 		public void apply() {
+			if ( ! evolveTransformation() ) {
+				System.out.println("REFACTORING (NOT APPLIED): Remove association class " + intermediateClass.getName());
+			}
+			
 			System.out.println("REFACTORING: Remove association class " + intermediateClass.getName());
 
 			pointingFeature.setContainment(false);
 			pointingFeature.setEType( intermediateClass.getEReferences().get(0).getEType()  );
 			EcoreUtil.delete(intermediateClass);
 		}
+
+		private boolean evolveTransformation() {
+			ATLModel atlModel = analysis.getATL();
+
+			List<? extends NavigationOrAttributeCallExp> navs = atlModel.allObjectsOf(NavigationOrAttributeCallExp.class);
+			
+			for (NavigationOrAttributeCallExp nav : navs) {
+				ExpressionAnnotation ann = analysis.findExpressionAnnotation(nav.original());
+				if ( ann.getUsedFeature() == pointingFeature ) {
+					System.out.println("FOUND!!");
+				}
+			}
+			
+			return false;
+		}
+
 	}
 }

@@ -1,33 +1,26 @@
 package bento.componetization.atl;
 
-import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
-import java.beans.Expression;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import javax.management.RuntimeErrorException;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.IModel;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import atl.metamodel.ATLModel;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
 import bento.componetization.atl.refactorings.PushDownFeature;
 import bento.componetization.atl.refactorings.RemoveEmptyClass;
-import bento.componetization.atl.refactorings.SpecializeFeatureType;
 
 public class ConceptExtractor extends FootprintComputation implements IStaticAnalysisInfo, IMetamodelInfo {
 	
@@ -38,16 +31,22 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 
 		computeFootprint();
 	}
+	
+	@Override
+	public ATLModel getATL() {
+		return new ATLModel(atlTransformation.getHandler().getResource());
+	}
 
 	public EPackage refactor() {
 		// The order matters: In TrafoRunningExample RemoveAssociationClass -> PushDownFeature means
 		//                    that generalization is never pushed down
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
-				// new RemoveAssociationClass(this, this),
+				new RemoveAssociationClass(this, this),
 				new PushDownFeature(this, this),
 				new RemoveAssociationClass(this, this),
 
-				new RemoveEmptyClass(this, this),
+				// new RemoveEmptyClass(this, this),
+				
 				// new SpecializeFeatureType(this, this),
 				// new RemoveEmptyClass(this)
 		};
@@ -109,6 +108,18 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 		}
 		
 		return features;
+	}
+
+	@Override
+	public ExpressionAnnotation findExpressionAnnotation(EObject expr) {
+		for(Object o : this.typing.allObjectsOf(ExpressionAnnotation.class.getSimpleName()) ) {
+			ExpressionAnnotation ann = (ExpressionAnnotation) o;
+			if ( ann.getExpr() == expr ) {
+				return ann;
+			}
+		}
+		
+		throw new RuntimeException("Typing for node " + expr + " not found");
 	}
 
 }

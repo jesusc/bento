@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import tests.base.BaseTest;
 import bento.componetization.atl.ConceptExtractor;
@@ -44,13 +45,15 @@ public class TestTrafoRunningExample extends BaseTest {
 
 		// Meta-model prunning
 		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
-		savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);
+		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);
 		
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, PRUNED_SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
 		System.out.println("Re-Typing of " + TestTrafoRunningExample.class.getSimpleName());
+		
+		getTypingModel().serialize(new FileOutputStream("tmp_/retyping.xmi"));
 		
 		// Effective meta-model
 		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml_concept", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");

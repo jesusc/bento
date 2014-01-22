@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import bento.componetization.atl.ConceptExtractor;
+import bento.componetization.atl.MetamodelModel;
 import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;

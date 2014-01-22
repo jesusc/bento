@@ -255,18 +255,6 @@ public class TransformationConfigurationPage extends FormPage {
 				});
 				btnRemove.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 				
-				Hyperlink hprlnkCreateConceptPages = managedForm.getToolkit().createHyperlink(composite, "Create concept pages", SWT.NONE);
-				hprlnkCreateConceptPages.addHyperlinkListener(new IHyperlinkListener() {
-					public void linkActivated(HyperlinkEvent e) {
-						createConceptPages();
-					}
-					public void linkEntered(HyperlinkEvent e) {
-					}
-					public void linkExited(HyperlinkEvent e) {
-					}
-				});
-				managedForm.getToolkit().paintBordersFor(hprlnkCreateConceptPages);
-				
 				Section sctnProcess = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
 				managedForm.getToolkit().paintBordersFor(sctnProcess);
 				sctnProcess.setText("Process");

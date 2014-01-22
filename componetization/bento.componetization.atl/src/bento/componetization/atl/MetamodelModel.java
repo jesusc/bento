@@ -1,5 +1,6 @@
-package bento.componetization.ui;
+package bento.componetization.atl;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -100,5 +101,6 @@ public class MetamodelModel implements IModel<EObject, EClass>{
 	public Object getContainer(Object object) {
 		return ((EObject) object).eContainer();
 	}
+
 
 }

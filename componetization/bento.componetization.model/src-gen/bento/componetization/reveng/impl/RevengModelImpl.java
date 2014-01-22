@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link bento.componetization.reveng.impl.RevengModelImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.RevengModelImpl#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,6 +43,16 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 	 * @ordered
 	 */
 	protected Transformation transformation;
+
+	/**
+	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Transformation template;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -110,11 +121,56 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Transformation getTemplate() {
+		return template;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTemplate(Transformation newTemplate, NotificationChain msgs) {
+		Transformation oldTemplate = template;
+		template = newTemplate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RevengPackage.REVENG_MODEL__TEMPLATE, oldTemplate, newTemplate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTemplate(Transformation newTemplate) {
+		if (newTemplate != template) {
+			NotificationChain msgs = null;
+			if (template != null)
+				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RevengPackage.REVENG_MODEL__TEMPLATE, null, msgs);
+			if (newTemplate != null)
+				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RevengPackage.REVENG_MODEL__TEMPLATE, null, msgs);
+			msgs = basicSetTemplate(newTemplate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.REVENG_MODEL__TEMPLATE, newTemplate, newTemplate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RevengPackage.REVENG_MODEL__TRANSFORMATION:
 				return basicSetTransformation(null, msgs);
+			case RevengPackage.REVENG_MODEL__TEMPLATE:
+				return basicSetTemplate(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -129,6 +185,8 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 		switch (featureID) {
 			case RevengPackage.REVENG_MODEL__TRANSFORMATION:
 				return getTransformation();
+			case RevengPackage.REVENG_MODEL__TEMPLATE:
+				return getTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -143,6 +201,9 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 		switch (featureID) {
 			case RevengPackage.REVENG_MODEL__TRANSFORMATION:
 				setTransformation((Transformation)newValue);
+				return;
+			case RevengPackage.REVENG_MODEL__TEMPLATE:
+				setTemplate((Transformation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -159,6 +220,9 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 			case RevengPackage.REVENG_MODEL__TRANSFORMATION:
 				setTransformation((Transformation)null);
 				return;
+			case RevengPackage.REVENG_MODEL__TEMPLATE:
+				setTemplate((Transformation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -173,6 +237,8 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 		switch (featureID) {
 			case RevengPackage.REVENG_MODEL__TRANSFORMATION:
 				return transformation != null;
+			case RevengPackage.REVENG_MODEL__TEMPLATE:
+				return template != null;
 		}
 		return super.eIsSet(featureID);
 	}

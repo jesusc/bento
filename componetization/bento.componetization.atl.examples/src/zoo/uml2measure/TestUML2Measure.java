@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import paper.metrics.TestTrafoRunningExample;
 
@@ -34,19 +35,19 @@ public class TestUML2Measure extends BaseTest {
 		// typing
 		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
 		
-		getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
+		// getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
 
 		System.out.println("Finished typing of " + TestUML2Measure.class.getSimpleName());
 
 		// Meta-model prunning
 		MetamodelPrunner pr = pruneMetamodel("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classidag");
-		savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
+		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, PRUNED_SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
 		System.out.println("Re-Typing of " + TestUML2Measure.class.getSimpleName());
 
 		// conceptExtraction - RealFeature
