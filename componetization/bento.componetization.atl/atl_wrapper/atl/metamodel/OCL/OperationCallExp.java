@@ -6,106 +6,25 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-public class OperationCallExp {
-	private EObject object;
-	private atl.metamodel.ATLModel manager;
+public interface OperationCallExp extends atl.metamodel.ATLModelBaseObjectInterface, atl.metamodel.OCL.PropertyCallExp {
 	
-	public OperationCallExp(atl.metamodel.ATLModel manager, EObject o) {
-		this.manager = manager;
-		this.object  = o;
-	}
-	
-	public java.lang.String getLocation() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
-		Object result = object.eGet(f);
-		return (java.lang.String) result;
-	}
-	public List<java.lang.String> getCommentsBefore() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
-		Object result = object.eGet(f);
-		return (List<java.lang.String>) result;
-	}
-	public List<java.lang.String> getCommentsAfter() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
-		Object result = object.eGet(f);
-		return (List<java.lang.String>) result;
-	}
-	public atl.metamodel.OCL.OclType getType() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("type");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.OclType) result;
-	}
-	public atl.metamodel.OCL.IfExp getIfExp3() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("ifExp3");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.IfExp) result;
-	}
-	public atl.metamodel.OCL.PropertyCallExp getAppliedProperty() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("appliedProperty");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.PropertyCallExp) result;
-	}
-	public atl.metamodel.OCL.CollectionExp getCollection() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("collection");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.CollectionExp) result;
-	}
-	public atl.metamodel.OCL.LetExp getLetExp() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("letExp");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.LetExp) result;
-	}
-	public atl.metamodel.OCL.LoopExp getLoopExp() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("loopExp");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.LoopExp) result;
-	}
-	public atl.metamodel.OCL.OperationCallExp getParentOperation() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("parentOperation");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.OperationCallExp) result;
-	}
-	public atl.metamodel.OCL.VariableDeclaration getInitializedVariable() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("initializedVariable");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.VariableDeclaration) result;
-	}
-	public atl.metamodel.OCL.IfExp getIfExp2() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("ifExp2");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.IfExp) result;
-	}
-	public atl.metamodel.OCL.Operation getOwningOperation() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("owningOperation");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.Operation) result;
-	}
-	public atl.metamodel.OCL.IfExp getIfExp1() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("ifExp1");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.IfExp) result;
-	}
-	public atl.metamodel.OCL.Attribute getOwningAttribute() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("owningAttribute");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.Attribute) result;
-	}
-	public atl.metamodel.OCL.OclExpression getSource() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("source");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.OclExpression) result;
-	}
-	public List<atl.metamodel.OCL.OclExpression> getArguments() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("arguments");
-		Object result = object.eGet(f);
-		return (List<atl.metamodel.OCL.OclExpression>) result;
-	}
-	public java.lang.String getOperationName() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("operationName");
-		Object result = object.eGet(f);
-		return (java.lang.String) result;
-	}
+	public java.lang.String getLocation();
+	public List<java.lang.String> getCommentsBefore();
+	public List<java.lang.String> getCommentsAfter();
+	public atl.metamodel.OCL.OclType getType();
+	public atl.metamodel.OCL.IfExp getIfExp3();
+	public atl.metamodel.OCL.PropertyCallExp getAppliedProperty();
+	public atl.metamodel.OCL.CollectionExp getCollection();
+	public atl.metamodel.OCL.LetExp getLetExp();
+	public atl.metamodel.OCL.LoopExp getLoopExp();
+	public atl.metamodel.OCL.OperationCallExp getParentOperation();
+	public atl.metamodel.OCL.VariableDeclaration getInitializedVariable();
+	public atl.metamodel.OCL.IfExp getIfExp2();
+	public atl.metamodel.OCL.Operation getOwningOperation();
+	public atl.metamodel.OCL.IfExp getIfExp1();
+	public atl.metamodel.OCL.Attribute getOwningAttribute();
+	public atl.metamodel.OCL.OclExpression getSource();
+	public List<atl.metamodel.OCL.OclExpression> getArguments();
+	public java.lang.String getOperationName();
 
-
-	public EObject original() { return object; }
 }

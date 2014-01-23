@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import atl.metamodel.ATLModel;
+import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
+import atl.metamodel.OCL.OclExpression;
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
@@ -138,17 +140,27 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			List<? extends NavigationOrAttributeCallExp> navs = atlModel.allObjectsOf(NavigationOrAttributeCallExp.class);
 			
 			for (NavigationOrAttributeCallExp nav : navs) {
-				ExpressionAnnotation ann = analysis.findExpressionAnnotation(nav.original());
+				ExpressionAnnotation ann = analysis.findExpressionAnnotation(nav.original_());
 				if ( ann.getUsedFeature() == pointingFeature ) {
-					findClosingExpression(nav, ann);
+					findClosingExpression(nav, targetType);
 				}
 			}
 			
 			return false;
 		}
 
-		private void findClosingExpression(NavigationOrAttributeCallExp nav, ExpressionAnnotation ann) {
-			
+		private void findClosingExpression(NavigationOrAttributeCallExp nav, EClass targetType) {
+			ATLModelBaseObject container = nav.container_();
+			while ( container != null && container instanceof OclExpression ) {
+				OclExpression expr = (OclExpression) container;
+				
+				ExpressionAnnotation ann = analysis.findExpressionAnnotation(expr.original_());
+				
+				System.out.println(expr.original_());
+				System.out.println(ann.getType());
+				
+				container = expr.container_();
+			}
 		}
 
 	}

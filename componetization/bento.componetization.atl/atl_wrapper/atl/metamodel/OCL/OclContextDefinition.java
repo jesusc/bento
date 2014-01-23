@@ -6,41 +6,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-public class OclContextDefinition {
-	private EObject object;
-	private atl.metamodel.ATLModel manager;
+public interface OclContextDefinition extends atl.metamodel.ATLModelBaseObjectInterface, atl.metamodel.ATL.LocatedElement {
 	
-	public OclContextDefinition(atl.metamodel.ATLModel manager, EObject o) {
-		this.manager = manager;
-		this.object  = o;
-	}
-	
-	public java.lang.String getLocation() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
-		Object result = object.eGet(f);
-		return (java.lang.String) result;
-	}
-	public List<java.lang.String> getCommentsBefore() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
-		Object result = object.eGet(f);
-		return (List<java.lang.String>) result;
-	}
-	public List<java.lang.String> getCommentsAfter() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
-		Object result = object.eGet(f);
-		return (List<java.lang.String>) result;
-	}
-	public atl.metamodel.OCL.OclFeatureDefinition getDefinition() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("definition");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.OclFeatureDefinition) result;
-	}
-	public atl.metamodel.OCL.OclType getContext_() {
-		EStructuralFeature f = object.eClass().getEStructuralFeature("context_");
-		Object result = object.eGet(f);
-		return (atl.metamodel.OCL.OclType) result;
-	}
+	public java.lang.String getLocation();
+	public List<java.lang.String> getCommentsBefore();
+	public List<java.lang.String> getCommentsAfter();
+	public atl.metamodel.OCL.OclFeatureDefinition getDefinition();
+	public atl.metamodel.OCL.OclType getContext_();
 
-
-	public EObject original() { return object; }
 }
