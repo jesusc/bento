@@ -40,8 +40,8 @@ public class ComponetizationNewWizardPage extends WizardPage {
 	 */
 	public ComponetizationNewWizardPage(ISelection selection) {
 		super("wizardPage");
-		setTitle("Multi-page Editor File");
-		setDescription("This wizard creates a new file with *.componetization extension that can be opened by a multi-page editor.");
+		setTitle("Bento transformation reverse engineering model");
+		setDescription("This wizard creates a new file with *.componetization extension that can be opened by the \"componetization\" editor.");
 		this.selection = selection;
 	}
 
@@ -99,6 +99,7 @@ public class ComponetizationNewWizardPage extends WizardPage {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			if (ssel.size() > 1)
 				return;
+			Object selectedElement = ((IStructuredSelection) selection).iterator().next();
 			Object obj = ssel.getFirstElement();
 			if (obj instanceof IResource) {
 				IContainer container;
@@ -107,9 +108,9 @@ public class ComponetizationNewWizardPage extends WizardPage {
 				else
 					container = ((IResource) obj).getParent();
 				containerText.setText(container.getFullPath().toString());
-			}
+			}			
 		}
-		fileText.setText("new_file.componetization");
+		fileText.setText("new_file.componetize");
 	}
 
 	/**
@@ -162,8 +163,8 @@ public class ComponetizationNewWizardPage extends WizardPage {
 		int dotLoc = fileName.lastIndexOf('.');
 		if (dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("componetization") == false) {
-				updateStatus("File extension must be \"componetization\"");
+			if (ext.equalsIgnoreCase("componetize") == false) {
+				updateStatus("File extension must be \"componetize\"");
 				return;
 			}
 		}

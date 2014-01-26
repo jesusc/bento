@@ -2,6 +2,8 @@
 package atl.metamodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public abstract class ATLModelBaseObject implements ATLModelBaseObjectInterface {
 		
@@ -20,8 +22,11 @@ public abstract class ATLModelBaseObject implements ATLModelBaseObjectInterface 
 		return this.manager.findWrapper(object.eContainer());
 	}
 	
-	public interface Interface {
-		public EObject original_();
-		public ATLModelBaseObject container_();
+	public void replaceBy(ATLModelBaseObjectInterface element) {
+		EStructuralFeature f = object.eContainingFeature();
+		EObject container    = object.eContainer();
+		
+		EcoreUtil.replace(container, f, object, element.original_());
 	}
+	
 }

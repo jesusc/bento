@@ -1,4 +1,13 @@
 
+== Experiment
+
+1- Remove 14 empty classes
+2- Apply son PDF
+3- Now 2 additional classes can be removed
+
+
+======================
+
 * Refactorings we would like to apply
 
 - Remove empty class "Feature" -> This implies changing the template, can this be done safely?

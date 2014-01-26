@@ -1,5 +1,6 @@
 package bento.componetization.ui.forms;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -11,11 +12,17 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+import bento.componetization.ui.dialogs.FindFileDialog;
 
 public class MetamodelInfoDialog extends TitleAreaDialog {
 
 	private String metamodelName;
 	private String metamodelURI;
+	private boolean isBecomeConcept;
+	
 	private Text txtMetamodelName;
 	private Text txtMetamodelURI;
 	private Button btnConceptualize;
@@ -60,6 +67,12 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 				txtMetamodelURI.setLayoutData(dataLastName);
 				
 				Button btnBrowse = new Button(container, SWT.NONE);
+				btnBrowse.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						browseEcoreFiles();
+					}
+				});
 				btnBrowse.setText("Browse...");
 				new Label(container, SWT.NONE);
 				
@@ -96,7 +109,17 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 	private void saveInput() {
 		metamodelName = txtMetamodelName.getText();
 		metamodelURI = txtMetamodelURI.getText();
+		isBecomeConcept = btnConceptualize.getSelection();
+	}
 
+	//
+	// Event handlers
+	//
+	protected void browseEcoreFiles() {
+		FindFileDialog listDialog = new FindFileDialog(null, "ecore");		
+		listDialog.open();
+		IResource r = (IResource) listDialog.getResult()[0];
+		txtMetamodelURI.setText( r.getFullPath().toPortableString() );
 	}
 
 	@Override
@@ -109,11 +132,20 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		return metamodelName;
 	}
 
+	public void setData(String name, String path, boolean isConcept) {
+		txtMetamodelName.setText(name);
+		txtMetamodelURI.setText(path);
+		btnConceptualize.setSelection( isConcept );
+	}
+
 	public String getMetamodelURI() {
 		return metamodelURI;
 	}
 
 	public boolean isConcept() {
-		return btnConceptualize.getSelection();
+		return isBecomeConcept;
 	}
+
+
+
 }

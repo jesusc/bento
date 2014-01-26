@@ -62,6 +62,7 @@ public class TestTrafoRunningExample extends BaseTest {
 		ex.refactor();
 		
 		saveConcept(withDir("tmp_/concept_paper_running_example.ecore"));
+		this.atlTransformation.serialize(new FileOutputStream(withDir("tmp_/trafo_running_example.atl.xmi")));
 		
 		
 		

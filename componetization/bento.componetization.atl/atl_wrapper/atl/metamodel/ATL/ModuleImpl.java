@@ -20,12 +20,34 @@ public class ModuleImpl extends atl.metamodel.ATLModelBaseObject implements Modu
 	}
 	
 	@Override
+	public void setLocation(java.lang.String v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
 		return (List<java.lang.String>) result;
 	}
 	
+	@Override
+	public void addCommentsBefore(List<java.lang.String> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
 	@Override
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
@@ -34,12 +56,35 @@ public class ModuleImpl extends atl.metamodel.ATLModelBaseObject implements Modu
 	}
 	
 	@Override
+	public void addCommentsAfter(List<java.lang.String> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public List<atl.metamodel.ATL.LibraryRef> getLibraries() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("libraries");
 		Object result = object.eGet(f);
+		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.LibraryRef>) result;
 	}
 	
+	@Override
+	public void addLibraries(List<atl.metamodel.ATL.LibraryRef> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("libraries");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
 	@Override
 	public java.lang.String getName() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
@@ -48,6 +93,17 @@ public class ModuleImpl extends atl.metamodel.ATLModelBaseObject implements Modu
 	}
 	
 	@Override
+	public void setName(java.lang.String v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public Boolean getIsRefining() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isRefining");
 		Object result = object.eGet(f);
@@ -55,26 +111,73 @@ public class ModuleImpl extends atl.metamodel.ATLModelBaseObject implements Modu
 	}
 	
 	@Override
+	public void setIsRefining(Boolean v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("isRefining");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public List<atl.metamodel.OCL.OclModel> getInModels() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("inModels");
 		Object result = object.eGet(f);
+		result = manager.wrap(result);
 		return (List<atl.metamodel.OCL.OclModel>) result;
 	}
 	
+	@Override
+	public void addInModels(List<atl.metamodel.OCL.OclModel> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("inModels");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
 	@Override
 	public List<atl.metamodel.OCL.OclModel> getOutModels() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("outModels");
 		Object result = object.eGet(f);
+		result = manager.wrap(result);
 		return (List<atl.metamodel.OCL.OclModel>) result;
 	}
 	
 	@Override
+	public void addOutModels(List<atl.metamodel.OCL.OclModel> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("outModels");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public List<atl.metamodel.ATL.ModuleElement> getElements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elements");
 		Object result = object.eGet(f);
+		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.ModuleElement>) result;
 	}
 	
+	@Override
+	public void addElements(List<atl.metamodel.ATL.ModuleElement> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("elements");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
 
 	public Class<Module> getImplementedInterface() { return Module.class; }
 }

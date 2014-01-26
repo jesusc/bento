@@ -111,7 +111,12 @@ public class SpecializeFeatureType extends BaseRefactoring {
 
 			feature.setEType(newFeatureType);
 		}
-		
+
+		@Override
+		public boolean coevolutionRequired() {
+			return false;
+		}
+
 	}
 
 	

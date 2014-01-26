@@ -34,16 +34,22 @@ public interface AtlTransformationLoader {
 			this.templateFileName = template;
 		}
 
+		public FileBased(String template, EMFModel loadedAtlModel) {
+			this(template);
+			this.loadedAtlModel = loadedAtlModel;
+		}
+
 		@Override
 		public BasicEMFModel load(EMFLoader loader) throws IOException {
 			// TODO: Repeated in gcomponents.ui -> for importing to XMI...
 			ModelFactory modelFactory = new EMFModelFactory();
 
 			IReferenceModel atlMetamodel;
-			try {				
+			try {
 				atlMetamodel = modelFactory.getBuiltInResource("ATL.ecore");
 				EMFModel atlModel = (EMFModel) modelFactory
 						.newModel(atlMetamodel);
+
 				AtlParser atlParser = new AtlParser();
 
 				String srcFile = templateFileName;
@@ -51,6 +57,7 @@ public interface AtlTransformationLoader {
 
 				atlModel.setIsTarget(true);
 				this.loadedAtlModel = atlModel;
+		
 				List<? extends EPackage> atlPackages = (List<? extends EPackage>) atlModel
 						.getReferenceModel().getResource().getContents();
 				return loader.basicModelFromMemory(
@@ -69,24 +76,46 @@ public interface AtlTransformationLoader {
 			ModelFactory modelFactory = new EMFModelFactory();
 			try {
 				/*
+				 * IReferenceModel atlMetamodel = modelFactory
+				 * .getBuiltInResource("ATL.ecore"); //$NON-NLS-1$ IModel
+				 * atlModel = modelFactory.newModel(atlMetamodel);
+				 * 
+				 * EMFInjector injector = new EMFInjector();
+				 * injector.inject(atlModel, resource);
+				 */
+
+				AtlParser atlParser = new AtlParser();
+				atlParser.extract(loadedAtlModel, adaptedFileName);
+				// atlParser.extract(atlModel, adaptedFileName);
+
+			} catch (ATLCoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return;
+			}
+
+			System.out.println("Adapted transformation: " + adaptedFileName);
+		}
+
+		// Does not work!! Why???
+		public static void exportAtlResource(Resource resource, String filename) {
+			ModelFactory modelFactory = new EMFModelFactory();
+			try {
 				IReferenceModel atlMetamodel = modelFactory
 						.getBuiltInResource("ATL.ecore"); //$NON-NLS-1$
 				IModel atlModel = modelFactory.newModel(atlMetamodel);
 
 				EMFInjector injector = new EMFInjector();
 				injector.inject(atlModel, resource);
-				*/
-				System.out.println(loadedAtlModel);
+				atlModel.setIsTarget(true);
+
 				AtlParser atlParser = new AtlParser();
-				atlParser.extract(loadedAtlModel, adaptedFileName);
-				//atlParser.extract(atlModel, adaptedFileName);
+				atlParser.extract(atlModel, filename);
 			} catch (ATLCoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return;
-			} 
-
-			System.out.println("Adapted transformation: " + adaptedFileName);
+			}
 		}
 
 	}

@@ -113,6 +113,12 @@ public class RemoveEmptyClass extends BaseRefactoring {
 			// prunner.removeClass(tgtClass);
 		
 		}
+		
+		@Override
+		public boolean coevolutionRequired() {
+			return false;
+		}
+
 	}	
 	
 }

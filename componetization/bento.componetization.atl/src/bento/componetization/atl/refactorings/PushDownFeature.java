@@ -115,6 +115,11 @@ public class PushDownFeature extends BaseRefactoring {
 			return copy;
 		}
 		
+		@Override
+		public boolean coevolutionRequired() {
+			return false;
+		}
+		
 	}
 
 	

@@ -8,4 +8,7 @@ public interface ATLModelBaseObjectInterface {
 	public ATLModelBaseObject container_();
 
 	public Class<?> getImplementedInterface();
+
+	public void replaceBy(ATLModelBaseObjectInterface element);
+
 }

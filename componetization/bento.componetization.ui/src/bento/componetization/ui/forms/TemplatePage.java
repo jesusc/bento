@@ -1,5 +1,7 @@
 package bento.componetization.ui.forms;
 
+import genericity.typecheck.atl.TypeCheckLauncher.ErrorMessage;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.IValueChangeListener;
 import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -52,6 +55,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
@@ -74,6 +79,7 @@ import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.Activator;
 import bento.componetization.ui.ITask;
 import bento.componetization.ui.RevengProcessManager;
+import bento.componetization.ui.TypingInfo;
 import bento.componetization.ui.WorkspaceLogger;
 
 import org.eclipse.swt.widgets.TableColumn;
@@ -82,6 +88,7 @@ import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.events.IHyperlinkListener;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.internal.dialogs.DialogUtil;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.ui.forms.widgets.FormText;
@@ -90,15 +97,16 @@ import org.eclipse.emf.databinding.FeaturePath;
 
 public class TemplatePage extends FormPage {
 	private DataBindingContext m_bindingContext;
-	private Text txtAtlFile;
 	
 	private RevengModel revengModel;
 	private AtlTransformation atlTransformation;
 
 	boolean isDirtyPage = false;
 	private RevengProcessManager manager;
-	private Table table_1;
 	public static final String ID = "TemplatePage";
+	private TableViewer analysisTableViewer;
+	private TypingInfo typingInfo;
+	private Table tableTyping;
 	
 	/**
 	 * Create the form page.
@@ -140,72 +148,72 @@ public class TemplatePage extends FormPage {
 		
 		Section sctnTransformation = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
 		managedForm.getToolkit().paintBordersFor(sctnTransformation);
-		sctnTransformation.setText("Template");
+		sctnTransformation.setText("Analysis result");
 		sctnTransformation.setExpanded(true);
 		
 		Composite composite = managedForm.getToolkit().createComposite(sctnTransformation, SWT.NONE);
 		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		managedForm.getToolkit().paintBordersFor(composite);
 		sctnTransformation.setClient(composite);
-		composite.setLayout(new GridLayout(1, false));
-		
-		Composite compAtlFile = new Composite(composite, SWT.NONE);
-		compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		managedForm.getToolkit().adapt(compAtlFile);
-		managedForm.getToolkit().paintBordersFor(compAtlFile);
-		GridLayout gl_compAtlFile = new GridLayout(3, false);
-		compAtlFile.setLayout(gl_compAtlFile);
-		
-		Label lblAtlFile = managedForm.getToolkit().createLabel(compAtlFile, "ATL File: ", SWT.NONE);
-		
-		txtAtlFile = managedForm.getToolkit().createText(compAtlFile, "", SWT.NONE);
-		GridData gd_txtAtlFile = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_txtAtlFile.minimumWidth = 200;
-		gd_txtAtlFile.heightHint = 19;
-		gd_txtAtlFile.widthHint = 0;
-		txtAtlFile.setLayoutData(gd_txtAtlFile);
-		
-		Button btnBrowse = managedForm.getToolkit().createButton(compAtlFile, "Browse...", SWT.NONE);
-		btnBrowse.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				showBrowseAtlFileDialog();
-			}
-		});
+		composite.setLayout(new GridLayout(2, false));
 				
-				Section sctnProcess = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
-				managedForm.getToolkit().paintBordersFor(sctnProcess);
-				sctnProcess.setText("Analysis result");
-				sctnProcess.setExpanded(true);
+				Section sctnTyping = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
+				managedForm.getToolkit().paintBordersFor(sctnTyping);
+				sctnTyping.setText("Typing information");
+				sctnTyping.setExpanded(true);
 				
-				Composite composite_2 = managedForm.getToolkit().createComposite(sctnProcess, SWT.NONE);
-				managedForm.getToolkit().paintBordersFor(composite_2);
-				sctnProcess.setClient(composite_2);
-				composite_2.setLayout(new GridLayout(1, false));
+				Composite composite_1 = new Composite(sctnTyping, SWT.NONE);
+				managedForm.getToolkit().adapt(composite_1);
+				managedForm.getToolkit().paintBordersFor(composite_1);
+				sctnTyping.setClient(composite_1);
+				composite_1.setLayout(new GridLayout(1, false));
 				
-				TableViewer tableViewer = new TableViewer(composite_2, SWT.BORDER | SWT.FULL_SELECTION);
-				table_1 = tableViewer.getTable();
-				table_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-				managedForm.getToolkit().paintBordersFor(table_1);
-				
-				Hyperlink hprlnkApplyAnalysisAgain = managedForm.getToolkit().createHyperlink(composite_2, "Apply analysis again", SWT.NONE);
-				managedForm.getToolkit().paintBordersFor(hprlnkApplyAnalysisAgain);
+				TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+				tableTyping = tableViewer.getTable();
+				tableTyping.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+				managedForm.getToolkit().paintBordersFor(tableTyping);
 		sashForm.setWeights(new int[] {1, 1});
 		toolkit.decorateFormHeading(form.getForm());
 		m_bindingContext = initDataBindings();
 		
-
-		// Get Dirty flag...
-		IObservableValue observeTextTxtAtlFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
+		analysisTableViewer = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		Table analysisMessagesTable = analysisTableViewer.getTable();
+		analysisMessagesTable.setHeaderVisible(true);
+		analysisMessagesTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
+		managedForm.getToolkit().paintBordersFor(analysisMessagesTable);
 		
-		// IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__TRANSFORMATION);
-		observeTextTxtAtlFileObserveWidget.addValueChangeListener(new IValueChangeListener() {
-			@Override
-			public void handleValueChange(ValueChangeEvent event) {
-				changeTransformationText();
+		TableColumn tblclmnType = new TableColumn(analysisMessagesTable, SWT.NONE);
+		tblclmnType.setWidth(42);
+		tblclmnType.setText("Type");
+		
+		TableColumn tblclmnMessage = new TableColumn(analysisMessagesTable, SWT.NONE);
+		tblclmnMessage.setWidth(243);
+		tblclmnMessage.setText("Message");
+		
+		TableColumn tblclmnLocation = new TableColumn(analysisMessagesTable, SWT.NONE);
+		tblclmnLocation.setWidth(50);
+		tblclmnLocation.setText("Location");
+		analysisTableViewer.setLabelProvider(new AnalysisListProvider());
+		analysisTableViewer.setContentProvider(new AnalysisListProvider());
+		if ( typingInfo != null )
+			analysisTableViewer.setInput(typingInfo);
+		
+		Hyperlink hprlnkApplyTyping = managedForm.getToolkit().createHyperlink(composite, "Apply analysis", SWT.NONE);
+		managedForm.getToolkit().paintBordersFor(hprlnkApplyTyping);
+		
+		Hyperlink hprlnkOpenTemplate = managedForm.getToolkit().createHyperlink(composite, "Open template", SWT.NONE);
+		hprlnkOpenTemplate.addHyperlinkListener(new IHyperlinkListener() {
+			public void linkActivated(HyperlinkEvent e) {
+				openAtlEditor();
+			}
+			public void linkEntered(HyperlinkEvent e) {
+			}
+			public void linkExited(HyperlinkEvent e) {
 			}
 		});
-
+		hprlnkOpenTemplate.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		managedForm.getToolkit().paintBordersFor(hprlnkOpenTemplate);
+		
 	}
 
 	private void markAsDirty() {
@@ -214,80 +222,92 @@ public class TemplatePage extends FormPage {
 	}
 
 	
-	//
-	// Event handling
-	//
-	protected void changeTransformationText() {
-		this.revengModel.getTransformation().setPath( txtAtlFile.getText() );
-		
-		markAsDirty();		
-	}
-
-	private void showBrowseAtlFileDialog() {
-		final ArrayList<IResource> resources = new ArrayList<IResource>();
-		
-		try {
-			ResourcesPlugin.getWorkspace().getRoot().accept(new IResourceVisitor() {
-				@Override
-				public boolean visit(IResource resource) throws CoreException {
-					// if ( resource instanceof IFile && ((IFile) resource).
-					if ( resource.getLocation() != null && resource.getLocation().getFileExtension() != null && 
-						 resource.getLocation().getFileExtension().equals("atl") ) {
-						resources.add(resource);
-					}
-					return true;
-				}
-			});
-		} catch (CoreException e1) {
-			e1.printStackTrace();
-		}
-
-		LabelProvider labelProvider = new LabelProvider() {
-			@Override
-			public String getText(Object element) {
-				IResource r = (IResource) element;
-				return r.getName();
-			}
-		};
-		
-		ElementListSelectionDialog listDialog = new ElementListSelectionDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), labelProvider);	    
-		listDialog.setStatusLineAboveButtons(true);
-		listDialog.setValidator(new ISelectionStatusValidator() {
-			@Override
-			public IStatus validate(Object[] selection) {
-				IResource r = (IResource) selection[0];
-				return new Status(IStatus.INFO, Activator.PLUGIN_ID, r.getProjectRelativePath().toPortableString());
-			}
-		});
-		listDialog.setMultipleSelection(false);
-		listDialog.setTitle("ATL files in the workspace");
-		listDialog.setMessage("");
-		listDialog.setElements(resources.toArray());
-		// listDialog.setElements(list.toArray());
-		listDialog.open();				
-		
-		IResource r = (IResource) listDialog.getResult()[0];
-		txtAtlFile.setText( r.getFullPath().toPortableString() );
-	}	
-	
-	
-	
-	public static class TransformationToTextConverter extends Converter {
-		public TransformationToTextConverter() { super(AtlTransformation.class, String.class); }
-
-		@Override
-		public Object convert(Object fromObject) {
-			AtlTransformation t = (AtlTransformation) fromObject;
-			return t.getPath();
-		}		
-	}
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		IObservableValue observeTextTxtAtlFileObserveWidget_1 = WidgetProperties.text(SWT.Modify).observe(txtAtlFile);
-		IObservableValue revengModelPathObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.REVENG_MODEL__TEMPLATE, Literals.TRANSFORMATION__PATH)).observe(revengModel);
-		bindingContext.bindValue(observeTextTxtAtlFileObserveWidget_1, revengModelPathObserveValue, null, null);
-		//
 		return bindingContext;
 	}
+
+	
+	public void setTypingInfo(TypingInfo info) {
+		if ( analysisTableViewer != null ) {
+			analysisTableViewer.setInput(info);
+			analysisTableViewer.refresh();
+		}
+		this.typingInfo = info;
+	}
+
+	///
+	/// Handlers
+	///
+
+	protected void openAtlEditor() {
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();;
+		IFile file = manager.getTemplateFile();
+		IEditorDescriptor desc = PlatformUI.getWorkbench().
+		        getEditorRegistry().getDefaultEditor(file.getName());
+		try {
+			page.openEditor(new FileEditorInput(file), desc.getId());
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	
+	/**
+	 * 
+	 * @author jesus
+	 *
+	 */
+	public class AnalysisListProvider implements ITableLabelProvider, IStructuredContentProvider {
+		
+		@Override
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		}
+
+		@Override
+		public Object[] getElements(Object inputElement) {
+			if ( typingInfo == null )
+				return new Object[] { };
+
+			return typingInfo.getMessages().toArray();
+		}
+		
+		
+		@Override
+		public void addListener(ILabelProviderListener listener) { }
+
+		@Override
+		public void dispose() { }
+
+		@Override
+		public boolean isLabelProperty(Object element, String property) {
+			return false;
+		}
+
+		@Override
+		public void removeListener(ILabelProviderListener listener) { }
+
+		@Override
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+
+		@Override
+		public String getColumnText(Object element, int columnIndex) {
+			ErrorMessage err = (ErrorMessage) element;
+			switch (columnIndex) {
+			case 0:
+				return err.isError() ? "Error" : "Warning";
+			case 1:
+				return err.getMessage();
+			case 2:
+				return err.getLocation();
+			}
+			return null;
+		}		
+	}
+	
+	
 }

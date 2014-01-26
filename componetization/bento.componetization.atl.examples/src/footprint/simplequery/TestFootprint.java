@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.eclectic.modeling.emf.Util;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import tests.base.BaseTest;
 import bento.componetization.atl.ConceptExtractor;
@@ -45,17 +46,20 @@ public class TestFootprint extends BaseTest {
 
 		// Prunning
 		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag");
-		savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
+		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, PRUNED_SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
 
 		// Extract concept by refactoring
 		ConceptExtractor extractor = extractConcept("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag");
 		
 		saveConcept(withDir("tmp_/concept_simplequery1.ecore"));
+		this.atlTransformation.serialize(new FileOutputStream(withDir("tmp_/test_footprint.atl.xmi")));
+
+		
 		System.out.println("Finished extracting of " + TestFootprint.class.getSimpleName());
 
 	}

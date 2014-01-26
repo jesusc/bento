@@ -41,8 +41,8 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 		// The order matters: In TrafoRunningExample RemoveAssociationClass -> PushDownFeature means
 		//                    that generalization is never pushed down
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
-				new RemoveAssociationClass(this, this),
-				new PushDownFeature(this, this),
+				// new RemoveAssociationClass(this, this),
+				// new PushDownFeature(this, this),
 				new RemoveAssociationClass(this, this),
 
 				// new RemoveEmptyClass(this, this),

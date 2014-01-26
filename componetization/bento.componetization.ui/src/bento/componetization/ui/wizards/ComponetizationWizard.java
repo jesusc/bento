@@ -128,8 +128,7 @@ public class ComponetizationWizard extends Wizard implements INewWizard {
 	 */
 
 	private InputStream openContentStream() {
-		String contents =
-			"This is the initial file contents for *.componetization file that should be word-sorted in the Preview page of the multi-page editor";
+		String contents = "";
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 
@@ -138,7 +137,7 @@ public class ComponetizationWizard extends Wizard implements INewWizard {
 			new Status(IStatus.ERROR, "bento.componetization.ui", IStatus.OK, message, null);
 		throw new CoreException(status);
 	}
-
+	
 	/**
 	 * We will accept the selection in the workbench to see if
 	 * we can initialize from it.

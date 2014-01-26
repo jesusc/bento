@@ -20,6 +20,17 @@ public class LocatedElementImpl extends atl.metamodel.ATLModelBaseObject impleme
 	}
 	
 	@Override
+	public void setLocation(java.lang.String v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
@@ -27,12 +38,34 @@ public class LocatedElementImpl extends atl.metamodel.ATLModelBaseObject impleme
 	}
 	
 	@Override
+	public void addCommentsBefore(List<java.lang.String> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
+	@Override
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
 		return (List<java.lang.String>) result;
 	}
 	
+	@Override
+	public void addCommentsAfter(List<java.lang.String> v) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
+		Object o = v;
+	
+		if ( f.isMany() ) {
+			((List<Object>) object.eGet(f)).add(o);
+		} else {
+			object.eSet(f, o);
+		}
+	}
 
 	public Class<LocatedElement> getImplementedInterface() { return LocatedElement.class; }
 }
