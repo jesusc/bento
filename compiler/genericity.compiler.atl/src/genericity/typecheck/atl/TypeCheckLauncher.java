@@ -471,7 +471,7 @@ public class TypeCheckLauncher {
 				}
 			}
 
-			return signalNoOperationError(clazz, operationName, operations);
+			return signalNoOperationError(clazz, operationName, operations, "operation");
 			//return throwError("No operation " + operationName + " for type "
 			//		+ (receptorType.isMultivalued() ? "* " : " ") + clazz.getName(),
 			//		model.getFeature(object, "location"));
@@ -556,8 +556,8 @@ public class TypeCheckLauncher {
 							+ " with type " + t);
 					return t;
 				} else if (helpers.size() > 1) {
-					throw new RuntimeException("Too many " + featureName + " " + clazz.getName() + " : " + object + " "
-							+ model.getFeature(object, "location"));
+					return signalNoOperationError(clazz, featureName, helpers, "helper");
+					// throwError("Too many invokable helpers for " + featureName + " of type " + clazz.getName(), model.getFeature(object, "location"));
 				} else {
 					if (operations.size() == 1
 							&& ((ImmutableList) model.getFeature(model.getFeature(operations.first(), "feature"),
@@ -580,8 +580,8 @@ public class TypeCheckLauncher {
 			return createType(f.getEType(), f.getUpperBound() == -1 || f.getUpperBound() > 1);
 		}
 
-		private Type signalNoOperationError(EClass clazz, String operationName, ImmutableList operations) {
-			String errorMsg = "No operation " + clazz.getName() + "." + operationName;
+		private Type signalNoOperationError(EClass clazz, String operationName, ImmutableList operations, String operationOrHelper) {
+			String errorMsg = "No " + operationOrHelper + " " + clazz.getName() + "." + operationName;
 			Object location = model.getFeature(object, "location");
 			
 			Type t = null;

@@ -15,7 +15,7 @@ import bento.componetization.atl.MetamodelPrunner;
 import tests.base.BaseTest;
 
 public class TestUML2Measure extends BaseTest {
-	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/zoo/uml2measure/oo2measure-all.atl.xmi";
+	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/zoo/uml2measure/uml2measure-all.atl.xmi";
 	public static final String TARGET_METAMODEL_NAME = "Measure";
 	private static final String SOURCE_METAMODEL_NAME = "UML2";
 

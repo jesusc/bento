@@ -13,25 +13,15 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -71,6 +61,10 @@ import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.Activator;
 import bento.componetization.ui.MatchInfo;
 import bento.componetization.ui.RevengProcessManager;
+import bento.componetization.ui.viewers.MetamodelVisualization;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.custom.CTabItem;
 
 public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -83,6 +77,7 @@ public class ConceptRefactoringPage extends FormPage {
 	private Table table_1;
 	private CheckboxTableViewer listRefactorings;
 	private TreeViewer conceptTreeViewer;
+	private Text text;
 
 	/**
 	 * Create the form page.
@@ -153,7 +148,7 @@ public class ConceptRefactoringPage extends FormPage {
 		composite.setLayout(new GridLayout(1, false));
 		
 		Composite composite_1 = new Composite(composite, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
 		managedForm.getToolkit().adapt(composite_1);
 		managedForm.getToolkit().paintBordersFor(composite_1);
 		composite_1.setLayout(new GridLayout(5, false));
@@ -264,27 +259,53 @@ public class ConceptRefactoringPage extends FormPage {
 				Composite composite_3 = managedForm.getToolkit().createComposite(sctnConcept, SWT.NONE);
 				managedForm.getToolkit().paintBordersFor(composite_3);
 				sctnConcept.setClient(composite_3);
-				composite_3.setLayout(new GridLayout(1, false));
+				composite_3.setLayout(new GridLayout(2, false));
 				
-				conceptTreeViewer = new TreeViewer(composite_3, SWT.BORDER);
+				CTabFolder tabFolder = new CTabFolder(composite_3, SWT.BORDER);
+				tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+				managedForm.getToolkit().adapt(tabFolder);
+				managedForm.getToolkit().paintBordersFor(tabFolder);
+				tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+				
+				CTabItem tbtmMetamodel = new CTabItem(tabFolder, SWT.NONE);
+				tbtmMetamodel.setText("Metamodel");
+				
+				conceptTreeViewer = new TreeViewer(tabFolder, SWT.BORDER);
 				Tree conceptTree = conceptTreeViewer.getTree();
-				GridData gd_conceptTree = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-				gd_conceptTree.heightHint = 100;
-				conceptTree.setLayoutData(gd_conceptTree);
+				tbtmMetamodel.setControl(conceptTree);
 				managedForm.getToolkit().paintBordersFor(conceptTree);
+				
+				CTabItem tbtmMetrics = new CTabItem(tabFolder, SWT.NONE);
+				tbtmMetrics.setText("Metrics");
+				
+				text = new Text(tabFolder, SWT.BORDER);
+				text.setText("");
+				tbtmMetrics.setControl(text);
 				conceptTreeViewer.setLabelProvider(new MetamodelVisualization());
 				conceptTreeViewer.setContentProvider(new MetamodelVisualization());
+				conceptTreeViewer.refresh();
+				
+				Hyperlink hprlnkComputeMetrics = managedForm.getToolkit().createHyperlink(composite_3, "Compute metrics", SWT.NONE);
+				managedForm.getToolkit().paintBordersFor(hprlnkComputeMetrics);
+				
+				Button btnComputeMetrics = new Button(composite_3, SWT.CHECK);
+				btnComputeMetrics.setSelection(true);
+				managedForm.getToolkit().adapt(btnComputeMetrics, true, true);
+				btnComputeMetrics.setText("Inline in tree");
 		sashForm_1.setWeights(new int[] {1, 1});
 		toolkit.decorateFormHeading(form.getForm());
 		m_bindingContext = initDataBindings();
 		
 
 		// Manually modified
+		// Set input for the tree editor
+		myInitializations();
+	}
+
+
+	private void myInitializations() {
 		Resource metamodelResource = this.manager.getConcept(this.metamodel);
 		conceptTreeViewer.setInput(metamodelResource);
-		conceptTreeViewer.refresh();
-		
-		// Set input for the tree editor
 		
 		
 		// Get Dirty flag...
@@ -294,10 +315,8 @@ public class ConceptRefactoringPage extends FormPage {
 			public void handleValueChange(ValueChangeEvent event) {
 				markAsDirty();
 			}
-		});
-
+		});		
 	}
-
 
 	private void markAsDirty() {
 		isDirtyPage = true;
@@ -484,103 +503,5 @@ public class ConceptRefactoringPage extends FormPage {
 			}
 			return "";
 		}
-	}
-	
-	public class MetamodelVisualization implements ITreeContentProvider, ILabelProvider  {
-
-		@Override
-		public void dispose() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			
-		}
-
-		@Override
-		public Object[] getElements(Object inputElement) {
-			return getChildren(inputElement);
-		}
-
-		@Override
-		public void addListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void removeListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Image getImage(Object element) {
-			if ( element instanceof EPackage ) 	return Activator.getImageDescriptor("/icons/full/obj16/EPackage.gif").createImage();
-			if ( element instanceof EClass )	return Activator.getImageDescriptor("/icons/full/obj16/EClass.gif").createImage();
-			if ( element instanceof EReference)	return Activator.getImageDescriptor("/icons/full/obj16/EReference.gif").createImage();
-			if ( element instanceof EAttribute)	return Activator.getImageDescriptor("/icons/full/obj16/EAttribute.gif").createImage();
-
-			return null;
-		}
-
-		@Override
-		public String getText(Object element) {
-			if ( element instanceof EPackage ) 	return ((EPackage) element).getName();
-			if ( element instanceof EClass )	return ((EClass) element).getName();
-			if ( element instanceof EReference)	return ((EReference) element).getName() + " : " + getFeatureTypeText((EStructuralFeature) element);
-			if ( element instanceof EAttribute)	return ((EAttribute) element).getName() + " : " + getFeatureTypeText((EStructuralFeature) element);
-			
-			return element.toString();
-		}
-
-		private String getFeatureTypeText(EStructuralFeature element) {
-			if ( element.getEType() == null ) return "<no-type-defined>";
-			return element.getEType().getName();
-		}
-
-		@Override
-		public Object[] getChildren(Object parentElement) {
-			if ( parentElement instanceof Resource) return ((Resource) parentElement).getContents().toArray();
-
-			EObject obj = (EObject) parentElement;
-			return filterContents(obj.eContents()).toArray();
-		}
-
-		private List<EObject> filterContents(EList<EObject> eContents) {
-			ArrayList<EObject> result = new ArrayList<EObject>();
-			for (EObject eObject : eContents) {
-				if ( eObject instanceof EGenericType ) { } // skip
-				else {
-					result.add(eObject);
-				}
-			}
-			return result;
-		}
-
-		@Override
-		public Object getParent(Object element) {
-			if ( element instanceof Resource) return null;
-			
-			EObject obj = (EObject) element;
-			return obj.eContainer();
-		}
-
-		@Override
-		public boolean hasChildren(Object element) {
-			if ( element instanceof Resource) return ((Resource) element).getContents().size() > 0;
-
-			EObject obj = (EObject) element;
-			return obj.eContents().size() > 0;
-		}
-		
 	}
 }
