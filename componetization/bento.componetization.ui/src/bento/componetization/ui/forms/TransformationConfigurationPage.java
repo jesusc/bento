@@ -59,6 +59,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import bento.componetization.reveng.AtlTransformation;
 import bento.componetization.reveng.Metamodel;
+import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.reveng.RevengPackage.Literals;
@@ -79,6 +80,7 @@ public class TransformationConfigurationPage extends FormPage {
 	boolean isDirtyPage = false;
 	private TableViewer listMetamodels;
 	private RevengProcessManager manager;
+	private Text txtComponentFile;
 
 	/**
 	 * Create the form page.
@@ -307,6 +309,28 @@ public class TransformationConfigurationPage extends FormPage {
 			}
 		});
 		managedForm.getToolkit().paintBordersFor(hprlnkExtractConcepts);
+		
+		Label label_3 = new Label(composite_2, SWT.NONE);
+		managedForm.getToolkit().adapt(label_3, true, true);
+		label_3.setText("3.");
+		
+		Label lblDocumentnotIntegrated = managedForm.getToolkit().createLabel(composite_2, "Document (not integrated yet)", SWT.NONE);
+		
+		Label label_4 = new Label(composite_2, SWT.NONE);
+		managedForm.getToolkit().adapt(label_4, true, true);
+		label_4.setText("4.");
+		
+		Hyperlink hprlnkPackageComponent = managedForm.getToolkit().createHyperlink(composite_2, "Package component", SWT.NONE);
+		hprlnkPackageComponent.addHyperlinkListener(new IHyperlinkListener() {
+			public void linkActivated(HyperlinkEvent e) {
+				packageComponent();
+			}
+			public void linkEntered(HyperlinkEvent e) {
+			}
+			public void linkExited(HyperlinkEvent e) {
+			}
+		});
+		managedForm.getToolkit().paintBordersFor(hprlnkPackageComponent);
 		sashForm.setWeights(new int[] { 1, 1 });
 		toolkit.decorateFormHeading(form.getForm());
 
@@ -322,11 +346,31 @@ public class TransformationConfigurationPage extends FormPage {
 		Button btnBrowse_1 = new Button(compAtlFile, SWT.NONE);
 		managedForm.getToolkit().adapt(btnBrowse_1, true, true);
 		btnBrowse_1.setText("Browse...");
+		
+		Composite composite_3 = new Composite(composite, SWT.NONE);
+		composite_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		managedForm.getToolkit().adapt(composite_3);
+		managedForm.getToolkit().paintBordersFor(composite_3);
+		composite_3.setLayout(new GridLayout(3, false));
+		
+		Label lblNewLabel = new Label(composite_3, SWT.NONE);
+		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		managedForm.getToolkit().adapt(lblNewLabel, true, true);
+		lblNewLabel.setText("Component:");
+		
+		txtComponentFile = new Text(composite_3, SWT.BORDER);
+		txtComponentFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		managedForm.getToolkit().adapt(txtComponentFile, true, true);
+		
+		Button btnBrowse_2 = new Button(composite_3, SWT.NONE);
+		managedForm.getToolkit().adapt(btnBrowse_2, true, true);
+		btnBrowse_2.setText("Browse...");
 
 		m_bindingContext = initDataBindings();
 		myDataBindings();
 		// ///////////
 	}
+
 
 
 	protected void createTemplateFile() {
@@ -404,13 +448,19 @@ public class TransformationConfigurationPage extends FormPage {
 
 		MetamodelInfoDialog dialog = new MetamodelInfoDialog(this.getSite().getShell());
 		dialog.create();
-		dialog.setData(mm.getName(), mm.getPath(), mm.isBecomeConcept());
+		dialog.setData(mm.getName(), mm.getPath(), mm.getModelName(), mm.isBecomeConcept(), mm.getKind() == ModelKind.IN);
 
 		if (dialog.open() == MetamodelInfoDialog.OK) {
 			mm.setName(dialog.getMetamodelName());
 			mm.setPath(dialog.getMetamodelURI());
 			mm.setBecomeConcept(dialog.isConcept());
-
+			if ( dialog.isSource() ) {
+				mm.setKind(ModelKind.IN);
+			} else {
+				mm.setKind(ModelKind.OUT);				
+			}
+			mm.setModelName(dialog.getModelName());
+			
 			markAsDirty();
 			listMetamodels.refresh();
 		}
@@ -431,7 +481,10 @@ public class TransformationConfigurationPage extends FormPage {
 			markAsDirty();
 			listMetamodels.refresh();
 		}
+	}
 
+	protected void packageComponent() {
+		manager.packageComponent();
 	}
 
 	protected void createConceptPages() {
@@ -499,6 +552,14 @@ public class TransformationConfigurationPage extends FormPage {
 
 			txtTemplatePath.setText(file.getFullPath().toPortableString());
 		}
+		
+		if ( txtComponentFile.getText().trim().isEmpty()) {
+			String fileName = new Path(path).lastSegment();
+			IFolder folder = manager.getDefaultComponentFolder();
+			IFile file = folder.getFile(fileName);
+
+			txtComponentFile.setText(file.getFullPath().removeFileExtension().addFileExtension("gcomponent").toPortableString());
+		} 
 
 	}
 
@@ -601,6 +662,14 @@ public class TransformationConfigurationPage extends FormPage {
 			}
 		});
 		
+		IObservableValue observeTextTxtComponentFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtComponentFile);
+		observeTextTxtComponentFileObserveWidget.addValueChangeListener(new IValueChangeListener() {
+			@Override
+			public void handleValueChange(ValueChangeEvent event) {
+				markAsDirty();
+			}
+		});
+		
 	}
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
@@ -616,6 +685,10 @@ public class TransformationConfigurationPage extends FormPage {
 		UpdateValueStrategy strategy_2 = new UpdateValueStrategy();
 		strategy_2.setConverter(new TransformationToTextConverter());
 		bindingContext.bindValue(observeTextTxtTemplatePathObserveWidget, revengModelTemplateObserveValue, null, strategy_2);
+		//
+		IObservableValue observeTextTxtComponentNameObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtComponentFile);
+		IObservableValue revengModelComponentPathObserveValue = EMFObservables.observeValue(revengModel, Literals.REVENG_MODEL__COMPONENT_PATH);
+		bindingContext.bindValue(observeTextTxtComponentNameObserveWidget, revengModelComponentPathObserveValue, null, null);
 		//
 		return bindingContext;
 	}

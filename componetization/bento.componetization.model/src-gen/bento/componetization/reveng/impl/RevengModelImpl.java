@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link bento.componetization.reveng.impl.RevengModelImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link bento.componetization.reveng.impl.RevengModelImpl#getTemplate <em>Template</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.RevengModelImpl#getComponentPath <em>Component Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +54,26 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 	 * @ordered
 	 */
 	protected Transformation template;
+
+	/**
+	 * The default value of the '{@link #getComponentPath() <em>Component Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponentPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMPONENT_PATH_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComponentPath() <em>Component Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponentPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected String componentPath = COMPONENT_PATH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,6 +185,27 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComponentPath() {
+		return componentPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComponentPath(String newComponentPath) {
+		String oldComponentPath = componentPath;
+		componentPath = newComponentPath;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.REVENG_MODEL__COMPONENT_PATH, oldComponentPath, componentPath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -187,6 +229,8 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 				return getTransformation();
 			case RevengPackage.REVENG_MODEL__TEMPLATE:
 				return getTemplate();
+			case RevengPackage.REVENG_MODEL__COMPONENT_PATH:
+				return getComponentPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -204,6 +248,9 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 				return;
 			case RevengPackage.REVENG_MODEL__TEMPLATE:
 				setTemplate((Transformation)newValue);
+				return;
+			case RevengPackage.REVENG_MODEL__COMPONENT_PATH:
+				setComponentPath((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,6 +270,9 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 			case RevengPackage.REVENG_MODEL__TEMPLATE:
 				setTemplate((Transformation)null);
 				return;
+			case RevengPackage.REVENG_MODEL__COMPONENT_PATH:
+				setComponentPath(COMPONENT_PATH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -239,8 +289,26 @@ public class RevengModelImpl extends EObjectImpl implements RevengModel {
 				return transformation != null;
 			case RevengPackage.REVENG_MODEL__TEMPLATE:
 				return template != null;
+			case RevengPackage.REVENG_MODEL__COMPONENT_PATH:
+				return COMPONENT_PATH_EDEFAULT == null ? componentPath != null : !COMPONENT_PATH_EDEFAULT.equals(componentPath);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (componentPath: ");
+		result.append(componentPath);
+		result.append(')');
+		return result.toString();
 	}
 
 } //RevengModelImpl

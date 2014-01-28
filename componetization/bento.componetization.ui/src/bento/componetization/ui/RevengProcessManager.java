@@ -8,6 +8,7 @@ import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typecheck.atl.TypeCheckLauncher.ErrorMessage;
 import genericity.typing.atl_types.AtlTypingPackage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -41,6 +43,7 @@ import bento.componetization.atl.refactorings.PushDownFeature;
 import bento.componetization.atl.refactorings.RemoveEmptyClass;
 import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
+import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
 import bento.componetization.ui.forms.TemplatePage;
@@ -138,6 +141,12 @@ public class RevengProcessManager {
 		IFolder f = project.getFolder(new Path("template"));
 		return f;
 	}
+	
+	public IFolder getDefaultComponentFolder() {
+		IFolder f = project.getFolder(new Path("component"));
+		return f;
+	}
+	
 	
 	private boolean templateExists() {
 		if ( model.getTemplate() == null ) return false;
@@ -364,6 +373,97 @@ public class RevengProcessManager {
 		} catch (CoreException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public void packageComponent() {
+		IFile component = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(this.model.getComponentPath()));
+		try {
+			if (!component.getParent().exists()) {
+				((IFolder) component.getParent()).create(true, true, null);
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		String componentName = component.getLocation().removeFileExtension().lastSegment();
+		
+		StringBuffer buf = new StringBuffer();
+		buf.append("transformation component " + componentName + " { \n");
+		
+		EList<Metamodel> metamodels = model.getTransformation().getMetamodels();
+		for (Metamodel metamodel : metamodels) {
+			String name = metamodel.getExtractedConcept() != null ? metamodel.getExtractedConcept().getName() : metamodel.getName(); 
+			String URI  = metamodel.getExtractedConcept() != null ? metamodel.getExtractedConcept().getPath() : metamodel.getPath(); 
+			
+			String conceptLine = "concept " + name + " : \"platform:/resource/" + URI + "\"";
+			if ( metamodel.getKind() == ModelKind.IN ) {
+				conceptLine = "source " + conceptLine;
+			} else {
+				conceptLine = "target " + conceptLine;				
+			}
+
+			buf.append("\t" + conceptLine + "\n");
+		}
+		
+		for (Metamodel metamodel : metamodels) {
+			String name = metamodel.getModelName().toLowerCase(); 
+			String mmName = metamodel.getExtractedConcept() != null ? metamodel.getExtractedConcept().getName() : metamodel.getName(); 
+			
+			String conceptLine = "model " + name + " : " + mmName;
+			if ( metamodel.getKind() == ModelKind.IN ) {
+				conceptLine = "source " + conceptLine;
+			} else {
+				conceptLine = "target " + conceptLine;				
+			}
+		
+			buf.append("\t" + conceptLine + "\n");
+		}
+		
+		buf.append("\tdefinition atl \"platform:/resource/" + model.getTemplate().getPath() + "\" with \n");
+		for (int i = 0; i < metamodels.size(); i++) {
+			Metamodel metamodel = metamodels.get(i);
+			String mmName = metamodel.getExtractedConcept() != null ? metamodel.getExtractedConcept().getName() : metamodel.getName(); 
+			
+			String line = metamodel.getModelName() + " : " + mmName + " = " + metamodel.getModelName().toLowerCase();
+			if ( i + 1 < metamodels.size() )
+				line += ", ";
+			
+			buf.append("\t\t" + line + "\n");
+		}
+		
+		buf.append("}");
+		
+		ByteArrayInputStream is = null;
+		try {
+			is = new ByteArrayInputStream(buf.toString().getBytes());
+			if (!component.exists()) {
+				component.create(is, 0, null);
+			} else {
+				component.setContents(is, 0, null);
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		/*
+	        source concept OO      : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"
+	        target concept Measure : "platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/Measure.ecore"
+	        source model in  : OO
+	        target model out : Measure
+	        
+	        definition atl "platform:/resource/genericity.benchmarks/components/oo2measure/trafo/oo2measure-all.atl" with IN : UML2 = in, OUT = out
+		*/
+
+		
+		// component.setContents(sis, 0, null);
+		
 	}
 	
 }

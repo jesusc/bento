@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link bento.componetization.reveng.impl.ConceptImpl#getName <em>Name</em>}</li>
  *   <li>{@link bento.componetization.reveng.impl.ConceptImpl#getNsURI <em>Ns URI</em>}</li>
  * </ul>
  * </p>
@@ -29,6 +30,24 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class ConceptImpl extends ResourceImpl implements Concept {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,6 +91,27 @@ public class ConceptImpl extends ResourceImpl implements Concept {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.CONCEPT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getNsURI() {
 		return nsURI;
 	}
@@ -96,6 +136,8 @@ public class ConceptImpl extends ResourceImpl implements Concept {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case RevengPackage.CONCEPT__NAME:
+				return getName();
 			case RevengPackage.CONCEPT__NS_URI:
 				return getNsURI();
 		}
@@ -110,6 +152,9 @@ public class ConceptImpl extends ResourceImpl implements Concept {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case RevengPackage.CONCEPT__NAME:
+				setName((String)newValue);
+				return;
 			case RevengPackage.CONCEPT__NS_URI:
 				setNsURI((String)newValue);
 				return;
@@ -125,6 +170,9 @@ public class ConceptImpl extends ResourceImpl implements Concept {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case RevengPackage.CONCEPT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case RevengPackage.CONCEPT__NS_URI:
 				setNsURI(NS_URI_EDEFAULT);
 				return;
@@ -140,6 +188,8 @@ public class ConceptImpl extends ResourceImpl implements Concept {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case RevengPackage.CONCEPT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case RevengPackage.CONCEPT__NS_URI:
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
 		}
@@ -156,7 +206,9 @@ public class ConceptImpl extends ResourceImpl implements Concept {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (nsURI: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", nsURI: ");
 		result.append(nsURI);
 		result.append(')');
 		return result.toString();

@@ -8,6 +8,7 @@ package bento.componetization.reveng.impl;
 
 import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
+import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -27,7 +28,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getModelName <em>Model Name</em>}</li>
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#isBecomeConcept <em>Become Concept</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getExtractedConcept <em>Extracted Concept</em>}</li>
  * </ul>
  * </p>
@@ -56,6 +59,26 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MODEL_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getModelName() <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String modelName = MODEL_NAME_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #isBecomeConcept() <em>Become Concept</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,6 +97,26 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 	 * @ordered
 	 */
 	protected boolean becomeConcept = BECOME_CONCEPT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ModelKind KIND_EDEFAULT = ModelKind.IN;
+
+	/**
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected ModelKind kind = KIND_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExtractedConcept() <em>Extracted Concept</em>}' containment reference.
@@ -130,6 +173,27 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getModelName() {
+		return modelName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setModelName(String newModelName) {
+		String oldModelName = modelName;
+		modelName = newModelName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__MODEL_NAME, oldModelName, modelName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isBecomeConcept() {
 		return becomeConcept;
 	}
@@ -144,6 +208,27 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 		becomeConcept = newBecomeConcept;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__BECOME_CONCEPT, oldBecomeConcept, becomeConcept));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelKind getKind() {
+		return kind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKind(ModelKind newKind) {
+		ModelKind oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__KIND, oldKind, kind));
 	}
 
 	/**
@@ -213,8 +298,12 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 		switch (featureID) {
 			case RevengPackage.METAMODEL__NAME:
 				return getName();
+			case RevengPackage.METAMODEL__MODEL_NAME:
+				return getModelName();
 			case RevengPackage.METAMODEL__BECOME_CONCEPT:
 				return isBecomeConcept();
+			case RevengPackage.METAMODEL__KIND:
+				return getKind();
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				return getExtractedConcept();
 		}
@@ -232,8 +321,14 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 			case RevengPackage.METAMODEL__NAME:
 				setName((String)newValue);
 				return;
+			case RevengPackage.METAMODEL__MODEL_NAME:
+				setModelName((String)newValue);
+				return;
 			case RevengPackage.METAMODEL__BECOME_CONCEPT:
 				setBecomeConcept((Boolean)newValue);
+				return;
+			case RevengPackage.METAMODEL__KIND:
+				setKind((ModelKind)newValue);
 				return;
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				setExtractedConcept((Concept)newValue);
@@ -253,8 +348,14 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 			case RevengPackage.METAMODEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case RevengPackage.METAMODEL__MODEL_NAME:
+				setModelName(MODEL_NAME_EDEFAULT);
+				return;
 			case RevengPackage.METAMODEL__BECOME_CONCEPT:
 				setBecomeConcept(BECOME_CONCEPT_EDEFAULT);
+				return;
+			case RevengPackage.METAMODEL__KIND:
+				setKind(KIND_EDEFAULT);
 				return;
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				setExtractedConcept((Concept)null);
@@ -273,8 +374,12 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 		switch (featureID) {
 			case RevengPackage.METAMODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case RevengPackage.METAMODEL__MODEL_NAME:
+				return MODEL_NAME_EDEFAULT == null ? modelName != null : !MODEL_NAME_EDEFAULT.equals(modelName);
 			case RevengPackage.METAMODEL__BECOME_CONCEPT:
 				return becomeConcept != BECOME_CONCEPT_EDEFAULT;
+			case RevengPackage.METAMODEL__KIND:
+				return kind != KIND_EDEFAULT;
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				return extractedConcept != null;
 		}
@@ -293,8 +398,12 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", modelName: ");
+		result.append(modelName);
 		result.append(", becomeConcept: ");
 		result.append(becomeConcept);
+		result.append(", kind: ");
+		result.append(kind);
 		result.append(')');
 		return result.toString();
 	}

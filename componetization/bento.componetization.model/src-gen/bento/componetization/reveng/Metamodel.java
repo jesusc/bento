@@ -17,7 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link bento.componetization.reveng.Metamodel#getName <em>Name</em>}</li>
+ *   <li>{@link bento.componetization.reveng.Metamodel#getModelName <em>Model Name</em>}</li>
  *   <li>{@link bento.componetization.reveng.Metamodel#isBecomeConcept <em>Become Concept</em>}</li>
+ *   <li>{@link bento.componetization.reveng.Metamodel#getKind <em>Kind</em>}</li>
  *   <li>{@link bento.componetization.reveng.Metamodel#getExtractedConcept <em>Extracted Concept</em>}</li>
  * </ul>
  * </p>
@@ -54,6 +56,32 @@ public interface Metamodel extends Resource {
 	void setName(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Model Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Model Name</em>' attribute.
+	 * @see #setModelName(String)
+	 * @see bento.componetization.reveng.RevengPackage#getMetamodel_ModelName()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getModelName();
+
+	/**
+	 * Sets the value of the '{@link bento.componetization.reveng.Metamodel#getModelName <em>Model Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Model Name</em>' attribute.
+	 * @see #getModelName()
+	 * @generated
+	 */
+	void setModelName(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Become Concept</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -78,6 +106,35 @@ public interface Metamodel extends Resource {
 	 * @generated
 	 */
 	void setBecomeConcept(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link bento.componetization.reveng.ModelKind}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see bento.componetization.reveng.ModelKind
+	 * @see #setKind(ModelKind)
+	 * @see bento.componetization.reveng.RevengPackage#getMetamodel_Kind()
+	 * @model
+	 * @generated
+	 */
+	ModelKind getKind();
+
+	/**
+	 * Sets the value of the '{@link bento.componetization.reveng.Metamodel#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see bento.componetization.reveng.ModelKind
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(ModelKind value);
 
 	/**
 	 * Returns the value of the '<em><b>Extracted Concept</b></em>' containment reference.

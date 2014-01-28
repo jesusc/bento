@@ -6,6 +6,8 @@ package reveng;
 class RevengModel {
    val Transformation[1] transformation; 
    val Transformation[0..1] template;
+   
+   attr String[1] componentPath;
 }
 
 abstract class Transformation {
@@ -22,11 +24,21 @@ abstract class Resource {
 
 class Metamodel extends Resource {
    attr String[1] name;
+   attr String[1] modelName; // This is specific of ATL... (and actually not completely accurate)
    attr boolean becomeConcept;
+   
+   attr ModelKind kind;
    
    val Concept[0..1] extractedConcept;
 }
 
+enum ModelKind {
+   IN = 0;
+   OUT = 1;
+   INOUT = 2;
+}
+
 class Concept extends Resource {
+   attr String[1] name;
    attr String[1] nsURI;
 }

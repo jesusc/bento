@@ -78,6 +78,8 @@ public class ConceptRefactoringPage extends FormPage {
 	private CheckboxTableViewer listRefactorings;
 	private TreeViewer conceptTreeViewer;
 	private Text text;
+	private Text txtConcepturi;
+	private Text txtConceptname;
 
 	/**
 	 * Create the form page.
@@ -148,7 +150,7 @@ public class ConceptRefactoringPage extends FormPage {
 		composite.setLayout(new GridLayout(1, false));
 		
 		Composite composite_1 = new Composite(composite, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
+		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		managedForm.getToolkit().adapt(composite_1);
 		managedForm.getToolkit().paintBordersFor(composite_1);
 		composite_1.setLayout(new GridLayout(5, false));
@@ -162,7 +164,7 @@ public class ConceptRefactoringPage extends FormPage {
 				listRefactorings = CheckboxTableViewer.newCheckList(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
 				table_1 = listRefactorings.getTable();
 				table_1.setHeaderVisible(true);
-				GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 3);
+				GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3);
 				gd_table_1.heightHint = 150;
 				table_1.setLayoutData(gd_table_1);
 				managedForm.getToolkit().paintBordersFor(table_1);
@@ -196,7 +198,7 @@ public class ConceptRefactoringPage extends FormPage {
 				new Label(composite_1, SWT.NONE);
 				
 				Button btnApplyAll = managedForm.getToolkit().createButton(composite_1, "Apply all", SWT.NONE);
-				btnApplyAll.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
+				btnApplyAll.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
 				new Label(composite_1, SWT.NONE);
@@ -233,6 +235,16 @@ public class ConceptRefactoringPage extends FormPage {
 				GridLayout gl_compAtlFile = new GridLayout(3, false);
 				compAtlFile.setLayout(gl_compAtlFile);
 				
+				Label lblName = new Label(compAtlFile, SWT.NONE);
+				lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				managedForm.getToolkit().adapt(lblName, true, true);
+				lblName.setText("Name:");
+				
+				txtConceptname = managedForm.getToolkit().createText(compAtlFile, "New Text", SWT.NONE);
+				txtConceptname.setText("");
+				txtConceptname.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+				new Label(compAtlFile, SWT.NONE);
+				
 				Label lblConceptMetamodelFile = managedForm.getToolkit().createLabel(compAtlFile, "Metamodel file: ", SWT.NONE);
 				
 				txtConceptMetamodelFile = managedForm.getToolkit().createText(compAtlFile, "", SWT.NONE);
@@ -243,6 +255,16 @@ public class ConceptRefactoringPage extends FormPage {
 				txtConceptMetamodelFile.setLayoutData(gd_txtConceptMetamodelFile);
 				
 				Button btnBrowse = managedForm.getToolkit().createButton(compAtlFile, "Browse...", SWT.NONE);
+				
+				Label lblUri = new Label(compAtlFile, SWT.NONE);
+				lblUri.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				managedForm.getToolkit().adapt(lblUri, true, true);
+				lblUri.setText("URI:");
+				
+				txtConcepturi = managedForm.getToolkit().createText(compAtlFile, "New Text", SWT.NONE);
+				txtConcepturi.setText("");
+				txtConcepturi.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+				new Label(compAtlFile, SWT.NONE);
 				btnBrowse.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
@@ -335,10 +357,16 @@ public class ConceptRefactoringPage extends FormPage {
 
 
 	protected void applySelectedRefactorings() {
+		Activator.log("Applying refactorings");
+		
 		List<IMatch> matches = new ArrayList<IMatch>();
 		List<IMatch> uncheckedMatches = new ArrayList<IMatch>((List<IMatch>) listRefactorings.getInput());
 		for(Object o : listRefactorings.getCheckedElements()) {
-			matches.add( ((MatchInfo) o).getMatch() );
+			MatchInfo mi = ((MatchInfo) o);
+			Activator.log("  - Refactoring " + mi.getRefactoringHumanName() + " will be applied: " + mi.getText());
+
+			
+			matches.add( mi.getMatch() );
 			uncheckedMatches.remove(o);
 		}
 		
@@ -397,16 +425,6 @@ public class ConceptRefactoringPage extends FormPage {
 		IResource r = (IResource) listDialog.getResult()[0];
 		txtConceptMetamodelFile.setText( r.getFullPath().toPortableString() );
 	}	
-		
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		IObservableValue observeTextTxtConceptMetamodelFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConceptMetamodelFile);
-		IObservableValue metamodelPathObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.RESOURCE__PATH)).observe(metamodel);
-		bindingContext.bindValue(observeTextTxtConceptMetamodelFileObserveWidget, metamodelPathObserveValue, null, null);
-		//
-		return bindingContext;
-	}
 	
 	/*
 	public class SelectRefactoringEditingSupport extends EditingSupport {
@@ -503,5 +521,22 @@ public class ConceptRefactoringPage extends FormPage {
 			}
 			return "";
 		}
+	}
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
+		//
+		IObservableValue observeTextTxtConceptMetamodelFileObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConceptMetamodelFile);
+		IObservableValue metamodelPathObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.RESOURCE__PATH)).observe(metamodel);
+		bindingContext.bindValue(observeTextTxtConceptMetamodelFileObserveWidget, metamodelPathObserveValue, null, null);
+		//
+		IObservableValue observeTextTxtConceptnameObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConceptname);
+		IObservableValue metamodelNameObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.CONCEPT__NAME)).observe(metamodel);
+		bindingContext.bindValue(observeTextTxtConceptnameObserveWidget, metamodelNameObserveValue, null, null);
+		//
+		IObservableValue observeTextTxtConcepturiObserveWidget = WidgetProperties.text(SWT.Modify).observe(txtConcepturi);
+		IObservableValue metamodelNsURIObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.CONCEPT__NS_URI)).observe(metamodel);
+		bindingContext.bindValue(observeTextTxtConcepturiObserveWidget, metamodelNsURIObserveValue, null, null);
+		//
+		return bindingContext;
 	}
 }

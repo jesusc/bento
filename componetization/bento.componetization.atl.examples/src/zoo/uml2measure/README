@@ -1,12 +1,47 @@
 
+== Adjustments
+
+- Remove one of the versions Class.NOM() (line 1757), that is repeated
+  TODO: Let the analyser detect this!
+
 == Experiment
 
+0. Get the effective meta-model
 1- Remove 14 empty classes
-2- Apply son PDF
+
+	REFACTORING: Remove empty class EModelElement
+	REFACTORING: Remove empty class MultiplicityElement
+	REFACTORING: Remove empty class ParameterableElement
+	REFACTORING: Remove empty class StructuralFeature
+	REFACTORING: Remove empty class DirectedRelationship
+	REFACTORING: Remove empty class BehavioredClassifier
+	REFACTORING: Remove empty class ConnectableElement
+	REFACTORING: Remove empty class Relationship
+	REFACTORING: Remove empty class Namespace
+	REFACTORING: Remove empty class EncapsulatedClassifier
+	REFACTORING: Remove empty class Element
+	REFACTORING: Remove empty class DeploymentTarget
+	REFACTORING: Remove empty class RedefinableElement
+	REFACTORING: Remove empty class TemplateableElement
+
+2- Apply 5 PDF
+
+	REFACTORING: Push down feature BehavioralFeature.method
+	REFACTORING: Push down feature BehavioralFeature.ownedParameter
+	REFACTORING: Push down feature Classifier.isAbstract
+	REFACTORING: Push down feature Classifier.generalization
+	REFACTORING: Push down feature StructuredClassifier.ownedAttribute
+
 3- Now 2 additional classes can be removed
 
+	REFACTORING: Remove empty class BehavioralFeature
+	REFACTORING: Remove empty class StructuredClassifier
 
 ======================
+
+* Possible improvements?
+
+  - Why NamedElement.visibility is not proposed to be push down??? 
 
 * Refactorings we would like to apply
 

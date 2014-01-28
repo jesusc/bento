@@ -8,6 +8,7 @@ package bento.componetization.reveng;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -88,13 +89,22 @@ public interface RevengPackage extends EPackage {
 	int REVENG_MODEL__TEMPLATE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Component Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVENG_MODEL__COMPONENT_PATH = 2;
+
+	/**
 	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REVENG_MODEL_FEATURE_COUNT = 2;
+	int REVENG_MODEL_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link bento.componetization.reveng.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -228,13 +238,31 @@ public interface RevengPackage extends EPackage {
 	int METAMODEL__NAME = RESOURCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__MODEL_NAME = RESOURCE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Become Concept</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__BECOME_CONCEPT = RESOURCE_FEATURE_COUNT + 1;
+	int METAMODEL__BECOME_CONCEPT = RESOURCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL__KIND = RESOURCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Extracted Concept</b></em>' containment reference.
@@ -243,7 +271,7 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__EXTRACTED_CONCEPT = RESOURCE_FEATURE_COUNT + 2;
+	int METAMODEL__EXTRACTED_CONCEPT = RESOURCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Metamodel</em>' class.
@@ -252,7 +280,7 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 3;
+	int METAMODEL_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 5;
 
 
 	/**
@@ -275,13 +303,22 @@ public interface RevengPackage extends EPackage {
 	int CONCEPT__PATH = RESOURCE__PATH;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT__NAME = RESOURCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT__NS_URI = RESOURCE_FEATURE_COUNT + 0;
+	int CONCEPT__NS_URI = RESOURCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Concept</em>' class.
@@ -290,7 +327,18 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 1;
+	int CONCEPT_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 2;
+
+
+	/**
+	 * The meta object id for the '{@link bento.componetization.reveng.ModelKind <em>Model Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.componetization.reveng.ModelKind
+	 * @see bento.componetization.reveng.impl.RevengPackageImpl#getModelKind()
+	 * @generated
+	 */
+	int MODEL_KIND = 6;
 
 
 	/**
@@ -324,6 +372,17 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRevengModel_Template();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.RevengModel#getComponentPath <em>Component Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Component Path</em>'.
+	 * @see bento.componetization.reveng.RevengModel#getComponentPath()
+	 * @see #getRevengModel()
+	 * @generated
+	 */
+	EAttribute getRevengModel_ComponentPath();
 
 	/**
 	 * Returns the meta object for class '{@link bento.componetization.reveng.Transformation <em>Transformation</em>}'.
@@ -410,6 +469,17 @@ public interface RevengPackage extends EPackage {
 	EAttribute getMetamodel_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#getModelName <em>Model Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Model Name</em>'.
+	 * @see bento.componetization.reveng.Metamodel#getModelName()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EAttribute getMetamodel_ModelName();
+
+	/**
 	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#isBecomeConcept <em>Become Concept</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -419,6 +489,17 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMetamodel_BecomeConcept();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Metamodel#getKind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see bento.componetization.reveng.Metamodel#getKind()
+	 * @see #getMetamodel()
+	 * @generated
+	 */
+	EAttribute getMetamodel_Kind();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link bento.componetization.reveng.Metamodel#getExtractedConcept <em>Extracted Concept</em>}'.
@@ -442,6 +523,17 @@ public interface RevengPackage extends EPackage {
 	EClass getConcept();
 
 	/**
+	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Concept#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see bento.componetization.reveng.Concept#getName()
+	 * @see #getConcept()
+	 * @generated
+	 */
+	EAttribute getConcept_Name();
+
+	/**
 	 * Returns the meta object for the attribute '{@link bento.componetization.reveng.Concept#getNsURI <em>Ns URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -451,6 +543,16 @@ public interface RevengPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getConcept_NsURI();
+
+	/**
+	 * Returns the meta object for enum '{@link bento.componetization.reveng.ModelKind <em>Model Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Model Kind</em>'.
+	 * @see bento.componetization.reveng.ModelKind
+	 * @generated
+	 */
+	EEnum getModelKind();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -499,6 +601,14 @@ public interface RevengPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REVENG_MODEL__TEMPLATE = eINSTANCE.getRevengModel_Template();
+
+		/**
+		 * The meta object literal for the '<em><b>Component Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REVENG_MODEL__COMPONENT_PATH = eINSTANCE.getRevengModel_ComponentPath();
 
 		/**
 		 * The meta object literal for the '{@link bento.componetization.reveng.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -573,12 +683,28 @@ public interface RevengPackage extends EPackage {
 		EAttribute METAMODEL__NAME = eINSTANCE.getMetamodel_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METAMODEL__MODEL_NAME = eINSTANCE.getMetamodel_ModelName();
+
+		/**
 		 * The meta object literal for the '<em><b>Become Concept</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute METAMODEL__BECOME_CONCEPT = eINSTANCE.getMetamodel_BecomeConcept();
+
+		/**
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METAMODEL__KIND = eINSTANCE.getMetamodel_Kind();
 
 		/**
 		 * The meta object literal for the '<em><b>Extracted Concept</b></em>' containment reference feature.
@@ -599,12 +725,30 @@ public interface RevengPackage extends EPackage {
 		EClass CONCEPT = eINSTANCE.getConcept();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONCEPT__NAME = eINSTANCE.getConcept_Name();
+
+		/**
 		 * The meta object literal for the '<em><b>Ns URI</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CONCEPT__NS_URI = eINSTANCE.getConcept_NsURI();
+
+		/**
+		 * The meta object literal for the '{@link bento.componetization.reveng.ModelKind <em>Model Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.componetization.reveng.ModelKind
+		 * @see bento.componetization.reveng.impl.RevengPackageImpl#getModelKind()
+		 * @generated
+		 */
+		EEnum MODEL_KIND = eINSTANCE.getModelKind();
 
 	}
 

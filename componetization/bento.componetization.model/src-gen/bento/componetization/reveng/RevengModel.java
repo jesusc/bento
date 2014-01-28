@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link bento.componetization.reveng.RevengModel#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link bento.componetization.reveng.RevengModel#getTemplate <em>Template</em>}</li>
+ *   <li>{@link bento.componetization.reveng.RevengModel#getComponentPath <em>Component Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,31 @@ public interface RevengModel extends EObject {
 	 * @generated
 	 */
 	void setTemplate(Transformation value);
+
+	/**
+	 * Returns the value of the '<em><b>Component Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Component Path</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Component Path</em>' attribute.
+	 * @see #setComponentPath(String)
+	 * @see bento.componetization.reveng.RevengPackage#getRevengModel_ComponentPath()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getComponentPath();
+
+	/**
+	 * Sets the value of the '{@link bento.componetization.reveng.RevengModel#getComponentPath <em>Component Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Component Path</em>' attribute.
+	 * @see #getComponentPath()
+	 * @generated
+	 */
+	void setComponentPath(String value);
 
 } // RevengModel

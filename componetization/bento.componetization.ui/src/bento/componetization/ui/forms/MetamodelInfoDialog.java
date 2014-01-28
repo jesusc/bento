@@ -16,6 +16,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 import bento.componetization.ui.dialogs.FindFileDialog;
+import org.eclipse.swt.layout.RowLayout;
 
 public class MetamodelInfoDialog extends TitleAreaDialog {
 
@@ -26,6 +27,11 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 	private Text txtMetamodelName;
 	private Text txtMetamodelURI;
 	private Button btnConceptualize;
+	private Button btnSource;
+	private Button btnTarget;
+	private Text txtModelname;
+	private String modelName;
+	private boolean isSource;
 
 	/**
 	 * Create the dialog.
@@ -74,6 +80,26 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 					}
 				});
 				btnBrowse.setText("Browse...");
+				
+				Label lblModelName = new Label(container, SWT.NONE);
+				lblModelName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				lblModelName.setText("Model name:");
+				
+				txtModelname = new Text(container, SWT.BORDER);
+				txtModelname.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+				new Label(container, SWT.NONE);
+				new Label(container, SWT.NONE);
+				
+				Composite composite = new Composite(container, SWT.NONE);
+				composite.setLayout(new RowLayout(SWT.HORIZONTAL));
+				
+				btnSource = new Button(composite, SWT.RADIO);
+				btnSource.setSelection(true);
+				btnSource.setText("Source");
+				
+				btnTarget = new Button(composite, SWT.RADIO);
+				btnTarget.setText("Target");
+				new Label(container, SWT.NONE);
 				new Label(container, SWT.NONE);
 				
 				btnConceptualize = new Button(container, SWT.CHECK);
@@ -110,6 +136,8 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		metamodelName = txtMetamodelName.getText();
 		metamodelURI = txtMetamodelURI.getText();
 		isBecomeConcept = btnConceptualize.getSelection();
+		isSource = btnSource.getSelection();
+		modelName = txtModelname.getText();
 	}
 
 	//
@@ -132,10 +160,27 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		return metamodelName;
 	}
 
-	public void setData(String name, String path, boolean isConcept) {
+	public String getModelName() {
+		return modelName;
+	}
+	
+	public void setData(String name, String path, String modelName, boolean isConcept, boolean isSource) {
 		txtMetamodelName.setText(name);
 		txtMetamodelURI.setText(path);
+		txtModelname.setText(modelName);
 		btnConceptualize.setSelection( isConcept );
+		
+		if ( isSource ) {
+			btnSource.setSelection(true);
+			btnTarget.setSelection(false);
+		} else {
+			btnSource.setSelection(false);
+			btnTarget.setSelection(true);
+		}
+	}
+	
+	public boolean isSource() {
+		return isSource;
 	}
 
 	public String getMetamodelURI() {

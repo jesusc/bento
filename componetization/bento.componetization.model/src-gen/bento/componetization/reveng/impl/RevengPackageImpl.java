@@ -9,6 +9,7 @@ package bento.componetization.reveng.impl;
 import bento.componetization.reveng.AtlTransformation;
 import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
+import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.Resource;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
@@ -17,6 +18,7 @@ import bento.componetization.reveng.Transformation;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -70,6 +72,13 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * @generated
 	 */
 	private EClass conceptEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum modelKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -164,6 +173,15 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRevengModel_ComponentPath() {
+		return (EAttribute)revengModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransformation() {
 		return transformationEClass;
 	}
@@ -236,7 +254,7 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetamodel_BecomeConcept() {
+	public EAttribute getMetamodel_ModelName() {
 		return (EAttribute)metamodelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -245,8 +263,26 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMetamodel_BecomeConcept() {
+		return (EAttribute)metamodelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetamodel_Kind() {
+		return (EAttribute)metamodelEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMetamodel_ExtractedConcept() {
-		return (EReference)metamodelEClass.getEStructuralFeatures().get(2);
+		return (EReference)metamodelEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -263,8 +299,26 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConcept_NsURI() {
+	public EAttribute getConcept_Name() {
 		return (EAttribute)conceptEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConcept_NsURI() {
+		return (EAttribute)conceptEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getModelKind() {
+		return modelKindEEnum;
 	}
 
 	/**
@@ -298,6 +352,7 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 		revengModelEClass = createEClass(REVENG_MODEL);
 		createEReference(revengModelEClass, REVENG_MODEL__TRANSFORMATION);
 		createEReference(revengModelEClass, REVENG_MODEL__TEMPLATE);
+		createEAttribute(revengModelEClass, REVENG_MODEL__COMPONENT_PATH);
 
 		transformationEClass = createEClass(TRANSFORMATION);
 		createEAttribute(transformationEClass, TRANSFORMATION__PATH);
@@ -310,11 +365,17 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 
 		metamodelEClass = createEClass(METAMODEL);
 		createEAttribute(metamodelEClass, METAMODEL__NAME);
+		createEAttribute(metamodelEClass, METAMODEL__MODEL_NAME);
 		createEAttribute(metamodelEClass, METAMODEL__BECOME_CONCEPT);
+		createEAttribute(metamodelEClass, METAMODEL__KIND);
 		createEReference(metamodelEClass, METAMODEL__EXTRACTED_CONCEPT);
 
 		conceptEClass = createEClass(CONCEPT);
+		createEAttribute(conceptEClass, CONCEPT__NAME);
 		createEAttribute(conceptEClass, CONCEPT__NS_URI);
+
+		// Create enums
+		modelKindEEnum = createEEnum(MODEL_KIND);
 	}
 
 	/**
@@ -353,6 +414,7 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 		initEClass(revengModelEClass, RevengModel.class, "RevengModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRevengModel_Transformation(), this.getTransformation(), null, "transformation", null, 1, 1, RevengModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRevengModel_Template(), this.getTransformation(), null, "template", null, 0, 1, RevengModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRevengModel_ComponentPath(), ecorePackage.getEString(), "componentPath", null, 1, 1, RevengModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformationEClass, Transformation.class, "Transformation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransformation_Path(), ecorePackage.getEString(), "path", null, 1, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -365,11 +427,20 @@ public class RevengPackageImpl extends EPackageImpl implements RevengPackage {
 
 		initEClass(metamodelEClass, Metamodel.class, "Metamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetamodel_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetamodel_ModelName(), ecorePackage.getEString(), "modelName", null, 1, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetamodel_BecomeConcept(), ecorePackage.getEBoolean(), "becomeConcept", null, 0, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetamodel_Kind(), this.getModelKind(), "kind", null, 0, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetamodel_ExtractedConcept(), this.getConcept(), null, "extractedConcept", null, 0, 1, Metamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conceptEClass, Concept.class, "Concept", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConcept_Name(), ecorePackage.getEString(), "name", null, 1, 1, Concept.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConcept_NsURI(), ecorePackage.getEString(), "nsURI", null, 1, 1, Concept.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(modelKindEEnum, ModelKind.class, "ModelKind");
+		addEEnumLiteral(modelKindEEnum, ModelKind.IN);
+		addEEnumLiteral(modelKindEEnum, ModelKind.OUT);
+		addEEnumLiteral(modelKindEEnum, ModelKind.INOUT);
 
 		// Create resource
 		createResource(eNS_URI);

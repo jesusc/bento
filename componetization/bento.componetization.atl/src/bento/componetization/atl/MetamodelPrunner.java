@@ -136,7 +136,8 @@ public class MetamodelPrunner extends FootprintComputation {
 		
 		EClass copy = EcoreFactory.eINSTANCE.createEClass();
 		copy.setName(eClass.getName());
-	
+		copy.setAbstract(eClass.isAbstract());
+		
 		conceptPkg.getEClassifiers().add(copy);
 		traceClass.put(eClass, copy);
 		

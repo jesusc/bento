@@ -7,9 +7,15 @@
   <foreignModel>reveng.ecore</foreignModel>
   <genPackages prefix="Reveng" basePackage="bento.componetization" disposableProviderFactory="true"
       ecorePackage="reveng.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="reveng.ecore#//ModelKind">
+      <genEnumLiterals ecoreEnumLiteral="reveng.ecore#//ModelKind/IN"/>
+      <genEnumLiterals ecoreEnumLiteral="reveng.ecore#//ModelKind/OUT"/>
+      <genEnumLiterals ecoreEnumLiteral="reveng.ecore#//ModelKind/INOUT"/>
+    </genEnums>
     <genClasses ecoreClass="reveng.ecore#//RevengModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//RevengModel/transformation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//RevengModel/template"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//RevengModel/componentPath"/>
     </genClasses>
     <genClasses image="false" ecoreClass="reveng.ecore#//Transformation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Transformation/path"/>
@@ -21,10 +27,13 @@
     </genClasses>
     <genClasses ecoreClass="reveng.ecore#//Metamodel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/modelName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/becomeConcept"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Metamodel/kind"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference reveng.ecore#//Metamodel/extractedConcept"/>
     </genClasses>
     <genClasses ecoreClass="reveng.ecore#//Concept">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Concept/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute reveng.ecore#//Concept/nsURI"/>
     </genClasses>
   </genPackages>
