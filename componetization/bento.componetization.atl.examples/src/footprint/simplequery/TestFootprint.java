@@ -45,7 +45,7 @@ public class TestFootprint extends BaseTest {
 		System.out.println("Finished analysis of " + TestFootprint.class.getSimpleName());
 
 		// Prunning
-		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag");
+		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag", PRUNED_SOURCE_METAMODEL);
 		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");

@@ -34,7 +34,8 @@ public abstract class BaseTest {
 	protected BasicEMFModel typingModel;
 	private EPackage conceptPkg;
 	private EPackage metamodelPkg;
-	ResourceSet rs = new ResourceSetImpl();	
+	ResourceSet rs = new ResourceSetImpl();
+	private Resource	prunnedResource;	
 	
 	public void typing(String atlTransformationFile, Object... metamodels) throws IOException {
 		EMFLoader loader = new EMFLoader(new JavaListConverter(), rs);
@@ -82,18 +83,17 @@ public abstract class BaseTest {
 
 
 	public Resource savePrunnedMetamodel(String filename) throws IOException {
-		// XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(filename));
-		Resource r = rs.createResource(URI.createURI(filename));
-		r.getContents().add(metamodelPkg);
-		r.save(null);
+		prunnedResource.save(null);
 		
-		return r;
+		return prunnedResource;
 	}
 	
-	public MetamodelPrunner pruneMetamodel(String uri, String newURI, String newName) {
+	public MetamodelPrunner pruneMetamodel(String uri, String newURI, String newName, String filename) {
+		prunnedResource = rs.createResource(URI.createURI(filename));
+		
 		MetamodelPrunner prunner = new MetamodelPrunner (atlTransformation, 
 				getTransformationMetamodels(), getTypingModel(), uri);
-		metamodelPkg = prunner.extractSource(newName, newURI, newName);
+		metamodelPkg = prunner.extractSource(prunnedResource, newName, newURI, newName);
 		System.out.println(metamodelPkg);
 		return prunner ;
 	}

@@ -41,7 +41,7 @@ public class TestUML2Measure extends BaseTest {
 		System.out.println("Finished typing of " + TestUML2Measure.class.getSimpleName());
 
 		// Meta-model prunning
-		MetamodelPrunner pr = pruneMetamodel("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classidag");
+		MetamodelPrunner pr = pruneMetamodel("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classidag", PRUNED_SOURCE_METAMODEL);
 		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");

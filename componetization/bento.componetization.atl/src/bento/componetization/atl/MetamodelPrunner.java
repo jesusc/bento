@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class MetamodelPrunner extends FootprintComputation {
@@ -42,13 +43,15 @@ public class MetamodelPrunner extends FootprintComputation {
 		super(atlTransformation, mm, typing, slicedURI);
 	}
 
-	public EPackage extractSource(String name, String conceptURI, String conceptPrefix) {
+	public EPackage extractSource(Resource r, String name, String conceptURI, String conceptPrefix) {
 		computeFootprint();
 		
 		conceptPkg = EcoreFactory.eINSTANCE.createEPackage();
 		conceptPkg.setName(name);
 		conceptPkg.setNsURI(conceptURI);
 		conceptPkg.setNsPrefix(conceptPrefix);
+		
+		r.getContents().add(conceptPkg);
 		
 		//copyClasses(directUsedTypes);
 		//copyClasses(indirectUsedTypes);
@@ -133,6 +136,8 @@ public class MetamodelPrunner extends FootprintComputation {
 	private EClass copyClass(EClass eClass) {
 		if ( traceClass.containsKey(eClass) )
 			return traceClass.get(eClass);
+		
+		conceptPkg.eResource().getContents().add(eClass);
 		
 		EClass copy = EcoreFactory.eINSTANCE.createEClass();
 		copy.setName(eClass.getName());

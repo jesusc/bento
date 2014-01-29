@@ -43,7 +43,7 @@ public class TestKM32Measure extends BaseTest {
 		System.out.println("Finished typing of " + TestKM32Measure.class.getSimpleName());
 
 		// Meta-model prunning
-		MetamodelPrunner pr = pruneMetamodel("amma/km3/modified", "http://bento/examples/classdiag", "classidag");
+		MetamodelPrunner pr = pruneMetamodel("amma/km3/modified", "http://bento/examples/classdiag", "classidag", PRUNED_SOURCE_METAMODEL);
 		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");

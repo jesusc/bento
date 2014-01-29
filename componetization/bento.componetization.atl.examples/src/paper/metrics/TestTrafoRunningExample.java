@@ -44,7 +44,7 @@ public class TestTrafoRunningExample extends BaseTest {
 		System.out.println("Typing of " + TestTrafoRunningExample.class.getSimpleName());
 
 		// Meta-model prunning
-		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
+		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml", PRUNED_SOURCE_METAMODEL);
 		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);
 		
 		System.out.println("Meta-model prunned");

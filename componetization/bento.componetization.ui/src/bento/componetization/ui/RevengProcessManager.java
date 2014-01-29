@@ -236,7 +236,6 @@ public class RevengProcessManager {
 		MetamodelPrunner prunner = new MetamodelPrunner(atlModel,
 				metamodelsAndConcepts, typing, pkg.getNsURI());
 		
-		EPackage initialConcept = prunner.extractSource(pkg.getName(), getDefaultConceptURI(metamodel), getDefaultConceptPrefix(metamodel));		
 		
 		Concept concept = RevengFactory.eINSTANCE.createConcept();
 		metamodel.setExtractedConcept(concept);
@@ -244,6 +243,9 @@ public class RevengProcessManager {
 		
 		ResourceSetImpl rs = new ResourceSetImpl();
 		Resource conceptResource = rs.createResource(URI.createURI(concept.getPath()));
+
+		EPackage initialConcept = prunner.extractSource(conceptResource, pkg.getName(), getDefaultConceptURI(metamodel), getDefaultConceptPrefix(metamodel));		
+		
 		conceptResources.put(concept, conceptResource);
 		conceptResource.getContents().add(initialConcept);
 		conceptResource.save(null);
@@ -423,7 +425,7 @@ public class RevengProcessManager {
 		buf.append("\tdefinition atl \"platform:/resource/" + model.getTemplate().getPath() + "\" with \n");
 		for (int i = 0; i < metamodels.size(); i++) {
 			Metamodel metamodel = metamodels.get(i);
-			String mmName = metamodel.getExtractedConcept() != null ? metamodel.getExtractedConcept().getName() : metamodel.getName(); 
+			String mmName = metamodel.getName(); // metamodel.getExtractedConcept() != null ? metamodel.getExtractedConcept().getName() : metamodel.getName(); 
 			
 			String line = metamodel.getModelName() + " : " + mmName + " = " + metamodel.getModelName().toLowerCase();
 			if ( i + 1 < metamodels.size() )

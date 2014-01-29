@@ -1,4 +1,6 @@
 library simplequery2;
 
 helper context CD!Class def : myQuery() : OclAny = 
-	self.features->select(f | f.oclIsKindOf(CD!Reference)->select(f|f.name = 'X');
+	self.features->select(f | f.oclIsKindOf(CD!Reference)->select(f|f.name = 'X'));
+
+	

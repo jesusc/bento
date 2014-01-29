@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.componetization.atl.metrics/src-gen"
+    modelPluginID="bento.componetization.atl.metrics" modelName="Measure" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>Measure.ecore</foreignModel>
+  <genPackages prefix="Measure" basePackage="metamodel.metrics" disposableProviderFactory="true"
+      ecorePackage="Measure.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Measure.ecore#//ModelKind">
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ModelKind/KM3"/>
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ModelKind/UML2"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Measure.ecore#//ElementKind">
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ElementKind/metamodel"/>
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ElementKind/model"/>
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ElementKind/package"/>
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ElementKind/interface"/>
+      <genEnumLiterals ecoreEnumLiteral="Measure.ecore#//ElementKind/class"/>
+    </genEnums>
+    <genClasses ecoreClass="Measure.ecore#//RootMeasureSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//RootMeasureSet/modelType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Measure.ecore#//RootMeasureSet/categories"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Measure.ecore#//RootMeasureSet/measureSets"/>
+    </genClasses>
+    <genClasses ecoreClass="Measure.ecore#//Category">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//Category/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//Category/desc"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Measure.ecore#//Category/metrics"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Measure.ecore#//Category/root"/>
+    </genClasses>
+    <genClasses ecoreClass="Measure.ecore#//Metric">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//Metric/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//Metric/desc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//Metric/preferredValue"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Measure.ecore#//Metric/category"/>
+    </genClasses>
+    <genClasses ecoreClass="Measure.ecore#//MeasureSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//MeasureSet/elementName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//MeasureSet/elementType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Measure.ecore#//MeasureSet/measures"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Measure.ecore#//MeasureSet/root"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Measure.ecore#//MeasureSet/subsets"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Measure.ecore#//MeasureSet/parent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Measure.ecore#//Measure">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Measure.ecore#//Measure/metric"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Measure.ecore#//Measure/owner"/>
+    </genClasses>
+    <genClasses ecoreClass="Measure.ecore#//IntegerMeasure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//IntegerMeasure/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Measure.ecore#//DoubleMeasure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//DoubleMeasure/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Measure.ecore#//PercentageMeasure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Measure.ecore#//PercentageMeasure/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
