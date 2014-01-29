@@ -152,7 +152,7 @@ public class TransformationConfigurationPage extends FormPage {
 		composite.setLayout(new GridLayout(1, false));
 
 		Composite compAtlFile = new Composite(composite, SWT.NONE);
-		compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		managedForm.getToolkit().adapt(compAtlFile);
 		managedForm.getToolkit().paintBordersFor(compAtlFile);
 		GridLayout gl_compAtlFile = new GridLayout(3, false);
@@ -176,7 +176,7 @@ public class TransformationConfigurationPage extends FormPage {
 		});
 
 		Composite composite_1 = new Composite(composite, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		managedForm.getToolkit().adapt(composite_1);
 		managedForm.getToolkit().paintBordersFor(composite_1);
 		composite_1.setLayout(new GridLayout(2, false));

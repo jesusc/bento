@@ -1,0 +1,57 @@
+binding oo2ecore {  
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/UML2.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+
+    class EcoreGeneralization {
+            ref general  : EClass
+            ref specific : EClass
+    } init = ECORE!EClass.allInstances()->collect(specific| specific.eSuperTypes->collect(general | 
+            Tuple { 
+                    type__ = 'EcoreGeneralization', 
+                    general = general, specific = specific
+            }
+    ))->flatten()
+
+	class NamedElement to ENamedElement
+    class Dependency to NONE --??
+    class Class	     to EClass
+    class Property   to EStructuralFeature
+	class Feature	 to EStructuralFeature
+    class Parameter	 to EParameter
+	class Model      to NONE
+	class Package    to EPackage
+	class PackageableElement to EClassifier, EPackage
+	class Classifier to EClassifier
+	class Behavior   to NONE
+	class Operation  to EOperation
+	class TypedElement to ETypedElement
+	class Generalization to virtual EcoreGeneralization
+	class VisibilityKind to NONE
+	
+	
+    -- class PackageableElement to ?
+     
+    feature NamedElement.name   is name
+    
+    feature Class.isAbstract is abstract
+    feature Class.nestedClassifier = Sequence { }
+    feature Class.ownedOperation   is eOperations
+    feature Class.ownedAttribute   is eStructuralFeatures
+    
+    feature Class.generalization = self.EcoreGeneralization_AllInstances->select(g | g.specific = self)
+    
+    feature Generalization.general is general
+    feature Generalization.specific is  specific 
+    
+    feature Operation.ownedParameter is eParameters
+    feature Operation.method = Sequence { }
+    
+    feature Package.packagedElement = self.eClassifiers.union(self.eSubpackages)
+    
+    -- visibility???
+    feature TypedElement.type is eType
+    
+    -- Collapse NamedElement.visibility
+    feature Class.visibility = #public
+    feature Property.visibility = #public
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="KM3"
+    nsURI="amma/km3/modified/concept" nsPrefix="amma_km3_modified_concept">
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//Classifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//StructuralFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Classifier" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//ModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
+        eType="ecore:EClass /bento.componetization.atl.examples/concepts/KM3.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
+        eType="ecore:EDataType /bento.componetization.atl.examples/concepts/KM3.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeatures" upperBound="-1"
+        eType="ecore:EClass /bento.componetization.atl.examples/concepts/KM3.ecore#//StructuralFeature"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//ModelElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="ecore:EClass /bento.componetization.atl.examples/concepts/KM3.ecore#//ModelElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//Classifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuralFeature" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//TypedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isContainer" lowerBound="1"
+        eType="ecore:EDataType /bento.componetization.atl.examples/concepts/KM3.ecore#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//StructuralFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="/bento.componetization.atl.examples/concepts/KM3.ecore#//ModelElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass /bento.componetization.atl.examples/concepts/KM3.ecore#//Classifier"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" lowerBound="1"
+        eType="ecore:EClass /bento.componetization.atl.examples/concepts/KM3.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType /bento.componetization.atl.examples/concepts/KM3.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String"/>
+</ecore:EPackage>

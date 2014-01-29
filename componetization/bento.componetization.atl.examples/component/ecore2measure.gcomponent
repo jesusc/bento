@@ -1,0 +1,11 @@
+composite component ecore2measure {
+	uses "platform:/resource/bento.componetization.atl.examples/component/oo2measure.gcomponent"  
+	binding bindECORE = "platform:/resource/bento.componetization.atl.examples/component/uml_concept2ecore.gbind"
+			
+    source concept ECORE    : "http://www.eclipse.org/emf/2002/Ecore"
+    target concept Measure : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore"
+    source model in  : ECORE    = "platform:/resource/bento.componetization.atl.examples/mymodel.xmi"
+    target model out : Measure = "platform:/resource/bento.componetization.atl.examples/mymodel_output.xmi"
+        			
+	compose apply oo2measure(bindECORE(in)) -> (out)
+}

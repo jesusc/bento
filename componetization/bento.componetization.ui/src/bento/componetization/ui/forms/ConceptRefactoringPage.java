@@ -356,11 +356,6 @@ public class ConceptRefactoringPage extends FormPage {
 			}
 		});
 		managedForm.getToolkit().paintBordersFor(hprlnkComputeMetrics);
-
-		Button btnComputeMetrics = new Button(composite_3, SWT.CHECK);
-		btnComputeMetrics.setSelection(true);
-		managedForm.getToolkit().adapt(btnComputeMetrics, true, true);
-		btnComputeMetrics.setText("Inline in tree");
 		sashForm_1.setWeights(new int[] { 1, 1 });
 		toolkit.decorateFormHeading(form.getForm());
 		m_bindingContext = initDataBindings();
@@ -368,6 +363,7 @@ public class ConceptRefactoringPage extends FormPage {
 		// Manually modified
 		// Set input for the tree editor
 		tabFolder.setSelection(tbtmMetamodel);
+		new Label(composite_3, SWT.NONE);
 		myInitializations();
 	}
 
