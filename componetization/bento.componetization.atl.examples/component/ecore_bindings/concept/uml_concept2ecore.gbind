@@ -16,7 +16,7 @@ binding oo2ecore {
     class Dependency to NONE --??
     class Class	     to EClass
     class Property   to EStructuralFeature
-	class Feature	 to EStructuralFeature
+	class Feature	 to EOperation, EStructuralFeature
     class Parameter	 to EParameter
 	class Model      to NONE
 	class Package    to EPackage

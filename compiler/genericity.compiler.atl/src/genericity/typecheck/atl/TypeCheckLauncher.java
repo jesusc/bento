@@ -577,6 +577,9 @@ public class TypeCheckLauncher {
 			// return values
 			// The value is queried with getLastNavigatedFeature
 			lastNavigatedFeature = f;
+			if ( f.getEType().getName() == null ) {
+				throw new IllegalStateException("No name for type in feature " + f.getEContainingClass().getName() + "." + f.getName());
+			}
 			return createType(f.getEType(), f.getUpperBound() == -1 || f.getUpperBound() > 1);
 		}
 

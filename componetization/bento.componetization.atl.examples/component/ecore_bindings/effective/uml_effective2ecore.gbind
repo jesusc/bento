@@ -1,0 +1,60 @@
+binding oo2ecore {  
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_effective.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+
+    class EcoreGeneralization {
+            ref general  : EClass
+            ref specific : EClass
+    } init = ECORE!EClass.allInstances()->collect(specific| specific.eSuperTypes->collect(general | 
+            Tuple { 
+                    type__ = 'EcoreGeneralization', 
+                    general = general, specific = specific
+            }
+    ))->flatten()
+
+
+	class Property to EStructuralFeature
+	class Model    to NONE 
+	class Class    to EClass
+	class NamedElement to ENamedElement
+	class Feature      to EOperation, EStructuralFeature
+	class Package  to EPackage
+	class PackageableElement to EClassifier, EPackage
+	class Dependency to NONE
+	class Operation  to EOperation
+	class Generalization to virtual EcoreGeneralization	
+	class Parameter to EParameter
+	-- class BehavioralFeature to ???  -- I left this unbound because I know that only Operation inherit from this... hard to see
+	class Classifier to EClassifier 
+	class TypedElement to ETypedElement
+	-- class StructuralFeature to ?? -- Weird, but no need to bind because it is empty class
+	
+	feature Class.nestedClassifier = Sequence { }
+	feature Class.ownedOperation   is eOperations
+	
+	feature NamedElement.name is name
+	feature NamedElement.visibility = #public
+	
+	feature Package.packagedElement = self.eClassifiers.union(self.eSubpackages)
+--	feature Package.packagedElement = self.eClassifiers->select(c | c.oclIsKindOf(ECORE!EClass)).union(self.eSubpackages)
+
+	feature Generalization.specific is specific
+	feature Generalization.general  is general
+
+	feature NamedElement.name is name
+	feature NamedElement.visibility = #public
+	
+	-- From BehavioralFeature
+	feature Operation.method = Sequence { }
+	feature Operation.ownedParameter is eParameters
+	
+	-- From classifier (in the concept this is more evident)
+	feature Class.isAbstract is abstract
+	feature Class.generalization = self.EcoreGeneralization_AllInstances->select(g | g.specific = self)
+
+	feature TypedElement.type is eType
+	
+	-- From StructuredClassifier
+	feature Class.ownedAttribute is eStructuralFeatures
+	
+}

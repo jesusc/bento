@@ -5,59 +5,59 @@
     nsURI="http://www.eclipse.org/uml2/3.0.0/UML/concept" nsPrefix="uml_concept">
   <eClassifiers xsi:type="ecore:EClass" name="Generalization">
     <eStructuralFeatures xsi:type="ecore:EReference" name="specific" lowerBound="1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Classifier"/>
+        eType="ecore:EClass #//Classifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="general" lowerBound="1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Classifier"/>
+        eType="ecore:EClass #//Classifier"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType /bento.componetization.atl.examples/concepts/UML2.ecore#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum /bento.componetization.atl.examples/concepts/UML2.ecore#//VisibilityKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType #//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum #//VisibilityKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//Feature /bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="method" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Behavior"/>
+        eType="ecore:EClass #//Behavior"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Parameter"
+        eType="ecore:EClass #//Parameter"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//TypedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//Package"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement /bento.componetization.atl.examples/concepts/UML2.ecore#//Feature /bento.componetization.atl.examples/concepts/UML2.ecore#//TypedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//PackageableElement /bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//NamedElement #//Feature #//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//PackageableElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElement" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//PackageableElement"
+        eType="ecore:EClass #//PackageableElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//PackageableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//PackageableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement"/>
+        upperBound="-1" eType="ecore:EClass #//NamedElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//Classifier">
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//Classifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Operation"
+        eType="ecore:EClass #//Operation"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedClassifier" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Classifier"
+        eType="ecore:EClass #//Classifier"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Property"
+        eType="ecore:EClass #//Property"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
-        eType="ecore:EDataType /bento.componetization.atl.examples/concepts/UML2.ecore#//Boolean"/>
+        eType="ecore:EDataType #//Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generalization" upperBound="-1"
-        eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Generalization"
+        eType="ecore:EClass #//Generalization"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
-      eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement"/>
+      eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//Type /bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Behavior" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//Class"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass /bento.componetization.atl.examples/concepts/UML2.ecore#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#//Type #//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Behavior" eSuperTypes="#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass #//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="/bento.componetization.atl.examples/concepts/UML2.ecore#//PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//PackageableElement"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
   <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
     <eLiterals name="public"/>
