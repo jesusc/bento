@@ -73,6 +73,7 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import bento.componetization.ui.viewers.MetricsTreeProvider;
+import bento.componetization.ui.viewers.MetamodelUsageProvider;
 
 public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -88,6 +89,7 @@ public class ConceptRefactoringPage extends FormPage {
 	private Text txtConcepturi;
 	private Text txtConceptname;
 	private TreeViewer treeMetricsViewer;
+	private TreeViewer treeMetamodelUsageViewer;
 
 	/**
 	 * Create the form page.
@@ -363,6 +365,27 @@ public class ConceptRefactoringPage extends FormPage {
 		// Manually modified
 		// Set input for the tree editor
 		tabFolder.setSelection(tbtmMetamodel);
+		
+		CTabItem tbtmMetamodelUsage = new CTabItem(tabFolder, SWT.NONE);
+		tbtmMetamodelUsage.setText("Uses");
+		
+		treeMetamodelUsageViewer = new TreeViewer(tabFolder, SWT.BORDER);
+		Tree treeMetamodelUsage = treeMetamodelUsageViewer.getTree();
+		treeMetamodelUsage.setHeaderVisible(true);
+		tbtmMetamodelUsage.setControl(treeMetamodelUsage);
+		managedForm.getToolkit().paintBordersFor(treeMetamodelUsage);
+		
+		TreeViewerColumn treeViewerColumn_3 = new TreeViewerColumn(treeMetamodelUsageViewer, SWT.NONE);
+		TreeColumn trclmnData = treeViewerColumn_3.getColumn();
+		trclmnData.setWidth(136);
+		trclmnData.setText("Use");
+		
+		TreeViewerColumn treeViewerColumn_4 = new TreeViewerColumn(treeMetamodelUsageViewer, SWT.NONE);
+		TreeColumn trclmnNewColumn = treeViewerColumn_4.getColumn();
+		trclmnNewColumn.setWidth(100);
+		trclmnNewColumn.setText("Observation");
+		treeMetamodelUsageViewer.setLabelProvider(new MetamodelUsageProvider());
+		treeMetamodelUsageViewer.setContentProvider(new MetamodelUsageProvider());
 		new Label(composite_3, SWT.NONE);
 		myInitializations();
 	}
@@ -386,6 +409,9 @@ public class ConceptRefactoringPage extends FormPage {
 		Resource metamodelResource = this.manager.getConcept(this.metamodel);
 		conceptTreeViewer.setInput(metamodelResource);
 
+		treeMetamodelUsageViewer.setInput(this.manager.computeStaticAnalysis(this.metamodel));
+		
+		
 		// Get Dirty flag...
 		IObservableValue revengModelTransformationObserveValue = EMFObservables.observeValue(manager.getModel(),
 				Literals.REVENG_MODEL__TRANSFORMATION);

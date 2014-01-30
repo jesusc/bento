@@ -1,0 +1,10 @@
+transformation component uml_concept2measure { 
+	source concept OO : "platform:/resource//bento.componetization.atl.examples/concepts/UML2.ecore"
+	target concept Measure : "platform:/resource//bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore"
+	source model in : OO
+	target model out : Measure
+	definition atl "platform:/resource//bento.componetization.atl.examples/template/uml2measure-all.atl" with
+ 		IN : UML2 = in, 
+		OUT : Measure = out
+
+}

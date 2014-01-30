@@ -71,7 +71,11 @@ public class MetamodelVisualization implements ITreeContentProvider, ILabelProvi
 	@Override
 	public Image getImage(Object element) {
 		if ( element instanceof EPackage ) 	return Activator.getImageDescriptor("/icons/full/obj16/EPackage.gif").createImage();
-		if ( element instanceof EClass )	return Activator.getImageDescriptor("/icons/full/obj16/EClass.gif").createImage();
+		if ( element instanceof EClass )	{
+			if ( ((EClass) element).isAbstract() )
+				return Activator.getImageDescriptor("/icons/full/obj16/EClass_abstract.gif").createImage();
+			return Activator.getImageDescriptor("/icons/full/obj16/EClass.gif").createImage();
+		}
 		if ( element instanceof EReference)	return Activator.getImageDescriptor("/icons/full/obj16/EReference.gif").createImage();
 		if ( element instanceof EAttribute)	return Activator.getImageDescriptor("/icons/full/obj16/EAttribute.gif").createImage();
 

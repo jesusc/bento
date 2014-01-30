@@ -23,10 +23,6 @@ import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMat
  * taking into account that classes explicitly named in the transformation
  * cannot be removed.
  * 
- * TODO: So far it only removes empty top superclasses because
- *       the pruning algorithm already removes intermediate empty
- *       superclasses, but this may probably needs to be changed.
- * 
  * @author jesus
  *
  */

@@ -34,11 +34,13 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import bento.componetization.atl.ConceptExtractor;
+import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.atl.MetamodelModel;
 import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
 import bento.componetization.atl.refactorings.IMatch;
+import bento.componetization.atl.refactorings.MakeLeafAbstractClassConcrete;
 import bento.componetization.atl.refactorings.PushDownFeature;
 import bento.componetization.atl.refactorings.RemoveEmptyClass;
 import bento.componetization.reveng.Concept;
@@ -322,6 +324,10 @@ public class RevengProcessManager {
         return new MetamodelModel(metamodelResources.values());
     }
 
+    public IStaticAnalysisInfo computeStaticAnalysis(Metamodel metamodel) {
+    	return new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
+    }
+    
 	public List<MatchInfo> findRefactorings(Metamodel metamodel) {
 		ConceptExtractor ex = new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
 
@@ -329,6 +335,7 @@ public class RevengProcessManager {
 		
 		// TODO: Have a place to configure the available refactorings 
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
+				new MakeLeafAbstractClassConcrete(ex, ex),
 				new PushDownFeature(ex, ex),
 				new RemoveAssociationClass(ex, ex),
 				new RemoveEmptyClass(ex, ex),

@@ -94,6 +94,13 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.ui.forms.widgets.FormText;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
+import org.eclipse.swt.custom.TableTree;
+import org.eclipse.jface.viewers.TableTreeViewer;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.jface.viewers.TreeViewerColumn;
+import bento.componetization.ui.viewers.MetamodelUsageProvider;
 
 public class TemplatePage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -106,7 +113,6 @@ public class TemplatePage extends FormPage {
 	public static final String ID = "TemplatePage";
 	private TableViewer analysisTableViewer;
 	private TypingInfo typingInfo;
-	private Table tableTyping;
 	
 	/**
 	 * Create the form page.
@@ -156,23 +162,7 @@ public class TemplatePage extends FormPage {
 		managedForm.getToolkit().paintBordersFor(composite);
 		sctnTransformation.setClient(composite);
 		composite.setLayout(new GridLayout(2, false));
-				
-				Section sctnTyping = managedForm.getToolkit().createSection(sashForm, Section.TWISTIE | Section.TITLE_BAR);
-				managedForm.getToolkit().paintBordersFor(sctnTyping);
-				sctnTyping.setText("Typing information");
-				sctnTyping.setExpanded(true);
-				
-				Composite composite_1 = new Composite(sctnTyping, SWT.NONE);
-				managedForm.getToolkit().adapt(composite_1);
-				managedForm.getToolkit().paintBordersFor(composite_1);
-				sctnTyping.setClient(composite_1);
-				composite_1.setLayout(new GridLayout(1, false));
-				
-				TableViewer tableViewer = new TableViewer(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
-				tableTyping = tableViewer.getTable();
-				tableTyping.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-				managedForm.getToolkit().paintBordersFor(tableTyping);
-		sashForm.setWeights(new int[] {1, 1});
+		sashForm.setWeights(new int[] {1});
 		toolkit.decorateFormHeading(form.getForm());
 		m_bindingContext = initDataBindings();
 		
@@ -214,6 +204,12 @@ public class TemplatePage extends FormPage {
 		hprlnkOpenTemplate.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		managedForm.getToolkit().paintBordersFor(hprlnkOpenTemplate);
 		
+		
+		// My initializations
+		myInitializations();
+	}
+
+	private void myInitializations() {
 	}
 
 	private void markAsDirty() {
@@ -234,6 +230,7 @@ public class TemplatePage extends FormPage {
 			analysisTableViewer.setInput(info);
 			analysisTableViewer.refresh();
 		}
+
 		this.typingInfo = info;
 	}
 

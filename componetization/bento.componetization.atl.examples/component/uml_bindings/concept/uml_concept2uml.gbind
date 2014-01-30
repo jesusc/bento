@@ -1,0 +1,42 @@
+binding oo2ecore {  
+	concept   UMLE  : "platform:/resource//bento.componetization.atl.examples/concepts/uml2measure/UML2_effective.ecore"
+	metamodel UML2 : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/UML2_3_0_0.ecore"
+
+	class Generalization to Generalization
+	class Feature        to Feature
+	class NamedElement   to NamedElement
+	class Operation 	 to Operation
+	class Parameter      to Parameter
+	class Model          to Model
+	class Property       to Property
+	class Package        to Package
+	class Dependency	 to Dependency
+	class Class			 to Class
+	class PackageableElement to PackageableElement
+	-- class Classifier to Classifier  -- Not in explicit types! => Suggest a refactoring to eliminate it...
+	-- class Behavior   to Behavior    -- Not in explicit types! => Suggest a refactoring to eliminate it...
+	class TypedElement   to TypedElement
+	-- class Type       to Type 	   -- Not in explicit types! => Suggest a refactoring to eliminate it...
+
+	feature Generalization.general  is general
+	feature Generalization.specific is specific
+	
+	feature NamedElement.name is name
+	feature NamedElement.visibility is visibility
+	
+	feature Operation.method is method
+	feature Operation.ownedParameter is ownedParameter
+	
+	feature Package.packagedElements is packagedElements
+
+	feature Dependency.supplier is supplier
+	
+	feature Class.ownedOperation is ownedOperation
+	feature Class.nestedClassifier is nestedClassifier
+	feature Class.ownedAttribute is ownedAttribute
+	feature Class.isAbstract     is isAbstract     -- PDF from Classifier
+	feature Class.generalization is generalization -- PDF from Classifier
+	
+	feature TypedElement.type is type
+	
+}

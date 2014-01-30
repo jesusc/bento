@@ -1,0 +1,11 @@
+composite component uml2measure {
+	uses "platform:/resource/bento.componetization.atl.examples/component/uml_bindings/concept/uml_concept2measure.gcomponent"  
+	binding bindUML = "platform:/resource/bento.componetization.atl.examples/component/uml_bindings/concept/uml_concept2uml.gbind"
+			
+    source concept UML    : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/UML2_3_0_0.ecore"
+    target concept Measure : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore"
+    source model in  : UML    = "platform:/resource/bento.componetization.atl.examples/mymodel.xmi"
+    target model out : Measure = "platform:/resource/bento.componetization.atl.examples/mymodel_output.xmi"
+        			
+	compose apply uml_concept2measure(bindUML(in)) -> (out)
+}
