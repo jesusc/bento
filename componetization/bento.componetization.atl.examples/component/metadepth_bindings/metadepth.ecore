@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="mdTypes" nsURI="http://metadepth.org/mdTypes" nsPrefix="mdepthDataTypes">
+    <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Instance" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LingType" abstract="true" eSuperTypes="#/0/Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeLingType" eSuperTypes="#/0/LingType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EdgeLingType" eSuperTypes="#/0/LingType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="#/0/Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#/0/DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+          eType="#/0/EnumerationLiteralType" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralType" eSuperTypes="#/0/DataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveDataType" abstract="true"
+        eSuperTypes="#/0/DataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#/0/PrimitiveDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntType" eSuperTypes="#/0/PrimitiveDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DoubleType" eSuperTypes="#/0/PrimitiveDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DateType" eSuperTypes="#/0/PrimitiveDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#/0/PrimitiveDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FieldValue" abstract="true" eSuperTypes="#/0/Instance">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#/0/Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AtomicValue" abstract="true" eSuperTypes="#/0/FieldValue"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DoubleValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DateValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectValue" eSuperTypes="#/0/AtomicValue">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
+          eType="#/0/Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MDCollection" abstract="true" eSuperTypes="#/0/FieldValue">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" eType="#/0/Type"
+          transient="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+          eType="#/0/AtomicValue" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectCollection" eSuperTypes="#/0/MDCollection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveCollection" eSuperTypes="#/0/MDCollection"/>
+  </ecore:EPackage>
+  <ecore:EPackage name="commands" nsURI="http://metadepth.org/commands" nsPrefix="mdepthCommands">
+    <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Load" eSuperTypes="#/1/Command">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ecore:EPackage name="core" nsURI="http://metadepth.org" nsPrefix="mdepth">
+    <eAnnotations source="http://www.eclipse.org/OCL/Import">
+      <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Environment">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
+          eType="#/1/Command" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+          eType="#/2/Model" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataTypes" upperBound="-1"
+          eType="#/0/DataType" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Model" abstract="true" eSuperTypes="#/2/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
+          upperBound="-1" eType="#/2/QualifiedElement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="imports" ordered="false"
+          upperBound="-1" eType="#/2/Model"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enumerations" ordered="false"
+          upperBound="-1" eType="#/0/EnumerationType" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#/2/Model"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelInstance" eSuperTypes="#/2/Model"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Clabject" abstract="true" eSuperTypes="#/0/Type #/0/Instance">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="potency" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#/2/Clabject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStrict" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true" eSuperTypes="#/2/Clabject">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#/0/FieldValue"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fieldType" eType="#/0/Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#/2/Property">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isId" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FieldInstance" eSuperTypes="#/2/Property"/>
+    <eClassifiers xsi:type="ecore:EClass" name="QualifiedElement" abstract="true"
+        eSuperTypes="#/2/Clabject">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fields" ordered="false"
+          upperBound="-1" eType="#/2/Property" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#/2/QualifiedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+          eType="#/2/Classifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="#/2/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeType" eSuperTypes="#/2/Node"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeInstance" eSuperTypes="#/2/Node"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#/2/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="memberEnd" upperBound="-1"
+          eType="#/2/Field" containment="true"/>
+    </eClassifiers>
+  </ecore:EPackage>
+</xmi:XMI>
