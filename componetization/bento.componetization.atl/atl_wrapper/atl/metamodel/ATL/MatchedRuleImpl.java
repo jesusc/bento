@@ -16,6 +16,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public atl.metamodel.ATL.Module getModule() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("module");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.Module) result;
 	}
@@ -78,6 +89,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setModule(atl.metamodel.ATL.Module v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("module");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,6 +102,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public atl.metamodel.ATL.OutPattern getOutPattern() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("outPattern");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.OutPattern) result;
 	}
@@ -97,6 +112,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setOutPattern(atl.metamodel.ATL.OutPattern v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("outPattern");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -108,6 +125,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public atl.metamodel.ATL.ActionBlock getActionBlock() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("actionBlock");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.ActionBlock) result;
 	}
@@ -116,6 +135,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setActionBlock(atl.metamodel.ATL.ActionBlock v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("actionBlock");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -127,14 +148,18 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<atl.metamodel.ATL.RuleVariableDeclaration> getVariables() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("variables");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.RuleVariableDeclaration>) result;
 	}
 	
 	@Override
-	public void addVariables(List<atl.metamodel.ATL.RuleVariableDeclaration> v) {
+	public void addVariables(atl.metamodel.ATL.RuleVariableDeclaration v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("variables");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -146,6 +171,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public java.lang.String getName() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -153,6 +180,7 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setName(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -164,6 +192,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public atl.metamodel.ATL.InPattern getInPattern() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("inPattern");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.InPattern) result;
 	}
@@ -172,6 +202,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setInPattern(atl.metamodel.ATL.InPattern v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("inPattern");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -183,14 +215,18 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<atl.metamodel.ATL.MatchedRule> getChildren() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("children");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.MatchedRule>) result;
 	}
 	
 	@Override
-	public void addChildren(List<atl.metamodel.ATL.MatchedRule> v) {
+	public void addChildren(atl.metamodel.ATL.MatchedRule v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("children");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -202,6 +238,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public atl.metamodel.ATL.MatchedRule getSuperRule() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("superRule");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.MatchedRule) result;
 	}
@@ -210,6 +248,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setSuperRule(atl.metamodel.ATL.MatchedRule v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("superRule");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -221,6 +261,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public Boolean getIsAbstract() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isAbstract");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (Boolean) result;
 	}
 	
@@ -228,6 +270,7 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setIsAbstract(Boolean v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isAbstract");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -239,6 +282,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public Boolean getIsRefining() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isRefining");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (Boolean) result;
 	}
 	
@@ -246,6 +291,7 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setIsRefining(Boolean v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isRefining");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -257,6 +303,8 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public Boolean getIsNoDefault() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isNoDefault");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (Boolean) result;
 	}
 	
@@ -264,6 +312,7 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setIsNoDefault(Boolean v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("isNoDefault");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

@@ -1,5 +1,15 @@
 library simplequery2;
 
+helper def : myQueryAll() : OclAny = 
+	CD!Class.allInstances()->collect(specific | 
+		specific.superclasses->collect(general|
+			Tuple { specific = specific, general = general }	
+		)	
+	);
+
+helper def : xxx() : OclAny =
+	CD!Generalization.allInstances()->select(x | true);
+
 helper context CD!Class def : myQuery() : OclAny = 
 	self.features->select(f | f.oclIsKindOf(CD!Reference)->select(f|f.name = 'X'));
 

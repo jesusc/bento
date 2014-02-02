@@ -13,15 +13,15 @@ public interface ActionBlock extends atl.metamodel.ATLModelBaseObjectInterface, 
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.ATL.Rule getRule();
 
 	public void setRule(atl.metamodel.ATL.Rule v);
 	public List<atl.metamodel.ATL.Statement> getStatements();
 
-	public void addStatements(List<atl.metamodel.ATL.Statement> v);
+	public void addStatements(atl.metamodel.ATL.Statement v);
 
 }

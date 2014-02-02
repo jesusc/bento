@@ -16,6 +16,8 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public java.lang.String getName() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -77,6 +88,7 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public void setName(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -88,6 +100,8 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public atl.metamodel.OCL.OclModel getMetamodel() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("metamodel");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.OclModel) result;
 	}
@@ -96,6 +110,8 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public void setMetamodel(atl.metamodel.OCL.OclModel v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("metamodel");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -107,14 +123,18 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public List<atl.metamodel.OCL.OclModelElement> getElements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elements");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.OCL.OclModelElement>) result;
 	}
 	
 	@Override
-	public void addElements(List<atl.metamodel.OCL.OclModelElement> v) {
+	public void addElements(atl.metamodel.OCL.OclModelElement v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elements");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -126,14 +146,18 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 	public List<atl.metamodel.OCL.OclModel> getModel() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("model");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.OCL.OclModel>) result;
 	}
 	
 	@Override
-	public void addModel(List<atl.metamodel.OCL.OclModel> v) {
+	public void addModel(atl.metamodel.OCL.OclModel v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("model");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

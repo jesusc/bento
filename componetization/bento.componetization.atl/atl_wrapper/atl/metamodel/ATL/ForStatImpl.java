@@ -16,6 +16,8 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public atl.metamodel.OCL.Iterator getIterator() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("iterator");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.Iterator) result;
 	}
@@ -78,6 +89,8 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public void setIterator(atl.metamodel.OCL.Iterator v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("iterator");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,6 +102,8 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public atl.metamodel.OCL.OclExpression getCollection() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("collection");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.OclExpression) result;
 	}
@@ -97,6 +112,8 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public void setCollection(atl.metamodel.OCL.OclExpression v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("collection");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -108,14 +125,18 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 	public List<atl.metamodel.ATL.Statement> getStatements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("statements");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.Statement>) result;
 	}
 	
 	@Override
-	public void addStatements(List<atl.metamodel.ATL.Statement> v) {
+	public void addStatements(atl.metamodel.ATL.Statement v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("statements");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

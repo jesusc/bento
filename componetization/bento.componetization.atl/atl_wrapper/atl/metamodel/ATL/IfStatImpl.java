@@ -16,6 +16,8 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public atl.metamodel.OCL.OclExpression getCondition() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("condition");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.OclExpression) result;
 	}
@@ -78,6 +89,8 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public void setCondition(atl.metamodel.OCL.OclExpression v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("condition");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,14 +102,18 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public List<atl.metamodel.ATL.Statement> getThenStatements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("thenStatements");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.Statement>) result;
 	}
 	
 	@Override
-	public void addThenStatements(List<atl.metamodel.ATL.Statement> v) {
+	public void addThenStatements(atl.metamodel.ATL.Statement v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("thenStatements");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -108,14 +125,18 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 	public List<atl.metamodel.ATL.Statement> getElseStatements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elseStatements");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.Statement>) result;
 	}
 	
 	@Override
-	public void addElseStatements(List<atl.metamodel.ATL.Statement> v) {
+	public void addElseStatements(atl.metamodel.ATL.Statement v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elseStatements");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

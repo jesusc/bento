@@ -13,10 +13,10 @@ public interface OperationCallExp extends atl.metamodel.ATLModelBaseObjectInterf
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclType getType();
 
 	public void setType(atl.metamodel.OCL.OclType v);
@@ -58,7 +58,7 @@ public interface OperationCallExp extends atl.metamodel.ATLModelBaseObjectInterf
 	public void setSource(atl.metamodel.OCL.OclExpression v);
 	public List<atl.metamodel.OCL.OclExpression> getArguments();
 
-	public void addArguments(List<atl.metamodel.OCL.OclExpression> v);
+	public void addArguments(atl.metamodel.OCL.OclExpression v);
 	public java.lang.String getOperationName();
 
 	public void setOperationName(java.lang.String v);

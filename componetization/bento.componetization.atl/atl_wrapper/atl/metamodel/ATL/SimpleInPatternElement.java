@@ -13,10 +13,10 @@ public interface SimpleInPatternElement extends atl.metamodel.ATLModelBaseObject
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public java.lang.String getId();
 
 	public void setId(java.lang.String v);
@@ -37,7 +37,7 @@ public interface SimpleInPatternElement extends atl.metamodel.ATLModelBaseObject
 	public void setBaseExp(atl.metamodel.OCL.IterateExp v);
 	public List<atl.metamodel.OCL.VariableExp> getVariableExp();
 
-	public void addVariableExp(List<atl.metamodel.OCL.VariableExp> v);
+	public void addVariableExp(atl.metamodel.OCL.VariableExp v);
 	public atl.metamodel.ATL.OutPatternElement getMapsTo();
 
 	public void setMapsTo(atl.metamodel.ATL.OutPatternElement v);
@@ -46,6 +46,6 @@ public interface SimpleInPatternElement extends atl.metamodel.ATLModelBaseObject
 	public void setInPattern(atl.metamodel.ATL.InPattern v);
 	public List<atl.metamodel.OCL.OclModel> getModels();
 
-	public void addModels(List<atl.metamodel.OCL.OclModel> v);
+	public void addModels(atl.metamodel.OCL.OclModel v);
 
 }

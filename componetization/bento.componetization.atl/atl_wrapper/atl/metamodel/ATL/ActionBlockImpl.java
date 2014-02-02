@@ -16,6 +16,8 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public atl.metamodel.ATL.Rule getRule() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("rule");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.Rule) result;
 	}
@@ -78,6 +89,8 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public void setRule(atl.metamodel.ATL.Rule v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("rule");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,14 +102,18 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 	public List<atl.metamodel.ATL.Statement> getStatements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("statements");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.Statement>) result;
 	}
 	
 	@Override
-	public void addStatements(List<atl.metamodel.ATL.Statement> v) {
+	public void addStatements(atl.metamodel.ATL.Statement v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("statements");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

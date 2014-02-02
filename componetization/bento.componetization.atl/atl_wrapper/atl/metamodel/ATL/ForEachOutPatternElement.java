@@ -13,10 +13,10 @@ public interface ForEachOutPatternElement extends atl.metamodel.ATLModelBaseObje
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public java.lang.String getId();
 
 	public void setId(java.lang.String v);
@@ -37,7 +37,7 @@ public interface ForEachOutPatternElement extends atl.metamodel.ATLModelBaseObje
 	public void setBaseExp(atl.metamodel.OCL.IterateExp v);
 	public List<atl.metamodel.OCL.VariableExp> getVariableExp();
 
-	public void addVariableExp(List<atl.metamodel.OCL.VariableExp> v);
+	public void addVariableExp(atl.metamodel.OCL.VariableExp v);
 	public atl.metamodel.ATL.OutPattern getOutPattern();
 
 	public void setOutPattern(atl.metamodel.ATL.OutPattern v);
@@ -46,7 +46,7 @@ public interface ForEachOutPatternElement extends atl.metamodel.ATLModelBaseObje
 	public void setSourceElement(atl.metamodel.ATL.InPatternElement v);
 	public List<atl.metamodel.ATL.Binding> getBindings();
 
-	public void addBindings(List<atl.metamodel.ATL.Binding> v);
+	public void addBindings(atl.metamodel.ATL.Binding v);
 	public atl.metamodel.OCL.OclModel getModel();
 
 	public void setModel(atl.metamodel.OCL.OclModel v);

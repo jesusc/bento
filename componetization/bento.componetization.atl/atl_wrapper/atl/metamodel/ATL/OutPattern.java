@@ -13,15 +13,15 @@ public interface OutPattern extends atl.metamodel.ATLModelBaseObjectInterface, a
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.ATL.Rule getRule();
 
 	public void setRule(atl.metamodel.ATL.Rule v);
 	public List<atl.metamodel.ATL.OutPatternElement> getElements();
 
-	public void addElements(List<atl.metamodel.ATL.OutPatternElement> v);
+	public void addElements(atl.metamodel.ATL.OutPatternElement v);
 
 }

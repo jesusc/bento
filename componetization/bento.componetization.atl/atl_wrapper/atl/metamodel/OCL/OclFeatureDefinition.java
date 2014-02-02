@@ -13,10 +13,10 @@ public interface OclFeatureDefinition extends atl.metamodel.ATLModelBaseObjectIn
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclFeature getFeature();
 
 	public void setFeature(atl.metamodel.OCL.OclFeature v);

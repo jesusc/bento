@@ -13,10 +13,10 @@ public interface BindingStat extends atl.metamodel.ATLModelBaseObjectInterface, 
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclExpression getSource();
 
 	public void setSource(atl.metamodel.OCL.OclExpression v);

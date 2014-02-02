@@ -13,10 +13,10 @@ public interface IterateExp extends atl.metamodel.ATLModelBaseObjectInterface, a
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclType getType();
 
 	public void setType(atl.metamodel.OCL.OclType v);
@@ -61,7 +61,7 @@ public interface IterateExp extends atl.metamodel.ATLModelBaseObjectInterface, a
 	public void setBody(atl.metamodel.OCL.OclExpression v);
 	public List<atl.metamodel.OCL.Iterator> getIterators();
 
-	public void addIterators(List<atl.metamodel.OCL.Iterator> v);
+	public void addIterators(atl.metamodel.OCL.Iterator v);
 	public atl.metamodel.OCL.VariableDeclaration getResult();
 
 	public void setResult(atl.metamodel.OCL.VariableDeclaration v);

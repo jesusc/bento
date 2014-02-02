@@ -16,6 +16,8 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,14 +79,18 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public List<atl.metamodel.ATL.InPatternElement> getElements() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elements");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (List<atl.metamodel.ATL.InPatternElement>) result;
 	}
 	
 	@Override
-	public void addElements(List<atl.metamodel.ATL.InPatternElement> v) {
+	public void addElements(atl.metamodel.ATL.InPatternElement v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("elements");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,6 +102,8 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public atl.metamodel.ATL.MatchedRule getRule() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("rule");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.MatchedRule) result;
 	}
@@ -97,6 +112,8 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public void setRule(atl.metamodel.ATL.MatchedRule v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("rule");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -108,6 +125,8 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public atl.metamodel.OCL.OclExpression getFilter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("filter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.OclExpression) result;
 	}
@@ -116,6 +135,8 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 	public void setFilter(atl.metamodel.OCL.OclExpression v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("filter");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

@@ -13,10 +13,10 @@ public interface ExpressionStat extends atl.metamodel.ATLModelBaseObjectInterfac
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclExpression getExpression();
 
 	public void setExpression(atl.metamodel.OCL.OclExpression v);

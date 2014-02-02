@@ -4,6 +4,7 @@ import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.UnknownFeature;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,6 +17,14 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import atl.metamodel.ATLModel;
+import atl.metamodel.ATL.Helper;
+import atl.metamodel.ATL.PatternElement;
+import atl.metamodel.ATL.Rule;
+import atl.metamodel.OCL.OclModelElement;
+import atl.metamodel.OCL.OclType;
+import atl.metamodel.OCL.OperationCallExp;
 
 public abstract class FootprintComputation {
 	protected String slicedURI;
@@ -31,6 +40,7 @@ public abstract class FootprintComputation {
 	protected HashSet<UnknownFeature> unknownFeatures = new HashSet<UnknownFeature>();
 	
 	protected HashSet<CallSite> callSites = new HashSet<CallSite>();
+	private ATLModel	atlModel;
 
 	public FootprintComputation(BasicEMFModel atlTransformation, IModel mm, BasicEMFModel typing, String slicedURI) {
 		this.atlTransformation = atlTransformation;
@@ -49,6 +59,15 @@ public abstract class FootprintComputation {
 		}
 		if ( pkg == null ) throw new IllegalArgumentException("No package with URI " + slicedURI);		
 	}
+	
+	
+	public ATLModel getATL() {
+		if ( atlModel == null )
+			atlModel = new ATLModel(atlTransformation.getHandler().getResource());
+		return atlModel;
+	}
+
+	
 	
 	protected void computeFootprint() {
 		// Compute direct used types
@@ -91,11 +110,12 @@ public abstract class FootprintComputation {
 	}
 	
 
-
 	public HashSet<EStructuralFeature> getUsedFeatures() {
 		HashSet<EStructuralFeature> s = new HashSet<EStructuralFeature>();
 		s.addAll(usedAttributes);
 		s.addAll(usedReferences);
 		return s;
 	}	
+
+
 }

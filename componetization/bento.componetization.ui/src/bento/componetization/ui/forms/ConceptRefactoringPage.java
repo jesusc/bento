@@ -172,30 +172,44 @@ public class ConceptRefactoringPage extends FormPage {
 		managedForm.getToolkit().adapt(lblRefactorings, true, true);
 		lblRefactorings.setText("Applicable refactorings");
 		new Label(composite_1, SWT.NONE);
-
-		listRefactorings = CheckboxTableViewer.newCheckList(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
-		table_1 = listRefactorings.getTable();
-		table_1.setHeaderVisible(true);
-		GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3);
-		gd_table_1.heightHint = 150;
-		table_1.setLayoutData(gd_table_1);
-		managedForm.getToolkit().paintBordersFor(table_1);
-
-		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(listRefactorings, SWT.NONE);
-		TableColumn tblclmnSelected = tableViewerColumn_3.getColumn();
-		tblclmnSelected.setWidth(20);
-
-		TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(listRefactorings, SWT.NONE);
-		TableColumn tblclmnName_1 = tableViewerColumn_4.getColumn();
-		tblclmnName_1.setWidth(100);
-		tblclmnName_1.setText("Name");
-
-		TableViewerColumn tableViewerColumn_5 = new TableViewerColumn(listRefactorings, SWT.NONE);
-		TableColumn tblclmnExplanation_1 = tableViewerColumn_5.getColumn();
-		tblclmnExplanation_1.setWidth(100);
-		tblclmnExplanation_1.setText("Explanation");
-		listRefactorings.setContentProvider(new RefactoringListProvider());
-		listRefactorings.setLabelProvider(new RefactoringListProvider());
+		
+				listRefactorings = CheckboxTableViewer.newCheckList(composite_1, SWT.BORDER | SWT.FULL_SELECTION);
+				table_1 = listRefactorings.getTable();
+				table_1.setHeaderVisible(true);
+				GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 4);
+				gd_table_1.heightHint = 150;
+				table_1.setLayoutData(gd_table_1);
+				managedForm.getToolkit().paintBordersFor(table_1);
+				
+						TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(listRefactorings, SWT.NONE);
+						TableColumn tblclmnSelected = tableViewerColumn_3.getColumn();
+						tblclmnSelected.setWidth(20);
+						
+								TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(listRefactorings, SWT.NONE);
+								TableColumn tblclmnName_1 = tableViewerColumn_4.getColumn();
+								tblclmnName_1.setWidth(100);
+								tblclmnName_1.setText("Name");
+								
+										TableViewerColumn tableViewerColumn_5 = new TableViewerColumn(listRefactorings, SWT.NONE);
+										TableColumn tblclmnExplanation_1 = tableViewerColumn_5.getColumn();
+										tblclmnExplanation_1.setWidth(100);
+										tblclmnExplanation_1.setText("Explanation");
+										listRefactorings.setContentProvider(new RefactoringListProvider());
+										listRefactorings.setLabelProvider(new RefactoringListProvider());
+		new Label(composite_1, SWT.NONE);
+		
+		Button btnNewButton = new Button(composite_1, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				deselectAll();
+			}
+		});
+		btnNewButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		managedForm.getToolkit().adapt(btnNewButton, true, true);
+		btnNewButton.setText("Deselect all");
+		new Label(composite_1, SWT.NONE);
+		new Label(composite_1, SWT.NONE);
 		new Label(composite_1, SWT.NONE);
 
 		Button btnApplySelected = managedForm.getToolkit().createButton(composite_1, "Apply selected", SWT.NONE);
@@ -390,6 +404,7 @@ public class ConceptRefactoringPage extends FormPage {
 		myInitializations();
 	}
 
+
 	protected void computeMetrics() {
 		try {
 			MyEcore2Measure runner = new MyEcore2Measure();
@@ -436,8 +451,13 @@ public class ConceptRefactoringPage extends FormPage {
 		List<MatchInfo> matches = manager.findRefactorings(this.metamodel);
 		listRefactorings.setInput(matches);
 		listRefactorings.setAllChecked(true);
+
 	}
 
+	protected void deselectAll() {
+		listRefactorings.setAllChecked(false);
+	}
+	
 	protected void applySelectedRefactorings() {
 		Activator.log("Applying refactorings");
 

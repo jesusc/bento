@@ -2,8 +2,10 @@ package bento.componetization.atl;
 
 import genericity.typing.atl_types.UnknownFeature;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.IModel;
@@ -12,6 +14,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -31,6 +34,8 @@ public class MetamodelPrunner extends FootprintComputation {
 	protected HashMap<EStructuralFeature, EStructuralFeature> traceFeature = new HashMap<EStructuralFeature, EStructuralFeature>();
 		
 	private Strategy strategy = Strategy.REALFEATURE_STRATEGY;
+
+	private List<EReference> pendingOpposites = new ArrayList<EReference>();
 	
 	/**
 	 * 
@@ -63,16 +68,6 @@ public class MetamodelPrunner extends FootprintComputation {
 		return conceptPkg;
 	}
 	
-	private void copyReferences(HashSet<EClass> usedTypes) {
-		for (EClass eClass : usedTypes) {
-			EClass copy = EcoreFactory.eINSTANCE.createEClass();
-			copy.setName(eClass.getName());
-		
-			conceptPkg.getEClassifiers().add(copy);
-			traceClass.put(eClass, copy);
-		}
-	}
-
 	private void copyFeature(EClass klass, EStructuralFeature usedFeature) {
 		if ( traceFeature.containsKey(usedFeature) ) {
 			throw new IllegalStateException("Feature " + usedFeature.getName() + " already translated");
@@ -95,6 +90,10 @@ public class MetamodelPrunner extends FootprintComputation {
 			
 			((EReference) copy).setContainment( ((EReference) usedFeature).isContainment() );
 			copy.setEType( tgtType );
+			
+			if ( ((EReference) usedFeature).getEOpposite() != null ) {
+				pendingOpposites.add(((EReference) usedFeature));
+			}
 		}
 	
 		copy.setName( usedFeature.getName() );
@@ -226,6 +225,15 @@ public class MetamodelPrunner extends FootprintComputation {
 				for(EClass original : new HashSet<EClass>(extractor.traceClass.keySet()) ) {
 					extractor.setInheritanceLinks(original, extractor.traceClass.get(original));
 				}
+				
+				for(EReference r: extractor.pendingOpposites) {
+					EReference copied = (EReference) extractor.traceFeature.get(r);
+					if ( extractor.traceFeature.containsKey(r.getEOpposite()) ) {
+						EReference opp = (EReference) extractor.traceFeature.get(r.getEOpposite());
+						copied.setEOpposite( opp );
+					}
+				}
+				
 			}
 		},
 

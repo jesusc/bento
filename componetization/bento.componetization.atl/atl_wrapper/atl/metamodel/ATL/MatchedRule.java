@@ -13,10 +13,10 @@ public interface MatchedRule extends atl.metamodel.ATLModelBaseObjectInterface, 
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.ATL.Module getModule();
 
 	public void setModule(atl.metamodel.ATL.Module v);
@@ -28,7 +28,7 @@ public interface MatchedRule extends atl.metamodel.ATLModelBaseObjectInterface, 
 	public void setActionBlock(atl.metamodel.ATL.ActionBlock v);
 	public List<atl.metamodel.ATL.RuleVariableDeclaration> getVariables();
 
-	public void addVariables(List<atl.metamodel.ATL.RuleVariableDeclaration> v);
+	public void addVariables(atl.metamodel.ATL.RuleVariableDeclaration v);
 	public java.lang.String getName();
 
 	public void setName(java.lang.String v);
@@ -37,7 +37,7 @@ public interface MatchedRule extends atl.metamodel.ATLModelBaseObjectInterface, 
 	public void setInPattern(atl.metamodel.ATL.InPattern v);
 	public List<atl.metamodel.ATL.MatchedRule> getChildren();
 
-	public void addChildren(List<atl.metamodel.ATL.MatchedRule> v);
+	public void addChildren(atl.metamodel.ATL.MatchedRule v);
 	public atl.metamodel.ATL.MatchedRule getSuperRule();
 
 	public void setSuperRule(atl.metamodel.ATL.MatchedRule v);

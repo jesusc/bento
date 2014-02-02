@@ -2,7 +2,9 @@ package bento.componetization.atl;
 
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.management.RuntimeErrorException;
@@ -17,6 +19,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import atl.metamodel.ATLModel;
+import atl.metamodel.ATL.Helper;
+import atl.metamodel.ATL.PatternElement;
+import atl.metamodel.ATL.Rule;
+import atl.metamodel.OCL.OclContextDefinition;
+import atl.metamodel.OCL.OclModelElement;
+import atl.metamodel.OCL.OclType;
+import atl.metamodel.OCL.OperationCallExp;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
 import bento.componetization.atl.refactorings.PushDownFeature;
@@ -30,11 +39,6 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 		// TODO Auto-generated constructor stub
 
 		computeFootprint();
-	}
-	
-	@Override
-	public ATLModel getATL() {
-		return new ATLModel(atlTransformation.getHandler().getResource());
 	}
 
 	public EPackage refactor() {
@@ -122,4 +126,63 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 		throw new RuntimeException("Typing for node " + expr + " not found");
 	}
 
+	@Override
+	public List<OperationCallExp> getAllInstancesUsages(EClass clazz) {
+		ArrayList<OperationCallExp> result = new ArrayList<OperationCallExp>();
+
+		List<? extends OperationCallExp> elements = getATL().allObjectsOf(OperationCallExp.class);
+		for (OperationCallExp op : elements) {
+			if ( op.getOperationName().equals("allInstances") ) {
+				if ( op.getSource() instanceof OclModelElement  &&
+					 ((OclModelElement) op.getSource()).getName().equals(clazz.getName()) ) {
+			
+					result.add(op);
+				}
+			}
+		}
+		
+		return result;
+ 	}
+
+	@Override
+	public HashSet<Rule> getRuleUsages(EClass clazz) {
+		HashSet<Rule> result = new HashSet<Rule>();
+
+		List<? extends PatternElement> elements = getATL().allObjectsOf(PatternElement.class);
+		// Improve to consider subtypes...
+		for (PatternElement patternElement : elements) {
+			if ( checkCompatibility(patternElement.getType(), clazz) ) {
+				Rule r = (Rule) patternElement.container_().container_();
+				result.add(r);
+			}
+		}
+		
+		return result;
+ 	}
+
+	@Override
+	public List<Helper> getHelperUsages(EClass clazz) {
+		ArrayList<Helper> result = new ArrayList<Helper>();
+
+		List<? extends Helper> elements = getATL().allObjectsOf(Helper.class);
+		for (Helper h : elements) {
+			OclContextDefinition context = h.getDefinition().getContext_();
+			if ( context == null )
+				continue;
+			
+			if ( checkCompatibility(context.getContext_(), clazz) ) {
+				result.add(h);
+			}
+		}
+		
+		return result;
+		
+	}
+
+
+	/** TODO: CHECK SUBTYPES */
+	private boolean checkCompatibility(OclType t, EClass clazz) {
+		return t.getName().equals(clazz.getName());
+	}
+	
 }

@@ -13,10 +13,10 @@ public interface Iterator extends atl.metamodel.ATLModelBaseObjectInterface, atl
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public java.lang.String getId();
 
 	public void setId(java.lang.String v);
@@ -37,7 +37,7 @@ public interface Iterator extends atl.metamodel.ATLModelBaseObjectInterface, atl
 	public void setBaseExp(atl.metamodel.OCL.IterateExp v);
 	public List<atl.metamodel.OCL.VariableExp> getVariableExp();
 
-	public void addVariableExp(List<atl.metamodel.OCL.VariableExp> v);
+	public void addVariableExp(atl.metamodel.OCL.VariableExp v);
 	public atl.metamodel.OCL.LoopExp getLoopExpr();
 
 	public void setLoopExpr(atl.metamodel.OCL.LoopExp v);

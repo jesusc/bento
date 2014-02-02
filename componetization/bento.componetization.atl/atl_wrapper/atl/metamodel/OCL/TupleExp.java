@@ -13,10 +13,10 @@ public interface TupleExp extends atl.metamodel.ATLModelBaseObjectInterface, atl
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclType getType();
 
 	public void setType(atl.metamodel.OCL.OclType v);
@@ -55,6 +55,6 @@ public interface TupleExp extends atl.metamodel.ATLModelBaseObjectInterface, atl
 	public void setOwningAttribute(atl.metamodel.OCL.Attribute v);
 	public List<atl.metamodel.OCL.TuplePart> getTuplePart();
 
-	public void addTuplePart(List<atl.metamodel.OCL.TuplePart> v);
+	public void addTuplePart(atl.metamodel.OCL.TuplePart v);
 
 }

@@ -13,10 +13,10 @@ public interface TupleType extends atl.metamodel.ATLModelBaseObjectInterface, at
 	public void setLocation(java.lang.String v);
 	public List<java.lang.String> getCommentsBefore();
 
-	public void addCommentsBefore(List<java.lang.String> v);
+	public void addCommentsBefore(java.lang.String v);
 	public List<java.lang.String> getCommentsAfter();
 
-	public void addCommentsAfter(List<java.lang.String> v);
+	public void addCommentsAfter(java.lang.String v);
 	public atl.metamodel.OCL.OclType getType();
 
 	public void setType(atl.metamodel.OCL.OclType v);
@@ -85,6 +85,6 @@ public interface TupleType extends atl.metamodel.ATLModelBaseObjectInterface, at
 	public void setVariableDeclaration(atl.metamodel.OCL.VariableDeclaration v);
 	public List<atl.metamodel.OCL.TupleTypeAttribute> getAttributes();
 
-	public void addAttributes(List<atl.metamodel.OCL.TupleTypeAttribute> v);
+	public void addAttributes(atl.metamodel.OCL.TupleTypeAttribute v);
 
 }

@@ -16,6 +16,8 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public atl.metamodel.ATL.Unit getUnit() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("unit");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.ATL.Unit) result;
 	}
@@ -78,6 +89,8 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public void setUnit(atl.metamodel.ATL.Unit v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("unit");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,6 +102,8 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public java.lang.String getName() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -96,6 +111,7 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 	public void setName(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);

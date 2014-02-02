@@ -16,7 +16,7 @@ import bento.componetization.atl.MetamodelPrunner;
 public class TestFootprint extends BaseTest {
 	// public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery1.atl.xmi";
 
-	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery3.atl.xmi";
+	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/footprint/simplequery/simplequery1.atl.xmi";
 
 	
 	public static final String TARGET_METAMODEL_NAME = "NOTHING_FOR_LIBRARIES";

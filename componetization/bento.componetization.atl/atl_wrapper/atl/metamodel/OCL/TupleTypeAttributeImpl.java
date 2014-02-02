@@ -16,6 +16,8 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public java.lang.String getLocation() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -23,6 +25,7 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public void setLocation(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("location");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -34,13 +37,16 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public List<java.lang.String> getCommentsBefore() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsBefore(List<java.lang.String> v) {
+	public void addCommentsBefore(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsBefore");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -52,13 +58,16 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public List<java.lang.String> getCommentsAfter() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (List<java.lang.String>) result;
 	}
 	
 	@Override
-	public void addCommentsAfter(List<java.lang.String> v) {
+	public void addCommentsAfter(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("commentsAfter");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -70,6 +79,8 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public atl.metamodel.OCL.OclType getType() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("type");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.OclType) result;
 	}
@@ -78,6 +89,8 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public void setType(atl.metamodel.OCL.OclType v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("type");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -89,6 +102,8 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public atl.metamodel.OCL.TupleType getTupleType() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("tupleType");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		result = manager.wrap(result);
 		return (atl.metamodel.OCL.TupleType) result;
 	}
@@ -97,6 +112,8 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public void setTupleType(atl.metamodel.OCL.TupleType v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("tupleType");
 		Object o = v;
+
+		o = v.original_();
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
@@ -108,6 +125,8 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public java.lang.String getName() {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object result = object.eGet(f);
+		if ( result == null ) 
+			return null;
 		return (java.lang.String) result;
 	}
 	
@@ -115,6 +134,7 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 	public void setName(java.lang.String v) {
 		EStructuralFeature f = object.eClass().getEStructuralFeature("name");
 		Object o = v;
+
 	
 		if ( f.isMany() ) {
 			((List<Object>) object.eGet(f)).add(o);
