@@ -27,7 +27,8 @@ binding oo2mdepth {
 	
     -- class PackageableElement to ?
     
-    feature NamedElement.name   is name
+    feature NamedElement[Classifier].name   is name
+    feature NamedElement[Property].name   is name    
     
     feature Class.isAbstract is isAbstract
     feature Class.nestedClassifier = Sequence { }
