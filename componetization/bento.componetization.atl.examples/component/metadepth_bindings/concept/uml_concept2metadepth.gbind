@@ -1,0 +1,50 @@
+binding oo2mdepth {  
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/UML2.ecore"
+	metamodel MDEPTH : "http://metadepth.org"
+
+ 	class MDGeneralization {
+            ref general  : Classifier
+            ref specific : Classifier
+    } init = MDEPTH!Class.allInstances()->collect(specific | specific.extends->collect(general | 
+            Tuple { 
+                    type__ = 'MDGeneralization', 
+                    general = general, specific = specific
+            }
+    ))->flatten()
+
+    class NamedElement to NONE
+    class Class	     to Node
+    class Property   to Property
+	class Model      to Model
+	class Package    to NONE
+	class Classifier to Classifier
+	class Behavior   to NONE
+	class Operation  to NONE
+	class TypedElement to Clabject
+	class Generalization to virtual MDGeneralization
+	class VisibilityKind to NONE
+	
+	
+    -- class PackageableElement to ?
+    
+    feature NamedElement.name   is name
+    
+    feature Class.isAbstract is isAbstract
+    feature Class.nestedClassifier = Sequence { }
+    feature Class.ownedOperation   is NONE
+    feature Class.ownedAttribute   is fields
+    
+    feature Class.generalization = self.MDGeneralization_AllInstances->select(g | g.specific = self)
+    
+    feature Generalization.general is general
+    feature Generalization.specific is  specific 
+    
+    feature Model.packagedElement is children
+    
+    -- visibility???
+    feature TypedElement.type is type
+    
+    -- Collapse NamedElement.visibility
+    feature Class.visibility = #public
+    feature Property.visibility = #public
+}
