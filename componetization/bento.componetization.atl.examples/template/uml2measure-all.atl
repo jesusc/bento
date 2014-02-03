@@ -804,9 +804,7 @@ helper context UML2!Class def: descendants : Set(UML2!Class) =
 -- @begin attribute helper parents
 -- @comments Set of Classs from which the current Class derives directly.
 helper context UML2!Class def: parents : Set(UML2!Class) =
- self.generalizationSpecific->collect(g |
-  g.general
- )->excluding(self)->asSet(); -- @end attribute helper parents
+ self.generalizationGeneral->excluding(self)->asSet(); -- @end attribute helper parents
 -- @begin attribute helper ascendants
 -- @comments Set of all classes from which the current Class derives (both directly and indirectly).
 -- @end attribute helper parents

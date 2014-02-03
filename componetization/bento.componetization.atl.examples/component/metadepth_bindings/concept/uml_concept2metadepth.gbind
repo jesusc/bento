@@ -35,6 +35,8 @@ binding oo2mdepth {
     feature Class.ownedOperation   is NONE
     feature Class.ownedAttribute   is fields
     
+    -- feature Classifier.generalizationGeneral is extends
+    
     feature Class.generalization = self.MDGeneralization_AllInstances->select(g | g.specific = self)
     
     feature Generalization.general is general

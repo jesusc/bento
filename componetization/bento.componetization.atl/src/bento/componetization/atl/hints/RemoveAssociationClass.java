@@ -151,6 +151,8 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			this.intermediateClass = intermediateClass;
 			this.pointingFeature = pointingFeature;
 			this.intermediateReference = intermediateClass.getEReferences().get(0);
+			if ( pointingFeature.getEOpposite() == intermediateReference ) 
+				intermediateReference = intermediateClass.getEReferences().get(1);
 			this.allInstances = allInstances;
 		}
 

@@ -1,5 +1,6 @@
 transformation component oo2measure { 
-	source concept OO : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_effective.ecore"
+	// source concept OO : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_concept.ecore"
+	source concept OO : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_step4.ecore"
 	target concept Measure : "platform:/resource//bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore"
 	source model in : OO
 	target model out : Measure
