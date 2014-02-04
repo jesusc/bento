@@ -2154,7 +2154,7 @@ helper context UML2!Class def: CCP() : Integer =
 -- @comments This metric is an aggregate of the data and method Parameter complexities.
 helper context UML2!Class def: CCM() : Integer =
  self.CCD() + self.CCP(); -- @end helper QMOOD::CCM
-helper def: AllInstancesOf_Generalization : OclAny =
+helper def: AllInstancesOf_Generalization : Sequence(TupleType(specific : OclAny, general : OclAny)) =
  UML2!Class.allInstances()->collect(specific |
   specific->collect(general |
    Tuple {specific = specific, general = general}

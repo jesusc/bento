@@ -1,0 +1,36 @@
+binding oo2km3 {  
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_concept.ecore"
+	metamodel KM3 : "platform:/resource/bento.componetization.atl.examples/component/km3_bindings/KM3_modified.ecore"
+
+    class NamedElement to ModelElement
+    class Package      to Package
+    class Classifier   to Classifier
+    class Parameter    to Parameter
+    class Property     to StructuralFeature
+    class Dependency   to NONE
+    class Feature      to Operation, StructuralFeature
+    class Class		   to Class
+    class Operation    to Operation
+    class PackageableElement to Class, Package
+    class Behavior to NONE
+    class TypedElement to TypedElement
+    -- class Type to Type
+   	class VisibilityKind to NONE
+    
+    feature NamedElement.name is name
+    feature NamedElement.visibility = #public
+    
+    -- Perhaps this is not really needed in practice...
+    feature Package.packagedElement = self.contents->select(c | c.oclIsKindOf(KM3!Package) or c.oclIsKindOf(KM3!Class) )
+    
+    feature Class.ownedOperation is operations
+    feature Class.ownedAttribute is structuralFeatures
+    feature Class.isAbstract     is isAbstract
+    feature Class.generalization is supertypes
+    feature Class.nestedClassifier = Sequence { }
+    
+    feature Operation.ownedParameter is parameters
+    feature Operation.method = Sequence { }
+    
+    feature TypedElement.type is type -- type in KM3 is a Classifier, but in UML a Type => No problem
+}

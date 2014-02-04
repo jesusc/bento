@@ -33,8 +33,11 @@ import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.Operation;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
+import atl.metamodel.OCL.SequenceType;
 import atl.metamodel.OCL.TupleExp;
 import atl.metamodel.OCL.TuplePart;
+import atl.metamodel.OCL.TupleType;
+import atl.metamodel.OCL.TupleTypeAttribute;
 import atl.metamodel.OCL.VariableDeclaration;
 import atl.metamodel.OCL.VariableExp;
 import bento.componetization.atl.BaseRefactoring;
@@ -322,9 +325,54 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			OclFeatureDefinition definition = atl.create(OclFeatureDefinition.class);
 			helper.setDefinition(definition);	
 			
+			SequenceType returnType = atl.create(SequenceType.class);
+			TupleType    tupleType  = atl.create(TupleType.class);
+			returnType.setElementType(tupleType);
+			
+			TupleTypeAttribute att1 = atl.create(TupleTypeAttribute.class); 
+			att1.setName(firstVarName);
+			att1.setType( atl.create(OclAnyType.class) );
+			tupleType.addAttributes(att1);
+			// TODO. SET THE TYPE OF THE TUPLE PARTS!!
+			
+			if ( secondVarName != null ) {
+				TupleTypeAttribute att2 = atl.create(TupleTypeAttribute.class); 
+				att2.setName(secondVarName);				
+				att2.setType( atl.create(OclAnyType.class) );
+				tupleType.addAttributes(att2);
+			}
+			
+			
+			
+/*
+			type = mm!SequenceType {
+				location = "7:50-7:104"
+				elementType = mm!TupleType {
+					location = "7:59-7:103"
+					attributes = mm!TupleTypeAttribute {
+						location = "7:69-7:84"
+						name = "input"
+						type = mm!OclModelElement {
+							location = "7:77-7:84"
+							name = "Node"
+						}
+					}
+					attributes = mm!TupleTypeAttribute {
+						location = "7:86-7:102"
+						name = "output"
+						type = mm!OclModelElement {
+							location = "7:95-7:102"
+							name = "Node"
+						}
+					}
+				}
+			}
+		*/	
+			
 			Attribute feature = atl.create(Attribute.class);
 			feature.setName( helperName );
-			feature.setType( atl.create(OclAnyType.class) );
+			// feature.setType( atl.create(OclAnyType.class) );
+			feature.setType( returnType );
 			definition.setFeature(feature);
 			
 			IteratorExp collect1 = atl.create(IteratorExp.class);

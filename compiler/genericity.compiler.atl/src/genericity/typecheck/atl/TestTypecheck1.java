@@ -58,7 +58,7 @@ public class TestTypecheck1 {
 	//public static final String ATL_TRANSFORMATION = "test/typing/reference0.atl.xmi";
 	//public static final String SOURCE_METAMODEL = "fixtures/metamodels/UML.ecore";
 
-	public static final String ATL_TRANSFORMATION = "test/typing/flow2pn_simple.atl.xmi";
+	public static final String ATL_TRANSFORMATION = "test/typing/tuple_types.atl.xmi"; // "test/typing/flow2pn_simple.atl.xmi";
 	public static final String SOURCE_METAMODEL = "fixtures/metamodels/flow_concept.ecore";
 	public static final String TARGET_METAMODEL = "fixtures/metamodels/petri_nets.ecore";
 
@@ -84,7 +84,7 @@ public class TestTypecheck1 {
 		
 		BasicEMFModel in = loader
 				.basicModelFromFile(
-						withDir("../genericity.atl.transformations/metamodels/ATL.ecore"),
+						withDir("metamodels/ATL.ecore"),
 						withDir(ATL_TRANSFORMATION));
 
 		List<EPackage> pkgs = new ArrayList<EPackage>();

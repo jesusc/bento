@@ -11,7 +11,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum #//VisibilityKind"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType #//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Feature #//TypedElement #//NamedElement"/>
@@ -20,7 +19,7 @@
         upperBound="-1" eType="ecore:EClass #//NamedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//StructuredClassifier #//Classifier">
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//Classifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
         eType="ecore:EClass #//Operation"
         containment="true"/>
@@ -35,12 +34,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" lowerBound="1"
         eType="ecore:EDataType #//Boolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//BehavioralFeature">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
         eType="ecore:EClass #//Parameter"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="method" upperBound="-1"
         eType="ecore:EClass #//Behavior"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EEnum #//VisibilityKind"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
       eSuperTypes="#//NamedElement"/>
@@ -50,10 +50,7 @@
     <eLiterals name="protected" value="2"/>
     <eLiterals name="package" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StructuredClassifier" abstract="true"
-      eSuperTypes="#//Classifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#//Type #//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BehavioralFeature" abstract="true" eSuperTypes="#//Feature #//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Behavior" eSuperTypes="#//Class"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//NamedElement">
