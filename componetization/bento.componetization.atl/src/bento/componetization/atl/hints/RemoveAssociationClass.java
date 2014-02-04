@@ -340,34 +340,15 @@ public class RemoveAssociationClass extends BaseRefactoring {
 				att2.setName(secondVarName);				
 				att2.setType( atl.create(OclAnyType.class) );
 				tupleType.addAttributes(att2);
+			
+				 /*			type = mm!OclModelElement {
+								location = "7:77-7:84"
+								name = "Node"
+							}
+				
+				 */
 			}
 			
-			
-			
-/*
-			type = mm!SequenceType {
-				location = "7:50-7:104"
-				elementType = mm!TupleType {
-					location = "7:59-7:103"
-					attributes = mm!TupleTypeAttribute {
-						location = "7:69-7:84"
-						name = "input"
-						type = mm!OclModelElement {
-							location = "7:77-7:84"
-							name = "Node"
-						}
-					}
-					attributes = mm!TupleTypeAttribute {
-						location = "7:86-7:102"
-						name = "output"
-						type = mm!OclModelElement {
-							location = "7:95-7:102"
-							name = "Node"
-						}
-					}
-				}
-			}
-		*/	
 			
 			Attribute feature = atl.create(Attribute.class);
 			feature.setName( helperName );
@@ -375,8 +356,13 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			feature.setType( returnType );
 			definition.setFeature(feature);
 			
+			CollectionOperationCallExp flatten = atl.create(CollectionOperationCallExp.class);
+			flatten.setOperationName("flatten");
+			feature.setInitExpression(flatten);
+			
 			IteratorExp collect1 = atl.create(IteratorExp.class);
-			feature.setInitExpression(collect1);			
+			// feature.setInitExpression(collect1);			
+			flatten.setSource(collect1);
 			collect1.setName("collect");
 			Iterator itVarCollect1 = atl.create(Iterator.class);
 			itVarCollect1.setVarName(firstVarName);
@@ -402,7 +388,8 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			navReference.setName( match.introducedFeatureName() );
 			VariableExp varExp = atl.create(VariableExp.class);
 			varExp.setReferredVariable(itVarCollect1);
-			collect2.setSource(varExp);
+			navReference.setSource(varExp);
+			collect2.setSource(navReference);
 			
 			TupleExp tupleValue = atl.create(TupleExp.class);
 			collect2.setBody(tupleValue);

@@ -2156,8 +2156,8 @@ helper context UML2!Class def: CCM() : Integer =
  self.CCD() + self.CCP(); -- @end helper QMOOD::CCM
 helper def: AllInstancesOf_Generalization : Sequence(TupleType(specific : OclAny, general : OclAny)) =
  UML2!Class.allInstances()->collect(specific |
-  specific->collect(general |
+  specific.generalizationGeneral->collect(general |
    Tuple {specific = specific, general = general}
   )
- );
+ )->flatten();
 -- @end helper QMOOD::CCM

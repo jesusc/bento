@@ -314,7 +314,7 @@ public class TransformationConfigurationPage extends FormPage {
 		managedForm.getToolkit().adapt(label_3, true, true);
 		label_3.setText("3.");
 		
-		Label lblDocumentnotIntegrated = managedForm.getToolkit().createLabel(composite_2, "Document (not integrated yet)", SWT.NONE);
+		Label lblDocumentnotIntegrated = managedForm.getToolkit().createLabel(composite_2, "Create documentation (not integrated yet)", SWT.NONE);
 		
 		Label label_4 = new Label(composite_2, SWT.NONE);
 		managedForm.getToolkit().adapt(label_4, true, true);

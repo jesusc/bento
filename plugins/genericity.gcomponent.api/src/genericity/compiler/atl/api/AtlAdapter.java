@@ -179,7 +179,10 @@ public class AtlAdapter {
 		}
 		
 		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, strMetamodels);
-		new TypeCheckLauncher().launch(mm, atlTransformation, out);
+		TypeCheckLauncher typechecker = new TypeCheckLauncher();
+		typechecker.setWarningMode();
+		typechecker.launch(mm, atlTransformation, out);
+		// TODO: GET ERRORS AND SHOW WARNINGS THEM SOMEHOW
 		
 		VirtualClasses.BindingData data = new VirtualClasses.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
 		new VirtualClasses().launch(atlTransformation, bindingModel, out, data);

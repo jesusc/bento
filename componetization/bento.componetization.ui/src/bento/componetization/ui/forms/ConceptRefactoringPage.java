@@ -478,6 +478,9 @@ public class ConceptRefactoringPage extends FormPage {
 		conceptTreeViewer.refresh();
 
 		markAsDirty();
+		
+		// Find again!! This is to remove stale information from applied refactorings
+		findNewRefactorings();
 	}
 
 	private void showBrowseAtlFileDialog() {

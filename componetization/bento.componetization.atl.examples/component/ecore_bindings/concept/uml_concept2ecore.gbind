@@ -1,16 +1,16 @@
 binding oo2ecore {  
-	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/UML2.ecore"
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_concept.ecore"
 	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
 
-    class EcoreGeneralization {
-            ref general  : EClass
-            ref specific : EClass
-    } init = ECORE!EClass.allInstances()->collect(specific| specific.eSuperTypes->collect(general | 
-            Tuple { 
-                    type__ = 'EcoreGeneralization', 
-                    general = general, specific = specific
-            }
-    ))->flatten()
+--    class EcoreGeneralization {
+--            ref general  : EClass
+--            ref specific : EClass
+--    } init = ECORE!EClass.allInstances()->collect(specific| specific.eSuperTypes->collect(general | 
+--            Tuple { 
+--                    type__ = 'EcoreGeneralization', 
+--                    general = general, specific = specific
+--            }
+--    ))->flatten()
 
 	class NamedElement to ENamedElement
     class Dependency to NONE --??
@@ -25,7 +25,7 @@ binding oo2ecore {
 	class Behavior   to NONE
 	class Operation  to EOperation
 	class TypedElement to ETypedElement
-	class Generalization to virtual EcoreGeneralization
+	-- class Generalization to virtual EcoreGeneralization
 	class VisibilityKind to NONE
 	
 	
@@ -37,11 +37,14 @@ binding oo2ecore {
     feature Class.nestedClassifier = Sequence { }
     feature Class.ownedOperation   is eOperations
     feature Class.ownedAttribute   is eStructuralFeatures
+
+	feature Class.generalizationGeneral is eSuperTypes
     
-    feature Class.generalization = self.EcoreGeneralization_AllInstances->select(g | g.specific = self)
+    -- feature Class.generalization = self.EcoreGeneralization_AllInstances->select(g | g.specific = self)
     
-    feature Generalization.general is general
-    feature Generalization.specific is  specific 
+    
+    -- feature Generalization.general is general
+    -- feature Generalization.specific is  specific 
     
     feature Operation.ownedParameter is eParameters
     feature Operation.method = Sequence { }

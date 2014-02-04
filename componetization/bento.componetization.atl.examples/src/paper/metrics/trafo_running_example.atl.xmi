@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
-  <atl:Module location="1:1-26:72" name="UML2Metrics">
+  <atl:Module location="1:1-30:44" name="UML2Metrics">
     <inModels location="2:27-2:35" name="IN" metamodel="/2"/>
     <outModels location="2:8-2:21" name="OUT" metamodel="/1"/>
     <elements xsi:type="atl:MatchedRule" location="4:1-11:2" name="Class2MeasureSet">
@@ -141,6 +141,41 @@
         </context_>
       </definition>
     </elements>
+    <elements xsi:type="atl:Helper" location="28:1-30:44">
+      <definition location="28:8-30:43">
+        <feature xsi:type="ocl:Attribute" location="28:32-30:43" name="children">
+          <initExpression xsi:type="ocl:CollectionOperationCallExp" location="29:2-30:43" operationName="asSet">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="29:2-30:32" operationName="excluding">
+              <source xsi:type="ocl:IteratorExp" location="29:2-30:13" name="collect">
+                <source xsi:type="ocl:IteratorExp" location="29:2-29:68" name="select">
+                  <source xsi:type="ocl:OperationCallExp" location="29:2-29:36" operationName="allInstances">
+                    <source xsi:type="ocl:OclModelElement" location="29:2-29:21" name="Generalization" model="/16"/>
+                  </source>
+                  <body xsi:type="ocl:OperatorCallExp" location="29:51-29:67" operationName="=">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="29:51-29:60" name="general">
+                      <source xsi:type="ocl:VariableExp" location="29:51-29:52" referredVariable="/0/@elements.4/@definition/@feature/@initExpression/@source/@source/@source/@iterators.0"/>
+                    </source>
+                    <arguments xsi:type="ocl:VariableExp" location="29:63-29:67" referredVariable="/17"/>
+                  </body>
+                  <iterators location="29:47-29:48" varName="g" variableExp="/0/@elements.4/@definition/@feature/@initExpression/@source/@source/@source/@body/@source/@source"/>
+                </source>
+                <body xsi:type="ocl:NavigationOrAttributeCallExp" location="29:84-30:12" name="specific">
+                  <source xsi:type="ocl:VariableExp" location="29:84-29:85" referredVariable="/0/@elements.4/@definition/@feature/@initExpression/@source/@source/@iterators.0"/>
+                </body>
+                <iterators location="29:80-29:81" varName="g" variableExp="/0/@elements.4/@definition/@feature/@initExpression/@source/@source/@body/@source"/>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="30:27-30:31" referredVariable="/18"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:SetType" location="28:42-28:57">
+            <elementType xsi:type="ocl:OclModelElement" location="28:46-28:56" name="Class" model="/15"/>
+          </type>
+        </feature>
+        <context_ location="28:8-28:26">
+          <context_ xsi:type="ocl:OclModelElement" location="28:16-28:26" name="Class" model="/14"/>
+        </context_>
+      </definition>
+    </elements>
   </atl:Module>
   <ocl:OclModel location="2:14-2:21" name="Metrics" model="/0/@outModels.0"/>
   <ocl:OclModel location="2:32-2:35" name="UML" model="/0/@inModels.0"/>
@@ -155,4 +190,9 @@
   <ocl:OclModel location="25:44-25:47" name="UML" elements="/0/@elements.3/@definition/@feature/@type/@elementType"/>
   <ocl:VariableDeclaration location="26:2-26:6" varName="self" variableExp="/0/@elements.3/@definition/@feature/@initExpression/@source/@source/@source/@source"/>
   <ocl:VariableDeclaration location="26:57-26:61" varName="self" variableExp="/0/@elements.3/@definition/@feature/@initExpression/@source/@arguments.0"/>
+  <ocl:OclModel location="28:16-28:20" name="UML2" elements="/0/@elements.4/@definition/@context_/@context_"/>
+  <ocl:OclModel location="28:46-28:50" name="UML2" elements="/0/@elements.4/@definition/@feature/@type/@elementType"/>
+  <ocl:OclModel location="29:2-29:6" name="UML2" elements="/0/@elements.4/@definition/@feature/@initExpression/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="29:63-29:67" varName="self" variableExp="/0/@elements.4/@definition/@feature/@initExpression/@source/@source/@source/@body/@arguments.0"/>
+  <ocl:VariableDeclaration location="30:27-30:31" varName="self" variableExp="/0/@elements.4/@definition/@feature/@initExpression/@source/@arguments.0"/>
 </xmi:XMI>
