@@ -31,6 +31,17 @@ helper def: MetricByName : Map(String, Measure!Metric) =
  Map {}; -- @end attribute helper MetricByName
 -- @begin helper defaultName
 -- @comments Returns the name of the named element or "Anonymous".
+-- @end attribute helper MetricByName
+-- @begin helper defaultName
+-- @comments Returns the name of the named element or "Anonymous".
+helper context MDEPTH!Clabject def: defaultName() : String =
+ if self.name.oclIsUndefined() then
+  'Anonymous'
+ else
+  self.name
+ endif; -- @end helper defaultName
+-- @begin entrypoint rule Metrics
+-- @comments Registers the MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD metrics implemented in libraries.
 -- @end helper defaultName
 -- @begin entrypoint rule Metrics
 -- @comments Registers the MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD metrics implemented in libraries.
@@ -158,6 +169,92 @@ entrypoint rule Metrics() {
 } -- @end entrypoint rule Metrics
 -- @begin  rule Package2MeasureSet
 -- @comments Collects measurement data on the model (default package) or a package (measureLevel must be set to #package or #class).
+-- @end entrypoint rule Metrics
+-- @begin  rule Package2MeasureSet
+-- @comments Collects measurement data on the model (default package) or a package (measureLevel must be set to #package or #class).
+rule Package2MeasureSet {
+ from
+  ne : MDEPTH!ModelType
+  (
+   ne.oclIsTypeOf(MDEPTH!Model) or ne.oclIsTypeOf(MDEPTH!ModelType) and thisModule.measureLevel = #package or thisModule.measureLevel = #class
+  )
+ to
+  ms : Measure!MeasureSet (
+   elementName <- if ne.CN() > 0 then
+    ne.defaultName().debug('Processing metrics on package')
+   else
+    ne.defaultName()
+   endif,
+   elementType <- if ne.oclIsTypeOf(MDEPTH!ModelType) then
+    #model
+   else
+    #package
+   endif,
+   subsets <- ne.contents,
+   subsets <- ne.allClasses->collect(c |
+    thisModule.Class2MeasureSet(c)
+   )
+  )
+ do {
+  if(ne.oclIsTypeOf(MDEPTH!ModelType))
+   thisModule.root.measureSets <- ms;
+  if(ne.CN() > 0) {
+   -- ==================================================
+   -- MOOD Metrics : Intra-Specification Level Metrics =
+   -- ==================================================
+   -- ==================================================
+   -- MOOD Metrics : Intra-Specification Level Metrics =
+   -- ==================================================
+   -- ==================================================
+   -- MOOD Metrics : Intra-Specification Level Metrics =
+   -- ==================================================
+   ms.measures <- thisModule.PercentageMeasure('AIF', ne.AIF());
+   ms.measures <- thisModule.PercentageMeasure('OIF', ne.OIF());
+   ms.measures <- thisModule.PercentageMeasure('AHF', ne.AHF());
+   ms.measures <- thisModule.PercentageMeasure('OHF', ne.OHF());
+   ms.measures <- thisModule.PercentageMeasure('BPF', ne.BPF());
+   ms.measures <- thisModule.PercentageMeasure('CCF', ne.CCF());
+   ms.measures <- thisModule.PercentageMeasure('ICF', ne.ICF()); -- =============================================================
+   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
+   -- =============================================================
+   -- =============================================================
+   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
+   -- =============================================================
+   -- =============================================================
+   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
+   -- =============================================================
+   -- =============================================================
+   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
+   -- =============================================================
+   ms.measures <- thisModule.PercentageMeasure('IIF', ne.IIF());
+   ms.measures <- thisModule.PercentageMeasure('AHEF', ne.AHEF());
+   ms.measures <- thisModule.PercentageMeasure('OHEF', ne.OHEF()); -- ===============
+   -- QMOOD Metrics =
+   -- ===============
+   -- ===============
+   -- QMOOD Metrics =
+   -- ===============
+   -- ===============
+   -- QMOOD Metrics =
+   -- ===============
+   -- ===============
+   -- QMOOD Metrics =
+   -- ===============
+   ms.measures <- thisModule.IntegerMeasure('DSC', ne.DSC());
+   ms.measures <- thisModule.IntegerMeasure('NOH', ne.NOH());
+   ms.measures <- thisModule.IntegerMeasure('NIC', ne.NIC());
+   ms.measures <- thisModule.IntegerMeasure('NSI', ne.NSI());
+   ms.measures <- thisModule.IntegerMeasure('NNC', ne.NNC());
+   ms.measures <- thisModule.IntegerMeasure('NAC', ne.NAC());
+   ms.measures <- thisModule.IntegerMeasure('NLC', ne.NLC());
+   ms.measures <- thisModule.DoubleMeasure('ADI', ne.ADI());
+   ms.measures <- thisModule.DoubleMeasure('AWI', ne.AWI());
+   ms.measures <- thisModule.DoubleMeasure('ANA', ne.ANA());
+  }
+ }
+} -- @end rule Package2MeasureSet
+-- @begin lazy rule Class2MeasureSet
+-- @comments Collects measurement data on a class (measureLevel must be set to #class).
 -- @end rule Package2MeasureSet
 -- @begin lazy rule Class2MeasureSet
 -- @comments Collects measurement data on a class (measureLevel must be set to #class).
@@ -510,6 +607,12 @@ helper context MDEPTH!NodeType def: newAttributes : Sequence(MDEPTH!Property) =
 helper context MDEPTH!NodeType def: definedAttributes : Sequence(MDEPTH!Property) =
  self.ownedAttribute;
 
+helper context MDEPTH!ModelType def: definedAttributes : Sequence(MDEPTH!Property) =
+ self.allClasses->collect(c |
+  c.definedAttributes
+ )->flatten(); -- @end attribute helper definedAttributes
+-- @begin attribute helper directlyInheritedAttributes
+-- @comments Sequence of directly inherited Properties.
 -- @end attribute helper definedAttributes
 -- @begin attribute helper directlyInheritedAttributes
 -- @comments Sequence of directly inherited Properties.
@@ -549,6 +652,12 @@ helper context MDEPTH!NodeType def: allAttributes : Sequence(MDEPTH!Property) =
   )->includes(ia.name)
  ));
 
+helper context MDEPTH!ModelType def: allAttributes : Sequence(MDEPTH!Property) =
+ self.allClasses->collect(c |
+  c.allAttributes
+ )->flatten(); -- @end attribute helper allAttributes
+-- @begin attribute helper allAttributesTypes
+-- @comments Set containing all Types of all Attribtues of the Class.
 -- @end attribute helper allAttributes
 -- @begin attribute helper allAttributesTypes
 -- @comments Set containing all Types of all Attribtues of the Class.
@@ -577,6 +686,12 @@ helper context MDEPTH!NodeType def: newOperations : Sequence(MDEPTH!NONE) =
 helper context MDEPTH!NodeType def: definedOperations : Sequence(MDEPTH!NONE) =
  self.ownedOperation;
 
+helper context MDEPTH!ModelType def: definedOperations : Sequence(MDEPTH!NONE) =
+ self.allClasses->collect(c |
+  c.definedOperations
+ )->flatten(); -- @end attribute helper definedOperations
+-- @begin attribute helper directlyInheritedOperations
+-- @comments Sequence of directly inherited Operations.
 -- @end attribute helper definedOperations
 -- @begin attribute helper directlyInheritedOperations
 -- @comments Sequence of directly inherited Operations.
@@ -616,6 +731,12 @@ helper context MDEPTH!NodeType def: allOperations : Sequence(MDEPTH!NONE) =
   )->includes(iop.name)
  ));
 
+helper context MDEPTH!ModelType def: allOperations : Sequence(MDEPTH!NONE) =
+ self.allClasses->collect(c |
+  c.allOperations
+ )->flatten()->asSet(); -- @end attribute helper allOperations
+-- @begin attribute helper allParameters
+-- @comments Set containing all Parameters of all Operations of the Class.
 -- @end attribute helper allOperations
 -- @begin attribute helper allParameters
 -- @comments Set containing all Parameters of all Operations of the Class.
@@ -689,6 +810,77 @@ helper context MDEPTH!NodeType def: ascendants : Set(MDEPTH!NodeType) =
  ); -- @end attribute helper ascendants
 -- @begin attribute helper client
 -- @comments Set containing all direct clients of the NamedElement.
+-- @end attribute helper ascendants
+-- @begin attribute helper client
+-- @comments Set containing all direct clients of the NamedElement.
+helper context MDEPTH!Clabject def: client : Set(MDEPTH!Clabject) =
+ --@comments reference supplierDependency does not exist in this UML2 metamodel (using
+ -- allInstances instead)
+ --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
+ --@comments reference supplierDependency does not exist in this UML2 metamodel (using
+ -- allInstances instead)
+ --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
+ --@comments reference supplierDependency does not exist in this UML2 metamodel (using
+ -- allInstances instead)
+ --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
+ --@comments reference supplierDependency does not exist in this UML2 metamodel (using
+ -- allInstances instead)
+ --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
+ --@comments reference supplierDependency does not exist in this UML2 metamodel (using
+ -- allInstances instead)
+ --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
+ --@comments reference supplierDependency does not exist in this UML2 metamodel (using
+ -- allInstances instead)
+ --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
+ MDEPTH!Dependency.allInstances()->select(d |
+  d.supplier->includes(self)
+ )->collect(d |
+  d.client
+ )->flatten()->asSet(); -- @end attribute helper client
+-- @begin attribute helper allClients
+-- @comments Set containing all the NamedElements that are clients of this NamedElement, including the clients of these NamedElements. This is the transitive closure.
+-- @end attribute helper client
+-- @begin attribute helper allClients
+-- @comments Set containing all the NamedElements that are clients of this NamedElement, including the clients of these NamedElements. This is the transitive closure.
+helper context MDEPTH!Clabject def: allClients : Set(MDEPTH!Clabject) =
+ self.client->union(self.client->collect(ne |
+  ne.allClients
+ )->flatten())->asSet(); -- @end attribute helper allClients
+-- @begin attribute helper contents
+-- @comments Sequence containing all PackageableElement contained by the Package.
+-- @end attribute helper allClients
+-- @begin attribute helper contents
+-- @comments Sequence containing all PackageableElement contained by the Package.
+helper context MDEPTH!ModelType def: contents : Sequence(MDEPTH!NONE) =
+ self.packagedElement; -- @end attribute helper contents
+-- @begin attribute helper allClasses
+-- @comments Sequence of all Classes belonging to the current Package.
+-- @end attribute helper contents
+-- @begin attribute helper allClasses
+-- @comments Sequence of all Classes belonging to the current Package.
+helper context MDEPTH!ModelType def: allClasses : Sequence(MDEPTH!NodeType) =
+ self.contents->select(c |
+  c.oclIsKindOf(MDEPTH!NodeType)
+ ); -- @end attribute helper allClasses
+-- @begin attribute helper internalBaseClasses
+-- @comments Set of base Classes in the current Package.
+-- @end attribute helper allClasses
+-- @begin attribute helper internalBaseClasses
+-- @comments Set of base Classes in the current Package.
+helper context MDEPTH!ModelType def: internalBaseClasses : Set(MDEPTH!NodeType) =
+ self.allClasses->iterate(c; acc : Set(MDEPTH!NodeType) = Set {} |
+  acc->union(c.parents)
+ ); -- @end attribute helper internalBaseClasses
+-- @begin attribute helper internalSupplierClasses
+-- @comments Set of supplier Classes in the current Package.
+-- @end attribute helper internalBaseClasses
+-- @begin attribute helper internalSupplierClasses
+-- @comments Set of supplier Classes in the current Package.
+helper context MDEPTH!ModelType def: internalSupplierClasses : Set(MDEPTH!NodeType) =
+ self.supplierClasses(self); -- @end attribute helper internalSupplierClasses
+-- @begin attribute helper owner
+-- @comments This attribute helper is not include in FLAME library.
+-- @comments The package which contains this packageable element.
 -- @end attribute helper owner
 -- @begin helper AUN
 -- @comments Attribute Use Number
@@ -901,6 +1093,698 @@ helper context MDEPTH!NodeType def: ASCN() : Integer =
 -- @begin helper OUN
 -- @comments Operation Use Number
 -- @comments Number of NamedElement that use the Operation (excludes the NamedElement where the Feature is declared).
+-- @end helper OUN
+-- @begin helper isInternal
+-- @comments Indicates if the Class received as parameter belongs to the considered Package.
+helper context MDEPTH!ModelType def: isInternal(c : MDEPTH!NodeType) : Boolean =
+ self.contents->includes(c); -- @end helper isInternal
+-- @begin helper baseClasses
+-- @comments Set of base Classes (from the current Package) that belong to the Package "p".
+-- @end helper isInternal
+-- @begin helper baseClasses
+-- @comments Set of base Classes (from the current Package) that belong to the Package "p".
+helper context MDEPTH!ModelType def: baseClasses(p : MDEPTH!Model) : Set(MDEPTH!NodeType) =
+ self.internalBaseClasses->select(c |
+  p.isInternal(c)
+ )->asSet(); -- @end helper baseClasses
+-- @begin helper baseClassesInPackages
+-- @comments Set of base Classes in both the current Package and the one bound to the parameter.
+-- @end helper baseClasses
+-- @begin helper baseClassesInPackages
+-- @comments Set of base Classes in both the current Package and the one bound to the parameter.
+helper context MDEPTH!ModelType def: baseClassesInPackages(p : MDEPTH!Model) : Set(MDEPTH!NodeType) =
+ self.internalBaseClasses->union(p.internalBaseClasses); -- @end helper baseClassesInPackages
+-- @begin helper supplierClasses
+-- @comments Set of supplier Classes (from the current Package) that belong to the Package "p"(excludes inheritance).
+-- @end helper baseClassesInPackages
+-- @begin helper supplierClasses
+-- @comments Set of supplier Classes (from the current Package) that belong to the Package "p"(excludes inheritance).
+helper context MDEPTH!ModelType def: supplierClasses(p : MDEPTH!Model) : Set(MDEPTH!NodeType) =
+ self.allClasses->iterate(c; acc : Set(MDEPTH!NodeType) = Set {} |
+  acc->union(c.coupledClasses)
+ )->select(c |
+  p.isInternal(c)
+ )->asSet(); -- @end helper supplierClasses
+-- @begin helper supplierClassesInPackages
+-- @comments Set of supplier Classes in both the current Package and the one bound to the parameter.
+-- @end helper supplierClasses
+-- @begin helper supplierClassesInPackages
+-- @comments Set of supplier Classes in both the current Package and the one bound to the parameter.
+helper context MDEPTH!ModelType def: supplierClassesInPackages(p : MDEPTH!Model) : Set(MDEPTH!NodeType) =
+ self.internalSupplierClasses->union(p.internalSupplierClasses); -- @end helper supplierClassesInPackages
+-- @begin helper relatedClasses
+-- @comments Set of Classes from the "p" Package that are either base or supplier Classes.
+-- @end helper supplierClassesInPackages
+-- @begin helper relatedClasses
+-- @comments Set of Classes from the "p" Package that are either base or supplier Classes.
+helper context MDEPTH!ModelType def: relatedClasses(p : MDEPTH!Model) : Set(MDEPTH!NodeType) =
+ self.baseClasses(p)->union(self.supplierClasses(p)); -- @end helper relatedClasses
+-- @begin helper CN
+-- @comments Classes Number
+-- @comments Number of Classes in the Package.
+-- @end helper relatedClasses
+-- @begin helper CN
+-- @comments Classes Number
+-- @comments Number of Classes in the Package.
+helper context MDEPTH!ModelType def: CN() : Integer =
+ self.allClasses->size(); -- @end helper CN
+-- @begin helper PNAN
+-- @comments Package New Attributes Number
+-- @comments Number of new Properties in the Package.
+-- @end helper CN
+-- @begin helper PNAN
+-- @comments Package New Attributes Number
+-- @comments Number of new Properties in the Package.
+helper context MDEPTH!ModelType def: PNAN() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.NAN
+ ); -- @end helper PNAN
+-- @begin helper PDAN
+-- @comments Package Defined Attributes Number
+-- @comments Number of defined Properties in the Package.
+-- @end helper PNAN
+-- @begin helper PDAN
+-- @comments Package Defined Attributes Number
+-- @comments Number of defined Properties in the Package.
+helper context MDEPTH!ModelType def: PDAN() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.DAN()
+ ); -- @end helper PDAN
+-- @begin helper PIAN
+-- @comments Package Inherited Attributes Number
+-- @comments Number of Properties inherited in the Package.
+-- @end helper PDAN
+-- @begin helper PIAN
+-- @comments Package Inherited Attributes Number
+-- @comments Number of Properties inherited in the Package.
+helper context MDEPTH!ModelType def: PIAN() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.IAN()
+ ); -- @end helper PIAN
+-- @begin helper POAN
+-- @comments Package Overridden Attributes Number
+-- @comments Number of overridden Properties in the Package.
+-- @end helper PIAN
+-- @begin helper POAN
+-- @comments Package Overridden Attributes Number
+-- @comments Number of overridden Properties in the Package.
+helper context MDEPTH!ModelType def: POAN() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.OAN
+ ); -- @end helper POAN
+-- @begin helper PAAN
+-- @comments Package Available Attributes Number
+-- @comments Number of available Properties in the Package.
+-- @end helper POAN
+-- @begin helper PAAN
+-- @comments Package Available Attributes Number
+-- @comments Number of available Properties in the Package.
+helper context MDEPTH!ModelType def: PAAN() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.AAN()
+ ); -- @end helper PAAN
+-- @begin helper PNON
+-- @comments Package New Operations Number
+-- @comments Number of new Operations in the Package.
+-- @end helper PAAN
+-- @begin helper PNON
+-- @comments Package New Operations Number
+-- @comments Number of new Operations in the Package.
+helper context MDEPTH!ModelType def: PNON() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.NON()
+ ); -- @end helper PNON
+-- @begin helper PDON
+-- @comments Package Defined Operations Number
+-- @comments Number of defined Operations in the Package.
+-- @end helper PNON
+-- @begin helper PDON
+-- @comments Package Defined Operations Number
+-- @comments Number of defined Operations in the Package.
+helper context MDEPTH!ModelType def: PDON() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.DON()
+ ); -- @end helper PDON
+-- @begin helper PION
+-- @comments Package Inherited Operations Number
+-- @comments Number of inherited Operations in the Package.
+-- @end helper PDON
+-- @begin helper PION
+-- @comments Package Inherited Operations Number
+-- @comments Number of inherited Operations in the Package.
+helper context MDEPTH!ModelType def: PION() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.ION()
+ ); -- @end helper PION
+-- @begin helper POON
+-- @comments Package Overridden Operations Number
+-- @comments Number of overridden Operations in the Package.
+-- @end helper PION
+-- @begin helper POON
+-- @comments Package Overridden Operations Number
+-- @comments Number of overridden Operations in the Package.
+helper context MDEPTH!ModelType def: POON() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.OON()
+ ); -- @end helper POON
+-- @begin helper PAON
+-- @comments Package Available Operations Number
+-- @comments Number of available Operations in the Package.
+-- @end helper POON
+-- @begin helper PAON
+-- @comments Package Available Operations Number
+-- @comments Number of available Operations in the Package.
+helper context MDEPTH!ModelType def: PAON() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.AON()
+ ); -- @end helper PAON
+-- @begin helper EILN
+-- @comments External Inheritance Links Number
+-- @comments Number of inheritance relations where the derived Classes belong to the current Package and the base ones belong to the Package "p" given as parameter.
+-- @end helper PAON
+-- @begin helper EILN
+-- @comments External Inheritance Links Number
+-- @comments Number of inheritance relations where the derived Classes belong to the current Package and the base ones belong to the Package "p" given as parameter.
+helper context MDEPTH!ModelType def: EILN(p : MDEPTH!Model) : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.parents->select(g |
+   p.isInternal(g)
+  )->size()
+ ); -- @end helper EILN
+-- @begin attribute helper IILN
+-- @comments Internal Inheritance Links Number
+-- @comments Number of inheritance relations where the base and derived Classes belong to the current Package.
+-- @end helper EILN
+-- @begin attribute helper IILN
+-- @comments Internal Inheritance Links Number
+-- @comments Number of inheritance relations where the base and derived Classes belong to the current Package.
+helper context MDEPTH!ModelType def: IILN : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  acc + c.parents->select(g |
+   self.isInternal(g)
+  )->size()
+ ); -- @end attribute helper IILN
+-- @begin helper PILN
+-- @comments Packages Inheritance Links Number
+-- @comments Number of inheritance relations between the current package and the one received as parameter.
+-- @end attribute helper IILN
+-- @begin helper PILN
+-- @comments Packages Inheritance Links Number
+-- @comments Number of inheritance relations between the current package and the one received as parameter.
+helper context MDEPTH!ModelType def: PILN(p : MDEPTH!Model) : Integer =
+ self.IILN + self.EILN(p); -- @end helper PILN
+-- @begin helper ECLN
+-- @comments External Coupling Links Number
+-- @comments Number of coupling relations where the client Class belongs to the current Package and the supplier Class belongs to the Package "p" (excludes inheritance).
+-- @end helper PILN
+-- @begin helper ECLN
+-- @comments External Coupling Links Number
+-- @comments Number of coupling relations where the client Class belongs to the current Package and the supplier Class belongs to the Package "p" (excludes inheritance).
+helper context MDEPTH!ModelType def: ECLN(p : MDEPTH!Model) : Integer =
+ self.supplierClassesInPackages(p)->size(); -- @end helper ECLN
+-- @begin helper ICLN
+-- @comments Internal Coupling Links Number
+-- @comments Number of distinct coupling relations where both the client and the supplier Classes belong to the current Package (excludes inheritance).
+-- @end helper ECLN
+-- @begin helper ICLN
+-- @comments Internal Coupling Links Number
+-- @comments Number of distinct coupling relations where both the client and the supplier Classes belong to the current Package (excludes inheritance).
+helper context MDEPTH!ModelType def: ICLN() : Integer =
+ self.internalSupplierClasses->size(); -- @end helper ICLN
+-- @begin helper PCLN
+-- @comments Packages Coupling Links Number
+-- @comments Number of coupling relations between the current package and the one received as parameter.
+-- @end helper ICLN
+-- @begin helper PCLN
+-- @comments Packages Coupling Links Number
+-- @comments Number of coupling relations between the current package and the one received as parameter.
+helper context MDEPTH!ModelType def: PCLN(p : MDEPTH!Model) : Integer =
+ self.ICLN() + self.ECLN(p); -- @end helper PCLN
+-- @begin helper AVN
+-- @comments Attribute Visibility Number
+-- @comments Number of Classes in the considered Package where the Property can be accessed.
+-- @end helper PCLN
+-- @begin helper AVN
+-- @comments Attribute Visibility Number
+-- @comments Number of Classes in the considered Package where the Property can be accessed.
+helper context MDEPTH!ModelType def: AVN(a : MDEPTH!Property) : Integer =
+ self.FVN(a); -- @end helper AVN
+-- @begin helper OVN
+-- @comments Operation Visibility Number
+-- @comments Number of Classes in the considered Package where the Operation can be accessed.
+-- @end helper AVN
+-- @begin helper OVN
+-- @comments Operation Visibility Number
+-- @comments Number of Classes in the considered Package where the Operation can be accessed.
+helper context MDEPTH!ModelType def: OVN(o : MDEPTH!NONE) : Integer =
+ self.FVN(o); -- @end helper OVN
+-- @begin helper FVN
+-- @comments Feature Visibility Number
+-- @comments Number of Classes in the considered Package where the Feature can be accessed.
+-- @end helper OVN
+-- @begin helper FVN
+-- @comments Feature Visibility Number
+-- @comments Number of Classes in the considered Package where the Feature can be accessed.
+helper context MDEPTH!ModelType def: FVN(f : MDEPTH!NONE) : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  if c.FCV(f) then
+   acc + 1
+  else
+   acc
+  endif
+ ); -- @end helper FVN
+-- @begin helper APV
+-- @comments Attribute to Package Visibility
+-- @comments Percentage of Classes in the considered Package where the Property can be accessed (excludes the Class where the Property is declared).
+-- @end helper FVN
+-- @begin helper APV
+-- @comments Attribute to Package Visibility
+-- @comments Percentage of Classes in the considered Package where the Property can be accessed (excludes the Class where the Property is declared).
+helper context MDEPTH!ModelType def: APV(a : MDEPTH!Property) : Real =
+ if self.CN() > 1 then
+  (self.AVN(a) - 1) / (self.CN() - 1)
+ else
+  0
+ endif; -- @end helper APV
+-- @begin helper OPV
+-- @comments Operation to Package Visibility
+-- @comments Percentage of Classes in the considered Package where the Operation can be accessed (excludes the class where the Operation is declared).
+-- @end helper APV
+-- @begin helper OPV
+-- @comments Operation to Package Visibility
+-- @comments Percentage of Classes in the considered Package where the Operation can be accessed (excludes the class where the Operation is declared).
+helper context MDEPTH!ModelType def: OPV(o : MDEPTH!NONE) : Real =
+ if self.CN() > 1 then
+  (self.OVN(o) - 1) / (self.CN() - 1)
+ else
+  0
+ endif; -- @end helper OPV
+-- @begin helper FPV
+-- @comments Feature to Package Visibility
+-- @comments Percentage of Classes in the considered Package where the Feature can be accessed (excludes the Class where the attribute is declared).
+-- @end helper OPV
+-- @begin helper FPV
+-- @comments Feature to Package Visibility
+-- @comments Percentage of Classes in the considered Package where the Feature can be accessed (excludes the Class where the attribute is declared).
+helper context MDEPTH!ModelType def: FPV(f : MDEPTH!NONE) : Real =
+ if self.CN() > 1 then
+  (self.FVN(f) - 1) / (self.CN() - 1)
+ else
+  0
+ endif; -- @end helper FPV
+--******************************************************************************************************
+--******************************************************************************************************
+--uses MOOD4UML2;
+--******************************************************************************************************
+--******************************************************************************************************
+-- ============================================================
+-- MOOD and MOOD2 Metrics : Intra-Specification Level Metrics =
+-- ============================================================
+-- @begin helper MOOD::AIF
+-- @comments Attributes Inheritance Factor
+-- @comments Quotient between the number of inherited Properties in all Classes of the Package and the number of available Properties (locally defined plus inherited) for all Classes of the current Package.
+-- @comments The pre-condition states that the package must have available Properties.
+-- @comments AIF() = 0 means that there is no effective Property inheritance (either there are no inheritance hierarchies or all inherited Properties are redefined).
+-- @end helper FPV
+--******************************************************************************************************
+--******************************************************************************************************
+--uses MOOD4UML2;
+--******************************************************************************************************
+--******************************************************************************************************
+-- ============================================================
+-- MOOD and MOOD2 Metrics : Intra-Specification Level Metrics =
+-- ============================================================
+-- @begin helper MOOD::AIF
+-- @comments Attributes Inheritance Factor
+-- @comments Quotient between the number of inherited Properties in all Classes of the Package and the number of available Properties (locally defined plus inherited) for all Classes of the current Package.
+-- @comments The pre-condition states that the package must have available Properties.
+-- @comments AIF() = 0 means that there is no effective Property inheritance (either there are no inheritance hierarchies or all inherited Properties are redefined).
+helper context MDEPTH!ModelType def: AIF() : Real =
+ if self.PAAN() > 0 then
+  self.PIAN() / self.PAAN()
+ else
+  0
+ endif; -- @end helper MOOD::AIF
+-- @begin helper MOOD::OIF
+-- @comments Operations Inheritance Factor
+-- @comments Quotient between the number of inherited Operations in all Classes of the Package and the number of available Operations (locally defined plus inherited) for all Classes of the current Package.
+-- @comments The pre-condition states that the package must have available Operations.
+-- @comments OIF() = 0 means that there is no effective Operation inheritance (either there are no inheritance hierarchies or all inherited Operations are redefined).
+-- @end helper MOOD::AIF
+-- @begin helper MOOD::OIF
+-- @comments Operations Inheritance Factor
+-- @comments Quotient between the number of inherited Operations in all Classes of the Package and the number of available Operations (locally defined plus inherited) for all Classes of the current Package.
+-- @comments The pre-condition states that the package must have available Operations.
+-- @comments OIF() = 0 means that there is no effective Operation inheritance (either there are no inheritance hierarchies or all inherited Operations are redefined).
+helper context MDEPTH!ModelType def: OIF() : Real =
+ if self.PAON() > 0 then
+  self.PION() / self.PAON()
+ else
+  0
+ endif; -- @end helper MOOD::OIF
+-- @begin helper MOOD2::IIF
+-- @comments Internal Inheritance Factor
+-- @comments Quotient between the number of inheritance links where both the base and derived Classes belong to the current Package and the total number of inheritance links originating in the current Package.
+-- @comments The pre-condition states that the package must have some inheritance links defined on it.
+-- @comments Inheritance links originating in the current package are those where the derived Class belongs to it.
+-- @comments The inheritance link is directed from the derived Class to the base one.
+-- @end helper MOOD::OIF
+-- @begin helper MOOD2::IIF
+-- @comments Internal Inheritance Factor
+-- @comments Quotient between the number of inheritance links where both the base and derived Classes belong to the current Package and the total number of inheritance links originating in the current Package.
+-- @comments The pre-condition states that the package must have some inheritance links defined on it.
+-- @comments Inheritance links originating in the current package are those where the derived Class belongs to it.
+-- @comments The inheritance link is directed from the derived Class to the base one.
+helper context MDEPTH!ModelType def: IIF() : Real =
+ if self.IILN > 0 then
+  self.IILN / self.PILN(self)
+ else
+  0
+ endif; -- @end helper MOOD2::IIF
+-- @begin helper MOOD::AHF
+-- @comments Attributes Hiding Factor
+-- @comments Quotient between the sum of the invisibilities of all Properties defined in all Classes in the current Package and the total number of Properties defined in the Package.
+-- @comments The invisibility of an Property is the percentage of the Classes in the package from which this Properties is not visible and is given by 1-APV( self ), where self is the current Package.
+-- @comments If all Properties are private, the numerator is 0 and as such, AHF() = 0.
+-- @comments If all Properties are public, the numerator is 0 and as such, AHF() = 1.
+-- @comments The pre-condition regarding the number of Classes is required for calculating the Properties visibility (the package must have some Classes).
+-- @comments The second pre-condition means that Properties are necessary for calculating the metric.
+-- @end helper MOOD2::IIF
+-- @begin helper MOOD::AHF
+-- @comments Attributes Hiding Factor
+-- @comments Quotient between the sum of the invisibilities of all Properties defined in all Classes in the current Package and the total number of Properties defined in the Package.
+-- @comments The invisibility of an Property is the percentage of the Classes in the package from which this Properties is not visible and is given by 1-APV( self ), where self is the current Package.
+-- @comments If all Properties are private, the numerator is 0 and as such, AHF() = 0.
+-- @comments If all Properties are public, the numerator is 0 and as such, AHF() = 1.
+-- @comments The pre-condition regarding the number of Classes is required for calculating the Properties visibility (the package must have some Classes).
+-- @comments The second pre-condition means that Properties are necessary for calculating the metric.
+helper context MDEPTH!ModelType def: AHF() : Real =
+ if self.CN() > 1 then
+  if self.PDAN() > 0 then
+   self.definedAttributes->iterate(a; acc : Real = 0 |
+    acc + 1 - self.APV(a)
+   ) / self.PDAN()
+  else
+   0
+  endif
+ else
+  0
+ endif; -- @end helper MOOD::AHF
+-- @begin helper MOOD::OHF
+-- @comments Operations Hiding Factor
+-- @comments Quotient between the sum of the invisibilities of all Operations defined in all Classes in the current Package and the total number of Operations defined in the Package.
+-- @comments The invisibility of an Operation is the percentage of the total Classes in the package from which this Operation is not visible and is given by 1-OPV( self ), where self is the current package.
+-- @comments If all Operations are public the numerator equals the denominator and then OHF() = 1.
+-- @comments Otherwise, if all Operations are private, OHF() = 0.
+-- @comments The pre-condition regarding the number of Classes is required for calculating the Operations visibility (the package must have some Classes).
+-- @comments The second pre-condition means that Operations are necessary for calculating the metric.
+-- @end helper MOOD::AHF
+-- @begin helper MOOD::OHF
+-- @comments Operations Hiding Factor
+-- @comments Quotient between the sum of the invisibilities of all Operations defined in all Classes in the current Package and the total number of Operations defined in the Package.
+-- @comments The invisibility of an Operation is the percentage of the total Classes in the package from which this Operation is not visible and is given by 1-OPV( self ), where self is the current package.
+-- @comments If all Operations are public the numerator equals the denominator and then OHF() = 1.
+-- @comments Otherwise, if all Operations are private, OHF() = 0.
+-- @comments The pre-condition regarding the number of Classes is required for calculating the Operations visibility (the package must have some Classes).
+-- @comments The second pre-condition means that Operations are necessary for calculating the metric.
+helper context MDEPTH!ModelType def: OHF() : Real =
+ if self.CN() > 1 then
+  if self.PDON() > 0 then
+   self.definedOperations->iterate(o; acc : Real = 0 |
+    acc + 1 - self.OPV(o)
+   ) / self.PDON()
+  else
+   0
+  endif
+ else
+  0
+ endif; -- @end helper MOOD::OHF
+-- @begin helper MOOD2::AHEF
+-- @comments Attributes Hiding Effectiveness Factor
+-- @comments Quotient between the cumulative number of the Package Classes that do access the Package Properties and the cumulative number of the Package Classes that can access the Package Properties.
+-- @end helper MOOD::OHF
+-- @begin helper MOOD2::AHEF
+-- @comments Attributes Hiding Effectiveness Factor
+-- @comments Quotient between the cumulative number of the Package Classes that do access the Package Properties and the cumulative number of the Package Classes that can access the Package Properties.
+helper context MDEPTH!ModelType def: AHEF() : Real =
+ let avnSum : Integer = self.allAttributes->iterate(a; acc : Integer = 0 |
+  acc + self.AVN(a)
+ ) in
+ if avnSum > 0 then
+  self.allAttributes->iterate(a; acc : Integer = 0 |
+   acc + a.AUN()
+  ) / avnSum
+ else
+  0
+ endif; -- @end helper MOOD2::AHEF
+-- @begin helper MOOD2::OHEF
+-- @comments Operations Hiding Effectiveness Factor
+-- @comments Quotient between the cumulative number of the Package Classes that do access the Package Operations and the cumulative number of the Package Classes that can access the Package Operations.
+-- @end helper MOOD2::AHEF
+-- @begin helper MOOD2::OHEF
+-- @comments Operations Hiding Effectiveness Factor
+-- @comments Quotient between the cumulative number of the Package Classes that do access the Package Operations and the cumulative number of the Package Classes that can access the Package Operations.
+helper context MDEPTH!ModelType def: OHEF() : Real =
+ let ovnSum : Integer = self.allOperations->iterate(op; acc : Integer = 0 |
+  acc + self.OVN(op)
+ ) in
+ if ovnSum > 0 then
+  self.allOperations->iterate(op; acc : Integer = 0 |
+   acc + op.OUN()
+  ) / ovnSum
+ else
+  0
+ endif; -- @end helper MOOD2::OHEF
+-- @begin helper MOOD::BPF
+-- @comments Behavioral Polymorphism Factor
+-- @comments Quotient between the actual number of possible different polymorphic situations within the current Package and the maximum number of possible distinct polymorphic situations (due to inheritance).
+-- @comments An Operation in a Class Ci can have as many shapes ("morphos" in ancient Greek) as the number of times it is overridden (in Ci descendants).
+-- @comments This represents the actual number of, possible different, polymorphic situations for that Class (For this metric, the overriding of Operations is considered only when defined in the current package).
+-- @comments The maximum number of possible distinct polymorphic situations for Class Ci occurs if all new Operations defined in it are overridden in all of their derived Classes.
+-- @end helper MOOD2::OHEF
+-- @begin helper MOOD::BPF
+-- @comments Behavioral Polymorphism Factor
+-- @comments Quotient between the actual number of possible different polymorphic situations within the current Package and the maximum number of possible distinct polymorphic situations (due to inheritance).
+-- @comments An Operation in a Class Ci can have as many shapes ("morphos" in ancient Greek) as the number of times it is overridden (in Ci descendants).
+-- @comments This represents the actual number of, possible different, polymorphic situations for that Class (For this metric, the overriding of Operations is considered only when defined in the current package).
+-- @comments The maximum number of possible distinct polymorphic situations for Class Ci occurs if all new Operations defined in it are overridden in all of their derived Classes.
+helper context MDEPTH!ModelType def: BPF() : Real =
+ if self.PAON() > 0 then
+  self.POON() / self.PAON()
+ else
+  0
+ endif; -- @end helper MOOD::BPF
+-- @begin helper MOOD::CCF
+-- @comments Parametric Polymorphism Factor
+-- @comments Quotient between the actual number of coupled class-pairs within the Package and the maximum possible number of class-pair couplings in the Package. This coupling is the one not imputable to inheritance.
+-- @comments In a coupled class-pair one Class is the client and the other is the supplier.
+-- @comments These clientsupplier relations can have several shapes; see the function Class::CoupledClasses for details.
+-- @comments The pre-condition states that, with only one Class, there are no couplings within the package.
+-- @comments The square root counteracts for the fact that the couplings grow quadratically with the number of Classes.
+-- @end helper MOOD::BPF
+-- @begin helper MOOD::CCF
+-- @comments Parametric Polymorphism Factor
+-- @comments Quotient between the actual number of coupled class-pairs within the Package and the maximum possible number of class-pair couplings in the Package. This coupling is the one not imputable to inheritance.
+-- @comments In a coupled class-pair one Class is the client and the other is the supplier.
+-- @comments These clientsupplier relations can have several shapes; see the function Class::CoupledClasses for details.
+-- @comments The pre-condition states that, with only one Class, there are no couplings within the package.
+-- @comments The square root counteracts for the fact that the couplings grow quadratically with the number of Classes.
+helper context MDEPTH!ModelType def: CCF() : Real =
+ if self.CN() > 1 then
+  (self.ICLN() / (self.CN() * self.CN() - self.CN())).sqrt()
+ else
+  0
+ endif; -- @end helper MOOD::CCF
+-- @begin helper MOOD::ICF
+-- @comments Internal Coupling Factor
+-- @comments Quotient between the number of coupling links where both the client and supplier Classes belong to the current Package and the total number of coupling links originating in the current Package.
+-- @comments Coupling links originating in the current Package are those where the client Class belongs to it.
+-- @comments The coupling link is directed from the client Class to the supplier one.
+-- @end helper MOOD::CCF
+-- @begin helper MOOD::ICF
+-- @comments Internal Coupling Factor
+-- @comments Quotient between the number of coupling links where both the client and supplier Classes belong to the current Package and the total number of coupling links originating in the current Package.
+-- @comments Coupling links originating in the current Package are those where the client Class belongs to it.
+-- @comments The coupling link is directed from the client Class to the supplier one.
+helper context MDEPTH!ModelType def: ICF() : Real =
+ if self.ICLN() > 0 then
+  self.ICLN() / self.PCLN(self)
+ else
+  0
+ endif; -- @end helper MOOD::ICF
+--******************************************************************************************************
+--******************************************************************************************************
+--uses QMOOD4UML2;
+--******************************************************************************************************
+--******************************************************************************************************
+-- ===============
+-- QMOOD Metrics =
+-- ===============
+-- @begin helper QMOOD::DSC
+-- @comments Design Size in Classes
+-- @comments Count of the total number of Classes in the design.
+-- @end helper MOOD::ICF
+--******************************************************************************************************
+--******************************************************************************************************
+--uses QMOOD4UML2;
+--******************************************************************************************************
+--******************************************************************************************************
+-- ===============
+-- QMOOD Metrics =
+-- ===============
+-- @begin helper QMOOD::DSC
+-- @comments Design Size in Classes
+-- @comments Count of the total number of Classes in the design.
+helper context MDEPTH!ModelType def: DSC() : Integer =
+ self.CN(); -- @end helper QMOOD::DSC
+-- @begin helper QMOOD::NOH
+-- @comments Number of Hierarchies
+-- @comments Count of the number of Class hierarchies in the design.
+-- @comments In [Abreu et al., 2000], this metric has another interpretation.
+-- @comments  There, hierarchies are not the number of inheritance relations but the number of inheritance trees.
+-- @comments  In this case, this metric is always equal to 1 for systems developed in languages that have a common super class (like Object in Smalltalk and Java).
+-- @comments  This case shows that the metric is centered in the language, which is considered as a potential problem (Remember QMOOD metrics were created based upon C++).
+-- @end helper QMOOD::DSC
+-- @begin helper QMOOD::NOH
+-- @comments Number of Hierarchies
+-- @comments Count of the number of Class hierarchies in the design.
+-- @comments In [Abreu et al., 2000], this metric has another interpretation.
+-- @comments  There, hierarchies are not the number of inheritance relations but the number of inheritance trees.
+-- @comments  In this case, this metric is always equal to 1 for systems developed in languages that have a common super class (like Object in Smalltalk and Java).
+-- @comments  This case shows that the metric is centered in the language, which is considered as a potential problem (Remember QMOOD metrics were created based upon C++).
+helper context MDEPTH!ModelType def: NOH() : Integer =
+ self.allClasses->collect(c |
+  c.children
+ )->flatten()->asSet()->size(); -- @end helper QMOOD::NOH
+-- @begin helper QMOOD::NIC
+-- @comments Number of Independent Classes
+-- @comments Count of the number of Classes that are not inherited by any Class in the design.
+-- @end helper QMOOD::NOH
+-- @begin helper QMOOD::NIC
+-- @comments Number of Independent Classes
+-- @comments Count of the number of Classes that are not inherited by any Class in the design.
+helper context MDEPTH!ModelType def: NIC() : Integer =
+ self.allClasses->select(c |
+  c.isLeaf
+ )->size(); -- @end helper QMOOD::NIC
+-- @begin helper QMOOD::NSI
+-- @comments Number of Single Inheritance
+-- @comments Number of Classes (sub classes) that use inheritance in the design.
+-- @comments According to [Abreu et al., 2000], for the same reason than in NOH, this metric would be always equal to DSC (if the Classes belonging to the development environment were considered) or to DSC – 1 (in the opposite case).
+-- @comments This is another signal of language dependency.
+-- @end helper QMOOD::NIC
+-- @begin helper QMOOD::NSI
+-- @comments Number of Single Inheritance
+-- @comments Number of Classes (sub classes) that use inheritance in the design.
+-- @comments According to [Abreu et al., 2000], for the same reason than in NOH, this metric would be always equal to DSC (if the Classes belonging to the development environment were considered) or to DSC – 1 (in the opposite case).
+-- @comments This is another signal of language dependency.
+helper context MDEPTH!ModelType def: NSI() : Integer =
+ self.allClasses->iterate(c; acc : Integer = 0 |
+  if c.PARN() = 1 then
+   acc + 1
+  else
+   acc
+  endif
+ ); -- @end helper QMOOD::NSI
+-- @begin helper QMOOD::NNC
+-- @comments Number of Internal Classes
+-- @comments Count of the number of internal Classes defined for creating generalization-specialization structures in Class hierarchies of the design.
+-- @comments In this case, why to have the same value than NOH? Has this metric another interpretation? [Abreu et al., 2000] say that this metric is always equal to DSC or DSC -1, by the reasons pointed out in NOH and NSI.
+-- @end helper QMOOD::NSI
+-- @begin helper QMOOD::NNC
+-- @comments Number of Internal Classes
+-- @comments Count of the number of internal Classes defined for creating generalization-specialization structures in Class hierarchies of the design.
+-- @comments In this case, why to have the same value than NOH? Has this metric another interpretation? [Abreu et al., 2000] say that this metric is always equal to DSC or DSC -1, by the reasons pointed out in NOH and NSI.
+helper context MDEPTH!ModelType def: NNC() : Integer =
+ self.NOH(); -- @end helper QMOOD::NNC
+-- @begin helper QMOOD::NAC
+-- @comments Number of Abstract Classes
+-- @comments Count of the number of Classes that have been defined purely for organizing information in the design.
+-- @end helper QMOOD::NNC
+-- @begin helper QMOOD::NAC
+-- @comments Number of Abstract Classes
+-- @comments Count of the number of Classes that have been defined purely for organizing information in the design.
+helper context MDEPTH!ModelType def: NAC() : Integer =
+ self.allClasses->select(c |
+  c.isAbstract
+ )->size(); -- @end helper QMOOD::NAC
+-- @begin helper QMOOD::NLC
+-- @comments Number of Leaf Classes
+-- @comments Count of the number of leaf Classes in the hierarchies of the design.
+-- @comments This metric is the same than NIC, defined above.
+-- @end helper QMOOD::NAC
+-- @begin helper QMOOD::NLC
+-- @comments Number of Leaf Classes
+-- @comments Count of the number of leaf Classes in the hierarchies of the design.
+-- @comments This metric is the same than NIC, defined above.
+helper context MDEPTH!ModelType def: NLC() : Integer =
+ self.allClasses->select(c |
+  c.isLeaf
+ )->size(); -- @end helper QMOOD::NLC
+-- @begin helper QMOOD::ADI
+-- @comments Average Depth of Inheritance
+-- @comments The average depth of inheritance of Classes in the design. It is computed by dividing the summation of maximum path lengths to all Classes by the number of Classes. The path length for a Class is the number of edges from the root to the Class in an inheritance tree representation.
+-- @end helper QMOOD::NLC
+-- @begin helper QMOOD::ADI
+-- @comments Average Depth of Inheritance
+-- @comments The average depth of inheritance of Classes in the design. It is computed by dividing the summation of maximum path lengths to all Classes by the number of Classes. The path length for a Class is the number of edges from the root to the Class in an inheritance tree representation.
+helper context MDEPTH!ModelType def: ADI() : Real =
+ self.allClasses->iterate(c; acc : Real = 0 |
+  (acc + c.DIT()) / self.CN()
+ ); -- @end helper QMOOD::ADI
+-- @begin helper QMOOD::AWI
+-- @comments Average Width of Inheritance
+-- @comments The average number of children per Class in the design. The metric is computed by dividing the summation of the number of children over all Classes by the number of Classes in the design.
+-- @comments Accordingly to a different view point, [Abreu et al., 2000] say this metric is always equal to DSC or DSC - 1, when multiple inheritance is not supported by the language, as in Smalltalk, Eiffel or Java. The same happens with NOH, NSI and NNC.
+-- @end helper QMOOD::ADI
+-- @begin helper QMOOD::AWI
+-- @comments Average Width of Inheritance
+-- @comments The average number of children per Class in the design. The metric is computed by dividing the summation of the number of children over all Classes by the number of Classes in the design.
+-- @comments Accordingly to a different view point, [Abreu et al., 2000] say this metric is always equal to DSC or DSC - 1, when multiple inheritance is not supported by the language, as in Smalltalk, Eiffel or Java. The same happens with NOH, NSI and NNC.
+helper context MDEPTH!ModelType def: AWI() : Real =
+ self.allClasses->iterate(c; acc : Real = 0 |
+  (acc + c.CHIN()) / self.CN()
+ ); -- @end helper QMOOD::AWI
+-- @begin helper QMOOD::ANA
+-- @comments Average Number of Ancestors
+-- @comments The average number of Classes from which a class inherits information.
+-- @comments This metric is similar to the ADI measure and differs only when there are instances of multiple inheritance in the design.
+-- @end helper QMOOD::AWI
+-- @begin helper QMOOD::ANA
+-- @comments Average Number of Ancestors
+-- @comments The average number of Classes from which a class inherits information.
+-- @comments This metric is similar to the ADI measure and differs only when there are instances of multiple inheritance in the design.
+helper context MDEPTH!ModelType def: ANA() : Real =
+ if self.CN() > 0 then
+  self.internalBaseClasses->size() / self.CN()
+ else
+  0
+ endif; -- @end helper QMOOD::ANA
+-- @comments This metrics is not used because result can be negative.
+-- @begin helper QMOOD::MFM
+-- @comments Measure of Functional Modularity
+-- @comments Computes modularity based on the deviation of the number of Methods in a Class from the average number of Methods per Class in the design.
+-- @comments A value closer than zero is preferred for this metric. A lower value indicates a smaller deviation among Classes in the number of services provided.
+--helper context UML2!Class
+--def : MFM() : Integer =
+--	let owner : UML2!Package = self.owner in
+--	if not owner.oclIsUndefined()
+--		then if owner.CN() > 0
+--				then if owner.PAON() / owner.CN() > 0
+--						then (self.allOperations->size() -
+--							  (owner.PAON() / owner.CN())) /
+--							  	(owner.PAON() / owner.CN())
+--						else 0
+--					endif
+--				else 0
+--			endif
+--		else 0
+--	endif;
+-- @end helper QMOOD::MFM
+-- @begin helper QMOOD::MFA
+-- @comments Measure of Functional Abstraction
+-- @comments The ratio of the number of Methods inherited by a class to the total number of Methods accessible by members in the Class.
+-- @comments In order to calculate MFA, the number of Operations must be greater than zero.
 -- @end helper QMOOD::ANA
 -- @comments This metrics is not used because result can be negative.
 -- @begin helper QMOOD::MFM
@@ -978,7 +1862,7 @@ helper context MDEPTH!NodeType def: MAT() : Integer =
 -- @comments Measure of Aggregation
 -- @comments Count of the number of data declarations whose types are user defined Classes.
 helper context MDEPTH!NodeType def: MOA() : Integer =
- let owner : MDEPTH!NONE = self.owner in
+ let owner : MDEPTH!Model = self.owner in
  if not owner.oclIsUndefined() then
   self.allAttributes->iterate(a; acc : Integer = 0 |
    if owner.allClasses->includes(a.type) then

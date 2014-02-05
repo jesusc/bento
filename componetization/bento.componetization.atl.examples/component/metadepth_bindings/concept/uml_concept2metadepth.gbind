@@ -4,21 +4,22 @@ binding oo2mdepth {
 
 	class PackageableElement to NONE
 	class Feature 			 to NONE
-    class NamedElement 		 to NONE
-	class Package    		 to NONE
+    --class NamedElement 		 to NONE
+	--class Package    		 to NONE
 	class Behavior   		 to NONE
 	class Operation  		 to NONE
 	class VisibilityKind 	 to NONE
+	class TypedElement       to NONE
 	
     class Class	     	to NodeType
     class Property   	to Property
 	class Model      	to ModelType
-	class TypedElement 	to Clabject	
+	class Package       to Model
+	class NamedElement  to Clabject
+	--class TypedElement 	to Clabject	
 	class Classifier 	to Classifier
 	
-    feature NamedElement[Classifier].name   is name
-    feature NamedElement[Property].name   	is name
-    feature NamedElement[ModelType].name   	is name     
+    feature NamedElement.name   is name
     
     feature Class.isAbstract 		is isAbstract
     feature Class.nestedClassifier 	= Sequence { }
@@ -27,7 +28,7 @@ binding oo2mdepth {
     feature Class.generalization 	is extends
         
     feature Model.packagedElement 	is children
-    feature TypedElement.type 		is type
+    feature TypedElement[Property].type is type
     
     -- Collapse NamedElement.visibility
     feature Class.visibility 		= #public
