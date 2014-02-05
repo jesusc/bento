@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<mdepth:Environment
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mdepth="http://metadepth.org">
+  <models xsi:type="mdepth:ModelType"
+      name="SampleMetaModel">
+    <children
+        xsi:type="mdepth:NodeType"
+        name="Machine"
+        extends="//@models.0/@children.0"
+        isAbstract="true">
+      <fields
+          xsi:type="mdepth:Field"
+          name="name"/>
+    </children>
+    <children
+        xsi:type="mdepth:NodeType"
+        name="Assembler"/>
+  </models>
+</mdepth:Environment>
