@@ -1,0 +1,11 @@
+composite component metadepth2measure {
+	uses "platform:/resource/bento.componetization.atl.examples/component/oo_effective2measure.gcomponent"  
+	binding bindMD = "platform:/resource/bento.componetization.atl.examples/component/metadepth_bindings/effective/uml_effective2metadepth.gbind"
+			
+    source concept MD          : "http://metadepth.org"
+    target concept Measure     : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore"
+    source model in  : MD      = "platform:/resource/bento.componetization.atl.examples/component/metadepth_bindings/myMDmodel.xmi"
+    target model out : Measure = "platform:/resource/bento.componetization.atl.examples/component/metadepth_bindings/mymodel_output.xmi"
+        			
+	compose apply oo2measure(bindMD(in)) -> (out)
+}

@@ -1,7 +1,18 @@
 binding oo2mdepth {  
-	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/UML2.ecore"
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_effective.ecore"
 	metamodel MDEPTH : "http://metadepth.org"
 
+
+ 	class MDGeneralization {
+            ref general  : NodeType
+            ref specific : NodeType
+    } init = MDEPTH!NodeType.allInstances()->collect(specific| specific.extends->collect(general | 
+            Tuple { 
+                    type__ = 'MDGeneralization', 
+                    general = general, specific = specific
+            }
+    ))->flatten()
+    
 	class PackageableElement to QualifiedElement -- Needs to be mapped: in Explicit Types!!
 	class Feature 			 to NONE
 	class Behavior   		 to NONE
@@ -15,14 +26,18 @@ binding oo2mdepth {
 	class Package       to Model
 	class NamedElement  to Clabject
 	class Classifier 	to Classifier
+	class Generalization to virtual MDGeneralization
 	
+	feature Generalization.specific is specific
+	feature Generalization.general  is general
     feature NamedElement.name   is name
     
     feature Class.isAbstract 		is isAbstract
     feature Class.nestedClassifier 	= Sequence { }
     feature Class.ownedOperation   	= Sequence { }
     feature Class.ownedAttribute   	is fields
-    feature Class.generalizationGeneral	is extends
+    
+    feature Class.generalization = self.MDGeneralization_AllInstances->select(g | g.specific = self)
         
     feature Model.packagedElement 	is children
     feature TypedElement[Property].type is type
