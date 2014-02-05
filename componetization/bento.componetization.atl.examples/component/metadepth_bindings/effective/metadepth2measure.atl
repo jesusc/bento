@@ -2172,16 +2172,16 @@ helper context MDEPTH!NodeType def: ownedAttribute : OclAny =
 helper context MDEPTH!ModelType def: packagedElement : OclAny =
  self.children;
 
+helper context MDEPTH!NodeType def: generalization : OclAny =
+ self.MDGeneralization_AllInstances->select(g |
+  g.specific = self
+ );
+
 helper context MDEPTH!NodeType def: nestedClassifier : OclAny =
  Sequence {};
 
 helper context MDEPTH!NodeType def: ownedOperation : OclAny =
  Sequence {};
-
-helper context MDEPTH!NodeType def: generalization : OclAny =
- self.MDGeneralization_AllInstances->select(g |
-  g.specific = self
- );
 
 helper context MDEPTH!NodeType def: visibility : OclAny =
  #public;
