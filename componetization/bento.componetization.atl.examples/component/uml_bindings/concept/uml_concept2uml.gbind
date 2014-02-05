@@ -2,7 +2,7 @@ binding oo2ecore {
 	concept   UMLE  : "platform:/resource//bento.componetization.atl.examples/concepts/uml2measure/UML2_effective.ecore"
 	metamodel UML2 : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/UML2_3_0_0.ecore"
 
-	class Generalization to Generalization
+	-- class Generalization to Generalization
 	class Feature        to Feature
 	class NamedElement   to NamedElement
 	class Operation 	 to Operation
@@ -18,8 +18,8 @@ binding oo2ecore {
 	class TypedElement   to TypedElement
 	-- class Type       to Type 	   -- Not in explicit types! => Suggest a refactoring to eliminate it...
 
-	feature Generalization.general  is general
-	feature Generalization.specific is specific
+	-- feature Generalization.general  is general
+	-- feature Generalization.specific is specific
 	
 	feature NamedElement.name is name
 	feature NamedElement.visibility is visibility
@@ -35,7 +35,8 @@ binding oo2ecore {
 	feature Class.nestedClassifier is nestedClassifier
 	feature Class.ownedAttribute is ownedAttribute
 	feature Class.isAbstract     is isAbstract     -- PDF from Classifier
-	feature Class.generalization is generalization -- PDF from Classifier
+	-- feature Class.generalization is generalization -- PDF from Classifier
+	feature Class.generalizationGeneral = self.generalization->collect(g | g.general)
 	
 	feature TypedElement.type is type
 	

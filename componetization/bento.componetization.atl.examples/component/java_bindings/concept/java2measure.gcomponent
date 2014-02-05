@@ -1,0 +1,11 @@
+composite component java2measure {
+	uses "platform:/resource/bento.componetization.atl.examples/component/oo_concept2measure.gcomponent"  
+	binding bindJAVA = "platform:/resource/bento.componetization.atl.examples/component/java_bindings/concept/uml_concept2java.gbind"
+			
+    source concept JAVA    : "platform:/resource/bento.componetization.atl.examples/component/java_bindings/java.ecore"
+    target concept Measure : "platform:/resource/bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore"
+    source model in  : JAVA    = "platform:/resource/bento.componetization.atl.examples/mymodel.xmi"
+    target model out : Measure = "platform:/resource/bento.componetization.atl.examples/mymodel_output.xmi"
+        			
+	compose apply oo2measure(bindJAVA(in)) -> (out)
+}

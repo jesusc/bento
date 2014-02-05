@@ -2,7 +2,7 @@ binding oo2mdepth {
 	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/UML2.ecore"
 	metamodel MDEPTH : "http://metadepth.org"
 
-	class PackageableElement to NONE
+	class PackageableElement to QualifiedElement -- Needs to be mapped: in Explicit Types!!
 	class Feature 			 to NONE
     --class NamedElement 		 to NONE
 	--class Package    		 to NONE
@@ -23,9 +23,9 @@ binding oo2mdepth {
     
     feature Class.isAbstract 		is isAbstract
     feature Class.nestedClassifier 	= Sequence { }
-    feature Class.ownedOperation   	is NONE
+    feature Class.ownedOperation   	= Sequence { }
     feature Class.ownedAttribute   	is fields
-    feature Class.generalization 	is extends
+    feature Class.generalizationGeneral	is extends
         
     feature Model.packagedElement 	is children
     feature TypedElement[Property].type is type

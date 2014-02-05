@@ -1,0 +1,66 @@
+binding oo2java {  
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_concept.ecore"
+	metamodel JAVA : "platform:/resource/bento.componetization.atl.examples/component/java_bindings/java.ecore"
+
+	class NamedElement to ENamedElement    
+	
+    class Dependency to NONE --??
+	class Parameter to Parameter
+	class Model     to NONE --- ???
+	class Feature   to Member
+	class Package   to Package --- ?? NO FUNCIONA EN LA PRÁCTICA!! BUENO...	
+	class PackageableElement to ConcreteClassifier -- CompilationUnit
+	class Property  to Field
+	class Class to Class
+	class Operation to ClassMethod
+	class Classifier to ConcreteClassifier
+	class Behavior to NONE
+	class TypedElement to TypedElement
+	
+    feature NamedElement.name   is name
+    
+    -- This is not very good OO style but it catches every subclass...
+    feature NamedElement.visibility = 
+    	if self.annotationsAndModifiers->any(a | a.oclIsKindOf(JAVA!Public) ) then
+    		#public
+    	else 
+    		if self.annotationsAndModifiers->any(a | a.oclIsKindOf(JAVA!Private) ) then
+    			#private
+    		else
+    			#protected
+    		endif
+    	endif 
+    
+	feature Package.packagedElement = self.compilationUnits->collect(c | c.classifier)
+	    
+    feature Class.isAbstract = self.annotationsAndModifiers->any(a | a.oclIsKindOf(JAVA!Abstract) )
+    feature Class.nestedClassifier = self.members->select(m | m.oclIsKind(JAVA!ConcreteClassifier) )
+    feature Class.ownedOperation   = self.members->select(m | m.oclIsKind(JAVA!ClassMethod)) 
+    feature Class.ownedAttribute   = self.members->select(m | m.oclIsKind(JAVA!Field))
+
+	-- TypeReference
+	feature Class.generalizationGeneral = 
+		if self.extends.oclIsUndefined() then
+			self.implements->collect(tr | tr.targetType)
+		else
+			self.implements->collect(tr | tr.targetType).including(self.extends.targetType)
+    	endif
+    
+    -- feature Class.generalization = self.EcoreGeneralization_AllInstances->select(g | g.specific = self)
+    
+    
+    -- feature Generalization.general is general
+    -- feature Generalization.specific is  specific 
+    
+    feature Operation.ownedParameter is parameters
+    feature Operation.method = Sequence { }
+    
+    -- Not sure how this might work
+    feature TypedElement.type = self.typeReference.targetType
+	
+	helper ClassifierReference.targetType : JAVA!Type = self.target
+	helper NamespaceClassifierReference.targetType : JAVA!Type = self.classifierReferences->first()
+	helper PrimitiveType.targetType : JAVA!Type = self
+	
+	
+}
