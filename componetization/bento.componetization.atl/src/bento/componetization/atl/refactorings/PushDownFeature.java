@@ -107,7 +107,7 @@ public class PushDownFeature extends BaseRefactoring {
 				siteClass.getEStructuralFeatures().add( copyFeature(feature) );
 			}
 		
-			EcoreUtil.remove(feature);
+			EcoreUtil.delete(feature);
 		}
 		
 		private EStructuralFeature copyFeature(EStructuralFeature targetOriginal) {
