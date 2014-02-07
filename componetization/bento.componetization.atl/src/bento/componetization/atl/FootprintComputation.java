@@ -86,7 +86,8 @@ public abstract class FootprintComputation {
 		
 		for (EObject eObject : annotations) {
 			ExpressionAnnotation ann = (ExpressionAnnotation) eObject;
-			if ( ann.getUsedFeature() != null ) {
+			if ( ann.getUsedFeature() != null && EcoreUtil.isAncestor(pkg, ann.getUsedFeature()) ) {
+
 				EStructuralFeature f = (EStructuralFeature) ann.getUsedFeature();
 				if ( f instanceof EReference ) {
 					usedReferences.add((EReference) f);

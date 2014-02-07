@@ -390,7 +390,7 @@ def : coupledClasses : Set(KM3!Classifier) =
 --@comments Sequence of Features declared in the current Class. This definition excludes inherited Features.
 helper context KM3!Class
 def : newFeatures : Sequence(KM3!StructuralFeature) =
-    self.newAttributes()->union(self.newReferences);
+    self.newAttributes->union(self.newReferences);
 --@end attribute helper newFeatures
 
 --@begin attribute helper directlyInheritedFeatures
@@ -418,7 +418,7 @@ def : allFeatures : Sequence(KM3!StructuralFeature) =
 --@begin attribute helper newAttributes
 --@comments Sequence of Attributes and containment References declared in the current Class.
 helper context KM3!Class
-def : newAttributes() : Sequence(KM3!StructuralFeature) =
+def : newAttributes : Sequence(KM3!StructuralFeature) =
     self.structuralFeatures->select(sf|sf.oclIsTypeOf(KM3!Attribute))->
         union(self.structuralFeatures->
             select(sf|sf.oclIsTypeOf(KM3!Reference))->select(r|r.isContainer));

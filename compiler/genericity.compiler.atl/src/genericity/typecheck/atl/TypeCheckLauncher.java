@@ -186,7 +186,11 @@ public class TypeCheckLauncher {
 					return eenum;
 			}
 
-			throw new RuntimeException("EClass " + name + " not found");
+			return (EClassifier) throwError("EClass " + name + " not found", getLocation());
+		}
+
+		private Object getLocation() {
+			return model.getFeature(object, "location");
 		}
 
 		protected Type findCommonTypeAux(Type t1, Type t2, boolean createUnionType) {
@@ -863,6 +867,8 @@ public class TypeCheckLauncher {
 							+ " - " + arguments.first() + " " + model.getFeature(object, "location"));
 				}
 				return ct;
+			} else if ( operationName.equals("sum") ) {
+				return (Type) types.createObject(IntegerType.class.getSimpleName());
 			}
 			throw new UnsupportedOperationException("Collection operation: " + operationName);
 		}

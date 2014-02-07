@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -78,6 +79,7 @@ public class MetamodelVisualization implements ITreeContentProvider, ILabelProvi
 		}
 		if ( element instanceof EReference)	return Activator.getImageDescriptor("/icons/full/obj16/EReference.gif").createImage();
 		if ( element instanceof EAttribute)	return Activator.getImageDescriptor("/icons/full/obj16/EAttribute.gif").createImage();
+		if ( element instanceof EDataType)	return Activator.getImageDescriptor("/icons/full/obj16/EDataType.gif").createImage();
 
 		if ( element instanceof AllSubtypesNode )	return Activator.getImageDescriptor("/icons/full/custom/subtypes.gif").createImage();
 
@@ -92,7 +94,7 @@ public class MetamodelVisualization implements ITreeContentProvider, ILabelProvi
 		if ( element instanceof EAttribute)	return ((EAttribute) element).getName() + " : " + getFeatureTypeText((EStructuralFeature) element);
 
 		if ( element instanceof AllSubtypesNode) return "Subclasses : " + ((AllSubtypesNode) element).getSize();
-		
+		if ( element instanceof EDataType ) return ((EDataType) element).getName();
 		return element.toString();
 	}
 

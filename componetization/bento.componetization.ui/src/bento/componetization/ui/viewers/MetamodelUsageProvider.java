@@ -1,7 +1,9 @@
 package bento.componetization.ui.viewers;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -10,6 +12,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 
+import bento.componetization.atl.CallSite;
 import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.ui.Activator;
 
@@ -49,10 +52,13 @@ public class MetamodelUsageProvider  implements ITreeContentProvider, ITableLabe
 	public Object[] getChildren(Object parentElement) {
 		if ( parentElement instanceof IStaticAnalysisInfo ) {
 			IStaticAnalysisInfo info = (IStaticAnalysisInfo) parentElement;
-			return new Object[] { new ExplicitSet() };
+			return new Object[] { new ExplicitSet(), new CallSitesSet() };
 		} else if ( parentElement instanceof ExplicitSet ) {
 			ExplicitSet s = (ExplicitSet) parentElement;
 			return s.createExplicitSet().toArray();			
+		} else if ( parentElement instanceof CallSitesSet ) {
+			CallSitesSet s = (CallSitesSet) parentElement;
+			return s.createCallSitesSet().toArray();
 		}
 		
 		return new Object[0];
@@ -61,6 +67,7 @@ public class MetamodelUsageProvider  implements ITreeContentProvider, ITableLabe
 	@Override
 	public Object getParent(Object element) {
 		if ( element instanceof ExplicitClass ) return info;
+		if ( element instanceof CallSitesSet  ) return info;
 		return null;
 	}
 
@@ -74,6 +81,9 @@ public class MetamodelUsageProvider  implements ITreeContentProvider, ITableLabe
 		if ( element instanceof ExplicitClass && columnIndex == 0 ) {
 			return Activator.getImageDescriptor("/icons/full/obj16/EClass.gif").createImage();
 		}
+		if ( element instanceof CallSite && columnIndex == 0 ) {
+			return Activator.getImageDescriptor("/icons/full/custom/callsite.gif").createImage();
+		}
 	
 		return null;
 	}
@@ -82,11 +92,18 @@ public class MetamodelUsageProvider  implements ITreeContentProvider, ITableLabe
 	public String getColumnText(Object element, int columnIndex) {
 		if ( element instanceof ExplicitSet && columnIndex == 0 ) {
 			return "Explicit uses";
+		} else if ( element instanceof CallSitesSet && columnIndex == 0 ) {
+			return "Call sites";
 		}
 		
 		if ( element instanceof ExplicitClass) {
 			ExplicitClass c = (ExplicitClass) element;
 			if ( columnIndex == 0 ) return c.eClass.getName();
+		} else if ( element instanceof CallSite ) {
+			CallSite site = (CallSite) element;
+			if ( columnIndex == 0 ) return site.getReceptor().getName() + "." + site.getFeature().getName();
+			if ( columnIndex == 1 && site.getFeature().getEContainingClass() != null ) 
+				return site.getFeature().getEContainingClass().getName() + "." + site.getFeature().getName();
 		}
 
 		return "-";
@@ -100,6 +117,20 @@ public class MetamodelUsageProvider  implements ITreeContentProvider, ITableLabe
 				result.add(new ExplicitClass(eClass));
 			}
 			return result;
+		}		
+	}
+	
+
+	private class CallSitesSet {
+		public Set<CallSite> createCallSitesSet() {
+			TreeSet<CallSite> s = new TreeSet<CallSite>(new Comparator<CallSite>() {
+				@Override
+				public int compare(CallSite s0, CallSite s1) {
+					return s0.getReceptor().getName().compareTo(s1.getReceptor().getName());
+				}
+			});
+			s.addAll(info.getCallSites());
+			return s;
 		}		
 	}
 	

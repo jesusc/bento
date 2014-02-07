@@ -428,14 +428,10 @@ public class TransformationConfigurationPage extends FormPage {
 		if (dialog.open() == MetamodelInfoDialog.OK) {
 
 			Metamodel mm = RevengFactory.eINSTANCE.createMetamodel();
-			mm.setName(dialog.getMetamodelName());
-			mm.setPath(dialog.getMetamodelURI());
-			mm.setBecomeConcept(dialog.isConcept());
-
+			setMetamodelInfo(mm, dialog);
+			
 			this.atlTransformation.getMetamodels().add(mm);
-
 			markAsDirty();
-
 			listMetamodels.refresh();
 		}
 	}
@@ -451,21 +447,24 @@ public class TransformationConfigurationPage extends FormPage {
 		dialog.setData(mm.getName(), mm.getPath(), mm.getModelName(), mm.isBecomeConcept(), mm.getKind() == ModelKind.IN);
 
 		if (dialog.open() == MetamodelInfoDialog.OK) {
-			mm.setName(dialog.getMetamodelName());
-			mm.setPath(dialog.getMetamodelURI());
-			mm.setBecomeConcept(dialog.isConcept());
-			if ( dialog.isSource() ) {
-				mm.setKind(ModelKind.IN);
-			} else {
-				mm.setKind(ModelKind.OUT);				
-			}
-			mm.setModelName(dialog.getModelName());
-			
+			setMetamodelInfo(mm, dialog);
 			markAsDirty();
 			listMetamodels.refresh();
 		}
 	}
 
+	private void setMetamodelInfo(Metamodel mm, MetamodelInfoDialog dialog) {
+		mm.setName(dialog.getMetamodelName());
+		mm.setPath(dialog.getMetamodelURI());
+		mm.setBecomeConcept(dialog.isConcept());
+		if ( dialog.isSource() ) {
+			mm.setKind(ModelKind.IN);
+		} else {
+			mm.setKind(ModelKind.OUT);				
+		}
+		mm.setModelName(dialog.getModelName());
+	}
+	
 	protected void removeMetamodel() {
 		if (listMetamodels.getSelection() instanceof IStructuredSelection) {
 			Iterator it = ((IStructuredSelection) listMetamodels.getSelection()).iterator();
