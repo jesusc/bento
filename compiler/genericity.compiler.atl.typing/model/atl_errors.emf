@@ -1,0 +1,17 @@
+@namespace(uri="http://bento/analysis/atl/errors", prefix="atl_errors")
+package atl_errors;
+
+class AnalysisResult {
+   val Error[*] errors;
+   
+}
+
+abstract class AnalysisInfo {
+   
+}
+
+abstract class Error extends AnalysisInfo {
+   
+}
+
+// References to typing ... 
