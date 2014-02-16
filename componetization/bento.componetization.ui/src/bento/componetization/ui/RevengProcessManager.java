@@ -4,6 +4,7 @@ package bento.componetization.ui;
 
 import genericity.compiler.atl.api.AtlTransformationLoader;
 import genericity.compiler.atl.api.AtlTransformationLoader.FileBased;
+import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typecheck.atl.TypeCheckLauncher.ErrorMessage;
 import genericity.typing.atl_types.AtlTypingPackage;
@@ -35,7 +36,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.IStaticAnalysisInfo;
-import bento.componetization.atl.MetamodelModel;
 import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
@@ -281,7 +281,9 @@ public class RevengProcessManager {
 	
     public IModel loadTransformationMetamodels(List<Metamodel> metamodels) throws IOException {
         metamodelResources = new HashMap<Metamodel, Resource>();
+        HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
     	
+        
     	ResourceSetImpl rs = new ResourceSetImpl();
         // Resource merged = rs.createResource(URI.createURI("reveng_metamodels.ecore"));
         
@@ -312,6 +314,7 @@ public class RevengProcessManager {
         	}
         	
         	metamodelResources.put(m, r1);
+        	logicalNamesToResources.put(m.getName(), r1);
         	
         	if ( m.getExtractedConcept() != null ) {
         		this.conceptResources.put(m.getExtractedConcept(), r1);
@@ -321,7 +324,9 @@ public class RevengProcessManager {
         	//	  pruneMetamodel(m);
         }
 
-        return new MetamodelModel(metamodelResources.values());
+        
+        
+        return new AtlTransformationMetamodelsModel(logicalNamesToResources.values(), logicalNamesToResources);
     }
 
     public IStaticAnalysisInfo computeStaticAnalysis(Metamodel metamodel) {

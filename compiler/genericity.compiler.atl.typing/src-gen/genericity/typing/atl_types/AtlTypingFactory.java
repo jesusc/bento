@@ -26,6 +26,15 @@ public interface AtlTypingFactory extends EFactory {
 	AtlTypingFactory eINSTANCE = genericity.typing.atl_types.impl.AtlTypingFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Ocl Undefined Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ocl Undefined Type</em>'.
+	 * @generated
+	 */
+	OclUndefinedType createOclUndefinedType();
+
+	/**
 	 * Returns a new object of class '<em>Boolean Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,6 +177,24 @@ public interface AtlTypingFactory extends EFactory {
 	 * @generated
 	 */
 	ReflectiveClass createReflectiveClass();
+
+	/**
+	 * Returns a new object of class '<em>Sequence Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sequence Type</em>'.
+	 * @generated
+	 */
+	SequenceType createSequenceType();
+
+	/**
+	 * Returns a new object of class '<em>Set Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set Type</em>'.
+	 * @generated
+	 */
+	SetType createSetType();
 
 	/**
 	 * Returns the package supported by this factory.

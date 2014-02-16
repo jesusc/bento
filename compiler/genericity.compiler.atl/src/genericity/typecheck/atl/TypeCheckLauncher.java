@@ -49,6 +49,9 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import atl.metamodel.ATLModel;
+import atl.metamodel.ATLModelBaseObject;
+
 public class TypeCheckLauncher {
 
 	public static BasicEMFModel loadTransformationMetamodels(EMFLoader loader, String... metamodels) throws IOException {
@@ -107,7 +110,8 @@ public class TypeCheckLauncher {
 
 		context = new ExecutionContext();
 		context.setWarningMode(isWarningMode);
-
+		context.setAtlModel(in);
+		
 		in.registerMethodHandler(new CustomMethodHandler(mm, out, manager, context));
 		transformation.setModelManager(manager);
 
@@ -151,10 +155,14 @@ public class TypeCheckLauncher {
 		private IModel				mm;
 		private BasicEMFModel		types;
 		private ExecutionContext	context;
+		private ATLModelBaseObject	atlObject;
 
 		public CustomMethodWrapper(IModel mm, BasicEMFModel types, IModel<?, ?> model, Object o,
 				ExecutionContext context) {
 			super(model, o);
+		
+			this.atlObject = context.getAtlModel().findWrapper(o);
+			
 			this.mm = mm;
 			this.types = types;
 			this.context = context;
@@ -877,11 +885,20 @@ public class TypeCheckLauncher {
 	public static class ExecutionContext {
 		private ArrayList<ErrorMessage>	messages	= new ArrayList<ErrorMessage>();
 		private boolean					warningMode;
+		private ATLModel	atlModel;
 
 		public void addMessage(ErrorMessage msg) {
 			messages.add(msg);
 		}
 
+		public void setAtlModel(BasicEMFModel in) {
+			this.atlModel = new ATLModel(in.getHandler().getResource());
+		}
+
+		public ATLModel getAtlModel() {
+			return atlModel;
+		}
+		
 		public boolean isWarningMode() {
 			return warningMode;
 		}

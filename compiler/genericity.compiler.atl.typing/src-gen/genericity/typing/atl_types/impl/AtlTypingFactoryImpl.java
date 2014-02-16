@@ -60,6 +60,7 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case AtlTypingPackage.OCL_UNDEFINED_TYPE: return createOclUndefinedType();
 			case AtlTypingPackage.BOOLEAN_TYPE: return createBooleanType();
 			case AtlTypingPackage.INTEGER_TYPE: return createIntegerType();
 			case AtlTypingPackage.STRING_TYPE: return createStringType();
@@ -76,9 +77,21 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 			case AtlTypingPackage.UNION_TYPE: return createUnionType();
 			case AtlTypingPackage.THIS_MODULE_TYPE: return createThisModuleType();
 			case AtlTypingPackage.REFLECTIVE_CLASS: return createReflectiveClass();
+			case AtlTypingPackage.SEQUENCE_TYPE: return createSequenceType();
+			case AtlTypingPackage.SET_TYPE: return createSetType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OclUndefinedType createOclUndefinedType() {
+		OclUndefinedTypeImpl oclUndefinedType = new OclUndefinedTypeImpl();
+		return oclUndefinedType;
 	}
 
 	/**
@@ -239,6 +252,26 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	public ReflectiveClass createReflectiveClass() {
 		ReflectiveClassImpl reflectiveClass = new ReflectiveClassImpl();
 		return reflectiveClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SequenceType createSequenceType() {
+		SequenceTypeImpl sequenceType = new SequenceTypeImpl();
+		return sequenceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SetType createSetType() {
+		SetTypeImpl setType = new SetTypeImpl();
+		return setType;
 	}
 
 	/**

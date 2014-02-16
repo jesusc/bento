@@ -1,0 +1,266 @@
+@namespace(uri="zoo/ant", prefix="zoo_ant")
+package Ant; 
+  class Project {
+    !ordered attr String name;
+    !ordered attr String basedir;
+    !ordered attr String description;
+    !ordered ref Target[1] default;
+    !ordered val Path path;
+    val Property[*] properties;
+    !ordered val TaskDef[*] taskdef;
+    val Target[+] targets;
+  }
+
+  abstract class Property {
+  }
+
+  class PropertyName extends Property {
+    !ordered attr String[1] name;
+  }
+
+  class PropertyValue extends PropertyName {
+    !ordered attr String[1] value;
+  }
+
+  class PropertyLocation extends PropertyName {
+    !ordered attr String[1] location;
+  }
+
+  class PropertyFile extends Property {
+    !ordered attr String[1] file;
+  }
+
+  class PropertyEnv extends Property {
+    !ordered attr String[1] environment;
+  }
+
+  class Target {
+    !ordered attr String[1] name;
+    !ordered attr String description;
+    !ordered attr String unless;
+    !ordered attr String ifCondition;
+    !ordered ref Target[*] depends;
+    val Task[*]#target tasks;
+  }
+
+  abstract class Pattern {
+  }
+
+  abstract class Basic extends Pattern {
+  }
+
+  class Mapper extends Basic {
+    !ordered attr String type;
+    !ordered attr String classname;
+    !ordered attr String classpath;
+    !ordered attr String classpathref;
+    !ordered attr String from;
+    !ordered attr String to;
+  }
+
+  abstract class InExcludes extends Basic {
+    !ordered attr String[1] name;
+    !ordered attr String ifCondition;
+    !ordered attr String unless;
+  }
+
+  class Includes extends InExcludes {
+  }
+
+  class Excludes extends InExcludes {
+  }
+
+  class IncludesFile extends InExcludes {
+  }
+
+  class ExcludesFile extends InExcludes {
+  }
+
+  class FileList extends Basic {
+    !ordered attr String[1] dir;
+    !ordered attr String[1] files;
+  }
+
+  class Filter extends Basic {
+    !ordered attr String[1] token;
+    !ordered attr String[1] value;
+  }
+
+  class FiltersFile extends Basic {
+    !ordered attr String[1] file;
+  }
+
+  class PathElement extends Basic {
+    !ordered attr String[1] path;
+    !ordered attr String[1] location;
+  }
+
+  abstract class Set extends Pattern {
+  }
+
+  class PatternSet extends Set {
+    !ordered val InExcludes[+] inexcludes;
+  }
+
+  class FileSet extends Set {
+    !ordered attr String[1] dir;
+    !ordered val PatternSet[*] patternset;
+    !ordered val Includes[*] include;
+    !ordered val Excludes[*] exclude;
+  }
+
+  class FilterSet extends Set {
+    !ordered attr String starttoken;
+    !ordered attr String endtoken;
+    !ordered val Filter[*] filter;
+    !ordered val FiltersFile[*] filtersfile;
+  }
+
+  class Path extends Set {
+    !ordered attr String[1] ~id;
+    !ordered attr String refid;
+    !ordered val Path path;
+    !ordered val PathElement[*] pathElement;
+    !ordered val FileSet[*] fileset;
+  }
+
+  class ClassPath extends Set {
+    !ordered attr String[1] refid;
+    !ordered val PathElement[*] pathElement;
+    !ordered val FileSet[*] fileset;
+  }
+
+  abstract class Task {
+    !ordered ref Target[1]#tasks target;
+  }
+
+  class TaskDef {
+    !ordered attr String[1] name;
+    !ordered attr String[1] classname;
+  }
+
+  class NewTask extends Task {
+    !ordered ref TaskDef[1] taskName;
+    !ordered val Attribut[*] attributes;
+  }
+
+  class Attribut {
+    !ordered attr String[1] name;
+    !ordered attr String[1] value;
+  }
+
+  abstract class PreDefinedTask extends Task {
+    !ordered attr String ~id;
+    !ordered attr String taskname;
+    !ordered attr String description;
+  }
+
+  class Java extends ExecutionTask {
+    !ordered attr String[1] classname;
+    !ordered attr String jar;
+    !ordered attr String fork;
+    !ordered val ClassPath classPath;
+  }
+
+  abstract class MiscellaneousTask extends PreDefinedTask {
+  }
+
+  class Echo extends MiscellaneousTask {
+    !ordered attr String[1] message;
+    !ordered attr String file;
+    !ordered attr String append;
+  }
+
+  class Tstamp extends MiscellaneousTask {
+    !ordered val FormatTstamp[*] format;
+  }
+
+  class FormatTstamp {
+    !ordered attr String[1] property;
+    !ordered attr String[1] pattern;
+    !ordered attr String offset;
+    !ordered attr String unit;
+    !ordered attr String locale;
+  }
+
+  abstract class CompileTask extends PreDefinedTask {
+  }
+
+  class Javac extends CompileTask {
+    !ordered attr String[1] srcdir;
+    !ordered attr String destdir;
+    !ordered attr String debug;
+    !ordered attr String fork;
+    !ordered attr String optimize;
+    !ordered attr String deprecation;
+    !ordered val InExcludes[*] inExcludes;
+    !ordered val ClassPath classPath;
+  }
+
+  abstract class DocumentationTask extends PreDefinedTask {
+  }
+
+  class Javadoc extends DocumentationTask {
+    !ordered attr String[1] sourcepath;
+    !ordered attr String[1] destdir;
+    !ordered attr String[1] packagenames;
+    !ordered attr String[1] defaultexcludes;
+    !ordered attr String[1] author;
+    !ordered attr String[1] version;
+    !ordered attr String[1] use;
+    !ordered attr String[1] windowtitle;
+  }
+
+  abstract class ArchiveTask extends PreDefinedTask {
+  }
+
+  class Jar extends ArchiveTask {
+    !ordered attr String[1] jarfile;
+    !ordered attr String basedir;
+    !ordered attr String compress;
+    !ordered attr String encoding;
+    !ordered attr String manifest;
+  }
+
+  abstract class FileTask extends PreDefinedTask {
+  }
+
+  class Mkdir extends FileTask {
+    !ordered attr String[1] dir;
+  }
+
+  class Copy extends FileTask {
+    !ordered attr String file;
+    !ordered attr String presservelastmodified;
+    !ordered attr String tofile;
+    !ordered attr String todir;
+    !ordered attr String overwrite;
+    !ordered attr String filtering;
+    !ordered attr String flatten;
+    !ordered attr String includeEmptyDirs;
+    !ordered val FileSet fileset;
+    !ordered val FilterSet filterset;
+    !ordered val Mapper mapper;
+  }
+
+  class Delete extends FileTask {
+    !ordered attr String file;
+    !ordered attr String dir;
+    !ordered attr String verbose;
+    !ordered attr String quiet;
+    !ordered attr String failonerror;
+    !ordered attr String includeEmptyDirs;
+    !ordered attr String includes;
+    !ordered attr String includesfile;
+    !ordered attr String excludes;
+    !ordered attr String excludesfile;
+    !ordered attr String defaultexcludes;
+  }
+
+  abstract class ExecutionTask extends PreDefinedTask {
+  }
+
+  class Exec extends ExecutionTask {
+    !ordered attr String[1] executable;
+    !ordered attr String[1] dir;
+  }

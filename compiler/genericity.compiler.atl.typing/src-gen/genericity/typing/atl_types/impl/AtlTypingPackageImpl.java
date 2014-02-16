@@ -9,16 +9,20 @@ package genericity.typing.atl_types.impl;
 import genericity.typing.atl_types.AtlTypingFactory;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.BooleanType;
+import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollection;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.MapType;
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.OclUndefinedType;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.RefType;
 import genericity.typing.atl_types.ReflectiveClass;
 import genericity.typing.atl_types.ReflectiveType;
+import genericity.typing.atl_types.SequenceType;
+import genericity.typing.atl_types.SetType;
 import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.TupleAttribute;
@@ -52,6 +56,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * @generated
 	 */
 	private EClass typeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass oclUndefinedTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +191,27 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	private EClass reflectiveClassEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sequenceTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass setTypeEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -261,6 +293,15 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 */
 	public EAttribute getType_Multivalued() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOclUndefinedType() {
+		return oclUndefinedTypeEClass;
 	}
 
 	/**
@@ -493,6 +534,15 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMetaclass_MetamodelRef() {
+		return (EAttribute)metaclassEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReflectiveType() {
 		return reflectiveTypeEClass;
 	}
@@ -538,6 +588,42 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCollectionType() {
+		return collectionTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionType_ContainedType() {
+		return (EReference)collectionTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSequenceType() {
+		return sequenceTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSetType() {
+		return setTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AtlTypingFactory getAtlTypingFactory() {
 		return (AtlTypingFactory)getEFactoryInstance();
 	}
@@ -563,6 +649,8 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		// Create classes and their features
 		typeEClass = createEClass(TYPE);
 		createEAttribute(typeEClass, TYPE__MULTIVALUED);
+
+		oclUndefinedTypeEClass = createEClass(OCL_UNDEFINED_TYPE);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
 
@@ -602,6 +690,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		createEAttribute(metaclassEClass, METACLASS__NAME);
 		createEAttribute(metaclassEClass, METACLASS__EXPLICIT_OCURRENCE);
 		createEReference(metaclassEClass, METACLASS__KLASS);
+		createEAttribute(metaclassEClass, METACLASS__METAMODEL_REF);
 
 		reflectiveTypeEClass = createEClass(REFLECTIVE_TYPE);
 
@@ -611,6 +700,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		thisModuleTypeEClass = createEClass(THIS_MODULE_TYPE);
 
 		reflectiveClassEClass = createEClass(REFLECTIVE_CLASS);
+
+		collectionTypeEClass = createEClass(COLLECTION_TYPE);
+		createEReference(collectionTypeEClass, COLLECTION_TYPE__CONTAINED_TYPE);
+
+		sequenceTypeEClass = createEClass(SEQUENCE_TYPE);
+
+		setTypeEClass = createEClass(SET_TYPE);
 	}
 
 	/**
@@ -647,6 +743,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		oclUndefinedTypeEClass.getESuperTypes().add(this.getType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		booleanTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		integerTypeEClass.getESuperTypes().add(this.getPrimitiveType());
@@ -664,10 +761,14 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		unionTypeEClass.getESuperTypes().add(this.getType());
 		thisModuleTypeEClass.getESuperTypes().add(this.getType());
 		reflectiveClassEClass.getESuperTypes().add(this.getReflectiveType());
+		sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
+		setTypeEClass.getESuperTypes().add(this.getCollectionType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getType_Multivalued(), ecorePackage.getEBoolean(), "multivalued", "false", 1, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(oclUndefinedTypeEClass, OclUndefinedType.class, "OclUndefinedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -707,6 +808,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEAttribute(getMetaclass_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaclass_ExplicitOcurrence(), ecorePackage.getEBoolean(), "explicitOcurrence", null, 0, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaclass_Klass(), ecorePackage.getEClass(), null, "klass", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaclass_MetamodelRef(), ecorePackage.getEJavaObject(), "metamodelRef", null, 0, 1, Metaclass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reflectiveTypeEClass, ReflectiveType.class, "ReflectiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -716,6 +818,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEClass(thisModuleTypeEClass, ThisModuleType.class, "ThisModuleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(reflectiveClassEClass, ReflectiveClass.class, "ReflectiveClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(collectionTypeEClass, CollectionType.class, "CollectionType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionType_ContainedType(), this.getType(), null, "containedType", null, 1, 1, CollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sequenceTypeEClass, SequenceType.class, "SequenceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(setTypeEClass, SetType.class, "SetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

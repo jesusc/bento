@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link genericity.typing.atl_types.Metaclass#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.Metaclass#isExplicitOcurrence <em>Explicit Ocurrence</em>}</li>
  *   <li>{@link genericity.typing.atl_types.Metaclass#getKlass <em>Klass</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.Metaclass#getMetamodelRef <em>Metamodel Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +105,31 @@ public interface Metaclass extends RefType {
 	 * @generated
 	 */
 	void setKlass(EClass value);
+
+	/**
+	 * Returns the value of the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metamodel Ref</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metamodel Ref</em>' attribute.
+	 * @see #setMetamodelRef(Object)
+	 * @see genericity.typing.atl_types.AtlTypingPackage#getMetaclass_MetamodelRef()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Object getMetamodelRef();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.Metaclass#getMetamodelRef <em>Metamodel Ref</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Metamodel Ref</em>' attribute.
+	 * @see #getMetamodelRef()
+	 * @generated
+	 */
+	void setMetamodelRef(Object value);
 
 } // Metaclass

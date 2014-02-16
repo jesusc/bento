@@ -1,11 +1,13 @@
 package tests.base;
 
+import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -23,13 +25,12 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
-import bento.componetization.atl.MetamodelModel;
 import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.atl.MetamodelPrunner.Strategy;
 
 public abstract class BaseTest {
 
-	protected MetamodelModel transformationMetamodels;
+	protected AtlTransformationMetamodelsModel transformationMetamodels;
 	protected BasicEMFModel atlTransformation;
 	protected BasicEMFModel typingModel;
 	private EPackage conceptPkg;
@@ -37,10 +38,10 @@ public abstract class BaseTest {
 	ResourceSet rs = new ResourceSetImpl();
 	private Resource	prunnedResource;	
 	
-	public void typing(String atlTransformationFile, Object... metamodels) throws IOException {
+	public void typing(String atlTransformationFile, Object metamodels[], String names[]) throws IOException {
 		EMFLoader loader = new EMFLoader(new JavaListConverter(), rs);
 		
-		MetamodelModel mm = loadMetamodels(metamodels); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
+		AtlTransformationMetamodelsModel mm = loadMetamodels(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
 		// BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, BOUND_METAMODEL);
 				
 		atlTransformation = loader
@@ -61,8 +62,11 @@ public abstract class BaseTest {
 		typingModel = out;	
 	}
 	
-	private MetamodelModel loadMetamodels(Object[] metamodels) {
+	private AtlTransformationMetamodelsModel loadMetamodels(Object[] metamodels, String names[]) {
 		ArrayList<Resource> resources = new ArrayList<Resource>();
+		HashMap<String, Resource> nameResources = new HashMap<String, Resource>();
+		
+		int i = 0;
 		for (Object fileOrResource : metamodels) {
 			Resource r = null;
 			if ( fileOrResource instanceof String ) {
@@ -71,8 +75,11 @@ public abstract class BaseTest {
 				r = (Resource) fileOrResource;
 			}
 			resources.add(r);
+		
+			nameResources.put(names[i], r);
+			i++;
 		}
-		return new MetamodelModel(resources);
+		return new AtlTransformationMetamodelsModel(resources, nameResources);
 	}
 
 	public void saveConcept(String conceptFilename) throws IOException {
@@ -146,7 +153,7 @@ public abstract class BaseTest {
 		return atlTransformation;
 	}
 	
-	public MetamodelModel getTransformationMetamodels() {
+	public AtlTransformationMetamodelsModel getTransformationMetamodels() {
 		return transformationMetamodels;
 	}
 	

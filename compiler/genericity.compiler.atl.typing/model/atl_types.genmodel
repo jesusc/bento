@@ -10,6 +10,7 @@
     <genClasses image="false" ecoreClass="atl_types.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Type/multivalued"/>
     </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//OclUndefinedType"/>
     <genClasses image="false" ecoreClass="atl_types.ecore#//PrimitiveType"/>
     <genClasses ecoreClass="atl_types.ecore#//BooleanType"/>
     <genClasses ecoreClass="atl_types.ecore#//IntegerType"/>
@@ -40,6 +41,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/explicitOcurrence"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//Metaclass/klass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/metamodelRef"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_types.ecore#//ReflectiveType"/>
     <genClasses ecoreClass="atl_types.ecore#//UnionType">
@@ -47,6 +49,11 @@
     </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//ThisModuleType"/>
     <genClasses ecoreClass="atl_types.ecore#//ReflectiveClass"/>
+    <genClasses image="false" ecoreClass="atl_types.ecore#//CollectionType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//CollectionType/containedType"/>
+    </genClasses>
+    <genClasses ecoreClass="atl_types.ecore#//SequenceType"/>
+    <genClasses ecoreClass="atl_types.ecore#//SetType"/>
     <nestedGenPackages prefix="Annotations" basePackage="genericity.typing.atl_types"
         disposableProviderFactory="true" ecorePackage="atl_types.ecore#//annotations">
       <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/AtlAnnotation"/>

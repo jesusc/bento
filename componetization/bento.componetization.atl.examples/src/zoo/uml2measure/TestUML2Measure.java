@@ -33,7 +33,8 @@ public class TestUML2Measure extends BaseTest {
 	
 	public void run() throws IOException {
 		// typing
-		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		// typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, new String[] { "UML2", "Measure" });
 		
 		// getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
@@ -47,7 +48,7 @@ public class TestUML2Measure extends BaseTest {
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { prunned, TARGET_METAMODEL }, new String[] { "UML2", "Measure" });
 		System.out.println("Re-Typing of " + TestUML2Measure.class.getSimpleName());
 
 		// conceptExtraction - RealFeature

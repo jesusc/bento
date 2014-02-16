@@ -7,6 +7,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multivalued" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OclUndefinedType" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//PrimitiveType"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerType" eSuperTypes="#//PrimitiveType"/>
@@ -42,6 +43,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitOcurrence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="klass" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReflectiveType" abstract="true" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnionType" eSuperTypes="#//Type">
@@ -50,6 +53,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThisModuleType" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReflectiveClass" eSuperTypes="#//ReflectiveType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" lowerBound="1"
+        eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceType" eSuperTypes="#//CollectionType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SetType" eSuperTypes="#//CollectionType"/>
   <eSubpackages name="annotations" nsURI="http://genericity/types/atl/annotations"
       nsPrefix="atl_types_annotations">
     <eClassifiers xsi:type="ecore:EClass" name="AtlAnnotation" abstract="true"/>

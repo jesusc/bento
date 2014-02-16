@@ -7,6 +7,10 @@ abstract class Type {
 	attr boolean[1] multivalued = false;
 }
 
+class OclUndefinedType extends Type {
+   
+}
+
 abstract class PrimitiveType extends Type {
 }
 
@@ -61,6 +65,8 @@ class Metaclass extends RefType {
    attr String[1] name;
    attr boolean explicitOcurrence;
    ref EClass[1] klass;   
+
+   transient attr Object[0..1] metamodelRef;
 }
 
 abstract class ReflectiveType extends Type {
@@ -82,6 +88,17 @@ class ThisModuleType extends Type {
 class ReflectiveClass extends ReflectiveType {
    
 }
+
+abstract class CollectionType {
+   ref Type[1] containedType;
+}
+
+class SequenceType extends CollectionType {
+}
+
+class SetType extends CollectionType {  
+}
+
 
 @namespace(uri="http://genericity/types/atl/annotations", prefix="atl_types_annotations")
 package annotations {

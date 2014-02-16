@@ -36,7 +36,7 @@ public class TestTrafoRunningExample extends BaseTest {
 	
 	public void run() throws IOException {
 		// initial typing
-		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, new String[] { "UML", "Metrics" });
 		
 		// getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		// getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
@@ -50,7 +50,7 @@ public class TestTrafoRunningExample extends BaseTest {
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { prunned, TARGET_METAMODEL }, new String[] { "UML", "Metrics" });
 		System.out.println("Re-Typing of " + TestTrafoRunningExample.class.getSimpleName());
 		
 		getTypingModel().serialize(new FileOutputStream("tmp_/retyping.xmi"));

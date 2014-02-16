@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bento componetization examples
+Bundle-SymbolicName: bento.componetization.atl.examples;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Miso Team
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
+ org.eclectic.modeling;bundle-version="0.8.6",
+ org.eclectic.idc;bundle-version="0.8.6",
+ genericity.compiler.atl;bundle-version="1.0.0",
+ bento.componetization.atl;bundle-version="1.0.0",
+ genericity.compiler.atl.typing;bundle-version="1.0.0"

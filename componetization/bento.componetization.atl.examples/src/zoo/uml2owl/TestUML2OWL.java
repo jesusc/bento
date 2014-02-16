@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -31,7 +32,7 @@ public class TestUML2OWL extends BaseTest {
 	
 	public void run() throws IOException {
 		// typing
-		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, new String[] { "UML", "OWL" });
 		
 		//getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		// getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
@@ -40,12 +41,12 @@ public class TestUML2OWL extends BaseTest {
 
 		// Meta-model prunning
 		MetamodelPrunner pr = pruneMetamodel("http://www.eclipse.org/uml2/3.0.0/UML", "http://bento/examples/classdiag", "classidag", PRUNED_SOURCE_METAMODEL);
-		savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
+		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, PRUNED_SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { prunned, TARGET_METAMODEL }, new String[] { "UML", "OWL" });
 		System.out.println("Re-Typing of " + TestUML2OWL.class.getSimpleName());
 		
 		// conceptExtraction - RealFeature

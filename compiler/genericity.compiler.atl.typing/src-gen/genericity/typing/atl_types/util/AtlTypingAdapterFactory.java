@@ -80,6 +80,10 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAdapter();
 			}
 			@Override
+			public Adapter caseOclUndefinedType(OclUndefinedType object) {
+				return createOclUndefinedTypeAdapter();
+			}
+			@Override
 			public Adapter casePrimitiveType(PrimitiveType object) {
 				return createPrimitiveTypeAdapter();
 			}
@@ -152,6 +156,18 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createReflectiveClassAdapter();
 			}
 			@Override
+			public Adapter caseCollectionType(CollectionType object) {
+				return createCollectionTypeAdapter();
+			}
+			@Override
+			public Adapter caseSequenceType(SequenceType object) {
+				return createSequenceTypeAdapter();
+			}
+			@Override
+			public Adapter caseSetType(SetType object) {
+				return createSetTypeAdapter();
+			}
+			@Override
 			public Adapter caseEModelElement(EModelElement object) {
 				return createEModelElementAdapter();
 			}
@@ -198,6 +214,20 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.OclUndefinedType <em>Ocl Undefined Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.OclUndefinedType
+	 * @generated
+	 */
+	public Adapter createOclUndefinedTypeAdapter() {
 		return null;
 	}
 
@@ -450,6 +480,48 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReflectiveClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.CollectionType <em>Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.CollectionType
+	 * @generated
+	 */
+	public Adapter createCollectionTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.SequenceType <em>Sequence Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.SequenceType
+	 * @generated
+	 */
+	public Adapter createSequenceTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.SetType <em>Set Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.SetType
+	 * @generated
+	 */
+	public Adapter createSetTypeAdapter() {
 		return null;
 	}
 

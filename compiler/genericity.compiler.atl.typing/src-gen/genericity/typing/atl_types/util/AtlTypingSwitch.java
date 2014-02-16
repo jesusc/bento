@@ -80,6 +80,13 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlTypingPackage.OCL_UNDEFINED_TYPE: {
+				OclUndefinedType oclUndefinedType = (OclUndefinedType)theEObject;
+				T result = caseOclUndefinedType(oclUndefinedType);
+				if (result == null) result = caseType(oclUndefinedType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlTypingPackage.PRIMITIVE_TYPE: {
 				PrimitiveType primitiveType = (PrimitiveType)theEObject;
 				T result = casePrimitiveType(primitiveType);
@@ -215,6 +222,26 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlTypingPackage.COLLECTION_TYPE: {
+				CollectionType collectionType = (CollectionType)theEObject;
+				T result = caseCollectionType(collectionType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlTypingPackage.SEQUENCE_TYPE: {
+				SequenceType sequenceType = (SequenceType)theEObject;
+				T result = caseSequenceType(sequenceType);
+				if (result == null) result = caseCollectionType(sequenceType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlTypingPackage.SET_TYPE: {
+				SetType setType = (SetType)theEObject;
+				T result = caseSetType(setType);
+				if (result == null) result = caseCollectionType(setType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -231,6 +258,21 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseType(Type object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ocl Undefined Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ocl Undefined Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOclUndefinedType(OclUndefinedType object) {
 		return null;
 	}
 
@@ -501,6 +543,51 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReflectiveClass(ReflectiveClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionType(CollectionType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSequenceType(SequenceType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Set Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSetType(SetType object) {
 		return null;
 	}
 

@@ -37,7 +37,7 @@ public class TestFootprint extends BaseTest {
 	
 	public void run() throws IOException {
 		// typing
-		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL }, new String[] { "CD" });
 		
 		// getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		// getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
@@ -51,7 +51,7 @@ public class TestFootprint extends BaseTest {
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { prunned }, new String[] { "CD" });
 
 		// Extract concept by refactoring
 		ConceptExtractor extractor = extractConcept("http://bento/componetization/simplequery/classcd", "http://bento/footprint/simplequery1_concept", "classdiag");

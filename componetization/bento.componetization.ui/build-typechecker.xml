@@ -18,6 +18,7 @@
 		<jar destfile="lib/typechecker-atl.jar">
 			<fileset dir="../../compiler/genericity.compiler.atl/bin" >
 				<include name="genericity/typecheck/atl/TypeCheckLauncher*"/>
+				<include name="genericity/typecheck/atl/AtlTransformationMetamodelsModel*"/>
 				
 				<!-- Types are now got from the typing project -->
 				<!--

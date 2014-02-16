@@ -15,8 +15,8 @@ import bento.componetization.atl.MetamodelPrunner;
 import tests.base.BaseTest;
 
 public class TestKM32Measure extends BaseTest {
-	// public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/zoo/km32measure/KM32Measure_all.atl.xmi";
-	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/template/KM32Measure_all.atl.xmi";
+	public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/src/zoo/km32measure/KM32Measure_all.atl.xmi";
+	// public static final String ATL_TRANSFORMATION = "../bento.componetization.atl.examples/template/KM32Measure_all.atl.xmi";
 
 	public static final String TARGET_METAMODEL_NAME = "Measure";
 	private static final String SOURCE_METAMODEL_NAME = "KM3";
@@ -35,7 +35,7 @@ public class TestKM32Measure extends BaseTest {
 	
 	public void run() throws IOException {
 		// typing
-		typing(ATL_TRANSFORMATION, SOURCE_METAMODEL, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, new String[] { "KM3", "Measure" });
 		
 		// getTransformationMetamodels().serialize(new FileOutputStream("tmp_/typing_metamodels.ecore"));
 		getTypingModel().serialize(new FileOutputStream(withDir("tmp_/typing.xmi")));
@@ -49,7 +49,8 @@ public class TestKM32Measure extends BaseTest {
 		System.out.println("Meta-model prunned");
 		
 		// Re-typing
-		typing(ATL_TRANSFORMATION, prunned, TARGET_METAMODEL);
+		typing(ATL_TRANSFORMATION, new Object[] { prunned, TARGET_METAMODEL }, new String[] { "KM3", "Measure" });
+
 		System.out.println("Re-Typing of " + TestKM32Measure.class.getSimpleName());
 
 		// conceptExtraction - RealFeature
