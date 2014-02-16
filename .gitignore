@@ -15,6 +15,9 @@
 */eclectic-gen/*
 *.asm
 
+# tmp files
+*/tmp_/*
+
 !componetization/bento.componetization.ui/swt-grouplayout.jar
 !componetization/bento.componetization.ui/swing2swt.jar
 
