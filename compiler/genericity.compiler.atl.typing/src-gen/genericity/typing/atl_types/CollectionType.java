@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface CollectionType extends EObject {
+public interface CollectionType extends Type {
 	/**
 	 * Returns the value of the '<em><b>Contained Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

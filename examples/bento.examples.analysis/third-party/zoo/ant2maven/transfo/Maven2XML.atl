@@ -396,16 +396,16 @@ rule MavenProjectProject2XMLProjectRootWithoutDescription{
 }
 
 
-rule MavenProjectDescription{
-	from i : MavenProject!Description
-	to o : XMLProject!Element(
-		name <- 'description',
-		children <- textText
-	),
-	textText : XMLProject!Text(
-		value <- i.description
-	)
-}
+--rule MavenProjectDescription{
+--	from i : MavenProject!Description
+--	to o : XMLProject!Element(
+--		name <- 'description',
+--		children <- textText
+--	),
+--	textText : XMLProject!Text(
+--		value <- i.description
+--	)
+--}
 
 rule MavenProjectBuild{
 	from i : MavenProject!Build

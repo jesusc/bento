@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link genericity.typing.atl_types.Type#isMultivalued <em>Multivalued</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.Type#getMetamodelRef <em>Metamodel Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,5 +52,31 @@ public interface Type extends EObject {
 	 * @generated
 	 */
 	void setMultivalued(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metamodel Ref</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metamodel Ref</em>' attribute.
+	 * @see #setMetamodelRef(Object)
+	 * @see genericity.typing.atl_types.AtlTypingPackage#getType_MetamodelRef()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Object getMetamodelRef();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.Type#getMetamodelRef <em>Metamodel Ref</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Metamodel Ref</em>' attribute.
+	 * @see #getMetamodelRef()
+	 * @generated
+	 */
+	void setMetamodelRef(Object value);
 
 } // Type

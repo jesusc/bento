@@ -225,6 +225,7 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 			case AtlTypingPackage.COLLECTION_TYPE: {
 				CollectionType collectionType = (CollectionType)theEObject;
 				T result = caseCollectionType(collectionType);
+				if (result == null) result = caseType(collectionType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -232,6 +233,7 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				SequenceType sequenceType = (SequenceType)theEObject;
 				T result = caseSequenceType(sequenceType);
 				if (result == null) result = caseCollectionType(sequenceType);
+				if (result == null) result = caseType(sequenceType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,6 +241,7 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				SetType setType = (SetType)theEObject;
 				T result = caseSetType(setType);
 				if (result == null) result = caseCollectionType(setType);
+				if (result == null) result = caseType(setType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

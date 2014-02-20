@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public abstract class CollectionTypeImpl extends EObjectImpl implements CollectionType {
+public abstract class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' reference.
 	 * <!-- begin-user-doc -->

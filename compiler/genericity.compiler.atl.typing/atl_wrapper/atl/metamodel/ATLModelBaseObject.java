@@ -22,6 +22,11 @@ public abstract class ATLModelBaseObject implements ATLModelBaseObjectInterface 
 		return this.manager.findWrapper(object.eContainer());
 	}
 	
+	public <T> T container(Class<T> casting) {
+		return casting.cast(this.container_());
+	}
+	
+	
 	public void replaceBy(ATLModelBaseObjectInterface element) {
 		EStructuralFeature f = object.eContainingFeature();
 		EObject container    = object.eContainer();

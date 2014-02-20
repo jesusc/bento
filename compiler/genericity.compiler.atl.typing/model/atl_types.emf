@@ -5,6 +5,9 @@ package atl_types;
 
 abstract class Type {
 	attr boolean[1] multivalued = false;
+
+    transient attr Object[0..1] metamodelRef;
+
 }
 
 class OclUndefinedType extends Type {
@@ -66,7 +69,6 @@ class Metaclass extends RefType {
    attr boolean explicitOcurrence;
    ref EClass[1] klass;   
 
-   transient attr Object[0..1] metamodelRef;
 }
 
 abstract class ReflectiveType extends Type {
@@ -89,7 +91,7 @@ class ReflectiveClass extends ReflectiveType {
    
 }
 
-abstract class CollectionType {
+abstract class CollectionType extends Type {
    ref Type[1] containedType;
 }
 

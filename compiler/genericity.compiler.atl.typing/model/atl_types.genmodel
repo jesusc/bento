@@ -9,6 +9,7 @@
       ecorePackage="atl_types.ecore#/">
     <genClasses image="false" ecoreClass="atl_types.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Type/multivalued"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Type/metamodelRef"/>
     </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//OclUndefinedType"/>
     <genClasses image="false" ecoreClass="atl_types.ecore#//PrimitiveType"/>
@@ -41,7 +42,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/explicitOcurrence"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//Metaclass/klass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/metamodelRef"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_types.ecore#//ReflectiveType"/>
     <genClasses ecoreClass="atl_types.ecore#//UnionType">

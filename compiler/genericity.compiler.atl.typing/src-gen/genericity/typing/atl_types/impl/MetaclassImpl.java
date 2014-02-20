@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#isExplicitOcurrence <em>Explicit Ocurrence</em>}</li>
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getKlass <em>Klass</em>}</li>
- *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getMetamodelRef <em>Metamodel Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,26 +81,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * @ordered
 	 */
 	protected EClass klass;
-
-	/**
-	 * The default value of the '{@link #getMetamodelRef() <em>Metamodel Ref</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetamodelRef()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object METAMODEL_REF_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMetamodelRef() <em>Metamodel Ref</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetamodelRef()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object metamodelRef = METAMODEL_REF_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,27 +186,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getMetamodelRef() {
-		return metamodelRef;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMetamodelRef(Object newMetamodelRef) {
-		Object oldMetamodelRef = metamodelRef;
-		metamodelRef = newMetamodelRef;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.METACLASS__METAMODEL_REF, oldMetamodelRef, metamodelRef));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -238,8 +196,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 			case AtlTypingPackage.METACLASS__KLASS:
 				if (resolve) return getKlass();
 				return basicGetKlass();
-			case AtlTypingPackage.METACLASS__METAMODEL_REF:
-				return getMetamodelRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -260,9 +216,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 				return;
 			case AtlTypingPackage.METACLASS__KLASS:
 				setKlass((EClass)newValue);
-				return;
-			case AtlTypingPackage.METACLASS__METAMODEL_REF:
-				setMetamodelRef(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -285,9 +238,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 			case AtlTypingPackage.METACLASS__KLASS:
 				setKlass((EClass)null);
 				return;
-			case AtlTypingPackage.METACLASS__METAMODEL_REF:
-				setMetamodelRef(METAMODEL_REF_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -306,8 +256,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 				return explicitOcurrence != EXPLICIT_OCURRENCE_EDEFAULT;
 			case AtlTypingPackage.METACLASS__KLASS:
 				return klass != null;
-			case AtlTypingPackage.METACLASS__METAMODEL_REF:
-				return METAMODEL_REF_EDEFAULT == null ? metamodelRef != null : !METAMODEL_REF_EDEFAULT.equals(metamodelRef);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -326,8 +274,6 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 		result.append(name);
 		result.append(", explicitOcurrence: ");
 		result.append(explicitOcurrence);
-		result.append(", metamodelRef: ");
-		result.append(metamodelRef);
 		result.append(')');
 		return result.toString();
 	}

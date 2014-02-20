@@ -80,13 +80,22 @@ public interface AtlTypingPackage extends EPackage {
 	int TYPE__MULTIVALUED = 0;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__METAMODEL_REF = 1;
+
+	/**
 	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = 1;
+	int TYPE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.OclUndefinedTypeImpl <em>Ocl Undefined Type</em>}' class.
@@ -106,6 +115,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int OCL_UNDEFINED_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCL_UNDEFINED_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
 	 * The number of structural features of the '<em>Ocl Undefined Type</em>' class.
@@ -136,6 +154,15 @@ public interface AtlTypingPackage extends EPackage {
 	int PRIMITIVE_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -162,6 +189,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_TYPE__MULTIVALUED = PRIMITIVE_TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_TYPE__METAMODEL_REF = PRIMITIVE_TYPE__METAMODEL_REF;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
@@ -192,6 +228,15 @@ public interface AtlTypingPackage extends EPackage {
 	int INTEGER_TYPE__MULTIVALUED = PRIMITIVE_TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_TYPE__METAMODEL_REF = PRIMITIVE_TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>Integer Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -218,6 +263,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_TYPE__MULTIVALUED = PRIMITIVE_TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TYPE__METAMODEL_REF = PRIMITIVE_TYPE__METAMODEL_REF;
 
 	/**
 	 * The number of structural features of the '<em>String Type</em>' class.
@@ -248,6 +302,15 @@ public interface AtlTypingPackage extends EPackage {
 	int FLOAT_TYPE__MULTIVALUED = PRIMITIVE_TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_TYPE__METAMODEL_REF = PRIMITIVE_TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>Float Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -274,6 +337,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int TUPLE_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -311,6 +383,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAP_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
 	 * The feature id for the '<em><b>Key Type</b></em>' containment reference.
@@ -396,6 +477,15 @@ public interface AtlTypingPackage extends EPackage {
 	int REF_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REF_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>Ref Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -422,6 +512,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNKNOWN__MULTIVALUED = REF_TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN__METAMODEL_REF = REF_TYPE__METAMODEL_REF;
 
 	/**
 	 * The number of structural features of the '<em>Unknown</em>' class.
@@ -642,6 +741,15 @@ public interface AtlTypingPackage extends EPackage {
 	int EMPTY_COLLECTION__MULTIVALUED = TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_COLLECTION__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>Empty Collection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -668,6 +776,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUM_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -716,6 +833,15 @@ public interface AtlTypingPackage extends EPackage {
 	int METACLASS__MULTIVALUED = REF_TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS__METAMODEL_REF = REF_TYPE__METAMODEL_REF;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -743,22 +869,13 @@ public interface AtlTypingPackage extends EPackage {
 	int METACLASS__KLASS = REF_TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METACLASS__METAMODEL_REF = REF_TYPE_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Metaclass</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METACLASS_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 4;
+	int METACLASS_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.ReflectiveTypeImpl <em>Reflective Type</em>}' class.
@@ -778,6 +895,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFLECTIVE_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFLECTIVE_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
 	 * The number of structural features of the '<em>Reflective Type</em>' class.
@@ -806,6 +932,15 @@ public interface AtlTypingPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNION_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNION_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
 	 * The feature id for the '<em><b>Possible Types</b></em>' containment reference list.
@@ -845,6 +980,15 @@ public interface AtlTypingPackage extends EPackage {
 	int THIS_MODULE_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THIS_MODULE_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>This Module Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -873,6 +1017,15 @@ public interface AtlTypingPackage extends EPackage {
 	int REFLECTIVE_CLASS__MULTIVALUED = REFLECTIVE_TYPE__MULTIVALUED;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFLECTIVE_CLASS__METAMODEL_REF = REFLECTIVE_TYPE__METAMODEL_REF;
+
+	/**
 	 * The number of structural features of the '<em>Reflective Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -893,13 +1046,31 @@ public interface AtlTypingPackage extends EPackage {
 	int COLLECTION_TYPE = 20;
 
 	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TYPE__CONTAINED_TYPE = 0;
+	int COLLECTION_TYPE__CONTAINED_TYPE = TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Collection Type</em>' class.
@@ -908,7 +1079,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TYPE_FEATURE_COUNT = 1;
+	int COLLECTION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
@@ -919,6 +1090,24 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	int SEQUENCE_TYPE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__MULTIVALUED = COLLECTION_TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE__METAMODEL_REF = COLLECTION_TYPE__METAMODEL_REF;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' reference.
@@ -947,6 +1136,24 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	int SET_TYPE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__MULTIVALUED = COLLECTION_TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE__METAMODEL_REF = COLLECTION_TYPE__METAMODEL_REF;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' reference.
@@ -987,6 +1194,17 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getType_Multivalued();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.Type#getMetamodelRef <em>Metamodel Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Metamodel Ref</em>'.
+	 * @see genericity.typing.atl_types.Type#getMetamodelRef()
+	 * @see #getType()
+	 * @generated
+	 */
+	EAttribute getType_MetamodelRef();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.OclUndefinedType <em>Ocl Undefined Type</em>}'.
@@ -1260,17 +1478,6 @@ public interface AtlTypingPackage extends EPackage {
 	EReference getMetaclass_Klass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.Metaclass#getMetamodelRef <em>Metamodel Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Metamodel Ref</em>'.
-	 * @see genericity.typing.atl_types.Metaclass#getMetamodelRef()
-	 * @see #getMetaclass()
-	 * @generated
-	 */
-	EAttribute getMetaclass_MetamodelRef();
-
-	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.ReflectiveType <em>Reflective Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1401,6 +1608,14 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TYPE__MULTIVALUED = eINSTANCE.getType_Multivalued();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel Ref</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE__METAMODEL_REF = eINSTANCE.getType_MetamodelRef();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.OclUndefinedTypeImpl <em>Ocl Undefined Type</em>}' class.
@@ -1639,14 +1854,6 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference METACLASS__KLASS = eINSTANCE.getMetaclass_Klass();
-
-		/**
-		 * The meta object literal for the '<em><b>Metamodel Ref</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute METACLASS__METAMODEL_REF = eINSTANCE.getMetaclass_MetamodelRef();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.ReflectiveTypeImpl <em>Reflective Type</em>}' class.

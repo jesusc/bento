@@ -1,7 +1,7 @@
 package analysis;
 
 import genericity.compiler.atl.analyser.Analyser;
-import genericity.compiler.atl.analyser.MetamodelAccess;
+import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
@@ -59,7 +59,7 @@ public abstract class BaseTest {
 			launcher.setWarningMode(); 
 			launcher.launch(mm, atlTransformation, out);		
 		} else {
-			MetamodelAccess mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
+			GlobalNamespace mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
 			Analyser analyser = new Analyser(mm, atlTransformation, out);
 			analyser.perform();
 		}
@@ -86,7 +86,7 @@ public abstract class BaseTest {
 		return new AtlTransformationMetamodelsModel(resources, logicalNamesToResources);
 	}
 
-	private MetamodelAccess loadMetamodels2(Object[] metamodels, String[] names) {
+	private GlobalNamespace loadMetamodels2(Object[] metamodels, String[] names) {
 		int i = 0;
 		HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
 		ArrayList<Resource> resources = new ArrayList<Resource>();
@@ -102,7 +102,7 @@ public abstract class BaseTest {
 			i++;
 		}
 
-		return new MetamodelAccess(resources, logicalNamesToResources);
+		return new GlobalNamespace(resources, logicalNamesToResources);
 	}
 	
 	public void saveConcept(String conceptFilename) throws IOException {

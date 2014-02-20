@@ -300,6 +300,15 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getType_MetamodelRef() {
+		return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOclUndefinedType() {
 		return oclUndefinedTypeEClass;
 	}
@@ -534,15 +543,6 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetaclass_MetamodelRef() {
-		return (EAttribute)metaclassEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getReflectiveType() {
 		return reflectiveTypeEClass;
 	}
@@ -649,6 +649,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		// Create classes and their features
 		typeEClass = createEClass(TYPE);
 		createEAttribute(typeEClass, TYPE__MULTIVALUED);
+		createEAttribute(typeEClass, TYPE__METAMODEL_REF);
 
 		oclUndefinedTypeEClass = createEClass(OCL_UNDEFINED_TYPE);
 
@@ -690,7 +691,6 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		createEAttribute(metaclassEClass, METACLASS__NAME);
 		createEAttribute(metaclassEClass, METACLASS__EXPLICIT_OCURRENCE);
 		createEReference(metaclassEClass, METACLASS__KLASS);
-		createEAttribute(metaclassEClass, METACLASS__METAMODEL_REF);
 
 		reflectiveTypeEClass = createEClass(REFLECTIVE_TYPE);
 
@@ -761,12 +761,14 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		unionTypeEClass.getESuperTypes().add(this.getType());
 		thisModuleTypeEClass.getESuperTypes().add(this.getType());
 		reflectiveClassEClass.getESuperTypes().add(this.getReflectiveType());
+		collectionTypeEClass.getESuperTypes().add(this.getType());
 		sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
 		setTypeEClass.getESuperTypes().add(this.getCollectionType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getType_Multivalued(), ecorePackage.getEBoolean(), "multivalued", "false", 1, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getType_MetamodelRef(), ecorePackage.getEJavaObject(), "metamodelRef", null, 0, 1, Type.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(oclUndefinedTypeEClass, OclUndefinedType.class, "OclUndefinedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -808,7 +810,6 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEAttribute(getMetaclass_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaclass_ExplicitOcurrence(), ecorePackage.getEBoolean(), "explicitOcurrence", null, 0, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaclass_Klass(), ecorePackage.getEClass(), null, "klass", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMetaclass_MetamodelRef(), ecorePackage.getEJavaObject(), "metamodelRef", null, 0, 1, Metaclass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reflectiveTypeEClass, ReflectiveType.class, "ReflectiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

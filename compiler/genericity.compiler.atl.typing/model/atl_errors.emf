@@ -14,4 +14,11 @@ abstract class Error extends AnalysisInfo {
    
 }
 
+//
+// Example: aClass->select(x)
+// 
+class CollectionOperationOverNoCollectionType extends Error {
+      
+}
+
 // References to typing ... 
