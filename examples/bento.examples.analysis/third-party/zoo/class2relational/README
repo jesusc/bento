@@ -1,0 +1,7 @@
+ECore2Class launch configuration
+
+IN 	--> Sample.xmi
+MOF --> ECore (button MM is ECore)
+
+OUT --> outClassXMI.ecore
+Class --> Class.xmi

@@ -4,7 +4,7 @@ import genericity.typing.atl_types.Type;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.OclFeature;
 
-public class VirtualFeature<T extends ITypeNamespace, F extends OclFeature> {
+public class VirtualFeature<T extends ITypeNamespace, F> {
 	protected String featureName;
 	protected T receptorType;
 	protected Type returnType;

@@ -3,6 +3,7 @@ package genericity.compiler.atl.analyser;
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.IMetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.PrimitiveGlobalNamespace;
+import genericity.compiler.atl.analyser.namespaces.UnionTypeNamespace;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.FloatType;
@@ -12,9 +13,11 @@ import genericity.typing.atl_types.OclUndefinedType;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.ReflectiveClass;
 import genericity.typing.atl_types.SequenceType;
+import genericity.typing.atl_types.SetType;
 import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.annotations.BindingAnnotation;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
@@ -95,6 +98,14 @@ public class TypingModel {
 		return seq;
 	}
 
+	public SetType newSetType(Type nested) {
+		SetType seq = (SetType) impl.createObject(SetType .class.getSimpleName());
+		seq.setContainedType(nested);
+		seq.setMultivalued(true);
+		seq.setMetamodelRef(primitiveNamespace.getClassifier(PrimitiveGlobalNamespace.SET_TYPE, nested));
+		return seq;
+	}
+
 	public void createBindingAnnotation(Binding b, Type t) {
 		BindingAnnotation bt = (BindingAnnotation) impl.createObject(BindingAnnotation.class.getSimpleName());
 		bt.setBinding(b.original_());
@@ -123,11 +134,26 @@ public class TypingModel {
 			return t1;
 		}
 
-	
-		throw new UnsupportedOperationException("CommonTypes: " + t1 + " - " + t2);
+		if ( (t1 instanceof UnionType) || (t1 instanceof UnionType) ) {
+			// TODO: Try to merge
+			throw new UnsupportedOperationException();
+		} else {
+			return createUnionType(t1, t2);
+		}
+		
+		// throw new UnsupportedOperationException("CommonTypes: " + t1 + " - " + t2);
 	}
 
 	
+	private Type createUnionType(Type... types) {
+		UnionType ut = (UnionType) impl.createObject(UnionType.class.getSimpleName());
+		for (Type type : types) {
+			ut.getPossibleTypes().add(type);
+		}
+		ut.setMetamodelRef(new UnionTypeNamespace(this, ut));
+		return ut;
+	}
+
 	public boolean equalTypes(Type t1, Type t2) {
 		if ( t1.getClass() != t2.getClass() ) 
 			return false;
@@ -150,6 +176,7 @@ public class TypingModel {
 		}
 		return false;
 	}
+
 
 	
 }

@@ -23,8 +23,13 @@ public class IntegerNamespace extends PrimitiveTypeNamespace {
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		Type t = super.getOperatorType(operatorSymbol, optionalArgument, node);
 		if ( t == null ) {
-			throw new UnsupportedOperationException(operatorSymbol);
+			throw new UnsupportedOperationException(operatorSymbol + ". " + node.getLocation());
 		}
 		return t;
+	}
+	
+	@Override
+	public Type createType(boolean explicitOcurrence) {
+		return typ.newIntegerType();
 	}
 }

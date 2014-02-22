@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="10:1-144:2" name="CodeClone2SVG2">
+    <commentsBefore>--@atlcompiler	atl2006</commentsBefore>
+    <commentsBefore>--@name			CodeClone2SVG2</commentsBefore>
+    <commentsBefore>--@version		1.0</commentsBefore>
+    <commentsBefore>--@domains		CodeClone, SVG2</commentsBefore>
+    <commentsBefore>--@authors		Yu Sun</commentsBefore>
+    <commentsBefore>--@email        yusun@cis.uab.edu</commentsBefore>
+    <commentsBefore>--@date			2007/11/05</commentsBefore>
+    <commentsBefore>--@description	This transformation is used to transform the generic Code Clone DSL model to SVG model in a different format.</commentsBefore>
+    <inModels location="11:23-11:37" name="IN" metamodel="/2"/>
+    <outModels location="11:8-11:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:Helper" location="13:1-17:4">
+      <definition location="13:8-17:3">
+        <feature xsi:type="ocl:Operation" location="14:7-17:3" name="firstOne">
+          <parameters location="14:16-14:39" varName="p">
+            <type xsi:type="ocl:OclModelElement" location="14:20-14:39" name="CloneUnit" model="/4"/>
+          </parameters>
+          <returnType xsi:type="ocl:IntegerType" location="14:43-14:50"/>
+          <body xsi:type="ocl:CollectionOperationCallExp" location="16:3-16:141" operationName="indexOf">
+            <source xsi:type="ocl:OperationCallExp" location="16:3-16:37" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="16:3-16:22" name="CloneUnit" model="/5"/>
+            </source>
+            <arguments xsi:type="ocl:CollectionOperationCallExp" location="16:47-16:140" operationName="first">
+              <source xsi:type="ocl:IteratorExp" location="16:47-16:131" name="select">
+                <source xsi:type="ocl:OperationCallExp" location="16:47-16:81" operationName="allInstances">
+                  <source xsi:type="ocl:OclModelElement" location="16:47-16:66" name="CloneUnit" model="/6"/>
+                </source>
+                <body xsi:type="ocl:OperatorCallExp" location="16:94-16:130" operationName="=">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="16:94-16:109" name="fileName">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="16:94-16:100" name="file">
+                      <source xsi:type="ocl:VariableExp" location="16:94-16:95" referredVariable="/0/@elements.0/@definition/@feature/@body/@arguments.0/@source/@iterators.0"/>
+                    </source>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="16:112-16:130" name="fileName">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="16:112-16:121" name="file">
+                      <source xsi:type="ocl:VariableExp" location="16:112-16:116" referredVariable="/7"/>
+                    </source>
+                  </arguments>
+                </body>
+                <iterators location="16:90-16:91" varName="e" variableExp="/0/@elements.0/@definition/@feature/@body/@arguments.0/@source/@body/@source/@source/@source"/>
+              </source>
+            </arguments>
+          </body>
+        </feature>
+        <context_ location="13:8-13:35">
+          <context_ xsi:type="ocl:OclModelElement" location="13:16-13:35" name="CloneUnit" model="/3"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="19:1-23:4">
+      <definition location="19:8-23:3">
+        <feature xsi:type="ocl:Operation" location="20:7-23:3" name="getColor">
+          <returnType xsi:type="ocl:StringType" location="20:20-20:26"/>
+          <body xsi:type="ocl:CollectionOperationCallExp" location="22:3-22:204" operationName="at">
+            <source xsi:type="ocl:SequenceExp" location="22:3-22:150">
+              <elements xsi:type="ocl:StringExp" location="22:12-22:17" stringSymbol="red"/>
+              <elements xsi:type="ocl:StringExp" location="22:19-22:26" stringSymbol="green"/>
+              <elements xsi:type="ocl:StringExp" location="22:28-22:34" stringSymbol="blue"/>
+              <elements xsi:type="ocl:StringExp" location="22:36-22:44" stringSymbol="yellow"/>
+              <elements xsi:type="ocl:StringExp" location="22:46-22:52" stringSymbol="pink"/>
+              <elements xsi:type="ocl:StringExp" location="22:54-22:60" stringSymbol="gold"/>
+              <elements xsi:type="ocl:StringExp" location="22:62-22:69" stringSymbol="brown"/>
+              <elements xsi:type="ocl:StringExp" location="22:71-22:77" stringSymbol="cyan"/>
+              <elements xsi:type="ocl:StringExp" location="22:79-22:89" stringSymbol="honeydew"/>
+              <elements xsi:type="ocl:StringExp" location="22:91-22:97" stringSymbol="lime"/>
+              <elements xsi:type="ocl:StringExp" location="22:99-22:107" stringSymbol="purple"/>
+              <elements xsi:type="ocl:StringExp" location="22:109-22:117" stringSymbol="sienna"/>
+              <elements xsi:type="ocl:StringExp" location="22:119-22:132" stringSymbol="springgreen"/>
+              <elements xsi:type="ocl:StringExp" location="22:134-22:141" stringSymbol="black"/>
+              <elements xsi:type="ocl:StringExp" location="22:143-22:149" stringSymbol="dark"/>
+            </source>
+            <arguments xsi:type="ocl:OperationCallExp" location="22:157-22:203" operationName="indexOf">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="22:157-22:182" name="groups">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="22:157-22:175" name="parent">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="22:157-22:168" name="parent">
+                    <source xsi:type="ocl:VariableExp" location="22:157-22:161" referredVariable="/9"/>
+                  </source>
+                </source>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="22:191-22:202" name="parent">
+                <source xsi:type="ocl:VariableExp" location="22:191-22:195" referredVariable="/10"/>
+              </arguments>
+            </arguments>
+          </body>
+        </feature>
+        <context_ location="19:8-19:35">
+          <context_ xsi:type="ocl:OclModelElement" location="19:16-19:35" name="CloneUnit" model="/8"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="25:1-30:4">
+      <definition location="25:8-30:3">
+        <feature xsi:type="ocl:Operation" location="26:7-30:3" name="getPos">
+          <parameters location="26:14-26:24" varName="p" variableExp="/0/@elements.2/@definition/@feature/@body/@arguments.0">
+            <type xsi:type="ocl:StringType" location="26:18-26:24"/>
+          </parameters>
+          <returnType xsi:type="ocl:IntegerType" location="26:28-26:35"/>
+          <body xsi:type="ocl:CollectionOperationCallExp" location="28:3-29:66" operationName="indexOf">
+            <source xsi:type="ocl:IterateExp" location="28:3-29:52">
+              <source xsi:type="ocl:OperationCallExp" location="28:3-28:37" operationName="allInstances">
+                <source xsi:type="ocl:OclModelElement" location="28:3-28:22" name="CloneUnit" model="/12"/>
+              </source>
+              <body xsi:type="ocl:CollectionOperationCallExp" location="29:20-29:51" operationName="including">
+                <source xsi:type="ocl:VariableExp" location="29:20-29:23" referredVariable="/0/@elements.2/@definition/@feature/@body/@source/@result"/>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="29:35-29:50" name="fileName">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="29:35-29:41" name="file">
+                    <source xsi:type="ocl:VariableExp" location="29:35-29:36" referredVariable="/0/@elements.2/@definition/@feature/@body/@source/@iterators.0"/>
+                  </source>
+                </arguments>
+              </body>
+              <iterators location="28:47-28:48" varName="e" variableExp="/0/@elements.2/@definition/@feature/@body/@source/@body/@arguments.0/@source/@source"/>
+              <result location="28:50-28:89" varName="acc" variableExp="/0/@elements.2/@definition/@feature/@body/@source/@body/@source">
+                <type xsi:type="ocl:OrderedSetType" location="28:56-28:74">
+                  <elementType xsi:type="ocl:StringType" location="28:67-28:73"/>
+                </type>
+                <initExpression xsi:type="ocl:OrderedSetExp" location="28:77-28:89"/>
+              </result>
+            </source>
+            <arguments xsi:type="ocl:VariableExp" location="29:64-29:65" referredVariable="/0/@elements.2/@definition/@feature/@parameters.0"/>
+          </body>
+        </feature>
+        <context_ location="25:8-25:35">
+          <context_ xsi:type="ocl:OclModelElement" location="25:16-25:35" name="CloneUnit" model="/11"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="32:1-39:4">
+      <definition location="32:8-39:3">
+        <feature xsi:type="ocl:Operation" location="33:7-39:3" name="maxLine">
+          <returnType xsi:type="ocl:IntegerType" location="33:19-33:26"/>
+          <body xsi:type="ocl:IterateExp" location="35:6-38:23">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="35:6-35:51" operationName="flatten">
+              <source xsi:type="ocl:OperationCallExp" location="35:6-35:40" operationName="allInstances">
+                <source xsi:type="ocl:OclModelElement" location="35:6-35:25" name="CloneUnit" model="/14"/>
+              </source>
+            </source>
+            <body xsi:type="ocl:IfExp" location="36:17-38:22">
+              <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="36:53-36:74" name="totalFileLines">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="36:53-36:59" name="file">
+                  <source xsi:type="ocl:VariableExp" location="36:53-36:54" referredVariable="/0/@elements.3/@definition/@feature/@body/@iterators.0"/>
+                </source>
+              </thenExpression>
+              <condition xsi:type="ocl:OperatorCallExp" location="36:20-36:47" operationName=">">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="36:20-36:41" name="totalFileLines">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="36:20-36:26" name="file">
+                    <source xsi:type="ocl:VariableExp" location="36:20-36:21" referredVariable="/0/@elements.3/@definition/@feature/@body/@iterators.0"/>
+                  </source>
+                </source>
+                <arguments xsi:type="ocl:VariableExp" location="36:44-36:47" referredVariable="/0/@elements.3/@definition/@feature/@body/@result"/>
+              </condition>
+              <elseExpression xsi:type="ocl:VariableExp" location="37:22-37:25" referredVariable="/0/@elements.3/@definition/@feature/@body/@result"/>
+            </body>
+            <iterators location="35:61-35:62" varName="e" variableExp="/0/@elements.3/@definition/@feature/@body/@body/@condition/@source/@source/@source /0/@elements.3/@definition/@feature/@body/@body/@thenExpression/@source/@source"/>
+            <result location="35:64-35:82" varName="res" variableExp="/0/@elements.3/@definition/@feature/@body/@body/@condition/@arguments.0 /0/@elements.3/@definition/@feature/@body/@body/@elseExpression">
+              <type xsi:type="ocl:IntegerType" location="35:70-35:77"/>
+              <initExpression xsi:type="ocl:OperatorCallExp" location="35:80-35:82" operationName="-">
+                <source xsi:type="ocl:IntegerExp" location="35:81-35:82" integerSymbol="1"/>
+              </initExpression>
+            </result>
+          </body>
+        </feature>
+        <context_ location="32:8-32:35">
+          <context_ xsi:type="ocl:OclModelElement" location="32:16-32:35" name="CloneUnit" model="/13"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="41:1-68:2" name="CodeClone2Svg">
+      <outPattern location="44:2-67:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="45:3-53:4" varName="s">
+          <type xsi:type="ocl:OclModelElement" location="45:7-45:14" name="Svg" model="/16"/>
+          <bindings location="46:4-46:17" propertyName="width">
+            <value xsi:type="ocl:IntegerExp" location="46:13-46:17" integerSymbol="1000"/>
+          </bindings>
+          <bindings location="47:11-47:116" propertyName="height">
+            <value xsi:type="ocl:OperatorCallExp" location="47:21-47:116" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="47:21-47:110" operationName="*">
+                <source xsi:type="ocl:CollectionOperationCallExp" location="47:21-47:105" operationName="size">
+                  <source xsi:type="ocl:CollectionOperationCallExp" location="47:21-47:95" operationName="asSet">
+                    <source xsi:type="ocl:IteratorExp" location="47:21-47:85" name="collect">
+                      <source xsi:type="ocl:OperationCallExp" location="47:21-47:55" operationName="allInstances">
+                        <source xsi:type="ocl:OclModelElement" location="47:21-47:40" name="CloneUnit" model="/17"/>
+                      </source>
+                      <body xsi:type="ocl:NavigationOrAttributeCallExp" location="47:69-47:84" name="fileName">
+                        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="47:69-47:75" name="file">
+                          <source xsi:type="ocl:VariableExp" location="47:69-47:70" referredVariable="/0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@source/@iterators.0"/>
+                        </source>
+                      </body>
+                      <iterators location="47:65-47:66" varName="e" variableExp="/0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@source/@body/@source/@source"/>
+                    </source>
+                  </source>
+                </source>
+                <arguments xsi:type="ocl:IntegerExp" location="47:108-47:110" integerSymbol="90"/>
+              </source>
+              <arguments xsi:type="ocl:IntegerExp" location="47:113-47:116" integerSymbol="100"/>
+            </value>
+          </bindings>
+          <bindings location="49:4-49:20" propertyName="version">
+            <value xsi:type="ocl:StringExp" location="49:15-49:20" stringSymbol="1.1"/>
+          </bindings>
+          <bindings location="50:4-50:22" propertyName="standalone">
+            <value xsi:type="ocl:StringExp" location="50:18-50:22" stringSymbol="no"/>
+          </bindings>
+          <bindings location="51:4-51:21" propertyName="children">
+            <value xsi:type="ocl:VariableExp" location="51:16-51:21" referredVariable="/0/@elements.4/@outPattern/@elements.1"/>
+          </bindings>
+          <bindings location="52:4-52:50" propertyName="children">
+            <value xsi:type="ocl:OperationCallExp" location="52:16-52:50" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="52:16-52:35" name="CloneUnit" model="/18"/>
+            </value>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="55:3-59:4" varName="group" variableExp="/0/@elements.4/@outPattern/@elements.0/@bindings.4/@value">
+          <type xsi:type="ocl:OclModelElement" location="55:11-55:20" name="Group" model="/19"/>
+          <bindings location="56:4-56:20" propertyName="translate_x">
+            <value xsi:type="ocl:IntegerExp" location="56:19-56:20"/>
+          </bindings>
+          <bindings location="57:4-57:20" propertyName="translate_y">
+            <value xsi:type="ocl:IntegerExp" location="57:19-57:20"/>
+          </bindings>
+          <bindings location="58:4-58:22" propertyName="components">
+            <value xsi:type="ocl:VariableExp" location="58:18-58:22" referredVariable="/0/@elements.4/@outPattern/@elements.2"/>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="61:3-67:4" varName="text" variableExp="/0/@elements.4/@outPattern/@elements.1/@bindings.2/@value">
+          <type xsi:type="ocl:OclModelElement" location="61:10-61:18" name="Text" model="/20"/>
+          <bindings location="62:4-62:12" propertyName="x">
+            <value xsi:type="ocl:IntegerExp" location="62:9-62:12" integerSymbol="220"/>
+          </bindings>
+          <bindings location="63:4-63:11" propertyName="y">
+            <value xsi:type="ocl:IntegerExp" location="63:9-63:11" integerSymbol="20"/>
+          </bindings>
+          <bindings location="64:4-64:32" propertyName="font_family">
+            <value xsi:type="ocl:StringExp" location="64:19-64:32" stringSymbol="Arial Black"/>
+          </bindings>
+          <bindings location="65:4-65:19" propertyName="font_size">
+            <value xsi:type="ocl:IntegerExp" location="65:17-65:19" integerSymbol="16"/>
+          </bindings>
+          <bindings location="66:4-66:67" propertyName="contend">
+            <value xsi:type="ocl:OperatorCallExp" location="66:15-66:67" operationName="+">
+              <source xsi:type="ocl:StringExp" location="66:15-66:47" stringSymbol="Code Clone Analysis Result by "/>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="66:50-66:67" name="sourceToolName">
+                <source xsi:type="ocl:VariableExp" location="66:50-66:52" referredVariable="/0/@elements.4/@inPattern/@elements.0"/>
+              </arguments>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="42:2-43:27">
+        <elements xsi:type="atl:SimpleInPatternElement" location="43:3-43:27" varName="cc" variableExp="/0/@elements.4/@outPattern/@elements.2/@bindings.4/@value/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="43:8-43:27" name="CodeClone" model="/15"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="71:1-119:2" name="CloneUnit2Group">
+      <outPattern location="76:2-118:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="77:3-83:4" varName="g">
+          <type xsi:type="ocl:OclModelElement" location="77:7-77:16" name="Group" model="/23"/>
+          <bindings location="78:4-78:20" propertyName="translate_x">
+            <value xsi:type="ocl:IntegerExp" location="78:19-78:20"/>
+          </bindings>
+          <bindings location="79:4-79:57" propertyName="translate_y">
+            <value xsi:type="ocl:OperatorCallExp" location="79:19-79:57" operationName="*">
+              <source xsi:type="ocl:IntegerExp" location="79:19-79:21" integerSymbol="90"/>
+              <arguments xsi:type="ocl:OperatorCallExp" location="79:25-79:56" operationName="-">
+                <source xsi:type="ocl:OperationCallExp" location="79:25-79:52" operationName="getPos">
+                  <source xsi:type="ocl:VariableExp" location="79:25-79:27" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="79:35-79:51" name="fileName">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="79:35-79:42" name="file">
+                      <source xsi:type="ocl:VariableExp" location="79:35-79:37" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                    </source>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:IntegerExp" location="79:55-79:56" integerSymbol="1"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="80:4-80:22" propertyName="components">
+            <value xsi:type="ocl:VariableExp" location="80:18-80:22" referredVariable="/0/@elements.5/@outPattern/@elements.1"/>
+          </bindings>
+          <bindings location="81:4-81:22" propertyName="components">
+            <value xsi:type="ocl:VariableExp" location="81:18-81:22" referredVariable="/0/@elements.5/@outPattern/@elements.2"/>
+          </bindings>
+          <bindings location="82:4-82:23" propertyName="components">
+            <value xsi:type="ocl:VariableExp" location="82:18-82:23" referredVariable="/0/@elements.5/@outPattern/@elements.3"/>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="85:3-92:4" varName="text" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.2/@value">
+          <type xsi:type="ocl:OclModelElement" location="85:10-85:18" name="Text" model="/24"/>
+          <bindings location="86:4-86:11" propertyName="x">
+            <value xsi:type="ocl:IntegerExp" location="86:9-86:11" integerSymbol="25"/>
+          </bindings>
+          <bindings location="87:4-87:11" propertyName="y">
+            <value xsi:type="ocl:IntegerExp" location="87:9-87:11" integerSymbol="75"/>
+          </bindings>
+          <bindings location="88:4-88:19" propertyName="font_size">
+            <value xsi:type="ocl:IntegerExp" location="88:17-88:19" integerSymbol="12"/>
+          </bindings>
+          <bindings location="89:4-89:26" propertyName="font_family">
+            <value xsi:type="ocl:StringExp" location="89:19-89:26" stringSymbol="Arial"/>
+          </bindings>
+          <bindings location="90:4-90:18" propertyName="fill">
+            <value xsi:type="ocl:StringExp" location="90:12-90:18" stringSymbol="blue"/>
+          </bindings>
+          <bindings location="91:4-91:97" propertyName="contend">
+            <value xsi:type="ocl:OperatorCallExp" location="91:15-91:97" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="91:15-91:91" operationName="+">
+                <source xsi:type="ocl:OperatorCallExp" location="91:15-91:52" operationName="+">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="91:15-91:31" name="fileName">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="91:15-91:22" name="file">
+                      <source xsi:type="ocl:VariableExp" location="91:15-91:17" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                    </source>
+                  </source>
+                  <arguments xsi:type="ocl:StringExp" location="91:34-91:52" stringSymbol="  (Total Lines: "/>
+                </source>
+                <arguments xsi:type="ocl:CollectionOperationCallExp" location="91:55-91:91" operationName="toString">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="91:55-91:77" name="totalFileLines">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="91:55-91:62" name="file">
+                      <source xsi:type="ocl:VariableExp" location="91:55-91:57" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                    </source>
+                  </source>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:StringExp" location="91:94-91:97" stringSymbol=")"/>
+            </value>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="94:3-106:4" varName="rect" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.3/@value">
+          <type xsi:type="ocl:OclModelElement" location="94:10-94:18" name="Rect" model="/25"/>
+          <bindings location="95:4-95:11" propertyName="x">
+            <value xsi:type="ocl:IntegerExp" location="95:9-95:11" integerSymbol="20"/>
+          </bindings>
+          <bindings location="96:4-96:11" propertyName="y">
+            <value xsi:type="ocl:IntegerExp" location="96:9-96:11" integerSymbol="80"/>
+          </bindings>
+          <bindings location="97:4-97:12" propertyName="rx">
+            <value xsi:type="ocl:IntegerExp" location="97:10-97:12" integerSymbol="10"/>
+          </bindings>
+          <bindings location="98:4-98:12" propertyName="ry">
+            <value xsi:type="ocl:IntegerExp" location="98:10-98:12" integerSymbol="10"/>
+          </bindings>
+          <bindings location="99:4-99:66" propertyName="width">
+            <value xsi:type="ocl:OperationCallExp" location="99:13-99:66" operationName="floor">
+              <source xsi:type="ocl:OperatorCallExp" location="99:14-99:57" operationName="*">
+                <source xsi:type="ocl:OperatorCallExp" location="99:14-99:32" operationName="/">
+                  <source xsi:type="ocl:IntegerExp" location="99:14-99:17" integerSymbol="950"/>
+                  <arguments xsi:type="ocl:OperationCallExp" location="99:20-99:32" operationName="maxLine">
+                    <source xsi:type="ocl:VariableExp" location="99:20-99:22" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="99:35-99:57" name="totalFileLines">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="99:35-99:42" name="file">
+                    <source xsi:type="ocl:VariableExp" location="99:35-99:37" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  </source>
+                </arguments>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="100:4-100:16" propertyName="height">
+            <value xsi:type="ocl:IntegerExp" location="100:14-100:16" integerSymbol="60"/>
+          </bindings>
+          <bindings location="101:4-101:19" propertyName="fill">
+            <value xsi:type="ocl:StringExp" location="101:12-101:19" stringSymbol="white"/>
+          </bindings>
+          <bindings location="102:4-102:21" propertyName="stroke">
+            <value xsi:type="ocl:StringExp" location="102:14-102:21" stringSymbol="brown"/>
+          </bindings>
+          <bindings location="103:4-103:21" propertyName="stroke_width">
+            <value xsi:type="ocl:IntegerExp" location="103:20-103:21" integerSymbol="3"/>
+          </bindings>
+          <bindings location="104:4-104:49" propertyName="title">
+            <value xsi:type="ocl:OperatorCallExp" location="104:13-104:49" operationName="+">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="104:13-104:29" name="fileName">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="104:13-104:20" name="file">
+                  <source xsi:type="ocl:VariableExp" location="104:13-104:15" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                </source>
+              </source>
+              <arguments xsi:type="ocl:StringExp" location="104:32-104:49" stringSymbol="Test Test again"/>
+            </value>
+          </bindings>
+          <bindings location="105:4-105:18" propertyName="opacity">
+            <value xsi:type="ocl:RealExp" location="105:15-105:18" realSymbol="0.8"/>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="108:3-118:4" varName="rect2" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.4/@value">
+          <type xsi:type="ocl:OclModelElement" location="108:11-108:19" name="Rect" model="/26"/>
+          <bindings location="109:5-109:58" propertyName="x">
+            <value xsi:type="ocl:OperatorCallExp" location="109:10-109:58" operationName="+">
+              <source xsi:type="ocl:IntegerExp" location="109:10-109:12" integerSymbol="20"/>
+              <arguments xsi:type="ocl:OperationCallExp" location="109:15-109:58" operationName="floor">
+                <source xsi:type="ocl:OperatorCallExp" location="109:16-109:49" operationName="*">
+                  <source xsi:type="ocl:OperatorCallExp" location="109:16-109:34" operationName="/">
+                    <source xsi:type="ocl:IntegerExp" location="109:16-109:19" integerSymbol="950"/>
+                    <arguments xsi:type="ocl:OperationCallExp" location="109:22-109:34" operationName="maxLine">
+                      <source xsi:type="ocl:VariableExp" location="109:22-109:24" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                    </arguments>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="109:37-109:49" name="startLine">
+                    <source xsi:type="ocl:VariableExp" location="109:37-109:39" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  </arguments>
+                </source>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="110:5-110:12" propertyName="y">
+            <value xsi:type="ocl:IntegerExp" location="110:10-110:12" integerSymbol="83"/>
+          </bindings>
+          <bindings location="111:5-111:12" propertyName="rx">
+            <value xsi:type="ocl:IntegerExp" location="111:11-111:12"/>
+          </bindings>
+          <bindings location="112:5-112:12" propertyName="ry">
+            <value xsi:type="ocl:IntegerExp" location="112:11-112:12"/>
+          </bindings>
+          <bindings location="113:5-113:72" propertyName="width">
+            <value xsi:type="ocl:OperationCallExp" location="113:14-113:72" operationName="floor">
+              <source xsi:type="ocl:OperatorCallExp" location="113:15-113:63" operationName="*">
+                <source xsi:type="ocl:OperatorCallExp" location="113:15-113:33" operationName="/">
+                  <source xsi:type="ocl:IntegerExp" location="113:15-113:18" integerSymbol="950"/>
+                  <arguments xsi:type="ocl:OperationCallExp" location="113:21-113:33" operationName="maxLine">
+                    <source xsi:type="ocl:VariableExp" location="113:21-113:23" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:OperatorCallExp" location="113:37-113:62" operationName="-">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="113:37-113:47" name="endLine">
+                    <source xsi:type="ocl:VariableExp" location="113:37-113:39" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="113:50-113:62" name="startLine">
+                    <source xsi:type="ocl:VariableExp" location="113:50-113:52" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                  </arguments>
+                </arguments>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="114:5-114:17" propertyName="height">
+            <value xsi:type="ocl:IntegerExp" location="114:15-114:17" integerSymbol="54"/>
+          </bindings>
+          <bindings location="115:5-115:26" propertyName="fill">
+            <value xsi:type="ocl:OperationCallExp" location="115:13-115:26" operationName="getColor">
+              <source xsi:type="ocl:VariableExp" location="115:13-115:15" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings location="116:5-116:20" propertyName="opacity">
+            <value xsi:type="ocl:RealExp" location="116:16-116:20" realSymbol="0.75"/>
+          </bindings>
+          <bindings location="117:5-117:147" propertyName="title">
+            <value xsi:type="ocl:OperatorCallExp" location="117:14-117:147" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="117:14-117:135" operationName="+">
+                <source xsi:type="ocl:OperatorCallExp" location="117:14-117:89" operationName="+">
+                  <source xsi:type="ocl:OperatorCallExp" location="117:14-117:82" operationName="+">
+                    <source xsi:type="ocl:OperatorCallExp" location="117:14-117:57" operationName="+">
+                      <source xsi:type="ocl:OperatorCallExp" location="117:14-117:48" operationName="+">
+                        <source xsi:type="ocl:StringExp" location="117:14-117:21" stringSymbol="Line "/>
+                        <arguments xsi:type="ocl:CollectionOperationCallExp" location="117:24-117:48" operationName="toString">
+                          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="117:24-117:36" name="startLine">
+                            <source xsi:type="ocl:VariableExp" location="117:24-117:26" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                          </source>
+                        </arguments>
+                      </source>
+                      <arguments xsi:type="ocl:StringExp" location="117:51-117:57" stringSymbol=" to "/>
+                    </source>
+                    <arguments xsi:type="ocl:CollectionOperationCallExp" location="117:60-117:82" operationName="toString">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="117:60-117:70" name="endLine">
+                        <source xsi:type="ocl:VariableExp" location="117:60-117:62" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                      </source>
+                    </arguments>
+                  </source>
+                  <arguments xsi:type="ocl:StringExp" location="117:85-117:89" stringSymbol=" ("/>
+                </source>
+                <arguments xsi:type="ocl:CollectionOperationCallExp" location="117:92-117:135" operationName="toString">
+                  <source xsi:type="ocl:OperatorCallExp" location="117:93-117:122" operationName="+">
+                    <source xsi:type="ocl:OperatorCallExp" location="117:93-117:118" operationName="-">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="117:93-117:103" name="endLine">
+                        <source xsi:type="ocl:VariableExp" location="117:93-117:95" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                      </source>
+                      <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="117:106-117:118" name="startLine">
+                        <source xsi:type="ocl:VariableExp" location="117:106-117:108" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+                      </arguments>
+                    </source>
+                    <arguments xsi:type="ocl:IntegerExp" location="117:121-117:122" integerSymbol="1"/>
+                  </source>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:StringExp" location="117:138-117:147" stringSymbol=" lines)"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="72:2-75:5">
+        <elements xsi:type="atl:SimpleInPatternElement" location="73:4-73:28" varName="cu" variableExp="/0/@elements.5/@inPattern/@filter/@source/@arguments.0 /0/@elements.5/@inPattern/@filter/@arguments.0/@source /0/@elements.5/@inPattern/@filter/@arguments.0/@arguments.0 /0/@elements.5/@outPattern/@elements.0/@bindings.1/@value/@arguments.0/@source/@source /0/@elements.5/@outPattern/@elements.0/@bindings.1/@value/@arguments.0/@source/@arguments.0/@source/@source /0/@elements.5/@outPattern/@elements.1/@bindings.5/@value/@source/@source/@source/@source/@source /0/@elements.5/@outPattern/@elements.1/@bindings.5/@value/@source/@arguments.0/@source/@source/@source /0/@elements.5/@outPattern/@elements.2/@bindings.4/@value/@source/@source/@arguments.0/@source /0/@elements.5/@outPattern/@elements.2/@bindings.4/@value/@source/@arguments.0/@source/@source /0/@elements.5/@outPattern/@elements.2/@bindings.9/@value/@source/@source/@source /0/@elements.5/@outPattern/@elements.3/@bindings.0/@value/@arguments.0/@source/@source/@arguments.0/@source /0/@elements.5/@outPattern/@elements.3/@bindings.0/@value/@arguments.0/@source/@arguments.0/@source /0/@elements.5/@outPattern/@elements.3/@bindings.4/@value/@source/@source/@arguments.0/@source /0/@elements.5/@outPattern/@elements.3/@bindings.4/@value/@source/@arguments.0/@source/@source /0/@elements.5/@outPattern/@elements.3/@bindings.4/@value/@source/@arguments.0/@arguments.0/@source /0/@elements.5/@outPattern/@elements.3/@bindings.6/@value/@source /0/@elements.5/@outPattern/@elements.3/@bindings.8/@value/@source/@source/@source/@source/@source/@arguments.0/@source/@source /0/@elements.5/@outPattern/@elements.3/@bindings.8/@value/@source/@source/@source/@arguments.0/@source/@source /0/@elements.5/@outPattern/@elements.3/@bindings.8/@value/@source/@arguments.0/@source/@source/@source/@source /0/@elements.5/@outPattern/@elements.3/@bindings.8/@value/@source/@arguments.0/@source/@source/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="73:9-73:28" name="CloneUnit" model="/21"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="74:5-74:81" operationName="=">
+          <source xsi:type="ocl:CollectionOperationCallExp" location="74:5-74:63" operationName="indexOf">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="74:5-74:50" operationName="flatten">
+              <source xsi:type="ocl:OperationCallExp" location="74:5-74:39" operationName="allInstances">
+                <source xsi:type="ocl:OclModelElement" location="74:5-74:24" name="CloneUnit" model="/22"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:VariableExp" location="74:60-74:62" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+          </source>
+          <arguments xsi:type="ocl:OperationCallExp" location="74:66-74:81" operationName="firstOne">
+            <source xsi:type="ocl:VariableExp" location="74:66-74:68" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+            <arguments xsi:type="ocl:VariableExp" location="74:78-74:80" referredVariable="/0/@elements.5/@inPattern/@elements.0"/>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="121:1-144:2" name="CloneUnit22Group">
+      <outPattern location="126:2-143:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="127:3-131:4" varName="g">
+          <type xsi:type="ocl:OclModelElement" location="127:7-127:16" name="Group" model="/29"/>
+          <bindings location="128:4-128:20" propertyName="translate_x">
+            <value xsi:type="ocl:IntegerExp" location="128:19-128:20"/>
+          </bindings>
+          <bindings location="129:4-129:57" propertyName="translate_y">
+            <value xsi:type="ocl:OperatorCallExp" location="129:19-129:57" operationName="*">
+              <source xsi:type="ocl:IntegerExp" location="129:19-129:21" integerSymbol="90"/>
+              <arguments xsi:type="ocl:OperatorCallExp" location="129:25-129:56" operationName="-">
+                <source xsi:type="ocl:OperationCallExp" location="129:25-129:52" operationName="getPos">
+                  <source xsi:type="ocl:VariableExp" location="129:25-129:27" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="129:35-129:51" name="fileName">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="129:35-129:42" name="file">
+                      <source xsi:type="ocl:VariableExp" location="129:35-129:37" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                    </source>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:IntegerExp" location="129:55-129:56" integerSymbol="1"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="130:4-130:23" propertyName="components">
+            <value xsi:type="ocl:VariableExp" location="130:18-130:23" referredVariable="/0/@elements.6/@outPattern/@elements.1"/>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="133:3-143:4" varName="rect2" variableExp="/0/@elements.6/@outPattern/@elements.0/@bindings.2/@value">
+          <type xsi:type="ocl:OclModelElement" location="133:11-133:19" name="Rect" model="/30"/>
+          <bindings location="134:5-134:58" propertyName="x">
+            <value xsi:type="ocl:OperatorCallExp" location="134:10-134:58" operationName="+">
+              <source xsi:type="ocl:IntegerExp" location="134:10-134:12" integerSymbol="20"/>
+              <arguments xsi:type="ocl:OperationCallExp" location="134:15-134:58" operationName="floor">
+                <source xsi:type="ocl:OperatorCallExp" location="134:16-134:49" operationName="*">
+                  <source xsi:type="ocl:OperatorCallExp" location="134:16-134:34" operationName="/">
+                    <source xsi:type="ocl:IntegerExp" location="134:16-134:19" integerSymbol="950"/>
+                    <arguments xsi:type="ocl:OperationCallExp" location="134:22-134:34" operationName="maxLine">
+                      <source xsi:type="ocl:VariableExp" location="134:22-134:24" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                    </arguments>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="134:37-134:49" name="startLine">
+                    <source xsi:type="ocl:VariableExp" location="134:37-134:39" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                  </arguments>
+                </source>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="135:5-135:12" propertyName="y">
+            <value xsi:type="ocl:IntegerExp" location="135:10-135:12" integerSymbol="83"/>
+          </bindings>
+          <bindings location="136:5-136:12" propertyName="rx">
+            <value xsi:type="ocl:IntegerExp" location="136:11-136:12"/>
+          </bindings>
+          <bindings location="137:5-137:12" propertyName="ry">
+            <value xsi:type="ocl:IntegerExp" location="137:11-137:12"/>
+          </bindings>
+          <bindings location="138:5-138:72" propertyName="width">
+            <value xsi:type="ocl:OperationCallExp" location="138:14-138:72" operationName="floor">
+              <source xsi:type="ocl:OperatorCallExp" location="138:15-138:63" operationName="*">
+                <source xsi:type="ocl:OperatorCallExp" location="138:15-138:33" operationName="/">
+                  <source xsi:type="ocl:IntegerExp" location="138:15-138:18" integerSymbol="950"/>
+                  <arguments xsi:type="ocl:OperationCallExp" location="138:21-138:33" operationName="maxLine">
+                    <source xsi:type="ocl:VariableExp" location="138:21-138:23" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:OperatorCallExp" location="138:37-138:62" operationName="-">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="138:37-138:47" name="endLine">
+                    <source xsi:type="ocl:VariableExp" location="138:37-138:39" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="138:50-138:62" name="startLine">
+                    <source xsi:type="ocl:VariableExp" location="138:50-138:52" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                  </arguments>
+                </arguments>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="139:5-139:17" propertyName="height">
+            <value xsi:type="ocl:IntegerExp" location="139:15-139:17" integerSymbol="54"/>
+          </bindings>
+          <bindings location="140:5-140:26" propertyName="fill">
+            <value xsi:type="ocl:OperationCallExp" location="140:13-140:26" operationName="getColor">
+              <source xsi:type="ocl:VariableExp" location="140:13-140:15" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings location="141:5-141:20" propertyName="opacity">
+            <value xsi:type="ocl:RealExp" location="141:16-141:20" realSymbol="0.75"/>
+          </bindings>
+          <bindings location="142:5-142:147" propertyName="title">
+            <value xsi:type="ocl:OperatorCallExp" location="142:14-142:147" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="142:14-142:135" operationName="+">
+                <source xsi:type="ocl:OperatorCallExp" location="142:14-142:89" operationName="+">
+                  <source xsi:type="ocl:OperatorCallExp" location="142:14-142:82" operationName="+">
+                    <source xsi:type="ocl:OperatorCallExp" location="142:14-142:57" operationName="+">
+                      <source xsi:type="ocl:OperatorCallExp" location="142:14-142:48" operationName="+">
+                        <source xsi:type="ocl:StringExp" location="142:14-142:21" stringSymbol="Line "/>
+                        <arguments xsi:type="ocl:CollectionOperationCallExp" location="142:24-142:48" operationName="toString">
+                          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="142:24-142:36" name="startLine">
+                            <source xsi:type="ocl:VariableExp" location="142:24-142:26" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                          </source>
+                        </arguments>
+                      </source>
+                      <arguments xsi:type="ocl:StringExp" location="142:51-142:57" stringSymbol=" to "/>
+                    </source>
+                    <arguments xsi:type="ocl:CollectionOperationCallExp" location="142:60-142:82" operationName="toString">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="142:60-142:70" name="endLine">
+                        <source xsi:type="ocl:VariableExp" location="142:60-142:62" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                      </source>
+                    </arguments>
+                  </source>
+                  <arguments xsi:type="ocl:StringExp" location="142:85-142:89" stringSymbol=" ("/>
+                </source>
+                <arguments xsi:type="ocl:CollectionOperationCallExp" location="142:92-142:135" operationName="toString">
+                  <source xsi:type="ocl:OperatorCallExp" location="142:93-142:122" operationName="+">
+                    <source xsi:type="ocl:OperatorCallExp" location="142:93-142:118" operationName="-">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="142:93-142:103" name="endLine">
+                        <source xsi:type="ocl:VariableExp" location="142:93-142:95" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                      </source>
+                      <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="142:106-142:118" name="startLine">
+                        <source xsi:type="ocl:VariableExp" location="142:106-142:108" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+                      </arguments>
+                    </source>
+                    <arguments xsi:type="ocl:IntegerExp" location="142:121-142:122" integerSymbol="1"/>
+                  </source>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:StringExp" location="142:138-142:147" stringSymbol=" lines)"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="122:2-125:5">
+        <elements xsi:type="atl:SimpleInPatternElement" location="123:4-123:28" varName="cu" variableExp="/0/@elements.6/@inPattern/@filter/@source/@source/@arguments.0 /0/@elements.6/@inPattern/@filter/@source/@arguments.0/@source /0/@elements.6/@inPattern/@filter/@source/@arguments.0/@arguments.0 /0/@elements.6/@outPattern/@elements.0/@bindings.1/@value/@arguments.0/@source/@source /0/@elements.6/@outPattern/@elements.0/@bindings.1/@value/@arguments.0/@source/@arguments.0/@source/@source /0/@elements.6/@outPattern/@elements.1/@bindings.0/@value/@arguments.0/@source/@source/@arguments.0/@source /0/@elements.6/@outPattern/@elements.1/@bindings.0/@value/@arguments.0/@source/@arguments.0/@source /0/@elements.6/@outPattern/@elements.1/@bindings.4/@value/@source/@source/@arguments.0/@source /0/@elements.6/@outPattern/@elements.1/@bindings.4/@value/@source/@arguments.0/@source/@source /0/@elements.6/@outPattern/@elements.1/@bindings.4/@value/@source/@arguments.0/@arguments.0/@source /0/@elements.6/@outPattern/@elements.1/@bindings.6/@value/@source /0/@elements.6/@outPattern/@elements.1/@bindings.8/@value/@source/@source/@source/@source/@source/@arguments.0/@source/@source /0/@elements.6/@outPattern/@elements.1/@bindings.8/@value/@source/@source/@source/@arguments.0/@source/@source /0/@elements.6/@outPattern/@elements.1/@bindings.8/@value/@source/@arguments.0/@source/@source/@source/@source /0/@elements.6/@outPattern/@elements.1/@bindings.8/@value/@source/@arguments.0/@source/@source/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="123:9-123:28" name="CloneUnit" model="/27"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="124:6-124:88" operationName="not">
+          <source xsi:type="ocl:OperatorCallExp" location="124:11-124:87" operationName="=">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="124:11-124:69" operationName="indexOf">
+              <source xsi:type="ocl:CollectionOperationCallExp" location="124:11-124:56" operationName="flatten">
+                <source xsi:type="ocl:OperationCallExp" location="124:11-124:45" operationName="allInstances">
+                  <source xsi:type="ocl:OclModelElement" location="124:11-124:30" name="CloneUnit" model="/28"/>
+                </source>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="124:66-124:68" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+            </source>
+            <arguments xsi:type="ocl:OperationCallExp" location="124:72-124:87" operationName="firstOne">
+              <source xsi:type="ocl:VariableExp" location="124:72-124:74" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+              <arguments xsi:type="ocl:VariableExp" location="124:84-124:86" referredVariable="/0/@elements.6/@inPattern/@elements.0"/>
+            </arguments>
+          </source>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="11:14-11:17" name="SVG" model="/0/@outModels.0"/>
+  <ocl:OclModel location="11:28-11:37" name="CodeClone" model="/0/@inModels.0"/>
+  <ocl:OclModel location="13:16-13:25" name="CodeClone" elements="/0/@elements.0/@definition/@context_/@context_"/>
+  <ocl:OclModel location="14:20-14:29" name="CodeClone" elements="/0/@elements.0/@definition/@feature/@parameters.0/@type"/>
+  <ocl:OclModel location="16:3-16:12" name="CodeClone" elements="/0/@elements.0/@definition/@feature/@body/@source/@source"/>
+  <ocl:OclModel location="16:47-16:56" name="CodeClone" elements="/0/@elements.0/@definition/@feature/@body/@arguments.0/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="16:112-16:116" varName="self" variableExp="/0/@elements.0/@definition/@feature/@body/@arguments.0/@source/@body/@arguments.0/@source/@source"/>
+  <ocl:OclModel location="19:16-19:25" name="CodeClone" elements="/0/@elements.1/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="22:157-22:161" varName="self" variableExp="/0/@elements.1/@definition/@feature/@body/@arguments.0/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="22:191-22:195" varName="self" variableExp="/0/@elements.1/@definition/@feature/@body/@arguments.0/@arguments.0/@source"/>
+  <ocl:OclModel location="25:16-25:25" name="CodeClone" elements="/0/@elements.2/@definition/@context_/@context_"/>
+  <ocl:OclModel location="28:3-28:12" name="CodeClone" elements="/0/@elements.2/@definition/@feature/@body/@source/@source/@source"/>
+  <ocl:OclModel location="32:16-32:25" name="CodeClone" elements="/0/@elements.3/@definition/@context_/@context_"/>
+  <ocl:OclModel location="35:6-35:15" name="CodeClone" elements="/0/@elements.3/@definition/@feature/@body/@source/@source/@source"/>
+  <ocl:OclModel location="43:8-43:17" name="CodeClone" elements="/0/@elements.4/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="45:7-45:10" name="SVG" elements="/0/@elements.4/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="47:21-47:30" name="CodeClone" elements="/0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@source/@source/@source"/>
+  <ocl:OclModel location="52:16-52:25" name="CodeClone" elements="/0/@elements.4/@outPattern/@elements.0/@bindings.5/@value/@source"/>
+  <ocl:OclModel location="55:11-55:14" name="SVG" elements="/0/@elements.4/@outPattern/@elements.1/@type"/>
+  <ocl:OclModel location="61:10-61:13" name="SVG" elements="/0/@elements.4/@outPattern/@elements.2/@type"/>
+  <ocl:OclModel location="73:9-73:18" name="CodeClone" elements="/0/@elements.5/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="74:5-74:14" name="CodeClone" elements="/0/@elements.5/@inPattern/@filter/@source/@source/@source/@source"/>
+  <ocl:OclModel location="77:7-77:10" name="SVG" elements="/0/@elements.5/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="85:10-85:13" name="SVG" elements="/0/@elements.5/@outPattern/@elements.1/@type"/>
+  <ocl:OclModel location="94:10-94:13" name="SVG" elements="/0/@elements.5/@outPattern/@elements.2/@type"/>
+  <ocl:OclModel location="108:11-108:14" name="SVG" elements="/0/@elements.5/@outPattern/@elements.3/@type"/>
+  <ocl:OclModel location="123:9-123:18" name="CodeClone" elements="/0/@elements.6/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="124:11-124:20" name="CodeClone" elements="/0/@elements.6/@inPattern/@filter/@source/@source/@source/@source/@source"/>
+  <ocl:OclModel location="127:7-127:10" name="SVG" elements="/0/@elements.6/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="133:11-133:14" name="SVG" elements="/0/@elements.6/@outPattern/@elements.1/@type"/>
+</xmi:XMI>

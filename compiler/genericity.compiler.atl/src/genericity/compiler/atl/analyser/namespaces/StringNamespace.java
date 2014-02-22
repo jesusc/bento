@@ -15,6 +15,8 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 		if ( t == null ) {
 			if ( operationName.equals("size")     ) return typ.newIntegerType();
 			if ( operationName.equals("substring")) return typ.newStringType();
+			if ( operationName.equals("firstToLower")) return typ.newStringType();
+			if ( operationName.equals("toInteger")) return typ.newIntegerType();
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 		}
 		return t;
@@ -24,8 +26,13 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		Type t = super.getOperatorType(operatorSymbol, optionalArgument, node);
 		if ( t == null ) {
-			throw new UnsupportedOperationException(operatorSymbol);
+			throw new UnsupportedOperationException(operatorSymbol + " - " + node.getLocation());
 		}
 		return t;
+	}
+	
+	@Override
+	public Type createType(boolean explicitOcurrence) {
+		return typ.newStringType();
 	}
 }

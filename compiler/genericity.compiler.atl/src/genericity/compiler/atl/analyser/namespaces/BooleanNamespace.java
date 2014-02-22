@@ -29,4 +29,8 @@ public class BooleanNamespace extends PrimitiveTypeNamespace {
 		throw new UnsupportedOperationException(operatorSymbol);
 	}
 
+	@Override
+	public Type createType(boolean explicitOcurrence) {
+		return typ.newBooleanType();
+	}
 }

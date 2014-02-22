@@ -13,8 +13,10 @@ import atl.metamodel.ATL.Unit;
 import atl.metamodel.OCL.BooleanType;
 import atl.metamodel.OCL.IntegerType;
 import atl.metamodel.OCL.OclModelElement;
+import atl.metamodel.OCL.OrderedSetType;
 import atl.metamodel.OCL.RealType;
 import atl.metamodel.OCL.SequenceType;
+import atl.metamodel.OCL.SetType;
 import atl.metamodel.OCL.StringType;
 
 public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
@@ -82,4 +84,16 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	public void inSequenceType(SequenceType self) {
 		attr.linkType( typ.newSequenceType( attr.typeOf( self.getElementType() ) ) );
 	}
+
+	@Override
+	public void inSetType(SetType self) {
+		attr.linkType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
+	}
+	
+	@Override
+	public void inOrderedSetType(OrderedSetType self) {
+		// TODO: Create proper OrderedSet type
+		attr.linkType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
+	}
+
 }

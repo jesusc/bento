@@ -68,6 +68,8 @@ public class EcoreTypeConverter {
 		} else if ( c.getName().equals("EInt") || c.getName().endsWith("Integer") || 
 				    c.getName().equals("UnlimitedNatural") ) {
 			return typ.newIntegerType();
+		} else if ( c.getName().equals("Double") ) {
+			return typ.newFloatType();
 		}
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ":" + "Type [" + c.getName() + "] not supported");
 	}

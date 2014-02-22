@@ -3,6 +3,7 @@ package genericity.compiler.atl.analyser;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
+import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
@@ -38,6 +39,7 @@ import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.RealExp;
 import atl.metamodel.OCL.SequenceExp;
+import atl.metamodel.OCL.SetExp;
 import atl.metamodel.OCL.StringExp;
 import atl.metamodel.OCL.VariableDeclaration;
 import atl.metamodel.OCL.VariableExp;
@@ -204,7 +206,6 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		}
 	
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
-		
 		attr.linkType( tspace.getOperationType(self.getOperationName(), arguments, self) );
 	}
 	
@@ -289,15 +290,24 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	}
 	
 	@Override
-	public void inCollectionOperationCallExp(CollectionOperationCallExp self) {
-		Type receptorType = attr.typeOf(self.getSource());
-		Type[] arguments  = new Type[self.getArguments().size()];
+	public void inCollectionOperationCallExp(final CollectionOperationCallExp self) {
+		final Type receptorType = attr.typeOf(self.getSource());
+		final Type[] arguments  = new Type[self.getArguments().size()];
 		for(int i = 0; i < self.getArguments().size(); i++) {
 			arguments[i] = attr.typeOf(self.getArguments().get(i));
 		}
 		
 		if ( ! ( receptorType instanceof CollectionType ) ) {
-			errors.signalCollectionOperationOverNoCollectionType(receptorType, self);
+			errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {
+				public boolean recover() {
+					ITypeNamespace tspace = (ITypeNamespace) receptorType.getMetamodelRef();					
+					if ( tspace.hasOperation(self.getOperationName(), arguments)) {
+						attr.linkType( tspace.getOperationType(self.getOperationName(), arguments, self) );									
+						return true;
+					}
+					return false;
+				}
+			});
 		} else {
 			CollectionNamespace namespace = (CollectionNamespace) receptorType.getMetamodelRef();
 			String          operationName = self.getOperationName();
@@ -368,10 +378,21 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			// TODO: Generalize computing the union of all expression elements
 			// For the moment just taking the first
 			OclExpression representative = self.getElements().get(0);
-			attr.linkType( attr.typeOf(representative) );
+			attr.linkType( typ.newSequenceType( attr.typeOf(representative) ) );
+		}		
+	}
+		
+	/* Same as SequenceExp */
+	@Override
+	public void inSetExp(SetExp self) {
+		if ( self.getElements().isEmpty() ) {
+			attr.linkType( typ.newSetType( typ.newUnknownType() ) );
+		} else {
+			OclExpression representative = self.getElements().get(0);
+			attr.linkType( typ.newSetType( attr.typeOf(representative) ) );
 		}
 		
 	}
-		
+	
 	
 }

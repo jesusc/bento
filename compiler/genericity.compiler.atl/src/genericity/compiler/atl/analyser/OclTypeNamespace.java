@@ -1,6 +1,7 @@
 package genericity.compiler.atl.analyser;
 
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
@@ -49,6 +50,11 @@ public class OclTypeNamespace implements ITypeNamespace {
 
 	@Override
 	public Type createType(boolean explicitOcurrence) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void extendType(String ruleName, Type returnType, Rule rule) {
 		throw new UnsupportedOperationException();
 	}
 

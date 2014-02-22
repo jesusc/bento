@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
 import genericity.typing.atl_types.AtlTypingPackage;
@@ -172,8 +173,11 @@ public class ClassNamespace implements ITypeNamespace {
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");
 	}
 
-	
 
+	@Override
+	public void extendType(String ruleName, Type returnType, Rule rule) {
+		throw new UnsupportedOperationException("TODO: ATTACH MATCHED RULES TO TYPES");
+	}
 	
 	
 }

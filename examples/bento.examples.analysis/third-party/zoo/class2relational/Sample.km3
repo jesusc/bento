@@ -1,0 +1,17 @@
+package Sample {
+
+	datatype String;
+	datatype Integer;
+
+	class Family {
+		attribute name : String;
+		attribute members[*] : Person;
+	}
+
+	class Person {
+		attribute firstName : String;
+		attribute closestFriend : Person;
+		attribute emailAddresses[*] : String;
+	}
+}
+

@@ -16,6 +16,7 @@ import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.ATLModelBaseObjectInterface;
 import atl.metamodel.ATLModelVisitor;
+import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.Helper;
 import atl.metamodel.ATL.Module;
@@ -95,6 +96,16 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 		}
 	}
 
+	/**
+	 * Called and lazy rules are treated as global helpers with a return type belonging
+	 * to a target meta-model.
+	 */
+	@Override
+	public void inCalledRule(CalledRule self) {
+		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
+		mm.getTransformationNamespace().extendType(self.getName(), t, self);
+	}
+	
 	//  
 	// Variables 
 	//

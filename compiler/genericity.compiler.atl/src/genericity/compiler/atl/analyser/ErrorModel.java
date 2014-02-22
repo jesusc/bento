@@ -1,6 +1,7 @@
 package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
+import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 
@@ -26,9 +27,14 @@ public class ErrorModel {
 	}
 	
 
-	public void signalCollectionOperationOverNoCollectionType(Type receptorType, LocatedElement element) {
+	public void signalCollectionOperationOverNoCollectionType(Type receptorType, LocatedElement element, IRecoveryAction ra) {
+		if ( ra.recover() ) {
+			signalWarning("Collection operation over " + receptorType, element);
+			return;
+		}
 		signalNoRecoverableError("Collection operation over " + receptorType, element);
 	}
+
 
 	public void signalIteratorOverNoCollectionType(Type receptorType, LocatedElement element) {
 		signalNoRecoverableError("Iterator operation over " + receptorType, element);		
@@ -36,10 +42,6 @@ public class ErrorModel {
 
 	public void signalNoOperationFound(Type receptorType, String operationName, LocatedElement node) {
 		signalNoRecoverableError("No operation " + operationName, node);
-	}
-
-	public void signalNoRecoverableError(String msg, LocatedElement l) {
-		throw new RuntimeException(msg + ". " + l.getLocation());
 	}
 
 	public void signalNoThisModuleOperation(String operationName, LocatedElement node) {
@@ -55,5 +57,13 @@ public class ErrorModel {
 	}
 
 
+	
+	public void signalNoRecoverableError(String msg, LocatedElement l) {
+		throw new RuntimeException(msg + ". " + l.getLocation());
+	}
+
+	private void signalWarning(String msg, LocatedElement l) {
+		System.out.println(msg + ". " + l.getLocation());		
+	}
 
 }
