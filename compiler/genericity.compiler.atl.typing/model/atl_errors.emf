@@ -1,6 +1,8 @@
 @namespace(uri="http://bento/analysis/atl/analysis", prefix="atl_analysis")
 package atl_analysis;
 
+import "platform:/resource/genericity.compiler.atl.typing/model/atl_types.ecore";
+
 class AnalysisResult {
    val Problem[*] problems;
    
@@ -14,8 +16,7 @@ abstract class Problem extends AnalysisInfo {
    
 }
 
-abstract class Recovery {
-   
+abstract class Recovery {   
 }
 
 @namespace(uri="http://bento/analysis/atl/analysis/errors", prefix="atl_error")
@@ -27,9 +28,8 @@ package atl_error {
 	   val Recovery[0..1] recovery;
 	}
 	
-	abstract class NavigationProblem extends LocalProblem {
-	   	   
-	}
+	abstract class NavigationProblem extends LocalProblem {	}
+	abstract class InvalidArgumentProblem extends LocalProblem {	}
 	 
 	//
 	// Example: aClass->select(x)
@@ -42,6 +42,10 @@ package atl_error {
 		attr String[1] featureName;
 		attr String[1] className;
 		attr String[1] metamodelName;
+	}
+	
+	class InvalidOperand extends InvalidArgumentProblem {
+	   attr String[1] operatorSymbol;	   
 	}	  
 }
 
@@ -49,6 +53,10 @@ package atl_error {
 package atl_recovery {
 	class FeatureFoundInSubclass extends Recovery {
 		attr String[1] subclassName;
+	}
+	
+	class TentativeTypeAssigned extends Recovery {
+	   ref atl_types.Type[1] type;
 	}
 }
 // References to typing ... 

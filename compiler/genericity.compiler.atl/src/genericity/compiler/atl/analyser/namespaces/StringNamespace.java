@@ -24,11 +24,13 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
-		Type t = super.getOperatorType(operatorSymbol, optionalArgument, node);
-		if ( t == null ) {
-			throw new UnsupportedOperationException(operatorSymbol + " - " + node.getLocation());
+		if ( operatorSymbol.equals("=") ) {
+			return typ.newBooleanType();
+		} if ( operatorSymbol.equals("+") ) {
+			// Anything concatenated with a string is a string
+			return typ.newStringType();
 		}
-		return t;
+		throw new UnsupportedOperationException(operatorSymbol + " - " + node.getLocation());
 	}
 	
 	@Override

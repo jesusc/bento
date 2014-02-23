@@ -11,14 +11,18 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.OCL.IfExp;
+import atl.metamodel.OCL.VariableDeclaration;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.AtlAnalysisFactory;
+import bento.analysis.atl_analysis.Recovery;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
 import bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass;
+import bento.analysis.atl_analysis.atl_recovery.TentativeTypeAssigned;
+import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryFactoryImpl;
 
 public class ErrorModel {
 	
@@ -42,15 +46,17 @@ public class ErrorModel {
 	}
 	
 
-	public void signalCollectionOperationOverNoCollectionType(Type receptorType, LocatedElement element, IRecoveryAction ra) {
+	public Type signalCollectionOperationOverNoCollectionType(Type receptorType, LocatedElement element, IRecoveryAction ra) {
 		CollectionOperationOverNoCollectionError error = AtlErrorsFactory.eINSTANCE.createCollectionOperationOverNoCollectionError();
 		initProblem(error, element);
 		
-		if ( ra.recover() ) {
+		Type result = ra.recover(this, error);
+		if ( result != null ) {
 			signalWarning("Collection operation over " + receptorType, element);
-			return;
+			return result;
 		}
 		signalNoRecoverableError("Collection operation over " + receptorType, element);
+		return null;
 	}
 
 	public void warningFeatureFoundInSubType(Metaclass type, Metaclass subtype, String featureName, LocatedElement node) {
@@ -64,9 +70,15 @@ public class ErrorModel {
 		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
 		recovery.setSubclassName(subtype.getName());
 		
-		System.err.println("WARNING: Feature " + featureName + " expected in " + type.getName() + " but found in subtype " + subtype.getName() + ". " + node.getLocation() );
+		System.err.println("Feature " + featureName + " expected in " + type.getName() + " but found in subtype " + subtype.getName() + ". " + node.getLocation() );
 	}
 
+
+	public void signalInvalidOperand(String operatorSymbol, LocatedElement node, IRecoveryAction recovery) {
+		FeatureNotFound error = AtlErrorsFactory.eINSTANCE.createFeatureNotFound();
+		initProblem(error, node);
+		
+	}
 
 	private void initProblem(LocalProblem p, LocatedElement element) {
 		p.setLocation(element.getLocation());
@@ -98,9 +110,21 @@ public class ErrorModel {
 	}
 
 	private void signalWarning(String msg, LocatedElement l) {
-		System.out.println(msg + ". " + l.getLocation());		
+		System.out.println("WARNING: " + msg + ". " + l.getLocation());		
 	}
 
+	public void warningVarDclIncoherentTypes(Type exprType, Type declared, LocatedElement node) {
+		signalWarning("Incoherent types in variable declaration " + exprType + " - " + declared, node);
+	}
 	
+	/** Recovery methods **/ 
+	
+	public Recovery recoveryTentativeTypeAssigned(Type t) {
+		TentativeTypeAssigned rec = AtlRecoveryFactory.eINSTANCE.createTentativeTypeAssigned();
+		rec.setType(t);
+		return rec;
+	}
+
+
 
 }

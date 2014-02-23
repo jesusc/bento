@@ -56,7 +56,6 @@ public class CodeCloneTools extends BaseTest {
 		System.out.println("Finished typing of " + SVG2XML_TRANSFORMATION);
 
 		// WITH TYPE ERRORS!
-		/*
 		typing(CodeClone2SVG_TRANSFORMATION, new Object[] { CODECLONE_METAMODEL, SVG_METAMODEL }, 
 				   new String[] { "CodeClone", "SVG" });
 		
@@ -66,7 +65,6 @@ public class CodeCloneTools extends BaseTest {
 				   new String[] { "CodeClone", "SVG" });
 		
 		System.out.println("Finished typing of " + CodeClone2SVG2_TRANSFORMATION);
-		*/
 	}
 
 }

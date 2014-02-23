@@ -1,5 +1,6 @@
 package genericity.compiler.atl.analyser;
 
+import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
@@ -37,6 +38,7 @@ import atl.metamodel.OCL.OclFeatureDefinition;
 import atl.metamodel.OCL.OclUndefinedExp;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
+import atl.metamodel.OCL.OrderedSetExp;
 import atl.metamodel.OCL.RealExp;
 import atl.metamodel.OCL.SequenceExp;
 import atl.metamodel.OCL.SetExp;
@@ -107,12 +109,15 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inVariableDeclaration(VariableDeclaration self) {
+		Type exprType = attr.typeOf( self.getInitExpression() );
 		if ( self.getType() == null ) {
-			Type exprType = attr.typeOf( self.getInitExpression() );
 			attr.linkType(exprType);
 		} else {
-			// TODO: Check consistency
-			System.out.println("BottomUpTraversal.inVariableDeclaration() : TODO: Check consistency");
+			Type declared = attr.typeOf( self.getType() );
+			if ( ! typ.equalTypes(exprType, declared) ) {
+				errors.warningVarDclIncoherentTypes(exprType, declared, self);
+			}
+			attr.linkType( declared ); // TODO: What should be the type??
 		}
 	}
 
@@ -299,16 +304,20 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		if ( ! ( receptorType instanceof CollectionType ) ) {
-			errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {
-				public boolean recover() {
+			Type t = errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {
+			
+				@Override
+				public Type recover(ErrorModel m, LocalProblem p) {
 					ITypeNamespace tspace = (ITypeNamespace) receptorType.getMetamodelRef();					
 					if ( tspace.hasOperation(self.getOperationName(), arguments)) {
-						attr.linkType( tspace.getOperationType(self.getOperationName(), arguments, self) );									
-						return true;
+						return tspace.getOperationType(self.getOperationName(), arguments, self);
 					}
-					return false;
+					return null;
 				}
+
 			});
+			
+			attr.linkType( t );
 		} else {
 			CollectionNamespace namespace = (CollectionNamespace) receptorType.getMetamodelRef();
 			String          operationName = self.getOperationName();
@@ -391,9 +400,19 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		} else {
 			OclExpression representative = self.getElements().get(0);
 			attr.linkType( typ.newSetType( attr.typeOf(representative) ) );
-		}
-		
+		}		
 	}
 	
-	
+
+	/* Same as Copied from ordered set, using SET as OrderedSet! */
+	@Override
+	public void inOrderedSetExp(OrderedSetExp self) {
+		if ( self.getElements().isEmpty() ) {
+			attr.linkType( typ.newSetType( typ.newUnknownType() ) );
+		} else {
+			OclExpression representative = self.getElements().get(0);
+			attr.linkType( typ.newSetType( attr.typeOf(representative) ) );
+		}		
+	}
+
 }

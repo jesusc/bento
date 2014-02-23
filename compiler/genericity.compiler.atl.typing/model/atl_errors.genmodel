@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.compiler.atl.typing/src-gen"
     modelPluginID="genericity.compiler.atl.typing" modelName="Atl_errors" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false">
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/genericity.compiler.atl.typing/model/atl_types.genmodel#//atl_types">
   <foreignModel>atl_errors.ecore</foreignModel>
   <genPackages prefix="AtlAnalysis" basePackage="bento.analysis" disposableProviderFactory="true"
       ecorePackage="atl_errors.ecore#/">
@@ -21,17 +21,25 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/LocalProblem/recovery"/>
       </genClasses>
       <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/NavigationProblem"/>
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/InvalidArgumentProblem"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/CollectionOperationOverNoCollectionError"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFound">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/featureName"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/className"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/metamodelName"/>
       </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/InvalidOperand">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/InvalidOperand/operatorSymbol"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">
       <genClasses ecoreClass="atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass/subclassName"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_recovery/TentativeTypeAssigned">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_recovery/TentativeTypeAssigned/type"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>
