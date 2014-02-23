@@ -8,9 +8,31 @@
   <genPackages prefix="AtlAnalysis" basePackage="bento.analysis" disposableProviderFactory="true"
       ecorePackage="atl_errors.ecore#/">
     <genClasses ecoreClass="atl_errors.ecore#//AnalysisResult">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//AnalysisResult/errors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//AnalysisResult/problems"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_errors.ecore#//AnalysisInfo"/>
-    <genClasses image="false" ecoreClass="atl_errors.ecore#//Error"/>
+    <genClasses image="false" ecoreClass="atl_errors.ecore#//Problem"/>
+    <genClasses image="false" ecoreClass="atl_errors.ecore#//Recovery"/>
+    <nestedGenPackages prefix="AtlErrors" basePackage="bento.analysis.atl_analysis"
+        disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_error">
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/LocalProblem">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/LocalProblem/location"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/LocalProblem/element"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/LocalProblem/recovery"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/NavigationProblem"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/CollectionOperationOverNoCollectionError"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFound">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/featureName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/className"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/metamodelName"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
+        disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">
+      <genClasses ecoreClass="atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass/subclassName"/>
+      </genClasses>
+    </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

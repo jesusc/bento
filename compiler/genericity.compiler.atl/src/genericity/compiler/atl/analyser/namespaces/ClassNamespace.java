@@ -33,6 +33,10 @@ public class ClassNamespace implements ITypeNamespace {
 		this.metamodel = metamodel;
 	}
 
+
+	public String getMetamodelName() {
+		return this.metamodel.getName();
+	}
 	
 	public Type getFeature(String featureName, LocatedElement node) {
 
@@ -178,6 +182,8 @@ public class ClassNamespace implements ITypeNamespace {
 	public void extendType(String ruleName, Type returnType, Rule rule) {
 		throw new UnsupportedOperationException("TODO: ATTACH MATCHED RULES TO TYPES");
 	}
+
+
 	
 	
 }

@@ -24,6 +24,9 @@ public class Analyser {
 		this.trafo = new ATLModel(trafo.getHandler().getResource());
 		this.typ   = new TypingModel(out);
 		this.errors = new ErrorModel();
+	
+		AnalyserContext.setErrorModel(errors);
+		AnalyserContext.setTypingModel(typ);
 	}
 
 	public void perform() {

@@ -75,7 +75,7 @@ entrypoint rule Metrics() {
    modelType <- #UML2
   )
  do {
-  thisModule.root <- root;
+  thisModule.root <- root.debug(1 + false);
   if(thisModule.measureLevel = #package or thisModule.measureLevel = #class) {
    -- ==================================================
    -- MOOD Metrics : Intra-Specification Level Metrics =

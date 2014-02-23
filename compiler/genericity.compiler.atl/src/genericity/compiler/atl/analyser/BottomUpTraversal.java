@@ -121,8 +121,9 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		Type thenPart = attr.typeOf(self.getThenExpression());
 		Type elsePart = attr.typeOf(self.getElseExpression());
 		
-		if ( thenPart != elsePart ) {
-			System.out.println("TODO: Check if - else type conformance");
+		// TODO: Perhaps not the same type but compatible types!
+		if ( ! typ.equalTypes(thenPart, elsePart) ) {
+			errors.signalDifferentBranchTypes(thenPart, elsePart, self);
 		}
 		
 		attr.linkType( thenPart );

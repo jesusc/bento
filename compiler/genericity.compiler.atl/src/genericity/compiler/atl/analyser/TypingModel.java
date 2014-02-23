@@ -1,10 +1,12 @@
 package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
+import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.IMetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.PrimitiveGlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.UnionTypeNamespace;
 import genericity.typing.atl_types.BooleanType;
+import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
@@ -162,9 +164,12 @@ public class TypingModel {
 			return ( ((Metaclass) t1).getKlass().equals(((Metaclass) t2).getKlass()));
 		} else if ( t1 instanceof PrimitiveType ) {
 			return true;
+		} else if ( (t1 instanceof CollectionType) && (t2 instanceof CollectionType) ) {
+			// TODO: Equal types for collection types, for the moment, considered the same even it internally they are not the same!! not sure a about this
+			return true;
 		}
 		
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("EqualTypes: " + t1 + " - " + t2);
 	}
 
 	public boolean isCompatible(Type type_, Type supertype) {

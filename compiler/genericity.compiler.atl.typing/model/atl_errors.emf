@@ -1,8 +1,8 @@
-@namespace(uri="http://bento/analysis/atl/errors", prefix="atl_errors")
-package atl_errors;
+@namespace(uri="http://bento/analysis/atl/analysis", prefix="atl_analysis")
+package atl_analysis;
 
 class AnalysisResult {
-   val Error[*] errors;
+   val Problem[*] problems;
    
 }
 
@@ -10,15 +10,45 @@ abstract class AnalysisInfo {
    
 }
 
-abstract class Error extends AnalysisInfo {
+abstract class Problem extends AnalysisInfo {
    
 }
 
-//
-// Example: aClass->select(x)
-// 
-class CollectionOperationOverNoCollectionType extends Error {
-      
+abstract class Recovery {
+   
 }
 
+@namespace(uri="http://bento/analysis/atl/analysis/errors", prefix="atl_error")
+package atl_error {
+	abstract class LocalProblem extends Problem {
+	   attr String[1] location;
+	   attr String[1] element;
+	   
+	   val Recovery[0..1] recovery;
+	}
+	
+	abstract class NavigationProblem extends LocalProblem {
+	   	   
+	}
+	 
+	//
+	// Example: aClass->select(x)
+	// 
+	class CollectionOperationOverNoCollectionError extends NavigationProblem {
+	      
+	}
+	
+	class FeatureNotFound extends NavigationProblem {
+		attr String[1] featureName;
+		attr String[1] className;
+		attr String[1] metamodelName;
+	}	  
+}
+
+@namespace(uri="http://bento/analysis/atl/analysis/recovery", prefix="atl_recovery")
+package atl_recovery {
+	class FeatureFoundInSubclass extends Recovery {
+		attr String[1] subclassName;
+	}
+}
 // References to typing ... 

@@ -39,24 +39,6 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 
 
 	@Override
-	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
-		Type t = super.getOperatorType(operatorSymbol, optionalArgument, node);
-		if ( t == null ) {
-			if ( operatorSymbol.equals("+") || operatorSymbol.equals("*") || operatorSymbol.equals("/")) {
-				// TODO: Check argument and current type are the same or compatible... (which are the compatibility rules of ATL?)
-				System.out.println("PrimitiveTypeNamespace.getOperatorType() : TODO: Check type conformance");
-				return optionalArgument;
-			} else if ( operatorSymbol.equals("-") ) {
-				return createType(false); // This is separated because there are two cases: "a-b", "-a"
-			}
-			
-			return null;
-			// throw new UnsupportedOperationException(operatorSymbol);
-		}
-		return t;
-	}
-
-	@Override
 	public void extendType(String featureName, Type returnType, Attribute attrDefinition) {
 		throw new UnsupportedOperationException(featureName);		
 	}
