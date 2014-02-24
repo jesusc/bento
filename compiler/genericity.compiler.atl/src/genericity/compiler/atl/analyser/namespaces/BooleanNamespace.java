@@ -34,4 +34,5 @@ public class BooleanNamespace extends PrimitiveTypeNamespace {
 	public Type createType(boolean explicitOcurrence) {
 		return AnalyserContext.getTypingModel().newBooleanType();
 	}
+
 }

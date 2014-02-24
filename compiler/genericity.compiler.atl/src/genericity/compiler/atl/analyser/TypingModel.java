@@ -1,8 +1,12 @@
 package genericity.compiler.atl.analyser;
 
+import java.util.ArrayList;
+import java.util.ListIterator;
+
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.IMetamodelNamespace;
+import genericity.compiler.atl.analyser.namespaces.OclTypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.PrimitiveGlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.UnionTypeNamespace;
 import genericity.typing.atl_types.BooleanType;
@@ -25,8 +29,10 @@ import genericity.typing.atl_types.annotations.BindingAnnotation;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 
 import atl.metamodel.ATL.Binding;
 
@@ -91,6 +97,7 @@ public class TypingModel {
 		enumT.setName(c.getName());
 		return enumT;
 	}
+	
 
 	public SequenceType newSequenceType(Type nested) {
 		SequenceType seq = (SequenceType) impl.createObject(SequenceType.class.getSimpleName());
@@ -137,8 +144,21 @@ public class TypingModel {
 		}
 
 		if ( (t1 instanceof UnionType) || (t1 instanceof UnionType) ) {
-			// TODO: Try to merge
-			throw new UnsupportedOperationException();
+			ArrayList<Type> types = new ArrayList<Type>();
+			if ( t1 instanceof UnionType ) {
+				addUniqueTypes(types, ((UnionType) t1).getPossibleTypes());
+			} else {
+				addUniqueType(types, t1);
+			}
+			
+			if ( t2 instanceof UnionType ) {
+				addUniqueTypes(types, ((UnionType) t2).getPossibleTypes());
+			} else {
+				addUniqueType(types, t2);
+			}
+			
+			Type[] unionTypes = new Type[types.size()];
+			return createUnionType(types.toArray(unionTypes));
 		} else {
 			return createUnionType(t1, t2);
 		}
@@ -147,6 +167,33 @@ public class TypingModel {
 	}
 
 	
+	private void addUniqueTypes(ArrayList<Type> existingTypes, EList<Type> newTypes) {
+		for (Type type : newTypes) {
+			addUniqueType(existingTypes, type);
+		}
+	}
+
+	private void addUniqueType(ArrayList<Type> existingTypes, Type type) {
+		ListIterator<Type> it = existingTypes.listIterator();
+		while ( it.hasNext() ) {
+			Type existing = it.next();
+			
+			if ( equalTypes(existing, type) ) {
+				return;
+			} else if ( existing instanceof Metaclass && type instanceof Metaclass ) {
+				Metaclass existingMetaclass = (Metaclass) existing;
+				Metaclass typeMetaclass     = (Metaclass) type;
+				if ( existingMetaclass.getKlass().isSuperTypeOf(typeMetaclass.getKlass()) ) {
+					return; // No need
+				} else if ( typeMetaclass.getKlass().isSuperTypeOf(existingMetaclass.getKlass()) ) {
+					it.set(type);
+					return;
+				}
+			}
+		}
+		existingTypes.add(type);
+	}
+
 	private Type createUnionType(Type... types) {
 		UnionType ut = (UnionType) impl.createObject(UnionType.class.getSimpleName());
 		for (Type type : types) {
@@ -167,6 +214,8 @@ public class TypingModel {
 		} else if ( (t1 instanceof CollectionType) && (t2 instanceof CollectionType) ) {
 			// TODO: Equal types for collection types, for the moment, considered the same even it internally they are not the same!! not sure a about this
 			return true;
+		} else if ( t1 instanceof EnumType && t2 instanceof EnumType ) {
+			return ((EnumType) t1).getName().equals(((EnumType) t2).getName());
 		}
 		
 		throw new UnsupportedOperationException("EqualTypes: " + t1 + " - " + t2);
@@ -181,6 +230,7 @@ public class TypingModel {
 		}
 		return false;
 	}
+
 
 
 	

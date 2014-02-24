@@ -4,8 +4,10 @@ import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
+import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
 import genericity.typing.atl_types.CollectionType;
+import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATLModel;
@@ -24,6 +26,7 @@ import atl.metamodel.ATL.Unit;
 import atl.metamodel.ATLModelVisitor.VisitedReferences;
 import atl.metamodel.OCL.BooleanExp;
 import atl.metamodel.OCL.CollectionOperationCallExp;
+import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.IterateExp;
@@ -340,6 +343,19 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	// 
 	// Literal values
 	// 
+	
+	@Override
+	public void inEnumLiteralExp(EnumLiteralExp self) {
+		for(MetamodelNamespace ns : mm.getMetamodels()) {
+			EnumType enum_ = ns.findEnumLiteral(self.getName());
+			if ( enum_ != null ) {
+				attr.linkType( enum_ );
+				return;
+			}
+		}
+		
+		errors.signalNoEnumLiteral(self.getName(), self);
+	}
 	
 	@Override
 	public void inStringExp(StringExp obj) {

@@ -95,6 +95,10 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createFeatureNotFoundAdapter();
 			}
 			@Override
+			public Adapter caseFeatureNotFoundInUnionType(FeatureNotFoundInUnionType object) {
+				return createFeatureNotFoundInUnionTypeAdapter();
+			}
+			@Override
 			public Adapter caseInvalidOperand(InvalidOperand object) {
 				return createInvalidOperandAdapter();
 			}
@@ -197,6 +201,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFeatureNotFoundAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType <em>Feature Not Found In Union Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType
+	 * @generated
+	 */
+	public Adapter createFeatureNotFoundInUnionTypeAdapter() {
 		return null;
 	}
 

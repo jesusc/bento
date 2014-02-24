@@ -18,6 +18,11 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 	public Type getFeature(String featureName, LocatedElement self) {
 		throw new UnsupportedOperationException(featureName);
 	}
+	
+	@Override
+	public boolean hasFeature(String featureName) {
+		throw new UnsupportedOperationException(featureName);
+	}
 
 	@Override
 	public boolean hasOperation(String operationName, Type[] arguments) {

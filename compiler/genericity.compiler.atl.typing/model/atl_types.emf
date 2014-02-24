@@ -59,6 +59,13 @@ class EmptyCollection extends Type {
    
 }
 
+/*
+class EnumLiteralType extends Type {
+   ref EnumType[1] type;
+   attr String[1] value;   
+}
+*/
+
 class EnumType extends Type {
    attr String[1] name;
    ref EObject[1] eenum;      

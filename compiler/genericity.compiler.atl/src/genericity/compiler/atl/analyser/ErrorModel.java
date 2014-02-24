@@ -1,15 +1,20 @@
 package genericity.compiler.atl.analyser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.UnionType;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.VariableDeclaration;
 import bento.analysis.atl_analysis.AnalysisResult;
@@ -17,6 +22,7 @@ import bento.analysis.atl_analysis.AtlAnalysisFactory;
 import bento.analysis.atl_analysis.Recovery;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
+import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
@@ -134,6 +140,26 @@ public class ErrorModel {
 		
 		signalNoRecoverableError("No container is possible for class " + clazz.getName(), node);
 	}
+
+	public void signalNoFeatureInUnionType(UnionType type, String featureName, LocatedElement node) {
+		FeatureNotFoundInUnionType error = AtlErrorsFactory.eINSTANCE.createFeatureNotFoundInUnionType();
+		initProblem(error, node);
+		error.setFeatureName(featureName);
+		
+		signalNoRecoverableError("No feature " + featureName + " for " + TypeUtils.typeToString(type), node);
+	}
+
+	public void signalNoEnumLiteral(String name, LocatedElement node) {
+		signalNoRecoverableError("No enum literal " + name, node);
+	}
+
+	public void warningMissingFeatureInUnionType(List<Type> noFeatureTypes, LocatedElement node) {
+		String strTypes = "";
+		for (Type type : noFeatureTypes) {
+			strTypes += TypeUtils.typeToString(type) + " ";
+		}
+		signalWarning("Missing feature in these types: [" + strTypes + "]", node);
+	} 
 
 
 

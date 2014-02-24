@@ -62,6 +62,7 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 		switch (eClass.getClassifierID()) {
 			case AtlErrorsPackage.COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR: return createCollectionOperationOverNoCollectionError();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND: return createFeatureNotFound();
+			case AtlErrorsPackage.FEATURE_NOT_FOUND_IN_UNION_TYPE: return createFeatureNotFoundInUnionType();
 			case AtlErrorsPackage.INVALID_OPERAND: return createInvalidOperand();
 			case AtlErrorsPackage.NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE: return createNoContainerForRefImmediateComposite();
 			default:
@@ -87,6 +88,16 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public FeatureNotFound createFeatureNotFound() {
 		FeatureNotFoundImpl featureNotFound = new FeatureNotFoundImpl();
 		return featureNotFound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FeatureNotFoundInUnionType createFeatureNotFoundInUnionType() {
+		FeatureNotFoundInUnionTypeImpl featureNotFoundInUnionType = new FeatureNotFoundInUnionTypeImpl();
+		return featureNotFoundInUnionType;
 	}
 
 	/**

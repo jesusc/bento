@@ -25,6 +25,11 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 	}
 
 	@Override
+	public boolean hasFeature(String featureName) {
+		throw new UnsupportedOperationException(featureName);
+	}
+	
+	@Override
 	public void extendType(String featureName, Type returnType, Attribute attrDefinition) {
 		throw new UnsupportedOperationException();
 	}

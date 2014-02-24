@@ -16,6 +16,7 @@ import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
 import genericity.compiler.atl.analyser.AnalyserContext;
+import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
@@ -42,7 +43,27 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return this.metamodel.getName();
 	}
 	
+	@Override
+	public boolean hasFeature(String featureName) {
+		return getExtendedFeature(featureName) != null ||
+				 eClass.getEStructuralFeature(featureName) != null;
+	}	
+	
 	public Type getFeature(String featureName, LocatedElement node) {
+		Type t = getExtendedFeature(featureName);
+		if ( t != null) 
+			return t;
+		
+		EStructuralFeature f = eClass.getEStructuralFeature(featureName);
+		if ( f == null ) {
+			return tryRecovery(featureName, node);
+		}
+		
+		return metamodel.converter.convert(f, metamodel);
+	}
+
+
+	private Type getExtendedFeature(String featureName) {
 		if ( metamodel.featureNames.contains(featureName) ) {
 			if ( features.containsKey(featureName) ) {
 				return features.get(featureName).returnType;
@@ -51,20 +72,11 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			for (EClass supertype : eClass.getEAllSuperTypes()) {
 				ClassNamespace cn = (ClassNamespace) metamodel.getClassifier(supertype.getName());
 				if ( cn.features.containsKey(featureName) ) {
-					return features.get(featureName).returnType;
+					return cn.features.get(featureName).returnType;
 				}
 			}
-
-			// May be the case that no feature with the name is attached 
-			// (metamodel.featureNames is only an optimization)
 		}
-		
-		EStructuralFeature f = eClass.getEStructuralFeature(featureName);
-		if ( f == null ) {
-			return tryRecovery(featureName, node);
-		}
-		
-		return metamodel.converter.convert(f, metamodel);
+		return null;
 	}
 	
 	private Type tryRecovery(String featureName, LocatedElement node) {
@@ -153,7 +165,7 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			return t;
 		}
 		
-		if ( operationName.equals("allInstances") ) {
+		if ( operationName.equals("allInstances") || operationName.equals("allInstancesFrom") ) {
 			return metamodel.converter.convertAllInstancesOf(eClass, this);
 		} else if ( operationName.equals("oclIsKindOf") || 
 					operationName.equals("oclIsTypeOf")) {
@@ -185,16 +197,26 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return null;
 	}
 
-	private Metaclass findTypeOfContainer(LocatedElement node) {
+	/**
+	 * Implements the algorithm to find the container(s) that may hold
+	 * the an object of the class when invoking "refImmediateComposite".
+	 * 
+	 * @param node
+	 * @return
+	 */
+	private Type findTypeOfContainer(LocatedElement node) {
 		ArrayList<EClass> possibleContainers = new ArrayList<EClass>();
 		
 		List<EClass> classes = metamodel.getAllClasses();
 		for (EClass c : classes) {
 			for(EReference r : c.getEReferences()) {
 				if ( r.isContainment() ) {
-					if ( r.getEReferenceType() == eClass || eClass.isSuperTypeOf(r.getEReferenceType())) {
+					if ( r.getEReferenceType() == eClass || 
+						 eClass.isSuperTypeOf(r.getEReferenceType()) || // This is to select every possible "pointed" subclass
+						 r.getEReferenceType().isSuperTypeOf(eClass)    // This is the normaly polymorphic checking
+					) {
+						
 						possibleContainers.add(r.getEContainingClass());
-						System.out.println(r.getEContainingClass().getName());
 					}
 				}
 			}
@@ -204,12 +226,18 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			// TODO: How to recover from a not having a container???
 			AnalyserContext.getErrorModel().signalNoContainerForRefImmediateComposite(getType(), node);
 		} else if ( possibleContainers.size() == 1 ) {
-			return ((ClassNamespace) metamodel.getClassifier(possibleContainers.get(0).getName())).getType();
+			return metamodel.getMetaclass(possibleContainers.get(0));
 		} else {
-			throw new UnsupportedOperationException("TODO: For objects that may be contained in multiple classes, signal warning and return a union type");
+			Type t1 = metamodel.getMetaclass(possibleContainers.get(0));
+			for(int i = 1; i < possibleContainers.size(); i++) {
+				Type t2 = metamodel.getMetaclass(possibleContainers.get(i));
+ 				t1 = AnalyserContext.getTypingModel().getCommonType(t1, t2);
+			}
+			
+			// throw new UnsupportedOperationException("TODO: For objects that may be contained in multiple classes, signal warning and return a union type");
+			return t1;
 		}
-		
-		return null;
+		throw new IllegalStateException(); // This should not happen (the compiler seems not see it...)
 	}
 
 
@@ -225,6 +253,5 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	}
 
 
-	
 	
 }

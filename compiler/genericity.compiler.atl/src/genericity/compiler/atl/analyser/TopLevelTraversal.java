@@ -19,6 +19,7 @@ import atl.metamodel.ATLModelVisitor;
 import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.Helper;
+import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.ModuleElement;
 import atl.metamodel.ATL.Rule;
@@ -105,7 +106,13 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
 		mm.getTransformationNamespace().extendType(self.getName(), t, self);
 	}
-	
+
+	@Override
+	public void inLazyMatchedRule(LazyMatchedRule self) {
+		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
+		mm.getTransformationNamespace().extendType(self.getName(), t, self);
+	}
+
 	//  
 	// Variables 
 	//

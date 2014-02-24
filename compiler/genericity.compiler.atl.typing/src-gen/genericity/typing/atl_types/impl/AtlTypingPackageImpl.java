@@ -31,16 +31,13 @@ import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.UnknownFeature;
-
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
-
 import genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**

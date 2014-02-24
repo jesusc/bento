@@ -119,6 +119,16 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.FEATURE_NOT_FOUND_IN_UNION_TYPE: {
+				FeatureNotFoundInUnionType featureNotFoundInUnionType = (FeatureNotFoundInUnionType)theEObject;
+				T result = caseFeatureNotFoundInUnionType(featureNotFoundInUnionType);
+				if (result == null) result = caseNavigationProblem(featureNotFoundInUnionType);
+				if (result == null) result = caseLocalProblem(featureNotFoundInUnionType);
+				if (result == null) result = caseProblem(featureNotFoundInUnionType);
+				if (result == null) result = caseAnalysisInfo(featureNotFoundInUnionType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.INVALID_OPERAND: {
 				InvalidOperand invalidOperand = (InvalidOperand)theEObject;
 				T result = caseInvalidOperand(invalidOperand);
@@ -215,6 +225,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureNotFound(FeatureNotFound object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Feature Not Found In Union Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Feature Not Found In Union Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFeatureNotFoundInUnionType(FeatureNotFoundInUnionType object) {
 		return null;
 	}
 

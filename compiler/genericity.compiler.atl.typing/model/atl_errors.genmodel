@@ -28,6 +28,9 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/className"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/metamodelName"/>
       </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType/featureName"/>
+      </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/InvalidOperand">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/InvalidOperand/operatorSymbol"/>
       </genClasses>

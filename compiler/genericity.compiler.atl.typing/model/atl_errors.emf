@@ -44,6 +44,10 @@ package atl_error {
 		attr String[1] metamodelName;
 	}
 	
+	class FeatureNotFoundInUnionType extends NavigationProblem {
+		attr String[1] featureName;	   
+	}
+	
 	class InvalidOperand extends InvalidArgumentProblem {
 	   attr String[1] operatorSymbol;	   
 	}	  

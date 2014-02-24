@@ -4,9 +4,11 @@ import genericity.compiler.atl.analyser.EcoreTypeConverter;
 import genericity.compiler.atl.analyser.ErrorModel;
 import genericity.compiler.atl.analyser.TypingModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -32,11 +34,15 @@ public class GlobalNamespace {
 		return tspace;
 	}
 	
-	public MetamodelNamespace getHelper(String name) {
+	public MetamodelNamespace getNamespace(String name) {
 		if ( namesToMetamodels.containsKey(name) ) 
 			return namesToMetamodels.get(name);
 		
 		return null;
+	}
+	
+	public List<MetamodelNamespace> getMetamodels() {
+		return new ArrayList<MetamodelNamespace>(namesToMetamodels.values());
 	}
 
 	public void setDependencies(EcoreTypeConverter ecoreTypeConverter, TypingModel typ, ErrorModel errors) {

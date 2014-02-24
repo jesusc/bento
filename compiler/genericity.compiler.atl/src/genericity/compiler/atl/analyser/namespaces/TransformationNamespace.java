@@ -16,6 +16,7 @@ public class TransformationNamespace implements ITypeNamespace {
 	private HashMap<String, VirtualFeature<TransformationNamespace, Operation>> operations = new HashMap<String, VirtualFeature<TransformationNamespace, Operation>>();
 	private HashMap<String, VirtualFeature<TransformationNamespace, Attribute>> features   = new HashMap<String, VirtualFeature<TransformationNamespace, Attribute>>();
 	private HashMap<String, VirtualFeature<TransformationNamespace, CalledRule>> calledRules  = new HashMap<String, VirtualFeature<TransformationNamespace, CalledRule>>();
+	private HashMap<String, VirtualFeature<TransformationNamespace, LazyMatchedRule>> lazyRules  = new HashMap<String, VirtualFeature<TransformationNamespace, LazyMatchedRule>>();
 
 	private ErrorModel	errors;
 	
@@ -28,11 +29,21 @@ public class TransformationNamespace implements ITypeNamespace {
 		return op.returnType;
 	}
 
+
+	@Override
+	public boolean hasFeature(String featureName) {
+		return features.containsKey(featureName);
+	}
+
+
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		VirtualFeature<TransformationNamespace, ?> op = operations.get(operationName);
 		if ( op == null ) {
 			op = calledRules.get(operationName);
+			if ( op == null ) 
+				op = lazyRules.get(operationName);
+			
 			if ( op == null )
 				errors.signalNoThisModuleOperation(operationName, node);
 		}
@@ -52,7 +63,7 @@ public class TransformationNamespace implements ITypeNamespace {
 		if ( r instanceof CalledRule ) {
 			calledRules.put(ruleName, new VirtualFeature<TransformationNamespace, CalledRule>(this, ruleName, returnType, (CalledRule) r));
 		} else if ( r instanceof LazyMatchedRule ) {
-			throw new UnsupportedOperationException("TODO: Deal with lazy rules");
+			lazyRules.put(ruleName, new VirtualFeature<TransformationNamespace, LazyMatchedRule>(this, ruleName, returnType, (LazyMatchedRule) r));
 		} else {
 			throw new IllegalArgumentException("Only called rulres and lazy rules can be attached to thisModule");
 		}
@@ -61,7 +72,8 @@ public class TransformationNamespace implements ITypeNamespace {
 	@Override
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		return operations.containsKey(operationName) ||
-			   calledRules.containsKey(operationName);
+			   calledRules.containsKey(operationName) ||
+			   lazyRules.containsKey(operationName);
 	}
 
 	@Override
@@ -77,6 +89,5 @@ public class TransformationNamespace implements ITypeNamespace {
 	public void setDependencies(ErrorModel errors) {
 		this.errors = errors;
 	}
-
 
 }

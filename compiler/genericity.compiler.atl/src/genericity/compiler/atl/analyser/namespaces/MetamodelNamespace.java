@@ -3,6 +3,8 @@ package genericity.compiler.atl.analyser.namespaces;
 import genericity.compiler.atl.analyser.EcoreTypeConverter;
 import genericity.compiler.atl.analyser.ErrorModel;
 import genericity.compiler.atl.analyser.TypingModel;
+import genericity.typing.atl_types.AtlTypingFactory;
+import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,6 +38,7 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 	private Resource	resource;
 	private HashMap<String, ITypeNamespace> classifiers = new HashMap<String, ITypeNamespace>();
 	private ArrayList<EClass> allClasses = new ArrayList<EClass>();
+	private ArrayList<EEnum> allEnums= new ArrayList<EEnum>();
 	
 	// this is just to have a quick look before iterating over superclasses looking for virtual features
 	protected Set<String> featureNames = new HashSet<String>(); 
@@ -56,6 +61,8 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 				if ( c instanceof EClass ) {
 					classifiers.put(c.getName(), new ClassNamespace(this, (EClass) c));
 					allClasses.add((EClass) c);
+				} else if ( c instanceof EEnum ) {
+					allEnums.add((EEnum) c);
 				} else {
 					// System.out.println("MetamodelNamespace: Type " + c.getName() + " not supported ");
 				}
@@ -105,6 +112,22 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 	@Override
 	public ITypeNamespace getClassifier(String name) {
 		return classifiers.get(name);
+	}
+	
+	public Metaclass getMetaclass(EClass c) {
+		return ((ClassNamespace) classifiers.get(c.getName())).getType();
+	}
+
+	public EnumType findEnumLiteral(String name) {
+		for(EEnum eenum : allEnums) {
+			EEnumLiteral literal = eenum.getEEnumLiteral(name);
+			if ( literal != null ) {
+				return typ.createEEnum(eenum);
+			}
+		}
+		
+		return null;
+		// TODO: Check that the same literal is not repeated... (this is more a meta-model level check)
 	}
 
 	

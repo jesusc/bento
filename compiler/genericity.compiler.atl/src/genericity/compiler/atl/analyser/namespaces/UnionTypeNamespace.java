@@ -1,5 +1,8 @@
 package genericity.compiler.atl.analyser.namespaces;
 
+import java.util.ArrayList;
+
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.TypingModel;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
@@ -17,9 +20,49 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 	}
 	
 	@Override
-	public Type getFeature(String featureName, LocatedElement self) {
-		throw new UnsupportedOperationException(featureName);
+	public Type getFeature(String featureName, LocatedElement node) {
+		ArrayList<Type> results = new ArrayList<Type>();
+		ArrayList<Type> noFeatureTypes = new ArrayList<Type>();
+		
+		// This is complicated and problematic, because a getFeature to e.g., a ClassNamespace
+		// may create a "recovery error"...
+		for(Type t : type.getPossibleTypes()) {
+			ITypeNamespace ns = (ITypeNamespace) t.getMetamodelRef();
+			if ( ns.hasFeature(featureName) ) {
+				results.add(ns.getFeature(featureName, node));
+			} else {
+				noFeatureTypes.add(t);
+			}
+		}
+		
+		if ( results.size() == 0 ) {
+			AnalyserContext.getErrorModel().signalNoFeatureInUnionType(type, featureName, node);
+			throw new IllegalStateException();
+		}
+		
+		Type t1 = results.get(0);
+		for(int i = 1; i < results.size(); i++) {
+			Type t2 = results.get(i);
+			t1 = AnalyserContext.getTypingModel().getCommonType(t1, t2);
+		}
+		
+		if ( noFeatureTypes.size() != 0 ) {
+			AnalyserContext.getErrorModel().warningMissingFeatureInUnionType(noFeatureTypes, node);
+		}
+		
+		return t1;
 	}
+	
+	@Override
+	public boolean hasFeature(String featureName) {
+		for(Type t : type.getPossibleTypes()) {
+			ITypeNamespace ns = (ITypeNamespace) t.getMetamodelRef();
+			if ( ns.hasFeature(featureName) ) 
+				return true;
+		}
+		return false;
+	}
+	
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
@@ -63,6 +106,6 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		return false;
 	}
-	
+
 	
 }

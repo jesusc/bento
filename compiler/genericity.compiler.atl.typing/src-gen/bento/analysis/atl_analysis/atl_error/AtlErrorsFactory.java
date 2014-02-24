@@ -44,6 +44,15 @@ public interface AtlErrorsFactory extends EFactory {
 	FeatureNotFound createFeatureNotFound();
 
 	/**
+	 * Returns a new object of class '<em>Feature Not Found In Union Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Feature Not Found In Union Type</em>'.
+	 * @generated
+	 */
+	FeatureNotFoundInUnionType createFeatureNotFoundInUnionType();
+
+	/**
 	 * Returns a new object of class '<em>Invalid Operand</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

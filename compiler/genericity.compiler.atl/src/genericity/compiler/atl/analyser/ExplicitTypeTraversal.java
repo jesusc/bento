@@ -39,7 +39,7 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public void inOclModelElement(OclModelElement obj) {
 		String mmName = obj.getModel().getName();
-		MetamodelNamespace mmspace = mm.getHelper(mmName);
+		MetamodelNamespace mmspace = mm.getNamespace(mmName);
 		if ( mmspace == null ) {
 			errors.signalNoModel(mmName, obj);
 		}

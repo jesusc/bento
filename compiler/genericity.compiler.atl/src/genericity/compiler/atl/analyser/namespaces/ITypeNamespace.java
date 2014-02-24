@@ -11,7 +11,9 @@ public interface ITypeNamespace {
 	Type getFeature(String featureName, LocatedElement node);
 	Type getOperationType(String operationName, Type[] arguments, LocatedElement node);
 	Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node);
+	
 	boolean hasOperation(String operationName, Type[] arguments);
+	boolean hasFeature(String featureName);
 	
 	void extendType( String featureName, Type returnType, Attribute attrDefinition);
 	void extendType(String operationName, Type returnType, Operation opDefinition);
