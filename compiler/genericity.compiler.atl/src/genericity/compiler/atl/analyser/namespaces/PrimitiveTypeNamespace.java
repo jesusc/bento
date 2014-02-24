@@ -11,7 +11,6 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 	private PrimitiveGlobalNamespace	nspace;
 
 	public PrimitiveTypeNamespace(PrimitiveGlobalNamespace nspace) {
-		super(nspace.typ);
 		this.nspace = nspace;
 	}
 

@@ -17,6 +17,7 @@ import bento.analysis.atl_analysis.atl_error.InvalidOperand;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.NavigationProblem;
 
+import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage;
 import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryPackageImpl;
 import bento.analysis.atl_analysis.impl.AtlAnalysisPackageImpl;
@@ -77,6 +78,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass invalidOperandEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass noContainerForRefImmediateCompositeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -272,6 +280,33 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNoContainerForRefImmediateComposite() {
+		return noContainerForRefImmediateCompositeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNoContainerForRefImmediateComposite_ClassName() {
+		return (EAttribute)noContainerForRefImmediateCompositeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNoContainerForRefImmediateComposite_MetamodelName() {
+		return (EAttribute)noContainerForRefImmediateCompositeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AtlErrorsFactory getAtlErrorsFactory() {
 		return (AtlErrorsFactory)getEFactoryInstance();
 	}
@@ -313,6 +348,10 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		invalidOperandEClass = createEClass(INVALID_OPERAND);
 		createEAttribute(invalidOperandEClass, INVALID_OPERAND__OPERATOR_SYMBOL);
+
+		noContainerForRefImmediateCompositeEClass = createEClass(NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE);
+		createEAttribute(noContainerForRefImmediateCompositeEClass, NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__CLASS_NAME);
+		createEAttribute(noContainerForRefImmediateCompositeEClass, NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__METAMODEL_NAME);
 	}
 
 	/**
@@ -352,6 +391,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		collectionOperationOverNoCollectionErrorEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
 		invalidOperandEClass.getESuperTypes().add(this.getInvalidArgumentProblem());
+		noContainerForRefImmediateCompositeEClass.getESuperTypes().add(this.getNavigationProblem());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(localProblemEClass, LocalProblem.class, "LocalProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -372,6 +412,10 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		initEClass(invalidOperandEClass, InvalidOperand.class, "InvalidOperand", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInvalidOperand_OperatorSymbol(), ecorePackage.getEString(), "operatorSymbol", null, 1, 1, InvalidOperand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(noContainerForRefImmediateCompositeEClass, NoContainerForRefImmediateComposite.class, "NoContainerForRefImmediateComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNoContainerForRefImmediateComposite_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, NoContainerForRefImmediateComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNoContainerForRefImmediateComposite_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, NoContainerForRefImmediateComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //AtlErrorsPackageImpl

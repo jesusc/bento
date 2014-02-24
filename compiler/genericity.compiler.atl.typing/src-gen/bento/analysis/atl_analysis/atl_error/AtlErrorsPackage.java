@@ -376,6 +376,71 @@ public interface AtlErrorsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.NoContainerForRefImmediateCompositeImpl <em>No Container For Ref Immediate Composite</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.NoContainerForRefImmediateCompositeImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoContainerForRefImmediateComposite()
+	 * @generated
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__LOCATION = NAVIGATION_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__ELEMENT = NAVIGATION_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__RECOVERY = NAVIGATION_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__CLASS_NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__METAMODEL_NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>No Container For Ref Immediate Composite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.LocalProblem <em>Local Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -511,6 +576,38 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getInvalidOperand_OperatorSymbol();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite <em>No Container For Ref Immediate Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>No Container For Ref Immediate Composite</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite
+	 * @generated
+	 */
+	EClass getNoContainerForRefImmediateComposite();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite#getClassName <em>Class Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite#getClassName()
+	 * @see #getNoContainerForRefImmediateComposite()
+	 * @generated
+	 */
+	EAttribute getNoContainerForRefImmediateComposite_ClassName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite#getMetamodelName <em>Metamodel Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Metamodel Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite#getMetamodelName()
+	 * @see #getNoContainerForRefImmediateComposite()
+	 * @generated
+	 */
+	EAttribute getNoContainerForRefImmediateComposite_MetamodelName();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -649,6 +746,32 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INVALID_OPERAND__OPERATOR_SYMBOL = eINSTANCE.getInvalidOperand_OperatorSymbol();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.NoContainerForRefImmediateCompositeImpl <em>No Container For Ref Immediate Composite</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.NoContainerForRefImmediateCompositeImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoContainerForRefImmediateComposite()
+		 * @generated
+		 */
+		EClass NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE = eINSTANCE.getNoContainerForRefImmediateComposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__CLASS_NAME = eINSTANCE.getNoContainerForRefImmediateComposite_ClassName();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__METAMODEL_NAME = eINSTANCE.getNoContainerForRefImmediateComposite_MetamodelName();
 
 	}
 

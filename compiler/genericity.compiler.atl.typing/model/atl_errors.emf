@@ -47,6 +47,13 @@ package atl_error {
 	class InvalidOperand extends InvalidArgumentProblem {
 	   attr String[1] operatorSymbol;	   
 	}	  
+
+    // Example: Given a root class, e.g., MyClassModel, the expression
+    //          aClassModel.refImmediateComposite() will always return null.
+	class NoContainerForRefImmediateComposite extends NavigationProblem {
+		attr String[1] className;
+		attr String[1] metamodelName;			   
+	}
 }
 
 @namespace(uri="http://bento/analysis/atl/analysis/recovery", prefix="atl_recovery")

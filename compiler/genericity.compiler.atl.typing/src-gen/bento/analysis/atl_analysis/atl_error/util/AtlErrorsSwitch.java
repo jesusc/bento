@@ -129,6 +129,16 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE: {
+				NoContainerForRefImmediateComposite noContainerForRefImmediateComposite = (NoContainerForRefImmediateComposite)theEObject;
+				T result = caseNoContainerForRefImmediateComposite(noContainerForRefImmediateComposite);
+				if (result == null) result = caseNavigationProblem(noContainerForRefImmediateComposite);
+				if (result == null) result = caseLocalProblem(noContainerForRefImmediateComposite);
+				if (result == null) result = caseProblem(noContainerForRefImmediateComposite);
+				if (result == null) result = caseAnalysisInfo(noContainerForRefImmediateComposite);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -220,6 +230,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInvalidOperand(InvalidOperand object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>No Container For Ref Immediate Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>No Container For Ref Immediate Composite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNoContainerForRefImmediateComposite(NoContainerForRefImmediateComposite object) {
 		return null;
 	}
 

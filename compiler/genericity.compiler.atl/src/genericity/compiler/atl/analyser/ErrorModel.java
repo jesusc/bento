@@ -19,6 +19,7 @@ import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
+import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
 import bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass;
 import bento.analysis.atl_analysis.atl_recovery.TentativeTypeAssigned;
@@ -123,6 +124,15 @@ public class ErrorModel {
 		TentativeTypeAssigned rec = AtlRecoveryFactory.eINSTANCE.createTentativeTypeAssigned();
 		rec.setType(t);
 		return rec;
+	}
+
+	public void signalNoContainerForRefImmediateComposite(Metaclass clazz, LocatedElement node) {
+		NoContainerForRefImmediateComposite error = AtlErrorsFactory.eINSTANCE.createNoContainerForRefImmediateComposite();
+		initProblem(error, node);
+		error.setClassName(clazz.getName());
+		error.setMetamodelName(((ClassNamespace) clazz.getMetamodelRef()).getMetamodelName());
+		
+		signalNoRecoverableError("No container is possible for class " + clazz.getName(), node);
 	}
 
 

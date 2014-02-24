@@ -53,6 +53,15 @@ public interface AtlErrorsFactory extends EFactory {
 	InvalidOperand createInvalidOperand();
 
 	/**
+	 * Returns a new object of class '<em>No Container For Ref Immediate Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>No Container For Ref Immediate Composite</em>'.
+	 * @generated
+	 */
+	NoContainerForRefImmediateComposite createNoContainerForRefImmediateComposite();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,24 +1,28 @@
 package genericity.compiler.atl.analyser.namespaces;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.UnknownFeature;
 
-public class ClassNamespace implements ITypeNamespace {
+public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamespace {
 	private EClass	eClass;
 	private MetamodelNamespace	metamodel;
 	private HashMap<String, VirtualFeature<ClassNamespace, Attribute>> features = 
@@ -39,18 +43,20 @@ public class ClassNamespace implements ITypeNamespace {
 	}
 	
 	public Type getFeature(String featureName, LocatedElement node) {
-
 		if ( metamodel.featureNames.contains(featureName) ) {
-			throw new UnsupportedOperationException();
-			// ITERATE OVER ALL SUPERCLASSES, CHECKING IF THE THERE IS A VIRTUAL FEATURE
-			/*
-			if ( virtualFeatures.containsKey(m..getKlass()) ) {
-				Set<VirtualFeature<Metaclass>> features = virtualFeatures.get(m.eClass());
-				for (VirtualFeature<Metaclass> virtualFeature : features) {
-					
+			if ( features.containsKey(featureName) ) {
+				return features.get(featureName).returnType;
+			}
+
+			for (EClass supertype : eClass.getEAllSuperTypes()) {
+				ClassNamespace cn = (ClassNamespace) metamodel.getClassifier(supertype.getName());
+				if ( cn.features.containsKey(featureName) ) {
+					return features.get(featureName).returnType;
 				}
 			}
-			*/
+
+			// May be the case that no feature with the name is attached 
+			// (metamodel.featureNames is only an optimization)
 		}
 		
 		EStructuralFeature f = eClass.getEStructuralFeature(featureName);
@@ -142,6 +148,11 @@ public class ClassNamespace implements ITypeNamespace {
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
+		Type t = super.getOperationType(operationName, arguments, node);
+		if ( t != null ) {
+			return t;
+		}
+		
 		if ( operationName.equals("allInstances") ) {
 			return metamodel.converter.convertAllInstancesOf(eClass, this);
 		} else if ( operationName.equals("oclIsKindOf") || 
@@ -152,6 +163,8 @@ public class ClassNamespace implements ITypeNamespace {
 			return metamodel.typ.newBooleanType();
 		} else if ( operationName.equals("oclType") ) {
 			return metamodel.typ.newOclType();
+		} else if ( operationName.equals("refImmediateComposite") ) {
+			return findTypeOfContainer(node);
 		}
 		
 		if ( this.hasOperation(operationName, arguments) ) {
@@ -171,6 +184,34 @@ public class ClassNamespace implements ITypeNamespace {
 		metamodel.errors.signalNoOperationFound(getType(), operationName, node);
 		return null;
 	}
+
+	private Metaclass findTypeOfContainer(LocatedElement node) {
+		ArrayList<EClass> possibleContainers = new ArrayList<EClass>();
+		
+		List<EClass> classes = metamodel.getAllClasses();
+		for (EClass c : classes) {
+			for(EReference r : c.getEReferences()) {
+				if ( r.isContainment() ) {
+					if ( r.getEReferenceType() == eClass || eClass.isSuperTypeOf(r.getEReferenceType())) {
+						possibleContainers.add(r.getEContainingClass());
+						System.out.println(r.getEContainingClass().getName());
+					}
+				}
+			}
+		}
+		
+		if ( possibleContainers.size() == 0 ) {
+			// TODO: How to recover from a not having a container???
+			AnalyserContext.getErrorModel().signalNoContainerForRefImmediateComposite(getType(), node);
+		} else if ( possibleContainers.size() == 1 ) {
+			return ((ClassNamespace) metamodel.getClassifier(possibleContainers.get(0).getName())).getType();
+		} else {
+			throw new UnsupportedOperationException("TODO: For objects that may be contained in multiple classes, signal warning and return a union type");
+		}
+		
+		return null;
+	}
+
 
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {

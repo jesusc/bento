@@ -36,14 +36,14 @@ public class IntegerNamespace extends PrimitiveTypeNamespace {
 			
 			if ( optionalArgument instanceof FloatType || 
 				 ( optionalArgument instanceof IntegerType && (operatorSymbol.equals("/") || operatorSymbol.equals("*") )) ) {
-				return typ.newFloatType();
+				return AnalyserContext.getTypingModel().newFloatType();
 			} else if ( optionalArgument instanceof IntegerType ) {
-				return typ.newIntegerType();
+				return AnalyserContext.getTypingModel().newIntegerType();
 			} else {
 				AnalyserContext.getErrorModel().signalInvalidOperand(operatorSymbol, node, new IRecoveryAction() {
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {
-						Type t = typ.newIntegerType();
+						Type t = AnalyserContext.getTypingModel().newIntegerType();
 						p.setRecovery( m.recoveryTentativeTypeAssigned(t) );
 						return t;
 					}
@@ -62,6 +62,6 @@ public class IntegerNamespace extends PrimitiveTypeNamespace {
 	
 	@Override
 	public Type createType(boolean explicitOcurrence) {
-		return typ.newIntegerType();
+		return AnalyserContext.getTypingModel().newIntegerType();
 	}
 }

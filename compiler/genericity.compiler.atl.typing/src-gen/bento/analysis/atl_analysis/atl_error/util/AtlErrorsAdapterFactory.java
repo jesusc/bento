@@ -99,6 +99,10 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createInvalidOperandAdapter();
 			}
 			@Override
+			public Adapter caseNoContainerForRefImmediateComposite(NoContainerForRefImmediateComposite object) {
+				return createNoContainerForRefImmediateCompositeAdapter();
+			}
+			@Override
 			public Adapter caseAnalysisInfo(AnalysisInfo object) {
 				return createAnalysisInfoAdapter();
 			}
@@ -207,6 +211,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidOperandAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite <em>No Container For Ref Immediate Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite
+	 * @generated
+	 */
+	public Adapter createNoContainerForRefImmediateCompositeAdapter() {
 		return null;
 	}
 

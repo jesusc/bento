@@ -12,8 +12,7 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 
 	private UnionType	type;
 
-	public UnionTypeNamespace(TypingModel typ, UnionType type) {
-		super(typ);
+	public UnionTypeNamespace(UnionType type) {
 		this.type = type;
 	}
 	

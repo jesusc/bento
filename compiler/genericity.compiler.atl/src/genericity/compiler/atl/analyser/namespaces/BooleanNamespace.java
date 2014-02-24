@@ -1,5 +1,6 @@
 package genericity.compiler.atl.analyser.namespaces;
 
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.LocatedElement;
 
@@ -24,13 +25,13 @@ public class BooleanNamespace extends PrimitiveTypeNamespace {
 		Type t = super.getOperatorType(operatorSymbol, optionalArgument, node);
 		if ( t == null ) {
 			if ( operatorSymbol.equals("not") || operatorSymbol.equals("and") || operatorSymbol.equals("or") )
-				return typ.newBooleanType();
+				return AnalyserContext.getTypingModel().newBooleanType();
 		}
 		throw new UnsupportedOperationException(operatorSymbol);
 	}
 
 	@Override
 	public Type createType(boolean explicitOcurrence) {
-		return typ.newBooleanType();
+		return AnalyserContext.getTypingModel().newBooleanType();
 	}
 }

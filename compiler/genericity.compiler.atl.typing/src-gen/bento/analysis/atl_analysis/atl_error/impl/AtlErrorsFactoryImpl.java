@@ -63,6 +63,7 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR: return createCollectionOperationOverNoCollectionError();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND: return createFeatureNotFound();
 			case AtlErrorsPackage.INVALID_OPERAND: return createInvalidOperand();
+			case AtlErrorsPackage.NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE: return createNoContainerForRefImmediateComposite();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -96,6 +97,16 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public InvalidOperand createInvalidOperand() {
 		InvalidOperandImpl invalidOperand = new InvalidOperandImpl();
 		return invalidOperand;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NoContainerForRefImmediateComposite createNoContainerForRefImmediateComposite() {
+		NoContainerForRefImmediateCompositeImpl noContainerForRefImmediateComposite = new NoContainerForRefImmediateCompositeImpl();
+		return noContainerForRefImmediateComposite;
 	}
 
 	/**

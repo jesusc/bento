@@ -152,7 +152,7 @@ public class TypingModel {
 		for (Type type : types) {
 			ut.getPossibleTypes().add(type);
 		}
-		ut.setMetamodelRef(new UnionTypeNamespace(this, ut));
+		ut.setMetamodelRef(new UnionTypeNamespace(ut));
 		return ut;
 	}
 

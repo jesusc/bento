@@ -31,6 +31,10 @@
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/InvalidOperand">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/InvalidOperand/operatorSymbol"/>
       </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoContainerForRefImmediateComposite">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoContainerForRefImmediateComposite/className"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoContainerForRefImmediateComposite/metamodelName"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">

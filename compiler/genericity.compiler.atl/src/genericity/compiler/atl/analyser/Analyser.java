@@ -5,8 +5,10 @@ import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -28,29 +30,31 @@ public class Analyser {
 		this.trafo = new ATLModel(trafo.getHandler().getResource());
 		this.typ   = new TypingModel(out);
 		this.errors = new ErrorModel();
-	
-		AnalyserContext.setErrorModel(errors);
-		AnalyserContext.setTypingModel(typ);
 	}
 
 	public void perform() {
 		ExecutorService executor = Executors.newSingleThreadExecutor();
-		executor.execute(new Runnable() {			
+		Future<?> result = executor.submit(new Runnable() {			
 			@Override
 			public void run() {
+				AnalyserContext.setErrorModel(errors);
+				AnalyserContext.setTypingModel(typ);				
+				
 				List<? extends Unit> units = trafo.allObjectsOf(Unit.class);
 				for (Unit unit : units) {
 					new BottomUpTraversal(trafo, mm, unit, typ, errors).perform();
-				}				
+				}	
 			}
 		});
 
-		// This is only during development
 		try {
-			executor.awaitTermination(0, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
+			// wait;
+			result.get();
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		} finally {			
+			executor.shutdown();
+		}
 	}
 
 	

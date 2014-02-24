@@ -19,7 +19,7 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		Type t = super.getOperationType(operationName, arguments, node);
 		if ( t == null ) {
-			if ( operationName.equals("floor") ) return typ.newIntegerType();
+			if ( operationName.equals("floor") ) return AnalyserContext.getTypingModel().newIntegerType();
 					
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 		}
@@ -36,12 +36,12 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 			(operatorSymbol.equals("-") && optionalArgument != null)) {
 			
 			if ( optionalArgument instanceof FloatType || optionalArgument instanceof IntegerType ) {
-				return typ.newFloatType();
+				return AnalyserContext.getTypingModel().newFloatType();
 			} else {
 				AnalyserContext.getErrorModel().signalInvalidOperand(operatorSymbol, node, new IRecoveryAction() {
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {
-						Type t = typ.newFloatType();
+						Type t = AnalyserContext.getTypingModel().newFloatType();
 						p.setRecovery( m.recoveryTentativeTypeAssigned(t) );
 						return t;
 					}
@@ -56,6 +56,6 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 	
 	@Override
 	public Type createType(boolean explicitOcurrence) {
-		return typ.newFloatType();
+		return AnalyserContext.getTypingModel().newFloatType();
 	}
 }
