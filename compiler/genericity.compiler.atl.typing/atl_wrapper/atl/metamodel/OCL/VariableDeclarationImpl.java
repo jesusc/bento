@@ -238,7 +238,7 @@ public class VariableDeclarationImpl extends atl.metamodel.ATLModelBaseObject im
 
 	@Override
 	public void visit(atl.metamodel.ATLModelVisitor visitor) {
-		atl.metamodel.ATLModelVisitor.VisitedReferences v = visitor.preVariableDeclaration(this);
+		atl.metamodel.ATLModelVisitor.VisitingActions v = visitor.preVariableDeclaration(this);
 		if ( v == null ) {
 			return;
 		}
@@ -247,16 +247,22 @@ public class VariableDeclarationImpl extends atl.metamodel.ATLModelBaseObject im
 		visitor.setCurrent(this);
 		visitor.beforeVariableDeclaration(this);
 			
-		for(EReference r : v.getReferences(this)) {
-			Object refObj   = object.eGet(r);
-			if ( refObj == null ) continue;
-			Object res = manager.wrap(refObj);
-			if ( res instanceof java.util.Collection ) {
-				for(Object o : (java.util.Collection<?>) res) {
-					((atl.metamodel.ATLModelVisitable) o).visit(visitor);
+		for(atl.metamodel.ATLModelVisitor.VisitingAction va : v.getActions(this)) {
+			if ( va.isMethodCall() ) {
+				va.performMethodCall();		
+			} else if ( va.isReference() ) {
+				EReference r = va.getEReference();
+				
+				Object refObj   = object.eGet(r);
+				if ( refObj == null ) continue;
+				Object res = manager.wrap(refObj);
+				if ( res instanceof java.util.Collection ) {
+					for(Object o : (java.util.Collection<?>) res) {
+						((atl.metamodel.ATLModelVisitable) o).visit(visitor);
+					}
+				} else {
+					((atl.metamodel.ATLModelVisitable) res).visit(visitor);
 				}
-			} else {
-				((atl.metamodel.ATLModelVisitable) res).visit(visitor);
 			}
 		}
 					

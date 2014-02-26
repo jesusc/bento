@@ -27,7 +27,7 @@ import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
-import atl.metamodel.ATLModelVisitor.VisitedReferences;
+import atl.metamodel.ATLModelVisitor.VisitingActions;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.Iterator;
@@ -64,8 +64,8 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 	}
 
 	@Override
-	public VisitedReferences preRule(Rule self) {
-		return refs(); // Do not visit anything else
+	public VisitingActions preRule(Rule self) {
+		return actions(); // Do not visit anything else
 	}
 	
 	
@@ -120,12 +120,12 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 	/** 
 	 * The evaluation order to the variable declarations of a rule is important!
 	 */
-	public VisitedReferences preMatchedRule(atl.metamodel.ATL.MatchedRule self) { 
-		return new VisitedReferences("variables" , "inPattern", "outPattern" , "actionBlock"); 
+	public VisitingActions preMatchedRule(atl.metamodel.ATL.MatchedRule self) { 
+		return new VisitingActions("variables" , "inPattern", "outPattern" , "actionBlock"); 
 	} 
 
-	public VisitedReferences preLazyMatchedRule(atl.metamodel.ATL.LazyMatchedRule self) { 
-		return new VisitedReferences("variables" , "inPattern", "outPattern" , "actionBlock" ); 
+	public VisitingActions preLazyMatchedRule(atl.metamodel.ATL.LazyMatchedRule self) { 
+		return new VisitingActions("variables" , "inPattern", "outPattern" , "actionBlock" ); 
 	} 
 
 	@Override
@@ -138,7 +138,7 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 
 		// TODO: Ver que debe estar partida en dos reglas de eclectic
 		if ( self.getType() != null ) {
-			attr.linkType( attr.typeOf(self.getType()) );
+			attr.linkExprType( attr.typeOf(self.getType()) );
 			// type[self] <- type[self.type]
 			// TODO: Get the type of the variable declaration
 		} else {
@@ -152,32 +152,32 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public void inRuleVariableDeclaration(RuleVariableDeclaration self) {
 		if ( self.getType() != null ) {
-			attr.linkType( attr.typeOf(self.getType()) );			
+			attr.linkExprType( attr.typeOf(self.getType()) );			
 		}
 	}
 	
 	@Override
 	public void inParameter(Parameter self) {
-		attr.linkType( attr.typeOf(self.getType()) );
+		attr.linkExprType( attr.typeOf(self.getType()) );
 	}
 	
 	@Override
 	public void inSimpleInPatternElement(SimpleInPatternElement self) {
-		attr.linkType( attr.typeOf(self.getType()) );
+		attr.linkExprType( attr.typeOf(self.getType()) );
 	}
 	
 	@Override
 	public void inSimpleOutPatternElement(SimpleOutPatternElement self) {
-		attr.linkType( attr.typeOf(self.getType()) );
+		attr.linkExprType( attr.typeOf(self.getType()) );
 	}
 	
 	@Override
 	public void inForEachOutPatternElement(ForEachOutPatternElement self) {
-		attr.linkType( attr.typeOf(self.getType()) );
+		attr.linkExprType( attr.typeOf(self.getType()) );
 	
 		// Deal only with the case of iterators defined for ForEachOutPatternElement,
 		// which type is given by the enclosing foreach
-		attr.linkType(self.getIterator(), attr.typeOf(self.getType()));
+		attr.linkExprType(self.getIterator(), attr.typeOf(self.getType()));
 	}
 	
 	

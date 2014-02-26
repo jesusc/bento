@@ -17,7 +17,7 @@ public class GlobalNamespace {
 	private HashMap<String, MetamodelNamespace> namesToMetamodels = new HashMap<String, MetamodelNamespace>();
 	
 	public static final String THIS_MODULE = "thisModule";
-	private TransformationNamespace tspace = new TransformationNamespace();
+	private TransformationNamespace tspace;
 	
 	
 	public GlobalNamespace(Collection<Resource> r, HashMap<String, Resource> logicalNamesToMetamodels) {
@@ -31,6 +31,9 @@ public class GlobalNamespace {
 	}
 	
 	public TransformationNamespace getTransformationNamespace() {
+		if ( tspace == null ) {
+			tspace  = new TransformationNamespace(); // Lazy initialization to ensure it is created in the thread's context
+		}
 		return tspace;
 	}
 	
@@ -51,7 +54,6 @@ public class GlobalNamespace {
 			m.setErrors(errors);
 			m.setTypingModel(typ);
 		}		
-		tspace.setDependencies(errors);
 	}
 	
 }

@@ -48,8 +48,13 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return getExtendedFeature(featureName) != null ||
 				 eClass.getEStructuralFeature(featureName) != null;
 	}	
+
+
+	public EStructuralFeature getFeatureInfo(String featureName) {
+		return eClass.getEStructuralFeature(featureName);
+	}
 	
-	public Type getFeature(String featureName, LocatedElement node) {
+	public Type getFeatureType(String featureName, LocatedElement node) {
 		Type t = getExtendedFeature(featureName);
 		if ( t != null) 
 			return t;
@@ -170,14 +175,17 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		} else if ( operationName.equals("oclIsKindOf") || 
 					operationName.equals("oclIsTypeOf")) {
 			// TODO: Mark the boolean type so that it carries the "isKindOf" information
-			return metamodel.typ.newBooleanType();
+			return metamodel.typ.newBooleanType((Metaclass) arguments[0]);
 		} else if ( operationName.equals("oclIsUndefined") ) {
 			return metamodel.typ.newBooleanType();
 		} else if ( operationName.equals("oclType") ) {
 			return metamodel.typ.newOclType();
 		} else if ( operationName.equals("refImmediateComposite") ) {
 			return findTypeOfContainer(node);
+		} else if ( operationName.equals("refSetValue") ) {
+			return getType(); // returns itself
 		}
+
 		
 		if ( this.hasOperation(operationName, arguments) ) {
 			return operations.get(operationName).returnType;
@@ -192,10 +200,32 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 				return n.getOperationType(operationName, arguments, node);
 			}			
 		}
-		
+
+		t = tryRecoveryGetOperation(operationName, arguments, node);
+		if ( t != null ) {
+			return t;
+		}
+
 		metamodel.errors.signalNoOperationFound(getType(), operationName, node);
 		return null;
 	}
+	
+	private Type tryRecoveryGetOperation(String operationName, Type[] arguments, LocatedElement node) {
+		List<EClass> allClasses = metamodel.getAllClasses();
+		for (EClass subtype : allClasses) {
+			// Es un subtipo 
+			if (subtype.getEAllSuperTypes().contains(eClass)) {
+				ClassNamespace cn = (ClassNamespace) metamodel.getClassifier(subtype.getName());
+				if ( cn.hasOperation(operationName, arguments)) {
+					metamodel.errors.warningOperationFoundInSubType(getType(), cn.getType(), operationName, node);
+					return cn.getOperationType(operationName, arguments, node);
+				}		
+			}
+		}
+		
+		return null;
+	}
+
 
 	/**
 	 * Implements the algorithm to find the container(s) that may hold
@@ -243,6 +273,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
+		if ( operatorSymbol.equals("=") || operatorSymbol.equals("<>") ) {
+			return AnalyserContext.getTypingModel().newBooleanType();
+		}
+		
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");
 	}
 
@@ -251,7 +285,6 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	public void extendType(String ruleName, Type returnType, Rule rule) {
 		throw new UnsupportedOperationException("TODO: ATTACH MATCHED RULES TO TYPES");
 	}
-
 
 	
 }

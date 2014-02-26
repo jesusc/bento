@@ -67,6 +67,13 @@ public class TypingModel {
 	public BooleanType newBooleanType() {
 		return (BooleanType) createPType(BooleanType.class.getSimpleName(), PrimitiveGlobalNamespace.BOOLEAN_TYPE);	
 	}
+	
+	public BooleanType newBooleanType(Metaclass metaclass) {
+		BooleanType t = newBooleanType();
+		t.getKindOfTypes().add(metaclass);
+		return t;
+	}
+
 
 	public ExpressionAnnotation createExpressionAnnotation() {
 		return (ExpressionAnnotation) impl.createObject(ExpressionAnnotation.class.getSimpleName());				
@@ -230,7 +237,6 @@ public class TypingModel {
 		}
 		return false;
 	}
-
 
 
 	

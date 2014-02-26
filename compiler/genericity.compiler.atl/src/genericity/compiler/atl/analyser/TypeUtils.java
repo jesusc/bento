@@ -1,5 +1,6 @@
 package genericity.compiler.atl.analyser;
 
+import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
@@ -15,6 +16,11 @@ public class TypeUtils {
 				else result = result +  ", " + typeToString(inner);
 			}
 			return "{" +  result + "}";
+		}
+		
+		if ( t instanceof CollectionType ) {
+			String name = t.getClass().getInterfaces()[0].getSimpleName();
+			return name + "(" + typeToString( ((CollectionType) t).getContainedType() ) + ")";
 		}
 		
 		return t.toString();

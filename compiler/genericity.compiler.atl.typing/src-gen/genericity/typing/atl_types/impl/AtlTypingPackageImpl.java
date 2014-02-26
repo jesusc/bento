@@ -333,6 +333,15 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBooleanType_KindOfTypes() {
+		return (EReference)booleanTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIntegerType() {
 		return integerTypeEClass;
 	}
@@ -653,6 +662,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
 
 		booleanTypeEClass = createEClass(BOOLEAN_TYPE);
+		createEReference(booleanTypeEClass, BOOLEAN_TYPE__KIND_OF_TYPES);
 
 		integerTypeEClass = createEClass(INTEGER_TYPE);
 
@@ -772,6 +782,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(booleanTypeEClass, BooleanType.class, "BooleanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBooleanType_KindOfTypes(), this.getMetaclass(), null, "kindOfTypes", null, 0, -1, BooleanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerTypeEClass, IntegerType.class, "IntegerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

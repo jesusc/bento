@@ -1,13 +1,16 @@
 package genericity.compiler.atl.analyser;
 
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
+import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
+import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATLModel;
@@ -23,7 +26,7 @@ import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
-import atl.metamodel.ATLModelVisitor.VisitedReferences;
+import atl.metamodel.ATLModelVisitor.VisitingActions;
 import atl.metamodel.OCL.BooleanExp;
 import atl.metamodel.OCL.CollectionOperationCallExp;
 import atl.metamodel.OCL.EnumLiteralExp;
@@ -69,6 +72,9 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		helperOperations.perform(attr);
 		
 		startVisiting(root);
+		
+		RuleAnalysis ruleAnalysis = new RuleAnalysis(model, mm, root, typ, errors);
+		ruleAnalysis.perform(attr);
 	}
 	
 
@@ -91,7 +97,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			// Decide about the most concrete type
 			// TODO: WARNING MAY ARISE IF THEY DO NO COINCIDE
 		} else {
-			attr.linkType(t);
+			attr.linkExprType(t);
 		}
 	}
 	
@@ -99,31 +105,56 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	public void inBinding(Binding self) {
 		Type t = attr.typeOf(self.getValue());
 		typ.createBindingAnnotation(self, t);
+	
+		Metaclass targetVar = (Metaclass) attr.typeOf( self.getOutPatternElement() );
+		ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
+		
+		if ( ! ns.hasFeature(self.getPropertyName()) ) {
+			this.errors.signalNoFeature(targetVar.getKlass(), self.getPropertyName(), self); // No need to halt, recovery is just "ignore"
+		}
 	}
 	
 
-	public VisitedReferences preLetExp(atl.metamodel.OCL.LetExp self) { return refs("type" , "variable" , "in_"); } 
+	public VisitingActions preLetExp(atl.metamodel.OCL.LetExp self) { return actions("type" , "variable" , "in_"); } 
 
 	
 	@Override
 	public void inLetExp(LetExp self) {
-		attr.linkType( attr.typeOf( self.getIn_() ) );
+		attr.linkExprType( attr.typeOf( self.getIn_() ) );
 	}
 	
 	@Override
 	public void inVariableDeclaration(VariableDeclaration self) {
 		Type exprType = attr.typeOf( self.getInitExpression() );
 		if ( self.getType() == null ) {
-			attr.linkType(exprType);
+			attr.linkExprType(exprType);
 		} else {
 			Type declared = attr.typeOf( self.getType() );
 			if ( ! typ.equalTypes(exprType, declared) ) {
 				errors.warningVarDclIncoherentTypes(exprType, declared, self);
 			}
-			attr.linkType( declared ); // TODO: What should be the type??
+			attr.linkExprType( declared ); // TODO: What should be the type??Visited
 		}
 	}
 
+	@Override
+	public VisitingActions preIfExp(IfExp self) {
+		return actions("type", "condition", 
+				method("createIfScope", self, true), "thenExpression" , method("createIfScope", self, false), 
+				"elseExpression");
+	}
+	
+	public void createIfScope(IfExp self, java.lang.Boolean open) {
+		BooleanType t = (BooleanType) attr.typeOf(self.getCondition());
+		if ( t.getKindOfTypes().isEmpty() ) 
+			return;
+		
+		
+		// System.out.println(t);
+		//if ( open ) attr.pushScope();
+		//else        attr.popScope();
+	}
+	
 	@Override
 	public void inIfExp(IfExp self) {
 		Type thenPart = attr.typeOf(self.getThenExpression());
@@ -134,7 +165,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			errors.signalDifferentBranchTypes(thenPart, elsePart, self);
 		}
 		
-		attr.linkType( thenPart );
+		attr.linkExprType( thenPart );
 		
 	}
 	
@@ -143,8 +174,8 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	//
 	
 	@Override
-	public VisitedReferences preIteratorExp(IteratorExp self) {
-		return refs("source", "iterators", "body");
+	public VisitingActions preIteratorExp(IteratorExp self) {
+		return actions("source", "iterators", "body");
 	}
 	
 	@Override
@@ -156,7 +187,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			}
 	
 			Type t = ((CollectionNamespace) collType.getMetamodelRef()).unwrap();
-			attr.linkType( t );
+			attr.linkExprType( t );
 		// } else if ( self.container_() instanceof IterateExp ) {
 			
 		} else {
@@ -166,13 +197,13 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	}
 	
 	@Override
-	public VisitedReferences preIterateExp(IterateExp self) {
-		return refs("source", "iterators" , "result", "type" , "body" );
+	public VisitingActions preIterateExp(IterateExp self) {
+		return actions("source", "iterators" , "result", "type" , "body" );
 	}
 	
 	@Override
 	public void inIterateExp(IterateExp self) {
-		attr.linkType( attr.typeOf( self.getResult() ) );
+		attr.linkExprType( attr.typeOf( self.getResult() ) );
 	}
 	
 	@Override
@@ -182,7 +213,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		Type bodyType = attr.typeOf( self.getBody() ); 
 		
 		CollectionNamespace cspace = (CollectionNamespace) srcType.getMetamodelRef();
-		attr.linkType( cspace.getIteratorType(self.getName(), bodyType) );
+		attr.linkExprType( cspace.getIteratorType(self.getName(), bodyType) );
 	}
 	
 	@Override
@@ -192,9 +223,9 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		// TODO: FIX: Warn about navigation of collection with "." (ATL just crash)
 		
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
-		Type t2 = tspace.getFeature(self.getName(), self);
+		Type t2 = tspace.getFeatureType(self.getName(), self);
 		
-		attr.linkType(t2);
+		attr.linkExprType(t2);
 		/*
 		// Get the navigated feature, cached by featureType
 		navFeature[self] <- self.getLastNavigatedFeature
@@ -215,7 +246,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		}
 	
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
-		attr.linkType( tspace.getOperationType(self.getOperationName(), arguments, self) );
+		attr.linkExprType( tspace.getOperationType(self.getOperationName(), arguments, self) );
 	}
 	
 	private void resolveResolveTemp(OperationCallExp self) {
@@ -265,7 +296,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		if ( selectedType != null ) {
-			attr.linkType(selectedType);
+			attr.linkExprType(selectedType);
 			return;
 		}
 		
@@ -281,7 +312,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			while ( container != null ) {
 				if ( container instanceof OclFeatureDefinition ) {
 					OclContextDefinition ctx = ((OclFeatureDefinition) container).getContext_();					
-					attr.linkType( attr.typeOf(ctx.getContext_() ));
+					attr.linkExprType( attr.typeOf(ctx.getContext_() ));
 					break;
 				}
 				container = container.container_();
@@ -292,9 +323,9 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			}
 			
 		} else if ( self.getReferredVariable().getVarName().equals("thisModule") ) {
-			attr.linkType( getThisModuleType() );
+			attr.linkExprType( getThisModuleType() );
 		} else {
-			attr.linkType( attr.typeOf(self.getReferredVariable()) );
+			attr.linkExprType( attr.typeOf(self.getReferredVariable()) );
 		}
 	}
 	
@@ -320,13 +351,13 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 
 			});
 			
-			attr.linkType( t );
+			attr.linkExprType( t );
 		} else {
 			CollectionNamespace namespace = (CollectionNamespace) receptorType.getMetamodelRef();
 			String          operationName = self.getOperationName();
 			
 			Type t = namespace.getOperationType(operationName, arguments, self);
-			attr.linkType(t);
+			attr.linkExprType(t);
 		}
 	}
 
@@ -338,7 +369,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 			optional = attr.typeOf(self.getArguments().get(0));
 
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
-		attr.linkType(tspace.getOperatorType(self.getOperationName(), optional, self));
+		attr.linkExprType(tspace.getOperatorType(self.getOperationName(), optional, self));
 	}
 	// 
 	// Literal values
@@ -349,7 +380,7 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 		for(MetamodelNamespace ns : mm.getMetamodels()) {
 			EnumType enum_ = ns.findEnumLiteral(self.getName());
 			if ( enum_ != null ) {
-				attr.linkType( enum_ );
+				attr.linkExprType( enum_ );
 				return;
 			}
 		}
@@ -359,27 +390,27 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inStringExp(StringExp obj) {
-		attr.linkType(typ.newStringType());
+		attr.linkExprType(typ.newStringType());
 	}
 
 	@Override
 	public void inIntegerExp(IntegerExp obj) {
-		attr.linkType(typ.newIntegerType());
+		attr.linkExprType(typ.newIntegerType());
 	}
 
 	@Override
 	public void inRealExp(RealExp obj) {
-		attr.linkType(typ.newFloatType());
+		attr.linkExprType(typ.newFloatType());
 	}
 
 	@Override
 	public void inBooleanExp(BooleanExp self) {
-		attr.linkType(typ.newBooleanType());
+		attr.linkExprType(typ.newBooleanType());
 	}
 	
 	@Override
 	public void inOclUndefinedExp(OclUndefinedExp obj) {
-		attr.linkType(typ.newOclUndefinedType());		
+		attr.linkExprType(typ.newOclUndefinedType());		
 	};
 
 	@Override
@@ -399,12 +430,12 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 						type[self] <- t
 			})
 			*/
-			attr.linkType( typ.newSequenceType( typ.newUnknownType() ) );
+			attr.linkExprType( typ.newSequenceType( typ.newUnknownType() ) );
 		} else {
 			// TODO: Generalize computing the union of all expression elements
 			// For the moment just taking the first
 			OclExpression representative = self.getElements().get(0);
-			attr.linkType( typ.newSequenceType( attr.typeOf(representative) ) );
+			attr.linkExprType( typ.newSequenceType( attr.typeOf(representative) ) );
 		}		
 	}
 		
@@ -412,10 +443,10 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public void inSetExp(SetExp self) {
 		if ( self.getElements().isEmpty() ) {
-			attr.linkType( typ.newSetType( typ.newUnknownType() ) );
+			attr.linkExprType( typ.newSetType( typ.newUnknownType() ) );
 		} else {
 			OclExpression representative = self.getElements().get(0);
-			attr.linkType( typ.newSetType( attr.typeOf(representative) ) );
+			attr.linkExprType( typ.newSetType( attr.typeOf(representative) ) );
 		}		
 	}
 	
@@ -424,10 +455,10 @@ public class BottomUpTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public void inOrderedSetExp(OrderedSetExp self) {
 		if ( self.getElements().isEmpty() ) {
-			attr.linkType( typ.newSetType( typ.newUnknownType() ) );
+			attr.linkExprType( typ.newSetType( typ.newUnknownType() ) );
 		} else {
 			OclExpression representative = self.getElements().get(0);
-			attr.linkType( typ.newSetType( attr.typeOf(representative) ) );
+			attr.linkExprType( typ.newSetType( attr.typeOf(representative) ) );
 		}		
 	}
 

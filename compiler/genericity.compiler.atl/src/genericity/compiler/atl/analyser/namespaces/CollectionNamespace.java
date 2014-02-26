@@ -20,7 +20,7 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 	}
 
 	@Override
-	public Type getFeature(String featureName, LocatedElement self) {
+	public Type getFeatureType(String featureName, LocatedElement self) {
 		throw new UnsupportedOperationException(featureName + " " + self.getLocation());
 	}
 

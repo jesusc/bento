@@ -21,7 +21,7 @@ public class OclTypeNamespace implements ITypeNamespace {
 	}
 	
 	@Override
-	public Type getFeature(String featureName, LocatedElement node) {
+	public Type getFeatureType(String featureName, LocatedElement node) {
 		if ( featureName.equals("name" ) ) 
 			return typ.newStringType();
 		

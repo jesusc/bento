@@ -8,7 +8,7 @@ import atl.metamodel.OCL.Operation;
 
 public interface ITypeNamespace {
 
-	Type getFeature(String featureName, LocatedElement node);
+	Type getFeatureType(String featureName, LocatedElement node);
 	Type getOperationType(String operationName, Type[] arguments, LocatedElement node);
 	Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node);
 	

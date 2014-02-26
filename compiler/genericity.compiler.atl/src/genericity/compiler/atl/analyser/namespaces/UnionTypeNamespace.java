@@ -20,7 +20,7 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 	}
 	
 	@Override
-	public Type getFeature(String featureName, LocatedElement node) {
+	public Type getFeatureType(String featureName, LocatedElement node) {
 		ArrayList<Type> results = new ArrayList<Type>();
 		ArrayList<Type> noFeatureTypes = new ArrayList<Type>();
 		
@@ -29,7 +29,7 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 		for(Type t : type.getPossibleTypes()) {
 			ITypeNamespace ns = (ITypeNamespace) t.getMetamodelRef();
 			if ( ns.hasFeature(featureName) ) {
-				results.add(ns.getFeature(featureName, node));
+				results.add(ns.getFeatureType(featureName, node));
 			} else {
 				noFeatureTypes.add(t);
 			}

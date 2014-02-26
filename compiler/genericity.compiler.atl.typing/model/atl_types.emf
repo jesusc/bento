@@ -18,6 +18,7 @@ abstract class PrimitiveType extends Type {
 }
 
 class BooleanType extends PrimitiveType {
+	ref Metaclass[0..*] kindOfTypes;
 }
 
 class IntegerType extends PrimitiveType {

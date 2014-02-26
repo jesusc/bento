@@ -200,13 +200,22 @@ public interface AtlTypingPackage extends EPackage {
 	int BOOLEAN_TYPE__METAMODEL_REF = PRIMITIVE_TYPE__METAMODEL_REF;
 
 	/**
+	 * The feature id for the '<em><b>Kind Of Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_TYPE__KIND_OF_TYPES = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
+	int BOOLEAN_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.IntegerTypeImpl <em>Integer Type</em>}' class.
@@ -1237,6 +1246,17 @@ public interface AtlTypingPackage extends EPackage {
 	EClass getBooleanType();
 
 	/**
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.BooleanType#getKindOfTypes <em>Kind Of Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Kind Of Types</em>'.
+	 * @see genericity.typing.atl_types.BooleanType#getKindOfTypes()
+	 * @see #getBooleanType()
+	 * @generated
+	 */
+	EReference getBooleanType_KindOfTypes();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.IntegerType <em>Integer Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1646,6 +1666,14 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BOOLEAN_TYPE = eINSTANCE.getBooleanType();
+
+		/**
+		 * The meta object literal for the '<em><b>Kind Of Types</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOOLEAN_TYPE__KIND_OF_TYPES = eINSTANCE.getBooleanType_KindOfTypes();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.IntegerTypeImpl <em>Integer Type</em>}' class.

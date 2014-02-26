@@ -48,7 +48,7 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 		if ( tspace == null ) {
 			errors.signalNoClass(obj.getName(), mmspace, obj);
 		}
-		attr.linkType(tspace.createType(true));
+		attr.linkExprType(tspace.createType(true));
 	}	
 
 	// 
@@ -58,22 +58,22 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inBooleanType(BooleanType self) {
-		attr.linkType(typ.newBooleanType());
+		attr.linkExprType(typ.newBooleanType());
 	}
 	
 	@Override
 	public void inStringType(StringType self) {
-		attr.linkType(typ.newStringType());
+		attr.linkExprType(typ.newStringType());
 	}
 	
 	@Override
 	public void inIntegerType(IntegerType self) {
-		attr.linkType(typ.newIntegerType());
+		attr.linkExprType(typ.newIntegerType());
 	}
 
 	@Override
 	public void inRealType(RealType self) {
-		attr.linkType(typ.newFloatType());
+		attr.linkExprType(typ.newFloatType());
 	}
 	
 	//
@@ -82,18 +82,18 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inSequenceType(SequenceType self) {
-		attr.linkType( typ.newSequenceType( attr.typeOf( self.getElementType() ) ) );
+		attr.linkExprType( typ.newSequenceType( attr.typeOf( self.getElementType() ) ) );
 	}
 
 	@Override
 	public void inSetType(SetType self) {
-		attr.linkType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
+		attr.linkExprType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
 	}
 	
 	@Override
 	public void inOrderedSetType(OrderedSetType self) {
 		// TODO: Create proper OrderedSet type
-		attr.linkType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
+		attr.linkExprType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
 	}
 
 }

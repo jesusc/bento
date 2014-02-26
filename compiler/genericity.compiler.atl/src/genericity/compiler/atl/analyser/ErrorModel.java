@@ -1,6 +1,7 @@
 package genericity.compiler.atl.analyser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
@@ -11,9 +12,12 @@ import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.VariableDeclaration;
@@ -81,6 +85,10 @@ public class ErrorModel {
 	}
 
 
+	public void warningOperationFoundInSubType(Metaclass type, Metaclass subtype, String operationName, LocatedElement node) {
+		System.err.println("WARNING: Feature " + operationName + " expected in " + type.getName() + " but found in subtype " + subtype.getName() + ". " + node.getLocation() );		
+	} 
+
 	public void signalInvalidOperand(String operatorSymbol, LocatedElement node, IRecoveryAction recovery) {
 		FeatureNotFound error = AtlErrorsFactory.eINSTANCE.createFeatureNotFound();
 		initProblem(error, node);
@@ -97,7 +105,7 @@ public class ErrorModel {
 	}
 
 	public void signalNoOperationFound(Type receptorType, String operationName, LocatedElement node) {
-		signalNoRecoverableError("No operation " + operationName, node);
+		signalNoRecoverableError("No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);
 	}
 
 	public void signalNoThisModuleOperation(String operationName, LocatedElement node) {
@@ -109,7 +117,7 @@ public class ErrorModel {
 	}
 
 	public void signalDifferentBranchTypes(Type thenPart, Type elsePart, LocatedElement node) {
-		signalNoRecoverableError("Different types in if/else braches" + thenPart + " - " + elsePart, node);	
+		signalNoRecoverableError("Different types in if/else branches: " + TypeUtils.typeToString(thenPart) + " - " + TypeUtils.typeToString(elsePart), node);	
 	}
 	
 	public void signalNoRecoverableError(String msg, LocatedElement l) {
@@ -159,7 +167,24 @@ public class ErrorModel {
 			strTypes += TypeUtils.typeToString(type) + " ";
 		}
 		signalWarning("Missing feature in these types: [" + strTypes + "]", node);
-	} 
+	}
+
+	public void signalBindingExpectedOneAssignedMany(Binding binding, Metaclass targetVar, String propertyName) {
+		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected mono-valued, received collection", binding);
+	}
+
+	public void signalBindingPrimitiveExpectedButObjectAssigned(Binding binding, Metaclass targetVar, String propertyName) {
+		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected primitive type, received objects", binding);		
+	}
+
+	public void signalBindingObjectExpectedButPrimitiveAssigned(Binding binding, Metaclass targetVar, String propertyName) {
+		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected object type, received primitive value", binding);				
+	}
+
+	public void signalNoBindingForCompulsoryFeature(EStructuralFeature unboundCompulsoryFeature, SimpleOutPatternElement pe) {
+		signalWarning("In rule " + pe.getOutPattern().getRule().getName() + ", no binding for compulsory " + unboundCompulsoryFeature.getEContainingClass().getName() + "." + unboundCompulsoryFeature.getName(), pe);						
+	}
+
 
 
 

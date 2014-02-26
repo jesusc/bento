@@ -2,7 +2,9 @@ package genericity.compiler.atl.analyser.namespaces;
 
 import java.util.HashMap;
 
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.ErrorModel;
+import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.LazyMatchedRule;
@@ -18,13 +20,18 @@ public class TransformationNamespace implements ITypeNamespace {
 	private HashMap<String, VirtualFeature<TransformationNamespace, CalledRule>> calledRules  = new HashMap<String, VirtualFeature<TransformationNamespace, CalledRule>>();
 	private HashMap<String, VirtualFeature<TransformationNamespace, LazyMatchedRule>> lazyRules  = new HashMap<String, VirtualFeature<TransformationNamespace, LazyMatchedRule>>();
 
-	private ErrorModel	errors;
+	private ThisModuleType	theType;
+	
+	public TransformationNamespace() {
+		theType = AnalyserContext.getTypingModel().createThisModuleType();
+		theType.setMetamodelRef(this);
+	}
 	
 	@Override
-	public Type getFeature(String featureName, LocatedElement node) {
+	public Type getFeatureType(String featureName, LocatedElement node) {
 		VirtualFeature<TransformationNamespace, Attribute> op = features.get(featureName);
 		if ( op == null ) {
-			errors.signalNoThisModuleFeature(featureName, node);
+			AnalyserContext.getErrorModel().signalNoThisModuleFeature(featureName, node);
 		}
 		return op.returnType;
 	}
@@ -38,6 +45,10 @@ public class TransformationNamespace implements ITypeNamespace {
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
+		if ( operationName.equals("refSetValue") ) {
+			return theType; // // returns itself
+		}
+		
 		VirtualFeature<TransformationNamespace, ?> op = operations.get(operationName);
 		if ( op == null ) {
 			op = calledRules.get(operationName);
@@ -45,7 +56,7 @@ public class TransformationNamespace implements ITypeNamespace {
 				op = lazyRules.get(operationName);
 			
 			if ( op == null )
-				errors.signalNoThisModuleOperation(operationName, node);
+				AnalyserContext.getErrorModel().signalNoThisModuleOperation(operationName, node);
 		}
 		return op.returnType;
 	}
@@ -78,16 +89,12 @@ public class TransformationNamespace implements ITypeNamespace {
 
 	@Override
 	public Type createType(boolean explicitOcurrence) {
-		throw new UnsupportedOperationException();
+		return theType;
 	}
 
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");
-	}
-
-	public void setDependencies(ErrorModel errors) {
-		this.errors = errors;
 	}
 
 }

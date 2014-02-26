@@ -1,0 +1,8 @@
+
+Changes
+=======
+
+* DSL2XML.atl
+
+	Line 97: helper def: Acc : Sequence(KM3!Class) = thisModule.getRoots;
+	Commented because KM3 is not a declared model.
