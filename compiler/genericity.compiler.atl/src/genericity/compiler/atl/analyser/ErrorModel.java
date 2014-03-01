@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
@@ -181,7 +182,7 @@ public class ErrorModel {
 		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected object type, received primitive value", binding);				
 	}
 
-	public void signalNoBindingForCompulsoryFeature(EStructuralFeature unboundCompulsoryFeature, SimpleOutPatternElement pe) {
+	public void signalNoBindingForCompulsoryFeature(EStructuralFeature unboundCompulsoryFeature, OutPatternElement pe) {
 		signalWarning("In rule " + pe.getOutPattern().getRule().getName() + ", no binding for compulsory " + unboundCompulsoryFeature.getEContainingClass().getName() + "." + unboundCompulsoryFeature.getName(), pe);						
 	}
 

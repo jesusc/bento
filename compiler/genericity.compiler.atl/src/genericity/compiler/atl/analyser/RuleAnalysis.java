@@ -21,6 +21,7 @@ import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
@@ -32,6 +33,7 @@ import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.Helper;
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.Library;
+import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.ModuleElement;
 import atl.metamodel.ATL.OutPatternElement;
@@ -83,8 +85,8 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	}
 	
 	@Override
-	public void beforeRule(Rule self) {
-		self.getOutPattern().getElements();
+	public void beforeMatchedRule(MatchedRule self) {
+		// self.getInPattern().getElements().get(0);
 	}
 	
 	private HashSet<EStructuralFeature> compulsoryFeatures = null;
@@ -92,19 +94,38 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void beforeSimpleOutPatternElement(SimpleOutPatternElement self) {
+		Metaclass mc = (Metaclass) attr.typeOf( self.getType() );
+		setCurrentCompulsoryFeatures(mc);
+	}
+
+	@Override
+	public void beforeForEachOutPatternElement(ForEachOutPatternElement self) {
+		Metaclass mc = (Metaclass) attr.typeOf( self.getType() );
+		setCurrentCompulsoryFeatures(mc);
+	}
+
+	
+	@Override
+	public void inSimpleOutPatternElement(SimpleOutPatternElement self) {
+		checkCompulsoryFeature(self);
+	}
+	
+	@Override
+	public void inForEachOutPatternElement(ForEachOutPatternElement self) {
+		checkCompulsoryFeature(self);
+	}
+
+	private void setCurrentCompulsoryFeatures(Metaclass mc) {
 		compulsoryFeatures = new HashSet<EStructuralFeature>();
 		
-		Metaclass mc = (Metaclass) attr.typeOf( self.getType() );
 		for(EStructuralFeature f : mc.getKlass().getEAllStructuralFeatures() ) {
 			if ( f.getLowerBound() != 0 && f.getDefaultValue() == null ) {
 				compulsoryFeatures.add(f);
 			}
 		}
 	}
-	
-	@Override
-	public void inSimpleOutPatternElement(SimpleOutPatternElement self) {
-		
+
+	private void checkCompulsoryFeature(OutPatternElement self) {
 		if ( compulsoryFeatures.size() != 0 ) {
 			for (EStructuralFeature f : compulsoryFeatures) {
 				if ( f instanceof EReference && allWrittenCompulsoryFeatures.contains( ((EReference) f).getEOpposite()) ) 
@@ -115,10 +136,10 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		}
 		compulsoryFeatures = null;
 	}
-	
+
 	@Override
 	public void inBinding(Binding self) {
-		Type t = attr.typeOf(self.getValue());
+		Type rightType = attr.typeOf(self.getValue());
 	
 		Type targetVar = attr.typeOf( self.getOutPatternElement() );
 		ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
@@ -126,19 +147,32 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		
 		// The feature is removed from the current compulsoryFeatures set, which is
 		// checked later to be empty
+		if ( compulsoryFeatures == null )
+		System.out.println(self.getLocation());
 		compulsoryFeatures.remove(f);
 		allWrittenCompulsoryFeatures.add(f);
 		
+		if ( rightType instanceof UnionType ) {
+			UnionType ut = (UnionType) rightType;
+			for(Type t : ut.getPossibleTypes() ) {
+				analyseBinding(self, t, targetVar, f);
+			}
+		} else {
+			analyseBinding(self, rightType, targetVar, f);
+		}
+	}
+
+	private void analyseBinding(Binding self, Type rightType, Type targetVar, EStructuralFeature f) {
 		// Assignments of 0/1:1 features with collections
-		if ( (! f.isMany()) && t instanceof CollectionType  ) {
+		if ( (! f.isMany()) && rightType instanceof CollectionType  ) {
 			errors.signalBindingExpectedOneAssignedMany(self, (Metaclass) targetVar, self.getPropertyName());
 		}
 		
 		// Assignment of attributes with objects
-		if ( f instanceof EAttribute && !(t instanceof PrimitiveType )) {
-			if (t instanceof CollectionType && ((CollectionType) t).getContainedType() instanceof PrimitiveType ) {
+		if ( f instanceof EAttribute && !(rightType instanceof PrimitiveType )) {
+			if (rightType instanceof CollectionType && ((CollectionType) rightType).getContainedType() instanceof PrimitiveType ) {
 				// That's fine
-			} else if ( t instanceof EnumType && f.getEType() instanceof EEnum ) {
+			} else if ( rightType instanceof EnumType && f.getEType() instanceof EEnum ) {
 				// That's fine				
 			} else {
 				errors.signalBindingPrimitiveExpectedButObjectAssigned(self, (Metaclass) targetVar, self.getPropertyName());
@@ -147,20 +181,48 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		
 		// Assignment of references with primitive values
 		if ( f instanceof EReference && 
-				(t instanceof PrimitiveType || t instanceof EnumType ||
-				(t instanceof CollectionType && ((CollectionType) t).getContainedType() instanceof PrimitiveType) )) {
+				(rightType instanceof PrimitiveType || rightType instanceof EnumType ||
+				(rightType instanceof CollectionType && ((CollectionType) rightType).getContainedType() instanceof PrimitiveType) )) {
 
 			errors.signalBindingObjectExpectedButPrimitiveAssigned(self, (Metaclass) targetVar, self.getPropertyName());
 		}		
 		
-		
+		if ( f instanceof EReference ) {
+			analyseRuleResolution(self, rightType, (EReference) f);
+		}
 		
 		/* TODO: Other analysis */
 		/*
 		 * - Compulsory features in the meta-model not assigned
-		 * 
+		 * - Assignments object-object due to: lazy/called rules, or implicit assignment
 		 */
-		
+	}
+
+	/**
+	 * Analyse if a binding is properly resolved by some rule.
+	 * 
+	 * @param self
+	 * @param rightType
+	 * @param f
+	 */
+	private void analyseRuleResolution(Binding self, Type rightType, EReference f) {
+		if ( rightType instanceof Metaclass ) {
+			Metaclass rightMetaclass = (Metaclass) rightType;
+			ClassNamespace ns = (ClassNamespace) rightType.getMetamodelRef();
+			
+			List<MatchedRule> rules = ns.getAttachedRules();
+			if ( rules.size() == 0 && ! TypeUtils.isClassAssignableTo(rightMetaclass.getKlass(), f.getEReferenceType()) ) {
+				System.err.println("!!!!! WARNING!!! No rule for binding.  " + f.getEContainingClass().getName() + "." + f.getName() + " <- " + TypeUtils.typeToString(rightType) + ". " + self.getLocation());
+			}
+		} else if ( rightType instanceof CollectionType ) {
+			CollectionType ct = (CollectionType) rightType;
+			analyseRuleResolution(self, ct.getContainedType(), f);
+		} else if ( rightType instanceof UnionType ) {
+			UnionType ut = (UnionType) rightType;
+			for(Type t : ut.getPossibleTypes() ) {
+				analyseRuleResolution(self, t, f);
+			}
+		}
 	}
 	
 }

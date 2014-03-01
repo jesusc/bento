@@ -18,6 +18,8 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 			if ( operationName.equals("substring")) return AnalyserContext.getTypingModel().newStringType();
 			if ( operationName.equals("firstToLower")) return AnalyserContext.getTypingModel().newStringType();
 			if ( operationName.equals("toInteger")) return AnalyserContext.getTypingModel().newIntegerType();
+			if ( operationName.equals("concat")) return AnalyserContext.getTypingModel().newStringType(); // TODO: Check concat's arguments
+
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 		}
 		return t;

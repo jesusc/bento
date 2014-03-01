@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;

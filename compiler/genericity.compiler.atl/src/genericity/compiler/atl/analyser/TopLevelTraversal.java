@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 
+import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
@@ -20,6 +21,7 @@ import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.Helper;
 import atl.metamodel.ATL.LazyMatchedRule;
+import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.ModuleElement;
 import atl.metamodel.ATL.Rule;
@@ -111,6 +113,15 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 	public void inLazyMatchedRule(LazyMatchedRule self) {
 		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
 		mm.getTransformationNamespace().extendType(self.getName(), t, self);
+	}
+	
+	@Override
+	public void inMatchedRule(MatchedRule self) {
+		Metaclass m = (Metaclass) attr.typeOf(self.getInPattern().getElements().get(0));
+		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
+		
+		ClassNamespace ns = (ClassNamespace) m.getMetamodelRef();
+		ns.extendType(self.getName(), t, self);
 	}
 
 	//  

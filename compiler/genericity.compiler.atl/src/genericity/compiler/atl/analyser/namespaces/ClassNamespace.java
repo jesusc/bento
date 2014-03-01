@@ -11,7 +11,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
@@ -281,10 +283,23 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	}
 
 
+	private ArrayList<MatchedRule> attachedRules = new ArrayList<MatchedRule>();
+
 	@Override
 	public void extendType(String ruleName, Type returnType, Rule rule) {
-		throw new UnsupportedOperationException("TODO: ATTACH MATCHED RULES TO TYPES");
+		if ( ! (rule instanceof MatchedRule) ) throw new IllegalArgumentException();
+		
+		attachedRules.add((MatchedRule) rule);
+		
+		for(EClass c : eClass.getESuperTypes()) {
+			if ( c.eIsProxy() ) { System.out.println("WARNING: Ignoring proxy (extendType, ClassNamespace)"); continue; }
+			
+			ClassNamespace ns = (ClassNamespace) metamodel.getClassifier(c.getName());
+			ns.extendType(ruleName, returnType, rule);
+		}
 	}
 
-	
+	public List<MatchedRule> getAttachedRules() {
+		return attachedRules;
+	}
 }
