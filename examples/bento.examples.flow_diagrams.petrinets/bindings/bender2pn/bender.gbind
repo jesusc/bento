@@ -4,8 +4,8 @@
 binding bender2fd {  
 	enable-class-merge
 	
-	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
-	metamodel BENDER : "platform:/resource/genericity.benchmarks/components/flowdiagrams/bender2pn/StateMachine.ecore"
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel BENDER : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/bender2pn/StateMachine.ecore"
 
 	class FlowDiagram to StateMachine	
 	class Node        to State, Collected

@@ -95,6 +95,8 @@ helper def : getRoots : Sequence(DSL!Class)=
 -- CONTEXT: thisModule
 -- RETURN: Sequence(KM3!Class)
 -- helper def: Acc : Sequence(KM3!Class) = thisModule.getRoots;
+helper def: Acc : Sequence(DSL!Class) = thisModule.getRoots;
+
 
 -- This helper computes the definitionlevel of a treeExpression
 -- if the class has ever been treated, its definitionlevel is "use"

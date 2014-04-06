@@ -2,6 +2,7 @@ package genericity.compiler.atl.api;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclectic.idc.datatypes.JavaListConverter;
@@ -15,11 +16,14 @@ import org.eclectic.modeling.emf.IModel;
 import org.eclectic.modeling.emf.ModelManager;
 import org.eclectic.modeling.emf.NoModelFoundException;
 import org.eclectic.modeling.emf.Util;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import eclectic.adapt_transformation;
@@ -29,8 +33,12 @@ import gbind.dsl.BindingOptions;
 import genericity.compiler.atl.Class2Reference;
 import genericity.compiler.atl.ClassMerge;
 import genericity.compiler.atl.VirtualClasses;
+import genericity.compiler.atl.analyser.Analyser;
+import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.api.AtlAdapter.BindingData;
 import genericity.language.gcomponent.core.Metamodel;
+import genericity.language.gcomponent.core.ParameterModel;
+import genericity.language.gcomponent.technologies.AtlParameter;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
 
@@ -49,7 +57,7 @@ public class AtlAdapter {
 		this.inout = null;
 	}
 	
-	public void doAdaptation(BindingModelLoader binding, String boundMetamodelName, ArrayList<Metamodel> metamodels) {
+	public void doAdaptation(BindingModelLoader binding, String boundMetamodelName, List<AtlParameter> templateParameters) {
 	    adapt_transformation transformation = new adapt_transformation();
 	    
 	    String concreteMetamodelName = null;
@@ -75,27 +83,13 @@ public class AtlAdapter {
 		BindingData bindingData = new BindingData(boundMetamodelName, concreteMetamodelName);
 		ParametersModel parameters = new ParametersModel();
 		parameters.addParameterObject(bindingData);
-
-		/*
-		// If there is class -> reference specifications, the transformation must be first
-		// rewritten and a typecheck phase is needed
-		if ( in.allObjectsOf("IntermediateClassBinding").size() > 0 ) {
-			try {
-				transformClass2Reference(loader, in, inout, metamodels, bindingData);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}
-		}
-		*/
 		
 		List<EObject> optionsList = in.allObjectsOf("BindingOptions");
 		if ( optionsList.size() > 0 ) {
 			BindingOptions options = (BindingOptions) optionsList.get(0);
 			if ( options.isEnableClassMerge() ) {
 				try {
-					transformClassMerge(loader, in, inout, metamodels, boundMetamodel, bindingData);
+					transformClassMerge(loader, in, inout, templateParameters, boundMetamodel, bindingData);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -106,7 +100,7 @@ public class AtlAdapter {
 		
 		if ( in.allObjectsOf("VirtualClassBinding").size() > 0 ) {
 			try {
-				transformVirtualClasses(loader, in, inout, metamodels, bindingData);
+				transformVirtualClasses(loader, in, inout, templateParameters, bindingData);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -137,43 +131,23 @@ public class AtlAdapter {
 		System.out.println("Finished Atl Adaptation");
 	}
 
-	/*
-	private void transformClass2Reference(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
-			ArrayList<Metamodel> metamodels, BindingData bindingData) throws IOException {
-		// TODO Auto-generated method stub
-		List<EPackage> pkgs = new ArrayList<EPackage>();
-		pkgs.add(AtlTypingPackage.eINSTANCE);
-		BasicEMFModel out = loader
-				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
-
-		String[] strMetamodels = new String[metamodels.size()];
-		int i = 0;
-		for (Metamodel meta : metamodels) {
-			strMetamodels[i] = meta.getUri();
-			i++;
-		}
-		
-		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, strMetamodels);
-		new TypeCheckLauncher().launch(mm, atlTransformation, out);
-		
-		Class2Reference.BindingData data = new Class2Reference.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
-		new Class2Reference().launch(atlTransformation, bindingModel, out, data);
-		
-		System.out.println("Finished class2reference transformation...");
-	}
-	*/
-	
 	private void transformVirtualClasses(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
-			ArrayList<Metamodel> metamodels, BindingData bindingData) throws IOException {
+			List<AtlParameter> templateParameters, BindingData bindingData) throws IOException {
 		// TODO Auto-generated method stub
 		List<EPackage> pkgs = new ArrayList<EPackage>();
 		pkgs.add(AtlTypingPackage.eINSTANCE);
-		BasicEMFModel out = loader
+		BasicEMFModel typing = loader
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
-		String[] strMetamodels = new String[metamodels.size()];
+		GlobalNamespace mm = loadMetamodels(loader, templateParameters);
+		Analyser analyser = new Analyser(mm, atlTransformation, typing);
+		analyser.setDoDependencyAnalysis(false);
+		analyser.perform();
+		
+		/*
+		String[] strMetamodels = new String[templateParameters.size()];
 		int i = 0;
-		for (Metamodel meta : metamodels) {
+		for (Metamodel meta : templateParameters) {
 			strMetamodels[i] = meta.getUri();
 			i++;
 		}
@@ -182,38 +156,65 @@ public class AtlAdapter {
 		TypeCheckLauncher typechecker = new TypeCheckLauncher();
 		typechecker.setWarningMode();
 		typechecker.launch(mm, atlTransformation, out);
-		// TODO: GET ERRORS AND SHOW WARNINGS THEM SOMEHOW
+		// TODO: GET ERRORS AND SHOW WARNINGS SOMEHOW
+		*/
 		
 		VirtualClasses.BindingData data = new VirtualClasses.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
-		new VirtualClasses().launch(atlTransformation, bindingModel, out, data);
+		new VirtualClasses().launch(atlTransformation, bindingModel, typing, data);
 		
 		System.out.println("Finished virtual-classes transformation...");
 	}
 
 	private void transformClassMerge(EMFLoader loader, BasicEMFModel bindingModel, BasicEMFModel atlTransformation, 
-			ArrayList<Metamodel> metamodels, MetamodelDeclaration boundMetamodel, BindingData bindingData) throws IOException {
+			List<AtlParameter> templateParameters, MetamodelDeclaration boundMetamodel, BindingData bindingData) throws IOException {
 		// TODO Auto-generated method stub
 		List<EPackage> pkgs = new ArrayList<EPackage>();
 		pkgs.add(AtlTypingPackage.eINSTANCE);
-		BasicEMFModel out = loader
+		BasicEMFModel typing = loader
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
-		String[] strMetamodels = new String[metamodels.size()];
+		
+		GlobalNamespace mm = loadMetamodels(loader, templateParameters);
+		Analyser analyser = new Analyser(mm, atlTransformation, typing);
+		analyser.setDoDependencyAnalysis(false);
+		analyser.perform();
+		
+		/*
+		String[] strMetamodels = new String[templateParameters.size()];
 		int i = 0;
-		for (Metamodel meta : metamodels) {
+		for (Metamodel meta : templateParameters) {
 			strMetamodels[i] = meta.getUri();
 			i++;
 		}
 		
 		BasicEMFModel mm = TypeCheckLauncher.loadTransformationMetamodels(loader, strMetamodels);
 		new TypeCheckLauncher().launch(mm, atlTransformation, out);
+		*/
 		
 		BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, boundMetamodel.getMetamodelURI());
 		
 		ClassMerge.BindingData data = new ClassMerge.BindingData(bindingData.boundMetamodelName, bindingData.concreteMetamodelName);
-		new ClassMerge().launch(atlTransformation, bindingModel, out, boundMM, data);
+		new ClassMerge().launch(atlTransformation, bindingModel, typing, boundMM, data);
 		
 		System.out.println("Finished class-merge transformation...");
+	}
+
+	private GlobalNamespace loadMetamodels(EMFLoader loader, List<AtlParameter> templateParameters) {
+		ResourceSet rs = loader.getResourceSet();
+		HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
+		ArrayList<Resource> resources = new ArrayList<Resource>();
+		for (AtlParameter atlParameter : templateParameters) {
+			ParameterModel parameterModel = (ParameterModel) atlParameter.getModel();
+			
+			Resource r = null;
+			
+			r = rs.getResource(URI.createURI(parameterModel.getType().getUri()), true);
+
+			resources.add(r);
+			logicalNamesToResources.put(atlParameter.getAtlMetamodelName(), r);
+		}
+
+		return new GlobalNamespace(resources, logicalNamesToResources);
 	}
 
 	public Resource getResource() {

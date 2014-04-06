@@ -42,12 +42,13 @@ import eclectic.rewrite_class1;
 import gbind.dsl.BindingModel;
 import gbind.dsl.ClassBinding;
 import gbind.dsl.ConcreteMetaclass;
+import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
-import genericity.typing.atl_types.annotations.BindingAnnotation;
+import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 public class ClassMerge {
@@ -164,9 +165,9 @@ public class ClassMerge {
 
 
 		private Type bindingType(Object object) {
-			List<EObject> annotations = typingModel.allObjectsOf("BindingAnnotation");
+			List<EObject> annotations = typingModel.allObjectsOf("BindingAnn");
 			for (EObject eObject : annotations) {
-				BindingAnnotation ann = (BindingAnnotation) eObject;
+				BindingAnn ann = (BindingAnn) eObject;
 				if ( ann.getBinding() == object ) {
 					return ann.getSourceType();
 				}
@@ -236,7 +237,9 @@ public class ClassMerge {
 				// return m.getKlass() == eclass; // .getName().equals(typeName);
 				
 				return bindingType.getKlass().isSuperTypeOf(ruleType);
-			
+			} else if ( type instanceof CollectionType ) {
+				CollectionType ct = (CollectionType) type;
+				return checkType(ct.getContainedType(), ruleType);			
 			} else if ( type instanceof PrimitiveType ) {
 				return false;
 			} else if ( type instanceof UnionType ) {

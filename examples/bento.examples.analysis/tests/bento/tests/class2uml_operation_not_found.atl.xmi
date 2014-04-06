@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="4:1-14:2" name="class2umlOperationNotFound">
+    <commentsBefore>-- @path CD=/bento.examples.analysis/tests/bento/tests/ClassCD.ecore</commentsBefore>
+    <commentsBefore>-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore</commentsBefore>
+    <inModels location="5:23-5:30" name="IN" metamodel="/2"/>
+    <outModels location="5:8-5:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="7:1-14:2" name="model">
+      <outPattern location="10:2-13:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="11:3-13:4" varName="u">
+          <type xsi:type="ocl:OclModelElement" location="11:7-11:18" name="Package" model="/4"/>
+          <bindings location="12:4-12:64" propertyName="ownedElement">
+            <value xsi:type="ocl:IteratorExp" location="12:20-12:64" name="select">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="12:20-12:33" name="classifiers">
+                <source xsi:type="ocl:VariableExp" location="12:20-12:21" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+              </source>
+              <body xsi:type="ocl:OperationCallExp" location="12:46-12:62" operationName="isPersistent">
+                <source xsi:type="ocl:VariableExp" location="12:46-12:47" referredVariable="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@iterators.0"/>
+              </body>
+              <iterators location="12:42-12:43" varName="c" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@body/@source"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="8:2-9:15">
+        <elements xsi:type="atl:SimpleInPatternElement" location="9:3-9:15" varName="m" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="9:7-9:15" name="Model" model="/3"/>
+        </elements>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="5:14-5:17" name="UML" model="/0/@outModels.0"/>
+  <ocl:OclModel location="5:28-5:30" name="CD" model="/0/@inModels.0"/>
+  <ocl:OclModel location="9:7-9:9" name="CD" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="11:7-11:10" name="UML" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+</xmi:XMI>

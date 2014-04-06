@@ -35,13 +35,13 @@ class TupleType extends Type {
 }
 
 class MapType extends Type {
-   val Type[1] keyType;
-   val Type[1] valueType;
+   ref Type[1] keyType;
+   ref Type[1] valueType;
 }
 
 class TupleAttribute {
    attr String[1] name;
-   val Type[1] type;
+   ref Type[1] type;
 }
 
 class RefType extends Type {
@@ -49,6 +49,15 @@ class RefType extends Type {
 }
 
 class Unknown extends RefType {
+   
+}
+
+class EmptyCollectionType extends Type {
+   
+}
+
+
+class TypeError extends Type {
    
 }
 
@@ -84,7 +93,7 @@ abstract class ReflectiveType extends Type {
 }
 
 class UnionType extends Type {
-	val Type[*] possibleTypes;   
+	ref Type[*] possibleTypes;   
 }
 
 class ThisModuleType extends Type {
@@ -113,31 +122,147 @@ class SetType extends CollectionType {
 @namespace(uri="http://genericity/types/atl/annotations", prefix="atl_types_annotations")
 package annotations {
   abstract class AtlAnnotation {
+	//val AtlAnnotation[*]#parent children;
+	//ref AtlAnnotation[0..1]#children parent;
   }
 
-  class HelperAnnotation extends AtlAnnotation {
+  class TransformationAnn extends AtlAnnotation {
+  	 ref EObject[1] module;
+  
+     val MatchedRuleAnn[*] matchedRules;
+     val CalledRuleAnn[*] calledRules;
+     val LazyRuleAnn[*] lazyRules;
+     
+     val HelperAnn[*] helpers;
+  }
+
+  abstract class RuleAnn extends AtlAnnotation {
+    ref EObject rule;
+    
+    val OutputPatternAnn[1..*] outputPatterns;
+
+	attr String[1] name;
+  }
+  
+  abstract class MatchedRuleAnn extends RuleAnn {
+    val ExpressionAnnotation[0..1] filter;
+    ref Metaclass[1] outputPatternType;        
+  }
+  
+  class MatchedRuleOneAnn extends MatchedRuleAnn {
+  	ref Metaclass[1] inPatternType;   
+  }
+  
+  class MatchedRuleManyAnn extends MatchedRuleAnn {
+  	ref Metaclass[2..*] inPatternTypes;   
+  }
+  
+  class LazyRuleAnn extends RuleAnn {
+  	ref Metaclass[1] inPatternType;   
+    ref Metaclass[1] outputPatternType;   
+  }
+  
+  class CalledRuleAnn extends RuleAnn {
+     
+  }
+  
+  
+  class OutputPatternAnn extends RuleAnn {
+    ref EObject outputPatternElement;
+    ref Type[1] type;
+
+     val BindingAnn[*] bindings;
+  }
+
+  // TODO: Distinguish the different kind of helpers
+  abstract class HelperAnn extends AtlAnnotation {
     ref EObject helper;
-	attr String[0..1] name;
-	ref Type[1] type;
+	attr String[1] name;
+	ref Type[1] returnType;
+  	
+  	val ExpressionAnnotation[1] expr;
   }
 
+  class ModuleHelperAnn extends HelperAnn {
+       
+  }
+  
+  class ContextHelperAnn extends HelperAnn {
+	ref Type[1] contextType;
+	
+	ref CallExprAnn[*]#dynamicResolvers calledBy;
+  }
+  
 
-  class BindingAnnotation extends AtlAnnotation {
+  class BindingAnn extends AtlAnnotation {
     ref EObject rule;
 	ref EObject binding;
 	attr String[0..1] name;
 	ref Type[1] sourceType;
 	ref Type[1] targetType;
+	
+	val ExpressionAnnotation[1] value;
+	
+	ref MatchedRuleOneAnn[*] resolvedBy;
   }
 
-  class ExpressionAnnotation extends AtlAnnotation {
+  abstract class ExpressionAnnotation extends AtlAnnotation {
     ref EObject expr;
 	ref Type[1] type;
 	
 	// Reference to EStructuralFeature and the type of the static receptor
 	ref EObject[0..1] usedFeature;
-	ref EObject[0..1] receptorType;
-	
+	ref EObject[0..1] receptorType;	
+  }
+  
+  
+  class LetExprAnn extends ExpressionAnnotation {
+     val ExpressionAnnotation[1] init;
+     val ExpressionAnnotation[1] body;
+  }
+  
+  class IfExprAnn extends ExpressionAnnotation {
+     val ExpressionAnnotation[1] ifCondition;
+     val ExpressionAnnotation[1] thenPart;
+     val ExpressionAnnotation[1] elsePart;
+     
+  }
+  
+  class CallExprAnn extends ExpressionAnnotation {
+  	val ExpressionAnnotation[1] source;
+  	val ExpressionAnnotation[*] arguments;  	   
+
+	ref HelperAnn[1] staticResolver;
+	ref ContextHelperAnn[1..*]#calledBy dynamicResolvers;
+  }
+
+  abstract class AbstractIteratorExprAnn extends ExpressionAnnotation {
+  	val ExpressionAnnotation[1] source;   
+ 	val ExpressionAnnotation[1] body;    
+  }
+  
+  class IteratorExprAnn extends AbstractIteratorExprAnn {
+  }
+
+  class IterateExprAnn extends AbstractIteratorExprAnn {
+  	val ExpressionAnnotation[1] resultVar;   
+  }
+
+  class CollectionExprAnn extends ExpressionAnnotation {
+     val ExpressionAnnotation[*] initializers;
+  }
+
+  class MapExprAnn extends ExpressionAnnotation {
+     val ExpressionAnnotation[*] keyInitializers;
+     val ExpressionAnnotation[*] valueInitializers;
+  }
+
+  class TupleExprAnn extends ExpressionAnnotation {
+     val ExpressionAnnotation[*] parts;
+  }
+  
+  class GenericExprAnn extends ExpressionAnnotation {
+     
   }
 
 }

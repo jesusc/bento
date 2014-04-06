@@ -53,26 +53,26 @@ public interface TupleAttribute extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
+	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see genericity.typing.atl_types.AtlTypingPackage#getTupleAttribute_Type()
-	 * @model containment="true" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	Type getType();
 
 	/**
-	 * Sets the value of the '{@link genericity.typing.atl_types.TupleAttribute#getType <em>Type</em>}' containment reference.
+	 * Sets the value of the '{@link genericity.typing.atl_types.TupleAttribute#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
+	 * @param value the new value of the '<em>Type</em>' reference.
 	 * @see #getType()
 	 * @generated
 	 */

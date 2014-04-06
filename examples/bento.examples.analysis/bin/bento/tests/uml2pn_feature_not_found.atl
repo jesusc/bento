@@ -1,0 +1,17 @@
+-- @path PN=/bento.examples.analysis/tests/bento/tests/petri_nets.ecore
+-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore
+
+module uml2pn;
+create OUT : PN from IN : UML;
+
+
+rule activity_node {
+        from node : UML!ActivityNode (
+        	node.incoming->size() > 0	
+        )
+        to   net  : PN!Place (
+			-- ERROR: incomings is not a valid feature -> incoming
+        	name <- node.name.toString() + '_' + node.inStructuredNode.incomings->indexOf(node).toString()
+        )
+}
+

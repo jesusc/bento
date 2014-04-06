@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -57,24 +58,14 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 	protected String location = LOCATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getElement() <em>Element</em>}' attribute.
+	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ELEMENT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getElement() <em>Element</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected String element = ELEMENT_EDEFAULT;
+	protected EObject element;
 
 	/**
 	 * The cached value of the '{@link #getRecovery() <em>Recovery</em>}' containment reference.
@@ -131,7 +122,15 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getElement() {
+	public EObject getElement() {
+		if (element != null && element.eIsProxy()) {
+			InternalEObject oldElement = (InternalEObject)element;
+			element = eResolveProxy(oldElement);
+			if (element != oldElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlErrorsPackage.LOCAL_PROBLEM__ELEMENT, oldElement, element));
+			}
+		}
 		return element;
 	}
 
@@ -140,8 +139,17 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElement(String newElement) {
-		String oldElement = element;
+	public EObject basicGetElement() {
+		return element;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElement(EObject newElement) {
+		EObject oldElement = element;
 		element = newElement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.LOCAL_PROBLEM__ELEMENT, oldElement, element));
@@ -215,7 +223,8 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 			case AtlErrorsPackage.LOCAL_PROBLEM__LOCATION:
 				return getLocation();
 			case AtlErrorsPackage.LOCAL_PROBLEM__ELEMENT:
-				return getElement();
+				if (resolve) return getElement();
+				return basicGetElement();
 			case AtlErrorsPackage.LOCAL_PROBLEM__RECOVERY:
 				return getRecovery();
 		}
@@ -234,7 +243,7 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 				setLocation((String)newValue);
 				return;
 			case AtlErrorsPackage.LOCAL_PROBLEM__ELEMENT:
-				setElement((String)newValue);
+				setElement((EObject)newValue);
 				return;
 			case AtlErrorsPackage.LOCAL_PROBLEM__RECOVERY:
 				setRecovery((Recovery)newValue);
@@ -255,7 +264,7 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 				setLocation(LOCATION_EDEFAULT);
 				return;
 			case AtlErrorsPackage.LOCAL_PROBLEM__ELEMENT:
-				setElement(ELEMENT_EDEFAULT);
+				setElement((EObject)null);
 				return;
 			case AtlErrorsPackage.LOCAL_PROBLEM__RECOVERY:
 				setRecovery((Recovery)null);
@@ -275,7 +284,7 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 			case AtlErrorsPackage.LOCAL_PROBLEM__LOCATION:
 				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
 			case AtlErrorsPackage.LOCAL_PROBLEM__ELEMENT:
-				return ELEMENT_EDEFAULT == null ? element != null : !ELEMENT_EDEFAULT.equals(element);
+				return element != null;
 			case AtlErrorsPackage.LOCAL_PROBLEM__RECOVERY:
 				return recovery != null;
 		}
@@ -294,8 +303,6 @@ public abstract class LocalProblemImpl extends ProblemImpl implements LocalProbl
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (location: ");
 		result.append(location);
-		result.append(", element: ");
-		result.append(element);
 		result.append(')');
 		return result.toString();
 	}

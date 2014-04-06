@@ -403,7 +403,7 @@ public interface AtlTypingPackage extends EPackage {
 	int MAP_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
-	 * The feature id for the '<em><b>Key Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Key Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -412,7 +412,7 @@ public interface AtlTypingPackage extends EPackage {
 	int MAP_TYPE__KEY_TYPE = TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Value Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -449,7 +449,7 @@ public interface AtlTypingPackage extends EPackage {
 	int TUPLE_ATTRIBUTE__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -541,6 +541,80 @@ public interface AtlTypingPackage extends EPackage {
 	int UNKNOWN_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.EmptyCollectionTypeImpl <em>Empty Collection Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.EmptyCollectionTypeImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEmptyCollectionType()
+	 * @generated
+	 */
+	int EMPTY_COLLECTION_TYPE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_COLLECTION_TYPE__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_COLLECTION_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
+	 * The number of structural features of the '<em>Empty Collection Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_COLLECTION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.TypeErrorImpl <em>Type Error</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.TypeErrorImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getTypeError()
+	 * @generated
+	 */
+	int TYPE_ERROR = 13;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ERROR__MULTIVALUED = TYPE__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ERROR__METAMODEL_REF = TYPE__METAMODEL_REF;
+
+	/**
+	 * The number of structural features of the '<em>Type Error</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ERROR_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.UnknownFeatureImpl <em>Unknown Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -548,7 +622,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnknownFeature()
 	 * @generated
 	 */
-	int UNKNOWN_FEATURE = 12;
+	int UNKNOWN_FEATURE = 14;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -738,7 +812,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEmptyCollection()
 	 * @generated
 	 */
-	int EMPTY_COLLECTION = 13;
+	int EMPTY_COLLECTION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -775,7 +849,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEnumType()
 	 * @generated
 	 */
-	int ENUM_TYPE = 14;
+	int ENUM_TYPE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -830,7 +904,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 15;
+	int METACLASS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -894,7 +968,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveType()
 	 * @generated
 	 */
-	int REFLECTIVE_TYPE = 16;
+	int REFLECTIVE_TYPE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -931,7 +1005,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnionType()
 	 * @generated
 	 */
-	int UNION_TYPE = 17;
+	int UNION_TYPE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -952,7 +1026,7 @@ public interface AtlTypingPackage extends EPackage {
 	int UNION_TYPE__METAMODEL_REF = TYPE__METAMODEL_REF;
 
 	/**
-	 * The feature id for the '<em><b>Possible Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Possible Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -977,7 +1051,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getThisModuleType()
 	 * @generated
 	 */
-	int THIS_MODULE_TYPE = 18;
+	int THIS_MODULE_TYPE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1014,7 +1088,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveClass()
 	 * @generated
 	 */
-	int REFLECTIVE_CLASS = 19;
+	int REFLECTIVE_CLASS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1043,7 +1117,6 @@ public interface AtlTypingPackage extends EPackage {
 	 */
 	int REFLECTIVE_CLASS_FEATURE_COUNT = REFLECTIVE_TYPE_FEATURE_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -1052,7 +1125,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getCollectionType()
 	 * @generated
 	 */
-	int COLLECTION_TYPE = 20;
+	int COLLECTION_TYPE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1098,7 +1171,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getSequenceType()
 	 * @generated
 	 */
-	int SEQUENCE_TYPE = 21;
+	int SEQUENCE_TYPE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1144,7 +1217,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getSetType()
 	 * @generated
 	 */
-	int SET_TYPE = 22;
+	int SET_TYPE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1318,10 +1391,10 @@ public interface AtlTypingPackage extends EPackage {
 	EClass getMapType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.MapType#getKeyType <em>Key Type</em>}'.
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.MapType#getKeyType <em>Key Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Key Type</em>'.
+	 * @return the meta object for the reference '<em>Key Type</em>'.
 	 * @see genericity.typing.atl_types.MapType#getKeyType()
 	 * @see #getMapType()
 	 * @generated
@@ -1329,10 +1402,10 @@ public interface AtlTypingPackage extends EPackage {
 	EReference getMapType_KeyType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.MapType#getValueType <em>Value Type</em>}'.
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.MapType#getValueType <em>Value Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value Type</em>'.
+	 * @return the meta object for the reference '<em>Value Type</em>'.
 	 * @see genericity.typing.atl_types.MapType#getValueType()
 	 * @see #getMapType()
 	 * @generated
@@ -1361,10 +1434,10 @@ public interface AtlTypingPackage extends EPackage {
 	EAttribute getTupleAttribute_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.TupleAttribute#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.TupleAttribute#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @return the meta object for the reference '<em>Type</em>'.
 	 * @see genericity.typing.atl_types.TupleAttribute#getType()
 	 * @see #getTupleAttribute()
 	 * @generated
@@ -1390,6 +1463,26 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getUnknown();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.EmptyCollectionType <em>Empty Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Empty Collection Type</em>'.
+	 * @see genericity.typing.atl_types.EmptyCollectionType
+	 * @generated
+	 */
+	EClass getEmptyCollectionType();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.TypeError <em>Type Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Error</em>'.
+	 * @see genericity.typing.atl_types.TypeError
+	 * @generated
+	 */
+	EClass getTypeError();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.UnknownFeature <em>Unknown Feature</em>}'.
@@ -1518,10 +1611,10 @@ public interface AtlTypingPackage extends EPackage {
 	EClass getUnionType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link genericity.typing.atl_types.UnionType#getPossibleTypes <em>Possible Types</em>}'.
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.UnionType#getPossibleTypes <em>Possible Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Possible Types</em>'.
+	 * @return the meta object for the reference list '<em>Possible Types</em>'.
 	 * @see genericity.typing.atl_types.UnionType#getPossibleTypes()
 	 * @see #getUnionType()
 	 * @generated
@@ -1734,7 +1827,7 @@ public interface AtlTypingPackage extends EPackage {
 		EClass MAP_TYPE = eINSTANCE.getMapType();
 
 		/**
-		 * The meta object literal for the '<em><b>Key Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Key Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1742,7 +1835,7 @@ public interface AtlTypingPackage extends EPackage {
 		EReference MAP_TYPE__KEY_TYPE = eINSTANCE.getMapType_KeyType();
 
 		/**
-		 * The meta object literal for the '<em><b>Value Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1768,7 +1861,7 @@ public interface AtlTypingPackage extends EPackage {
 		EAttribute TUPLE_ATTRIBUTE__NAME = eINSTANCE.getTupleAttribute_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1794,6 +1887,26 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UNKNOWN = eINSTANCE.getUnknown();
+
+		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.EmptyCollectionTypeImpl <em>Empty Collection Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.EmptyCollectionTypeImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEmptyCollectionType()
+		 * @generated
+		 */
+		EClass EMPTY_COLLECTION_TYPE = eINSTANCE.getEmptyCollectionType();
+
+		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.TypeErrorImpl <em>Type Error</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.TypeErrorImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getTypeError()
+		 * @generated
+		 */
+		EClass TYPE_ERROR = eINSTANCE.getTypeError();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.UnknownFeatureImpl <em>Unknown Feature</em>}' class.
@@ -1904,7 +2017,7 @@ public interface AtlTypingPackage extends EPackage {
 		EClass UNION_TYPE = eINSTANCE.getUnionType();
 
 		/**
-		 * The meta object literal for the '<em><b>Possible Types</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Possible Types</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

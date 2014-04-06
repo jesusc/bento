@@ -1,5 +1,5 @@
--- @path FD=/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore
--- @path PN=/genericity.benchmarks/components/flowdiagrams/metamodels/petri_nets.ecore
+-- @path FD=/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore
+-- @path PN=/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore
 module flow2pn;
 create OUT : PN from IN : SFC;
 
@@ -20,7 +20,8 @@ helper context SFC!StepType def: isFinalTask : Boolean =
 
 helper context SFC!StepType def: isTerminatingTask : Boolean =
  if self.isFinalTask then
-  self.oclAsType(SFC!NONE).isTerminating
+  -- self.oclAsType(SFC!NONE).isTerminating
+ 	false
  else
   false
  endif;
@@ -580,35 +581,35 @@ helper context SFC!SimultaneousConvergenceType def: isFinalTask : Boolean =
 
 helper context SFC!TransitionType1 def: isTerminatingTask : Boolean =
  if self.isFinalTask then
-  self.oclAsType(SFC!NONE).isTerminating
+  false -- self.oclAsType(SFC!NONE).isTerminating
  else
   false
  endif;
 
 helper context SFC!SelectionDivergenceType def: isTerminatingTask : Boolean =
  if self.isFinalTask then
-  self.oclAsType(SFC!NONE).isTerminating
+  false -- self.oclAsType(SFC!NONE).isTerminating
  else
   false
  endif;
 
 helper context SFC!SelectionConvergenceType def: isTerminatingTask : Boolean =
  if self.isFinalTask then
-  self.oclAsType(SFC!NONE).isTerminating
+  false -- self.oclAsType(SFC!NONE).isTerminating
  else
   false
  endif;
 
 helper context SFC!SimultaneousDivergenceType def: isTerminatingTask : Boolean =
  if self.isFinalTask then
-  self.oclAsType(SFC!NONE).isTerminating
+  false -- self.oclAsType(SFC!NONE).isTerminating
  else
   false
  endif;
 
 helper context SFC!SimultaneousConvergenceType def: isTerminatingTask : Boolean =
  if self.isFinalTask then
-  self.oclAsType(SFC!NONE).isTerminating
+  false -- self.oclAsType(SFC!NONE).isTerminating
  else
   false
  endif;
@@ -856,11 +857,11 @@ helper context SFC!SimultaneousConvergenceType def: out : OclAny =
 helper context SFC!TransitionType1 def: isInitial : OclAny =
  false;
 
-helper context SFC!NONE def: isTerminating : OclAny =
- false;
+--helper context SFC!NONE def: isTerminating : OclAny =
+-- false;
 
-helper context SFC!NONE def: isMandatory : OclAny =
- false;
+--helper context SFC!NONE def: isMandatory : OclAny =
+-- false;
 
 helper context SFC!Connection def: parent : OclAny =
  self.refImmediateComposite().refImmediateComposite();

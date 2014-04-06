@@ -29,14 +29,14 @@ public class Class2Relational extends BaseTest {
 	
 	public void run() throws IOException {
 		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, 
-				   new String[] { SOURCE_METAMODEL_NAME, TARGET_METAMODEL_NAME });
+				   new String[] { SOURCE_METAMODEL_NAME, TARGET_METAMODEL_NAME }, true);
+		generateCSP();
 
-		System.out.println("Finished typing of " + ATL_TRANSFORMATION);
-
+		// 
+		
 		typing(ECORE_TRANSFORMATION, new Object[] { ECORE_METAMODEL, SOURCE_METAMODEL }, 
-				   new String[] { "MOF", SOURCE_METAMODEL_NAME });
-
-		System.out.println("Finished typing of " + ECORE_TRANSFORMATION);
+				   new String[] { "MOF", SOURCE_METAMODEL_NAME }, true);
+		generateCSP();
 		
 	}
 

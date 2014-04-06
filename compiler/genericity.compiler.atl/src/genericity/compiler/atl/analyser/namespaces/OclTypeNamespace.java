@@ -43,6 +43,14 @@ public class OclTypeNamespace implements ITypeNamespace {
 		throw new UnsupportedOperationException();
 	}
 
+	public Operation getAttachedOperation(String operationName) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public boolean hasAttachedOperation(String operationName) {
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public void extendType(String featureName, Type returnType, Attribute attrDefinition) {
 		throw new UnsupportedOperationException();

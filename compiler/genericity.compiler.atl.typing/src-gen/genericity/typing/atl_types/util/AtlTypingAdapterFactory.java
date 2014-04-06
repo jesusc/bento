@@ -124,6 +124,14 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createUnknownAdapter();
 			}
 			@Override
+			public Adapter caseEmptyCollectionType(EmptyCollectionType object) {
+				return createEmptyCollectionTypeAdapter();
+			}
+			@Override
+			public Adapter caseTypeError(TypeError object) {
+				return createTypeErrorAdapter();
+			}
+			@Override
 			public Adapter caseUnknownFeature(UnknownFeature object) {
 				return createUnknownFeatureAdapter();
 			}
@@ -368,6 +376,34 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUnknownAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.EmptyCollectionType <em>Empty Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.EmptyCollectionType
+	 * @generated
+	 */
+	public Adapter createEmptyCollectionTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.TypeError <em>Type Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.TypeError
+	 * @generated
+	 */
+	public Adapter createTypeErrorAdapter() {
 		return null;
 	}
 

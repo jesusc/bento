@@ -18,8 +18,8 @@ binding epc {
 	feature FlowDiagram.nodes is objects
 	feature FlowDiagram.edges = self.flows->select(f | f.oclIsKindOf(EPC!ControlFlow)) -- automated filtering
 	feature FlowDiagram.isFinalMandatory = true
-	feature Node.outs is outgoing -- defined by all children classes of ProcessObject
-	feature Node.ins is incoming  -- defined by all children classes of  ProcessObject
+	feature Node.outs is outgoing -- = Sequence { self.outgoing }->flatten() -- outgoing -- defined by all children classes of ProcessObject
+	feature Node.ins is incoming -- = Sequence { self.incoming }->flatten() --incoming  -- defined by all children classes of  ProcessObject
 	feature Task[Event].name is name
 	feature Task[Event].isInitial = self.incoming->size() = 0
 	feature Task[Function].name is name

@@ -298,6 +298,7 @@ public abstract class ATLModelVisitor {
 	public static class VisitingAction {
 		public static final int REFERENCE = 0;
 		public static final int METHOD_CALL = 1;
+		public static final int FILTER_CALL = 2;
 		
 		private int actionType = -1;
 
@@ -316,6 +317,12 @@ public abstract class ATLModelVisitor {
 			this.arguments = arguments;
 		}
 
+		public static VisitingAction createFilter(ATLModelVisitor receptor, java.lang.reflect.Method method, Object[] arguments) {
+			VisitingAction va = new VisitingAction(receptor, method, arguments);
+			va.actionType = FILTER_CALL;
+			return va;
+		}
+		
 		public VisitingAction(EReference r) {
 			actionType = REFERENCE;
 			this.reference = r;
@@ -337,14 +344,20 @@ public abstract class ATLModelVisitor {
 			return getActionType() == METHOD_CALL;
 		}
 		
-		public void performMethodCall() {
+		public boolean isFilter() {
+			return getActionType() == FILTER_CALL;
+		}
+		
+		public Object performMethodCall() {
 			try {
-				method.invoke(receptor, arguments);
+				return method.invoke(receptor, arguments);
 			} catch ( Exception e ) {
 				throw new RuntimeException(e);
 			}	
 		}
 	}
+	
+	
 	
 	public VisitingAction method(String methodName, Object... arguments) {
 		// Does not work fine because getMethod does not check for compatible types
@@ -373,4 +386,16 @@ public abstract class ATLModelVisitor {
 		
 		throw new RuntimeException("No method " + methodName + " found in " + this.getClass().getName());
 	}
+
+	public VisitingAction filter(String methodName, Object... arguments) {
+		for(java.lang.reflect.Method m : this.getClass().getDeclaredMethods()) {
+			if ( m.getName().equals(methodName) ) {
+				return VisitingAction.createFilter(this, m, arguments);
+			}
+		}
+		
+		throw new RuntimeException("No method " + methodName + " found in " + this.getClass().getName());
+	}
+	
+
 }

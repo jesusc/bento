@@ -87,12 +87,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createInvalidArgumentProblemAdapter();
 			}
 			@Override
+			public Adapter caseTargetModelConformanceProblem(TargetModelConformanceProblem object) {
+				return createTargetModelConformanceProblemAdapter();
+			}
+			@Override
 			public Adapter caseCollectionOperationOverNoCollectionError(CollectionOperationOverNoCollectionError object) {
 				return createCollectionOperationOverNoCollectionErrorAdapter();
 			}
 			@Override
 			public Adapter caseFeatureNotFound(FeatureNotFound object) {
 				return createFeatureNotFoundAdapter();
+			}
+			@Override
+			public Adapter caseOperationNotFound(OperationNotFound object) {
+				return createOperationNotFoundAdapter();
 			}
 			@Override
 			public Adapter caseFeatureNotFoundInUnionType(FeatureNotFoundInUnionType object) {
@@ -105,6 +113,26 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNoContainerForRefImmediateComposite(NoContainerForRefImmediateComposite object) {
 				return createNoContainerForRefImmediateCompositeAdapter();
+			}
+			@Override
+			public Adapter caseDifferentBranchTypes(DifferentBranchTypes object) {
+				return createDifferentBranchTypesAdapter();
+			}
+			@Override
+			public Adapter caseBindingProblem(BindingProblem object) {
+				return createBindingProblemAdapter();
+			}
+			@Override
+			public Adapter caseNoBindingForCompulsoryFeature(NoBindingForCompulsoryFeature object) {
+				return createNoBindingForCompulsoryFeatureAdapter();
+			}
+			@Override
+			public Adapter caseBindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany object) {
+				return createBindingExpectedOneAssignedManyAdapter();
+			}
+			@Override
+			public Adapter caseFlattenOverNonNestedCollection(FlattenOverNonNestedCollection object) {
+				return createFlattenOverNonNestedCollectionAdapter();
 			}
 			@Override
 			public Adapter caseAnalysisInfo(AnalysisInfo object) {
@@ -177,6 +205,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.TargetModelConformanceProblem <em>Target Model Conformance Problem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.TargetModelConformanceProblem
+	 * @generated
+	 */
+	public Adapter createTargetModelConformanceProblemAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError <em>Collection Operation Over No Collection Error</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -201,6 +243,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFeatureNotFoundAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.OperationNotFound <em>Operation Not Found</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFound
+	 * @generated
+	 */
+	public Adapter createOperationNotFoundAdapter() {
 		return null;
 	}
 
@@ -243,6 +299,76 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNoContainerForRefImmediateCompositeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.DifferentBranchTypes <em>Different Branch Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.DifferentBranchTypes
+	 * @generated
+	 */
+	public Adapter createDifferentBranchTypesAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingProblem <em>Binding Problem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingProblem
+	 * @generated
+	 */
+	public Adapter createBindingProblemAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature <em>No Binding For Compulsory Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature
+	 * @generated
+	 */
+	public Adapter createNoBindingForCompulsoryFeatureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany <em>Binding Expected One Assigned Many</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany
+	 * @generated
+	 */
+	public Adapter createBindingExpectedOneAssignedManyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection <em>Flatten Over Non Nested Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection
+	 * @generated
+	 */
+	public Adapter createFlattenOverNonNestedCollectionAdapter() {
 		return null;
 	}
 

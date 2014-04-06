@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="4:1-19:2" name="uml2pn">
+    <commentsBefore>-- @path PN=/bento.examples.analysis/tests/bento/tests/petri_nets.ecore</commentsBefore>
+    <commentsBefore>-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore</commentsBefore>
+    <inModels location="5:22-5:30" name="IN" metamodel="/2"/>
+    <outModels location="5:8-5:16" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="11:1-19:2" name="activity_node">
+      <commentsBefore>--</commentsBefore>
+      <commentsBefore>-- The filter is non sense, but it is just to test that</commentsBefore>
+      <commentsBefore>-- we can get a type slice of the filter</commentsBefore>
+      <commentsBefore>-- </commentsBefore>
+      <outPattern location="16:9-18:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="16:14-18:4" varName="net">
+          <type xsi:type="ocl:OclModelElement" location="16:21-16:29" name="Place" model="/4"/>
+        </elements>
+      </outPattern>
+      <inPattern location="12:9-15:10">
+        <elements xsi:type="atl:SimpleInPatternElement" location="12:14-12:37" varName="node" variableExp="/0/@elements.0/@inPattern/@filter/@source/@source/@source/@source /0/@elements.0/@inPattern/@filter/@arguments.0/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="12:21-12:37" name="ActivityNode" model="/3"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="13:10-14:37" operationName="and">
+          <source xsi:type="ocl:OperatorCallExp" location="13:10-13:35" operationName=">">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="13:10-13:31" operationName="size">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="13:10-13:23" name="incoming">
+                <source xsi:type="ocl:VariableExp" location="13:10-13:14" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:IntegerExp" location="13:34-13:35"/>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="14:4-14:37" operationName="=">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="14:4-14:22" name="name">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="14:4-14:17" name="activity">
+                <source xsi:type="ocl:VariableExp" location="14:4-14:8" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:StringExp" location="14:25-14:37" stringSymbol="myActivity"/>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="5:14-5:16" name="PN" model="/0/@outModels.0"/>
+  <ocl:OclModel location="5:27-5:30" name="UML" model="/0/@inModels.0"/>
+  <ocl:OclModel location="12:21-12:24" name="UML" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="16:21-16:23" name="PN" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+</xmi:XMI>

@@ -142,6 +142,7 @@ segment findNavExpr
 	forall atlBinding from mBinding
 
 	 	compatible_cbs = gbind!VirtualClassBinding.all_instances.select { |cb|
+			atlBinding.value.location.println("Binding: ")
 		 	atlBinding.value.hasType(cb.concept.name)
 	 	}
 	 		 	

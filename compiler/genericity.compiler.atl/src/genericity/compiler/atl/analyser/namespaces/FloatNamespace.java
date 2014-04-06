@@ -11,8 +11,7 @@ import atl.metamodel.ATL.LocatedElement;
 
 public class FloatNamespace extends PrimitiveTypeNamespace {
 
-	public FloatNamespace(PrimitiveGlobalNamespace nspace) {
-		super(nspace);
+	public FloatNamespace() {
 	}
 
 	@Override

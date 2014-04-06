@@ -15,12 +15,6 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 	private HashMap<String, VirtualFeature<PrimitiveTypeNamespace, Operation>> operations = 
 			new HashMap<String, VirtualFeature<PrimitiveTypeNamespace, Operation>>();
 
-	private PrimitiveGlobalNamespace	nspace;
-
-	public PrimitiveTypeNamespace(PrimitiveGlobalNamespace nspace) {
-		this.nspace = nspace;
-	}
-
 	@Override
 	public Type getFeatureType(String featureName, LocatedElement node) {
 		Type t = features.containsKey(featureName) ? features.get(featureName).returnType : null;
@@ -39,9 +33,18 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 		if ( super.hasOperation(operationName, arguments) ) {
 			return true;
 		}
-		return false;
+		return operations.containsKey(operationName);
 	}
-		
+
+	public Operation getAttachedOperation(String operationName) {
+		return operations.get(operationName).definition;
+	}
+	
+	public boolean hasAttachedOperation(String operationName) {
+		return operations.containsKey(operationName);
+	}
+	
+
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		Type t = super.getOperationType(operationName, arguments, node);

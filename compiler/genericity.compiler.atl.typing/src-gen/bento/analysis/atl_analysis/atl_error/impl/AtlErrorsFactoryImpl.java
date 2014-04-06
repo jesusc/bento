@@ -62,9 +62,14 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 		switch (eClass.getClassifierID()) {
 			case AtlErrorsPackage.COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR: return createCollectionOperationOverNoCollectionError();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND: return createFeatureNotFound();
+			case AtlErrorsPackage.OPERATION_NOT_FOUND: return createOperationNotFound();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND_IN_UNION_TYPE: return createFeatureNotFoundInUnionType();
 			case AtlErrorsPackage.INVALID_OPERAND: return createInvalidOperand();
 			case AtlErrorsPackage.NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE: return createNoContainerForRefImmediateComposite();
+			case AtlErrorsPackage.DIFFERENT_BRANCH_TYPES: return createDifferentBranchTypes();
+			case AtlErrorsPackage.NO_BINDING_FOR_COMPULSORY_FEATURE: return createNoBindingForCompulsoryFeature();
+			case AtlErrorsPackage.BINDING_EXPECTED_ONE_ASSIGNED_MANY: return createBindingExpectedOneAssignedMany();
+			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: return createFlattenOverNonNestedCollection();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -95,6 +100,16 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public OperationNotFound createOperationNotFound() {
+		OperationNotFoundImpl operationNotFound = new OperationNotFoundImpl();
+		return operationNotFound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FeatureNotFoundInUnionType createFeatureNotFoundInUnionType() {
 		FeatureNotFoundInUnionTypeImpl featureNotFoundInUnionType = new FeatureNotFoundInUnionTypeImpl();
 		return featureNotFoundInUnionType;
@@ -118,6 +133,46 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public NoContainerForRefImmediateComposite createNoContainerForRefImmediateComposite() {
 		NoContainerForRefImmediateCompositeImpl noContainerForRefImmediateComposite = new NoContainerForRefImmediateCompositeImpl();
 		return noContainerForRefImmediateComposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DifferentBranchTypes createDifferentBranchTypes() {
+		DifferentBranchTypesImpl differentBranchTypes = new DifferentBranchTypesImpl();
+		return differentBranchTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NoBindingForCompulsoryFeature createNoBindingForCompulsoryFeature() {
+		NoBindingForCompulsoryFeatureImpl noBindingForCompulsoryFeature = new NoBindingForCompulsoryFeatureImpl();
+		return noBindingForCompulsoryFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingExpectedOneAssignedMany createBindingExpectedOneAssignedMany() {
+		BindingExpectedOneAssignedManyImpl bindingExpectedOneAssignedMany = new BindingExpectedOneAssignedManyImpl();
+		return bindingExpectedOneAssignedMany;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FlattenOverNonNestedCollection createFlattenOverNonNestedCollection() {
+		FlattenOverNonNestedCollectionImpl flattenOverNonNestedCollection = new FlattenOverNonNestedCollectionImpl();
+		return flattenOverNonNestedCollection;
 	}
 
 	/**

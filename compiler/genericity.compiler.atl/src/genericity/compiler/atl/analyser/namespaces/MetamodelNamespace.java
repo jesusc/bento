@@ -8,6 +8,7 @@ import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -72,6 +73,20 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 				// classifiers.put(c.getName(), c);
 			}
 		}
+		
+		// To allow cross-references...
+		for (EClass eClass : new ArrayList<EClass>(allClasses)) {
+			for(EClass sup : eClass.getEAllSuperTypes()) {
+				if ( classifiers.containsKey(sup.getName() )) 
+					continue;		
+				if ( sup.eIsProxy() )
+					continue;
+				
+				classifiers.put(sup.getName(), new ClassNamespace(this, (EClass) sup));				
+				allClasses.add(sup);
+			}
+		}
+		
 	}
 
 	public List<EClass> getAllClasses() {
@@ -112,7 +127,8 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 	 */
 	@Override
 	public ITypeNamespace getClassifier(String name) {
-		return classifiers.get(name);
+		ITypeNamespace tn = classifiers.get(name);
+		return tn;
 	}
 	
 	public Metaclass getMetaclass(EClass c) {
@@ -129,6 +145,20 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		
 		return null;
 		// TODO: Check that the same literal is not repeated... (this is more a meta-model level check)
+	}
+
+	public boolean hasClass(EClass klass) {
+		return allClasses.contains(klass);
+	}
+
+	public Collection<ClassNamespace> getAllSubclasses(EClass eClass) {
+		ArrayList<ClassNamespace> result = new ArrayList<ClassNamespace>();
+		for (EClass klass : allClasses) {
+			if ( klass.getEAllSuperTypes().contains(eClass) ) {
+				result.add((ClassNamespace) classifiers.get(klass.getName()));
+			}
+		}
+		return result;
 	}
 
 	

@@ -8,7 +8,6 @@ package genericity.typing.atl_types;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Boolean Type</b></em>'.
@@ -26,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface BooleanType extends PrimitiveType {
-
 	/**
 	 * Returns the value of the '<em><b>Kind Of Types</b></em>' reference list.
 	 * The list contents are of type {@link genericity.typing.atl_types.Metaclass}.
@@ -42,4 +40,5 @@ public interface BooleanType extends PrimitiveType {
 	 * @generated
 	 */
 	EList<Metaclass> getKindOfTypes();
+
 } // BooleanType

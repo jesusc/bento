@@ -66,7 +66,8 @@ public class EcoreTypeConverter {
 		} else if ( c.getName().endsWith("Boolean") ) {
 			return typ.newBooleanType();
 		} else if ( c.getName().equals("EInt") || c.getName().endsWith("Integer") || 
-				    c.getName().equals("UnlimitedNatural") ) {
+				    c.getName().equals("UnlimitedNatural") ||
+				    c.getName().endsWith("Long") ) {
 			return typ.newIntegerType();
 		} else if ( c.getName().equals("Double") ) {
 			return typ.newFloatType();

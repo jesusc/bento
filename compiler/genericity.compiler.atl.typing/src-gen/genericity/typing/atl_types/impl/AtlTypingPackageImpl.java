@@ -11,6 +11,7 @@ import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollection;
+import genericity.typing.atl_types.EmptyCollectionType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
@@ -28,16 +29,20 @@ import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.TupleAttribute;
 import genericity.typing.atl_types.TupleType;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.UnknownFeature;
+
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
+
 import genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -130,6 +135,20 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * @generated
 	 */
 	private EClass unknownEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass emptyCollectionTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeErrorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -459,6 +478,24 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEmptyCollectionType() {
+		return emptyCollectionTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeError() {
+		return typeErrorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUnknownFeature() {
 		return unknownFeatureEClass;
 	}
@@ -685,6 +722,10 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		unknownEClass = createEClass(UNKNOWN);
 
+		emptyCollectionTypeEClass = createEClass(EMPTY_COLLECTION_TYPE);
+
+		typeErrorEClass = createEClass(TYPE_ERROR);
+
 		unknownFeatureEClass = createEClass(UNKNOWN_FEATURE);
 		createEReference(unknownFeatureEClass, UNKNOWN_FEATURE__THE_CONTAINING_CLASS);
 
@@ -760,6 +801,8 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		mapTypeEClass.getESuperTypes().add(this.getType());
 		refTypeEClass.getESuperTypes().add(this.getType());
 		unknownEClass.getESuperTypes().add(this.getRefType());
+		emptyCollectionTypeEClass.getESuperTypes().add(this.getType());
+		typeErrorEClass.getESuperTypes().add(this.getType());
 		unknownFeatureEClass.getESuperTypes().add(ecorePackage.getEStructuralFeature());
 		emptyCollectionEClass.getESuperTypes().add(this.getType());
 		enumTypeEClass.getESuperTypes().add(this.getType());
@@ -794,16 +837,20 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEReference(getTupleType_Attributes(), this.getTupleAttribute(), null, "attributes", null, 0, -1, TupleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mapTypeEClass, MapType.class, "MapType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMapType_KeyType(), this.getType(), null, "keyType", null, 1, 1, MapType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMapType_ValueType(), this.getType(), null, "valueType", null, 1, 1, MapType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapType_KeyType(), this.getType(), null, "keyType", null, 1, 1, MapType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapType_ValueType(), this.getType(), null, "valueType", null, 1, 1, MapType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tupleAttributeEClass, TupleAttribute.class, "TupleAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTupleAttribute_Name(), ecorePackage.getEString(), "name", null, 1, 1, TupleAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTupleAttribute_Type(), this.getType(), null, "type", null, 1, 1, TupleAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTupleAttribute_Type(), this.getType(), null, "type", null, 1, 1, TupleAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(refTypeEClass, RefType.class, "RefType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unknownEClass, Unknown.class, "Unknown", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(emptyCollectionTypeEClass, EmptyCollectionType.class, "EmptyCollectionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(typeErrorEClass, TypeError.class, "TypeError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unknownFeatureEClass, UnknownFeature.class, "UnknownFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnknownFeature_TheContainingClass(), ecorePackage.getEClass(), null, "theContainingClass", null, 1, 1, UnknownFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -822,7 +869,7 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEClass(reflectiveTypeEClass, ReflectiveType.class, "ReflectiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unionTypeEClass, UnionType.class, "UnionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnionType_PossibleTypes(), this.getType(), null, "possibleTypes", null, 0, -1, UnionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnionType_PossibleTypes(), this.getType(), null, "possibleTypes", null, 0, -1, UnionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(thisModuleTypeEClass, ThisModuleType.class, "ThisModuleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

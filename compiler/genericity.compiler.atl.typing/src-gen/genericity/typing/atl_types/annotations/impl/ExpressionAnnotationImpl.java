@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ExpressionAnnotationImpl extends AtlAnnotationImpl implements ExpressionAnnotation {
+public abstract class ExpressionAnnotationImpl extends AtlAnnotationImpl implements ExpressionAnnotation {
 	/**
 	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' reference.
 	 * <!-- begin-user-doc -->

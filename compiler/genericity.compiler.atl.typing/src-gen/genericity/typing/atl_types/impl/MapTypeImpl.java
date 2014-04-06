@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class MapTypeImpl extends TypeImpl implements MapType {
 	/**
-	 * The cached value of the '{@link #getKeyType() <em>Key Type</em>}' containment reference.
+	 * The cached value of the '{@link #getKeyType() <em>Key Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getKeyType()
@@ -44,7 +44,7 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	protected Type keyType;
 
 	/**
-	 * The cached value of the '{@link #getValueType() <em>Value Type</em>}' containment reference.
+	 * The cached value of the '{@link #getValueType() <em>Value Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValueType()
@@ -78,6 +78,14 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	 * @generated
 	 */
 	public Type getKeyType() {
+		if (keyType != null && keyType.eIsProxy()) {
+			InternalEObject oldKeyType = (InternalEObject)keyType;
+			keyType = (Type)eResolveProxy(oldKeyType);
+			if (keyType != oldKeyType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlTypingPackage.MAP_TYPE__KEY_TYPE, oldKeyType, keyType));
+			}
+		}
 		return keyType;
 	}
 
@@ -86,14 +94,8 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetKeyType(Type newKeyType, NotificationChain msgs) {
-		Type oldKeyType = keyType;
-		keyType = newKeyType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MAP_TYPE__KEY_TYPE, oldKeyType, newKeyType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Type basicGetKeyType() {
+		return keyType;
 	}
 
 	/**
@@ -102,17 +104,10 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	 * @generated
 	 */
 	public void setKeyType(Type newKeyType) {
-		if (newKeyType != keyType) {
-			NotificationChain msgs = null;
-			if (keyType != null)
-				msgs = ((InternalEObject)keyType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AtlTypingPackage.MAP_TYPE__KEY_TYPE, null, msgs);
-			if (newKeyType != null)
-				msgs = ((InternalEObject)newKeyType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AtlTypingPackage.MAP_TYPE__KEY_TYPE, null, msgs);
-			msgs = basicSetKeyType(newKeyType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MAP_TYPE__KEY_TYPE, newKeyType, newKeyType));
+		Type oldKeyType = keyType;
+		keyType = newKeyType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MAP_TYPE__KEY_TYPE, oldKeyType, keyType));
 	}
 
 	/**
@@ -121,6 +116,14 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	 * @generated
 	 */
 	public Type getValueType() {
+		if (valueType != null && valueType.eIsProxy()) {
+			InternalEObject oldValueType = (InternalEObject)valueType;
+			valueType = (Type)eResolveProxy(oldValueType);
+			if (valueType != oldValueType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlTypingPackage.MAP_TYPE__VALUE_TYPE, oldValueType, valueType));
+			}
+		}
 		return valueType;
 	}
 
@@ -129,14 +132,8 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValueType(Type newValueType, NotificationChain msgs) {
-		Type oldValueType = valueType;
-		valueType = newValueType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MAP_TYPE__VALUE_TYPE, oldValueType, newValueType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Type basicGetValueType() {
+		return valueType;
 	}
 
 	/**
@@ -145,33 +142,10 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	 * @generated
 	 */
 	public void setValueType(Type newValueType) {
-		if (newValueType != valueType) {
-			NotificationChain msgs = null;
-			if (valueType != null)
-				msgs = ((InternalEObject)valueType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AtlTypingPackage.MAP_TYPE__VALUE_TYPE, null, msgs);
-			if (newValueType != null)
-				msgs = ((InternalEObject)newValueType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AtlTypingPackage.MAP_TYPE__VALUE_TYPE, null, msgs);
-			msgs = basicSetValueType(newValueType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MAP_TYPE__VALUE_TYPE, newValueType, newValueType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case AtlTypingPackage.MAP_TYPE__KEY_TYPE:
-				return basicSetKeyType(null, msgs);
-			case AtlTypingPackage.MAP_TYPE__VALUE_TYPE:
-				return basicSetValueType(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		Type oldValueType = valueType;
+		valueType = newValueType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MAP_TYPE__VALUE_TYPE, oldValueType, valueType));
 	}
 
 	/**
@@ -183,9 +157,11 @@ public class MapTypeImpl extends TypeImpl implements MapType {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AtlTypingPackage.MAP_TYPE__KEY_TYPE:
-				return getKeyType();
+				if (resolve) return getKeyType();
+				return basicGetKeyType();
 			case AtlTypingPackage.MAP_TYPE__VALUE_TYPE:
-				return getValueType();
+				if (resolve) return getValueType();
+				return basicGetValueType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

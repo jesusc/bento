@@ -116,13 +116,22 @@ public interface AtlAnalysisPackage extends EPackage {
 	int PROBLEM = 2;
 
 	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__DEPENDENTS = ANALYSIS_INFO_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Problem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_FEATURE_COUNT = ANALYSIS_INFO_FEATURE_COUNT + 0;
+	int PROBLEM_FEATURE_COUNT = ANALYSIS_INFO_FEATURE_COUNT + 1;
 
 
 	/**
@@ -185,6 +194,17 @@ public interface AtlAnalysisPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getProblem();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link bento.analysis.atl_analysis.Problem#getDependents <em>Dependents</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Dependents</em>'.
+	 * @see bento.analysis.atl_analysis.Problem#getDependents()
+	 * @see #getProblem()
+	 * @generated
+	 */
+	EReference getProblem_Dependents();
 
 	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.Recovery <em>Recovery</em>}'.
@@ -255,6 +275,14 @@ public interface AtlAnalysisPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PROBLEM = eINSTANCE.getProblem();
+
+		/**
+		 * The meta object literal for the '<em><b>Dependents</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROBLEM__DEPENDENTS = eINSTANCE.getProblem_Dependents();
 
 		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.impl.RecoveryImpl <em>Recovery</em>}' class.

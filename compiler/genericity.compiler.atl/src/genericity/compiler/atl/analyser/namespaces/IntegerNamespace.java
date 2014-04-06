@@ -11,8 +11,7 @@ import atl.metamodel.ATL.LocatedElement;
 
 public class IntegerNamespace extends PrimitiveTypeNamespace {
 
-	public IntegerNamespace(PrimitiveGlobalNamespace nspace) {
-		super(nspace);
+	public IntegerNamespace() {
 	}
 
 	@Override

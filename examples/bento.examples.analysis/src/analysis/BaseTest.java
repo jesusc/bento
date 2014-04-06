@@ -2,6 +2,10 @@ package analysis;
 
 import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
+import genericity.compiler.atl.csp.CSPGenerator;
+import genericity.compiler.atl.csp.ErrorSliceGenerator;
+import genericity.compiler.atl.csp.GraphvizGenerator;
+import genericity.compiler.atl.graph.DependencyGraph;
 import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
 import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
@@ -25,6 +29,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
+import bento.analyser.footprint.EffectiveMetamodelBuilder;
+import bento.analyser.footprint.TrafoMetamodelData;
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -35,55 +41,84 @@ public abstract class BaseTest {
 	protected BasicEMFModel atlTransformation;
 	protected BasicEMFModel typingModel;
 	private EPackage conceptPkg;
-	ResourceSet rs = new ResourceSetImpl();
+	private ResourceSet rs = new ResourceSetImpl();
 	private Resource	prunnedResource;	
 	
+	private DependencyGraph dependencyGraph;
+	private GlobalNamespace	mm;
+	private EPackage	metamodelPkg;
+	private Analyser	analyser;
+
 	public void typing(String atlTransformationFile, Object[] metamodels, String[] names) throws IOException {
+		typing(atlTransformationFile, metamodels, names, false);
+	}
+	
+	public void typing(String atlTransformationFile, Object[] metamodels, String[] names, boolean doDependencyAnalysis) throws IOException {
 		EMFLoader loader = new EMFLoader(new JavaListConverter(), rs);
 		
 		// BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, BOUND_METAMODEL);
-				
+
 		atlTransformation = loader
 				.basicModelFromFile(
 						withDir("../../compiler/genericity.compiler.atl/src/genericity/typecheck/atl/ATL.ecore"),
 						withDir(atlTransformationFile));
 
-		List<EPackage> pkgs = new ArrayList<EPackage>();
+ 		List<EPackage> pkgs = new ArrayList<EPackage>();
 		pkgs.add(AtlTypingPackage.eINSTANCE);
 		BasicEMFModel out = loader
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
-		if ( false ) {
-			AtlTransformationMetamodelsModel mm = loadMetamodels(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
-			TypeCheckLauncher launcher = new TypeCheckLauncher();
-			launcher.setWarningMode(); 
-			launcher.launch(mm, atlTransformation, out);		
-		} else {
-			GlobalNamespace mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
-			Analyser analyser = new Analyser(mm, atlTransformation, out);
-			analyser.perform();
-		}
+		mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
+		analyser = new Analyser(mm, atlTransformation, out);
+		analyser.setDoDependencyAnalysis(doDependencyAnalysis);
+		analyser.perform();
 	
+		dependencyGraph = analyser.getDependencyGraph();
+		
 		typingModel = out;	
+		
+		System.out.println("Finished typing " + atlTransformationFile);
 	}
 	
-	private AtlTransformationMetamodelsModel loadMetamodels(Object[] metamodels, String[] names) {
-		int i = 0;
-		HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
-		ArrayList<Resource> resources = new ArrayList<Resource>();
-		for (Object fileOrResource : metamodels) {
-			Resource r = null;
-			if ( fileOrResource instanceof String ) {
-				r = rs.getResource(URI.createURI((String) fileOrResource), true);
-			} else {
-				r = (Resource) fileOrResource;
-			}
-			resources.add(r);
-			logicalNamesToResources.put(names[i], r);
-			i++;
-		}
+	/*
+	public MetamodelPrunner pruneMetamodel(String logicalName, String newURI, String newName, String filename) {
+		prunnedResource = rs.createResource(URI.createURI(filename));
+		
+		MetamodelPrunner prunner = new MetamodelPrunner (atlTransformation, 
+				getTransformationMetamodels(mm), getTypingModel(), uri);
+		metamodelPkg = prunner.extractSource(prunnedResource, newName, newURI, newName);
+		System.out.println(metamodelPkg);
+		return prunner ;
+	}	
+	*/
+	
 
-		return new AtlTransformationMetamodelsModel(resources, logicalNamesToResources);
+	protected void generateGraphviz() {
+		new GraphvizGenerator(dependencyGraph).visualize();
+	}	
+	
+	protected void generateCSP() {
+		String s = new CSPGenerator(dependencyGraph).generate();
+		if ( ! s.trim().isEmpty() )
+			System.out.println(s);
+	}
+	
+	protected void generateErrorSlice(String errorSliceMMUri) throws IOException {
+		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
+		new ErrorSliceGenerator(analyser, dependencyGraph).generate(r);
+		r.save(null);
+	}
+	
+	protected void generateEffectiveMetamodel(String logicalName, String outputPath) throws IOException {
+		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(outputPath));
+		TrafoMetamodelData data = new TrafoMetamodelData(atlTransformation, mm.getNamespace(logicalName), typingModel, logicalName);
+		new EffectiveMetamodelBuilder(data).extractSource(r, logicalName, logicalName, logicalName);
+		r.save(null);
+	}
+	
+
+	private AtlTransformationMetamodelsModel getTransformationMetamodels(GlobalNamespace ns) {
+		return new AtlTransformationMetamodelsModel(ns.getLogicalNamesToMetamodels().values(), ns.getLogicalNamesToMetamodels());
 	}
 
 	private GlobalNamespace loadMetamodels2(Object[] metamodels, String[] names) {

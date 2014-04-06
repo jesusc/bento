@@ -44,6 +44,15 @@ public interface AtlErrorsFactory extends EFactory {
 	FeatureNotFound createFeatureNotFound();
 
 	/**
+	 * Returns a new object of class '<em>Operation Not Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Not Found</em>'.
+	 * @generated
+	 */
+	OperationNotFound createOperationNotFound();
+
+	/**
 	 * Returns a new object of class '<em>Feature Not Found In Union Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +78,42 @@ public interface AtlErrorsFactory extends EFactory {
 	 * @generated
 	 */
 	NoContainerForRefImmediateComposite createNoContainerForRefImmediateComposite();
+
+	/**
+	 * Returns a new object of class '<em>Different Branch Types</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Different Branch Types</em>'.
+	 * @generated
+	 */
+	DifferentBranchTypes createDifferentBranchTypes();
+
+	/**
+	 * Returns a new object of class '<em>No Binding For Compulsory Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>No Binding For Compulsory Feature</em>'.
+	 * @generated
+	 */
+	NoBindingForCompulsoryFeature createNoBindingForCompulsoryFeature();
+
+	/**
+	 * Returns a new object of class '<em>Binding Expected One Assigned Many</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binding Expected One Assigned Many</em>'.
+	 * @generated
+	 */
+	BindingExpectedOneAssignedMany createBindingExpectedOneAssignedMany();
+
+	/**
+	 * Returns a new object of class '<em>Flatten Over Non Nested Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Flatten Over Non Nested Collection</em>'.
+	 * @generated
+	 */
+	FlattenOverNonNestedCollection createFlattenOverNonNestedCollection();
 
 	/**
 	 * Returns the package supported by this factory.

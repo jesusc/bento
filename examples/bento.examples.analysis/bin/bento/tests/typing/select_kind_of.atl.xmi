@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="4:1-21:2" name="uml2pn">
+    <commentsBefore>-- @path PN=/bento.examples.analysis/tests/bento/tests/petri_nets.ecore</commentsBefore>
+    <commentsBefore>-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore</commentsBefore>
+    <inModels location="5:22-5:30" name="IN" metamodel="/2"/>
+    <outModels location="5:8-5:16" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="7:1-12:2" name="activity_node">
+      <outPattern location="9:9-11:10">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="9:14-11:10" varName="net">
+          <type xsi:type="ocl:OclModelElement" location="9:21-9:32" name="PetriNet" model="/4"/>
+          <bindings location="10:10-10:96" propertyName="elems">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="10:19-10:96" name="handler">
+              <source xsi:type="ocl:CollectionOperationCallExp" location="10:19-10:88" operationName="first">
+                <source xsi:type="ocl:IteratorExp" location="10:19-10:79" name="select">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:19-10:32" name="node">
+                    <source xsi:type="ocl:VariableExp" location="10:19-10:27" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                  </source>
+                  <body xsi:type="ocl:OperationCallExp" location="10:45-10:78" operationName="oclIsKindOf">
+                    <source xsi:type="ocl:VariableExp" location="10:45-10:46" referredVariable="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@iterators.0"/>
+                    <arguments xsi:type="ocl:OclModelElement" location="10:59-10:77" name="ExecutableNode" model="/5"/>
+                  </body>
+                  <iterators location="10:41-10:42" varName="n" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@body/@source"/>
+                </source>
+              </source>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="8:9-8:37">
+        <elements xsi:type="atl:SimpleInPatternElement" location="8:14-8:37" varName="activity" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="8:25-8:37" name="Activity" model="/3"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="14:1-21:2" name="handler">
+      <outPattern location="17:2-20:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="18:3-20:4" varName="pn">
+          <type xsi:type="ocl:OclModelElement" location="18:8-18:16" name="Place" model="/7"/>
+          <bindings location="19:4-19:21" propertyName="name">
+            <value xsi:type="ocl:StringExp" location="19:12-19:21" stringSymbol="handler"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="15:2-16:33">
+        <elements xsi:type="atl:SimpleInPatternElement" location="16:3-16:33" varName="handler">
+          <type xsi:type="ocl:OclModelElement" location="16:13-16:33" name="ExceptionHandler" model="/6"/>
+        </elements>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="5:14-5:16" name="PN" model="/0/@outModels.0"/>
+  <ocl:OclModel location="5:27-5:30" name="UML" model="/0/@inModels.0"/>
+  <ocl:OclModel location="8:25-8:28" name="UML" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="9:21-9:23" name="PN" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="10:59-10:62" name="UML" elements="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@body/@arguments.0"/>
+  <ocl:OclModel location="16:13-16:16" name="UML" elements="/0/@elements.1/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="18:8-18:10" name="PN" elements="/0/@elements.1/@outPattern/@elements.0/@type"/>
+</xmi:XMI>

@@ -6,9 +6,11 @@ import genericity.compiler.atl.analyser.TypingModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -18,6 +20,7 @@ public class GlobalNamespace {
 	
 	public static final String THIS_MODULE = "thisModule";
 	private TransformationNamespace tspace;
+	private Map<String, Resource>	logicalNamesToMetamodels;
 	
 	
 	public GlobalNamespace(Collection<Resource> r, HashMap<String, Resource> logicalNamesToMetamodels) {
@@ -28,6 +31,12 @@ public class GlobalNamespace {
 		for (String key : logicalNamesToMetamodels.keySet()) {
 			namesToMetamodels.put(key, new MetamodelNamespace(key, logicalNamesToMetamodels.get(key)));
 		}
+		
+		this.logicalNamesToMetamodels = Collections.unmodifiableMap(logicalNamesToMetamodels);
+	}
+	
+	public Map<String, Resource> getLogicalNamesToMetamodels() {
+		return logicalNamesToMetamodels;
 	}
 	
 	public TransformationNamespace getTransformationNamespace() {

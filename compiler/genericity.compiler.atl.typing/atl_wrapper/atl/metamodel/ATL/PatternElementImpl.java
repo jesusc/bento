@@ -250,6 +250,15 @@ public class PatternElementImpl extends atl.metamodel.ATLModelBaseObject impleme
 		for(atl.metamodel.ATLModelVisitor.VisitingAction va : v.getActions(this)) {
 			if ( va.isMethodCall() ) {
 				va.performMethodCall();		
+			} else if ( va.isFilter() ) {
+				Object res = va.performMethodCall();
+				if ( res instanceof java.util.Collection ) {
+					for(Object o : (java.util.Collection<?>) res) {
+						((atl.metamodel.ATLModelVisitable) o).visit(visitor);
+					}
+				} else {
+					((atl.metamodel.ATLModelVisitable) res).visit(visitor);
+				}
 			} else if ( va.isReference() ) {
 				EReference r = va.getEReference();
 				

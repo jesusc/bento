@@ -35,36 +35,47 @@ public class CodeCloneTools extends BaseTest {
 	}
 	
 	public void run() throws IOException {
+		/*
 		typing(CloneDr2CodeClone_TRANSFORMATION, new Object[] { CLONEDR_METAMODEL, FILEINFO_METAMODEL, CODECLONE_METAMODEL }, 
-				   new String[] { "CloneDr", "FileInfo", "CodeClone" });
+				   new String[] { "CloneDr", "FileInfo", "CodeClone" }, true);
 		
-		System.out.println("Finished typing of " + CloneDr2CodeClone_TRANSFORMATION);
-
+		generateGraphviz();
+		generateCSP();
+		
+		//
+		
 		typing(Simian2CodeClone_TRANSFORMATION, new Object[] { SIMIAN_METAMODEL, FILEINFO_METAMODEL, CODECLONE_METAMODEL }, 
-				   new String[] { "Simian", "FileInfo", "CodeClone" });
+				   new String[] { "Simian", "FileInfo", "CodeClone" }, true);
 		
-		System.out.println("Finished typing of " + CloneDr2CodeClone_TRANSFORMATION);
+		generateCSP();
 
-		typing(SimScan2CodeClone_TRANSFORMATION, new Object[] { SIMSCAN_METAMODEL, FILEINFO_METAMODEL, CODECLONE_METAMODEL }, 
-				   new String[] { "SimScan", "FileInfo", "CodeClone" });
+		//
 		
-		System.out.println("Finished typing of " + SimScan2CodeClone_TRANSFORMATION);
+		typing(SimScan2CodeClone_TRANSFORMATION, new Object[] { SIMSCAN_METAMODEL, FILEINFO_METAMODEL, CODECLONE_METAMODEL }, 
+				   new String[] { "SimScan", "FileInfo", "CodeClone" }, true);
+		
+		generateCSP();
+		*/
 
 		typing(SVG2XML_TRANSFORMATION, new Object[] { SVG_METAMODEL, XML_METAMODEL}, 
-				   new String[] { "SVG", "XML" });
+				   new String[] { "SVG", "XML" }, true);
 		
-		System.out.println("Finished typing of " + SVG2XML_TRANSFORMATION);
-
+		generateCSP();
+		
+		/*
+		
 		// WITH TYPE ERRORS!
 		typing(CodeClone2SVG_TRANSFORMATION, new Object[] { CODECLONE_METAMODEL, SVG_METAMODEL }, 
-				   new String[] { "CodeClone", "SVG" });
+				   new String[] { "CodeClone", "SVG" }, true);
 		
-		System.out.println("Finished typing of " + CodeClone2SVG_TRANSFORMATION);
+		generateCSP();
 		
 		typing(CodeClone2SVG2_TRANSFORMATION, new Object[] { CODECLONE_METAMODEL, SVG_METAMODEL }, 
-				   new String[] { "CodeClone", "SVG" });
+				   new String[] { "CodeClone", "SVG" }, true);
 		
-		System.out.println("Finished typing of " + CodeClone2SVG2_TRANSFORMATION);
+		generateCSP();
+		*/
+
 	}
 
 }

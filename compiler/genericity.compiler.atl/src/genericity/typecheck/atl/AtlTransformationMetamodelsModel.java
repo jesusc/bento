@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.eclectic.modeling.emf.IModel;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -17,11 +18,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 public class AtlTransformationMetamodelsModel implements IModel<EObject, EClass>{
 	HashSet<Resource> resources = new HashSet<Resource>();
 	private Object methodHandler;
+	private Map<String, Resource>	logicalNamesToMetamodels;
 	
-	public AtlTransformationMetamodelsModel(Collection<Resource> r, HashMap<String, Resource> logicalNamesToMetamodels) {
+	public AtlTransformationMetamodelsModel(Collection<Resource> r, Map<String, Resource> logicalNamesToMetamodels) {
 		for (Resource resource : r) {
 			resources.add(resource);
 		}
+		this.logicalNamesToMetamodels = logicalNamesToMetamodels;
+	}
+	
+	public HashMap<String, Resource> getLogicalNamesToMetamodels() {
+		return new HashMap<String, Resource>(logicalNamesToMetamodels);
 	}
 	
 	@Override

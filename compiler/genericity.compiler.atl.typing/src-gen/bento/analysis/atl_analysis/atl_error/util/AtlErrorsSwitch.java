@@ -99,6 +99,15 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.TARGET_MODEL_CONFORMANCE_PROBLEM: {
+				TargetModelConformanceProblem targetModelConformanceProblem = (TargetModelConformanceProblem)theEObject;
+				T result = caseTargetModelConformanceProblem(targetModelConformanceProblem);
+				if (result == null) result = caseLocalProblem(targetModelConformanceProblem);
+				if (result == null) result = caseProblem(targetModelConformanceProblem);
+				if (result == null) result = caseAnalysisInfo(targetModelConformanceProblem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR: {
 				CollectionOperationOverNoCollectionError collectionOperationOverNoCollectionError = (CollectionOperationOverNoCollectionError)theEObject;
 				T result = caseCollectionOperationOverNoCollectionError(collectionOperationOverNoCollectionError);
@@ -116,6 +125,16 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseLocalProblem(featureNotFound);
 				if (result == null) result = caseProblem(featureNotFound);
 				if (result == null) result = caseAnalysisInfo(featureNotFound);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.OPERATION_NOT_FOUND: {
+				OperationNotFound operationNotFound = (OperationNotFound)theEObject;
+				T result = caseOperationNotFound(operationNotFound);
+				if (result == null) result = caseNavigationProblem(operationNotFound);
+				if (result == null) result = caseLocalProblem(operationNotFound);
+				if (result == null) result = caseProblem(operationNotFound);
+				if (result == null) result = caseAnalysisInfo(operationNotFound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,6 +165,55 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseLocalProblem(noContainerForRefImmediateComposite);
 				if (result == null) result = caseProblem(noContainerForRefImmediateComposite);
 				if (result == null) result = caseAnalysisInfo(noContainerForRefImmediateComposite);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.DIFFERENT_BRANCH_TYPES: {
+				DifferentBranchTypes differentBranchTypes = (DifferentBranchTypes)theEObject;
+				T result = caseDifferentBranchTypes(differentBranchTypes);
+				if (result == null) result = caseNavigationProblem(differentBranchTypes);
+				if (result == null) result = caseLocalProblem(differentBranchTypes);
+				if (result == null) result = caseProblem(differentBranchTypes);
+				if (result == null) result = caseAnalysisInfo(differentBranchTypes);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.BINDING_PROBLEM: {
+				BindingProblem bindingProblem = (BindingProblem)theEObject;
+				T result = caseBindingProblem(bindingProblem);
+				if (result == null) result = caseLocalProblem(bindingProblem);
+				if (result == null) result = caseProblem(bindingProblem);
+				if (result == null) result = caseAnalysisInfo(bindingProblem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.NO_BINDING_FOR_COMPULSORY_FEATURE: {
+				NoBindingForCompulsoryFeature noBindingForCompulsoryFeature = (NoBindingForCompulsoryFeature)theEObject;
+				T result = caseNoBindingForCompulsoryFeature(noBindingForCompulsoryFeature);
+				if (result == null) result = caseTargetModelConformanceProblem(noBindingForCompulsoryFeature);
+				if (result == null) result = caseBindingProblem(noBindingForCompulsoryFeature);
+				if (result == null) result = caseLocalProblem(noBindingForCompulsoryFeature);
+				if (result == null) result = caseProblem(noBindingForCompulsoryFeature);
+				if (result == null) result = caseAnalysisInfo(noBindingForCompulsoryFeature);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.BINDING_EXPECTED_ONE_ASSIGNED_MANY: {
+				BindingExpectedOneAssignedMany bindingExpectedOneAssignedMany = (BindingExpectedOneAssignedMany)theEObject;
+				T result = caseBindingExpectedOneAssignedMany(bindingExpectedOneAssignedMany);
+				if (result == null) result = caseBindingProblem(bindingExpectedOneAssignedMany);
+				if (result == null) result = caseLocalProblem(bindingExpectedOneAssignedMany);
+				if (result == null) result = caseProblem(bindingExpectedOneAssignedMany);
+				if (result == null) result = caseAnalysisInfo(bindingExpectedOneAssignedMany);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: {
+				FlattenOverNonNestedCollection flattenOverNonNestedCollection = (FlattenOverNonNestedCollection)theEObject;
+				T result = caseFlattenOverNonNestedCollection(flattenOverNonNestedCollection);
+				if (result == null) result = caseLocalProblem(flattenOverNonNestedCollection);
+				if (result == null) result = caseProblem(flattenOverNonNestedCollection);
+				if (result == null) result = caseAnalysisInfo(flattenOverNonNestedCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,6 +267,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target Model Conformance Problem</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target Model Conformance Problem</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTargetModelConformanceProblem(TargetModelConformanceProblem object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Collection Operation Over No Collection Error</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -225,6 +308,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureNotFound(FeatureNotFound object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Not Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Not Found</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationNotFound(OperationNotFound object) {
 		return null;
 	}
 
@@ -270,6 +368,81 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNoContainerForRefImmediateComposite(NoContainerForRefImmediateComposite object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Different Branch Types</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Different Branch Types</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDifferentBranchTypes(DifferentBranchTypes object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Problem</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Problem</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingProblem(BindingProblem object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>No Binding For Compulsory Feature</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>No Binding For Compulsory Feature</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNoBindingForCompulsoryFeature(NoBindingForCompulsoryFeature object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Expected One Assigned Many</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Expected One Assigned Many</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Flatten Over Non Nested Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Flatten Over Non Nested Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFlattenOverNonNestedCollection(FlattenOverNonNestedCollection object) {
 		return null;
 	}
 

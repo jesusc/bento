@@ -60,9 +60,24 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case AnnotationsPackage.HELPER_ANNOTATION: return createHelperAnnotation();
-			case AnnotationsPackage.BINDING_ANNOTATION: return createBindingAnnotation();
-			case AnnotationsPackage.EXPRESSION_ANNOTATION: return createExpressionAnnotation();
+			case AnnotationsPackage.TRANSFORMATION_ANN: return createTransformationAnn();
+			case AnnotationsPackage.MATCHED_RULE_ONE_ANN: return createMatchedRuleOneAnn();
+			case AnnotationsPackage.MATCHED_RULE_MANY_ANN: return createMatchedRuleManyAnn();
+			case AnnotationsPackage.LAZY_RULE_ANN: return createLazyRuleAnn();
+			case AnnotationsPackage.CALLED_RULE_ANN: return createCalledRuleAnn();
+			case AnnotationsPackage.OUTPUT_PATTERN_ANN: return createOutputPatternAnn();
+			case AnnotationsPackage.MODULE_HELPER_ANN: return createModuleHelperAnn();
+			case AnnotationsPackage.CONTEXT_HELPER_ANN: return createContextHelperAnn();
+			case AnnotationsPackage.BINDING_ANN: return createBindingAnn();
+			case AnnotationsPackage.LET_EXPR_ANN: return createLetExprAnn();
+			case AnnotationsPackage.IF_EXPR_ANN: return createIfExprAnn();
+			case AnnotationsPackage.CALL_EXPR_ANN: return createCallExprAnn();
+			case AnnotationsPackage.ITERATOR_EXPR_ANN: return createIteratorExprAnn();
+			case AnnotationsPackage.ITERATE_EXPR_ANN: return createIterateExprAnn();
+			case AnnotationsPackage.COLLECTION_EXPR_ANN: return createCollectionExprAnn();
+			case AnnotationsPackage.MAP_EXPR_ANN: return createMapExprAnn();
+			case AnnotationsPackage.TUPLE_EXPR_ANN: return createTupleExprAnn();
+			case AnnotationsPackage.GENERIC_EXPR_ANN: return createGenericExprAnn();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -73,9 +88,9 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HelperAnnotation createHelperAnnotation() {
-		HelperAnnotationImpl helperAnnotation = new HelperAnnotationImpl();
-		return helperAnnotation;
+	public TransformationAnn createTransformationAnn() {
+		TransformationAnnImpl transformationAnn = new TransformationAnnImpl();
+		return transformationAnn;
 	}
 
 	/**
@@ -83,9 +98,9 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BindingAnnotation createBindingAnnotation() {
-		BindingAnnotationImpl bindingAnnotation = new BindingAnnotationImpl();
-		return bindingAnnotation;
+	public MatchedRuleOneAnn createMatchedRuleOneAnn() {
+		MatchedRuleOneAnnImpl matchedRuleOneAnn = new MatchedRuleOneAnnImpl();
+		return matchedRuleOneAnn;
 	}
 
 	/**
@@ -93,9 +108,159 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionAnnotation createExpressionAnnotation() {
-		ExpressionAnnotationImpl expressionAnnotation = new ExpressionAnnotationImpl();
-		return expressionAnnotation;
+	public MatchedRuleManyAnn createMatchedRuleManyAnn() {
+		MatchedRuleManyAnnImpl matchedRuleManyAnn = new MatchedRuleManyAnnImpl();
+		return matchedRuleManyAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LazyRuleAnn createLazyRuleAnn() {
+		LazyRuleAnnImpl lazyRuleAnn = new LazyRuleAnnImpl();
+		return lazyRuleAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CalledRuleAnn createCalledRuleAnn() {
+		CalledRuleAnnImpl calledRuleAnn = new CalledRuleAnnImpl();
+		return calledRuleAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OutputPatternAnn createOutputPatternAnn() {
+		OutputPatternAnnImpl outputPatternAnn = new OutputPatternAnnImpl();
+		return outputPatternAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModuleHelperAnn createModuleHelperAnn() {
+		ModuleHelperAnnImpl moduleHelperAnn = new ModuleHelperAnnImpl();
+		return moduleHelperAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ContextHelperAnn createContextHelperAnn() {
+		ContextHelperAnnImpl contextHelperAnn = new ContextHelperAnnImpl();
+		return contextHelperAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingAnn createBindingAnn() {
+		BindingAnnImpl bindingAnn = new BindingAnnImpl();
+		return bindingAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LetExprAnn createLetExprAnn() {
+		LetExprAnnImpl letExprAnn = new LetExprAnnImpl();
+		return letExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IfExprAnn createIfExprAnn() {
+		IfExprAnnImpl ifExprAnn = new IfExprAnnImpl();
+		return ifExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallExprAnn createCallExprAnn() {
+		CallExprAnnImpl callExprAnn = new CallExprAnnImpl();
+		return callExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IteratorExprAnn createIteratorExprAnn() {
+		IteratorExprAnnImpl iteratorExprAnn = new IteratorExprAnnImpl();
+		return iteratorExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IterateExprAnn createIterateExprAnn() {
+		IterateExprAnnImpl iterateExprAnn = new IterateExprAnnImpl();
+		return iterateExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionExprAnn createCollectionExprAnn() {
+		CollectionExprAnnImpl collectionExprAnn = new CollectionExprAnnImpl();
+		return collectionExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MapExprAnn createMapExprAnn() {
+		MapExprAnnImpl mapExprAnn = new MapExprAnnImpl();
+		return mapExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TupleExprAnn createTupleExprAnn() {
+		TupleExprAnnImpl tupleExprAnn = new TupleExprAnnImpl();
+		return tupleExprAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericExprAnn createGenericExprAnn() {
+		GenericExprAnnImpl genericExprAnn = new GenericExprAnnImpl();
+		return genericExprAnn;
 	}
 
 	/**

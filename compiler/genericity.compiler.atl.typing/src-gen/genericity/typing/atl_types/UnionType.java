@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface UnionType extends Type {
 	/**
-	 * Returns the value of the '<em><b>Possible Types</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Possible Types</b></em>' reference list.
 	 * The list contents are of type {@link genericity.typing.atl_types.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -34,9 +34,9 @@ public interface UnionType extends Type {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Possible Types</em>' containment reference list.
+	 * @return the value of the '<em>Possible Types</em>' reference list.
 	 * @see genericity.typing.atl_types.AtlTypingPackage#getUnionType_PossibleTypes()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	EList<Type> getPossibleTypes();

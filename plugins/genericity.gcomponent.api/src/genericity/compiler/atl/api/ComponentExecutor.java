@@ -149,13 +149,16 @@ public class ComponentExecutor {
 			}
 			
 			
+			/*
 			ArrayList<Metamodel> metamodels = new ArrayList<Metamodel>();
 			for (AtlParameter p : template.getParameters()) {
 				ParameterModel pm = (ParameterModel) p.getModel();
 				metamodels.add(pm.getType());
 			}
-			// template.getParameters().get(0).getModel()
 			adapter.doAdaptation(loader, atlBoundModel.getAtlMetamodelName(), metamodels);
+			*/
+
+			adapter.doAdaptation(loader, atlBoundModel.getAtlMetamodelName(), template.getParameters());
 		}
 
 		

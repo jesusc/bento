@@ -4,6 +4,8 @@ public class AnalyserContext {
 	private static ThreadLocal<TypingModel> typingModelTL = new ThreadLocal<TypingModel>();
 	private static ThreadLocal<ErrorModel>  errorModelTL  = new ThreadLocal<ErrorModel>();
 	private static ThreadLocal<EcoreTypeConverter> converterTL  = new ThreadLocal<EcoreTypeConverter>();
+	private static boolean	isVarDclInferencePreferred = true;
+	private static boolean	isOclStrict = false;
 	
 	public static void setTypingModel(TypingModel value) {
 		typingModelTL.set(value);
@@ -24,5 +26,13 @@ public class AnalyserContext {
 	
 	public static EcoreTypeConverter getConverter() {
 		return converterTL.get();
+	}
+
+	public static boolean isVarDclInferencePreferred() {
+		return isVarDclInferencePreferred ;
+	}
+
+	public static boolean isOclStrict() {
+		return isOclStrict ;
 	}
 }

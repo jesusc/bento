@@ -70,6 +70,8 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 			case AtlTypingPackage.TUPLE_ATTRIBUTE: return createTupleAttribute();
 			case AtlTypingPackage.REF_TYPE: return createRefType();
 			case AtlTypingPackage.UNKNOWN: return createUnknown();
+			case AtlTypingPackage.EMPTY_COLLECTION_TYPE: return createEmptyCollectionType();
+			case AtlTypingPackage.TYPE_ERROR: return createTypeError();
 			case AtlTypingPackage.UNKNOWN_FEATURE: return createUnknownFeature();
 			case AtlTypingPackage.EMPTY_COLLECTION: return createEmptyCollection();
 			case AtlTypingPackage.ENUM_TYPE: return createEnumType();
@@ -182,6 +184,26 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	public Unknown createUnknown() {
 		UnknownImpl unknown = new UnknownImpl();
 		return unknown;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EmptyCollectionType createEmptyCollectionType() {
+		EmptyCollectionTypeImpl emptyCollectionType = new EmptyCollectionTypeImpl();
+		return emptyCollectionType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeError createTypeError() {
+		TypeErrorImpl typeError = new TypeErrorImpl();
+		return typeError;
 	}
 
 	/**

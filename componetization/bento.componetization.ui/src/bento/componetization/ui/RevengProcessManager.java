@@ -2,6 +2,8 @@ package bento.componetization.ui;
 
 // import genericity.typing.atl_types.AtlTypingPackage;
 
+import genericity.compiler.atl.analyser.Analyser;
+import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.api.AtlTransformationLoader;
 import genericity.compiler.atl.api.AtlTransformationLoader.FileBased;
 import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
@@ -34,6 +36,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 
+import bento.analysis.atl_analysis.ErrorMessages;
+import bento.analysis.atl_analysis.Problem;
+import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.atl.MetamodelPrunner;
@@ -68,7 +73,7 @@ public class RevengProcessManager {
 
 	private BasicEMFModel typing;
 	
-	private IModel metamodelsAndConcepts;
+	private AtlTransformationMetamodelsModel metamodelsAndConcepts;
 	private HashMap<Metamodel, Resource> metamodelResources;
 	private HashMap<Concept, Resource> conceptResources = new HashMap<Concept, Resource>();
 	private FileBased atlLoader;
@@ -177,20 +182,43 @@ public class RevengProcessManager {
 		pkgs.add(AtlTypingPackage.eINSTANCE);
 		typing = loader.emptyModelFromMemory(pkgs, getTypeModelURI());
 
-		// String[] strMetamodels = getMetamodelPaths();
 
-		metamodelsAndConcepts = this.loadTransformationMetamodels(model.getTransformation().getMetamodels());
 		
-		TypeCheckLauncher launcher = new TypeCheckLauncher();
-		launcher.setWarningMode();
-		try {
-			launcher.launch(metamodelsAndConcepts, atlModel, typing);		
-		} catch ( Exception e ) {
-			e.printStackTrace();
+		metamodelsAndConcepts = this.loadTransformationMetamodels(model.getTransformation().getMetamodels());
+
+		if ( false ) {
+			// Old version
+			TypeCheckLauncher launcher = new TypeCheckLauncher();
+			launcher.setWarningMode();
+			try {
+				launcher.launch(metamodelsAndConcepts, atlModel, typing);		
+			} catch ( Exception e ) {
+				e.printStackTrace();
+			}
+
+			return new TypingInfo(launcher.getMessages());
+		} else {
+			HashMap<String, Resource> nameBindings = metamodelsAndConcepts.getLogicalNamesToMetamodels();
+			GlobalNamespace mm = new GlobalNamespace(nameBindings.values(), nameBindings);
+			Analyser analyser = new Analyser(mm, atlModel, typing);
+			analyser.setDoDependencyAnalysis(false);
+			analyser.perform();
+			
+			ArrayList<TypeCheckLauncher.ErrorMessage> messages = new ArrayList<TypeCheckLauncher.ErrorMessage>();
+			
+			// Adapt to old version of error messages, until a complete update is done
+			for(Problem p : analyser.getErrors().getAnalysis().getProblems() ) {
+				if ( p instanceof LocalProblem ) {
+					bento.analysis.atl_analysis.atl_error.LocalProblem lp = (LocalProblem) p;
+					TypeCheckLauncher.ErrorMessage msg = new TypeCheckLauncher.ErrorMessage(ErrorMessages.getMessage(p), lp.getLocation());
+					
+					messages.add(msg);
+				}
+			}
+			
+			return new TypingInfo(messages);
 		}
 		
-		return new TypingInfo(launcher.getMessages());
-
 		// typing.serialize();
 	}
 
@@ -279,7 +307,7 @@ public class RevengProcessManager {
 		return pkg;
 	}
 	
-    public IModel loadTransformationMetamodels(List<Metamodel> metamodels) throws IOException {
+    public AtlTransformationMetamodelsModel loadTransformationMetamodels(List<Metamodel> metamodels) throws IOException {
         metamodelResources = new HashMap<Metamodel, Resource>();
         HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
     	
@@ -288,8 +316,6 @@ public class RevengProcessManager {
         // Resource merged = rs.createResource(URI.createURI("reveng_metamodels.ecore"));
         
         for (Metamodel m : metamodels) {
-        	boolean requirePruning = false;
-        	
         	String path;
         	if ( m.getExtractedConcept() == null ) 
         		path = m.getPath();
@@ -324,8 +350,6 @@ public class RevengProcessManager {
         	//	  pruneMetamodel(m);
         }
 
-        
-        
         return new AtlTransformationMetamodelsModel(logicalNamesToResources.values(), logicalNamesToResources);
     }
 

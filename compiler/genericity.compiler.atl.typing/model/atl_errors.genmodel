@@ -11,22 +11,30 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//AnalysisResult/problems"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_errors.ecore#//AnalysisInfo"/>
-    <genClasses image="false" ecoreClass="atl_errors.ecore#//Problem"/>
+    <genClasses image="false" ecoreClass="atl_errors.ecore#//Problem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//Problem/dependents"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="atl_errors.ecore#//Recovery"/>
     <nestedGenPackages prefix="AtlErrors" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_error">
       <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/LocalProblem">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/LocalProblem/location"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/LocalProblem/element"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/LocalProblem/element"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/LocalProblem/recovery"/>
       </genClasses>
       <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/NavigationProblem"/>
       <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/InvalidArgumentProblem"/>
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/TargetModelConformanceProblem"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/CollectionOperationOverNoCollectionError"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFound">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/featureName"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/className"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/metamodelName"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/OperationNotFound">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFound/operationName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/OperationNotFound/type"/>
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType/featureName"/>
@@ -38,6 +46,20 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoContainerForRefImmediateComposite/className"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoContainerForRefImmediateComposite/metamodelName"/>
       </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/DifferentBranchTypes">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/DifferentBranchTypes/thenType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/DifferentBranchTypes/elseType"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/BindingProblem">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingProblem/feature"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/BindingProblem/featureName"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoBindingForCompulsoryFeature"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingExpectedOneAssignedMany"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">

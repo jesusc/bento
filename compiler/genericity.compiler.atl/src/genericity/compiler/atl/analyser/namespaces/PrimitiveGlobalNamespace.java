@@ -21,10 +21,10 @@ public class PrimitiveGlobalNamespace implements IMetamodelNamespace {
 	
 	public PrimitiveGlobalNamespace(TypingModel typ) {
 		this.typ = typ;
-		this.stringNamespace = new StringNamespace(this);
-		this.integerNamespace = new IntegerNamespace(this);
-		this.booleanNamespace = new BooleanNamespace(this);
-		this.floatNamespace   = new FloatNamespace(this);
+		this.stringNamespace = new StringNamespace();
+		this.integerNamespace = new IntegerNamespace();
+		this.booleanNamespace = new BooleanNamespace();
+		this.floatNamespace   = new FloatNamespace();
 	}
 
 	@Override

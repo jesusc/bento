@@ -10,15 +10,22 @@ import bento.analysis.atl_analysis.AtlAnalysisPackage;
 
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
+import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingProblem;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
+import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
+import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
 import bento.analysis.atl_analysis.atl_error.InvalidArgumentProblem;
 import bento.analysis.atl_analysis.atl_error.InvalidOperand;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.NavigationProblem;
 
+import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
+import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.TargetModelConformanceProblem;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage;
 import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryPackageImpl;
 import bento.analysis.atl_analysis.impl.AtlAnalysisPackageImpl;
@@ -64,6 +71,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass targetModelConformanceProblemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass collectionOperationOverNoCollectionErrorEClass = null;
 
 	/**
@@ -72,6 +86,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass featureNotFoundEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationNotFoundEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,6 +114,41 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass noContainerForRefImmediateCompositeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass differentBranchTypesEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingProblemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass noBindingForCompulsoryFeatureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingExpectedOneAssignedManyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass flattenOverNonNestedCollectionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -189,8 +245,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLocalProblem_Element() {
-		return (EAttribute)localProblemEClass.getEStructuralFeatures().get(1);
+	public EReference getLocalProblem_Element() {
+		return (EReference)localProblemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -218,6 +274,15 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 */
 	public EClass getInvalidArgumentProblem() {
 		return invalidArgumentProblemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTargetModelConformanceProblem() {
+		return targetModelConformanceProblemEClass;
 	}
 
 	/**
@@ -263,6 +328,33 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 */
 	public EAttribute getFeatureNotFound_MetamodelName() {
 		return (EAttribute)featureNotFoundEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperationNotFound() {
+		return operationNotFoundEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperationNotFound_OperationName() {
+		return (EAttribute)operationNotFoundEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperationNotFound_Type() {
+		return (EReference)operationNotFoundEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -333,6 +425,87 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDifferentBranchTypes() {
+		return differentBranchTypesEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDifferentBranchTypes_ThenType() {
+		return (EReference)differentBranchTypesEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDifferentBranchTypes_ElseType() {
+		return (EReference)differentBranchTypesEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBindingProblem() {
+		return bindingProblemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingProblem_Feature() {
+		return (EReference)bindingProblemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBindingProblem_FeatureName() {
+		return (EAttribute)bindingProblemEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNoBindingForCompulsoryFeature() {
+		return noBindingForCompulsoryFeatureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBindingExpectedOneAssignedMany() {
+		return bindingExpectedOneAssignedManyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFlattenOverNonNestedCollection() {
+		return flattenOverNonNestedCollectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AtlErrorsFactory getAtlErrorsFactory() {
 		return (AtlErrorsFactory)getEFactoryInstance();
 	}
@@ -358,12 +531,14 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		// Create classes and their features
 		localProblemEClass = createEClass(LOCAL_PROBLEM);
 		createEAttribute(localProblemEClass, LOCAL_PROBLEM__LOCATION);
-		createEAttribute(localProblemEClass, LOCAL_PROBLEM__ELEMENT);
+		createEReference(localProblemEClass, LOCAL_PROBLEM__ELEMENT);
 		createEReference(localProblemEClass, LOCAL_PROBLEM__RECOVERY);
 
 		navigationProblemEClass = createEClass(NAVIGATION_PROBLEM);
 
 		invalidArgumentProblemEClass = createEClass(INVALID_ARGUMENT_PROBLEM);
+
+		targetModelConformanceProblemEClass = createEClass(TARGET_MODEL_CONFORMANCE_PROBLEM);
 
 		collectionOperationOverNoCollectionErrorEClass = createEClass(COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR);
 
@@ -371,6 +546,10 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		createEAttribute(featureNotFoundEClass, FEATURE_NOT_FOUND__FEATURE_NAME);
 		createEAttribute(featureNotFoundEClass, FEATURE_NOT_FOUND__CLASS_NAME);
 		createEAttribute(featureNotFoundEClass, FEATURE_NOT_FOUND__METAMODEL_NAME);
+
+		operationNotFoundEClass = createEClass(OPERATION_NOT_FOUND);
+		createEAttribute(operationNotFoundEClass, OPERATION_NOT_FOUND__OPERATION_NAME);
+		createEReference(operationNotFoundEClass, OPERATION_NOT_FOUND__TYPE);
 
 		featureNotFoundInUnionTypeEClass = createEClass(FEATURE_NOT_FOUND_IN_UNION_TYPE);
 		createEAttribute(featureNotFoundInUnionTypeEClass, FEATURE_NOT_FOUND_IN_UNION_TYPE__FEATURE_NAME);
@@ -381,6 +560,20 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		noContainerForRefImmediateCompositeEClass = createEClass(NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE);
 		createEAttribute(noContainerForRefImmediateCompositeEClass, NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__CLASS_NAME);
 		createEAttribute(noContainerForRefImmediateCompositeEClass, NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE__METAMODEL_NAME);
+
+		differentBranchTypesEClass = createEClass(DIFFERENT_BRANCH_TYPES);
+		createEReference(differentBranchTypesEClass, DIFFERENT_BRANCH_TYPES__THEN_TYPE);
+		createEReference(differentBranchTypesEClass, DIFFERENT_BRANCH_TYPES__ELSE_TYPE);
+
+		bindingProblemEClass = createEClass(BINDING_PROBLEM);
+		createEReference(bindingProblemEClass, BINDING_PROBLEM__FEATURE);
+		createEAttribute(bindingProblemEClass, BINDING_PROBLEM__FEATURE_NAME);
+
+		noBindingForCompulsoryFeatureEClass = createEClass(NO_BINDING_FOR_COMPULSORY_FEATURE);
+
+		bindingExpectedOneAssignedManyEClass = createEClass(BINDING_EXPECTED_ONE_ASSIGNED_MANY);
+
+		flattenOverNonNestedCollectionEClass = createEClass(FLATTEN_OVER_NON_NESTED_COLLECTION);
 	}
 
 	/**
@@ -408,6 +601,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		// Obtain other dependent packages
 		AtlAnalysisPackage theAtlAnalysisPackage = (AtlAnalysisPackage)EPackage.Registry.INSTANCE.getEPackage(AtlAnalysisPackage.eNS_URI);
+		AtlTypingPackage theAtlTypingPackage = (AtlTypingPackage)EPackage.Registry.INSTANCE.getEPackage(AtlTypingPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -417,21 +611,31 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		localProblemEClass.getESuperTypes().add(theAtlAnalysisPackage.getProblem());
 		navigationProblemEClass.getESuperTypes().add(this.getLocalProblem());
 		invalidArgumentProblemEClass.getESuperTypes().add(this.getLocalProblem());
+		targetModelConformanceProblemEClass.getESuperTypes().add(this.getLocalProblem());
 		collectionOperationOverNoCollectionErrorEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
+		operationNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundInUnionTypeEClass.getESuperTypes().add(this.getNavigationProblem());
 		invalidOperandEClass.getESuperTypes().add(this.getInvalidArgumentProblem());
 		noContainerForRefImmediateCompositeEClass.getESuperTypes().add(this.getNavigationProblem());
+		differentBranchTypesEClass.getESuperTypes().add(this.getNavigationProblem());
+		bindingProblemEClass.getESuperTypes().add(this.getLocalProblem());
+		noBindingForCompulsoryFeatureEClass.getESuperTypes().add(this.getTargetModelConformanceProblem());
+		noBindingForCompulsoryFeatureEClass.getESuperTypes().add(this.getBindingProblem());
+		bindingExpectedOneAssignedManyEClass.getESuperTypes().add(this.getBindingProblem());
+		flattenOverNonNestedCollectionEClass.getESuperTypes().add(this.getLocalProblem());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(localProblemEClass, LocalProblem.class, "LocalProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLocalProblem_Location(), ecorePackage.getEString(), "location", null, 1, 1, LocalProblem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocalProblem_Element(), ecorePackage.getEString(), "element", null, 1, 1, LocalProblem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLocalProblem_Element(), ecorePackage.getEObject(), null, "element", null, 1, 1, LocalProblem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLocalProblem_Recovery(), theAtlAnalysisPackage.getRecovery(), null, "recovery", null, 0, 1, LocalProblem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(navigationProblemEClass, NavigationProblem.class, "NavigationProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(invalidArgumentProblemEClass, InvalidArgumentProblem.class, "InvalidArgumentProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(targetModelConformanceProblemEClass, TargetModelConformanceProblem.class, "TargetModelConformanceProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(collectionOperationOverNoCollectionErrorEClass, CollectionOperationOverNoCollectionError.class, "CollectionOperationOverNoCollectionError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -439,6 +643,10 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEAttribute(getFeatureNotFound_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, FeatureNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureNotFound_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, FeatureNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureNotFound_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, FeatureNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationNotFoundEClass, OperationNotFound.class, "OperationNotFound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOperationNotFound_OperationName(), ecorePackage.getEString(), "operationName", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperationNotFound_Type(), theAtlTypingPackage.getType(), null, "type", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(featureNotFoundInUnionTypeEClass, FeatureNotFoundInUnionType.class, "FeatureNotFoundInUnionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatureNotFoundInUnionType_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, FeatureNotFoundInUnionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -449,6 +657,20 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEClass(noContainerForRefImmediateCompositeEClass, NoContainerForRefImmediateComposite.class, "NoContainerForRefImmediateComposite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNoContainerForRefImmediateComposite_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, NoContainerForRefImmediateComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNoContainerForRefImmediateComposite_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, NoContainerForRefImmediateComposite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(differentBranchTypesEClass, DifferentBranchTypes.class, "DifferentBranchTypes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDifferentBranchTypes_ThenType(), theAtlTypingPackage.getType(), null, "thenType", null, 1, 1, DifferentBranchTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDifferentBranchTypes_ElseType(), theAtlTypingPackage.getType(), null, "elseType", null, 1, 1, DifferentBranchTypes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bindingProblemEClass, BindingProblem.class, "BindingProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBindingProblem_Feature(), ecorePackage.getEStructuralFeature(), null, "feature", null, 0, 1, BindingProblem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBindingProblem_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, BindingProblem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(noBindingForCompulsoryFeatureEClass, NoBindingForCompulsoryFeature.class, "NoBindingForCompulsoryFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(bindingExpectedOneAssignedManyEClass, BindingExpectedOneAssignedMany.class, "BindingExpectedOneAssignedMany", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(flattenOverNonNestedCollectionEClass, FlattenOverNonNestedCollection.class, "FlattenOverNonNestedCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //AtlErrorsPackageImpl

@@ -24,17 +24,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MapType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="keyType" lowerBound="1"
-        eType="#//Type" containment="true"/>
+        eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" lowerBound="1"
-        eType="#//Type" containment="true"/>
+        eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TupleAttribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Type"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefType" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="Unknown" eSuperTypes="#//RefType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmptyCollectionType" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeError" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownFeature" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature">
     <eStructuralFeatures xsi:type="ecore:EReference" name="theContainingClass" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
@@ -52,7 +53,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ReflectiveType" abstract="true" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnionType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="possibleTypes" upperBound="-1"
-        eType="#//Type" containment="true"/>
+        eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThisModuleType" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReflectiveClass" eSuperTypes="#//ReflectiveType"/>
@@ -65,13 +66,71 @@
   <eSubpackages name="annotations" nsURI="http://genericity/types/atl/annotations"
       nsPrefix="atl_types_annotations">
     <eClassifiers xsi:type="ecore:EClass" name="AtlAnnotation" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="HelperAnnotation" eSuperTypes="#//annotations/AtlAnnotation">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="helper" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TransformationAnn" eSuperTypes="#//annotations/AtlAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="module" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="matchedRules" upperBound="-1"
+          eType="#//annotations/MatchedRuleAnn" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="calledRules" upperBound="-1"
+          eType="#//annotations/CalledRuleAnn" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lazyRules" upperBound="-1"
+          eType="#//annotations/LazyRuleAnn" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="helpers" upperBound="-1"
+          eType="#//annotations/HelperAnn" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RuleAnn" abstract="true" eSuperTypes="#//annotations/AtlAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputPatterns" lowerBound="1"
+          upperBound="-1" eType="#//annotations/OutputPatternAnn" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MatchedRuleAnn" abstract="true" eSuperTypes="#//annotations/RuleAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//annotations/ExpressionAnnotation"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputPatternType" lowerBound="1"
+          eType="#//Metaclass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MatchedRuleOneAnn" eSuperTypes="#//annotations/MatchedRuleAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inPatternType" lowerBound="1"
+          eType="#//Metaclass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MatchedRuleManyAnn" eSuperTypes="#//annotations/MatchedRuleAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inPatternTypes" lowerBound="2"
+          upperBound="-1" eType="#//Metaclass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LazyRuleAnn" eSuperTypes="#//annotations/RuleAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inPatternType" lowerBound="1"
+          eType="#//Metaclass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputPatternType" lowerBound="1"
+          eType="#//Metaclass"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CalledRuleAnn" eSuperTypes="#//annotations/RuleAnn"/>
+    <eClassifiers xsi:type="ecore:EClass" name="OutputPatternAnn" eSuperTypes="#//annotations/RuleAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputPatternElement"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+          eType="#//annotations/BindingAnn" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="BindingAnnotation" eSuperTypes="#//annotations/AtlAnnotation">
+    <eClassifiers xsi:type="ecore:EClass" name="HelperAnn" abstract="true" eSuperTypes="#//annotations/AtlAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="helper" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
+          eType="#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModuleHelperAnn" eSuperTypes="#//annotations/HelperAnn"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ContextHelperAnn" eSuperTypes="#//annotations/HelperAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" lowerBound="1"
+          eType="#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="calledBy" upperBound="-1"
+          eType="#//annotations/CallExprAnn" eOpposite="#//annotations/CallExprAnn/dynamicResolvers"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingAnn" eSuperTypes="#//annotations/AtlAnnotation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="binding" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -79,13 +138,69 @@
           eType="#//Type"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="targetType" lowerBound="1"
           eType="#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedBy" upperBound="-1"
+          eType="#//annotations/MatchedRuleOneAnn"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExpressionAnnotation" eSuperTypes="#//annotations/AtlAnnotation">
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionAnnotation" abstract="true"
+        eSuperTypes="#//annotations/AtlAnnotation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expr" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//Type"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="usedFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="receptorType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LetExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="init" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IfExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ifCondition" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="thenPart" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elsePart" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CallExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticResolver" lowerBound="1"
+          eType="#//annotations/HelperAnn"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicResolvers" lowerBound="1"
+          upperBound="-1" eType="#//annotations/ContextHelperAnn" eOpposite="#//annotations/ContextHelperAnn/calledBy"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractIteratorExprAnn" abstract="true"
+        eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IteratorExprAnn" eSuperTypes="#//annotations/AbstractIteratorExprAnn"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IterateExprAnn" eSuperTypes="#//annotations/AbstractIteratorExprAnn">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resultVar" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initializers" upperBound="-1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MapExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="keyInitializers" upperBound="-1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="valueInitializers" upperBound="-1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TupleExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
+          eType="#//annotations/ExpressionAnnotation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GenericExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation"/>
   </eSubpackages>
 </ecore:EPackage>

@@ -1,0 +1,19 @@
+-- @path PN=/bento.examples.analysis/tests/bento/tests/petri_nets.ecore
+-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore
+
+module uml2pn;
+create OUT : PN from IN : UML;
+
+--
+-- The filter is non sense, but it is just to test that
+-- we can get a type slice of the filter
+-- 
+rule activity_node {
+        from node : UML!ActivityNode (
+        	node.incoming->size() > 0 and
+			node.activity.name = 'myActivity'	
+        )
+        to   net  : PN!Place (
+        	-- name <- NOT SET        
+		)
+}

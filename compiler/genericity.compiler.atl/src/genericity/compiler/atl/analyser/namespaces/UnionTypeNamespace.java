@@ -40,11 +40,7 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 			throw new IllegalStateException();
 		}
 		
-		Type t1 = results.get(0);
-		for(int i = 1; i < results.size(); i++) {
-			Type t2 = results.get(i);
-			t1 = AnalyserContext.getTypingModel().getCommonType(t1, t2);
-		}
+		Type t1 = AnalyserContext.getTypingModel().getCommonType(results);
 		
 		if ( noFeatureTypes.size() != 0 ) {
 			AnalyserContext.getErrorModel().warningMissingFeatureInUnionType(noFeatureTypes, node);
@@ -105,6 +101,14 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 	@Override
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		return false;
+	}
+
+	public Operation getAttachedOperation(String operationName) {
+		throw new UnsupportedOperationException();
+	}
+
+	public boolean hasAttachedOperation(String operationName) {
+		throw new UnsupportedOperationException();
 	}
 
 	

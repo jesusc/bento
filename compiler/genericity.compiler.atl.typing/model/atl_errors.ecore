@@ -8,21 +8,26 @@
         eType="#//Problem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnalysisInfo" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Problem" abstract="true" eSuperTypes="#//AnalysisInfo"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Problem" abstract="true" eSuperTypes="#//AnalysisInfo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" upperBound="-1"
+        eType="#//Problem" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Recovery" abstract="true"/>
   <eSubpackages name="atl_error" nsURI="http://bento/analysis/atl/analysis/errors"
       nsPrefix="atl_error">
     <eClassifiers xsi:type="ecore:EClass" name="LocalProblem" abstract="true" eSuperTypes="#//Problem">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="element" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="recovery" eType="#//Recovery"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NavigationProblem" abstract="true"
         eSuperTypes="#//atl_error/LocalProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="InvalidArgumentProblem" abstract="true"
+        eSuperTypes="#//atl_error/LocalProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TargetModelConformanceProblem" abstract="true"
         eSuperTypes="#//atl_error/LocalProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionOperationOverNoCollectionError"
         eSuperTypes="#//atl_error/NavigationProblem"/>
@@ -33,6 +38,12 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OperationNotFound" eSuperTypes="#//atl_error/NavigationProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="ecore:EClass atl_types.ecore#//Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FeatureNotFoundInUnionType" eSuperTypes="#//atl_error/NavigationProblem">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
@@ -49,6 +60,20 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DifferentBranchTypes" eSuperTypes="#//atl_error/NavigationProblem">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="thenType" lowerBound="1"
+          eType="ecore:EClass atl_types.ecore#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elseType" lowerBound="1"
+          eType="ecore:EClass atl_types.ecore#//Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingProblem" abstract="true" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NoBindingForCompulsoryFeature" eSuperTypes="#//atl_error/TargetModelConformanceProblem #//atl_error/BindingProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingExpectedOneAssignedMany" eSuperTypes="#//atl_error/BindingProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FlattenOverNonNestedCollection" eSuperTypes="#//atl_error/LocalProblem"/>
   </eSubpackages>
   <eSubpackages name="atl_recovery" nsURI="http://bento/analysis/atl/analysis/recovery"
       nsPrefix="atl_recovery">
@@ -58,7 +83,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TentativeTypeAssigned" eSuperTypes="#//Recovery">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
-          eType="ecore:EClass platform:/plugin/genericity.compiler.atl.typing/model/atl_types.ecore#//Type"/>
+          eType="ecore:EClass atl_types.ecore#//Type"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

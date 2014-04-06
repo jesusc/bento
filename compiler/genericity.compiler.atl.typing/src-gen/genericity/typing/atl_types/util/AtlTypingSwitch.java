@@ -161,6 +161,20 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlTypingPackage.EMPTY_COLLECTION_TYPE: {
+				EmptyCollectionType emptyCollectionType = (EmptyCollectionType)theEObject;
+				T result = caseEmptyCollectionType(emptyCollectionType);
+				if (result == null) result = caseType(emptyCollectionType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlTypingPackage.TYPE_ERROR: {
+				TypeError typeError = (TypeError)theEObject;
+				T result = caseTypeError(typeError);
+				if (result == null) result = caseType(typeError);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlTypingPackage.UNKNOWN_FEATURE: {
 				UnknownFeature unknownFeature = (UnknownFeature)theEObject;
 				T result = caseUnknownFeature(unknownFeature);
@@ -426,6 +440,36 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUnknown(Unknown object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Empty Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Empty Collection Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEmptyCollectionType(EmptyCollectionType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Error</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeError(TypeError object) {
 		return null;
 	}
 

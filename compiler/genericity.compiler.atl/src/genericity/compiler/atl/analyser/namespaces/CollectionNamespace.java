@@ -1,9 +1,12 @@
 package genericity.compiler.atl.analyser.namespaces;
 
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.TypingModel;
+import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.TypeError;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
@@ -54,6 +57,8 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		if ( operationName.equals("size")  ) return typ.newIntegerType();
 		if ( operationName.equals("first") ) return nested;
+		if ( operationName.equals("last") ) return nested;
+
 		if ( operationName.equals("at") ) return nested; // TODO: Indicate somehow that at may return null
 		
 		if ( operationName.equals("sum") ) {
@@ -77,7 +82,8 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 		}
 		
 		if ( operationName.equals("append") || operationName.equals("including") ) {
-			return newCollectionType(typ.getCommonType(this.nested, arguments[0]));
+			CollectionType r = newCollectionType(typ.getCommonType(this.nested, arguments[0]));
+			return r;
 		}
 		
 		if ( operationName.equals("union") ) {
@@ -90,7 +96,8 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 			if ( nested instanceof CollectionType ) {
 				return nested;
 			} else {
-				System.out.println("CollectionNamespace.getOperationType(): TODO: Signal warning, flatten over non-nested collection.");
+				AnalyserContext.getErrorModel().signalFlattenOverNonNestedCollection(nested, node);
+				// System.out.println("CollectionNamespace.getOperationType(): TODO: Signal warning, flatten over non-nested collection." + node.getLocation() );
 				return newCollectionType(nested); 
 			}
 		}
@@ -102,6 +109,14 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		return false;
 	}
+	
+	public Operation getAttachedOperation(String operationName) {
+		throw new UnsupportedOperationException();
+	}
+
+	public boolean hasAttachedOperation(String operationName) {
+		throw new UnsupportedOperationException();
+	}
 
 	protected abstract CollectionType newCollectionType(Type nested);
 	
@@ -111,15 +126,31 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 
 	public Type getIteratorType(String name, Type bodyType) {
 		if ( name.equals("select") ) {
-			return this.newCollectionType(nested); 
+			return selectIteratorType(bodyType); 
 		} else if ( name.equals("collect") ) {
 			return this.newCollectionType(bodyType);
 		} else if ( name.equals("sortedBy") ) {
 			return this.newCollectionType(nested);
+		} else if ( name.equals("exists") ) {
+			return typ.newBooleanType();
 		}
 		throw new UnsupportedOperationException("Collection operation " + name + " not supported.");
 	}
 	
+	private Type selectIteratorType(Type bodyType) {
+		// If you have "m.classifiers->select(c | c.operationNotFound() )"
+		// a conservative action is to consider that the collection is never filtered.
+		if ( bodyType instanceof TypeError ) 
+			return this.newCollectionType(nested);
+		
+		BooleanType b = (BooleanType) bodyType;
+		if ( b.getKindOfTypes().isEmpty() ) {
+			return this.newCollectionType(nested);
+		} else {
+			return this.newCollectionType( AnalyserContext.getTypingModel().getCommonType(b.getKindOfTypes() ) );
+		}
+	}
+
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");

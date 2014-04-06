@@ -9,7 +9,7 @@ import org.eclectic.modeling.emf.Util;
 import analysis.BaseTest;
 
 public class Bibtex2Docbook extends BaseTest {
-	public static final String ATL_TRANSFORMATION = "../bento.examples.analysis/third-party/zoo/bibtex2docbook/trafo/BibTeX2DocBook.atl.xmi";
+	public static final String BIBTEX2DOCBOOKL_TRANSFORMATION = "../bento.examples.analysis/third-party/zoo/bibtex2docbook/trafo/BibTeX2DocBook.atl.xmi";
 	public static final String TARGET_METAMODEL_NAME = "DocBook";
 	
 	private static final String SOURCE_METAMODEL_NAME = "BibTeX";
@@ -26,10 +26,11 @@ public class Bibtex2Docbook extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, 
-				   new String[] { SOURCE_METAMODEL_NAME, TARGET_METAMODEL_NAME });
+		typing(BIBTEX2DOCBOOKL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, 
+				   new String[] { SOURCE_METAMODEL_NAME, TARGET_METAMODEL_NAME }, true);
 
-		System.out.println("Finished typing of " + ATL_TRANSFORMATION);
+		generateGraphviz();
+		generateCSP();
 	}
 
 }

@@ -131,7 +131,9 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 				if ( f instanceof EReference && allWrittenCompulsoryFeatures.contains( ((EReference) f).getEOpposite()) ) 
 					continue; // Assumes that if the opposite is written in other rule, it is the one that corresponds to this object
 				
-				errors.signalNoBindingForCompulsoryFeature(f, self);				
+				
+				if ( f.getDefaultValueLiteral() == null )
+					errors.signalNoBindingForCompulsoryFeature(f, self);				
 			}
 		}
 		compulsoryFeatures = null;
@@ -147,8 +149,6 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		
 		// The feature is removed from the current compulsoryFeatures set, which is
 		// checked later to be empty
-		if ( compulsoryFeatures == null )
-		System.out.println(self.getLocation());
 		compulsoryFeatures.remove(f);
 		allWrittenCompulsoryFeatures.add(f);
 		
@@ -213,6 +213,8 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 			List<MatchedRule> rules = ns.getAttachedRules();
 			if ( rules.size() == 0 && ! TypeUtils.isClassAssignableTo(rightMetaclass.getKlass(), f.getEReferenceType()) ) {
 				System.err.println("!!!!! WARNING!!! No rule for binding.  " + f.getEContainingClass().getName() + "." + f.getName() + " <- " + TypeUtils.typeToString(rightType) + ". " + self.getLocation());
+			} else {
+				findPossibleUnresolvedClasses(rightMetaclass, rules);				
 			}
 		} else if ( rightType instanceof CollectionType ) {
 			CollectionType ct = (CollectionType) rightType;
@@ -224,5 +226,14 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 			}
 		}
 	}
-	
+
+	private void findPossibleUnresolvedClasses(Metaclass rightMetaclass, List<MatchedRule> rules) {
+		ClassNamespace ns = (ClassNamespace) rightMetaclass.getMetamodelRef();
+		
+		for (MatchedRule matchedRule : rules) {
+			
+		}
+		// System.out.println("RuleAnalysis.findPossibleUnresolvedClasses()");
+	}
 }
+

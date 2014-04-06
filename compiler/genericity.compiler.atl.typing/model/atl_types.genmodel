@@ -32,6 +32,8 @@
     </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//RefType"/>
     <genClasses ecoreClass="atl_types.ecore#//Unknown"/>
+    <genClasses ecoreClass="atl_types.ecore#//EmptyCollectionType"/>
+    <genClasses ecoreClass="atl_types.ecore#//TypeError"/>
     <genClasses ecoreClass="atl_types.ecore#//UnknownFeature">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//UnknownFeature/theContainingClass"/>
     </genClasses>
@@ -59,23 +61,75 @@
     <nestedGenPackages prefix="Annotations" basePackage="genericity.typing.atl_types"
         disposableProviderFactory="true" ecorePackage="atl_types.ecore#//annotations">
       <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/AtlAnnotation"/>
-      <genClasses ecoreClass="atl_types.ecore#//annotations/HelperAnnotation">
+      <genClasses ecoreClass="atl_types.ecore#//annotations/TransformationAnn">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnnotation/helper"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/HelperAnnotation/name"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnnotation/type"/>
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/TransformationAnn/module"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/TransformationAnn/matchedRules"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/TransformationAnn/calledRules"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/TransformationAnn/lazyRules"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/TransformationAnn/helpers"/>
       </genClasses>
-      <genClasses ecoreClass="atl_types.ecore#//annotations/BindingAnnotation">
+      <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/RuleAnn">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/rule"/>
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/RuleAnn/rule"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/RuleAnn/outputPatterns"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/RuleAnn/name"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/MatchedRuleAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/MatchedRuleAnn/filter"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/binding"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/BindingAnnotation/name"/>
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/MatchedRuleAnn/outputPatternType"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/MatchedRuleOneAnn">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/sourceType"/>
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/MatchedRuleOneAnn/inPatternType"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/MatchedRuleManyAnn">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnnotation/targetType"/>
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/MatchedRuleManyAnn/inPatternTypes"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/LazyRuleAnn">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/LazyRuleAnn/inPatternType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/LazyRuleAnn/outputPatternType"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/CalledRuleAnn"/>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/OutputPatternAnn">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/OutputPatternAnn/outputPatternElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/OutputPatternAnn/type"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/OutputPatternAnn/bindings"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/HelperAnn">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnn/helper"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/HelperAnn/name"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnn/returnType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnn/expr"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/ModuleHelperAnn"/>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/ContextHelperAnn">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ContextHelperAnn/contextType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ContextHelperAnn/calledBy"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/BindingAnn">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/rule"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/binding"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/BindingAnn/name"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/sourceType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/targetType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/value"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/resolvedBy"/>
       </genClasses>
       <genClasses ecoreClass="atl_types.ecore#//annotations/ExpressionAnnotation">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -87,6 +141,42 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/receptorType"/>
       </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/LetExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/LetExprAnn/init"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/LetExprAnn/body"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/IfExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/IfExprAnn/ifCondition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/IfExprAnn/thenPart"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/IfExprAnn/elsePart"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/CallExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/CallExprAnn/source"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/CallExprAnn/arguments"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/CallExprAnn/staticResolver"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/CallExprAnn/dynamicResolvers"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/AbstractIteratorExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/AbstractIteratorExprAnn/source"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/AbstractIteratorExprAnn/body"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/IteratorExprAnn"/>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/IterateExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/IterateExprAnn/resultVar"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/CollectionExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/CollectionExprAnn/initializers"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/MapExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/MapExprAnn/keyInitializers"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/MapExprAnn/valueInitializers"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/TupleExprAnn">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/TupleExprAnn/parts"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/GenericExprAnn"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

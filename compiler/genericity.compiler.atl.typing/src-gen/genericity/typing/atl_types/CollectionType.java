@@ -6,7 +6,6 @@
  */
 package genericity.typing.atl_types;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

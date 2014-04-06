@@ -15,9 +15,12 @@ public interface ITypeNamespace {
 	boolean hasOperation(String operationName, Type[] arguments);
 	boolean hasFeature(String featureName);
 	
-	void extendType( String featureName, Type returnType, Attribute attrDefinition);
+	void extendType(String featureName, Type returnType, Attribute attrDefinition);
 	void extendType(String operationName, Type returnType, Operation opDefinition);
 	void extendType(String ruleName, Type returnType, Rule rule);
+	
+	boolean   hasAttachedOperation(String operationName);
+	Operation getAttachedOperation(String operationName);
 	
 	Type createType(boolean explicitOcurrence);
 

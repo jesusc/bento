@@ -34,8 +34,15 @@ abstract class ProcessObject{}
 
 abstract class Function extends ProcessObject {
   attr String name;
-  ref ControlFlow[1]#fsource outgoing;
-  ref ControlFlow[1]#ftarget incoming;
+
+// Originally it was: 
+//  ref ControlFlow[1]#fsource outgoing;
+//  ref ControlFlow[1]#ftarget incoming;
+// Is this right? If so, the binding is wrong.
+
+  ref ControlFlow[1..*]#fsource outgoing;
+  ref ControlFlow[1..*]#ftarget incoming;
+
 } 
 
 class BasicFunction extends Function{   

@@ -6,8 +6,8 @@ import atl.metamodel.ATL.LocatedElement;
 
 public class StringNamespace extends PrimitiveTypeNamespace {
 
-	public StringNamespace(PrimitiveGlobalNamespace nspace) {
-		super(nspace);
+	public StringNamespace() {
+		super();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
-		if ( operatorSymbol.equals("=") ) {
+		if ( operatorSymbol.equals("=") || operatorSymbol.equals("<>") ) {
 			return AnalyserContext.getTypingModel().newBooleanType();
 		} if ( operatorSymbol.equals("+") ) {
 			// Anything concatenated with a string is a string

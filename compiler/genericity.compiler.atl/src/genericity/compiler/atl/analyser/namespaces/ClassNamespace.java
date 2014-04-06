@@ -1,15 +1,19 @@
 package genericity.compiler.atl.analyser.namespaces;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import bento.analysis.atl_analysis.atl_error.LocalProblem;
 
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.LocatedElement;
@@ -18,7 +22,10 @@ import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
 import genericity.compiler.atl.analyser.AnalyserContext;
+import genericity.compiler.atl.analyser.ErrorModel;
 import genericity.compiler.atl.analyser.TypeUtils;
+import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
+import genericity.compiler.atl.analyser.recovery.RecoverOperationNotFound;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
@@ -77,6 +84,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			}
 
 			for (EClass supertype : eClass.getEAllSuperTypes()) {
+				if ( supertype.eIsProxy() ) {
+					continue; // TODO: Don't know how to deal with proxies...
+				}
+				
 				ClassNamespace cn = (ClassNamespace) metamodel.getClassifier(supertype.getName());
 				if ( cn.features.containsKey(featureName) ) {
 					return cn.features.get(featureName).returnType;
@@ -87,6 +98,7 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	}
 	
 	private Type tryRecovery(String featureName, LocatedElement node) {
+		
 		List<EClass> allClasses = metamodel.getAllClasses();
 		for (EClass subtype : allClasses) {
 			// Es un subtipo 
@@ -98,6 +110,14 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 					metamodel.errors.warningFeatureFoundInSubType(getType(), t, featureName, node);
 					return metamodel.converter.convert(f, metamodel);
 				}
+				
+				// Check extended features
+				ClassNamespace cn = (ClassNamespace) metamodel.getClassifier(subtype.getName());
+				if ( cn.hasFeature(featureName)) {
+					metamodel.errors.warningFeatureFoundInSubType(getType(), cn.getType(), featureName, node);
+					return cn.getFeatureType(featureName, node);
+				}		
+				
 			}
 		
 		}
@@ -119,10 +139,8 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			return signalError(errorMessage, location, t);
 		}
 		 */
-		metamodel.errors.signalNoFeature(eClass, featureName, node);
 		
-		// TODO: Try to recover
-		return null;
+		return metamodel.errors.signalNoFeature(eClass, featureName, node);
 	}
 
 	/**
@@ -146,8 +164,19 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	
 	@Override
 	public boolean hasOperation(String operationName, Type[] arguments) {
+		if ( super.hasOperation(operationName, arguments) )
+			return true;
 		return operations.containsKey(operationName);
 	}
+	
+	public Operation getAttachedOperation(String operationName) {
+		return operations.get(operationName).definition;
+	}
+
+	public boolean hasAttachedOperation(String operationName) {
+		return operations.containsKey(operationName);
+	}
+	
 	
 	protected Metaclass getType() {
 		if ( this.theType == null )
@@ -174,10 +203,6 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		
 		if ( operationName.equals("allInstances") || operationName.equals("allInstancesFrom") ) {
 			return metamodel.converter.convertAllInstancesOf(eClass, this);
-		} else if ( operationName.equals("oclIsKindOf") || 
-					operationName.equals("oclIsTypeOf")) {
-			// TODO: Mark the boolean type so that it carries the "isKindOf" information
-			return metamodel.typ.newBooleanType((Metaclass) arguments[0]);
 		} else if ( operationName.equals("oclIsUndefined") ) {
 			return metamodel.typ.newBooleanType();
 		} else if ( operationName.equals("oclType") ) {
@@ -188,7 +213,6 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			return getType(); // returns itself
 		}
 
-		
 		if ( this.hasOperation(operationName, arguments) ) {
 			return operations.get(operationName).returnType;
 		}
@@ -208,8 +232,8 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			return t;
 		}
 
-		metamodel.errors.signalNoOperationFound(getType(), operationName, node);
-		return null;
+		return metamodel.errors.signalNoOperationFound(getType(), operationName, node, 
+				new RecoverOperationNotFound(this, operationName, node));
 	}
 	
 	private Type tryRecoveryGetOperation(String operationName, Type[] arguments, LocatedElement node) {
@@ -260,14 +284,12 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		} else if ( possibleContainers.size() == 1 ) {
 			return metamodel.getMetaclass(possibleContainers.get(0));
 		} else {
-			Type t1 = metamodel.getMetaclass(possibleContainers.get(0));
-			for(int i = 1; i < possibleContainers.size(); i++) {
-				Type t2 = metamodel.getMetaclass(possibleContainers.get(i));
- 				t1 = AnalyserContext.getTypingModel().getCommonType(t1, t2);
+			ArrayList<Type> containerTypes = new ArrayList<Type>();
+			for(int i = 0; i < possibleContainers.size(); i++) {
+				containerTypes.add(metamodel.getMetaclass(possibleContainers.get(i)));
 			}
-			
-			// throw new UnsupportedOperationException("TODO: For objects that may be contained in multiple classes, signal warning and return a union type");
-			return t1;
+
+			return AnalyserContext.getTypingModel().getCommonType(containerTypes);
 		}
 		throw new IllegalStateException(); // This should not happen (the compiler seems not see it...)
 	}
@@ -292,7 +314,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		attachedRules.add((MatchedRule) rule);
 		
 		for(EClass c : eClass.getESuperTypes()) {
-			if ( c.eIsProxy() ) { System.out.println("WARNING: Ignoring proxy (extendType, ClassNamespace)"); continue; }
+			if ( c.eIsProxy() ) { 
+				// TODO: Handle this: System.out.println("WARNING: Ignoring proxy (extendType, ClassNamespace)"); 
+				continue; 
+			}
 			
 			ClassNamespace ns = (ClassNamespace) metamodel.getClassifier(c.getName());
 			ns.extendType(ruleName, returnType, rule);
@@ -301,5 +326,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 
 	public List<MatchedRule> getAttachedRules() {
 		return attachedRules;
+	}
+
+
+	public Collection<ClassNamespace> getAllSubclasses() {
+		return metamodel.getAllSubclasses(eClass);
 	}
 }

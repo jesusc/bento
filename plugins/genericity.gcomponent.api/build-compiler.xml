@@ -43,6 +43,14 @@
 				<include name="genericity/compiler/atl/VirtualClasses*"/>
 				<include name="genericity/compiler/atl/ClassMerge*"/>
 
+				<include name="genericity/typecheck/atl/AtlTransformationMetamodelsModel*"/>
+
+				<include name="genericity/compiler/atl/analyser/*"/>
+				<include name="genericity/compiler/atl/analyser/namespaces/*"/>
+				<include name="genericity/compiler/atl/analyser/recovery/*"/>
+				<include name="genericity/compiler/atl/analyser/csp/*"/>
+				<include name="genericity/compiler/atl/analyser/graph/*"/>
+
 				<!--
 				<include name="genericity/typing/atl_types/*"/>
 				<include name="genericity/typing/atl_types/impl/*"/>

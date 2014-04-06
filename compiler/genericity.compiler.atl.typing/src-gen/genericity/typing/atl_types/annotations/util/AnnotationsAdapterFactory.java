@@ -76,16 +76,96 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 				return createAtlAnnotationAdapter();
 			}
 			@Override
-			public Adapter caseHelperAnnotation(HelperAnnotation object) {
-				return createHelperAnnotationAdapter();
+			public Adapter caseTransformationAnn(TransformationAnn object) {
+				return createTransformationAnnAdapter();
 			}
 			@Override
-			public Adapter caseBindingAnnotation(BindingAnnotation object) {
-				return createBindingAnnotationAdapter();
+			public Adapter caseRuleAnn(RuleAnn object) {
+				return createRuleAnnAdapter();
+			}
+			@Override
+			public Adapter caseMatchedRuleAnn(MatchedRuleAnn object) {
+				return createMatchedRuleAnnAdapter();
+			}
+			@Override
+			public Adapter caseMatchedRuleOneAnn(MatchedRuleOneAnn object) {
+				return createMatchedRuleOneAnnAdapter();
+			}
+			@Override
+			public Adapter caseMatchedRuleManyAnn(MatchedRuleManyAnn object) {
+				return createMatchedRuleManyAnnAdapter();
+			}
+			@Override
+			public Adapter caseLazyRuleAnn(LazyRuleAnn object) {
+				return createLazyRuleAnnAdapter();
+			}
+			@Override
+			public Adapter caseCalledRuleAnn(CalledRuleAnn object) {
+				return createCalledRuleAnnAdapter();
+			}
+			@Override
+			public Adapter caseOutputPatternAnn(OutputPatternAnn object) {
+				return createOutputPatternAnnAdapter();
+			}
+			@Override
+			public Adapter caseHelperAnn(HelperAnn object) {
+				return createHelperAnnAdapter();
+			}
+			@Override
+			public Adapter caseModuleHelperAnn(ModuleHelperAnn object) {
+				return createModuleHelperAnnAdapter();
+			}
+			@Override
+			public Adapter caseContextHelperAnn(ContextHelperAnn object) {
+				return createContextHelperAnnAdapter();
+			}
+			@Override
+			public Adapter caseBindingAnn(BindingAnn object) {
+				return createBindingAnnAdapter();
 			}
 			@Override
 			public Adapter caseExpressionAnnotation(ExpressionAnnotation object) {
 				return createExpressionAnnotationAdapter();
+			}
+			@Override
+			public Adapter caseLetExprAnn(LetExprAnn object) {
+				return createLetExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseIfExprAnn(IfExprAnn object) {
+				return createIfExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseCallExprAnn(CallExprAnn object) {
+				return createCallExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseAbstractIteratorExprAnn(AbstractIteratorExprAnn object) {
+				return createAbstractIteratorExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseIteratorExprAnn(IteratorExprAnn object) {
+				return createIteratorExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseIterateExprAnn(IterateExprAnn object) {
+				return createIterateExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseCollectionExprAnn(CollectionExprAnn object) {
+				return createCollectionExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseMapExprAnn(MapExprAnn object) {
+				return createMapExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseTupleExprAnn(TupleExprAnn object) {
+				return createTupleExprAnnAdapter();
+			}
+			@Override
+			public Adapter caseGenericExprAnn(GenericExprAnn object) {
+				return createGenericExprAnnAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -122,30 +202,170 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.HelperAnnotation <em>Helper Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.TransformationAnn <em>Transformation Ann</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see genericity.typing.atl_types.annotations.HelperAnnotation
+	 * @see genericity.typing.atl_types.annotations.TransformationAnn
 	 * @generated
 	 */
-	public Adapter createHelperAnnotationAdapter() {
+	public Adapter createTransformationAnnAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.BindingAnnotation <em>Binding Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.RuleAnn <em>Rule Ann</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see genericity.typing.atl_types.annotations.BindingAnnotation
+	 * @see genericity.typing.atl_types.annotations.RuleAnn
 	 * @generated
 	 */
-	public Adapter createBindingAnnotationAdapter() {
+	public Adapter createRuleAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.MatchedRuleAnn <em>Matched Rule Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.MatchedRuleAnn
+	 * @generated
+	 */
+	public Adapter createMatchedRuleAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.MatchedRuleOneAnn <em>Matched Rule One Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.MatchedRuleOneAnn
+	 * @generated
+	 */
+	public Adapter createMatchedRuleOneAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.MatchedRuleManyAnn <em>Matched Rule Many Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.MatchedRuleManyAnn
+	 * @generated
+	 */
+	public Adapter createMatchedRuleManyAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.LazyRuleAnn <em>Lazy Rule Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.LazyRuleAnn
+	 * @generated
+	 */
+	public Adapter createLazyRuleAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.CalledRuleAnn <em>Called Rule Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.CalledRuleAnn
+	 * @generated
+	 */
+	public Adapter createCalledRuleAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.OutputPatternAnn <em>Output Pattern Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.OutputPatternAnn
+	 * @generated
+	 */
+	public Adapter createOutputPatternAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.HelperAnn <em>Helper Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.HelperAnn
+	 * @generated
+	 */
+	public Adapter createHelperAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.ModuleHelperAnn <em>Module Helper Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.ModuleHelperAnn
+	 * @generated
+	 */
+	public Adapter createModuleHelperAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.ContextHelperAnn <em>Context Helper Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.ContextHelperAnn
+	 * @generated
+	 */
+	public Adapter createContextHelperAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.BindingAnn <em>Binding Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.BindingAnn
+	 * @generated
+	 */
+	public Adapter createBindingAnnAdapter() {
 		return null;
 	}
 
@@ -160,6 +380,146 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAnnotationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.LetExprAnn <em>Let Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.LetExprAnn
+	 * @generated
+	 */
+	public Adapter createLetExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.IfExprAnn <em>If Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.IfExprAnn
+	 * @generated
+	 */
+	public Adapter createIfExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.CallExprAnn <em>Call Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.CallExprAnn
+	 * @generated
+	 */
+	public Adapter createCallExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.AbstractIteratorExprAnn <em>Abstract Iterator Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.AbstractIteratorExprAnn
+	 * @generated
+	 */
+	public Adapter createAbstractIteratorExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.IteratorExprAnn <em>Iterator Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.IteratorExprAnn
+	 * @generated
+	 */
+	public Adapter createIteratorExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.IterateExprAnn <em>Iterate Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.IterateExprAnn
+	 * @generated
+	 */
+	public Adapter createIterateExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.CollectionExprAnn <em>Collection Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.CollectionExprAnn
+	 * @generated
+	 */
+	public Adapter createCollectionExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.MapExprAnn <em>Map Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.MapExprAnn
+	 * @generated
+	 */
+	public Adapter createMapExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.TupleExprAnn <em>Tuple Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.TupleExprAnn
+	 * @generated
+	 */
+	public Adapter createTupleExprAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.GenericExprAnn <em>Generic Expr Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.GenericExprAnn
+	 * @generated
+	 */
+	public Adapter createGenericExprAnnAdapter() {
 		return null;
 	}
 

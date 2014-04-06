@@ -13,7 +13,7 @@ abstract class AnalysisInfo {
 }
 
 abstract class Problem extends AnalysisInfo {
-   
+	val Problem[*] dependents;   
 }
 
 abstract class Recovery {   
@@ -23,13 +23,14 @@ abstract class Recovery {
 package atl_error {
 	abstract class LocalProblem extends Problem {
 	   attr String[1] location;
-	   attr String[1] element;
+	   ref  EObject[1] element;
 	   
 	   val Recovery[0..1] recovery;
 	}
 	
 	abstract class NavigationProblem extends LocalProblem {	}
-	abstract class InvalidArgumentProblem extends LocalProblem {	}
+	abstract class InvalidArgumentProblem extends LocalProblem { }
+	abstract class TargetModelConformanceProblem extends LocalProblem { }
 	 
 	//
 	// Example: aClass->select(x)
@@ -42,6 +43,11 @@ package atl_error {
 		attr String[1] featureName;
 		attr String[1] className;
 		attr String[1] metamodelName;
+	}
+
+	class OperationNotFound extends NavigationProblem {
+		attr String[1] operationName;
+		ref  atl_types.Type[1] type;	   
 	}
 	
 	class FeatureNotFoundInUnionType extends NavigationProblem {
@@ -57,6 +63,28 @@ package atl_error {
 	class NoContainerForRefImmediateComposite extends NavigationProblem {
 		attr String[1] className;
 		attr String[1] metamodelName;			   
+	}
+
+	class DifferentBranchTypes extends NavigationProblem {
+	   ref atl_types.Type[1] thenType;
+	   ref atl_types.Type[1] elseType;
+	}
+	
+	abstract class BindingProblem extends LocalProblem {
+		ref ecore.EStructuralFeature[0..1] feature;
+		attr String[1] featureName;
+	}
+	
+	class NoBindingForCompulsoryFeature extends TargetModelConformanceProblem, BindingProblem {
+	   
+	}
+
+	class BindingExpectedOneAssignedMany extends BindingProblem {
+	   
+	}	
+
+	class FlattenOverNonNestedCollection extends LocalProblem {
+	   
 	}
 }
 

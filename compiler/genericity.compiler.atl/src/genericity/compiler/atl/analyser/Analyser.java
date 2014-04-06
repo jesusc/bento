@@ -1,22 +1,18 @@
 package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
-import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
+import genericity.compiler.atl.graph.DependencyGraph;
+import genericity.compiler.atl.graph.ErrorPathGenerator;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
-import org.eclectic.modeling.emf.IModel;
 
 import atl.metamodel.ATLModel;
-import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.Unit;
 
 public class Analyser {
@@ -24,12 +20,19 @@ public class Analyser {
 	private TypingModel	typ;
 	private ATLModel	trafo;
 	private ErrorModel	errors;
-
+	
+	private boolean doDependency = true;
+	private DependencyGraph dependencyGraph;
+	
 	public Analyser(GlobalNamespace mm, BasicEMFModel trafo, BasicEMFModel out) throws IOException {
 		this.mm    = mm;
 		this.trafo = new ATLModel(trafo.getHandler().getResource());
 		this.typ   = new TypingModel(out);
 		this.errors = new ErrorModel();
+	}
+	
+	public void setDoDependencyAnalysis(boolean doDependency) {
+		this.doDependency = doDependency;
 	}
 
 	public void perform() {
@@ -42,8 +45,11 @@ public class Analyser {
 				
 				List<? extends Unit> units = trafo.allObjectsOf(Unit.class);
 				for (Unit unit : units) {
-					new BottomUpTraversal(trafo, mm, unit, typ, errors).perform();
+					new TypeAnalysisTraversal(trafo, mm, unit, typ, errors).perform();
 				}	
+				
+				if ( doDependency ) 
+					dependencyGraph = new ErrorPathGenerator(errors, typ, trafo).perform();
 			}
 		});
 
@@ -55,7 +61,19 @@ public class Analyser {
 		} finally {			
 			executor.shutdown();
 		}
+		
+		
+	}
+	
+	public ErrorModel getErrors() {
+		return errors;
+	}
+	
+	public TypingModel getTyping() {
+		return typ;
 	}
 
-	
+	public DependencyGraph getDependencyGraph() {
+		return dependencyGraph;
+	}
 }

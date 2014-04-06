@@ -1,0 +1,14 @@
+-- @path CD=/bento.examples.analysis/tests/bento/tests/ClassCD.ecore
+-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore
+
+module class2umlOperationNotFound;
+create OUT : UML from IN : CD;
+
+rule model {
+	from
+		m : CD!Model
+	to 
+		u : UML!Package (
+			ownedElement <- m.classifiers->select(c | c.isPersistent() )
+		)
+}

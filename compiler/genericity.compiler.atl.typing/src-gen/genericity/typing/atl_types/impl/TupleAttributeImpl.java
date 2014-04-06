@@ -55,7 +55,7 @@ public class TupleAttributeImpl extends EObjectImpl implements TupleAttribute {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()
@@ -110,6 +110,14 @@ public class TupleAttributeImpl extends EObjectImpl implements TupleAttribute {
 	 * @generated
 	 */
 	public Type getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (Type)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE, oldType, type));
+			}
+		}
 		return type;
 	}
 
@@ -118,14 +126,8 @@ public class TupleAttributeImpl extends EObjectImpl implements TupleAttribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE, oldType, newType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Type basicGetType() {
+		return type;
 	}
 
 	/**
@@ -134,31 +136,10 @@ public class TupleAttributeImpl extends EObjectImpl implements TupleAttribute {
 	 * @generated
 	 */
 	public void setType(Type newType) {
-		if (newType != type) {
-			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE, newType, newType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE:
-				return basicSetType(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE, oldType, type));
 	}
 
 	/**
@@ -172,7 +153,8 @@ public class TupleAttributeImpl extends EObjectImpl implements TupleAttribute {
 			case AtlTypingPackage.TUPLE_ATTRIBUTE__NAME:
 				return getName();
 			case AtlTypingPackage.TUPLE_ATTRIBUTE__TYPE:
-				return getType();
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

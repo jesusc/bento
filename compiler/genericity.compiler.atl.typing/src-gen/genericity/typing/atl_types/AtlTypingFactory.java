@@ -116,6 +116,24 @@ public interface AtlTypingFactory extends EFactory {
 	Unknown createUnknown();
 
 	/**
+	 * Returns a new object of class '<em>Empty Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Empty Collection Type</em>'.
+	 * @generated
+	 */
+	EmptyCollectionType createEmptyCollectionType();
+
+	/**
+	 * Returns a new object of class '<em>Type Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Error</em>'.
+	 * @generated
+	 */
+	TypeError createTypeError();
+
+	/**
 	 * Returns a new object of class '<em>Unknown Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

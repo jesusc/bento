@@ -29,11 +29,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 
-import eclectic.callexpr;
-import eclectic.composed_genericity;
-import eclectic.ocl2ocl;
-import eclectic.rewrite_class1;
 import gbind.dsl.BindingModel;
+import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
@@ -175,6 +172,9 @@ public class VirtualClasses {
 			if ( type instanceof Metaclass ) {
 				Metaclass m = (Metaclass) type;
 				return m.getKlass().getName().equals(typeName);
+			} else if ( type instanceof CollectionType ) {
+				CollectionType ct = (CollectionType) type;
+				return hasTypeAux(ct.getContainedType(), typeName);
 			} else if ( type instanceof PrimitiveType || type instanceof EnumType) {
 				return false;
 			} else if ( type instanceof UnionType ) {

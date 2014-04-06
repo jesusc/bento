@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getExpressionAnnotation()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ExpressionAnnotation extends AtlAnnotation {

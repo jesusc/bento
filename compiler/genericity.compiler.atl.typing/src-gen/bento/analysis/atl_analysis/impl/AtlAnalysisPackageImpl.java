@@ -174,6 +174,15 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getProblem_Dependents() {
+		return (EReference)problemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRecovery() {
 		return recoveryEClass;
 	}
@@ -212,6 +221,7 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 		analysisInfoEClass = createEClass(ANALYSIS_INFO);
 
 		problemEClass = createEClass(PROBLEM);
+		createEReference(problemEClass, PROBLEM__DEPENDENTS);
 
 		recoveryEClass = createEClass(RECOVERY);
 	}
@@ -261,6 +271,7 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 		initEClass(analysisInfoEClass, AnalysisInfo.class, "AnalysisInfo", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(problemEClass, Problem.class, "Problem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProblem_Dependents(), this.getProblem(), null, "dependents", null, 0, -1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(recoveryEClass, Recovery.class, "Recovery", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

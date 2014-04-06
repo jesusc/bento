@@ -4,20 +4,21 @@ import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.typing.atl_types.Metaclass;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-
+import genericity.typing.atl_types.Type;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Unit;
 import atl.metamodel.OCL.BooleanType;
 import atl.metamodel.OCL.IntegerType;
+import atl.metamodel.OCL.MapType;
+import atl.metamodel.OCL.OclAnyType;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OrderedSetType;
 import atl.metamodel.OCL.RealType;
 import atl.metamodel.OCL.SequenceType;
 import atl.metamodel.OCL.SetType;
 import atl.metamodel.OCL.StringType;
+import atl.metamodel.OCL.TupleType;
+import atl.metamodel.OCL.TupleTypeAttribute;
 
 public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	
@@ -37,18 +38,24 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	//
 
 	@Override
-	public void inOclModelElement(OclModelElement obj) {
-		String mmName = obj.getModel().getName();
+	public void inOclModelElement(OclModelElement self) {
+		String mmName = self.getModel().getName();
 		MetamodelNamespace mmspace = mm.getNamespace(mmName);
 		if ( mmspace == null ) {
-			errors.signalNoModel(mmName, obj);
+			errors.signalNoModel(mmName, self);
 		}
 		
-		ITypeNamespace tspace = mmspace.getClassifier(obj.getName());
+		ITypeNamespace tspace = mmspace.getClassifier(self.getName());
 		if ( tspace == null ) {
-			errors.signalNoClass(obj.getName(), mmspace, obj);
+			if ( self.getName().equals("OclAny") ) {
+				attr.linkExprType(typ.newUnknownType());
+				return;
+			}
+			errors.signalNoClass(self.getName(), mmspace, self);
 		}
-		attr.linkExprType(tspace.createType(true));
+		Metaclass metaclass = (Metaclass) tspace.createType(true);
+		metaclass.setExplicitOcurrence(true);
+		attr.linkExprType(metaclass);
 	}	
 
 	// 
@@ -96,4 +103,29 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 		attr.linkExprType( typ.newSetType( attr.typeOf( self.getElementType() ) ) );
 	}
 
+	@Override
+	public void inMapType(MapType self) {
+		attr.linkExprType( typ.newMapType( 
+				attr.typeOf( self.getKeyType() ), 
+				attr.typeOf( self.getValueType() ) ));
+	}
+	
+	@Override
+	public void inTupleType(TupleType self) {
+		Type[] attTypes   = new Type[self.getAttributes().size()];
+		String[] attNames = new String[self.getAttributes().size()];
+		
+		int i = 0;
+		for(TupleTypeAttribute a : self.getAttributes()) {
+			attTypes[i] = attr.typeOf(a.getType());
+			attNames[i] = a.getName();
+			i++;
+		}
+		attr.linkExprType( typ.newTupleTuple(attNames, attTypes) );
+	}
+	
+	@Override
+	public void inOclAnyType(OclAnyType self) {
+		attr.linkExprType(typ.newUnknownType());
+	}
 }
