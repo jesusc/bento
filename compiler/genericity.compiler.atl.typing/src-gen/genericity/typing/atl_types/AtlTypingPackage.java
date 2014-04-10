@@ -897,6 +897,34 @@ public interface AtlTypingPackage extends EPackage {
 	int ENUM_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.ModelImpl <em>Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.ModelImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getModel()
+	 * @generated
+	 */
+	int MODEL = 17;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.MetaclassImpl <em>Metaclass</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -904,7 +932,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 17;
+	int METACLASS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -952,13 +980,22 @@ public interface AtlTypingPackage extends EPackage {
 	int METACLASS__KLASS = REF_TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS__MODEL = REF_TYPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Metaclass</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METACLASS_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 3;
+	int METACLASS_FEATURE_COUNT = REF_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.ReflectiveTypeImpl <em>Reflective Type</em>}' class.
@@ -968,7 +1005,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveType()
 	 * @generated
 	 */
-	int REFLECTIVE_TYPE = 18;
+	int REFLECTIVE_TYPE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1005,7 +1042,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnionType()
 	 * @generated
 	 */
-	int UNION_TYPE = 19;
+	int UNION_TYPE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1051,7 +1088,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getThisModuleType()
 	 * @generated
 	 */
-	int THIS_MODULE_TYPE = 20;
+	int THIS_MODULE_TYPE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1088,7 +1125,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveClass()
 	 * @generated
 	 */
-	int REFLECTIVE_CLASS = 21;
+	int REFLECTIVE_CLASS = 22;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1125,7 +1162,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getCollectionType()
 	 * @generated
 	 */
-	int COLLECTION_TYPE = 22;
+	int COLLECTION_TYPE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1171,7 +1208,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getSequenceType()
 	 * @generated
 	 */
-	int SEQUENCE_TYPE = 23;
+	int SEQUENCE_TYPE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1217,7 +1254,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getSetType()
 	 * @generated
 	 */
-	int SET_TYPE = 24;
+	int SET_TYPE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1548,6 +1585,27 @@ public interface AtlTypingPackage extends EPackage {
 	EReference getEnumType_Eenum();
 
 	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model</em>'.
+	 * @see genericity.typing.atl_types.Model
+	 * @generated
+	 */
+	EClass getModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.Model#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see genericity.typing.atl_types.Model#getName()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EAttribute getModel_Name();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.Metaclass <em>Metaclass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1589,6 +1647,17 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMetaclass_Klass();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.Metaclass#getModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Model</em>'.
+	 * @see genericity.typing.atl_types.Metaclass#getModel()
+	 * @see #getMetaclass()
+	 * @generated
+	 */
+	EReference getMetaclass_Model();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.ReflectiveType <em>Reflective Type</em>}'.
@@ -1963,6 +2032,24 @@ public interface AtlTypingPackage extends EPackage {
 		EReference ENUM_TYPE__EENUM = eINSTANCE.getEnumType_Eenum();
 
 		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.ModelImpl <em>Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.ModelImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getModel()
+		 * @generated
+		 */
+		EClass MODEL = eINSTANCE.getModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
+
+		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.MetaclassImpl <em>Metaclass</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1995,6 +2082,14 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference METACLASS__KLASS = eINSTANCE.getMetaclass_Klass();
+
+		/**
+		 * The meta object literal for the '<em><b>Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METACLASS__MODEL = eINSTANCE.getMetaclass_Model();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.ReflectiveTypeImpl <em>Reflective Type</em>}' class.

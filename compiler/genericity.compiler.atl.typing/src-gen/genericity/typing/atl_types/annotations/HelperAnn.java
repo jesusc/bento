@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface HelperAnn extends AtlAnnotation {
+public interface HelperAnn extends AtlAnnotation, ModuleCallableAnn {
 	/**
 	 * Returns the value of the '<em><b>Helper</b></em>' reference.
 	 * <!-- begin-user-doc -->

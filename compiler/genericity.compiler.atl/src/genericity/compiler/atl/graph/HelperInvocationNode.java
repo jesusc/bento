@@ -5,7 +5,9 @@ import genericity.compiler.atl.analyser.ATLUtils;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.annotations.HelperAnn;
+import genericity.typing.atl_types.annotations.LazyRuleAnn;
 
 public class HelperInvocationNode extends AbstractDependencyNode {
 
@@ -28,14 +30,17 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
-		throw new UnsupportedOperationException();
+		if ( helperAnn.getReturnType() instanceof Metaclass )
+			slice.addExplicitMetaclass((Metaclass) helperAnn.getReturnType());
+		System.out.println("HelperInvocationNode.genErrorSlice(): TODO: Add context type and arguments");
+		generatedDependencies(slice);
 	}
 
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
 		gv.addNode(this, 
-				(ATLUtils.isContextHelper(helper) ? ATLUtils.getHelperType(helper).getName() + "." : "") + 
+				"def:" + (ATLUtils.isContextHelper(helper) ? ATLUtils.getHelperType(helper).getName() + "." : "") + 
 				ATLUtils.getHelperName(helper));
 	}
 }

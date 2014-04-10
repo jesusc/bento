@@ -116,10 +116,21 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AnnotationsPackage.IMPERATIVE_RULE_ANN: {
+				ImperativeRuleAnn imperativeRuleAnn = (ImperativeRuleAnn)theEObject;
+				T result = caseImperativeRuleAnn(imperativeRuleAnn);
+				if (result == null) result = caseRuleAnn(imperativeRuleAnn);
+				if (result == null) result = caseModuleCallableAnn(imperativeRuleAnn);
+				if (result == null) result = caseAtlAnnotation(imperativeRuleAnn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AnnotationsPackage.LAZY_RULE_ANN: {
 				LazyRuleAnn lazyRuleAnn = (LazyRuleAnn)theEObject;
 				T result = caseLazyRuleAnn(lazyRuleAnn);
+				if (result == null) result = caseImperativeRuleAnn(lazyRuleAnn);
 				if (result == null) result = caseRuleAnn(lazyRuleAnn);
+				if (result == null) result = caseModuleCallableAnn(lazyRuleAnn);
 				if (result == null) result = caseAtlAnnotation(lazyRuleAnn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -127,7 +138,9 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 			case AnnotationsPackage.CALLED_RULE_ANN: {
 				CalledRuleAnn calledRuleAnn = (CalledRuleAnn)theEObject;
 				T result = caseCalledRuleAnn(calledRuleAnn);
+				if (result == null) result = caseImperativeRuleAnn(calledRuleAnn);
 				if (result == null) result = caseRuleAnn(calledRuleAnn);
+				if (result == null) result = caseModuleCallableAnn(calledRuleAnn);
 				if (result == null) result = caseAtlAnnotation(calledRuleAnn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -143,7 +156,15 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 			case AnnotationsPackage.HELPER_ANN: {
 				HelperAnn helperAnn = (HelperAnn)theEObject;
 				T result = caseHelperAnn(helperAnn);
+				if (result == null) result = caseModuleCallableAnn(helperAnn);
 				if (result == null) result = caseAtlAnnotation(helperAnn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AnnotationsPackage.MODULE_CALLABLE_ANN: {
+				ModuleCallableAnn moduleCallableAnn = (ModuleCallableAnn)theEObject;
+				T result = caseModuleCallableAnn(moduleCallableAnn);
+				if (result == null) result = caseAtlAnnotation(moduleCallableAnn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -151,6 +172,7 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 				ModuleHelperAnn moduleHelperAnn = (ModuleHelperAnn)theEObject;
 				T result = caseModuleHelperAnn(moduleHelperAnn);
 				if (result == null) result = caseHelperAnn(moduleHelperAnn);
+				if (result == null) result = caseModuleCallableAnn(moduleHelperAnn);
 				if (result == null) result = caseAtlAnnotation(moduleHelperAnn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -159,6 +181,7 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 				ContextHelperAnn contextHelperAnn = (ContextHelperAnn)theEObject;
 				T result = caseContextHelperAnn(contextHelperAnn);
 				if (result == null) result = caseHelperAnn(contextHelperAnn);
+				if (result == null) result = caseModuleCallableAnn(contextHelperAnn);
 				if (result == null) result = caseAtlAnnotation(contextHelperAnn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -354,6 +377,21 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Rule Ann</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Rule Ann</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImperativeRuleAnn(ImperativeRuleAnn object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Lazy Rule Ann</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -410,6 +448,21 @@ public class AnnotationsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseHelperAnn(HelperAnn object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Module Callable Ann</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Module Callable Ann</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModuleCallableAnn(ModuleCallableAnn object) {
 		return null;
 	}
 

@@ -96,6 +96,10 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 				return createMatchedRuleManyAnnAdapter();
 			}
 			@Override
+			public Adapter caseImperativeRuleAnn(ImperativeRuleAnn object) {
+				return createImperativeRuleAnnAdapter();
+			}
+			@Override
 			public Adapter caseLazyRuleAnn(LazyRuleAnn object) {
 				return createLazyRuleAnnAdapter();
 			}
@@ -110,6 +114,10 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseHelperAnn(HelperAnn object) {
 				return createHelperAnnAdapter();
+			}
+			@Override
+			public Adapter caseModuleCallableAnn(ModuleCallableAnn object) {
+				return createModuleCallableAnnAdapter();
 			}
 			@Override
 			public Adapter caseModuleHelperAnn(ModuleHelperAnn object) {
@@ -272,6 +280,20 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.ImperativeRuleAnn <em>Imperative Rule Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.ImperativeRuleAnn
+	 * @generated
+	 */
+	public Adapter createImperativeRuleAnnAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.LazyRuleAnn <em>Lazy Rule Ann</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -324,6 +346,20 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHelperAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.ModuleCallableAnn <em>Module Callable Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.ModuleCallableAnn
+	 * @generated
+	 */
+	public Adapter createModuleCallableAnnAdapter() {
 		return null;
 	}
 

@@ -7,9 +7,17 @@
 package genericity.typing.atl_types.annotations.impl;
 
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
+import genericity.typing.atl_types.annotations.CallExprAnn;
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 
+import java.util.Collection;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->

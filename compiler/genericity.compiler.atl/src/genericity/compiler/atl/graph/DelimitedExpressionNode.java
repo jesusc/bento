@@ -4,6 +4,7 @@ import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.OclSlice;
 import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import atl.metamodel.OCL.OclExpression;
@@ -44,7 +45,8 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
-		throw new UnsupportedOperationException();
+		OclSlice.slice(slice, start);
+		generatedDependencies(slice);
 	}
 	
 	@Override

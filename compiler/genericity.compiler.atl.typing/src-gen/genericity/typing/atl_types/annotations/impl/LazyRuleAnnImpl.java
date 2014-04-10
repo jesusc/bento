@@ -9,14 +9,21 @@ package genericity.typing.atl_types.annotations.impl;
 import genericity.typing.atl_types.Metaclass;
 
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
+import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.LazyRuleAnn;
 
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +39,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class LazyRuleAnnImpl extends RuleAnnImpl implements LazyRuleAnn {
+public class LazyRuleAnnImpl extends ImperativeRuleAnnImpl implements LazyRuleAnn {
 	/**
 	 * The cached value of the '{@link #getInPatternType() <em>In Pattern Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -171,6 +178,7 @@ public class LazyRuleAnnImpl extends RuleAnnImpl implements LazyRuleAnn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

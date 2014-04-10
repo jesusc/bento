@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classcd"
     nsURI="http://bento/componetization/simplequery/classcd" nsPrefix="classcd">
-  <eClassifiers xsi:type="ecore:EClass" name="Model">
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//NamedElt">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
         eType="#//Classifier" containment="true"/>
   </eClassifiers>

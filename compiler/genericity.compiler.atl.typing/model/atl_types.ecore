@@ -45,10 +45,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eenum" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metaclass" eSuperTypes="#//RefType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitOcurrence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="klass" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//Model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReflectiveType" abstract="true" eSuperTypes="#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnionType" eSuperTypes="#//Type">
@@ -99,13 +103,15 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="inPatternTypes" lowerBound="2"
           upperBound="-1" eType="#//Metaclass"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LazyRuleAnn" eSuperTypes="#//annotations/RuleAnn">
+    <eClassifiers xsi:type="ecore:EClass" name="ImperativeRuleAnn" abstract="true"
+        eSuperTypes="#//annotations/RuleAnn #//annotations/ModuleCallableAnn"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LazyRuleAnn" eSuperTypes="#//annotations/ImperativeRuleAnn">
       <eStructuralFeatures xsi:type="ecore:EReference" name="inPatternType" lowerBound="1"
           eType="#//Metaclass"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outputPatternType" lowerBound="1"
           eType="#//Metaclass"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CalledRuleAnn" eSuperTypes="#//annotations/RuleAnn"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CalledRuleAnn" eSuperTypes="#//annotations/ImperativeRuleAnn"/>
     <eClassifiers xsi:type="ecore:EClass" name="OutputPatternAnn" eSuperTypes="#//annotations/RuleAnn">
       <eStructuralFeatures xsi:type="ecore:EReference" name="outputPatternElement"
           eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -114,7 +120,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
           eType="#//annotations/BindingAnn" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HelperAnn" abstract="true" eSuperTypes="#//annotations/AtlAnnotation">
+    <eClassifiers xsi:type="ecore:EClass" name="HelperAnn" abstract="true" eSuperTypes="#//annotations/AtlAnnotation #//annotations/ModuleCallableAnn">
       <eStructuralFeatures xsi:type="ecore:EReference" name="helper" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -123,12 +129,17 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1"
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModuleCallableAnn" abstract="true"
+        eSuperTypes="#//annotations/AtlAnnotation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="calledBy" upperBound="-1"
+          eType="#//annotations/CallExprAnn" eOpposite="#//annotations/CallExprAnn/staticResolver"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ModuleHelperAnn" eSuperTypes="#//annotations/HelperAnn"/>
     <eClassifiers xsi:type="ecore:EClass" name="ContextHelperAnn" eSuperTypes="#//annotations/HelperAnn">
       <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" lowerBound="1"
           eType="#//Type"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="calledBy" upperBound="-1"
-          eType="#//annotations/CallExprAnn" eOpposite="#//annotations/CallExprAnn/dynamicResolvers"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="polymorphicCalledBy"
+          upperBound="-1" eType="#//annotations/CallExprAnn" eOpposite="#//annotations/CallExprAnn/dynamicResolvers"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BindingAnn" eSuperTypes="#//annotations/AtlAnnotation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -171,9 +182,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticResolver" lowerBound="1"
-          eType="#//annotations/HelperAnn"/>
+          eType="#//annotations/ModuleCallableAnn" eOpposite="#//annotations/ModuleCallableAnn/calledBy"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicResolvers" lowerBound="1"
-          upperBound="-1" eType="#//annotations/ContextHelperAnn" eOpposite="#//annotations/ContextHelperAnn/calledBy"/>
+          upperBound="-1" eType="#//annotations/ContextHelperAnn" eOpposite="#//annotations/ContextHelperAnn/polymorphicCalledBy"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AbstractIteratorExprAnn" abstract="true"
         eSuperTypes="#//annotations/ExpressionAnnotation">

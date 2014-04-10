@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link genericity.typing.atl_types.Metaclass#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.Metaclass#isExplicitOcurrence <em>Explicit Ocurrence</em>}</li>
  *   <li>{@link genericity.typing.atl_types.Metaclass#getKlass <em>Klass</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.Metaclass#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +105,31 @@ public interface Metaclass extends RefType {
 	 * @generated
 	 */
 	void setKlass(EClass value);
+
+	/**
+	 * Returns the value of the '<em><b>Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Model</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Model</em>' reference.
+	 * @see #setModel(Model)
+	 * @see genericity.typing.atl_types.AtlTypingPackage#getMetaclass_Model()
+	 * @model required="true"
+	 * @generated
+	 */
+	Model getModel();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.Metaclass#getModel <em>Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Model</em>' reference.
+	 * @see #getModel()
+	 * @generated
+	 */
+	void setModel(Model value);
 
 } // Metaclass

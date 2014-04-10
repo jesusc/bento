@@ -21,13 +21,16 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 	private HashSet<EStructuralFeature> explicitFeatures = new HashSet<EStructuralFeature>();
 
 	private Analyser	analyser;
+	private String	metamodelName;
 	
-	public ErrorSlice(Analyser analyser) {
+	public ErrorSlice(Analyser analyser, String metamodelName) {
 		this.analyser = analyser;
+		this.metamodelName = metamodelName;
 	}
 
 	public void addExplicitMetaclass(Metaclass type) {
-		explicitTypes.add(type.getKlass());
+		if ( type.getModel().getName().equals(metamodelName) )
+			explicitTypes.add(type.getKlass());
 	}
 	
 	public TypingModel getTypingModel() {

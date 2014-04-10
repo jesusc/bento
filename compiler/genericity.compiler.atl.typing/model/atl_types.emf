@@ -81,11 +81,16 @@ class EnumType extends Type {
    ref EObject[1] eenum;      
 }
 
+class Model {
+   attr String[1] name; 
+}
+
 class Metaclass extends RefType {
    attr String[1] name;
    attr boolean explicitOcurrence;
    ref EClass[1] klass;   
 
+   ref Model[1] model;
 }
 
 abstract class ReflectiveType extends Type {
@@ -157,12 +162,16 @@ package annotations {
   	ref Metaclass[2..*] inPatternTypes;   
   }
   
-  class LazyRuleAnn extends RuleAnn {
+  abstract class ImperativeRuleAnn extends RuleAnn, ModuleCallableAnn {
+     
+  }
+  
+  class LazyRuleAnn extends ImperativeRuleAnn {
   	ref Metaclass[1] inPatternType;   
     ref Metaclass[1] outputPatternType;   
   }
   
-  class CalledRuleAnn extends RuleAnn {
+  class CalledRuleAnn extends ImperativeRuleAnn {
      
   }
   
@@ -175,12 +184,16 @@ package annotations {
   }
 
   // TODO: Distinguish the different kind of helpers
-  abstract class HelperAnn extends AtlAnnotation {
+  abstract class HelperAnn extends AtlAnnotation, ModuleCallableAnn {
     ref EObject helper;
 	attr String[1] name;
 	ref Type[1] returnType;
   	
   	val ExpressionAnnotation[1] expr;
+  }
+
+  abstract class ModuleCallableAnn extends AtlAnnotation {
+     ref CallExprAnn[*]#staticResolver calledBy;
   }
 
   class ModuleHelperAnn extends HelperAnn {
@@ -190,7 +203,7 @@ package annotations {
   class ContextHelperAnn extends HelperAnn {
 	ref Type[1] contextType;
 	
-	ref CallExprAnn[*]#dynamicResolvers calledBy;
+	ref CallExprAnn[*]#dynamicResolvers polymorphicCalledBy;
   }
   
 
@@ -232,8 +245,8 @@ package annotations {
   	val ExpressionAnnotation[1] source;
   	val ExpressionAnnotation[*] arguments;  	   
 
-	ref HelperAnn[1] staticResolver;
-	ref ContextHelperAnn[1..*]#calledBy dynamicResolvers;
+	ref ModuleCallableAnn[1]#calledBy staticResolver;
+	ref ContextHelperAnn[1..*]#polymorphicCalledBy dynamicResolvers;
   }
 
   abstract class AbstractIteratorExprAnn extends ExpressionAnnotation {

@@ -103,9 +103,9 @@ public abstract class BaseTest {
 			System.out.println(s);
 	}
 	
-	protected void generateErrorSlice(String errorSliceMMUri) throws IOException {
+	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
-		new ErrorSliceGenerator(analyser, dependencyGraph).generate(r);
+		new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName);
 		r.save(null);
 	}
 	

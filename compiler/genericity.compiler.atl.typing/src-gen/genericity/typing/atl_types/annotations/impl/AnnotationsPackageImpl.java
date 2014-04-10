@@ -21,6 +21,7 @@ import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import genericity.typing.atl_types.annotations.GenericExprAnn;
 import genericity.typing.atl_types.annotations.HelperAnn;
 import genericity.typing.atl_types.annotations.IfExprAnn;
+import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
 import genericity.typing.atl_types.annotations.IterateExprAnn;
 import genericity.typing.atl_types.annotations.IteratorExprAnn;
 import genericity.typing.atl_types.annotations.LazyRuleAnn;
@@ -29,6 +30,7 @@ import genericity.typing.atl_types.annotations.MapExprAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.RuleAnn;
@@ -98,6 +100,13 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass imperativeRuleAnnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass lazyRuleAnnEClass = null;
 
 	/**
@@ -120,6 +129,13 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * @generated
 	 */
 	private EClass helperAnnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass moduleCallableAnnEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -452,6 +468,15 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImperativeRuleAnn() {
+		return imperativeRuleAnnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLazyRuleAnn() {
 		return lazyRuleAnnEClass;
 	}
@@ -569,6 +594,24 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getModuleCallableAnn() {
+		return moduleCallableAnnEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModuleCallableAnn_CalledBy() {
+		return (EReference)moduleCallableAnnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModuleHelperAnn() {
 		return moduleHelperAnnEClass;
 	}
@@ -596,7 +639,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContextHelperAnn_CalledBy() {
+	public EReference getContextHelperAnn_PolymorphicCalledBy() {
 		return (EReference)contextHelperAnnEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1003,6 +1046,8 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		matchedRuleManyAnnEClass = createEClass(MATCHED_RULE_MANY_ANN);
 		createEReference(matchedRuleManyAnnEClass, MATCHED_RULE_MANY_ANN__IN_PATTERN_TYPES);
 
+		imperativeRuleAnnEClass = createEClass(IMPERATIVE_RULE_ANN);
+
 		lazyRuleAnnEClass = createEClass(LAZY_RULE_ANN);
 		createEReference(lazyRuleAnnEClass, LAZY_RULE_ANN__IN_PATTERN_TYPE);
 		createEReference(lazyRuleAnnEClass, LAZY_RULE_ANN__OUTPUT_PATTERN_TYPE);
@@ -1020,11 +1065,14 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		createEReference(helperAnnEClass, HELPER_ANN__RETURN_TYPE);
 		createEReference(helperAnnEClass, HELPER_ANN__EXPR);
 
+		moduleCallableAnnEClass = createEClass(MODULE_CALLABLE_ANN);
+		createEReference(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__CALLED_BY);
+
 		moduleHelperAnnEClass = createEClass(MODULE_HELPER_ANN);
 
 		contextHelperAnnEClass = createEClass(CONTEXT_HELPER_ANN);
 		createEReference(contextHelperAnnEClass, CONTEXT_HELPER_ANN__CONTEXT_TYPE);
-		createEReference(contextHelperAnnEClass, CONTEXT_HELPER_ANN__CALLED_BY);
+		createEReference(contextHelperAnnEClass, CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY);
 
 		bindingAnnEClass = createEClass(BINDING_ANN);
 		createEReference(bindingAnnEClass, BINDING_ANN__RULE);
@@ -1114,10 +1162,14 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		matchedRuleAnnEClass.getESuperTypes().add(this.getRuleAnn());
 		matchedRuleOneAnnEClass.getESuperTypes().add(this.getMatchedRuleAnn());
 		matchedRuleManyAnnEClass.getESuperTypes().add(this.getMatchedRuleAnn());
-		lazyRuleAnnEClass.getESuperTypes().add(this.getRuleAnn());
-		calledRuleAnnEClass.getESuperTypes().add(this.getRuleAnn());
+		imperativeRuleAnnEClass.getESuperTypes().add(this.getRuleAnn());
+		imperativeRuleAnnEClass.getESuperTypes().add(this.getModuleCallableAnn());
+		lazyRuleAnnEClass.getESuperTypes().add(this.getImperativeRuleAnn());
+		calledRuleAnnEClass.getESuperTypes().add(this.getImperativeRuleAnn());
 		outputPatternAnnEClass.getESuperTypes().add(this.getRuleAnn());
 		helperAnnEClass.getESuperTypes().add(this.getAtlAnnotation());
+		helperAnnEClass.getESuperTypes().add(this.getModuleCallableAnn());
+		moduleCallableAnnEClass.getESuperTypes().add(this.getAtlAnnotation());
 		moduleHelperAnnEClass.getESuperTypes().add(this.getHelperAnn());
 		contextHelperAnnEClass.getESuperTypes().add(this.getHelperAnn());
 		bindingAnnEClass.getESuperTypes().add(this.getAtlAnnotation());
@@ -1158,6 +1210,8 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEClass(matchedRuleManyAnnEClass, MatchedRuleManyAnn.class, "MatchedRuleManyAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMatchedRuleManyAnn_InPatternTypes(), theAtlTypingPackage.getMetaclass(), null, "inPatternTypes", null, 2, -1, MatchedRuleManyAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(imperativeRuleAnnEClass, ImperativeRuleAnn.class, "ImperativeRuleAnn", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(lazyRuleAnnEClass, LazyRuleAnn.class, "LazyRuleAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLazyRuleAnn_InPatternType(), theAtlTypingPackage.getMetaclass(), null, "inPatternType", null, 1, 1, LazyRuleAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLazyRuleAnn_OutputPatternType(), theAtlTypingPackage.getMetaclass(), null, "outputPatternType", null, 1, 1, LazyRuleAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1175,11 +1229,14 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEReference(getHelperAnn_ReturnType(), theAtlTypingPackage.getType(), null, "returnType", null, 1, 1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHelperAnn_Expr(), this.getExpressionAnnotation(), null, "expr", null, 1, 1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(moduleCallableAnnEClass, ModuleCallableAnn.class, "ModuleCallableAnn", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModuleCallableAnn_CalledBy(), this.getCallExprAnn(), this.getCallExprAnn_StaticResolver(), "calledBy", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(moduleHelperAnnEClass, ModuleHelperAnn.class, "ModuleHelperAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(contextHelperAnnEClass, ContextHelperAnn.class, "ContextHelperAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContextHelperAnn_ContextType(), theAtlTypingPackage.getType(), null, "contextType", null, 1, 1, ContextHelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getContextHelperAnn_CalledBy(), this.getCallExprAnn(), this.getCallExprAnn_DynamicResolvers(), "calledBy", null, 0, -1, ContextHelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContextHelperAnn_PolymorphicCalledBy(), this.getCallExprAnn(), this.getCallExprAnn_DynamicResolvers(), "polymorphicCalledBy", null, 0, -1, ContextHelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bindingAnnEClass, BindingAnn.class, "BindingAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBindingAnn_Rule(), ecorePackage.getEObject(), null, "rule", null, 0, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1208,8 +1265,8 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEClass(callExprAnnEClass, CallExprAnn.class, "CallExprAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallExprAnn_Source(), this.getExpressionAnnotation(), null, "source", null, 1, 1, CallExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallExprAnn_Arguments(), this.getExpressionAnnotation(), null, "arguments", null, 0, -1, CallExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallExprAnn_StaticResolver(), this.getHelperAnn(), null, "staticResolver", null, 1, 1, CallExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallExprAnn_DynamicResolvers(), this.getContextHelperAnn(), this.getContextHelperAnn_CalledBy(), "dynamicResolvers", null, 1, -1, CallExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCallExprAnn_StaticResolver(), this.getModuleCallableAnn(), this.getModuleCallableAnn_CalledBy(), "staticResolver", null, 1, 1, CallExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCallExprAnn_DynamicResolvers(), this.getContextHelperAnn(), this.getContextHelperAnn_PolymorphicCalledBy(), "dynamicResolvers", null, 1, -1, CallExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractIteratorExprAnnEClass, AbstractIteratorExprAnn.class, "AbstractIteratorExprAnn", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractIteratorExprAnn_Source(), this.getExpressionAnnotation(), null, "source", null, 1, 1, AbstractIteratorExprAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

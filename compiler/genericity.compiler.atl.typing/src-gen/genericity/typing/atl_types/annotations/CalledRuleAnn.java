@@ -17,5 +17,5 @@ package genericity.typing.atl_types.annotations;
  * @model
  * @generated
  */
-public interface CalledRuleAnn extends RuleAnn {
+public interface CalledRuleAnn extends ImperativeRuleAnn {
 } // CalledRuleAnn

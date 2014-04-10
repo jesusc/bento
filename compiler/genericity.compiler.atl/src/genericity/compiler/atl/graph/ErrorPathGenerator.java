@@ -12,6 +12,9 @@ import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import genericity.typing.atl_types.annotations.HelperAnn;
+import genericity.typing.atl_types.annotations.IfExprAnn;
+import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
+import genericity.typing.atl_types.annotations.LazyRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
@@ -25,6 +28,7 @@ import atl.metamodel.ATL.Helper;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.Rule;
+import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
@@ -36,6 +40,7 @@ import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
+import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
@@ -92,6 +97,8 @@ public class ErrorPathGenerator {
 			System.err.println("ErrorPathGenerator: Ignored CollectionOperationOverNoCollectionError" );			
 		} else if ( p instanceof FlattenOverNonNestedCollection ) {
 			System.err.println("ErrorPathGenerator: Ignored FlattenOverNonNestedCollectionImpl" );
+		} else if ( p instanceof DifferentBranchTypes ) {
+			System.err.println("ErrorPathGenerator: Ignored DifferentBranchTypes" );
 		} else {
 			throw new UnsupportedOperationException(p.getClass().getName());
 		}
@@ -104,7 +111,7 @@ public class ErrorPathGenerator {
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
 		graph.linkProblemToNode(p, node);
 		
-		pathToExpression(atlExpr.getSource(), 
+		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);
 	}
 
@@ -113,12 +120,34 @@ public class ErrorPathGenerator {
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
 		graph.linkProblemToNode(p, node);
 		
-		pathToExpression2(atlExpr.getSource(), 
+		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);		
 	}
 	
 
-	private void pathToExpression2(OclExpression expr, ExpressionAnnotation annotation, DependencyNode depNode) {
+	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {
+		// Try to find an iterator
+		ATLModelBaseObject parent = start.container_(); // TODO: Iterate
+		while ( ! (parent instanceof IteratorExp || (parent instanceof IterateExp) ) ) {
+			if ( (parent instanceof Rule) || (parent instanceof Helper) ) {
+				parent = null;
+				break;
+			}
+			parent = parent.container_();
+		}
+
+		// It is an iterator
+		if ( parent != null ) {
+			start = ((IteratorExp) parent).getSource();
+			startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
+		}
+
+		DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
+		depNode.addDependency(node);
+	
+		pathToControlFlow(start, node);
+		
+		/*
 		OclExpression start = expr;
 		ExpressionAnnotation startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
 		
@@ -128,6 +157,13 @@ public class ErrorPathGenerator {
 		ATLModelBaseObject parent = start.container_(); // TODO: Iterate
 		while ( ! ( (parent instanceof Rule) || (parent instanceof Helper) || 
 				    (parent instanceof IteratorExp || (parent instanceof IterateExp) ))) {
+
+			if ( parent instanceof IfExp ) {
+				pathToIfExpr((IfExp) parent, depNode);
+				return;
+				//	throw new UnsupportedOperationException();
+			}
+			
 			parent = parent.container_();
 		}
 		
@@ -142,121 +178,88 @@ public class ErrorPathGenerator {
 		depNode.addDependency(node);
 
 		pathToSomewhere(parent, node);
-		/*
-		// QUITAR ESTE IF Y PONERLO EN PATH_TO_SOMEWHERE
-		if ( parent instanceof Rule ) {
-			pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node);
-		} else if ( parent instanceof Helper ){
-			pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node);			
-		} else if ( parent instanceof IteratorExp ) {
-			pathToSomewhere(parent, node);
-		} else {
-			throw new UnsupportedOperationException();
-		}
 		*/
-	
 	}
 
+	private void pathForCall(OclExpression call, DependencyNode depNode) {
+		// pathToControlFlow(expr, hNode);
 
-	private void pathToControlFlow(OclExpression start, ExpressionAnnotation ann, DelimitedExpressionNode node) {
-		ATLModelBaseObject parent = start.container_(); 
-		while ( ! ( (parent instanceof Rule) || (parent instanceof Helper) )) {
+		/*
+		System.out.println("pathForCall: " +  OclGenerator.gen(call) );
+		OclExpression lastParent  = call;
+		ATLModelBaseObject parent = call.container_(); 
+		while ( parent instanceof OclExpression) {
+			if ( parent instanceof IfExp ) {
+				break;
+			}
+			lastParent = (OclExpression) parent;
 			parent = parent.container_();
 		}
 		
-		pathToSomewhere(parent, node);
-	}
-	
-	private void pathToSomewhere(ATLModelBaseObject parent, DelimitedExpressionNode node) {
-		 AtlAnnotation ann = typ.getAnnotation(parent.original_());
+		ExpressionAnnotation lastParentAnn = (ExpressionAnnotation) typ.getAnnotation(lastParent.original_());
 		
+		
+		DelimitedExpressionNode node = new DelimitedExpressionNode(lastParent, lastParentAnn);
+		depNode.addDependency(node);
+	
+		pathToControlFlow(lastParent, node);
+		*/
+		
+		ExpressionAnnotation ann = (ExpressionAnnotation) typ.getAnnotation(call.original_());
+		
+		DelimitedExpressionNode node = new DelimitedExpressionNode(call, ann);
+		depNode.addDependency(node);
+		
+		pathToControlFlow(call, node);
+	}
+
+	private void pathToControlFlow(OclExpression start, DependencyNode node) {
+		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
+		ATLModelBaseObject parent = start.container_(); 
+		while ( ! ( (parent instanceof Rule) || (parent instanceof Helper) ||
+				    (parent instanceof IfExp ))) {
+			lastParent = parent;
+			parent = parent.container_();
+		}
+		
+	    AtlAnnotation ann = typ.getAnnotation(parent.original_());
+			
 		// QUITAR ESTE IF Y PONERLO EN PATH_TO_SOMEWHERE
 		if ( parent instanceof Rule ) {
 			pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node);
 		} else if ( parent instanceof Helper ){
-			pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node);			
+			pathFromHelper((HelperAnn) typ.getAnnotation(parent.original_()), node);			
 		//} else if ( parent instanceof IteratorExp ) {
 		//	pathToSomewhere(parent, node);
-		} else if ( parent instanceof Binding ) {
-			Rule r = parent.container_().container(Rule.class);
+		} else if ( parent instanceof IfExp ) {
+			pathFromIfExpr((IfExp) parent, (OclExpression) lastParent, node);
+		/*} else if ( parent instanceof Binding ) {
+			Rule r = parent.container_().container_().container(Rule.class);
 			pathToRule((RuleAnn) typ.getAnnotation(r.original_()), node);
 		} else if ( parent instanceof OclExpression ) {
-			pathToControlFlow((OclExpression) parent, (ExpressionAnnotation) ann, node);
-		} else {
+			pathToControlFlow((OclExpression) parent, node);
+		*/} else {
 			throw new UnsupportedOperationException();
 		}
-
 	}
 
 
-	private void pathToExpression(OclExpression expr, ExpressionAnnotation annotation, DependencyNode depNode) {
-		/*
-		 * Is this needed??
-		if ( ! ( expr.container_() instanceof OclExpression) )
-			throw new IllegalArgumentException();
-		*/
-		
-		// I MADE THE MISTAKE OF TRAVERSING THROUGH THE CONTAINER, NOT THE SOURCE
-		// BUT MAY BE THERE IS SOMETHING HERE WORTH LOOKING AGAIN : START - END...
-		/*
-		OclExpression start       		= expr.container(OclExpression.class);
-		ATLModelBaseObjectInterface end = start;
-		ATLModelBaseObject parent       = end.container_(); 
-				
-		while ( end instanceof OclExpression && ! (end instanceof OperationCallExp)  ) {
-			end = parent;
-			parent = start.container_();
-		}
-		// TODO: THIS IS NOT FINE IF IT IS WITHIN AN ITERATOR...		
-		
-		System.out.println(start);
-		System.out.println(end);
-		
-		DelimitedExpressionNode node = new DelimitedExpressionNode(start, (OclExpression) end);
-		depNode.addDependency(node);
-		*/
-		
-		
-		OclExpression start = expr;
-		ExpressionAnnotation startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
-		
-		/*// NOT NEEDED
-		ATLModelBaseObjectInterface end = start;		
-		while ( end instanceof PropertyCallExp ) {
-			end = ((PropertyCallExp) end).getSource();
-		}
-		System.out.println(start);
-		System.out.println(end);
-		*/
-		
-		DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
-		depNode.addDependency(node);
-		
-		// TODO: Merge with the other branch if needed...
-		// TODO: Take into account that the container maybe a rule or a helper...
-		//       For the moment assume a rule...
-		ATLModelBaseObject parent = start.container_();
-		while ( ! ( (parent instanceof Rule) || (parent instanceof Helper) )) {
-			parent = parent.container_();
+	private void pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node) {
+		boolean branch;
+		if ( expr.getThenExpression() == directChild ) {
+			branch = ConditionalNode.TRUE_BRANCH;
+		} else {
+			branch = ConditionalNode.FALSE_BRANCH;
 		}
 		
-		if ( parent instanceof Rule ) {
-			pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node);
-		} else if ( parent instanceof Helper ){
-			pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node);			
-		}
+		IfExprAnn ann = (IfExprAnn) typ.getAnnotation(expr.original_());
+		ConditionalNode newNode = new ConditionalNode(expr, branch);
+		node.addDependency(newNode);
 		
-		/*
-		parent = end.container_();
-		while ( ! ( parent instanceof Rule ) ) parent = parent.container_();
-		
-		pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node);
-		*/
-		
-		// System.out.println(start);
-		// System.out.println(end);
-		// System.out.println(annotation);
+		pathToControlFlow(expr, newNode);
 	}
+
+
 
 	private void generatePath_BindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany p) {
 		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
@@ -292,12 +295,24 @@ public class ErrorPathGenerator {
 	private void pathToRule(RuleAnn rule, DependencyNode dependent) {
 		if ( rule instanceof MatchedRuleAnn ) {
 			pathToMatchedRuleOne((MatchedRuleAnn) rule, dependent);
+		} else if ( rule instanceof LazyRuleAnn ) {
+			pathToLazyRule((LazyRuleAnn) rule, dependent);
 		} else {
-			throw new UnsupportedOperationException();
+			throw new UnsupportedOperationException(rule.getClass().getName());
 		}
 	}
 	
-	private void pathToHelper(HelperAnn helperAnn, DependencyNode depNode) {
+	private void pathToLazyRule(LazyRuleAnn rule, DependencyNode dependent) {
+		Rule r =  (Rule) atlModel.findWrapper( rule.getRule() );
+		ImperativeRuleExecution node = new ImperativeRuleExecution(rule, r);
+		dependent.addDependency(node);
+		for(CallExprAnn callExprAnn : rule.getCalledBy()) {
+			 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
+			 pathForCall(expr, node);				 			
+		}
+	}
+
+	private void pathFromHelper(HelperAnn helperAnn, DependencyNode depNode) {
 		Helper h =  (Helper) atlModel.findWrapper( helperAnn.getHelper() );
 		HelperInvocationNode hNode = new HelperInvocationNode(h, helperAnn);
 		depNode.addDependency(hNode);
@@ -305,11 +320,10 @@ public class ErrorPathGenerator {
 		if ( helperAnn instanceof ModuleHelperAnn ) {
 			throw new UnsupportedOperationException();			
 		} else if ( helperAnn instanceof ContextHelperAnn ) {
-			EList<CallExprAnn> callers = ((ContextHelperAnn) helperAnn).getCalledBy();
+			EList<CallExprAnn> callers = ((ContextHelperAnn) helperAnn).getPolymorphicCalledBy();
 			for (CallExprAnn callExprAnn : callers) {
 				 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
-				 System.out.println(expr.getLocation());
-				 pathToExpression(expr, callExprAnn, hNode);
+				 pathForCall(expr, hNode);				 
 			}
 			//pathToExpression(expr, annotation, depNode)
 			//System.out.println(callers.size());
@@ -317,7 +331,7 @@ public class ErrorPathGenerator {
 			throw new UnsupportedOperationException();
 		}
 	}
-	
+
 	private void pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent) {		
 		MatchedRule r = (MatchedRule) atlModel.findWrapper( rule.getRule() );
 		// VariableDeclaration v = r.getInPattern().getElements().get(0);

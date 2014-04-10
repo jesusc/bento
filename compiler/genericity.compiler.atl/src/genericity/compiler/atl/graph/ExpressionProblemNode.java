@@ -4,6 +4,7 @@ import genericity.compiler.atl.analyser.ErrorUtils;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.OclSlice;
 import atl.metamodel.OCL.OclExpression;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
@@ -28,7 +29,8 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
-		throw new UnsupportedOperationException();
+		OclSlice.slice(slice, expr);
+		generatedDependencies(slice);
 	}
 	
 	@Override

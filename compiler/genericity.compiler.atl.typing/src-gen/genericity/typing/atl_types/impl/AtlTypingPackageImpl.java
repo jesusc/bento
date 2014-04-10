@@ -17,6 +17,7 @@ import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.MapType;
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.Model;
 import genericity.typing.atl_types.OclUndefinedType;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.RefType;
@@ -170,6 +171,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * @generated
 	 */
 	private EClass enumTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -550,6 +558,24 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getModel() {
+		return modelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModel_Name() {
+		return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetaclass() {
 		return metaclassEClass;
 	}
@@ -579,6 +605,15 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 */
 	public EReference getMetaclass_Klass() {
 		return (EReference)metaclassEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaclass_Model() {
+		return (EReference)metaclassEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -735,10 +770,14 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		createEAttribute(enumTypeEClass, ENUM_TYPE__NAME);
 		createEReference(enumTypeEClass, ENUM_TYPE__EENUM);
 
+		modelEClass = createEClass(MODEL);
+		createEAttribute(modelEClass, MODEL__NAME);
+
 		metaclassEClass = createEClass(METACLASS);
 		createEAttribute(metaclassEClass, METACLASS__NAME);
 		createEAttribute(metaclassEClass, METACLASS__EXPLICIT_OCURRENCE);
 		createEReference(metaclassEClass, METACLASS__KLASS);
+		createEReference(metaclassEClass, METACLASS__MODEL);
 
 		reflectiveTypeEClass = createEClass(REFLECTIVE_TYPE);
 
@@ -861,10 +900,14 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEAttribute(getEnumType_Name(), ecorePackage.getEString(), "name", null, 1, 1, EnumType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEnumType_Eenum(), ecorePackage.getEObject(), null, "eenum", null, 1, 1, EnumType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(metaclassEClass, Metaclass.class, "Metaclass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaclass_Name(), ecorePackage.getEString(), "name", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaclass_ExplicitOcurrence(), ecorePackage.getEBoolean(), "explicitOcurrence", null, 0, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaclass_Klass(), ecorePackage.getEClass(), null, "klass", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetaclass_Model(), this.getModel(), null, "model", null, 1, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(reflectiveTypeEClass, ReflectiveType.class, "ReflectiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

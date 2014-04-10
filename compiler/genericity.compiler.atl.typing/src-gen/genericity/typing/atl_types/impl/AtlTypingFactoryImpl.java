@@ -75,6 +75,7 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 			case AtlTypingPackage.UNKNOWN_FEATURE: return createUnknownFeature();
 			case AtlTypingPackage.EMPTY_COLLECTION: return createEmptyCollection();
 			case AtlTypingPackage.ENUM_TYPE: return createEnumType();
+			case AtlTypingPackage.MODEL: return createModel();
 			case AtlTypingPackage.METACLASS: return createMetaclass();
 			case AtlTypingPackage.UNION_TYPE: return createUnionType();
 			case AtlTypingPackage.THIS_MODULE_TYPE: return createThisModuleType();
@@ -234,6 +235,16 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	public EnumType createEnumType() {
 		EnumTypeImpl enumType = new EnumTypeImpl();
 		return enumType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Model createModel() {
+		ModelImpl model = new ModelImpl();
+		return model;
 	}
 
 	/**

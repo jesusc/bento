@@ -25,6 +25,7 @@ import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.MapType;
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.Model;
 import genericity.typing.atl_types.OclUndefinedType;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.ReflectiveClass;
@@ -153,8 +154,16 @@ public class TypingModel {
 		metaclass.setName(c.getName());
 		metaclass.setMultivalued(false);
 		metaclass.setMetamodelRef(cspace);
+		metaclass.setModel(createModel(cspace.getMetamodelName()));
 		return metaclass;
 	}
+
+	private Model createModel(String metamodelName) {
+		Model model = (Model) impl.createObject(Model.class.getSimpleName());
+		model.setName(metamodelName);
+		return model;
+	}
+
 
 	public Unknown newUnknownType() {
 		Unknown u = (Unknown) impl.createObject(Unknown.class.getSimpleName());
@@ -620,7 +629,7 @@ public class TypingModel {
 	
 	public AtlAnnotation getAnnotation(EObject element) {
 		if ( ! nodesToAnnotations.containsKey(element) ) 
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("No annotation for " + element);
 		
 		return nodesToAnnotations.get(element);
 	}
@@ -676,7 +685,7 @@ public class TypingModel {
 				pending.add(((CollectionType) t).getContainedType() );
 			} else if ( t instanceof UnionType ) {
 				pending.addAll( ((UnionType) t).getPossibleTypes());
-			} else if ( t instanceof PrimitiveType ) { 
+			} else if ( t instanceof PrimitiveType || t instanceof EnumType || t instanceof OclUndefinedType ) { 
 				// ignore
 			} else {
 				throw new UnsupportedOperationException(t.getClass().getName());

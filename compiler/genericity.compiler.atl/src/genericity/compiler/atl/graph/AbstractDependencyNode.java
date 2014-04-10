@@ -1,5 +1,6 @@
 package genericity.compiler.atl.graph;
 
+import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 
 import java.util.Collections;
@@ -29,7 +30,13 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 		depending.add(node);
 	}
 	
+	protected void generatedDependencies(ErrorSlice slice) {
+		for(DependencyNode n : dependencies) {
+			n.genErrorSlice(slice);
+		}					
+	}
 
+	
 	@Override
 	public void setGraph(DependencyGraph dependencyGraph) {
 		this.graph = dependencyGraph;

@@ -72,6 +72,7 @@ public interface CallExprAnn extends ExpressionAnnotation {
 
 	/**
 	 * Returns the value of the '<em><b>Static Resolver</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getCalledBy <em>Called By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Static Resolver</em>' reference isn't clear,
@@ -79,12 +80,13 @@ public interface CallExprAnn extends ExpressionAnnotation {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static Resolver</em>' reference.
-	 * @see #setStaticResolver(HelperAnn)
+	 * @see #setStaticResolver(ModuleCallableAnn)
 	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getCallExprAnn_StaticResolver()
-	 * @model required="true"
+	 * @see genericity.typing.atl_types.annotations.ModuleCallableAnn#getCalledBy
+	 * @model opposite="calledBy" required="true"
 	 * @generated
 	 */
-	HelperAnn getStaticResolver();
+	ModuleCallableAnn getStaticResolver();
 
 	/**
 	 * Sets the value of the '{@link genericity.typing.atl_types.annotations.CallExprAnn#getStaticResolver <em>Static Resolver</em>}' reference.
@@ -94,12 +96,12 @@ public interface CallExprAnn extends ExpressionAnnotation {
 	 * @see #getStaticResolver()
 	 * @generated
 	 */
-	void setStaticResolver(HelperAnn value);
+	void setStaticResolver(ModuleCallableAnn value);
 
 	/**
 	 * Returns the value of the '<em><b>Dynamic Resolvers</b></em>' reference list.
 	 * The list contents are of type {@link genericity.typing.atl_types.annotations.ContextHelperAnn}.
-	 * It is bidirectional and its opposite is '{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getCalledBy <em>Called By</em>}'.
+	 * It is bidirectional and its opposite is '{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getPolymorphicCalledBy <em>Polymorphic Called By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dynamic Resolvers</em>' reference isn't clear,
@@ -108,8 +110,8 @@ public interface CallExprAnn extends ExpressionAnnotation {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dynamic Resolvers</em>' reference list.
 	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getCallExprAnn_DynamicResolvers()
-	 * @see genericity.typing.atl_types.annotations.ContextHelperAnn#getCalledBy
-	 * @model opposite="calledBy" required="true"
+	 * @see genericity.typing.atl_types.annotations.ContextHelperAnn#getPolymorphicCalledBy
+	 * @model opposite="polymorphicCalledBy" required="true"
 	 * @generated
 	 */
 	EList<ContextHelperAnn> getDynamicResolvers();

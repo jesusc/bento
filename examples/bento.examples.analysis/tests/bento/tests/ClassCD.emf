@@ -3,7 +3,7 @@
 	prefix="classcd")
 package classcd;
 
-class Model {
+class Model extends NamedElt {
    val Classifier[*] classifiers;
 }
 

@@ -7,6 +7,8 @@ import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import atl.metamodel.OCL.CollectionExp;
+import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
@@ -25,7 +27,9 @@ public class OclSlice {
 
 		
 		ignore.add(atl.metamodel.OCL.StringExpImpl.class);
-
+		ignore.add(atl.metamodel.OCL.IntegerExpImpl.class);
+		ignore.add(atl.metamodel.OCL.BooleanExpImpl.class);
+		
 	}
 	
 	public static void slice(ErrorSlice slice, OclExpression expr) {
@@ -46,6 +50,16 @@ public class OclSlice {
 			for(OclExpression arg : op.getArguments()) {
 				slice(slice, arg);
 			}
+		} else if ( expr instanceof CollectionExp ) {
+			for(OclExpression arg : ((CollectionExp) expr).getElements()) {
+				slice(slice, arg);
+			}			
+		} else if ( expr instanceof IfExp ) {
+			IfExp ifExp = (IfExp) expr;
+			slice(slice, ifExp.getCondition());
+			// Not the branches!!! because the corresponding branch should be done by the
+			// corresponding node in the condition graph
+			// slice(slice, ifExp)
 		} else if ( ignore.contains(expr.getClass()) ) {
 			// Ignore
 		} else {

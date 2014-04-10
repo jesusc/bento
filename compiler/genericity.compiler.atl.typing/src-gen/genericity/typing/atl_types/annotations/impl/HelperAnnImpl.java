@@ -9,17 +9,23 @@ package genericity.typing.atl_types.annotations.impl;
 import genericity.typing.atl_types.Type;
 
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
+import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import genericity.typing.atl_types.annotations.HelperAnn;
 
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +34,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getCalledBy <em>Called By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getHelper <em>Helper</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getReturnType <em>Return Type</em>}</li>
@@ -38,6 +45,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperAnn {
+	/**
+	 * The cached value of the '{@link #getCalledBy() <em>Called By</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCalledBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CallExprAnn> calledBy;
+
 	/**
 	 * The cached value of the '{@link #getHelper() <em>Helper</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -105,6 +122,18 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	@Override
 	protected EClass eStaticClass() {
 		return AnnotationsPackage.Literals.HELPER_ANN;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<CallExprAnn> getCalledBy() {
+		if (calledBy == null) {
+			calledBy = new EObjectWithInverseResolvingEList<CallExprAnn>(CallExprAnn.class, this, AnnotationsPackage.HELPER_ANN__CALLED_BY, AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER);
+		}
+		return calledBy;
 	}
 
 	/**
@@ -252,9 +281,26 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCalledBy()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
+				return ((InternalEList<?>)getCalledBy()).basicRemove(otherEnd, msgs);
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				return basicSetExpr(null, msgs);
 		}
@@ -269,6 +315,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
+				return getCalledBy();
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				if (resolve) return getHelper();
 				return basicGetHelper();
@@ -288,9 +336,14 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
+				getCalledBy().clear();
+				getCalledBy().addAll((Collection<? extends CallExprAnn>)newValue);
+				return;
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				setHelper((EObject)newValue);
 				return;
@@ -315,6 +368,9 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
+				getCalledBy().clear();
+				return;
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				setHelper((EObject)null);
 				return;
@@ -339,6 +395,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
+				return calledBy != null && !calledBy.isEmpty();
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				return helper != null;
 			case AnnotationsPackage.HELPER_ANN__NAME:
@@ -349,6 +407,38 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				return expr != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ModuleCallableAnn.class) {
+			switch (derivedFeatureID) {
+				case AnnotationsPackage.HELPER_ANN__CALLED_BY: return AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ModuleCallableAnn.class) {
+			switch (baseFeatureID) {
+				case AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY: return AnnotationsPackage.HELPER_ANN__CALLED_BY;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

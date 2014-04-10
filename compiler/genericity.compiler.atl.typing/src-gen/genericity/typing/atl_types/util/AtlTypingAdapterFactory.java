@@ -144,6 +144,10 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createEnumTypeAdapter();
 			}
 			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
+			}
+			@Override
 			public Adapter caseMetaclass(Metaclass object) {
 				return createMetaclassAdapter();
 			}
@@ -446,6 +450,20 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnumTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.Model
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
 		return null;
 	}
 

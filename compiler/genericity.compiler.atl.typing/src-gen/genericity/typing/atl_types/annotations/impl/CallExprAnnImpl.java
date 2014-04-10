@@ -11,6 +11,7 @@ import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.HelperAnn;
 import java.util.Collection;
 
@@ -74,7 +75,7 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	 * @generated
 	 * @ordered
 	 */
-	protected HelperAnn staticResolver;
+	protected ModuleCallableAnn staticResolver;
 
 	/**
 	 * The cached value of the '{@link #getDynamicResolvers() <em>Dynamic Resolvers</em>}' reference list.
@@ -165,10 +166,10 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HelperAnn getStaticResolver() {
+	public ModuleCallableAnn getStaticResolver() {
 		if (staticResolver != null && staticResolver.eIsProxy()) {
 			InternalEObject oldStaticResolver = (InternalEObject)staticResolver;
-			staticResolver = (HelperAnn)eResolveProxy(oldStaticResolver);
+			staticResolver = (ModuleCallableAnn)eResolveProxy(oldStaticResolver);
 			if (staticResolver != oldStaticResolver) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER, oldStaticResolver, staticResolver));
@@ -182,7 +183,7 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HelperAnn basicGetStaticResolver() {
+	public ModuleCallableAnn basicGetStaticResolver() {
 		return staticResolver;
 	}
 
@@ -191,11 +192,33 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStaticResolver(HelperAnn newStaticResolver) {
-		HelperAnn oldStaticResolver = staticResolver;
+	public NotificationChain basicSetStaticResolver(ModuleCallableAnn newStaticResolver, NotificationChain msgs) {
+		ModuleCallableAnn oldStaticResolver = staticResolver;
 		staticResolver = newStaticResolver;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER, oldStaticResolver, staticResolver));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER, oldStaticResolver, newStaticResolver);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStaticResolver(ModuleCallableAnn newStaticResolver) {
+		if (newStaticResolver != staticResolver) {
+			NotificationChain msgs = null;
+			if (staticResolver != null)
+				msgs = ((InternalEObject)staticResolver).eInverseRemove(this, AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY, ModuleCallableAnn.class, msgs);
+			if (newStaticResolver != null)
+				msgs = ((InternalEObject)newStaticResolver).eInverseAdd(this, AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY, ModuleCallableAnn.class, msgs);
+			msgs = basicSetStaticResolver(newStaticResolver, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER, newStaticResolver, newStaticResolver));
 	}
 
 	/**
@@ -205,7 +228,7 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	 */
 	public EList<ContextHelperAnn> getDynamicResolvers() {
 		if (dynamicResolvers == null) {
-			dynamicResolvers = new EObjectWithInverseResolvingEList.ManyInverse<ContextHelperAnn>(ContextHelperAnn.class, this, AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS, AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY);
+			dynamicResolvers = new EObjectWithInverseResolvingEList.ManyInverse<ContextHelperAnn>(ContextHelperAnn.class, this, AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS, AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY);
 		}
 		return dynamicResolvers;
 	}
@@ -219,6 +242,10 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
+				if (staticResolver != null)
+					msgs = ((InternalEObject)staticResolver).eInverseRemove(this, AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY, ModuleCallableAnn.class, msgs);
+				return basicSetStaticResolver((ModuleCallableAnn)otherEnd, msgs);
 			case AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDynamicResolvers()).basicAdd(otherEnd, msgs);
 		}
@@ -237,6 +264,8 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 				return basicSetSource(null, msgs);
 			case AnnotationsPackage.CALL_EXPR_ANN__ARGUMENTS:
 				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
+				return basicSetStaticResolver(null, msgs);
 			case AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS:
 				return ((InternalEList<?>)getDynamicResolvers()).basicRemove(otherEnd, msgs);
 		}
@@ -281,7 +310,7 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 				getArguments().addAll((Collection<? extends ExpressionAnnotation>)newValue);
 				return;
 			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
-				setStaticResolver((HelperAnn)newValue);
+				setStaticResolver((ModuleCallableAnn)newValue);
 				return;
 			case AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS:
 				getDynamicResolvers().clear();
@@ -306,7 +335,7 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 				getArguments().clear();
 				return;
 			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
-				setStaticResolver((HelperAnn)null);
+				setStaticResolver((ModuleCallableAnn)null);
 				return;
 			case AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS:
 				getDynamicResolvers().clear();

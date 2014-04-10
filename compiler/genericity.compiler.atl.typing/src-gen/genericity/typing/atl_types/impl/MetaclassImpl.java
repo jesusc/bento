@@ -9,6 +9,7 @@ package genericity.typing.atl_types.impl;
 import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.Metaclass;
 
+import genericity.typing.atl_types.Model;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#isExplicitOcurrence <em>Explicit Ocurrence</em>}</li>
  *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getKlass <em>Klass</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.impl.MetaclassImpl#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +83,16 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * @ordered
 	 */
 	protected EClass klass;
+
+	/**
+	 * The cached value of the '{@link #getModel() <em>Model</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModel()
+	 * @generated
+	 * @ordered
+	 */
+	protected Model model;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -186,6 +198,44 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Model getModel() {
+		if (model != null && model.eIsProxy()) {
+			InternalEObject oldModel = (InternalEObject)model;
+			model = (Model)eResolveProxy(oldModel);
+			if (model != oldModel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlTypingPackage.METACLASS__MODEL, oldModel, model));
+			}
+		}
+		return model;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Model basicGetModel() {
+		return model;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setModel(Model newModel) {
+		Model oldModel = model;
+		model = newModel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.METACLASS__MODEL, oldModel, model));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -196,6 +246,9 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 			case AtlTypingPackage.METACLASS__KLASS:
 				if (resolve) return getKlass();
 				return basicGetKlass();
+			case AtlTypingPackage.METACLASS__MODEL:
+				if (resolve) return getModel();
+				return basicGetModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,6 +269,9 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 				return;
 			case AtlTypingPackage.METACLASS__KLASS:
 				setKlass((EClass)newValue);
+				return;
+			case AtlTypingPackage.METACLASS__MODEL:
+				setModel((Model)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,6 +294,9 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 			case AtlTypingPackage.METACLASS__KLASS:
 				setKlass((EClass)null);
 				return;
+			case AtlTypingPackage.METACLASS__MODEL:
+				setModel((Model)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -256,6 +315,8 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 				return explicitOcurrence != EXPLICIT_OCURRENCE_EDEFAULT;
 			case AtlTypingPackage.METACLASS__KLASS:
 				return klass != null;
+			case AtlTypingPackage.METACLASS__MODEL:
+				return model != null;
 		}
 		return super.eIsSet(featureID);
 	}

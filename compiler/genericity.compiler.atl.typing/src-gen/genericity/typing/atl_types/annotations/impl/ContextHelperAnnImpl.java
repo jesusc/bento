@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ContextHelperAnnImpl#getContextType <em>Context Type</em>}</li>
- *   <li>{@link genericity.typing.atl_types.annotations.impl.ContextHelperAnnImpl#getCalledBy <em>Called By</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.ContextHelperAnnImpl#getPolymorphicCalledBy <em>Polymorphic Called By</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,14 +50,14 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 	protected Type contextType;
 
 	/**
-	 * The cached value of the '{@link #getCalledBy() <em>Called By</em>}' reference list.
+	 * The cached value of the '{@link #getPolymorphicCalledBy() <em>Polymorphic Called By</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCalledBy()
+	 * @see #getPolymorphicCalledBy()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CallExprAnn> calledBy;
+	protected EList<CallExprAnn> polymorphicCalledBy;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,11 +121,11 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CallExprAnn> getCalledBy() {
-		if (calledBy == null) {
-			calledBy = new EObjectWithInverseResolvingEList.ManyInverse<CallExprAnn>(CallExprAnn.class, this, AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY, AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS);
+	public EList<CallExprAnn> getPolymorphicCalledBy() {
+		if (polymorphicCalledBy == null) {
+			polymorphicCalledBy = new EObjectWithInverseResolvingEList.ManyInverse<CallExprAnn>(CallExprAnn.class, this, AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY, AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS);
 		}
-		return calledBy;
+		return polymorphicCalledBy;
 	}
 
 	/**
@@ -137,8 +137,8 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCalledBy()).basicAdd(otherEnd, msgs);
+			case AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPolymorphicCalledBy()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -151,8 +151,8 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY:
-				return ((InternalEList<?>)getCalledBy()).basicRemove(otherEnd, msgs);
+			case AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY:
+				return ((InternalEList<?>)getPolymorphicCalledBy()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -168,8 +168,8 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 			case AnnotationsPackage.CONTEXT_HELPER_ANN__CONTEXT_TYPE:
 				if (resolve) return getContextType();
 				return basicGetContextType();
-			case AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY:
-				return getCalledBy();
+			case AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY:
+				return getPolymorphicCalledBy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -186,9 +186,9 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 			case AnnotationsPackage.CONTEXT_HELPER_ANN__CONTEXT_TYPE:
 				setContextType((Type)newValue);
 				return;
-			case AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY:
-				getCalledBy().clear();
-				getCalledBy().addAll((Collection<? extends CallExprAnn>)newValue);
+			case AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY:
+				getPolymorphicCalledBy().clear();
+				getPolymorphicCalledBy().addAll((Collection<? extends CallExprAnn>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -205,8 +205,8 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 			case AnnotationsPackage.CONTEXT_HELPER_ANN__CONTEXT_TYPE:
 				setContextType((Type)null);
 				return;
-			case AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY:
-				getCalledBy().clear();
+			case AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY:
+				getPolymorphicCalledBy().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -222,8 +222,8 @@ public class ContextHelperAnnImpl extends HelperAnnImpl implements ContextHelper
 		switch (featureID) {
 			case AnnotationsPackage.CONTEXT_HELPER_ANN__CONTEXT_TYPE:
 				return contextType != null;
-			case AnnotationsPackage.CONTEXT_HELPER_ANN__CALLED_BY:
-				return calledBy != null && !calledBy.isEmpty();
+			case AnnotationsPackage.CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY:
+				return polymorphicCalledBy != null && !polymorphicCalledBy.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

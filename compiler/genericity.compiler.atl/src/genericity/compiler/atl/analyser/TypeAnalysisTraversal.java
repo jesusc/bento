@@ -18,6 +18,7 @@ import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.Unknown;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
@@ -283,7 +284,13 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 					attr.linkExprType( thenPart );					
 					return;
 				}
-			}
+			} else if ( thenPart instanceof TypeError ) {
+				attr.linkExprType( elsePart );					
+				return;
+			} else if ( elsePart instanceof TypeError ) {
+				attr.linkExprType( thenPart );					
+				return;
+			} 
 
 			
 			Type recovered = errors.signalDifferentBranchTypes(thenPart, elsePart, self, new IRecoveryAction() {

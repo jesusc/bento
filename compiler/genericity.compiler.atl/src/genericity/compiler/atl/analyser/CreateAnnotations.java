@@ -12,11 +12,13 @@ import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
+import genericity.compiler.atl.analyser.namespaces.TransformationNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.annotations.AtlAnnotation;
@@ -26,9 +28,11 @@ import genericity.typing.atl_types.annotations.CalledRuleAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import genericity.typing.atl_types.annotations.HelperAnn;
+import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
 import genericity.typing.atl_types.annotations.LazyRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.TransformationAnn;
@@ -190,7 +194,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		Type tgtType = attr.typeOf( self.getOutPattern().getElements().get(0) );
 
 		LazyRuleAnn ann = typ.createLazyRuleAnn(self, (Metaclass) srcType, (Metaclass) tgtType);
-
+		
 		attr.linkAnnotation(self, ann);
 	}
 	
@@ -363,6 +367,23 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 				}
 			}
 			
+		} else if ( ann.getSource().getType() instanceof ThisModuleType ) {
+			TransformationNamespace tn = (TransformationNamespace) ann.getSource().getType().getMetamodelRef();
+			if ( tn.hasAttachedOperation(self.getOperationName()) ) {
+				Operation op = tn.getAttachedOperation(self.getOperationName());
+				Helper h = op.container_().container(Helper.class);
+
+				ModuleCallableAnn x = attr.<ModuleCallableAnn>annotationOf(h);
+				ann.setStaticResolver( x );
+			} else if ( tn.hasLazyRule(self.getOperationName()) ) {
+				LazyMatchedRule r = tn.getLazyRule(self.getOperationName());
+				ModuleCallableAnn x = attr.<ModuleCallableAnn>annotationOf(r);
+				ann.setStaticResolver( x  );
+			} else if ( tn.hasCalledRule(self.getOperationName()) ) {
+				CalledRule r = tn.getCalledRule(self.getOperationName());
+				ModuleCallableAnn x = attr.<ModuleCallableAnn>annotationOf(r);
+				ann.setStaticResolver( x  );
+			}
 		}
 	}
 	

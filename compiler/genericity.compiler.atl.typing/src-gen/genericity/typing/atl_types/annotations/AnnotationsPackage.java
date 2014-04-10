@@ -399,14 +399,14 @@ public interface AnnotationsPackage extends EPackage {
 	int MATCHED_RULE_MANY_ANN_FEATURE_COUNT = MATCHED_RULE_ANN_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.LazyRuleAnnImpl <em>Lazy Rule Ann</em>}' class.
+	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl <em>Imperative Rule Ann</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see genericity.typing.atl_types.annotations.impl.LazyRuleAnnImpl
-	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getLazyRuleAnn()
+	 * @see genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl
+	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getImperativeRuleAnn()
 	 * @generated
 	 */
-	int LAZY_RULE_ANN = 6;
+	int IMPERATIVE_RULE_ANN = 6;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' reference.
@@ -415,7 +415,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAZY_RULE_ANN__RULE = RULE_ANN__RULE;
+	int IMPERATIVE_RULE_ANN__RULE = RULE_ANN__RULE;
 
 	/**
 	 * The feature id for the '<em><b>Output Patterns</b></em>' containment reference list.
@@ -424,7 +424,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAZY_RULE_ANN__OUTPUT_PATTERNS = RULE_ANN__OUTPUT_PATTERNS;
+	int IMPERATIVE_RULE_ANN__OUTPUT_PATTERNS = RULE_ANN__OUTPUT_PATTERNS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -433,7 +433,71 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAZY_RULE_ANN__NAME = RULE_ANN__NAME;
+	int IMPERATIVE_RULE_ANN__NAME = RULE_ANN__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_RULE_ANN__CALLED_BY = RULE_ANN_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Imperative Rule Ann</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_RULE_ANN_FEATURE_COUNT = RULE_ANN_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.LazyRuleAnnImpl <em>Lazy Rule Ann</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.annotations.impl.LazyRuleAnnImpl
+	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getLazyRuleAnn()
+	 * @generated
+	 */
+	int LAZY_RULE_ANN = 7;
+
+	/**
+	 * The feature id for the '<em><b>Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAZY_RULE_ANN__RULE = IMPERATIVE_RULE_ANN__RULE;
+
+	/**
+	 * The feature id for the '<em><b>Output Patterns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAZY_RULE_ANN__OUTPUT_PATTERNS = IMPERATIVE_RULE_ANN__OUTPUT_PATTERNS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAZY_RULE_ANN__NAME = IMPERATIVE_RULE_ANN__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAZY_RULE_ANN__CALLED_BY = IMPERATIVE_RULE_ANN__CALLED_BY;
 
 	/**
 	 * The feature id for the '<em><b>In Pattern Type</b></em>' reference.
@@ -442,7 +506,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAZY_RULE_ANN__IN_PATTERN_TYPE = RULE_ANN_FEATURE_COUNT + 0;
+	int LAZY_RULE_ANN__IN_PATTERN_TYPE = IMPERATIVE_RULE_ANN_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Output Pattern Type</b></em>' reference.
@@ -451,7 +515,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAZY_RULE_ANN__OUTPUT_PATTERN_TYPE = RULE_ANN_FEATURE_COUNT + 1;
+	int LAZY_RULE_ANN__OUTPUT_PATTERN_TYPE = IMPERATIVE_RULE_ANN_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Lazy Rule Ann</em>' class.
@@ -460,7 +524,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAZY_RULE_ANN_FEATURE_COUNT = RULE_ANN_FEATURE_COUNT + 2;
+	int LAZY_RULE_ANN_FEATURE_COUNT = IMPERATIVE_RULE_ANN_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.CalledRuleAnnImpl <em>Called Rule Ann</em>}' class.
@@ -470,7 +534,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getCalledRuleAnn()
 	 * @generated
 	 */
-	int CALLED_RULE_ANN = 7;
+	int CALLED_RULE_ANN = 8;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' reference.
@@ -479,7 +543,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALLED_RULE_ANN__RULE = RULE_ANN__RULE;
+	int CALLED_RULE_ANN__RULE = IMPERATIVE_RULE_ANN__RULE;
 
 	/**
 	 * The feature id for the '<em><b>Output Patterns</b></em>' containment reference list.
@@ -488,7 +552,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALLED_RULE_ANN__OUTPUT_PATTERNS = RULE_ANN__OUTPUT_PATTERNS;
+	int CALLED_RULE_ANN__OUTPUT_PATTERNS = IMPERATIVE_RULE_ANN__OUTPUT_PATTERNS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -497,7 +561,16 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALLED_RULE_ANN__NAME = RULE_ANN__NAME;
+	int CALLED_RULE_ANN__NAME = IMPERATIVE_RULE_ANN__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALLED_RULE_ANN__CALLED_BY = IMPERATIVE_RULE_ANN__CALLED_BY;
 
 	/**
 	 * The number of structural features of the '<em>Called Rule Ann</em>' class.
@@ -506,7 +579,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALLED_RULE_ANN_FEATURE_COUNT = RULE_ANN_FEATURE_COUNT + 0;
+	int CALLED_RULE_ANN_FEATURE_COUNT = IMPERATIVE_RULE_ANN_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.OutputPatternAnnImpl <em>Output Pattern Ann</em>}' class.
@@ -516,7 +589,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getOutputPatternAnn()
 	 * @generated
 	 */
-	int OUTPUT_PATTERN_ANN = 8;
+	int OUTPUT_PATTERN_ANN = 9;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' reference.
@@ -589,7 +662,16 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getHelperAnn()
 	 * @generated
 	 */
-	int HELPER_ANN = 9;
+	int HELPER_ANN = 10;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_ANN__CALLED_BY = ATL_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Helper</b></em>' reference.
@@ -598,7 +680,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__HELPER = ATL_ANNOTATION_FEATURE_COUNT + 0;
+	int HELPER_ANN__HELPER = ATL_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -607,7 +689,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__NAME = ATL_ANNOTATION_FEATURE_COUNT + 1;
+	int HELPER_ANN__NAME = ATL_ANNOTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' reference.
@@ -616,7 +698,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__RETURN_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 2;
+	int HELPER_ANN__RETURN_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -625,7 +707,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__EXPR = ATL_ANNOTATION_FEATURE_COUNT + 3;
+	int HELPER_ANN__EXPR = ATL_ANNOTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Helper Ann</em>' class.
@@ -634,7 +716,35 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 4;
+	int HELPER_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl <em>Module Callable Ann</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl
+	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getModuleCallableAnn()
+	 * @generated
+	 */
+	int MODULE_CALLABLE_ANN = 11;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CALLABLE_ANN__CALLED_BY = ATL_ANNOTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Module Callable Ann</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CALLABLE_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ModuleHelperAnnImpl <em>Module Helper Ann</em>}' class.
@@ -644,7 +754,16 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getModuleHelperAnn()
 	 * @generated
 	 */
-	int MODULE_HELPER_ANN = 10;
+	int MODULE_HELPER_ANN = 12;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_HELPER_ANN__CALLED_BY = HELPER_ANN__CALLED_BY;
 
 	/**
 	 * The feature id for the '<em><b>Helper</b></em>' reference.
@@ -699,7 +818,16 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getContextHelperAnn()
 	 * @generated
 	 */
-	int CONTEXT_HELPER_ANN = 11;
+	int CONTEXT_HELPER_ANN = 13;
+
+	/**
+	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXT_HELPER_ANN__CALLED_BY = HELPER_ANN__CALLED_BY;
 
 	/**
 	 * The feature id for the '<em><b>Helper</b></em>' reference.
@@ -747,13 +875,13 @@ public interface AnnotationsPackage extends EPackage {
 	int CONTEXT_HELPER_ANN__CONTEXT_TYPE = HELPER_ANN_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Called By</b></em>' reference list.
+	 * The feature id for the '<em><b>Polymorphic Called By</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_HELPER_ANN__CALLED_BY = HELPER_ANN_FEATURE_COUNT + 1;
+	int CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY = HELPER_ANN_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Context Helper Ann</em>' class.
@@ -772,7 +900,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getBindingAnn()
 	 * @generated
 	 */
-	int BINDING_ANN = 12;
+	int BINDING_ANN = 14;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' reference.
@@ -854,7 +982,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getExpressionAnnotation()
 	 * @generated
 	 */
-	int EXPRESSION_ANNOTATION = 13;
+	int EXPRESSION_ANNOTATION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -909,7 +1037,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getLetExprAnn()
 	 * @generated
 	 */
-	int LET_EXPR_ANN = 14;
+	int LET_EXPR_ANN = 16;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -982,7 +1110,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getIfExprAnn()
 	 * @generated
 	 */
-	int IF_EXPR_ANN = 15;
+	int IF_EXPR_ANN = 17;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1064,7 +1192,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getCallExprAnn()
 	 * @generated
 	 */
-	int CALL_EXPR_ANN = 16;
+	int CALL_EXPR_ANN = 18;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1155,7 +1283,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getAbstractIteratorExprAnn()
 	 * @generated
 	 */
-	int ABSTRACT_ITERATOR_EXPR_ANN = 17;
+	int ABSTRACT_ITERATOR_EXPR_ANN = 19;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1228,7 +1356,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getIteratorExprAnn()
 	 * @generated
 	 */
-	int ITERATOR_EXPR_ANN = 18;
+	int ITERATOR_EXPR_ANN = 20;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1301,7 +1429,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getIterateExprAnn()
 	 * @generated
 	 */
-	int ITERATE_EXPR_ANN = 19;
+	int ITERATE_EXPR_ANN = 21;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1383,7 +1511,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getCollectionExprAnn()
 	 * @generated
 	 */
-	int COLLECTION_EXPR_ANN = 20;
+	int COLLECTION_EXPR_ANN = 22;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1447,7 +1575,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getMapExprAnn()
 	 * @generated
 	 */
-	int MAP_EXPR_ANN = 21;
+	int MAP_EXPR_ANN = 23;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1520,7 +1648,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getTupleExprAnn()
 	 * @generated
 	 */
-	int TUPLE_EXPR_ANN = 22;
+	int TUPLE_EXPR_ANN = 24;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1584,7 +1712,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getGenericExprAnn()
 	 * @generated
 	 */
-	int GENERIC_EXPR_ANN = 23;
+	int GENERIC_EXPR_ANN = 25;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1825,6 +1953,16 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getMatchedRuleManyAnn_InPatternTypes();
 
 	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.ImperativeRuleAnn <em>Imperative Rule Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Imperative Rule Ann</em>'.
+	 * @see genericity.typing.atl_types.annotations.ImperativeRuleAnn
+	 * @generated
+	 */
+	EClass getImperativeRuleAnn();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.LazyRuleAnn <em>Lazy Rule Ann</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1964,6 +2102,27 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getHelperAnn_Expr();
 
 	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.ModuleCallableAnn <em>Module Callable Ann</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Module Callable Ann</em>'.
+	 * @see genericity.typing.atl_types.annotations.ModuleCallableAnn
+	 * @generated
+	 */
+	EClass getModuleCallableAnn();
+
+	/**
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getCalledBy <em>Called By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Called By</em>'.
+	 * @see genericity.typing.atl_types.annotations.ModuleCallableAnn#getCalledBy()
+	 * @see #getModuleCallableAnn()
+	 * @generated
+	 */
+	EReference getModuleCallableAnn_CalledBy();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.ModuleHelperAnn <em>Module Helper Ann</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1995,15 +2154,15 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getContextHelperAnn_ContextType();
 
 	/**
-	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getCalledBy <em>Called By</em>}'.
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getPolymorphicCalledBy <em>Polymorphic Called By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Called By</em>'.
-	 * @see genericity.typing.atl_types.annotations.ContextHelperAnn#getCalledBy()
+	 * @return the meta object for the reference list '<em>Polymorphic Called By</em>'.
+	 * @see genericity.typing.atl_types.annotations.ContextHelperAnn#getPolymorphicCalledBy()
 	 * @see #getContextHelperAnn()
 	 * @generated
 	 */
-	EReference getContextHelperAnn_CalledBy();
+	EReference getContextHelperAnn_PolymorphicCalledBy();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.BindingAnn <em>Binding Ann</em>}'.
@@ -2601,6 +2760,16 @@ public interface AnnotationsPackage extends EPackage {
 		EReference MATCHED_RULE_MANY_ANN__IN_PATTERN_TYPES = eINSTANCE.getMatchedRuleManyAnn_InPatternTypes();
 
 		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl <em>Imperative Rule Ann</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl
+		 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getImperativeRuleAnn()
+		 * @generated
+		 */
+		EClass IMPERATIVE_RULE_ANN = eINSTANCE.getImperativeRuleAnn();
+
+		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.LazyRuleAnnImpl <em>Lazy Rule Ann</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2713,6 +2882,24 @@ public interface AnnotationsPackage extends EPackage {
 		EReference HELPER_ANN__EXPR = eINSTANCE.getHelperAnn_Expr();
 
 		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl <em>Module Callable Ann</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl
+		 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getModuleCallableAnn()
+		 * @generated
+		 */
+		EClass MODULE_CALLABLE_ANN = eINSTANCE.getModuleCallableAnn();
+
+		/**
+		 * The meta object literal for the '<em><b>Called By</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODULE_CALLABLE_ANN__CALLED_BY = eINSTANCE.getModuleCallableAnn_CalledBy();
+
+		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.ModuleHelperAnnImpl <em>Module Helper Ann</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2741,12 +2928,12 @@ public interface AnnotationsPackage extends EPackage {
 		EReference CONTEXT_HELPER_ANN__CONTEXT_TYPE = eINSTANCE.getContextHelperAnn_ContextType();
 
 		/**
-		 * The meta object literal for the '<em><b>Called By</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Polymorphic Called By</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTEXT_HELPER_ANN__CALLED_BY = eINSTANCE.getContextHelperAnn_CalledBy();
+		EReference CONTEXT_HELPER_ANN__POLYMORPHIC_CALLED_BY = eINSTANCE.getContextHelperAnn_PolymorphicCalledBy();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl <em>Binding Ann</em>}' class.

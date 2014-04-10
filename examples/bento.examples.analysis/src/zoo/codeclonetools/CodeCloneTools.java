@@ -35,7 +35,6 @@ public class CodeCloneTools extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		/*
 		typing(CloneDr2CodeClone_TRANSFORMATION, new Object[] { CLONEDR_METAMODEL, FILEINFO_METAMODEL, CODECLONE_METAMODEL }, 
 				   new String[] { "CloneDr", "FileInfo", "CodeClone" }, true);
 		
@@ -55,15 +54,12 @@ public class CodeCloneTools extends BaseTest {
 				   new String[] { "SimScan", "FileInfo", "CodeClone" }, true);
 		
 		generateCSP();
-		*/
 
 		typing(SVG2XML_TRANSFORMATION, new Object[] { SVG_METAMODEL, XML_METAMODEL}, 
 				   new String[] { "SVG", "XML" }, true);
 		
 		generateCSP();
-		
-		/*
-		
+				
 		// WITH TYPE ERRORS!
 		typing(CodeClone2SVG_TRANSFORMATION, new Object[] { CODECLONE_METAMODEL, SVG_METAMODEL }, 
 				   new String[] { "CodeClone", "SVG" }, true);
@@ -74,7 +70,6 @@ public class CodeCloneTools extends BaseTest {
 				   new String[] { "CodeClone", "SVG" }, true);
 		
 		generateCSP();
-		*/
 
 	}
 

@@ -87,6 +87,22 @@ public class TransformationNamespace implements ITypeNamespace {
 			   lazyRules.containsKey(operationName);
 	}
 
+	public boolean hasLazyRule(String ruleName) {
+		return lazyRules.containsKey(ruleName);
+ 	}
+	
+	public boolean hasCalledRule(String ruleName) {
+		return calledRules.containsKey(ruleName);
+ 	}
+	
+	public LazyMatchedRule getLazyRule(String ruleName) {
+		return lazyRules.get(ruleName).definition;
+ 	}
+	
+	public CalledRule getCalledRule(String ruleName) {
+		return calledRules.get(ruleName).definition;
+ 	}
+	
 	public Operation getAttachedOperation(String operationName) {
 		return operations.get(operationName).definition;
 	}

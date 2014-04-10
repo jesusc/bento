@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getContextType <em>Context Type</em>}</li>
- *   <li>{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getCalledBy <em>Called By</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.ContextHelperAnn#getPolymorphicCalledBy <em>Polymorphic Called By</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,21 +54,21 @@ public interface ContextHelperAnn extends HelperAnn {
 	void setContextType(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Called By</b></em>' reference list.
+	 * Returns the value of the '<em><b>Polymorphic Called By</b></em>' reference list.
 	 * The list contents are of type {@link genericity.typing.atl_types.annotations.CallExprAnn}.
 	 * It is bidirectional and its opposite is '{@link genericity.typing.atl_types.annotations.CallExprAnn#getDynamicResolvers <em>Dynamic Resolvers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Called By</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Polymorphic Called By</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Called By</em>' reference list.
-	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getContextHelperAnn_CalledBy()
+	 * @return the value of the '<em>Polymorphic Called By</em>' reference list.
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getContextHelperAnn_PolymorphicCalledBy()
 	 * @see genericity.typing.atl_types.annotations.CallExprAnn#getDynamicResolvers
 	 * @model opposite="dynamicResolvers"
 	 * @generated
 	 */
-	EList<CallExprAnn> getCalledBy();
+	EList<CallExprAnn> getPolymorphicCalledBy();
 
 } // ContextHelperAnn

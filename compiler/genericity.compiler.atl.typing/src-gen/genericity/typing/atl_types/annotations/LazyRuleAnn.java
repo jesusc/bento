@@ -25,7 +25,7 @@ import genericity.typing.atl_types.Metaclass;
  * @model
  * @generated
  */
-public interface LazyRuleAnn extends RuleAnn {
+public interface LazyRuleAnn extends ImperativeRuleAnn {
 	/**
 	 * Returns the value of the '<em><b>In Pattern Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

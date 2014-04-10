@@ -21,16 +21,16 @@ public class ErrorSliceGenerator {
 		this.analyser = analyser;
 	}
 
-	public void generate() {
+	public void generate(String metamodelName) {
 		for(DependencyNode node : graph.getProblemNodes()) {
-			ErrorSlice slice = new ErrorSlice(analyser);
+			ErrorSlice slice = new ErrorSlice(analyser, metamodelName);
 			node.genErrorSlice(slice);
 			((ProblemNode) node).setErrorSlice(slice);
 		}
 	}
 
-	public void generate(Resource r) {
-		generate();
+	public void generate(Resource r, String metamodelName) {
+		generate(metamodelName);
 		
 		int i = 0;
 		for(DependencyNode node : graph.getProblemNodes()) {

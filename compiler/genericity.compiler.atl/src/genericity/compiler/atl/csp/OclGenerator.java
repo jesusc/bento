@@ -14,6 +14,7 @@ import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
+import atl.metamodel.OCL.SequenceExp;
 import atl.metamodel.OCL.StringExp;
 import atl.metamodel.OCL.VariableExp;
 
@@ -40,6 +41,15 @@ public class OclGenerator {
 		} else if ( expr instanceof IfExp ) {
 			IfExp ifexp = (IfExp) expr;
 			return "if " + gen(ifexp.getCondition()) + "\n\tthen " + gen(ifexp.getThenExpression()) + "\n\telse " + gen(ifexp.getElseExpression()) + "\n\tendif";
+		} else if ( expr instanceof SequenceExp ) {
+			SequenceExp col = (SequenceExp) expr;
+			String elems = "";
+			for(int i = 0; i < col.getElements().size(); i++) {
+				elems += OclGenerator.gen( col.getElements().get(i) );
+				if ( i + 1 < col.getElements().size() ) 
+					elems += ",";
+			}
+			return "Sequence { " + elems + " }";
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}
