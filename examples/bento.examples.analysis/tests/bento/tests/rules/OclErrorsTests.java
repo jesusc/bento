@@ -29,9 +29,9 @@ public class OclErrorsTests extends BaseTest {
 				   new String[] { "CD", "UML" }, true);
 		
 		generateGraphviz();
-		generateCSP();
 		generateErrorSlice("CD", "tmp_/operation_not_found.slice.ecore");
 		generateEffectiveMetamodel("CD", "tmp_/operation_not_found.effective.ecore");
+		generateCSP();
 	}
 	
 	/*

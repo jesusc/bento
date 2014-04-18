@@ -14,7 +14,7 @@ import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.Operation;
 
-public abstract class CollectionNamespace implements ITypeNamespace {
+public abstract class CollectionNamespace extends AbstractTypeNamespace implements ITypeNamespace {
 
 	protected TypingModel	typ;
 	protected Type	nested;
@@ -57,6 +57,11 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
+		Type t = super.getOperationType(operationName, arguments, node);
+		if ( t != null ) {
+			return t;
+		}
+		
 		if ( operationName.equals("size")  ) return typ.newIntegerType();
 		if ( operationName.equals("first") ) return nested;
 		if ( operationName.equals("last") ) return nested;
@@ -75,8 +80,8 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 		if ( operationName.equals("asSequence") ) return typ.newSequenceType(nested);
 		if ( operationName.equals("asSet") ) return typ.newSetType(nested);
 		
-		if ( operationName.equals("isEmpty") ) return typ.newBooleanType();
-		if ( operationName.equals("includes") ) return typ.newBooleanType();
+		if ( operationName.equals("isEmpty") || operationName.equals("notEmpty")) return typ.newBooleanType();
+		if ( operationName.equals("includes") || operationName.equals("excludes") ) return typ.newBooleanType();
 		
 		if ( operationName.equals("indexOf") ) {
 			// TODO: indexOf may return a "bottom" value???
@@ -133,6 +138,10 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 		
 		if ( name.equals("select") ) {
 			return selectIteratorType(bodyType); 
+		} else if ( name.equals("any") ) {
+			return anyIteratorType(bodyType); 
+		} else if ( name.equals("reject") ) {
+			return rejectIteratorType(bodyType); 			
 		} else if ( name.equals("collect") ) {
 			return this.newCollectionType(bodyType);
 		} else if ( name.equals("sortedBy") ) {
@@ -157,6 +166,32 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 		}
 	}
 
+	private Type anyIteratorType(Type bodyType) {
+		if ( bodyType instanceof TypeError ) 
+			return nested;
+		
+		BooleanType b = (BooleanType) bodyType;
+		if ( b.getKindOfTypes().isEmpty() ) {
+			return nested;
+		} else {
+			return AnalyserContext.getTypingModel().getCommonType(b.getKindOfTypes());
+		}
+	}
+
+	private Type rejectIteratorType(Type bodyType) {
+		// If you have "m.classifiers->select(c | c.operationNotFound() )"
+		// a conservative action is to consider that the collection is never filtered.
+		if ( bodyType instanceof TypeError ) 
+			return this.newCollectionType(nested);
+		
+		BooleanType b = (BooleanType) bodyType;
+		if ( b.getKindOfTypes().isEmpty() ) {
+			return this.newCollectionType(nested);
+		} else {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");

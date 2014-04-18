@@ -189,6 +189,10 @@ package annotations {
 	attr String[1] name;
 	ref Type[1] returnType;
   	
+  	
+  	ref Type[*] arguments;
+  	attr String[*] names; // This is to facilitate OCL generation
+  	
   	val ExpressionAnnotation[1] expr;
   }
 
@@ -247,6 +251,7 @@ package annotations {
   	val ExpressionAnnotation[1] source;
   	val ExpressionAnnotation[*] arguments;  	   
 
+	attr boolean[1] isStaticCall = false;
 	ref ModuleCallableAnn[1]#calledBy staticResolver;
 	ref ContextHelperAnn[1..*]#polymorphicCalledBy dynamicResolvers;
   }

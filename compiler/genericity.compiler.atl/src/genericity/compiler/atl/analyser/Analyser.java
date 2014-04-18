@@ -76,4 +76,8 @@ public class Analyser {
 	public DependencyGraph getDependencyGraph() {
 		return dependencyGraph;
 	}
+
+	public ATLModel getATLModel() {
+		return trafo;
+	}
 }

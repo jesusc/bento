@@ -2,11 +2,14 @@ package bento.analyser.footprint;
 
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.IModel;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -31,6 +34,11 @@ public class TrafoMetamodelData extends FootprintComputation implements IEffecti
 		result.addAll(this.usedAttributes);
 		result.addAll(this.usedReferences);
 		return result;
+	}
+
+	@Override
+	public Collection<EAnnotation> getPackageAnnotations() {
+		return new ArrayList<EAnnotation>();
 	}
 
 }

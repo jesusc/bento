@@ -3,6 +3,7 @@ package analysis;
 import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.csp.CSPGenerator;
+import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.ErrorSliceGenerator;
 import genericity.compiler.atl.csp.GraphvizGenerator;
 import genericity.compiler.atl.graph.DependencyGraph;
@@ -48,6 +49,7 @@ public abstract class BaseTest {
 	private GlobalNamespace	mm;
 	private EPackage	metamodelPkg;
 	private Analyser	analyser;
+	private ErrorSlice	slice;
 
 	public void typing(String atlTransformationFile, Object[] metamodels, String[] names) throws IOException {
 		typing(atlTransformationFile, metamodels, names, false);
@@ -98,14 +100,17 @@ public abstract class BaseTest {
 	}	
 	
 	protected void generateCSP() {
-		String s = new CSPGenerator(dependencyGraph).generate();
+		if ( slice == null )
+			throw new IllegalStateException("Error slice should be computed before generating CSP");
+		
+		String s = new CSPGenerator(dependencyGraph, slice).generate();
 		if ( ! s.trim().isEmpty() )
 			System.out.println(s);
 	}
 	
 	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
-		new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName);
+		slice = new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName);
 		r.save(null);
 	}
 	

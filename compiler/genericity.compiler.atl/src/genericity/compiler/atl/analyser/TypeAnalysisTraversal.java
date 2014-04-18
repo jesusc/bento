@@ -640,9 +640,18 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public void inMapExp(MapExp self) {
 		if ( self.getElements().size() != 0 ) {
-			throw new UnsupportedOperationException("TODO: Implement map initialization with elements");
+			// throw new UnsupportedOperationException("TODO: Implement map initialization with elements" + self.getLocation());
+			List<Type> keys   = new ArrayList<Type>();
+			List<Type> values = new ArrayList<Type>();
+			for(int i = 0; i < self.getElements().size(); i++) {
+				keys.add(attr.typeOf(self.getElements().get(i).getKey()));
+				values.add(attr.typeOf(self.getElements().get(i).getValue()));
+			}
+			
+			attr.linkExprType( typ.newMapType( typ.getCommonType(keys), typ.getCommonType(values)) );
+		} else {
+			attr.linkExprType( typ.newMapType( typ.newUnknownType(), typ.newUnknownType()) );
 		}
-		attr.linkExprType( typ.newMapType( typ.newUnknownType(), typ.newUnknownType()) );
 	}
 	
 	@Override

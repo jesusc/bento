@@ -47,8 +47,8 @@ public class Ant2Maven extends BaseTest {
 				   new String[] { "XML", "Ant" }, true);
 
 		generateGraphviz();
-		generateCSP(); 
 		generateErrorSlice("XML", XML2ANT_ERROR_SLICE);
+		generateCSP(); 
 		generateEffectiveMetamodel("XML", XML2ANT_SRC_EFFECTIVE);
 		
 		// 

@@ -126,6 +126,10 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
           eType="#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+          eType="#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="names" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1"
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
     </eClassifiers>
@@ -183,6 +187,9 @@
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStaticCall" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticResolver" lowerBound="1"
           eType="#//annotations/ModuleCallableAnn" eOpposite="#//annotations/ModuleCallableAnn/calledBy"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="dynamicResolvers" lowerBound="1"

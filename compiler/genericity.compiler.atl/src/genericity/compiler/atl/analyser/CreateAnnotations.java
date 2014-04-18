@@ -1,22 +1,8 @@
 package genericity.compiler.atl.analyser;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
-import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
-import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
-import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.TransformationNamespace;
-import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
-import genericity.typing.atl_types.BooleanType;
-import genericity.typing.atl_types.CollectionType;
-import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
@@ -29,16 +15,20 @@ import genericity.typing.atl_types.annotations.CalledRuleAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import genericity.typing.atl_types.annotations.HelperAnn;
-import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
 import genericity.typing.atl_types.annotations.LazyRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import genericity.typing.atl_types.annotations.ModuleCallableAnn;
-import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.TransformationAnn;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import atl.metamodel.ATLModel;
-import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.Helper;
@@ -47,36 +37,28 @@ import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.ModuleElement;
-import atl.metamodel.ATL.OutPattern;
 import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.RuleVariableDeclaration;
-import atl.metamodel.ATL.SimpleInPatternElement;
-import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
-import atl.metamodel.ATLModelVisitor.VisitingActions;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.BooleanExp;
-import atl.metamodel.OCL.CollectionExp;
 import atl.metamodel.OCL.CollectionOperationCallExp;
 import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.IterateExp;
-import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.LetExp;
-import atl.metamodel.OCL.LoopExp;
 import atl.metamodel.OCL.MapExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
-import atl.metamodel.OCL.OclContextDefinition;
 import atl.metamodel.OCL.OclExpression;
-import atl.metamodel.OCL.OclFeatureDefinition;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OclUndefinedExp;
 import atl.metamodel.OCL.Operation;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.OrderedSetExp;
+import atl.metamodel.OCL.Parameter;
 import atl.metamodel.OCL.PropertyCallExp;
 import atl.metamodel.OCL.RealExp;
 import atl.metamodel.OCL.SequenceExp;
@@ -150,12 +132,22 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	public void createHelperAnnotation(Helper self) {
 		Type returnType = null;
 		String name = null;
+		String[] names = new String[0];
+		Type[] arguments = new Type[0];
 		if ( self.getDefinition().getFeature() instanceof Attribute ) {
 			returnType = attr.typeOf( ((Attribute) self.getDefinition().getFeature()).getType() );
 			name       = ((Attribute) self.getDefinition().getFeature()).getName();
 		} else {
 			returnType = attr.typeOf( ((Operation) self.getDefinition().getFeature()).getReturnType() );
 			name       = ((Operation) self.getDefinition().getFeature()).getName();
+		
+			List<Parameter> params = ((Operation) self.getDefinition().getFeature()).getParameters();
+			names 	  = new String[params.size()];
+			arguments = new Type[params.size()];
+			for(int i = 0; i < params.size(); i++) {
+				names[i]     = params.get(i).getVarName();
+				arguments[i] = attr.typeOf(params.get(i));
+			}
 		}
 		
 		HelperAnn ann = null;
@@ -164,6 +156,12 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		} else {
 			ann = typ.createContextHelper(self, attr.typeOf(self.getDefinition().getContext_().getContext_()), returnType); 
 		}
+		
+		for(int i = 0; i < names.length; i++) {
+			ann.getNames().add(names[i]);
+			ann.getArguments().add(arguments[i]);
+		}
+		
 		ann.setName(name);
 		
 		attr.linkAnnotation(self, ann);
@@ -379,6 +377,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			}
 			
 		} else if ( ann.getSource().getType() instanceof ThisModuleType ) {
+			ann.setIsStaticCall(true);
 			TransformationNamespace tn = (TransformationNamespace) ann.getSource().getType().getMetamodelRef();
 			if ( tn.hasAttachedOperation(self.getOperationName()) ) {
 				Operation op = tn.getAttachedOperation(self.getOperationName());

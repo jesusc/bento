@@ -3,8 +3,12 @@ package genericity.compiler.atl.csp;
 import java.util.HashSet;
 
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.annotations.CallExprAnn;
+import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import atl.metamodel.OCL.CollectionExp;
@@ -50,6 +54,18 @@ public class OclSlice {
 			for(OclExpression arg : op.getArguments()) {
 				slice(slice, arg);
 			}
+
+			CallExprAnn ann = (CallExprAnn) slice.getTypingModel().getAnnotation(op.original_());
+			if ( ! ann.isIsStaticCall() ) {
+				EList<ContextHelperAnn> resolvers = ann.getDynamicResolvers();
+				for (ContextHelperAnn contextHelperAnn : resolvers) {
+					slice.addHelper(contextHelperAnn);
+				}
+				
+			} else {
+				System.out.println("OclSlice - OperationCall not generating static call");
+			}
+			
 		} else if ( expr instanceof CollectionExp ) {
 			for(OclExpression arg : ((CollectionExp) expr).getElements()) {
 				slice(slice, arg);

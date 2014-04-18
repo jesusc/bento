@@ -15,26 +15,29 @@ public class ErrorSliceGenerator {
 	
 	private DependencyGraph	graph;
 	private Analyser	analyser;
+	private ErrorSlice	slice;
 	
 	public ErrorSliceGenerator(Analyser analyser, DependencyGraph g) {
 		this.graph = g;
 		this.analyser = analyser;
 	}
 
-	public void generate(String metamodelName) {
+	public ErrorSlice generate(String metamodelName) {
 		for(DependencyNode node : graph.getProblemNodes()) {
-			ErrorSlice slice = new ErrorSlice(analyser, metamodelName);
+			slice = new ErrorSlice(analyser, metamodelName);
 			node.genErrorSlice(slice);
 			((ProblemNode) node).setErrorSlice(slice);
 		}
+		
+		return slice;
 	}
 
-	public void generate(Resource r, String metamodelName) {
+	public ErrorSlice generate(Resource r, String metamodelName) {
 		generate(metamodelName);
 		
 		int i = 0;
 		for(DependencyNode node : graph.getProblemNodes()) {
-			ErrorSlice slice = ((ProblemNode) node).getErrorSlice();
+			slice = ((ProblemNode) node).getErrorSlice();
 			LocalProblem p   = (LocalProblem) ((ProblemNode) node).getProblem();
 			
 			String name = "error" + (i + 1);
@@ -43,5 +46,12 @@ public class ErrorSliceGenerator {
 			
 			i++;
 		}
+		
+		return slice;
 	}
+	
+	public ErrorSlice getSlice() {
+		return slice;
+	}
+	
 }

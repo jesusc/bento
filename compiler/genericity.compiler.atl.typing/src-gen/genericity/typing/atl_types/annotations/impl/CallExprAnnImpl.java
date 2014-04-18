@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.CallExprAnnImpl#getSource <em>Source</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.CallExprAnnImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.CallExprAnnImpl#isIsStaticCall <em>Is Static Call</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.CallExprAnnImpl#getStaticResolver <em>Static Resolver</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.CallExprAnnImpl#getDynamicResolvers <em>Dynamic Resolvers</em>}</li>
  * </ul>
@@ -66,6 +67,26 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 	 * @ordered
 	 */
 	protected EList<ExpressionAnnotation> arguments;
+
+	/**
+	 * The default value of the '{@link #isIsStaticCall() <em>Is Static Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStaticCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_STATIC_CALL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsStaticCall() <em>Is Static Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStaticCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isStaticCall = IS_STATIC_CALL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStaticResolver() <em>Static Resolver</em>}' reference.
@@ -159,6 +180,27 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 			arguments = new EObjectContainmentEList<ExpressionAnnotation>(ExpressionAnnotation.class, this, AnnotationsPackage.CALL_EXPR_ANN__ARGUMENTS);
 		}
 		return arguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsStaticCall() {
+		return isStaticCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsStaticCall(boolean newIsStaticCall) {
+		boolean oldIsStaticCall = isStaticCall;
+		isStaticCall = newIsStaticCall;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.CALL_EXPR_ANN__IS_STATIC_CALL, oldIsStaticCall, isStaticCall));
 	}
 
 	/**
@@ -284,6 +326,8 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 				return getSource();
 			case AnnotationsPackage.CALL_EXPR_ANN__ARGUMENTS:
 				return getArguments();
+			case AnnotationsPackage.CALL_EXPR_ANN__IS_STATIC_CALL:
+				return isIsStaticCall();
 			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
 				if (resolve) return getStaticResolver();
 				return basicGetStaticResolver();
@@ -308,6 +352,9 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 			case AnnotationsPackage.CALL_EXPR_ANN__ARGUMENTS:
 				getArguments().clear();
 				getArguments().addAll((Collection<? extends ExpressionAnnotation>)newValue);
+				return;
+			case AnnotationsPackage.CALL_EXPR_ANN__IS_STATIC_CALL:
+				setIsStaticCall((Boolean)newValue);
 				return;
 			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
 				setStaticResolver((ModuleCallableAnn)newValue);
@@ -334,6 +381,9 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 			case AnnotationsPackage.CALL_EXPR_ANN__ARGUMENTS:
 				getArguments().clear();
 				return;
+			case AnnotationsPackage.CALL_EXPR_ANN__IS_STATIC_CALL:
+				setIsStaticCall(IS_STATIC_CALL_EDEFAULT);
+				return;
 			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
 				setStaticResolver((ModuleCallableAnn)null);
 				return;
@@ -356,12 +406,30 @@ public class CallExprAnnImpl extends ExpressionAnnotationImpl implements CallExp
 				return source != null;
 			case AnnotationsPackage.CALL_EXPR_ANN__ARGUMENTS:
 				return arguments != null && !arguments.isEmpty();
+			case AnnotationsPackage.CALL_EXPR_ANN__IS_STATIC_CALL:
+				return isStaticCall != IS_STATIC_CALL_EDEFAULT;
 			case AnnotationsPackage.CALL_EXPR_ANN__STATIC_RESOLVER:
 				return staticResolver != null;
 			case AnnotationsPackage.CALL_EXPR_ANN__DYNAMIC_RESOLVERS:
 				return dynamicResolvers != null && !dynamicResolvers.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (isStaticCall: ");
+		result.append(isStaticCall);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CallExprAnnImpl

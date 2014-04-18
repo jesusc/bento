@@ -78,12 +78,12 @@ public class OclGenerator {
 		} else if (expr instanceof NavigationOrAttributeCallExp) {
 			NavigationOrAttributeCallExp nav = (NavigationOrAttributeCallExp) expr;
 			return receptor + "." + nav.getName();
-		} else if (expr instanceof OperationCallExp) {
-			OperationCallExp call = (OperationCallExp) expr;
-			return receptor + "." + call.getOperationName() + "(" + genArgs(call.getArguments(), vars )+ ")";
 		} else if (expr instanceof CollectionOperationCallExp) {
 			CollectionOperationCallExp call = (CollectionOperationCallExp) expr;
 			return receptor + "->" + call.getOperationName() + "(" + genArgs(call.getArguments(), vars )+ ")";
+		} else if (expr instanceof OperationCallExp) {
+			OperationCallExp call = (OperationCallExp) expr;
+			return receptor + "." + call.getOperationName() + "(" + genArgs(call.getArguments(), vars )+ ")";
 		} else if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr;
 			// TODO: Include type if available??

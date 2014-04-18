@@ -54,6 +54,10 @@ public class EffectiveMetamodelBuilder {
 		//copyClasses(directUsedTypes);
 		//copyClasses(indirectUsedTypes);
 		
+		for(EAnnotation extra : data.getPackageAnnotations()) {
+			conceptPkg.getEAnnotations().add(extra);
+		}
+		
 		transform(this);
 		
 		// fillFeatures(directUsedTypes);

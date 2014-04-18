@@ -8,6 +8,7 @@ package genericity.typing.atl_types.annotations;
 
 import genericity.typing.atl_types.Type;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -21,6 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.typing.atl_types.annotations.HelperAnn#getHelper <em>Helper</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.HelperAnn#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.HelperAnn#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.HelperAnn#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.HelperAnn#getNames <em>Names</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.HelperAnn#getExpr <em>Expr</em>}</li>
  * </ul>
  * </p>
@@ -107,6 +110,38 @@ public interface HelperAnn extends AtlAnnotation, ModuleCallableAnn {
 	 * @generated
 	 */
 	void setReturnType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>Arguments</b></em>' reference list.
+	 * The list contents are of type {@link genericity.typing.atl_types.Type}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Arguments</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Arguments</em>' reference list.
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getHelperAnn_Arguments()
+	 * @model
+	 * @generated
+	 */
+	EList<Type> getArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Names</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Names</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Names</em>' attribute list.
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getHelperAnn_Names()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getNames();
 
 	/**
 	 * Returns the value of the '<em><b>Expr</b></em>' containment reference.

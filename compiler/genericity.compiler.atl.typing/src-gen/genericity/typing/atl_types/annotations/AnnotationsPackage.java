@@ -701,13 +701,31 @@ public interface AnnotationsPackage extends EPackage {
 	int HELPER_ANN__RETURN_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_ANN__ARGUMENTS = ATL_ANNOTATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_ANN__NAMES = ATL_ANNOTATION_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__EXPR = ATL_ANNOTATION_FEATURE_COUNT + 4;
+	int HELPER_ANN__EXPR = ATL_ANNOTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Helper Ann</em>' class.
@@ -716,7 +734,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 5;
+	int HELPER_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl <em>Module Callable Ann</em>}' class.
@@ -793,6 +811,24 @@ public interface AnnotationsPackage extends EPackage {
 	int MODULE_HELPER_ANN__RETURN_TYPE = HELPER_ANN__RETURN_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_HELPER_ANN__ARGUMENTS = HELPER_ANN__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_HELPER_ANN__NAMES = HELPER_ANN__NAMES;
+
+	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,6 +891,24 @@ public interface AnnotationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTEXT_HELPER_ANN__RETURN_TYPE = HELPER_ANN__RETURN_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXT_HELPER_ANN__ARGUMENTS = HELPER_ANN__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXT_HELPER_ANN__NAMES = HELPER_ANN__NAMES;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1258,13 +1312,22 @@ public interface AnnotationsPackage extends EPackage {
 	int CALL_EXPR_ANN__ARGUMENTS = EXPRESSION_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Static Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXPR_ANN__IS_STATIC_CALL = EXPRESSION_ANNOTATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Static Resolver</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_EXPR_ANN__STATIC_RESOLVER = EXPRESSION_ANNOTATION_FEATURE_COUNT + 2;
+	int CALL_EXPR_ANN__STATIC_RESOLVER = EXPRESSION_ANNOTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Dynamic Resolvers</b></em>' reference list.
@@ -1273,7 +1336,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_EXPR_ANN__DYNAMIC_RESOLVERS = EXPRESSION_ANNOTATION_FEATURE_COUNT + 3;
+	int CALL_EXPR_ANN__DYNAMIC_RESOLVERS = EXPRESSION_ANNOTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Call Expr Ann</em>' class.
@@ -1282,7 +1345,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_EXPR_ANN_FEATURE_COUNT = EXPRESSION_ANNOTATION_FEATURE_COUNT + 4;
+	int CALL_EXPR_ANN_FEATURE_COUNT = EXPRESSION_ANNOTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.AbstractIteratorExprAnnImpl <em>Abstract Iterator Expr Ann</em>}' class.
@@ -2100,6 +2163,28 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getHelperAnn_ReturnType();
 
 	/**
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.HelperAnn#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Arguments</em>'.
+	 * @see genericity.typing.atl_types.annotations.HelperAnn#getArguments()
+	 * @see #getHelperAnn()
+	 * @generated
+	 */
+	EReference getHelperAnn_Arguments();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link genericity.typing.atl_types.annotations.HelperAnn#getNames <em>Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Names</em>'.
+	 * @see genericity.typing.atl_types.annotations.HelperAnn#getNames()
+	 * @see #getHelperAnn()
+	 * @generated
+	 */
+	EAttribute getHelperAnn_Names();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.annotations.HelperAnn#getExpr <em>Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2431,6 +2516,17 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCallExprAnn_Arguments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.annotations.CallExprAnn#isIsStaticCall <em>Is Static Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Static Call</em>'.
+	 * @see genericity.typing.atl_types.annotations.CallExprAnn#isIsStaticCall()
+	 * @see #getCallExprAnn()
+	 * @generated
+	 */
+	EAttribute getCallExprAnn_IsStaticCall();
 
 	/**
 	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.annotations.CallExprAnn#getStaticResolver <em>Static Resolver</em>}'.
@@ -2894,6 +2990,22 @@ public interface AnnotationsPackage extends EPackage {
 		EReference HELPER_ANN__RETURN_TYPE = eINSTANCE.getHelperAnn_ReturnType();
 
 		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference HELPER_ANN__ARGUMENTS = eINSTANCE.getHelperAnn_Arguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HELPER_ANN__NAMES = eINSTANCE.getHelperAnn_Names();
+
+		/**
 		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3156,6 +3268,14 @@ public interface AnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CALL_EXPR_ANN__ARGUMENTS = eINSTANCE.getCallExprAnn_Arguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Static Call</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_EXPR_ANN__IS_STATIC_CALL = eINSTANCE.getCallExprAnn_IsStaticCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Static Resolver</b></em>' reference feature.

@@ -9,9 +9,11 @@ import genericity.compiler.atl.graph.HelperInvocationNode;
 public class CSPGenerator {
 	
 	private DependencyGraph	graph;
+	private ErrorSlice	slice;
 
-	public CSPGenerator(DependencyGraph g) {
+	public CSPGenerator(DependencyGraph g, ErrorSlice slice) {
 		this.graph = g;
+		this.slice = slice;
 	}
 	
 	public String generate() {
@@ -30,8 +32,12 @@ public class CSPGenerator {
 
 	private String generateCSP(DependencyNode errorNode) {
 		CSPBuffer buf = new CSPBuffer();
-		errorNode.getCSPText(buf);
 		
+		for(String typeName : slice.getHelpers().keySet()) {
+			
+		}
+		
+		errorNode.getCSPText(buf);
 		
 		String s = buf.getText();
 		

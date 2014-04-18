@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.CallExprAnn#getSource <em>Source</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.CallExprAnn#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.CallExprAnn#isIsStaticCall <em>Is Static Call</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.CallExprAnn#getStaticResolver <em>Static Resolver</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.CallExprAnn#getDynamicResolvers <em>Dynamic Resolvers</em>}</li>
  * </ul>
@@ -69,6 +70,33 @@ public interface CallExprAnn extends ExpressionAnnotation {
 	 * @generated
 	 */
 	EList<ExpressionAnnotation> getArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Is Static Call</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Static Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Static Call</em>' attribute.
+	 * @see #setIsStaticCall(boolean)
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getCallExprAnn_IsStaticCall()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isIsStaticCall();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.annotations.CallExprAnn#isIsStaticCall <em>Is Static Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Static Call</em>' attribute.
+	 * @see #isIsStaticCall()
+	 * @generated
+	 */
+	void setIsStaticCall(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Static Resolver</b></em>' reference.

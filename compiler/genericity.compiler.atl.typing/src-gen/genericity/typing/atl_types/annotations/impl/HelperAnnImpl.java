@@ -24,6 +24,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -38,6 +40,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getHelper <em>Helper</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getNames <em>Names</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getExpr <em>Expr</em>}</li>
  * </ul>
  * </p>
@@ -94,6 +98,26 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * @ordered
 	 */
 	protected Type returnType;
+
+	/**
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> arguments;
+
+	/**
+	 * The cached value of the '{@link #getNames() <em>Names</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNames()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> names;
 
 	/**
 	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
@@ -238,6 +262,30 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getArguments() {
+		if (arguments == null) {
+			arguments = new EObjectResolvingEList<Type>(Type.class, this, AnnotationsPackage.HELPER_ANN__ARGUMENTS);
+		}
+		return arguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getNames() {
+		if (names == null) {
+			names = new EDataTypeUniqueEList<String>(String.class, this, AnnotationsPackage.HELPER_ANN__NAMES);
+		}
+		return names;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpressionAnnotation getExpr() {
 		return expr;
 	}
@@ -325,6 +373,10 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				if (resolve) return getReturnType();
 				return basicGetReturnType();
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				return getArguments();
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				return getNames();
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				return getExpr();
 		}
@@ -353,6 +405,14 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				setReturnType((Type)newValue);
 				return;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				getArguments().clear();
+				getArguments().addAll((Collection<? extends Type>)newValue);
+				return;
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				getNames().clear();
+				getNames().addAll((Collection<? extends String>)newValue);
+				return;
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				setExpr((ExpressionAnnotation)newValue);
 				return;
@@ -380,6 +440,12 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				setReturnType((Type)null);
 				return;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				getArguments().clear();
+				return;
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				getNames().clear();
+				return;
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				setExpr((ExpressionAnnotation)null);
 				return;
@@ -403,6 +469,10 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				return returnType != null;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				return arguments != null && !arguments.isEmpty();
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				return names != null && !names.isEmpty();
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				return expr != null;
 		}
@@ -453,6 +523,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", names: ");
+		result.append(names);
 		result.append(')');
 		return result.toString();
 	}

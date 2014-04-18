@@ -2,10 +2,12 @@ package genericity.compiler.atl.analyser;
 
 import org.eclipse.emf.ecore.EClass;
 
+import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollectionType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
+import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.TupleAttribute;
 import genericity.typing.atl_types.TupleType;
 import genericity.typing.atl_types.Type;
@@ -71,5 +73,16 @@ public class TypeUtils {
 
 	public static boolean isCollection(Type type) {
 		return type instanceof CollectionType;
+	}
+
+	public static String getTypeName(Type t) {
+		if ( t instanceof Metaclass ) {
+			return ((Metaclass) t).getName();
+		} else if ( t instanceof StringType ) {
+			return "String";
+		} else if ( t instanceof BooleanType ) {
+			return "Boolean";
+		}
+		throw new UnsupportedOperationException(t.getClass().getName());
 	}
 }

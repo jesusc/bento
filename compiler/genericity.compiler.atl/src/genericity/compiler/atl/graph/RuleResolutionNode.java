@@ -45,6 +45,7 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 			if ( i + 1 < n ) {
 				s += " or \n\t";
 			}			
+			i++;
 		}
 		
 		buf.generateExpression(s);

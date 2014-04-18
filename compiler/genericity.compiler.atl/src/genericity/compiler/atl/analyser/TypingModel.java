@@ -645,6 +645,7 @@ public class TypingModel {
 		ann.setHelper(h.original_());
 		ann.setContextType(type);
 		
+		
 		linkNodeToAnnotation(h.original_(), ann);
 		
 		return ann;
