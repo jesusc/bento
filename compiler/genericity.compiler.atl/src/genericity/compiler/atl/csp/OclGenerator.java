@@ -47,7 +47,8 @@ public class OclGenerator {
 			return ((BooleanExp) expr).getBooleanSymbol().toString();
 		} else if ( expr instanceof OclModelElement ) {
 			OclModelElement ome = (OclModelElement) expr;
-			return ome.getModel().getName() + "!" + ome.getName();
+			// return ome.getModel().getName() + "!" + ome.getName();
+			return ome.getName();
 		} else if ( expr instanceof IfExp ) {
 			IfExp ifexp = (IfExp) expr;
 			return "if " + gen(ifexp.getCondition()) + "\n\tthen " + gen(ifexp.getThenExpression()) + "\n\telse " + gen(ifexp.getElseExpression()) + "\n\tendif";
