@@ -21,6 +21,7 @@ import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
+import genericity.typing.atl_types.analysis.ControlFlow;
 import genericity.typing.atl_types.annotations.AtlAnnotation;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.CallExprAnn;
@@ -266,10 +267,20 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			}
 		}
 		
+		
+		createControlFlowGraph(ann);
+		
 	}
 
 
 	
+	private void createControlFlowGraph(BindingAnn ann) {
+		ControlFlow cflow = typ.createControlFlow();
+		ann.setControlFlow(cflow);		
+		
+		// ann.getValue()
+	}
+
 	@Override
 	public void inRuleVariableDeclaration(RuleVariableDeclaration self) {
 		// Ignored for the moment, not sure if needed

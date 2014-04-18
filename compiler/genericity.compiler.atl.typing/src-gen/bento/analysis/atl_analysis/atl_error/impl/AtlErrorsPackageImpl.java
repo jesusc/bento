@@ -19,6 +19,7 @@ import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
 import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
 import bento.analysis.atl_analysis.atl_error.InvalidArgumentProblem;
 import bento.analysis.atl_analysis.atl_error.InvalidOperand;
+import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.NavigationProblem;
 
@@ -149,6 +150,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass flattenOverNonNestedCollectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iteratorOverEmptySequenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -506,6 +514,15 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getIteratorOverEmptySequence() {
+		return iteratorOverEmptySequenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AtlErrorsFactory getAtlErrorsFactory() {
 		return (AtlErrorsFactory)getEFactoryInstance();
 	}
@@ -574,6 +591,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		bindingExpectedOneAssignedManyEClass = createEClass(BINDING_EXPECTED_ONE_ASSIGNED_MANY);
 
 		flattenOverNonNestedCollectionEClass = createEClass(FLATTEN_OVER_NON_NESTED_COLLECTION);
+
+		iteratorOverEmptySequenceEClass = createEClass(ITERATOR_OVER_EMPTY_SEQUENCE);
 	}
 
 	/**
@@ -624,6 +643,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		noBindingForCompulsoryFeatureEClass.getESuperTypes().add(this.getBindingProblem());
 		bindingExpectedOneAssignedManyEClass.getESuperTypes().add(this.getBindingProblem());
 		flattenOverNonNestedCollectionEClass.getESuperTypes().add(this.getLocalProblem());
+		iteratorOverEmptySequenceEClass.getESuperTypes().add(this.getLocalProblem());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(localProblemEClass, LocalProblem.class, "LocalProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -671,6 +691,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEClass(bindingExpectedOneAssignedManyEClass, BindingExpectedOneAssignedMany.class, "BindingExpectedOneAssignedMany", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(flattenOverNonNestedCollectionEClass, FlattenOverNonNestedCollection.class, "FlattenOverNonNestedCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(iteratorOverEmptySequenceEClass, IteratorOverEmptySequence.class, "IteratorOverEmptySequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //AtlErrorsPackageImpl

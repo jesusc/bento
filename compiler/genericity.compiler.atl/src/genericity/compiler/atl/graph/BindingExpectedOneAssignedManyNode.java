@@ -1,5 +1,6 @@
 package genericity.compiler.atl.graph;
 
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -16,7 +17,8 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 		this.binding = binding;
 	}
 	
-
+	/*
+	@Override
 	public String genCSP(String dependent) {
 		String s = "";
 		for(DependencyNode n : dependencies) {
@@ -24,16 +26,22 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 		}
 		return s;
 	}
-
+	*/
+	/*
 	private String completeDependency(String dependent) {
 		String s = dependent == null ? "" : dependent + " and";
-		s       += OclGenerator.gen(binding.getValue(), null) + "->size() > 1"; 
+		s       += OclGenerator.gen(binding.getValue()) + "->size() > 1"; 
 		return s;
 	}
-
+	*/
+	
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
 		for(DependencyNode n : dependencies) {
+			n.genErrorSlice(slice);
+		}		
+		
+		for(ConstraintNode n : constraints) {
 			n.genErrorSlice(slice);
 		}		
 		
@@ -46,4 +54,17 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 		super.genGraphviz(gv);
 		gv.addNode(this, "Problem\\n" + binding.getPropertyName() + ":1 <- *" + "\\n" + binding.getLocation());
 	}
+
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		getDependency().getCSPText(buf);
+		
+		buf.generateIf(binding.getValue(), "->size() > 0", true);
+		
+		// CSPBuffer buf2 = new CSPBuffer();
+		getConstraint().getCSPText(buf);
+		// System.out.println(buf2.getText());
+	}
+
 }

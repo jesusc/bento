@@ -2,6 +2,7 @@ package genericity.compiler.atl.graph;
 
 import atl.metamodel.ATL.Helper;
 import genericity.compiler.atl.analyser.ATLUtils;
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -19,6 +20,7 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 		this.helperAnn = helperAnn;
 	}
 	
+	/*
 	@Override
 	public String genCSP(String dependent) {
 		String s = "";
@@ -27,6 +29,7 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 		}
 		return s + "\nHELPER INVOCATION: " + OclGenerator.gen(ATLUtils.getBody(helper));
 	}
+	*/
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
@@ -42,5 +45,20 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 		gv.addNode(this, 
 				"def:" + (ATLUtils.isContextHelper(helper) ? ATLUtils.getHelperType(helper).getName() + "." : "") + 
 				ATLUtils.getHelperName(helper));
+	}
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		if ( getDependencies().size() == 0 ) {
+			System.err.println("WARNING: Error cannot be reached");
+		}
+		
+		for(DependencyNode n : getDependencies()) {
+			// 1. Generate code for the dependency node
+			n.getCSPText(buf);
+			// 2. Place the generated code in "if ( dependency = true ) then X else false endif"
+			// TODO: Do this.
+			// 3. X will be the code for the depending node
+		}
 	}
 }

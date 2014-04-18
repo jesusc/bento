@@ -70,6 +70,7 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.NO_BINDING_FOR_COMPULSORY_FEATURE: return createNoBindingForCompulsoryFeature();
 			case AtlErrorsPackage.BINDING_EXPECTED_ONE_ASSIGNED_MANY: return createBindingExpectedOneAssignedMany();
 			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: return createFlattenOverNonNestedCollection();
+			case AtlErrorsPackage.ITERATOR_OVER_EMPTY_SEQUENCE: return createIteratorOverEmptySequence();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -173,6 +174,16 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public FlattenOverNonNestedCollection createFlattenOverNonNestedCollection() {
 		FlattenOverNonNestedCollectionImpl flattenOverNonNestedCollection = new FlattenOverNonNestedCollectionImpl();
 		return flattenOverNonNestedCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IteratorOverEmptySequence createIteratorOverEmptySequence() {
+		IteratorOverEmptySequenceImpl iteratorOverEmptySequence = new IteratorOverEmptySequenceImpl();
+		return iteratorOverEmptySequence;
 	}
 
 	/**

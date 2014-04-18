@@ -77,7 +77,7 @@ public abstract class BaseTest {
 		
 		typingModel = out;	
 		
-		System.out.println("Finished typing " + atlTransformationFile);
+		System.out.println("Finished typing " + atlTransformationFile + "\n");
 	}
 	
 	/*
@@ -94,7 +94,7 @@ public abstract class BaseTest {
 	
 
 	protected void generateGraphviz() {
-		new GraphvizGenerator(dependencyGraph).visualize();
+		new GraphvizGenerator(dependencyGraph).visualize("tmp_/output.dot");
 	}	
 	
 	protected void generateCSP() {
@@ -112,7 +112,7 @@ public abstract class BaseTest {
 	protected void generateEffectiveMetamodel(String logicalName, String outputPath) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(outputPath));
 		TrafoMetamodelData data = new TrafoMetamodelData(atlTransformation, mm.getNamespace(logicalName), typingModel, logicalName);
-		new EffectiveMetamodelBuilder(data).extractSource(r, logicalName, logicalName, logicalName);
+		new EffectiveMetamodelBuilder(data).extractSource(r, logicalName, logicalName, logicalName, logicalName);
 		r.save(null);
 	}
 	

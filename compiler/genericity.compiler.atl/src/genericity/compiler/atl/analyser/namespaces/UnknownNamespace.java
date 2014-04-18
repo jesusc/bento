@@ -2,12 +2,19 @@ package genericity.compiler.atl.analyser.namespaces;
 
 import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.Unknown;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
 
 public class UnknownNamespace extends AbstractTypeNamespace {
+
+	private Type selfType;
+	
+	public UnknownNamespace(Type u) {
+		selfType = u;
+	}
 
 	@Override
 	public Type getFeatureType(String featureName, LocatedElement node) {
@@ -16,7 +23,11 @@ public class UnknownNamespace extends AbstractTypeNamespace {
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
-		return super.getOperationType(operationName, arguments, node);
+		Type t = super.getOperationType(operationName, arguments, node);
+		if ( t == null ) {
+			return AnalyserContext.getErrorModel().signalNoOperationFound(selfType, operationName, node, null);
+		}
+		return t;
 	}
 
 	@Override

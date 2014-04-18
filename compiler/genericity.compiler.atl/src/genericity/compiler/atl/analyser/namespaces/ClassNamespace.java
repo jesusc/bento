@@ -166,6 +166,9 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		if ( super.hasOperation(operationName, arguments) )
 			return true;
+		if ( operationName.equals("allInstances") || operationName.equals("allInstancesFrom") ) 
+			return true;
+
 		return operations.containsKey(operationName);
 	}
 	

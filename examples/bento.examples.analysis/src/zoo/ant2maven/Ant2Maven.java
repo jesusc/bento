@@ -53,6 +53,8 @@ public class Ant2Maven extends BaseTest {
 		
 		// 
 		
+		/*
+		
 		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL, TARGET_METAMODEL2 }, 
 								   new String[] { "Ant", "MavenMaven", "MavenProject" }, true);
 		
@@ -69,6 +71,7 @@ public class Ant2Maven extends BaseTest {
 		generateErrorSlice("MavenMaven", MAVEN2XML_ERROR_SLICE);
 		generateEffectiveMetamodel("MavenMaven", MAVEN2XML_SRC1_EFFECTIVE);
 	
+		*/
 	}
 
 

@@ -364,7 +364,7 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		Type bodyType = attr.typeOf( self.getBody() ); 
 		
 		CollectionNamespace cspace = (CollectionNamespace) srcType.getMetamodelRef();
-		attr.linkExprType( cspace.getIteratorType(self.getName(), bodyType) );
+		attr.linkExprType( cspace.getIteratorType(self.getName(), bodyType, self) );
 	}
 	
 	@Override
@@ -431,6 +431,8 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 					SimpleInPatternElement pe = (SimpleInPatternElement) mr.getInPattern().getElements().get(0);
 					Type type_ = attr.typeOf(resolvedObj);
 					Type supertype = attr.typeOf(pe.getType());
+					
+					// System.out.println(TypeUtils.typeToString(type_) + " - " + TypeUtils.typeToString(supertype));
 					if ( typ.isCompatible(type_, supertype) ) {
 						compatibleRules += mr.getName() + ", ";
 						
@@ -501,20 +503,30 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		if ( ! ( receptorType instanceof CollectionType ) ) {
-			Type t = errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {
-			
-				@Override
-				public Type recover(ErrorModel m, LocalProblem p) {
-					ITypeNamespace tspace = (ITypeNamespace) receptorType.getMetamodelRef();	
-					if ( tspace.hasOperation(self.getOperationName(), arguments)) {
-						return tspace.getOperationType(self.getOperationName(), arguments, self);
-					}
-					return null;
-				}
+			final Type t;
+			ITypeNamespace tspace = (ITypeNamespace) receptorType.getMetamodelRef();	
+			if ( tspace.hasOperation(self.getOperationName(), arguments)) {
+				t = tspace.getOperationType(self.getOperationName(), arguments, self);
+			} else {
+				t = null;
+			}
 
-			});
+			if ( AnalyserContext.isOclStrict() ) {
+				errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {				
+					@Override
+					public Type recover(ErrorModel m, LocalProblem p) {
+						return t;
+					}
+				});
+
+				attr.linkExprType( t );
+			} else if ( t == null ) {
+				Type error = errors.signalNoOperationFound(receptorType, self.getOperationName(), self, null);
+				attr.linkExprType( error );
+			} else {
+				attr.linkExprType( t );
+			}
 			
-			attr.linkExprType( t );
 		} else {
 			CollectionNamespace namespace = (CollectionNamespace) receptorType.getMetamodelRef();
 			String          operationName = self.getOperationName();

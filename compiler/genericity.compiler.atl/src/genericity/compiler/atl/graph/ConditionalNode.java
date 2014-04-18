@@ -1,6 +1,7 @@
 package genericity.compiler.atl.graph;
 
 import atl.metamodel.OCL.IfExp;
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -18,10 +19,6 @@ public class ConditionalNode extends AbstractDependencyNode {
 		this.branch = branch;
 	}
 	
-	@Override
-	public String genCSP(String dependent) {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
@@ -39,5 +36,18 @@ public class ConditionalNode extends AbstractDependencyNode {
 		super.genGraphviz(gv);
 		gv.addNode(this, "if: " + OclGenerator.gen(ifExpr.getCondition()) + " / " + (branch + "").toUpperCase());
 	}
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		this.getDependency().getCSPText(buf);
+
+		if ( branch == TRUE_BRANCH ) {
+			buf.generateIf(ifExpr.getCondition(), true);
+		} else {
+			buf.generateIf(ifExpr.getCondition(), false);
+		}
+		
+	}
+
 	
 }

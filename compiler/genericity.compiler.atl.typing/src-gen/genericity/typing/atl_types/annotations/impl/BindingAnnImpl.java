@@ -8,6 +8,7 @@ package genericity.typing.atl_types.annotations.impl;
 
 import genericity.typing.atl_types.Type;
 
+import genericity.typing.atl_types.analysis.ControlFlow;
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getTargetType <em>Target Type</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getValue <em>Value</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getResolvedBy <em>Resolved By</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getControlFlow <em>Control Flow</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,6 +126,16 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 	 * @ordered
 	 */
 	protected EList<MatchedRuleOneAnn> resolvedBy;
+
+	/**
+	 * The cached value of the '{@link #getControlFlow() <em>Control Flow</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getControlFlow()
+	 * @generated
+	 * @ordered
+	 */
+	protected ControlFlow controlFlow;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -377,6 +389,44 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ControlFlow getControlFlow() {
+		if (controlFlow != null && controlFlow.eIsProxy()) {
+			InternalEObject oldControlFlow = (InternalEObject)controlFlow;
+			controlFlow = (ControlFlow)eResolveProxy(oldControlFlow);
+			if (controlFlow != oldControlFlow) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnnotationsPackage.BINDING_ANN__CONTROL_FLOW, oldControlFlow, controlFlow));
+			}
+		}
+		return controlFlow;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ControlFlow basicGetControlFlow() {
+		return controlFlow;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setControlFlow(ControlFlow newControlFlow) {
+		ControlFlow oldControlFlow = controlFlow;
+		controlFlow = newControlFlow;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.BINDING_ANN__CONTROL_FLOW, oldControlFlow, controlFlow));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -412,6 +462,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 				return getValue();
 			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:
 				return getResolvedBy();
+			case AnnotationsPackage.BINDING_ANN__CONTROL_FLOW:
+				if (resolve) return getControlFlow();
+				return basicGetControlFlow();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -447,6 +500,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 				getResolvedBy().clear();
 				getResolvedBy().addAll((Collection<? extends MatchedRuleOneAnn>)newValue);
 				return;
+			case AnnotationsPackage.BINDING_ANN__CONTROL_FLOW:
+				setControlFlow((ControlFlow)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -480,6 +536,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:
 				getResolvedBy().clear();
 				return;
+			case AnnotationsPackage.BINDING_ANN__CONTROL_FLOW:
+				setControlFlow((ControlFlow)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -506,6 +565,8 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 				return value != null;
 			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:
 				return resolvedBy != null && !resolvedBy.isEmpty();
+			case AnnotationsPackage.BINDING_ANN__CONTROL_FLOW:
+				return controlFlow != null;
 		}
 		return super.eIsSet(featureID);
 	}

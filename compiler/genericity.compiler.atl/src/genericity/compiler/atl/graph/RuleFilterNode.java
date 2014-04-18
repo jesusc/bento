@@ -1,22 +1,18 @@
 package genericity.compiler.atl.graph;
 
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
 import atl.metamodel.OCL.OclExpression;
 
-public class SatisfiesConstraintNode extends AbstractDependencyNode {
+public class RuleFilterNode implements ConstraintNode {
 
 	private OclExpression	expr;
 
-	public SatisfiesConstraintNode(OclExpression expr) {
+	public RuleFilterNode(OclExpression expr) {
 		this.expr = expr;
-	}
-
-	public String genCSP(String dependent) {
-		String s = OclGenerator.gen(expr, null); 
-		return s;
 	}
 	
 	@Override
@@ -26,7 +22,12 @@ public class SatisfiesConstraintNode extends AbstractDependencyNode {
 	
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
-		super.genGraphviz(gv);
 		gv.addNode(this, OclGenerator.gen(expr));
+	}
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		buf.generateIf(expr, true);
+		// buf.generateExpression(OclGenerator.gen(expr));
 	}
 }

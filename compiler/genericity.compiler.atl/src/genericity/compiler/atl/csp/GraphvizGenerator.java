@@ -26,10 +26,10 @@ public class GraphvizGenerator {
 		return gv.getText();
 	}
 
-	public void visualize() {
+	public void visualize(String path) {
 		String s = generate();
 		try {
-			FileWriter fw = new FileWriter("/tmp/salida.dot");
+			FileWriter fw = new FileWriter(path);
 			fw.append(s);
 			fw.close();
 		} catch (IOException e) {

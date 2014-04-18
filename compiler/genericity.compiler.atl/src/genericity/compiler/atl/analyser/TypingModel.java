@@ -39,6 +39,7 @@ import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
+import genericity.typing.atl_types.analysis.ControlFlow;
 import genericity.typing.atl_types.annotations.AtlAnnotation;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.CallExprAnn;
@@ -167,13 +168,13 @@ public class TypingModel {
 
 	public Unknown newUnknownType() {
 		Unknown u = (Unknown) impl.createObject(Unknown.class.getSimpleName());
-		u.setMetamodelRef(new UnknownNamespace());
+		u.setMetamodelRef(new UnknownNamespace(u));
 		return u;
 	}
 	
 	public Type newEmptyCollectionType() {
 		EmptyCollectionType u = (EmptyCollectionType) impl.createObject(EmptyCollectionType.class.getSimpleName());
-		u.setMetamodelRef(new UnknownNamespace());
+		u.setMetamodelRef(new UnknownNamespace(u));
 		return u;
 	}
 
@@ -262,6 +263,10 @@ public class TypingModel {
 			return t1;
 		}
 
+		// Ignore empty collection types
+		if ( t1 instanceof EmptyCollectionType ) return t2;
+		else if ( t2 instanceof EmptyCollectionType ) return t1;
+		
 		if ( (t1 instanceof UnionType) || (t1 instanceof UnionType) ) {
 			ArrayList<Type> types = new ArrayList<Type>();
 			if ( t1 instanceof UnionType ) {
@@ -276,6 +281,15 @@ public class TypingModel {
 				addUniqueType(types, t2);
 			}
 
+			// Remove unknown empty collection type if there is more than one type
+			if ( types.size() > 1 ) {
+				ListIterator<Type> it = types.listIterator();
+				while ( it.hasNext() ) {
+					if ( it.next() instanceof EmptyCollectionType ) 
+						it.remove();
+				}
+			}
+			
 			if ( types.size() == 1 ) {
 				return types.get(0);
 			} else {				
@@ -388,6 +402,22 @@ public class TypingModel {
 			
 			return assignableTypes(dcl.getKeyType(), rtm.getKeyType()) &&
 				assignableTypes(dcl.getValueType(), dcl.getValueType());
+		} else if ( declaredType instanceof TupleType & runtimeType instanceof TupleType ) {
+			TupleType dcl = (TupleType) declaredType;
+			TupleType rtm = (TupleType) runtimeType;
+			
+			if ( dcl.getAttributes().size() != rtm.getAttributes().size() )
+				return false;
+			
+			int i = 0;
+			for(TupleAttribute a1 : dcl.getAttributes()) {
+				TupleAttribute a2 = rtm.getAttributes().get(i);
+				if ( ! (a1.getName().equals(a2.getName()) && equalTypes(a1.getType(), a2.getType())))  {
+					return false;
+				}
+				i++;
+			}
+			return true;
 		}
 		
 		throw new UnsupportedOperationException("EqualTypes: " + declaredType + " - " + runtimeType);
@@ -693,6 +723,15 @@ public class TypingModel {
 		}
 		
 		return result;
+	}
+
+
+	
+	// Control flow
+	
+	public ControlFlow createControlFlow() {
+		ControlFlow cf = (ControlFlow) impl.createObject(ControlFlow.class.getSimpleName());	
+		return cf;
 	}
 
 

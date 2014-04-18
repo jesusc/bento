@@ -1,6 +1,7 @@
 package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.analyser.ErrorUtils;
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -19,13 +20,10 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 	}
 
 	@Override
-	public String genCSP(String dependent) {
-		String s = "";
-		for(DependencyNode node : getDependencies()) {
-			s += node.genCSP(dependent) + "\n";
-		}
-		return s;
+	public void getCSPText(CSPBuffer buf){
+		this.getDependency().getCSPText(buf);
 	}
+	
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
@@ -40,4 +38,5 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 		
 		gv.addNode(this, msg + "\\n" + OclGenerator.gen(expr));
 	}
+
 }

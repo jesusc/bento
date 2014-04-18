@@ -26,6 +26,7 @@ import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
+import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.VariableDeclaration;
 import bento.analysis.atl_analysis.AnalysisResult;
@@ -38,6 +39,7 @@ import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
 import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
+import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
@@ -151,8 +153,8 @@ public class ErrorModel {
 			}
 		}
 		
-		signalNoRecoverableError("No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);	
-		return null;
+		signalError("No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);	
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
 	
@@ -261,6 +263,12 @@ public class ErrorModel {
 		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected mono-valued, received collection", binding);
 	}
 
+	public void signalIteratorOverEmptyCollection(IteratorExp node) {
+		IteratorOverEmptySequence error = AtlErrorsFactory.eINSTANCE.createIteratorOverEmptySequence();
+		initProblem(error, node);
+		signalWarning("Iterator over empty sequence", node);
+	}
+
 	public void signalFlattenOverNonNestedCollection(Type nestedType, LocatedElement node) {
 		FlattenOverNonNestedCollection error = AtlErrorsFactory.eINSTANCE.createFlattenOverNonNestedCollection();
 		initProblem(error, node);
@@ -309,6 +317,7 @@ public class ErrorModel {
 	public void signalExpectedCollectionInForEachOutputPattern(ForEachOutPatternElement e) {
 		signalWarning("Expected collection in ForEach output pattern element", e);
 	}
+
 
 
 	

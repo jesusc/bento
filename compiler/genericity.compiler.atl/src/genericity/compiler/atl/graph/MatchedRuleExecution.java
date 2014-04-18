@@ -2,6 +2,7 @@ package genericity.compiler.atl.graph;
 
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.OCL.VariableDeclaration;
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -14,18 +15,15 @@ public class MatchedRuleExecution extends AbstractDependencyNode {
 
 	private MatchedRuleAnn rule;
 	private MatchedRule	atlRule;
-	private DependencyNode	constraint;
+	//private DependencyNode	constraint;
 
 	public MatchedRuleExecution(MatchedRuleAnn rule, MatchedRule atlRule) {
 		this.rule = rule;
 		this.atlRule = atlRule;
 	}
 	
-	public void setConstraint(DependencyNode constraint) {
-		this.constraint = constraint;
-		this.addDependency(constraint);		
-	}
-	
+	/*
+	@Override
 	public String genCSP(String dependent) {
 		Metaclass metaclass = null;
 		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
@@ -69,6 +67,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode {
 
 		return s;
 	}
+	*/
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
@@ -80,6 +79,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode {
 			}
 		}
 		
+		generatedDependencies(slice);
 	}
 	
 	@Override
@@ -89,4 +89,33 @@ public class MatchedRuleExecution extends AbstractDependencyNode {
 		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
 		gv.addNode(this, rule.getName() + "\\nfrom: " + varDcl.getType().getName() ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
+	
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		Metaclass metaclass = null;
+		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
+		
+		if ( rule instanceof MatchedRuleOneAnn ) metaclass = ((MatchedRuleOneAnn) rule).getInPatternType();
+		else {
+			metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(0);
+			throw new UnsupportedOperationException();
+		}
+
+		String s = metaclass.getName() + ".allInstances()"; 
+		
+		boolean withExists = true;
+		
+		String depStr = "";
+		if ( rule.getFilter() != null ) {
+
+			
+			buf.generateLoop(s, "exists", varDcl.getVarName());
+			this.getConstraint().getCSPText(buf);
+			// buf.generateIf(rule.getFilter(), true);
+		} else {
+			buf.generateLoop(s, "exists", varDcl.getVarName());
+		}
+
+	}
+		
 }

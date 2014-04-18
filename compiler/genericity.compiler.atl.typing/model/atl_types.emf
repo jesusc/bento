@@ -217,6 +217,8 @@ package annotations {
 	val ExpressionAnnotation[1] value;
 	
 	ref MatchedRuleOneAnn[*] resolvedBy;
+  
+  	ref analysis.ControlFlow[1] controlFlow;
   }
 
   abstract class ExpressionAnnotation extends AtlAnnotation {
@@ -280,3 +282,33 @@ package annotations {
 
 }
 
+@namespace(uri="http://genericity/types/atl/analysis", prefix="atl_types_analysis")
+package analysis {
+	class ControlFlow {
+	   ref BasicBlock[1] start;
+	}
+
+
+	abstract class BasicBlock {
+		ref annotations.ExpressionAnnotation[1] expr;   
+
+		ref BasicBlock[*]#cfPrev cfNext;
+		ref BasicBlock[1]#cfNext cfPrev;
+	}
+	
+	class NavigationBasicBlock extends BasicBlock {
+	   ref annotations.ExpressionAnnotation[1] subexprStart;
+	   ref annotations.ExpressionAnnotation[1] subexprEnd;
+	}
+	
+	class LoopBasicBlock extends BasicBlock {
+		ref BasicBlock[0..1] body;
+		ref BasicBlock[0..1] next;	    
+	}
+		
+	
+	class IfBasicBlock extends BasicBlock {
+		ref BasicBlock[1] then;
+		ref BasicBlock[1] else;	    	   
+	}
+}

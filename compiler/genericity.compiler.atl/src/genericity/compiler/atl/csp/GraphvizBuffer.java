@@ -1,25 +1,26 @@
 package genericity.compiler.atl.csp;
 
 import genericity.compiler.atl.graph.DependencyNode;
+import genericity.compiler.atl.graph.GraphNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GraphvizBuffer {
-	private List<DependencyNode> allNodes = new ArrayList<DependencyNode>();
+	private List<GraphNode> allNodes = new ArrayList<GraphNode>();
 
-	private List<DependencyNode> subraphList = new ArrayList<DependencyNode>();
+	private List<GraphNode> subraphList = new ArrayList<GraphNode>();
 	private String nodes = "";
 	private String edges = "";
 	private ArrayList<String> subgraphs = new ArrayList<String>();
 
-	public void addNode(DependencyNode node, String label) {
+	public void addNode(GraphNode node, String label) {
 		int i = addNodeAux(node);
 		
 		nodes = nodes + "\n" + (genNodeName(i) + "[label=\"" + label + "\"];"); 
 	}
 	
-	private int addNodeAux(DependencyNode node) {
+	private int addNodeAux(GraphNode node) {
 		// System.out.println("GrapvizBuffer: " + node.getClass().getSimpleName());
 		int i = allNodes.indexOf(node);
 		if ( i == -1 ) {
@@ -34,7 +35,7 @@ public class GraphvizBuffer {
 		return "node_" + i;
 	}
 
-	public void addEdge(DependencyNode start, DependencyNode end) {
+	public void addEdge(GraphNode start, GraphNode end) {
 		int i = addNodeAux(start);
 		int j = addNodeAux(end);;
 		if ( i == -1 || j == -1 ) 
@@ -65,7 +66,7 @@ public class GraphvizBuffer {
 	
 	public void packSubgraph() {
 		subgraphs.add("subgraph " + "cluster_" + subgraphs.size() + "{\n" + genBody() + "\n}"); 
-		subraphList = new ArrayList<DependencyNode>();
+		subraphList = new ArrayList<GraphNode>();
 		nodes = "";
 		edges = "";
 	}

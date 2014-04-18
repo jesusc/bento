@@ -32,10 +32,12 @@ import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LoopExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
 import atl.metamodel.OCL.VariableDeclaration;
+import atl.metamodel.OCL.VariableExp;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
@@ -120,6 +122,7 @@ public class ErrorPathGenerator {
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
 		graph.linkProblemToNode(p, node);
 		
+		System.out.println(p.getLocation());
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);		
 	}
@@ -142,82 +145,67 @@ public class ErrorPathGenerator {
 			startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
 		}
 
-		DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
-		depNode.addDependency(node);
+		// Handle the special case "varName.error", to avoid generating a node with just "varName" which
+		// is redundant (variable names represents objects that must exist)
+		if ( start instanceof VariableExp ) {
+			VariableExp v = (VariableExp) start;
+			if ( v.getReferredVariable().getVarName().equals("thisModule") ) throw new UnsupportedOperationException();
+
+			pathToControlFlow(start.container_(), depNode);
+		} else {
+			DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
+			depNode.addDependency(node);
 	
-		pathToControlFlow(start, node);
-		
-		/*
-		OclExpression start = expr;
-		ExpressionAnnotation startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
-		
-		// TODO: Merge with the other branch if needed...
-		// TODO: Take into account that the container maybe a rule or a helper...
-		//       For the moment assume a rule...
-		ATLModelBaseObject parent = start.container_(); // TODO: Iterate
-		while ( ! ( (parent instanceof Rule) || (parent instanceof Helper) || 
-				    (parent instanceof IteratorExp || (parent instanceof IterateExp) ))) {
-
-			if ( parent instanceof IfExp ) {
-				pathToIfExpr((IfExp) parent, depNode);
-				return;
-				//	throw new UnsupportedOperationException();
-			}
-			
-			parent = parent.container_();
+			pathToControlFlow(start, node);
 		}
 		
-		DelimitedExpressionNode node = null;
-
-		if ( parent instanceof IteratorExp ) {
-			start = ((IteratorExp) parent).getSource();
-			startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
-		}
-		
-		node = new DelimitedExpressionNode(start, startAnn);
-		depNode.addDependency(node);
-
-		pathToSomewhere(parent, node);
-		*/
 	}
 
 	private void pathForCall(OclExpression call, DependencyNode depNode) {
-		// pathToControlFlow(expr, hNode);
-
-		/*
-		System.out.println("pathForCall: " +  OclGenerator.gen(call) );
-		OclExpression lastParent  = call;
-		ATLModelBaseObject parent = call.container_(); 
-		while ( parent instanceof OclExpression) {
-			if ( parent instanceof IfExp ) {
-				break;
+		CallExprAnn ann = (CallExprAnn) typ.getAnnotation(call.original_());
+		
+		CallExprNode node = new CallExprNode((PropertyCallExp) call, ann);
+		depNode.addDependency(node);
+		
+		ATLModelBaseObject parent = call.container_();
+		while ( ! isControlFlowElement(parent) ) {
+			if ( isIteration(parent) ) {
+				LoopExp exp = (LoopExp) parent;
+				LoopNode loop = new LoopNode(exp.getSource(), exp.getIterators().get(0));
+				node.addDependency(loop);
+				
+				pathToControlFlow(exp.getSource(), loop);
+				return;
 			}
-			lastParent = (OclExpression) parent;
 			parent = parent.container_();
 		}
-		
-		ExpressionAnnotation lastParentAnn = (ExpressionAnnotation) typ.getAnnotation(lastParent.original_());
-		
-		
-		DelimitedExpressionNode node = new DelimitedExpressionNode(lastParent, lastParentAnn);
-		depNode.addDependency(node);
-	
-		pathToControlFlow(lastParent, node);
-		*/
-		
-		ExpressionAnnotation ann = (ExpressionAnnotation) typ.getAnnotation(call.original_());
-		
-		DelimitedExpressionNode node = new DelimitedExpressionNode(call, ann);
-		depNode.addDependency(node);
 		
 		pathToControlFlow(call, node);
 	}
 
-	private void pathToControlFlow(OclExpression start, DependencyNode node) {
+	private boolean isIteration(ATLModelBaseObject element) {
+		return element instanceof LoopExp;
+	}
+
+	public boolean isControlFlowElement(ATLModelBaseObject element) {
+		return (element instanceof Rule) || (element instanceof Helper) ||
+			    (element instanceof IfExp );
+	}
+	
+	private void pathToControlFlow(ATLModelBaseObjectInterface start, DependencyNode node) {
 		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
 		ATLModelBaseObject parent = start.container_(); 
-		while ( ! ( (parent instanceof Rule) || (parent instanceof Helper) ||
-				    (parent instanceof IfExp ))) {
+		while ( ! isControlFlowElement(parent) ) {
+			if ( isIteration(parent) ) {
+				LoopExp exp = (LoopExp) parent;
+				LoopNode loop = new LoopNode(exp.getSource(), exp.getIterators().get(0));
+				node.addDependency(loop);
+				
+				// ?? Different from the pathToCall
+				pathToControlFlow((OclExpression) parent, loop);
+				return;
+			}
+			
 			lastParent = parent;
 			parent = parent.container_();
 		}
@@ -277,7 +265,7 @@ public class ErrorPathGenerator {
 	
 	private void pathToBinding(Binding atlBinding , BindingAnn b, ProblemNode node) {
 		RuleResolutionNode resolutionNode = new RuleResolutionNode(atlBinding, b);
-		node.addDependency(resolutionNode);
+		node.addConstraint(resolutionNode);
 		for(MatchedRuleAnn mr : b.getResolvedBy()) {
 			pathToRule(mr, resolutionNode);
 		}
@@ -340,17 +328,17 @@ public class ErrorPathGenerator {
 		dependent.addDependency(newNode);
 		
 		if ( rule.getFilter() != null ) {
-			DependencyNode constraint = pathToFilterExpression(rule.getFilter());
-			newNode.setConstraint(constraint);
+			ConstraintNode constraint = pathToFilterExpression(rule.getFilter());
+			newNode.addConstraint(constraint);
 		}
 		
 		graph.addRule(newNode);
 	}
 
-	private DependencyNode pathToFilterExpression(ExpressionAnnotation expr) {
+	private ConstraintNode pathToFilterExpression(ExpressionAnnotation expr) {
 		OclExpression atlOcl = (OclExpression) atlModel.findWrapper( expr.getExpr() );
 
-		SatisfiesConstraintNode node = new SatisfiesConstraintNode(atlOcl);
+		RuleFilterNode node = new RuleFilterNode(atlOcl);
 		
 		return node;
 	}

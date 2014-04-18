@@ -35,6 +35,8 @@ import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.UnknownFeature;
 
+import genericity.typing.atl_types.analysis.AnalysisPackage;
+import genericity.typing.atl_types.analysis.impl.AnalysisPackageImpl;
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
 
 import genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl;
@@ -283,14 +285,17 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		// Obtain or create and register interdependencies
 		AnnotationsPackageImpl theAnnotationsPackage = (AnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AnnotationsPackage.eNS_URI) instanceof AnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AnnotationsPackage.eNS_URI) : AnnotationsPackage.eINSTANCE);
+		AnalysisPackageImpl theAnalysisPackage = (AnalysisPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AnalysisPackage.eNS_URI) instanceof AnalysisPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AnalysisPackage.eNS_URI) : AnalysisPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theAtlTypingPackage.createPackageContents();
 		theAnnotationsPackage.createPackageContents();
+		theAnalysisPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theAtlTypingPackage.initializePackageContents();
 		theAnnotationsPackage.initializePackageContents();
+		theAnalysisPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theAtlTypingPackage.freeze();
@@ -821,9 +826,11 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		// Obtain other dependent packages
 		AnnotationsPackage theAnnotationsPackage = (AnnotationsPackage)EPackage.Registry.INSTANCE.getEPackage(AnnotationsPackage.eNS_URI);
+		AnalysisPackage theAnalysisPackage = (AnalysisPackage)EPackage.Registry.INSTANCE.getEPackage(AnalysisPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theAnnotationsPackage);
+		getESubpackages().add(theAnalysisPackage);
 
 		// Create type parameters
 

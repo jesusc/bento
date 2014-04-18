@@ -19,6 +19,9 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 		Type t = super.getOperationType(operationName, arguments, node);
 		if ( t == null ) {
 			if ( operationName.equals("floor") ) return AnalyserContext.getTypingModel().newIntegerType();
+		
+			if ( operationName.equals("sin") ) return AnalyserContext.getTypingModel().newFloatType();
+			if ( operationName.equals("cos") ) return AnalyserContext.getTypingModel().newFloatType();
 					
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 		}

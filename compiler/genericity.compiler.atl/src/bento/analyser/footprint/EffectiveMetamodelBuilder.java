@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -37,11 +38,16 @@ public class EffectiveMetamodelBuilder {
 		this.data = data;
 	}
 
-	public EPackage extractSource(Resource r, String name, String conceptURI, String conceptPrefix) {	
+	public EPackage extractSource(Resource r, String name, String conceptURI, String conceptPrefix, String info) {	
 		conceptPkg = EcoreFactory.eINSTANCE.createEPackage();
 		conceptPkg.setName(name);
 		conceptPkg.setNsURI(conceptURI);
 		conceptPkg.setNsPrefix(conceptPrefix);
+		
+		EAnnotation ann = EcoreFactory.eINSTANCE.createEAnnotation();
+		//ann.getDetails().put("error", name);
+		ann.setSource(info);
+		conceptPkg.getEAnnotations().add(ann);
 		
 		r.getContents().add(conceptPkg);
 		

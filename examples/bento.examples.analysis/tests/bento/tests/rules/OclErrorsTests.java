@@ -27,9 +27,9 @@ public class OclErrorsTests extends BaseTest {
 		
 		typing(CD2UML_OPERATION_NOT_FOUND, new Object[] { CD_METAMODEL, UML_METAMODEL }, 
 				   new String[] { "CD", "UML" }, true);
-	
+		
 		generateGraphviz();
-		// generateCSP();
+		generateCSP();
 		generateErrorSlice("CD", "tmp_/operation_not_found.slice.ecore");
 		generateEffectiveMetamodel("CD", "tmp_/operation_not_found.effective.ecore");
 	}

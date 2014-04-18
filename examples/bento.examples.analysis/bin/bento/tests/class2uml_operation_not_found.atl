@@ -24,7 +24,25 @@ rule model {
 					if m.classifiers.size() = 1 then -- TODO: ERROR IN THE IF CONDITION
 						Sequence { thisModule.model_2(m) }
 					else
-						m.classifiers->select(c | c.isPersistent())					
+						-- m.classifiers->select(c | c.isPersistent())					
+	
+						m.classifiers->select(c|
+							if c.name = 'Something' then
+								c.isPersistent()
+							else
+								false
+							endif
+							
+						)
+						
+						--						m.classifiers->select(c1 | 
+--							m.classifiers->select(c2| c2 = c1)->select(c2 | 
+--								if m.name = 'PersistentModel' then 
+--									c1.isPersistent()
+--								else 
+--									c1
+--								endif)					
+--						)							
 					endif
 				endif
 		)

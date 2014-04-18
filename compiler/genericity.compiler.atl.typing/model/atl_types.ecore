@@ -153,6 +153,8 @@
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedBy" upperBound="-1"
           eType="#//annotations/MatchedRuleOneAnn"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlow" lowerBound="1"
+          eType="#//analysis/ControlFlow"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionAnnotation" abstract="true"
         eSuperTypes="#//annotations/AtlAnnotation">
@@ -213,5 +215,35 @@
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="GenericExprAnn" eSuperTypes="#//annotations/ExpressionAnnotation"/>
+  </eSubpackages>
+  <eSubpackages name="analysis" nsURI="http://genericity/types/atl/analysis" nsPrefix="atl_types_analysis">
+    <eClassifiers xsi:type="ecore:EClass" name="ControlFlow">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="start" lowerBound="1"
+          eType="#//analysis/BasicBlock"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BasicBlock" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="cfNext" upperBound="-1"
+          eType="#//analysis/BasicBlock" eOpposite="#//analysis/BasicBlock/cfPrev"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="cfPrev" lowerBound="1"
+          eType="#//analysis/BasicBlock" eOpposite="#//analysis/BasicBlock/cfNext"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NavigationBasicBlock" eSuperTypes="#//analysis/BasicBlock">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subexprStart" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subexprEnd" lowerBound="1"
+          eType="#//annotations/ExpressionAnnotation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LoopBasicBlock" eSuperTypes="#//analysis/BasicBlock">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//analysis/BasicBlock"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//analysis/BasicBlock"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IfBasicBlock" eSuperTypes="#//analysis/BasicBlock">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="then" lowerBound="1"
+          eType="#//analysis/BasicBlock"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="else" lowerBound="1"
+          eType="#//analysis/BasicBlock"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

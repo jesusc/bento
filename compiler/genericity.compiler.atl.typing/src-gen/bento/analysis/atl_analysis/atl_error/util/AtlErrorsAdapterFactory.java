@@ -135,6 +135,10 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createFlattenOverNonNestedCollectionAdapter();
 			}
 			@Override
+			public Adapter caseIteratorOverEmptySequence(IteratorOverEmptySequence object) {
+				return createIteratorOverEmptySequenceAdapter();
+			}
+			@Override
 			public Adapter caseAnalysisInfo(AnalysisInfo object) {
 				return createAnalysisInfoAdapter();
 			}
@@ -369,6 +373,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFlattenOverNonNestedCollectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence <em>Iterator Over Empty Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence
+	 * @generated
+	 */
+	public Adapter createIteratorOverEmptySequenceAdapter() {
 		return null;
 	}
 

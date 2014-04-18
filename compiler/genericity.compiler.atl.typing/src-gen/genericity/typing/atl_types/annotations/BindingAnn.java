@@ -8,6 +8,7 @@ package genericity.typing.atl_types.annotations;
 
 import genericity.typing.atl_types.Type;
 
+import genericity.typing.atl_types.analysis.ControlFlow;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getTargetType <em>Target Type</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getValue <em>Value</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getResolvedBy <em>Resolved By</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getControlFlow <em>Control Flow</em>}</li>
  * </ul>
  * </p>
  *
@@ -205,5 +207,31 @@ public interface BindingAnn extends AtlAnnotation {
 	 * @generated
 	 */
 	EList<MatchedRuleOneAnn> getResolvedBy();
+
+	/**
+	 * Returns the value of the '<em><b>Control Flow</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Control Flow</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Control Flow</em>' reference.
+	 * @see #setControlFlow(ControlFlow)
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getBindingAnn_ControlFlow()
+	 * @model required="true"
+	 * @generated
+	 */
+	ControlFlow getControlFlow();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.annotations.BindingAnn#getControlFlow <em>Control Flow</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Control Flow</em>' reference.
+	 * @see #getControlFlow()
+	 * @generated
+	 */
+	void setControlFlow(ControlFlow value);
 
 } // BindingAnn

@@ -1,8 +1,10 @@
 package genericity.compiler.atl.csp;
 
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import genericity.compiler.atl.analyser.ErrorUtils;
 import genericity.compiler.atl.graph.DependencyGraph;
 import genericity.compiler.atl.graph.DependencyNode;
+import genericity.compiler.atl.graph.HelperInvocationNode;
 
 public class CSPGenerator {
 	
@@ -17,10 +19,32 @@ public class CSPGenerator {
 		for(DependencyNode node : graph.getProblemNodes()) {
 			LocalProblem lp = (LocalProblem) node.getProblem();
 
-			s += lp.getClass().getSimpleName() + " (" + lp.getLocation() +"): ";
-			s += node.genCSP(null);
-			s += "\n";
+			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
+			s += generateCSP(node);
+			s += "\n\n";
+			System.out.println(s);
+			s = "";
 		}
 		return s;
+	}
+
+	private String generateCSP(DependencyNode errorNode) {
+		CSPBuffer buf = new CSPBuffer();
+		errorNode.getCSPText(buf);
+		
+		
+		String s = buf.getText();
+		
+		return s;
+		/*
+		while ( (node = node.getDependency()) != null ) {
+			node.getCSPText(buf);
+			
+			if ( node instanceof HelperInvocationNode ) {
+				System.out.println("* End of helper\n");
+				// break;
+			}
+		}
+		*/
 	}
 }

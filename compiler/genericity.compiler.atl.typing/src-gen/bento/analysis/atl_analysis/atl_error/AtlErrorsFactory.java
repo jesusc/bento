@@ -116,6 +116,15 @@ public interface AtlErrorsFactory extends EFactory {
 	FlattenOverNonNestedCollection createFlattenOverNonNestedCollection();
 
 	/**
+	 * Returns a new object of class '<em>Iterator Over Empty Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator Over Empty Sequence</em>'.
+	 * @generated
+	 */
+	IteratorOverEmptySequence createIteratorOverEmptySequence();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -4,12 +4,14 @@ import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.TypingModel;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
+import genericity.typing.atl_types.EmptyCollectionType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.Operation;
 
 public abstract class CollectionNamespace implements ITypeNamespace {
@@ -124,7 +126,11 @@ public abstract class CollectionNamespace implements ITypeNamespace {
 		return nested;
 	}
 
-	public Type getIteratorType(String name, Type bodyType) {
+	public Type getIteratorType(String name, Type bodyType, IteratorExp node) {
+		if ( nested instanceof EmptyCollectionType ) {
+			AnalyserContext.getErrorModel().signalIteratorOverEmptyCollection(node);
+		}
+		
 		if ( name.equals("select") ) {
 			return selectIteratorType(bodyType); 
 		} else if ( name.equals("collect") ) {

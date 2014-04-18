@@ -13,6 +13,7 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 
 	public LinkedList<DependencyNode> dependencies = new LinkedList<DependencyNode>();
 	public LinkedList<DependencyNode> depending    = new LinkedList<DependencyNode>();
+	public LinkedList<ConstraintNode> constraints = new LinkedList<ConstraintNode>();
 	
 	private DependencyGraph	graph;
 	private Problem	problem;
@@ -24,16 +25,41 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 		dependencies.add(node);
 		node.addDepending(this);
 	}
+
+	public DependencyNode getDependency() {
+		if 		( dependencies.size() == 0 ) return null;
+		else if ( dependencies.size() == 1 ) return dependencies.get(0);
+		
+		throw new IllegalStateException("Only one dependency per node supported");
+	}
+
+	public ConstraintNode getConstraint() {
+		if 		( constraints.size() == 0 ) return null;
+		else if ( constraints.size() == 1 ) return constraints.get(0);
+		
+		throw new IllegalStateException("Only one constraint per node supported");
+	}
 	
 	@Override
 	public void addDepending(DependencyNode node) {
 		depending.add(node);
 	}
 	
+	
+	
+	@Override
+	public void addConstraint(ConstraintNode constraint) {
+		this.constraints.add(constraint);
+	}
+	
 	protected void generatedDependencies(ErrorSlice slice) {
 		for(DependencyNode n : dependencies) {
 			n.genErrorSlice(slice);
 		}					
+		for(ConstraintNode c : constraints) {
+			c.genErrorSlice(slice);
+		}					
+		
 	}
 
 	
@@ -60,6 +86,12 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 			n.genGraphviz(gv);
 			gv.addEdge(this, n);
 		}
+		
+		for (ConstraintNode c : constraints) {
+			c.genGraphviz(gv);
+			gv.addEdge(this, c);
+		}
+		
 	}
 	
 }

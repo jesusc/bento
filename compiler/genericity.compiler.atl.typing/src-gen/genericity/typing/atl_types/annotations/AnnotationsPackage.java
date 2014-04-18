@@ -966,13 +966,22 @@ public interface AnnotationsPackage extends EPackage {
 	int BINDING_ANN__RESOLVED_BY = ATL_ANNOTATION_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Control Flow</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_ANN__CONTROL_FLOW = ATL_ANNOTATION_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Binding Ann</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 7;
+	int BINDING_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl <em>Expression Annotation</em>}' class.
@@ -2252,6 +2261,17 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getBindingAnn_ResolvedBy();
 
 	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.annotations.BindingAnn#getControlFlow <em>Control Flow</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Control Flow</em>'.
+	 * @see genericity.typing.atl_types.annotations.BindingAnn#getControlFlow()
+	 * @see #getBindingAnn()
+	 * @generated
+	 */
+	EReference getBindingAnn_ControlFlow();
+
+	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.ExpressionAnnotation <em>Expression Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3000,6 +3020,14 @@ public interface AnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BINDING_ANN__RESOLVED_BY = eINSTANCE.getBindingAnn_ResolvedBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Control Flow</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_ANN__CONTROL_FLOW = eINSTANCE.getBindingAnn_ControlFlow();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl <em>Expression Annotation</em>}' class.

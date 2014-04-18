@@ -4,6 +4,7 @@ import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.VariableDeclaration;
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -50,6 +51,23 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 			VariableDeclaration varDcl = r.getInPattern().getElements().get(0);
 			fromPart = "\\nfrom: " + varDcl.getType().getName();
 		}
-		gv.addNode(this, rule.getName() + fromPart ); //+ "\\n" + OclGenerator.gen(constraint) );
+		gv.addNode(this, "<<lazy>>\\n" + rule.getName() + fromPart ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		if ( getDependencies().size() == 0 ) {
+			System.err.println("WARNING: Lazy rule " + rule.getName()+ " cannot be reached");
+		}
+		
+		for(DependencyNode n : getDependencies()) {
+			// 1. Generate code for the dependency node
+			n.getCSPText(buf);
+			// 2. Place the generated code in "if ( dependency = true ) then X else false endif"
+			// TODO: Do this.
+			// 3. X will be the code for the depending node
+		}
+	}
+	
+	
 }

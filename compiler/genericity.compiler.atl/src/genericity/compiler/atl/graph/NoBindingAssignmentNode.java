@@ -1,5 +1,6 @@
 package genericity.compiler.atl.graph;
 
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
@@ -10,7 +11,7 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 		super(problem);
 	}
 	
-
+	/*
 	public String genCSP(String dependent) {
 		String s = "";
 		for(DependencyNode n : dependencies) {
@@ -18,6 +19,7 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 		}
 		return s;
 	}
+	*/
 	
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
@@ -31,4 +33,10 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 		super.genGraphviz(gv);
 		gv.addNode(this, "No binding for\\ncompulsory '" + problem.getFeatureName() + "'");
 	}
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		throw new UnsupportedOperationException();
+	}
+	
 }

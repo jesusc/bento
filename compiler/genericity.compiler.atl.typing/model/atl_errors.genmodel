@@ -60,6 +60,8 @@
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoBindingForCompulsoryFeature"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingExpectedOneAssignedMany"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/FlattenOverNonNestedCollection"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/IteratorOverEmptySequence"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">

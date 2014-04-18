@@ -37,8 +37,9 @@ public class ErrorSliceGenerator {
 			ErrorSlice slice = ((ProblemNode) node).getErrorSlice();
 			LocalProblem p   = (LocalProblem) ((ProblemNode) node).getProblem();
 			
-			String name = ErrorUtils.getShortError(p);
-			new EffectiveMetamodelBuilder(slice).extractSource(r, name, name, "prefix" + i);
+			String name = "error" + (i + 1);
+			String info = ErrorUtils.getShortError(p);
+			new EffectiveMetamodelBuilder(slice).extractSource(r, name, name, "prefix" + (i + 1), info);
 			
 			i++;
 		}

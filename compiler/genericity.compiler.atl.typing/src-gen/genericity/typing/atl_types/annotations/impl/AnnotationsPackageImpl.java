@@ -8,6 +8,8 @@ package genericity.typing.atl_types.annotations.impl;
 
 import genericity.typing.atl_types.AtlTypingPackage;
 
+import genericity.typing.atl_types.analysis.AnalysisPackage;
+import genericity.typing.atl_types.analysis.impl.AnalysisPackageImpl;
 import genericity.typing.atl_types.annotations.AbstractIteratorExprAnn;
 import genericity.typing.atl_types.annotations.AnnotationsFactory;
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
@@ -283,14 +285,17 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 
 		// Obtain or create and register interdependencies
 		AtlTypingPackageImpl theAtlTypingPackage = (AtlTypingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AtlTypingPackage.eNS_URI) instanceof AtlTypingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AtlTypingPackage.eNS_URI) : AtlTypingPackage.eINSTANCE);
+		AnalysisPackageImpl theAnalysisPackage = (AnalysisPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AnalysisPackage.eNS_URI) instanceof AnalysisPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AnalysisPackage.eNS_URI) : AnalysisPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theAnnotationsPackage.createPackageContents();
 		theAtlTypingPackage.createPackageContents();
+		theAnalysisPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theAnnotationsPackage.initializePackageContents();
 		theAtlTypingPackage.initializePackageContents();
+		theAnalysisPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theAnnotationsPackage.freeze();
@@ -720,6 +725,15 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBindingAnn_ControlFlow() {
+		return (EReference)bindingAnnEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExpressionAnnotation() {
 		return expressionAnnotationEClass;
 	}
@@ -1082,6 +1096,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		createEReference(bindingAnnEClass, BINDING_ANN__TARGET_TYPE);
 		createEReference(bindingAnnEClass, BINDING_ANN__VALUE);
 		createEReference(bindingAnnEClass, BINDING_ANN__RESOLVED_BY);
+		createEReference(bindingAnnEClass, BINDING_ANN__CONTROL_FLOW);
 
 		expressionAnnotationEClass = createEClass(EXPRESSION_ANNOTATION);
 		createEReference(expressionAnnotationEClass, EXPRESSION_ANNOTATION__EXPR);
@@ -1151,6 +1166,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 
 		// Obtain other dependent packages
 		AtlTypingPackage theAtlTypingPackage = (AtlTypingPackage)EPackage.Registry.INSTANCE.getEPackage(AtlTypingPackage.eNS_URI);
+		AnalysisPackage theAnalysisPackage = (AnalysisPackage)EPackage.Registry.INSTANCE.getEPackage(AnalysisPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1246,6 +1262,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEReference(getBindingAnn_TargetType(), theAtlTypingPackage.getType(), null, "targetType", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_Value(), this.getExpressionAnnotation(), null, "value", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_ResolvedBy(), this.getMatchedRuleOneAnn(), null, "resolvedBy", null, 0, -1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingAnn_ControlFlow(), theAnalysisPackage.getControlFlow(), null, "controlFlow", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionAnnotationEClass, ExpressionAnnotation.class, "ExpressionAnnotation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpressionAnnotation_Expr(), ecorePackage.getEObject(), null, "expr", null, 0, 1, ExpressionAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

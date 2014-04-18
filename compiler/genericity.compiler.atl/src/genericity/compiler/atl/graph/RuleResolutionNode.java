@@ -2,12 +2,13 @@ package genericity.compiler.atl.graph;
 
 import atl.metamodel.ATL.Binding;
 import genericity.compiler.atl.analyser.TypeUtils;
+import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.annotations.BindingAnn;
 
-public class RuleResolutionNode extends AbstractDependencyNode {
+public class RuleResolutionNode extends AbstractDependencyNode implements ConstraintNode {
 
 	private BindingAnn	bindingAnn;
 	private Binding	atlBinding;
@@ -17,12 +18,6 @@ public class RuleResolutionNode extends AbstractDependencyNode {
 		this.bindingAnn = bindingAnn;
 	}
 	
-	@Override
-	public String genCSP(String dependent) {
-	//	throw new UnsupportedOperationException();
-		return "";
-	}
-
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
 		for(DependencyNode n : dependencies) {
@@ -36,4 +31,25 @@ public class RuleResolutionNode extends AbstractDependencyNode {
 		gv.addNode(this, OclGenerator.gen(atlBinding.getValue()) + 
 				": " + TypeUtils.typeToString(bindingAnn.getSourceType()) +"\\nresolvedBy");
 	}
+
+	@Override
+	public void getCSPText(CSPBuffer buf) {
+		String s = "";
+		int i = 0;
+		int n = getDependencies().size();
+		for (DependencyNode d : getDependencies()) {
+			CSPBuffer buf2 = new CSPBuffer();
+			d.getCSPText(buf2);
+			
+			s += buf2.getText();
+			if ( i + 1 < n ) {
+				s += " or \n\t";
+			}			
+		}
+		
+		buf.generateExpression(s);
+		
+	}
+	
+	
 }
