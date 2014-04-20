@@ -41,6 +41,7 @@ import atl.metamodel.OCL.VariableExp;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
@@ -88,9 +89,13 @@ public class ErrorPathGenerator {
 		
 		if ( p instanceof NoBindingForCompulsoryFeature ) {
 			generatePath_NoBindingForCompulsoryFeature((NoBindingForCompulsoryFeature) p);		
+		
+		// These two are very similar
 		} else if ( p instanceof BindingExpectedOneAssignedMany ) {
 			generatePath_BindingExpectedOneAssignedMany((BindingExpectedOneAssignedMany) p);				
-		
+		} else if ( p instanceof BindingWithResolvedByIncompatibleRule ) {
+			generatePath_BindingWithResolvedByIncompatibleRule((BindingWithResolvedByIncompatibleRule) p);
+				
 		} else if ( p instanceof FeatureNotFound ) {
 			generatePath_FeatureNotFound((FeatureNotFound) p);
 		} else if ( p instanceof OperationNotFound ) {
@@ -253,6 +258,20 @@ public class ErrorPathGenerator {
 		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
 
 		ProblemNode node = new BindingExpectedOneAssignedManyNode(p, atlBinding);
+		graph.linkProblemToNode(p, node);
+		
+		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
+		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
+		RuleAnn rule = (RuleAnn) op.eContainer();
+		pathToRule(rule, node);	
+		
+		pathToBinding(atlBinding, b, node);
+	}
+	
+	private void generatePath_BindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule p) {
+		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
+
+		ProblemNode node = new BindingWithResolvedByIncompatibleRuleNode(p, atlBinding);
 		graph.linkProblemToNode(p, node);
 		
 		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());

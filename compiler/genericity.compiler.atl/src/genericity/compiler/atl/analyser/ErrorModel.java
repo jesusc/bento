@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.OCL.EnumLiteralExp;
@@ -35,6 +36,7 @@ import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.Recovery;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
@@ -45,6 +47,7 @@ import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollection
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
 import bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass;
 import bento.analysis.atl_analysis.atl_recovery.TentativeTypeAssigned;
@@ -276,6 +279,37 @@ public class ErrorModel {
 		signalWarning("Flatten over non-nested collection", node);
 	}
 
+
+	public void signalBindingWithResolvedByIncompatibleRule(Binding b, EClass rightType, EClass targetType,
+			List<MatchedRule> problematicRules, List<EClass> targetClasses) {
+		
+		BindingWithResolvedByIncompatibleRule error = AtlErrorsFactory.eINSTANCE.createBindingWithResolvedByIncompatibleRule();
+		initProblem(error, b);
+
+		error.setRightType(rightType);
+		error.setTargetType(targetType);
+		error.setFeatureName(b.getPropertyName());
+		// error.setFeature(); // TODO: Set the EStructuralFeature
+		
+		int i = 0;
+		for (MatchedRule r : problematicRules) {
+			ResolvedRuleInfo rinfo = AtlErrorsFactory.eINSTANCE.createResolvedRuleInfo();
+			rinfo.setLocation(r.getLocation());
+			rinfo.setElement(r.original_());
+			rinfo.setRuleName(r.getName());
+			rinfo.setOutputType(targetClasses.get(i));
+			i++;
+			error.getRules().add(rinfo);
+		}
+		
+		String s = "Binding may be resolved by rule with invalid target type. " + b.getLocation() + "\n";
+		for (ResolvedRuleInfo rinfo : error.getRules()) {
+			s += "\t" + rinfo.getRuleName() + " " + rinfo.getLocation() + "\n";
+		}
+		
+		signalWarning(s, b);
+		
+	}
 	// End-of binding problems
 	
 	public void signalNoEnumLiteral(String name, LocatedElement node) {
@@ -317,6 +351,7 @@ public class ErrorModel {
 	public void signalExpectedCollectionInForEachOutputPattern(ForEachOutPatternElement e) {
 		signalWarning("Expected collection in ForEach output pattern element", e);
 	}
+
 
 
 

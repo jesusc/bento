@@ -12,6 +12,7 @@ import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +51,7 @@ public abstract class BaseTest {
 	private EPackage	metamodelPkg;
 	private Analyser	analyser;
 	private ErrorSlice	slice;
+	private String	atlTransformationFile;
 
 	public void typing(String atlTransformationFile, Object[] metamodels, String[] names) throws IOException {
 		typing(atlTransformationFile, metamodels, names, false);
@@ -57,7 +59,7 @@ public abstract class BaseTest {
 	
 	public void typing(String atlTransformationFile, Object[] metamodels, String[] names, boolean doDependencyAnalysis) throws IOException {
 		EMFLoader loader = new EMFLoader(new JavaListConverter(), rs);
-		
+		this.atlTransformationFile = atlTransformationFile;
 		// BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, BOUND_METAMODEL);
 
 		atlTransformation = loader
@@ -99,13 +101,20 @@ public abstract class BaseTest {
 		new GraphvizGenerator(dependencyGraph).visualize("tmp_/output.dot");
 	}	
 	
-	protected void generateCSP() {
-		if ( slice == null )
-			throw new IllegalStateException("Error slice should be computed before generating CSP");
-		
+	protected void generateCSP() throws IOException {
+		//if ( slice == null )
+		//	throw new IllegalStateException("Error slice should be computed before generating CSP");
+				
 		String s = new CSPGenerator(dependencyGraph, slice).generate();
-		if ( ! s.trim().isEmpty() )
-			System.out.println(s);
+		if ( ! s.trim().isEmpty() ) {
+			
+			FileWriter fw = new FileWriter("tmp_/errors.txt", true);
+			fw.write(atlTransformationFile + "\n");
+			fw.write(s);
+			fw.write("#########################################\n\n");
+			fw.close();
+			// System.out.println(s);
+		}
 	}
 	
 	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri) throws IOException {

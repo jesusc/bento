@@ -69,6 +69,9 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.DIFFERENT_BRANCH_TYPES: return createDifferentBranchTypes();
 			case AtlErrorsPackage.NO_BINDING_FOR_COMPULSORY_FEATURE: return createNoBindingForCompulsoryFeature();
 			case AtlErrorsPackage.BINDING_EXPECTED_ONE_ASSIGNED_MANY: return createBindingExpectedOneAssignedMany();
+			case AtlErrorsPackage.BINDING_WITHOUT_RULE: return createBindingWithoutRule();
+			case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE: return createBindingWithResolvedByIncompatibleRule();
+			case AtlErrorsPackage.RESOLVED_RULE_INFO: return createResolvedRuleInfo();
 			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: return createFlattenOverNonNestedCollection();
 			case AtlErrorsPackage.ITERATOR_OVER_EMPTY_SEQUENCE: return createIteratorOverEmptySequence();
 			default:
@@ -164,6 +167,36 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public BindingExpectedOneAssignedMany createBindingExpectedOneAssignedMany() {
 		BindingExpectedOneAssignedManyImpl bindingExpectedOneAssignedMany = new BindingExpectedOneAssignedManyImpl();
 		return bindingExpectedOneAssignedMany;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingWithoutRule createBindingWithoutRule() {
+		BindingWithoutRuleImpl bindingWithoutRule = new BindingWithoutRuleImpl();
+		return bindingWithoutRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingWithResolvedByIncompatibleRule createBindingWithResolvedByIncompatibleRule() {
+		BindingWithResolvedByIncompatibleRuleImpl bindingWithResolvedByIncompatibleRule = new BindingWithResolvedByIncompatibleRuleImpl();
+		return bindingWithResolvedByIncompatibleRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResolvedRuleInfo createResolvedRuleInfo() {
+		ResolvedRuleInfoImpl resolvedRuleInfo = new ResolvedRuleInfoImpl();
+		return resolvedRuleInfo;
 	}
 
 	/**

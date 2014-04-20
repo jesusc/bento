@@ -98,17 +98,21 @@ public class MatchedRuleExecution extends AbstractDependencyNode {
 		if ( rule instanceof MatchedRuleOneAnn ) metaclass = ((MatchedRuleOneAnn) rule).getInPatternType();
 		else {
 			metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(0);
-			throw new UnsupportedOperationException();
+		}
+
+		if ( rule instanceof MatchedRuleManyAnn ) {
+			for(int i = 1; i < ((MatchedRuleManyAnn) rule).getInPatternTypes().size(); i++) {
+				metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(i);
+				varDcl    = atlRule.getInPattern().getElements().get(i);
+
+				String s = metaclass.getName() + ".allInstances()"; 
+				buf.generateLoop(s, "exists", varDcl.getVarName());
+			}
 		}
 
 		String s = metaclass.getName() + ".allInstances()"; 
 		
-		boolean withExists = true;
-		
-		String depStr = "";
 		if ( rule.getFilter() != null ) {
-
-			
 			buf.generateLoop(s, "exists", varDcl.getVarName());
 			this.getConstraint().getCSPText(buf);
 			// buf.generateIf(rule.getFilter(), true);

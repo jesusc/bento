@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 
+import atl.metamodel.ATLModel;
 import atl.metamodel.OCL.OclExpression;
 import bento.analyser.footprint.IEffectiveMetamodelData;
 
@@ -28,8 +29,8 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 	private HashSet<EClass> explicitTypes = new HashSet<EClass>();
 	private HashSet<EStructuralFeature> explicitFeatures = new HashSet<EStructuralFeature>();
 
-	private HashMap<String, java.util.List<ContextHelperAnn>> helpers = 
-			new HashMap<String, java.util.List<ContextHelperAnn>>();
+	private HashMap<String, java.util.Set<ContextHelperAnn>> helpers = 
+			new HashMap<String, java.util.Set<ContextHelperAnn>>();
 	
 	
 	private Analyser	analyser;
@@ -49,6 +50,10 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 		return analyser.getTyping();
 	}
 
+	public ATLModel getATLModel() {
+		return analyser.getATLModel();
+	}
+	
 	public void addExplicitFeature(EStructuralFeature f ) {
 		explicitFeatures.add(f);
 	}
@@ -63,20 +68,16 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 		return Collections.unmodifiableSet(this.explicitFeatures);
 	}
 
-	public void addHelper(ContextHelperAnn contextHelperAnn) {
+	public boolean addHelper(ContextHelperAnn contextHelperAnn) {
 		String ctxTypeName = TypeUtils.getTypeName(contextHelperAnn.getContextType());
 		
 		if ( ! helpers.containsKey(ctxTypeName) ) {
-			helpers.put(ctxTypeName, new ArrayList<ContextHelperAnn>());
+			helpers.put(ctxTypeName, new HashSet<ContextHelperAnn>());
 		}
 		
-		helpers.get(ctxTypeName).add(contextHelperAnn);		
+		return helpers.get(ctxTypeName).add(contextHelperAnn);		
 	}
 	
-	public HashMap<String, java.util.List<ContextHelperAnn>> getHelpers() {
-		return helpers;
-	}
-
 	/**
 	 * The implementation of this method generates helpers in USE format.
 	 */

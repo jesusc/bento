@@ -24,18 +24,13 @@ public class CSPGenerator {
 			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
 			s += generateCSP(node);
 			s += "\n\n";
-			System.out.println(s);
-			s = "";
+			// System.out.println(s);
 		}
 		return s;
 	}
 
 	private String generateCSP(DependencyNode errorNode) {
 		CSPBuffer buf = new CSPBuffer();
-		
-		for(String typeName : slice.getHelpers().keySet()) {
-			
-		}
 		
 		errorNode.getCSPText(buf);
 		

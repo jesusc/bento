@@ -32,6 +32,7 @@ public class EcoreTypeConverter {
 	}
 
 	public Type convert(EStructuralFeature f, IMetamodelNamespace mspace) {
+		// System.out.println(f.getName());
 		Type t = convert(f.getEType(), mspace);
 		if ( f.isMany() ) {
 			return typ.newSequenceType(t);
@@ -59,9 +60,11 @@ public class EcoreTypeConverter {
 	}
 	
 	private Type convertEDataType(EDataType c) {
+		String instance = c.getInstanceClassName() == null ? "" : c.getInstanceClassName();
+		
 		if ( c instanceof EEnum ) {
 			return convertEEnum((EEnum) c);
-		} else if ( c.getName().endsWith("String") ) {
+		} else if ( c.getName().endsWith("String") || instance.equals("java.lang.String")) {
 			return typ.newStringType();
 		} else if ( c.getName().endsWith("Boolean") ) {
 			return typ.newBooleanType();

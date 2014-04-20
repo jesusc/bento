@@ -60,6 +60,22 @@
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoBindingForCompulsoryFeature"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingExpectedOneAssignedMany"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingWithoutRule"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule/rightType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule/targetType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule/rules"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/ResolvedRuleInfo">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/ResolvedRuleInfo/location"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/ResolvedRuleInfo/element"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/ResolvedRuleInfo/ruleName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/ResolvedRuleInfo/outputType"/>
+      </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FlattenOverNonNestedCollection"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/IteratorOverEmptySequence"/>
     </nestedGenPackages>

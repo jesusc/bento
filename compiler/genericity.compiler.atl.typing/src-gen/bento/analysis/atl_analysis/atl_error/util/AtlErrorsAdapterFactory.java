@@ -131,6 +131,18 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createBindingExpectedOneAssignedManyAdapter();
 			}
 			@Override
+			public Adapter caseBindingWithoutRule(BindingWithoutRule object) {
+				return createBindingWithoutRuleAdapter();
+			}
+			@Override
+			public Adapter caseBindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule object) {
+				return createBindingWithResolvedByIncompatibleRuleAdapter();
+			}
+			@Override
+			public Adapter caseResolvedRuleInfo(ResolvedRuleInfo object) {
+				return createResolvedRuleInfoAdapter();
+			}
+			@Override
 			public Adapter caseFlattenOverNonNestedCollection(FlattenOverNonNestedCollection object) {
 				return createFlattenOverNonNestedCollectionAdapter();
 			}
@@ -359,6 +371,48 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBindingExpectedOneAssignedManyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingWithoutRule <em>Binding Without Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithoutRule
+	 * @generated
+	 */
+	public Adapter createBindingWithoutRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule <em>Binding With Resolved By Incompatible Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule
+	 * @generated
+	 */
+	public Adapter createBindingWithResolvedByIncompatibleRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo <em>Resolved Rule Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo
+	 * @generated
+	 */
+	public Adapter createResolvedRuleInfoAdapter() {
 		return null;
 	}
 

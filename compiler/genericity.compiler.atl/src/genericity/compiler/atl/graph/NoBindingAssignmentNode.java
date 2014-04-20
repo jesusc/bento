@@ -36,7 +36,7 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 
 	@Override
 	public void getCSPText(CSPBuffer buf) {
-		throw new UnsupportedOperationException();
+		getDependency().getCSPText(buf);
 	}
 	
 }

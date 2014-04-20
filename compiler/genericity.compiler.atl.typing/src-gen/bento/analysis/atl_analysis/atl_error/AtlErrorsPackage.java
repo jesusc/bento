@@ -991,6 +991,234 @@ public interface AtlErrorsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl <em>Binding Without Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithoutRule()
+	 * @generated
+	 */
+	int BINDING_WITHOUT_RULE = 14;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE__DEPENDENTS = BINDING_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE__LOCATION = BINDING_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE__ELEMENT = BINDING_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE__RECOVERY = BINDING_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE__FEATURE = BINDING_PROBLEM__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE__FEATURE_NAME = BINDING_PROBLEM__FEATURE_NAME;
+
+	/**
+	 * The number of structural features of the '<em>Binding Without Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITHOUT_RULE_FEATURE_COUNT = BINDING_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithResolvedByIncompatibleRuleImpl <em>Binding With Resolved By Incompatible Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.BindingWithResolvedByIncompatibleRuleImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithResolvedByIncompatibleRule()
+	 * @generated
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__DEPENDENTS = BINDING_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__LOCATION = BINDING_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__ELEMENT = BINDING_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RECOVERY = BINDING_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__FEATURE = BINDING_PROBLEM__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__FEATURE_NAME = BINDING_PROBLEM__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Right Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RIGHT_TYPE = BINDING_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__TARGET_TYPE = BINDING_PROBLEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RULES = BINDING_PROBLEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Binding With Resolved By Incompatible Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE_FEATURE_COUNT = BINDING_PROBLEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl <em>Resolved Rule Info</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getResolvedRuleInfo()
+	 * @generated
+	 */
+	int RESOLVED_RULE_INFO = 16;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO__LOCATION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO__ELEMENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO__RULE_NAME = 2;
+
+	/**
+	 * The feature id for the '<em><b>Output Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO__OUTPUT_TYPE = 3;
+
+	/**
+	 * The number of structural features of the '<em>Resolved Rule Info</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.FlattenOverNonNestedCollectionImpl <em>Flatten Over Non Nested Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -998,7 +1226,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFlattenOverNonNestedCollection()
 	 * @generated
 	 */
-	int FLATTEN_OVER_NON_NESTED_COLLECTION = 14;
+	int FLATTEN_OVER_NON_NESTED_COLLECTION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1054,7 +1282,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorOverEmptySequence()
 	 * @generated
 	 */
-	int ITERATOR_OVER_EMPTY_SEQUENCE = 15;
+	int ITERATOR_OVER_EMPTY_SEQUENCE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1419,6 +1647,113 @@ public interface AtlErrorsPackage extends EPackage {
 	EClass getBindingExpectedOneAssignedMany();
 
 	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.BindingWithoutRule <em>Binding Without Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Binding Without Rule</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithoutRule
+	 * @generated
+	 */
+	EClass getBindingWithoutRule();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule <em>Binding With Resolved By Incompatible Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Binding With Resolved By Incompatible Rule</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule
+	 * @generated
+	 */
+	EClass getBindingWithResolvedByIncompatibleRule();
+
+	/**
+	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule#getRightType <em>Right Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Right Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule#getRightType()
+	 * @see #getBindingWithResolvedByIncompatibleRule()
+	 * @generated
+	 */
+	EReference getBindingWithResolvedByIncompatibleRule_RightType();
+
+	/**
+	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule#getTargetType <em>Target Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule#getTargetType()
+	 * @see #getBindingWithResolvedByIncompatibleRule()
+	 * @generated
+	 */
+	EReference getBindingWithResolvedByIncompatibleRule_TargetType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule#getRules <em>Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Rules</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule#getRules()
+	 * @see #getBindingWithResolvedByIncompatibleRule()
+	 * @generated
+	 */
+	EReference getBindingWithResolvedByIncompatibleRule_Rules();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo <em>Resolved Rule Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Resolved Rule Info</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo
+	 * @generated
+	 */
+	EClass getResolvedRuleInfo();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getLocation()
+	 * @see #getResolvedRuleInfo()
+	 * @generated
+	 */
+	EAttribute getResolvedRuleInfo_Location();
+
+	/**
+	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getElement <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Element</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getElement()
+	 * @see #getResolvedRuleInfo()
+	 * @generated
+	 */
+	EReference getResolvedRuleInfo_Element();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getRuleName <em>Rule Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rule Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getRuleName()
+	 * @see #getResolvedRuleInfo()
+	 * @generated
+	 */
+	EAttribute getResolvedRuleInfo_RuleName();
+
+	/**
+	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getOutputType <em>Output Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Output Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getOutputType()
+	 * @see #getResolvedRuleInfo()
+	 * @generated
+	 */
+	EReference getResolvedRuleInfo_OutputType();
+
+	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection <em>Flatten Over Non Nested Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1727,6 +2062,92 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BINDING_EXPECTED_ONE_ASSIGNED_MANY = eINSTANCE.getBindingExpectedOneAssignedMany();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl <em>Binding Without Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithoutRule()
+		 * @generated
+		 */
+		EClass BINDING_WITHOUT_RULE = eINSTANCE.getBindingWithoutRule();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithResolvedByIncompatibleRuleImpl <em>Binding With Resolved By Incompatible Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.BindingWithResolvedByIncompatibleRuleImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithResolvedByIncompatibleRule()
+		 * @generated
+		 */
+		EClass BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE = eINSTANCE.getBindingWithResolvedByIncompatibleRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RIGHT_TYPE = eINSTANCE.getBindingWithResolvedByIncompatibleRule_RightType();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__TARGET_TYPE = eINSTANCE.getBindingWithResolvedByIncompatibleRule_TargetType();
+
+		/**
+		 * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RULES = eINSTANCE.getBindingWithResolvedByIncompatibleRule_Rules();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl <em>Resolved Rule Info</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getResolvedRuleInfo()
+		 * @generated
+		 */
+		EClass RESOLVED_RULE_INFO = eINSTANCE.getResolvedRuleInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOLVED_RULE_INFO__LOCATION = eINSTANCE.getResolvedRuleInfo_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESOLVED_RULE_INFO__ELEMENT = eINSTANCE.getResolvedRuleInfo_Element();
+
+		/**
+		 * The meta object literal for the '<em><b>Rule Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOLVED_RULE_INFO__RULE_NAME = eINSTANCE.getResolvedRuleInfo_RuleName();
+
+		/**
+		 * The meta object literal for the '<em><b>Output Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESOLVED_RULE_INFO__OUTPUT_TYPE = eINSTANCE.getResolvedRuleInfo_OutputType();
 
 		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.FlattenOverNonNestedCollectionImpl <em>Flatten Over Non Nested Collection</em>}' class.

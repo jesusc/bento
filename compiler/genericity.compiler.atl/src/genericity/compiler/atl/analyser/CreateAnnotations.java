@@ -224,7 +224,23 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			ann.setFilter( attr.<ExpressionAnnotation> annotationOf(self.getInPattern().getFilter()) ); 
 		}
 		
-		
+		// Replicated in inMatchedRule	
+		for (OutPatternElement ope : self.getOutPattern().getElements()) {
+			OutputPatternAnn customOP = typ.createOutputPattern( ope, attr.typeOf(ope.getType()) );
+			List<Binding> bindings = ope.getBindings();
+			for (Binding binding : bindings) {
+				customOP.getBindings().add( (BindingAnn) attr.annotationOf(binding) );
+			}
+			
+			ann.getOutputPatterns().add(customOP);
+		}
+	}
+	
+	@Override
+	public void inLazyMatchedRule(LazyMatchedRule self) {
+		LazyRuleAnn ann = attr.annotationOf(self);
+
+		// Replicated from inMatchedRule
 		for (OutPatternElement ope : self.getOutPattern().getElements()) {
 			OutputPatternAnn customOP = typ.createOutputPattern( ope, attr.typeOf(ope.getType()) );
 			List<Binding> bindings = ope.getBindings();

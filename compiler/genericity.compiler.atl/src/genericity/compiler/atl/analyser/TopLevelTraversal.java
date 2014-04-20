@@ -109,8 +109,11 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 		if ( self.getIsEndpoint() || self.getIsEntrypoint() )
 			return;
 
-		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
-		mm.getTransformationNamespace().extendType(self.getName(), t, self);
+		// Some called rules just feature a do { } block
+		if ( self.getOutPattern() != null ) {
+			Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
+			mm.getTransformationNamespace().extendType(self.getName(), t, self);
+		}
 	}
 
 	@Override

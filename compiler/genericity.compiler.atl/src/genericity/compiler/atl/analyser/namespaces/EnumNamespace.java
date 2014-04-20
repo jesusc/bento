@@ -8,7 +8,7 @@ import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Operation;
 
-public class EnumNamespace implements ITypeNamespace {
+public class EnumNamespace extends AbstractTypeNamespace {
 
 	private EnumType	enumType;
 
@@ -23,7 +23,10 @@ public class EnumNamespace implements ITypeNamespace {
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
-		throw new UnsupportedOperationException();
+		Type t = super.getOperationType(operationName, arguments, node);
+		if ( t != null ) 
+			return t;
+		throw new UnsupportedOperationException(node.getLocation());
 	}
 
 	public Operation getAttachedOperation(String operationName) {
@@ -37,10 +40,10 @@ public class EnumNamespace implements ITypeNamespace {
 	
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
-		if ( operatorSymbol.equals("=") ) {
+		if ( operatorSymbol.equals("=") || operatorSymbol.equals("<>") ) {
 			return AnalyserContext.getTypingModel().newBooleanType();
 		}
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException(node.getLocation());
 	}
 
 	@Override

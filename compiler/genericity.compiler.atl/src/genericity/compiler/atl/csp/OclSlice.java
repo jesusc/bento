@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.OCL.CollectionExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IteratorExp;
@@ -35,46 +36,60 @@ public class OclSlice {
 		ignore.add(atl.metamodel.OCL.BooleanExpImpl.class);
 		
 	}
-	
+
 	public static void slice(ErrorSlice slice, OclExpression expr) {
+		slice(slice, expr, false);
+	}
+	
+	public static void slice(ErrorSlice slice, OclExpression expr, boolean isExternalDependency) {
 		ExpressionAnnotation exprAnn = addExprType(slice, expr); 
 
 		if ( expr instanceof PropertyCallExp ) {
 			PropertyCallExp pc = (PropertyCallExp) expr;
-			slice(slice, pc.getSource());
+			slice(slice, pc.getSource(), isExternalDependency);
 		}
 		
 		if ( expr instanceof NavigationOrAttributeCallExp ) {
-			slice.addExplicitFeature((EStructuralFeature) exprAnn.getUsedFeature());
+			EStructuralFeature f = (EStructuralFeature) exprAnn.getUsedFeature();
+			if ( f != null )
+				slice.addExplicitFeature(f);
 		} else if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr; 
-			slice(slice, it.getBody());
+			slice(slice, it.getBody(), isExternalDependency);
 		} else if ( expr instanceof OperationCallExp ) {
 			OperationCallExp op = (OperationCallExp) expr;
 			for(OclExpression arg : op.getArguments()) {
-				slice(slice, arg);
+				slice(slice, arg, isExternalDependency);
 			}
 
 			CallExprAnn ann = (CallExprAnn) slice.getTypingModel().getAnnotation(op.original_());
 			if ( ! ann.isIsStaticCall() ) {
 				EList<ContextHelperAnn> resolvers = ann.getDynamicResolvers();
 				for (ContextHelperAnn contextHelperAnn : resolvers) {
-					slice.addHelper(contextHelperAnn);
-				}
-				
+					if ( slice.addHelper(contextHelperAnn) ) {
+						OclExpression body = (OclExpression) slice.getATLModel().findWrapper(contextHelperAnn.getExpr().getExpr());
+						slice(slice, body, true);
+					}
+				}	
 			} else {
-				System.out.println("OclSlice - OperationCall not generating static call");
+				// System.out.println("OclSlice - OperationCall not generating static call");
 			}
 			
 		} else if ( expr instanceof CollectionExp ) {
 			for(OclExpression arg : ((CollectionExp) expr).getElements()) {
-				slice(slice, arg);
+				slice(slice, arg, isExternalDependency);
 			}			
 		} else if ( expr instanceof IfExp ) {
 			IfExp ifExp = (IfExp) expr;
-			slice(slice, ifExp.getCondition());
-			// Not the branches!!! because the corresponding branch should be done by the
-			// corresponding node in the condition graph
+			slice(slice, ifExp.getCondition(), isExternalDependency);
+			
+			if ( isExternalDependency ) {
+				slice(slice, ifExp.getThenExpression(), isExternalDependency);
+				slice(slice, ifExp.getElseExpression(), isExternalDependency);
+			} else {				
+				// Not the branches!!! because the corresponding branch should be done by the
+				// corresponding node in the condition graph
+			}
 			// slice(slice, ifExp)
 		} else if ( ignore.contains(expr.getClass()) ) {
 			// Ignore

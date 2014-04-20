@@ -208,6 +208,32 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.BINDING_WITHOUT_RULE: {
+				BindingWithoutRule bindingWithoutRule = (BindingWithoutRule)theEObject;
+				T result = caseBindingWithoutRule(bindingWithoutRule);
+				if (result == null) result = caseBindingProblem(bindingWithoutRule);
+				if (result == null) result = caseLocalProblem(bindingWithoutRule);
+				if (result == null) result = caseProblem(bindingWithoutRule);
+				if (result == null) result = caseAnalysisInfo(bindingWithoutRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE: {
+				BindingWithResolvedByIncompatibleRule bindingWithResolvedByIncompatibleRule = (BindingWithResolvedByIncompatibleRule)theEObject;
+				T result = caseBindingWithResolvedByIncompatibleRule(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = caseBindingProblem(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = caseLocalProblem(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = caseProblem(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = caseAnalysisInfo(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.RESOLVED_RULE_INFO: {
+				ResolvedRuleInfo resolvedRuleInfo = (ResolvedRuleInfo)theEObject;
+				T result = caseResolvedRuleInfo(resolvedRuleInfo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: {
 				FlattenOverNonNestedCollection flattenOverNonNestedCollection = (FlattenOverNonNestedCollection)theEObject;
 				T result = caseFlattenOverNonNestedCollection(flattenOverNonNestedCollection);
@@ -437,6 +463,51 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Without Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Without Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingWithoutRule(BindingWithoutRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding With Resolved By Incompatible Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding With Resolved By Incompatible Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resolved Rule Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resolved Rule Info</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResolvedRuleInfo(ResolvedRuleInfo object) {
 		return null;
 	}
 

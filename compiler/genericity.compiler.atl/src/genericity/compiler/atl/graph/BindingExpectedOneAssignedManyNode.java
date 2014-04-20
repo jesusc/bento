@@ -60,7 +60,7 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 	public void getCSPText(CSPBuffer buf) {
 		getDependency().getCSPText(buf);
 		
-		buf.generateIf(binding.getValue(), "->size() > 0", true);
+		buf.generateIf(binding.getValue(), "->size() > 1", true);
 		
 		// CSPBuffer buf2 = new CSPBuffer();
 		getConstraint().getCSPText(buf);

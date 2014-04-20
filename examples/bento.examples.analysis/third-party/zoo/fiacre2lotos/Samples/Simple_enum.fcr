@@ -1,0 +1,1 @@
+type test is enum a, b, c end

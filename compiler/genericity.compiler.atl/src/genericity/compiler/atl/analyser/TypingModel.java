@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.lang.model.type.ErrorType;
+
 import genericity.compiler.atl.analyser.namespaces.BooleanNamespace;
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
@@ -718,6 +720,7 @@ public class TypingModel {
 				pending.addAll( ((UnionType) t).getPossibleTypes());
 			} else if ( t instanceof PrimitiveType || t instanceof EnumType || t instanceof OclUndefinedType ) { 
 				// ignore
+			} else if ( t instanceof TypeError ) {
 			} else {
 				throw new UnsupportedOperationException(t.getClass().getName());
 			}

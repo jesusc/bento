@@ -73,6 +73,25 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NoBindingForCompulsoryFeature" eSuperTypes="#//atl_error/TargetModelConformanceProblem #//atl_error/BindingProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="BindingExpectedOneAssignedMany" eSuperTypes="#//atl_error/BindingProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingWithoutRule" eSuperTypes="#//atl_error/BindingProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingWithResolvedByIncompatibleRule"
+        eSuperTypes="#//atl_error/BindingProblem">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rightType" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="targetType" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+          eType="#//atl_error/ResolvedRuleInfo" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ResolvedRuleInfo">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="ruleName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FlattenOverNonNestedCollection" eSuperTypes="#//atl_error/LocalProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="IteratorOverEmptySequence" eSuperTypes="#//atl_error/LocalProblem"/>
   </eSubpackages>

@@ -1,0 +1,78 @@
+-- @path UML=/bento.examples.analysis/tests/ase/running/UML2_3_0_0.ecore
+-- @path Intalio=/bento.examples.analysis/tests/ase/running/bpmn.ecore
+
+-- Error: potentially invalid target in binding
+-- Error: missing rule for object flow
+-- Error: Sequence(Sequence) in binding assignment
+
+
+
+module UML2Intalio;
+create OUT : Intalio from IN : UML;
+
+--helpersi
+
+helper context UML!Activity def : allPartitions : OclAny = 
+	self.partition->collect(p | p.allPartitions)->flatten();
+
+helper context UML!ActivityPartition def : allPartitions :  Sequence(UML!ActivityPartition) = 
+	self.subpartition->collect(p | p.allPartition)->flatten();
+
+-- rules
+
+rule activity2diagram {
+	from
+		a : UML!Activity
+	to
+		m : Intalio!BpmnDiagram (
+			name <- a.name,
+			pools <- pool
+		), 
+		pool : Intalio!Pool (
+			lanes <- a.allPartitions,
+			sequenceEdges <- a.edge->select(e | e.oclIsKindOf(UML!ControlFlow))->
+				collect(e | thisModule.controlflow(e) ), 
+			vertices  <- a.partition->collect(p | p.node)
+		)
+}
+
+-- Unused rule
+--rule partition2pool {
+--	from p: UML!ActivityPartition (
+--		p.superPartition <> OclUndefined
+--	)
+--	to pool : Intalio!Pool (
+--		name <- p.name,
+--		sequenceEdges <- p.edge,
+--		vertices      <- p.node
+--	)
+--}
+
+lazy rule controlflow {
+	from 
+		cf : UML!ControlFlow
+	to
+		b : Intalio!SequenceEdge (
+			name <- if cf.name.oclIsUndefined() then cf.seqName else cf.name endif,
+			source <- cf.source,
+			target <- cf.target		
+		)
+}
+
+rule initialnode {
+	from
+		initial : UML!InitialNode
+	to 
+		activity : Intalio!Activity (
+			name <- initial.name.concat('-initial')
+			-- activityType <- #EventStartEmpty
+		)
+}
+
+rule objectnode {
+	from obj : UML!ObjectNode
+	to   art : Intalio!Artifact 
+}
+
+-- Lanes are not transformed
+

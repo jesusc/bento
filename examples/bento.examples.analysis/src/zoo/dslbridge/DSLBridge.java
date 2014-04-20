@@ -34,21 +34,21 @@ public class DSLBridge extends BaseTest {
 		typing(DSL2XML_TRANSFORMATION, new Object[] { DSL_METAMODEL, XML_METAMODEL}, 
 				   new String[] { "DSL", "XML" }, true);
 		generateCSP();
-		/*
+		
 		//
 		
 		typing(KM32DSL_TRANSFORMATION, new Object[] { KM3_METAMODEL, DSL_METAMODEL }, 
 				   new String[] { "KM3", "DSL" });
 		
 		System.out.println("Finished typing of " + KM32DSL_TRANSFORMATION);
-
+		
 		//
 		
 		typing(XML2DSL_TRANSFORMATION, new Object[] { XML_METAMODEL, DSL_METAMODEL }, 
 				   new String[] { "XML", "DSL" });
 		
 		System.out.println("Finished typing of " + XML2DSL_TRANSFORMATION);
-		*/
+		
 		
 	}
 

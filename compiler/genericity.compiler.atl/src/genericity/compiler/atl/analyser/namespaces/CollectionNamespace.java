@@ -88,7 +88,7 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 			return typ.newIntegerType();
 		}
 		
-		if ( operationName.equals("append") || operationName.equals("including") ) {
+		if ( operationName.equals("append") || operationName.equals("including") || operationName.equals("prepend") ) {
 			CollectionType r = newCollectionType(typ.getCommonType(this.nested, arguments[0]));
 			return r;
 		}

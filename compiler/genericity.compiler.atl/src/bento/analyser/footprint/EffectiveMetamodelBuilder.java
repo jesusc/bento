@@ -159,8 +159,8 @@ public class EffectiveMetamodelBuilder {
 			// Not sure why proxies are not resolved...
 			if ( superType.eIsProxy() ) {
 				
-				System.out.println( ((InternalEObject) superType).eProxyURI() );
-				System.out.println("Proxy not resolved: MetamodelPrunner");
+				// System.out.println( ((InternalEObject) superType).eProxyURI() );
+				// System.out.println("Proxy not resolved: EffectiveMetamodelBuilder");
 				continue;
 			}
 			

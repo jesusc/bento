@@ -1,5 +1,6 @@
 package genericity.compiler.atl.analyser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -21,6 +22,7 @@ import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import atl.metamodel.ATLModel;
@@ -163,6 +165,9 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	}
 
 	private void analyseBinding(Binding self, Type rightType, Type targetVar, EStructuralFeature f) {
+		if ( rightType instanceof TypeError )
+			return;
+		
 		// Assignments of 0/1:1 features with collections
 		if ( (! f.isMany()) && rightType instanceof CollectionType  ) {
 			errors.signalBindingExpectedOneAssignedMany(self, (Metaclass) targetVar, self.getPropertyName());
@@ -215,6 +220,7 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 				System.err.println("!!!!! WARNING!!! No rule for binding.  " + f.getEContainingClass().getName() + "." + f.getName() + " <- " + TypeUtils.typeToString(rightType) + ". " + self.getLocation());
 			} else {
 				findPossibleUnresolvedClasses(rightMetaclass, rules);				
+				findRulesWithWrongTargetType(self, rightMetaclass, f.getEReferenceType(), rules);
 			}
 		} else if ( rightType instanceof CollectionType ) {
 			CollectionType ct = (CollectionType) rightType;
@@ -224,6 +230,24 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 			for(Type t : ut.getPossibleTypes() ) {
 				analyseRuleResolution(self, t, f);
 			}
+		}
+	}
+
+	private void findRulesWithWrongTargetType(Binding b, Metaclass rightType, EClass targetType, List<MatchedRule> resolvingRules) {
+		ArrayList<MatchedRule> problematicRules = new ArrayList<MatchedRule>();
+		ArrayList<EClass> targetClasses = new ArrayList<EClass>();
+		
+		for (MatchedRule matchedRule : resolvingRules) {
+			Metaclass m = (Metaclass) attr.typeOf( matchedRule.getOutPattern().getElements().get(0) );
+			if ( ! TypeUtils.isClassAssignableTo(m.getKlass(), targetType)  ) {
+				problematicRules.add(matchedRule);
+				targetClasses.add(m.getKlass());
+				// System.err.println("Problem in rule " + matchedRule.getName() + " " + m.getName() + " - " + targetType.getName() + "/" + TypeUtils.typeToString(rightType) + "." + b.getLocation() + " " + matchedRule.getLocation());
+			}
+		}
+		
+		if ( problematicRules.size() > 0 ) {
+			errors.signalBindingWithResolvedByIncompatibleRule(b, rightType.getKlass(), targetType, problematicRules, targetClasses);
 		}
 	}
 

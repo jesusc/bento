@@ -12,6 +12,8 @@ import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 import bento.analysis.atl_analysis.atl_error.BindingProblem;
+import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
+import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
@@ -26,6 +28,7 @@ import bento.analysis.atl_analysis.atl_error.NavigationProblem;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_error.TargetModelConformanceProblem;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage;
 import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryPackageImpl;
@@ -143,6 +146,27 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass bindingExpectedOneAssignedManyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingWithoutRuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingWithResolvedByIncompatibleRuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass resolvedRuleInfoEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -505,6 +529,96 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBindingWithoutRule() {
+		return bindingWithoutRuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBindingWithResolvedByIncompatibleRule() {
+		return bindingWithResolvedByIncompatibleRuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingWithResolvedByIncompatibleRule_RightType() {
+		return (EReference)bindingWithResolvedByIncompatibleRuleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingWithResolvedByIncompatibleRule_TargetType() {
+		return (EReference)bindingWithResolvedByIncompatibleRuleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingWithResolvedByIncompatibleRule_Rules() {
+		return (EReference)bindingWithResolvedByIncompatibleRuleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getResolvedRuleInfo() {
+		return resolvedRuleInfoEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getResolvedRuleInfo_Location() {
+		return (EAttribute)resolvedRuleInfoEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getResolvedRuleInfo_Element() {
+		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getResolvedRuleInfo_RuleName() {
+		return (EAttribute)resolvedRuleInfoEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getResolvedRuleInfo_OutputType() {
+		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFlattenOverNonNestedCollection() {
 		return flattenOverNonNestedCollectionEClass;
 	}
@@ -590,6 +704,19 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		bindingExpectedOneAssignedManyEClass = createEClass(BINDING_EXPECTED_ONE_ASSIGNED_MANY);
 
+		bindingWithoutRuleEClass = createEClass(BINDING_WITHOUT_RULE);
+
+		bindingWithResolvedByIncompatibleRuleEClass = createEClass(BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE);
+		createEReference(bindingWithResolvedByIncompatibleRuleEClass, BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RIGHT_TYPE);
+		createEReference(bindingWithResolvedByIncompatibleRuleEClass, BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__TARGET_TYPE);
+		createEReference(bindingWithResolvedByIncompatibleRuleEClass, BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RULES);
+
+		resolvedRuleInfoEClass = createEClass(RESOLVED_RULE_INFO);
+		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__LOCATION);
+		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__ELEMENT);
+		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__RULE_NAME);
+		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__OUTPUT_TYPE);
+
 		flattenOverNonNestedCollectionEClass = createEClass(FLATTEN_OVER_NON_NESTED_COLLECTION);
 
 		iteratorOverEmptySequenceEClass = createEClass(ITERATOR_OVER_EMPTY_SEQUENCE);
@@ -642,6 +769,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		noBindingForCompulsoryFeatureEClass.getESuperTypes().add(this.getTargetModelConformanceProblem());
 		noBindingForCompulsoryFeatureEClass.getESuperTypes().add(this.getBindingProblem());
 		bindingExpectedOneAssignedManyEClass.getESuperTypes().add(this.getBindingProblem());
+		bindingWithoutRuleEClass.getESuperTypes().add(this.getBindingProblem());
+		bindingWithResolvedByIncompatibleRuleEClass.getESuperTypes().add(this.getBindingProblem());
 		flattenOverNonNestedCollectionEClass.getESuperTypes().add(this.getLocalProblem());
 		iteratorOverEmptySequenceEClass.getESuperTypes().add(this.getLocalProblem());
 
@@ -689,6 +818,19 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEClass(noBindingForCompulsoryFeatureEClass, NoBindingForCompulsoryFeature.class, "NoBindingForCompulsoryFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(bindingExpectedOneAssignedManyEClass, BindingExpectedOneAssignedMany.class, "BindingExpectedOneAssignedMany", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(bindingWithoutRuleEClass, BindingWithoutRule.class, "BindingWithoutRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(bindingWithResolvedByIncompatibleRuleEClass, BindingWithResolvedByIncompatibleRule.class, "BindingWithResolvedByIncompatibleRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBindingWithResolvedByIncompatibleRule_RightType(), ecorePackage.getEClass(), null, "rightType", null, 1, 1, BindingWithResolvedByIncompatibleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingWithResolvedByIncompatibleRule_TargetType(), ecorePackage.getEClass(), null, "targetType", null, 1, 1, BindingWithResolvedByIncompatibleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingWithResolvedByIncompatibleRule_Rules(), this.getResolvedRuleInfo(), null, "rules", null, 0, -1, BindingWithResolvedByIncompatibleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(resolvedRuleInfoEClass, ResolvedRuleInfo.class, "ResolvedRuleInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getResolvedRuleInfo_Location(), ecorePackage.getEString(), "location", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResolvedRuleInfo_Element(), ecorePackage.getEObject(), null, "element", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResolvedRuleInfo_RuleName(), ecorePackage.getEString(), "ruleName", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResolvedRuleInfo_OutputType(), ecorePackage.getEClass(), null, "outputType", null, 0, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(flattenOverNonNestedCollectionEClass, FlattenOverNonNestedCollection.class, "FlattenOverNonNestedCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

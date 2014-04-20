@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     FIACRE/FIACRE2LOTOS
+     
+     jouault                                                                
+     ====================================================================== -->
+<project name="FIACRE2LOTOS" default="main">
+	
+	<eclipse.convertPath resourcepath="/FIACRE" property="fiacre.absolute.dir"/>
+
+	<target name="main">
+		<antcall target="transform" inheritall="true" inheritrefs="true">
+			<param name="sample" value="/FIACRE/Samples/Simple_array.fcr"/>
+		</antcall>
+		<antcall target="transform" inheritall="true" inheritrefs="true">
+			<param name="sample" value="/FIACRE/Samples/Simple_enum.fcr"/>
+		</antcall>
+		<antcall target="transform" inheritall="true" inheritrefs="true">
+			<param name="sample" value="/FIACRE/Samples/Simple_interval.fcr"/>
+		</antcall>
+		<antcall target="transform" inheritall="true" inheritrefs="true">
+			<param name="sample" value="/FIACRE/Samples/Simple_record.fcr"/>
+		</antcall>
+	</target>
+
+	<target name="transform" depends="loadModels">
+		<basename property="sample.name" file="${sample}" suffix=".fcr"/>
+		<dirname property="sample.dir" file="${sample}"/>
+		
+		<property name="fiacre.path" value="${sample}"/>
+		<property name="lotos.path" value="${sample.dir}/${sample.name}.lotos"/>
+			
+		<am3.loadModel modelHandler="EMF" name="myFIACRE" metamodel="FIACRE" path="${fiacre.path}">
+			<injector name="ebnf">
+				<param name="name" value="FIACRE"/>
+				<classpath>
+						<!-- location must be relative !! -->
+					<pathelement location="${fiacre.absolute.dir}/Syntax/FIACRE-parser.jar"/>
+				</classpath>
+			</injector>
+		</am3.loadModel>
+		
+		<!-- Transform FIACRE model into LOTOS model -->
+		<am3.atl path="/FIACRE/Compiler/FIACRE2LOTOS.atl">
+			<inModel name="IN" model="myFIACRE"/>
+			<inModel name="FIACRE" model="FIACRE"/>
+			<inModel name="LOTOS" model="LOTOS"/>
+			<outModel name="OUT" model="myLOTOS" metamodel="LOTOS"/>
+		</am3.atl>
+
+		<!-- Serialize LOTOS model into .lotos file -->
+		<am3.saveModel model="myLOTOS" path="${lotos.path}">
+			<extractor name="ebnf">
+				<param name="format" value="LOTOS.tcs"/>
+				<param name="stringDelim" value="&quot;"/>
+				<param name="serializeComments" value="true"/>
+				<param name="indentString" value="&#9;"/>
+			</extractor>
+		</am3.saveModel>
+	</target>
+	
+	<target name="loadModels">
+		<!-- Load FIACRE metamodel -->
+		<am3.loadModel modelHandler="EMF" name="FIACRE" metamodel="MOF" path="/FIACRE/Metamodel/FIACRE.ecore"/>
+
+		<!-- Load LOTOS metamodel -->
+		<am3.loadModel modelHandler="EMF" name="LOTOS" metamodel="MOF" path="/LOTOS/Metamodel/LOTOS.ecore" />		
+
+		<!-- Load TCS metamodel -->
+		<am3.loadModel modelHandler="EMF" name="TCS" metamodel="MOF" path="/AMMACore/TCS/Metamodel/TCS.ecore" />		
+
+		<!-- Load LOTOS model for TCS -->
+		<am3.loadModel modelHandler="EMF" name="LOTOS.tcs" metamodel="TCS" path="/LOTOS/Syntax/LOTOS.tcs">
+			<injector name="ebnf">
+				<param name="name" value="TCS"/>
+			</injector>
+		</am3.loadModel>
+	</target>	
+</project>

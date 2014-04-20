@@ -20,6 +20,7 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 			if ( operationName.equals("toInteger")) return AnalyserContext.getTypingModel().newIntegerType();
 			if ( operationName.equals("toReal")) return AnalyserContext.getTypingModel().newFloatType();
 			if ( operationName.equals("concat")) return AnalyserContext.getTypingModel().newStringType(); // TODO: Check concat's arguments
+			if ( operationName.equals("startsWith")) return AnalyserContext.getTypingModel().newBooleanType(); // TODO: Check startsWith arguments
 
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 		}

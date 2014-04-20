@@ -32,12 +32,10 @@ public class Book2Publication extends BaseTest {
 		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL }, 
 				   new String[] { SOURCE_METAMODEL_NAME, TARGET_METAMODEL_NAME });
 
-		System.out.println("Finished typing of " + ATL_TRANSFORMATION);
-
+		//
+		
 		typing(XML_TRANSFORMATION, new Object[] { XML_METAMODEL, SOURCE_METAMODEL }, 
 				   new String[] { "XML", SOURCE_METAMODEL_NAME });
-
-		System.out.println("Finished typing of " + XML_TRANSFORMATION);
 
 	}
 

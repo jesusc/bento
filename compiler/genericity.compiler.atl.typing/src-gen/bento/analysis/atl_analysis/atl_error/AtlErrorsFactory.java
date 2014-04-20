@@ -107,6 +107,33 @@ public interface AtlErrorsFactory extends EFactory {
 	BindingExpectedOneAssignedMany createBindingExpectedOneAssignedMany();
 
 	/**
+	 * Returns a new object of class '<em>Binding Without Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binding Without Rule</em>'.
+	 * @generated
+	 */
+	BindingWithoutRule createBindingWithoutRule();
+
+	/**
+	 * Returns a new object of class '<em>Binding With Resolved By Incompatible Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binding With Resolved By Incompatible Rule</em>'.
+	 * @generated
+	 */
+	BindingWithResolvedByIncompatibleRule createBindingWithResolvedByIncompatibleRule();
+
+	/**
+	 * Returns a new object of class '<em>Resolved Rule Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resolved Rule Info</em>'.
+	 * @generated
+	 */
+	ResolvedRuleInfo createResolvedRuleInfo();
+
+	/**
 	 * Returns a new object of class '<em>Flatten Over Non Nested Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

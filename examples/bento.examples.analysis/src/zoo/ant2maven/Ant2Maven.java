@@ -43,6 +43,7 @@ public class Ant2Maven extends BaseTest {
 	}
 	
 	public void run() throws IOException {
+		
 		typing(XML2ANT, new Object[] { XML_ANT, SOURCE_METAMODEL }, 
 				   new String[] { "XML", "Ant" }, true);
 
@@ -51,27 +52,27 @@ public class Ant2Maven extends BaseTest {
 		generateCSP(); 
 		generateEffectiveMetamodel("XML", XML2ANT_SRC_EFFECTIVE);
 		
+		/*
 		// 
 		
-		/*
 		
 		typing(ATL_TRANSFORMATION, new Object[] { SOURCE_METAMODEL, TARGET_METAMODEL, TARGET_METAMODEL2 }, 
 								   new String[] { "Ant", "MavenMaven", "MavenProject" }, true);
-		
-		generateCSP();
+
 		generateErrorSlice("Ant", ANT2MAVEN_ERROR_SLICE);
 		generateEffectiveMetamodel("Ant", ANT2MAVEN_SRC_EFFECTIVE);
-		
+		generateCSP();
+
 		//
 		
 		typing(MAVEN2XML, new Object[] { MAVEN_PROJECT, MAVEN_MAVEN, XML_PROJECT, XML_MAVEN }, 
 				   new String[] { "MavenProject", "MavenMaven", "XMLProject", "XMLMaven" }, true);
 		
-		generateCSP();
 		generateErrorSlice("MavenMaven", MAVEN2XML_ERROR_SLICE);
 		generateEffectiveMetamodel("MavenMaven", MAVEN2XML_SRC1_EFFECTIVE);
-	
+		generateCSP();
 		*/
+		
 	}
 
 
