@@ -417,6 +417,13 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			errors.signalNoRecoverableError("resolveTemp expects two arguments", self);
 		}
 
+		if ( ! (self.getArguments().get(1) instanceof StringExp ) ) {
+			System.out.println("Cannot deal with resolveTemp with second argument not being string: " + self.getLocation());
+			// attr.linkExprType(typ.newUnknownType());
+			attr.linkExprType(typ.newTypeErrorType(null));
+			return;
+		}
+		
 		OclExpression resolvedObj = self.getArguments().get(0);
 		String expectedVarName = ((StringExp) self.getArguments().get(1)).getStringSymbol();
 		String compatibleRules  = "";

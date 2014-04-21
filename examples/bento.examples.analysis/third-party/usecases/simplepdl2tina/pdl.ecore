@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pdl"
+    nsURI="http://pdl" nsPrefix="pdl">
+  <eClassifiers xsi:type="ecore:EClass" name="WorkDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guidances" upperBound="-1"
+        eType="#//Guidance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkToSuccessor" upperBound="-1"
+        eType="#//WorkSequence" eOpposite="#//WorkSequence/predecessor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkToPredecessor" upperBound="-1"
+        eType="#//WorkSequence" eOpposite="#//WorkSequence/successor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="temps_min" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="temps_max" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/workDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Process">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guidances" upperBound="-1"
+        eType="#//Guidance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workDefinitions" upperBound="-1"
+        eType="#//WorkDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workSequences" upperBound="-1"
+        eType="#//WorkSequence" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Ressources" upperBound="-1"
+        eType="#//Ressource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="temps_min" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="temps_max" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkSequence">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkType" lowerBound="1"
+        eType="#//WorkSequenceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predecessor" lowerBound="1"
+        eType="#//WorkDefinition" eOpposite="#//WorkDefinition/linkToSuccessor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="successor" lowerBound="1"
+        eType="#//WorkDefinition" eOpposite="#//WorkDefinition/linkToPredecessor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Guidance">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="WorkSequenceType">
+    <eLiterals name="startToStart"/>
+    <eLiterals name="startToFinish" value="1"/>
+    <eLiterals name="finishToStart" value="2"/>
+    <eLiterals name="finishToFinish" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ressource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbOccurence" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ressource" lowerBound="1"
+        eType="#//Ressource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workDefinition" lowerBound="1"
+        eType="#//WorkDefinition" eOpposite="#//WorkDefinition/parameters"/>
+  </eClassifiers>
+</ecore:EPackage>

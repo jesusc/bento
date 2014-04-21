@@ -12,6 +12,7 @@
 
 # Binaries
 */bin/*
+*/bin/
 */eclectic-gen/*
 *.asm
 

@@ -1,0 +1,15 @@
+-- Creation : 		03/10/06
+-- Auteur : 		IRIT/LAAS labs
+-- Contact : 		Benoit Combemale <bcombema at n7.fr>
+-- Description : 	Generate one invariant example for
+--						transformation consistency verification 
+
+query invariants = 
+--	# all WorkDefinition must be exclusively in one of the 
+--	# {notStarted, in_progress, finished} states:
+	pdl!WorkDefinition.allInstances()
+		->iterate(wd; acc : String ='' | acc + 
+		'[] (' + wd.name + '_notStarted + ' 
+		+ wd.name + '_finished + ' 
+		+ wd.name + '_inProgress = 1);\n')
+		.writeTo('/tmp/invariants.ltl');

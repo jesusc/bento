@@ -1,0 +1,50 @@
+-- Creation : 		03/10/06
+-- Author : 		IRIT/LAAS labs
+-- Contact : 		Benoit Combemale <bcombema at n7.fr>
+-- Description : 	PetriNet (Model) to Tina (Text) transformation
+query PetriNet2Tina = 
+	PetriNet!PetriNet.allInstances()->asSequence()->first()
+		.generatePetriNet().writeTo('/tmp/MyCompleteProcess.net');
+
+helper
+context PetriNet!PetriNet
+def : generatePetriNet() : String =
+	'net generatedPNFromTinaModelBE\n'
+	  + self.nodes->select(pl | pl.oclIsTypeOf(PetriNet!Place))
+	  		->iterate(pl; accPL : String ='' | accPL + pl.generatePlace()) + '\n'
+	  + self.nodes->select(pl | pl.oclIsTypeOf(PetriNet!Transition))
+	  		->iterate(tr; accTR : String ='' | accTR + tr.generateTransition()) + '\n'
+	;
+
+helper
+context PetriNet!Place
+def : generatePlace() : String = 
+		'pl ' + self.name 
+		+ if (self.nbJetons<>0) 
+			then ( '(' + self.nbJetons.toString() + ')\n' ) 
+			else '\n' 
+		  endif ;
+	
+helper
+context PetriNet!Transition
+def : generateTransition() : String = 'tr ' + self.name
+	+ '[' + if (self.temps_min <> (0-1)) 
+					then self.temps_min.toString()
+					else 'w'
+				endif
+	+ ',' + if (self.temps_max <> (0-1))
+					then self.temps_max.toString()+'] '
+					else 'w[ '
+	  			endif
+	+ PetriNet!Arc.allInstances()->select(a | a.cible = self)
+		->iterate(a; acc : String ='' | acc + a.source.name
+	+ if a.kind = #read_arc 
+			then '?' 
+			else '*'
+		endif
+		+ a.nbJetons.toString() + ' ' )
+	+ ' -> '
+	+ PetriNet!Arc.allInstances()->select(a | a.source = self)
+		->iterate(a; acc : String ='' | acc + a.cible.name
+		+ '*' + a.nbJetons.toString() + ' ' )
+	+ '\n';

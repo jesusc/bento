@@ -1,0 +1,31 @@
+-- Creation : 		03/10/06
+-- Auteur : 		IRIT/LAAS Labs
+--	Contact : 		Benoit Combemale <bcombema at n7.fr>
+-- Description : 	Generate the terminaison invariant and properties for this study 
+--						(does exist a correct execution?)
+--						without and with the temporal observer
+query finished = 
+
+--	# without temporal observer
+	'op finished = T'.concat(
+	pdl!WorkDefinition.allInstances()
+		->iterate(wd; acc : String='' | acc.concat(' /\\ ' + wd.name + '_finished')) + ';\n\n'	
+--		# properties :
+		+ '[] (finished => dead);\n'
+		+ '[] (dead => finished);\n'
+		+ '[] <> dead ;\n'
+	
+		+ '- <> finished;\n\n'
+		
+--	# with the temporal observer (temporal good states study)
+	+ 'op statesearly = F'.concat(pdl!WorkDefinition.allInstances()
+		->iterate(wd; acc : String='' | acc.concat(' \\/ ' + wd.name + '_tooEarly')) + ';\n'
+	+ 'op stateslate = F'.concat(pdl!WorkDefinition.allInstances()
+		->iterate(wd; acc : String='' | acc.concat(' \\/ ' + wd.name + '_tooLate')) + ';\n'
+	+ 'op badstates = (statesearly \\/ stateslate);\n'
+	+ 'op goodstates = -  badstates;\n\n'
+--		# properties :
+		+ '- <> (dead /\\ finished /\\  goodstates);'
+	
+--	# save in file :
+	))).writeTo('/tmp/finished.ltl');
