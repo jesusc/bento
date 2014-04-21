@@ -12,6 +12,7 @@ import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 
 public abstract class CollectionNamespace extends AbstractTypeNamespace implements ITypeNamespace {
@@ -197,5 +198,9 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");
 	}
 
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
+		throw new UnsupportedOperationException();
+	}
 
 }

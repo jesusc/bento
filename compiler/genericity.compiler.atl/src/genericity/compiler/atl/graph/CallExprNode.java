@@ -66,7 +66,7 @@ public class CallExprNode extends AbstractDependencyNode {
 		this.getDependency().getCSPText(buf);
 		// TODO: Add parameters
 		
-		buf.generateCallContext(start.getSource(), ann.getStaticResolver() != null);
+		buf.generateCallContext(start, ann.getStaticResolver() != null, ann.getStaticResolver());
 	}
 	
 }

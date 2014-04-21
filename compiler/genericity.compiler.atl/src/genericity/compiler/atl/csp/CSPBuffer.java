@@ -1,12 +1,16 @@
 package genericity.compiler.atl.csp;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import atl.metamodel.OCL.OclExpression;
+import atl.metamodel.OCL.OperationCallExp;
+import atl.metamodel.OCL.PropertyCallExp;
 import genericity.compiler.atl.csp.CSPBuffer.GenerationCommand;
 import genericity.compiler.atl.csp.CSPBuffer.IfCommand;
 import genericity.compiler.atl.graph.DependencyNode;
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 
 public class CSPBuffer {
 
@@ -49,8 +53,8 @@ public class CSPBuffer {
 		setLastCommand(command);
 	}
 
-	public void generateCallContext(OclExpression receptor, boolean isThisModuleCall) {
-		CallContext command = new CallContext(receptor, isThisModuleCall);
+	public void generateCallContext(PropertyCallExp call, boolean isThisModuleCall, ModuleCallableAnn moduleCallableAnn) {
+		CallContext command = new CallContext(call, isThisModuleCall, moduleCallableAnn);
 		setLastCommand(command);
 	}
 
@@ -179,16 +183,26 @@ public class CSPBuffer {
 	public static class CallContext extends GenerationCommand {
 		private OclExpression receptor;
 		private boolean	isThisModuleCall;
+		private ModuleCallableAnn	moduleCallableAnn;
+		private PropertyCallExp	call;
 
-		public CallContext(OclExpression receptor, boolean isThisModuleCall) {
-			this.receptor = receptor;
+		public CallContext(PropertyCallExp call, boolean isThisModuleCall, ModuleCallableAnn moduleCallableAnn) {
+			this.call = call;
+			this.receptor = call.getSource();
 			this.isThisModuleCall = isThisModuleCall;
+			this.moduleCallableAnn = moduleCallableAnn;
 		}
 		
 		@Override
 		public String getText(int tab) {
 			if ( isThisModuleCall ) {
-				return nested.getText(tab + 1);
+				String argBinding = "";
+				for(int i = 0; i < moduleCallableAnn.getArguments().size(); i++) {
+					String varName = moduleCallableAnn.getNames().get(i);
+					OclExpression formalParameter = ((OperationCallExp) call).getArguments().get(i);
+					argBinding += t(tab) + "let " + varName + " = " + OclGenerator.gen(formalParameter) + " in\n";
+				}
+				return argBinding + nested.getText(tab + 1);
 			} else {
 				String genVar = "_x_";
 				nested.prepareSelf(genVar);

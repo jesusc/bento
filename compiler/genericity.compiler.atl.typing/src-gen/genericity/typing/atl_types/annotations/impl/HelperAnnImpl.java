@@ -37,11 +37,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getCalledBy <em>Called By</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getNames <em>Names</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getHelper <em>Helper</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getArguments <em>Arguments</em>}</li>
- *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getNames <em>Names</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getExpr <em>Expr</em>}</li>
  * </ul>
  * </p>
@@ -58,6 +58,26 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * @ordered
 	 */
 	protected EList<CallExprAnn> calledBy;
+
+	/**
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> arguments;
+
+	/**
+	 * The cached value of the '{@link #getNames() <em>Names</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNames()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> names;
 
 	/**
 	 * The cached value of the '{@link #getHelper() <em>Helper</em>}' reference.
@@ -98,26 +118,6 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * @ordered
 	 */
 	protected Type returnType;
-
-	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Type> arguments;
-
-	/**
-	 * The cached value of the '{@link #getNames() <em>Names</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNames()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> names;
 
 	/**
 	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
@@ -365,6 +365,10 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 		switch (featureID) {
 			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
 				return getCalledBy();
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				return getArguments();
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				return getNames();
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				if (resolve) return getHelper();
 				return basicGetHelper();
@@ -373,10 +377,6 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				if (resolve) return getReturnType();
 				return basicGetReturnType();
-			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
-				return getArguments();
-			case AnnotationsPackage.HELPER_ANN__NAMES:
-				return getNames();
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				return getExpr();
 		}
@@ -396,6 +396,14 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				getCalledBy().clear();
 				getCalledBy().addAll((Collection<? extends CallExprAnn>)newValue);
 				return;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				getArguments().clear();
+				getArguments().addAll((Collection<? extends Type>)newValue);
+				return;
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				getNames().clear();
+				getNames().addAll((Collection<? extends String>)newValue);
+				return;
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				setHelper((EObject)newValue);
 				return;
@@ -404,14 +412,6 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				return;
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				setReturnType((Type)newValue);
-				return;
-			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
-				getArguments().clear();
-				getArguments().addAll((Collection<? extends Type>)newValue);
-				return;
-			case AnnotationsPackage.HELPER_ANN__NAMES:
-				getNames().clear();
-				getNames().addAll((Collection<? extends String>)newValue);
 				return;
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				setExpr((ExpressionAnnotation)newValue);
@@ -431,6 +431,12 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
 				getCalledBy().clear();
 				return;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				getArguments().clear();
+				return;
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				getNames().clear();
+				return;
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				setHelper((EObject)null);
 				return;
@@ -439,12 +445,6 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				return;
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				setReturnType((Type)null);
-				return;
-			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
-				getArguments().clear();
-				return;
-			case AnnotationsPackage.HELPER_ANN__NAMES:
-				getNames().clear();
 				return;
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				setExpr((ExpressionAnnotation)null);
@@ -463,16 +463,16 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 		switch (featureID) {
 			case AnnotationsPackage.HELPER_ANN__CALLED_BY:
 				return calledBy != null && !calledBy.isEmpty();
+			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
+				return arguments != null && !arguments.isEmpty();
+			case AnnotationsPackage.HELPER_ANN__NAMES:
+				return names != null && !names.isEmpty();
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				return helper != null;
 			case AnnotationsPackage.HELPER_ANN__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case AnnotationsPackage.HELPER_ANN__RETURN_TYPE:
 				return returnType != null;
-			case AnnotationsPackage.HELPER_ANN__ARGUMENTS:
-				return arguments != null && !arguments.isEmpty();
-			case AnnotationsPackage.HELPER_ANN__NAMES:
-				return names != null && !names.isEmpty();
 			case AnnotationsPackage.HELPER_ANN__EXPR:
 				return expr != null;
 		}
@@ -489,6 +489,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 		if (baseClass == ModuleCallableAnn.class) {
 			switch (derivedFeatureID) {
 				case AnnotationsPackage.HELPER_ANN__CALLED_BY: return AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY;
+				case AnnotationsPackage.HELPER_ANN__ARGUMENTS: return AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENTS;
+				case AnnotationsPackage.HELPER_ANN__NAMES: return AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES;
 				default: return -1;
 			}
 		}
@@ -505,6 +507,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 		if (baseClass == ModuleCallableAnn.class) {
 			switch (baseFeatureID) {
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY: return AnnotationsPackage.HELPER_ANN__CALLED_BY;
+				case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENTS: return AnnotationsPackage.HELPER_ANN__ARGUMENTS;
+				case AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES: return AnnotationsPackage.HELPER_ANN__NAMES;
 				default: return -1;
 			}
 		}
@@ -521,10 +525,10 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", names: ");
+		result.append(" (names: ");
 		result.append(names);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

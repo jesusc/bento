@@ -6,6 +6,7 @@ import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 
 public class EnumNamespace extends AbstractTypeNamespace {
@@ -73,6 +74,11 @@ public class EnumNamespace extends AbstractTypeNamespace {
 
 	@Override
 	public Type createType(boolean explicitOcurrence) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
 		throw new UnsupportedOperationException();
 	}
 

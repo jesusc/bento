@@ -117,7 +117,7 @@ public class ErrorPathGenerator {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
 		graph.linkProblemToNode(p, node);
-		
+		System.out.println(p);
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);
 	}
@@ -127,7 +127,6 @@ public class ErrorPathGenerator {
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
 		graph.linkProblemToNode(p, node);
 		
-		System.out.println(p.getLocation());
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);		
 	}

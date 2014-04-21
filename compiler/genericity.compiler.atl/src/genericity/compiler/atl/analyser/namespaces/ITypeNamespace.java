@@ -4,6 +4,7 @@ import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 
 public interface ITypeNamespace {
@@ -21,6 +22,9 @@ public interface ITypeNamespace {
 	
 	boolean   hasAttachedOperation(String operationName);
 	Operation getAttachedOperation(String operationName);
+	
+	OclFeature getAttachedOclFeature(String attributeOrOperationName);
+	
 	
 	Type createType(boolean explicitOcurrence);
 

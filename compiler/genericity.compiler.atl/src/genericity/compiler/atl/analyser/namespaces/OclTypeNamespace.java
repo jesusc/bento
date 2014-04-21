@@ -3,6 +3,7 @@ package genericity.compiler.atl.analyser.namespaces;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 import genericity.compiler.atl.analyser.TypingModel;
 import genericity.typing.atl_types.Type;
@@ -68,6 +69,11 @@ public class OclTypeNamespace implements ITypeNamespace {
 
 	@Override
 	public void extendType(String ruleName, Type returnType, Rule rule) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
 		throw new UnsupportedOperationException();
 	}
 

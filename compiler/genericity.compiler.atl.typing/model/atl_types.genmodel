@@ -113,14 +113,14 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/HelperAnn/name"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnn/returnType"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnn/arguments"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/HelperAnn/names"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/HelperAnn/expr"/>
       </genClasses>
       <genClasses image="false" ecoreClass="atl_types.ecore#//annotations/ModuleCallableAnn">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ModuleCallableAnn/calledBy"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ModuleCallableAnn/arguments"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/ModuleCallableAnn/names"/>
       </genClasses>
       <genClasses ecoreClass="atl_types.ecore#//annotations/ModuleHelperAnn"/>
       <genClasses ecoreClass="atl_types.ecore#//annotations/ContextHelperAnn">

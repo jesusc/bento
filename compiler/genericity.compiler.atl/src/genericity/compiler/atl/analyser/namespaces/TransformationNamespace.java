@@ -11,6 +11,7 @@ import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 
 public class TransformationNamespace implements ITypeNamespace {
@@ -122,4 +123,12 @@ public class TransformationNamespace implements ITypeNamespace {
 		throw new UnsupportedOperationException("No symbol " + operatorSymbol + " supported");
 	}
 
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
+		VirtualFeature<?, ? extends OclFeature> vf = operations.get(attributeOrOperationName);
+		if ( vf == null ) {
+			vf = features.get(attributeOrOperationName);
+		}
+		return vf == null ? null : vf.definition;
+	}
 }

@@ -83,7 +83,7 @@ public class OclGenerator {
 			return receptor + "->" + call.getOperationName() + "(" + genArgs(call.getArguments(), vars )+ ")";
 		} else if (expr instanceof OperationCallExp) {
 			OperationCallExp call = (OperationCallExp) expr;
-			return receptor + "." + call.getOperationName() + "(" + genArgs(call.getArguments(), vars )+ ")";
+			return receptor + "." + translateName(call) + "(" + genArgs(call.getArguments(), vars )+ ")";
 		} else if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr;
 			// TODO: Include type if available??
@@ -96,6 +96,12 @@ public class OclGenerator {
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}
+	}
+
+	private static String translateName(OperationCallExp call) {
+		String name = call.getOperationName();
+		if ( name.equals("oclIsUndefined") ) return "isUndefined";
+		return name;
 	}
 
 	private static String genArgs(List<OclExpression> arguments, Map<String, String> vars) {

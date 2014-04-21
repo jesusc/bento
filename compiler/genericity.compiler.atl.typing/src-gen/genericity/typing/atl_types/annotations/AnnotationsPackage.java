@@ -445,13 +445,31 @@ public interface AnnotationsPackage extends EPackage {
 	int IMPERATIVE_RULE_ANN__CALLED_BY = RULE_ANN_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_RULE_ANN__ARGUMENTS = RULE_ANN_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_RULE_ANN__NAMES = RULE_ANN_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Imperative Rule Ann</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_RULE_ANN_FEATURE_COUNT = RULE_ANN_FEATURE_COUNT + 1;
+	int IMPERATIVE_RULE_ANN_FEATURE_COUNT = RULE_ANN_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.LazyRuleAnnImpl <em>Lazy Rule Ann</em>}' class.
@@ -498,6 +516,24 @@ public interface AnnotationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int LAZY_RULE_ANN__CALLED_BY = IMPERATIVE_RULE_ANN__CALLED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAZY_RULE_ANN__ARGUMENTS = IMPERATIVE_RULE_ANN__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAZY_RULE_ANN__NAMES = IMPERATIVE_RULE_ANN__NAMES;
 
 	/**
 	 * The feature id for the '<em><b>In Pattern Type</b></em>' reference.
@@ -571,6 +607,24 @@ public interface AnnotationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALLED_RULE_ANN__CALLED_BY = IMPERATIVE_RULE_ANN__CALLED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALLED_RULE_ANN__ARGUMENTS = IMPERATIVE_RULE_ANN__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALLED_RULE_ANN__NAMES = IMPERATIVE_RULE_ANN__NAMES;
 
 	/**
 	 * The number of structural features of the '<em>Called Rule Ann</em>' class.
@@ -674,40 +728,13 @@ public interface AnnotationsPackage extends EPackage {
 	int HELPER_ANN__CALLED_BY = ATL_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER_ANN__HELPER = ATL_ANNOTATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER_ANN__NAME = ATL_ANNOTATION_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER_ANN__RETURN_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__ARGUMENTS = ATL_ANNOTATION_FEATURE_COUNT + 4;
+	int HELPER_ANN__ARGUMENTS = ATL_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Names</b></em>' attribute list.
@@ -716,7 +743,34 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_ANN__NAMES = ATL_ANNOTATION_FEATURE_COUNT + 5;
+	int HELPER_ANN__NAMES = ATL_ANNOTATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Helper</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_ANN__HELPER = ATL_ANNOTATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_ANN__NAME = ATL_ANNOTATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Return Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER_ANN__RETURN_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -756,13 +810,31 @@ public interface AnnotationsPackage extends EPackage {
 	int MODULE_CALLABLE_ANN__CALLED_BY = ATL_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CALLABLE_ANN__ARGUMENTS = ATL_ANNOTATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_CALLABLE_ANN__NAMES = ATL_ANNOTATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Module Callable Ann</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_CALLABLE_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 1;
+	int MODULE_CALLABLE_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ModuleHelperAnnImpl <em>Module Helper Ann</em>}' class.
@@ -782,6 +854,24 @@ public interface AnnotationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODULE_HELPER_ANN__CALLED_BY = HELPER_ANN__CALLED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_HELPER_ANN__ARGUMENTS = HELPER_ANN__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_HELPER_ANN__NAMES = HELPER_ANN__NAMES;
 
 	/**
 	 * The feature id for the '<em><b>Helper</b></em>' reference.
@@ -809,24 +899,6 @@ public interface AnnotationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODULE_HELPER_ANN__RETURN_TYPE = HELPER_ANN__RETURN_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE_HELPER_ANN__ARGUMENTS = HELPER_ANN__ARGUMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Names</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE_HELPER_ANN__NAMES = HELPER_ANN__NAMES;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -866,6 +938,24 @@ public interface AnnotationsPackage extends EPackage {
 	int CONTEXT_HELPER_ANN__CALLED_BY = HELPER_ANN__CALLED_BY;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXT_HELPER_ANN__ARGUMENTS = HELPER_ANN__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXT_HELPER_ANN__NAMES = HELPER_ANN__NAMES;
+
+	/**
 	 * The feature id for the '<em><b>Helper</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -891,24 +981,6 @@ public interface AnnotationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTEXT_HELPER_ANN__RETURN_TYPE = HELPER_ANN__RETURN_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_HELPER_ANN__ARGUMENTS = HELPER_ANN__ARGUMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Names</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_HELPER_ANN__NAMES = HELPER_ANN__NAMES;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -2163,28 +2235,6 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getHelperAnn_ReturnType();
 
 	/**
-	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.HelperAnn#getArguments <em>Arguments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Arguments</em>'.
-	 * @see genericity.typing.atl_types.annotations.HelperAnn#getArguments()
-	 * @see #getHelperAnn()
-	 * @generated
-	 */
-	EReference getHelperAnn_Arguments();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link genericity.typing.atl_types.annotations.HelperAnn#getNames <em>Names</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Names</em>'.
-	 * @see genericity.typing.atl_types.annotations.HelperAnn#getNames()
-	 * @see #getHelperAnn()
-	 * @generated
-	 */
-	EAttribute getHelperAnn_Names();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.annotations.HelperAnn#getExpr <em>Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2215,6 +2265,28 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModuleCallableAnn_CalledBy();
+
+	/**
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Arguments</em>'.
+	 * @see genericity.typing.atl_types.annotations.ModuleCallableAnn#getArguments()
+	 * @see #getModuleCallableAnn()
+	 * @generated
+	 */
+	EReference getModuleCallableAnn_Arguments();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getNames <em>Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Names</em>'.
+	 * @see genericity.typing.atl_types.annotations.ModuleCallableAnn#getNames()
+	 * @see #getModuleCallableAnn()
+	 * @generated
+	 */
+	EAttribute getModuleCallableAnn_Names();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.ModuleHelperAnn <em>Module Helper Ann</em>}'.
@@ -2990,22 +3062,6 @@ public interface AnnotationsPackage extends EPackage {
 		EReference HELPER_ANN__RETURN_TYPE = eINSTANCE.getHelperAnn_ReturnType();
 
 		/**
-		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference HELPER_ANN__ARGUMENTS = eINSTANCE.getHelperAnn_Arguments();
-
-		/**
-		 * The meta object literal for the '<em><b>Names</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute HELPER_ANN__NAMES = eINSTANCE.getHelperAnn_Names();
-
-		/**
 		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3030,6 +3086,22 @@ public interface AnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODULE_CALLABLE_ANN__CALLED_BY = eINSTANCE.getModuleCallableAnn_CalledBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODULE_CALLABLE_ANN__ARGUMENTS = eINSTANCE.getModuleCallableAnn_Arguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE_CALLABLE_ANN__NAMES = eINSTANCE.getModuleCallableAnn_Names();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.ModuleHelperAnnImpl <em>Module Helper Ann</em>}' class.

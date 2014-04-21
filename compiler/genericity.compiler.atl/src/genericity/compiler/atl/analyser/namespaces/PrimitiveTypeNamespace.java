@@ -6,6 +6,7 @@ import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 
 public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace implements ITypeNamespace {
@@ -44,6 +45,15 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 		return operations.containsKey(operationName);
 	}
 	
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
+		VirtualFeature<?, ? extends OclFeature> vf = operations.get(attributeOrOperationName);
+		if ( vf == null ) {
+			vf = features.get(attributeOrOperationName);
+		}
+		return vf == null ? null : vf.definition;
+	}
+
 
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {

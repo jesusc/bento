@@ -10,6 +10,7 @@ import genericity.typing.atl_types.TypeError;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 
 public class TypeErrorNamespace implements ITypeNamespace {
@@ -113,5 +114,9 @@ public class TypeErrorNamespace implements ITypeNamespace {
 		}
 	}
 	
-	
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
+		throw new UnsupportedOperationException();
+	}
+
 }

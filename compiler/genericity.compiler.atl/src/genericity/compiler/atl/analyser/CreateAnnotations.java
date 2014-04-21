@@ -52,6 +52,7 @@ import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.MapExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OclUndefinedExp;
 import atl.metamodel.OCL.Operation;
@@ -240,6 +241,10 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	public void inLazyMatchedRule(LazyMatchedRule self) {
 		LazyRuleAnn ann = attr.annotationOf(self);
 
+		InPatternElement inPatternElement = self.getInPattern().getElements().get(0);
+		ann.getNames().add(inPatternElement.getVarName());
+		ann.getArguments().add(attr.typeOf(inPatternElement));
+		
 		// Replicated from inMatchedRule
 		for (OutPatternElement ope : self.getOutPattern().getElements()) {
 			OutputPatternAnn customOP = typ.createOutputPattern( ope, attr.typeOf(ope.getType()) );
@@ -354,7 +359,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inNavigationOrAttributeCallExp(NavigationOrAttributeCallExp self) {
-		ExpressionAnnotation ann = annotationOperationCall(self, Collections.<OclExpression> emptyList());
+		CallExprAnn ann = annotationOperationCall(self, Collections.<OclExpression> emptyList());
 		
 		Type srcType = attr.typeOf(self.getSource());
 		ann.setReceptorType( srcType );
@@ -362,22 +367,31 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		if ( srcType instanceof Metaclass ) {
 			ClassNamespace cn = (ClassNamespace) srcType.getMetamodelRef();
 			EStructuralFeature f = cn.getFeatureInfo(self.getName());
-			ann.setUsedFeature(f);
+			if ( f != null  ) {
+				ann.setUsedFeature(f);
+			} else {
+				computeResolvers(self, ann, self.getName());				
+			}
 		} else if ( srcType instanceof UnionType ) {
 			System.err.println("TODO: How to deal with this in createannotations... setUsedFeature...");
 		}
+		
+		
 	}
 	
 	@Override
 	public void inOperationCallExp(OperationCallExp self) {
 		CallExprAnn ann = annotationOperationCall(self, self.getArguments());
-		
+		computeResolvers(self, ann, self.getOperationName());
+	}
+
+	private void computeResolvers(PropertyCallExp self, CallExprAnn ann, String featureOrOperationName) {
 		if ( ann.getSource().getType() instanceof Metaclass && !(self.getSource() instanceof OclModelElement) ) {
 			ClassNamespace cn = (ClassNamespace) ann.getSource().getType().getMetamodelRef();
-			if ( cn.hasAttachedOperation(self.getOperationName())) {
+			if ( cn.getAttachedOclFeature(featureOrOperationName) != null ) {
 			
 				//System.out.println(TypeUtils.typeToString(ann.getSource().getType()) + "." + self.getOperationName() + " - " + self.getLocation());
-				Operation op = cn.getAttachedOperation(self.getOperationName());
+				OclFeature op = cn.getAttachedOclFeature(featureOrOperationName);
 			
 				Helper h = op.container_().container(Helper.class);
 				ann.setStaticResolver( attr.<HelperAnn>annotationOf(h) );
@@ -385,8 +399,8 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			}
 			
 			for(ClassNamespace sub : cn.getAllSubclasses()) {
-				if ( sub.hasAttachedOperation(self.getOperationName()) ) {
-					Operation op = sub.getAttachedOperation(self.getOperationName());
+				if ( sub.getAttachedOclFeature(featureOrOperationName) != null ) {
+					OclFeature op =  sub.getAttachedOclFeature(featureOrOperationName);
 					Helper h = op.container_().container(Helper.class);
 					ann.getDynamicResolvers().add( attr.<ContextHelperAnn>annotationOf(h) ) ;					
 				}
@@ -395,18 +409,18 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		} else if ( ann.getSource().getType() instanceof ThisModuleType ) {
 			ann.setIsStaticCall(true);
 			TransformationNamespace tn = (TransformationNamespace) ann.getSource().getType().getMetamodelRef();
-			if ( tn.hasAttachedOperation(self.getOperationName()) ) {
-				Operation op = tn.getAttachedOperation(self.getOperationName());
+			if ( tn.getAttachedOclFeature(featureOrOperationName) != null ) {
+				OclFeature op = tn.getAttachedOclFeature(featureOrOperationName);
 				Helper h = op.container_().container(Helper.class);
 
 				ModuleCallableAnn x = attr.<ModuleCallableAnn>annotationOf(h);
 				ann.setStaticResolver( x );
-			} else if ( tn.hasLazyRule(self.getOperationName()) ) {
-				LazyMatchedRule r = tn.getLazyRule(self.getOperationName());
+			} else if ( tn.hasLazyRule(featureOrOperationName) ) {
+				LazyMatchedRule r = tn.getLazyRule(featureOrOperationName);
 				ModuleCallableAnn x = attr.<ModuleCallableAnn>annotationOf(r);
 				ann.setStaticResolver( x  );
-			} else if ( tn.hasCalledRule(self.getOperationName()) ) {
-				CalledRule r = tn.getCalledRule(self.getOperationName());
+			} else if ( tn.hasCalledRule(featureOrOperationName) ) {
+				CalledRule r = tn.getCalledRule(featureOrOperationName);
 				ModuleCallableAnn x = attr.<ModuleCallableAnn>annotationOf(r);
 				ann.setStaticResolver( x  );
 			}
@@ -430,6 +444,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 				getAnnotations( arguments ) );
 		
 		// System.out.println("Ann: " +  TypeUtils.typeToString(exprAnn.getType()) + " - " + self.getLocation());
+		
 		
 		attr.linkAnnotation(self,  exprAnn);		
 

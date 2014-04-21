@@ -189,15 +189,15 @@ package annotations {
 	attr String[1] name;
 	ref Type[1] returnType;
   	
-  	
-  	ref Type[*] arguments;
-  	attr String[*] names; // This is to facilitate OCL generation
-  	
   	val ExpressionAnnotation[1] expr;
   }
 
   abstract class ModuleCallableAnn extends AtlAnnotation {
      ref CallExprAnn[*]#staticResolver calledBy;
+ 
+ 	 ref Type[*] arguments;
+     attr String[*] names; // This is to facilitate OCL generation
+ 
   }
 
   class ModuleHelperAnn extends HelperAnn {

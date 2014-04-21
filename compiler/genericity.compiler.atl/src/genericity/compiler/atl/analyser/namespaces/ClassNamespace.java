@@ -20,6 +20,7 @@ import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
+import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.Operation;
 import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.ErrorModel;
@@ -180,6 +181,14 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return operations.containsKey(operationName);
 	}
 	
+	@Override
+	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
+		VirtualFeature<ClassNamespace, ? extends OclFeature> vf = operations.get(attributeOrOperationName);
+		if ( vf == null ) {
+			vf = features.get(attributeOrOperationName);
+		}
+		return vf == null ? null : vf.definition;
+	}
 	
 	protected Metaclass getType() {
 		if ( this.theType == null )

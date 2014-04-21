@@ -590,26 +590,8 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getHelperAnn_Arguments() {
-		return (EReference)helperAnnEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getHelperAnn_Names() {
-		return (EAttribute)helperAnnEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getHelperAnn_Expr() {
-		return (EReference)helperAnnEClass.getEStructuralFeatures().get(5);
+		return (EReference)helperAnnEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -628,6 +610,24 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 */
 	public EReference getModuleCallableAnn_CalledBy() {
 		return (EReference)moduleCallableAnnEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModuleCallableAnn_Arguments() {
+		return (EReference)moduleCallableAnnEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModuleCallableAnn_Names() {
+		return (EAttribute)moduleCallableAnnEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1104,12 +1104,12 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		createEReference(helperAnnEClass, HELPER_ANN__HELPER);
 		createEAttribute(helperAnnEClass, HELPER_ANN__NAME);
 		createEReference(helperAnnEClass, HELPER_ANN__RETURN_TYPE);
-		createEReference(helperAnnEClass, HELPER_ANN__ARGUMENTS);
-		createEAttribute(helperAnnEClass, HELPER_ANN__NAMES);
 		createEReference(helperAnnEClass, HELPER_ANN__EXPR);
 
 		moduleCallableAnnEClass = createEClass(MODULE_CALLABLE_ANN);
 		createEReference(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__CALLED_BY);
+		createEReference(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__ARGUMENTS);
+		createEAttribute(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__NAMES);
 
 		moduleHelperAnnEClass = createEClass(MODULE_HELPER_ANN);
 
@@ -1273,12 +1273,12 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEReference(getHelperAnn_Helper(), ecorePackage.getEObject(), null, "helper", null, 0, 1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getHelperAnn_Name(), ecorePackage.getEString(), "name", null, 1, 1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHelperAnn_ReturnType(), theAtlTypingPackage.getType(), null, "returnType", null, 1, 1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHelperAnn_Arguments(), theAtlTypingPackage.getType(), null, "arguments", null, 0, -1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHelperAnn_Names(), ecorePackage.getEString(), "names", null, 0, -1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHelperAnn_Expr(), this.getExpressionAnnotation(), null, "expr", null, 1, 1, HelperAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(moduleCallableAnnEClass, ModuleCallableAnn.class, "ModuleCallableAnn", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModuleCallableAnn_CalledBy(), this.getCallExprAnn(), this.getCallExprAnn_StaticResolver(), "calledBy", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModuleCallableAnn_Arguments(), theAtlTypingPackage.getType(), null, "arguments", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModuleCallableAnn_Names(), ecorePackage.getEString(), "names", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(moduleHelperAnnEClass, ModuleHelperAnn.class, "ModuleHelperAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -69,7 +69,7 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 		if ( TypeUtils.isReference(ann.getType()) ) {
 			g = " not " + g + ".oclIsUndefined()";					
 		} else if ( TypeUtils.isCollection(ann.getType()) ) {
-			g = g + ".size() > 0";					
+			g = g + "->size() > 0";					
 		} else if ( ann.getType() instanceof StringType ) {
 			throw new UnsupportedOperationException(ann.getType().getClass().toString());
 			// g = g + "STRING_NOT_SUPPORTED";
