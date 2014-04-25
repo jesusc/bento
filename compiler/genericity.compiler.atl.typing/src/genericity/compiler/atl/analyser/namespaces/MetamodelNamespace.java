@@ -28,8 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 
-import com.google.common.collect.HashMultimap;
-
 /**
  * Provides convenient functions to retrieve information about a meta-model.
  * 

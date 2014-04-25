@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: atl.metamodel,
  atl.metamodel.ATL,
  atl.metamodel.OCL,
+ bento.analyser.footprint,
  bento.analysis.atl_analysis,
  bento.analysis.atl_analysis.atl_error,
  bento.analysis.atl_analysis.atl_error.impl,
@@ -19,6 +20,10 @@ Export-Package: atl.metamodel,
  bento.analysis.atl_analysis.atl_recovery.util,
  bento.analysis.atl_analysis.impl,
  bento.analysis.atl_analysis.util,
+ genericity.compiler.atl.analyser,
+ genericity.compiler.atl.analyser.namespaces,
+ genericity.compiler.atl.csp,
+ genericity.compiler.atl.graph,
  genericity.compiler.atl.typing,
  genericity.typing.atl_types,
  genericity.typing.atl_types.analysis,
@@ -30,5 +35,6 @@ Export-Package: atl.metamodel,
  genericity.typing.atl_types.impl,
  genericity.typing.atl_types.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclectic.modeling;bundle-version="0.8.6"
 Bundle-ActivationPolicy: lazy

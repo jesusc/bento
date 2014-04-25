@@ -8,12 +8,7 @@ Bundle-ClassPath: .,
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: bento.analyser.footprint,
- genericity.compiler.atl,
- genericity.compiler.atl.analyser,
- genericity.compiler.atl.analyser.namespaces,
- genericity.compiler.atl.csp,
- genericity.compiler.atl.graph,
+Export-Package: genericity.compiler.atl,
  genericity.typecheck.atl
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,

@@ -1,6 +1,5 @@
 package genericity.compiler.atl.graph;
 
-import gbind.simpleocl.PropertyCall;
 import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.ErrorSlice;
