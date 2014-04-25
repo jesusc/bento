@@ -63,13 +63,19 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 	public void getCSPText(CSPBuffer buf) {
 		this.getDependency().getCSPText(buf);
 		
-		String s = "";
-		String g = OclGenerator.gen(start);
+		//String s = "";
+		//String g = OclGenerator.gen(start);
+		String prefix = "";
+		String postfix = "";
+		
 		
 		if ( TypeUtils.isReference(ann.getType()) ) {
-			g = " not " + g + ".oclIsUndefined()";					
+			// g = " not " + g + ".oclIsUndefined()";
+			prefix = " not ";
+			postfix = ".oclIsUndefined()";
 		} else if ( TypeUtils.isCollection(ann.getType()) ) {
-			g = g + "->size() > 0";					
+			// g = g + "->size() > 0";
+			postfix = "->size() > 0";
 		} else if ( ann.getType() instanceof StringType ) {
 			throw new UnsupportedOperationException(ann.getType().getClass().toString());
 			// g = g + "STRING_NOT_SUPPORTED";
@@ -77,7 +83,7 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 			throw new UnsupportedOperationException(ann.getType().getClass().toString());
 		}
 		
-		buf.generateExpression(g);
+		buf.generateExpression(start, prefix, postfix);
 	}
 	
 }

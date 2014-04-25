@@ -58,8 +58,8 @@ public class CSPBuffer {
 		setLastCommand(command);
 	}
 
-	public void generateExpression(String exprText) {
-		Expression command = new Expression(exprText);
+	public void generateExpression(OclExpression expr, String prefix, String postfix) {
+		Expression command = new Expression(expr, prefix, postfix);
 		setLastCommand(command);
 	}
 	
@@ -92,6 +92,14 @@ public class CSPBuffer {
 
 		protected void prepareSelf(String var) {
 			this.subSelfVar = var;
+			if ( nested == null )
+				return;
+			
+			if ( nested.subSelfVar != null ) 
+				return; // NOT:SURE
+				// throw new IllegalStateException("Not expected!");
+			
+			nested.prepareSelf(var);
 		}
 		
 		protected String genOcl(OclExpression expr) {
@@ -152,7 +160,7 @@ public class CSPBuffer {
 
 		@Override
 		public String getText(int tab) {
-			return t(tab) + OclGenerator.gen(receptor) + "->" + selector + "(" + varName + "|\n" +
+			return t(tab) + genOcl(receptor) + "->" + selector + "(" + varName + "|\n" +
 						nested.getText(tab + 1) + 
 					t(tab) + ")";
 		}
@@ -193,6 +201,8 @@ public class CSPBuffer {
 			this.moduleCallableAnn = moduleCallableAnn;
 		}
 		
+		private static int selfCounter = 1;
+		
 		@Override
 		public String getText(int tab) {
 			if ( isThisModuleCall ) {
@@ -200,23 +210,27 @@ public class CSPBuffer {
 				for(int i = 0; i < moduleCallableAnn.getArguments().size(); i++) {
 					String varName = moduleCallableAnn.getNames().get(i);
 					OclExpression formalParameter = ((OperationCallExp) call).getArguments().get(i);
-					argBinding += t(tab) + "let " + varName + " = " + OclGenerator.gen(formalParameter) + " in\n";
+					argBinding += t(tab) + "let " + varName + " = " + genOcl(formalParameter) + " in\n";
 				}
 				return argBinding + nested.getText(tab + 1);
 			} else {
-				String genVar = "_x_";
+				String genVar = "genSelf_" + selfCounter++;
 				nested.prepareSelf(genVar);
-				return t(tab) + "let " + genVar + " = " + OclGenerator.gen(receptor) + " in\n" +
-						nested.getText(tab + 1);
+				return t(tab) + "let " + genVar + " = " + genOcl(receptor) + " in\n" +
+						nested.getText(tab);
 			}
 		}		
 	}
 	
 	public static class Expression extends GenerationCommand {
-		private String exprText;
+		private OclExpression expr;
+		private String	prefix;
+		private String	postfix;
 
-		public Expression(String exprText) {
-			this.exprText = exprText;
+		public Expression(OclExpression expr, String prefix, String postfix) {
+			this.expr = expr;
+			this.prefix = prefix;
+			this.postfix = postfix;
 		}
 		
 		@Override
@@ -226,7 +240,8 @@ public class CSPBuffer {
 		
 		@Override
 		public String getText(int tab) {
-			return t(tab) + exprText;
+			String exprText = expr != null ? genOcl(expr) : "";
+			return t(tab) + prefix + exprText + postfix;
 		}
 		
 	}

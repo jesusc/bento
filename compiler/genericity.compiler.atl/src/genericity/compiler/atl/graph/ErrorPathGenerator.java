@@ -178,7 +178,8 @@ public class ErrorPathGenerator {
 				LoopNode loop = new LoopNode(exp.getSource(), exp.getIterators().get(0));
 				node.addDependency(loop);
 				
-				pathToControlFlow(exp.getSource(), loop);
+				// pathToControlFlow(exp.getSource(), loop);
+				pathToControlFlow(parent, loop); 
 				return;
 			}
 			parent = parent.container_();

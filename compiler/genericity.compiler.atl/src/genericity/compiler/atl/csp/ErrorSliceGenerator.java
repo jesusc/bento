@@ -1,5 +1,9 @@
 package genericity.compiler.atl.csp;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+
 import org.eclipse.emf.ecore.resource.Resource;
 
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
@@ -34,9 +38,19 @@ public class ErrorSliceGenerator {
 
 	public ErrorSlice generate(Resource r, String metamodelName) {
 		generate(metamodelName);
+
+		LinkedList<DependencyNode> sorted = new LinkedList<DependencyNode>(graph.getProblemNodes());
+		Collections.sort(sorted, new Comparator<DependencyNode>() {
+			@Override
+			public int compare(DependencyNode arg0, DependencyNode arg1) {
+				LocalProblem lp1 = (LocalProblem) arg0.getProblem();
+				LocalProblem lp2 = (LocalProblem) arg1.getProblem();
+				return lp1.getLocation().compareTo(lp2.getLocation());
+			}
+		});
 		
 		int i = 0;
-		for(DependencyNode node : graph.getProblemNodes()) {
+		for(DependencyNode node : sorted) {
 			slice = ((ProblemNode) node).getErrorSlice();
 			LocalProblem p   = (LocalProblem) ((ProblemNode) node).getProblem();
 			

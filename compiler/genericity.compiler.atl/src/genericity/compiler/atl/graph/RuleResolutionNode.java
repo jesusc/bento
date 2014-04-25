@@ -48,7 +48,7 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 			i++;
 		}
 		
-		buf.generateExpression(s);
+		buf.generateExpression(null, s, "");
 		
 	}
 	

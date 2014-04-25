@@ -387,6 +387,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 
 	private void computeResolvers(PropertyCallExp self, CallExprAnn ann, String featureOrOperationName) {
 		if ( ann.getSource().getType() instanceof Metaclass && !(self.getSource() instanceof OclModelElement) ) {
+			ann.setIsStaticCall(false);
 			ClassNamespace cn = (ClassNamespace) ann.getSource().getType().getMetamodelRef();
 			if ( cn.getAttachedOclFeature(featureOrOperationName) != null ) {
 			
