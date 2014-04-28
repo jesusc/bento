@@ -7,12 +7,21 @@
   <foreignModel>atl_errors.ecore</foreignModel>
   <genPackages prefix="AtlAnalysis" basePackage="bento.analysis" disposableProviderFactory="true"
       ecorePackage="atl_errors.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="atl_errors.ecore#//SeverityKind">
+      <genEnumLiterals ecoreEnumLiteral="atl_errors.ecore#//SeverityKind/ERROR"/>
+      <genEnumLiterals ecoreEnumLiteral="atl_errors.ecore#//SeverityKind/WARNING"/>
+      <genEnumLiterals ecoreEnumLiteral="atl_errors.ecore#//SeverityKind/STYLE_SUGGESTION"/>
+      <genEnumLiterals ecoreEnumLiteral="atl_errors.ecore#//SeverityKind/PERFORMANCE_SUGGESTION"/>
+    </genEnums>
     <genClasses ecoreClass="atl_errors.ecore#//AnalysisResult">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//AnalysisResult/problems"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_errors.ecore#//AnalysisInfo"/>
     <genClasses image="false" ecoreClass="atl_errors.ecore#//Problem">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//Problem/dependents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//Problem/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//Problem/severity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//Problem/needsCSP"/>
     </genClasses>
     <genClasses image="false" ecoreClass="atl_errors.ecore#//Recovery"/>
     <nestedGenPackages prefix="AtlErrors" basePackage="bento.analysis.atl_analysis"
@@ -60,13 +69,18 @@
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoBindingForCompulsoryFeature"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingExpectedOneAssignedMany"/>
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/BindingResolution">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingResolution/rightType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingResolution/targetType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingResolution/rules"/>
+      </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingWithoutRule"/>
-      <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule">
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/BindingPossiblyUnresolved">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule/rightType"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule/targetType"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingWithResolvedByIncompatibleRule/rules"/>
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/BindingPossiblyUnresolved/problematicClasses"/>
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/ResolvedRuleInfo">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/ResolvedRuleInfo/location"/>

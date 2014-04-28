@@ -112,14 +112,14 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 		// Some called rules just feature a do { } block
 		if ( self.getOutPattern() != null ) {
 			Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
-			mm.getTransformationNamespace().extendType(self.getName(), t, self);
+			mm.getTransformationNamespace().attachRule(self.getName(), t, self);
 		}
 	}
 
 	@Override
 	public void inLazyMatchedRule(LazyMatchedRule self) {
 		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
-		mm.getTransformationNamespace().extendType(self.getName(), t, self);
+		mm.getTransformationNamespace().attachRule(self.getName(), t, self);
 	}
 	
 	@Override
@@ -129,7 +129,7 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 		
 		ClassNamespace ns = (ClassNamespace) m.getMetamodelRef();
 		// System.out.println("TopLevelTraversal.inMatchedRule(): " + self.getName());
-		ns.extendType(self.getName(), t, self);
+		ns.attachRule(self.getName(), t, self);
 	}
 
 	//  

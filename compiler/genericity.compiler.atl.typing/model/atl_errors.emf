@@ -14,6 +14,17 @@ abstract class AnalysisInfo {
 
 abstract class Problem extends AnalysisInfo {
 	val Problem[*] dependents;   
+
+	attr String[1] description;
+	attr SeverityKind[1] severity;
+	attr boolean needsCSP = false;
+}
+
+enum SeverityKind {
+   ERROR = 0;
+   WARNING = 1;
+   STYLE_SUGGESTION  = 3;
+   PERFORMANCE_SUGGESTION = 4;
 }
 
 abstract class Recovery {   
@@ -83,15 +94,21 @@ package atl_error {
 	   
 	}	
 
-	class BindingWithoutRule extends BindingProblem {
-	   
-	}
-	
-	class BindingWithResolvedByIncompatibleRule extends BindingProblem {
-		ref ecore.EClass[1] rightType;	
+	abstract class BindingResolution {
+	   	ref ecore.EClass[1] rightType;	
 		ref ecore.EClass[1] targetType;
 
 		val ResolvedRuleInfo[*] rules;
+	}
+
+	class BindingWithoutRule extends BindingProblem, BindingResolution {			   
+	}
+	
+	class BindingWithResolvedByIncompatibleRule extends BindingProblem, BindingResolution {
+	}
+
+	class BindingPossiblyUnresolved extends BindingProblem, BindingResolution {
+	   ref EClass[+] problematicClasses;
 	}
 	
 	class ResolvedRuleInfo {

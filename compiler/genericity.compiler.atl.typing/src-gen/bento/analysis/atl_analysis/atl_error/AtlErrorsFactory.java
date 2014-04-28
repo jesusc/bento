@@ -125,6 +125,15 @@ public interface AtlErrorsFactory extends EFactory {
 	BindingWithResolvedByIncompatibleRule createBindingWithResolvedByIncompatibleRule();
 
 	/**
+	 * Returns a new object of class '<em>Binding Possibly Unresolved</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binding Possibly Unresolved</em>'.
+	 * @generated
+	 */
+	BindingPossiblyUnresolved createBindingPossiblyUnresolved();
+
+	/**
 	 * Returns a new object of class '<em>Resolved Rule Info</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -28,6 +28,8 @@ rule activity2diagram {
 			pools <- pool
 		), 
 		pool : Intalio!Pool (
+			name <- a.partition->collect(p | if p.name = 'hola' then 'ok' else p.name2 endif)->first(),
+			
 			name <- 'main (' + a.allPartitions->size() + ' lanes)',
 			lanes <- a.allPartitions,
 			sequenceEdges <- a.edge->select(e | e.oclIsKindOf(UML!ControlFlow))->

@@ -140,7 +140,7 @@ public class AtlAdapter {
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
 		GlobalNamespace mm = loadMetamodels(loader, templateParameters);
-		Analyser analyser = new Analyser(mm, atlTransformation, typing);
+		Analyser analyser = new Analyser(mm, atlTransformation.getHandler().getResource(), typing);
 		analyser.setDoDependencyAnalysis(false);
 		analyser.perform();
 		
@@ -175,7 +175,7 @@ public class AtlAdapter {
 
 		
 		GlobalNamespace mm = loadMetamodels(loader, templateParameters);
-		Analyser analyser = new Analyser(mm, atlTransformation, typing);
+		Analyser analyser = new Analyser(mm, atlTransformation.getHandler().getResource(), typing);
 		analyser.setDoDependencyAnalysis(false);
 		analyser.perform();
 		

@@ -11,7 +11,9 @@ import bento.analysis.atl_analysis.AtlAnalysisPackage;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingProblem;
+import bento.analysis.atl_analysis.atl_error.BindingResolution;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
@@ -152,6 +154,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass bindingResolutionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass bindingWithoutRuleEClass = null;
 
 	/**
@@ -160,6 +169,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass bindingWithResolvedByIncompatibleRuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bindingPossiblyUnresolvedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -529,6 +545,42 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBindingResolution() {
+		return bindingResolutionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingResolution_RightType() {
+		return (EReference)bindingResolutionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingResolution_TargetType() {
+		return (EReference)bindingResolutionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingResolution_Rules() {
+		return (EReference)bindingResolutionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBindingWithoutRule() {
 		return bindingWithoutRuleEClass;
 	}
@@ -547,8 +599,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingWithResolvedByIncompatibleRule_RightType() {
-		return (EReference)bindingWithResolvedByIncompatibleRuleEClass.getEStructuralFeatures().get(0);
+	public EClass getBindingPossiblyUnresolved() {
+		return bindingPossiblyUnresolvedEClass;
 	}
 
 	/**
@@ -556,17 +608,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingWithResolvedByIncompatibleRule_TargetType() {
-		return (EReference)bindingWithResolvedByIncompatibleRuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBindingWithResolvedByIncompatibleRule_Rules() {
-		return (EReference)bindingWithResolvedByIncompatibleRuleEClass.getEStructuralFeatures().get(2);
+	public EReference getBindingPossiblyUnresolved_ProblematicClasses() {
+		return (EReference)bindingPossiblyUnresolvedEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -704,12 +747,17 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		bindingExpectedOneAssignedManyEClass = createEClass(BINDING_EXPECTED_ONE_ASSIGNED_MANY);
 
+		bindingResolutionEClass = createEClass(BINDING_RESOLUTION);
+		createEReference(bindingResolutionEClass, BINDING_RESOLUTION__RIGHT_TYPE);
+		createEReference(bindingResolutionEClass, BINDING_RESOLUTION__TARGET_TYPE);
+		createEReference(bindingResolutionEClass, BINDING_RESOLUTION__RULES);
+
 		bindingWithoutRuleEClass = createEClass(BINDING_WITHOUT_RULE);
 
 		bindingWithResolvedByIncompatibleRuleEClass = createEClass(BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE);
-		createEReference(bindingWithResolvedByIncompatibleRuleEClass, BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RIGHT_TYPE);
-		createEReference(bindingWithResolvedByIncompatibleRuleEClass, BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__TARGET_TYPE);
-		createEReference(bindingWithResolvedByIncompatibleRuleEClass, BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RULES);
+
+		bindingPossiblyUnresolvedEClass = createEClass(BINDING_POSSIBLY_UNRESOLVED);
+		createEReference(bindingPossiblyUnresolvedEClass, BINDING_POSSIBLY_UNRESOLVED__PROBLEMATIC_CLASSES);
 
 		resolvedRuleInfoEClass = createEClass(RESOLVED_RULE_INFO);
 		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__LOCATION);
@@ -770,7 +818,11 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		noBindingForCompulsoryFeatureEClass.getESuperTypes().add(this.getBindingProblem());
 		bindingExpectedOneAssignedManyEClass.getESuperTypes().add(this.getBindingProblem());
 		bindingWithoutRuleEClass.getESuperTypes().add(this.getBindingProblem());
+		bindingWithoutRuleEClass.getESuperTypes().add(this.getBindingResolution());
 		bindingWithResolvedByIncompatibleRuleEClass.getESuperTypes().add(this.getBindingProblem());
+		bindingWithResolvedByIncompatibleRuleEClass.getESuperTypes().add(this.getBindingResolution());
+		bindingPossiblyUnresolvedEClass.getESuperTypes().add(this.getBindingProblem());
+		bindingPossiblyUnresolvedEClass.getESuperTypes().add(this.getBindingResolution());
 		flattenOverNonNestedCollectionEClass.getESuperTypes().add(this.getLocalProblem());
 		iteratorOverEmptySequenceEClass.getESuperTypes().add(this.getLocalProblem());
 
@@ -819,12 +871,17 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		initEClass(bindingExpectedOneAssignedManyEClass, BindingExpectedOneAssignedMany.class, "BindingExpectedOneAssignedMany", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(bindingResolutionEClass, BindingResolution.class, "BindingResolution", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBindingResolution_RightType(), ecorePackage.getEClass(), null, "rightType", null, 1, 1, BindingResolution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingResolution_TargetType(), ecorePackage.getEClass(), null, "targetType", null, 1, 1, BindingResolution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingResolution_Rules(), this.getResolvedRuleInfo(), null, "rules", null, 0, -1, BindingResolution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(bindingWithoutRuleEClass, BindingWithoutRule.class, "BindingWithoutRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(bindingWithResolvedByIncompatibleRuleEClass, BindingWithResolvedByIncompatibleRule.class, "BindingWithResolvedByIncompatibleRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBindingWithResolvedByIncompatibleRule_RightType(), ecorePackage.getEClass(), null, "rightType", null, 1, 1, BindingWithResolvedByIncompatibleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBindingWithResolvedByIncompatibleRule_TargetType(), ecorePackage.getEClass(), null, "targetType", null, 1, 1, BindingWithResolvedByIncompatibleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBindingWithResolvedByIncompatibleRule_Rules(), this.getResolvedRuleInfo(), null, "rules", null, 0, -1, BindingWithResolvedByIncompatibleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bindingPossiblyUnresolvedEClass, BindingPossiblyUnresolved.class, "BindingPossiblyUnresolved", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBindingPossiblyUnresolved_ProblematicClasses(), ecorePackage.getEClass(), null, "problematicClasses", null, 1, -1, BindingPossiblyUnresolved.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(resolvedRuleInfoEClass, ResolvedRuleInfo.class, "ResolvedRuleInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResolvedRuleInfo_Location(), ecorePackage.getEString(), "location", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

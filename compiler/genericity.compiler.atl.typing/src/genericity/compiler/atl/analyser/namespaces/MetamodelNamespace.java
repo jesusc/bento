@@ -159,6 +159,16 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		return result;
 	}
 
+	public Collection<ClassNamespace> getDirectSubclasses(EClass eClass) {
+		ArrayList<ClassNamespace> result = new ArrayList<ClassNamespace>();
+		for (EClass klass : allClasses) {
+			if ( klass.getESuperTypes().contains(eClass) ) {
+				result.add((ClassNamespace) classifiers.get(klass.getName()));
+			}
+		}
+		return result;
+	}
+
 	
 
 

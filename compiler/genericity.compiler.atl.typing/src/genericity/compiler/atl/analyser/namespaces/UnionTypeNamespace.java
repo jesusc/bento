@@ -90,7 +90,7 @@ public class UnionTypeNamespace extends AbstractTypeNamespace implements ITypeNa
 	}
 
 	@Override
-	public void extendType(String operationName, Type returnType, Rule r) {
+	public void attachRule(String operationName, Type returnType, Rule r) {
 		throw new UnsupportedOperationException(operationName);				
 	}
 	

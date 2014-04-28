@@ -208,10 +208,17 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.BINDING_RESOLUTION: {
+				BindingResolution bindingResolution = (BindingResolution)theEObject;
+				T result = caseBindingResolution(bindingResolution);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.BINDING_WITHOUT_RULE: {
 				BindingWithoutRule bindingWithoutRule = (BindingWithoutRule)theEObject;
 				T result = caseBindingWithoutRule(bindingWithoutRule);
 				if (result == null) result = caseBindingProblem(bindingWithoutRule);
+				if (result == null) result = caseBindingResolution(bindingWithoutRule);
 				if (result == null) result = caseLocalProblem(bindingWithoutRule);
 				if (result == null) result = caseProblem(bindingWithoutRule);
 				if (result == null) result = caseAnalysisInfo(bindingWithoutRule);
@@ -222,9 +229,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				BindingWithResolvedByIncompatibleRule bindingWithResolvedByIncompatibleRule = (BindingWithResolvedByIncompatibleRule)theEObject;
 				T result = caseBindingWithResolvedByIncompatibleRule(bindingWithResolvedByIncompatibleRule);
 				if (result == null) result = caseBindingProblem(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = caseBindingResolution(bindingWithResolvedByIncompatibleRule);
 				if (result == null) result = caseLocalProblem(bindingWithResolvedByIncompatibleRule);
 				if (result == null) result = caseProblem(bindingWithResolvedByIncompatibleRule);
 				if (result == null) result = caseAnalysisInfo(bindingWithResolvedByIncompatibleRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED: {
+				BindingPossiblyUnresolved bindingPossiblyUnresolved = (BindingPossiblyUnresolved)theEObject;
+				T result = caseBindingPossiblyUnresolved(bindingPossiblyUnresolved);
+				if (result == null) result = caseBindingProblem(bindingPossiblyUnresolved);
+				if (result == null) result = caseBindingResolution(bindingPossiblyUnresolved);
+				if (result == null) result = caseLocalProblem(bindingPossiblyUnresolved);
+				if (result == null) result = caseProblem(bindingPossiblyUnresolved);
+				if (result == null) result = caseAnalysisInfo(bindingPossiblyUnresolved);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -467,6 +486,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Resolution</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Resolution</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingResolution(BindingResolution object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Binding Without Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -493,6 +527,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Possibly Unresolved</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Possibly Unresolved</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBindingPossiblyUnresolved(BindingPossiblyUnresolved object) {
 		return null;
 	}
 

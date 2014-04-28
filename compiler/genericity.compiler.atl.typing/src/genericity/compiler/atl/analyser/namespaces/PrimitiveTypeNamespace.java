@@ -83,7 +83,7 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 	 * Rules cannot be attached to primitive types
 	 */
 	@Override
-	public void extendType(String operationName, Type returnType, Rule r) {
+	public void attachRule(String operationName, Type returnType, Rule r) {
 		throw new UnsupportedOperationException(operationName);				
 	}
 

@@ -131,12 +131,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createBindingExpectedOneAssignedManyAdapter();
 			}
 			@Override
+			public Adapter caseBindingResolution(BindingResolution object) {
+				return createBindingResolutionAdapter();
+			}
+			@Override
 			public Adapter caseBindingWithoutRule(BindingWithoutRule object) {
 				return createBindingWithoutRuleAdapter();
 			}
 			@Override
 			public Adapter caseBindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule object) {
 				return createBindingWithResolvedByIncompatibleRuleAdapter();
+			}
+			@Override
+			public Adapter caseBindingPossiblyUnresolved(BindingPossiblyUnresolved object) {
+				return createBindingPossiblyUnresolvedAdapter();
 			}
 			@Override
 			public Adapter caseResolvedRuleInfo(ResolvedRuleInfo object) {
@@ -375,6 +383,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingResolution <em>Binding Resolution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingResolution
+	 * @generated
+	 */
+	public Adapter createBindingResolutionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingWithoutRule <em>Binding Without Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -399,6 +421,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBindingWithResolvedByIncompatibleRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved <em>Binding Possibly Unresolved</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved
+	 * @generated
+	 */
+	public Adapter createBindingPossiblyUnresolvedAdapter() {
 		return null;
 	}
 

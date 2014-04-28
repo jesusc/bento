@@ -7,8 +7,6 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.ErrorSliceGenerator;
 import genericity.compiler.atl.csp.GraphvizGenerator;
 import genericity.compiler.atl.graph.DependencyGraph;
-import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
-import genericity.typecheck.atl.TypeCheckLauncher;
 import genericity.typing.atl_types.AtlTypingPackage;
 
 import java.io.File;
@@ -73,7 +71,7 @@ public abstract class BaseTest {
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
 		mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
-		analyser = new Analyser(mm, atlTransformation, out);
+		analyser = new Analyser(mm, atlTransformation.getHandler().getResource(), out);
 		analyser.setDoDependencyAnalysis(doDependencyAnalysis);
 		analyser.perform();
 	
@@ -130,11 +128,6 @@ public abstract class BaseTest {
 		r.save(null);
 	}
 	
-
-	private AtlTransformationMetamodelsModel getTransformationMetamodels(GlobalNamespace ns) {
-		return new AtlTransformationMetamodelsModel(ns.getLogicalNamesToMetamodels().values(), ns.getLogicalNamesToMetamodels());
-	}
-
 	private GlobalNamespace loadMetamodels2(Object[] metamodels, String[] names) {
 		int i = 0;
 		HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();

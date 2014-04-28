@@ -7,36 +7,43 @@
 package bento.analysis.atl_analysis.atl_error.impl;
 
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
+import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingResolution;
-import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
-
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
+
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Binding Without Rule</b></em>'.
+ * An implementation of the model object '<em><b>Binding Possibly Unresolved</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl#getRightType <em>Right Type</em>}</li>
- *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl#getTargetType <em>Target Type</em>}</li>
- *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingWithoutRuleImpl#getRules <em>Rules</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingPossiblyUnresolvedImpl#getRightType <em>Right Type</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingPossiblyUnresolvedImpl#getTargetType <em>Target Type</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingPossiblyUnresolvedImpl#getRules <em>Rules</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.BindingPossiblyUnresolvedImpl#getProblematicClasses <em>Problematic Classes</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BindingWithoutRuleImpl extends BindingProblemImpl implements BindingWithoutRule {
+public class BindingPossiblyUnresolvedImpl extends BindingProblemImpl implements BindingPossiblyUnresolved {
 	/**
 	 * The cached value of the '{@link #getRightType() <em>Right Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -46,6 +53,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	 * @ordered
 	 */
 	protected EClass rightType;
+
 	/**
 	 * The cached value of the '{@link #getTargetType() <em>Target Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -67,11 +75,21 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	protected EList<ResolvedRuleInfo> rules;
 
 	/**
+	 * The cached value of the '{@link #getProblematicClasses() <em>Problematic Classes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProblematicClasses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EClass> problematicClasses;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BindingWithoutRuleImpl() {
+	protected BindingPossiblyUnresolvedImpl() {
 		super();
 	}
 
@@ -82,7 +100,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AtlErrorsPackage.Literals.BINDING_WITHOUT_RULE;
+		return AtlErrorsPackage.Literals.BINDING_POSSIBLY_UNRESOLVED;
 	}
 
 	/**
@@ -96,7 +114,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 			rightType = (EClass)eResolveProxy(oldRightType);
 			if (rightType != oldRightType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE, oldRightType, rightType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE, oldRightType, rightType));
 			}
 		}
 		return rightType;
@@ -120,7 +138,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 		EClass oldRightType = rightType;
 		rightType = newRightType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE, oldRightType, rightType));
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE, oldRightType, rightType));
 	}
 
 	/**
@@ -134,7 +152,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 			targetType = (EClass)eResolveProxy(oldTargetType);
 			if (targetType != oldTargetType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE, oldTargetType, targetType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE, oldTargetType, targetType));
 			}
 		}
 		return targetType;
@@ -158,7 +176,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 		EClass oldTargetType = targetType;
 		targetType = newTargetType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE, oldTargetType, targetType));
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE, oldTargetType, targetType));
 	}
 
 	/**
@@ -168,9 +186,21 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	 */
 	public EList<ResolvedRuleInfo> getRules() {
 		if (rules == null) {
-			rules = new EObjectContainmentEList<ResolvedRuleInfo>(ResolvedRuleInfo.class, this, AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES);
+			rules = new EObjectContainmentEList<ResolvedRuleInfo>(ResolvedRuleInfo.class, this, AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES);
 		}
 		return rules;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EClass> getProblematicClasses() {
+		if (problematicClasses == null) {
+			problematicClasses = new EObjectResolvingEList<EClass>(EClass.class, this, AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__PROBLEMATIC_CLASSES);
+		}
+		return problematicClasses;
 	}
 
 	/**
@@ -181,7 +211,7 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES:
 				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -195,14 +225,16 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE:
 				if (resolve) return getRightType();
 				return basicGetRightType();
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE:
 				if (resolve) return getTargetType();
 				return basicGetTargetType();
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES:
 				return getRules();
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__PROBLEMATIC_CLASSES:
+				return getProblematicClasses();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,15 +248,19 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE:
 				setRightType((EClass)newValue);
 				return;
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE:
 				setTargetType((EClass)newValue);
 				return;
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES:
 				getRules().clear();
 				getRules().addAll((Collection<? extends ResolvedRuleInfo>)newValue);
+				return;
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__PROBLEMATIC_CLASSES:
+				getProblematicClasses().clear();
+				getProblematicClasses().addAll((Collection<? extends EClass>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,14 +274,17 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE:
 				setRightType((EClass)null);
 				return;
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE:
 				setTargetType((EClass)null);
 				return;
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES:
 				getRules().clear();
+				return;
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__PROBLEMATIC_CLASSES:
+				getProblematicClasses().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -259,12 +298,14 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE:
 				return rightType != null;
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE:
 				return targetType != null;
-			case AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES:
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES:
 				return rules != null && !rules.isEmpty();
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__PROBLEMATIC_CLASSES:
+				return problematicClasses != null && !problematicClasses.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -278,9 +319,9 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingResolution.class) {
 			switch (derivedFeatureID) {
-				case AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE: return AtlErrorsPackage.BINDING_RESOLUTION__RIGHT_TYPE;
-				case AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE: return AtlErrorsPackage.BINDING_RESOLUTION__TARGET_TYPE;
-				case AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES: return AtlErrorsPackage.BINDING_RESOLUTION__RULES;
+				case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE: return AtlErrorsPackage.BINDING_RESOLUTION__RIGHT_TYPE;
+				case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE: return AtlErrorsPackage.BINDING_RESOLUTION__TARGET_TYPE;
+				case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES: return AtlErrorsPackage.BINDING_RESOLUTION__RULES;
 				default: return -1;
 			}
 		}
@@ -296,13 +337,13 @@ public class BindingWithoutRuleImpl extends BindingProblemImpl implements Bindin
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingResolution.class) {
 			switch (baseFeatureID) {
-				case AtlErrorsPackage.BINDING_RESOLUTION__RIGHT_TYPE: return AtlErrorsPackage.BINDING_WITHOUT_RULE__RIGHT_TYPE;
-				case AtlErrorsPackage.BINDING_RESOLUTION__TARGET_TYPE: return AtlErrorsPackage.BINDING_WITHOUT_RULE__TARGET_TYPE;
-				case AtlErrorsPackage.BINDING_RESOLUTION__RULES: return AtlErrorsPackage.BINDING_WITHOUT_RULE__RULES;
+				case AtlErrorsPackage.BINDING_RESOLUTION__RIGHT_TYPE: return AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RIGHT_TYPE;
+				case AtlErrorsPackage.BINDING_RESOLUTION__TARGET_TYPE: return AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__TARGET_TYPE;
+				case AtlErrorsPackage.BINDING_RESOLUTION__RULES: return AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED__RULES;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-} //BindingWithoutRuleImpl
+} //BindingPossiblyUnresolvedImpl

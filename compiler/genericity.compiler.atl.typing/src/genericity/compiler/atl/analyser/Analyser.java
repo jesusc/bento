@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Unit;
@@ -24,13 +25,16 @@ public class Analyser {
 	private boolean doDependency = true;
 	private DependencyGraph dependencyGraph;
 	
-	public Analyser(GlobalNamespace mm, BasicEMFModel trafo, BasicEMFModel out) throws IOException {
+	public Analyser(GlobalNamespace mm, Resource atlResource, BasicEMFModel out) throws IOException {
+		this(mm, new ATLModel(atlResource), out);
+	}
+	
+	public Analyser(GlobalNamespace mm, ATLModel atlModel, BasicEMFModel out) throws IOException {
 		this.mm    = mm;
-		this.trafo = new ATLModel(trafo.getHandler().getResource());
+		this.trafo = atlModel;
 		this.typ   = new TypingModel(out);
 		this.errors = new ErrorModel();
 	}
-	
 	public void setDoDependencyAnalysis(boolean doDependency) {
 		this.doDependency = doDependency;
 	}

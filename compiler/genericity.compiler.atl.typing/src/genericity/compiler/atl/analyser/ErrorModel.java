@@ -1,19 +1,16 @@
 package genericity.compiler.atl.analyser;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.TypeErrorNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
-import genericity.compiler.atl.analyser.recovery.RecoverOperationNotFound;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.TupleType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
+
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -24,26 +21,25 @@ import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.OutPatternElement;
-import atl.metamodel.ATL.SimpleOutPatternElement;
-import atl.metamodel.OCL.EnumLiteralExp;
-import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.OperationCallExp;
-import atl.metamodel.OCL.VariableDeclaration;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.AtlAnalysisFactory;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.Recovery;
+import bento.analysis.atl_analysis.SeverityKind;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
+import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
+import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
 import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
 import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
-import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
@@ -51,7 +47,6 @@ import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
 import bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass;
 import bento.analysis.atl_analysis.atl_recovery.TentativeTypeAssigned;
-import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryFactoryImpl;
 
 public class ErrorModel {
 	
@@ -78,7 +73,7 @@ public class ErrorModel {
 		FeatureNotFound error = AtlErrorsFactory.eINSTANCE.createFeatureNotFound();
 		initProblem(error, element);
 		
-		signalError("No feature " + c.getName() + "." + featureName + " found", element);
+		signalError(error, "No feature " + c.getName() + "." + featureName + " found", element);
 		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
@@ -86,7 +81,7 @@ public class ErrorModel {
 		FeatureNotFound error = AtlErrorsFactory.eINSTANCE.createFeatureNotFound();
 		initProblem(error, element);
 		
-		signalError("No feature " + "OclAny" + "." + featureName + " found", element);
+		signalError(error, "No feature " + "OclAny" + "." + featureName + " found", element);
 		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
@@ -94,7 +89,7 @@ public class ErrorModel {
 		FeatureNotFound error = AtlErrorsFactory.eINSTANCE.createFeatureNotFound();
 		initProblem(error, element);
 		
-		signalError("No feature " + "Tuple" + "." + featureName + " found", element);
+		signalError(error, "No feature " + "Tuple" + "." + featureName + " found", element);
 		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
@@ -120,7 +115,7 @@ public class ErrorModel {
 		
 		Type result = ra.recover(this, error);
 		if ( result != null ) {
-			signalWarning("Collection operation over " + TypeUtils.typeToString(receptorType), element);
+			signalWarning(error, "Collection operation over " + TypeUtils.typeToString(receptorType), element);
 			return result;
 		}
 		signalNoRecoverableError("Collection operation over " + TypeUtils.typeToString(receptorType), element);
@@ -133,7 +128,7 @@ public class ErrorModel {
 		
 		Type result = ra.recover(this, error);
 		if ( result != null ) {
-			signalWarning("Different types in if/else branches: " + TypeUtils.typeToString(thenPart) + " - " + TypeUtils.typeToString(elsePart), node);	
+			signalWarning(error, "Different types in if/else branches: " + TypeUtils.typeToString(thenPart) + " - " + TypeUtils.typeToString(elsePart), node);	
 			return result;
 		}
 		
@@ -151,12 +146,12 @@ public class ErrorModel {
 		if ( ra != null ) {
 			Type result = ra.recover(this, error);
 			if ( result != null ) {
-				signalWarning("No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);	
+				signalWarning(error, "No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);	
 				return result;
 			}
 		}
 		
-		signalError("No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);	
+		signalError(error, "No operation " + TypeUtils.typeToString(receptorType) + "." + operationName, node);	
 		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
@@ -210,16 +205,26 @@ public class ErrorModel {
 		throw new NoRecoverableError(msg + ". " + l.getLocation());
 	}
 
-	private void signalError(String msg, LocatedElement l) {
+	private void signalError(Problem p, String msg, LocatedElement l) {
+		p.setDescription(msg);
+		p.setSeverity(SeverityKind.ERROR);
+		
 		System.out.println("ERROR: " + msg + ". " + l.getLocation());		
 	}
 	
-	private void signalWarning(String msg, LocatedElement l) {
+	private void signalWarning(Problem p, String msg, LocatedElement l) {
+		p.setDescription(msg);
+		p.setSeverity(SeverityKind.WARNING);
+		
+		System.out.println("WARNING: " + msg + ". " + l.getLocation());		
+	}
+
+	private void signalWarning_WITHOUTERROR_TODO( String msg, LocatedElement l) {
 		System.out.println("WARNING: " + msg + ". " + l.getLocation());		
 	}
 
 	public void warningVarDclIncoherentTypes(Type exprType, Type declared, LocatedElement node) {
-		signalWarning("Incoherent types in variable declaration " + TypeUtils.typeToString(exprType) + " - " + TypeUtils.typeToString(declared), node);
+		signalWarning_WITHOUTERROR_TODO("Incoherent types in variable declaration " + TypeUtils.typeToString(exprType) + " - " + TypeUtils.typeToString(declared), node);
 	}
 	
 	/** Recovery methods **/ 
@@ -255,7 +260,7 @@ public class ErrorModel {
 		error.setFeature(unboundCompulsoryFeature);
 		error.setFeatureName(unboundCompulsoryFeature.getName());
 		
-		signalWarning("In rule " + pe.getOutPattern().getRule().getName() + ", no binding for compulsory " + unboundCompulsoryFeature.getEContainingClass().getName() + "." + unboundCompulsoryFeature.getName(), pe);						
+		signalWarning(error, "In rule " + pe.getOutPattern().getRule().getName() + ", no binding for compulsory " + unboundCompulsoryFeature.getEContainingClass().getName() + "." + unboundCompulsoryFeature.getName(), pe);						
 	}
 
 	
@@ -263,23 +268,37 @@ public class ErrorModel {
 		BindingExpectedOneAssignedMany error = AtlErrorsFactory.eINSTANCE.createBindingExpectedOneAssignedMany();
 		initProblem(error, binding);
 		error.setFeatureName(propertyName);
-		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected mono-valued, received collection", binding);
+		signalWarning(error, "In binding " + targetVar.getName() + "." + propertyName + ", expected mono-valued, received collection", binding);
 	}
 
 	public void signalIteratorOverEmptyCollection(IteratorExp node) {
 		IteratorOverEmptySequence error = AtlErrorsFactory.eINSTANCE.createIteratorOverEmptySequence();
 		initProblem(error, node);
-		signalWarning("Iterator over empty sequence", node);
+		signalWarning(error, "Iterator over empty sequence", node);
 	}
 
 	public void signalFlattenOverNonNestedCollection(Type nestedType, LocatedElement node) {
 		FlattenOverNonNestedCollection error = AtlErrorsFactory.eINSTANCE.createFlattenOverNonNestedCollection();
 		initProblem(error, node);
 		
-		signalWarning("Flatten over non-nested collection", node);
+		signalWarning(error, "Flatten over non-nested collection", node);
 	}
 
 
+
+	public void signalBindingWithoutRule(Binding b, EClass rightType, EClass targetType) {
+		BindingWithoutRule error = AtlErrorsFactory.eINSTANCE.createBindingWithoutRule();
+		initProblem(error, b);
+		
+		error.setRightType(rightType);
+		error.setTargetType(targetType);
+		error.setFeatureName(b.getPropertyName());
+		
+
+		signalWarning(error, "No rule for binding", b);
+		
+	}
+	
 	public void signalBindingWithResolvedByIncompatibleRule(Binding b, EClass rightType, EClass targetType,
 			List<MatchedRule> problematicRules, List<EClass> targetClasses) {
 		
@@ -307,9 +326,28 @@ public class ErrorModel {
 			s += "\t" + rinfo.getRuleName() + " " + rinfo.getLocation() + "\n";
 		}
 		
-		signalWarning(s, b);
-		
+		signalWarning(error, s, b);		
 	}
+	
+	public void signalBindingPossiblyUnresolved(Binding b, EClass rightType, EClass targetType, List<EClass> problematicClasses) {
+		BindingPossiblyUnresolved error = AtlErrorsFactory.eINSTANCE.createBindingPossiblyUnresolved();
+		initProblem(error, b);
+
+		error.setRightType(rightType);
+		error.setTargetType(targetType);
+		error.setFeatureName(b.getPropertyName());
+		
+		error.getProblematicClasses().addAll(problematicClasses);
+		String s = "";
+		for (EClass eClass : problematicClasses) {
+			s += ", " + eClass.getName();
+		}
+		s = s.replaceFirst(",", "");
+		
+		signalWarning(error, "Possibly unresolved binding: " + s, b);
+	}
+
+	
 	// End-of binding problems
 	
 	public void signalNoEnumLiteral(String name, LocatedElement node) {
@@ -321,25 +359,25 @@ public class ErrorModel {
 		for (Type type : noFeatureTypes) {
 			strTypes += TypeUtils.typeToString(type) + " ";
 		}
-		signalWarning("Missing feature in these types: [" + strTypes + "]", node);
+		signalWarning_WITHOUTERROR_TODO("Missing feature in these types: [" + strTypes + "]", node);
 	}
 
 	
 
 	public void signalBindingPrimitiveExpectedButObjectAssigned(Binding binding, Metaclass targetVar, String propertyName) {
-		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected primitive type, received objects", binding);		
+		signalWarning_WITHOUTERROR_TODO("In binding " + targetVar.getName() + "." + propertyName + ", expected primitive type, received objects", binding);		
 	}
 
 	public void signalBindingObjectExpectedButPrimitiveAssigned(Binding binding, Metaclass targetVar, String propertyName) {
-		signalWarning("In binding " + targetVar.getName() + "." + propertyName + ", expected object type, received primitive value", binding);				
+		signalWarning_WITHOUTERROR_TODO("In binding " + targetVar.getName() + "." + propertyName + ", expected object type, received primitive value", binding);				
 	}
 
 	public void signalWarningInvalidMapKeyType(LocatedElement node) {
-		signalWarning("Invalid type for key in Map ", node);								
+		signalWarning_WITHOUTERROR_TODO("Invalid type for key in Map ", node);								
 	}
 
 	public void signalOperationOverCollectionType(OperationCallExp node) {
-		signalWarning("Operation over collection type. TODO: Not sure if this is error (try ATL execution) ", node);										
+		signalWarning_WITHOUTERROR_TODO("Operation over collection type. TODO: Not sure if this is error (try ATL execution) ", node);										
 	}
 
 	public static class NoRecoverableError extends RuntimeException {
@@ -349,11 +387,8 @@ public class ErrorModel {
 	}
 
 	public void signalExpectedCollectionInForEachOutputPattern(ForEachOutPatternElement e) {
-		signalWarning("Expected collection in ForEach output pattern element", e);
+		signalWarning_WITHOUTERROR_TODO("Expected collection in ForEach output pattern element", e);
 	}
-
-
-
 
 	
 }

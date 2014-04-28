@@ -279,7 +279,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			ArrayList<ClassNamespace> nss = new ArrayList<ClassNamespace>(srcNs.getAllSubclasses());
 			nss.add(srcNs);
 			for(ClassNamespace sub : nss) {
-				for(MatchedRule r : sub.getAttachedRules() ) {
+				for(MatchedRule r : sub.getResolvingRules() ) {
 					// System.out.println("Resolved by " + r.getName());
 					ann.getResolvedBy().add( attr.<MatchedRuleOneAnn>annotationOf(r) ) ;					
 				}

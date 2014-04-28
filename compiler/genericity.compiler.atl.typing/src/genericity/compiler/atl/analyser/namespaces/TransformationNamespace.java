@@ -71,7 +71,7 @@ public class TransformationNamespace implements ITypeNamespace {
 		operations.put(operationName, new VirtualFeature<TransformationNamespace, Operation>(this, operationName, returnType, opDefinition));
 	}
 
-	public void extendType(String ruleName, Type returnType, Rule r) {
+	public void attachRule(String ruleName, Type returnType, Rule r) {
 		if ( r instanceof CalledRule ) {
 			calledRules.put(ruleName, new VirtualFeature<TransformationNamespace, CalledRule>(this, ruleName, returnType, (CalledRule) r));
 		} else if ( r instanceof LazyMatchedRule ) {

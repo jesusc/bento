@@ -53,6 +53,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return this.metamodel.getName();
 	}
 	
+	public EClass getKlass() {
+		return eClass;
+	}
+	
 	@Override
 	public boolean hasFeature(String featureName) {
 		return getExtendedFeature(featureName) != null ||
@@ -318,13 +322,19 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 
 
 	private ArrayList<MatchedRule> attachedRules = new ArrayList<MatchedRule>();
+	private ArrayList<MatchedRule> resolvingRules = new ArrayList<MatchedRule>();
 
 	@Override
-	public void extendType(String ruleName, Type returnType, Rule rule) {
+	public void attachRule(String ruleName, Type returnType, Rule rule) {
 		if ( ! (rule instanceof MatchedRule) ) throw new IllegalArgumentException();
 		
-		attachedRules.add((MatchedRule) rule);
-		
+		attachedRules.add((MatchedRule) rule);	
+		attachResolvingRule(ruleName, returnType, (MatchedRule) rule);
+	}
+	
+	public void attachResolvingRule(String ruleName, Type returnType, MatchedRule rule) {
+		resolvingRules.add(rule);		
+
 		for(EClass c : eClass.getESuperTypes()) {
 			if ( c.eIsProxy() ) { 
 				// TODO: Handle this: System.out.println("WARNING: Ignoring proxy (extendType, ClassNamespace)"); 
@@ -332,16 +342,25 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 			}
 			
 			ClassNamespace ns = (ClassNamespace) metamodel.getClassifier(c.getName());
-			ns.extendType(ruleName, returnType, rule);
-		}
+			ns.attachResolvingRule(ruleName, returnType, rule);
+		}		
 	}
 
-	public List<MatchedRule> getAttachedRules() {
+	public List<MatchedRule> getResolvingRules() {
+		return resolvingRules;
+	}
+
+	public List<MatchedRule> getRules() {
 		return attachedRules;
 	}
-
 
 	public Collection<ClassNamespace> getAllSubclasses() {
 		return metamodel.getAllSubclasses(eClass);
 	}
+
+
+	public Collection<ClassNamespace> getDirectSubclasses() {
+		return metamodel.getDirectSubclasses(eClass);		
+	}
+
 }

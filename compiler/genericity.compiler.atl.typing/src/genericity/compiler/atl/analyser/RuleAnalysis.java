@@ -1,8 +1,11 @@
 package genericity.compiler.atl.analyser;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import java.util.List;
 
@@ -215,11 +218,13 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 			Metaclass rightMetaclass = (Metaclass) rightType;
 			ClassNamespace ns = (ClassNamespace) rightType.getMetamodelRef();
 			
-			List<MatchedRule> rules = ns.getAttachedRules();
+			List<MatchedRule> rules = ns.getResolvingRules();
 			if ( rules.size() == 0 && ! TypeUtils.isClassAssignableTo(rightMetaclass.getKlass(), f.getEReferenceType()) ) {
-				System.err.println("!!!!! WARNING!!! No rule for binding.  " + f.getEContainingClass().getName() + "." + f.getName() + " <- " + TypeUtils.typeToString(rightType) + ". " + self.getLocation());
+				errors.signalBindingWithoutRule(self, rightMetaclass.getKlass(), f.getEReferenceType());
+
+				// System.err.println("!!!!! WARNING!!! No rule for binding.  " + f.getEContainingClass().getName() + "." + f.getName() + " <- " + TypeUtils.typeToString(rightType) + ". " + self.getLocation());
 			} else {
-				findPossibleUnresolvedClasses(rightMetaclass, rules);				
+				findPossibleUnresolvedClasses(self, rightMetaclass, f.getEReferenceType()); //, rules);				
 				findRulesWithWrongTargetType(self, rightMetaclass, f.getEReferenceType(), rules);
 			}
 		} else if ( rightType instanceof CollectionType ) {
@@ -251,12 +256,45 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		}
 	}
 
-	private void findPossibleUnresolvedClasses(Metaclass rightMetaclass, List<MatchedRule> rules) {
-		ClassNamespace ns = (ClassNamespace) rightMetaclass.getMetamodelRef();
+	private void findPossibleUnresolvedClasses(Binding b, Metaclass rightMetaclass, EClass targetType) { //, List<MatchedRule> rules) {
+		LinkedList<ClassNamespace> pending = new LinkedList<ClassNamespace>();
+		pending.add( (ClassNamespace) rightMetaclass.getMetamodelRef() );
+	
+		LinkedList<ClassNamespace> notResolved = new LinkedList<ClassNamespace>();
 		
-		for (MatchedRule matchedRule : rules) {
+		while ( ! pending.isEmpty() ) {
+			ClassNamespace ns = pending.pop();
 			
+			if ( ns.getRules().isEmpty() ) {
+				Collection<ClassNamespace> direct = ns.getDirectSubclasses();
+				if ( direct.size() > 0 ) {
+					pending.addAll(direct);
+				} else {
+					notResolved.add(ns);
+				}
+			}
 		}
+		
+		if ( notResolved.size() > 0 ) {
+			ArrayList<EClass> problematicClasses = new ArrayList<EClass>(notResolved.size());
+			for (ClassNamespace classNamespace : notResolved) {
+				problematicClasses.add(classNamespace.getKlass());
+			}
+			
+			errors.signalBindingPossiblyUnresolved(b, rightMetaclass.getKlass(), targetType, problematicClasses);
+
+			// BindingPossiblyUnresolved
+			// System.out.println("Problems with " + notResolved);
+		}
+		
+		/*
+		ns.getDirectSubclasses();
+		
+		System.out.println("* " + rightMetaclass.getName());
+		for (MatchedRule matchedRule : rules) {
+			System.out.println(matchedRule.getName());
+		}
+		*/
 		// System.out.println("RuleAnalysis.findPossibleUnresolvedClasses()");
 	}
 }

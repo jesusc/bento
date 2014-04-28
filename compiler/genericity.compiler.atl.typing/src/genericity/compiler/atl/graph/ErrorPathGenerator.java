@@ -41,7 +41,9 @@ import atl.metamodel.OCL.VariableExp;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
+import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
@@ -106,6 +108,10 @@ public class ErrorPathGenerator {
 			System.err.println("ErrorPathGenerator: Ignored FlattenOverNonNestedCollectionImpl" );
 		} else if ( p instanceof DifferentBranchTypes ) {
 			System.err.println("ErrorPathGenerator: Ignored DifferentBranchTypes" );
+		} else if ( p instanceof BindingPossiblyUnresolved ) {
+			System.err.println("ErrorPathGenerator: Ignored BindingPossiblyUnresolved" );
+		} else if ( p instanceof BindingWithoutRule ) {
+			System.err.println("ErrorPathGenerator: Ignored BindingWithoutRule" );
 		} else {
 			throw new UnsupportedOperationException(p.getClass().getName());
 		}
@@ -117,7 +123,7 @@ public class ErrorPathGenerator {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
 		graph.linkProblemToNode(p, node);
-		System.out.println(p);
+		// System.out.println(p);
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);
 	}
@@ -135,6 +141,8 @@ public class ErrorPathGenerator {
 	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {
 		// Try to find an iterator
 		ATLModelBaseObject parent = start.container_(); // TODO: Iterate
+
+		System.out.println(OclGenerator.gen(start));
 		while ( ! (parent instanceof IteratorExp || (parent instanceof IterateExp) ) ) {
 			if ( (parent instanceof Rule) || (parent instanceof Helper) ) {
 				parent = null;

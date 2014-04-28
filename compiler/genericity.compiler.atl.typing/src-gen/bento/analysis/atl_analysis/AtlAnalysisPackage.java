@@ -6,7 +6,9 @@
  */
 package bento.analysis.atl_analysis;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -125,13 +127,40 @@ public interface AtlAnalysisPackage extends EPackage {
 	int PROBLEM__DEPENDENTS = ANALYSIS_INFO_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__DESCRIPTION = ANALYSIS_INFO_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__SEVERITY = ANALYSIS_INFO_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__NEEDS_CSP = ANALYSIS_INFO_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Problem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_FEATURE_COUNT = ANALYSIS_INFO_FEATURE_COUNT + 1;
+	int PROBLEM_FEATURE_COUNT = ANALYSIS_INFO_FEATURE_COUNT + 4;
 
 
 	/**
@@ -152,6 +181,17 @@ public interface AtlAnalysisPackage extends EPackage {
 	 * @ordered
 	 */
 	int RECOVERY_FEATURE_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.SeverityKind <em>Severity Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.SeverityKind
+	 * @see bento.analysis.atl_analysis.impl.AtlAnalysisPackageImpl#getSeverityKind()
+	 * @generated
+	 */
+	int SEVERITY_KIND = 4;
 
 
 	/**
@@ -207,6 +247,39 @@ public interface AtlAnalysisPackage extends EPackage {
 	EReference getProblem_Dependents();
 
 	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.Problem#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see bento.analysis.atl_analysis.Problem#getDescription()
+	 * @see #getProblem()
+	 * @generated
+	 */
+	EAttribute getProblem_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.Problem#getSeverity <em>Severity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Severity</em>'.
+	 * @see bento.analysis.atl_analysis.Problem#getSeverity()
+	 * @see #getProblem()
+	 * @generated
+	 */
+	EAttribute getProblem_Severity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.Problem#isNeedsCSP <em>Needs CSP</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Needs CSP</em>'.
+	 * @see bento.analysis.atl_analysis.Problem#isNeedsCSP()
+	 * @see #getProblem()
+	 * @generated
+	 */
+	EAttribute getProblem_NeedsCSP();
+
+	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.Recovery <em>Recovery</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -215,6 +288,16 @@ public interface AtlAnalysisPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRecovery();
+
+	/**
+	 * Returns the meta object for enum '{@link bento.analysis.atl_analysis.SeverityKind <em>Severity Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Severity Kind</em>'.
+	 * @see bento.analysis.atl_analysis.SeverityKind
+	 * @generated
+	 */
+	EEnum getSeverityKind();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -285,6 +368,30 @@ public interface AtlAnalysisPackage extends EPackage {
 		EReference PROBLEM__DEPENDENTS = eINSTANCE.getProblem_Dependents();
 
 		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROBLEM__DESCRIPTION = eINSTANCE.getProblem_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Severity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROBLEM__SEVERITY = eINSTANCE.getProblem_Severity();
+
+		/**
+		 * The meta object literal for the '<em><b>Needs CSP</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROBLEM__NEEDS_CSP = eINSTANCE.getProblem_NeedsCSP();
+
+		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.impl.RecoveryImpl <em>Recovery</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -293,6 +400,16 @@ public interface AtlAnalysisPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RECOVERY = eINSTANCE.getRecovery();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.SeverityKind <em>Severity Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.SeverityKind
+		 * @see bento.analysis.atl_analysis.impl.AtlAnalysisPackageImpl#getSeverityKind()
+		 * @generated
+		 */
+		EEnum SEVERITY_KIND = eINSTANCE.getSeverityKind();
 
 	}
 

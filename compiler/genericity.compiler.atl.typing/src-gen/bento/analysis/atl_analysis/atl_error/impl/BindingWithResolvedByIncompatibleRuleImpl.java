@@ -7,6 +7,7 @@
 package bento.analysis.atl_analysis.atl_error.impl;
 
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
+import bento.analysis.atl_analysis.atl_error.BindingResolution;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
@@ -265,6 +266,42 @@ public class BindingWithResolvedByIncompatibleRuleImpl extends BindingProblemImp
 				return rules != null && !rules.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BindingResolution.class) {
+			switch (derivedFeatureID) {
+				case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RIGHT_TYPE: return AtlErrorsPackage.BINDING_RESOLUTION__RIGHT_TYPE;
+				case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__TARGET_TYPE: return AtlErrorsPackage.BINDING_RESOLUTION__TARGET_TYPE;
+				case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RULES: return AtlErrorsPackage.BINDING_RESOLUTION__RULES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BindingResolution.class) {
+			switch (baseFeatureID) {
+				case AtlErrorsPackage.BINDING_RESOLUTION__RIGHT_TYPE: return AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RIGHT_TYPE;
+				case AtlErrorsPackage.BINDING_RESOLUTION__TARGET_TYPE: return AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__TARGET_TYPE;
+				case AtlErrorsPackage.BINDING_RESOLUTION__RULES: return AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE__RULES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //BindingWithResolvedByIncompatibleRuleImpl

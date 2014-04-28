@@ -23,7 +23,7 @@ public class GlobalNamespace {
 	private Map<String, Resource>	logicalNamesToMetamodels;
 	
 	
-	public GlobalNamespace(Collection<Resource> r, HashMap<String, Resource> logicalNamesToMetamodels) {
+	public GlobalNamespace(Collection<Resource> r, Map<String, Resource> logicalNamesToMetamodels) {
 		for (Resource resource : r) {
 			resources.add(resource);
 		}

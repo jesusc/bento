@@ -71,6 +71,7 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.BINDING_EXPECTED_ONE_ASSIGNED_MANY: return createBindingExpectedOneAssignedMany();
 			case AtlErrorsPackage.BINDING_WITHOUT_RULE: return createBindingWithoutRule();
 			case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE: return createBindingWithResolvedByIncompatibleRule();
+			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED: return createBindingPossiblyUnresolved();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO: return createResolvedRuleInfo();
 			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: return createFlattenOverNonNestedCollection();
 			case AtlErrorsPackage.ITERATOR_OVER_EMPTY_SEQUENCE: return createIteratorOverEmptySequence();
@@ -187,6 +188,16 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public BindingWithResolvedByIncompatibleRule createBindingWithResolvedByIncompatibleRule() {
 		BindingWithResolvedByIncompatibleRuleImpl bindingWithResolvedByIncompatibleRule = new BindingWithResolvedByIncompatibleRuleImpl();
 		return bindingWithResolvedByIncompatibleRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BindingPossiblyUnresolved createBindingPossiblyUnresolved() {
+		BindingPossiblyUnresolvedImpl bindingPossiblyUnresolved = new BindingPossiblyUnresolvedImpl();
+		return bindingPossiblyUnresolved;
 	}
 
 	/**

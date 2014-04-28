@@ -41,7 +41,7 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 	}
 
 	@Override
-	public void extendType(String featureName, Type returnType, Rule r) {
+	public void attachRule(String featureName, Type returnType, Rule r) {
 		throw new UnsupportedOperationException("Collection types cannot be atached to rules");
 	}
 

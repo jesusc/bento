@@ -18,7 +18,7 @@ public interface ITypeNamespace {
 	
 	void extendType(String featureName, Type returnType, Attribute attrDefinition);
 	void extendType(String operationName, Type returnType, Operation opDefinition);
-	void extendType(String ruleName, Type returnType, Rule rule);
+	void attachRule(String ruleName, Type returnType, Rule rule);
 	
 	boolean   hasAttachedOperation(String operationName);
 	Operation getAttachedOperation(String operationName);

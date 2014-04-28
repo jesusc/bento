@@ -13,6 +13,7 @@ import bento.analysis.atl_analysis.AtlAnalysisPackage;
 import bento.analysis.atl_analysis.Problem;
 
 import bento.analysis.atl_analysis.Recovery;
+import bento.analysis.atl_analysis.SeverityKind;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
 
 import bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl;
@@ -20,7 +21,9 @@ import bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage;
 import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryPackageImpl;
 import genericity.typing.atl_types.AtlTypingPackage;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -60,6 +63,13 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 	 * @generated
 	 */
 	private EClass recoveryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum severityKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -183,8 +193,44 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProblem_Description() {
+		return (EAttribute)problemEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProblem_Severity() {
+		return (EAttribute)problemEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProblem_NeedsCSP() {
+		return (EAttribute)problemEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRecovery() {
 		return recoveryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getSeverityKind() {
+		return severityKindEEnum;
 	}
 
 	/**
@@ -222,8 +268,14 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 
 		problemEClass = createEClass(PROBLEM);
 		createEReference(problemEClass, PROBLEM__DEPENDENTS);
+		createEAttribute(problemEClass, PROBLEM__DESCRIPTION);
+		createEAttribute(problemEClass, PROBLEM__SEVERITY);
+		createEAttribute(problemEClass, PROBLEM__NEEDS_CSP);
 
 		recoveryEClass = createEClass(RECOVERY);
+
+		// Create enums
+		severityKindEEnum = createEEnum(SEVERITY_KIND);
 	}
 
 	/**
@@ -272,8 +324,18 @@ public class AtlAnalysisPackageImpl extends EPackageImpl implements AtlAnalysisP
 
 		initEClass(problemEClass, Problem.class, "Problem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProblem_Dependents(), this.getProblem(), null, "dependents", null, 0, -1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProblem_Description(), ecorePackage.getEString(), "description", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProblem_Severity(), this.getSeverityKind(), "severity", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProblem_NeedsCSP(), ecorePackage.getEBoolean(), "needsCSP", "false", 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(recoveryEClass, Recovery.class, "Recovery", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Initialize enums and add enum literals
+		initEEnum(severityKindEEnum, SeverityKind.class, "SeverityKind");
+		addEEnumLiteral(severityKindEEnum, SeverityKind.ERROR);
+		addEEnumLiteral(severityKindEEnum, SeverityKind.WARNING);
+		addEEnumLiteral(severityKindEEnum, SeverityKind.STYLE_SUGGESTION);
+		addEEnumLiteral(severityKindEEnum, SeverityKind.PERFORMANCE_SUGGESTION);
 
 		// Create resource
 		createResource(eNS_URI);

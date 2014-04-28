@@ -6,6 +6,8 @@
  */
 package bento.analysis.atl_analysis.atl_error;
 
+import org.eclipse.emf.ecore.EClass;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,5 +19,5 @@ package bento.analysis.atl_analysis.atl_error;
  * @model
  * @generated
  */
-public interface BindingWithoutRule extends BindingProblem {
+public interface BindingWithoutRule extends BindingProblem, BindingResolution {
 } // BindingWithoutRule

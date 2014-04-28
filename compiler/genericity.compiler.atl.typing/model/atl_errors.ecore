@@ -11,6 +11,18 @@
   <eClassifiers xsi:type="ecore:EClass" name="Problem" abstract="true" eSuperTypes="#//AnalysisInfo">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" upperBound="-1"
         eType="#//Problem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" lowerBound="1"
+        eType="#//SeverityKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsCSP" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SeverityKind">
+    <eLiterals name="ERROR"/>
+    <eLiterals name="WARNING" value="1"/>
+    <eLiterals name="STYLE_SUGGESTION" value="3"/>
+    <eLiterals name="PERFORMANCE_SUGGESTION" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Recovery" abstract="true"/>
   <eSubpackages name="atl_error" nsURI="http://bento/analysis/atl/analysis/errors"
@@ -73,15 +85,20 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NoBindingForCompulsoryFeature" eSuperTypes="#//atl_error/TargetModelConformanceProblem #//atl_error/BindingProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="BindingExpectedOneAssignedMany" eSuperTypes="#//atl_error/BindingProblem"/>
-    <eClassifiers xsi:type="ecore:EClass" name="BindingWithoutRule" eSuperTypes="#//atl_error/BindingProblem"/>
-    <eClassifiers xsi:type="ecore:EClass" name="BindingWithResolvedByIncompatibleRule"
-        eSuperTypes="#//atl_error/BindingProblem">
+    <eClassifiers xsi:type="ecore:EClass" name="BindingResolution" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="rightType" lowerBound="1"
           eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="targetType" lowerBound="1"
           eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
           eType="#//atl_error/ResolvedRuleInfo" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingWithoutRule" eSuperTypes="#//atl_error/BindingProblem #//atl_error/BindingResolution"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingWithResolvedByIncompatibleRule"
+        eSuperTypes="#//atl_error/BindingProblem #//atl_error/BindingResolution"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BindingPossiblyUnresolved" eSuperTypes="#//atl_error/BindingProblem #//atl_error/BindingResolution">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="problematicClasses" lowerBound="1"
+          upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ResolvedRuleInfo">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"

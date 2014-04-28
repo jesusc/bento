@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
@@ -95,6 +96,7 @@ public class Ecore2measure {
 	public Ecore2measure() throws IOException {
 		properties = new Properties();
 		properties.load(getFileURL("Ecore2measure.properties").openStream());
+		EPackage.Registry.INSTANCE.put(getMetamodelUri("Measure"), metamodel.metrics.Measure.MeasurePackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 	}
 	
