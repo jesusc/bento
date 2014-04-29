@@ -14,12 +14,15 @@ public class IntegerNamespace extends PrimitiveTypeNamespace {
 	public IntegerNamespace() {
 	}
 
+	protected IntegerType getType() {
+		return (IntegerType) createType(false);
+	}
+	
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		Type t = super.getOperationType(operationName, arguments, node);
 		if ( t == null ) {
-	
-			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
+			return AnalyserContext.getErrorModel().signalNoOperationFound(getType(), operationName, node, null);
 		}
 		return t;
 	}

@@ -136,7 +136,7 @@ public class CSPBuffer {
 		public String getText(int tab) {
 			// Optimization
 			if ( nested == null ) {
-				 return t(tab) + (!branch ? "not" : "") + genOcl(condition) + postfix;
+				 return t(tab) + (!branch ? "not " : "") + genOcl(condition) + postfix;
 			}
 			
 			String t = branch ? getNestedText(tab + 1) : t(tab + 1) + "false";
@@ -161,7 +161,8 @@ public class CSPBuffer {
 		@Override
 		public String getText(int tab) {
 			return t(tab) + genOcl(receptor) + "->" + selector + "(" + varName + "|\n" +
-						nested.getText(tab + 1) + 
+						getNestedText(tab + 1) +
+						// nested.getText(tab + 1) + 
 					t(tab) + ")";
 		}
 		

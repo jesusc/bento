@@ -6,6 +6,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
@@ -72,12 +73,16 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 		if ( TypeUtils.isReference(ann.getType()) ) {
 			// g = " not " + g + ".oclIsUndefined()";
 			prefix = " not ";
-			postfix = ".oclIsUndefined()";
+			postfix = ".isUndefined()";
 		} else if ( TypeUtils.isCollection(ann.getType()) ) {
 			// g = g + "->size() > 0";
 			postfix = "->size() > 0";
-		} else if ( ann.getType() instanceof StringType ) {
-			throw new UnsupportedOperationException(ann.getType().getClass().toString());
+		} else if ( ann.getType() instanceof PrimitiveType ) {
+			// The alternative is to strip the parts that refers to primitive types...
+			prefix = " not ";
+			postfix = ".isUndefined()";
+	
+			// throw new UnsupportedOperationException(ann.getType().getClass().toString());
 			// g = g + "STRING_NOT_SUPPORTED";
 		} else { 
 			throw new UnsupportedOperationException(ann.getType().getClass().toString());

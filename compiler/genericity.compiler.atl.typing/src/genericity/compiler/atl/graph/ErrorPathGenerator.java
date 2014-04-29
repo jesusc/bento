@@ -137,8 +137,20 @@ public class ErrorPathGenerator {
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);		
 	}
 	
-
+	public ATLModelBaseObject findControlFlowConstruct(ATLModelBaseObject element) {
+		ATLModelBaseObject parent = element.container_();
+		while ( ! isControlFlowElement(parent) ) {
+			if ( isIteration(parent) ) {
+				return parent;
+			}
+			parent = parent.container_();
+		}
+		
+		return parent;
+	}
+	
 	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {
+		/*
 		// Try to find an iterator
 		ATLModelBaseObject parent = start.container_(); // TODO: Iterate
 
@@ -156,7 +168,8 @@ public class ErrorPathGenerator {
 			start = ((IteratorExp) parent).getSource();
 			startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
 		}
-
+		*/
+		
 		// Handle the special case "varName.error", to avoid generating a node with just "varName" which
 		// is redundant (variable names represents objects that must exist)
 		if ( start instanceof VariableExp ) {
