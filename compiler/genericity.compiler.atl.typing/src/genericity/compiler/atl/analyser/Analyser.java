@@ -25,9 +25,11 @@ public class Analyser {
 	private boolean doDependency = true;
 	private DependencyGraph dependencyGraph;
 	
+	/*
 	public Analyser(GlobalNamespace mm, Resource atlResource, BasicEMFModel out) throws IOException {
 		this(mm, new ATLModel(atlResource), out);
 	}
+	*/
 	
 	public Analyser(GlobalNamespace mm, ATLModel atlModel, BasicEMFModel out) throws IOException {
 		this.mm    = mm;

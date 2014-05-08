@@ -87,6 +87,13 @@ public class ErrorPathGenerator {
 		return graph;
 	}
 
+
+	public DependencyGraph perform(Problem p) {
+		graph = new DependencyGraph();
+		generatePath((LocalProblem) p);
+		return graph;
+	}
+
 	private void generatePath(LocalProblem p) {
 		
 		if ( p instanceof NoBindingForCompulsoryFeature ) {

@@ -64,6 +64,27 @@ public class ErrorSliceGenerator {
 		return slice;
 	}
 	
+	public ErrorSlice generate(Problem p, Resource r, String metamodelName) {
+		generate(metamodelName);
+
+		for(DependencyNode node : graph.getProblemNodes()) {
+			LocalProblem problemOfNode   = (LocalProblem) ((ProblemNode) node).getProblem();
+			System.out.println(p + " - " + problemOfNode);
+			if ( problemOfNode == p ) {
+				slice = ((ProblemNode) node).getErrorSlice();
+
+				String name = "error"; //  + (i + 1);
+				String info = ErrorUtils.getShortError(problemOfNode);
+
+				new EffectiveMetamodelBuilder(slice).extractSource(r, name, name, name, info);
+				return slice;
+			}
+		}
+		
+		throw new IllegalArgumentException(graph.getProblemNodes().toString());
+	}
+	
+	
 	public ErrorSlice getSlice() {
 		return slice;
 	}

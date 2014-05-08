@@ -102,6 +102,14 @@ public class TypingModel {
 	public TypingModel(BasicEMFModel impl) {
 		this.impl = impl;
 	}
+	
+	/**
+	 * Remove some time...
+	 * @return
+	 */
+	public BasicEMFModel getImpl() {
+		return impl;
+	}
 
 	
 	public StringType newStringType() {

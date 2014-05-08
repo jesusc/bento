@@ -39,7 +39,7 @@ public abstract class FootprintComputation {
 	protected String slicedURI;
 	protected BasicEMFModel typing;
 	protected MetamodelNamespace mm;
-	protected BasicEMFModel atlTransformation;
+	// protected BasicEMFModel atlTransformation;
 	// protected EPackage pkg;
 
 	protected HashSet<EClass> directUsedTypes   = new HashSet<EClass>();
@@ -51,12 +51,12 @@ public abstract class FootprintComputation {
 	protected HashSet<CallSite> callSites = new HashSet<CallSite>();
 	private ATLModel	atlModel;
 
-	public FootprintComputation(BasicEMFModel atlTransformation, MetamodelNamespace mm, BasicEMFModel typing, String slicedURI) {
-		this.atlTransformation = atlTransformation;
+	public FootprintComputation(ATLModel atlModel, MetamodelNamespace mm, BasicEMFModel typing, String slicedURI) {
+		// this.atlTransformation = atlTransformation;
 		this.mm = mm;
 		this.typing = typing;
 		this.slicedURI = slicedURI;
-		
+		this.atlModel = atlModel;
 		
 		/*
 		List<EObject> pkgs = mm.allObjectsOf(EPackage.class.getSimpleName());
@@ -73,8 +73,8 @@ public abstract class FootprintComputation {
 	
 	
 	public ATLModel getATL() {
-		if ( atlModel == null )
-			atlModel = new ATLModel(atlTransformation.getHandler().getResource());
+		// if ( atlModel == null )
+		//	atlModel = new ATLModel(atlTransformation.getHandler().getResource());
 		return atlModel;
 	}
 

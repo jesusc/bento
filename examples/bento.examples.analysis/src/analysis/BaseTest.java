@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
+import atl.metamodel.ATLModel;
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
 import bento.analyser.footprint.TrafoMetamodelData;
 import bento.componetization.atl.CallSite;
@@ -38,7 +39,7 @@ import bento.componetization.atl.MetamodelPrunner.Strategy;
 
 public abstract class BaseTest {
 
-	protected BasicEMFModel atlTransformation;
+	protected ATLModel atlTransformation;
 	protected BasicEMFModel typingModel;
 	private EPackage conceptPkg;
 	private ResourceSet rs = new ResourceSetImpl();
@@ -60,18 +61,20 @@ public abstract class BaseTest {
 		this.atlTransformationFile = atlTransformationFile;
 		// BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, BOUND_METAMODEL);
 
-		atlTransformation = loader
+		BasicEMFModel atlTransformationEmfModel = loader
 				.basicModelFromFile(
 						withDir("../../compiler/genericity.compiler.atl/src/genericity/typecheck/atl/ATL.ecore"),
 						withDir(atlTransformationFile));
 
+		atlTransformation = new ATLModel(atlTransformationEmfModel.getHandler().getResource());
+		
  		List<EPackage> pkgs = new ArrayList<EPackage>();
 		pkgs.add(AtlTypingPackage.eINSTANCE);
 		BasicEMFModel out = loader
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
 		mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
-		analyser = new Analyser(mm, atlTransformation.getHandler().getResource(), out);
+		analyser = new Analyser(mm, atlTransformation, out);
 		analyser.setDoDependencyAnalysis(doDependencyAnalysis);
 		analyser.perform();
 	
@@ -160,9 +163,6 @@ public abstract class BaseTest {
 		return prunnedResource;
 	}
 		
-	public BasicEMFModel getAtlTransformation() {
-		return atlTransformation;
-	}
 	
 	public BasicEMFModel getTypingModel() {
 		return typingModel;

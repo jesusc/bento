@@ -8,15 +8,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
-import org.eclectic.modeling.emf.IModel;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import atl.metamodel.ATLModel;
+
 public class TrafoMetamodelData extends FootprintComputation implements IEffectiveMetamodelData {
 
-	public TrafoMetamodelData(BasicEMFModel atlTransformation, MetamodelNamespace mm, BasicEMFModel typing, String slicedURI) {
-		super(atlTransformation, mm, typing, slicedURI);
+	public TrafoMetamodelData(ATLModel atlModel, MetamodelNamespace mm, BasicEMFModel typing, String slicedURI) {
+		super(atlModel, mm, typing, slicedURI);
 		computeFootprint();
 	}
 

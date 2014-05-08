@@ -157,5 +157,5 @@
 		<debugModelPresentation id="genericity.language.gcomponent.resource.gcomponent.debugModel" class="genericity.language.gcomponent.resource.gcomponent.ui.debug.GcomponentDebugModelPresentation">
 		</debugModelPresentation>
 	</extension>
-	
+ 
 </plugin>

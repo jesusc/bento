@@ -1,3 +1,7 @@
+-- @path CodeClone=/bento.examples.analysis/third-party/usecases/codeclonetools/CodeClone/Metamodels/CodeClone/CodeClone.ecore
+-- @path CloneDr=/bento.examples.analysis/third-party/usecases/codeclonetools/CloneDr/Metamodel/CloneDr.ecore
+-- @path FileInfo=/bento.examples.analysis/third-party/usecases/codeclonetools/FileInfo/Metamodel/FileInfo.ecore
+
 --@atlcompiler	atl2006
 --@name			CloneDr2CodeClone
 --@version		1.0

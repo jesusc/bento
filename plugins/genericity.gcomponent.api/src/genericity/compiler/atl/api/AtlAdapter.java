@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import atl.metamodel.ATLModel;
 import eclectic.adapt_transformation;
 import gbind.dsl.BindingModel;
 import gbind.dsl.MetamodelDeclaration;
@@ -139,8 +140,9 @@ public class AtlAdapter {
 		BasicEMFModel typing = loader
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
+		ATLModel atlModel = new ATLModel(atlTransformation.getHandler().getResource());
 		GlobalNamespace mm = loadMetamodels(loader, templateParameters);
-		Analyser analyser = new Analyser(mm, atlTransformation.getHandler().getResource(), typing);
+		Analyser analyser = new Analyser(mm, atlModel, typing);
 		analyser.setDoDependencyAnalysis(false);
 		analyser.perform();
 		
@@ -174,8 +176,9 @@ public class AtlAdapter {
 				.emptyModelFromMemory(pkgs, "tmp_/typing.xmi");
 
 		
+		ATLModel atlModel = new ATLModel(atlTransformation.getHandler().getResource());
 		GlobalNamespace mm = loadMetamodels(loader, templateParameters);
-		Analyser analyser = new Analyser(mm, atlTransformation.getHandler().getResource(), typing);
+		Analyser analyser = new Analyser(mm, atlModel, typing);
 		analyser.setDoDependencyAnalysis(false);
 		analyser.perform();
 		

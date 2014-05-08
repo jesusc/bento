@@ -1,3 +1,6 @@
+-- @path CodeClone=/bento.examples.analysis/third-party/usecases/codeclonetools/CodeClone/Metamodels/CodeClone/CodeClone.ecore
+-- @path SVG=/bento.examples.analysis/third-party/usecases/codeclonetools/CodeClone/Metamodels/SVG/SVG.ecore
+
 --@atlcompiler	atl2006
 --@name			CodeClone2SVG
 --@version		1.0

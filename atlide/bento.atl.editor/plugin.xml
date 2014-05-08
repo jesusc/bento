@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="bento.atl.editor.quickfix" name="Bento ATL QuickFix" schema="schema/bento.atl.editor.quickfix.exsd"/>
+
+   <extension
+         id="bentoATLBuilder"
+         name="Bento ATL Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="bento.atl.editor.builder.BentoATLBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="bentoATLNature"
+         name="Bento ATL Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="bento.atl.editor.builder.BentoATLNature">
+         </run>
+      </runtime>
+      <builder
+            id="bento.atl.editor.bentoATLBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="bento.atl.editor.contribution1">
+         <action
+               label="Add/Remove Bento ATL Nature"
+               class="bento.atl.editor.builder.ToggleNatureAction"
+               menubarPath="additions"
+               enablesFor="+"
+               id="bento.atl.editor.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="bento.atl.editor.bentoATLProblem"
+         name="ATL Analysis Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="false">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="bento.atl.editor.problems.MarkerResolutionGenerator"
+            markerType="bento.atl.editor.bentoATLProblem">
+      </markerResolutionGenerator>
+   </extension>
+   
+   
+     <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="bento.atl.editor.AtlEditorExt"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="atl"
+            icon="icons/atl_file.gif"
+            id="org.eclipse.m2m.atl.adt.editor.AtlEditor"
+            name="Bento ATL Editor">
+			<!--
+			class="org.eclipse.m2m.atl.adt.ui.editor.AtlEditor"
+            id="org.eclipse.m2m.atl.adt.editor.AtlEditor"
+			-->
+      </editor>
+   </extension>
+
+</plugin>

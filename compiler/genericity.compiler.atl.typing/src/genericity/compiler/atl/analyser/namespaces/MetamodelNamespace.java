@@ -87,6 +87,10 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		
 	}
 
+	public Resource getResource() {
+		return resource;
+	}
+	
 	public List<EClass> getAllClasses() {
 		return allClasses;
 	}

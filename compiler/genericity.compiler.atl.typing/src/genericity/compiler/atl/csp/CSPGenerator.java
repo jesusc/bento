@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
+import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import genericity.compiler.atl.analyser.ErrorUtils;
 import genericity.compiler.atl.graph.DependencyGraph;
@@ -43,6 +44,15 @@ public class CSPGenerator {
 		return s;
 	}
 
+	public String generate(Problem p) {
+		for(DependencyNode node : graph.getProblemNodes()) {
+			if ( node.getProblem() == p ) {
+				return generateCSP(node);
+			}
+		}
+		throw new IllegalArgumentException();
+	}
+	
 	private String generateCSP(DependencyNode errorNode) {
 		CSPBuffer buf = new CSPBuffer();
 		

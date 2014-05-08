@@ -32,6 +32,7 @@ public class FD2PN extends BaseTest {
 		typing(FD2PN_TRANSFORMATION, new Object[] { FD_METAMODEL, PN_METAMODEL}, 
 				   new String[] { "FD", "PN" }, false);
 		
+		/*
 		TreeIterator<EObject> it = atlTransformation.getHandler().getResource().getAllContents();
 		while ( it.hasNext() ) {
 			EObject obj = it.next();
@@ -59,6 +60,7 @@ public class FD2PN extends BaseTest {
 				}
 			}
 		}
+		*/
 		
 		System.out.println("Finished typing of " + FD2PN_TRANSFORMATION);
 	}
