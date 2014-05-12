@@ -1,6 +1,7 @@
 package genericity.compiler.atl.analyser.namespaces;
 
 import genericity.compiler.atl.analyser.AnalyserContext;
+import genericity.compiler.atl.libtypes.AtlTypes;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.LocatedElement;
 
@@ -11,9 +12,19 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 	}
 
 	@Override
+	public boolean hasOperation(String operationName, Type[] arguments) {
+		boolean hasOp = super.hasOperation(operationName, arguments);
+		if ( ! hasOp ) {
+			hasOp = AtlTypes.string().hasOperation(operationName);
+		}
+		return hasOp;
+	}
+	
+	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		Type t = super.getOperationType(operationName, arguments, node);
 		if ( t == null ) {
+			/*
 			if ( operationName.equals("size")     ) return AnalyserContext.getTypingModel().newIntegerType();
 			if ( operationName.equals("substring")) return AnalyserContext.getTypingModel().newStringType();
 			if ( operationName.equals("firstToLower")) return AnalyserContext.getTypingModel().newStringType();
@@ -21,8 +32,11 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 			if ( operationName.equals("toReal")) return AnalyserContext.getTypingModel().newFloatType();
 			if ( operationName.equals("concat")) return AnalyserContext.getTypingModel().newStringType(); // TODO: Check concat's arguments
 			if ( operationName.equals("startsWith")) return AnalyserContext.getTypingModel().newBooleanType(); // TODO: Check startsWith arguments
+			if ( operationName.equals("indexOf")) return AnalyserContext.getTypingModel().newIntegerType(); 
 
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
+			*/
+			return AtlTypes.string().getOperationReturnType(operationName);
 		}
 		return t;
 	}

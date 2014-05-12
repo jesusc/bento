@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.compiler.atl.typing/src-gen"
-    modelPluginID="genericity.compiler.atl.typing" modelName="Atl_errors" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/genericity.compiler.atl.typing/model/atl_types.genmodel#//atl_types">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.compiler.atl.typing/src-gen" modelPluginID="genericity.compiler.atl.typing"
+    modelName="Atl_errors" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/genericity.compiler.atl.typing/model/atl_types.genmodel#//atl_types">
   <foreignModel>atl_errors.ecore</foreignModel>
   <genPackages prefix="AtlAnalysis" basePackage="bento.analysis" disposableProviderFactory="true"
       ecorePackage="atl_errors.ecore#/">
@@ -35,6 +34,9 @@
       <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/InvalidArgumentProblem"/>
       <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/TargetModelConformanceProblem"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/CollectionOperationOverNoCollectionError"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureAccessInCollection">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureAccessInCollection/featureName"/>
+      </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFound">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/featureName"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFound/className"/>
@@ -44,6 +46,8 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFound/operationName"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/OperationNotFound/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFound/className"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFound/metamodelName"/>
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType/featureName"/>
@@ -92,6 +96,23 @@
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FlattenOverNonNestedCollection"/>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/IteratorOverEmptySequence"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/ReadingTargetModel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/ReadingTargetModel/modelName"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/AmbiguousTargetModelReference">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/AmbiguousTargetModelReference/modelName"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoModelFound">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoModelFound/modelName"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="atl_errors.ecore#//atl_error/WrongType"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/IteratorBodyWrongType"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/MatchedRuleWithoutOutputPattern"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/ExpectedCollectionInForEach"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/NoClassFoundInMetamodel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoClassFoundInMetamodel/className"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/InvalidArgument"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">

@@ -118,6 +118,16 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.FEATURE_ACCESS_IN_COLLECTION: {
+				FeatureAccessInCollection featureAccessInCollection = (FeatureAccessInCollection)theEObject;
+				T result = caseFeatureAccessInCollection(featureAccessInCollection);
+				if (result == null) result = caseNavigationProblem(featureAccessInCollection);
+				if (result == null) result = caseLocalProblem(featureAccessInCollection);
+				if (result == null) result = caseProblem(featureAccessInCollection);
+				if (result == null) result = caseAnalysisInfo(featureAccessInCollection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.FEATURE_NOT_FOUND: {
 				FeatureNotFound featureNotFound = (FeatureNotFound)theEObject;
 				T result = caseFeatureNotFound(featureNotFound);
@@ -271,6 +281,88 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.READING_TARGET_MODEL: {
+				ReadingTargetModel readingTargetModel = (ReadingTargetModel)theEObject;
+				T result = caseReadingTargetModel(readingTargetModel);
+				if (result == null) result = caseLocalProblem(readingTargetModel);
+				if (result == null) result = caseProblem(readingTargetModel);
+				if (result == null) result = caseAnalysisInfo(readingTargetModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.AMBIGUOUS_TARGET_MODEL_REFERENCE: {
+				AmbiguousTargetModelReference ambiguousTargetModelReference = (AmbiguousTargetModelReference)theEObject;
+				T result = caseAmbiguousTargetModelReference(ambiguousTargetModelReference);
+				if (result == null) result = caseLocalProblem(ambiguousTargetModelReference);
+				if (result == null) result = caseProblem(ambiguousTargetModelReference);
+				if (result == null) result = caseAnalysisInfo(ambiguousTargetModelReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.NO_MODEL_FOUND: {
+				NoModelFound noModelFound = (NoModelFound)theEObject;
+				T result = caseNoModelFound(noModelFound);
+				if (result == null) result = caseLocalProblem(noModelFound);
+				if (result == null) result = caseProblem(noModelFound);
+				if (result == null) result = caseAnalysisInfo(noModelFound);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.WRONG_TYPE: {
+				WrongType wrongType = (WrongType)theEObject;
+				T result = caseWrongType(wrongType);
+				if (result == null) result = caseLocalProblem(wrongType);
+				if (result == null) result = caseProblem(wrongType);
+				if (result == null) result = caseAnalysisInfo(wrongType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.ITERATOR_BODY_WRONG_TYPE: {
+				IteratorBodyWrongType iteratorBodyWrongType = (IteratorBodyWrongType)theEObject;
+				T result = caseIteratorBodyWrongType(iteratorBodyWrongType);
+				if (result == null) result = caseWrongType(iteratorBodyWrongType);
+				if (result == null) result = caseLocalProblem(iteratorBodyWrongType);
+				if (result == null) result = caseProblem(iteratorBodyWrongType);
+				if (result == null) result = caseAnalysisInfo(iteratorBodyWrongType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.MATCHED_RULE_WITHOUT_OUTPUT_PATTERN: {
+				MatchedRuleWithoutOutputPattern matchedRuleWithoutOutputPattern = (MatchedRuleWithoutOutputPattern)theEObject;
+				T result = caseMatchedRuleWithoutOutputPattern(matchedRuleWithoutOutputPattern);
+				if (result == null) result = caseLocalProblem(matchedRuleWithoutOutputPattern);
+				if (result == null) result = caseProblem(matchedRuleWithoutOutputPattern);
+				if (result == null) result = caseAnalysisInfo(matchedRuleWithoutOutputPattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.EXPECTED_COLLECTION_IN_FOR_EACH: {
+				ExpectedCollectionInForEach expectedCollectionInForEach = (ExpectedCollectionInForEach)theEObject;
+				T result = caseExpectedCollectionInForEach(expectedCollectionInForEach);
+				if (result == null) result = caseLocalProblem(expectedCollectionInForEach);
+				if (result == null) result = caseProblem(expectedCollectionInForEach);
+				if (result == null) result = caseAnalysisInfo(expectedCollectionInForEach);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL: {
+				NoClassFoundInMetamodel noClassFoundInMetamodel = (NoClassFoundInMetamodel)theEObject;
+				T result = caseNoClassFoundInMetamodel(noClassFoundInMetamodel);
+				if (result == null) result = caseLocalProblem(noClassFoundInMetamodel);
+				if (result == null) result = caseProblem(noClassFoundInMetamodel);
+				if (result == null) result = caseAnalysisInfo(noClassFoundInMetamodel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.INVALID_ARGUMENT: {
+				InvalidArgument invalidArgument = (InvalidArgument)theEObject;
+				T result = caseInvalidArgument(invalidArgument);
+				if (result == null) result = caseLocalProblem(invalidArgument);
+				if (result == null) result = caseProblem(invalidArgument);
+				if (result == null) result = caseAnalysisInfo(invalidArgument);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -347,6 +439,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCollectionOperationOverNoCollectionError(CollectionOperationOverNoCollectionError object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Feature Access In Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Feature Access In Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFeatureAccessInCollection(FeatureAccessInCollection object) {
 		return null;
 	}
 
@@ -587,6 +694,141 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIteratorOverEmptySequence(IteratorOverEmptySequence object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reading Target Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reading Target Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReadingTargetModel(ReadingTargetModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ambiguous Target Model Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ambiguous Target Model Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAmbiguousTargetModelReference(AmbiguousTargetModelReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>No Model Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>No Model Found</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNoModelFound(NoModelFound object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wrong Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wrong Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWrongType(WrongType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Iterator Body Wrong Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Iterator Body Wrong Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIteratorBodyWrongType(IteratorBodyWrongType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Matched Rule Without Output Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Matched Rule Without Output Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMatchedRuleWithoutOutputPattern(MatchedRuleWithoutOutputPattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Collection In For Each</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Collection In For Each</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedCollectionInForEach(ExpectedCollectionInForEach object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>No Class Found In Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>No Class Found In Metamodel</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNoClassFoundInMetamodel(NoClassFoundInMetamodel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Invalid Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Invalid Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInvalidArgument(InvalidArgument object) {
 		return null;
 	}
 

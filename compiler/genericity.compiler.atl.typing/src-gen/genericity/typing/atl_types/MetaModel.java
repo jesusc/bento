@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package genericity.typing.atl_types;
 
@@ -10,21 +6,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model</b></em>'.
+ * A representation of the model object '<em><b>Meta Model</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link genericity.typing.atl_types.Model#getName <em>Name</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.MetaModel#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see genericity.typing.atl_types.AtlTypingPackage#getModel()
+ * @see genericity.typing.atl_types.AtlTypingPackage#getMetaModel()
  * @model
  * @generated
  */
-public interface Model extends EObject {
+public interface MetaModel extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -35,14 +31,14 @@ public interface Model extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see genericity.typing.atl_types.AtlTypingPackage#getModel_Name()
+	 * @see genericity.typing.atl_types.AtlTypingPackage#getMetaModel_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link genericity.typing.atl_types.Model#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link genericity.typing.atl_types.MetaModel#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -51,4 +47,4 @@ public interface Model extends EObject {
 	 */
 	void setName(String value);
 
-} // Model
+} // MetaModel

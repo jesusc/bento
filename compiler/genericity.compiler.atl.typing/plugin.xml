@@ -26,4 +26,43 @@
       </package>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated atl_types -->
+      <package
+            uri="http://genericity/types/atl/annotations"
+            class="genericity.typing.atl_types.annotations.AnnotationsPackage"
+            genModel="model/atl_types.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated atl_types -->
+      <package
+            uri="http://genericity/types/atl/analysis"
+            class="genericity.typing.atl_types.analysis.AnalysisPackage"
+            genModel="model/atl_types.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated atl_errors -->
+      <package
+            uri="http://bento/analysis/atl/analysis"
+            class="bento.analysis.atl_analysis.AtlAnalysisPackage"
+            genModel="model/atl_errors.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated atl_errors -->
+      <package
+            uri="http://bento/analysis/atl/analysis/errors"
+            class="bento.analysis.atl_analysis.atl_error.AtlErrorsPackage"
+            genModel="model/atl_errors.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated atl_errors -->
+      <package
+            uri="http://bento/analysis/atl/analysis/recovery"
+            class="bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage"
+            genModel="model/atl_errors.genmodel"/>
+   </extension>
 </plugin>

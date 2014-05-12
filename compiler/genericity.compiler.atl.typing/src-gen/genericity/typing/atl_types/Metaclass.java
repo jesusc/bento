@@ -115,12 +115,12 @@ public interface Metaclass extends RefType {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Model</em>' reference.
-	 * @see #setModel(Model)
+	 * @see #setModel(MetaModel)
 	 * @see genericity.typing.atl_types.AtlTypingPackage#getMetaclass_Model()
 	 * @model required="true"
 	 * @generated
 	 */
-	Model getModel();
+	MetaModel getModel();
 
 	/**
 	 * Sets the value of the '{@link genericity.typing.atl_types.Metaclass#getModel <em>Model</em>}' reference.
@@ -130,6 +130,6 @@ public interface Metaclass extends RefType {
 	 * @see #getModel()
 	 * @generated
 	 */
-	void setModel(Model value);
+	void setModel(MetaModel value);
 
 } // Metaclass

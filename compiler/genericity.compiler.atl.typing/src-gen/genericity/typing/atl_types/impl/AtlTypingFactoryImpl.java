@@ -31,7 +31,7 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	 */
 	public static AtlTypingFactory init() {
 		try {
-			AtlTypingFactory theAtlTypingFactory = (AtlTypingFactory)EPackage.Registry.INSTANCE.getEFactory("http://genericity/types/atl"); 
+			AtlTypingFactory theAtlTypingFactory = (AtlTypingFactory)EPackage.Registry.INSTANCE.getEFactory(AtlTypingPackage.eNS_URI);
 			if (theAtlTypingFactory != null) {
 				return theAtlTypingFactory;
 			}
@@ -75,7 +75,7 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 			case AtlTypingPackage.UNKNOWN_FEATURE: return createUnknownFeature();
 			case AtlTypingPackage.EMPTY_COLLECTION: return createEmptyCollection();
 			case AtlTypingPackage.ENUM_TYPE: return createEnumType();
-			case AtlTypingPackage.MODEL: return createModel();
+			case AtlTypingPackage.META_MODEL: return createMetaModel();
 			case AtlTypingPackage.METACLASS: return createMetaclass();
 			case AtlTypingPackage.UNION_TYPE: return createUnionType();
 			case AtlTypingPackage.THIS_MODULE_TYPE: return createThisModuleType();
@@ -242,9 +242,9 @@ public class AtlTypingFactoryImpl extends EFactoryImpl implements AtlTypingFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Model createModel() {
-		ModelImpl model = new ModelImpl();
-		return model;
+	public MetaModel createMetaModel() {
+		MetaModelImpl metaModel = new MetaModelImpl();
+		return metaModel;
 	}
 
 	/**

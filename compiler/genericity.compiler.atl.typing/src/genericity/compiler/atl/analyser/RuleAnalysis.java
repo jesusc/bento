@@ -219,11 +219,12 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 			ClassNamespace ns = (ClassNamespace) rightType.getMetamodelRef();
 			
 			List<MatchedRule> rules = ns.getResolvingRules();
-			if ( rules.size() == 0 && ! TypeUtils.isClassAssignableTo(rightMetaclass.getKlass(), f.getEReferenceType()) ) {
+			boolean isAssignable    = TypeUtils.isClassAssignableTo(rightMetaclass.getKlass(), f.getEReferenceType());
+			if ( rules.size() == 0 && ! isAssignable ) {
 				errors.signalBindingWithoutRule(self, rightMetaclass.getKlass(), f.getEReferenceType());
 
 				// System.err.println("!!!!! WARNING!!! No rule for binding.  " + f.getEContainingClass().getName() + "." + f.getName() + " <- " + TypeUtils.typeToString(rightType) + ". " + self.getLocation());
-			} else {
+			} else if ( ! isAssignable ){
 				findPossibleUnresolvedClasses(self, rightMetaclass, f.getEReferenceType()); //, rules);				
 				findRulesWithWrongTargetType(self, rightMetaclass, f.getEReferenceType(), rules);
 			}

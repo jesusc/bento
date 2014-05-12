@@ -35,6 +35,15 @@ public interface AtlErrorsFactory extends EFactory {
 	CollectionOperationOverNoCollectionError createCollectionOperationOverNoCollectionError();
 
 	/**
+	 * Returns a new object of class '<em>Feature Access In Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Feature Access In Collection</em>'.
+	 * @generated
+	 */
+	FeatureAccessInCollection createFeatureAccessInCollection();
+
+	/**
 	 * Returns a new object of class '<em>Feature Not Found</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,6 +168,78 @@ public interface AtlErrorsFactory extends EFactory {
 	 * @generated
 	 */
 	IteratorOverEmptySequence createIteratorOverEmptySequence();
+
+	/**
+	 * Returns a new object of class '<em>Reading Target Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reading Target Model</em>'.
+	 * @generated
+	 */
+	ReadingTargetModel createReadingTargetModel();
+
+	/**
+	 * Returns a new object of class '<em>Ambiguous Target Model Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ambiguous Target Model Reference</em>'.
+	 * @generated
+	 */
+	AmbiguousTargetModelReference createAmbiguousTargetModelReference();
+
+	/**
+	 * Returns a new object of class '<em>No Model Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>No Model Found</em>'.
+	 * @generated
+	 */
+	NoModelFound createNoModelFound();
+
+	/**
+	 * Returns a new object of class '<em>Iterator Body Wrong Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator Body Wrong Type</em>'.
+	 * @generated
+	 */
+	IteratorBodyWrongType createIteratorBodyWrongType();
+
+	/**
+	 * Returns a new object of class '<em>Matched Rule Without Output Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Matched Rule Without Output Pattern</em>'.
+	 * @generated
+	 */
+	MatchedRuleWithoutOutputPattern createMatchedRuleWithoutOutputPattern();
+
+	/**
+	 * Returns a new object of class '<em>Expected Collection In For Each</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Collection In For Each</em>'.
+	 * @generated
+	 */
+	ExpectedCollectionInForEach createExpectedCollectionInForEach();
+
+	/**
+	 * Returns a new object of class '<em>No Class Found In Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>No Class Found In Metamodel</em>'.
+	 * @generated
+	 */
+	NoClassFoundInMetamodel createNoClassFoundInMetamodel();
+
+	/**
+	 * Returns a new object of class '<em>Invalid Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Invalid Argument</em>'.
+	 * @generated
+	 */
+	InvalidArgument createInvalidArgument();
 
 	/**
 	 * Returns the package supported by this factory.

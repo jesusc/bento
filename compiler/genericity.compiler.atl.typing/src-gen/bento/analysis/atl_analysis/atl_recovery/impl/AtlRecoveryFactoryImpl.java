@@ -31,7 +31,7 @@ public class AtlRecoveryFactoryImpl extends EFactoryImpl implements AtlRecoveryF
 	 */
 	public static AtlRecoveryFactory init() {
 		try {
-			AtlRecoveryFactory theAtlRecoveryFactory = (AtlRecoveryFactory)EPackage.Registry.INSTANCE.getEFactory("http://bento/analysis/atl/analysis/recovery"); 
+			AtlRecoveryFactory theAtlRecoveryFactory = (AtlRecoveryFactory)EPackage.Registry.INSTANCE.getEFactory(AtlRecoveryPackage.eNS_URI);
 			if (theAtlRecoveryFactory != null) {
 				return theAtlRecoveryFactory;
 			}

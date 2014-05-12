@@ -161,13 +161,13 @@ public interface AtlTypingFactory extends EFactory {
 	EnumType createEnumType();
 
 	/**
-	 * Returns a new object of class '<em>Model</em>'.
+	 * Returns a new object of class '<em>Meta Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model</em>'.
+	 * @return a new object of class '<em>Meta Model</em>'.
 	 * @generated
 	 */
-	Model createModel();
+	MetaModel createMetaModel();
 
 	/**
 	 * Returns a new object of class '<em>Metaclass</em>'.

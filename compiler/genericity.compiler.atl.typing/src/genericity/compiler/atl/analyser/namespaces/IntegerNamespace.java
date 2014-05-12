@@ -42,7 +42,7 @@ public class IntegerNamespace extends PrimitiveTypeNamespace {
 			} else if ( optionalArgument instanceof IntegerType ) {
 				return AnalyserContext.getTypingModel().newIntegerType();
 			} else {
-				AnalyserContext.getErrorModel().signalInvalidOperand(operatorSymbol, node, new IRecoveryAction() {
+				return AnalyserContext.getErrorModel().signalInvalidOperand(operatorSymbol, node, new IRecoveryAction() {
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {
 						Type t = AnalyserContext.getTypingModel().newIntegerType();
@@ -59,7 +59,7 @@ public class IntegerNamespace extends PrimitiveTypeNamespace {
 		}
 
 		
-		throw new UnsupportedOperationException(operatorSymbol + " - " + node);
+		throw new UnsupportedOperationException(operatorSymbol + " - " + node.getLocation());
 	}
 	
 	@Override

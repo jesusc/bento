@@ -95,7 +95,7 @@ public class ErrorPathGenerator {
 	}
 
 	private void generatePath(LocalProblem p) {
-		
+		System.out.println(p.getClass().getName() + " " + p.getDescription() + " " + p.getLocation()) ;
 		if ( p instanceof NoBindingForCompulsoryFeature ) {
 			generatePath_NoBindingForCompulsoryFeature((NoBindingForCompulsoryFeature) p);		
 		
@@ -109,6 +109,7 @@ public class ErrorPathGenerator {
 			generatePath_FeatureNotFound((FeatureNotFound) p);
 		} else if ( p instanceof OperationNotFound ) {
 			generatePath_OperationNotFound((OperationNotFound) p);			
+			/*
 		} else if ( p instanceof CollectionOperationOverNoCollectionError ) {
 			System.err.println("ErrorPathGenerator: Ignored CollectionOperationOverNoCollectionError" );			
 		} else if ( p instanceof FlattenOverNonNestedCollection ) {
@@ -119,8 +120,9 @@ public class ErrorPathGenerator {
 			System.err.println("ErrorPathGenerator: Ignored BindingPossiblyUnresolved" );
 		} else if ( p instanceof BindingWithoutRule ) {
 			System.err.println("ErrorPathGenerator: Ignored BindingWithoutRule" );
+		*/
 		} else {
-			throw new UnsupportedOperationException(p.getClass().getName());
+			System.err.println("ErrorPathGenerator: Ignored " + p.getClass().getSimpleName());
 		}
 		
 	}

@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundImpl#getOperationName <em>Operation Name</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundImpl#getType <em>Type</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundImpl#getClassName <em>Class Name</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundImpl#getMetamodelName <em>Metamodel Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +64,46 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 	 * @ordered
 	 */
 	protected Type type;
+
+	/**
+	 * The default value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CLASS_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String className = CLASS_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMetamodelName() <em>Metamodel Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetamodelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String METAMODEL_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMetamodelName() <em>Metamodel Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetamodelName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String metamodelName = METAMODEL_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -146,6 +188,48 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getClassName() {
+		return className;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClassName(String newClassName) {
+		String oldClassName = className;
+		className = newClassName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.OPERATION_NOT_FOUND__CLASS_NAME, oldClassName, className));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMetamodelName() {
+		return metamodelName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetamodelName(String newMetamodelName) {
+		String oldMetamodelName = metamodelName;
+		metamodelName = newMetamodelName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.OPERATION_NOT_FOUND__METAMODEL_NAME, oldMetamodelName, metamodelName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -154,6 +238,10 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 			case AtlErrorsPackage.OPERATION_NOT_FOUND__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__CLASS_NAME:
+				return getClassName();
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__METAMODEL_NAME:
+				return getMetamodelName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,6 +259,12 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 				return;
 			case AtlErrorsPackage.OPERATION_NOT_FOUND__TYPE:
 				setType((Type)newValue);
+				return;
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__CLASS_NAME:
+				setClassName((String)newValue);
+				return;
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__METAMODEL_NAME:
+				setMetamodelName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,6 +284,12 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 			case AtlErrorsPackage.OPERATION_NOT_FOUND__TYPE:
 				setType((Type)null);
 				return;
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__CLASS_NAME:
+				setClassName(CLASS_NAME_EDEFAULT);
+				return;
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__METAMODEL_NAME:
+				setMetamodelName(METAMODEL_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -206,6 +306,10 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 				return OPERATION_NAME_EDEFAULT == null ? operationName != null : !OPERATION_NAME_EDEFAULT.equals(operationName);
 			case AtlErrorsPackage.OPERATION_NOT_FOUND__TYPE:
 				return type != null;
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__CLASS_NAME:
+				return CLASS_NAME_EDEFAULT == null ? className != null : !CLASS_NAME_EDEFAULT.equals(className);
+			case AtlErrorsPackage.OPERATION_NOT_FOUND__METAMODEL_NAME:
+				return METAMODEL_NAME_EDEFAULT == null ? metamodelName != null : !METAMODEL_NAME_EDEFAULT.equals(metamodelName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -222,6 +326,10 @@ public class OperationNotFoundImpl extends NavigationProblemImpl implements Oper
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (operationName: ");
 		result.append(operationName);
+		result.append(", className: ");
+		result.append(className);
+		result.append(", metamodelName: ");
+		result.append(metamodelName);
 		result.append(')');
 		return result.toString();
 	}

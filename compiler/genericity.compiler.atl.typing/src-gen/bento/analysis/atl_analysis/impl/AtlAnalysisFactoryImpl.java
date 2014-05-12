@@ -32,7 +32,7 @@ public class AtlAnalysisFactoryImpl extends EFactoryImpl implements AtlAnalysisF
 	 */
 	public static AtlAnalysisFactory init() {
 		try {
-			AtlAnalysisFactory theAtlAnalysisFactory = (AtlAnalysisFactory)EPackage.Registry.INSTANCE.getEFactory("http://bento/analysis/atl/analysis"); 
+			AtlAnalysisFactory theAtlAnalysisFactory = (AtlAnalysisFactory)EPackage.Registry.INSTANCE.getEFactory(AtlAnalysisPackage.eNS_URI);
 			if (theAtlAnalysisFactory != null) {
 				return theAtlAnalysisFactory;
 			}

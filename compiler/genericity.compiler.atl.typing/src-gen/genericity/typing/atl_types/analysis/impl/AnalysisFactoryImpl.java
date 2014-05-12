@@ -31,7 +31,7 @@ public class AnalysisFactoryImpl extends EFactoryImpl implements AnalysisFactory
 	 */
 	public static AnalysisFactory init() {
 		try {
-			AnalysisFactory theAnalysisFactory = (AnalysisFactory)EPackage.Registry.INSTANCE.getEFactory("http://genericity/types/atl/analysis"); 
+			AnalysisFactory theAnalysisFactory = (AnalysisFactory)EPackage.Registry.INSTANCE.getEFactory(AnalysisPackage.eNS_URI);
 			if (theAnalysisFactory != null) {
 				return theAnalysisFactory;
 			}

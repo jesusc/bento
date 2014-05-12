@@ -1,0 +1,26 @@
+@namespace(
+	uri="http://bento/analysis/abcd",
+	prefix="abcd")
+package abcd;
+
+abstract class NamedElt {
+   attr String[1] name;
+}
+
+class Model extends NamedElt {
+   val A[*] elements;
+}
+
+class A extends NamedElt { }
+
+class B extends A { }
+
+class C extends A { }
+class C1 extends C { }
+class C2 extends C { }
+
+class D extends A { }
+class D1 extends D { }
+class D2 extends D { }
+class D3 extends D { }
+

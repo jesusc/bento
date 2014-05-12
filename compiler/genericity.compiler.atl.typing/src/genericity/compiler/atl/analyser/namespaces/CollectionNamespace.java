@@ -1,5 +1,7 @@
 package genericity.compiler.atl.analyser.namespaces;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.TypingModel;
 import genericity.typing.atl_types.BooleanType;
@@ -27,12 +29,12 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 
 	@Override
 	public Type getFeatureType(String featureName, LocatedElement self) {
-		throw new UnsupportedOperationException(featureName + " " + self.getLocation());
+		return AnalyserContext.getErrorModel().signalFeatureAccessInCollection(featureName, self);
 	}
 
 	@Override
 	public boolean hasFeature(String featureName) {
-		throw new UnsupportedOperationException(featureName);
+		return false;
 	}
 	
 	@Override
@@ -89,7 +91,8 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 			return typ.newIntegerType();
 		}
 		
-		if ( operationName.equals("append") || operationName.equals("including") || operationName.equals("prepend") ) {
+		if ( operationName.equals("append") || operationName.equals("including") || operationName.equals("prepend") || 
+				operationName.equals("excluding") ) {
 			CollectionType r = newCollectionType(typ.getCommonType(this.nested, arguments[0]));
 			return r;
 		}
@@ -138,26 +141,33 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 		}
 		
 		if ( name.equals("select") ) {
-			return selectIteratorType(bodyType); 
+			return selectIteratorType(node, bodyType); 
 		} else if ( name.equals("any") ) {
-			return anyIteratorType(bodyType); 
+			return anyIteratorType(node, bodyType); 
 		} else if ( name.equals("reject") ) {
-			return rejectIteratorType(bodyType); 			
+			return rejectIteratorType(node, bodyType); 			
 		} else if ( name.equals("collect") ) {
 			return this.newCollectionType(bodyType);
 		} else if ( name.equals("sortedBy") ) {
 			return this.newCollectionType(nested);
-		} else if ( name.equals("exists") ) {
+		} else if ( name.equals("exists") ||  name.equals("forAll") ) {
 			return typ.newBooleanType();
 		}
 		throw new UnsupportedOperationException("Collection operation " + name + " not supported.");
 	}
 	
-	private Type selectIteratorType(Type bodyType) {
+	private Type selectIteratorType(IteratorExp node, Type bodyType) {
 		// If you have "m.classifiers->select(c | c.operationNotFound() )"
 		// a conservative action is to consider that the collection is never filtered.
 		if ( bodyType instanceof TypeError ) 
 			return this.newCollectionType(nested);
+		
+		if ( ! (bodyType instanceof BooleanType) ) {
+			AnalyserContext.getErrorModel().signalIteratorBodyWrongType(node, bodyType);
+			// This return is the recovery action
+			return this.newCollectionType(nested);
+		}
+
 		
 		BooleanType b = (BooleanType) bodyType;
 		if ( b.getKindOfTypes().isEmpty() ) {
@@ -167,9 +177,15 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 		}
 	}
 
-	private Type anyIteratorType(Type bodyType) {
+	private Type anyIteratorType(IteratorExp node, Type bodyType) {
 		if ( bodyType instanceof TypeError ) 
 			return nested;
+		
+		if ( ! (bodyType instanceof BooleanType) ) {
+			AnalyserContext.getErrorModel().signalIteratorBodyWrongType(node, bodyType);
+			// This return is the recovery action
+			return this.newCollectionType(nested);
+		}
 		
 		BooleanType b = (BooleanType) bodyType;
 		if ( b.getKindOfTypes().isEmpty() ) {
@@ -179,17 +195,26 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 		}
 	}
 
-	private Type rejectIteratorType(Type bodyType) {
+	private Type rejectIteratorType(IteratorExp node, Type bodyType) {
 		// If you have "m.classifiers->select(c | c.operationNotFound() )"
 		// a conservative action is to consider that the collection is never filtered.
 		if ( bodyType instanceof TypeError ) 
 			return this.newCollectionType(nested);
 		
+
+		if ( ! (bodyType instanceof BooleanType) ) {
+			AnalyserContext.getErrorModel().signalIteratorBodyWrongType(node, bodyType);
+			// This return is the recovery action
+			return this.newCollectionType(nested);
+		}
+		
 		BooleanType b = (BooleanType) bodyType;
 		if ( b.getKindOfTypes().isEmpty() ) {
 			return this.newCollectionType(nested);
 		} else {
-			throw new UnsupportedOperationException();
+			System.out.println("TODO: Reject with oclKindOf not supported yet");
+			return this.newCollectionType(nested);
+			// throw new UnsupportedOperationException();
 		}
 	}
 	

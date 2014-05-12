@@ -1,0 +1,26 @@
+@namespace(
+	uri="http://bento/analysis/wxyz",
+	prefix="wxyz")
+package wxyz;
+
+abstract class NamedElt {
+   attr String[1] name;
+}
+
+class Model extends NamedElt {
+   val W[*] elements;
+}
+
+class W extends NamedElt { }
+
+class X extends W { }
+
+class Y extends X { }
+class Y1 extends X { }
+class Y2 extends X { }
+
+class Z extends Y { }
+class Z1 extends Y { }
+class Z2 extends Y { }
+class Z3 extends Y { }
+

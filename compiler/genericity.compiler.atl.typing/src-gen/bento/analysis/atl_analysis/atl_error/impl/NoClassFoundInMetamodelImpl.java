@@ -1,61 +1,56 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
-package genericity.typing.atl_types.impl;
+package bento.analysis.atl_analysis.atl_error.impl;
 
-import genericity.typing.atl_types.AtlTypingPackage;
-import genericity.typing.atl_types.Model;
+import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
+import bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>No Class Found In Metamodel</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link genericity.typing.atl_types.impl.ModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.NoClassFoundInMetamodelImpl#getClassName <em>Class Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ModelImpl extends EObjectImpl implements Model {
+public class NoClassFoundInMetamodelImpl extends LocalProblemImpl implements NoClassFoundInMetamodel {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getClassName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String CLASS_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getClassName() <em>Class Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getClassName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String className = CLASS_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ModelImpl() {
+	protected NoClassFoundInMetamodelImpl() {
 		super();
 	}
 
@@ -66,7 +61,7 @@ public class ModelImpl extends EObjectImpl implements Model {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AtlTypingPackage.Literals.MODEL;
+		return AtlErrorsPackage.Literals.NO_CLASS_FOUND_IN_METAMODEL;
 	}
 
 	/**
@@ -74,8 +69,8 @@ public class ModelImpl extends EObjectImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public String getClassName() {
+		return className;
 	}
 
 	/**
@@ -83,11 +78,11 @@ public class ModelImpl extends EObjectImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setClassName(String newClassName) {
+		String oldClassName = className;
+		className = newClassName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.MODEL__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME, oldClassName, className));
 	}
 
 	/**
@@ -98,8 +93,8 @@ public class ModelImpl extends EObjectImpl implements Model {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AtlTypingPackage.MODEL__NAME:
-				return getName();
+			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME:
+				return getClassName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,8 +107,8 @@ public class ModelImpl extends EObjectImpl implements Model {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AtlTypingPackage.MODEL__NAME:
-				setName((String)newValue);
+			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME:
+				setClassName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,8 +122,8 @@ public class ModelImpl extends EObjectImpl implements Model {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AtlTypingPackage.MODEL__NAME:
-				setName(NAME_EDEFAULT);
+			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME:
+				setClassName(CLASS_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -142,8 +137,8 @@ public class ModelImpl extends EObjectImpl implements Model {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AtlTypingPackage.MODEL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME:
+				return CLASS_NAME_EDEFAULT == null ? className != null : !CLASS_NAME_EDEFAULT.equals(className);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -158,10 +153,10 @@ public class ModelImpl extends EObjectImpl implements Model {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (className: ");
+		result.append(className);
 		result.append(')');
 		return result.toString();
 	}
 
-} //ModelImpl
+} //NoClassFoundInMetamodelImpl

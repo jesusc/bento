@@ -125,6 +125,11 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public void inMatchedRule(MatchedRule self) {
 		Metaclass m = (Metaclass) attr.typeOf(self.getInPattern().getElements().get(0));
+		if ( self.getOutPattern() == null || self.getOutPattern().getElements().isEmpty() ) {
+			errors.signalMatchedRuleWithoutOutputPattern(self);
+			return;
+		}
+		
 		Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
 		
 		ClassNamespace ns = (ClassNamespace) m.getMetamodelRef();

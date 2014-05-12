@@ -50,6 +50,10 @@ package atl_error {
 	      
 	}
 	
+	class FeatureAccessInCollection extends NavigationProblem {
+	    attr String[1] featureName;
+	}
+	
 	class FeatureNotFound extends NavigationProblem {
 		attr String[1] featureName;
 		attr String[1] className;
@@ -59,6 +63,9 @@ package atl_error {
 	class OperationNotFound extends NavigationProblem {
 		attr String[1] operationName;
 		ref  atl_types.Type[1] type;	   
+
+		attr String[1] className;
+		attr String[1] metamodelName;
 	}
 	
 	class FeatureNotFoundInUnionType extends NavigationProblem {
@@ -125,6 +132,43 @@ package atl_error {
 	class IteratorOverEmptySequence extends LocalProblem {
 	   
 	}
+	
+	class ReadingTargetModel extends LocalProblem {
+		attr String[1] modelName;
+	}
+
+	class AmbiguousTargetModelReference extends LocalProblem {
+		attr String[1] modelName;		
+	}
+
+	class NoModelFound extends LocalProblem {
+		attr String[1] modelName;				
+	}
+	
+	abstract class WrongType extends LocalProblem {
+		
+	}
+	
+	class IteratorBodyWrongType extends WrongType {
+		
+	}
+
+	class MatchedRuleWithoutOutputPattern extends LocalProblem {
+		// Possibly using the matched rule as entrypint rule (see Measure2XHTML)
+	}
+
+	class ExpectedCollectionInForEach extends LocalProblem {
+		
+	}
+
+	class NoClassFoundInMetamodel extends LocalProblem {
+		attr String[1] className;
+	}
+
+	class InvalidArgument extends LocalProblem {
+		
+	}
+
 }
 
 @namespace(uri="http://bento/analysis/atl/analysis/recovery", prefix="atl_recovery")

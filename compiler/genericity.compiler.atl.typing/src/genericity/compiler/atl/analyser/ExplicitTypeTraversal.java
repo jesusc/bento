@@ -3,14 +3,19 @@ package genericity.compiler.atl.analyser;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
+import genericity.compiler.atl.analyser.namespaces.UnknownNamespace;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATLModel;
+import atl.metamodel.ATL.CalledRule;
+import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.Unit;
 import atl.metamodel.OCL.BooleanType;
 import atl.metamodel.OCL.IntegerType;
 import atl.metamodel.OCL.MapType;
 import atl.metamodel.OCL.OclAnyType;
+import atl.metamodel.OCL.OclExpression;
+import atl.metamodel.OCL.OclModel;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OrderedSetType;
 import atl.metamodel.OCL.RealType;
@@ -39,10 +44,16 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 
 	@Override
 	public void inOclModelElement(OclModelElement self) {
-		String mmName = self.getModel().getName();
+		OclModel metamodel = self.getModel();
+		String mmName = metamodel.getName();
 		MetamodelNamespace mmspace = mm.getNamespace(mmName);
 		if ( mmspace == null ) {
+			// TODO: As recovery action look up a model with the required
+			//       type name
 			errors.signalNoModel(mmName, self);
+			
+			attr.linkExprType(typ.newUnknownType());
+			return;
 		}
 		
 		ITypeNamespace tspace = mmspace.getClassifier(self.getName());
@@ -51,11 +62,38 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 				attr.linkExprType(typ.newUnknownType());
 				return;
 			}
+
 			errors.signalNoClass(self.getName(), mmspace, self);
+			// TODO: Signal no class should recover more elegantly
+			attr.linkExprType(typ.newUnknownType());
+			return;
 		}
-		Metaclass metaclass = (Metaclass) tspace.createType(true);
-		metaclass.setExplicitOcurrence(true);
-		attr.linkExprType(metaclass);
+		Type type = (Type) tspace.createType(true);
+		// metaclass.setExplicitOcurrence(true);
+		attr.linkExprType(type);
+
+		
+		// TODO: Reading target model: Not sure if this may catch false cases
+		Module m = (Module) root;
+		int numTargets = 0;
+		for(OclModel outModel : m.getOutModels()) {
+			if ( outModel.getMetamodel().getName().equals(metamodel.getName()) ) {
+				numTargets++;
+			}
+		}
+		
+		boolean isTarget = numTargets > 0;
+		if ( isTarget && self.container_() instanceof OclExpression && ! (self.container_() instanceof CalledRule)) {
+			errors.signalReadingTargetModel(self);
+		}
+		
+		if ( numTargets > 1 && metamodel.getModel().size() == 0 ) {
+			errors.signalAmbiguousTargetModelReference(self);
+		}
+		
+		// I think there are ambiguous cases if the same meta-model
+		// appears in source and target, but perhaps only for bindings, so this is
+		// not the place to check
 	}	
 
 	// 

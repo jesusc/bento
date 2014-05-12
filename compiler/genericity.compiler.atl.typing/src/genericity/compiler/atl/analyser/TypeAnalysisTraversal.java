@@ -1,30 +1,29 @@
 package genericity.compiler.atl.analyser;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
-import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollectionType;
 import genericity.typing.atl_types.EnumType;
-import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.ThisModuleType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.Unknown;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.ForEachOutPatternElement;
+import atl.metamodel.ATL.ForStat;
 import atl.metamodel.ATL.Helper;
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
@@ -37,7 +36,6 @@ import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
-import atl.metamodel.ATLModelVisitor.VisitingActions;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.BooleanExp;
 import atl.metamodel.OCL.CollectionOperationCallExp;
@@ -66,7 +64,6 @@ import atl.metamodel.OCL.SetExp;
 import atl.metamodel.OCL.StringExp;
 import atl.metamodel.OCL.TupleExp;
 import atl.metamodel.OCL.TuplePart;
-import atl.metamodel.OCL.TupleTypeAttribute;
 import atl.metamodel.OCL.VariableDeclaration;
 import atl.metamodel.OCL.VariableExp;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
@@ -77,7 +74,7 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		super(model, mm, root, typ, errors);
 	
 		attr = new ComputedAttributes(this);
-		mm.setDependencies(new EcoreTypeConverter(typ), typ, errors);
+		mm.setDependencies(new EcoreTypeConverter(typ), errors);
 	}
 		
 	
@@ -219,6 +216,8 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 				if ( AnalyserContext.isVarDclInferencePreferred() && typ.moreConcrete(declared, exprType) == exprType ) {
 					attr.linkExprType(exprType);					
 				}
+			} else {
+				attr.linkExprType(exprType);
 			}
 			
 			/*
@@ -256,9 +255,11 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 	}
 	
 	public void createIfScope(IfExp self, java.lang.Boolean open) {
-		BooleanType t = (BooleanType) attr.typeOf(self.getCondition());
-		if ( t.getKindOfTypes().isEmpty() ) 
-			return;
+		if ( attr.typeOf(self.getCondition()) instanceof BooleanType ) {		
+			BooleanType t = (BooleanType) attr.typeOf(self.getCondition());
+			if ( t.getKindOfTypes().isEmpty() ) 
+				return;
+		}
 		
 		
 		// System.out.println(t);
@@ -317,6 +318,8 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		return actions("source", "iterators", "body");
 	}
 	
+	
+	
 	@Override
 	public void inIterator(Iterator self) {
 		if ( self.container_() instanceof LoopExp ) { // IteratorExp & IterateExp
@@ -329,15 +332,25 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			attr.linkExprType( t );
 		// } else if ( self.container_() instanceof IterateExp ) {
 			
-		} else {
+		} else if ( self.container_() instanceof ForEachOutPatternElement ){
 			ForEachOutPatternElement e = self.container(ForEachOutPatternElement.class);
 			Type t = attr.typeOf(e.getCollection());
 			if ( ! (t instanceof CollectionType) ) {
-				AnalyserContext.getErrorModel().signalExpectedCollectionInForEachOutputPattern(e);
+				t = AnalyserContext.getErrorModel().signalExpectedCollectionInForEachOutputPattern(e);
 			} else {
 				t = ((CollectionType) t).getContainedType();
 			}
 			attr.linkExprType(self, t);
+		} else {
+			ForStat fs = self.container(ForStat.class);
+			Type t = attr.typeOf(fs.getCollection());
+			if ( ! (t instanceof CollectionType) ) {
+				t = AnalyserContext.getErrorModel().signalExpectedCollectionInForStat(fs);
+			} else {
+				t = ((CollectionType) t).getContainedType();
+			}
+			attr.linkExprType(self, t);
+			
 		}
 	}
 	
@@ -349,6 +362,11 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 	@Override
 	public VisitingActions preForEachOutPatternElement(ForEachOutPatternElement self) {
 		return actions("type" , "initExpression" , "collection", "iterator", "bindings" ); 
+	}
+	
+	@Override
+	public VisitingActions preForStat(ForStat self) {
+		return actions("collection" , "iterator" , "statements" ); 
 	}
 	
 	
@@ -393,7 +411,6 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			return;
 		}
 		
-		
 		Type t = attr.typeOf( self.getSource() );
 		Type[] arguments  = new Type[self.getArguments().size()];
 		for(int i = 0; i < self.getArguments().size(); i++) {
@@ -405,6 +422,9 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
+		if ( self.getOperationName().equals("") ) {
+			
+		}
 		attr.linkExprType( tspace.getOperationType(self.getOperationName(), arguments, self) );
 	}
 	
@@ -550,6 +570,12 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		if ( self.getArguments().size() > 0 )
 			optional = attr.typeOf(self.getArguments().get(0));
 
+		if ( optional instanceof TypeError ) {
+			// propagate error
+			attr.linkExprType(optional);
+			return;
+		}
+		
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
 		attr.linkExprType(tspace.getOperatorType(self.getOperationName(), optional, self));
 	}

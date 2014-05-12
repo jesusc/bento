@@ -57,11 +57,10 @@ public class GlobalNamespace {
 		return new ArrayList<MetamodelNamespace>(namesToMetamodels.values());
 	}
 
-	public void setDependencies(EcoreTypeConverter ecoreTypeConverter, TypingModel typ, ErrorModel errors) {
+	public void setDependencies(EcoreTypeConverter ecoreTypeConverter, ErrorModel errors) {
 		for(MetamodelNamespace m : namesToMetamodels.values()) {
 			m.setConverter(ecoreTypeConverter);
 			m.setErrors(errors);
-			m.setTypingModel(typ);
 		}		
 	}
 	

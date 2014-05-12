@@ -21,16 +21,22 @@ public abstract class AbstractTypeNamespace implements ITypeNamespace {
 		} else if ( operationName.equals("toString") ) {
 			return AnalyserContext.getTypingModel().newStringType();
 		} else if ( operationName.equals("oclIsKindOf") || operationName.equals("oclIsTypeOf")) {
+			if ( ! (arguments[0] instanceof Metaclass) ) {
+				return AnalyserContext.getErrorModel().signalInvalidArgument(operationName, node);
+			}
 			// TODO: Mark the boolean type so that it carries the "isKindOf" information
 			return AnalyserContext.getTypingModel().newBooleanType((Metaclass) arguments[0]);
+		} else if ( operationName.equals("debug") ) {
+			return this.getType();
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		if ( operatorSymbol.equals("=") ||
-			 operatorSymbol.equals(">") ||
+			 operatorSymbol.equals("<>") ||
+ 			 operatorSymbol.equals(">") ||
 			 operatorSymbol.equals(">=") ||
 			 operatorSymbol.equals("<=") ||
 			 operatorSymbol.equals("<") ) {
@@ -40,4 +46,9 @@ public abstract class AbstractTypeNamespace implements ITypeNamespace {
 		return null;
 	}
 
+	private Type getType() {
+		// This should be change for a "type" reference in the hierarchy, instead of
+		// creating a type each type, then createType() replace for cloneType in case this is actually needed
+		return createType(false);
+	}
 }

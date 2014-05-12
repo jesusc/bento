@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
-
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.MatchedRule;
@@ -220,9 +219,9 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		if ( operationName.equals("allInstances") || operationName.equals("allInstancesFrom") ) {
 			return metamodel.converter.convertAllInstancesOf(eClass, this);
 		} else if ( operationName.equals("oclIsUndefined") ) {
-			return metamodel.typ.newBooleanType();
+			return AnalyserContext.getTypingModel().newBooleanType();
 		} else if ( operationName.equals("oclType") ) {
-			return metamodel.typ.newOclType();
+			return AnalyserContext.getTypingModel().newOclType();
 		} else if ( operationName.equals("refImmediateComposite") ) {
 			return findTypeOfContainer(node);
 		} else if ( operationName.equals("refSetValue") ) {
@@ -237,6 +236,7 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		// Not sure this is totally valid because of the traversal order
 		EList<EClass> supertypes = eClass.getEAllSuperTypes();
 		for (EClass c : supertypes) {
+			if ( c.eIsProxy() ) continue; // proxies again...
 			ITypeNamespace n = metamodel.getClassifier(c.getName());
 			if ( n.hasOperation(operationName, arguments) ){
 				return n.getOperationType(operationName, arguments, node);

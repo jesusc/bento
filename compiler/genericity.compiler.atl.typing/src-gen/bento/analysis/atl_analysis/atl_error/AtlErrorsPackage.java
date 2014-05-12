@@ -472,6 +472,97 @@ public interface AtlErrorsPackage extends EPackage {
 	int COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureAccessInCollectionImpl <em>Feature Access In Collection</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.FeatureAccessInCollectionImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFeatureAccessInCollection()
+	 * @generated
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__DEPENDENTS = NAVIGATION_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__DESCRIPTION = NAVIGATION_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__SEVERITY = NAVIGATION_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__NEEDS_CSP = NAVIGATION_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__LOCATION = NAVIGATION_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__ELEMENT = NAVIGATION_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__RECOVERY = NAVIGATION_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION__FEATURE_NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Feature Access In Collection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_ACCESS_IN_COLLECTION_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundImpl <em>Feature Not Found</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -479,7 +570,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFeatureNotFound()
 	 * @generated
 	 */
-	int FEATURE_NOT_FOUND = 5;
+	int FEATURE_NOT_FOUND = 6;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -589,7 +680,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getOperationNotFound()
 	 * @generated
 	 */
-	int OPERATION_NOT_FOUND = 6;
+	int OPERATION_NOT_FOUND = 7;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -673,13 +764,31 @@ public interface AtlErrorsPackage extends EPackage {
 	int OPERATION_NOT_FOUND__TYPE = NAVIGATION_PROBLEM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND__CLASS_NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND__METAMODEL_NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Operation Not Found</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_NOT_FOUND_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 2;
+	int OPERATION_NOT_FOUND_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundInUnionTypeImpl <em>Feature Not Found In Union Type</em>}' class.
@@ -689,7 +798,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFeatureNotFoundInUnionType()
 	 * @generated
 	 */
-	int FEATURE_NOT_FOUND_IN_UNION_TYPE = 7;
+	int FEATURE_NOT_FOUND_IN_UNION_TYPE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -780,7 +889,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getInvalidOperand()
 	 * @generated
 	 */
-	int INVALID_OPERAND = 8;
+	int INVALID_OPERAND = 9;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -872,7 +981,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoContainerForRefImmediateComposite()
 	 * @generated
 	 */
-	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE = 9;
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -973,7 +1082,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getDifferentBranchTypes()
 	 * @generated
 	 */
-	int DIFFERENT_BRANCH_TYPES = 10;
+	int DIFFERENT_BRANCH_TYPES = 11;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1074,7 +1183,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingProblem()
 	 * @generated
 	 */
-	int BINDING_PROBLEM = 11;
+	int BINDING_PROBLEM = 12;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1174,7 +1283,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoBindingForCompulsoryFeature()
 	 * @generated
 	 */
-	int NO_BINDING_FOR_COMPULSORY_FEATURE = 12;
+	int NO_BINDING_FOR_COMPULSORY_FEATURE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1275,7 +1384,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingExpectedOneAssignedMany()
 	 * @generated
 	 */
-	int BINDING_EXPECTED_ONE_ASSIGNED_MANY = 13;
+	int BINDING_EXPECTED_ONE_ASSIGNED_MANY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1376,7 +1485,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingResolution()
 	 * @generated
 	 */
-	int BINDING_RESOLUTION = 14;
+	int BINDING_RESOLUTION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Right Type</b></em>' reference.
@@ -1422,7 +1531,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithoutRule()
 	 * @generated
 	 */
-	int BINDING_WITHOUT_RULE = 15;
+	int BINDING_WITHOUT_RULE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1549,7 +1658,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithResolvedByIncompatibleRule()
 	 * @generated
 	 */
-	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE = 16;
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1676,7 +1785,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingPossiblyUnresolved()
 	 * @generated
 	 */
-	int BINDING_POSSIBLY_UNRESOLVED = 17;
+	int BINDING_POSSIBLY_UNRESOLVED = 18;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1812,7 +1921,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getResolvedRuleInfo()
 	 * @generated
 	 */
-	int RESOLVED_RULE_INFO = 18;
+	int RESOLVED_RULE_INFO = 19;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -1867,7 +1976,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFlattenOverNonNestedCollection()
 	 * @generated
 	 */
-	int FLATTEN_OVER_NON_NESTED_COLLECTION = 19;
+	int FLATTEN_OVER_NON_NESTED_COLLECTION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1950,7 +2059,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorOverEmptySequence()
 	 * @generated
 	 */
-	int ITERATOR_OVER_EMPTY_SEQUENCE = 20;
+	int ITERATOR_OVER_EMPTY_SEQUENCE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2023,6 +2132,788 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_OVER_EMPTY_SEQUENCE_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.ReadingTargetModelImpl <em>Reading Target Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.ReadingTargetModelImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getReadingTargetModel()
+	 * @generated
+	 */
+	int READING_TARGET_MODEL = 22;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL__MODEL_NAME = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Reading Target Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READING_TARGET_MODEL_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.AmbiguousTargetModelReferenceImpl <em>Ambiguous Target Model Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AmbiguousTargetModelReferenceImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getAmbiguousTargetModelReference()
+	 * @generated
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE__MODEL_NAME = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Ambiguous Target Model Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.NoModelFoundImpl <em>No Model Found</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.NoModelFoundImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoModelFound()
+	 * @generated
+	 */
+	int NO_MODEL_FOUND = 24;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Model Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND__MODEL_NAME = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>No Model Found</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_MODEL_FOUND_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.WrongTypeImpl <em>Wrong Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.WrongTypeImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getWrongType()
+	 * @generated
+	 */
+	int WRONG_TYPE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The number of structural features of the '<em>Wrong Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRONG_TYPE_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.IteratorBodyWrongTypeImpl <em>Iterator Body Wrong Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.IteratorBodyWrongTypeImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorBodyWrongType()
+	 * @generated
+	 */
+	int ITERATOR_BODY_WRONG_TYPE = 26;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__DEPENDENTS = WRONG_TYPE__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__DESCRIPTION = WRONG_TYPE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__SEVERITY = WRONG_TYPE__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__NEEDS_CSP = WRONG_TYPE__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__LOCATION = WRONG_TYPE__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__ELEMENT = WRONG_TYPE__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE__RECOVERY = WRONG_TYPE__RECOVERY;
+
+	/**
+	 * The number of structural features of the '<em>Iterator Body Wrong Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_BODY_WRONG_TYPE_FEATURE_COUNT = WRONG_TYPE_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.MatchedRuleWithoutOutputPatternImpl <em>Matched Rule Without Output Pattern</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.MatchedRuleWithoutOutputPatternImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getMatchedRuleWithoutOutputPattern()
+	 * @generated
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN = 27;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The number of structural features of the '<em>Matched Rule Without Output Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.ExpectedCollectionInForEachImpl <em>Expected Collection In For Each</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.ExpectedCollectionInForEachImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getExpectedCollectionInForEach()
+	 * @generated
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH = 28;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The number of structural features of the '<em>Expected Collection In For Each</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_COLLECTION_IN_FOR_EACH_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.NoClassFoundInMetamodelImpl <em>No Class Found In Metamodel</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.NoClassFoundInMetamodelImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoClassFoundInMetamodel()
+	 * @generated
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL = 29;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>No Class Found In Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO_CLASS_FOUND_IN_METAMODEL_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.InvalidArgumentImpl <em>Invalid Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.InvalidArgumentImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getInvalidArgument()
+	 * @generated
+	 */
+	int INVALID_ARGUMENT = 30;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The number of structural features of the '<em>Invalid Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_ARGUMENT_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 0;
 
 
 	/**
@@ -2109,6 +3000,27 @@ public interface AtlErrorsPackage extends EPackage {
 	EClass getCollectionOperationOverNoCollectionError();
 
 	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection <em>Feature Access In Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Feature Access In Collection</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection
+	 * @generated
+	 */
+	EClass getFeatureAccessInCollection();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection#getFeatureName <em>Feature Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Feature Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection#getFeatureName()
+	 * @see #getFeatureAccessInCollection()
+	 * @generated
+	 */
+	EAttribute getFeatureAccessInCollection_FeatureName();
+
+	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.FeatureNotFound <em>Feature Not Found</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2182,6 +3094,28 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperationNotFound_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.OperationNotFound#getClassName <em>Class Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFound#getClassName()
+	 * @see #getOperationNotFound()
+	 * @generated
+	 */
+	EAttribute getOperationNotFound_ClassName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.OperationNotFound#getMetamodelName <em>Metamodel Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Metamodel Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFound#getMetamodelName()
+	 * @see #getOperationNotFound()
+	 * @generated
+	 */
+	EAttribute getOperationNotFound_MetamodelName();
 
 	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType <em>Feature Not Found In Union Type</em>}'.
@@ -2500,6 +3434,140 @@ public interface AtlErrorsPackage extends EPackage {
 	EClass getIteratorOverEmptySequence();
 
 	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.ReadingTargetModel <em>Reading Target Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reading Target Model</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ReadingTargetModel
+	 * @generated
+	 */
+	EClass getReadingTargetModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.ReadingTargetModel#getModelName <em>Model Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Model Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ReadingTargetModel#getModelName()
+	 * @see #getReadingTargetModel()
+	 * @generated
+	 */
+	EAttribute getReadingTargetModel_ModelName();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference <em>Ambiguous Target Model Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ambiguous Target Model Reference</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference
+	 * @generated
+	 */
+	EClass getAmbiguousTargetModelReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference#getModelName <em>Model Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Model Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference#getModelName()
+	 * @see #getAmbiguousTargetModelReference()
+	 * @generated
+	 */
+	EAttribute getAmbiguousTargetModelReference_ModelName();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.NoModelFound <em>No Model Found</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>No Model Found</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoModelFound
+	 * @generated
+	 */
+	EClass getNoModelFound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.NoModelFound#getModelName <em>Model Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Model Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoModelFound#getModelName()
+	 * @see #getNoModelFound()
+	 * @generated
+	 */
+	EAttribute getNoModelFound_ModelName();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.WrongType <em>Wrong Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wrong Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.WrongType
+	 * @generated
+	 */
+	EClass getWrongType();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType <em>Iterator Body Wrong Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Iterator Body Wrong Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType
+	 * @generated
+	 */
+	EClass getIteratorBodyWrongType();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.MatchedRuleWithoutOutputPattern <em>Matched Rule Without Output Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Matched Rule Without Output Pattern</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.MatchedRuleWithoutOutputPattern
+	 * @generated
+	 */
+	EClass getMatchedRuleWithoutOutputPattern();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach <em>Expected Collection In For Each</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Collection In For Each</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach
+	 * @generated
+	 */
+	EClass getExpectedCollectionInForEach();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel <em>No Class Found In Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>No Class Found In Metamodel</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel
+	 * @generated
+	 */
+	EClass getNoClassFoundInMetamodel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel#getClassName <em>Class Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel#getClassName()
+	 * @see #getNoClassFoundInMetamodel()
+	 * @generated
+	 */
+	EAttribute getNoClassFoundInMetamodel_ClassName();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.InvalidArgument <em>Invalid Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Invalid Argument</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.InvalidArgument
+	 * @generated
+	 */
+	EClass getInvalidArgument();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2596,6 +3664,24 @@ public interface AtlErrorsPackage extends EPackage {
 		EClass COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR = eINSTANCE.getCollectionOperationOverNoCollectionError();
 
 		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureAccessInCollectionImpl <em>Feature Access In Collection</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.FeatureAccessInCollectionImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFeatureAccessInCollection()
+		 * @generated
+		 */
+		EClass FEATURE_ACCESS_IN_COLLECTION = eINSTANCE.getFeatureAccessInCollection();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE_ACCESS_IN_COLLECTION__FEATURE_NAME = eINSTANCE.getFeatureAccessInCollection_FeatureName();
+
+		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundImpl <em>Feature Not Found</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2654,6 +3740,22 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION_NOT_FOUND__TYPE = eINSTANCE.getOperationNotFound_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_NOT_FOUND__CLASS_NAME = eINSTANCE.getOperationNotFound_ClassName();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_NOT_FOUND__METAMODEL_NAME = eINSTANCE.getOperationNotFound_MetamodelName();
 
 		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundInUnionTypeImpl <em>Feature Not Found In Union Type</em>}' class.
@@ -2922,6 +4024,128 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ITERATOR_OVER_EMPTY_SEQUENCE = eINSTANCE.getIteratorOverEmptySequence();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.ReadingTargetModelImpl <em>Reading Target Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.ReadingTargetModelImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getReadingTargetModel()
+		 * @generated
+		 */
+		EClass READING_TARGET_MODEL = eINSTANCE.getReadingTargetModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute READING_TARGET_MODEL__MODEL_NAME = eINSTANCE.getReadingTargetModel_ModelName();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.AmbiguousTargetModelReferenceImpl <em>Ambiguous Target Model Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AmbiguousTargetModelReferenceImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getAmbiguousTargetModelReference()
+		 * @generated
+		 */
+		EClass AMBIGUOUS_TARGET_MODEL_REFERENCE = eINSTANCE.getAmbiguousTargetModelReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AMBIGUOUS_TARGET_MODEL_REFERENCE__MODEL_NAME = eINSTANCE.getAmbiguousTargetModelReference_ModelName();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.NoModelFoundImpl <em>No Model Found</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.NoModelFoundImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoModelFound()
+		 * @generated
+		 */
+		EClass NO_MODEL_FOUND = eINSTANCE.getNoModelFound();
+
+		/**
+		 * The meta object literal for the '<em><b>Model Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NO_MODEL_FOUND__MODEL_NAME = eINSTANCE.getNoModelFound_ModelName();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.WrongTypeImpl <em>Wrong Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.WrongTypeImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getWrongType()
+		 * @generated
+		 */
+		EClass WRONG_TYPE = eINSTANCE.getWrongType();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.IteratorBodyWrongTypeImpl <em>Iterator Body Wrong Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.IteratorBodyWrongTypeImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorBodyWrongType()
+		 * @generated
+		 */
+		EClass ITERATOR_BODY_WRONG_TYPE = eINSTANCE.getIteratorBodyWrongType();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.MatchedRuleWithoutOutputPatternImpl <em>Matched Rule Without Output Pattern</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.MatchedRuleWithoutOutputPatternImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getMatchedRuleWithoutOutputPattern()
+		 * @generated
+		 */
+		EClass MATCHED_RULE_WITHOUT_OUTPUT_PATTERN = eINSTANCE.getMatchedRuleWithoutOutputPattern();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.ExpectedCollectionInForEachImpl <em>Expected Collection In For Each</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.ExpectedCollectionInForEachImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getExpectedCollectionInForEach()
+		 * @generated
+		 */
+		EClass EXPECTED_COLLECTION_IN_FOR_EACH = eINSTANCE.getExpectedCollectionInForEach();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.NoClassFoundInMetamodelImpl <em>No Class Found In Metamodel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.NoClassFoundInMetamodelImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoClassFoundInMetamodel()
+		 * @generated
+		 */
+		EClass NO_CLASS_FOUND_IN_METAMODEL = eINSTANCE.getNoClassFoundInMetamodel();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME = eINSTANCE.getNoClassFoundInMetamodel_ClassName();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.InvalidArgumentImpl <em>Invalid Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.InvalidArgumentImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getInvalidArgument()
+		 * @generated
+		 */
+		EClass INVALID_ARGUMENT = eINSTANCE.getInvalidArgument();
 
 	}
 

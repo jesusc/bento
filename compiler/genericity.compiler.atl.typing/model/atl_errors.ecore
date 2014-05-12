@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="atl_analysis"
-    nsURI="http://bento/analysis/atl/analysis" nsPrefix="atl_analysis">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="atl_analysis" nsURI="http://bento/analysis/atl/analysis" nsPrefix="atl_analysis">
   <eClassifiers xsi:type="ecore:EClass" name="AnalysisResult">
     <eStructuralFeatures xsi:type="ecore:EReference" name="problems" upperBound="-1"
         eType="#//Problem" containment="true"/>
@@ -43,6 +41,10 @@
         eSuperTypes="#//atl_error/LocalProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionOperationOverNoCollectionError"
         eSuperTypes="#//atl_error/NavigationProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureAccessInCollection" eSuperTypes="#//atl_error/NavigationProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FeatureNotFound" eSuperTypes="#//atl_error/NavigationProblem">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -56,6 +58,10 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="ecore:EClass platform:/plugin/genericity.compiler.atl.typing/model/atl_types.ecore#//Type"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FeatureNotFoundInUnionType" eSuperTypes="#//atl_error/NavigationProblem">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
@@ -111,6 +117,27 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FlattenOverNonNestedCollection" eSuperTypes="#//atl_error/LocalProblem"/>
     <eClassifiers xsi:type="ecore:EClass" name="IteratorOverEmptySequence" eSuperTypes="#//atl_error/LocalProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ReadingTargetModel" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AmbiguousTargetModelReference" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NoModelFound" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="WrongType" abstract="true" eSuperTypes="#//atl_error/LocalProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IteratorBodyWrongType" eSuperTypes="#//atl_error/WrongType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MatchedRuleWithoutOutputPattern" eSuperTypes="#//atl_error/LocalProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedCollectionInForEach" eSuperTypes="#//atl_error/LocalProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NoClassFoundInMetamodel" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InvalidArgument" eSuperTypes="#//atl_error/LocalProblem"/>
   </eSubpackages>
   <eSubpackages name="atl_recovery" nsURI="http://bento/analysis/atl/analysis/recovery"
       nsPrefix="atl_recovery">

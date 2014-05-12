@@ -8,6 +8,7 @@ package bento.analysis.atl_analysis.atl_error.impl;
 
 import bento.analysis.atl_analysis.AtlAnalysisPackage;
 
+import bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
@@ -18,20 +19,29 @@ import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRu
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
+import bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach;
+import bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
 import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
+import bento.analysis.atl_analysis.atl_error.InvalidArgument;
 import bento.analysis.atl_analysis.atl_error.InvalidArgumentProblem;
 import bento.analysis.atl_analysis.atl_error.InvalidOperand;
+import bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType;
 import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import bento.analysis.atl_analysis.atl_error.MatchedRuleWithoutOutputPattern;
 import bento.analysis.atl_analysis.atl_error.NavigationProblem;
 
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
+import bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
+import bento.analysis.atl_analysis.atl_error.NoModelFound;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.ReadingTargetModel;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_error.TargetModelConformanceProblem;
+import bento.analysis.atl_analysis.atl_error.WrongType;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage;
 import bento.analysis.atl_analysis.atl_recovery.impl.AtlRecoveryPackageImpl;
 import bento.analysis.atl_analysis.impl.AtlAnalysisPackageImpl;
@@ -85,6 +95,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass collectionOperationOverNoCollectionErrorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass featureAccessInCollectionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +214,69 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass iteratorOverEmptySequenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass readingTargetModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ambiguousTargetModelReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass noModelFoundEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wrongTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iteratorBodyWrongTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass matchedRuleWithoutOutputPatternEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedCollectionInForEachEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass noClassFoundInMetamodelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass invalidArgumentEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -347,6 +427,24 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFeatureAccessInCollection() {
+		return featureAccessInCollectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFeatureAccessInCollection_FeatureName() {
+		return (EAttribute)featureAccessInCollectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFeatureNotFound() {
 		return featureNotFoundEClass;
 	}
@@ -403,6 +501,24 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 */
 	public EReference getOperationNotFound_Type() {
 		return (EReference)operationNotFoundEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperationNotFound_ClassName() {
+		return (EAttribute)operationNotFoundEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperationNotFound_MetamodelName() {
+		return (EAttribute)operationNotFoundEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -680,6 +796,123 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReadingTargetModel() {
+		return readingTargetModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReadingTargetModel_ModelName() {
+		return (EAttribute)readingTargetModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAmbiguousTargetModelReference() {
+		return ambiguousTargetModelReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAmbiguousTargetModelReference_ModelName() {
+		return (EAttribute)ambiguousTargetModelReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNoModelFound() {
+		return noModelFoundEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNoModelFound_ModelName() {
+		return (EAttribute)noModelFoundEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWrongType() {
+		return wrongTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIteratorBodyWrongType() {
+		return iteratorBodyWrongTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMatchedRuleWithoutOutputPattern() {
+		return matchedRuleWithoutOutputPatternEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExpectedCollectionInForEach() {
+		return expectedCollectionInForEachEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNoClassFoundInMetamodel() {
+		return noClassFoundInMetamodelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNoClassFoundInMetamodel_ClassName() {
+		return (EAttribute)noClassFoundInMetamodelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInvalidArgument() {
+		return invalidArgumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AtlErrorsFactory getAtlErrorsFactory() {
 		return (AtlErrorsFactory)getEFactoryInstance();
 	}
@@ -716,6 +949,9 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		collectionOperationOverNoCollectionErrorEClass = createEClass(COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR);
 
+		featureAccessInCollectionEClass = createEClass(FEATURE_ACCESS_IN_COLLECTION);
+		createEAttribute(featureAccessInCollectionEClass, FEATURE_ACCESS_IN_COLLECTION__FEATURE_NAME);
+
 		featureNotFoundEClass = createEClass(FEATURE_NOT_FOUND);
 		createEAttribute(featureNotFoundEClass, FEATURE_NOT_FOUND__FEATURE_NAME);
 		createEAttribute(featureNotFoundEClass, FEATURE_NOT_FOUND__CLASS_NAME);
@@ -724,6 +960,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		operationNotFoundEClass = createEClass(OPERATION_NOT_FOUND);
 		createEAttribute(operationNotFoundEClass, OPERATION_NOT_FOUND__OPERATION_NAME);
 		createEReference(operationNotFoundEClass, OPERATION_NOT_FOUND__TYPE);
+		createEAttribute(operationNotFoundEClass, OPERATION_NOT_FOUND__CLASS_NAME);
+		createEAttribute(operationNotFoundEClass, OPERATION_NOT_FOUND__METAMODEL_NAME);
 
 		featureNotFoundInUnionTypeEClass = createEClass(FEATURE_NOT_FOUND_IN_UNION_TYPE);
 		createEAttribute(featureNotFoundInUnionTypeEClass, FEATURE_NOT_FOUND_IN_UNION_TYPE__FEATURE_NAME);
@@ -768,6 +1006,28 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		flattenOverNonNestedCollectionEClass = createEClass(FLATTEN_OVER_NON_NESTED_COLLECTION);
 
 		iteratorOverEmptySequenceEClass = createEClass(ITERATOR_OVER_EMPTY_SEQUENCE);
+
+		readingTargetModelEClass = createEClass(READING_TARGET_MODEL);
+		createEAttribute(readingTargetModelEClass, READING_TARGET_MODEL__MODEL_NAME);
+
+		ambiguousTargetModelReferenceEClass = createEClass(AMBIGUOUS_TARGET_MODEL_REFERENCE);
+		createEAttribute(ambiguousTargetModelReferenceEClass, AMBIGUOUS_TARGET_MODEL_REFERENCE__MODEL_NAME);
+
+		noModelFoundEClass = createEClass(NO_MODEL_FOUND);
+		createEAttribute(noModelFoundEClass, NO_MODEL_FOUND__MODEL_NAME);
+
+		wrongTypeEClass = createEClass(WRONG_TYPE);
+
+		iteratorBodyWrongTypeEClass = createEClass(ITERATOR_BODY_WRONG_TYPE);
+
+		matchedRuleWithoutOutputPatternEClass = createEClass(MATCHED_RULE_WITHOUT_OUTPUT_PATTERN);
+
+		expectedCollectionInForEachEClass = createEClass(EXPECTED_COLLECTION_IN_FOR_EACH);
+
+		noClassFoundInMetamodelEClass = createEClass(NO_CLASS_FOUND_IN_METAMODEL);
+		createEAttribute(noClassFoundInMetamodelEClass, NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME);
+
+		invalidArgumentEClass = createEClass(INVALID_ARGUMENT);
 	}
 
 	/**
@@ -807,6 +1067,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		invalidArgumentProblemEClass.getESuperTypes().add(this.getLocalProblem());
 		targetModelConformanceProblemEClass.getESuperTypes().add(this.getLocalProblem());
 		collectionOperationOverNoCollectionErrorEClass.getESuperTypes().add(this.getNavigationProblem());
+		featureAccessInCollectionEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
 		operationNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundInUnionTypeEClass.getESuperTypes().add(this.getNavigationProblem());
@@ -825,6 +1086,15 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		bindingPossiblyUnresolvedEClass.getESuperTypes().add(this.getBindingResolution());
 		flattenOverNonNestedCollectionEClass.getESuperTypes().add(this.getLocalProblem());
 		iteratorOverEmptySequenceEClass.getESuperTypes().add(this.getLocalProblem());
+		readingTargetModelEClass.getESuperTypes().add(this.getLocalProblem());
+		ambiguousTargetModelReferenceEClass.getESuperTypes().add(this.getLocalProblem());
+		noModelFoundEClass.getESuperTypes().add(this.getLocalProblem());
+		wrongTypeEClass.getESuperTypes().add(this.getLocalProblem());
+		iteratorBodyWrongTypeEClass.getESuperTypes().add(this.getWrongType());
+		matchedRuleWithoutOutputPatternEClass.getESuperTypes().add(this.getLocalProblem());
+		expectedCollectionInForEachEClass.getESuperTypes().add(this.getLocalProblem());
+		noClassFoundInMetamodelEClass.getESuperTypes().add(this.getLocalProblem());
+		invalidArgumentEClass.getESuperTypes().add(this.getLocalProblem());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(localProblemEClass, LocalProblem.class, "LocalProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -840,6 +1110,9 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 
 		initEClass(collectionOperationOverNoCollectionErrorEClass, CollectionOperationOverNoCollectionError.class, "CollectionOperationOverNoCollectionError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(featureAccessInCollectionEClass, FeatureAccessInCollection.class, "FeatureAccessInCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFeatureAccessInCollection_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, FeatureAccessInCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(featureNotFoundEClass, FeatureNotFound.class, "FeatureNotFound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatureNotFound_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, FeatureNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureNotFound_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, FeatureNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -848,6 +1121,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEClass(operationNotFoundEClass, OperationNotFound.class, "OperationNotFound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperationNotFound_OperationName(), ecorePackage.getEString(), "operationName", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperationNotFound_Type(), theAtlTypingPackage.getType(), null, "type", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperationNotFound_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperationNotFound_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(featureNotFoundInUnionTypeEClass, FeatureNotFoundInUnionType.class, "FeatureNotFoundInUnionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatureNotFoundInUnionType_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, FeatureNotFoundInUnionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -892,6 +1167,28 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEClass(flattenOverNonNestedCollectionEClass, FlattenOverNonNestedCollection.class, "FlattenOverNonNestedCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(iteratorOverEmptySequenceEClass, IteratorOverEmptySequence.class, "IteratorOverEmptySequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(readingTargetModelEClass, ReadingTargetModel.class, "ReadingTargetModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getReadingTargetModel_ModelName(), ecorePackage.getEString(), "modelName", null, 1, 1, ReadingTargetModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ambiguousTargetModelReferenceEClass, AmbiguousTargetModelReference.class, "AmbiguousTargetModelReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAmbiguousTargetModelReference_ModelName(), ecorePackage.getEString(), "modelName", null, 1, 1, AmbiguousTargetModelReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(noModelFoundEClass, NoModelFound.class, "NoModelFound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNoModelFound_ModelName(), ecorePackage.getEString(), "modelName", null, 1, 1, NoModelFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(wrongTypeEClass, WrongType.class, "WrongType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(iteratorBodyWrongTypeEClass, IteratorBodyWrongType.class, "IteratorBodyWrongType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(matchedRuleWithoutOutputPatternEClass, MatchedRuleWithoutOutputPattern.class, "MatchedRuleWithoutOutputPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedCollectionInForEachEClass, ExpectedCollectionInForEach.class, "ExpectedCollectionInForEach", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(noClassFoundInMetamodelEClass, NoClassFoundInMetamodel.class, "NoClassFoundInMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNoClassFoundInMetamodel_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, NoClassFoundInMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(invalidArgumentEClass, InvalidArgument.class, "InvalidArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //AtlErrorsPackageImpl

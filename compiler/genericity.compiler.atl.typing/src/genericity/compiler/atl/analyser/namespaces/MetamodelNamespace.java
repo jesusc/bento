@@ -1,9 +1,10 @@
 package genericity.compiler.atl.analyser.namespaces;
 
+import genericity.compiler.atl.analyser.Analyser;
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.EcoreTypeConverter;
 import genericity.compiler.atl.analyser.ErrorModel;
 import genericity.compiler.atl.analyser.TypingModel;
-import genericity.typing.atl_types.AtlTypingFactory;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
 
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,12 +21,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import atl.metamodel.ATL.LocatedElement;
-import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 
 /**
  * Provides convenient functions to retrieve information about a meta-model.
@@ -45,7 +40,6 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 	
 	protected EcoreTypeConverter	converter;
 	protected ErrorModel	errors;
-	protected TypingModel	typ;
 	private String	name;
 	
 	public MetamodelNamespace(String name, Resource resource) {
@@ -62,6 +56,8 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 					classifiers.put(c.getName(), new ClassNamespace(this, (EClass) c));
 					allClasses.add((EClass) c);
 				} else if ( c instanceof EEnum ) {
+					// EnumNamespace enumNs = (EnumNamespace) getTypingModel().createEEnum((EEnum) c).getMetamodelRef(); 
+					classifiers.put(c.getName(), new EnumNamespace((EEnum) c));
 					allEnums.add((EEnum) c);
 				} else {
 					// System.out.println("MetamodelNamespace: Type " + c.getName() + " not supported ");
@@ -116,14 +112,6 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 	}
 
 	/**
-	 * Sets the typing model. Obligatory dependency.
-	 * @param errors
-	 */
-	public void setTypingModel(TypingModel typ) {
-		this.typ = typ;
-	}
-
-	/**
 	 * Returns a type of the meta-model given its name.
 	 * @param name
 	 */
@@ -141,7 +129,7 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		for(EEnum eenum : allEnums) {
 			EEnumLiteral literal = eenum.getEEnumLiteral(name);
 			if ( literal != null ) {
-				return typ.createEEnum(eenum);
+				return getTypingModel().createEEnum(eenum, (EnumNamespace) classifiers.get(eenum.getName()));
 			}
 		}
 		
@@ -153,6 +141,10 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		return allClasses.contains(klass);
 	}
 
+	private TypingModel getTypingModel() {
+		return AnalyserContext.getTypingModel();
+	}
+	
 	public Collection<ClassNamespace> getAllSubclasses(EClass eClass) {
 		ArrayList<ClassNamespace> result = new ArrayList<ClassNamespace>();
 		for (EClass klass : allClasses) {

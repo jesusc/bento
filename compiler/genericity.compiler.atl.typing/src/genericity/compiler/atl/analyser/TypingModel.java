@@ -27,7 +27,7 @@ import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.MapType;
 import genericity.typing.atl_types.Metaclass;
-import genericity.typing.atl_types.Model;
+import genericity.typing.atl_types.MetaModel;
 import genericity.typing.atl_types.OclUndefinedType;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.ReflectiveClass;
@@ -165,12 +165,12 @@ public class TypingModel {
 		metaclass.setName(c.getName());
 		metaclass.setMultivalued(false);
 		metaclass.setMetamodelRef(cspace);
-		metaclass.setModel(createModel(cspace.getMetamodelName()));
+		metaclass.setModel(createMetaModel(cspace.getMetamodelName()));
 		return metaclass;
 	}
 
-	private Model createModel(String metamodelName) {
-		Model model = (Model) impl.createObject(Model.class.getSimpleName());
+	private MetaModel createMetaModel(String metamodelName) {
+		MetaModel model = (MetaModel) impl.createObject(MetaModel.class.getSimpleName());
 		model.setName(metamodelName);
 		return model;
 	}
@@ -188,11 +188,11 @@ public class TypingModel {
 		return u;
 	}
 
-	public EnumType createEEnum(EEnum c) {
+	public EnumType createEEnum(EEnum c, EnumNamespace ns) {
 		EnumType enumT = (EnumType) impl.createObject(EnumType.class.getSimpleName());
 		enumT.setEenum(c);
 		enumT.setName(c.getName());
-		enumT.setMetamodelRef(new EnumNamespace(enumT));
+		enumT.setMetamodelRef(ns);
 		return enumT;
 	}
 	
@@ -357,6 +357,10 @@ public class TypingModel {
 		if ( t1 instanceof Metaclass ) {
 			return ( ((Metaclass) t1).getKlass().equals(((Metaclass) t2).getKlass()));
 		} else if ( t1 instanceof PrimitiveType ) {
+			return true;
+		} else if ( t1 instanceof OclUndefinedType ) {
+			return true;
+		} else if ( t1 instanceof Unknown ) {
 			return true;
 		} else if ( (t1 instanceof CollectionType) && (t2 instanceof CollectionType) ) {
 			CollectionType ct1 = (CollectionType) t1;
@@ -729,6 +733,8 @@ public class TypingModel {
 			} else if ( t instanceof PrimitiveType || t instanceof EnumType || t instanceof OclUndefinedType ) { 
 				// ignore
 			} else if ( t instanceof TypeError ) {
+			} else if ( t instanceof Unknown ) {
+				System.err.println("TODO: OclAny in right part of the binding. Nothing done so far.");
 			} else {
 				throw new UnsupportedOperationException(t.getClass().getName());
 			}

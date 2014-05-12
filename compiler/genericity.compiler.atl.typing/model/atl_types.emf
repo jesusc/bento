@@ -81,7 +81,7 @@ class EnumType extends Type {
    ref EObject[1] eenum;      
 }
 
-class Model {
+class MetaModel {
    attr String[1] name; 
 }
 
@@ -90,7 +90,7 @@ class Metaclass extends RefType {
    attr boolean explicitOcurrence;
    ref EClass[1] klass;   
 
-   ref Model[1] model;
+   ref MetaModel[1] model;
 }
 
 abstract class ReflectiveType extends Type {

@@ -1,0 +1,359 @@
+-- @atlcompiler atl2006
+module MDL2GMF; -- Module Template
+create OUT : GMF from INMDL : MDL, INUML : UML, INPROP : Property;
+
+-- uses MDLHelpers;
+helper context MDL!Property def : getAllObjects : Sequence(MDL!Object)=
+	self.value.value.elements;
+
+helper context MDL!Object def : getValue( propertyName: String) : String =
+	let _property : MDL!Property = self.properties->any(e|e.name=propertyName)in
+		if(	_property.oclIsUndefined()) 
+		then
+			OclUndefined
+		else if(_property.value.oclIsKindOf(MDL!IdVal))
+		then
+			_property.value.id.toString()
+		else if(_property.value.oclIsKindOf(MDL!ElementVal)and _property.value.value.oclIsKindOf(MDL!ValueElement))
+		then
+			_property.value.value.value.value
+		else
+			_property.value.value
+		endif endif endif;
+
+helper context MDL!Object def : getProperty(propertyName: String) : MDL!Property =
+	self.properties->any(e | e.name=propertyName);
+
+helper context MDL!Object def : getOwnedElements(input : String) : Sequence(MDL!Object)=
+let _property : MDL!Property=self.getProperty(input)in
+	if(_property.oclIsUndefined())
+	then
+		Sequence{}
+	else
+		_property.getAllObjects
+	endif;
+
+helper context MDL!Object def: getTypeValueByName(input : String) : OclAny =
+	let _type : String = self.getValue(input) in
+	if(_type.oclIsUndefined())
+	then
+		OclUndefined
+	else
+	let _primitiveType : OclAny = thisModule.primitiveType2OutVar.get(_type) in
+	if(_primitiveType.oclIsUndefined())
+	then				
+		self.getObjectById(self.getValue('quidu'))
+	else
+		thisModule.resolveTemp(thisModule.root, _primitiveType)
+	endif endif;
+	
+helper context MDL!Object def : getObjectById(id : String) : MDL!Object =
+	thisModule.quid2Object->get(id);
+
+helper context MDL!Object def : isNavigable() : Boolean =
+	let _isNavigable: Boolean= self.getValue('is_navigable') in
+	if(_isNavigable.oclIsUndefined() or _isNavigable='false')
+	then
+		false
+	else
+		true
+	endif;
+
+helper context MDL!Object def : getAssociationEnds() : Sequence(MDL!Object)=
+	MDL!Object.allInstancesFrom('IN')->select(e|e.type='Association')
+	->iterate(e; acc:Sequence(MDL!Object)=Sequence{}|
+	--if(e.type='Association')
+	--then
+	let _role : MDL!Object = e.getOwnedElements('roles')->any(e1|e1.getValue('quidu')=self.getValue('quid')
+			and e1.isNavigable()) in
+		if(_role.oclIsUndefined())
+		then
+			acc
+		else
+			acc->append(_role.getOppositeRole())
+		endif
+	--else
+	--	acc
+	);
+
+helper context MDL!Object def : getOppositeRole() : MDL!Object=
+	thisModule.getOwnerObject(self)->getOwnedElements('roles')->any(e|e<>self);
+
+helper def : getOwnerObject(input : OclAny) : OclAny =
+	let _return : OclAny = input.refImmediateComposite() in
+	if(_return.oclIsTypeOf(MDL!Object) or _return.oclIsUndefined())
+	then
+		_return
+	else
+		thisModule.getOwnerObject(_return)
+	endif;
+helper context MDL!Object def : isStereotypeApplied(stereotype : String) : Boolean=
+	let _element:MDL!Object = self.getObjectById(self.getValue('quidu')) in
+	if(_element.oclIsUndefined())
+		then false
+		else
+			let _stereotype : String = _element.getValue('stereotype')in
+			if(_stereotype=stereotype)
+			then
+				true
+			else 
+				false
+			endif
+		endif;
+helper context MDL!Object def : hasOwnerView(viewID : String) : Boolean=
+	let _element:MDL!Object = thisModule.getOwnerObject(self) in
+	if(_element.oclIsUndefined())
+		then false
+		else
+			let _id : String = _element.getValue('quid')in
+			if(_id=viewID)
+			then
+				true
+			else 
+				false
+			endif
+		endif;	
+helper context MDL!Object def : getOwnedNodes(input : String) : Sequence(MDL!Object)=
+	self.getOwnedElements('items')->select(e|e.type<>'InheritView');
+helper context MDL!Object def : getOwnedEdges(input : String) : Sequence(MDL!Object)=
+	self.getOwnedElements('items')->select(e|e.type='InheritView');
+-----
+
+helper def: quid2Object : Map(String,MDL!Object)=
+	MDL!Object.allInstancesFrom('INMDL')->iterate(e; acc : Map(String, MDL!Object) = Map {} |
+		acc->including(e.getValue('quid'),e)
+	);
+helper def: id2Node : Map(String,MDL!Object)=
+	MDL!Object.allInstancesFrom('INMDL')->iterate(e; acc : Map(String, MDL!Object) = Map {} |
+		let _type : String = e.type in
+		if(_type='ClassView')
+			then
+			acc->including(e.id.toString(),e)
+			else
+			acc->including(OclUndefined,e)
+		endif
+	);
+	
+
+--UML LIB--
+helper def: quid2Element : Map(String,UML!Element)=
+	UML!PackageableElement.allInstancesFrom('INUML')->iterate(e; acc : Map(String, UML!Element) = Map {} |
+		let _eAnnotation : GMF!"ecore::EAnnotation"=e.eAnnotations->any(a|true)in
+		if(not _eAnnotation.oclIsUndefined())
+			then
+			acc->including(_eAnnotation.source,e)
+			else
+			acc->including(OclUndefined,e)
+		endif
+	);
+helper def : getElementById(id : String) : UML!Element =
+	thisModule.quid2Element->get(id);
+helper def: quid2Generalization : Map(String,UML!Element)=
+	UML!Generalization.allInstancesFrom('INUML')->iterate(e; acc : Map(String, UML!Element) = Map {} |
+		let _eAnnotation : GMF!"ecore::EAnnotation"=e.eAnnotations->any(a|true)in
+		if(not _eAnnotation.oclIsUndefined())
+			then
+			acc->including(_eAnnotation.source,e)
+			else
+			acc->including(OclUndefined,e)
+		endif
+	);
+helper def : getGeneralizationById(id : String) : UML!Element =
+	thisModule.quid2Generalization->get(id);
+
+
+rule ClassDiagram {
+	from
+		o : MDL!Object(
+			o.type='ClassDiagram'
+			and o.getValue('quid')=Property!Property.allInstancesFrom('INPROP')->any(e|true).value
+		)
+	to
+		m : GMF!Diagram (
+			element<-thisModule.getElementById(o.getValue('quid')),
+			type<-'UMLClass',
+			measurementUnit<-#Pixel,
+			children<-o.getOwnedNodes('items'),
+			edges<-o.getOwnedEdges('items')
+			
+		)
+		
+}
+
+helper context MDL!Object def: x : Integer =
+	self.getValue('location').x;
+
+helper context MDL!Object def: y : Integer =
+	self.getValue('location').y;
+
+helper context MDL!Object def: width : Integer =
+	self.getValue('width');
+
+helper context MDL!Object def: height : Integer =
+	self.getValue('height');
+
+helper context MDL!Object def: hasSize : Boolean =
+	not (self.width.oclIsUndefined() or self.height.oclIsUndefined());
+
+helper context MDL!Object def: location : TupleType(x : Integer, y : Integer) =
+	if self.hasSize then
+		Tuple {
+			x = (self.x - self.width / 2).round(),
+			y = (self.y - self.height / 2).round()
+		}
+	else
+		Tuple {
+			x = self.x,
+			y = self.y
+		}
+	endif;
+
+abstract rule NodeView {
+	from
+		o : MDL!Object(
+			o.hasOwnerView(Property!Property.allInstancesFrom('INPROP')->any(e|true).value)
+		)
+	to		
+		g : GMF!Node (
+			element<-thisModule.getElementById(o.getValue('quidu')),			
+			layoutConstraint<- bound,
+			eAnnotations<- eAnn,
+			styles<- style
+		),		
+		eAnn : GMF!"ecore::EAnnotation"(
+			source<-'Shortcut',
+			details<-mapEntry			
+		),
+		mapEntry : GMF!"ecore::EStringToStringMapEntry"(
+			key<-'modelID',
+			value<-'UMLClass'
+		),
+		bound : GMF!Bounds(
+			x<-o.location.x,
+			y<- o.location.y
+		),
+		style : GMF!ShapeStyle(
+			lineColor<-o.getValue('line_color'),
+			fillColor<-o.getValue('fill_color')
+		)
+		
+}
+rule ClassView extends NodeView{
+	from
+		o : MDL!Object(
+			o.type='ClassView'
+			and not(o.isStereotypeApplied('Interface')or o.isStereotypeApplied('enumeration'))					
+		)
+	to
+		g : GMF!Node (
+			type<-'2001',
+			children<-Sequence{label,attributes,operations,inners}
+		),
+		label : GMF!Node(
+			type<-'5003'	
+		),
+		attributes : GMF!Node(
+			type<-'7001'	
+		),
+		operations : GMF!Node(
+			type<-'7002'	
+		),
+		inners : GMF!Node(
+			type<-'7003'	
+		)
+		
+}
+rule InterfaceView extends NodeView{
+	from
+		o : MDL!Object(
+			o.type='ClassView'
+			and(o.isStereotypeApplied('Interface'))
+		)
+	to
+		g : GMF!Node (
+			type<-'2010',
+			children<-Sequence{label}
+		),
+		label : GMF!Node(
+			type<-'5012',
+			layoutConstraint<-location
+		),			
+		location : GMF!Location(
+		)
+		
+}
+rule EnumerationView extends NodeView{
+	from
+		o : MDL!Object(
+			o.type='ClassView'
+			and(o.isStereotypeApplied('enumeration'))
+		)
+	to
+		g : GMF!Node (
+			type<-'2003',
+			children<-Sequence{label,attributes,operations,literals}
+		),
+		label : GMF!Node(
+			type<-'5005'
+		),	
+		attributes : GMF!Node(
+			type<-'7013'
+		),
+		operations : GMF!Node(
+			type<-'7014'
+		),
+		literals : GMF!Node(
+			type<-'7015'
+		)
+		
+		
+}
+rule PackageView extends NodeView{
+	from
+		o : MDL!Object(
+			o.type='CategoryView'			
+		)
+	to
+		g : GMF!Node (
+			type<-'2002',
+			children<-Sequence{label,packages,classifiers,others}
+		),
+		label : GMF!Node(
+			type<-'5004'
+		),	
+		packages : GMF!Node(
+			type<-'7010'
+		),
+		classifiers : GMF!Node(
+			type<-'7011'
+		),
+		others : GMF!Node(
+			type<-'7012'
+		)
+			
+}
+rule GeneralizationView {
+	from
+		o : MDL!Object(
+			o.type='InheritView'
+			and
+			o.hasOwnerView(Property!Property.allInstancesFrom('INPROP')->any(e|true).value)
+			
+		)
+	to		
+		g : GMF!Edge (
+			type<-'4001',
+			source<-thisModule.id2Node->get(o.getValue('client')),
+			target<-thisModule.id2Node->get(o.getValue('supplier')),		
+			styles<- Sequence{connectorStyle,fontStyle},
+			element<-thisModule.getGeneralizationById(o.getValue('quidu')),
+			bendpoints<-relativeBendPoints
+			
+		),
+		connectorStyle : GMF!ConnectorStyle(
+		),
+		fontStyle : GMF!FontStyle(
+		),
+		relativeBendPoints : GMF!RelativeBendpoints(
+		)
+}

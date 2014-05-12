@@ -1,0 +1,14 @@
+-- @path ABCD=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+-- @path WZYZ=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+
+module abcd;
+create OUT : WXYZ from IN : ABCD;
+
+rule model {
+        from src : ABCD!Model 
+        to   tgt : WXYZ!Model (
+        	name <- src.name,
+			elements <- x
+		),
+		x : WXYZ!X
+}

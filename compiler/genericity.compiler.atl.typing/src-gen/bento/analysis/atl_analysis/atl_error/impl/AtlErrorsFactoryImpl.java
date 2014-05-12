@@ -31,7 +31,7 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	 */
 	public static AtlErrorsFactory init() {
 		try {
-			AtlErrorsFactory theAtlErrorsFactory = (AtlErrorsFactory)EPackage.Registry.INSTANCE.getEFactory("http://bento/analysis/atl/analysis/errors"); 
+			AtlErrorsFactory theAtlErrorsFactory = (AtlErrorsFactory)EPackage.Registry.INSTANCE.getEFactory(AtlErrorsPackage.eNS_URI);
 			if (theAtlErrorsFactory != null) {
 				return theAtlErrorsFactory;
 			}
@@ -61,6 +61,7 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case AtlErrorsPackage.COLLECTION_OPERATION_OVER_NO_COLLECTION_ERROR: return createCollectionOperationOverNoCollectionError();
+			case AtlErrorsPackage.FEATURE_ACCESS_IN_COLLECTION: return createFeatureAccessInCollection();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND: return createFeatureNotFound();
 			case AtlErrorsPackage.OPERATION_NOT_FOUND: return createOperationNotFound();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND_IN_UNION_TYPE: return createFeatureNotFoundInUnionType();
@@ -75,6 +76,14 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.RESOLVED_RULE_INFO: return createResolvedRuleInfo();
 			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: return createFlattenOverNonNestedCollection();
 			case AtlErrorsPackage.ITERATOR_OVER_EMPTY_SEQUENCE: return createIteratorOverEmptySequence();
+			case AtlErrorsPackage.READING_TARGET_MODEL: return createReadingTargetModel();
+			case AtlErrorsPackage.AMBIGUOUS_TARGET_MODEL_REFERENCE: return createAmbiguousTargetModelReference();
+			case AtlErrorsPackage.NO_MODEL_FOUND: return createNoModelFound();
+			case AtlErrorsPackage.ITERATOR_BODY_WRONG_TYPE: return createIteratorBodyWrongType();
+			case AtlErrorsPackage.MATCHED_RULE_WITHOUT_OUTPUT_PATTERN: return createMatchedRuleWithoutOutputPattern();
+			case AtlErrorsPackage.EXPECTED_COLLECTION_IN_FOR_EACH: return createExpectedCollectionInForEach();
+			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL: return createNoClassFoundInMetamodel();
+			case AtlErrorsPackage.INVALID_ARGUMENT: return createInvalidArgument();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -88,6 +97,16 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public CollectionOperationOverNoCollectionError createCollectionOperationOverNoCollectionError() {
 		CollectionOperationOverNoCollectionErrorImpl collectionOperationOverNoCollectionError = new CollectionOperationOverNoCollectionErrorImpl();
 		return collectionOperationOverNoCollectionError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FeatureAccessInCollection createFeatureAccessInCollection() {
+		FeatureAccessInCollectionImpl featureAccessInCollection = new FeatureAccessInCollectionImpl();
+		return featureAccessInCollection;
 	}
 
 	/**
@@ -228,6 +247,86 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public IteratorOverEmptySequence createIteratorOverEmptySequence() {
 		IteratorOverEmptySequenceImpl iteratorOverEmptySequence = new IteratorOverEmptySequenceImpl();
 		return iteratorOverEmptySequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReadingTargetModel createReadingTargetModel() {
+		ReadingTargetModelImpl readingTargetModel = new ReadingTargetModelImpl();
+		return readingTargetModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AmbiguousTargetModelReference createAmbiguousTargetModelReference() {
+		AmbiguousTargetModelReferenceImpl ambiguousTargetModelReference = new AmbiguousTargetModelReferenceImpl();
+		return ambiguousTargetModelReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NoModelFound createNoModelFound() {
+		NoModelFoundImpl noModelFound = new NoModelFoundImpl();
+		return noModelFound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IteratorBodyWrongType createIteratorBodyWrongType() {
+		IteratorBodyWrongTypeImpl iteratorBodyWrongType = new IteratorBodyWrongTypeImpl();
+		return iteratorBodyWrongType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MatchedRuleWithoutOutputPattern createMatchedRuleWithoutOutputPattern() {
+		MatchedRuleWithoutOutputPatternImpl matchedRuleWithoutOutputPattern = new MatchedRuleWithoutOutputPatternImpl();
+		return matchedRuleWithoutOutputPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpectedCollectionInForEach createExpectedCollectionInForEach() {
+		ExpectedCollectionInForEachImpl expectedCollectionInForEach = new ExpectedCollectionInForEachImpl();
+		return expectedCollectionInForEach;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NoClassFoundInMetamodel createNoClassFoundInMetamodel() {
+		NoClassFoundInMetamodelImpl noClassFoundInMetamodel = new NoClassFoundInMetamodelImpl();
+		return noClassFoundInMetamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InvalidArgument createInvalidArgument() {
+		InvalidArgumentImpl invalidArgument = new InvalidArgumentImpl();
+		return invalidArgument;
 	}
 
 	/**

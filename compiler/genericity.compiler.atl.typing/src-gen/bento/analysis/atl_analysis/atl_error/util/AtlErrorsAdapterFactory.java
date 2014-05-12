@@ -95,6 +95,10 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createCollectionOperationOverNoCollectionErrorAdapter();
 			}
 			@Override
+			public Adapter caseFeatureAccessInCollection(FeatureAccessInCollection object) {
+				return createFeatureAccessInCollectionAdapter();
+			}
+			@Override
 			public Adapter caseFeatureNotFound(FeatureNotFound object) {
 				return createFeatureNotFoundAdapter();
 			}
@@ -157,6 +161,42 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseIteratorOverEmptySequence(IteratorOverEmptySequence object) {
 				return createIteratorOverEmptySequenceAdapter();
+			}
+			@Override
+			public Adapter caseReadingTargetModel(ReadingTargetModel object) {
+				return createReadingTargetModelAdapter();
+			}
+			@Override
+			public Adapter caseAmbiguousTargetModelReference(AmbiguousTargetModelReference object) {
+				return createAmbiguousTargetModelReferenceAdapter();
+			}
+			@Override
+			public Adapter caseNoModelFound(NoModelFound object) {
+				return createNoModelFoundAdapter();
+			}
+			@Override
+			public Adapter caseWrongType(WrongType object) {
+				return createWrongTypeAdapter();
+			}
+			@Override
+			public Adapter caseIteratorBodyWrongType(IteratorBodyWrongType object) {
+				return createIteratorBodyWrongTypeAdapter();
+			}
+			@Override
+			public Adapter caseMatchedRuleWithoutOutputPattern(MatchedRuleWithoutOutputPattern object) {
+				return createMatchedRuleWithoutOutputPatternAdapter();
+			}
+			@Override
+			public Adapter caseExpectedCollectionInForEach(ExpectedCollectionInForEach object) {
+				return createExpectedCollectionInForEachAdapter();
+			}
+			@Override
+			public Adapter caseNoClassFoundInMetamodel(NoClassFoundInMetamodel object) {
+				return createNoClassFoundInMetamodelAdapter();
+			}
+			@Override
+			public Adapter caseInvalidArgument(InvalidArgument object) {
+				return createInvalidArgumentAdapter();
 			}
 			@Override
 			public Adapter caseAnalysisInfo(AnalysisInfo object) {
@@ -253,6 +293,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionOperationOverNoCollectionErrorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection <em>Feature Access In Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection
+	 * @generated
+	 */
+	public Adapter createFeatureAccessInCollectionAdapter() {
 		return null;
 	}
 
@@ -477,6 +531,132 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorOverEmptySequenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.ReadingTargetModel <em>Reading Target Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.ReadingTargetModel
+	 * @generated
+	 */
+	public Adapter createReadingTargetModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference <em>Ambiguous Target Model Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference
+	 * @generated
+	 */
+	public Adapter createAmbiguousTargetModelReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.NoModelFound <em>No Model Found</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.NoModelFound
+	 * @generated
+	 */
+	public Adapter createNoModelFoundAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.WrongType <em>Wrong Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.WrongType
+	 * @generated
+	 */
+	public Adapter createWrongTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType <em>Iterator Body Wrong Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType
+	 * @generated
+	 */
+	public Adapter createIteratorBodyWrongTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.MatchedRuleWithoutOutputPattern <em>Matched Rule Without Output Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.MatchedRuleWithoutOutputPattern
+	 * @generated
+	 */
+	public Adapter createMatchedRuleWithoutOutputPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach <em>Expected Collection In For Each</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach
+	 * @generated
+	 */
+	public Adapter createExpectedCollectionInForEachAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel <em>No Class Found In Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel
+	 * @generated
+	 */
+	public Adapter createNoClassFoundInMetamodelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.InvalidArgument <em>Invalid Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.InvalidArgument
+	 * @generated
+	 */
+	public Adapter createInvalidArgumentAdapter() {
 		return null;
 	}
 

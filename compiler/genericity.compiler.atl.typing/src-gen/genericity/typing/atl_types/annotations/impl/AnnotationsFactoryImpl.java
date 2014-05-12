@@ -31,7 +31,7 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 	 */
 	public static AnnotationsFactory init() {
 		try {
-			AnnotationsFactory theAnnotationsFactory = (AnnotationsFactory)EPackage.Registry.INSTANCE.getEFactory("http://genericity/types/atl/annotations"); 
+			AnnotationsFactory theAnnotationsFactory = (AnnotationsFactory)EPackage.Registry.INSTANCE.getEFactory(AnnotationsPackage.eNS_URI);
 			if (theAnnotationsFactory != null) {
 				return theAnnotationsFactory;
 			}

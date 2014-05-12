@@ -18,16 +18,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.ForEachOutPatternElement;
+import atl.metamodel.ATL.ForStat;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OperationCallExp;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.AtlAnalysisFactory;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.Recovery;
 import bento.analysis.atl_analysis.SeverityKind;
+import bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
@@ -35,14 +38,21 @@ import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRu
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
+import bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach;
+import bento.analysis.atl_analysis.atl_error.FeatureAccessInCollection;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType;
 import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
+import bento.analysis.atl_analysis.atl_error.InvalidArgument;
+import bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType;
 import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
+import bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
+import bento.analysis.atl_analysis.atl_error.NoModelFound;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.ReadingTargetModel;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
 import bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass;
@@ -62,11 +72,19 @@ public class ErrorModel {
 	}
 	
 	public void signalNoModel(String name, LocatedElement element) {
-		signalNoRecoverableError("No model: " + name, element);
+		NoModelFound error = AtlErrorsFactory.eINSTANCE.createNoModelFound();
+		initProblem(error, element);
+		
+		signalError(error, "Invalid meta-model: " + name, element);
 	}
 
 	public void signalNoClass(String name, MetamodelNamespace mmspace, LocatedElement element) {
-		signalNoRecoverableError("No class " + name + " found in meta-model " + mmspace.getName(), element);
+		NoClassFoundInMetamodel error = AtlErrorsFactory.eINSTANCE.createNoClassFoundInMetamodel();
+		initProblem(error, element);
+		
+		error.setClassName(name);
+		
+		signalError(error, "No class " + name + " found in meta-model " + mmspace.getName(), element);
 	}
 
 	public Type signalNoFeature(EClass c, String featureName, LocatedElement element) {
@@ -167,18 +185,39 @@ public class ErrorModel {
 		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
 		recovery.setSubclassName(subtype.getName());
 		
-		System.err.println("Feature " + featureName + " expected in " + type.getName() + " but found in subtype " + subtype.getName() + ". " + node.getLocation() );
+		signalError(error, "Feature " + featureName + " expected in " + type.getName() + " but found in subtype " + subtype.getName(), node);
 	}
 
-
 	public void warningOperationFoundInSubType(Metaclass type, Metaclass subtype, String operationName, LocatedElement node) {
-		System.err.println("WARNING: Feature " + operationName + " expected in " + type.getName() + " but found in subtype " + subtype.getName() + ". " + node.getLocation() );		
+		OperationNotFound error = AtlErrorsFactory.eINSTANCE.createOperationNotFound();
+		initProblem(error, node);
+
+		error.setOperationName(operationName);
+		error.setClassName(type.getName());
+		error.setMetamodelName(((ClassNamespace) type.getMetamodelRef()).getMetamodelName());
+		
+		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
+		recovery.setSubclassName(subtype.getName());
+		
+		signalError(error, "Operation " + operationName + " expected in " + type.getName() + " but found in subtype " + subtype.getName(), node);
+
+		// System.err.println("WARNING: Feature " + operationName + " expected in " + type.getName() + " but found in subtype " + subtype.getName() + ". " + node.getLocation() );		
 	} 
 
-	public void signalInvalidOperand(String operatorSymbol, LocatedElement node, IRecoveryAction recovery) {
+	public Type signalInvalidOperand(String operatorSymbol, LocatedElement node, IRecoveryAction ra) {
 		FeatureNotFound error = AtlErrorsFactory.eINSTANCE.createFeatureNotFound();
 		initProblem(error, node);
 		
+		if ( ra == null ) 
+			throw new IllegalArgumentException();
+		
+		Type result = ra.recover(this, error);
+		if ( result != null ) {
+			signalError(error, "Invalid operand " + operatorSymbol, node);
+			return result;
+		}
+	
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
 	private void initProblem(LocalProblem p, LocatedElement element) {
@@ -346,9 +385,38 @@ public class ErrorModel {
 		
 		signalWarning(error, "Possibly unresolved binding: " + s, b);
 	}
-
-	
 	// End-of binding problems
+
+
+	public void signalIteratorBodyWrongType(IteratorExp node, Type bodyType) {
+		IteratorBodyWrongType error = AtlErrorsFactory.eINSTANCE.createIteratorBodyWrongType();
+		initProblem(error, node);
+		
+		signalError(error, "Wrong iterator body type " + TypeUtils.typeToString(bodyType), node);
+	}
+	public void signalReadingTargetModel(OclModelElement model) {
+		ReadingTargetModel error = AtlErrorsFactory.eINSTANCE.createReadingTargetModel();
+		initProblem(error, model);
+		error.setModelName(model.getName());
+		
+		signalError(error, "Reading target model " + model.getModel().getName() + "!" + model.getName(), model);
+	}
+	
+	public void signalAmbiguousTargetModelReference(OclModelElement model) {
+		AmbiguousTargetModelReference error = AtlErrorsFactory.eINSTANCE.createAmbiguousTargetModelReference();
+		initProblem(error, model);
+		error.setModelName(model.getName());
+		
+		signalError(error, "Ambiguous target model reference " + model.getModel().getName() + "!" + model.getName(), model);	
+	}
+
+	public void signalMatchedRuleWithoutOutputPattern(MatchedRule rule) {
+		AmbiguousTargetModelReference error = AtlErrorsFactory.eINSTANCE.createAmbiguousTargetModelReference();
+		initProblem(error, rule);
+		
+		signalWarning(error, "Matched rule without output pattern: " + rule.getName(), rule);		
+	}
+	
 	
 	public void signalNoEnumLiteral(String name, LocatedElement node) {
 		signalNoRecoverableError("No enum literal " + name, node);
@@ -386,9 +454,40 @@ public class ErrorModel {
 		public NoRecoverableError(String msg) { super(msg); }
 	}
 
-	public void signalExpectedCollectionInForEachOutputPattern(ForEachOutPatternElement e) {
-		signalWarning_WITHOUTERROR_TODO("Expected collection in ForEach output pattern element", e);
+	public Type signalExpectedCollectionInForEachOutputPattern(ForEachOutPatternElement e) {
+		ExpectedCollectionInForEach error = AtlErrorsFactory.eINSTANCE.createExpectedCollectionInForEach();
+		initProblem(error, e);
+		
+		signalError(error, "Expected collection in ForEachOutputPattern", e);		
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
+
+	public Type signalExpectedCollectionInForStat(ForStat fs) {
+		ExpectedCollectionInForEach error = AtlErrorsFactory.eINSTANCE.createExpectedCollectionInForEach();
+		initProblem(error, fs);
+		
+		signalError(error, "Expected collection in ForStat", fs);		
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
+	}
+
+	public Type signalInvalidArgument(String operationName, LocatedElement node) {
+		InvalidArgument error = AtlErrorsFactory.eINSTANCE.createInvalidArgument();
+		initProblem(error, node);
+
+		signalError(error, "Invalid argument", node);		
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
+	}
+
+	public Type signalFeatureAccessInCollection(String featureName, LocatedElement node) {
+		FeatureAccessInCollection error = AtlErrorsFactory.eINSTANCE.createFeatureAccessInCollection();
+		initProblem(error, node);
+		
+		error.setFeatureName(featureName);
+
+		signalError(error, "Feature access in collection, " + featureName, node);		
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
+	}
+
 
 	
 }

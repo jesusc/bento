@@ -1,6 +1,7 @@
 package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
+import genericity.compiler.atl.analyser.namespaces.EnumNamespace;
 import genericity.compiler.atl.analyser.namespaces.IMetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.typing.atl_types.CollectionType;
@@ -79,7 +80,7 @@ public class EcoreTypeConverter {
 	}
 
 	private Type convertEEnum(EEnum c) {
-		EnumType e = (EnumType) typ.createEEnum(c);
+		EnumType e = (EnumType) typ.createEEnum(c, new EnumNamespace(c));
 		e.setEenum(c);
 		e.setName(c.getName());
 		// TODO: Add literals

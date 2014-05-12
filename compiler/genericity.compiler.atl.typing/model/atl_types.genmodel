@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.compiler.atl.typing/src-gen"
-    modelPluginID="genericity.compiler.atl.typing" modelName="Atl_types" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.compiler.atl.typing/src-gen" modelPluginID="genericity.compiler.atl.typing"
+    modelName="Atl_types" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
   <foreignModel>atl_types.ecore</foreignModel>
   <genPackages prefix="AtlTyping" basePackage="genericity.typing" disposableProviderFactory="true"
       ecorePackage="atl_types.ecore#/">
@@ -42,8 +41,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//EnumType/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//EnumType/eenum"/>
     </genClasses>
-    <genClasses ecoreClass="atl_types.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Model/name"/>
+    <genClasses ecoreClass="atl_types.ecore#//MetaModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//MetaModel/name"/>
     </genClasses>
     <genClasses ecoreClass="atl_types.ecore#//Metaclass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//Metaclass/name"/>

@@ -36,5 +36,6 @@ Export-Package: atl.metamodel,
  genericity.typing.atl_types.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
+ genericity.compiler.atl.typing;visibility:=reexport,
  org.eclectic.modeling;bundle-version="0.8.6"
 Bundle-ActivationPolicy: lazy

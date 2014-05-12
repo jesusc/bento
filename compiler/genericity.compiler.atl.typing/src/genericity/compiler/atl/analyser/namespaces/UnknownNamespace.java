@@ -63,7 +63,7 @@ public class UnknownNamespace extends AbstractTypeNamespace {
 
 	@Override
 	public void extendType(String operationName, Type returnType, Operation opDefinition) {
-		throw new UnsupportedOperationException();		
+		throw new UnsupportedOperationException(operationName + " " + opDefinition.getLocation());		
 	}
 
 	@Override

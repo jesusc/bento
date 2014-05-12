@@ -7,9 +7,9 @@
 package genericity.typing.atl_types.impl;
 
 import genericity.typing.atl_types.AtlTypingPackage;
+import genericity.typing.atl_types.MetaModel;
 import genericity.typing.atl_types.Metaclass;
 
-import genericity.typing.atl_types.Model;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -92,7 +92,7 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * @generated
 	 * @ordered
 	 */
-	protected Model model;
+	protected MetaModel model;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,10 +198,10 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Model getModel() {
+	public MetaModel getModel() {
 		if (model != null && model.eIsProxy()) {
 			InternalEObject oldModel = (InternalEObject)model;
-			model = (Model)eResolveProxy(oldModel);
+			model = (MetaModel)eResolveProxy(oldModel);
 			if (model != oldModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlTypingPackage.METACLASS__MODEL, oldModel, model));
@@ -215,7 +215,7 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Model basicGetModel() {
+	public MetaModel basicGetModel() {
 		return model;
 	}
 
@@ -224,8 +224,8 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setModel(Model newModel) {
-		Model oldModel = model;
+	public void setModel(MetaModel newModel) {
+		MetaModel oldModel = model;
 		model = newModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AtlTypingPackage.METACLASS__MODEL, oldModel, model));
@@ -271,7 +271,7 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 				setKlass((EClass)newValue);
 				return;
 			case AtlTypingPackage.METACLASS__MODEL:
-				setModel((Model)newValue);
+				setModel((MetaModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -295,7 +295,7 @@ public class MetaclassImpl extends RefTypeImpl implements Metaclass {
 				setKlass((EClass)null);
 				return;
 			case AtlTypingPackage.METACLASS__MODEL:
-				setModel((Model)null);
+				setModel((MetaModel)null);
 				return;
 		}
 		super.eUnset(featureID);

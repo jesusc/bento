@@ -1,8 +1,10 @@
 package genericity.compiler.atl.analyser.namespaces;
 
 import genericity.compiler.atl.analyser.AnalyserContext;
-import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Type;
+
+import org.eclipse.emf.ecore.EEnum;
+
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.OCL.Attribute;
@@ -11,10 +13,10 @@ import atl.metamodel.OCL.Operation;
 
 public class EnumNamespace extends AbstractTypeNamespace {
 
-	private EnumType	enumType;
+	private EEnum eenum;
 
-	public EnumNamespace(EnumType enumT) {
-		this.enumType = enumT;
+	public EnumNamespace(EEnum eenum) {
+		this.eenum = eenum;
 	}
 
 	@Override
@@ -74,7 +76,7 @@ public class EnumNamespace extends AbstractTypeNamespace {
 
 	@Override
 	public Type createType(boolean explicitOcurrence) {
-		throw new UnsupportedOperationException();
+		return AnalyserContext.getTypingModel().createEEnum(eenum, this);
 	}
 
 	@Override

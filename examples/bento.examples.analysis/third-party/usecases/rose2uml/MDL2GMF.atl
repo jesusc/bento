@@ -1,6 +1,7 @@
 -- @atlcompiler atl2006
 module MDL2GMF; -- Module Template
 create OUT : GMF from INMDL : MDL, INUML : UML, INPROP : Property;
+
 uses MDLHelpers;
 
 helper def: quid2Object : Map(String,MDL!Object)=

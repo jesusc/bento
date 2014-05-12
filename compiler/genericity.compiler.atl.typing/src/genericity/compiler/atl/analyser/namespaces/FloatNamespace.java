@@ -22,6 +22,7 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 		
 			if ( operationName.equals("sin") ) return AnalyserContext.getTypingModel().newFloatType();
 			if ( operationName.equals("cos") ) return AnalyserContext.getTypingModel().newFloatType();
+			if ( operationName.equals("sqrt") ) return AnalyserContext.getTypingModel().newFloatType();
 					
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 		}
@@ -40,7 +41,7 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 			if ( optionalArgument instanceof FloatType || optionalArgument instanceof IntegerType ) {
 				return AnalyserContext.getTypingModel().newFloatType();
 			} else {
-				AnalyserContext.getErrorModel().signalInvalidOperand(operatorSymbol, node, new IRecoveryAction() {
+				return AnalyserContext.getErrorModel().signalInvalidOperand(operatorSymbol, node, new IRecoveryAction() {
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {
 						Type t = AnalyserContext.getTypingModel().newFloatType();
@@ -53,7 +54,7 @@ public class FloatNamespace extends PrimitiveTypeNamespace {
 			return createType(false); // This is separated because there are two cases: "a-b", "-a"
 		}
 		
-		throw new UnsupportedOperationException(operatorSymbol + " - " + node);
+		throw new UnsupportedOperationException(operatorSymbol + " - " + node.getLocation());
 	}
 	
 	@Override

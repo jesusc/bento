@@ -897,14 +897,14 @@ public interface AtlTypingPackage extends EPackage {
 	int ENUM_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link genericity.typing.atl_types.impl.ModelImpl <em>Model</em>}' class.
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.MetaModelImpl <em>Meta Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see genericity.typing.atl_types.impl.ModelImpl
-	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getModel()
+	 * @see genericity.typing.atl_types.impl.MetaModelImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaModel()
 	 * @generated
 	 */
-	int MODEL = 17;
+	int META_MODEL = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -913,16 +913,16 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__NAME = 0;
+	int META_MODEL__NAME = 0;
 
 	/**
-	 * The number of structural features of the '<em>Model</em>' class.
+	 * The number of structural features of the '<em>Meta Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = 1;
+	int META_MODEL_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.MetaclassImpl <em>Metaclass</em>}' class.
@@ -1585,25 +1585,25 @@ public interface AtlTypingPackage extends EPackage {
 	EReference getEnumType_Eenum();
 
 	/**
-	 * Returns the meta object for class '{@link genericity.typing.atl_types.Model <em>Model</em>}'.
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.MetaModel <em>Meta Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model</em>'.
-	 * @see genericity.typing.atl_types.Model
+	 * @return the meta object for class '<em>Meta Model</em>'.
+	 * @see genericity.typing.atl_types.MetaModel
 	 * @generated
 	 */
-	EClass getModel();
+	EClass getMetaModel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.Model#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link genericity.typing.atl_types.MetaModel#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see genericity.typing.atl_types.Model#getName()
-	 * @see #getModel()
+	 * @see genericity.typing.atl_types.MetaModel#getName()
+	 * @see #getMetaModel()
 	 * @generated
 	 */
-	EAttribute getModel_Name();
+	EAttribute getMetaModel_Name();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.Metaclass <em>Metaclass</em>}'.
@@ -2032,14 +2032,14 @@ public interface AtlTypingPackage extends EPackage {
 		EReference ENUM_TYPE__EENUM = eINSTANCE.getEnumType_Eenum();
 
 		/**
-		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.ModelImpl <em>Model</em>}' class.
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.MetaModelImpl <em>Meta Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see genericity.typing.atl_types.impl.ModelImpl
-		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getModel()
+		 * @see genericity.typing.atl_types.impl.MetaModelImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaModel()
 		 * @generated
 		 */
-		EClass MODEL = eINSTANCE.getModel();
+		EClass META_MODEL = eINSTANCE.getMetaModel();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2047,7 +2047,7 @@ public interface AtlTypingPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
+		EAttribute META_MODEL__NAME = eINSTANCE.getMetaModel_Name();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.MetaclassImpl <em>Metaclass</em>}' class.
