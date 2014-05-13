@@ -269,11 +269,12 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		Type targetVar = attr.typeOf( self.getOutPatternElement() );
 		ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
 		Type tgtType = ns.getFeatureType(self.getPropertyName(), self);
+		EStructuralFeature f = ns.getFeatureInfo(self.getPropertyName());
 		
 		//Type tgtType = attr.typeOf(self.g);
 		
 		BindingAnn ann = typ.createBindingAnnotation(self, srcType, tgtType);
-		
+		ann.setWrittenFeature(f);
 		ann.setValue( attr.<ExpressionAnnotation> annotationOf(self.getValue()) ); 
 	
 		attr.linkAnnotation(self, ann);

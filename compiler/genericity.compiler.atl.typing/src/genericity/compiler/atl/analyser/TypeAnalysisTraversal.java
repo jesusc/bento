@@ -89,11 +89,12 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		
 		startVisiting(root);
 
+		CreateAnnotations annotations = new CreateAnnotations(model, mm, root, typ, errors);
+		annotations .perform(attr);
+
 		RuleAnalysis ruleAnalysis = new RuleAnalysis(model, mm, root, typ, errors);
 		ruleAnalysis.perform(attr);
 
-		CreateAnnotations annotations = new CreateAnnotations(model, mm, root, typ, errors);
-		annotations .perform(attr);
 	}
 	
 	

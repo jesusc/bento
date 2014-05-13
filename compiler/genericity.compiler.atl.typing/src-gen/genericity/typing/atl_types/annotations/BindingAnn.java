@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getSourceType <em>Source Type</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getTargetType <em>Target Type</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getWrittenFeature <em>Written Feature</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getValue <em>Value</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getResolvedBy <em>Resolved By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.BindingAnn#getControlFlow <em>Control Flow</em>}</li>
@@ -165,6 +166,32 @@ public interface BindingAnn extends AtlAnnotation {
 	 * @generated
 	 */
 	void setTargetType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>Written Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Written Feature</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Written Feature</em>' reference.
+	 * @see #setWrittenFeature(EObject)
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getBindingAnn_WrittenFeature()
+	 * @model required="true"
+	 * @generated
+	 */
+	EObject getWrittenFeature();
+
+	/**
+	 * Sets the value of the '{@link genericity.typing.atl_types.annotations.BindingAnn#getWrittenFeature <em>Written Feature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Written Feature</em>' reference.
+	 * @see #getWrittenFeature()
+	 * @generated
+	 */
+	void setWrittenFeature(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

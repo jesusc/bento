@@ -1074,13 +1074,22 @@ public interface AnnotationsPackage extends EPackage {
 	int BINDING_ANN__TARGET_TYPE = ATL_ANNOTATION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Written Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_ANN__WRITTEN_FEATURE = ATL_ANNOTATION_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ANN__VALUE = ATL_ANNOTATION_FEATURE_COUNT + 5;
+	int BINDING_ANN__VALUE = ATL_ANNOTATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Resolved By</b></em>' reference list.
@@ -1089,7 +1098,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ANN__RESOLVED_BY = ATL_ANNOTATION_FEATURE_COUNT + 6;
+	int BINDING_ANN__RESOLVED_BY = ATL_ANNOTATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Control Flow</b></em>' reference.
@@ -1098,7 +1107,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ANN__CONTROL_FLOW = ATL_ANNOTATION_FEATURE_COUNT + 7;
+	int BINDING_ANN__CONTROL_FLOW = ATL_ANNOTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Binding Ann</em>' class.
@@ -1107,7 +1116,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 8;
+	int BINDING_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl <em>Expression Annotation</em>}' class.
@@ -2396,6 +2405,17 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getBindingAnn_TargetType();
 
 	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.annotations.BindingAnn#getWrittenFeature <em>Written Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Written Feature</em>'.
+	 * @see genericity.typing.atl_types.annotations.BindingAnn#getWrittenFeature()
+	 * @see #getBindingAnn()
+	 * @generated
+	 */
+	EReference getBindingAnn_WrittenFeature();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link genericity.typing.atl_types.annotations.BindingAnn#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3188,6 +3208,14 @@ public interface AnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BINDING_ANN__TARGET_TYPE = eINSTANCE.getBindingAnn_TargetType();
+
+		/**
+		 * The meta object literal for the '<em><b>Written Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_ANN__WRITTEN_FEATURE = eINSTANCE.getBindingAnn_WrittenFeature();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.

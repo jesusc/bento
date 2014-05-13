@@ -1,6 +1,7 @@
 package genericity.compiler.atl.analyser;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
@@ -98,5 +99,9 @@ public class TypeUtils {
 			return typeName + "(" + getTypeName(((CollectionType) t).getContainedType()) +")";
 		}
 		throw new UnsupportedOperationException(t.getClass().getName());
+	}
+
+	public static boolean isFeatureMustBeInitialized(EStructuralFeature f) {
+		return f.getLowerBound() != 0 && f.getDefaultValue() == null;
 	}
 }

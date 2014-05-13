@@ -725,7 +725,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingAnn_Value() {
+	public EReference getBindingAnn_WrittenFeature() {
 		return (EReference)bindingAnnEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -734,7 +734,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingAnn_ResolvedBy() {
+	public EReference getBindingAnn_Value() {
 		return (EReference)bindingAnnEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -743,8 +743,17 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingAnn_ControlFlow() {
+	public EReference getBindingAnn_ResolvedBy() {
 		return (EReference)bindingAnnEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingAnn_ControlFlow() {
+		return (EReference)bindingAnnEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1123,6 +1132,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		createEAttribute(bindingAnnEClass, BINDING_ANN__NAME);
 		createEReference(bindingAnnEClass, BINDING_ANN__SOURCE_TYPE);
 		createEReference(bindingAnnEClass, BINDING_ANN__TARGET_TYPE);
+		createEReference(bindingAnnEClass, BINDING_ANN__WRITTEN_FEATURE);
 		createEReference(bindingAnnEClass, BINDING_ANN__VALUE);
 		createEReference(bindingAnnEClass, BINDING_ANN__RESOLVED_BY);
 		createEReference(bindingAnnEClass, BINDING_ANN__CONTROL_FLOW);
@@ -1292,6 +1302,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEAttribute(getBindingAnn_Name(), ecorePackage.getEString(), "name", null, 0, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_SourceType(), theAtlTypingPackage.getType(), null, "sourceType", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_TargetType(), theAtlTypingPackage.getType(), null, "targetType", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingAnn_WrittenFeature(), ecorePackage.getEObject(), null, "writtenFeature", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_Value(), this.getExpressionAnnotation(), null, "value", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_ResolvedBy(), this.getMatchedRuleOneAnn(), null, "resolvedBy", null, 0, -1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_ControlFlow(), theAnalysisPackage.getControlFlow(), null, "controlFlow", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

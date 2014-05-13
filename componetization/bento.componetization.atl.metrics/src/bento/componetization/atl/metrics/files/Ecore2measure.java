@@ -96,7 +96,6 @@ public class Ecore2measure {
 	public Ecore2measure() throws IOException {
 		properties = new Properties();
 		properties.load(getFileURL("Ecore2measure.properties").openStream());
-		EPackage.Registry.INSTANCE.put(getMetamodelUri("Measure"), metamodel.metrics.Measure.MeasurePackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 	}
 	

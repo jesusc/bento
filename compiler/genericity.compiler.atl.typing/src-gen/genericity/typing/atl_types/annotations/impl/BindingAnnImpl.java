@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getSourceType <em>Source Type</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getTargetType <em>Target Type</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getWrittenFeature <em>Written Feature</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getValue <em>Value</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getResolvedBy <em>Resolved By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.BindingAnnImpl#getControlFlow <em>Control Flow</em>}</li>
@@ -106,6 +107,16 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 	 * @ordered
 	 */
 	protected Type targetType;
+
+	/**
+	 * The cached value of the '{@link #getWrittenFeature() <em>Written Feature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWrittenFeature()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject writtenFeature;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -334,6 +345,44 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EObject getWrittenFeature() {
+		if (writtenFeature != null && writtenFeature.eIsProxy()) {
+			InternalEObject oldWrittenFeature = (InternalEObject)writtenFeature;
+			writtenFeature = eResolveProxy(oldWrittenFeature);
+			if (writtenFeature != oldWrittenFeature) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AnnotationsPackage.BINDING_ANN__WRITTEN_FEATURE, oldWrittenFeature, writtenFeature));
+			}
+		}
+		return writtenFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetWrittenFeature() {
+		return writtenFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWrittenFeature(EObject newWrittenFeature) {
+		EObject oldWrittenFeature = writtenFeature;
+		writtenFeature = newWrittenFeature;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AnnotationsPackage.BINDING_ANN__WRITTEN_FEATURE, oldWrittenFeature, writtenFeature));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpressionAnnotation getValue() {
 		return value;
 	}
@@ -458,6 +507,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 			case AnnotationsPackage.BINDING_ANN__TARGET_TYPE:
 				if (resolve) return getTargetType();
 				return basicGetTargetType();
+			case AnnotationsPackage.BINDING_ANN__WRITTEN_FEATURE:
+				if (resolve) return getWrittenFeature();
+				return basicGetWrittenFeature();
 			case AnnotationsPackage.BINDING_ANN__VALUE:
 				return getValue();
 			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:
@@ -492,6 +544,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 				return;
 			case AnnotationsPackage.BINDING_ANN__TARGET_TYPE:
 				setTargetType((Type)newValue);
+				return;
+			case AnnotationsPackage.BINDING_ANN__WRITTEN_FEATURE:
+				setWrittenFeature((EObject)newValue);
 				return;
 			case AnnotationsPackage.BINDING_ANN__VALUE:
 				setValue((ExpressionAnnotation)newValue);
@@ -530,6 +585,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 			case AnnotationsPackage.BINDING_ANN__TARGET_TYPE:
 				setTargetType((Type)null);
 				return;
+			case AnnotationsPackage.BINDING_ANN__WRITTEN_FEATURE:
+				setWrittenFeature((EObject)null);
+				return;
 			case AnnotationsPackage.BINDING_ANN__VALUE:
 				setValue((ExpressionAnnotation)null);
 				return;
@@ -561,6 +619,8 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 				return sourceType != null;
 			case AnnotationsPackage.BINDING_ANN__TARGET_TYPE:
 				return targetType != null;
+			case AnnotationsPackage.BINDING_ANN__WRITTEN_FEATURE:
+				return writtenFeature != null;
 			case AnnotationsPackage.BINDING_ANN__VALUE:
 				return value != null;
 			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:

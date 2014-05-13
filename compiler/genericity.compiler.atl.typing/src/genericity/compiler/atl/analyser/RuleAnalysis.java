@@ -2,6 +2,7 @@ package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
+import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
@@ -9,6 +10,8 @@ import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
+import genericity.typing.atl_types.annotations.BindingAnn;
+import genericity.typing.atl_types.annotations.CallExprAnn;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,20 +19,28 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import atl.metamodel.ATLModel;
+import atl.metamodel.ATLModelBaseObject;
+import atl.metamodel.ATL.ActionBlock;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.BindingStat;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.MatchedRule;
+import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.OutPatternElement;
+import atl.metamodel.ATL.Rule;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
+import atl.metamodel.OCL.NavigationOrAttributeCallExp;
+import atl.metamodel.OCL.VariableExp;
 
 /**
  * This traversal is in charge of analysing rule "calls".
@@ -50,6 +61,32 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		attr.popVisitor(this);
 	}
 
+	@Override
+	public void beforeModule(Module self) {
+		// Compute the list of all written bindings
+		List<? extends Binding> bindings = model.allObjectsOf(Binding.class);
+		for (Binding binding : bindings) {
+			BindingAnn ann = attr.annotationOf(binding);
+			EStructuralFeature f = (EStructuralFeature) ann.getWrittenFeature();
+			if ( TypeUtils.isFeatureMustBeInitialized(f) ) {
+				allWrittenCompulsoryFeatures.add(f);
+			}
+		}
+
+		List<? extends BindingStat> stats = model.allObjectsOf(BindingStat.class);
+		for (BindingStat bindingStat : stats) {
+			CallExprAnn ann = attr.annotationOf(bindingStat.getSource());
+			if ( ann.getUsedFeature() != null ) {
+				EStructuralFeature f = (EStructuralFeature) ann.getUsedFeature();
+				if ( TypeUtils.isFeatureMustBeInitialized(f) ) {
+					allWrittenCompulsoryFeatures.add(f);
+				}				
+			}
+		}
+		
+		// TODO: May be another list with imperatively assigned features
+	}
+	
 	@Override
 	public VisitingActions preBinding(Binding self) {
 		return actions();
@@ -78,6 +115,16 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inSimpleOutPatternElement(SimpleOutPatternElement self) {
+		ActionBlock actionBlock = self.container_().container(Rule.class).getActionBlock();
+		if ( actionBlock != null ) {
+			TreeIterator<EObject> it = actionBlock.original_().eAllContents();
+			while ( it.hasNext() ) {
+				ATLModelBaseObject obj = model.findWrapper(it.next());
+				if ( obj instanceof BindingStat ) {
+					checkBindingStat((BindingStat) obj);
+				}
+			}
+		}
 		checkCompulsoryFeature(self);
 	}
 	
@@ -121,7 +168,6 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		// The feature is removed from the current compulsoryFeatures set, which is
 		// checked later to be empty
 		compulsoryFeatures.remove(f);
-		allWrittenCompulsoryFeatures.add(f);
 		
 		if ( rightType instanceof UnionType ) {
 			UnionType ut = (UnionType) rightType;
@@ -133,10 +179,21 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		}
 	}
 	
-	@Override
-	public void inBindingStat(BindingStat self) {
-		// TODO Auto-generated method stub
-		super.inBindingStat(self);
+	public void checkBindingStat(BindingStat self) {
+		NavigationOrAttributeCallExp assigned = (NavigationOrAttributeCallExp) self.getSource();
+		if ( assigned.getSource() instanceof VariableExp ) {
+			Type targetVar = attr.typeOf( assigned.getSource() );
+			// Rule out "thisModule" assignments
+			if ( targetVar instanceof Metaclass) { 
+				// The same as the declarative case
+				ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
+				EStructuralFeature f = ns.getFeatureInfo(assigned.getName());
+				
+				// The feature is removed from the current compulsoryFeatures set, which is
+				// checked later to be empty
+				compulsoryFeatures.remove(f);
+			}
+		} 
 	}
 
 	private void analyseBinding(Binding self, Type rightType, Type targetVar, EStructuralFeature f) {

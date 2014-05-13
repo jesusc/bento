@@ -217,6 +217,7 @@ package annotations {
 	attr String[0..1] name;
 	ref Type[1] sourceType;
 	ref Type[1] targetType;
+	ref EObject[1] writtenFeature;
 	
 	val ExpressionAnnotation[1] value;
 	

@@ -138,6 +138,8 @@
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/sourceType"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/targetType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/writtenFeature"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/value"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/resolvedBy"/>
