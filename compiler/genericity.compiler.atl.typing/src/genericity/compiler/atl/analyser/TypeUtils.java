@@ -5,8 +5,12 @@ import org.eclipse.emf.ecore.EClass;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollectionType;
+import genericity.typing.atl_types.FloatType;
+import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.PrimitiveType;
+import genericity.typing.atl_types.SequenceType;
+import genericity.typing.atl_types.SetType;
 import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.TupleAttribute;
 import genericity.typing.atl_types.TupleType;
@@ -82,6 +86,16 @@ public class TypeUtils {
 			return "String";
 		} else if ( t instanceof BooleanType ) {
 			return "Boolean";
+		} else if ( t instanceof IntegerType ) {
+			return "Integer";
+		} else if ( t instanceof FloatType ) {
+			return "Float";
+		} else if ( t instanceof CollectionType ) {
+			String typeName = null;
+			if ( t instanceof SequenceType ) typeName = "Sequence";
+			if ( t instanceof SetType ) typeName = "Set";
+			
+			return typeName + "(" + getTypeName(((CollectionType) t).getContainedType()) +")";
 		}
 		throw new UnsupportedOperationException(t.getClass().getName());
 	}

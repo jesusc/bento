@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import atl.metamodel.OCL.BooleanExp;
+import atl.metamodel.OCL.CollectionExp;
 import atl.metamodel.OCL.CollectionOperationCallExp;
+import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.IterateExp;
@@ -17,6 +19,7 @@ import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
 import atl.metamodel.OCL.SequenceExp;
+import atl.metamodel.OCL.SetExp;
 import atl.metamodel.OCL.StringExp;
 import atl.metamodel.OCL.VariableExp;
 
@@ -52,15 +55,23 @@ public class OclGenerator {
 		} else if ( expr instanceof IfExp ) {
 			IfExp ifexp = (IfExp) expr;
 			return "if " + gen(ifexp.getCondition()) + "\n\tthen " + gen(ifexp.getThenExpression()) + "\n\telse " + gen(ifexp.getElseExpression()) + "\n\tendif";
-		} else if ( expr instanceof SequenceExp ) {
-			SequenceExp col = (SequenceExp) expr;
+		} else if ( expr instanceof CollectionExp ) {
+			CollectionExp col = (CollectionExp) expr;
 			String elems = "";
 			for(int i = 0; i < col.getElements().size(); i++) {
 				elems += OclGenerator.gen( col.getElements().get(i) );
 				if ( i + 1 < col.getElements().size() ) 
 					elems += ",";
 			}
-			return "Sequence { " + elems + " }";
+			String type = null;
+			if ( expr instanceof SequenceExp ) type = "Sequence";
+			else if ( expr instanceof SetExp ) type = "Set";
+			else throw new UnsupportedOperationException();
+			
+			return type + " { " + elems + " }";
+		} else if ( expr instanceof EnumLiteralExp ) {
+			EnumLiteralExp enuml = (EnumLiteralExp) expr;
+			return "#" + enuml.getName();
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}

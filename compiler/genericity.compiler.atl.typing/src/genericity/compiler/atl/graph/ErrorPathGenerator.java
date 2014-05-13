@@ -1,5 +1,8 @@
 package genericity.compiler.atl.graph;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.emf.common.util.EList;
 
 import genericity.compiler.atl.analyser.ErrorModel;
@@ -95,7 +98,7 @@ public class ErrorPathGenerator {
 	}
 
 	private void generatePath(LocalProblem p) {
-		System.out.println(p.getClass().getName() + " " + p.getDescription() + " " + p.getLocation()) ;
+		// System.out.println(p.getClass().getName() + " " + p.getDescription() + " " + p.getLocation()) ;
 		if ( p instanceof NoBindingForCompulsoryFeature ) {
 			generatePath_NoBindingForCompulsoryFeature((NoBindingForCompulsoryFeature) p);		
 		
@@ -158,26 +161,8 @@ public class ErrorPathGenerator {
 		return parent;
 	}
 	
-	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {
-		/*
-		// Try to find an iterator
-		ATLModelBaseObject parent = start.container_(); // TODO: Iterate
-
-		System.out.println(OclGenerator.gen(start));
-		while ( ! (parent instanceof IteratorExp || (parent instanceof IterateExp) ) ) {
-			if ( (parent instanceof Rule) || (parent instanceof Helper) ) {
-				parent = null;
-				break;
-			}
-			parent = parent.container_();
-		}
-
-		// It is an iterator
-		if ( parent != null ) {
-			start = ((IteratorExp) parent).getSource();
-			startAnn = (ExpressionAnnotation) typ.getAnnotation(start.original_());
-		}
-		*/
+	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {		
+		TraversedSet traversed = new TraversedSet();
 		
 		// Handle the special case "varName.error", to avoid generating a node with just "varName" which
 		// is redundant (variable names represents objects that must exist)
@@ -185,22 +170,24 @@ public class ErrorPathGenerator {
 			VariableExp v = (VariableExp) start;
 			if ( v.getReferredVariable().getVarName().equals("thisModule") ) throw new UnsupportedOperationException();
 
-			pathToControlFlow(start.container_(), depNode);
+			pathToControlFlow(start.container_(), depNode, traversed);
 		} else {
 			DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
 			depNode.addDependency(node);
 	
-			pathToControlFlow(start, node);
+			pathToControlFlow(start, node, traversed);
 		}
 		
 	}
 
-	private void pathForCall(OclExpression call, DependencyNode depNode) {
+	private void pathForCall(OclExpression call, DependencyNode depNode, TraversedSet traversed) {
 		CallExprAnn ann = (CallExprAnn) typ.getAnnotation(call.original_());
 		
 		CallExprNode node = new CallExprNode((PropertyCallExp) call, ann);
 		depNode.addDependency(node);
 		
+		// This used to work, but seems redundant
+		/*
 		ATLModelBaseObject parent = call.container_();
 		while ( ! isControlFlowElement(parent) ) {
 			if ( isIteration(parent) ) {
@@ -214,8 +201,9 @@ public class ErrorPathGenerator {
 			}
 			parent = parent.container_();
 		}
+		*/
 		
-		pathToControlFlow(call, node);
+		pathToControlFlow(call, node, traversed);
 	}
 
 	private boolean isIteration(ATLModelBaseObject element) {
@@ -227,7 +215,7 @@ public class ErrorPathGenerator {
 			    (element instanceof IfExp );
 	}
 	
-	private void pathToControlFlow(ATLModelBaseObjectInterface start, DependencyNode node) {
+	private void pathToControlFlow(ATLModelBaseObjectInterface start, DependencyNode node, TraversedSet traversed) {
 		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
 		ATLModelBaseObject parent = start.container_(); 
 		while ( ! isControlFlowElement(parent) ) {
@@ -237,7 +225,7 @@ public class ErrorPathGenerator {
 				node.addDependency(loop);
 				
 				// ?? Different from the pathToCall
-				pathToControlFlow((OclExpression) parent, loop);
+				pathToControlFlow((OclExpression) parent, loop, traversed);
 				return;
 			}
 			
@@ -249,13 +237,13 @@ public class ErrorPathGenerator {
 			
 		// QUITAR ESTE IF Y PONERLO EN PATH_TO_SOMEWHERE
 		if ( parent instanceof Rule ) {
-			pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node);
+			pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node, traversed);
 		} else if ( parent instanceof Helper ){
-			pathFromHelper((HelperAnn) typ.getAnnotation(parent.original_()), node);			
+			pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node, traversed);			
 		//} else if ( parent instanceof IteratorExp ) {
 		//	pathToSomewhere(parent, node);
 		} else if ( parent instanceof IfExp ) {
-			pathFromIfExpr((IfExp) parent, (OclExpression) lastParent, node);
+			pathFromIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
 		/*} else if ( parent instanceof Binding ) {
 			Rule r = parent.container_().container_().container(Rule.class);
 			pathToRule((RuleAnn) typ.getAnnotation(r.original_()), node);
@@ -267,7 +255,7 @@ public class ErrorPathGenerator {
 	}
 
 
-	private void pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node) {
+	private void pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node, TraversedSet traversed) {
 		boolean branch;
 		if ( expr.getThenExpression() == directChild ) {
 			branch = ConditionalNode.TRUE_BRANCH;
@@ -279,7 +267,7 @@ public class ErrorPathGenerator {
 		ConditionalNode newNode = new ConditionalNode(expr, branch);
 		node.addDependency(newNode);
 		
-		pathToControlFlow(expr, newNode);
+		pathToControlFlow(expr, newNode, traversed);
 	}
 
 
@@ -293,9 +281,9 @@ public class ErrorPathGenerator {
 		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
 		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node);	
+		pathToRule(rule, node, new TraversedSet());	
 		
-		pathToBinding(atlBinding, b, node);
+		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
 	
 	private void generatePath_BindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule p) {
@@ -307,16 +295,16 @@ public class ErrorPathGenerator {
 		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
 		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node);	
+		pathToRule(rule, node, new TraversedSet());	
 		
-		pathToBinding(atlBinding, b, node);
+		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
 	
-	private void pathToBinding(Binding atlBinding , BindingAnn b, ProblemNode node) {
+	private void pathToBinding(Binding atlBinding , BindingAnn b, ProblemNode node, TraversedSet traversed) {
 		RuleResolutionNode resolutionNode = new RuleResolutionNode(atlBinding, b);
 		node.addConstraint(resolutionNode);
 		for(MatchedRuleAnn mr : b.getResolvedBy()) {
-			pathToRule(mr, resolutionNode);
+			pathToRule(mr, resolutionNode, traversed);
 		}
 	}
 
@@ -326,31 +314,40 @@ public class ErrorPathGenerator {
 		
 		OutputPatternAnn op = (OutputPatternAnn) typ.getAnnotation(p.getElement());
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node);	
+		pathToRule(rule, node, new TraversedSet());	
 	}
 	
-	private void pathToRule(RuleAnn rule, DependencyNode dependent) {
+	private void pathToRule(RuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
 		if ( rule instanceof MatchedRuleAnn ) {
 			pathToMatchedRuleOne((MatchedRuleAnn) rule, dependent);
-		} else if ( rule instanceof LazyRuleAnn ) {
-			pathToLazyRule((LazyRuleAnn) rule, dependent);
+		} else if ( rule instanceof ImperativeRuleAnn ) {
+			pathToImperativeRule((ImperativeRuleAnn) rule, dependent, traversed);
 		} else {
 			throw new UnsupportedOperationException(rule.getClass().getName());
 		}
 	}
 	
-	private void pathToLazyRule(LazyRuleAnn rule, DependencyNode dependent) {
+	private void pathToImperativeRule(ImperativeRuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
 		Rule r =  (Rule) atlModel.findWrapper( rule.getRule() );
+		
+		if ( ! traversed.addImperativeRule(r) ) {
+			return;
+		}
+		
 		ImperativeRuleExecution node = new ImperativeRuleExecution(rule, r);
 		dependent.addDependency(node);
 		for(CallExprAnn callExprAnn : rule.getCalledBy()) {
 			 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
-			 pathForCall(expr, node);				 			
+			 pathForCall(expr, node, traversed);				 			
 		}
 	}
 
-	private void pathFromHelper(HelperAnn helperAnn, DependencyNode depNode) {
+	private void pathToHelper(HelperAnn helperAnn, DependencyNode depNode, TraversedSet traversed) {
 		Helper h =  (Helper) atlModel.findWrapper( helperAnn.getHelper() );
+		
+		if ( ! traversed.addHelper(h) ) 
+			return;
+		
 		HelperInvocationNode hNode = new HelperInvocationNode(h, helperAnn);
 		depNode.addDependency(hNode);
 		
@@ -360,7 +357,7 @@ public class ErrorPathGenerator {
 			EList<CallExprAnn> callers = ((ContextHelperAnn) helperAnn).getPolymorphicCalledBy();
 			for (CallExprAnn callExprAnn : callers) {
 				 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
-				 pathForCall(expr, hNode);				 
+				 pathForCall(expr, hNode, traversed);				 
 			}
 			//pathToExpression(expr, annotation, depNode)
 			//System.out.println(callers.size());
@@ -392,42 +389,20 @@ public class ErrorPathGenerator {
 		return node;
 	}
 	
-	/*
-	private void generatePath_NoBindingForCompulsoryFeature(NoBindingForCompulsoryFeature p) {
-		
-		ErrorPath path = new ErrorPath();
-		
-		OutputPatternAnn op = (OutputPatternAnn) typ.getAnnotation(p.getElement());
-		RuleAnn rule = (RuleAnn) op.eContainer();
-		
-		pathToRule(rule, path);
-		
-		System.out.println(op);
-		System.out.println(rule.getName());
-	}
 
-	private void pathToRule(RuleAnn rule, ErrorPath path) {
-		if ( rule instanceof MatchedRuleOneAnn ) {
-			pathToMatchedRuleOne((MatchedRuleOneAnn) rule, path);
-		} else {
-			throw new UnsupportedOperationException();
-		}
-	}
-
-	private void pathToMatchedRuleOne(MatchedRuleOneAnn rule, ErrorPath path) {		
-		MatchedRule r = (MatchedRule) atlModel.findWrapper( rule.getRule() );
-		VariableDeclaration v = r.getInPattern().getElements().get(0);
-		
-		ObjectPath objectPath = new ObjectPath(rule.getInPatternType(),  v);
-		
-		if ( rule.getFilter() != null ) {
-			objectPath.addConstraint(rule.getFilter());
-		}
-
-		
-		path.addMatchedRule(rule);		
-	}
-	*/
 	
+	private class TraversedSet {
+		private Set<Helper> helpers = new HashSet<Helper>();
+		private Set<Rule> imperative = new HashSet<Rule>();
+		
+		public boolean addHelper(Helper h) {
+			return helpers.add(h);
+		}
+		
+		public boolean addImperativeRule(Rule r) {
+			return imperative.add(r);
+		}
+		
+	}
 	
 }

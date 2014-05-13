@@ -37,8 +37,13 @@ public class ModelsMeasurement extends BaseTest {
 	
 	public void run() throws IOException {
 		typing(KM32MEASURE_TRANSFORMATION, new Object[] { KM3_METAMODEL, MEASURE_METAMODEL}, 
-				   new String[] { "KM3", "Measure" }, false);
-		
+				   new String[] { "KM3", "Measure" }, true);
+
+		generateGraphviz("100:29-100:44");
+		generateErrorSlice("KM3", "tmp_/km32measure.slice.ecore");
+		generateEffectiveMetamodel("KM3", "tmp_/km32measure.effective.ecore");
+		generateCSP("100:29-100:44");
+
 
 		// 
 		

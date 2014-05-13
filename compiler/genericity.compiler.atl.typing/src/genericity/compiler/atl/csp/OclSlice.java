@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.OCL.CollectionExp;
+import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
+import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
@@ -56,6 +58,11 @@ public class OclSlice {
 		} else if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr; 
 			slice(slice, it.getBody(), isExternalDependency);
+
+		} else if ( expr instanceof IterateExp ) {
+			IterateExp it = (IterateExp) expr; 
+			slice(slice, it.getBody(), isExternalDependency);
+			slice(slice, it.getResult().getInitExpression());
 		} else if ( expr instanceof OperationCallExp ) {
 			OperationCallExp op = (OperationCallExp) expr;
 			for(OclExpression arg : op.getArguments()) {
@@ -91,6 +98,8 @@ public class OclSlice {
 				// corresponding node in the condition graph
 			}
 			// slice(slice, ifExp)
+		} else if ( expr instanceof EnumLiteralExp ) {
+			// TODO: NOT SURE IF ENUMLITERAL SHOULD BE PART OF THE SLICE!
 		} else if ( ignore.contains(expr.getClass()) ) {
 			// Ignore
 		} else {

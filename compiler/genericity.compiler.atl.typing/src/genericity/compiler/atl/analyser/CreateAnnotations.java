@@ -20,6 +20,7 @@ import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
+import genericity.typing.atl_types.annotations.RuleAnn;
 import genericity.typing.atl_types.annotations.TransformationAnn;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.ModuleElement;
 import atl.metamodel.ATL.OutPatternElement;
+import atl.metamodel.ATL.Rule;
 import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.Unit;
 import atl.metamodel.OCL.Attribute;
@@ -225,16 +227,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			ann.setFilter( attr.<ExpressionAnnotation> annotationOf(self.getInPattern().getFilter()) ); 
 		}
 		
-		// Replicated in inMatchedRule	
-		for (OutPatternElement ope : self.getOutPattern().getElements()) {
-			OutputPatternAnn customOP = typ.createOutputPattern( ope, attr.typeOf(ope.getType()) );
-			List<Binding> bindings = ope.getBindings();
-			for (Binding binding : bindings) {
-				customOP.getBindings().add( (BindingAnn) attr.annotationOf(binding) );
-			}
-			
-			ann.getOutputPatterns().add(customOP);
-		}
+		createOutputPatternElements(self, ann);
 	}
 	
 	@Override
@@ -245,6 +238,10 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		ann.getNames().add(inPatternElement.getVarName());
 		ann.getArguments().add(attr.typeOf(inPatternElement));
 		
+		createOutputPatternElements(self, ann);	
+	}
+	
+	public void createOutputPatternElements(Rule self, RuleAnn ann) {
 		// Replicated from inMatchedRule
 		for (OutPatternElement ope : self.getOutPattern().getElements()) {
 			OutputPatternAnn customOP = typ.createOutputPattern( ope, attr.typeOf(ope.getType()) );
@@ -255,6 +252,14 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			
 			ann.getOutputPatterns().add(customOP);
 		}
+
+	}
+
+	@Override
+	public void inCalledRule(CalledRule self) {
+		CalledRuleAnn ann = attr.annotationOf(self);
+		
+		createOutputPatternElements(self, ann);
 	}
 	
 	@Override

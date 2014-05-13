@@ -18,7 +18,7 @@ public class GraphvizGenerator {
 		this.graph = g;
 	}
 	
-	public String generate() {
+	public String generate(String location) {
 		LinkedList<DependencyNode> sorted = new LinkedList<DependencyNode>(graph.getProblemNodes());
 		Collections.sort(sorted, new Comparator<DependencyNode>() {
 			@Override
@@ -31,6 +31,10 @@ public class GraphvizGenerator {
 		
 		GraphvizBuffer gv = new GraphvizBuffer();
 		for(DependencyNode node : sorted) {
+			LocalProblem lp = (LocalProblem) node.getProblem();
+			if ( location != null && ! lp.getLocation().equals(location) ) 
+				continue;
+
 			node.genGraphviz(gv);
 			if ( graph.getProblemNodes().size() > 1 ) {
 				gv.packSubgraph();
@@ -40,7 +44,11 @@ public class GraphvizGenerator {
 	}
 
 	public void visualize(String path) {
-		String s = generate();
+		visualize(path, null);
+	}
+	
+	public void visualize(String path, String location) {
+		String s = generate(location);
 		try {
 			FileWriter fw = new FileWriter(path);
 			fw.append(s);

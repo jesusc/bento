@@ -20,8 +20,12 @@ public class CSPGenerator {
 		this.graph = g;
 		this.slice = slice;
 	}
-	
+
 	public String generate() {
+		return generateLoc(null);
+	}
+	
+	public String generateLoc(String location) {
 		LinkedList<DependencyNode> sorted = new LinkedList<DependencyNode>(graph.getProblemNodes());
 		Collections.sort(sorted, new Comparator<DependencyNode>() {
 			@Override
@@ -35,7 +39,9 @@ public class CSPGenerator {
 		String s = "";
 		for(DependencyNode node : sorted) {
 			LocalProblem lp = (LocalProblem) node.getProblem();
-
+			if ( location != null && ! lp.getLocation().equals(location) ) 
+				continue;
+				
 			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
 			s += generateCSP(node);
 			s += "\n\n";

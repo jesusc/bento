@@ -99,14 +99,23 @@ public abstract class BaseTest {
 	
 
 	protected void generateGraphviz() {
-		new GraphvizGenerator(dependencyGraph).visualize("tmp_/output.dot");
+		generateGraphviz(null);
 	}	
 	
+	protected void generateGraphviz(String location) {
+		new GraphvizGenerator(dependencyGraph).visualize("tmp_/output.dot", location);
+	}	
+	
+	
 	protected void generateCSP() throws IOException {
+		generateCSP(null);
+	}
+	
+	protected void generateCSP(String location) throws IOException {
 		//if ( slice == null )
 		//	throw new IllegalStateException("Error slice should be computed before generating CSP");
 				
-		String s = new CSPGenerator(dependencyGraph, slice).generate();
+		String s = new CSPGenerator(dependencyGraph, slice).generateLoc(location);
 		if ( ! s.trim().isEmpty() ) {
 			
 			FileWriter fw = new FileWriter("tmp_/errors.txt", true);

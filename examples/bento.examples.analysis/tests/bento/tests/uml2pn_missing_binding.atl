@@ -17,3 +17,14 @@ rule activity_node {
         	-- name <- NOT SET        
 		)
 }
+
+rule action_node {
+        from node : UML!Action 
+        to   net  : PN!Place (
+        	-- name <- NOT SET, but in do block     
+		)
+		do {
+			net.nameExpression.clientDependency <- '';
+			net.name <- 'something';
+		}
+}

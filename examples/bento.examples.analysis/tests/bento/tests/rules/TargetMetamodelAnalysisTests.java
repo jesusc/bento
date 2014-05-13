@@ -1,7 +1,5 @@
 package bento.tests.rules;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;

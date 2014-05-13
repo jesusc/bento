@@ -1,25 +1,7 @@
 package genericity.compiler.atl.analyser;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import java.util.List;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
-import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
-import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.Metaclass;
@@ -27,43 +9,27 @@ import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import atl.metamodel.ATLModel;
-import atl.metamodel.ATLModelBaseObject;
-import atl.metamodel.ATLModelBaseObjectInterface;
-import atl.metamodel.ATLModelVisitor;
 import atl.metamodel.ATL.Binding;
-import atl.metamodel.ATL.CalledRule;
+import atl.metamodel.ATL.BindingStat;
 import atl.metamodel.ATL.ForEachOutPatternElement;
-import atl.metamodel.ATL.Helper;
-import atl.metamodel.ATL.LazyMatchedRule;
-import atl.metamodel.ATL.Library;
 import atl.metamodel.ATL.MatchedRule;
-import atl.metamodel.ATL.Module;
-import atl.metamodel.ATL.ModuleElement;
 import atl.metamodel.ATL.OutPatternElement;
-import atl.metamodel.ATL.Rule;
-import atl.metamodel.ATL.RuleVariableDeclaration;
-import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
-import atl.metamodel.ATLModelVisitor.VisitingActions;
-import atl.metamodel.OCL.Attribute;
-import atl.metamodel.OCL.IntegerExp;
-import atl.metamodel.OCL.Iterator;
-import atl.metamodel.OCL.NavigationOrAttributeCallExp;
-import atl.metamodel.OCL.OclContextDefinition;
-import atl.metamodel.OCL.OclFeatureDefinition;
-import atl.metamodel.OCL.OclModel;
-import atl.metamodel.OCL.OclModelElement;
-import atl.metamodel.OCL.OclType;
-import atl.metamodel.OCL.OclUndefinedExp;
-import atl.metamodel.OCL.Operation;
-import atl.metamodel.OCL.Parameter;
-import atl.metamodel.OCL.Primitive;
-import atl.metamodel.OCL.RealExp;
-import atl.metamodel.OCL.StringExp;
-import atl.metamodel.OCL.VariableDeclaration;
 
 /**
  * This traversal is in charge of analysing rule "calls".
@@ -165,6 +131,12 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		} else {
 			analyseBinding(self, rightType, targetVar, f);
 		}
+	}
+	
+	@Override
+	public void inBindingStat(BindingStat self) {
+		// TODO Auto-generated method stub
+		super.inBindingStat(self);
 	}
 
 	private void analyseBinding(Binding self, Type rightType, Type targetVar, EStructuralFeature f) {

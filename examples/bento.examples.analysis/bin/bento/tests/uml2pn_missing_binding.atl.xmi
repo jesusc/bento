@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
-  <atl:Module location="4:1-19:2" name="uml2pn">
+  <atl:Module location="4:1-30:2" name="uml2pn">
     <commentsBefore>-- @path PN=/bento.examples.analysis/tests/bento/tests/petri_nets.ecore</commentsBefore>
     <commentsBefore>-- @path UML=/bento.examples.analysis/tests/bento/tests/UML.ecore</commentsBefore>
     <inModels location="5:22-5:30" name="IN" metamodel="/2"/>
@@ -39,9 +39,39 @@
         </filter>
       </inPattern>
     </elements>
+    <elements xsi:type="atl:MatchedRule" location="21:1-30:2" name="action_node">
+      <outPattern location="23:9-25:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="23:14-25:4" varName="net">
+          <type xsi:type="ocl:OclModelElement" location="23:21-23:29" name="Place" model="/6"/>
+        </elements>
+      </outPattern>
+      <actionBlock location="26:3-29:4">
+        <statements xsi:type="atl:BindingStat" location="27:4-27:47">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="27:4-27:40" name="clientDependency">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="27:4-27:23" name="nameExpression">
+              <source xsi:type="ocl:VariableExp" location="27:4-27:8" referredVariable="/0/@elements.1/@inPattern/@elements.0"/>
+            </source>
+          </source>
+          <value xsi:type="ocl:StringExp" location="27:44-27:46" stringSymbol=""/>
+        </statements>
+        <statements xsi:type="atl:BindingStat" location="28:4-28:29">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="28:4-28:13" name="name">
+            <source xsi:type="ocl:VariableExp" location="28:4-28:8" referredVariable="/0/@elements.1/@inPattern/@elements.0"/>
+          </source>
+          <value xsi:type="ocl:StringExp" location="28:17-28:28" stringSymbol="something"/>
+        </statements>
+      </actionBlock>
+      <inPattern location="22:9-22:31">
+        <elements xsi:type="atl:SimpleInPatternElement" location="22:14-22:31" varName="node" variableExp="/0/@elements.1/@actionBlock/@statements.0/@source/@source/@source /0/@elements.1/@actionBlock/@statements.1/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="22:21-22:31" name="Action" model="/5"/>
+        </elements>
+      </inPattern>
+    </elements>
   </atl:Module>
   <ocl:OclModel location="5:14-5:16" name="PN" model="/0/@outModels.0"/>
   <ocl:OclModel location="5:27-5:30" name="UML" model="/0/@inModels.0"/>
   <ocl:OclModel location="12:21-12:24" name="UML" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
   <ocl:OclModel location="16:21-16:23" name="PN" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="22:21-22:24" name="UML" elements="/0/@elements.1/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="23:21-23:23" name="PN" elements="/0/@elements.1/@outPattern/@elements.0/@type"/>
 </xmi:XMI>

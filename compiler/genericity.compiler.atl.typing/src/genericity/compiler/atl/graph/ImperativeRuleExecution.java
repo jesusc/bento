@@ -1,5 +1,8 @@
 package genericity.compiler.atl.graph;
 
+import org.eclipse.emf.common.util.EList;
+
+import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Rule;
@@ -9,6 +12,8 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.Type;
+import genericity.typing.atl_types.annotations.CalledRuleAnn;
 import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
 import genericity.typing.atl_types.annotations.LazyRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
@@ -36,8 +41,15 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 	public void genErrorSlice(ErrorSlice slice) {
 		if ( atlRule instanceof LazyMatchedRule ) {
 			slice.addExplicitMetaclass(((LazyRuleAnn) rule).getInPatternType());
+		} else if ( atlRule instanceof CalledRule ) {
+			EList<Type> args = ((CalledRuleAnn) rule).getArguments();
+			for (Type type : args) {
+				if ( type instanceof Metaclass ) {
+					slice.addExplicitMetaclass((Metaclass) type);				
+				}
+			}
 		} else {
-			throw new UnsupportedOperationException();		
+			throw new UnsupportedOperationException(atlRule.getClass().getName());		
 		}
 		generatedDependencies(slice);
 	}
