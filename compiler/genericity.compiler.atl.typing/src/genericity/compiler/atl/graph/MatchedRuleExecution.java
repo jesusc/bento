@@ -87,7 +87,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode {
 		super.genGraphviz(gv);
 		
 		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
-		gv.addNode(this, rule.getName() + "\\nfrom: " + varDcl.getType().getName() ); //+ "\\n" + OclGenerator.gen(constraint) );
+		gv.addNode(this, rule.getName() + "\\nfrom: " + varDcl.getType().getName(), leadsToExecution ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
 	
 	@Override

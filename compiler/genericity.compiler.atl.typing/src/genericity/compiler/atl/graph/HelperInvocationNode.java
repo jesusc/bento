@@ -60,7 +60,7 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 		super.genGraphviz(gv);
 		gv.addNode(this, 
 				"def:" + (ATLUtils.isContextHelper(helper) ? ATLUtils.getHelperType(helper).getName() + "." : "") + 
-				ATLUtils.getHelperName(helper));
+				ATLUtils.getHelperName(helper), leadsToExecution);
 	}
 
 	@Override

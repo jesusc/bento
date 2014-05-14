@@ -15,8 +15,9 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 	public LinkedList<DependencyNode> depending    = new LinkedList<DependencyNode>();
 	public LinkedList<ConstraintNode> constraints = new LinkedList<ConstraintNode>();
 	
-	private DependencyGraph	graph;
-	private Problem	problem;
+	protected DependencyGraph	graph;
+	protected Problem	problem;
+	protected boolean leadsToExecution = true;
 	
 	@Override
 	public void addDependency(DependencyNode node) {
@@ -92,6 +93,15 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 			gv.addEdge(this, c);
 		}
 		
+	}
+	
+	
+	public boolean leadsToExecution() {
+		return this.leadsToExecution;
+	}
+	
+	public void setLeadsToExecution(boolean leadsToExecution) {
+		this.leadsToExecution  = leadsToExecution;
 	}
 	
 }

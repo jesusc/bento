@@ -31,7 +31,7 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
-		gv.addNode(this, "No binding for\\ncompulsory '" + problem.getFeatureName() + "'");
+		gv.addNode(this, "No binding for\\ncompulsory '" + problem.getFeatureName() + "'", leadsToExecution);
 	}
 
 	@Override

@@ -17,5 +17,8 @@ public interface DependencyNode extends GraphNode {
 	void setProblem(Problem p);
 	Problem getProblem();
 	
+	boolean leadsToExecution();
+	void    setLeadsToExecution(boolean leadsToExecution);
+	
 	//String genCSP(String dependent);
 }

@@ -34,7 +34,7 @@ public class ConditionalNode extends AbstractDependencyNode {
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
-		gv.addNode(this, "if: " + OclGenerator.gen(ifExpr.getCondition()) + " / " + (branch + "").toUpperCase());
+		gv.addNode(this, "if: " + OclGenerator.gen(ifExpr.getCondition()) + " / " + (branch + "").toUpperCase(), leadsToExecution);
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
-		gv.addNode(this, "Problem\\n" + binding.getPropertyName() + ":1 <- *" + "\\n" + binding.getLocation());
+		gv.addNode(this, "Problem\\n" + binding.getPropertyName() + ":1 <- *" + "\\n" + binding.getLocation(), leadsToExecution);
 	}
 
 

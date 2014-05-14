@@ -36,7 +36,7 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 		super.genGraphviz(gv);
 		String msg = ErrorUtils.getShortError(problem);
 		
-		gv.addNode(this, msg + "\\n" + OclGenerator.gen(expr));
+		gv.addNode(this, msg + "\\n" + OclGenerator.gen(expr), leadsToExecution);
 	}
 
 }

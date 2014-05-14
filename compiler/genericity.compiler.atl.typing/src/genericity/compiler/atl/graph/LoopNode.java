@@ -35,7 +35,7 @@ public class LoopNode extends AbstractDependencyNode {
 
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
-		gv.addNode(this, "Loop: " + OclGenerator.gen(receptor));
+		gv.addNode(this, "Loop: " + OclGenerator.gen(receptor), leadsToExecution);
 		super.genGraphviz(gv);
 	}
 	

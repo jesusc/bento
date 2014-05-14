@@ -180,7 +180,7 @@ public class ErrorPathGenerator {
 		
 	}
 
-	private void pathForCall(OclExpression call, DependencyNode depNode, TraversedSet traversed) {
+	private boolean pathForCall(OclExpression call, DependencyNode depNode, TraversedSet traversed) {
 		CallExprAnn ann = (CallExprAnn) typ.getAnnotation(call.original_());
 		
 		CallExprNode node = new CallExprNode((PropertyCallExp) call, ann);
@@ -203,9 +203,14 @@ public class ErrorPathGenerator {
 		}
 		*/
 		
-		pathToControlFlow(call, node, traversed);
+		return checkReachesExecution(pathToControlFlow(call, node, traversed), node);
 	}
 
+	private boolean checkReachesExecution(boolean depReachability, DependencyNode current) {
+		current.setLeadsToExecution(depReachability);
+		return depReachability;
+	}
+	
 	private boolean isIteration(ATLModelBaseObject element) {
 		return element instanceof LoopExp;
 	}
@@ -215,7 +220,7 @@ public class ErrorPathGenerator {
 			    (element instanceof IfExp );
 	}
 	
-	private void pathToControlFlow(ATLModelBaseObjectInterface start, DependencyNode node, TraversedSet traversed) {
+	private boolean pathToControlFlow(ATLModelBaseObjectInterface start, DependencyNode node, TraversedSet traversed) {
 		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
 		ATLModelBaseObject parent = start.container_(); 
 		while ( ! isControlFlowElement(parent) ) {
@@ -225,8 +230,7 @@ public class ErrorPathGenerator {
 				node.addDependency(loop);
 				
 				// ?? Different from the pathToCall
-				pathToControlFlow((OclExpression) parent, loop, traversed);
-				return;
+				return checkReachesExecution(pathToControlFlow((OclExpression) parent, loop, traversed), loop);
 			}
 			
 			lastParent = parent;
@@ -237,13 +241,13 @@ public class ErrorPathGenerator {
 			
 		// QUITAR ESTE IF Y PONERLO EN PATH_TO_SOMEWHERE
 		if ( parent instanceof Rule ) {
-			pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node, traversed);
+			return pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node, traversed);
 		} else if ( parent instanceof Helper ){
-			pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node, traversed);			
+			return pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node, traversed);			
 		//} else if ( parent instanceof IteratorExp ) {
 		//	pathToSomewhere(parent, node);
 		} else if ( parent instanceof IfExp ) {
-			pathFromIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
+			return pathFromIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
 		/*} else if ( parent instanceof Binding ) {
 			Rule r = parent.container_().container_().container(Rule.class);
 			pathToRule((RuleAnn) typ.getAnnotation(r.original_()), node);
@@ -255,7 +259,7 @@ public class ErrorPathGenerator {
 	}
 
 
-	private void pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node, TraversedSet traversed) {
+	private boolean pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node, TraversedSet traversed) {
 		boolean branch;
 		if ( expr.getThenExpression() == directChild ) {
 			branch = ConditionalNode.TRUE_BRANCH;
@@ -267,7 +271,7 @@ public class ErrorPathGenerator {
 		ConditionalNode newNode = new ConditionalNode(expr, branch);
 		node.addDependency(newNode);
 		
-		pathToControlFlow(expr, newNode, traversed);
+		return checkReachesExecution(pathToControlFlow(expr, newNode, traversed), newNode);
 	}
 
 
@@ -317,39 +321,48 @@ public class ErrorPathGenerator {
 		pathToRule(rule, node, new TraversedSet());	
 	}
 	
-	private void pathToRule(RuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
+	private boolean pathToRule(RuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
 		if ( rule instanceof MatchedRuleAnn ) {
-			pathToMatchedRuleOne((MatchedRuleAnn) rule, dependent);
+			return pathToMatchedRuleOne((MatchedRuleAnn) rule, dependent);
 		} else if ( rule instanceof ImperativeRuleAnn ) {
-			pathToImperativeRule((ImperativeRuleAnn) rule, dependent, traversed);
+			return pathToImperativeRule((ImperativeRuleAnn) rule, dependent, traversed);
 		} else {
 			throw new UnsupportedOperationException(rule.getClass().getName());
 		}
 	}
 	
-	private void pathToImperativeRule(ImperativeRuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
+	private boolean pathToImperativeRule(ImperativeRuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
 		Rule r =  (Rule) atlModel.findWrapper( rule.getRule() );
 		
 		if ( ! traversed.addImperativeRule(r) ) {
-			return;
+			return false;
 		}
+		
+		boolean leadsToExecution = false;
 		
 		ImperativeRuleExecution node = new ImperativeRuleExecution(rule, r);
 		dependent.addDependency(node);
 		for(CallExprAnn callExprAnn : rule.getCalledBy()) {
 			 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
-			 pathForCall(expr, node, traversed);				 			
+			 if ( pathForCall(expr, node, traversed) ) {
+				 leadsToExecution = true;
+			 }
 		}
+		
+		node.setLeadsToExecution(leadsToExecution);
+		return leadsToExecution;
 	}
 
-	private void pathToHelper(HelperAnn helperAnn, DependencyNode depNode, TraversedSet traversed) {
+	private boolean pathToHelper(HelperAnn helperAnn, DependencyNode depNode, TraversedSet traversed) {
 		Helper h =  (Helper) atlModel.findWrapper( helperAnn.getHelper() );
 		
 		if ( ! traversed.addHelper(h) ) 
-			return;
+			return false;
 		
 		HelperInvocationNode hNode = new HelperInvocationNode(h, helperAnn);
 		depNode.addDependency(hNode);
+		
+		boolean leadsToExecution = false;
 		
 		if ( helperAnn instanceof ModuleHelperAnn ) {
 			throw new UnsupportedOperationException();			
@@ -357,16 +370,21 @@ public class ErrorPathGenerator {
 			EList<CallExprAnn> callers = ((ContextHelperAnn) helperAnn).getPolymorphicCalledBy();
 			for (CallExprAnn callExprAnn : callers) {
 				 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
-				 pathForCall(expr, hNode, traversed);				 
+				 if ( pathForCall(expr, hNode, traversed) ) {
+					 leadsToExecution = true;
+				 }
 			}
 			//pathToExpression(expr, annotation, depNode)
 			//System.out.println(callers.size());
 		} else {
 			throw new UnsupportedOperationException();
 		}
+		
+		hNode.setLeadsToExecution(leadsToExecution);
+		return leadsToExecution;
 	}
 
-	private void pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent) {		
+	private boolean pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent) {		
 		MatchedRule r = (MatchedRule) atlModel.findWrapper( rule.getRule() );
 		// VariableDeclaration v = r.getInPattern().getElements().get(0);
 		
@@ -379,6 +397,9 @@ public class ErrorPathGenerator {
 		}
 		
 		graph.addRule(newNode);
+		
+		newNode.setLeadsToExecution(true);
+		return true;
 	}
 
 	private ConstraintNode pathToFilterExpression(ExpressionAnnotation expr) {

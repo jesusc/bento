@@ -29,7 +29,7 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
 		gv.addNode(this, OclGenerator.gen(atlBinding.getValue()) + 
-				": " + TypeUtils.typeToString(bindingAnn.getSourceType()) +"\\nresolvedBy");
+				": " + TypeUtils.typeToString(bindingAnn.getSourceType()) +"\\nresolvedBy", leadsToExecution);
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 			VariableDeclaration varDcl = r.getInPattern().getElements().get(0);
 			fromPart = "\\nfrom: " + varDcl.getType().getName();
 		}
-		gv.addNode(this, "<<lazy>>\\n" + rule.getName() + fromPart ); //+ "\\n" + OclGenerator.gen(constraint) );
+		gv.addNode(this, "<<lazy>>\\n" + rule.getName() + fromPart, leadsToExecution ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
 
 	@Override

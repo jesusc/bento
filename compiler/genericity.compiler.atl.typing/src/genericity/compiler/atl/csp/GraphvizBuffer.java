@@ -14,10 +14,15 @@ public class GraphvizBuffer {
 	private String edges = "";
 	private ArrayList<String> subgraphs = new ArrayList<String>();
 
-	public void addNode(GraphNode node, String label) {
+	public void addNode(GraphNode node, String label, boolean isLeadingToExecution) {
 		int i = addNodeAux(node);
 		
-		nodes = nodes + "\n" + (genNodeName(i) + "[label=\"" + label + "\"];"); 
+		String color = "";
+		if ( ! isLeadingToExecution ) {
+			color = " style=filled fillcolor = lightgray";
+		}
+		
+		nodes = nodes + "\n" + (genNodeName(i) + "[label=\"" + label + "\"" + color + "];"); 
 	}
 	
 	private int addNodeAux(GraphNode node) {
