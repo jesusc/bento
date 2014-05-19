@@ -271,18 +271,21 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	private void findRulesWithWrongTargetType(Binding b, Metaclass rightType, EClass targetType, List<MatchedRule> resolvingRules) {
 		ArrayList<MatchedRule> problematicRules = new ArrayList<MatchedRule>();
 		ArrayList<EClass> targetClasses = new ArrayList<EClass>();
+		ArrayList<EClass> sourceClasses = new ArrayList<EClass>();
 		
 		for (MatchedRule matchedRule : resolvingRules) {
-			Metaclass m = (Metaclass) attr.typeOf( matchedRule.getOutPattern().getElements().get(0) );
-			if ( ! TypeUtils.isClassAssignableTo(m.getKlass(), targetType)  ) {
+			Metaclass srcMetaclass = (Metaclass) attr.typeOf( matchedRule.getInPattern().getElements().get(0) );
+			Metaclass tgtMetaclass = (Metaclass) attr.typeOf( matchedRule.getOutPattern().getElements().get(0) );
+			if ( ! TypeUtils.isClassAssignableTo(tgtMetaclass.getKlass(), targetType)  ) {
 				problematicRules.add(matchedRule);
-				targetClasses.add(m.getKlass());
+				sourceClasses.add(srcMetaclass.getKlass());
+				targetClasses.add(tgtMetaclass.getKlass());
 				// System.err.println("Problem in rule " + matchedRule.getName() + " " + m.getName() + " - " + targetType.getName() + "/" + TypeUtils.typeToString(rightType) + "." + b.getLocation() + " " + matchedRule.getLocation());
 			}
 		}
 		
 		if ( problematicRules.size() > 0 ) {
-			errors.signalBindingWithResolvedByIncompatibleRule(b, rightType.getKlass(), targetType, problematicRules, targetClasses);
+			errors.signalBindingWithResolvedByIncompatibleRule(b, rightType.getKlass(), targetType, problematicRules, sourceClasses, targetClasses);
 		}
 	}
 

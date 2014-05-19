@@ -2,41 +2,35 @@ package genericity.compiler.atl.csp;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
-import genericity.compiler.atl.graph.DependencyGraph;
+import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemPath;
 import genericity.compiler.atl.graph.DependencyNode;
 
 public class GraphvizGenerator {
 	
-	private DependencyGraph	graph;
+	private ProblemGraph	graph;
 
-	public GraphvizGenerator(DependencyGraph g) {
+	public GraphvizGenerator(ProblemGraph g) {
 		this.graph = g;
 	}
 	
 	public String generate(String location) {
-		LinkedList<DependencyNode> sorted = new LinkedList<DependencyNode>(graph.getProblemNodes());
-		Collections.sort(sorted, new Comparator<DependencyNode>() {
-			@Override
-			public int compare(DependencyNode arg0, DependencyNode arg1) {
-				LocalProblem lp1 = (LocalProblem) arg0.getProblem();
-				LocalProblem lp2 = (LocalProblem) arg1.getProblem();
-				return lp1.getLocation().compareTo(lp2.getLocation());
-			}
-		});
+		ArrayList<ProblemPath> sorted = graph.getProblemPaths();
 		
 		GraphvizBuffer gv = new GraphvizBuffer();
-		for(DependencyNode node : sorted) {
-			LocalProblem lp = (LocalProblem) node.getProblem();
+		for(ProblemPath path : sorted) {
+			LocalProblem lp = path.getProblem();
 			if ( location != null && ! lp.getLocation().equals(location) ) 
 				continue;
 
-			node.genGraphviz(gv);
-			if ( graph.getProblemNodes().size() > 1 ) {
+			path.getErrorNode().genGraphviz(gv);
+			if ( graph.getProblemPaths().size() > 1 ) {
 				gv.packSubgraph();
 			}
 		}

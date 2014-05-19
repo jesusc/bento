@@ -4,8 +4,9 @@ import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.ErrorSliceGenerator;
-import genericity.compiler.atl.graph.DependencyGraph;
 import genericity.compiler.atl.graph.ErrorPathGenerator;
+import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemPath;
 import genericity.typing.atl_types.AtlTypingPackage;
 
 import java.io.IOException;
@@ -58,8 +59,6 @@ public class AnalyserExecutor {
 		ATLModel atlModel = new ATLModel(manager.getModel().eResource());
 		Module module = atlModel.allObjectsOf(Module.class).get(0);
 		
-		System.out.println(module);
-		
 		HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
 		Map<String, List<EPackage>> atlPackages = manager.getMetamodelPackages(-1);
 		for(String k : atlPackages.keySet()) {
@@ -111,7 +110,7 @@ public class AnalyserExecutor {
 		private List<Problem> problems;
 		private Analyser analyser;
 		private GlobalNamespace namespace;
-		private DependencyGraph graph;
+		private ProblemPath path;
 
 		public AnalyserData(Analyser analyser, GlobalNamespace gn) {
 			this.analyser = analyser;
@@ -120,7 +119,7 @@ public class AnalyserExecutor {
 		}
 
 		public void computeProblemGraph(Problem p) {			
-			graph = new ErrorPathGenerator(null, analyser.getTyping(), analyser.getATLModel()).perform(p);
+			path = new ErrorPathGenerator(null, analyser.getTyping(), analyser.getATLModel()).generatePath((LocalProblem) p);
 		}
 		
 		public List<Problem> getProblems() {
@@ -140,7 +139,7 @@ public class AnalyserExecutor {
 			String uri = mm + "_" + "error";
 			
 			XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(uri));
-			ErrorSlice slice = new ErrorSliceGenerator(analyser, graph).generate(p, r, mm);
+			ErrorSlice slice = new ErrorSliceGenerator(analyser, null).generate(path, r, mm);
 
 			return (EPackage) r.getContents().get(0);
 			// r.getContents()
@@ -165,8 +164,8 @@ public class AnalyserExecutor {
 			
 		}
 
-		public DependencyGraph getGraph() {
-			return graph;
+		public ProblemPath getPath() {
+			return path;
 		}
 		
 	}

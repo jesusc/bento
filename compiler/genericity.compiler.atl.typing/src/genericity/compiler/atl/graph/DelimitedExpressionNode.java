@@ -2,6 +2,7 @@ package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -10,7 +11,10 @@ import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.StringType;
 import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
+import atl.metamodel.OCL.CollectionOperationCallExp;
 import atl.metamodel.OCL.OclExpression;
+import atl.metamodel.OCL.OperationCallExp;
+import atl.metamodel.OCL.OperatorCallExp;
 
 public class DelimitedExpressionNode extends AbstractDependencyNode {
 
@@ -89,6 +93,39 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 		}
 		
 		buf.generateExpression(start, prefix, postfix);
+	}
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		OclExpression expr = model.gen(start);
+		OclExpression check = null;
+		
+		if ( TypeUtils.isReference(ann.getType()) ) {
+			// => not expr.oclIsUndefined()
+			OperationCallExp isUndefined  = model.createOperationCall(expr, "oclIsUndefined");
+			OperatorCallExp  notUndefined = model.negateExpression(isUndefined);
+			
+			check =  notUndefined;
+		} else if ( TypeUtils.isCollection(ann.getType()) ) {
+			// => not expr->notEmpty()
+			CollectionOperationCallExp notEmpty = model.createCollectionOperationCall(expr, "notEmpty");
+			
+			check = notEmpty;
+		} else if ( ann.getType() instanceof PrimitiveType ) {
+			// => not expr.oclIsUndefined()
+			OperationCallExp isUndefined  = model.createOperationCall(expr, "oclIsUndefined");
+			OperatorCallExp  notUndefined = model.negateExpression(isUndefined);
+			
+			check = notUndefined;
+		} else { 
+			throw new UnsupportedOperationException(ann.getType().getClass().toString());
+		}
+		
+		// Optimization
+		if ( getDepending() instanceof ProblemNode && ((ProblemNode) getDepending()).isStraightforward() ) {
+			return check;
+		}
+		return model.createIfExpression(check, getDepending().genCSP(model), model.createBooleanLiteral(false));
 	}
 	
 }

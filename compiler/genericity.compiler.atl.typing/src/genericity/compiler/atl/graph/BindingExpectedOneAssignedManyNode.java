@@ -1,11 +1,13 @@
 package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
 import atl.metamodel.ATL.Binding;
+import atl.metamodel.OCL.OclExpression;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 
 public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmentNode implements ProblemNode {
@@ -67,4 +69,16 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 		// System.out.println(buf2.getText());
 	}
 
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isStraightforward() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
 }

@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getElement <em>Element</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getRuleName <em>Rule Name</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getInputType <em>Input Type</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getOutputType <em>Output Type</em>}</li>
  * </ul>
  * </p>
@@ -84,6 +85,16 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 	 * @ordered
 	 */
 	protected String ruleName = RULE_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInputType() <em>Input Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInputType()
+	 * @generated
+	 * @ordered
+	 */
+	protected EClass inputType;
 
 	/**
 	 * The cached value of the '{@link #getOutputType() <em>Output Type</em>}' reference.
@@ -199,6 +210,44 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInputType() {
+		if (inputType != null && inputType.eIsProxy()) {
+			InternalEObject oldInputType = (InternalEObject)inputType;
+			inputType = (EClass)eResolveProxy(oldInputType);
+			if (inputType != oldInputType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE, oldInputType, inputType));
+			}
+		}
+		return inputType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass basicGetInputType() {
+		return inputType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInputType(EClass newInputType) {
+		EClass oldInputType = inputType;
+		inputType = newInputType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE, oldInputType, inputType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOutputType() {
 		if (outputType != null && outputType.eIsProxy()) {
 			InternalEObject oldOutputType = (InternalEObject)outputType;
@@ -247,6 +296,9 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 				return basicGetElement();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				return getRuleName();
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE:
+				if (resolve) return getInputType();
+				return basicGetInputType();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__OUTPUT_TYPE:
 				if (resolve) return getOutputType();
 				return basicGetOutputType();
@@ -270,6 +322,9 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 				return;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				setRuleName((String)newValue);
+				return;
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE:
+				setInputType((EClass)newValue);
 				return;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__OUTPUT_TYPE:
 				setOutputType((EClass)newValue);
@@ -295,6 +350,9 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				setRuleName(RULE_NAME_EDEFAULT);
 				return;
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE:
+				setInputType((EClass)null);
+				return;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__OUTPUT_TYPE:
 				setOutputType((EClass)null);
 				return;
@@ -316,6 +374,8 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 				return element != null;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				return RULE_NAME_EDEFAULT == null ? ruleName != null : !RULE_NAME_EDEFAULT.equals(ruleName);
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE:
+				return inputType != null;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__OUTPUT_TYPE:
 				return outputType != null;
 		}

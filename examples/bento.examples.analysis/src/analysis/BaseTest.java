@@ -6,7 +6,8 @@ import genericity.compiler.atl.csp.CSPGenerator;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.ErrorSliceGenerator;
 import genericity.compiler.atl.csp.GraphvizGenerator;
-import genericity.compiler.atl.graph.DependencyGraph;
+import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemPath;
 import genericity.typing.atl_types.AtlTypingPackage;
 
 import java.io.File;
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import atl.metamodel.ATLModel;
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
 import bento.analyser.footprint.TrafoMetamodelData;
+import bento.analyser.util.StandaloneAtlLoader;
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -45,7 +47,7 @@ public abstract class BaseTest {
 	private ResourceSet rs = new ResourceSetImpl();
 	private Resource	prunnedResource;	
 	
-	private DependencyGraph dependencyGraph;
+	private ProblemGraph dependencyGraph;
 	private GlobalNamespace	mm;
 	private EPackage	metamodelPkg;
 	private Analyser	analyser;
@@ -115,7 +117,11 @@ public abstract class BaseTest {
 		//if ( slice == null )
 		//	throw new IllegalStateException("Error slice should be computed before generating CSP");
 				
-		String s = new CSPGenerator(dependencyGraph, slice).generateLoc(location);
+		String s = new CSPGenerator(dependencyGraph, slice, new StandaloneAtlLoader()).generateLoc(location);
+		if ( location != null ) {
+			// Debugging purposes
+			System.out.println(s);
+		}
 		if ( ! s.trim().isEmpty() ) {
 			
 			FileWriter fw = new FileWriter("tmp_/errors.txt", true);

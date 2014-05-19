@@ -1,10 +1,13 @@
 package genericity.compiler.atl.graph;
 
 import atl.metamodel.OCL.IfExp;
+import atl.metamodel.OCL.OclExpression;
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.OclGeneratorAST;
 import genericity.compiler.atl.csp.OclSlice;
 
 public class ConditionalNode extends AbstractDependencyNode {
@@ -47,6 +50,20 @@ public class ConditionalNode extends AbstractDependencyNode {
 			buf.generateIf(ifExpr.getCondition(), false);
 		}
 		
+	}
+
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		IfExp exp = null;
+		OclExpression copied = model.gen(ifExpr.getCondition());
+		OclExpression dep    = getDepending().genCSP(model);
+		if ( branch == TRUE_BRANCH ) {
+			exp = model.createIfExpression(copied, dep, model.createBooleanLiteral(false) );
+		} else {
+			exp = model.createIfExpression(copied, model.createBooleanLiteral(false), dep );
+		}
+		return exp;
 	}
 
 	

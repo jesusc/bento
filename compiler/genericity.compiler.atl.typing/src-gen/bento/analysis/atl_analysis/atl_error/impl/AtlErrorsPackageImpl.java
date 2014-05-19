@@ -769,8 +769,17 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getResolvedRuleInfo_OutputType() {
+	public EReference getResolvedRuleInfo_InputType() {
 		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getResolvedRuleInfo_OutputType() {
+		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1001,6 +1010,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__LOCATION);
 		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__ELEMENT);
 		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__RULE_NAME);
+		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__INPUT_TYPE);
 		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__OUTPUT_TYPE);
 
 		flattenOverNonNestedCollectionEClass = createEClass(FLATTEN_OVER_NON_NESTED_COLLECTION);
@@ -1162,6 +1172,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEAttribute(getResolvedRuleInfo_Location(), ecorePackage.getEString(), "location", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResolvedRuleInfo_Element(), ecorePackage.getEObject(), null, "element", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResolvedRuleInfo_RuleName(), ecorePackage.getEString(), "ruleName", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResolvedRuleInfo_InputType(), ecorePackage.getEClass(), null, "inputType", null, 0, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResolvedRuleInfo_OutputType(), ecorePackage.getEClass(), null, "outputType", null, 0, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(flattenOverNonNestedCollectionEClass, FlattenOverNonNestedCollection.class, "FlattenOverNonNestedCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

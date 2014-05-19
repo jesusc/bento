@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getCalledBy <em>Called By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getNames <em>Names</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getArgumentVars <em>Argument Vars</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getHelper <em>Helper</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getName <em>Name</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.HelperAnnImpl#getReturnType <em>Return Type</em>}</li>
@@ -78,6 +79,16 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * @ordered
 	 */
 	protected EList<String> names;
+
+	/**
+	 * The cached value of the '{@link #getArgumentVars() <em>Argument Vars</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArgumentVars()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EObject> argumentVars;
 
 	/**
 	 * The cached value of the '{@link #getHelper() <em>Helper</em>}' reference.
@@ -286,6 +297,18 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EObject> getArgumentVars() {
+		if (argumentVars == null) {
+			argumentVars = new EObjectResolvingEList<EObject>(EObject.class, this, AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS);
+		}
+		return argumentVars;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpressionAnnotation getExpr() {
 		return expr;
 	}
@@ -369,6 +392,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				return getArguments();
 			case AnnotationsPackage.HELPER_ANN__NAMES:
 				return getNames();
+			case AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS:
+				return getArgumentVars();
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				if (resolve) return getHelper();
 				return basicGetHelper();
@@ -404,6 +429,10 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				getNames().clear();
 				getNames().addAll((Collection<? extends String>)newValue);
 				return;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS:
+				getArgumentVars().clear();
+				getArgumentVars().addAll((Collection<? extends EObject>)newValue);
+				return;
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				setHelper((EObject)newValue);
 				return;
@@ -437,6 +466,9 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 			case AnnotationsPackage.HELPER_ANN__NAMES:
 				getNames().clear();
 				return;
+			case AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS:
+				getArgumentVars().clear();
+				return;
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				setHelper((EObject)null);
 				return;
@@ -467,6 +499,8 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				return arguments != null && !arguments.isEmpty();
 			case AnnotationsPackage.HELPER_ANN__NAMES:
 				return names != null && !names.isEmpty();
+			case AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS:
+				return argumentVars != null && !argumentVars.isEmpty();
 			case AnnotationsPackage.HELPER_ANN__HELPER:
 				return helper != null;
 			case AnnotationsPackage.HELPER_ANN__NAME:
@@ -491,6 +525,7 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				case AnnotationsPackage.HELPER_ANN__CALLED_BY: return AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY;
 				case AnnotationsPackage.HELPER_ANN__ARGUMENTS: return AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENTS;
 				case AnnotationsPackage.HELPER_ANN__NAMES: return AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES;
+				case AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS: return AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS;
 				default: return -1;
 			}
 		}
@@ -509,6 +544,7 @@ public abstract class HelperAnnImpl extends AtlAnnotationImpl implements HelperA
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY: return AnnotationsPackage.HELPER_ANN__CALLED_BY;
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENTS: return AnnotationsPackage.HELPER_ANN__ARGUMENTS;
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES: return AnnotationsPackage.HELPER_ANN__NAMES;
+				case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS: return AnnotationsPackage.HELPER_ANN__ARGUMENT_VARS;
 				default: return -1;
 			}
 		}

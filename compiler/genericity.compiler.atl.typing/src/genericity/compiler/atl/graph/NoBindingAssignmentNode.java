@@ -1,8 +1,10 @@
 package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
+import atl.metamodel.OCL.OclExpression;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
 
 public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBindingForCompulsoryFeature> implements ProblemNode {
@@ -39,4 +41,14 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 		getDependency().getCSPText(buf);
 	}
 	
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isStraightforward() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

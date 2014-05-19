@@ -6,8 +6,10 @@ import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Rule;
+import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.VariableDeclaration;
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -79,6 +81,11 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 			// TODO: Do this.
 			// 3. X will be the code for the depending node
 		}
+	}
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		return getDepending().genCSP(model);
 	}
 	
 	

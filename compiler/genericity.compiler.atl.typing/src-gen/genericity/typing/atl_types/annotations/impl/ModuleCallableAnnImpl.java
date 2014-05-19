@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl#getCalledBy <em>Called By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl#getNames <em>Names</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.ModuleCallableAnnImpl#getArgumentVars <em>Argument Vars</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +73,16 @@ public abstract class ModuleCallableAnnImpl extends AtlAnnotationImpl implements
 	 * @ordered
 	 */
 	protected EList<String> names;
+
+	/**
+	 * The cached value of the '{@link #getArgumentVars() <em>Argument Vars</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArgumentVars()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EObject> argumentVars;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,6 +144,18 @@ public abstract class ModuleCallableAnnImpl extends AtlAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EObject> getArgumentVars() {
+		if (argumentVars == null) {
+			argumentVars = new EObjectResolvingEList<EObject>(EObject.class, this, AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS);
+		}
+		return argumentVars;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -170,6 +194,8 @@ public abstract class ModuleCallableAnnImpl extends AtlAnnotationImpl implements
 				return getArguments();
 			case AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES:
 				return getNames();
+			case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS:
+				return getArgumentVars();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,6 +221,10 @@ public abstract class ModuleCallableAnnImpl extends AtlAnnotationImpl implements
 				getNames().clear();
 				getNames().addAll((Collection<? extends String>)newValue);
 				return;
+			case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS:
+				getArgumentVars().clear();
+				getArgumentVars().addAll((Collection<? extends EObject>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -216,6 +246,9 @@ public abstract class ModuleCallableAnnImpl extends AtlAnnotationImpl implements
 			case AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES:
 				getNames().clear();
 				return;
+			case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS:
+				getArgumentVars().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -234,6 +267,8 @@ public abstract class ModuleCallableAnnImpl extends AtlAnnotationImpl implements
 				return arguments != null && !arguments.isEmpty();
 			case AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES:
 				return names != null && !names.isEmpty();
+			case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS:
+				return argumentVars != null && !argumentVars.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

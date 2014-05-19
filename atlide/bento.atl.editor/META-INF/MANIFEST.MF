@@ -19,5 +19,6 @@ Require-Bundle: org.eclipse.ui,
  genericity.gcomponent.api;bundle-version="0.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: bento.atl.editor.builder,
+Export-Package: bento.atl.editor,
+ bento.atl.editor.builder,
  bento.atl.editor.quickfix

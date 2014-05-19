@@ -1,8 +1,10 @@
 package genericity.compiler.atl.graph;
 
 import atl.metamodel.ATL.Binding;
+import atl.metamodel.OCL.OclExpression;
 import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -51,6 +53,10 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 		buf.generateExpression(null, s, "");
 		
 	}
-	
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		throw new UnsupportedOperationException();
+	}
 	
 }

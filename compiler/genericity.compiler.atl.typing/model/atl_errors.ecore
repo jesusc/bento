@@ -113,6 +113,7 @@
           eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="ruleName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inputType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outputType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FlattenOverNonNestedCollection" eSuperTypes="#//atl_error/LocalProblem"/>

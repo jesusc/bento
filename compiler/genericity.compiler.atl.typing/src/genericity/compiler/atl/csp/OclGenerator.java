@@ -12,6 +12,7 @@ import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OclModelElement;
@@ -55,6 +56,13 @@ public class OclGenerator {
 		} else if ( expr instanceof IfExp ) {
 			IfExp ifexp = (IfExp) expr;
 			return "if " + gen(ifexp.getCondition()) + "\n\tthen " + gen(ifexp.getThenExpression()) + "\n\telse " + gen(ifexp.getElseExpression()) + "\n\tendif";
+		} else if ( expr instanceof LetExp ) {
+			LetExp let = (LetExp) expr;
+			String type = "";
+			if ( let.getVariable().getType() != null) {
+				type = gen(let.getVariable().getType());
+			}
+			return "let " + let.getVariable().getVarName() + type + " = " + gen(let.getVariable().getInitExpression(), vars) + " in\n\t" + gen(let.getIn_(), vars);
 		} else if ( expr instanceof CollectionExp ) {
 			CollectionExp col = (CollectionExp) expr;
 			String elems = "";
@@ -82,7 +90,7 @@ public class OclGenerator {
 		if (expr instanceof OperatorCallExp) {
 			OperatorCallExp op = (OperatorCallExp) expr;
 			if (op.getArguments().isEmpty()) {
-				return op.getOperationName() + " " + receptor;
+				return op.getOperationName() + " (" + receptor + ")";
 			} else {
 				return receptor + " " + op.getOperationName() + " " + gen(op.getArguments().get(0), end, vars);
 			}

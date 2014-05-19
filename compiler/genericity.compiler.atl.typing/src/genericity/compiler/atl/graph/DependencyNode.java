@@ -6,8 +6,11 @@ import genericity.compiler.atl.csp.GraphvizBuffer;
 import bento.analysis.atl_analysis.Problem;
 
 public interface DependencyNode extends GraphNode {
-	void setGraph(DependencyGraph dependencyGraph);
-
+	/*
+	void setGraph(ProblemPath dependencyGraph);
+	ProblemPath getGraph();
+	*/
+	
 	void addDependency(DependencyNode node);
 	void addDepending(DependencyNode node);
 	void addConstraint(ConstraintNode constraint);
@@ -16,6 +19,7 @@ public interface DependencyNode extends GraphNode {
 	
 	void setProblem(Problem p);
 	Problem getProblem();
+	
 	
 	boolean leadsToExecution();
 	void    setLeadsToExecution(boolean leadsToExecution);

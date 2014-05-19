@@ -1,9 +1,11 @@
 package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.OclGeneratorAST;
 import genericity.compiler.atl.csp.OclSlice;
 import atl.metamodel.OCL.OclExpression;
 
@@ -29,5 +31,10 @@ public class RuleFilterNode implements ConstraintNode {
 	public void getCSPText(CSPBuffer buf) {
 		buf.generateIf(expr, true);
 		// buf.generateExpression(OclGenerator.gen(expr));
+	}
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		return model.gen(expr);
 	}
 }

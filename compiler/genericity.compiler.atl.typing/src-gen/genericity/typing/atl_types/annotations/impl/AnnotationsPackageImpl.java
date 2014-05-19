@@ -635,6 +635,15 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getModuleCallableAnn_ArgumentVars() {
+		return (EReference)moduleCallableAnnEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModuleHelperAnn() {
 		return moduleHelperAnnEClass;
 	}
@@ -1119,6 +1128,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		createEReference(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__CALLED_BY);
 		createEReference(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__ARGUMENTS);
 		createEAttribute(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__NAMES);
+		createEReference(moduleCallableAnnEClass, MODULE_CALLABLE_ANN__ARGUMENT_VARS);
 
 		moduleHelperAnnEClass = createEClass(MODULE_HELPER_ANN);
 
@@ -1289,6 +1299,7 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEReference(getModuleCallableAnn_CalledBy(), this.getCallExprAnn(), this.getCallExprAnn_StaticResolver(), "calledBy", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModuleCallableAnn_Arguments(), theAtlTypingPackage.getType(), null, "arguments", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModuleCallableAnn_Names(), ecorePackage.getEString(), "names", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModuleCallableAnn_ArgumentVars(), ecorePackage.getEObject(), null, "argumentVars", null, 0, -1, ModuleCallableAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(moduleHelperAnnEClass, ModuleHelperAnn.class, "ModuleHelperAnn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

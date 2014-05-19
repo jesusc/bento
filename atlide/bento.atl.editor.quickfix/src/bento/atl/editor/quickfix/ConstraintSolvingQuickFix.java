@@ -22,6 +22,7 @@ import org.eclipse.ui.PlatformUI;
 
 import witness.generator.WitnessGeneratorMemory;
 import bento.analysis.atl_analysis.Problem;
+import bento.atl.editor.AtlEclipseLoader;
 import bento.atl.editor.builder.AnalyserExecutor.AnalyserData;
 import bento.atl.editor.builder.BentoATLBuilder;
 
@@ -48,7 +49,7 @@ public class ConstraintSolvingQuickFix implements AtlProblemQuickfix {
 			
 			String projectPath = getProjectPath();
 			
-			String constraint = new CSPGenerator(analysisData.getGraph(), null).generate(problem);
+			String constraint = new CSPGenerator(null, null, new AtlEclipseLoader()).generateCSP(analysisData.getPath());
 			
 			WitnessGeneratorMemory generator = new WitnessGeneratorMemory(errorSlice, effective, language, constraint);
 			generator.setTempDirectoryPath(projectPath);

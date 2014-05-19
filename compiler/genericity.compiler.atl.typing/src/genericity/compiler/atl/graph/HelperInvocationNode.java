@@ -3,8 +3,10 @@ package genericity.compiler.atl.graph;
 import org.eclipse.emf.common.util.EList;
 
 import atl.metamodel.ATL.Helper;
+import atl.metamodel.OCL.OclExpression;
 import genericity.compiler.atl.analyser.ATLUtils;
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -70,11 +72,19 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 		}
 		
 		for(DependencyNode n : getDependencies()) {
+			if ( ! n.leadsToExecution() )
+				continue;
+			
 			// 1. Generate code for the dependency node
 			n.getCSPText(buf);
 			// 2. Place the generated code in "if ( dependency = true ) then X else false endif"
 			// TODO: Do this.
 			// 3. X will be the code for the depending node
 		}
+	}
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {	
+		return getDepending().genCSP(model);
 	}
 }

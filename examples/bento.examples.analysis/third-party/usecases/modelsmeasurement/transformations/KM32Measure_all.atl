@@ -1,3 +1,6 @@
+-- @path KM3=/bento.examples.analysis/third-party/usecases/modelsmeasurement/extra/KM3.ecore
+-- @path Measure=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/Measure.ecore
+
 --@atlcompiler	atl2006
 --@name			KM32Measure
 --@version		2.1

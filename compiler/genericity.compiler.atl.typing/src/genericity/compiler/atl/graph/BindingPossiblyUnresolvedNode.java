@@ -10,6 +10,7 @@ import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
 import genericity.typing.atl_types.annotations.BindingAnn;
+import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.MatchedRule;
@@ -22,16 +23,17 @@ import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.VariableDeclaration;
 import atl.metamodel.OCL.VariableExp;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
+import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 
-public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAssignmentNode<BindingWithResolvedByIncompatibleRule> implements ProblemNode {
+public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode<BindingPossiblyUnresolved> implements ProblemNode {
 
 	private Binding	binding;
 	private BindingAnn bindingAnn;
 	private ATLModel atlModel;
 
-	public BindingWithResolvedByIncompatibleRuleNode(BindingWithResolvedByIncompatibleRule p, Binding binding, BindingAnn bindingAnn, ATLModel model) {
+	public BindingPossiblyUnresolvedNode(BindingPossiblyUnresolved p, Binding binding, BindingAnn bindingAnn, ATLModel model) {
 		super(p);
 		this.binding = binding;
 		this.bindingAnn = bindingAnn;
@@ -73,7 +75,7 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		OclExpression result = null;
-		EList<ResolvedRuleInfo> rules = problem.getRules();
+		EList<MatchedRuleOneAnn> rules = bindingAnn.getResolvedBy();
 		assert(rules.size() > 0);
 		
 		OclExpression value = model.gen(binding.getValue());		
@@ -84,14 +86,15 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 			VariableDeclaration varDcl = exists.getIterators().get(0);
 			
 			OclExpression lastExpr = null;
-
-			for (ResolvedRuleInfo rule : rules) {
-				MatchedRule r = (MatchedRule) atlModel.findWrapper(rule.getElement());
+			
+			// This strategy favours the last rule
+			for (MatchedRuleOneAnn rule : rules) {
+				MatchedRule r = (MatchedRule) atlModel.findWrapper(rule.getRule());
 				
 				// => _problem_.oclIsKindOf(ruleFrom)
 				VariableExp v = model.create(VariableExp.class);
 				v.setReferredVariable(varDcl);				
-				OperationCallExp kindOfCondition = model.createKindOf(v, null, rule.getInputType().getName());
+				OperationCallExp kindOfCondition = model.createKindOf(v, null, rule.getInPatternType().getName());
 				
 				// Generate the filter
 				OclExpression filter = null;
@@ -105,25 +108,16 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 				}
 				
 				IfExp ifexpr = model.createIfExpression(kindOfCondition, filter, model.createBooleanLiteral(false));
+				OperatorCallExp negatedIf = model.negateExpression(ifexpr);
 				
 				if ( lastExpr == null ) {
-					lastExpr = ifexpr;
+					lastExpr = negatedIf;
 				} else {
-					lastExpr = model.createBinaryOperator(lastExpr, ifexpr, "or");
+					lastExpr = model.createBinaryOperator(lastExpr, negatedIf, "and");
 				}
-
-				/*
-				if ( lastIf == null ) {
-					lastIf = ifexpr;
-				} else {
-					ifexpr.setElseExpression(lastIf);
-					lastIf = ifexpr;
-				}
-				*/
 			}
 			
 			// lastIf.setElseExpression(model.createBooleanLiteral(false));
-			// exists.setBody(lastIf);
 			
 			exists.setBody(lastExpr);
 			

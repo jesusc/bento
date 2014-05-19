@@ -12,9 +12,11 @@ rule activity2diagram {
 			pools <- pool
 		), 
 		pool : Intalio!Pool (
+			name <- if a.name = 'aName' then a.feature_not_found else 'someValue' endif,
+			name <- a.partition->collect(p | p.feature_not_found)->first(),
 			name <- a.partition->collect(p | 
-				if p.name = 'hola' then 'ok' 
-				else p.name2 endif)->first(),
+				if p.name = 'aName' then 'someValue' 
+				else p.feature_not_found endif)->first(),
 
 			ncname <- a.partition->collect(p | 
 				if p.name = 'hola' then 

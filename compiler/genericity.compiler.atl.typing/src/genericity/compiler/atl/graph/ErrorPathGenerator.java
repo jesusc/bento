@@ -67,7 +67,8 @@ public class ErrorPathGenerator {
 	private TypingModel	typ;
 	private ATLModel	atlModel;
 
-	private DependencyGraph	graph;
+	private ProblemGraph graph;
+	private ProblemPath	currentPath;
 	
 	public ErrorPathGenerator(ErrorModel model, TypingModel typ, ATLModel atlModel) {
 		this.errors = model;
@@ -75,13 +76,16 @@ public class ErrorPathGenerator {
 		this.atlModel = atlModel;
 	}
 	
-	public DependencyGraph perform() {
-		graph = new DependencyGraph();
-		
+	public ProblemGraph perform() {
+		ProblemGraph graph = new ProblemGraph();
 		AnalysisResult r = this.errors.getAnalysis();
 		for(Problem p : r.getProblems()) {
 			if ( p instanceof LocalProblem ) {
-				generatePath((LocalProblem) p);
+				ProblemPath path = generatePath((LocalProblem) p);
+				if ( path != null )
+					graph.addProblemPath(path);
+				else 
+					System.err.println("ErrorPathGenerator: Ignored " + p.getClass().getSimpleName());
 			} else {
 				throw new UnsupportedOperationException();
 			}
@@ -90,15 +94,17 @@ public class ErrorPathGenerator {
 		return graph;
 	}
 
-
-	public DependencyGraph perform(Problem p) {
-		graph = new DependencyGraph();
+	/*
+	public ProblemPath perform(Problem p) {
+		currentGraph = new ProblemPath();
 		generatePath((LocalProblem) p);
-		return graph;
+		return currentGraph;
 	}
+	*/
 
-	private void generatePath(LocalProblem p) {
-		// System.out.println(p.getClass().getName() + " " + p.getDescription() + " " + p.getLocation()) ;
+	public ProblemPath generatePath(LocalProblem p) {
+		currentPath = null;
+		System.out.println(p);
 		if ( p instanceof NoBindingForCompulsoryFeature ) {
 			generatePath_NoBindingForCompulsoryFeature((NoBindingForCompulsoryFeature) p);		
 		
@@ -106,35 +112,24 @@ public class ErrorPathGenerator {
 		} else if ( p instanceof BindingExpectedOneAssignedMany ) {
 			generatePath_BindingExpectedOneAssignedMany((BindingExpectedOneAssignedMany) p);				
 		} else if ( p instanceof BindingWithResolvedByIncompatibleRule ) {
-			generatePath_BindingWithResolvedByIncompatibleRule((BindingWithResolvedByIncompatibleRule) p);
-				
+			generatePath_BindingWithResolvedByIncompatibleRule((BindingWithResolvedByIncompatibleRule) p);				
+		} else if ( p instanceof BindingPossiblyUnresolved ) {
+			generatePath_BindingPossiblyUnresolved((BindingPossiblyUnresolved) p);				
 		} else if ( p instanceof FeatureNotFound ) {
 			generatePath_FeatureNotFound((FeatureNotFound) p);
 		} else if ( p instanceof OperationNotFound ) {
 			generatePath_OperationNotFound((OperationNotFound) p);			
-			/*
-		} else if ( p instanceof CollectionOperationOverNoCollectionError ) {
-			System.err.println("ErrorPathGenerator: Ignored CollectionOperationOverNoCollectionError" );			
-		} else if ( p instanceof FlattenOverNonNestedCollection ) {
-			System.err.println("ErrorPathGenerator: Ignored FlattenOverNonNestedCollectionImpl" );
-		} else if ( p instanceof DifferentBranchTypes ) {
-			System.err.println("ErrorPathGenerator: Ignored DifferentBranchTypes" );
-		} else if ( p instanceof BindingPossiblyUnresolved ) {
-			System.err.println("ErrorPathGenerator: Ignored BindingPossiblyUnresolved" );
-		} else if ( p instanceof BindingWithoutRule ) {
-			System.err.println("ErrorPathGenerator: Ignored BindingWithoutRule" );
-		*/
-		} else {
-			System.err.println("ErrorPathGenerator: Ignored " + p.getClass().getSimpleName());
 		}
-		
+	
+		return currentPath;
 	}
 
 
 	private void generatePath_FeatureNotFound(FeatureNotFound p) {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
-		graph.linkProblemToNode(p, node);
+		currentPath = new ProblemPath(p, node);
+		
 		// System.out.println(p);
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);
@@ -143,83 +138,69 @@ public class ErrorPathGenerator {
 	private void generatePath_OperationNotFound(OperationNotFound p) {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
 		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
-		graph.linkProblemToNode(p, node);
+		currentPath = new ProblemPath(p, node);
 		
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);		
-	}
+	}		
 	
-	public ATLModelBaseObject findControlFlowConstruct(ATLModelBaseObject element) {
-		ATLModelBaseObject parent = element.container_();
-		while ( ! isControlFlowElement(parent) ) {
-			if ( isIteration(parent) ) {
-				return parent;
-			}
-			parent = parent.container_();
-		}
-		
-		return parent;
-	}
-	
-	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {		
-		TraversedSet traversed = new TraversedSet();
-		
-		// Handle the special case "varName.error", to avoid generating a node with just "varName" which
-		// is redundant (variable names represents objects that must exist)
-		if ( start instanceof VariableExp ) {
-			VariableExp v = (VariableExp) start;
-			if ( v.getReferredVariable().getVarName().equals("thisModule") ) throw new UnsupportedOperationException();
+	private void generatePath_BindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany p) {
+		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
 
-			pathToControlFlow(start.container_(), depNode, traversed);
-		} else {
-			DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
-			depNode.addDependency(node);
-	
-			pathToControlFlow(start, node, traversed);
-		}
+		ProblemNode node = new BindingExpectedOneAssignedManyNode(p, atlBinding);
+		currentPath = new ProblemPath(p, node);
+			
+		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
+		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
+		RuleAnn rule = (RuleAnn) op.eContainer();
+		pathToRule(rule, node, new TraversedSet());	
 		
+		pathToBinding(atlBinding, b, node, new TraversedSet());
+
 	}
 
-	private boolean pathForCall(OclExpression call, DependencyNode depNode, TraversedSet traversed) {
-		CallExprAnn ann = (CallExprAnn) typ.getAnnotation(call.original_());
+	private void generatePath_BindingPossiblyUnresolved(BindingPossiblyUnresolved p) {
+		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
+		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
+
+		ProblemNode node = new BindingPossiblyUnresolvedNode(p, atlBinding, b, atlModel);
+		currentPath = new ProblemPath(p, node);
 		
-		CallExprNode node = new CallExprNode((PropertyCallExp) call, ann);
-		depNode.addDependency(node);
+		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
+		RuleAnn rule = (RuleAnn) op.eContainer();
+		pathToRule(rule, node, new TraversedSet());	
 		
-		// This used to work, but seems redundant
-		/*
-		ATLModelBaseObject parent = call.container_();
-		while ( ! isControlFlowElement(parent) ) {
-			if ( isIteration(parent) ) {
-				LoopExp exp = (LoopExp) parent;
-				LoopNode loop = new LoopNode(exp.getSource(), exp.getIterators().get(0));
-				node.addDependency(loop);
-				
-				// pathToControlFlow(exp.getSource(), loop);
-				pathToControlFlow(parent, loop); 
-				return;
-			}
-			parent = parent.container_();
-		}
-		*/
-		
-		return checkReachesExecution(pathToControlFlow(call, node, traversed), node);
+		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
 
-	private boolean checkReachesExecution(boolean depReachability, DependencyNode current) {
-		current.setLeadsToExecution(depReachability);
-		return depReachability;
-	}
-	
-	private boolean isIteration(ATLModelBaseObject element) {
-		return element instanceof LoopExp;
+	private void generatePath_BindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule p) {
+		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
+		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
+
+		ProblemNode node = new BindingWithResolvedByIncompatibleRuleNode(p, atlBinding, b, atlModel);
+		currentPath = new ProblemPath(p, node);
+		
+		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
+		RuleAnn rule = (RuleAnn) op.eContainer();
+		pathToRule(rule, node, new TraversedSet());	
+		
+		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
 
-	public boolean isControlFlowElement(ATLModelBaseObject element) {
-		return (element instanceof Rule) || (element instanceof Helper) ||
-			    (element instanceof IfExp );
+	private void generatePath_NoBindingForCompulsoryFeature(NoBindingForCompulsoryFeature p) {
+		ProblemNode node = new NoBindingAssignmentNode(p);
+		currentPath = new ProblemPath(p, node);
+		
+		OutputPatternAnn op = (OutputPatternAnn) typ.getAnnotation(p.getElement());
+		RuleAnn rule = (RuleAnn) op.eContainer();
+		pathToRule(rule, node, new TraversedSet());	
 	}
-	
+
+
+	//
+	// End-of errors
+	//
+
 	private boolean pathToControlFlow(ATLModelBaseObjectInterface start, DependencyNode node, TraversedSet traversed) {
 		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
 		ATLModelBaseObject parent = start.container_(); 
@@ -258,6 +239,47 @@ public class ErrorPathGenerator {
 		}
 	}
 
+	private boolean checkReachesExecution(boolean depReachability, DependencyNode current) {
+		current.setLeadsToExecution(depReachability);
+		return depReachability;
+	}
+	
+	private boolean isIteration(ATLModelBaseObject element) {
+		return element instanceof LoopExp;
+	}
+
+	public boolean isControlFlowElement(ATLModelBaseObject element) {
+		return (element instanceof Rule) || (element instanceof Helper) ||
+			    (element instanceof IfExp );
+	}
+
+	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {		
+		TraversedSet traversed = new TraversedSet();
+		
+		// Handle the special case "varName.error", to avoid generating a node with just "varName" which
+		// is redundant (variable names represents objects that must exist)
+		if ( start instanceof VariableExp ) {
+			VariableExp v = (VariableExp) start;
+			if ( v.getReferredVariable().getVarName().equals("thisModule") ) throw new UnsupportedOperationException();
+
+			pathToControlFlow(start.container_(), depNode, traversed);
+		} else {
+			DelimitedExpressionNode node = new DelimitedExpressionNode(start, startAnn);
+			depNode.addDependency(node);
+	
+			pathToControlFlow(start, node, traversed);
+		}
+		
+	}
+
+	private boolean pathForCall(OclExpression call, DependencyNode depNode, TraversedSet traversed) {
+		CallExprAnn ann = (CallExprAnn) typ.getAnnotation(call.original_());
+		
+		CallExprNode node = new CallExprNode((PropertyCallExp) call, ann, atlModel);
+		depNode.addDependency(node);
+		
+		return checkReachesExecution(pathToControlFlow(call, node, traversed), node);
+	}
 
 	private boolean pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node, TraversedSet traversed) {
 		boolean branch;
@@ -274,51 +296,12 @@ public class ErrorPathGenerator {
 		return checkReachesExecution(pathToControlFlow(expr, newNode, traversed), newNode);
 	}
 
-
-
-	private void generatePath_BindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany p) {
-		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
-
-		ProblemNode node = new BindingExpectedOneAssignedManyNode(p, atlBinding);
-		graph.linkProblemToNode(p, node);
-		
-		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
-		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
-		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
-		
-		pathToBinding(atlBinding, b, node, new TraversedSet());
-	}
-	
-	private void generatePath_BindingWithResolvedByIncompatibleRule(BindingWithResolvedByIncompatibleRule p) {
-		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
-
-		ProblemNode node = new BindingWithResolvedByIncompatibleRuleNode(p, atlBinding);
-		graph.linkProblemToNode(p, node);
-		
-		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
-		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
-		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
-		
-		pathToBinding(atlBinding, b, node, new TraversedSet());
-	}
-	
 	private void pathToBinding(Binding atlBinding , BindingAnn b, ProblemNode node, TraversedSet traversed) {
 		RuleResolutionNode resolutionNode = new RuleResolutionNode(atlBinding, b);
 		node.addConstraint(resolutionNode);
 		for(MatchedRuleAnn mr : b.getResolvedBy()) {
 			pathToRule(mr, resolutionNode, traversed);
 		}
-	}
-
-	private void generatePath_NoBindingForCompulsoryFeature(NoBindingForCompulsoryFeature p) {
-		ProblemNode node = new NoBindingAssignmentNode(p);
-		graph.linkProblemToNode(p, node);
-		
-		OutputPatternAnn op = (OutputPatternAnn) typ.getAnnotation(p.getElement());
-		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
 	}
 	
 	private boolean pathToRule(RuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
@@ -396,7 +379,7 @@ public class ErrorPathGenerator {
 			newNode.addConstraint(constraint);
 		}
 		
-		graph.addRule(newNode);
+		currentPath.addRule(newNode);
 		
 		newNode.setLeadsToExecution(true);
 		return true;
@@ -410,6 +393,17 @@ public class ErrorPathGenerator {
 		return node;
 	}
 	
+	private ATLModelBaseObject findControlFlowConstruct(ATLModelBaseObject element) {
+		ATLModelBaseObject parent = element.container_();
+		while ( ! isControlFlowElement(parent) ) {
+			if ( isIteration(parent) ) {
+				return parent;
+			}
+			parent = parent.container_();
+		}
+		
+		return parent;
+	}
 
 	
 	private class TraversedSet {

@@ -2,6 +2,7 @@ package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.analyser.ErrorUtils;
 import genericity.compiler.atl.csp.CSPBuffer;
+import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
@@ -37,6 +38,16 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 		String msg = ErrorUtils.getShortError(problem);
 		
 		gv.addNode(this, msg + "\\n" + OclGenerator.gen(expr), leadsToExecution);
+	}
+
+	@Override
+	public OclExpression genCSP(CSPModel model) {
+		return model.createBooleanLiteral(true);
+	}
+
+	@Override
+	public boolean isStraightforward() {
+		return true;
 	}
 
 }

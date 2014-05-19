@@ -197,7 +197,7 @@ package annotations {
  
  	 ref Type[*] arguments;
      attr String[*] names; // This is to facilitate OCL generation
- 
+ 	 ref EObject[*] argumentVars;
   }
 
   class ModuleHelperAnn extends HelperAnn {

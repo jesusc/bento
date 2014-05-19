@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getCalledBy <em>Called By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getArguments <em>Arguments</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getNames <em>Names</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.ModuleCallableAnn#getArgumentVars <em>Argument Vars</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,5 +80,21 @@ public interface ModuleCallableAnn extends AtlAnnotation {
 	 * @generated
 	 */
 	EList<String> getNames();
+
+	/**
+	 * Returns the value of the '<em><b>Argument Vars</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Argument Vars</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Argument Vars</em>' reference list.
+	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getModuleCallableAnn_ArgumentVars()
+	 * @model
+	 * @generated
+	 */
+	EList<EObject> getArgumentVars();
 
 } // ModuleCallableAnn

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl#getCalledBy <em>Called By</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl#getNames <em>Names</em>}</li>
+ *   <li>{@link genericity.typing.atl_types.annotations.impl.ImperativeRuleAnnImpl#getArgumentVars <em>Argument Vars</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +72,16 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 	 * @ordered
 	 */
 	protected EList<String> names;
+
+	/**
+	 * The cached value of the '{@link #getArgumentVars() <em>Argument Vars</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArgumentVars()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EObject> argumentVars;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -131,6 +143,18 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EObject> getArgumentVars() {
+		if (argumentVars == null) {
+			argumentVars = new EObjectResolvingEList<EObject>(EObject.class, this, AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS);
+		}
+		return argumentVars;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -169,6 +193,8 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 				return getArguments();
 			case AnnotationsPackage.IMPERATIVE_RULE_ANN__NAMES:
 				return getNames();
+			case AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS:
+				return getArgumentVars();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -194,6 +220,10 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 				getNames().clear();
 				getNames().addAll((Collection<? extends String>)newValue);
 				return;
+			case AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS:
+				getArgumentVars().clear();
+				getArgumentVars().addAll((Collection<? extends EObject>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -215,6 +245,9 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 			case AnnotationsPackage.IMPERATIVE_RULE_ANN__NAMES:
 				getNames().clear();
 				return;
+			case AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS:
+				getArgumentVars().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -233,6 +266,8 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 				return arguments != null && !arguments.isEmpty();
 			case AnnotationsPackage.IMPERATIVE_RULE_ANN__NAMES:
 				return names != null && !names.isEmpty();
+			case AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS:
+				return argumentVars != null && !argumentVars.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -249,6 +284,7 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 				case AnnotationsPackage.IMPERATIVE_RULE_ANN__CALLED_BY: return AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY;
 				case AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENTS: return AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENTS;
 				case AnnotationsPackage.IMPERATIVE_RULE_ANN__NAMES: return AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES;
+				case AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS: return AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS;
 				default: return -1;
 			}
 		}
@@ -267,6 +303,7 @@ public abstract class ImperativeRuleAnnImpl extends RuleAnnImpl implements Imper
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__CALLED_BY: return AnnotationsPackage.IMPERATIVE_RULE_ANN__CALLED_BY;
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENTS: return AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENTS;
 				case AnnotationsPackage.MODULE_CALLABLE_ANN__NAMES: return AnnotationsPackage.IMPERATIVE_RULE_ANN__NAMES;
+				case AnnotationsPackage.MODULE_CALLABLE_ANN__ARGUMENT_VARS: return AnnotationsPackage.IMPERATIVE_RULE_ANN__ARGUMENT_VARS;
 				default: return -1;
 			}
 		}

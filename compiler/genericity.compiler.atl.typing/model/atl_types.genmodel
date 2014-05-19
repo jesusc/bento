@@ -120,6 +120,8 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ModuleCallableAnn/arguments"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_types.ecore#//annotations/ModuleCallableAnn/names"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ModuleCallableAnn/argumentVars"/>
       </genClasses>
       <genClasses ecoreClass="atl_types.ecore#//annotations/ModuleHelperAnn"/>
       <genClasses ecoreClass="atl_types.ecore#//annotations/ContextHelperAnn">

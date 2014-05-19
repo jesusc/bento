@@ -3,22 +3,35 @@ package genericity.compiler.atl.csp;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
+import atl.metamodel.OCL.OclExpression;
+import bento.analyser.util.AtlLoader;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import genericity.compiler.atl.analyser.ErrorUtils;
-import genericity.compiler.atl.graph.DependencyGraph;
+import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemPath;
 import genericity.compiler.atl.graph.DependencyNode;
+import genericity.compiler.atl.graph.ExecutionNode;
 import genericity.compiler.atl.graph.HelperInvocationNode;
 
 public class CSPGenerator {
 	
-	private DependencyGraph	graph;
+	private ProblemGraph	graph;
 	private ErrorSlice	slice;
+	private boolean topDown = false;
+	private AtlLoader loader;
 
-	public CSPGenerator(DependencyGraph g, ErrorSlice slice) {
+	public CSPGenerator(ProblemGraph g, ErrorSlice slice, AtlLoader loader) {
+		this(g, slice, false);
+		this.loader = loader;
+	}
+	
+	public CSPGenerator(ProblemGraph g, ErrorSlice slice, boolean topDown) {
 		this.graph = g;
 		this.slice = slice;
+		this.topDown  = topDown;
 	}
 
 	public String generate() {
@@ -26,30 +39,24 @@ public class CSPGenerator {
 	}
 	
 	public String generateLoc(String location) {
-		LinkedList<DependencyNode> sorted = new LinkedList<DependencyNode>(graph.getProblemNodes());
-		Collections.sort(sorted, new Comparator<DependencyNode>() {
-			@Override
-			public int compare(DependencyNode arg0, DependencyNode arg1) {
-				LocalProblem lp1 = (LocalProblem) arg0.getProblem();
-				LocalProblem lp2 = (LocalProblem) arg1.getProblem();
-				return lp1.getLocation().compareTo(lp2.getLocation());
-			}
-		});
+		List<ProblemPath> sorted = graph.getSortedPaths();
 		
 		String s = "";
-		for(DependencyNode node : sorted) {
-			LocalProblem lp = (LocalProblem) node.getProblem();
+		for(ProblemPath path : sorted) {
+			LocalProblem lp = (LocalProblem) path.getProblem();
+		
 			if ( location != null && ! lp.getLocation().equals(location) ) 
 				continue;
 				
 			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
-			s += generateCSP(node);
+			s += generateCSP(path);
 			s += "\n\n";
 			// System.out.println(s);
 		}
 		return s;
 	}
 
+	/*
 	public String generate(Problem p) {
 		for(DependencyNode node : graph.getProblemNodes()) {
 			if ( node.getProblem() == p ) {
@@ -58,24 +65,26 @@ public class CSPGenerator {
 		}
 		throw new IllegalArgumentException();
 	}
+	*/
 	
-	private String generateCSP(DependencyNode errorNode) {
-		CSPBuffer buf = new CSPBuffer();
-		
-		errorNode.getCSPText(buf);
-		
-		String s = buf.getText();
-		
-		return s;
-		/*
-		while ( (node = node.getDependency()) != null ) {
-			node.getCSPText(buf);
+	public String generateCSP(ProblemPath path) {
+		DependencyNode errorNode = path.getErrorNode();
+		if ( topDown ) {
+			CSPBuffer buf = new CSPBuffer();
 			
-			if ( node instanceof HelperInvocationNode ) {
-				System.out.println("* End of helper\n");
-				// break;
+			errorNode.getCSPText(buf);
+			
+			String s = buf.getText();
+			
+			return s;
+		} else {
+			for (ExecutionNode node : path.getExecutionNodes()) {
+				OclExpression exp = node.genCSP(new CSPModel(loader));
+				return OclGenerator.gen(exp);
+				// Only one execution node supported so far
 			}
+			
+			return "Nothing generated";
 		}
-		*/
 	}
 }

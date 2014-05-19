@@ -1,7 +1,8 @@
 package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
-import genericity.compiler.atl.graph.DependencyGraph;
+import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemPath;
 import genericity.compiler.atl.graph.ErrorPathGenerator;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class Analyser {
 	private ErrorModel	errors;
 	
 	private boolean doDependency = true;
-	private DependencyGraph dependencyGraph;
+	private ProblemGraph problemGraph;
 	
 	/*
 	public Analyser(GlobalNamespace mm, Resource atlResource, BasicEMFModel out) throws IOException {
@@ -37,6 +38,7 @@ public class Analyser {
 		this.typ   = new TypingModel(out);
 		this.errors = new ErrorModel();
 	}
+	
 	public void setDoDependencyAnalysis(boolean doDependency) {
 		this.doDependency = doDependency;
 	}
@@ -55,7 +57,7 @@ public class Analyser {
 				}	
 				
 				if ( doDependency ) 
-					dependencyGraph = new ErrorPathGenerator(errors, typ, trafo).perform();
+					problemGraph = new ErrorPathGenerator(errors, typ, trafo).perform();
 			}
 		});
 
@@ -79,8 +81,8 @@ public class Analyser {
 		return typ;
 	}
 
-	public DependencyGraph getDependencyGraph() {
-		return dependencyGraph;
+	public ProblemGraph getDependencyGraph() {
+		return problemGraph;
 	}
 
 	public ATLModel getATLModel() {

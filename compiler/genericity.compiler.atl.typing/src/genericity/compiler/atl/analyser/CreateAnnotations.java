@@ -137,6 +137,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		String name = null;
 		String[] names = new String[0];
 		Type[] arguments = new Type[0];
+		VariableDeclaration[] argumentVars = new VariableDeclaration[0];
 		if ( self.getDefinition().getFeature() instanceof Attribute ) {
 			returnType = attr.typeOf( ((Attribute) self.getDefinition().getFeature()).getType() );
 			name       = ((Attribute) self.getDefinition().getFeature()).getName();
@@ -146,10 +147,12 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		
 			List<Parameter> params = ((Operation) self.getDefinition().getFeature()).getParameters();
 			names 	  = new String[params.size()];
+			argumentVars = new VariableDeclaration[params.size()];
 			arguments = new Type[params.size()];
 			for(int i = 0; i < params.size(); i++) {
 				names[i]     = params.get(i).getVarName();
 				arguments[i] = attr.typeOf(params.get(i));
+				argumentVars[i] = params.get(i);
 			}
 		}
 		
@@ -163,6 +166,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		for(int i = 0; i < names.length; i++) {
 			ann.getNames().add(names[i]);
 			ann.getArguments().add(arguments[i]);
+			ann.getArgumentVars().add(argumentVars[i].original_());
 		}
 		
 		ann.setName(name);
@@ -237,6 +241,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		InPatternElement inPatternElement = self.getInPattern().getElements().get(0);
 		ann.getNames().add(inPatternElement.getVarName());
 		ann.getArguments().add(attr.typeOf(inPatternElement));
+		ann.getArgumentVars().add(inPatternElement.original_());
 		
 		createOutputPatternElements(self, ann);	
 	}
@@ -258,7 +263,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	@Override
 	public void inCalledRule(CalledRule self) {
 		CalledRuleAnn ann = attr.annotationOf(self);
-		
+		// TODO: Create arguments
 		createOutputPatternElements(self, ann);
 	}
 	

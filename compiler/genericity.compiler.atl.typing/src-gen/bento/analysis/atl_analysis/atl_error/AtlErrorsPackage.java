@@ -1951,13 +1951,22 @@ public interface AtlErrorsPackage extends EPackage {
 	int RESOLVED_RULE_INFO__RULE_NAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Input Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO__INPUT_TYPE = 3;
+
+	/**
 	 * The feature id for the '<em><b>Output Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVED_RULE_INFO__OUTPUT_TYPE = 3;
+	int RESOLVED_RULE_INFO__OUTPUT_TYPE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Resolved Rule Info</em>' class.
@@ -1966,7 +1975,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVED_RULE_INFO_FEATURE_COUNT = 4;
+	int RESOLVED_RULE_INFO_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.FlattenOverNonNestedCollectionImpl <em>Flatten Over Non Nested Collection</em>}' class.
@@ -3403,6 +3412,17 @@ public interface AtlErrorsPackage extends EPackage {
 	EAttribute getResolvedRuleInfo_RuleName();
 
 	/**
+	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getInputType <em>Input Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Input Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getInputType()
+	 * @see #getResolvedRuleInfo()
+	 * @generated
+	 */
+	EReference getResolvedRuleInfo_InputType();
+
+	/**
 	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getOutputType <em>Output Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3996,6 +4016,14 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RESOLVED_RULE_INFO__RULE_NAME = eINSTANCE.getResolvedRuleInfo_RuleName();
+
+		/**
+		 * The meta object literal for the '<em><b>Input Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESOLVED_RULE_INFO__INPUT_TYPE = eINSTANCE.getResolvedRuleInfo_InputType();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Type</b></em>' reference feature.

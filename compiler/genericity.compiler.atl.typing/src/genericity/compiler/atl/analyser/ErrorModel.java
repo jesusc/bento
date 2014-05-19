@@ -339,7 +339,7 @@ public class ErrorModel {
 	}
 	
 	public void signalBindingWithResolvedByIncompatibleRule(Binding b, EClass rightType, EClass targetType,
-			List<MatchedRule> problematicRules, List<EClass> targetClasses) {
+			List<MatchedRule> problematicRules, List<EClass> sourceClasses, List<EClass> targetClasses) {
 		
 		BindingWithResolvedByIncompatibleRule error = AtlErrorsFactory.eINSTANCE.createBindingWithResolvedByIncompatibleRule();
 		initProblem(error, b);
@@ -355,6 +355,7 @@ public class ErrorModel {
 			rinfo.setLocation(r.getLocation());
 			rinfo.setElement(r.original_());
 			rinfo.setRuleName(r.getName());
+			rinfo.setInputType(sourceClasses.get(i));
 			rinfo.setOutputType(targetClasses.get(i));
 			i++;
 			error.getRules().add(rinfo);

@@ -92,6 +92,8 @@
             ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/ResolvedRuleInfo/element"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/ResolvedRuleInfo/ruleName"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/ResolvedRuleInfo/inputType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_errors.ecore#//atl_error/ResolvedRuleInfo/outputType"/>
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FlattenOverNonNestedCollection"/>

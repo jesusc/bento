@@ -6,4 +6,5 @@ public interface ProblemNode extends DependencyNode {
 
 	void setErrorSlice(ErrorSlice slice);
 	ErrorSlice getErrorSlice();
+	boolean isStraightforward();
 }

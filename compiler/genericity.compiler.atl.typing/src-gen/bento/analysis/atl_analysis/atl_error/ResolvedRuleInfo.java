@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getLocation <em>Location</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getElement <em>Element</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getRuleName <em>Rule Name</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getInputType <em>Input Type</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getOutputType <em>Output Type</em>}</li>
  * </ul>
  * </p>
@@ -106,6 +107,32 @@ public interface ResolvedRuleInfo extends EObject {
 	 * @generated
 	 */
 	void setRuleName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Input Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Input Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Input Type</em>' reference.
+	 * @see #setInputType(EClass)
+	 * @see bento.analysis.atl_analysis.atl_error.AtlErrorsPackage#getResolvedRuleInfo_InputType()
+	 * @model
+	 * @generated
+	 */
+	EClass getInputType();
+
+	/**
+	 * Sets the value of the '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getInputType <em>Input Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Input Type</em>' reference.
+	 * @see #getInputType()
+	 * @generated
+	 */
+	void setInputType(EClass value);
 
 	/**
 	 * Returns the value of the '<em><b>Output Type</b></em>' reference.

@@ -15,7 +15,6 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 	public LinkedList<DependencyNode> depending    = new LinkedList<DependencyNode>();
 	public LinkedList<ConstraintNode> constraints = new LinkedList<ConstraintNode>();
 	
-	protected DependencyGraph	graph;
 	protected Problem	problem;
 	protected boolean leadsToExecution = true;
 	
@@ -32,6 +31,13 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 		else if ( dependencies.size() == 1 ) return dependencies.get(0);
 		
 		throw new IllegalStateException("Only one dependency per node supported");
+	}
+
+	public DependencyNode getDepending() {
+		if 		( depending.size() == 0 ) return null;
+		else if ( depending.size() == 1 ) return depending.get(0);
+		
+		throw new IllegalStateException("Only one depending node supported");
 	}
 
 	public ConstraintNode getConstraint() {
@@ -55,18 +61,13 @@ public abstract class AbstractDependencyNode implements DependencyNode {
 	
 	protected void generatedDependencies(ErrorSlice slice) {
 		for(DependencyNode n : dependencies) {
-			n.genErrorSlice(slice);
+			if ( n.leadsToExecution() )
+				n.genErrorSlice(slice);
 		}					
 		for(ConstraintNode c : constraints) {
 			c.genErrorSlice(slice);
 		}					
 		
-	}
-
-	
-	@Override
-	public void setGraph(DependencyGraph dependencyGraph) {
-		this.graph = dependencyGraph;
 	}
 
 	public void setProblem(Problem p) {
