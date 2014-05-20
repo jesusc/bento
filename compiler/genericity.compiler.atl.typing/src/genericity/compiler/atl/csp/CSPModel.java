@@ -115,6 +115,7 @@ public class CSPModel {
 		exp.addArguments(expr2);
 		return exp;		
 	}
+	
 	public OperationCallExp createKindOf(OclExpression receptor, String modelName, String className) {
 		OperationCallExp op = create(OperationCallExp.class);
 		op.setOperationName("oclIsKindOf");
@@ -131,6 +132,28 @@ public class CSPModel {
 		}
 		
 		return op;
+	}
+	
+	public OclExpression createKindOf_AllInstancesStyle(OclExpression receptor, String modelName, String className) {
+		OclModelElement m = create(OclModelElement.class);
+		m.setName(className);
+
+		OperationCallExp op = create(OperationCallExp.class);
+		op.setOperationName("allInstances");
+		op.setSource(m);
+		
+		CollectionOperationCallExp colOp = create(CollectionOperationCallExp.class);
+		colOp.setOperationName("includes");
+		colOp.setSource(op);
+		colOp.addArguments(receptor);
+		
+		if ( modelName != null ) {
+			OclModel model = create(OclModel.class);
+			model.setName(modelName);
+			m.setModel(model);
+		}
+		
+		return colOp;
 	}
 	
 	public OclExpression gen(OclExpression expr) {

@@ -17,6 +17,7 @@ import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
@@ -80,42 +81,16 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		
 		OclExpression value = model.gen(binding.getValue());		
 		if ( TypeUtils.isReference(bindingAnn.getSourceType()) ) {
-			throw new UnsupportedOperationException();
+			LetExp let = model.createLetScope(value, null, "_problem_");
+			VariableDeclaration varDcl = let.getVariable();
+			let.setIn_( genOrRules(model, rules, varDcl));
+		
+			result = let;
 		} else if ( TypeUtils.isCollection(bindingAnn.getSourceType()) ) {
 			IteratorExp exists = model.createExists(value, "_problem_");
 			VariableDeclaration varDcl = exists.getIterators().get(0);
 			
-			OclExpression lastExpr = null;
-			
-			// This strategy favours the last rule
-			for (MatchedRuleOneAnn rule : rules) {
-				MatchedRule r = (MatchedRule) atlModel.findWrapper(rule.getRule());
-				
-				// => _problem_.oclIsKindOf(ruleFrom)
-				VariableExp v = model.create(VariableExp.class);
-				v.setReferredVariable(varDcl);				
-				OperationCallExp kindOfCondition = model.createKindOf(v, null, rule.getInPatternType().getName());
-				
-				// Generate the filter
-				OclExpression filter = null;
-				if ( r.getInPattern().getFilter() != null ) {
-					// Map the iterator var to the rule variable
-					model.addToScope((SimpleInPatternElement) r.getInPattern().getElements().get(0), varDcl);
-					
-					filter = model.gen(r.getInPattern().getFilter());
-				} else {
-					filter = model.createBooleanLiteral(true);
-				}
-				
-				IfExp ifexpr = model.createIfExpression(kindOfCondition, filter, model.createBooleanLiteral(false));
-				OperatorCallExp negatedIf = model.negateExpression(ifexpr);
-				
-				if ( lastExpr == null ) {
-					lastExpr = negatedIf;
-				} else {
-					lastExpr = model.createBinaryOperator(lastExpr, negatedIf, "and");
-				}
-			}
+			OclExpression lastExpr = genOrRules(model, rules, varDcl);
 			
 			// lastIf.setElseExpression(model.createBooleanLiteral(false));
 			
@@ -127,6 +102,41 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		}
 		
 		return result;
+	}
+
+	private OclExpression genOrRules(CSPModel model,
+			EList<MatchedRuleOneAnn> rules, VariableDeclaration varDcl) {
+		
+		OclExpression lastExpr = null;
+		for (MatchedRuleOneAnn rule : rules) {
+			MatchedRule r = (MatchedRule) atlModel.findWrapper(rule.getRule());
+			
+			// => _problem_.oclIsKindOf(ruleFrom)
+			VariableExp v = model.create(VariableExp.class);
+			v.setReferredVariable(varDcl);				
+			OclExpression kindOfCondition = model.createKindOf_AllInstancesStyle(v, null, rule.getInPatternType().getName());
+			
+			// Generate the filter
+			OclExpression filter = null;
+			if ( r.getInPattern().getFilter() != null ) {
+				// Map the iterator var to the rule variable
+				model.addToScope((SimpleInPatternElement) r.getInPattern().getElements().get(0), varDcl);
+				
+				filter = model.gen(r.getInPattern().getFilter());
+			} else {
+				filter = model.createBooleanLiteral(true);
+			}
+			
+			IfExp ifexpr = model.createIfExpression(kindOfCondition, filter, model.createBooleanLiteral(false));
+			OperatorCallExp negatedIf = model.negateExpression(ifexpr);
+			
+			if ( lastExpr == null ) {
+				lastExpr = negatedIf;
+			} else {
+				lastExpr = model.createBinaryOperator(lastExpr, negatedIf, "and");
+			}
+		}
+		return lastExpr;
 	}
 
 	@Override

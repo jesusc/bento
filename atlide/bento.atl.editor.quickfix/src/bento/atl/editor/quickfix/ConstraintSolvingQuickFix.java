@@ -51,6 +51,8 @@ public class ConstraintSolvingQuickFix implements AtlProblemQuickfix {
 			
 			String constraint = new CSPGenerator(null, null, new AtlEclipseLoader()).generateCSP(analysisData.getPath());
 			
+			System.out.println("Quickfix: " + constraint);
+			
 			WitnessGeneratorMemory generator = new WitnessGeneratorMemory(errorSlice, effective, language, constraint);
 			generator.setTempDirectoryPath(projectPath);
 			if ( ! generator.generate() ) {
