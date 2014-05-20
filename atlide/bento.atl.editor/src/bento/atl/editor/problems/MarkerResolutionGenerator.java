@@ -2,10 +2,9 @@ package bento.atl.editor.problems;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.m2m.atl.adt.ui.editor.AtlEditor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
@@ -16,7 +15,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import bento.atl.editor.quickfix.AnalysisQuickfixProcessor;
 
 public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 
@@ -24,12 +23,58 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 	
 	@Override
 	public IMarkerResolution[] getResolutions(IMarker marker) {
-		return new IMarkerResolution[] {
-				new QuickFix()
-		};
+		ICompletionProposal[] quickfixes = AnalysisQuickfixProcessor.getQuickfixes(marker);
+
+		IEditorPart editor= findEditor(null, false);
+		AtlEditor atlEditor = (AtlEditor) editor;
+		IDocument document = atlEditor.getDocumentProvider().getDocument(atlEditor.getEditorInput());
+
+		IMarkerResolution[] result = new IMarkerResolution[quickfixes.length];
+		int i = 0;
+		for (ICompletionProposal proposal : quickfixes) {
+			CompletionProposalToMarkerResolutionWrapper wrapper = new CompletionProposalToMarkerResolutionWrapper(proposal, document);
+			result[i++] = wrapper;
+		}
+		
+		return result;
+		// return new IMarkerResolution[] {
+				// new QuickFixTestReplacement()
+		// };
 	}
 	
-	public static class QuickFix implements IMarkerResolution2 {
+	public static class CompletionProposalToMarkerResolutionWrapper implements IMarkerResolution2 {
+
+		private ICompletionProposal proposal;
+		private IDocument document;
+
+		public CompletionProposalToMarkerResolutionWrapper(ICompletionProposal proposal, IDocument document) {
+			this.proposal = proposal;
+			this.document = document;
+		}
+		
+		@Override
+		public String getLabel() {
+			return proposal.getDisplayString();
+		}
+
+		@Override
+		public void run(IMarker marker) {
+			proposal.apply(document);
+		}
+
+		@Override
+		public String getDescription() {
+			return proposal.getAdditionalProposalInfo();
+		}
+
+		@Override
+		public Image getImage() {
+			return null;
+		}
+		
+	}
+	
+	public static class QuickFixTestReplacement implements IMarkerResolution2 {
 
 		@Override
 		public String getLabel() {
@@ -38,6 +83,7 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 
 		@Override
 		public void run(IMarker marker) {
+			
 			try {
 				// LocalProblem lp = (LocalProblem) marker.getAttribute(ORIGINAL_PROBLEM);
 				int line = (Integer) marker.getAttribute(IMarker.LINE_NUMBER);
@@ -76,6 +122,8 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 			
 			System.out.println(marker.getResource());
 	
+			
+			
 			// MessageDialog.openInformation(null, "Fix", "Fix");
 /*
 			IEditorPart editor= findEditor(null, false);
