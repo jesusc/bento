@@ -3,6 +3,7 @@ package genericity.compiler.atl.csp;
 import java.util.HashMap;
 import java.util.Map;
 
+import genericity.compiler.atl.analyser.Analyser;
 import genericity.typing.atl_types.Metaclass;
 import bento.analyser.util.AtlLoader;
 import atl.metamodel.ATLModel;
@@ -24,10 +25,11 @@ public class CSPModel {
 
 	private ATLModel atlModel;
 	private OclGeneratorAST generator;
+	private Analyser analyser;
 
-	public CSPModel(AtlLoader loader) {
+	public CSPModel(AtlLoader loader, Analyser analyser) {
 		atlModel = loader.create("problem");
-		generator = new OclGeneratorAST(atlModel);
+		generator = new OclGeneratorAST(atlModel, analyser.getTyping());
 	}
 
 	public <T> T create(Class<T> clazz) {
@@ -133,6 +135,19 @@ public class CSPModel {
 		
 		return op;
 	}
+
+	public OperationCallExp createCastTo(VariableDeclaration varToBeCasted, String className) {
+		VariableExp refToVarDcl = create(VariableExp.class);
+		refToVarDcl.setReferredVariable(varToBeCasted);	
+				
+		OperationCallExp opCall = createOperationCall(refToVarDcl, "oclAsType");
+		
+		OclModelElement m = create(OclModelElement.class);
+		m.setName(className);
+		
+		opCall.addArguments(m);
+		return opCall;
+	}
 	
 	public OclExpression createKindOf_AllInstancesStyle(OclExpression receptor, String modelName, String className) {
 		OclModelElement m = create(OclModelElement.class);
@@ -168,6 +183,8 @@ public class CSPModel {
 		
 		scope.put(varDcl, newVar);
 	}
+
+	
 
 
 

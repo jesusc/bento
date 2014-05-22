@@ -791,6 +791,197 @@ public interface AtlErrorsPackage extends EPackage {
 	int OPERATION_NOT_FOUND_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundInThisModuleImpl <em>Operation Not Found In This Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundInThisModuleImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getOperationNotFoundInThisModule()
+	 * @generated
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__DEPENDENTS = NAVIGATION_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__DESCRIPTION = NAVIGATION_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__SEVERITY = NAVIGATION_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__NEEDS_CSP = NAVIGATION_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__LOCATION = NAVIGATION_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__ELEMENT = NAVIGATION_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__RECOVERY = NAVIGATION_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Maybe Rule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE__MAYBE_RULE = NAVIGATION_PROBLEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Operation Not Found In This Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NOT_FOUND_IN_THIS_MODULE_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.AttributeNotFoundInThisModuleImpl <em>Attribute Not Found In This Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AttributeNotFoundInThisModuleImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getAttributeNotFoundInThisModule()
+	 * @generated
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__DEPENDENTS = NAVIGATION_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__DESCRIPTION = NAVIGATION_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__SEVERITY = NAVIGATION_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__NEEDS_CSP = NAVIGATION_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__LOCATION = NAVIGATION_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__ELEMENT = NAVIGATION_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__RECOVERY = NAVIGATION_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__NAME = NAVIGATION_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Not Found In This Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE_FEATURE_COUNT = NAVIGATION_PROBLEM_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundInUnionTypeImpl <em>Feature Not Found In Union Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -798,7 +989,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFeatureNotFoundInUnionType()
 	 * @generated
 	 */
-	int FEATURE_NOT_FOUND_IN_UNION_TYPE = 8;
+	int FEATURE_NOT_FOUND_IN_UNION_TYPE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -889,7 +1080,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getInvalidOperand()
 	 * @generated
 	 */
-	int INVALID_OPERAND = 9;
+	int INVALID_OPERAND = 11;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -981,7 +1172,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoContainerForRefImmediateComposite()
 	 * @generated
 	 */
-	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE = 10;
+	int NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1082,7 +1273,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getDifferentBranchTypes()
 	 * @generated
 	 */
-	int DIFFERENT_BRANCH_TYPES = 11;
+	int DIFFERENT_BRANCH_TYPES = 13;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1183,7 +1374,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingProblem()
 	 * @generated
 	 */
-	int BINDING_PROBLEM = 12;
+	int BINDING_PROBLEM = 14;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1283,7 +1474,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoBindingForCompulsoryFeature()
 	 * @generated
 	 */
-	int NO_BINDING_FOR_COMPULSORY_FEATURE = 13;
+	int NO_BINDING_FOR_COMPULSORY_FEATURE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1384,7 +1575,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingExpectedOneAssignedMany()
 	 * @generated
 	 */
-	int BINDING_EXPECTED_ONE_ASSIGNED_MANY = 14;
+	int BINDING_EXPECTED_ONE_ASSIGNED_MANY = 16;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1485,7 +1676,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingResolution()
 	 * @generated
 	 */
-	int BINDING_RESOLUTION = 15;
+	int BINDING_RESOLUTION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Right Type</b></em>' reference.
@@ -1531,7 +1722,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithoutRule()
 	 * @generated
 	 */
-	int BINDING_WITHOUT_RULE = 16;
+	int BINDING_WITHOUT_RULE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1658,7 +1849,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingWithResolvedByIncompatibleRule()
 	 * @generated
 	 */
-	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE = 17;
+	int BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1785,7 +1976,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getBindingPossiblyUnresolved()
 	 * @generated
 	 */
-	int BINDING_POSSIBLY_UNRESOLVED = 18;
+	int BINDING_POSSIBLY_UNRESOLVED = 20;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -1921,7 +2112,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getResolvedRuleInfo()
 	 * @generated
 	 */
-	int RESOLVED_RULE_INFO = 19;
+	int RESOLVED_RULE_INFO = 21;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -1985,7 +2176,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getFlattenOverNonNestedCollection()
 	 * @generated
 	 */
-	int FLATTEN_OVER_NON_NESTED_COLLECTION = 20;
+	int FLATTEN_OVER_NON_NESTED_COLLECTION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2068,7 +2259,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorOverEmptySequence()
 	 * @generated
 	 */
-	int ITERATOR_OVER_EMPTY_SEQUENCE = 21;
+	int ITERATOR_OVER_EMPTY_SEQUENCE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2151,7 +2342,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getReadingTargetModel()
 	 * @generated
 	 */
-	int READING_TARGET_MODEL = 22;
+	int READING_TARGET_MODEL = 24;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2243,7 +2434,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getAmbiguousTargetModelReference()
 	 * @generated
 	 */
-	int AMBIGUOUS_TARGET_MODEL_REFERENCE = 23;
+	int AMBIGUOUS_TARGET_MODEL_REFERENCE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2335,7 +2526,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoModelFound()
 	 * @generated
 	 */
-	int NO_MODEL_FOUND = 24;
+	int NO_MODEL_FOUND = 26;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2427,7 +2618,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getWrongType()
 	 * @generated
 	 */
-	int WRONG_TYPE = 25;
+	int WRONG_TYPE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2509,7 +2700,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorBodyWrongType()
 	 * @generated
 	 */
-	int ITERATOR_BODY_WRONG_TYPE = 26;
+	int ITERATOR_BODY_WRONG_TYPE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2592,7 +2783,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getMatchedRuleWithoutOutputPattern()
 	 * @generated
 	 */
-	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN = 27;
+	int MATCHED_RULE_WITHOUT_OUTPUT_PATTERN = 29;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2675,7 +2866,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getExpectedCollectionInForEach()
 	 * @generated
 	 */
-	int EXPECTED_COLLECTION_IN_FOR_EACH = 28;
+	int EXPECTED_COLLECTION_IN_FOR_EACH = 30;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2758,7 +2949,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getNoClassFoundInMetamodel()
 	 * @generated
 	 */
-	int NO_CLASS_FOUND_IN_METAMODEL = 29;
+	int NO_CLASS_FOUND_IN_METAMODEL = 31;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -2850,7 +3041,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getInvalidArgument()
 	 * @generated
 	 */
-	int INVALID_ARGUMENT = 30;
+	int INVALID_ARGUMENT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -3125,6 +3316,59 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOperationNotFound_MetamodelName();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule <em>Operation Not Found In This Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation Not Found In This Module</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule
+	 * @generated
+	 */
+	EClass getOperationNotFoundInThisModule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule#getName()
+	 * @see #getOperationNotFoundInThisModule()
+	 * @generated
+	 */
+	EAttribute getOperationNotFoundInThisModule_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule#isMaybeRule <em>Maybe Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Maybe Rule</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule#isMaybeRule()
+	 * @see #getOperationNotFoundInThisModule()
+	 * @generated
+	 */
+	EAttribute getOperationNotFoundInThisModule_MaybeRule();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule <em>Attribute Not Found In This Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Not Found In This Module</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule
+	 * @generated
+	 */
+	EClass getAttributeNotFoundInThisModule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule#getName()
+	 * @see #getAttributeNotFoundInThisModule()
+	 * @generated
+	 */
+	EAttribute getAttributeNotFoundInThisModule_Name();
 
 	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.FeatureNotFoundInUnionType <em>Feature Not Found In Union Type</em>}'.
@@ -3776,6 +4020,50 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OPERATION_NOT_FOUND__METAMODEL_NAME = eINSTANCE.getOperationNotFound_MetamodelName();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundInThisModuleImpl <em>Operation Not Found In This Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.OperationNotFoundInThisModuleImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getOperationNotFoundInThisModule()
+		 * @generated
+		 */
+		EClass OPERATION_NOT_FOUND_IN_THIS_MODULE = eINSTANCE.getOperationNotFoundInThisModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_NOT_FOUND_IN_THIS_MODULE__NAME = eINSTANCE.getOperationNotFoundInThisModule_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Maybe Rule</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_NOT_FOUND_IN_THIS_MODULE__MAYBE_RULE = eINSTANCE.getOperationNotFoundInThisModule_MaybeRule();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.AttributeNotFoundInThisModuleImpl <em>Attribute Not Found In This Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AttributeNotFoundInThisModuleImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getAttributeNotFoundInThisModule()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE = eINSTANCE.getAttributeNotFoundInThisModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__NAME = eINSTANCE.getAttributeNotFoundInThisModule_Name();
 
 		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundInUnionTypeImpl <em>Feature Not Found In Union Type</em>}' class.

@@ -68,6 +68,15 @@ package atl_error {
 		attr String[1] metamodelName;
 	}
 	
+	class OperationNotFoundInThisModule extends NavigationProblem {
+		attr String[1] name;
+		attr boolean[1] maybeRule = false;
+	}
+	
+	class AttributeNotFoundInThisModule extends NavigationProblem {
+		attr String[1] name;
+	}
+	
 	class FeatureNotFoundInUnionType extends NavigationProblem {
 		attr String[1] featureName;	   
 	}
@@ -177,6 +186,7 @@ package atl_error {
 package atl_recovery {
 	class FeatureFoundInSubclass extends Recovery {
 		attr String[1] subclassName;
+		ref  EClass[1] subclass;
 	}
 	
 	class TentativeTypeAssigned extends Recovery {

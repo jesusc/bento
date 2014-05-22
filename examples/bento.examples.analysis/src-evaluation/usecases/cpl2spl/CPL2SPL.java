@@ -23,9 +23,20 @@ public class CPL2SPL extends BaseTest {
 	
 	public void run() throws IOException {
 		typing(CPL2SPL_TRANSFORMATION, new Object[] { CPL_METAMODEL, SPL_METAMODEL}, 
-				   new String[] { "CPL", "SPL" });
+				   new String[] { "CPL", "SPL" }, true);
 		
-		System.out.println("Finished typing of " + CPL2SPL_TRANSFORMATION);
+		printStatistics();
+		printErrorsByType();
+		
+		String selectedError = "55:4-55:38";
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("CPL", "tmp_/cpl2spl.slice.ecore", selectedError);
+		generateEffectiveMetamodel("CPL", "tmp_/cpl2spl.effective.ecore");
+		generateCSP(selectedError);
+
+		
 	}
+
 
 }

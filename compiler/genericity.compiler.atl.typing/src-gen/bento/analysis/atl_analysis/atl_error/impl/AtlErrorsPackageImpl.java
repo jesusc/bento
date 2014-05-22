@@ -11,6 +11,7 @@ import bento.analysis.atl_analysis.AtlAnalysisPackage;
 import bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
+import bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingProblem;
@@ -38,6 +39,7 @@ import bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_error.NoModelFound;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule;
 import bento.analysis.atl_analysis.atl_error.ReadingTargetModel;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_error.TargetModelConformanceProblem;
@@ -116,6 +118,20 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass operationNotFoundEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationNotFoundInThisModuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeNotFoundInThisModuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -519,6 +535,51 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 */
 	public EAttribute getOperationNotFound_MetamodelName() {
 		return (EAttribute)operationNotFoundEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperationNotFoundInThisModule() {
+		return operationNotFoundInThisModuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperationNotFoundInThisModule_Name() {
+		return (EAttribute)operationNotFoundInThisModuleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperationNotFoundInThisModule_MaybeRule() {
+		return (EAttribute)operationNotFoundInThisModuleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAttributeNotFoundInThisModule() {
+		return attributeNotFoundInThisModuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttributeNotFoundInThisModule_Name() {
+		return (EAttribute)attributeNotFoundInThisModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -972,6 +1033,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		createEAttribute(operationNotFoundEClass, OPERATION_NOT_FOUND__CLASS_NAME);
 		createEAttribute(operationNotFoundEClass, OPERATION_NOT_FOUND__METAMODEL_NAME);
 
+		operationNotFoundInThisModuleEClass = createEClass(OPERATION_NOT_FOUND_IN_THIS_MODULE);
+		createEAttribute(operationNotFoundInThisModuleEClass, OPERATION_NOT_FOUND_IN_THIS_MODULE__NAME);
+		createEAttribute(operationNotFoundInThisModuleEClass, OPERATION_NOT_FOUND_IN_THIS_MODULE__MAYBE_RULE);
+
+		attributeNotFoundInThisModuleEClass = createEClass(ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE);
+		createEAttribute(attributeNotFoundInThisModuleEClass, ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE__NAME);
+
 		featureNotFoundInUnionTypeEClass = createEClass(FEATURE_NOT_FOUND_IN_UNION_TYPE);
 		createEAttribute(featureNotFoundInUnionTypeEClass, FEATURE_NOT_FOUND_IN_UNION_TYPE__FEATURE_NAME);
 
@@ -1080,6 +1148,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		featureAccessInCollectionEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
 		operationNotFoundEClass.getESuperTypes().add(this.getNavigationProblem());
+		operationNotFoundInThisModuleEClass.getESuperTypes().add(this.getNavigationProblem());
+		attributeNotFoundInThisModuleEClass.getESuperTypes().add(this.getNavigationProblem());
 		featureNotFoundInUnionTypeEClass.getESuperTypes().add(this.getNavigationProblem());
 		invalidOperandEClass.getESuperTypes().add(this.getInvalidArgumentProblem());
 		noContainerForRefImmediateCompositeEClass.getESuperTypes().add(this.getNavigationProblem());
@@ -1133,6 +1203,13 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEReference(getOperationNotFound_Type(), theAtlTypingPackage.getType(), null, "type", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOperationNotFound_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOperationNotFound_MetamodelName(), ecorePackage.getEString(), "metamodelName", null, 1, 1, OperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationNotFoundInThisModuleEClass, OperationNotFoundInThisModule.class, "OperationNotFoundInThisModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOperationNotFoundInThisModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, OperationNotFoundInThisModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOperationNotFoundInThisModule_MaybeRule(), ecorePackage.getEBoolean(), "maybeRule", "false", 1, 1, OperationNotFoundInThisModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(attributeNotFoundInThisModuleEClass, AttributeNotFoundInThisModule.class, "AttributeNotFoundInThisModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAttributeNotFoundInThisModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, AttributeNotFoundInThisModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(featureNotFoundInUnionTypeEClass, FeatureNotFoundInUnionType.class, "FeatureNotFoundInUnionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatureNotFoundInUnionType_FeatureName(), ecorePackage.getEString(), "featureName", null, 1, 1, FeatureNotFoundInUnionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

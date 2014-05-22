@@ -107,6 +107,14 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createOperationNotFoundAdapter();
 			}
 			@Override
+			public Adapter caseOperationNotFoundInThisModule(OperationNotFoundInThisModule object) {
+				return createOperationNotFoundInThisModuleAdapter();
+			}
+			@Override
+			public Adapter caseAttributeNotFoundInThisModule(AttributeNotFoundInThisModule object) {
+				return createAttributeNotFoundInThisModuleAdapter();
+			}
+			@Override
 			public Adapter caseFeatureNotFoundInUnionType(FeatureNotFoundInUnionType object) {
 				return createFeatureNotFoundInUnionTypeAdapter();
 			}
@@ -335,6 +343,34 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationNotFoundAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule <em>Operation Not Found In This Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule
+	 * @generated
+	 */
+	public Adapter createOperationNotFoundInThisModuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule <em>Attribute Not Found In This Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule
+	 * @generated
+	 */
+	public Adapter createAttributeNotFoundInThisModuleAdapter() {
 		return null;
 	}
 

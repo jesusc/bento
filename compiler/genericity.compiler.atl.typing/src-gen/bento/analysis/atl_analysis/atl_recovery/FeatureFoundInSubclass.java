@@ -7,6 +7,7 @@
 package bento.analysis.atl_analysis.atl_recovery;
 
 import bento.analysis.atl_analysis.Recovery;
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ import bento.analysis.atl_analysis.Recovery;
  * The following features are supported:
  * <ul>
  *   <li>{@link bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass#getSubclassName <em>Subclass Name</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass#getSubclass <em>Subclass</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +52,31 @@ public interface FeatureFoundInSubclass extends Recovery {
 	 * @generated
 	 */
 	void setSubclassName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Subclass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Subclass</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Subclass</em>' reference.
+	 * @see #setSubclass(EClass)
+	 * @see bento.analysis.atl_analysis.atl_recovery.AtlRecoveryPackage#getFeatureFoundInSubclass_Subclass()
+	 * @model required="true"
+	 * @generated
+	 */
+	EClass getSubclass();
+
+	/**
+	 * Sets the value of the '{@link bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass#getSubclass <em>Subclass</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Subclass</em>' reference.
+	 * @see #getSubclass()
+	 * @generated
+	 */
+	void setSubclass(EClass value);
 
 } // FeatureFoundInSubclass

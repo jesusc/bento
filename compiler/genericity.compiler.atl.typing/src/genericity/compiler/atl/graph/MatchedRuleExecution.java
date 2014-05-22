@@ -6,7 +6,6 @@ import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.VariableDeclaration;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
@@ -94,7 +93,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
 		gv.addNode(this, rule.getName() + "\\nfrom: " + varDcl.getType().getName(), leadsToExecution ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
-	
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		Metaclass metaclass = null;
@@ -126,6 +125,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		}
 
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

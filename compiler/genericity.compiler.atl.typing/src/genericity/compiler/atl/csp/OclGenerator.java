@@ -1,8 +1,9 @@
 package genericity.compiler.atl.csp;
 
-import java.util.HashMap;
+import genericity.compiler.atl.analyser.Analyser;
+import genericity.typing.atl_types.annotations.CallExprAnn;
+
 import java.util.List;
-import java.util.Map;
 
 import atl.metamodel.OCL.BooleanExp;
 import atl.metamodel.OCL.CollectionExp;
@@ -16,6 +17,7 @@ import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OclModelElement;
+import atl.metamodel.OCL.OclUndefinedExp;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
@@ -26,22 +28,15 @@ import atl.metamodel.OCL.VariableExp;
 
 public class OclGenerator {
 
-	public static String gen(OclExpression expr) {
-		return gen(expr, null, new HashMap<String, String>());
+	public static String gen(OclExpression receptor) {
+		return gen(receptor, null);
 	}
 	
-	public static String gen(OclExpression expr, Map<String, String> vars) {
-		return gen(expr, null, vars);
-	}
-	
-	public static String gen(OclExpression expr, OclExpression end, Map<String, String> vars) {
+	public static String gen(OclExpression expr, Analyser analyser) {
 		if (expr instanceof PropertyCallExp) {
-			return genPropertyCall(expr, end, vars);
+			return genPropertyCall(expr, analyser);
 		} else if (expr instanceof VariableExp) {
 			String varName = ((VariableExp) expr).getReferredVariable().getVarName();
-			if ( vars.containsKey(varName) ) {
-				varName = vars.get(varName);
-			}
 			return varName;
 		} else if (expr instanceof IntegerExp) {
 			return ((IntegerExp) expr).getIntegerSymbol().toString();
@@ -62,7 +57,7 @@ public class OclGenerator {
 			if ( let.getVariable().getType() != null) {
 				type = gen(let.getVariable().getType());
 			}
-			return "let " + let.getVariable().getVarName() + type + " = " + gen(let.getVariable().getInitExpression(), vars) + " in\n\t" + gen(let.getIn_(), vars);
+			return "let " + let.getVariable().getVarName() + type + " = " + gen(let.getVariable().getInitExpression(), analyser) + " in\n\t" + gen(let.getIn_(), analyser);
 		} else if ( expr instanceof CollectionExp ) {
 			CollectionExp col = (CollectionExp) expr;
 			String elems = "";
@@ -80,38 +75,46 @@ public class OclGenerator {
 		} else if ( expr instanceof EnumLiteralExp ) {
 			EnumLiteralExp enuml = (EnumLiteralExp) expr;
 			return "#" + enuml.getName();
+		} else if ( expr instanceof OclUndefinedExp ) {
+			return "OclUndefined";			
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}
 	}
 
-	private static String genPropertyCall(OclExpression expr, OclExpression end, Map<String, String> vars) {
-		String receptor = gen(((PropertyCallExp) expr).getSource(), end, vars);
+	private static String genPropertyCall(OclExpression expr, Analyser analyser) {
+		String receptor = gen(((PropertyCallExp) expr).getSource(), analyser);
 		if (expr instanceof OperatorCallExp) {
 			OperatorCallExp op = (OperatorCallExp) expr;
 			if (op.getArguments().isEmpty()) {
 				return op.getOperationName() + " (" + receptor + ")";
 			} else {
-				return receptor + " " + op.getOperationName() + " " + gen(op.getArguments().get(0), end, vars);
+				return "(" + receptor + ") " + op.getOperationName() + " (" + gen(op.getArguments().get(0), analyser) + ")";
 			}
 		} else if (expr instanceof NavigationOrAttributeCallExp) {
 			NavigationOrAttributeCallExp nav = (NavigationOrAttributeCallExp) expr;
-			return receptor + "." + nav.getName();
+			String op = nav.getName();
+			if ( analyser != null ) {
+				CallExprAnn ann = (CallExprAnn) analyser.getTyping().getAnnotation(nav.original_());
+				if ( ann.getUsedFeature() == null )
+					op = op + "()";
+			}
+			return receptor + "." + op;
 		} else if (expr instanceof CollectionOperationCallExp) {
 			CollectionOperationCallExp call = (CollectionOperationCallExp) expr;
-			return receptor + "->" + call.getOperationName() + "(" + genArgs(call.getArguments(), vars )+ ")";
+			return receptor + "->" + call.getOperationName() + "(" + genArgs(call.getArguments(), analyser )+ ")";
 		} else if (expr instanceof OperationCallExp) {
 			OperationCallExp call = (OperationCallExp) expr;
-			return receptor + "." + translateName(call) + "(" + genArgs(call.getArguments(), vars )+ ")";
+			return receptor + "." + translateName(call) + "(" + genArgs(call.getArguments(), analyser )+ ")";
 		} else if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr;
 			// TODO: Include type if available??
 			return receptor + "->" + it.getName() + "(" + it.getIterators().get(0).getVarName() + "|" +
-					gen(it.getBody()) + ")";
+					gen(it.getBody(), analyser) + ")";
 		} else if ( expr instanceof IterateExp ) {
 			IterateExp it = (IterateExp) expr;
 			return receptor + "->" + "iterate" + "(" + it.getIterators().get(0).getVarName() + "," + it.getResult().getVarName() + " = " + gen(it.getResult().getInitExpression()) + "|" +
-			gen(it.getBody()) + ")";			
+			gen(it.getBody(), analyser) + ")";			
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}
@@ -123,15 +126,19 @@ public class OclGenerator {
 		return name;
 	}
 
-	private static String genArgs(List<OclExpression> arguments, Map<String, String> vars) {
+	private static String genArgs(List<OclExpression> arguments, Analyser analyser) {
 		String s = "";
 		for(int i = 0; i < arguments.size(); i++) {
-			s += gen(arguments.get(i), null, vars);
+			s += gen(arguments.get(i), analyser);
 			if ( i < arguments.size() - 1 ) {
 				s += ",";
 			}
 		}
 		return s;
 	}
+
+	
+
+	
 
 }

@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link bento.analysis.atl_analysis.atl_recovery.impl.FeatureFoundInSubclassImpl#getSubclassName <em>Subclass Name</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_recovery.impl.FeatureFoundInSubclassImpl#getSubclass <em>Subclass</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +52,16 @@ public class FeatureFoundInSubclassImpl extends RecoveryImpl implements FeatureF
 	 * @ordered
 	 */
 	protected String subclassName = SUBCLASS_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSubclass() <em>Subclass</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubclass()
+	 * @generated
+	 * @ordered
+	 */
+	protected EClass subclass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,11 +108,52 @@ public class FeatureFoundInSubclassImpl extends RecoveryImpl implements FeatureF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSubclass() {
+		if (subclass != null && subclass.eIsProxy()) {
+			InternalEObject oldSubclass = (InternalEObject)subclass;
+			subclass = (EClass)eResolveProxy(oldSubclass);
+			if (subclass != oldSubclass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS, oldSubclass, subclass));
+			}
+		}
+		return subclass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass basicGetSubclass() {
+		return subclass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSubclass(EClass newSubclass) {
+		EClass oldSubclass = subclass;
+		subclass = newSubclass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS, oldSubclass, subclass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME:
 				return getSubclassName();
+			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS:
+				if (resolve) return getSubclass();
+				return basicGetSubclass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -115,6 +168,9 @@ public class FeatureFoundInSubclassImpl extends RecoveryImpl implements FeatureF
 		switch (featureID) {
 			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME:
 				setSubclassName((String)newValue);
+				return;
+			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS:
+				setSubclass((EClass)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -131,6 +187,9 @@ public class FeatureFoundInSubclassImpl extends RecoveryImpl implements FeatureF
 			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME:
 				setSubclassName(SUBCLASS_NAME_EDEFAULT);
 				return;
+			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS:
+				setSubclass((EClass)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -145,6 +204,8 @@ public class FeatureFoundInSubclassImpl extends RecoveryImpl implements FeatureF
 		switch (featureID) {
 			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME:
 				return SUBCLASS_NAME_EDEFAULT == null ? subclassName != null : !SUBCLASS_NAME_EDEFAULT.equals(subclassName);
+			case AtlRecoveryPackage.FEATURE_FOUND_IN_SUBCLASS__SUBCLASS:
+				return subclass != null;
 		}
 		return super.eIsSet(featureID);
 	}

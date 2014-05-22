@@ -365,7 +365,7 @@ public class TypingModel {
 		} else if ( (t1 instanceof CollectionType) && (t2 instanceof CollectionType) ) {
 			CollectionType ct1 = (CollectionType) t1;
 			CollectionType ct2 = (CollectionType) t2;
-						
+
 			// TODO: Equal types for collection does not take into account the concrete type of collection
 			return equalTypes(ct1.getContainedType(), ct2.getContainedType());
 		} else if ( t1 instanceof EnumType && t2 instanceof EnumType ) {
@@ -385,6 +385,17 @@ public class TypingModel {
 			}
 			
 			return true;
+		} else if ( t1 instanceof UnionType ) {
+			UnionType ut1 = (UnionType) t1;
+			UnionType ut2 = (UnionType) t2;
+			
+			if ( ut1.getPossibleTypes().size() != ut2.getPossibleTypes().size() ) 
+				return false;
+			
+			for(int i = 0; i < ut1.getPossibleTypes().size(); i++) {
+				if ( ! equalTypes(ut1.getPossibleTypes().get(i), ut2.getPossibleTypes().get(i)) )
+					return false;
+			}			
 		}
 		
 		throw new UnsupportedOperationException("EqualTypes: " + t1 + " - " + t2);

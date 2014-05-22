@@ -62,6 +62,24 @@ public interface AtlErrorsFactory extends EFactory {
 	OperationNotFound createOperationNotFound();
 
 	/**
+	 * Returns a new object of class '<em>Operation Not Found In This Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Not Found In This Module</em>'.
+	 * @generated
+	 */
+	OperationNotFoundInThisModule createOperationNotFoundInThisModule();
+
+	/**
+	 * Returns a new object of class '<em>Attribute Not Found In This Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Not Found In This Module</em>'.
+	 * @generated
+	 */
+	AttributeNotFoundInThisModule createAttributeNotFoundInThisModule();
+
+	/**
 	 * Returns a new object of class '<em>Feature Not Found In Union Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

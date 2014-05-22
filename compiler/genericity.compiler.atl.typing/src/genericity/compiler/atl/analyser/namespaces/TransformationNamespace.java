@@ -32,7 +32,7 @@ public class TransformationNamespace implements ITypeNamespace {
 	public Type getFeatureType(String featureName, LocatedElement node) {
 		VirtualFeature<TransformationNamespace, Attribute> op = features.get(featureName);
 		if ( op == null ) {
-			AnalyserContext.getErrorModel().signalNoThisModuleFeature(featureName, node);
+			return AnalyserContext.getErrorModel().signalNoThisModuleFeature(featureName, node);
 		}
 		return op.returnType;
 	}
@@ -56,8 +56,9 @@ public class TransformationNamespace implements ITypeNamespace {
 			if ( op == null ) 
 				op = lazyRules.get(operationName);
 			
-			if ( op == null )
-				AnalyserContext.getErrorModel().signalNoThisModuleOperation(operationName, node);
+			if ( op == null ) {
+				return AnalyserContext.getErrorModel().signalNoThisModuleOperation(operationName, node);
+			}
 		}
 		return op.returnType;
 	}

@@ -1,14 +1,13 @@
 package genericity.compiler.atl.graph;
 
-import atl.metamodel.ATL.Binding;
-import atl.metamodel.OCL.OclExpression;
 import genericity.compiler.atl.analyser.TypeUtils;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.annotations.BindingAnn;
+import atl.metamodel.ATL.Binding;
+import atl.metamodel.OCL.OclExpression;
 
 public class RuleResolutionNode extends AbstractDependencyNode implements ConstraintNode {
 
@@ -34,6 +33,7 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 				": " + TypeUtils.typeToString(bindingAnn.getSourceType()) +"\\nresolvedBy", leadsToExecution);
 	}
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		String s = "";
@@ -53,6 +53,7 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 		buf.generateExpression(null, s, "");
 		
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

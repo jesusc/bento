@@ -143,6 +143,15 @@ public class AtlRecoveryPackageImpl extends EPackageImpl implements AtlRecoveryP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getFeatureFoundInSubclass_Subclass() {
+		return (EReference)featureFoundInSubclassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTentativeTypeAssigned() {
 		return tentativeTypeAssignedEClass;
 	}
@@ -186,6 +195,7 @@ public class AtlRecoveryPackageImpl extends EPackageImpl implements AtlRecoveryP
 		// Create classes and their features
 		featureFoundInSubclassEClass = createEClass(FEATURE_FOUND_IN_SUBCLASS);
 		createEAttribute(featureFoundInSubclassEClass, FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME);
+		createEReference(featureFoundInSubclassEClass, FEATURE_FOUND_IN_SUBCLASS__SUBCLASS);
 
 		tentativeTypeAssignedEClass = createEClass(TENTATIVE_TYPE_ASSIGNED);
 		createEReference(tentativeTypeAssignedEClass, TENTATIVE_TYPE_ASSIGNED__TYPE);
@@ -229,6 +239,7 @@ public class AtlRecoveryPackageImpl extends EPackageImpl implements AtlRecoveryP
 		// Initialize classes and features; add operations and parameters
 		initEClass(featureFoundInSubclassEClass, FeatureFoundInSubclass.class, "FeatureFoundInSubclass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFeatureFoundInSubclass_SubclassName(), ecorePackage.getEString(), "subclassName", null, 1, 1, FeatureFoundInSubclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFeatureFoundInSubclass_Subclass(), ecorePackage.getEClass(), null, "subclass", null, 1, 1, FeatureFoundInSubclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tentativeTypeAssignedEClass, TentativeTypeAssigned.class, "TentativeTypeAssigned", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTentativeTypeAssigned_Type(), theAtlTypingPackage.getType(), null, "type", null, 1, 1, TentativeTypeAssigned.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

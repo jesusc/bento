@@ -1,15 +1,12 @@
 package genericity.compiler.atl.graph;
 
 import genericity.compiler.atl.analyser.TypeUtils;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
 import genericity.typing.atl_types.PrimitiveType;
-import genericity.typing.atl_types.StringType;
-import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 import atl.metamodel.OCL.CollectionOperationCallExp;
 import atl.metamodel.OCL.OclExpression;
@@ -64,6 +61,7 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 		gv.addNode(this, OclGenerator.gen(start), leadsToExecution);
 	}
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		this.getDependency().getCSPText(buf);
@@ -94,6 +92,7 @@ public class DelimitedExpressionNode extends AbstractDependencyNode {
 		
 		buf.generateExpression(start, prefix, postfix);
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

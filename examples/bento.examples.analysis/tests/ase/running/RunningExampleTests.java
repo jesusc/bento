@@ -27,10 +27,10 @@ public class RunningExampleTests extends BaseTest {
 		typing(UML2Intalio, new Object[] { UML_METAMODEL, BPMN_METAMODEL }, 
 				   new String[] { "UML", "Intalio" }, true);
 		
-		generateGraphviz("42:44-42:54");
+		generateGraphviz("47:3-47:22");
 		generateErrorSlice("UML", "tmp_/uml2intalio.slice.ecore");
 		generateEffectiveMetamodel("UML", "tmp_/uml2intalio.effective.ecore");
-		generateCSP("42:44-42:54");
+		generateCSP("47:3-47:22");
 	}
 	
 	/*

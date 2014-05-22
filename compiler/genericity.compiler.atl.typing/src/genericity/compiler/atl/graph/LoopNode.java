@@ -1,14 +1,13 @@
 package genericity.compiler.atl.graph;
 
-import atl.metamodel.OCL.Iterator;
-import atl.metamodel.OCL.IteratorExp;
-import atl.metamodel.OCL.OclExpression;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import atl.metamodel.OCL.Iterator;
+import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.OclExpression;
 
 public class LoopNode extends AbstractDependencyNode {
 
@@ -20,13 +19,14 @@ public class LoopNode extends AbstractDependencyNode {
 		this.iteratorVar = iterator;
 	}
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		this.getDependency().getCSPText(buf);
 		buf.generateLoop(receptor, "exists", iteratorVar.getVarName());
 		//throw new UnsupportedOperationException();		
-		
 	}
+	*/
 
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {

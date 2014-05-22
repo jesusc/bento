@@ -1,27 +1,22 @@
 package genericity.compiler.atl.graph;
 
+import genericity.compiler.atl.csp.CSPModel;
+import genericity.compiler.atl.csp.ErrorSlice;
+import genericity.compiler.atl.csp.GraphvizBuffer;
+import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.OclSlice;
+import genericity.typing.atl_types.annotations.CallExprAnn;
+import genericity.typing.atl_types.annotations.ContextHelperAnn;
+import genericity.typing.atl_types.annotations.ModuleCallableAnn;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-import genericity.compiler.atl.analyser.TypeUtils;
-import genericity.compiler.atl.csp.CSPBuffer;
-import genericity.compiler.atl.csp.CSPModel;
-import genericity.compiler.atl.csp.ErrorSlice;
-import genericity.compiler.atl.csp.GraphvizBuffer;
-import genericity.compiler.atl.csp.OclGenerator;
-import genericity.compiler.atl.csp.OclSlice;
-import genericity.typing.atl_types.StringType;
-import genericity.typing.atl_types.annotations.CallExprAnn;
-import genericity.typing.atl_types.annotations.ContextHelperAnn;
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
-import genericity.typing.atl_types.annotations.LazyRuleAnn;
-import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
-import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
@@ -79,12 +74,14 @@ public class CallExprNode extends AbstractDependencyNode {
 		gv.addNode(this, OclGenerator.gen(call), leadsToExecution);
 	}
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		this.getDependency().getCSPText(buf);
 		// TODO: Add parameters
 		buf.generateCallContext(call, ann.isIsStaticCall(), ann.getStaticResolver());
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

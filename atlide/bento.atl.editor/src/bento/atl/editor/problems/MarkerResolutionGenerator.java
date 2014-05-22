@@ -26,6 +26,9 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 		ICompletionProposal[] quickfixes = AnalysisQuickfixProcessor.getQuickfixes(marker);
 
 		IEditorPart editor= findEditor(null, false);
+		if ( ! (editor instanceof AtlEditor ) )
+			return new IMarkerResolution[0];
+		
 		AtlEditor atlEditor = (AtlEditor) editor;
 		IDocument document = atlEditor.getDocumentProvider().getDocument(atlEditor.getEditorInput());
 
@@ -166,6 +169,8 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator {
 
 	private static IEditorPart findEditor(Object inputElement, boolean b) {
 		IWorkbenchWindow window= PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		if ( window == null )
+			return null;
 		IWorkbenchPage page = window.getActivePage();
 		return page.getActiveEditor();
 	}

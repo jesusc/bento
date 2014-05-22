@@ -25,7 +25,8 @@ public class SimplePDL2Tina extends BaseTest {
 		typing(SimplePDL2Tina_TRANSFORMATION, new Object[] { PDL_METAMODEL, PN_METAMODEL}, 
 				   new String[] { "pdl", "PetriNet" }, true);
 		
-		System.out.println("Finished typing of " + SimplePDL2Tina_TRANSFORMATION);
+		printStatistics();
+		printErrorsByType();
 	}
 
 }

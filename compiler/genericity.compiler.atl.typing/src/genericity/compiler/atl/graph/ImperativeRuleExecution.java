@@ -1,26 +1,21 @@
 package genericity.compiler.atl.graph;
 
-import org.eclipse.emf.common.util.EList;
-
-import atl.metamodel.ATL.CalledRule;
-import atl.metamodel.ATL.LazyMatchedRule;
-import atl.metamodel.ATL.MatchedRule;
-import atl.metamodel.ATL.Rule;
-import atl.metamodel.OCL.OclExpression;
-import atl.metamodel.OCL.VariableDeclaration;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
-import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.annotations.CalledRuleAnn;
 import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
 import genericity.typing.atl_types.annotations.LazyRuleAnn;
-import genericity.typing.atl_types.annotations.MatchedRuleAnn;
-import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
-import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
+
+import org.eclipse.emf.common.util.EList;
+
+import atl.metamodel.ATL.CalledRule;
+import atl.metamodel.ATL.LazyMatchedRule;
+import atl.metamodel.ATL.Rule;
+import atl.metamodel.OCL.OclExpression;
+import atl.metamodel.OCL.VariableDeclaration;
 
 /**
  * Covers both lazy rule and called rule.
@@ -67,7 +62,7 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 		}
 		gv.addNode(this, "<<lazy>>\\n" + rule.getName() + fromPart, leadsToExecution ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
-
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		if ( getDependencies().size() == 0 ) {
@@ -82,6 +77,7 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 			// 3. X will be the code for the depending node
 		}
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

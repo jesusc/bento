@@ -148,6 +148,26 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.OPERATION_NOT_FOUND_IN_THIS_MODULE: {
+				OperationNotFoundInThisModule operationNotFoundInThisModule = (OperationNotFoundInThisModule)theEObject;
+				T result = caseOperationNotFoundInThisModule(operationNotFoundInThisModule);
+				if (result == null) result = caseNavigationProblem(operationNotFoundInThisModule);
+				if (result == null) result = caseLocalProblem(operationNotFoundInThisModule);
+				if (result == null) result = caseProblem(operationNotFoundInThisModule);
+				if (result == null) result = caseAnalysisInfo(operationNotFoundInThisModule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE: {
+				AttributeNotFoundInThisModule attributeNotFoundInThisModule = (AttributeNotFoundInThisModule)theEObject;
+				T result = caseAttributeNotFoundInThisModule(attributeNotFoundInThisModule);
+				if (result == null) result = caseNavigationProblem(attributeNotFoundInThisModule);
+				if (result == null) result = caseLocalProblem(attributeNotFoundInThisModule);
+				if (result == null) result = caseProblem(attributeNotFoundInThisModule);
+				if (result == null) result = caseAnalysisInfo(attributeNotFoundInThisModule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.FEATURE_NOT_FOUND_IN_UNION_TYPE: {
 				FeatureNotFoundInUnionType featureNotFoundInUnionType = (FeatureNotFoundInUnionType)theEObject;
 				T result = caseFeatureNotFoundInUnionType(featureNotFoundInUnionType);
@@ -484,6 +504,36 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperationNotFound(OperationNotFound object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Not Found In This Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Not Found In This Module</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationNotFoundInThisModule(OperationNotFoundInThisModule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Not Found In This Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Not Found In This Module</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeNotFoundInThisModule(AttributeNotFoundInThisModule object) {
 		return null;
 	}
 

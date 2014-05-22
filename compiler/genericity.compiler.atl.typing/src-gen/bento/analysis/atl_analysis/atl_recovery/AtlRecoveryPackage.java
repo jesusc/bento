@@ -81,13 +81,22 @@ public interface AtlRecoveryPackage extends EPackage {
 	int FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME = AtlAnalysisPackage.RECOVERY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Subclass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_FOUND_IN_SUBCLASS__SUBCLASS = AtlAnalysisPackage.RECOVERY_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Feature Found In Subclass</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_FOUND_IN_SUBCLASS_FEATURE_COUNT = AtlAnalysisPackage.RECOVERY_FEATURE_COUNT + 1;
+	int FEATURE_FOUND_IN_SUBCLASS_FEATURE_COUNT = AtlAnalysisPackage.RECOVERY_FEATURE_COUNT + 2;
 
 
 	/**
@@ -139,6 +148,17 @@ public interface AtlRecoveryPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFeatureFoundInSubclass_SubclassName();
+
+	/**
+	 * Returns the meta object for the reference '{@link bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass#getSubclass <em>Subclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Subclass</em>'.
+	 * @see bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass#getSubclass()
+	 * @see #getFeatureFoundInSubclass()
+	 * @generated
+	 */
+	EReference getFeatureFoundInSubclass_Subclass();
 
 	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_recovery.TentativeTypeAssigned <em>Tentative Type Assigned</em>}'.
@@ -200,6 +220,14 @@ public interface AtlRecoveryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FEATURE_FOUND_IN_SUBCLASS__SUBCLASS_NAME = eINSTANCE.getFeatureFoundInSubclass_SubclassName();
+
+		/**
+		 * The meta object literal for the '<em><b>Subclass</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE_FOUND_IN_SUBCLASS__SUBCLASS = eINSTANCE.getFeatureFoundInSubclass_Subclass();
 
 		/**
 		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_recovery.impl.TentativeTypeAssignedImpl <em>Tentative Type Assigned</em>}' class.

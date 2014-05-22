@@ -63,6 +63,17 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OperationNotFoundInThisModule" eSuperTypes="#//atl_error/NavigationProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="maybeRule" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeNotFoundInThisModule" eSuperTypes="#//atl_error/NavigationProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FeatureNotFoundInUnionType" eSuperTypes="#//atl_error/NavigationProblem">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -145,6 +156,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="FeatureFoundInSubclass" eSuperTypes="#//Recovery">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="subclassName" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subclass" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TentativeTypeAssigned" eSuperTypes="#//Recovery">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"

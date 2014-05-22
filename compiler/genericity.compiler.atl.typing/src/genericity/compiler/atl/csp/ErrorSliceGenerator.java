@@ -1,21 +1,16 @@
 package genericity.compiler.atl.csp;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import genericity.compiler.atl.analyser.Analyser;
+import genericity.compiler.atl.analyser.ErrorUtils;
+import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemPath;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
-import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
-import genericity.compiler.atl.analyser.Analyser;
-import genericity.compiler.atl.analyser.ErrorUtils;
-import genericity.compiler.atl.graph.ProblemGraph;
-import genericity.compiler.atl.graph.ProblemPath;
-import genericity.compiler.atl.graph.DependencyNode;
-import genericity.compiler.atl.graph.ProblemNode;
 
 public class ErrorSliceGenerator {
 	
@@ -38,6 +33,28 @@ public class ErrorSliceGenerator {
 		return slice;
 	}
 
+	public ErrorSlice generate(Resource r, String metamodelName, String location) {
+		int i = 0;
+		for(ProblemPath path : graph.getProblemPaths()) {
+			if ( path.getProblem().getLocation().equals(location) ) {
+				slice = new ErrorSlice(analyser, metamodelName);
+				path.getErrorNode().genErrorSlice(slice);
+				path.getErrorNode().setErrorSlice(slice);
+
+				slice = path.getErrorNode().getErrorSlice();
+				LocalProblem p = path.getProblem();
+				
+				String name = "error" + (i + 1);
+				String info = ErrorUtils.getShortError(p);
+				new EffectiveMetamodelBuilder(slice).extractSource(r, name, name, "prefix" + (i + 1), info);
+				
+				i++;				
+			}
+		}
+		
+		return slice;
+	}
+	
 	public ErrorSlice generate(Resource r, String metamodelName) {
 		generate(metamodelName);
 
@@ -77,5 +94,7 @@ public class ErrorSliceGenerator {
 	public ErrorSlice getSlice() {
 		return slice;
 	}
+
+	
 	
 }

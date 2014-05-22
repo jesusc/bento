@@ -1,5 +1,8 @@
 package genericity.compiler.atl.csp;
 
+import genericity.compiler.atl.analyser.TypingModel;
+import genericity.typing.atl_types.annotations.CallExprAnn;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +23,7 @@ import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OclModel;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OclType;
+import atl.metamodel.OCL.OclUndefinedExp;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
@@ -32,9 +36,11 @@ import atl.metamodel.OCL.VariableExp;
 public class OclGeneratorAST {
 
 	private ATLModel atlModel;
+	private TypingModel typ;
 
-	public OclGeneratorAST(ATLModel atlModel) {
+	public OclGeneratorAST(ATLModel atlModel, TypingModel typingModel) {
 		this.atlModel = atlModel;
+		this.typ = typingModel;
 	}
 
 	public OclExpression gen(OclExpression expr) {
@@ -79,31 +85,33 @@ public class OclGeneratorAST {
 			tgt.setModel( tgtModel );
 			
 			return tgt;
-		} /* else if ( expr instanceof IfExp ) {
+		} else if ( expr instanceof IfExp ) {
 			IfExp ifexp = (IfExp) expr;
-			return "if " + gen(ifexp.getCondition()) + "\n\tthen " + gen(ifexp.getThenExpression()) + "\n\telse " + gen(ifexp.getElseExpression()) + "\n\tendif";
+			IfExp tgt   = atlModel.create(IfExp.class);
+			tgt.setCondition(gen(ifexp.getCondition(), vars));
+			tgt.setThenExpression(gen(ifexp.getThenExpression(), vars));
+			tgt.setElseExpression(gen(ifexp.getElseExpression(), vars));
+			
+			return tgt;
 		} else if ( expr instanceof CollectionExp ) {
 			CollectionExp col = (CollectionExp) expr;
-			String elems = "";
-			for(int i = 0; i < col.getElements().size(); i++) {
-				elems += OclGeneratorAST.gen( col.getElements().get(i) );
-				if ( i + 1 < col.getElements().size() ) 
-					elems += ",";
-			}
-			String type = null;
-			if ( expr instanceof SequenceExp ) type = "Sequence";
-			else if ( expr instanceof SetExp ) type = "Set";
-			else throw new UnsupportedOperationException();
+			CollectionExp tgt = atlModel.create(col.getClass());
 			
-			return type + " { " + elems + " }";
+			for(int i = 0; i < col.getElements().size(); i++) {
+				tgt.addElements(gen( col.getElements().get(i), vars));
+			}
+			
+			return tgt;
 		} else if ( expr instanceof EnumLiteralExp ) {
 			EnumLiteralExp enuml = (EnumLiteralExp) expr;
-			return "#" + enuml.getName();
+			EnumLiteralExp tgt = atlModel.create(EnumLiteralExp.class);
+			tgt.setName(enuml.getName());
+			return tgt;
+		} else if ( expr instanceof OclUndefinedExp ) {
+			return atlModel.create(OclUndefinedExp.class);
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}
-		*/
-		throw new UnsupportedOperationException(expr.getClass().getSimpleName());
 	}
 
 
@@ -120,11 +128,18 @@ public class OclGeneratorAST {
 			return opT;
 		} else if (expr instanceof NavigationOrAttributeCallExp) {
 			NavigationOrAttributeCallExp navS = (NavigationOrAttributeCallExp) expr;
-			NavigationOrAttributeCallExp navT = atlModel.create(NavigationOrAttributeCallExp.class);
+			PropertyCallExp navT = null;
+			
+			CallExprAnn ann = (CallExprAnn) typ.getAnnotation(navS.original_());
+			if ( ann.getUsedFeature() == null ) {
+				navT = atlModel.create(OperationCallExp.class);
+				((OperationCallExp) navT).setOperationName(navS.getName());
+			} else {
+				navT = atlModel.create(NavigationOrAttributeCallExp.class);
+				((NavigationOrAttributeCallExp) navT).setName(navS.getName());
+			}
 			
 			navT.setSource(receptor);
-			navT.setName(navS.getName());
-
 			return navT;
 		} else if (expr instanceof CollectionOperationCallExp) {
 			CollectionOperationCallExp navS = (CollectionOperationCallExp) expr;

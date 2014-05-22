@@ -32,6 +32,7 @@ import bento.analysis.atl_analysis.Recovery;
 import bento.analysis.atl_analysis.SeverityKind;
 import bento.analysis.atl_analysis.atl_error.AmbiguousTargetModelReference;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsFactory;
+import bento.analysis.atl_analysis.atl_error.AttributeNotFoundInThisModule;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
@@ -52,6 +53,7 @@ import bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel;
 import bento.analysis.atl_analysis.atl_error.NoContainerForRefImmediateComposite;
 import bento.analysis.atl_analysis.atl_error.NoModelFound;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
+import bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule;
 import bento.analysis.atl_analysis.atl_error.ReadingTargetModel;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
@@ -184,6 +186,8 @@ public class ErrorModel {
 		
 		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
 		recovery.setSubclassName(subtype.getName());
+		recovery.setSubclass(subtype.getKlass());
+		error.setRecovery(recovery);
 		
 		signalError(error, "Feature " + featureName + " expected in " + type.getName() + " but found in subtype " + subtype.getName(), node);
 	}
@@ -198,6 +202,8 @@ public class ErrorModel {
 		
 		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
 		recovery.setSubclassName(subtype.getName());
+		recovery.setSubclass(subtype.getKlass());
+		error.setRecovery(recovery);
 		
 		signalError(error, "Operation " + operationName + " expected in " + type.getName() + " but found in subtype " + subtype.getName(), node);
 
@@ -230,12 +236,24 @@ public class ErrorModel {
 		signalNoRecoverableError("Iterator operation over " + receptorType, element);		
 	}
 
-	public void signalNoThisModuleOperation(String operationName, LocatedElement node) {
-		signalNoRecoverableError("No operation " + operationName + " in thisModule", node);		
+	public Type signalNoThisModuleOperation(String operationName, LocatedElement node) {
+		OperationNotFoundInThisModule error = AtlErrorsFactory.eINSTANCE.createOperationNotFoundInThisModule();
+		initProblem(error, node);
+		error.setName(operationName);
+		
+		signalError(error, "No operation " + operationName + " in thisModule", node);
+		
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
-	public void signalNoThisModuleFeature(String featureName, LocatedElement node) {
-		signalNoRecoverableError("No feature " + featureName + " in thisModule", node);				
+	public Type signalNoThisModuleFeature(String featureName, LocatedElement node) {
+		AttributeNotFoundInThisModule error = AtlErrorsFactory.eINSTANCE.createAttributeNotFoundInThisModule();
+		initProblem(error, node);
+		error.setName(featureName);
+		
+		signalError(error, "No operation " + featureName + " in thisModule", node);
+	
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
 	

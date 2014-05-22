@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import atl.metamodel.ATLModel;
 import atl.metamodel.OCL.OclExpression;
 import bento.analyser.footprint.IEffectiveMetamodelData;
-
 import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.analyser.TypingModel;
@@ -44,6 +43,10 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 	public void addExplicitMetaclass(Metaclass type) {
 		if ( type.getModel().getName().equals(metamodelName) )
 			explicitTypes.add(type.getKlass());
+	}
+	
+	public void addMetaclassNeededInError(EClass eClass) {
+		explicitTypes.add(eClass);
 	}
 	
 	public TypingModel getTypingModel() {
@@ -111,7 +114,9 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 		s += " : " + TypeUtils.getTypeName(ctx.getReturnType()) + " = ";
 		
 		OclExpression body = (OclExpression) analyser.getATLModel().findWrapper(ctx.getExpr().getExpr());
-		s += OclGenerator.gen(body); 
+		s += OclGenerator.gen(body, analyser); 
 		return s;
 	}
+
+	
 }

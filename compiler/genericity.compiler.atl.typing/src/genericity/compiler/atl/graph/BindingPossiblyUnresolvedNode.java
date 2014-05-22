@@ -3,7 +3,6 @@ package genericity.compiler.atl.graph;
 import org.eclipse.emf.common.util.EList;
 
 import genericity.compiler.atl.analyser.TypeUtils;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
@@ -58,10 +57,11 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
-		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - incompatible rules" + "\\n" + binding.getLocation(), leadsToExecution);
+		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - possibly unresolved" + "\\n" + binding.getLocation(), leadsToExecution);
 	}
 
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		getDependency().getCSPText(buf);
@@ -72,6 +72,7 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		getConstraint().getCSPText(buf);
 		// System.out.println(buf2.getText());
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
@@ -83,14 +84,22 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		if ( TypeUtils.isReference(bindingAnn.getSourceType()) ) {
 			LetExp let = model.createLetScope(value, null, "_problem_");
 			VariableDeclaration varDcl = let.getVariable();
-			let.setIn_( genOrRules(model, rules, varDcl));
-		
+			
+			OclExpression andRules = genAndRules(model, rules, varDcl);
+			
+			// => not varDcl.oclIsUndefined()
+			VariableExp varRef = model.create(VariableExp.class);
+			varRef.setReferredVariable(varDcl);
+			OperatorCallExp notUndefined = model.negateExpression(model.createOperationCall(varRef, "oclIsUndefined"));
+			
+			let.setIn_( model.createBinaryOperator(notUndefined, andRules, "and") );
+			
 			result = let;
 		} else if ( TypeUtils.isCollection(bindingAnn.getSourceType()) ) {
 			IteratorExp exists = model.createExists(value, "_problem_");
 			VariableDeclaration varDcl = exists.getIterators().get(0);
 			
-			OclExpression lastExpr = genOrRules(model, rules, varDcl);
+			OclExpression lastExpr = genAndRules(model, rules, varDcl);
 			
 			// lastIf.setElseExpression(model.createBooleanLiteral(false));
 			
@@ -104,7 +113,7 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		return result;
 	}
 
-	private OclExpression genOrRules(CSPModel model,
+	private OclExpression genAndRules(CSPModel model,
 			EList<MatchedRuleOneAnn> rules, VariableDeclaration varDcl) {
 		
 		OclExpression lastExpr = null;
@@ -116,13 +125,22 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 			v.setReferredVariable(varDcl);				
 			OclExpression kindOfCondition = model.createKindOf_AllInstancesStyle(v, null, rule.getInPatternType().getName());
 			
+			
+			
 			// Generate the filter
 			OclExpression filter = null;
 			if ( r.getInPattern().getFilter() != null ) {
-				// Map the iterator var to the rule variable
-				model.addToScope((SimpleInPatternElement) r.getInPattern().getElements().get(0), varDcl);
+				SimpleInPatternElement simpleElement = (SimpleInPatternElement) r.getInPattern().getElements().get(0);
 				
-				filter = model.gen(r.getInPattern().getFilter());
+				// => let newVar = _problem_.oclAsType(RuleFrom) in <filter>				
+				OperationCallExp casting = model.createCastTo(varDcl, simpleElement.getType().getName());				
+				LetExp let = model.createLetScope(casting, null, simpleElement.getVarName());
+					
+				// Map the iterator var to the rule variable
+				model.addToScope(simpleElement, let.getVariable());
+				let.setIn_(model.gen(r.getInPattern().getFilter()));
+				
+				filter = let;
 			} else {
 				filter = model.createBooleanLiteral(true);
 			}

@@ -104,7 +104,7 @@ public class ErrorPathGenerator {
 
 	public ProblemPath generatePath(LocalProblem p) {
 		currentPath = null;
-		System.out.println(p);
+		
 		if ( p instanceof NoBindingForCompulsoryFeature ) {
 			generatePath_NoBindingForCompulsoryFeature((NoBindingForCompulsoryFeature) p);		
 		
@@ -127,7 +127,7 @@ public class ErrorPathGenerator {
 
 	private void generatePath_FeatureNotFound(FeatureNotFound p) {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
-		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
+		FeatureOrOperationNotFoundNode node = new FeatureOrOperationNotFoundNode(p, atlExpr);
 		currentPath = new ProblemPath(p, node);
 		
 		// System.out.println(p);
@@ -137,7 +137,7 @@ public class ErrorPathGenerator {
 
 	private void generatePath_OperationNotFound(OperationNotFound p) {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
-		ExpressionProblemNode node = new ExpressionProblemNode(p, atlExpr);
+		FeatureOrOperationNotFoundNode node = new FeatureOrOperationNotFoundNode(p, atlExpr);
 		currentPath = new ProblemPath(p, node);
 		
 		pathFromErrorExpression(atlExpr.getSource(), 

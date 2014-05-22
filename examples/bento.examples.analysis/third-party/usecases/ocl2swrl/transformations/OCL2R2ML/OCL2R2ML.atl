@@ -1,4 +1,6 @@
---@atlcompiler atl2006
+-- @atlcompiler atl2006
+-- @path OCL=/bento.examples.analysis/third-party/usecases/ocl2swrl/metamodels/ocl/OCL.ecore
+-- @path R2ML=/bento.examples.analysis/third-party/usecases/ocl2swrl/metamodels/r2ml/r2ml.ecore
 
 -- ============================================================
 -- Transforms an OCL metamodel into R2ML metamodel.

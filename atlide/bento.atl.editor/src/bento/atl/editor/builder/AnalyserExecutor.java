@@ -22,8 +22,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlSourceManager;
@@ -80,17 +83,7 @@ public class AnalyserExecutor {
 		Analyser analyser = new Analyser(gn, atlModel, typing);
 		analyser.setDoDependencyAnalysis(false);
 		analyser.perform();
-		//-- @path CD1=/test-atl/metamodels/ClassCD.ecore
-		//-- @path CD2=/test-atl/metamodels/ClassCD.ecore
 
-		/*
-		for(Problem p : analyser.getErrors().getAnalysis().getProblems() ) {
-			if ( p instanceof LocalProblem ) {
-				System.out.println(p.getClass().getName() + " - " + ((LocalProblem) p).getLocation());
-			}
-		}
-		*/
-		
 		return new AnalyserData(analyser, gn);
 
 		
@@ -126,10 +119,40 @@ public class AnalyserExecutor {
 			return problems;
 		}
 		
+		public List<Problem> getNonIgnoredProblems() {
+			ArrayList<Problem> result = new ArrayList<Problem>();
+			Module module = analyser.getATLModel().allObjectsOf(Module.class).get(0);
+			List<String> ignored = findIgnoredProblems(module);
+			
+			for (Problem problem : problems) {				
+				if ( problem instanceof bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature && ignored.contains("MissingBinding") ) continue;
+				
+				result.add(problem);	
+			}
+			
+			return result;
+		}
+		
 		public EPackage getSourceMetamodel() {
 			Module mod = analyser.getATLModel().allObjectsOf(Module.class).get(0);
 			String n = mod.getInModels().get(0).getMetamodel().getName();
-			return (EPackage) namespace.getNamespace(n).getResource().getContents().get(0);
+			
+			if ( namespace.getNamespace(n).getResource().getContents().size() > 1 ) {
+				EPackage selected = null;
+				for (EObject c : namespace.getNamespace(n).getResource().getContents()) {
+					EPackage pkg = (EPackage) c;
+					if ( selected == null ) selected = pkg;
+					
+					if ( pkg.getEClassifiers().size() > selected.getEClassifiers().size() ) 
+						selected = pkg;
+				}
+				 
+				System.out.println("TODO: AnalyserExecutor: Using a very naive stratategy to select one package among several");
+				
+				return selected;
+			} else {
+				return (EPackage) namespace.getNamespace(n).getResource().getContents().get(0);
+			}
 		}
 
 		public EPackage generateErrorSlice(Problem p) {
@@ -167,7 +190,29 @@ public class AnalyserExecutor {
 		public ProblemPath getPath() {
 			return path;
 		}
-		
+
+
+		private static final String DISABLE = "@disable";
+		private List<String> findIgnoredProblems(Module module) {
+			List<String> result = new ArrayList<String>();
+			for (String str : module.getCommentsBefore()) {
+				String line = str.replaceAll("--", "").trim();
+				int index   = line.indexOf(DISABLE);
+				if ( index != -1 ) {
+					line = line.substring(index + DISABLE.length());
+					for(String s : line.split(",")) {
+						result.add(s.trim());
+					}
+				}			
+			}
+
+			return result;
+		}
+
+		public Analyser getAnalyser() {
+			return analyser;
+		}
+
 	}
 	
 }

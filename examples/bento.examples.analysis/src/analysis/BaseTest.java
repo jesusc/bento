@@ -2,6 +2,7 @@ package analysis;
 
 import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
+import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.csp.CSPGenerator;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.ErrorSliceGenerator;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclectic.idc.datatypes.JavaListConverter;
@@ -31,9 +33,17 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import atl.metamodel.ATLModel;
+import atl.metamodel.ATL.CalledRule;
+import atl.metamodel.ATL.Helper;
+import atl.metamodel.ATL.LazyMatchedRule;
+import atl.metamodel.ATL.MatchedRule;
+import atl.metamodel.ATL.Module;
+import atl.metamodel.ATL.ModuleElement;
+import atl.metamodel.OCL.OclModel;
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
 import bento.analyser.footprint.TrafoMetamodelData;
 import bento.analyser.util.StandaloneAtlLoader;
+import bento.analysis.atl_analysis.Problem;
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -99,6 +109,60 @@ public abstract class BaseTest {
 	}	
 	*/
 	
+	protected void printStatistics() {
+		int helpers = 0, matchedRules = 0, lazyRules = 0, calledRules = 0;
+		Module module = atlTransformation.allObjectsOf(Module.class).get(0);
+		for(ModuleElement e : module.getElements()) {
+			if      ( e instanceof Helper ) helpers++;
+			else if ( e instanceof MatchedRule ) matchedRules++;
+			else if ( e instanceof LazyMatchedRule ) lazyRules++;
+			else if ( e instanceof CalledRule ) calledRules++;
+			else throw new UnsupportedOperationException();
+		}
+		
+		System.out.println("Transformation statistics");
+		if ( helpers > 0 ) 		System.out.println(" * Helpers : " + helpers);
+		if ( matchedRules > 0 ) System.out.println(" * Matched rules : " + matchedRules);
+		if ( lazyRules > 0 ) 	System.out.println(" * Lazy rules : " + lazyRules);
+		if ( calledRules > 0 ) 	System.out.println(" * Called rules : " + calledRules);
+				
+		int sourceClasses = 0;
+		int targetClasses = 0;
+		for(OclModel model : module.getInModels()) {
+			MetamodelNamespace ns = mm.getNamespace(model.getMetamodel().getName());
+			sourceClasses += ns.getAllClasses().size();
+		}
+
+		for(OclModel model : module.getOutModels()) {
+			MetamodelNamespace ns = mm.getNamespace(model.getMetamodel().getName());
+			targetClasses += ns.getAllClasses().size();
+		}
+
+		System.out.println("Metamodel statistics");
+		System.out.println(" * Source meta-model(s) : " + sourceClasses);
+		System.out.println(" * Target meta-model(s) : " + targetClasses);
+
+		System.out.println();
+	}
+
+	
+	protected void printErrorsByType() {
+		HashMap<Class<?>, List<Problem>> problemsByType = new HashMap<Class<?>, List<Problem>>();
+		for(Problem p : analyser.getErrors().getAnalysis().getProblems()) {
+			if ( ! problemsByType.containsKey(p.getClass()) ) 
+				problemsByType.put(p.getClass(), new ArrayList<Problem>());
+			
+			problemsByType.get(p.getClass()).add(p);
+		}
+		
+		System.out.println("Problems by type");
+		for(Entry<Class<?>, List<Problem>> e : problemsByType.entrySet()) {
+			System.out.print(" * " + e.getKey().getSimpleName() + " ");
+			System.out.println(e.getValue().size());	
+		}
+		System.out.println();
+		
+	}
 
 	protected void generateGraphviz() {
 		generateGraphviz(null);
@@ -117,7 +181,7 @@ public abstract class BaseTest {
 		//if ( slice == null )
 		//	throw new IllegalStateException("Error slice should be computed before generating CSP");
 				
-		String s = new CSPGenerator(dependencyGraph, slice, new StandaloneAtlLoader()).generateLoc(location);
+		String s = new CSPGenerator(dependencyGraph, slice, new StandaloneAtlLoader()).generateLoc(location, analyser);
 		if ( location != null ) {
 			// Debugging purposes
 			System.out.println(s);
@@ -136,6 +200,13 @@ public abstract class BaseTest {
 	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
 		slice = new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName);
+		r.save(null);
+	}
+	
+
+	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri, String location) throws IOException {
+		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
+		slice = new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName, location);
 		r.save(null);
 	}
 	

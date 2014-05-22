@@ -1,20 +1,18 @@
 package genericity.compiler.atl.graph;
 
-import org.eclipse.emf.common.util.EList;
-
-import atl.metamodel.ATL.Helper;
-import atl.metamodel.OCL.OclExpression;
 import genericity.compiler.atl.analyser.ATLUtils;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
-import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.HelperAnn;
-import genericity.typing.atl_types.annotations.LazyRuleAnn;
+
+import org.eclipse.emf.common.util.EList;
+
+import atl.metamodel.ATL.Helper;
+import atl.metamodel.OCL.OclExpression;
 
 public class HelperInvocationNode extends AbstractDependencyNode {
 
@@ -65,6 +63,7 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 				ATLUtils.getHelperName(helper), leadsToExecution);
 	}
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		if ( getDependencies().size() == 0 ) {
@@ -82,6 +81,7 @@ public class HelperInvocationNode extends AbstractDependencyNode {
 			// 3. X will be the code for the depending node
 		}
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {	

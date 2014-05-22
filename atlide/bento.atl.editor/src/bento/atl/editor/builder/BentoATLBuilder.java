@@ -113,9 +113,9 @@ public class BentoATLBuilder extends IncrementalProjectBuilder {
 			
 			try {
 				AnalyserData data = new AnalyserExecutor().exec(resource);
-
+				
 				AtlNbCharFile help = new AtlNbCharFile(file.getContents());
-				for (Problem problem : data.getProblems()) {
+				for (Problem problem : data.getNonIgnoredProblems()) {
 					addMarker(file, help, data, problem);
 				}
 			} catch (IOException e) {

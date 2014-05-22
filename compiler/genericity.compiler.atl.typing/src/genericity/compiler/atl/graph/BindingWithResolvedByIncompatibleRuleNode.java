@@ -3,7 +3,6 @@ package genericity.compiler.atl.graph;
 import org.eclipse.emf.common.util.EList;
 
 import genericity.compiler.atl.analyser.TypeUtils;
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
@@ -59,7 +58,7 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - incompatible rules" + "\\n" + binding.getLocation(), leadsToExecution);
 	}
 
-
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		getDependency().getCSPText(buf);
@@ -70,6 +69,7 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		getConstraint().getCSPText(buf);
 		// System.out.println(buf2.getText());
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

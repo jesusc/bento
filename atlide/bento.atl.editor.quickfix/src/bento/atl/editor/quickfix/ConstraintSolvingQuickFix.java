@@ -49,7 +49,7 @@ public class ConstraintSolvingQuickFix implements AtlProblemQuickfix {
 			
 			String projectPath = getProjectPath();
 			
-			String constraint = new CSPGenerator(null, null, new AtlEclipseLoader()).generateCSP(analysisData.getPath());
+			String constraint = new CSPGenerator(null, null, new AtlEclipseLoader()).generateCSP(analysisData.getPath(), analysisData.getAnalyser());
 			
 			System.out.println("Quickfix: " + constraint);
 			

@@ -1,6 +1,5 @@
 package genericity.compiler.atl.graph;
 
-import genericity.compiler.atl.csp.CSPBuffer;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
@@ -58,6 +57,7 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 	}
 
 
+	/*
 	@Override
 	public void getCSPText(CSPBuffer buf) {
 		getDependency().getCSPText(buf);
@@ -68,6 +68,7 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 		getConstraint().getCSPText(buf);
 		// System.out.println(buf2.getText());
 	}
+	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {

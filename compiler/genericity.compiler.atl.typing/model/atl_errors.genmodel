@@ -49,6 +49,13 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFound/className"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFound/metamodelName"/>
       </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/OperationNotFoundInThisModule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFoundInThisModule/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/OperationNotFoundInThisModule/maybeRule"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/AttributeNotFoundInThisModule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/AttributeNotFoundInThisModule/name"/>
+      </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/FeatureNotFoundInUnionType/featureName"/>
       </genClasses>
@@ -120,6 +127,8 @@
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">
       <genClasses ecoreClass="atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass/subclassName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_errors.ecore#//atl_recovery/FeatureFoundInSubclass/subclass"/>
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_recovery/TentativeTypeAssigned">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

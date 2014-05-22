@@ -294,7 +294,9 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 				return;
 			} 
 
-			
+			Type recovered = typ.getCommonType(thenPart, elsePart);
+			// TODO: Do this better because this generates a lot of false errors...
+			/*
 			Type recovered = errors.signalDifferentBranchTypes(thenPart, elsePart, self, new IRecoveryAction() {
 				@Override
 				public Type recover(ErrorModel m, LocalProblem p) {
@@ -303,7 +305,8 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 					return thenPart;
 				}
 			});
-
+			*/
+			
 			attr.linkExprType( recovered );
 		} else {			
 			attr.linkExprType( thenPart );

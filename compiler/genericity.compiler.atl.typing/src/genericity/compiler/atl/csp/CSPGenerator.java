@@ -9,6 +9,7 @@ import atl.metamodel.OCL.OclExpression;
 import bento.analyser.util.AtlLoader;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.ErrorUtils;
 import genericity.compiler.atl.graph.ProblemGraph;
 import genericity.compiler.atl.graph.ProblemPath;
@@ -20,25 +21,23 @@ public class CSPGenerator {
 	
 	private ProblemGraph	graph;
 	private ErrorSlice	slice;
-	private boolean topDown = false;
 	private AtlLoader loader;
 
 	public CSPGenerator(ProblemGraph g, ErrorSlice slice, AtlLoader loader) {
-		this(g, slice, false);
+		this(g, slice);
 		this.loader = loader;
 	}
 	
-	public CSPGenerator(ProblemGraph g, ErrorSlice slice, boolean topDown) {
+	public CSPGenerator(ProblemGraph g, ErrorSlice slice) {
 		this.graph = g;
 		this.slice = slice;
-		this.topDown  = topDown;
 	}
 
-	public String generate() {
-		return generateLoc(null);
+	public String generate(Analyser analyser) {
+		return generateLoc(null, analyser);
 	}
 	
-	public String generateLoc(String location) {
+	public String generateLoc(String location, Analyser analyser) {
 		List<ProblemPath> sorted = graph.getSortedPaths();
 		
 		String s = "";
@@ -49,7 +48,7 @@ public class CSPGenerator {
 				continue;
 				
 			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
-			s += generateCSP(path);
+			s += generateCSP(path, analyser);
 			s += "\n\n";
 			// System.out.println(s);
 		}
@@ -67,24 +66,14 @@ public class CSPGenerator {
 	}
 	*/
 	
-	public String generateCSP(ProblemPath path) {
+	public String generateCSP(ProblemPath path, Analyser analyser) {
 		DependencyNode errorNode = path.getErrorNode();
-		if ( topDown ) {
-			CSPBuffer buf = new CSPBuffer();
-			
-			errorNode.getCSPText(buf);
-			
-			String s = buf.getText();
-			
-			return s;
-		} else {
-			for (ExecutionNode node : path.getExecutionNodes()) {
-				OclExpression exp = node.genCSP(new CSPModel(loader));
-				return OclGenerator.gen(exp);
-				// Only one execution node supported so far
-			}
-			
-			return "Nothing generated";
+		for (ExecutionNode node : path.getExecutionNodes()) {
+			OclExpression exp = node.genCSP(new CSPModel(loader, analyser));
+			return OclGenerator.gen(exp); // Not passing the analyser because it is not an original expression...
+			// Only one execution node supported so far
 		}
+		
+		return "Nothing generated";
 	}
 }

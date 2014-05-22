@@ -91,6 +91,8 @@ public class TypeUtils {
 			return "Integer";
 		} else if ( t instanceof FloatType ) {
 			return "Float";
+		} else if ( t instanceof Unknown ) {
+			return "OclAny";
 		} else if ( t instanceof CollectionType ) {
 			String typeName = null;
 			if ( t instanceof SequenceType ) typeName = "Sequence";

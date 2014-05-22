@@ -64,6 +64,8 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.FEATURE_ACCESS_IN_COLLECTION: return createFeatureAccessInCollection();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND: return createFeatureNotFound();
 			case AtlErrorsPackage.OPERATION_NOT_FOUND: return createOperationNotFound();
+			case AtlErrorsPackage.OPERATION_NOT_FOUND_IN_THIS_MODULE: return createOperationNotFoundInThisModule();
+			case AtlErrorsPackage.ATTRIBUTE_NOT_FOUND_IN_THIS_MODULE: return createAttributeNotFoundInThisModule();
 			case AtlErrorsPackage.FEATURE_NOT_FOUND_IN_UNION_TYPE: return createFeatureNotFoundInUnionType();
 			case AtlErrorsPackage.INVALID_OPERAND: return createInvalidOperand();
 			case AtlErrorsPackage.NO_CONTAINER_FOR_REF_IMMEDIATE_COMPOSITE: return createNoContainerForRefImmediateComposite();
@@ -127,6 +129,26 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public OperationNotFound createOperationNotFound() {
 		OperationNotFoundImpl operationNotFound = new OperationNotFoundImpl();
 		return operationNotFound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationNotFoundInThisModule createOperationNotFoundInThisModule() {
+		OperationNotFoundInThisModuleImpl operationNotFoundInThisModule = new OperationNotFoundInThisModuleImpl();
+		return operationNotFoundInThisModule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AttributeNotFoundInThisModule createAttributeNotFoundInThisModule() {
+		AttributeNotFoundInThisModuleImpl attributeNotFoundInThisModule = new AttributeNotFoundInThisModuleImpl();
+		return attributeNotFoundInThisModule;
 	}
 
 	/**

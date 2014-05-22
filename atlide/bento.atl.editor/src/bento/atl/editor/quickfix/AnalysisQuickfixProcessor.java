@@ -58,7 +58,7 @@ public class AnalysisQuickfixProcessor implements IQuickAssistProcessor {
 	@Override
 	public ICompletionProposal[] computeQuickAssistProposals(
 			IQuickAssistInvocationContext invocationContext) {
-		
+
 		ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 		if (sourceViewer == null || annotation == null)
 			return new ICompletionProposal[0]; 

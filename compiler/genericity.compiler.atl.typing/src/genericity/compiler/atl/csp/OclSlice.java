@@ -17,6 +17,7 @@ import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
@@ -36,6 +37,7 @@ public class OclSlice {
 		ignore.add(atl.metamodel.OCL.StringExpImpl.class);
 		ignore.add(atl.metamodel.OCL.IntegerExpImpl.class);
 		ignore.add(atl.metamodel.OCL.BooleanExpImpl.class);
+		ignore.add(atl.metamodel.OCL.OclUndefinedExpImpl.class);
 		
 	}
 
@@ -51,11 +53,7 @@ public class OclSlice {
 			slice(slice, pc.getSource(), isExternalDependency);
 		}
 		
-		if ( expr instanceof NavigationOrAttributeCallExp ) {
-			EStructuralFeature f = (EStructuralFeature) exprAnn.getUsedFeature();
-			if ( f != null )
-				slice.addExplicitFeature(f);
-		} else if ( expr instanceof IteratorExp ) {
+		if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr; 
 			slice(slice, it.getBody(), isExternalDependency);
 
@@ -63,13 +61,24 @@ public class OclSlice {
 			IterateExp it = (IterateExp) expr; 
 			slice(slice, it.getBody(), isExternalDependency);
 			slice(slice, it.getResult().getInitExpression());
-		} else if ( expr instanceof OperationCallExp ) {
-			OperationCallExp op = (OperationCallExp) expr;
-			for(OclExpression arg : op.getArguments()) {
-				slice(slice, arg, isExternalDependency);
+		} else if ( expr instanceof OperationCallExp || expr instanceof NavigationOrAttributeCallExp ) {	
+			PropertyCallExp pce = null;
+			if ( expr instanceof NavigationOrAttributeCallExp ) {
+				EStructuralFeature f = (EStructuralFeature) exprAnn.getUsedFeature();
+				if ( f != null )
+					slice.addExplicitFeature(f);
+				
+				pce = (PropertyCallExp) expr;
+			} else if ( expr instanceof OperationCallExp ) {			
+				OperationCallExp op = (OperationCallExp) expr;
+				for(OclExpression arg : op.getArguments()) {
+					slice(slice, arg, isExternalDependency);
+				}
+				
+				pce = op;
 			}
 
-			CallExprAnn ann = (CallExprAnn) slice.getTypingModel().getAnnotation(op.original_());
+			CallExprAnn ann = (CallExprAnn) slice.getTypingModel().getAnnotation(pce.original_());
 			if ( ! ann.isIsStaticCall() ) {
 				EList<ContextHelperAnn> resolvers = ann.getDynamicResolvers();
 				for (ContextHelperAnn contextHelperAnn : resolvers) {
@@ -96,8 +105,15 @@ public class OclSlice {
 			} else {				
 				// Not the branches!!! because the corresponding branch should be done by the
 				// corresponding node in the condition graph
+				// Well... I'm doing the branches to make this easier. Spourious helpers may be generated...
+				slice(slice, ifExp.getThenExpression(), true);
+				slice(slice, ifExp.getElseExpression(), true);				
 			}
 			// slice(slice, ifExp)
+		} else if ( expr instanceof LetExp ) {
+			LetExp let = (LetExp) expr;
+			slice(slice, let.getVariable().getInitExpression(), isExternalDependency);
+			slice(slice, let.getIn_(), isExternalDependency);
 		} else if ( expr instanceof EnumLiteralExp ) {
 			// TODO: NOT SURE IF ENUMLITERAL SHOULD BE PART OF THE SLICE!
 		} else if ( ignore.contains(expr.getClass()) ) {
