@@ -214,7 +214,7 @@ public class OclGeneratorAST {
 	private VariableDeclaration getVar(VariableExp expr, Map<VariableDeclaration, VariableDeclaration> vars) {
 		VariableDeclaration vd = vars.get( expr.getReferredVariable());
 		if ( vd == null ) 
-			throw new IllegalStateException("Expected mapping for var " + expr.getReferredVariable().getVarName());
+			throw new IllegalStateException("Expected mapping for var " + expr.getReferredVariable().getVarName() + " => " + expr.getLocation());
 		return vd;
 	}
 

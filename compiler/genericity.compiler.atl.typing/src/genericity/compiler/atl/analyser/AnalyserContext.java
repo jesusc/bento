@@ -5,7 +5,7 @@ public class AnalyserContext {
 	private static ThreadLocal<ErrorModel>  errorModelTL  = new ThreadLocal<ErrorModel>();
 	private static ThreadLocal<EcoreTypeConverter> converterTL  = new ThreadLocal<EcoreTypeConverter>();
 	private static boolean	isVarDclInferencePreferred = true;
-	private static boolean	isOclStrict = false;
+	private static boolean	isOclStrict = true;
 	
 	public static void setTypingModel(TypingModel value) {
 		typingModelTL.set(value);

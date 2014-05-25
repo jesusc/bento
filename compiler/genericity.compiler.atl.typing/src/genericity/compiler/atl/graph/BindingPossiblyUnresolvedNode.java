@@ -1,6 +1,7 @@
 package genericity.compiler.atl.graph;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 
 import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.csp.CSPModel;
@@ -52,6 +53,9 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		
 		OclSlice.slice(slice, binding.getValue());
 		
+		for (EClass c : problem.getProblematicClasses()) {
+			slice.addMetaclassNeededInError(c);
+		}
 	}
 
 	@Override

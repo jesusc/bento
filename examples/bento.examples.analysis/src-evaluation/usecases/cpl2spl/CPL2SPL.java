@@ -22,13 +22,13 @@ public class CPL2SPL extends BaseTest {
 	}
 	
 	public void run() throws IOException {
+		String selectedError = "55:4-55:38";
+
 		typing(CPL2SPL_TRANSFORMATION, new Object[] { CPL_METAMODEL, SPL_METAMODEL}, 
 				   new String[] { "CPL", "SPL" }, true);
 		
 		printStatistics();
 		printErrorsByType();
-		
-		String selectedError = "55:4-55:38";
 		
 		generateGraphviz(selectedError);
 		generateErrorSlice("CPL", "tmp_/cpl2spl.slice.ecore", selectedError);

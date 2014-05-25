@@ -44,12 +44,11 @@ public class NoBindingAssignmentNode extends AbstractBindingAssignmentNode<NoBin
 	
 	@Override
 	public OclExpression genCSP(CSPModel model) {
-		throw new UnsupportedOperationException();
+		return model.createBooleanLiteral(true);
 	}
 
 	@Override
 	public boolean isStraightforward() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

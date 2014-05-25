@@ -11,7 +11,10 @@ import genericity.compiler.atl.graph.ProblemGraph;
 import genericity.compiler.atl.graph.ProblemPath;
 import genericity.typing.atl_types.AtlTypingPackage;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,6 +112,28 @@ public abstract class BaseTest {
 	}	
 	*/
 	
+	protected int countLOCs() {
+		try {
+			FileReader r = new FileReader(atlTransformationFile);
+			BufferedReader br = new BufferedReader(r);
+			String s = null;
+			int count = 0;
+			while ( (s = br.readLine()) != null ) {
+				s = s.trim();
+				if ( ! s.startsWith("--") ) {
+					count++;
+				}
+			}
+			br.close();
+			return count;
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
 	protected void printStatistics() {
 		int helpers = 0, matchedRules = 0, lazyRules = 0, calledRules = 0;
 		Module module = atlTransformation.allObjectsOf(Module.class).get(0);
@@ -120,7 +145,10 @@ public abstract class BaseTest {
 			else throw new UnsupportedOperationException();
 		}
 		
+		int numberOfLines = countLOCs();
+		
 		System.out.println("Transformation statistics");
+		System.out.println(" * LOC : " + numberOfLines);
 		if ( helpers > 0 ) 		System.out.println(" * Helpers : " + helpers);
 		if ( matchedRules > 0 ) System.out.println(" * Matched rules : " + matchedRules);
 		if ( lazyRules > 0 ) 	System.out.println(" * Lazy rules : " + lazyRules);
@@ -257,4 +285,5 @@ public abstract class BaseTest {
 	public static String withDir(String path) {
 		return "." + File.separator + path;
 	}
+	
 }

@@ -24,14 +24,25 @@ public class SBVR2UML extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-//		typing(SBVR2UML_TRANSFORMATION, new Object[] { SBVR_METAMODEL, UML_METAMODEL }, 
-//				   new String[] { "SimpleSBVR", "SimpleUML" }, false);
+		String selectedError = "167:9-167:31";
 		
+		typing(SBVR2UML_TRANSFORMATION, new Object[] { SBVR_METAMODEL, UML_METAMODEL }, 
+				   new String[] { "SimpleSBVR", "SimpleUML" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("SimpleSBVR", "tmp_/SBVR2UML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("SimpleSBVR", "tmp_/SBVR2UML.effective.ecore");
+		generateCSP(selectedError);
+
 		//
 		
+		/*
 		typing(SYNTAX2SBVR_TRANSFORMATION, new Object[] { SYNTAX_METAMODEL, SBVR_METAMODEL }, 
 				   new String[] { "Syntax", "SimpleSBVR" }, false);
-		
+		*/
 	}
 
 }

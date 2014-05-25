@@ -138,7 +138,9 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		}
 
 		if ( rule instanceof MatchedRuleManyAnn ) {
-			throw new IllegalArgumentException();
+			System.err.println("MatchedRuleExecution: rules with several input types not supported yet");
+			// throw new IllegalArgumentException();
+			
 			/*
 			for(int i = 1; i < ((MatchedRuleManyAnn) rule).getInPatternTypes().size(); i++) {
 				metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(i);
