@@ -62,5 +62,19 @@ public class PathTests extends BaseTest {
 
 	}
 
+	@Test
+	public void testLet() throws IOException {
+		String ABCD_LET_SCOPE = "../bento.examples.analysis/tests/bento/tests/let_scope.atl.xmi";
+		
+		typing(ABCD_LET_SCOPE, new Object[] { ABCD_METAMODEL, WXYZ_METAMODEL}, 
+				   new String[] { "ABCD", "WXYZ" }, true);
+
+		generateGraphviz();
+		generateErrorSlice("ABCD", "tmp_/abcd_let_scope.slice.ecore");
+		generateEffectiveMetamodel("ABCD", "tmp_/abcd_let_scope.effective.ecore");
+		generateCSP();
+
+	}
+
 
 }

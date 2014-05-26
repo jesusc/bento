@@ -9,6 +9,7 @@ abstract class NamedElt {
 
 class Model extends NamedElt {
    val A[*] elements;
+   val Other[*] others;
 }
 
 class A extends NamedElt { }
@@ -24,3 +25,6 @@ class D1 extends D { }
 class D2 extends D { }
 class D3 extends D { }
 
+class Other extends NamedElt {
+	
+}

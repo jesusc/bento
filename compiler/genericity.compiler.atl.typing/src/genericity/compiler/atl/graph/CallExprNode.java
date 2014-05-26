@@ -129,8 +129,13 @@ public class CallExprNode extends AbstractDependencyNode {
 			for(int i = 0; i < contextHelperAnn.getArguments().size(); i++) {
 				String varName = contextHelperAnn.getNames().get(i);
 				OclExpression formalParameter = ((OperationCallExp) call).getArguments().get(i);
+				VariableDeclaration paramVar  = (VariableDeclaration) atlModel.findWrapper(contextHelperAnn.getArgumentVars().get(i));
 				
 				LetExp innerLet = model.createLetScope(model.gen(formalParameter), null, varName);
+
+				VariableDeclaration newVar = innerLet.getVariable();
+				model.addToScope(paramVar, newVar);
+				
 				lastLet.setIn_(innerLet);
 				lastLet = innerLet;
 			}

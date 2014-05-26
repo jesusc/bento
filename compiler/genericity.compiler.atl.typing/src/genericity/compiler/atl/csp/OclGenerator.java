@@ -8,6 +8,7 @@ import java.util.List;
 import atl.metamodel.OCL.BooleanExp;
 import atl.metamodel.OCL.CollectionExp;
 import atl.metamodel.OCL.CollectionOperationCallExp;
+import atl.metamodel.OCL.CollectionType;
 import atl.metamodel.OCL.EnumLiteralExp;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IntegerExp;
@@ -22,8 +23,10 @@ import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
 import atl.metamodel.OCL.SequenceExp;
+import atl.metamodel.OCL.SequenceType;
 import atl.metamodel.OCL.SetExp;
 import atl.metamodel.OCL.StringExp;
+import atl.metamodel.OCL.StringType;
 import atl.metamodel.OCL.VariableExp;
 
 public class OclGenerator {
@@ -77,6 +80,13 @@ public class OclGenerator {
 			return "#" + enuml.getName();
 		} else if ( expr instanceof OclUndefinedExp ) {
 			return "OclUndefined";			
+		} else if ( expr instanceof StringType ) { 
+			return "String";
+		} else if ( expr instanceof CollectionType ) {
+			CollectionType ct = (CollectionType) expr;
+			String str = gen(ct.getElementType());
+			if ( expr instanceof SequenceType ) return "Sequence(" + str + ")";			
+			else throw new UnsupportedOperationException(expr.toString());
 		} else {
 			throw new UnsupportedOperationException(expr.toString());
 		}
@@ -105,6 +115,10 @@ public class OclGenerator {
 			return receptor + "->" + call.getOperationName() + "(" + genArgs(call.getArguments(), analyser )+ ")";
 		} else if (expr instanceof OperationCallExp) {
 			OperationCallExp call = (OperationCallExp) expr;
+			if ( call.getOperationName().equals("allInstancesFrom") ) {
+				return receptor + ".allInstances()"; 
+			}
+			
 			return receptor + "." + translateName(call) + "(" + genArgs(call.getArguments(), analyser )+ ")";
 		} else if ( expr instanceof IteratorExp ) {
 			IteratorExp it = (IteratorExp) expr;

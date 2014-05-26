@@ -18,6 +18,7 @@ import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OclModel;
@@ -93,6 +94,24 @@ public class OclGeneratorAST {
 			tgt.setElseExpression(gen(ifexp.getElseExpression(), vars));
 			
 			return tgt;
+
+		} else if ( expr instanceof LetExp ) {
+			LetExp src = (LetExp) expr;
+			LetExp tgt = atlModel.create(LetExp.class);
+
+			VariableDeclaration vd = atlModel.create(VariableDeclaration.class);
+			vd.setVarName(src.getVariable().getVarName());
+			vd.setInitExpression(gen(src.getVariable().getInitExpression(), vars));
+
+			tgt.setVariable(vd);
+
+			// TODO: This is a very nasty side effect, but it is needed to make it visible
+			// to subsequent calls of gen that need this variable mapped!
+			vars.put(src.getVariable(), tgt.getVariable());
+			
+			tgt.setIn_( gen(src.getIn_(), vars) );
+			
+			return tgt;			
 		} else if ( expr instanceof CollectionExp ) {
 			CollectionExp col = (CollectionExp) expr;
 			CollectionExp tgt = atlModel.create(col.getClass());
@@ -178,7 +197,8 @@ public class OclGeneratorAST {
 			tgt.setBody( gen(src.getBody(), vars));
 			
 			return tgt;
-		} /* else if ( expr instanceof IterateExp ) {
+		}
+		/* else if ( expr instanceof IterateExp ) {
 			IterateExp it = (IterateExp) expr;
 			return receptor + "->" + "iterate" + "(" + it.getIterators().get(0).getVarName() + "," + it.getResult().getVarName() + " = " + gen(it.getResult().getInitExpression()) + "|" +
 			gen(it.getBody()) + ")";			

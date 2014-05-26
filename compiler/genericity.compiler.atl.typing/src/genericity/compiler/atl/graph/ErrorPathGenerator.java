@@ -35,6 +35,7 @@ import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.LoopExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
@@ -228,13 +229,10 @@ public class ErrorPathGenerator {
 		//} else if ( parent instanceof IteratorExp ) {
 		//	pathToSomewhere(parent, node);
 		} else if ( parent instanceof IfExp ) {
-			return pathFromIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
-		/*} else if ( parent instanceof Binding ) {
-			Rule r = parent.container_().container_().container(Rule.class);
-			pathToRule((RuleAnn) typ.getAnnotation(r.original_()), node);
-		} else if ( parent instanceof OclExpression ) {
-			pathToControlFlow((OclExpression) parent, node);
-		*/} else {
+			return pathToIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
+		} else if ( parent instanceof LetExp ) {
+			return pathToLetExpr((LetExp) parent, node, traversed);
+		} else {
 			throw new UnsupportedOperationException();
 		}
 	}
@@ -250,7 +248,7 @@ public class ErrorPathGenerator {
 
 	public boolean isControlFlowElement(ATLModelBaseObject element) {
 		return (element instanceof Rule) || (element instanceof Helper) ||
-			    (element instanceof IfExp );
+			    (element instanceof IfExp || (element instanceof LetExp ));
 	}
 
 	private void pathFromErrorExpression(OclExpression start, ExpressionAnnotation startAnn, DependencyNode depNode) {		
@@ -281,7 +279,22 @@ public class ErrorPathGenerator {
 		return checkReachesExecution(pathToControlFlow(call, node, traversed), node);
 	}
 
-	private boolean pathFromIfExpr(IfExp expr, OclExpression directChild, DependencyNode node, TraversedSet traversed) {
+
+	private boolean pathToLetExpr(LetExp start, DependencyNode node, TraversedSet traversed) {
+		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
+		ATLModelBaseObject parent = start.container_(); 
+		while ( parent instanceof LetExp ) {
+			lastParent = parent;
+			parent = parent.container_();
+		}
+		
+		LetScopeNode newNode = new LetScopeNode((LetExp) lastParent);
+		node.addDependency(newNode);
+
+		return checkReachesExecution(pathToControlFlow(lastParent.container_(), newNode, traversed), newNode);
+	}
+	
+	private boolean pathToIfExpr(IfExp expr, OclExpression directChild, DependencyNode node, TraversedSet traversed) {
 		boolean branch;
 		if ( expr.getThenExpression() == directChild ) {
 			branch = ConditionalNode.TRUE_BRANCH;
@@ -393,6 +406,7 @@ public class ErrorPathGenerator {
 		return node;
 	}
 	
+	/*
 	private ATLModelBaseObject findControlFlowConstruct(ATLModelBaseObject element) {
 		ATLModelBaseObject parent = element.container_();
 		while ( ! isControlFlowElement(parent) ) {
@@ -404,6 +418,7 @@ public class ErrorPathGenerator {
 		
 		return parent;
 	}
+	*/
 
 	
 	private class TraversedSet {

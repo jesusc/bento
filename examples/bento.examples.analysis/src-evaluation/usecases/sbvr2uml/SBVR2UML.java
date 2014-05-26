@@ -24,7 +24,7 @@ public class SBVR2UML extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		String selectedError = "167:9-167:31";
+		String selectedError = null;
 		
 		typing(SBVR2UML_TRANSFORMATION, new Object[] { SBVR_METAMODEL, UML_METAMODEL }, 
 				   new String[] { "SimpleSBVR", "SimpleUML" }, true);

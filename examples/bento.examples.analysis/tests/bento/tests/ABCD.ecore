@@ -7,6 +7,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//NamedElt">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//A" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="others" upperBound="-1"
+        eType="#//Other" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="A" eSuperTypes="#//NamedElt"/>
   <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="#//A"/>
@@ -17,4 +19,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="D1" eSuperTypes="#//D"/>
   <eClassifiers xsi:type="ecore:EClass" name="D2" eSuperTypes="#//D"/>
   <eClassifiers xsi:type="ecore:EClass" name="D3" eSuperTypes="#//D"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Other" eSuperTypes="#//NamedElt"/>
 </ecore:EPackage>
