@@ -260,6 +260,24 @@ public interface AtlErrorsFactory extends EFactory {
 	InvalidArgument createInvalidArgument();
 
 	/**
+	 * Returns a new object of class '<em>Collection Operation Not Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Operation Not Found</em>'.
+	 * @generated
+	 */
+	CollectionOperationNotFound createCollectionOperationNotFound();
+
+	/**
+	 * Returns a new object of class '<em>Iterator Over No Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator Over No Collection Type</em>'.
+	 * @generated
+	 */
+	IteratorOverNoCollectionType createIteratorOverNoCollectionType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -414,6 +414,7 @@ public class ForEachOutPatternElementImpl extends atl.metamodel.ATLModelBaseObje
 		}
 					
 		visitor.inForEachOutPatternElement(this);
+		visitor.afterForEachOutPatternElement(this);
 		visitor.setCurrent(pop);
 	}	
 

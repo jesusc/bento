@@ -186,6 +186,7 @@ public class LibraryImpl extends atl.metamodel.ATLModelBaseObject implements Lib
 		}
 					
 		visitor.inLibrary(this);
+		visitor.afterLibrary(this);
 		visitor.setCurrent(pop);
 	}	
 

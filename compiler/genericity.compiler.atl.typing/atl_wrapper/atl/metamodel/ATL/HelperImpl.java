@@ -211,6 +211,7 @@ public class HelperImpl extends atl.metamodel.ATLModelBaseObject implements Help
 		}
 					
 		visitor.inHelper(this);
+		visitor.afterHelper(this);
 		visitor.setCurrent(pop);
 	}	
 

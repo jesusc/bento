@@ -24,8 +24,8 @@ public class SBVR2UML extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		String selectedError = null;
-		
+		String selectedError = null; //"179:7-179:29";
+/*
 		typing(SBVR2UML_TRANSFORMATION, new Object[] { SBVR_METAMODEL, UML_METAMODEL }, 
 				   new String[] { "SimpleSBVR", "SimpleUML" }, true);
 
@@ -36,13 +36,20 @@ public class SBVR2UML extends BaseTest {
 		generateErrorSlice("SimpleSBVR", "tmp_/SBVR2UML.slice.ecore", selectedError);
 		generateEffectiveMetamodel("SimpleSBVR", "tmp_/SBVR2UML.effective.ecore");
 		generateCSP(selectedError);
-
+*/
 		//
-		
-		/*
+
 		typing(SYNTAX2SBVR_TRANSFORMATION, new Object[] { SYNTAX_METAMODEL, SBVR_METAMODEL }, 
-				   new String[] { "Syntax", "SimpleSBVR" }, false);
-		*/
+				   new String[] { "Syntax", "SimpleSBVR" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("Syntax", "tmp_/SYNTAX2SBVR.slice.ecore", selectedError);
+		generateEffectiveMetamodel("Syntax", "tmp_/SYNTAX2SBVR.effective.ecore");
+		generateCSP(selectedError);
+
 	}
 
 }

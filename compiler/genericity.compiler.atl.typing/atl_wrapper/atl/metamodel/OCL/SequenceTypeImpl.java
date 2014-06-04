@@ -646,6 +646,7 @@ public class SequenceTypeImpl extends atl.metamodel.ATLModelBaseObject implement
 		}
 					
 		visitor.inSequenceType(this);
+		visitor.afterSequenceType(this);
 		visitor.setCurrent(pop);
 	}	
 

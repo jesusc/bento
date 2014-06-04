@@ -163,6 +163,7 @@ public class LibraryRefImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inLibraryRef(this);
+		visitor.afterLibraryRef(this);
 		visitor.setCurrent(pop);
 	}	
 

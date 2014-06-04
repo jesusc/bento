@@ -416,6 +416,7 @@ public class RealExpImpl extends atl.metamodel.ATLModelBaseObject implements Rea
 		}
 					
 		visitor.inRealExp(this);
+		visitor.afterRealExp(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -10,7 +10,13 @@ public class ErrorUtils {
 	}
 	
 	public static String getShortError(LocalProblem p) {
-		return p.getClass().getSimpleName().replace("Impl", "") + " - "+ p.getLocation();
+		if ( p.getDescription() != null ) {
+			// return p.getDescription().split("\n")[0];
+			// return p.getDescription().replace("\n", " ");
+			return p.getDescription();
+		} else {
+			return p.getClass().getSimpleName().replace("Impl", "") + " - "+ p.getLocation();	
+		}
 	}
 	
 }

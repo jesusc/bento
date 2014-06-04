@@ -416,6 +416,7 @@ public class StringExpImpl extends atl.metamodel.ATLModelBaseObject implements S
 		}
 					
 		visitor.inStringExp(this);
+		visitor.afterStringExp(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -165,6 +165,7 @@ public class ActionBlockImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inActionBlock(this);
+		visitor.afterActionBlock(this);
 		visitor.setCurrent(pop);
 	}	
 

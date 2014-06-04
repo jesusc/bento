@@ -395,6 +395,7 @@ public class PrimitiveExpImpl extends atl.metamodel.ATLModelBaseObject implement
 		}
 					
 		visitor.inPrimitiveExp(this);
+		visitor.afterPrimitiveExp(this);
 		visitor.setCurrent(pop);
 	}	
 

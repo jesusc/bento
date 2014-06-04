@@ -623,6 +623,7 @@ public class RealTypeImpl extends atl.metamodel.ATLModelBaseObject implements Re
 		}
 					
 		visitor.inRealType(this);
+		visitor.afterRealType(this);
 		visitor.setCurrent(pop);
 	}	
 

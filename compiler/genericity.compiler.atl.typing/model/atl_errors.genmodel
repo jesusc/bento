@@ -122,6 +122,12 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/NoClassFoundInMetamodel/className"/>
       </genClasses>
       <genClasses ecoreClass="atl_errors.ecore#//atl_error/InvalidArgument"/>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/CollectionOperationNotFound">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/CollectionOperationNotFound/operationName"/>
+      </genClasses>
+      <genClasses ecoreClass="atl_errors.ecore#//atl_error/IteratorOverNoCollectionType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute atl_errors.ecore#//atl_error/IteratorOverNoCollectionType/iteratorName"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="AtlRecovery" basePackage="bento.analysis.atl_analysis"
         disposableProviderFactory="true" ecorePackage="atl_errors.ecore#//atl_recovery">

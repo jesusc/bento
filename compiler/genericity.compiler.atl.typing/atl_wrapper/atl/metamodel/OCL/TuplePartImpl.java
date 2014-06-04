@@ -299,6 +299,7 @@ public class TuplePartImpl extends atl.metamodel.ATLModelBaseObject implements T
 		}
 					
 		visitor.inTuplePart(this);
+		visitor.afterTuplePart(this);
 		visitor.setCurrent(pop);
 	}	
 

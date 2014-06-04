@@ -142,6 +142,7 @@ public class ModuleElementImpl extends atl.metamodel.ATLModelBaseObject implemen
 		}
 					
 		visitor.inModuleElement(this);
+		visitor.afterModuleElement(this);
 		visitor.setCurrent(pop);
 	}	
 

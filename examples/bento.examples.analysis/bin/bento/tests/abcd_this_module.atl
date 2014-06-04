@@ -1,0 +1,42 @@
+-- @path ABCD=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+-- @path WZYZ=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+
+module abcd;
+create OUT : WXYZ from IN : ABCD;
+
+helper context ABCD!A def : with_error : Integer =
+	if thisModule.globalHelper->isEmpty() 
+		then self.not_found 
+		else 0 endif;
+
+-- TODO: Do this with an target enumeration and a lazy rule call...
+-- helper def : style : ABCD!StyleKind = #style1;
+
+helper def : globalHelper : Sequence(ABCD!A) =
+	ABCD!A.allInstances();
+
+rule model {
+        from src : ABCD!Model 
+        to   tgt : WXYZ!Model (
+			name <- 'invented',
+        	elements <- src.elements
+		)
+}
+
+rule a_1 {
+	from
+		a : ABCD!A ( a.name.oclIsUndefined() )
+	to 
+		w : WXYZ!W (
+			name <- a.with_error
+		)
+}
+
+rule a_2 {
+	from
+		a : ABCD!A ( not a.name.oclIsUndefined() )
+	to 
+		w : WXYZ!W (
+			name <- a.with_error
+		)
+}

@@ -207,6 +207,14 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createInvalidArgumentAdapter();
 			}
 			@Override
+			public Adapter caseCollectionOperationNotFound(CollectionOperationNotFound object) {
+				return createCollectionOperationNotFoundAdapter();
+			}
+			@Override
+			public Adapter caseIteratorOverNoCollectionType(IteratorOverNoCollectionType object) {
+				return createIteratorOverNoCollectionTypeAdapter();
+			}
+			@Override
 			public Adapter caseAnalysisInfo(AnalysisInfo object) {
 				return createAnalysisInfoAdapter();
 			}
@@ -693,6 +701,34 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound <em>Collection Operation Not Found</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound
+	 * @generated
+	 */
+	public Adapter createCollectionOperationNotFoundAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType <em>Iterator Over No Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType
+	 * @generated
+	 */
+	public Adapter createIteratorOverNoCollectionTypeAdapter() {
 		return null;
 	}
 

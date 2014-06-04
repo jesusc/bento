@@ -119,6 +119,7 @@ public class StatementImpl extends atl.metamodel.ATLModelBaseObject implements S
 		}
 					
 		visitor.inStatement(this);
+		visitor.afterStatement(this);
 		visitor.setCurrent(pop);
 	}	
 

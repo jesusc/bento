@@ -623,6 +623,7 @@ public class PrimitiveImpl extends atl.metamodel.ATLModelBaseObject implements P
 		}
 					
 		visitor.inPrimitive(this);
+		visitor.afterPrimitive(this);
 		visitor.setCurrent(pop);
 	}	
 

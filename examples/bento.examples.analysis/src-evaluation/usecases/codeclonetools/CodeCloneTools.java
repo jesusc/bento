@@ -38,6 +38,7 @@ public class CodeCloneTools extends BaseTest {
 		String selectedError = null;
 		
 		/*
+		 */
 		typing(CloneDr2CodeClone_TRANSFORMATION, new Object[] { CLONEDR_METAMODEL, FILEINFO_METAMODEL, CODECLONE_METAMODEL }, 
 				   new String[] { "CloneDr", "FileInfo", "CodeClone" }, true);
 		
@@ -76,10 +77,8 @@ public class CodeCloneTools extends BaseTest {
 		generateErrorSlice("SimScan", "tmp_/SimScan2CodeClone.slice.ecore", selectedError);
 		generateEffectiveMetamodel("SimScan", "tmp_/SimScan2CodeClone.effective.ecore");
 		generateCSP(selectedError);
-*/
 		
 		//
-/*		
 		typing(SVG2XML_TRANSFORMATION, new Object[] { SVG_METAMODEL, XML_METAMODEL}, 
 				   new String[] { "SVG", "XML" }, true);
 		
@@ -90,6 +89,7 @@ public class CodeCloneTools extends BaseTest {
 		generateErrorSlice("SVG", "tmp_/SVG2XML.slice.ecore", selectedError);
 		generateEffectiveMetamodel("SVG", "tmp_/SVG2XML.effective.ecore");
 		generateCSP(selectedError);
+ 
 
 		// WITH TYPE ERRORS!
 		typing(CodeClone2SVG_TRANSFORMATION, new Object[] { CODECLONE_METAMODEL, SVG_METAMODEL }, 
@@ -102,7 +102,6 @@ public class CodeCloneTools extends BaseTest {
 		generateErrorSlice("CodeClone", "tmp_/CodeClone2SVG.slice.ecore", selectedError);
 		generateEffectiveMetamodel("CodeClone", "tmp_/CodeClone2SVG.effective.ecore");
 		generateCSP(selectedError);
-*/
 
 		typing(CodeClone2SVG2_TRANSFORMATION, new Object[] { CODECLONE_METAMODEL, SVG_METAMODEL }, 
 				   new String[] { "CodeClone", "SVG" }, true);
@@ -114,6 +113,7 @@ public class CodeCloneTools extends BaseTest {
 		generateErrorSlice("CodeClone", "tmp_/CodeClone2SVG2.slice.ecore", selectedError);
 		generateEffectiveMetamodel("CodeClone", "tmp_/CodeClone2SVG2.effective.ecore");
 		generateCSP(selectedError);
+		
 	}
 
 }

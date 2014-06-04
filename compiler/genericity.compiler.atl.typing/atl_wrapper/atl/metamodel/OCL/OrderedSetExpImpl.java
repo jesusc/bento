@@ -418,6 +418,7 @@ public class OrderedSetExpImpl extends atl.metamodel.ATLModelBaseObject implemen
 		}
 					
 		visitor.inOrderedSetExp(this);
+		visitor.afterOrderedSetExp(this);
 		visitor.setCurrent(pop);
 	}	
 

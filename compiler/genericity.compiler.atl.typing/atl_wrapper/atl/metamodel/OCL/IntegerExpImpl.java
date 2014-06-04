@@ -416,6 +416,7 @@ public class IntegerExpImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inIntegerExp(this);
+		visitor.afterIntegerExp(this);
 		visitor.setCurrent(pop);
 	}	
 

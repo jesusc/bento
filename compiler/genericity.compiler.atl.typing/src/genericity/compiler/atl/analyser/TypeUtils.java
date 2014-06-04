@@ -1,14 +1,20 @@
 package genericity.compiler.atl.analyser;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import atl.metamodel.OCL.EnumLiteralExp;
+import atl.metamodel.OCL.OclExpression;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollectionType;
+import genericity.typing.atl_types.EnumType;
 import genericity.typing.atl_types.FloatType;
 import genericity.typing.atl_types.IntegerType;
 import genericity.typing.atl_types.Metaclass;
+import genericity.typing.atl_types.OclUndefinedType;
 import genericity.typing.atl_types.PrimitiveType;
 import genericity.typing.atl_types.SequenceType;
 import genericity.typing.atl_types.SetType;
@@ -18,6 +24,7 @@ import genericity.typing.atl_types.TupleType;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
+import genericity.typing.atl_types.annotations.GenericExprAnn;
 
 public class TypeUtils {
 	public static String typeToString(Type t) {
@@ -80,6 +87,18 @@ public class TypeUtils {
 		return type instanceof CollectionType;
 	}
 
+	public static boolean isUnionWithReferences(Type type) {
+		if ( type instanceof UnionType ) {
+			UnionType u = (UnionType) type;
+			for (Type t : u.getPossibleTypes()) {
+				if ( ! isReference(t) && !(t instanceof OclUndefinedType )) 
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	public static String getTypeName(Type t) {
 		if ( t instanceof Metaclass ) {
 			return ((Metaclass) t).getName();
@@ -106,4 +125,14 @@ public class TypeUtils {
 	public static boolean isFeatureMustBeInitialized(EStructuralFeature f) {
 		return f.getLowerBound() != 0 && f.getDefaultValue() == null;
 	}
+
+	public static EEnumLiteral getLiteralOf(OclExpression expr, TypingModel typ) {
+		GenericExprAnn ann = (GenericExprAnn) typ.getAnnotation(expr.original_());
+		EnumType t = (EnumType) ann.getType();
+		EEnum eenum = (EEnum) t.getEenum();
+		EEnumLiteral literal = eenum.getEEnumLiteral(((EnumLiteralExp) expr).getName());		
+		return literal;
+	}
+
+	
 }

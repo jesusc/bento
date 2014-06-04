@@ -623,6 +623,7 @@ public class BooleanTypeImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inBooleanType(this);
+		visitor.afterBooleanType(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -416,6 +416,7 @@ public class BooleanExpImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inBooleanExp(this);
+		visitor.afterBooleanExp(this);
 		visitor.setCurrent(pop);
 	}	
 

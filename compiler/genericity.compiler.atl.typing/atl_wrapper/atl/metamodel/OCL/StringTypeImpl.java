@@ -623,6 +623,7 @@ public class StringTypeImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inStringType(this);
+		visitor.afterStringType(this);
 		visitor.setCurrent(pop);
 	}	
 

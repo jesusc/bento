@@ -14,6 +14,10 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 	@Override
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		boolean hasOp = super.hasOperation(operationName, arguments);
+		// TODO: Represent this in AtlTypeDef
+		if ( operationName.equals("split") ) 
+			return true;
+		
 		if ( ! hasOp ) {
 			hasOp = AtlTypes.string().hasOperation(operationName);
 		}
@@ -36,6 +40,12 @@ public class StringNamespace extends PrimitiveTypeNamespace {
 
 			throw new UnsupportedOperationException(operationName + " - " + node.getLocation());
 			*/
+			
+			// TODO: Represent this in AtlTypeDef
+			if ( operationName.equals("split") ) 
+				return AnalyserContext.getTypingModel().newSequenceType(AnalyserContext.getTypingModel().newStringType());
+			
+			
 			return AtlTypes.string().getOperationReturnType(operationName);
 		}
 		return t;

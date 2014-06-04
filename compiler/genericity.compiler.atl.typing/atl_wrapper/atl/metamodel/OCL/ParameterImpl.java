@@ -299,6 +299,7 @@ public class ParameterImpl extends atl.metamodel.ATLModelBaseObject implements P
 		}
 					
 		visitor.inParameter(this);
+		visitor.afterParameter(this);
 		visitor.setCurrent(pop);
 	}	
 

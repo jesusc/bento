@@ -418,6 +418,7 @@ public class VariableExpImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inVariableExp(this);
+		visitor.afterVariableExp(this);
 		visitor.setCurrent(pop);
 	}	
 

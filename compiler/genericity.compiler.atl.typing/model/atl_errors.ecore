@@ -150,6 +150,14 @@
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InvalidArgument" eSuperTypes="#//atl_error/LocalProblem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionOperationNotFound" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IteratorOverNoCollectionType" eSuperTypes="#//atl_error/LocalProblem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="iteratorName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="atl_recovery" nsURI="http://bento/analysis/atl/analysis/recovery"
       nsPrefix="atl_recovery">

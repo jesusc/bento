@@ -276,6 +276,7 @@ public class VariableDeclarationImpl extends atl.metamodel.ATLModelBaseObject im
 		}
 					
 		visitor.inVariableDeclaration(this);
+		visitor.afterVariableDeclaration(this);
 		visitor.setCurrent(pop);
 	}	
 

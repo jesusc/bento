@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.OclExpression;
 import bento.analyser.util.AtlLoader;
 import bento.analysis.atl_analysis.Problem;
@@ -70,8 +71,16 @@ public class CSPGenerator {
 	public String generateCSP(ProblemPath path, Analyser analyser) {
 		DependencyNode errorNode = path.getErrorNode();
 		for (ExecutionNode node : path.getExecutionNodes()) {
-			OclExpression exp = node.genCSP(new CSPModel(loader, analyser));
-			return OclGenerator.gen(exp); // Not passing the analyser because it is not an original expression...
+			CSPModel model = new CSPModel(loader, analyser);
+
+			// Create the thisModule context at the top level
+			IteratorExp ctx = model.createThisModuleContext();
+			model.setThisModuleVariable(ctx.getIterators().get(0));
+			
+			OclExpression exp = node.genCSP(model);
+			ctx.setBody(exp);
+			
+			return OclGenerator.gen(ctx); // Not passing the analyser because it is not an original expression...
 			// Only one execution node supported so far
 		}
 		

@@ -383,6 +383,24 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.COLLECTION_OPERATION_NOT_FOUND: {
+				CollectionOperationNotFound collectionOperationNotFound = (CollectionOperationNotFound)theEObject;
+				T result = caseCollectionOperationNotFound(collectionOperationNotFound);
+				if (result == null) result = caseLocalProblem(collectionOperationNotFound);
+				if (result == null) result = caseProblem(collectionOperationNotFound);
+				if (result == null) result = caseAnalysisInfo(collectionOperationNotFound);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.ITERATOR_OVER_NO_COLLECTION_TYPE: {
+				IteratorOverNoCollectionType iteratorOverNoCollectionType = (IteratorOverNoCollectionType)theEObject;
+				T result = caseIteratorOverNoCollectionType(iteratorOverNoCollectionType);
+				if (result == null) result = caseLocalProblem(iteratorOverNoCollectionType);
+				if (result == null) result = caseProblem(iteratorOverNoCollectionType);
+				if (result == null) result = caseAnalysisInfo(iteratorOverNoCollectionType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -879,6 +897,36 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInvalidArgument(InvalidArgument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Operation Not Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Operation Not Found</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionOperationNotFound(CollectionOperationNotFound object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Iterator Over No Collection Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Iterator Over No Collection Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIteratorOverNoCollectionType(IteratorOverNoCollectionType object) {
 		return null;
 	}
 

@@ -1,4 +1,6 @@
 --@atlcompiler	atl2006
+-- @path Measure=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/Measure.ecore
+-- @path XHTML=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/XHTML.ecore
 --@name			Measure2XHTML
 --@version		2.0
 --@domains		measurement data, metrics, XHTML

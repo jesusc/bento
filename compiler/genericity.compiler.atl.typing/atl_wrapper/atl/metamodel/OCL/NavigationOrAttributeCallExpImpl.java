@@ -439,6 +439,7 @@ public class NavigationOrAttributeCallExpImpl extends atl.metamodel.ATLModelBase
 		}
 					
 		visitor.inNavigationOrAttributeCallExp(this);
+		visitor.afterNavigationOrAttributeCallExp(this);
 		visitor.setCurrent(pop);
 	}	
 

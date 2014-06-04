@@ -276,6 +276,7 @@ public class PatternElementImpl extends atl.metamodel.ATLModelBaseObject impleme
 		}
 					
 		visitor.inPatternElement(this);
+		visitor.afterPatternElement(this);
 		visitor.setCurrent(pop);
 	}	
 

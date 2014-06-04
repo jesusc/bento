@@ -464,6 +464,7 @@ public class IfExpImpl extends atl.metamodel.ATLModelBaseObject implements IfExp
 		}
 					
 		visitor.inIfExp(this);
+		visitor.afterIfExp(this);
 		visitor.setCurrent(pop);
 	}	
 

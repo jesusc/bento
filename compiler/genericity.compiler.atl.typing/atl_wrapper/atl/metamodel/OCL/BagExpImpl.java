@@ -418,6 +418,7 @@ public class BagExpImpl extends atl.metamodel.ATLModelBaseObject implements BagE
 		}
 					
 		visitor.inBagExp(this);
+		visitor.afterBagExp(this);
 		visitor.setCurrent(pop);
 	}	
 

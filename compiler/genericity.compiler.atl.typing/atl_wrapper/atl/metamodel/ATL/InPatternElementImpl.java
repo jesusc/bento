@@ -345,6 +345,7 @@ public class InPatternElementImpl extends atl.metamodel.ATLModelBaseObject imple
 		}
 					
 		visitor.inInPatternElement(this);
+		visitor.afterInPatternElement(this);
 		visitor.setCurrent(pop);
 	}	
 

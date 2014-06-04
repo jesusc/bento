@@ -1,6 +1,8 @@
 package genericity.compiler.atl.analyser.namespaces;
 
 import atl.metamodel.ATL.LocatedElement;
+import atl.metamodel.OCL.OperationCallExp;
+import atl.metamodel.OCL.VariableExp;
 import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.TypingModel;
 import genericity.typing.atl_types.Metaclass;
@@ -24,8 +26,13 @@ public abstract class AbstractTypeNamespace implements ITypeNamespace {
 			if ( ! (arguments[0] instanceof Metaclass) ) {
 				return AnalyserContext.getErrorModel().signalInvalidArgument(operationName, node);
 			}
-			// TODO: Mark the boolean type so that it carries the "isKindOf" information
-			return AnalyserContext.getTypingModel().newBooleanType((Metaclass) arguments[0]);
+			
+			OperationCallExp op = (OperationCallExp) node;
+			if ( op.getSource() instanceof VariableExp ) {
+				return AnalyserContext.getTypingModel().newBooleanType((Metaclass) arguments[0]);				
+			} else {
+				return AnalyserContext.getTypingModel().newBooleanType();				
+			}
 		} else if ( operationName.equals("debug") ) {
 			return this.getType();
 		}

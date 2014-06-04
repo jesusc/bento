@@ -5,6 +5,7 @@ import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
+import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollectionType;
@@ -25,12 +26,14 @@ import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.ForStat;
 import atl.metamodel.ATL.Helper;
+import atl.metamodel.ATL.InPattern;
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Module;
 import atl.metamodel.ATL.ModuleElement;
 import atl.metamodel.ATL.OutPattern;
 import atl.metamodel.ATL.OutPatternElement;
+import atl.metamodel.ATL.PatternElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.SimpleInPatternElement;
@@ -58,6 +61,7 @@ import atl.metamodel.OCL.Operation;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.OrderedSetExp;
+import atl.metamodel.OCL.PropertyCallExp;
 import atl.metamodel.OCL.RealExp;
 import atl.metamodel.OCL.SequenceExp;
 import atl.metamodel.OCL.SetExp;
@@ -89,6 +93,8 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		
 		startVisiting(root);
 
+		// if ( ! attr.getVarScope().isEmpty() ) throw new IllegalStateException();
+		
 		CreateAnnotations annotations = new CreateAnnotations(model, mm, root, typ, errors);
 		annotations .perform(attr);
 
@@ -116,20 +122,19 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 	
 	@Override
 	public VisitingActions preMatchedRule(MatchedRule self) {
-		return actions("variables", "inPattern", "outPattern" , "actionBlock"); 
+		return actions("inPattern", "variables", "outPattern" , "actionBlock"); 
 	}
 	
 	@Override
 	public VisitingActions preLazyMatchedRule(LazyMatchedRule self) {
-		return actions("variables", "inPattern", "outPattern" , "actionBlock"); 
+		return actions("inPattern", "variables", "outPattern" , "actionBlock"); 
 	}
 
 	@Override
 	public VisitingActions preCalledRule(CalledRule self) {
 		return actions("parameters", "variables", "outPattern" , "actionBlock"); 
 	}
-	
-	
+		
 	public List<Helper> getHelpers(atl.metamodel.ATL.Module self) {
 		LinkedList<Helper> helpers = new LinkedList<Helper>();
 		for (ModuleElement me : self.getElements()) {
@@ -162,7 +167,7 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		}
 		return rules;
 	}
-
+	
 	@Override
 	public void inOperation(Operation self) {
 		Type declared = attr.typeOf(self.getReturnType());
@@ -250,23 +255,14 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 
 	@Override
 	public VisitingActions preIfExp(IfExp self) {
-		return actions("type", "condition", 
-				method("createIfScope", self, true), "thenExpression" , method("createIfScope", self, false), 
+		return actions("type", 
+				method("createIfScope", self, true),
+				"condition", 
+				"thenExpression" , 
+				method("createIfScope", self, false), 
 				"elseExpression");
-	}
+	}	
 	
-	public void createIfScope(IfExp self, java.lang.Boolean open) {
-		if ( attr.typeOf(self.getCondition()) instanceof BooleanType ) {		
-			BooleanType t = (BooleanType) attr.typeOf(self.getCondition());
-			if ( t.getKindOfTypes().isEmpty() ) 
-				return;
-		}
-		
-		
-		// System.out.println(t);
-		//if ( open ) attr.pushScope();
-		//else        attr.popScope();
-	}
 	
 	@Override
 	public void inIfExp(IfExp self) {
@@ -328,11 +324,13 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 	public void inIterator(Iterator self) {
 		if ( self.container_() instanceof LoopExp ) { // IteratorExp & IterateExp
 			Type collType = attr.typeOf(self.container(LoopExp.class).getSource());
+			Type t  = null;
 			if ( !(collType instanceof CollectionType) ) {
-				errors.signalIteratorOverNoCollectionType(collType, self.container(LoopExp.class));
+				t = errors.signalIteratorOverNoCollectionType(collType, self.container(LoopExp.class));
+			} else {
+				t = ((CollectionNamespace) collType.getMetamodelRef()).unwrap();
 			}
 	
-			Type t = ((CollectionNamespace) collType.getMetamodelRef()).unwrap();
 			attr.linkExprType( t );
 		// } else if ( self.container_() instanceof IterateExp ) {
 			
@@ -381,12 +379,17 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inIteratorExp(IteratorExp self) {
-		// Type collType = attr.typeOf(self.getSource());
-		CollectionType srcType  = (CollectionType) attr.typeOf( self.getSource() );
-		Type bodyType = attr.typeOf( self.getBody() ); 
-		
-		CollectionNamespace cspace = (CollectionNamespace) srcType.getMetamodelRef();
-		attr.linkExprType( cspace.getIteratorType(self.getName(), bodyType, self) );
+
+		Type srcType =  attr.typeOf( self.getSource() );
+		if ( !(srcType instanceof CollectionType) ) {
+			Type t = errors.signalIteratorOverNoCollectionType(srcType, self.container(LoopExp.class));
+			attr.linkExprType(t);
+		} else {
+			Type bodyType = attr.typeOf( self.getBody() ); 
+			
+			CollectionNamespace cspace = (CollectionNamespace) srcType.getMetamodelRef();
+			attr.linkExprType( cspace.getIteratorType(self.getName(), bodyType, self) );
+		}
 	}
 	
 	@Override
@@ -402,6 +405,10 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		// Get the navigated feature, cached by featureType
 		navFeature[self] <- self.getLastNavigatedFeature
 		*/
+		
+		if ( attr.wasCasted(self.getSource()) ){
+			typ.markImplicitlyCasted(self.getSource(), t);
+		}
 	}
 	
 	@Override
@@ -415,6 +422,26 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			return;
 		}
 		
+		// Treating oclIsKindOf
+		if ( self.getOperationName().equals("oclIsKindOf") || self.getOperationName().equals("oclIsTypeOf") ) {
+			Type exprType = attr.typeOf(self.getArguments().get(0));
+			
+			// Discard those with a negation
+			boolean hasNegation = false;
+			ATLModelBaseObject parent = self.container_();
+			while ( parent instanceof OclExpression && ! hasNegation ) {
+				if ( parent instanceof OperatorCallExp ) {
+					hasNegation = ((OperatorCallExp) parent).getOperationName().equals("not");
+				}
+				parent = parent.container_();
+			}
+			
+			if ( ! hasNegation ) {
+				VariableExp ve = VariableScope.findStartingVarExp(self);
+				attr.getVarScope().putKindOf(ve.getReferredVariable(), self.getSource(), exprType);
+			}
+		}
+		
 		Type t = attr.typeOf( self.getSource() );
 		Type[] arguments  = new Type[self.getArguments().size()];
 		for(int i = 0; i < self.getArguments().size(); i++) {
@@ -426,10 +453,11 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		ITypeNamespace tspace = (ITypeNamespace) t.getMetamodelRef();
-		if ( self.getOperationName().equals("") ) {
-			
-		}
 		attr.linkExprType( tspace.getOperationType(self.getOperationName(), arguments, self) );
+		
+		if ( attr.wasCasted(self.getSource()) ){
+			typ.markImplicitlyCasted(self.getSource(), t);
+		}
 	}
 	
 	private void resolveResolveTemp(OperationCallExp self) {
@@ -543,14 +571,14 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			}
 
 			if ( AnalyserContext.isOclStrict() ) {
-				errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {				
+				Type recType = errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {				
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {
 						return t;
 					}
 				});
 
-				attr.linkExprType( t );
+				attr.linkExprType( recType );
 			} else if ( t == null ) {
 				Type error = errors.signalNoOperationFound(receptorType, self.getOperationName(), self, null);
 				attr.linkExprType( error );
@@ -708,5 +736,52 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			i++;
 		}
 		attr.linkExprType( typ.newTupleTuple(attNames, attTypes) );
+	}
+	
+	
+	// Begin-of Scopes
+	@Override
+	public void beforeMatchedRule(MatchedRule self) {
+		attr.getVarScope().openScope();
+	}
+	
+	@Override
+	public void afterMatchedRule(MatchedRule self) {
+		attr.getVarScope().closeScope();
+	}
+	
+	public void createIfScope(IfExp self, java.lang.Boolean open) {
+		if ( open ) {
+			attr.getVarScope().openScope();
+		} else {
+			attr.getVarScope().closeScope();
 		}
+		
+		/*
+		if ( attr.typeOf(self.getCondition()) instanceof BooleanType ) {		
+			BooleanType t = (BooleanType) attr.typeOf(self.getCondition());
+			if ( t.getKindOfTypes().isEmpty() ) 
+				return;
+		}
+		*/
+		
+		
+		// System.out.println(t);
+		//if ( open ) attr.pushScope();
+		//else        attr.popScope();
+	}
+
+	@Override
+	public void beforeIteratorExp(IteratorExp self) {
+		attr.getVarScope().openScope();
+	}
+	
+	@Override
+	public void afterIteratorExp(IteratorExp self) {
+		attr.getVarScope().closeScope();
+	}
+	
+
+	// End-of Scopes
+	
 }

@@ -142,6 +142,7 @@ public class OclFeatureImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inOclFeature(this);
+		visitor.afterOclFeature(this);
 		visitor.setCurrent(pop);
 	}	
 

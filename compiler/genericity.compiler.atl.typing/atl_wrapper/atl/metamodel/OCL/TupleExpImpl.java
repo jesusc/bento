@@ -418,6 +418,7 @@ public class TupleExpImpl extends atl.metamodel.ATLModelBaseObject implements Tu
 		}
 					
 		visitor.inTupleExp(this);
+		visitor.afterTupleExp(this);
 		visitor.setCurrent(pop);
 	}	
 

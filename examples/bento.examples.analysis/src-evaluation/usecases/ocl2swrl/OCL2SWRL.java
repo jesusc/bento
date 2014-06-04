@@ -26,22 +26,32 @@ public class OCL2SWRL extends BaseTest {
 	}
 	
 	public void run() throws IOException {
+		String selectedError = null; // "709:6-709:23";
+		
+		/*
 		typing(OCL2R2ML_TRANSFORMATION, new Object[] { OCL_METAMODEL, R2ML_METAMODEL}, 
 				   new String[] { "OCL", "R2ML" }, true);
 
 		printStatistics();
 		printErrorsByType();
 
-		String selectedError = "203:7-203:29";
 		generateGraphviz(selectedError);
-		generateErrorSlice("OCL", "tmp_/ocl2rml.slice.ecore", selectedError);
-		generateEffectiveMetamodel("OCL", "tmp_/ocl2rml.effective.ecore");
+		generateErrorSlice("OCL", "tmp_/OCL2R2ML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("OCL", "tmp_/OCL2R2ML.effective.ecore");
 		generateCSP(selectedError);
-		
+		*/
 		// 
-		
-//		typing(R2ML2RDM_TRANSFORMATION, new Object[] { R2ML_METAMODEL, RDM_METAMODEL }, 
-//				   new String[] { "R2ML", "RDM" }, false);
+
+		typing(R2ML2RDM_TRANSFORMATION, new Object[] { R2ML_METAMODEL, RDM_METAMODEL }, 
+				   new String[] { "R2ML", "RDM" }, true);
+
+		printStatistics();
+		printErrorsByType();
+
+		generateGraphviz(selectedError);
+		generateErrorSlice("R2ML", "tmp_/R2ML2RDM.slice.ecore", selectedError);
+		generateEffectiveMetamodel("R2ML", "tmp_/R2ML2RDM.effective.ecore");
+		generateCSP_filtered(selectedError);
 
 		//
 		

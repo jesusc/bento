@@ -1,0 +1,36 @@
+-- @path UML=/bento.examples.analysis/tests/ase/running/UML2_3_0_0.ecore
+-- @path Intalio=/bento.examples.analysis/tests/ase/running/bpmn.ecore
+
+module UML2Intalio_nested_iterator;
+create OUT : Intalio from IN : UML;
+
+
+rule activity2diagram {
+	from a : UML!Activity
+	to   m : Intalio!BpmnDiagram (
+			name <- a.name,
+			pools <- pool
+		), 
+		pool : Intalio!Pool (
+			name <- if a.name = 'aName' then a.feature_not_found else 'someValue' endif,
+			name <- a.partition->collect(p | p.feature_not_found)->first(),
+			name <- a.partition->collect(p | 
+				if p.name = 'aName' then 'someValue' 
+				else p.feature_not_found endif)->first(),
+
+			ncname <- a.partition->collect(p | 
+				if p.name = 'hola' then 
+					'ok' 
+				else 
+					p.edge.size().toString_error() 
+				endif)->first(),
+
+			iD <- a.partition->collect(p | 
+				if p.name = 'hola' then 
+					'ok' 
+				else 
+					p.edge->select(e | e.inPartition_featureerror->size() = 3 )->size().toString()
+				endif)->first()
+				
+		)
+}

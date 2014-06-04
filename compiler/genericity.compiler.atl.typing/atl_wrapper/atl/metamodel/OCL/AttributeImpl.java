@@ -209,6 +209,7 @@ public class AttributeImpl extends atl.metamodel.ATLModelBaseObject implements A
 		}
 					
 		visitor.inAttribute(this);
+		visitor.afterAttribute(this);
 		visitor.setCurrent(pop);
 	}	
 

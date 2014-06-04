@@ -646,6 +646,7 @@ public class TupleTypeImpl extends atl.metamodel.ATLModelBaseObject implements T
 		}
 					
 		visitor.inTupleType(this);
+		visitor.afterTupleType(this);
 		visitor.setCurrent(pop);
 	}	
 

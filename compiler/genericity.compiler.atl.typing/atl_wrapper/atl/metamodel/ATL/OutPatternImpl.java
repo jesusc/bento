@@ -165,6 +165,7 @@ public class OutPatternImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inOutPattern(this);
+		visitor.afterOutPattern(this);
 		visitor.setCurrent(pop);
 	}	
 

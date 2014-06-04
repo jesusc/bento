@@ -418,6 +418,7 @@ public class CollectionExpImpl extends atl.metamodel.ATLModelBaseObject implemen
 		}
 					
 		visitor.inCollectionExp(this);
+		visitor.afterCollectionExp(this);
 		visitor.setCurrent(pop);
 	}	
 

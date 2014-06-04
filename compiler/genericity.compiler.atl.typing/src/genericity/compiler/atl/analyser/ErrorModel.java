@@ -37,6 +37,7 @@ import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
 import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
+import bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach;
@@ -47,6 +48,7 @@ import bento.analysis.atl_analysis.atl_error.FlattenOverNonNestedCollection;
 import bento.analysis.atl_analysis.atl_error.InvalidArgument;
 import bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType;
 import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
+import bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature;
 import bento.analysis.atl_analysis.atl_error.NoClassFoundInMetamodel;
@@ -138,8 +140,8 @@ public class ErrorModel {
 			signalWarning(error, "Collection operation over " + TypeUtils.typeToString(receptorType), element);
 			return result;
 		}
-		signalNoRecoverableError("Collection operation over " + TypeUtils.typeToString(receptorType), element);
-		return null;
+		signalError(error, "Collection operation over " + TypeUtils.typeToString(receptorType), element);
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 
 	public Type signalDifferentBranchTypes(Type thenPart, Type elsePart, LocatedElement node, IRecoveryAction ra) {
@@ -232,8 +234,15 @@ public class ErrorModel {
 		result.getProblems().add(p);
 	}
 
-	public void signalIteratorOverNoCollectionType(Type receptorType, LocatedElement element) {
-		signalNoRecoverableError("Iterator operation over " + receptorType, element);		
+	public Type signalIteratorOverNoCollectionType(Type receptorType, LocatedElement node) {
+		IteratorOverNoCollectionType error = AtlErrorsFactory.eINSTANCE.createIteratorOverNoCollectionType();
+		initProblem(error, node);
+		
+		if ( isErrorType(receptorType) )
+			return createDependentError(error, receptorType);
+
+		signalNoRecoverableError("Iterator operation over " + receptorType, node);		
+		return null;
 	}
 
 	public Type signalNoThisModuleOperation(String operationName, LocatedElement node) {
@@ -402,7 +411,7 @@ public class ErrorModel {
 		}
 		s = s.replaceFirst(",", "");
 		
-		signalWarning(error, "Possibly unresolved binding: " + s, b);
+		signalWarning(error, "Possibly unresolved binding (" + rightType.getName() + "): "  + s, b);
 	}
 	// End-of binding problems
 
@@ -504,6 +513,14 @@ public class ErrorModel {
 		error.setFeatureName(featureName);
 
 		signalError(error, "Feature access in collection, " + featureName, node);		
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
+	}
+
+	public Type signalCollectionOperationNotFound(String operationName, LocatedElement node) {
+		CollectionOperationNotFound error = AtlErrorsFactory.eINSTANCE.createCollectionOperationNotFound();
+		initProblem(error, node);
+		
+		signalError(error, "Collection operation " + operationName + " not supported", node);		
 		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
 

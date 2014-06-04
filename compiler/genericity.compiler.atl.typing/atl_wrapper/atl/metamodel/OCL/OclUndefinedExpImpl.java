@@ -395,6 +395,7 @@ public class OclUndefinedExpImpl extends atl.metamodel.ATLModelBaseObject implem
 		}
 					
 		visitor.inOclUndefinedExp(this);
+		visitor.afterOclUndefinedExp(this);
 		visitor.setCurrent(pop);
 	}	
 

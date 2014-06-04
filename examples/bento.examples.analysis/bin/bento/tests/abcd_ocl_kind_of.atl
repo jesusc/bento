@@ -1,0 +1,23 @@
+-- @path ABCD=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+-- @path WZYZ=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+
+module abcdOclKindOf;
+create OUT : WXYZ from IN : ABCD;
+
+rule a1 {
+        from src : ABCD!A ( src.oclIsKindOf(ABCD!C) )
+        to   tgt : WXYZ!W (
+        	name <- if src.oclIsKindOf(ABCD!B) 
+				then src.propOfB 
+				else src.propOfC endif
+		)
+}
+
+rule a2 {
+        from src : ABCD!A ( src.oclIsKindOf(ABCD!C) )
+        to   tgt : WXYZ!W (
+        	name <- if not src.oclIsKindOf(ABCD!B) 
+				then src.propOfB 
+				else src.propOfC endif
+			)
+}

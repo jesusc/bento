@@ -119,6 +119,7 @@ public class LocatedElementImpl extends atl.metamodel.ATLModelBaseObject impleme
 		}
 					
 		visitor.inLocatedElement(this);
+		visitor.afterLocatedElement(this);
 		visitor.setCurrent(pop);
 	}	
 

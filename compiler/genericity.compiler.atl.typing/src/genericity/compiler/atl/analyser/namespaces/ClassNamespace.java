@@ -173,6 +173,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		if ( operationName.equals("allInstances") || operationName.equals("allInstancesFrom") ) 
 			return true;
 
+		// Reflective
+		if ( operationName.equals("newInstance") || operationName.equals("refSetValue") ) 
+			return true;
+
 		return operations.containsKey(operationName);
 	}
 	
@@ -218,6 +222,8 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		
 		if ( operationName.equals("allInstances") || operationName.equals("allInstancesFrom") ) {
 			return metamodel.converter.convertAllInstancesOf(eClass, this);
+		} else if ( operationName.equals("newInstance") || operationName.equals("refSetValue") ) {
+			return metamodel.converter.convertEClass(eClass, this);
 		} else if ( operationName.equals("oclIsUndefined") ) {
 			return AnalyserContext.getTypingModel().newBooleanType();
 		} else if ( operationName.equals("oclType") ) {
@@ -361,6 +367,17 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 
 	public Collection<ClassNamespace> getDirectSubclasses() {
 		return metamodel.getDirectSubclasses(eClass);		
+	}
+
+
+	public List<ClassNamespace> getAllSuperClasses() {
+		ArrayList<ClassNamespace> result = new ArrayList<ClassNamespace>();
+		for(EClass c : eClass.getESuperTypes()) {
+			if ( c.eIsProxy() ) continue;
+			ClassNamespace ns = (ClassNamespace) metamodel.getClassifier(c.getName());
+			result.add(ns);
+		}
+		return result;
 	}
 
 }

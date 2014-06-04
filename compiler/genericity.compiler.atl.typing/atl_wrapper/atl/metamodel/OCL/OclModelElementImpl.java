@@ -646,6 +646,7 @@ public class OclModelElementImpl extends atl.metamodel.ATLModelBaseObject implem
 		}
 					
 		visitor.inOclModelElement(this);
+		visitor.afterOclModelElement(this);
 		visitor.setCurrent(pop);
 	}	
 

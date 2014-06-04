@@ -1,4 +1,6 @@
 --@atlcompiler	atl2006
+-- @path UML2=/bento.examples.analysis/third-party/usecases/modelsmeasurement/extra/UML2_3_0_0.ecore
+-- @path Measure=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/Measure.ecore
 --@name			UML22Measure
 --@version		1.1
 --@domains		UML2, measurement data, metrics

@@ -646,6 +646,7 @@ public class CollectionTypeImpl extends atl.metamodel.ATLModelBaseObject impleme
 		}
 					
 		visitor.inCollectionType(this);
+		visitor.afterCollectionType(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -1,28 +1,41 @@
 package genericity.compiler.atl.analyser;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.ITypeNamespace;
+import genericity.compiler.atl.analyser.namespaces.TransformationNamespace;
+import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.CalledRule;
+import atl.metamodel.ATL.ExpressionStat;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.ATL.MatchedRule;
+import atl.metamodel.ATL.Module;
+import atl.metamodel.ATL.ModuleElement;
+import atl.metamodel.ATL.Rule;
 import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.ATL.SimpleOutPatternElement;
+import atl.metamodel.ATL.Statement;
 import atl.metamodel.ATL.Unit;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.OclContextDefinition;
 import atl.metamodel.OCL.OclFeature;
 import atl.metamodel.OCL.OclFeatureDefinition;
+import atl.metamodel.OCL.OclType;
 import atl.metamodel.OCL.Operation;
+import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.Parameter;
 import atl.metamodel.OCL.VariableDeclaration;
+import atl.metamodel.OCL.VariableExp;
 
 /**
  * 
@@ -30,6 +43,9 @@ import atl.metamodel.OCL.VariableDeclaration;
  *
  */
 public class TopLevelTraversal extends AbstractAnalyserVisitor {
+	
+	/** Called rules whose type cannot be determined without analysing the last sentence of the do {} */
+	private LinkedList<CalledRule> pendingCalledRules = new LinkedList<CalledRule>();
 	
 	public TopLevelTraversal(ATLModel model, GlobalNamespace mm, Unit root, TypingModel typ, ErrorModel errors) {
 		super(model, mm, root, typ, errors);
@@ -39,8 +55,13 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 		this.attr = attr.pushVisitor(this);
 		startVisiting(root);
 		attr.popVisitor(this);
+		
+		// Lastly deal with pending called rules
+		for (CalledRule pendingCalledRule : pendingCalledRules) {			
+			treatPendingCalledRule(pendingCalledRule);
+		}
 	}
-
+	
 	//@Override
 	//public VisitingActions preRule(Rule self) {
 		// return actions(); // Do not visit anything else
@@ -111,9 +132,79 @@ public class TopLevelTraversal extends AbstractAnalyserVisitor {
 
 		// Some called rules just feature a do { } block
 		if ( self.getOutPattern() != null ) {
-			Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
-			mm.getTransformationNamespace().attachRule(self.getName(), t, self);
+			ExpressionStat s = getCalledRuleReturnStatement(self);
+			if ( s == null ) {
+				Type t = attr.typeOf(self.getOutPattern().getElements().get(0).getType()); 
+				mm.getTransformationNamespace().attachRule(self.getName(), t, self);
+			} else {
+				if ( s.getExpression() instanceof VariableExp ) {
+					VariableDeclaration vd = ((VariableExp) s.getExpression()).getReferredVariable();
+					if ( self.getOutPattern().getElements().contains(vd) ) {
+
+						// Same as above
+						Type t = attr.typeOf(vd); 
+						mm.getTransformationNamespace().attachRule(self.getName(), t, self);
+						
+					} else {
+						throw new UnsupportedOperationException(self.getLocation());
+					}
+				} else {
+					pendingCalledRules.add(self);					
+				}
+			}
+		} else {
+			pendingCalledRules.add(self);
 		}
+	}
+
+
+	private ExpressionStat getCalledRuleReturnStatement(CalledRule self) {
+		if ( self.getActionBlock() == null ) 
+			return null;
+		List<Statement> statements = self.getActionBlock().getStatements();
+		Statement last = statements.get(statements.size() - 1);
+				
+		if ( last instanceof ExpressionStat ) {
+			return (ExpressionStat) last;
+		}
+		return null;
+	}
+	
+	private void treatPendingCalledRule(CalledRule self) {
+		ExpressionStat last = getCalledRuleReturnStatement(self);
+		if ( last == null ) {
+			throw new UnsupportedOperationException(self.getLocation());
+		}
+
+		if ( last.getExpression() instanceof OperationCallExp && ((OperationCallExp) last.getExpression()).getSource() instanceof VariableExp ) {
+			OperationCallExp op = (OperationCallExp) last.getExpression();
+			VariableExp ve = (VariableExp) op.getSource();
+			if ( ve.getReferredVariable().getVarName().equals("thisModule") ) {
+				Type t = findImperativeRuleByName(op.getOperationName(), op);
+				mm.getTransformationNamespace().attachRule(self.getName(), t, self);				
+				return;
+			}
+		} else if ( last.getExpression() instanceof VariableExp && ((VariableExp) last.getExpression()).getReferredVariable() instanceof RuleVariableDeclaration) {
+			Type t = attr.typeOf( ((VariableExp) last.getExpression()).getReferredVariable() );
+			mm.getTransformationNamespace().attachRule(self.getName(), t, self);				
+			return;
+		}
+		throw new UnsupportedOperationException(OclGenerator.gen(last.getExpression()) + " - " + self.getLocation());		
+	}
+
+	
+	private Type findImperativeRuleByName(String operationName, OperationCallExp node) {
+		Module m = model.allObjectsOf(Module.class).get(0);
+		for(ModuleElement e : m.getElements()) {
+			if ( e instanceof Rule && ((Rule) e).getName().equals(operationName) ) {
+				TransformationNamespace tspace = mm.getTransformationNamespace();
+				// So far, no types because we do not argument types because there is no overriding...
+				Type t = tspace.getOperationType(operationName, new Type[0], node);
+				return t;
+			}
+		}
+		
+		throw new IllegalArgumentException("Cannot find rule " + operationName);
 	}
 
 	@Override

@@ -395,6 +395,7 @@ public class OclExpressionImpl extends atl.metamodel.ATLModelBaseObject implemen
 		}
 					
 		visitor.inOclExpression(this);
+		visitor.afterOclExpression(this);
 		visitor.setCurrent(pop);
 	}	
 

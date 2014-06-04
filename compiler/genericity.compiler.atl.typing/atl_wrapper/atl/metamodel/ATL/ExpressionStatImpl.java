@@ -142,6 +142,7 @@ public class ExpressionStatImpl extends atl.metamodel.ATLModelBaseObject impleme
 		}
 					
 		visitor.inExpressionStat(this);
+		visitor.afterExpressionStat(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -297,6 +297,7 @@ public class CalledRuleImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inCalledRule(this);
+		visitor.afterCalledRule(this);
 		visitor.setCurrent(pop);
 	}	
 

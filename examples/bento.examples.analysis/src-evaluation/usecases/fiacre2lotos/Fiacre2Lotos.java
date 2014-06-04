@@ -22,9 +22,18 @@ public class Fiacre2Lotos extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		typing(Fiacre2Lotos_TRANSFORMATION, new Object[] { FIACRE_METAMODEL, LOTOS_METAMODEL}, 
-				   new String[] { "FIACRE", "LOTOS" });
+		String selectedError = null;
 		
+		typing(Fiacre2Lotos_TRANSFORMATION, new Object[] { FIACRE_METAMODEL, LOTOS_METAMODEL}, 
+				   new String[] { "FIACRE", "LOTOS" }, true);
+		
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("FIACRE", "tmp_/fiacre.slice.ecore", selectedError);
+		generateEffectiveMetamodel("FIACRE", "tmp_/fiacre.effective.ecore");
+		generateCSP(selectedError);
 		
 	}
 

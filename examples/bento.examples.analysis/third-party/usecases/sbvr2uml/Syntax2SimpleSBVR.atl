@@ -1,4 +1,7 @@
 -- @atlcompiler atl2006
+-- @path Syntax=/bento.examples.analysis/third-party/usecases/sbvr2uml/Syntax/Syntax.ecore
+-- @path SimpleSBVR=/bento.examples.analysis/third-party/usecases/sbvr2uml/SimpleSBVR/SimpleSBVR.ecore
+
 
 -- ******************************************************************************
 -- Copyright (c) 2009 INRIA. 

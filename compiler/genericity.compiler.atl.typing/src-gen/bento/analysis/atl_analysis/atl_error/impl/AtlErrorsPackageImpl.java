@@ -18,6 +18,7 @@ import bento.analysis.atl_analysis.atl_error.BindingProblem;
 import bento.analysis.atl_analysis.atl_error.BindingResolution;
 import bento.analysis.atl_analysis.atl_error.BindingWithResolvedByIncompatibleRule;
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
+import bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound;
 import bento.analysis.atl_analysis.atl_error.CollectionOperationOverNoCollectionError;
 import bento.analysis.atl_analysis.atl_error.DifferentBranchTypes;
 import bento.analysis.atl_analysis.atl_error.ExpectedCollectionInForEach;
@@ -30,6 +31,7 @@ import bento.analysis.atl_analysis.atl_error.InvalidArgumentProblem;
 import bento.analysis.atl_analysis.atl_error.InvalidOperand;
 import bento.analysis.atl_analysis.atl_error.IteratorBodyWrongType;
 import bento.analysis.atl_analysis.atl_error.IteratorOverEmptySequence;
+import bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.analysis.atl_analysis.atl_error.MatchedRuleWithoutOutputPattern;
 import bento.analysis.atl_analysis.atl_error.NavigationProblem;
@@ -293,6 +295,20 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	private EClass invalidArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionOperationNotFoundEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iteratorOverNoCollectionTypeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -983,6 +999,42 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCollectionOperationNotFound() {
+		return collectionOperationNotFoundEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCollectionOperationNotFound_OperationName() {
+		return (EAttribute)collectionOperationNotFoundEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIteratorOverNoCollectionType() {
+		return iteratorOverNoCollectionTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIteratorOverNoCollectionType_IteratorName() {
+		return (EAttribute)iteratorOverNoCollectionTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AtlErrorsFactory getAtlErrorsFactory() {
 		return (AtlErrorsFactory)getEFactoryInstance();
 	}
@@ -1106,6 +1158,12 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		createEAttribute(noClassFoundInMetamodelEClass, NO_CLASS_FOUND_IN_METAMODEL__CLASS_NAME);
 
 		invalidArgumentEClass = createEClass(INVALID_ARGUMENT);
+
+		collectionOperationNotFoundEClass = createEClass(COLLECTION_OPERATION_NOT_FOUND);
+		createEAttribute(collectionOperationNotFoundEClass, COLLECTION_OPERATION_NOT_FOUND__OPERATION_NAME);
+
+		iteratorOverNoCollectionTypeEClass = createEClass(ITERATOR_OVER_NO_COLLECTION_TYPE);
+		createEAttribute(iteratorOverNoCollectionTypeEClass, ITERATOR_OVER_NO_COLLECTION_TYPE__ITERATOR_NAME);
 	}
 
 	/**
@@ -1175,6 +1233,8 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		expectedCollectionInForEachEClass.getESuperTypes().add(this.getLocalProblem());
 		noClassFoundInMetamodelEClass.getESuperTypes().add(this.getLocalProblem());
 		invalidArgumentEClass.getESuperTypes().add(this.getLocalProblem());
+		collectionOperationNotFoundEClass.getESuperTypes().add(this.getLocalProblem());
+		iteratorOverNoCollectionTypeEClass.getESuperTypes().add(this.getLocalProblem());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(localProblemEClass, LocalProblem.class, "LocalProblem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1277,6 +1337,12 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEAttribute(getNoClassFoundInMetamodel_ClassName(), ecorePackage.getEString(), "className", null, 1, 1, NoClassFoundInMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(invalidArgumentEClass, InvalidArgument.class, "InvalidArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(collectionOperationNotFoundEClass, CollectionOperationNotFound.class, "CollectionOperationNotFound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCollectionOperationNotFound_OperationName(), ecorePackage.getEString(), "operationName", null, 1, 1, CollectionOperationNotFound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(iteratorOverNoCollectionTypeEClass, IteratorOverNoCollectionType.class, "IteratorOverNoCollectionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIteratorOverNoCollectionType_IteratorName(), ecorePackage.getEString(), "iteratorName", null, 1, 1, IteratorOverNoCollectionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //AtlErrorsPackageImpl

@@ -385,6 +385,7 @@ public class LazyMatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implem
 		}
 					
 		visitor.inLazyMatchedRule(this);
+		visitor.afterLazyMatchedRule(this);
 		visitor.setCurrent(pop);
 	}	
 

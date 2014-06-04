@@ -345,6 +345,7 @@ public class SimpleInPatternElementImpl extends atl.metamodel.ATLModelBaseObject
 		}
 					
 		visitor.inSimpleInPatternElement(this);
+		visitor.afterSimpleInPatternElement(this);
 		visitor.setCurrent(pop);
 	}	
 

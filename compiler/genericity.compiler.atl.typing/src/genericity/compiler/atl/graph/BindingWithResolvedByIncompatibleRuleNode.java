@@ -50,6 +50,14 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		
 		OclSlice.slice(slice, binding.getValue());
 		
+		// Needed for the error
+		for(ResolvedRuleInfo r : problem.getRules()) {
+			MatchedRule mr = (MatchedRule) atlModel.findWrapper(r.getElement());
+			if ( mr.getInPattern().getFilter() != null ) {
+				OclSlice.slice(slice, mr.getInPattern().getFilter());
+			}
+		}
+		
 	}
 
 	@Override
@@ -77,13 +85,9 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		EList<ResolvedRuleInfo> rules = problem.getRules();
 		assert(rules.size() > 0);
 		
-		OclExpression value = model.gen(binding.getValue());		
+		OclExpression value = genBindingRightPart(model, binding, bindingAnn);		
 		if ( TypeUtils.isReference(bindingAnn.getSourceType()) ) {
-			LetExp let = model.createLetScope(value, null, "_problem_");
-			VariableDeclaration varDcl = let.getVariable();
-			let.setIn_( genOrRules(model, rules, varDcl));
-		
-			result = let;
+			result = createReferenceConstraint(model, rules, value);
 		} else if ( TypeUtils.isCollection(bindingAnn.getSourceType()) ) {
 			IteratorExp exists = model.createExists(value, "_problem_");
 			VariableDeclaration varDcl = exists.getIterators().get(0);
@@ -96,11 +100,21 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 			exists.setBody(lastExpr);
 			
 			result = exists;
+		} else if ( TypeUtils.isUnionWithReferences(bindingAnn.getSourceType())) {
+			result = createReferenceConstraint(model, rules, value);	
 		} else {
 			throw new IllegalStateException();
 		}
 		
 		return result;
+	}
+
+	private LetExp createReferenceConstraint(CSPModel model,
+			EList<ResolvedRuleInfo> rules, OclExpression value) {
+		LetExp let = model.createLetScope(value, null, "_problem_");
+		VariableDeclaration varDcl = let.getVariable();
+		let.setIn_( genOrRules(model, rules, varDcl));
+		return let;
 	}
 
 	private OclExpression genOrRules(CSPModel model, EList<ResolvedRuleInfo> rules, VariableDeclaration varDcl) {
@@ -136,10 +150,28 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		// Generate the filter
 		OclExpression filter = null;
 		if ( r.getInPattern().getFilter() != null ) {
+			model.openEmptyScope();
+			
+			SimpleInPatternElement simpleElement = (SimpleInPatternElement) r.getInPattern().getElements().get(0);
+			
+			// => let newVar = _problem_.oclAsType(RuleFrom) in <filter>				
+			OperationCallExp casting = model.createCastTo(varDcl, simpleElement.getType().getName());				
+			LetExp let = model.createLetScope(casting, null, simpleElement.getVarName());
+				
+			// Map the iterator var to the rule variable
+			model.addToScope(simpleElement, let.getVariable());
+			let.setIn_(model.gen(r.getInPattern().getFilter()));
+			
+			filter = let;
+			
+			/*
 			// Map the iterator var to the rule variable
 			model.addToScope((SimpleInPatternElement) r.getInPattern().getElements().get(0), varDcl);
 			
 			filter = model.gen(r.getInPattern().getFilter());
+			*/
+			
+			model.closeScope();
 		} else {
 			filter = model.createBooleanLiteral(true);
 		}

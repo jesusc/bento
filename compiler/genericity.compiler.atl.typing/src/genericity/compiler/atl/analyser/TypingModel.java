@@ -72,7 +72,6 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 
 import bento.analysis.atl_analysis.Problem;
-
 import atl.metamodel.ATLModelBaseObjectInterface;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.CalledRule;
@@ -86,6 +85,7 @@ import atl.metamodel.OCL.IterateExp;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.MapExp;
+import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperatorCallExp;
 import atl.metamodel.OCL.PropertyCallExp;
 import atl.metamodel.OCL.TupleExp;
@@ -277,7 +277,7 @@ public class TypingModel {
 		if ( t1 instanceof EmptyCollectionType ) return t2;
 		else if ( t2 instanceof EmptyCollectionType ) return t1;
 		
-		if ( (t1 instanceof UnionType) || (t1 instanceof UnionType) ) {
+		if ( (t1 instanceof UnionType) || (t2 instanceof UnionType) ) {
 			ArrayList<Type> types = new ArrayList<Type>();
 			if ( t1 instanceof UnionType ) {
 				addUniqueTypes(types, ((UnionType) t1).getPossibleTypes());
@@ -396,6 +396,7 @@ public class TypingModel {
 				if ( ! equalTypes(ut1.getPossibleTypes().get(i), ut2.getPossibleTypes().get(i)) )
 					return false;
 			}			
+			return true;
 		}
 		
 		throw new UnsupportedOperationException("EqualTypes: " + t1 + " - " + t2);
@@ -746,6 +747,8 @@ public class TypingModel {
 			} else if ( t instanceof TypeError ) {
 			} else if ( t instanceof Unknown ) {
 				System.err.println("TODO: OclAny in right part of the binding. Nothing done so far.");
+			} else if ( t instanceof EmptyCollectionType ) {
+				System.err.println("TODO: Empty collection in right part of the binding. Nothing done so far.");				
 			} else {
 				throw new UnsupportedOperationException(t.getClass().getName());
 			}
@@ -763,9 +766,15 @@ public class TypingModel {
 		return cf;
 	}
 
+	
+	private HashMap<OclExpression, Type> implicitlyCasted = new HashMap<OclExpression, Type>();
+	public void markImplicitlyCasted(OclExpression source, Type t) {
+		implicitlyCasted.put(source, t);
+	}
 
-
-
+	public Type getImplicitlyCasted(OclExpression expr) {
+		return implicitlyCasted.get(expr);
+	}
 
 	
 }

@@ -86,6 +86,8 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.EXPECTED_COLLECTION_IN_FOR_EACH: return createExpectedCollectionInForEach();
 			case AtlErrorsPackage.NO_CLASS_FOUND_IN_METAMODEL: return createNoClassFoundInMetamodel();
 			case AtlErrorsPackage.INVALID_ARGUMENT: return createInvalidArgument();
+			case AtlErrorsPackage.COLLECTION_OPERATION_NOT_FOUND: return createCollectionOperationNotFound();
+			case AtlErrorsPackage.ITERATOR_OVER_NO_COLLECTION_TYPE: return createIteratorOverNoCollectionType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -349,6 +351,26 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public InvalidArgument createInvalidArgument() {
 		InvalidArgumentImpl invalidArgument = new InvalidArgumentImpl();
 		return invalidArgument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionOperationNotFound createCollectionOperationNotFound() {
+		CollectionOperationNotFoundImpl collectionOperationNotFound = new CollectionOperationNotFoundImpl();
+		return collectionOperationNotFound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IteratorOverNoCollectionType createIteratorOverNoCollectionType() {
+		IteratorOverNoCollectionTypeImpl iteratorOverNoCollectionType = new IteratorOverNoCollectionTypeImpl();
+		return iteratorOverNoCollectionType;
 	}
 
 	/**

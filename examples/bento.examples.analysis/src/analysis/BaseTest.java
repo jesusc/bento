@@ -26,6 +26,7 @@ import java.util.Set;
 import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.EMFLoader;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -47,6 +48,11 @@ import bento.analyser.footprint.EffectiveMetamodelBuilder;
 import bento.analyser.footprint.TrafoMetamodelData;
 import bento.analyser.util.StandaloneAtlLoader;
 import bento.analysis.atl_analysis.Problem;
+import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
+import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
+import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
+import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundImpl;
 import bento.componetization.atl.CallSite;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -114,13 +120,13 @@ public abstract class BaseTest {
 	
 	protected int countLOCs() {
 		try {
-			FileReader r = new FileReader(atlTransformationFile);
+			FileReader r = new FileReader(atlTransformationFile.replace(".xmi", ""));
 			BufferedReader br = new BufferedReader(r);
 			String s = null;
 			int count = 0;
 			while ( (s = br.readLine()) != null ) {
 				s = s.trim();
-				if ( ! s.startsWith("--") ) {
+				if ( ! s.startsWith("--") && ! s.isEmpty() ) {
 					count++;
 				}
 			}
@@ -135,12 +141,16 @@ public abstract class BaseTest {
 	}
 	
 	protected void printStatistics() {
-		int helpers = 0, matchedRules = 0, lazyRules = 0, calledRules = 0;
+		int helpers = 0, matchedRules = 0, abstractRules = 0,  lazyRules = 0, calledRules = 0;
 		Module module = atlTransformation.allObjectsOf(Module.class).get(0);
 		for(ModuleElement e : module.getElements()) {
 			if      ( e instanceof Helper ) helpers++;
-			else if ( e instanceof MatchedRule ) matchedRules++;
 			else if ( e instanceof LazyMatchedRule ) lazyRules++;
+			else if ( e instanceof MatchedRule ) {
+				MatchedRule mr = (MatchedRule) e;
+				if ( mr.getIsAbstract() ) abstractRules++;
+				else matchedRules++;
+			}
 			else if ( e instanceof CalledRule ) calledRules++;
 			else throw new UnsupportedOperationException();
 		}
@@ -150,7 +160,7 @@ public abstract class BaseTest {
 		System.out.println("Transformation statistics");
 		System.out.println(" * LOC : " + numberOfLines);
 		if ( helpers > 0 ) 		System.out.println(" * Helpers : " + helpers);
-		if ( matchedRules > 0 ) System.out.println(" * Matched rules : " + matchedRules);
+		if ( matchedRules > 0 ) System.out.println(" * Matched rules : " + matchedRules + (abstractRules > 0 ? "(abstract = " + abstractRules + ")": ""));
 		if ( lazyRules > 0 ) 	System.out.println(" * Lazy rules : " + lazyRules);
 		if ( calledRules > 0 ) 	System.out.println(" * Called rules : " + calledRules);
 				
@@ -174,13 +184,22 @@ public abstract class BaseTest {
 	}
 
 	
+	protected EList<Problem> getProblems() {
+		return analyser.getErrors().getAnalysis().getProblems();
+	}
+	
 	protected void printErrorsByType() {
 		HashMap<Class<?>, List<Problem>> problemsByType = new HashMap<Class<?>, List<Problem>>();
 		for(Problem p : analyser.getErrors().getAnalysis().getProblems()) {
-			if ( ! problemsByType.containsKey(p.getClass()) ) 
-				problemsByType.put(p.getClass(), new ArrayList<Problem>());
+			Class<?> klass = p.getClass();
+			if ( p instanceof LocalProblem && ((LocalProblem) p).getRecovery() != null ) {
+				klass = ((LocalProblem) p).getRecovery().getClass();
+			}
 			
-			problemsByType.get(p.getClass()).add(p);
+			if ( ! problemsByType.containsKey(klass) ) 
+				problemsByType.put(klass, new ArrayList<Problem>());
+			
+			problemsByType.get(klass).add(p);
 		}
 		
 		System.out.println("Problems by type");
@@ -205,6 +224,24 @@ public abstract class BaseTest {
 		generateCSP(null);
 	}
 	
+
+	protected void generateCSP_filtered(String location) throws IOException {
+		List<ProblemPath> problems = analyser.getDependencyGraph().getSortedPaths();
+		for (ProblemPath path : problems) {
+			LocalProblem p = path.getProblem();
+			if ( location != null && ! p.getLocation().equals(location) ) 
+				continue;
+			
+			if ( p instanceof BindingWithoutRule || p instanceof BindingPossiblyUnresolved || p instanceof FeatureNotFound ) {
+				String s = new CSPGenerator(dependencyGraph, slice, new StandaloneAtlLoader()).generateCSP(path, analyser);
+				if ( location != null ) {
+					System.out.println(s);
+				}
+				printToErrorFile(s);
+			}
+		}
+	}
+	
 	protected void generateCSP(String location) throws IOException {
 		//if ( slice == null )
 		//	throw new IllegalStateException("Error slice should be computed before generating CSP");
@@ -214,6 +251,10 @@ public abstract class BaseTest {
 			// Debugging purposes
 			System.out.println(s);
 		}
+		printToErrorFile(s);
+	}
+
+	private void printToErrorFile(String s) throws IOException {
 		if ( ! s.trim().isEmpty() ) {
 			
 			FileWriter fw = new FileWriter("tmp_/errors.txt", true);

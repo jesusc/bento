@@ -416,6 +416,7 @@ public class EnumLiteralExpImpl extends atl.metamodel.ATLModelBaseObject impleme
 		}
 					
 		visitor.inEnumLiteralExp(this);
+		visitor.afterEnumLiteralExp(this);
 		visitor.setCurrent(pop);
 	}	
 

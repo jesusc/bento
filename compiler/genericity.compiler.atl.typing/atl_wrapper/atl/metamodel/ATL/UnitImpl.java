@@ -163,6 +163,7 @@ public class UnitImpl extends atl.metamodel.ATLModelBaseObject implements Unit {
 		}
 					
 		visitor.inUnit(this);
+		visitor.afterUnit(this);
 		visitor.setCurrent(pop);
 	}	
 

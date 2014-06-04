@@ -623,6 +623,7 @@ public class OclAnyTypeImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inOclAnyType(this);
+		visitor.afterOclAnyType(this);
 		visitor.setCurrent(pop);
 	}	
 

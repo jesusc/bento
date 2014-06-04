@@ -364,6 +364,7 @@ public class MatchedRuleImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inMatchedRule(this);
+		visitor.afterMatchedRule(this);
 		visitor.setCurrent(pop);
 	}	
 

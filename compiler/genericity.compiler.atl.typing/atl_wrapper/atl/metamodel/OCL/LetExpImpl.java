@@ -441,6 +441,7 @@ public class LetExpImpl extends atl.metamodel.ATLModelBaseObject implements LetE
 		}
 					
 		visitor.inLetExp(this);
+		visitor.afterLetExp(this);
 		visitor.setCurrent(pop);
 	}	
 

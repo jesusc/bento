@@ -646,6 +646,7 @@ public class BagTypeImpl extends atl.metamodel.ATLModelBaseObject implements Bag
 		}
 					
 		visitor.inBagType(this);
+		visitor.afterBagType(this);
 		visitor.setCurrent(pop);
 	}	
 

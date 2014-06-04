@@ -1,0 +1,34 @@
+-- @path ABCD=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+-- @path WZYZ=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+
+module abcd;
+create OUT : WXYZ from IN : ABCD;
+
+helper context ABCD!A def : with_error : Integer =
+	self.invalid_feature;
+
+rule model {
+        from src : ABCD!Model 
+        to   tgt : WXYZ!Model (
+			name <- 'invented',
+        	elements <- src.elements
+		)
+}
+
+rule a_1 {
+	from
+		a : ABCD!A ( a.name.oclIsUndefined() )
+	to 
+		w : WXYZ!W (
+			name <- a.with_error
+		)
+}
+
+rule a_2 {
+	from
+		a : ABCD!A ( not a.name.oclIsUndefined() )
+	to 
+		w : WXYZ!W (
+			name <- a.with_error
+		)
+}

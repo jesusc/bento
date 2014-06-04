@@ -418,6 +418,7 @@ public class SequenceExpImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inSequenceExp(this);
+		visitor.afterSequenceExp(this);
 		visitor.setCurrent(pop);
 	}	
 

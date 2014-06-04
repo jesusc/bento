@@ -26,6 +26,8 @@ public class Analyser {
 	private boolean doDependency = true;
 	private ProblemGraph problemGraph;
 	
+	public static final String USE_THIS_MODULE_CLASS = "ThisModule";
+	
 	/*
 	public Analyser(GlobalNamespace mm, Resource atlResource, BasicEMFModel out) throws IOException {
 		this(mm, new ATLModel(atlResource), out);

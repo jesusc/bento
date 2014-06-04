@@ -188,6 +188,7 @@ public class MapElementImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inMapElement(this);
+		visitor.afterMapElement(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -53,8 +53,17 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		
 		OclSlice.slice(slice, binding.getValue());
 		
+		// Needed for the error
 		for (EClass c : problem.getProblematicClasses()) {
 			slice.addMetaclassNeededInError(c);
+		}
+		
+		EList<MatchedRuleOneAnn> resolved = bindingAnn.getResolvedBy();
+		for (MatchedRuleOneAnn matchedRuleOneAnn : resolved) {
+			MatchedRule mr = (MatchedRule) atlModel.findWrapper(matchedRuleOneAnn.getRule());
+			if ( mr.getInPattern().getFilter() != null ) {
+				OclSlice.slice(slice, mr.getInPattern().getFilter());
+			}
 		}
 	}
 
@@ -84,21 +93,9 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		EList<MatchedRuleOneAnn> rules = bindingAnn.getResolvedBy();
 		assert(rules.size() > 0);
 		
-		OclExpression value = model.gen(binding.getValue());		
+		OclExpression value = genBindingRightPart(model, binding, bindingAnn);		
 		if ( TypeUtils.isReference(bindingAnn.getSourceType()) ) {
-			LetExp let = model.createLetScope(value, null, "_problem_");
-			VariableDeclaration varDcl = let.getVariable();
-			
-			OclExpression andRules = genAndRules(model, rules, varDcl);
-			
-			// => not varDcl.oclIsUndefined()
-			VariableExp varRef = model.create(VariableExp.class);
-			varRef.setReferredVariable(varDcl);
-			OperatorCallExp notUndefined = model.negateExpression(model.createOperationCall(varRef, "oclIsUndefined"));
-			
-			let.setIn_( model.createBinaryOperator(notUndefined, andRules, "and") );
-			
-			result = let;
+			result = createReferenceConstraint(model, rules, value);
 		} else if ( TypeUtils.isCollection(bindingAnn.getSourceType()) ) {
 			IteratorExp exists = model.createExists(value, "_problem_");
 			VariableDeclaration varDcl = exists.getIterators().get(0);
@@ -110,11 +107,30 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 			exists.setBody(lastExpr);
 			
 			result = exists;
+		} else if ( TypeUtils.isUnionWithReferences(bindingAnn.getSourceType())) {
+			result = createReferenceConstraint(model, rules, value);
 		} else {
-			throw new IllegalStateException();
+			// TODO: For union types with mixed collections and mono-valued elements, Sequence { value }->flatten()
+			throw new IllegalStateException(this.binding.getLocation() + " " + TypeUtils.typeToString(bindingAnn.getSourceType()));
 		}
 		
 		return result;
+	}
+
+	private LetExp createReferenceConstraint(CSPModel model,
+			EList<MatchedRuleOneAnn> rules, OclExpression value) {
+		LetExp let = model.createLetScope(value, null, "_problem_");
+		VariableDeclaration varDcl = let.getVariable();
+		
+		OclExpression andRules = genAndRules(model, rules, varDcl);
+		
+		// => not varDcl.oclIsUndefined()
+		VariableExp varRef = model.create(VariableExp.class);
+		varRef.setReferredVariable(varDcl);
+		OperatorCallExp notUndefined = model.negateExpression(model.createOperationCall(varRef, "oclIsUndefined"));
+		
+		let.setIn_( model.createBinaryOperator(notUndefined, andRules, "and") );
+		return let;
 	}
 
 	private OclExpression genAndRules(CSPModel model,
@@ -127,13 +143,13 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 			// => _problem_.oclIsKindOf(ruleFrom)
 			VariableExp v = model.create(VariableExp.class);
 			v.setReferredVariable(varDcl);				
-			OclExpression kindOfCondition = model.createKindOf_AllInstancesStyle(v, null, rule.getInPatternType().getName());
-			
-			
+			OclExpression kindOfCondition = model.createKindOf_AllInstancesStyle(v, null, rule.getInPatternType().getName());			
 			
 			// Generate the filter
 			OclExpression filter = null;
 			if ( r.getInPattern().getFilter() != null ) {
+				model.openEmptyScope();
+
 				SimpleInPatternElement simpleElement = (SimpleInPatternElement) r.getInPattern().getElements().get(0);
 				
 				// => let newVar = _problem_.oclAsType(RuleFrom) in <filter>				
@@ -145,6 +161,8 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 				let.setIn_(model.gen(r.getInPattern().getFilter()));
 				
 				filter = let;
+
+				model.closeScope();
 			} else {
 				filter = model.createBooleanLiteral(true);
 			}

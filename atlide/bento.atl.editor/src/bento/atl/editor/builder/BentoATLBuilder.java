@@ -1,5 +1,7 @@
 package bento.atl.editor.builder;
 
+import genericity.compiler.atl.analyser.ErrorUtils;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -164,7 +166,7 @@ public class BentoATLBuilder extends IncrementalProjectBuilder {
 		*/
 		
 		
-		String description = lp.getDescription() != null ? lp.getDescription() : lp.getClass().getName();
+		String description = ErrorUtils.getShortError(lp);
 		String location = lp.getLocation();
 		String[] parts = location.split("-")[0].split(":"); //$NON-NLS-1$ //$NON-NLS-2$
 

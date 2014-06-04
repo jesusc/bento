@@ -188,6 +188,7 @@ public class ForStatImpl extends atl.metamodel.ATLModelBaseObject implements For
 		}
 					
 		visitor.inForStat(this);
+		visitor.afterForStat(this);
 		visitor.setCurrent(pop);
 	}	
 

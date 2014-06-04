@@ -1,0 +1,26 @@
+-- @path ABCD=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+-- @path WZYZ=/bento.examples.analysis/tests/bento/tests/ABCD.ecore
+
+module abcd;
+create OUT : WXYZ from IN : ABCD;
+
+helper context ABCD!A def : with_error : Boolean =
+	self.invalid_feature;
+
+rule model {
+        from src : ABCD!Model 
+        to   tgt : WXYZ!Model (
+        	elements <- if true then let elems : Sequence(ABCD!A) = src.elements in
+						let unused_elem : String = 'something' in
+						let anA : ABCD!A = ABCD!A.allInstances()->first() in
+						elems->select(a | a = anA and a.with_error)
+			else OclUndefined endif
+        )
+}
+
+rule a {
+	from
+		a : ABCD!A
+	to 
+		w : WXYZ!W
+}

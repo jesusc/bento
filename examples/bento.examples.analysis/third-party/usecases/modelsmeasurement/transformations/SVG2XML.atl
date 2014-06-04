@@ -1,4 +1,6 @@
 --@atlcompiler	atl2006
+-- @path SVG=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/SVG.ecore
+-- @path XML=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/XML.ecore
 --@name			SVG2XML
 --@version		2.0
 --@domains		SVG, extractor

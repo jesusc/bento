@@ -64,7 +64,8 @@ public class CallExprNode extends AbstractDependencyNode {
 	
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
-		OclSlice.slice(slice, call);
+		OclSlice.slice(slice, call.getSource());
+		// call.getSource() does not work, why???
 		generatedDependencies(slice);
 	}
 	

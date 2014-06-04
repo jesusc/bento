@@ -485,6 +485,7 @@ public class IteratorExpImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inIteratorExp(this);
+		visitor.afterIteratorExp(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -418,6 +418,7 @@ public class SetExpImpl extends atl.metamodel.ATLModelBaseObject implements SetE
 		}
 					
 		visitor.inSetExp(this);
+		visitor.afterSetExp(this);
 		visitor.setCurrent(pop);
 	}	
 

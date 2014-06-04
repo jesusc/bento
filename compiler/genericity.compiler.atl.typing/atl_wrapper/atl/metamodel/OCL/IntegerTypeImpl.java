@@ -623,6 +623,7 @@ public class IntegerTypeImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inIntegerType(this);
+		visitor.afterIntegerType(this);
 		visitor.setCurrent(pop);
 	}	
 

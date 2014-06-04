@@ -1,4 +1,6 @@
 -- @atlcompiler atl2006
+-- @path FIACRE=/bento.examples.analysis/third-party/usecases/fiacre2lotos/Metamodel/FIACRE.ecore
+-- @path LOTOS=/bento.examples.analysis/third-party/usecases/fiacre2lotos/Metamodel/LOTOS.ecore
 module FIACRE2LOTOS;
 create OUT : LOTOS from IN : FIACRE;
 

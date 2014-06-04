@@ -418,6 +418,7 @@ public class PropertyCallExpImpl extends atl.metamodel.ATLModelBaseObject implem
 		}
 					
 		visitor.inPropertyCallExp(this);
+		visitor.afterPropertyCallExp(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -12,6 +12,7 @@ import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.CallExprAnn;
+import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,10 +36,13 @@ import atl.metamodel.ATL.BindingStat;
 import atl.metamodel.ATL.ForEachOutPatternElement;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.Module;
+import atl.metamodel.ATL.ModuleElement;
+import atl.metamodel.ATL.OutPattern;
 import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.Rule;
 import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Unit;
+import atl.metamodel.ATLModelVisitor.VisitingActions;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.VariableExp;
 
@@ -75,7 +79,8 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 
 		List<? extends BindingStat> stats = model.allObjectsOf(BindingStat.class);
 		for (BindingStat bindingStat : stats) {
-			CallExprAnn ann = attr.annotationOf(bindingStat.getSource());
+			// The expresion could be a simple var or an access to a feature (callexpr)
+			ExpressionAnnotation ann = attr.annotationOf(bindingStat.getSource());
 			if ( ann.getUsedFeature() != null ) {
 				EStructuralFeature f = (EStructuralFeature) ann.getUsedFeature();
 				if ( TypeUtils.isFeatureMustBeInitialized(f) ) {
@@ -101,6 +106,22 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	private HashSet<EStructuralFeature> allWrittenCompulsoryFeatures = new HashSet<EStructuralFeature>();
 	
 	@Override
+	public VisitingActions preSimpleOutPatternElement(SimpleOutPatternElement self) {
+		return actions("type" , "initExpression" , filter("getFlattenedBindings", self) , "reverseBindings");
+	}
+	
+	public List<Binding> getFlattenedBindings(SimpleOutPatternElement self) {
+		List<Binding> result = new ArrayList<Binding>(self.getBindings());
+		OutPattern outPattern = self.container(OutPattern.class);
+		Rule r = outPattern.container(Rule.class);
+		if ( outPattern.getElements().get(0) == self && r instanceof MatchedRule && ((MatchedRule) r).getSuperRule() != null) {
+			List<Binding> supers = getFlattenedBindings( (SimpleOutPatternElement) ((MatchedRule) r).getSuperRule().getOutPattern().getElements().get(0) );
+			result.addAll(supers);
+		}
+		return result;
+	}
+	
+	@Override
 	public void beforeSimpleOutPatternElement(SimpleOutPatternElement self) {
 		Metaclass mc = (Metaclass) attr.typeOf( self.getType() );
 		setCurrentCompulsoryFeatures(mc);
@@ -115,6 +136,13 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inSimpleOutPatternElement(SimpleOutPatternElement self) {
+		OutPattern outPattern = self.container(OutPattern.class);
+		Rule r = outPattern.container(Rule.class);
+		if ( outPattern.getElements().get(0) == self && r instanceof MatchedRule && ((MatchedRule) r).getIsAbstract() ) {
+			 // Do not check the first output pattern of abstract classes
+			return; 
+		}
+		
 		ActionBlock actionBlock = self.container_().container(Rule.class).getActionBlock();
 		if ( actionBlock != null ) {
 			TreeIterator<EObject> it = actionBlock.original_().eAllContents();
@@ -180,6 +208,9 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	}
 	
 	public void checkBindingStat(BindingStat self) {
+		if ( ! (self.getSource() instanceof NavigationOrAttributeCallExp) )
+			return;
+		
 		NavigationOrAttributeCallExp assigned = (NavigationOrAttributeCallExp) self.getSource();
 		if ( assigned.getSource() instanceof VariableExp ) {
 			Type targetVar = attr.typeOf( assigned.getSource() );

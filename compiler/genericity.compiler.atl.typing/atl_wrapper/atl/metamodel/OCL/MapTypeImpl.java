@@ -669,6 +669,7 @@ public class MapTypeImpl extends atl.metamodel.ATLModelBaseObject implements Map
 		}
 					
 		visitor.inMapType(this);
+		visitor.afterMapType(this);
 		visitor.setCurrent(pop);
 	}	
 

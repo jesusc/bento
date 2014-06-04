@@ -54,14 +54,14 @@
             value="false">
       </persistent>
    </extension>
-   <extension
+
+  <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
             class="bento.atl.editor.problems.MarkerResolutionGenerator"
             markerType="bento.atl.editor.bentoATLProblem">
       </markerResolutionGenerator>
    </extension>
-   
    
      <extension
          point="org.eclipse.ui.editors">

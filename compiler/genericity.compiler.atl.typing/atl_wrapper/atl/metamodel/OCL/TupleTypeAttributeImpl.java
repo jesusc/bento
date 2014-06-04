@@ -186,6 +186,7 @@ public class TupleTypeAttributeImpl extends atl.metamodel.ATLModelBaseObject imp
 		}
 					
 		visitor.inTupleTypeAttribute(this);
+		visitor.afterTupleTypeAttribute(this);
 		visitor.setCurrent(pop);
 	}	
 

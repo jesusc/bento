@@ -232,6 +232,7 @@ public class OperationImpl extends atl.metamodel.ATLModelBaseObject implements O
 		}
 					
 		visitor.inOperation(this);
+		visitor.afterOperation(this);
 		visitor.setCurrent(pop);
 	}	
 

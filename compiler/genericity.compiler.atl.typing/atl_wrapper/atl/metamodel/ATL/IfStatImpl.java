@@ -188,6 +188,7 @@ public class IfStatImpl extends atl.metamodel.ATLModelBaseObject implements IfSt
 		}
 					
 		visitor.inIfStat(this);
+		visitor.afterIfStat(this);
 		visitor.setCurrent(pop);
 	}	
 

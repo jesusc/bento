@@ -209,6 +209,7 @@ public class OclModelImpl extends atl.metamodel.ATLModelBaseObject implements Oc
 		}
 					
 		visitor.inOclModel(this);
+		visitor.afterOclModel(this);
 		visitor.setCurrent(pop);
 	}	
 

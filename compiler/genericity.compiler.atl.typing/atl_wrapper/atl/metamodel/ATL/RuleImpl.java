@@ -232,6 +232,7 @@ public class RuleImpl extends atl.metamodel.ATLModelBaseObject implements Rule {
 		}
 					
 		visitor.inRule(this);
+		visitor.afterRule(this);
 		visitor.setCurrent(pop);
 	}	
 

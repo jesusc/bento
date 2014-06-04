@@ -464,6 +464,7 @@ public class LoopExpImpl extends atl.metamodel.ATLModelBaseObject implements Loo
 		}
 					
 		visitor.inLoopExp(this);
+		visitor.afterLoopExp(this);
 		visitor.setCurrent(pop);
 	}	
 

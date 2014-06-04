@@ -418,6 +418,7 @@ public class MapExpImpl extends atl.metamodel.ATLModelBaseObject implements MapE
 		}
 					
 		visitor.inMapExp(this);
+		visitor.afterMapExp(this);
 		visitor.setCurrent(pop);
 	}	
 

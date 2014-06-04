@@ -7,8 +7,11 @@ import genericity.compiler.atl.analyser.namespaces.UnknownNamespace;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATLModel;
+import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.ATL.CalledRule;
 import atl.metamodel.ATL.Module;
+import atl.metamodel.ATL.ModuleElement;
+import atl.metamodel.ATL.Statement;
 import atl.metamodel.ATL.Unit;
 import atl.metamodel.OCL.BooleanType;
 import atl.metamodel.OCL.IntegerType;
@@ -18,6 +21,7 @@ import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OclModel;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OrderedSetType;
+import atl.metamodel.OCL.Parameter;
 import atl.metamodel.OCL.RealType;
 import atl.metamodel.OCL.SequenceType;
 import atl.metamodel.OCL.SetType;
@@ -83,7 +87,23 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		boolean isTarget = numTargets > 0;
-		if ( isTarget && self.container_() instanceof OclExpression && ! (self.container_() instanceof CalledRule)) {
+		if ( isTarget && self.container_() instanceof OclExpression ) {
+			// Check it is not in a do block, typically invoking a newInstance
+			//  	&& ! (self.container_() instanceof CalledRule)
+			ATLModelBaseObject parent = self.container_();
+			while ( !(parent instanceof ModuleElement) ) {
+				// It is a do block?
+				if ( parent instanceof Statement ) {
+					return;
+				}
+				// Check it is in the parameters of a called rule
+				if ( parent instanceof Parameter && parent.container_() instanceof CalledRule ) {
+					return;
+				}
+				parent = parent.container_();
+			}
+			
+			
 			errors.signalReadingTargetModel(self);
 		}
 		

@@ -3117,6 +3117,190 @@ public interface AtlErrorsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.CollectionOperationNotFoundImpl <em>Collection Operation Not Found</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.CollectionOperationNotFoundImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getCollectionOperationNotFound()
+	 * @generated
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND = 33;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Operation Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND__OPERATION_NAME = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Collection Operation Not Found</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_OPERATION_NOT_FOUND_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.IteratorOverNoCollectionTypeImpl <em>Iterator Over No Collection Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.analysis.atl_analysis.atl_error.impl.IteratorOverNoCollectionTypeImpl
+	 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorOverNoCollectionType()
+	 * @generated
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE = 34;
+
+	/**
+	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__DEPENDENTS = LOCAL_PROBLEM__DEPENDENTS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__DESCRIPTION = LOCAL_PROBLEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Severity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__SEVERITY = LOCAL_PROBLEM__SEVERITY;
+
+	/**
+	 * The feature id for the '<em><b>Needs CSP</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__NEEDS_CSP = LOCAL_PROBLEM__NEEDS_CSP;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__LOCATION = LOCAL_PROBLEM__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__ELEMENT = LOCAL_PROBLEM__ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Recovery</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__RECOVERY = LOCAL_PROBLEM__RECOVERY;
+
+	/**
+	 * The feature id for the '<em><b>Iterator Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE__ITERATOR_NAME = LOCAL_PROBLEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Iterator Over No Collection Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_OVER_NO_COLLECTION_TYPE_FEATURE_COUNT = LOCAL_PROBLEM_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.LocalProblem <em>Local Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3832,6 +4016,48 @@ public interface AtlErrorsPackage extends EPackage {
 	EClass getInvalidArgument();
 
 	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound <em>Collection Operation Not Found</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection Operation Not Found</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound
+	 * @generated
+	 */
+	EClass getCollectionOperationNotFound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound#getOperationName <em>Operation Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operation Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.CollectionOperationNotFound#getOperationName()
+	 * @see #getCollectionOperationNotFound()
+	 * @generated
+	 */
+	EAttribute getCollectionOperationNotFound_OperationName();
+
+	/**
+	 * Returns the meta object for class '{@link bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType <em>Iterator Over No Collection Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Iterator Over No Collection Type</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType
+	 * @generated
+	 */
+	EClass getIteratorOverNoCollectionType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType#getIteratorName <em>Iterator Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Iterator Name</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.IteratorOverNoCollectionType#getIteratorName()
+	 * @see #getIteratorOverNoCollectionType()
+	 * @generated
+	 */
+	EAttribute getIteratorOverNoCollectionType_IteratorName();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4462,6 +4688,42 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INVALID_ARGUMENT = eINSTANCE.getInvalidArgument();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.CollectionOperationNotFoundImpl <em>Collection Operation Not Found</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.CollectionOperationNotFoundImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getCollectionOperationNotFound()
+		 * @generated
+		 */
+		EClass COLLECTION_OPERATION_NOT_FOUND = eINSTANCE.getCollectionOperationNotFound();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION_OPERATION_NOT_FOUND__OPERATION_NAME = eINSTANCE.getCollectionOperationNotFound_OperationName();
+
+		/**
+		 * The meta object literal for the '{@link bento.analysis.atl_analysis.atl_error.impl.IteratorOverNoCollectionTypeImpl <em>Iterator Over No Collection Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.analysis.atl_analysis.atl_error.impl.IteratorOverNoCollectionTypeImpl
+		 * @see bento.analysis.atl_analysis.atl_error.impl.AtlErrorsPackageImpl#getIteratorOverNoCollectionType()
+		 * @generated
+		 */
+		EClass ITERATOR_OVER_NO_COLLECTION_TYPE = eINSTANCE.getIteratorOverNoCollectionType();
+
+		/**
+		 * The meta object literal for the '<em><b>Iterator Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ITERATOR_OVER_NO_COLLECTION_TYPE__ITERATOR_NAME = eINSTANCE.getIteratorOverNoCollectionType_IteratorName();
 
 	}
 

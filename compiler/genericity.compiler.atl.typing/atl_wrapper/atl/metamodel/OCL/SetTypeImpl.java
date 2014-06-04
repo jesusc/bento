@@ -646,6 +646,7 @@ public class SetTypeImpl extends atl.metamodel.ATLModelBaseObject implements Set
 		}
 					
 		visitor.inSetType(this);
+		visitor.afterSetType(this);
 		visitor.setCurrent(pop);
 	}	
 

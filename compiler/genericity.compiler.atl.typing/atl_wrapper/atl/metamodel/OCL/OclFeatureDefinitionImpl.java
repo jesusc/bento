@@ -165,6 +165,7 @@ public class OclFeatureDefinitionImpl extends atl.metamodel.ATLModelBaseObject i
 		}
 					
 		visitor.inOclFeatureDefinition(this);
+		visitor.afterOclFeatureDefinition(this);
 		visitor.setCurrent(pop);
 	}	
 

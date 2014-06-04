@@ -40,7 +40,6 @@ public class ModelsMeasurement extends BaseTest {
 	public void run() throws IOException {
 		String selectedError = null;
 		
-		
 		typing(KM32MEASURE_TRANSFORMATION, new Object[] { KM3_METAMODEL, MEASURE_METAMODEL}, 
 				   new String[] { "KM3", "Measure" }, true);
 
@@ -52,42 +51,102 @@ public class ModelsMeasurement extends BaseTest {
 		generateEffectiveMetamodel("KM3", "tmp_/KM32MEASURE.effective.ecore");
 		generateCSP(selectedError);
 
+/*		
+
+		// 
+
+		typing(UML2MEASURE_TRANSFORMATION, new Object[] { UML_METAMODEL, MEASURE_METAMODEL}, 
+				   new String[] { "UML2", "Measure" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("UML2", "tmp_/UML2MEASURE.slice.ecore", selectedError);
+		generateEffectiveMetamodel("UML2", "tmp_/UML2MEASURE.effective.ecore");
+		generateCSP(selectedError);
+
+		//
+		
+		typing(HTML2XML_TRANSFORMATION, new Object[] { HTML_METAMODEL, XML_METAMODEL }, 
+				   new String[] { "HTML", "XML" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("HTML", "tmp_/HTML2XML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("HTML", "tmp_/HTML2XML.effective.ecore");
+		generateCSP(selectedError);
+
+		//
+		
+		typing(Measure2Table_TRANSFORMATION, new Object[] { MEASURE_METAMODEL, TABLE_METAMODEL }, 
+				   new String[] { "Measure", "Table" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("Measure", "tmp_/Measure2Table.slice.ecore", selectedError);
+		generateEffectiveMetamodel("Measure", "tmp_/HTML2XML.effective.ecore");
+		generateCSP(selectedError);
+
+
+		//
+		
+		typing(Measure2XHTML_TRANSFORMATION, new Object[] { MEASURE_METAMODEL, XHTML_METAMODEL }, 
+				   new String[] { "Measure", "XHTML" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("Measure", "tmp_/Measure2XHTML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("Measure", "tmp_/Measure2XHTML.effective.ecore");
+		generateCSP(selectedError);
 
 		// 
 		
-//		typing(UML2MEASURE_TRANSFORMATION, new Object[] { UML_METAMODEL, MEASURE_METAMODEL}, 
-//				   new String[] { "UML2", "Measure" }, false);
+		typing(SVG2XML_TRANSFORMATION, new Object[] { SVG_METAMODEL, XML_METAMODEL }, 
+				   new String[] { "SVG", "XML" }, true);
+
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("SVG", "tmp_/SVG2XML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("SVG", "tmp_/SVG2XML.effective.ecore");
+		generateCSP(selectedError);
 
 		//
 		
-//		typing(HTML2XML_TRANSFORMATION, new Object[] { HTML_METAMODEL, XML_METAMODEL }, 
-//				   new String[] { "HTML", "XML" }, false);
+		typing(Table2SVGBarChart_TRANSFORMATION, new Object[] { TABLE_METAMODEL, SVG_METAMODEL }, 
+				   new String[] { "Table", "SVG" }, true);
 
-		//
+		printStatistics();
+		printErrorsByType();
 		
-//		typing(Measure2Table_TRANSFORMATION, new Object[] { MEASURE_METAMODEL, TABLE_METAMODEL }, 
-//				   new String[] { "Measure", "Table" }, false);
-
-		//
-		
-//		typing(Measure2XHTML_TRANSFORMATION, new Object[] { MEASURE_METAMODEL, XHTML_METAMODEL }, 
-//				   new String[] { "Measure", "XHTML" }, false);
-
-		// 
-		
-//		typing(SVG2XML_TRANSFORMATION, new Object[] { SVG_METAMODEL, XML_METAMODEL }, 
-//				   new String[] { "SVG", "XML" }, false);
-
-		//
-		
-//		typing(Table2SVGBarChart_TRANSFORMATION, new Object[] { TABLE_METAMODEL, SVG_METAMODEL }, 
-//				   new String[] { "Table", "SVG" }, false);
+		generateGraphviz(selectedError);
+		generateErrorSlice("Table", "tmp_/Table2SVGBarChart.slice.ecore", selectedError);
+		generateEffectiveMetamodel("Table", "tmp_/Table2SVGBarChart.effective.ecore");
+		generateCSP(selectedError);
 
 		//
 
-//		typing(XHTML2XML_TRANSFORMATION, new Object[] { XHTML_METAMODEL, XML_METAMODEL }, 
-//				   new String[] { "XHTML", "XML" }, false);
+		selectedError = "69:13-69:39";
+		
+		typing(XHTML2XML_TRANSFORMATION, new Object[] { XHTML_METAMODEL, XML_METAMODEL }, 
+				   new String[] { "XHTML", "XML" }, true);
 
+		printStatistics();
+		printErrorsByType();
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("XHTML", "tmp_/XHTML2XML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("XHTML", "tmp_/XHTML2XML.effective.ecore");
+		generateCSP(selectedError);
+*/
 	}
 
 }

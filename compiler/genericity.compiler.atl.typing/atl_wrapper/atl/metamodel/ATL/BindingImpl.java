@@ -207,6 +207,7 @@ public class BindingImpl extends atl.metamodel.ATLModelBaseObject implements Bin
 		}
 					
 		visitor.inBinding(this);
+		visitor.afterBinding(this);
 		visitor.setCurrent(pop);
 	}	
 

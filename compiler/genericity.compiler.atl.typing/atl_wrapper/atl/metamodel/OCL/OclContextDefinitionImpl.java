@@ -165,6 +165,7 @@ public class OclContextDefinitionImpl extends atl.metamodel.ATLModelBaseObject i
 		}
 					
 		visitor.inOclContextDefinition(this);
+		visitor.afterOclContextDefinition(this);
 		visitor.setCurrent(pop);
 	}	
 

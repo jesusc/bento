@@ -395,6 +395,7 @@ public class SuperExpImpl extends atl.metamodel.ATLModelBaseObject implements Su
 		}
 					
 		visitor.inSuperExp(this);
+		visitor.afterSuperExp(this);
 		visitor.setCurrent(pop);
 	}	
 

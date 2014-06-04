@@ -1,4 +1,6 @@
 --@atlcompiler	atl2006
+-- @path XHTML=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/XHTML.ecore
+-- @path XML=/bento.examples.analysis/third-party/usecases/modelsmeasurement/metamodels/XML.ecore
 --@name			XHTML2XML
 --@version		2.0
 --@domains		XHTML, Table

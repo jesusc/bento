@@ -23,14 +23,17 @@ public class RunningExampleTests extends BaseTest {
 	@Test
 	public void testUML2BPMN() throws IOException {
 		String UML2Intalio = "../bento.examples.analysis/tests/ase/running/UML2Intalio.atl.xmi";
+		String selectedError = null; //"17:33-17:47";
 		
 		typing(UML2Intalio, new Object[] { UML_METAMODEL, BPMN_METAMODEL }, 
 				   new String[] { "UML", "Intalio" }, true);
 		
-		generateGraphviz("47:3-47:22");
-		generateErrorSlice("UML", "tmp_/uml2intalio.slice.ecore");
+		generateGraphviz(selectedError);
+		generateErrorSlice("UML", "tmp_/uml2intalio.slice.ecore"); //, selectedError);
 		generateEffectiveMetamodel("UML", "tmp_/uml2intalio.effective.ecore");
-		generateCSP("47:3-47:22");
+		generateCSP(selectedError);
+		
+		printErrorsByType();
 	}
 	
 	/*

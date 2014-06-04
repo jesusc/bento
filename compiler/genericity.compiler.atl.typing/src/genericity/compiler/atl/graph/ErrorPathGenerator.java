@@ -112,6 +112,8 @@ public class ErrorPathGenerator {
 		// These two are very similar
 		} else if ( p instanceof BindingExpectedOneAssignedMany ) {
 			generatePath_BindingExpectedOneAssignedMany((BindingExpectedOneAssignedMany) p);				
+		} else if ( p instanceof BindingWithoutRule ) {
+			generatePath_BindingWithoutRule((BindingWithoutRule) p);
 		} else if ( p instanceof BindingWithResolvedByIncompatibleRule ) {
 			generatePath_BindingWithResolvedByIncompatibleRule((BindingWithResolvedByIncompatibleRule) p);				
 		} else if ( p instanceof BindingPossiblyUnresolved ) {
@@ -120,11 +122,12 @@ public class ErrorPathGenerator {
 			generatePath_FeatureNotFound((FeatureNotFound) p);
 		} else if ( p instanceof OperationNotFound ) {
 			generatePath_OperationNotFound((OperationNotFound) p);			
+		} else if ( p instanceof FlattenOverNonNestedCollection ) {
+			generatePath_FlattenOverNonNestedCollection((FlattenOverNonNestedCollection) p);					
 		}
 	
 		return currentPath;
 	}
-
 
 	private void generatePath_FeatureNotFound(FeatureNotFound p) {
 		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
@@ -144,6 +147,31 @@ public class ErrorPathGenerator {
 		pathFromErrorExpression(atlExpr.getSource(), 
 				(ExpressionAnnotation) typ.getAnnotation(atlExpr.getSource().original_()), node);		
 	}		
+
+
+	private void generatePath_FlattenOverNonNestedCollection(FlattenOverNonNestedCollection p) {
+		PropertyCallExp atlExpr = (PropertyCallExp) atlModel.findWrapper( p.getElement() );
+		FlattenOverNonNestedCollectionNode node = new FlattenOverNonNestedCollectionNode(p, atlExpr);
+		currentPath = new ProblemPath(p, node);
+		
+		pathFromErrorExpression(atlExpr, 
+				(ExpressionAnnotation) typ.getAnnotation(atlExpr.original_()), node);		
+	}
+
+
+	private void generatePath_BindingWithoutRule(BindingWithoutRule p) {
+		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
+		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
+
+		ProblemNode node = new BindingWithoutRuleNode(p, atlBinding, b, atlModel);
+		currentPath = new ProblemPath(p, node);
+			
+		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
+		RuleAnn rule = (RuleAnn) op.eContainer();
+		pathToRule(rule, node, new TraversedSet());	
+		
+		pathToBinding(atlBinding, b, node, new TraversedSet());		
+	}
 	
 	private void generatePath_BindingExpectedOneAssignedMany(BindingExpectedOneAssignedMany p) {
 		Binding atlBinding = (Binding) atlModel.findWrapper( p.getElement() );
@@ -157,7 +185,6 @@ public class ErrorPathGenerator {
 		pathToRule(rule, node, new TraversedSet());	
 		
 		pathToBinding(atlBinding, b, node, new TraversedSet());
-
 	}
 
 	private void generatePath_BindingPossiblyUnresolved(BindingPossiblyUnresolved p) {
@@ -231,7 +258,7 @@ public class ErrorPathGenerator {
 		} else if ( parent instanceof IfExp ) {
 			return pathToIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
 		} else if ( parent instanceof LetExp ) {
-			return pathToLetExpr((LetExp) parent, node, traversed);
+			return pathToLetExpr((LetExp) parent, lastParent, node, traversed);
 		} else {
 			throw new UnsupportedOperationException();
 		}
@@ -280,7 +307,16 @@ public class ErrorPathGenerator {
 	}
 
 
-	private boolean pathToLetExpr(LetExp start, DependencyNode node, TraversedSet traversed) {
+	private boolean pathToLetExpr(LetExp start, ATLModelBaseObject childToLet, DependencyNode node, TraversedSet traversed) {
+		// The error comes to the variable declaration
+		if ( start.getVariable() == childToLet ) {
+			// ExpressionAnnotation ann = (ExpressionAnnotation) typ.getAnnotation(childToLet.original_());
+			// DelimitedExpressionNode newNode = new DelimitedExpressionNode(start.getVariable().getInitExpression(), ann);
+
+			// return checkReachesExecution(pathToControlFlow(childToLet, newNode, traversed), newNode);
+			return checkReachesExecution(pathToControlFlow(start, node, traversed), node);
+		}
+		
 		ATLModelBaseObject lastParent = (ATLModelBaseObject) start; 
 		ATLModelBaseObject parent = start.container_(); 
 		while ( parent instanceof LetExp ) {
@@ -298,8 +334,11 @@ public class ErrorPathGenerator {
 		boolean branch;
 		if ( expr.getThenExpression() == directChild ) {
 			branch = ConditionalNode.TRUE_BRANCH;
-		} else {
+		} else if ( expr.getElseExpression() == directChild ){
 			branch = ConditionalNode.FALSE_BRANCH;
+		} else {
+			// must be the condition
+			return pathToControlFlow(expr, node, traversed);
 		}
 		
 		IfExprAnn ann = (IfExprAnn) typ.getAnnotation(expr.original_());
@@ -361,7 +400,14 @@ public class ErrorPathGenerator {
 		boolean leadsToExecution = false;
 		
 		if ( helperAnn instanceof ModuleHelperAnn ) {
-			throw new UnsupportedOperationException();			
+			EList<CallExprAnn> callers = helperAnn.getCalledBy();
+			for (CallExprAnn callExprAnn : callers) {
+				 OclExpression expr = (OclExpression) atlModel.findWrapper( callExprAnn.getExpr() ); 
+				 if ( pathForCall(expr, hNode, traversed) ) {
+					 leadsToExecution = true;
+				 }
+			}			
+			// throw new UnsupportedOperationException(h.getLocation());			
 		} else if ( helperAnn instanceof ContextHelperAnn ) {
 			EList<CallExprAnn> callers = ((ContextHelperAnn) helperAnn).getPolymorphicCalledBy();
 			for (CallExprAnn callExprAnn : callers) {

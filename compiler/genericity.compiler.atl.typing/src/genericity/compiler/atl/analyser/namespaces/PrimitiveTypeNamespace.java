@@ -2,6 +2,8 @@ package genericity.compiler.atl.analyser.namespaces;
 
 import java.util.HashMap;
 
+import genericity.compiler.atl.analyser.Analyser;
+import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.LocatedElement;
 import atl.metamodel.ATL.Rule;
@@ -21,7 +23,9 @@ public abstract class PrimitiveTypeNamespace extends AbstractTypeNamespace imple
 		Type t = features.containsKey(featureName) ? features.get(featureName).returnType : null;
 		if ( t != null )
 			return t;
-		throw new UnsupportedOperationException(featureName + " - " + node.getLocation());
+
+		// TODO: Should be no feature found!
+		return AnalyserContext.getErrorModel().signalNoOperationFound(this.createType(false), featureName, node, null);
 	}
 	
 	@Override

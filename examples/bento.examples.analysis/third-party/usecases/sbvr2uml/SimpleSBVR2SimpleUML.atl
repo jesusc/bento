@@ -1,4 +1,6 @@
 -- @atlcompiler atl2006
+-- @path SimpleUML=/bento.examples.analysis/third-party/usecases/sbvr2uml/SimpleUML/SimpleUML.ecore
+-- @path SimpleSBVR=/bento.examples.analysis/third-party/usecases/sbvr2uml/SimpleSBVR/SimpleSBVR.ecore
 
 -- ******************************************************************************
 -- Copyright (c) 2009 INRIA. 
@@ -159,7 +161,7 @@ rule ObjectificationFactType2InstanceSpecification  {
 helper context SimpleSBVR!AssociativeFactType def : getLowerValueForAssociativeFactType(ftr : SimpleSBVR!FactTypeRole) : Integer =
 	
 	let exact : SimpleSBVR!ExactlyNQuantification = SimpleSBVR!ExactlyNQuantification.allInstancesFrom('IN')->select(
-			i | i.scopesOTver.isBasedOn = self and i.introducedVariable.rangesOver = ftr.nounConcept
+			i | i.scopesOver.isBasedOn = self and i.introducedVariable.rangesOver = ftr.nounConcept
 		)->first() in 
 	if(not exact.oclIsUndefined()) then exact.cardinality.value
 	else

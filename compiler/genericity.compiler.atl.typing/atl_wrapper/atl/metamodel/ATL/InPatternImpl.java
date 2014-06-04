@@ -188,6 +188,7 @@ public class InPatternImpl extends atl.metamodel.ATLModelBaseObject implements I
 		}
 					
 		visitor.inInPattern(this);
+		visitor.afterInPattern(this);
 		visitor.setCurrent(pop);
 	}	
 

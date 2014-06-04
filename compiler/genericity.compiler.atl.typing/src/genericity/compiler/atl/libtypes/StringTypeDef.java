@@ -17,7 +17,13 @@ public class StringTypeDef extends AtlTypeDef {
 		operation("toLower").returnType(AtlTypes.string());
 		operation("toUpper").returnType(AtlTypes.string());
 		operation("concat").returnType(AtlTypes.string());
-		operation("startsWith").returnType(AtlTypes.string());
+
+		operation("regexReplaceAll").returnType(AtlTypes.string());
+
+		operation("startsWith").returnType(AtlTypes.boolean_());
+		operation("endsWith").returnType(AtlTypes.boolean_());
+
+		
 	}
 
 	@Override

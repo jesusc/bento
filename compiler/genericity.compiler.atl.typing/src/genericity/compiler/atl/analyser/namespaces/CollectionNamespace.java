@@ -113,7 +113,7 @@ public abstract class CollectionNamespace extends AbstractTypeNamespace implemen
 			}
 		}
 		
-		throw new UnsupportedOperationException("Collection operation " + operationName + " not supported. " + node.getLocation());
+		return AnalyserContext.getErrorModel().signalCollectionOperationNotFound(operationName, node);
 	}
 
 	@Override

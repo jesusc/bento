@@ -462,6 +462,7 @@ public class OperatorCallExpImpl extends atl.metamodel.ATLModelBaseObject implem
 		}
 					
 		visitor.inOperatorCallExp(this);
+		visitor.afterOperatorCallExp(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -180,6 +180,16 @@ package atl_error {
 		
 	}
 
+	class CollectionOperationNotFound extends LocalProblem {
+		attr String[1] operationName;	
+	}
+
+	class IteratorOverNoCollectionType extends LocalProblem {
+		attr String[1] iteratorName;	
+	}
+
+	
+
 }
 
 @namespace(uri="http://bento/analysis/atl/analysis/recovery", prefix="atl_recovery")
@@ -194,3 +204,8 @@ package atl_recovery {
 	}
 }
 // References to typing ... 
+
+
+/* Others errors that coud be checked */
+/* - Invalid uses of oclIsKindOf (those that do not make sense) */
+/* - Misuses of abstract classes */

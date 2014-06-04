@@ -391,6 +391,7 @@ public class SimpleOutPatternElementImpl extends atl.metamodel.ATLModelBaseObjec
 		}
 					
 		visitor.inSimpleOutPatternElement(this);
+		visitor.afterSimpleOutPatternElement(this);
 		visitor.setCurrent(pop);
 	}	
 

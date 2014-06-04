@@ -646,6 +646,7 @@ public class OrderedSetTypeImpl extends atl.metamodel.ATLModelBaseObject impleme
 		}
 					
 		visitor.inOrderedSetType(this);
+		visitor.afterOrderedSetType(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -299,6 +299,7 @@ public class RuleVariableDeclarationImpl extends atl.metamodel.ATLModelBaseObjec
 		}
 					
 		visitor.inRuleVariableDeclaration(this);
+		visitor.afterRuleVariableDeclaration(this);
 		visitor.setCurrent(pop);
 	}	
 

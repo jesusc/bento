@@ -6,6 +6,7 @@ import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
+import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -36,6 +37,7 @@ public class OclSlice {
 		
 		ignore.add(atl.metamodel.OCL.StringExpImpl.class);
 		ignore.add(atl.metamodel.OCL.IntegerExpImpl.class);
+		ignore.add(atl.metamodel.OCL.RealExpImpl.class);
 		ignore.add(atl.metamodel.OCL.BooleanExpImpl.class);
 		ignore.add(atl.metamodel.OCL.OclUndefinedExpImpl.class);
 		
@@ -78,6 +80,7 @@ public class OclSlice {
 				pce = op;
 			}
 
+
 			CallExprAnn ann = (CallExprAnn) slice.getTypingModel().getAnnotation(pce.original_());
 			if ( ! ann.isIsStaticCall() ) {
 				EList<ContextHelperAnn> resolvers = ann.getDynamicResolvers();
@@ -88,6 +91,13 @@ public class OclSlice {
 					}
 				}	
 			} else {
+				if ( ann.getStaticResolver() instanceof ModuleHelperAnn ) {
+					ModuleHelperAnn moduleHelper = (ModuleHelperAnn) ann.getStaticResolver();
+					if ( slice.addHelper(moduleHelper) ) {
+						OclExpression body = (OclExpression) slice.getATLModel().findWrapper(moduleHelper.getExpr().getExpr());
+						slice(slice, body, true);						
+					}
+				}
 				// System.out.println("OclSlice - OperationCall not generating static call");
 			}
 			

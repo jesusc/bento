@@ -623,6 +623,7 @@ public class NumericTypeImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inNumericType(this);
+		visitor.afterNumericType(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -253,6 +253,7 @@ public class ModuleImpl extends atl.metamodel.ATLModelBaseObject implements Modu
 		}
 					
 		visitor.inModule(this);
+		visitor.afterModule(this);
 		visitor.setCurrent(pop);
 	}	
 

@@ -368,6 +368,7 @@ public class OutPatternElementImpl extends atl.metamodel.ATLModelBaseObject impl
 		}
 					
 		visitor.inOutPatternElement(this);
+		visitor.afterOutPatternElement(this);
 		visitor.setCurrent(pop);
 	}	
 

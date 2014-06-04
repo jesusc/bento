@@ -209,6 +209,7 @@ public class QueryImpl extends atl.metamodel.ATLModelBaseObject implements Query
 		}
 					
 		visitor.inQuery(this);
+		visitor.afterQuery(this);
 		visitor.setCurrent(pop);
 	}	
 

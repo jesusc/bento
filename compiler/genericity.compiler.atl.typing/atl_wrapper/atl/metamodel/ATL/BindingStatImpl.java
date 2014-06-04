@@ -207,6 +207,7 @@ public class BindingStatImpl extends atl.metamodel.ATLModelBaseObject implements
 		}
 					
 		visitor.inBindingStat(this);
+		visitor.afterBindingStat(this);
 		visitor.setCurrent(pop);
 	}	
 

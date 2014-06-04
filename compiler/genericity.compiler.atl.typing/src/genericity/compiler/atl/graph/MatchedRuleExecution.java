@@ -1,8 +1,10 @@
 package genericity.compiler.atl.graph;
 
 import atl.metamodel.ATL.MatchedRule;
+import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.IteratorExp;
+import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.VariableDeclaration;
@@ -10,6 +12,7 @@ import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.OclSlice;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
@@ -80,6 +83,13 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		} else {
 			for(Metaclass m : ((MatchedRuleManyAnn) rule).getInPatternTypes()) {
 				slice.addExplicitMetaclass(m);
+			}
+		}
+
+		// TODO: Slice only the required ones!
+		if ( atlRule.getVariables().size() > 0 ) {
+			for (RuleVariableDeclaration v : atlRule.getVariables()) {
+				OclSlice.slice(slice, v.getInitExpression());
 			}
 		}
 		
@@ -158,6 +168,22 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		
 		model.addToScope(varDcl, exists.getIterators().get(0));
 		
+		LetExp letUsingDeclarations  = null;
+		LetExp lastLet  = null;
+		if ( atlRule.getVariables().size() > 0 ) {
+			for(RuleVariableDeclaration v : atlRule.getVariables()) {
+				LetExp let = model.createLetScope(model.gen(v.getInitExpression()), null, v.getVarName());
+				model.addToScope(v, let.getVariable());
+				if ( letUsingDeclarations  != null ) {
+					lastLet.setIn_(let);
+				} else {
+					letUsingDeclarations = let; // the first let
+				}
+				lastLet  = let;
+			}
+			exists.setBody(letUsingDeclarations );
+		}
+		
 		
 		if ( rule.getFilter() != null ) {
 			// => if ( filterCondition ) then <? : whenFilter> else false endif
@@ -165,7 +191,10 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 			IfExp ifExp = model.createIfExpression(condition, null, model.createBooleanLiteral(false) );
 			
 			// set <? : allInstancesBody>
-			exists.setBody(ifExp);
+			if ( letUsingDeclarations  == null )
+				exists.setBody(ifExp);
+			else 
+				letUsingDeclarations .setIn_(ifExp);
 			
 			// => set <? : whenFilter>
 			OclExpression whenFilterExpr = getDepending().genCSP(model);
@@ -173,7 +202,12 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		} else {
 			// set <? : allInstancesBody>
 			OclExpression whenFilterExpr = getDepending().genCSP(model);
-			exists.setBody(whenFilterExpr);
+
+			// set <? : allInstancesBody>
+			if ( letUsingDeclarations  == null )
+				exists.setBody(whenFilterExpr);
+			else 
+				letUsingDeclarations .setIn_(whenFilterExpr);
 		}
 		
 		return exists;

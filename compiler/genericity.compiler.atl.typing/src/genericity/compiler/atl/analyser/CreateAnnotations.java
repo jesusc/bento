@@ -191,6 +191,28 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		System.err.println("TODO: Complete called rule annotations");
 		
 		CalledRuleAnn ann = typ.createCalledRuleAnn(self); // , (Metaclass) srcType, (Metaclass) tgtType);
+
+		// Copied from createHelperAnnotation
+		String[] names = new String[0];
+		Type[] arguments = new Type[0];
+		VariableDeclaration[] argumentVars = new VariableDeclaration[0];
+
+		List<Parameter> params = self.getParameters();
+		names 	  = new String[params.size()];
+		argumentVars = new VariableDeclaration[params.size()];
+		arguments = new Type[params.size()];
+		for(int i = 0; i < params.size(); i++) {
+			names[i]     = params.get(i).getVarName();
+			arguments[i] = attr.typeOf(params.get(i));
+			argumentVars[i] = params.get(i);
+		}
+
+		for(int i = 0; i < names.length; i++) {
+			ann.getNames().add(names[i]);
+			ann.getArguments().add(arguments[i]);
+			ann.getArgumentVars().add(argumentVars[i].original_());
+		}
+
 		
 		attr.linkAnnotation(self, ann);		
 	}
@@ -205,8 +227,16 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	}
 	
 	public void createMatchedRuleAnnotation(MatchedRule self) {
+			
 		Type srcType = attr.typeOf( self.getInPattern().getElements().get(0) );
-		Type tgtType = attr.typeOf( self.getOutPattern().getElements().get(0) );
+		Type tgtType = null;
+		if ( self.getOutPattern() == null ) {
+			System.err.println("MATCHED RULE WITHOUT TO!!" + self.getLocation() + " - " + self.getName());
+			tgtType = null; //typ.newOclUndefinedType();
+		} else {
+			tgtType = attr.typeOf( self.getOutPattern().getElements().get(0) );
+		}
+		
 		MatchedRuleAnn ann = null;
 		
 		if ( self.getInPattern().getElements().size() != 1 ) { 
@@ -231,7 +261,8 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			ann.setFilter( attr.<ExpressionAnnotation> annotationOf(self.getInPattern().getFilter()) ); 
 		}
 		
-		createOutputPatternElements(self, ann);
+		if ( self.getOutPattern() != null )
+			createOutputPatternElements(self, ann);
 	}
 	
 	@Override
@@ -264,7 +295,8 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	public void inCalledRule(CalledRule self) {
 		CalledRuleAnn ann = attr.annotationOf(self);
 		// TODO: Create arguments
-		createOutputPatternElements(self, ann);
+		if ( self.getOutPattern() != null )
+			createOutputPatternElements(self, ann);
 	}
 	
 	@Override
@@ -371,7 +403,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	@Override
 	public void inNavigationOrAttributeCallExp(NavigationOrAttributeCallExp self) {
 		CallExprAnn ann = annotationOperationCall(self, Collections.<OclExpression> emptyList());
-		
+			
 		Type srcType = attr.typeOf(self.getSource());
 		ann.setReceptorType( srcType );
 		
@@ -383,9 +415,11 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			} else {
 				computeResolvers(self, ann, self.getName());				
 			}
+		} else if ( srcType instanceof ThisModuleType ) {
+			computeResolvers(self, ann, self.getName());			
 		} else if ( srcType instanceof UnionType ) {
 			System.err.println("TODO: How to deal with this in createannotations... setUsedFeature...");
-		}
+		} 
 		
 		
 	}
@@ -396,7 +430,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		computeResolvers(self, ann, self.getOperationName());
 	}
 
-	private void computeResolvers(PropertyCallExp self, CallExprAnn ann, String featureOrOperationName) {
+	private void computeResolvers(PropertyCallExp self, CallExprAnn ann, String featureOrOperationName) {			
 		if ( ann.getSource().getType() instanceof Metaclass && !(self.getSource() instanceof OclModelElement) ) {
 			ann.setIsStaticCall(false);
 			ClassNamespace cn = (ClassNamespace) ann.getSource().getType().getMetamodelRef();
@@ -408,6 +442,18 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 				Helper h = op.container_().container(Helper.class);
 				ann.setStaticResolver( attr.<HelperAnn>annotationOf(h) );
 				ann.getDynamicResolvers().add( attr.<ContextHelperAnn>annotationOf(h) ) ;
+			} else {
+				// Must be in the supertype, otherwise was signalled as an error
+				for(ClassNamespace sup : cn.getAllSuperClasses()) {
+					if ( sup.getAttachedOclFeature(featureOrOperationName) != null ) {
+						OclFeature op = sup.getAttachedOclFeature(featureOrOperationName);
+						
+						Helper h = op.container_().container(Helper.class);
+						ann.setStaticResolver( attr.<HelperAnn>annotationOf(h) );
+						ann.getDynamicResolvers().add( attr.<ContextHelperAnn>annotationOf(h) ) ;
+						break;
+					}
+				}
 			}
 			
 			for(ClassNamespace sub : cn.getAllSubclasses()) {

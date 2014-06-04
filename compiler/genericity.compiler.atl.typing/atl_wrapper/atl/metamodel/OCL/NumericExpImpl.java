@@ -395,6 +395,7 @@ public class NumericExpImpl extends atl.metamodel.ATLModelBaseObject implements 
 		}
 					
 		visitor.inNumericExp(this);
+		visitor.afterNumericExp(this);
 		visitor.setCurrent(pop);
 	}	
 
