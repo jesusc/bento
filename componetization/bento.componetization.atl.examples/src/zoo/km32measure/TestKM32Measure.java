@@ -43,7 +43,7 @@ public class TestKM32Measure extends BaseTest {
 		System.out.println("Finished typing of " + TestKM32Measure.class.getSimpleName());
 
 		// Meta-model prunning
-		MetamodelPrunner pr = pruneMetamodel("amma/km3/modified", "http://bento/examples/classdiag", "classidag", PRUNED_SOURCE_METAMODEL);
+		MetamodelPrunner pr = pruneMetamodel("amma/km3/modified", "KM3", "http://bento/examples/classdiag", "classidag", PRUNED_SOURCE_METAMODEL);
 		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);		
 		
 		System.out.println("Meta-model prunned");
@@ -54,7 +54,7 @@ public class TestKM32Measure extends BaseTest {
 		System.out.println("Re-Typing of " + TestKM32Measure.class.getSimpleName());
 
 		// conceptExtraction - RealFeature
-		ConceptExtractor ex = extractConcept("http://bento/examples/classdiag", "http://bento/examples/classdiag", "classdiag_concept");
+		ConceptExtractor ex = extractConcept("http://bento/examples/classdiag", "KM3", "http://bento/examples/classdiag", "classdiag_concept");
 		
 		saveConcept(withDir("tmp_/concept_uml2measure.ecore"));
 		System.out.println("Finished extracting of " + TestKM32Measure.class.getSimpleName());

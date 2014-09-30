@@ -1,0 +1,376 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bent&#333 by Miso</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/casestudy.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="casestudy">
+
+    <!-- Copy paste -->
+    <h1>Flow diagrams to Petri nets</h1>      
+    <p>
+    This document describes how the FD2PN component has been reused for several
+    workflow languages. This component features a reusable transformation from a 
+    Workflow concept to a Petri net, which is able to deal with several of the
+    patterns defined in the <a href="http://workflowpatterns.org">Workflow patterns catalog</a>.
+    </p>
+    <p>
+      The menu provide links to the different artefacts of the case study.
+    </p>
+
+    <div class="hmenu">
+      <span class="label">Code for Bent&#333:</span>
+      <ul class="metamodel-list">
+	<li><a href="../binaries/bento-examples-0.5.0.zip">Zip file</a></li>
+      </ul>
+    </div>
+
+   <div class="hmenu">
+      <span class="label">Template:</span>
+      <ul class="metamodel-list">
+	<li><a href="atl_template.html">ATL transformation</a></li>
+      </ul>
+    </div>
+ 
+    <div class="hmenu">
+      <span class="label">Concepts:</span>
+      <ul class="metamodel-list">
+	<li><a href="fd_concept.html">FlowDiagrams</a></li>
+	<li><a href="petrinet_concept.html">Petri net</a></li>
+      </ul>
+    </div>
+    
+    <div class="hmenu">
+      <span class="label">Meta-models:</span>
+      <ul class="metamodel-list">
+	<li><a href="intalio_bpmn.html">Intalio BPMN</a></li>
+	<li><a href="omg_bpmn.html">OMG BPMN</a></li>
+	<li><a href="uml_ad.html">UML AD</a></li>
+	<li><a href="epc.html">EPC</a></li>
+	<li><a href="yawl.html">YAWL</a></li>
+	<li><a href="grafcet.html">Grafcet</a></li>
+	<li><a href="apromore.html">Apromore</a></li>
+	<li><a href="bender.html">Bender</a></li>
+      </ul>
+    </div>
+    
+    <hr/>
+    <!-- Begin-of meta-model -->
+    
+    <h2><a name="atl_template" class="anchor" href="#bender"><span class="octicon octicon-link"></span></a>Transformation template</h2>
+    
+    
+    
+    <p>
+      The template transforms each task and exclusive-choice node into a place, each parallel-split 
+and synchronization node into a transition, and each simple-merge node into a place connected 
+to a transition. The rule to transform a multi-choice node is the most complex one, as it 
+creates 2^n-1 Petri net transitions (with n being the number of output nodes of the 
+multi-choice) connected to a different combination of the output nodes each (i.e. to one 
+of the outputs, to two of them, and so on). This models the fact that a multi-choice node 
+diverges the execution into several concurrent threads, but the selection of which ones is 
+resolved at runtime. Additional rules connect places and transitions through arcs according 
+to the defined flow edges, and create intermediate objects (e.g. a transition) if the elements 
+to connect have the same type (e.g. two places). Finally, if the language contains terminating 
+final tasks, the template adds a place Control connected to all transitions in the net 
+as follows: with an arc if the transition is connected to a terminating final task, and with a 
+loop if it is not connected to a terminating final task.
+    </p>
+
+    <pre class="binding">
+-- @path FD=/flow_diagrams/metamodels/flow_concept.ecore
+-- @path PN=/flow_diagrams/metamodels/petri_nets.ecore
+
+module flow2pn;
+create OUT : PN from IN : FD;
+
+helper context FD!Node def: typeName : String  = 
+  self.oclType().name; 
+helper context FD!Node def: isTask : Boolean = 
+  self.oclIsKindOf(FD!Task);
+helper context FD!Node def: isFinalTask : Boolean = 
+  self.oclIsKindOf(FD!FinalTask);
+helper context FD!Node def: isTerminatingTask : Boolean = 
+  if self.isFinalTask then 
+    self.isTerminating 
+  else 
+    false 
+  endif;
+helper context FD!Node def: isParallelSplit : Boolean = 
+  self.oclIsKindOf(FD!ParallelSplit);
+helper context FD!Node def: isSynchronization : Boolean = 
+  self.oclIsKindOf(FD!Synchronization);
+helper context FD!Node def: isExclusiveChoice : Boolean = 
+  self.oclIsKindOf(FD!ExclusiveChoice);
+helper context FD!Node def: isSimpleMerge : Boolean = 
+  self.oclIsKindOf(FD!SimpleMerge);
+helper context FD!Node def: isMultiChoice : Boolean = 
+  self.oclIsKindOf(FD!MultiChoice);
+helper context FD!Node def: toPlaceAsInput : Boolean = 
+  self.isTask or self.isFinalTask or self.isExclusiveChoice or 
+  self.isSimpleMerge or self.isMultiChoice;
+helper context FD!Node def: toPlaceAsOutput : Boolean = 
+  self.isTask or self.isFinalTask or self.isExclusiveChoice;
+helper context FD!Node def: toTransitionAsInput : Boolean = 
+  self.isSynchronization or self.isParallelSplit;
+helper context FD!Node def: toTransitionAsOutput : Boolean = 
+  self.isSynchronization or self.isParallelSplit or 
+  self.isSimpleMerge or self.isMultiChoice;
+
+ -- it returns n^m
+helper context Integer def: pow (m:Integer) : Integer = 
+  if (m>1) then 
+    self*self.pow(m-1) 
+  else 
+    self 
+  endif;
+
+-- it returns Sequence{1, 2, ... n}
+helper context Integer def: toSequence () : Sequence(Integer) = 
+  if self<=0 then 
+    Sequence{} 
+  else 
+    Sequence{self}.union((self-1).toSequence()) 
+  endif; 
+
+-- used by rule create_transition
+helper context Integer def: choices () : Sequence(Sequence(Boolean)) = 
+  if self>1 then 
+    (self-1).choices()
+    ->collect(n | n->append(true)) 
+    ->union((self-1).choices()
+    ->collect(n | n->append(false)))
+  else
+    Sequence{Sequence{true},Sequence{false}}
+  endif;
+
+helper context FD!MultiChoice def: nodeGenerator : 
+  Sequence(TupleType(source : FD!Node, num : Integer)) =
+  (2.pow(self.outs->size())-1).toSequence()
+  ->iterate(n; result: Sequence(TupleType(source : FD!Node, num : Integer)) = Sequence {} |
+    let tuple : 
+      OclAny = Tuple { source : FD!Node = self, num : Integer = n } 
+    in	
+      result.including(tuple)		
+  );
+
+rule create_transition(source : FD!Node, num : Integer) {
+  using { 
+    choices : Sequence(Boolean) = 
+      source.outs->size().choices()->at(num); 
+    icontrol : Sequence(OclAny) 
+      source.refImmediateComposite().control; 
+    ocontrol : Sequence(OclAny) = 
+      if source.isConnectedToTerminating then 
+        Sequence{} 
+      else 
+        icontrol 
+      endif; 
+  }
+  to  transition : PN!Transition (
+    name <- source.typeName + ' ' + num,
+    in   <- icontrol.append (source),
+    out  <- source.outs->size().toSequence()
+      ->iterate (i; result:Sequence(FD!Node)=Sequence{} | 
+        if choices->at(i)=true then
+          result->append( 
+            if source.outs->at(i).out.toPlaceAsInput then
+              source.outs.at(i).out
+            else 
+              source.outs.at(i)
+            endif)
+        else
+          result
+        endif) 
+      .append( ocontrol )
+  ) 
+  do { 
+    transition;
+  }
+}
+
+-- if the diagram contains terminating final tasks, we add a place 
+-- 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if it is not connected to a terminating final task
+helper context FD!FlowEdge def: isConnectedToTerminating : Boolean =
+  self.out.isTerminatingTask;
+
+helper context FD!Node def: isConnectedToTerminating : Boolean = 
+  self.outs->exists(e | e.isConnectedToTerminating);
+
+helper context FD!FlowDiagram def: control : OclAny = 
+  if self.nodes->exists(n | n.isTerminatingTask) then 
+    Sequence{ thisModule.get_control(self) }
+  else 
+    Sequence{} 
+  endif;
+
+unique lazy rule get_control {
+  from flow : FD!FlowDiagram
+  to  place : PN!Place (      
+    name <- 'Control',
+    tokens <- 1
+  )
+}
+	
+-- the flow diagram is transformed into a Petri net 
+rule flowdiagram {
+  from flow : FD!FlowDiagram 
+  to   net  : PN!PetriNet (
+    elems <- flow.nodes.append(
+      flow.edges
+     .append(flow.nodes->select(n | n.isSimpleMerge)
+        ->collect(n | thisModule.create_transition(n, 1) ))).union( 
+          flow.nodes->select(n | n.isMultiChoice)
+          ->collect(n | n.nodeGenerator)->flatten()
+          ->collect(n | thisModule.create_transition(n.source, n.num) ))
+         .append(flow.control)	
+	)
+}
+
+-- each task is transformed into a place, with 1 token if it is initial
+rule task { 
+  from task  : FD!Task 
+  to   place : PN!Place (
+    name   <- if task.isInitial then 'Initial' else task.name endif,
+    tokens <- if task.isInitial then 1 else 0 endif
+  )
+}
+
+-- each final task is transformed into a place
+rule finaltask { 
+  from task  : FD!FinalTask 
+  to   place : PN!Place (
+    name <- 'Final' + 
+      (if task.isTerminating then 
+        ' Terminating' 
+      else 
+        '' 
+      endif),
+    tokens <- 0
+  )
+}
+
+-- each parallel split  (i.e. fork) is transformed into a transition
+-- each synchronization (i.e. join) is transformed into a transition
+rule synchronization_all {
+  from synch : FD!Node (synch.isParallelSplit or synch.isSynchronization)
+  using { 
+    icontrol : Sequence(OclAny) = 
+      synch.refImmediateComposite().control; 
+    ocontrol : Sequence(OclAny) = 
+      if synch.isConnectedToTerminating then 
+        Sequence{} 
+      else 
+        icontrol 
+      endif; 
+  }
+  to   transition  : PN!Transition (
+    name <- synch.typeName,		
+    in <- synch.ins->select(e | e.in.toPlaceAsOutput)
+      ->collect(e | e.in) 
+      ->union( synch.ins->select(e | e.in.toTransitionAsOutput) ) 
+      .append( icontrol ),    				
+    out  <- synch.outs->select(e | e.out.toPlaceAsInput)
+      ->collect(e | e.out)  
+      ->union( synch.outs->select(e | e.out.toTransitionAsInput) )
+      .append( ocontrol )
+  ) 		
+}
+
+-- each exclusive choice is transformed into a place
+rule exclusive_choice {
+  from choice : FD!ExclusiveChoice
+  to   place  : PN!Place (
+    name   <- choice.typeName,
+    tokens <- 0
+  )
+}
+
+-- each simple merge is transformed into a place connected to a 
+-- transition; the transition is created by rule create_transition, 
+-- invoked from rule flow_diagram
+rule simple_merge {
+  from merge : FD!SimpleMerge
+  to 	 place : PN!Place (
+    name <- merge.typeName,
+    tokens <- 0
+  )
+}
+
+-- each multi choice is transformed into a place connected to (2^n)-1 
+-- transitions; the transitions are created by rule create_transition, 
+-- invoked from rule flow_diagram
+rule multi_choice {
+  from choice : FD!MultiChoice
+  to 	 place  : PN!Place (
+    name <- choice.typeName,
+    tokens <- 0
+  )
+}
+
+-- flow edges connecting nodes that are transformed into places, 
+-- are transformed into transitions
+rule place_place {
+  from edge : FD!FlowEdge 
+    ( edge.in.toPlaceAsOutput and 
+      edge.out.toPlaceAsInput )
+  using { 
+    icontrol : Sequence(OclAny) = 
+      edge.refImmediateComposite().control; 
+    ocontrol : Sequence(OclAny) = 
+      if edge.isConnectedToTerminating then 
+        Sequence{} 
+      else 
+        icontrol 
+      endif; 
+  }
+  to transition  : PN!Transition (
+    in  <- icontrol.append (edge.in),
+    out <- ocontrol.append (edge.out)
+  )
+}
+
+-- flow edges connecting nodes that are transformed into transitions, 
+-- are transformed into places
+rule transition_transition {
+  from edge  : FD!FlowEdge 
+    ( edge.in.toTransitionAsOutput and 
+      edge.out.toTransitionAsInput ) 
+  to   place : PN!Place (
+    name   <- edge.in.typeName + '-' + edge.out.typeName,
+    tokens <- 0
+  )
+}
+    </pre>
+
+
+
+
+
+
+    <!-- Copy paste -->
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11389533-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

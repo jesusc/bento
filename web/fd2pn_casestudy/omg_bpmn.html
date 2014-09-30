@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bent&#333 by jesusc</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/casestudy.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="casestudy">
+
+    <!-- Copy paste -->
+    <h1>Flow diagrams to Petri nets</h1>      
+    <p>
+    This document describes how the FD2PN component has been reused for several
+    workflow languages. This component features a reusable transformation from a 
+    Workflow concept to a Petri net, which is able to deal with several of the
+    patterns defined in the <a href="http://workflowpatterns.org">Workflow patterns catalog</a>.
+    </p>
+    <p>
+      The menu provide links to the different artefacts of the case study.
+    </p>
+
+    <div class="hmenu">
+      <span class="label">Code for Bent&#333:</span>
+      <ul class="metamodel-list">
+	<li><a href="../binaries/bento-examples-0.5.0.zip">Zip file</a></li>
+      </ul>
+    </div>
+
+   <div class="hmenu">
+      <span class="label">Template:</span>
+      <ul class="metamodel-list">
+	<li><a href="atl_template.html">ATL transformation</a></li>
+      </ul>
+    </div>
+ 
+    <div class="hmenu">
+      <span class="label">Concepts:</span>
+      <ul class="metamodel-list">
+	<li><a href="fd_concept.html">FlowDiagrams</a></li>
+	<li><a href="petrinet_concept.html">Petri net</a></li>
+      </ul>
+    </div>
+    
+    <div class="hmenu">
+      <span class="label">Meta-models:</span>
+      <ul class="metamodel-list">
+	<li><a href="intalio_bpmn.html">Intalio BPMN</a></li>
+	<li><a href="omg_bpmn.html">OMG BPMN</a></li>
+	<li><a href="uml_ad.html">UML AD</a></li>
+	<li><a href="epc.html">EPC</a></li>
+	<li><a href="yawl.html">YAWL</a></li>
+	<li><a href="grafcet.html">Grafcet</a></li>
+	<li><a href="apromore.html">Apromore</a></li>
+	<li><a href="bender.html">Bender</a></li>
+      </ul>
+    </div>
+    
+    <hr/>
+    
+    <!-- Begin-of meta-model -->
+    
+    <h2><a name="omg_bpmn" class="anchor" href="#omg_bpmn"><span class="octicon octicon-link"></span></a>Business Process Model and Notation (BPMN) by OMG</h2>
+
+    
+    <p>
+The <a href="http://www.bpmn.org/">Business Process Model and Notation</a> (BPMN) allows the graphical representation of business process models. In BPMN, a process model is made of a set of flow nodes of different types (activities, events and gateways) which can be interconnected through sequence flows. Activities are works performed within a business process, whereas a Task is an atomic activity within a process workflow. An event is somethig that happens during the course of a process, and may indicate where a particular process starts or ends. Gateways are used to control the process flow as they converge and diverge within a process, like the execution of only one outgoing branch (exclusive), several outgoing branches (inclusive) or all of them (parallel).
+
+    </p>
+
+    <h3>Meta-model</h3>
+    <p>
+    The following diagram is an excerpt with the relevant elements of the OMG-BPMN meta-model.
+    </p>
+
+    <div class="metamodel">
+      <!--
+       <object data="images/omg_bpmn.svg" type="image/svg+xml" >
+	 -->
+       <embed src="images/omg_bpmn.svg" type="image/svg+xml" />
+    </div>
+
+
+    <h3>Binding</h3>
+    <p>
+The classes FlowNode and SequenceFlow in the BPMN meta-model can be naturally mapped to Node and FlowEdge in the concept. This is so as BPMN defines the superclass FlowNode for all types of nodes and gateways, as our concept does, and also represents the sequence flow using a class. Task in the concept is mapped to the meta-model classes Task and StartEvent, while its feature isInitial is set to true in the case of start events, and set to false in tasks. FinalTask in the concept is represented in BPMN using the class EndEvent. Both gateways ParallelSplit and Synchronization in the concept are mapped to ParallelGateway in BPMN, in the first case when the gateway has one input and several outputs, and in the second case when it has several outputs and one input. Similarly, gateways SimpleMerge and MultiChoice in the concept are both mapped to class InclusiveGateway in the meta-model, in the first case when the gateway has several inputs and one output, and in the second case when it has one input and several outputs. Finally, ExclusiveChoice is mapped to two BPMN classes: EventBasedGateway (but only in the case the value of its attribute eventGatewayType is #exclusive), and ExclusiveGateway. To define this dual binding, ExclusiveChoice is bound to a class Gateway in the meta-model, which is a superclass of both EventBasedGateway and ExclusiveGateway; then, a filter selects only those having the appropriate type and attribute values.
+    </p>
+
+    <pre class="binding">
+binding bpmn_omg2fd {  
+	concept   FD   : "platform:/resource/genericity.benchmarks/components/flowdiagrams/metamodels/flow_concept.ecore"
+	metamodel BPMN : "platform:/resource/genericity.benchmarks/components/flowdiagrams/bpmn2pn/bpmn.ecore"
+
+	class FlowDiagram	to Process
+	class Node 		to FlowNode
+	class FlowEdge 		to SequenceFlow
+	
+	class Task		to Task, StartEvent
+	class FinalTask		to EndEvent
+	class ExclusiveChoice 	to Gateway when if self.oclIsTypeOf(BPMN!EventBasedGateway)  
+						then self.eventGatewayType = #exclusive
+						else self.oclIsTypeOf(BPMN!ExclusiveGateway) endif
+	class ParallelSplit   	to ParallelGateway  when self.incoming.size() = 1 and self.outgoing.size() > 1
+	class Synchronization 	to ParallelGateway  when self.incoming.size() > 1 and self.outgoing.size() = 1
+	class SimpleMerge   	to InclusiveGateway when self.incoming.size() > 1 and self.outgoing.size() = 1   
+	class MultiChoice	to InclusiveGateway when self.incoming.size() = 1 and self.outgoing.size() > 1	
+	
+	feature FlowDiagram.nodes = self.flowElements->select(f | f.oclIsKindOf(BPMN!FlowNode) )
+	feature FlowDiagram.edges = self.flowElements->select(f | f.oclIsKindOf(BPMN!SequenceFlow) )
+	
+	feature Task[Task].isInitial = false
+	feature Task[Task].name is name
+
+	feature Task[StartEvent].isInitial = true
+	feature Task[StartEvent].name is name
+	
+	feature Node.outs is outgoing
+	feature Node.ins  is incoming
+	
+	feature FlowEdge."in" is sourceRef
+	feature FlowEdge.out  is targetRef
+	
+	feature FinalTask.isTerminating = false
+}
+    </pre>
+
+
+    <!-- Copy paste -->
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11389533-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

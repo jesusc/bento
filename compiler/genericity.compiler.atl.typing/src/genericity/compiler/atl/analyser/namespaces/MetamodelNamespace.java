@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
@@ -141,6 +142,10 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		return allClasses.contains(klass);
 	}
 
+	public boolean belongsTo(EClassifier type) {
+		return type.eResource().equals(resource);
+	}
+
 	private TypingModel getTypingModel() {
 		return AnalyserContext.getTypingModel();
 	}
@@ -164,8 +169,6 @@ public class MetamodelNamespace implements IMetamodelNamespace {
 		}
 		return result;
 	}
-
-	
 
 
 }

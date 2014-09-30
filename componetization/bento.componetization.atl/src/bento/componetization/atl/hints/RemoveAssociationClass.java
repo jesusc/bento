@@ -373,7 +373,7 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			collect1.setSource(allInstancesCall);
 			
 			OclModelElement classOclModelElement = atl.create(OclModelElement.class);
-			classOclModelElement.setName("Class");
+			classOclModelElement.setName("Class"); // TODO: This is hardcoded!!!
 			classOclModelElement.setModel(model);
 			allInstancesCall.setSource(classOclModelElement);
 			

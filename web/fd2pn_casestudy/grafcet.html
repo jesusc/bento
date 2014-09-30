@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bent&#333 by jesusc</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/casestudy.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="casestudy">
+
+    <!-- Copy paste -->
+    <h1>Flow diagrams to Petri nets</h1>      
+    <p>
+    This document describes how the FD2PN component has been reused for several
+    workflow languages. This component features a reusable transformation from a 
+    Workflow concept to a Petri net, which is able to deal with several of the
+    patterns defined in the <a href="http://workflowpatterns.org">Workflow patterns catalog</a>.
+    </p>
+    <p>
+      The menu provide links to the different artefacts of the case study.
+    </p>
+
+    <div class="hmenu">
+      <span class="label">Code for Bent&#333:</span>
+      <ul class="metamodel-list">
+	<li><a href="../binaries/bento-examples-0.5.0.zip">Zip file</a></li>
+      </ul>
+    </div>
+
+   <div class="hmenu">
+      <span class="label">Template:</span>
+      <ul class="metamodel-list">
+	<li><a href="atl_template.html">ATL transformation</a></li>
+      </ul>
+    </div>
+ 
+    <div class="hmenu">
+      <span class="label">Concepts:</span>
+      <ul class="metamodel-list">
+	<li><a href="fd_concept.html">FlowDiagrams</a></li>
+	<li><a href="petrinet_concept.html">Petri net</a></li>
+      </ul>
+    </div>
+    
+    <div class="hmenu">
+      <span class="label">Meta-models:</span>
+      <ul class="metamodel-list">
+	<li><a href="intalio_bpmn.html">Intalio BPMN</a></li>
+	<li><a href="omg_bpmn.html">OMG BPMN</a></li>
+	<li><a href="uml_ad.html">UML AD</a></li>
+	<li><a href="epc.html">EPC</a></li>
+	<li><a href="yawl.html">YAWL</a></li>
+	<li><a href="grafcet.html">Grafcet</a></li>
+	<li><a href="apromore.html">Apromore</a></li>
+	<li><a href="bender.html">Bender</a></li>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <!-- Begin-of meta-model -->
+    
+    <h2><a name="epc" class="anchor" href="#epc"><span class="octicon octicon-link"></span></a>Sequential function chart (SFC) / Grafcet</h2>
+
+    
+    <p>
+Sequential function chart (SFC) is a graphical programming language used for programmable logic controllers (PLCs). It is based on Grafcet, whose semantics is
+based on Petri nets, and supported by the 
+<a href="http://webstore.iec.ch/webstore/webstore.nsf/Artnum_PK/47556">IEC 61131-3 standard</a>
+    </p>
+
+    <h3>Meta-model</h3>
+    <p>
+    The following diagram is an excerpt with the relevant elements of the SFC/Grafcet meta-model. 
+    The complete diagrams are also available in <a href="images/grafcet.svg">SVG</a> and 
+    <a href="images/grafcet.png">PNG</a> formats.
+    </p>
+    <p>
+      The actual Ecore meta-model has been extracted from the
+      XML Schema provided by the PLC Open initiative 
+      (available <a href="http://www.plcopen.org/pages/tc6_xml/">here</a>).
+
+      Models conforming to the XML format can be created using
+      the <a href="http://www.beremiz.org/">Beremiz</a> tool.
+    </p>
+
+    <div class="metamodel">
+      <!--
+       <object data="images/epc.svg" type="image/svg+xml" >
+	 -->
+       <embed src="images/grafcet_mini.svg" type="image/svg+xml" />
+    </div>
+
+
+    <h3>Binding</h3>
+    <p>
+      This binding is highly influenced by the fact that the meta-model basically represents the
+      tree structure of an XML document, and there is little inheritance and no explicit references.
+    </p>
+    <p>  
+      All SFC elements that represent a node in the workflow must be mapped
+      the Node class in the concept (line 6), because there is no common superclass in SFC.
+      In SFC both steps and transitions have the task semantics, and edges are represented by
+      Connection elements (lines 13-15). 
+      The "out" references in the concept cannot be mapped to any reference
+      in SFC, because the target element of SFC node is identified by the "localId" attribute. 
+      Hence, it must be resolved by explicitly locating the Connection object with the corresponding
+      identifier.
+    </p>
+
+    <pre class="binding">
+binding sfc {  
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel SFC  : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/sfc2pn/tc60201.ecore"
+	
+	class FlowDiagram to SFCType1	
+	class Node        to StepType, TransitionType1, -- Important to add here every "virtual subclass"
+	                     SelectionDivergenceType, SelectionConvergenceType, 
+	                     SimultaneousDivergenceType, SimultaneousConvergenceType 
+	
+	-- Edges are not transitions (which has a different semantics), 
+	-- but Connection/ConnectionPointIn which is an structural concept to link "SFC nodes" 
+	-- (which include transitions)
+	class FlowEdge to Connection
+	
+	class Task        to StepType, TransitionType1 
+	class FinalTask   to NONE 
+       
+	class ExclusiveChoice to SelectionDivergenceType
+	class SimpleMerge     to SelectionConvergenceType
+	                                        
+	class Synchronization   to SimultaneousConvergenceType
+	class ParallelSplit     to SimultaneousDivergenceType
+
+	class MultiChoice     to NONE	
+	
+	feature FlowDiagram.nodes is allNodes
+	feature FlowDiagram.edges is transition	
+
+	feature FlowEdge."in" = SFC!SFCType1.allInstances()->first().allNodes->any(n | n.localId = self.refLocalId) 
+	feature FlowEdge.out  is parent
+
+	feature Node[StepType]."in" = self.connectionPointIn.connection 
+	feature Node[StepType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[TransitionType1]."in" = self.connectionPointIn.connection 
+	feature Node[TransitionType1].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SelectionDivergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SelectionDivergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SelectionConvergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SelectionConvergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SimultaneousDivergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SimultaneousDivergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+	feature Node[SimultaneousConvergenceType]."in" = self.connectionPointIn.connection 
+	feature Node[SimultaneousConvergenceType].out  = SFC!Connection.allInstances()->select(c | c.refLocalId = self.localId)
+
+
+	feature Task[StepType].isInitial is initialStep
+	feature Task[TransitionType1].isInitial   = false   	
+
+	feature FinalTask.isTerminating = false 
+
+	
+	helper Connection.parent : OclAny = self.refImmediateComposite().refImmediateComposite()
+	
+	helper SFCType1.allNodes : OclAny = self.step.union(self.transition).
+	                                 union(self.selectionDivergence).
+	                                 union(self.selectionConvergence).
+	                                 union(self.simultaneousDivergence).
+	                                 union(self.simultaneousConvergence)	                              
+}
+    </pre>
+
+
+
+
+
+
+    <!-- Copy paste -->
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11389533-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

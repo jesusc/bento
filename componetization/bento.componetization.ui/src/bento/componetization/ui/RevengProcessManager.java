@@ -2,13 +2,12 @@ package bento.componetization.ui;
 
 // import genericity.typing.atl_types.AtlTypingPackage;
 
+
 import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
+import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.api.AtlTransformationLoader;
 import genericity.compiler.atl.api.AtlTransformationLoader.FileBased;
-import genericity.typecheck.atl.AtlTransformationMetamodelsModel;
-import genericity.typecheck.atl.TypeCheckLauncher;
-import genericity.typecheck.atl.TypeCheckLauncher.ErrorMessage;
 import genericity.typing.atl_types.AtlTypingPackage;
 
 import java.io.ByteArrayInputStream;
@@ -36,6 +35,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 
+import atl.metamodel.ATLModel;
 import bento.analysis.atl_analysis.ErrorMessages;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
@@ -73,7 +73,8 @@ public class RevengProcessManager {
 
 	private BasicEMFModel typing;
 	
-	private AtlTransformationMetamodelsModel metamodelsAndConcepts;
+	// private AtlTransformationMetamodelsModel metamodelsAndConcepts;
+	private GlobalNamespace metamodelsAndConcepts;
 	private HashMap<Metamodel, Resource> metamodelResources;
 	private HashMap<Concept, Resource> conceptResources = new HashMap<Concept, Resource>();
 	private FileBased atlLoader;
@@ -186,42 +187,23 @@ public class RevengProcessManager {
 		
 		metamodelsAndConcepts = this.loadTransformationMetamodels(model.getTransformation().getMetamodels());
 
-		if ( false ) {
-			// Old version
-			TypeCheckLauncher launcher = new TypeCheckLauncher();
-			launcher.setWarningMode();
-			try {
-				launcher.launch(metamodelsAndConcepts, atlModel, typing);		
-			} catch ( Exception e ) {
-				e.printStackTrace();
-			}
-
-			return new TypingInfo(launcher.getMessages());
-		} else {
-			HashMap<String, Resource> nameBindings = metamodelsAndConcepts.getLogicalNamesToMetamodels();
-			GlobalNamespace mm = new GlobalNamespace(nameBindings.values(), nameBindings);
-			Analyser analyser = new Analyser(mm, atlModel, typing);
-			analyser.setDoDependencyAnalysis(false);
-			analyser.perform();
-			
-			ArrayList<TypeCheckLauncher.ErrorMessage> messages = new ArrayList<TypeCheckLauncher.ErrorMessage>();
-			
-			// Adapt to old version of error messages, until a complete update is done
-			for(Problem p : analyser.getErrors().getAnalysis().getProblems() ) {
-				if ( p instanceof LocalProblem ) {
-					bento.analysis.atl_analysis.atl_error.LocalProblem lp = (LocalProblem) p;
-					TypeCheckLauncher.ErrorMessage msg = new TypeCheckLauncher.ErrorMessage(ErrorMessages.getMessage(p), lp.getLocation());
-					
-					messages.add(msg);
-				}
-			}
-			
-			return new TypingInfo(messages);
-		}
+		// HashMap<String, Resource> nameBindings = metamodelsAndConcepts.getLogicalNamesToMetamodels();
+		// GlobalNamespace mm = new GlobalNamespace(nameBindings.values(), nameBindings);
+		GlobalNamespace mm = metamodelsAndConcepts;
+		
+		// TODO: Use ATL Model directly
+		Analyser analyser = new Analyser(mm, getATLModel(), typing);
+		analyser.setDoDependencyAnalysis(false);
+		analyser.perform();
+	
+		return new TypingInfo(analyser.getErrors().getAnalysis().getProblems());
 		
 		// typing.serialize();
 	}
 
+	private ATLModel getATLModel() {
+		return new ATLModel(this.atlModel.getHandler().getResource());
+	}
 	
 	private String getFullPathFromProjectRelative(String path) {
 		IFile location = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
@@ -263,8 +245,10 @@ public class RevengProcessManager {
 			
 		EPackage pkg = getMetamodelPackage(metamodel);
 		
-		MetamodelPrunner prunner = new MetamodelPrunner(atlModel,
-				metamodelsAndConcepts, typing, pkg.getNsURI());
+		MetamodelNamespace mm = metamodelsAndConcepts.getNamespace(metamodel.getName());
+		
+		MetamodelPrunner prunner = new MetamodelPrunner(getATLModel(),
+				mm, typing, pkg.getNsURI());
 		
 		
 		Concept concept = RevengFactory.eINSTANCE.createConcept();
@@ -297,7 +281,7 @@ public class RevengProcessManager {
 		return getMetamodelPackage(metamodel).getNsPrefix() + "_concept";
 	}
 
-	protected EPackage getMetamodelPackage(Metamodel mm) {
+	private EPackage getMetamodelPackage(Metamodel mm) {
 		Resource r = metamodelResources.get(mm);
 		if ( r.getContents().size() != 1 ) {
 			throw new IllegalArgumentException("Metamodel " + mm.getPath() + " with more than one top-level package");
@@ -307,7 +291,7 @@ public class RevengProcessManager {
 		return pkg;
 	}
 	
-    public AtlTransformationMetamodelsModel loadTransformationMetamodels(List<Metamodel> metamodels) throws IOException {
+    public GlobalNamespace loadTransformationMetamodels(List<Metamodel> metamodels) throws IOException {
         metamodelResources = new HashMap<Metamodel, Resource>();
         HashMap<String, Resource> logicalNamesToResources = new HashMap<String, Resource>();
     	
@@ -350,15 +334,21 @@ public class RevengProcessManager {
         	//	  pruneMetamodel(m);
         }
 
-        return new AtlTransformationMetamodelsModel(logicalNamesToResources.values(), logicalNamesToResources);
+        return new GlobalNamespace(logicalNamesToResources.values(), logicalNamesToResources);
+        // return new AtlTransformationMetamodelsModel(logicalNamesToResources.values(), logicalNamesToResources);
     }
 
     public IStaticAnalysisInfo computeStaticAnalysis(Metamodel metamodel) {
-    	return new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
+		MetamodelNamespace mm = metamodelsAndConcepts.getNamespace(metamodel.getName());
+    	return new ConceptExtractor(getATLModel(), mm, typing, getMetamodelPackage(metamodel).getNsURI());
     }
     
 	public List<MatchInfo> findRefactorings(Metamodel metamodel) {
-		ConceptExtractor ex = new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
+		MetamodelNamespace mm = metamodelsAndConcepts.getNamespace(metamodel.getName());
+		System.out.println("===> Refactorings over " + mm);
+		ConceptExtractor ex = new ConceptExtractor(getATLModel(), mm, typing, getMetamodelPackage(metamodel).getNsURI());
+
+		// ConceptExtractor ex = new ConceptExtractor(atlModel, metamodelsAndConcepts, typing, getMetamodelPackage(metamodel).getNsURI());
 
 		List<MatchInfo> matches = new ArrayList<MatchInfo>();
 		

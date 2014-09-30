@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/bento.atl.analyzer.ide.dependencies.feature_0.6.0.qualifier.jar" id="bento.atl.analyzer.ide.dependencies.feature" version="0.6.0.qualifier">
+      <category name="bento.atl.analysis.ide"/>
+   </feature>
+   <feature url="features/bento.atl.analyzer.ide.feature_0.6.0.qualifier.jar" id="bento.atl.analyzer.ide.feature" version="0.6.0.qualifier">
+      <category name="bento.atl.analysis.ide"/>
+   </feature>
+   <feature url="features/bento.atl.analyzer.feature_0.6.0.qualifier.jar" id="bento.atl.analyzer.feature" version="0.6.0.qualifier">
+      <category name="bento.atl.analysis"/>
+   </feature>
+   <category-def name="bento.atl.analysis" label="ATL Analyzer API"/>
+   <category-def name="bento.atl.analysis.ide" label="ATL Analyzer IDE"/>
+</site>

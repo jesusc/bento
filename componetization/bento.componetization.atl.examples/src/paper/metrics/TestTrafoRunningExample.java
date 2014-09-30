@@ -44,7 +44,7 @@ public class TestTrafoRunningExample extends BaseTest {
 		System.out.println("Typing of " + TestTrafoRunningExample.class.getSimpleName());
 
 		// Meta-model prunning
-		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "http://bento/componetization/paper/simpleuml_concept", "simpleuml", PRUNED_SOURCE_METAMODEL);
+		MetamodelPrunner pr = pruneMetamodel("http://bento/componetization/paper/simpleuml", "UML", "http://bento/componetization/paper/simpleuml_concept", "simpleuml", PRUNED_SOURCE_METAMODEL);
 		Resource prunned = savePrunnedMetamodel(PRUNED_SOURCE_METAMODEL);
 		
 		System.out.println("Meta-model prunned");
@@ -56,14 +56,13 @@ public class TestTrafoRunningExample extends BaseTest {
 		getTypingModel().serialize(new FileOutputStream("tmp_/retyping.xmi"));
 		
 		// Effective meta-model
-		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml_concept", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
+		ConceptExtractor ex = extractConcept("http://bento/componetization/paper/simpleuml_concept", "UML", "http://bento/componetization/paper/simpleuml_concept", "simpleuml");
 		
 		// Refactor
 		ex.refactor();
 		
 		saveConcept(withDir("tmp_/concept_paper_running_example.ecore"));
-		this.atlTransformation.serialize(new FileOutputStream(withDir("tmp_/trafo_running_example.atl.xmi")));
-		
+		// this.atlTransformation.serialize(new FileOutputStream(withDir("tmp_/trafo_running_example.atl.xmi")));
 		
 		
 		System.out.println("Finished extracting of " + TestTrafoRunningExample.class.getSimpleName());

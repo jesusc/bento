@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bent&#333 by jesusc</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/casestudy.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="casestudy">
+
+    <!-- Copy paste -->
+    <h1>Flow diagrams to Petri nets</h1>      
+    <p>
+    This document describes how the FD2PN component has been reused for several
+    workflow languages. This component features a reusable transformation from a 
+    Workflow concept to a Petri net, which is able to deal with several of the
+    patterns defined in the <a href="http://workflowpatterns.org">Workflow patterns catalog</a>.
+    </p>
+    <p>
+      The menu provide links to the different artefacts of the case study.
+    </p>
+
+    <div class="hmenu">
+      <span class="label">Code for Bent&#333:</span>
+      <ul class="metamodel-list">
+	<li><a href="../binaries/bento-examples-0.5.0.zip">Zip file</a></li>
+      </ul>
+    </div>
+
+   <div class="hmenu">
+      <span class="label">Template:</span>
+      <ul class="metamodel-list">
+	<li><a href="atl_template.html">ATL transformation</a></li>
+      </ul>
+    </div>
+ 
+    <div class="hmenu">
+      <span class="label">Concepts:</span>
+      <ul class="metamodel-list">
+	<li><a href="fd_concept.html">FlowDiagrams</a></li>
+	<li><a href="petrinet_concept.html">Petri net</a></li>
+      </ul>
+    </div>
+    
+    <div class="hmenu">
+      <span class="label">Meta-models:</span>
+      <ul class="metamodel-list">
+	<li><a href="intalio_bpmn.html">Intalio BPMN</a></li>
+	<li><a href="omg_bpmn.html">OMG BPMN</a></li>
+	<li><a href="uml_ad.html">UML AD</a></li>
+	<li><a href="epc.html">EPC</a></li>
+	<li><a href="yawl.html">YAWL</a></li>
+	<li><a href="grafcet.html">Grafcet</a></li>
+	<li><a href="apromore.html">Apromore</a></li>
+	<li><a href="bender.html">Bender</a></li>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <!-- Begin-of meta-model -->
+    
+    <h2><a name="yawl" class="anchor" href="#yawl"><span class="octicon octicon-link"></span></a>Yet Another Workflow Language(YAWL)</h2>
+
+    
+    <p>
+    <a href="http://www.yawlfoundation.org/">YAWL</a> is a workflow language based on the <a href="http://www.workflowpatterns.com/">workflow patterns</a>, a joint effort
+    of the Eindhoven University of Technology and the Queensland University of Technology. A YAWL model is made of atomic tasks, or tasks combining split/join 
+    behaviour. The supported split types are XOR (which triggers only one outgoing flow), OR (triggers some but not necessarily all outgoing flows), and AND (triggers
+    all outgoing flows). The supported join types include AND (waits for completion of all incoming flows), XOR (waits for at least one incoming flow) and OR (waits for
+    completion of either all incoming flows, or completion of all incoming flows that can finish). The authors of YAWL recommend to use OR-join sparingly, because models with such
+    join can become difficult to understand.
+      
+
+    </p>
+
+    <h3>Meta-model</h3>
+    <p>
+    The following diagram shows the YAWL meta-model, which is also available in <a href="images/yawl.svg">SVG</a> and 
+    <a href="images/yawl.png">PNG</a> formats. It can be observed how Task contains two attributes, which are used to combine split/join behaviour. Tasks are connected
+    trhough the flowsInto/flowsOutOf references, defined on the parent class ProcessControlElement.
+    </p>
+
+    <div class="metamodel">
+      <!--
+       <object data="images/yawl.svg" type="image/svg+xml" >
+	 -->
+       <embed src="images/yawl.svg" type="image/svg+xml" />
+    </div>
+
+
+    <h3>Binding</h3>
+    <p>
+      The binding needs to create a virtual class, because there is no class in the meta-model to represent edges, but these are modelled as a pair of references.
+      Then, we maps YAWL Tasks to Task in the concept when they split and join type is #NORMAL. In such case the Task is not considered an initial Task.
+      InputConditions are mapped to initial Tasks, and OutputConditions to FinalTask. Then, depending on its split/join type, Tasks are assigned to
+      ParallelSplit, Synchronization, ExclusiveChoice, SimpleMerge and MultiChoice. We currently do not support OR-join.
+
+	 The virtual class YawlEdge is mapped to FlowEdge, and such class is also used to select the appropriate collections to map the Node.ins and 
+      Node.outs features. Finally, FlowDiagram.edges selects all edges connecting tasks in the given process Decomposition.
+    </p>
+
+    <pre class="binding">
+binding yawl {  
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel YAWL : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/yawl2pn/yawl.ecore"
+	
+	class YawlEdge {
+		ref src : ProcessControlElement
+		ref tgt : ProcessControlElement
+	} init = YAWL!ProcessControlElement.allInstances()->collect(src| src.flowsOutOf->collect(tgt | 
+		Tuple { type__ = 'YawlEdge', src = src, tgt = tgt
+			, out = tgt, "in" = src
+		 }
+	))->flatten()
+	
+	class FlowDiagram     to Decomposition 
+	class Node            to ProcessControlElement
+	class Task            to Task, InputCondition when 
+		if self.oclIsKindOf(YAWL!Task) then self.splitType = #NORMAL and self.joinType = #NORMAL else true endif
+	class FinalTask       to OutputCondition
+	class ParallelSplit   to Task when self.splitType = #AND
+	class Synchronization to Task when self.joinType = #AND 
+	class ExclusiveChoice to Task when self.splitType = #XOR
+	class SimpleMerge     to Task when self.joinType = #XOR  
+	class MultiChoice     to Task when self.splitType = #OR 
+		
+	class FlowEdge to virtual YawlEdge 	
+	
+	feature FlowDiagram.nodes is processControlElements 
+		
+	-- Involved in the virtual class mapping
+	feature FlowDiagram.edges = 
+		self.YawlEdge_AllInstances->select(y | self.processControlElements->exists(p | p = y.src ))	
+	feature Node.outs = self.YawlEdge_AllInstances->select(y | y.src = self) 
+	feature Node.ins  = self.YawlEdge_AllInstances->select(y | y.tgt = self) 
+	feature FlowEdge."in"  is src
+	feature FlowEdge."out" is tgt
+		
+	feature Task[Task].name is name
+	feature Task[InputCondition].name = 'input-condition'
+
+	feature Task[Task].isInitial = false -- self.oclIsKindOf(YAWL!InputCondition)
+	feature Task[InputCondition].isInitial = true -- self.oclIsKindOf(YAWL!InputCondition)
+	feature FinalTask.isTerminating = true
+}    
+</pre>
+
+
+
+
+
+
+    <!-- Copy paste -->
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11389533-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

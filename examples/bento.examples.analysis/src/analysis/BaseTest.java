@@ -52,11 +52,6 @@ import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
-import bento.analysis.atl_analysis.atl_error.impl.FeatureNotFoundImpl;
-import bento.componetization.atl.CallSite;
-import bento.componetization.atl.ConceptExtractor;
-import bento.componetization.atl.MetamodelPrunner;
-import bento.componetization.atl.MetamodelPrunner.Strategy;
 
 public abstract class BaseTest {
 

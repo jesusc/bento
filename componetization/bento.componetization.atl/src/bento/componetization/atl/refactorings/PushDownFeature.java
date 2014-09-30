@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import bento.analyser.footprint.CallSite;
 import bento.componetization.atl.BaseRefactoring;
-import bento.componetization.atl.CallSite;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 

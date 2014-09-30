@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bent&#333 by jesusc</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/casestudy.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="casestudy">
+
+    <!-- Copy paste -->
+    <h1>Flow diagrams to Petri nets</h1>      
+    <p>
+    This document describes how the FD2PN component has been reused for several
+    workflow languages. This component features a reusable transformation from a 
+    Workflow concept to a Petri net, which is able to deal with several of the
+    patterns defined in the <a href="http://workflowpatterns.org">Workflow patterns catalog</a>.
+    </p>
+    <p>
+      The menu provide links to the different artefacts of the case study.
+    </p>
+
+    <div class="hmenu">
+      <span class="label">Code for Bent&#333:</span>
+      <ul class="metamodel-list">
+	<li><a href="../binaries/bento-examples-0.5.0.zip">Zip file</a></li>
+      </ul>
+    </div>
+
+   <div class="hmenu">
+      <span class="label">Template:</span>
+      <ul class="metamodel-list">
+	<li><a href="atl_template.html">ATL transformation</a></li>
+      </ul>
+    </div>
+ 
+    <div class="hmenu">
+      <span class="label">Concepts:</span>
+      <ul class="metamodel-list">
+	<li><a href="fd_concept.html">FlowDiagrams</a></li>
+	<li><a href="petrinet_concept.html">Petri net</a></li>
+      </ul>
+    </div>
+    
+    <div class="hmenu">
+      <span class="label">Meta-models:</span>
+      <ul class="metamodel-list">
+	<li><a href="intalio_bpmn.html">Intalio BPMN</a></li>
+	<li><a href="omg_bpmn.html">OMG BPMN</a></li>
+	<li><a href="uml_ad.html">UML AD</a></li>
+	<li><a href="epc.html">EPC</a></li>
+	<li><a href="yawl.html">YAWL</a></li>
+	<li><a href="grafcet.html">Grafcet</a></li>
+	<li><a href="apromore.html">Apromore</a></li>
+	<li><a href="bender.html">Bender</a></li>
+      </ul>
+    </div>
+  
+    <hr/>
+    
+    <hr/>
+    <!-- Begin-of meta-model -->
+    
+    <h2><a name="epc" class="anchor" href="#epc"><span class="octicon octicon-link"></span></a>Event-Driven Process Chains (EPC)</h2>
+
+    
+    <p>
+      Event-driven Process Chains (EPCs) is a type of flowchart used in business process modelling. EPC models describe the flow of control of business processes as a chain
+of functions, events, and logical connectors. Functions represent activities in a business process. An event expresses a precondition (trigger) for a function or a postcondition that signals the termination of a function. Logical 
+connectors and, or, and xor are used according to their names to build the control flow of a process in a natural way [<a href="http://dx.doi.org/10.1007/11575771_14">HOS05</a>].
+      
+
+    </p>
+
+    <h3>Meta-model</h3>
+    <p>
+    The following diagram corresponds to the EPC meta-model.
+    </p>
+
+    <div class="metamodel">
+      <!--
+       <object data="images/epc.svg" type="image/svg+xml" >
+	 -->
+       <embed src="images/epc.svg" type="image/svg+xml" />
+    </div>
+
+
+    <h3>Binding</h3>
+    <p>
+      The binding maps Functions and Events into Tasks in the concept. In the latter case only when the event has at least one outgoing connection. Otherwise,
+the event is considered a FinalTask. This kind of distinction also happens with the logical connectors. In this way, an And connector might be mapped into
+a ParallelSplit (when it has several outgoing connections) and/or a Synchronization (when it has several incoming connections). Similarly, a Xor connection
+is mapped to an ExclusiveChoice (when it has exactly one incoming connection and several outgoing ones) or to a SimpleMerge (when it has more than one incoming 
+connection and exactly one outgoing one). Finally, Or connections are mapped to a MultiChoice when they have one incoming and severl outgoing connections.
+ControlFlow objects are naturally mapped to FlowEdges.
+As ControlFlows may actually connect Functions, Events or LogicalOperators through different source (fsource, esource, lsource) and target references (ftarget, etarget, ltarget),
+an OCL expression needs to check what they connect by looking at the non-empty references.
+    </p>
+
+    <pre class="binding">
+binding epc {  
+	enable-class-merge
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel EPC  : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/epc2pn/epc.ecore"
+	
+	
+	class FlowDiagram     to EPCDiagram
+	class Node            to ProcessObject 
+	class Task            to Function, Event when if self.oclIsKindOf(EPC!Event) then self.outgoing->size() > 0 else true endif
+	class FinalTask       to Event when self.outgoing->size() = 0 
+	class ParallelSplit   to And when self.outgoing->size() > 1
+	class Synchronization to And when self.incoming->size() > 1
+	class ExclusiveChoice to Xor when self.incoming->size() = 1 and self.outgoing->size() > 1
+	class SimpleMerge     to Xor when self.incoming->size() > 1 and self.outgoing->size() = 1
+	class MultiChoice     to Or  when self.incoming->size() = 1 and self.outgoing->size() > 1
+	class FlowEdge        to ControlFlow
+	
+	feature FlowDiagram.nodes is objects
+	feature FlowDiagram.edges = self.flows->select(f | f.oclIsKindOf(EPC!ControlFlow)) 
+	feature Node.outs is outgoing -- defined by all children classes of ProcessObject
+	feature Node.ins is incoming  -- defined by all children classes of  ProcessObject
+	feature Task[Event].name is name
+	feature Task[Event].isInitial = self.incoming->size() = 0
+	feature Task[Function].name is name
+	feature Task[Function].isInitial = false
+	feature FinalTask.isTerminating = true 
+	
+	feature FlowEdge."in" = if not self.fsource.oclIsUndefined() 
+	                        then self.fsource 
+	                        else
+	                          if self.lsource.oclIsUndefined()
+	                          then self.esource
+	                          else self.lsource
+	                          endif
+	                        endif    
+	feature FlowEdge.out = if not self.ftarget.oclIsUndefined() 
+	                        then self.ftarget
+	                        else
+	                          if self.ltarget.oclIsUndefined()
+	                          then self.etarget
+	                          else self.ltarget
+	                          endif
+	                        endif    
+}
+    </pre>
+
+
+
+
+
+
+    <!-- Copy paste -->
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11389533-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bent&#333 by jesusc</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/casestudy.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="casestudy">
+
+    <!-- Copy paste -->
+    <h1>Flow diagrams to Petri nets</h1>      
+    <p>
+    This document describes how the FD2PN component has been reused for several
+    workflow languages. This component features a reusable transformation from a 
+    Workflow concept to a Petri net, which is able to deal with several of the
+    patterns defined in the <a href="http://workflowpatterns.org">Workflow patterns catalog</a>.
+    </p>
+    <p>
+      The menu provide links to the different artefacts of the case study.
+    </p>
+
+    <div class="hmenu">
+      <span class="label">Code for Bent&#333:</span>
+      <ul class="metamodel-list">
+	<li><a href="../binaries/bento-examples-0.5.0.zip">Zip file</a></li>
+      </ul>
+    </div>
+
+   <div class="hmenu">
+      <span class="label">Template:</span>
+      <ul class="metamodel-list">
+	<li><a href="atl_template.html">ATL transformation</a></li>
+      </ul>
+    </div>
+ 
+    <div class="hmenu">
+      <span class="label">Concepts:</span>
+      <ul class="metamodel-list">
+	<li><a href="fd_concept.html">FlowDiagrams</a></li>
+	<li><a href="petrinet_concept.html">Petri net</a></li>
+      </ul>
+    </div>
+    
+    <div class="hmenu">
+      <span class="label">Meta-models:</span>
+      <ul class="metamodel-list">
+	<li><a href="intalio_bpmn.html">Intalio BPMN</a></li>
+	<li><a href="omg_bpmn.html">OMG BPMN</a></li>
+	<li><a href="uml_ad.html">UML AD</a></li>
+	<li><a href="epc.html">EPC</a></li>
+	<li><a href="yawl.html">YAWL</a></li>
+	<li><a href="grafcet.html">Grafcet</a></li>
+	<li><a href="apromore.html">Apromore</a></li>
+	<li><a href="bender.html">Bender</a></li>
+      </ul>
+    </div>
+    
+    <hr/>
+    <!-- Begin-of meta-model -->
+    
+    <h2><a name="uml_ad" class="anchor" href="#uml_ad"><span class="octicon octicon-link"></span></a>UML2.0 Activity Diagramas</h2>
+
+    
+    <p>
+The <a href="http://www.uml.org/">UML</a> is an OMG's specification for modelling of software applications from different perspectives, for which it provides different types of diagrams. Among them, activity diagrams specify the coordination of executions of subordinate behaviours, using a control and data flow model. An activity can be initiated when other diagram finishes its execution, when objects and data become available, or when events occur external to the flow. The flow of execution is modeled as activity nodes connected by activity edges. Activity nodes also include flow-of-control constructs, like synchronization of concurrent executions (forks and joins), decision and concurrency control. There are also initial and final nodes for starting and ending flows. There are two types of final nodes: activity final nodes and flow final nodes. An activity final node is a final node that stops all flows in an activity diagram. There may be several activity nodes, and the first one reached stops all flows in the activity. On the other hand, flow final nodes model the end of a flow, but reaching a node of this type does not stop the rest of flows in the activity.
+
+    </p>
+
+    <h3>Meta-model</h3>
+    <p>
+    The following diagram is an excerpt with the relevant elements of the Activity Diagram meta-model.
+    </p>
+
+    <div class="metamodel">
+      <!--
+       <object data="images/uml_ad.svg" type="image/svg+xml" >
+	 -->
+       <embed src="images/uml_ad.svg" type="image/svg+xml" />
+    </div>
+
+
+    <h3>Binding</h3>
+    <p>
+The meta-model of activity diagrams defines ActivityNode as superclass for all types of flow nodes, and represents flow edges using the class ActivityEdge; therefore, they are mapped to Node and FlowEdge in the concept, respectively. Task is bound to three classes in the meta-model: ObjectNode, ExecutableNode and InitialNode. Only the last one can be used to represent the starting point of an activity, hence the binding assigns the value true to its feature isInitial, while it assigns the value false to the same feature in the other two classes. The meta-model contains a class for each type of gateway in the concept, excluding MultiChoice, whose semantics is not supported by activity diagrams, and therefore it is mapped to NONE. FinalNode in the meta-model is mapped to FinalTask in the concept. Regarding the feature isTerminating, it is true when the concrete type of final node is ActivityFinalNode (i.e. flow final nodes do not terminate the flow of the activity).
+    </p>
+
+    <pre class="binding">
+binding ad2fd {  
+	concept   FD   : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore"
+	metamodel UML  : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/ad2pn/UML.ecore"
+
+	class FlowDiagram to Activity		
+	class Node        to ActivityNode 	
+	class FlowEdge    to ActivityEdge 
+		
+	class Task to ObjectNode, ExecutableNode, InitialNode
+	feature Task[ExecutableNode].name is name
+	feature Task[ExecutableNode].isInitial = false
+	feature Task[ObjectNode].name is name
+	feature Task[ObjectNode].isInitial = false
+	feature Task[InitialNode].name = 'Initial'
+	feature Task[InitialNode].isInitial = true 
+	     					           
+	class ExclusiveChoice to DecisionNode	                                        
+	class ParallelSplit   to ForkNode
+	class Synchronization to JoinNode 
+	class MultiChoice     to NONE
+	class SimpleMerge     to MergeNode
+	
+	feature FlowDiagram.nodes is node
+	feature FlowDiagram.edges is edge
+
+	feature FlowEdge."in" is source
+	feature FlowEdge.out is target
+
+	feature Node."ins" is incoming
+	feature Node.outs  is outgoing
+
+	class FinalTask to FinalNode
+	feature FinalTask.isTerminating = self.oclIsKindOf(UML!ActivityFinalNode)     
+}
+    </pre>
+
+
+    <!-- Copy paste -->
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-11389533-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

@@ -9,5 +9,5 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
  org.eclectic.modeling;bundle-version="0.8.6",
  org.eclectic.idc;bundle-version="0.8.6",
  bento.componetization.atl;bundle-version="1.0.0",
- genericity.compiler.atl.typing;bundle-version="1.0.0",
+ genericity.compiler.atl.typing;bundle-version="0.6.0",
  org.junit

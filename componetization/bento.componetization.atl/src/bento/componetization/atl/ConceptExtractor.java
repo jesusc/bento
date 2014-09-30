@@ -1,5 +1,6 @@
 package bento.componetization.atl;
 
+import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ import atl.metamodel.OCL.OclContextDefinition;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OclType;
 import atl.metamodel.OCL.OperationCallExp;
+import bento.analyser.footprint.CallSite;
+import bento.analyser.footprint.FootprintComputation;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
 import bento.componetization.atl.refactorings.PushDownFeature;
@@ -33,6 +36,14 @@ import bento.componetization.atl.refactorings.RemoveEmptyClass;
 
 public class ConceptExtractor extends FootprintComputation implements IStaticAnalysisInfo, IMetamodelInfo {
 	
+	public ConceptExtractor(ATLModel atlModel, MetamodelNamespace mm,
+			BasicEMFModel typing, String slicedURI) {
+		super(atlModel, mm, typing, slicedURI);
+
+		computeFootprint();
+	}
+
+	/*
 	public ConceptExtractor(BasicEMFModel atlTransformation, IModel mm,
 			BasicEMFModel typing, String slicedURI) {
 		super(atlTransformation, mm, typing, slicedURI);
@@ -40,8 +51,9 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 
 		computeFootprint();
 	}
+	*/
 
-	public EPackage refactor() {
+	public MetamodelNamespace refactor() {
 		// The order matters: In TrafoRunningExample RemoveAssociationClass -> PushDownFeature means
 		//                    that generalization is never pushed down
 		IConceptRefactoring[] refactorings = new IConceptRefactoring[] {
@@ -64,7 +76,7 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 			
 		}
 		
-		return pkg;
+		return mm;
 	}
 
 	@Override
@@ -91,12 +103,15 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 	@Override
 	public Set<EClass> getClasses() {
 		HashSet<EClass> classes = new HashSet<EClass>();
+		/*
 		TreeIterator<Object> it = EcoreUtil.getAllContents(pkg, false);
 		while ( it.hasNext() ) {
 			Object o = it.next();
 			if ( o instanceof EClass ) 
 				classes.add((EClass) o);
 		}
+		*/
+		classes.addAll(mm.getAllClasses());
 		
 		return classes;
 	}
@@ -104,13 +119,20 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 	@Override
 	public Set<EStructuralFeature> getFeatures() {
 		HashSet<EStructuralFeature> features = new HashSet<EStructuralFeature>();
+		List<EClass> classes = mm.getAllClasses();
+		for (EClass eClass : classes) {
+			for (EStructuralFeature f : eClass.getEStructuralFeatures()) {
+				features.add(f);
+			}
+		}
+		/*
 		TreeIterator<Object> it = EcoreUtil.getAllContents(pkg, false);
 		while ( it.hasNext() ) {
 			Object o = it.next();
 			if ( o instanceof EStructuralFeature ) 
 				features.add((EStructuralFeature) o);
 		}
-		
+		*/
 		return features;
 	}
 

@@ -28,7 +28,6 @@ public class OCL2SWRL extends BaseTest {
 	public void run() throws IOException {
 		String selectedError = null; // "709:6-709:23";
 		
-		/*
 		typing(OCL2R2ML_TRANSFORMATION, new Object[] { OCL_METAMODEL, R2ML_METAMODEL}, 
 				   new String[] { "OCL", "R2ML" }, true);
 
@@ -39,7 +38,8 @@ public class OCL2SWRL extends BaseTest {
 		generateErrorSlice("OCL", "tmp_/OCL2R2ML.slice.ecore", selectedError);
 		generateEffectiveMetamodel("OCL", "tmp_/OCL2R2ML.effective.ecore");
 		generateCSP(selectedError);
-		*/
+		/*
+		
 		// 
 
 		typing(R2ML2RDM_TRANSFORMATION, new Object[] { R2ML_METAMODEL, RDM_METAMODEL }, 
@@ -52,18 +52,34 @@ public class OCL2SWRL extends BaseTest {
 		generateErrorSlice("R2ML", "tmp_/R2ML2RDM.slice.ecore", selectedError);
 		generateEffectiveMetamodel("R2ML", "tmp_/R2ML2RDM.effective.ecore");
 		generateCSP_filtered(selectedError);
-
+		
 		//
 		
-//		typing(R2ML2XML_TRANSFORMATION, new Object[] { R2ML_METAMODEL, XML_METAMODEL }, 
-//				   new String[] { "R2ML", "XML" }, false);
+		typing(R2ML2XML_TRANSFORMATION, new Object[] { R2ML_METAMODEL, XML_METAMODEL }, 
+				   new String[] { "R2ML", "XML" }, true);
+
+		printStatistics();
+		printErrorsByType();
+
+		generateGraphviz(selectedError);
+		generateErrorSlice("R2ML", "tmp_/R2ML2XML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("R2ML", "tmp_/R2ML2XML.effective.ecore");
+		generateCSP_filtered(selectedError);
+*/
 
 		//
-		
-//		typing(RDM2XML_TRANSFORMATION, new Object[] { RDM_METAMODEL, XML_METAMODEL }, 
-//				   new String[] { "RDM", "XML" }, false);
+		/*
+		typing(RDM2XML_TRANSFORMATION, new Object[] { RDM_METAMODEL, XML_METAMODEL }, 
+				   new String[] { "RDM", "XML" }, true);
 
-	
+		printStatistics();
+		printErrorsByType();
+
+		generateGraphviz(selectedError);
+		generateErrorSlice("RDM", "tmp_/RDM2XML.slice.ecore", selectedError);
+		generateEffectiveMetamodel("RDM", "tmp_/RDM2XML.effective.ecore");
+		generateCSP_filtered(selectedError);
+	*/
 	}
 
 }

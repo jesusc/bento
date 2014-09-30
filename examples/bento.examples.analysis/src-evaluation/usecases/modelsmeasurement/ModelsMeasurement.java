@@ -38,7 +38,7 @@ public class ModelsMeasurement extends BaseTest {
 	
 	
 	public void run() throws IOException {
-		String selectedError = null;
+		String selectedError = "833:2-833:12";
 		
 		typing(KM32MEASURE_TRANSFORMATION, new Object[] { KM3_METAMODEL, MEASURE_METAMODEL}, 
 				   new String[] { "KM3", "Measure" }, true);

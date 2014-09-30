@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclectic.modeling.emf.EMFLoader;
+import org.eclectic.modeling.emf.ICollectionConverter;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -74,7 +74,7 @@ public class AnalyserExecutor {
 		GlobalNamespace gn = new GlobalNamespace(logicalNamesToResources.values(), logicalNamesToResources);
 
 		// Init typing model...
-		EMFLoader    loader  = new EMFLoader(new JavaListConverter());		
+		EMFLoader    loader  = new EMFLoader(new ICollectionConverter.JavaIdentity());		
 		List<EPackage> pkgs = new ArrayList<EPackage>();
 		pkgs.add(AtlTypingPackage.eINSTANCE);
 		BasicEMFModel typing = loader.emptyModelFromMemory(pkgs, "typing.xmi");

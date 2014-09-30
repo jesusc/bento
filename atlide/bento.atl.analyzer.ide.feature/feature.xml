@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="bento.atl.analyzer.ide.feature"
+      label="ATL Analyzer IDE Integration"
+      version="0.6.0.qualifier"
+      provider-name="Miso Team">
+
+   <description url="http://www.miso.es/tools/anATLyzer.html">
+      Integration of the ATL Analyzer with the ATL IDE.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import feature="bento.atl.analyzer.feature" version="0.6.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="bento.atl.editor"
+         download-size="0"
+         install-size="0"
+         version="0.6.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="bento.atl.editor.quickfix"
+         download-size="0"
+         install-size="0"
+         version="0.6.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="witness"
+         download-size="0"
+         install-size="0"
+         version="0.6.0.qualifier"
+         unpack="false"/>
+
+</feature>

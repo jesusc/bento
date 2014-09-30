@@ -1,17 +1,17 @@
 package bento.componetization.ui;
 
-import genericity.typecheck.atl.TypeCheckLauncher.ErrorMessage;
-
 import java.util.List;
 
-public class TypingInfo {
-	private List<ErrorMessage> messages;
+import bento.analysis.atl_analysis.Problem;
 
-	public TypingInfo(List<ErrorMessage> messages) {
+public class TypingInfo {
+	private List<Problem> messages;
+
+	public TypingInfo(List<Problem> messages) {
 		this.messages = messages;
 	}
 
-	public List<ErrorMessage> getMessages() {
+	public List<Problem> getMessages() {
 		return messages;
 	}
 

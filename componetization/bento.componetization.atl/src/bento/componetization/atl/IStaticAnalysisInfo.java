@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import bento.analyser.footprint.CallSite;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Helper;
 import atl.metamodel.ATL.Rule;

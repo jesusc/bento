@@ -1,5 +1,6 @@
 package bento.componetization.atl;
 
+import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.typing.atl_types.UnknownFeature;
 
 import java.util.ArrayList;
@@ -23,8 +24,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-public class MetamodelPrunner extends FootprintComputation {
+import atl.metamodel.ATLModel;
+import bento.analyser.footprint.CallSite;
+import bento.analyser.footprint.FootprintComputation;
 
+public class MetamodelPrunner extends FootprintComputation {
 
 	private EPackage conceptPkg;
 
@@ -44,10 +48,18 @@ public class MetamodelPrunner extends FootprintComputation {
 	 * @param typing The model containing the typing information
 	 * @param slicedURI The URI of the meta-model of interest
 	 */
+	/*
 	public MetamodelPrunner(BasicEMFModel atlTransformation, IModel mm, BasicEMFModel typing, String slicedURI) {
 		super(atlTransformation, mm, typing, slicedURI);
 	}
+	*/
 
+
+	public MetamodelPrunner(ATLModel atlModel, MetamodelNamespace mm,
+			BasicEMFModel typing, String slicedURI) {
+		super(atlModel, mm, typing, slicedURI);
+	}
+	
 	public EPackage extractSource(Resource r, String name, String conceptURI, String conceptPrefix) {
 		computeFootprint();
 		
@@ -114,7 +126,8 @@ public class MetamodelPrunner extends FootprintComputation {
 		if (traceDataType.containsKey(type) )
 			return traceDataType.get(type);
 		
-		if ( EcoreUtil.isAncestor(pkg, type) ) {
+		if ( mm.belongsTo(type) ) {
+		// if ( EcoreUtil.isAncestor(pkg, type) ) {
 			EDataType copied = EcoreUtil.copy(type);
 
 			traceDataType.put(type, copied);
@@ -149,7 +162,8 @@ public class MetamodelPrunner extends FootprintComputation {
 	}
 	
 	private boolean classInMetamodel(EClass eclass) {
-		return EcoreUtil.isAncestor(pkg, eclass);
+		return mm.belongsTo(eclass);
+		// return EcoreUtil.isAncestor(pkg, eclass);
 	}
 	
 	/**

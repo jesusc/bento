@@ -15,7 +15,20 @@ public class FeatureOrOperationNotFoundNode<P extends LocalProblem> extends Expr
 	
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
-		super.genErrorSlice(slice);
+		// Do not call super, it may make a problematic helper call be included in the path, leading
+		// to dependent errors to be included as well, when do not need to, example:
+		// * No problematic case (CHIN found in subtype):
+		//    helper context KM3!Classifier
+		//       def : NOC() : Integer = self.CHIN();
+		// * Problematic case (CHIN found in subtype too):
+		//    helper context KM3!Classifier
+		//       def : NOC() : Integer = self.CHIN() + self.operation_with_problems_inside();
+		// 
+		//  This is because operation_with_problems_inside will be included in the USE file, 
+		//  being problematic and unnecesary for the witness.
+		//
+		// super.genErrorSlice(slice);
+		generatedDependencies(slice);
 		if ( problem.getRecovery() instanceof FeatureFoundInSubclass ) {
 			FeatureFoundInSubclass recovery = (FeatureFoundInSubclass) problem.getRecovery();
 			slice.addMetaclassNeededInError(recovery.getSubclass());

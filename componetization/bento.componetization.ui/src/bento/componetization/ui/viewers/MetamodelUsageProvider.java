@@ -12,7 +12,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 
-import bento.componetization.atl.CallSite;
+import bento.analyser.footprint.CallSite;
 import bento.componetization.atl.IStaticAnalysisInfo;
 import bento.componetization.ui.Activator;
 

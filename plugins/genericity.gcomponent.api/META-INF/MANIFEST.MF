@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.m2m.atl;bundle-version="3.2.1",
  org.eclipse.m2m.atl.common;bundle-version="3.2.1",
  org.eclipse.m2m.atl.engine;bundle-version="3.2.1",
- genericity.compiler.atl.typing;bundle-version="1.0.0"
+ genericity.compiler.atl.typing;bundle-version="0.6.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: eclectic;uses:="org.eclectic.modeling.emf,org.eclectic.idc.jvm.runtime",
@@ -55,7 +55,8 @@ Export-Package: eclectic;uses:="org.eclectic.modeling.emf,org.eclectic.idc.jvm.r
    org.eclipse.emf.ecore,
    org.eclipse.emf.common.notify.impl,
    genericity.gcomponent.report,
-   org.eclipse.emf.common.notify"
+   org.eclipse.emf.common.notify",
+ genericity.typecheck.atl
 Bundle-ClassPath: lib/genericity-atl.jar,
  lib/genericity-instantiation.jar,
  .

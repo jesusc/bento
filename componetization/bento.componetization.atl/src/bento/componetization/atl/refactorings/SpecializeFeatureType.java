@@ -2,19 +2,13 @@ package bento.componetization.atl.refactorings;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
-import bento.componetization.atl.CallSite;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
 

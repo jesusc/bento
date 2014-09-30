@@ -1,7 +1,5 @@
 package bento.componetization.ui.forms;
 
-import genericity.typecheck.atl.TypeCheckLauncher.ErrorMessage;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -70,6 +68,9 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import bento.analysis.atl_analysis.Problem;
+import bento.analysis.atl_analysis.SeverityKind;
+import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import bento.componetization.atl.MetamodelPrunner;
 import bento.componetization.reveng.AtlTransformation;
 import bento.componetization.reveng.Metamodel;
@@ -100,6 +101,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.jface.viewers.TreeViewerColumn;
+
 import bento.componetization.ui.viewers.MetamodelUsageProvider;
 
 public class TemplatePage extends FormPage {
@@ -293,14 +295,14 @@ public class TemplatePage extends FormPage {
 
 		@Override
 		public String getColumnText(Object element, int columnIndex) {
-			ErrorMessage err = (ErrorMessage) element;
+			Problem err = (Problem) element;
 			switch (columnIndex) {
 			case 0:
-				return err.isError() ? "Error" : "Warning";
+				return err.getSeverity() == SeverityKind.ERROR ? "Error" : "Warning";
 			case 1:
-				return err.getMessage();
+				return err.getDescription();
 			case 2:
-				return err.getLocation();
+				return err instanceof LocalProblem ? ((LocalProblem) err).getLocation() : "-";
 			}
 			return null;
 		}		

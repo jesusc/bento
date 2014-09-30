@@ -31,7 +31,7 @@ import atl.metamodel.OCL.TupleTypeAttribute;
 
 public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 	
-	
+
 	public ExplicitTypeTraversal(ATLModel model, GlobalNamespace mm, Unit root, TypingModel typ, ErrorModel errors) {
 		super(model, mm, root, typ, errors);
 	}
