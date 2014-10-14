@@ -134,6 +134,15 @@ public interface AtlTypingFactory extends EFactory {
 	TypeError createTypeError();
 
 	/**
+	 * Returns a new object of class '<em>Unresolved Type Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Type Error</em>'.
+	 * @generated
+	 */
+	UnresolvedTypeError createUnresolvedTypeError();
+
+	/**
 	 * Returns a new object of class '<em>Unknown Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

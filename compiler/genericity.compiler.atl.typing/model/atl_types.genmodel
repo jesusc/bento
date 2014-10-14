@@ -33,6 +33,7 @@
     <genClasses ecoreClass="atl_types.ecore#//Unknown"/>
     <genClasses ecoreClass="atl_types.ecore#//EmptyCollectionType"/>
     <genClasses ecoreClass="atl_types.ecore#//TypeError"/>
+    <genClasses ecoreClass="atl_types.ecore#//UnresolvedTypeError"/>
     <genClasses ecoreClass="atl_types.ecore#//UnknownFeature">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference atl_types.ecore#//UnknownFeature/theContainingClass"/>
     </genClasses>

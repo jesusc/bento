@@ -2,6 +2,7 @@ package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
+import genericity.compiler.atl.analyser.namespaces.IClassNamespace;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EnumType;
@@ -190,8 +191,8 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		Type rightType = attr.typeOf(self.getValue());
 	
 		Type targetVar = attr.typeOf( self.getOutPatternElement() );
-		ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
-		EStructuralFeature f = ns.getFeatureInfo(self.getPropertyName());
+		IClassNamespace ns = (IClassNamespace) targetVar.getMetamodelRef();
+		EStructuralFeature f = ns.getStructuralFeatureInfo(self.getPropertyName());
 		
 		// The feature is removed from the current compulsoryFeatures set, which is
 		// checked later to be empty
@@ -217,8 +218,8 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 			// Rule out "thisModule" assignments
 			if ( targetVar instanceof Metaclass) { 
 				// The same as the declarative case
-				ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
-				EStructuralFeature f = ns.getFeatureInfo(assigned.getName());
+				IClassNamespace ns = (IClassNamespace) targetVar.getMetamodelRef();
+				EStructuralFeature f = ns.getStructuralFeatureInfo(assigned.getName());
 				
 				// The feature is removed from the current compulsoryFeatures set, which is
 				// checked later to be empty
@@ -276,7 +277,7 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	private void analyseRuleResolution(Binding self, Type rightType, EReference f) {
 		if ( rightType instanceof Metaclass ) {
 			Metaclass rightMetaclass = (Metaclass) rightType;
-			ClassNamespace ns = (ClassNamespace) rightType.getMetamodelRef();
+			IClassNamespace ns = (IClassNamespace) rightType.getMetamodelRef();
 			
 			List<MatchedRule> rules = ns.getResolvingRules();
 			boolean isAssignable    = TypeUtils.isClassAssignableTo(rightMetaclass.getKlass(), f.getEReferenceType());
@@ -341,7 +342,7 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		
 		if ( notResolved.size() > 0 ) {
 			ArrayList<EClass> problematicClasses = new ArrayList<EClass>(notResolved.size());
-			for (ClassNamespace classNamespace : notResolved) {
+			for (IClassNamespace classNamespace : notResolved) {
 				problematicClasses.add(classNamespace.getKlass());
 			}
 			

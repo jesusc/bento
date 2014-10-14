@@ -132,6 +132,10 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 				return createTypeErrorAdapter();
 			}
 			@Override
+			public Adapter caseUnresolvedTypeError(UnresolvedTypeError object) {
+				return createUnresolvedTypeErrorAdapter();
+			}
+			@Override
 			public Adapter caseUnknownFeature(UnknownFeature object) {
 				return createUnknownFeatureAdapter();
 			}
@@ -408,6 +412,20 @@ public class AtlTypingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeErrorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.UnresolvedTypeError <em>Unresolved Type Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.UnresolvedTypeError
+	 * @generated
+	 */
+	public Adapter createUnresolvedTypeErrorAdapter() {
 		return null;
 	}
 

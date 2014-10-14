@@ -35,6 +35,7 @@ import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.UnknownFeature;
 
+import genericity.typing.atl_types.UnresolvedTypeError;
 import genericity.typing.atl_types.analysis.AnalysisPackage;
 import genericity.typing.atl_types.analysis.impl.AnalysisPackageImpl;
 import genericity.typing.atl_types.annotations.AnnotationsPackage;
@@ -152,6 +153,13 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * @generated
 	 */
 	private EClass typeErrorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedTypeErrorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -509,6 +517,15 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnresolvedTypeError() {
+		return unresolvedTypeErrorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUnknownFeature() {
 		return unknownFeatureEClass;
 	}
@@ -766,6 +783,8 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 
 		typeErrorEClass = createEClass(TYPE_ERROR);
 
+		unresolvedTypeErrorEClass = createEClass(UNRESOLVED_TYPE_ERROR);
+
 		unknownFeatureEClass = createEClass(UNKNOWN_FEATURE);
 		createEReference(unknownFeatureEClass, UNKNOWN_FEATURE__THE_CONTAINING_CLASS);
 
@@ -849,6 +868,8 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		unknownEClass.getESuperTypes().add(this.getRefType());
 		emptyCollectionTypeEClass.getESuperTypes().add(this.getType());
 		typeErrorEClass.getESuperTypes().add(this.getType());
+		unresolvedTypeErrorEClass.getESuperTypes().add(this.getTypeError());
+		unresolvedTypeErrorEClass.getESuperTypes().add(this.getMetaclass());
 		unknownFeatureEClass.getESuperTypes().add(ecorePackage.getEStructuralFeature());
 		emptyCollectionEClass.getESuperTypes().add(this.getType());
 		enumTypeEClass.getESuperTypes().add(this.getType());
@@ -897,6 +918,8 @@ public class AtlTypingPackageImpl extends EPackageImpl implements AtlTypingPacka
 		initEClass(emptyCollectionTypeEClass, EmptyCollectionType.class, "EmptyCollectionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeErrorEClass, TypeError.class, "TypeError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unresolvedTypeErrorEClass, UnresolvedTypeError.class, "UnresolvedTypeError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(unknownFeatureEClass, UnknownFeature.class, "UnknownFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnknownFeature_TheContainingClass(), ecorePackage.getEClass(), null, "theContainingClass", null, 1, 1, UnknownFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

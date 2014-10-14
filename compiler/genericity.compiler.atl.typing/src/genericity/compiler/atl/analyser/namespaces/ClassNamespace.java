@@ -32,7 +32,7 @@ import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.Unknown;
 import genericity.typing.atl_types.UnknownFeature;
 
-public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamespace {
+public class ClassNamespace extends AbstractTypeNamespace implements IClassNamespace {
 	private EClass	eClass;
 	private MetamodelNamespace	metamodel;
 	private HashMap<String, VirtualFeature<ClassNamespace, Attribute>> features = 
@@ -48,14 +48,25 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	}
 
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getMetamodelName()
+	 */
+	@Override
 	public String getMetamodelName() {
 		return this.metamodel.getName();
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getKlass()
+	 */
+	@Override
 	public EClass getKlass() {
 		return eClass;
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#hasFeature(java.lang.String)
+	 */	
 	@Override
 	public boolean hasFeature(String featureName) {
 		return getExtendedFeature(featureName) != null ||
@@ -63,10 +74,18 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	}	
 
 
-	public EStructuralFeature getFeatureInfo(String featureName) {
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getFeatureInfo(java.lang.String)
+	 */
+	@Override
+	public EStructuralFeature getStructuralFeatureInfo(String featureName) {
 		return eClass.getEStructuralFeature(featureName);
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getFeatureType(java.lang.String, atl.metamodel.ATL.LocatedElement)
+	 */
+	@Override
 	public Type getFeatureType(String featureName, LocatedElement node) {
 		Type t = getExtendedFeature(featureName);
 		if ( t != null) 
@@ -147,13 +166,8 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return metamodel.errors.signalNoFeature(eClass, featureName, node);
 	}
 
-	/**
-	 * Extends the meta-model 
-	 * 
-	 * @param class
-	 * @param featureName
-	 * @param attrDefinition 
-	 * @param type 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#extendType(java.lang.String, genericity.typing.atl_types.Type, atl.metamodel.OCL.Attribute)
 	 */
 	@Override
 	public void extendType(String featureName, Type returnType, Attribute attrDefinition) {
@@ -161,11 +175,17 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		metamodel.featureNames.add(featureName);
 	}
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#extendType(java.lang.String, genericity.typing.atl_types.Type, atl.metamodel.OCL.Operation)
+	 */
 	@Override
 	public void extendType(String operationName, Type returnType, Operation opDefinition) {
 		operations.put(operationName, new VirtualFeature<ClassNamespace, Operation>(this, operationName, returnType, opDefinition));
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#hasOperation(java.lang.String, genericity.typing.atl_types.Type[])
+	 */
 	@Override
 	public boolean hasOperation(String operationName, Type[] arguments) {
 		if ( super.hasOperation(operationName, arguments) )
@@ -180,14 +200,25 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return operations.containsKey(operationName);
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getAttachedOperation(java.lang.String)
+	 */
+	@Override
 	public Operation getAttachedOperation(String operationName) {
 		return operations.get(operationName).definition;
 	}
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#hasAttachedOperation(java.lang.String)
+	 */
+	@Override
 	public boolean hasAttachedOperation(String operationName) {
 		return operations.containsKey(operationName);
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getAttachedOclFeature(java.lang.String)
+	 */
 	@Override
 	public OclFeature getAttachedOclFeature(String attributeOrOperationName) {
 		VirtualFeature<ClassNamespace, ? extends OclFeature> vf = operations.get(attributeOrOperationName);
@@ -203,6 +234,9 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return this.theType;
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#createType(boolean)
+	 */
 	@Override
 	public Type createType(boolean explicitOcurrence) {
 		// TODO: Not sure if this should cache the result... to have only one type
@@ -213,6 +247,9 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		return m;
 	}
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getOperationType(java.lang.String, genericity.typing.atl_types.Type[], atl.metamodel.ATL.LocatedElement)
+	 */
 	@Override
 	public Type getOperationType(String operationName, Type[] arguments, LocatedElement node) {
 		Type t = super.getOperationType(operationName, arguments, node);
@@ -317,6 +354,9 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	}
 
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getOperatorType(java.lang.String, genericity.typing.atl_types.Type, atl.metamodel.ATL.LocatedElement)
+	 */
 	@Override
 	public Type getOperatorType(String operatorSymbol, Type optionalArgument, LocatedElement node) {
 		if ( operatorSymbol.equals("=") || operatorSymbol.equals("<>") ) {
@@ -330,6 +370,9 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 	private ArrayList<MatchedRule> attachedRules = new ArrayList<MatchedRule>();
 	private ArrayList<MatchedRule> resolvingRules = new ArrayList<MatchedRule>();
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#attachRule(java.lang.String, genericity.typing.atl_types.Type, atl.metamodel.ATL.Rule)
+	 */
 	@Override
 	public void attachRule(String ruleName, Type returnType, Rule rule) {
 		if ( ! (rule instanceof MatchedRule) ) throw new IllegalArgumentException();
@@ -338,6 +381,10 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 		attachResolvingRule(ruleName, returnType, (MatchedRule) rule);
 	}
 	
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#attachResolvingRule(java.lang.String, genericity.typing.atl_types.Type, atl.metamodel.ATL.MatchedRule)
+	 */
+	@Override
 	public void attachResolvingRule(String ruleName, Type returnType, MatchedRule rule) {
 		resolvingRules.add(rule);		
 
@@ -347,29 +394,49 @@ public class ClassNamespace extends AbstractTypeNamespace implements ITypeNamesp
 				continue; 
 			}
 			
-			ClassNamespace ns = (ClassNamespace) metamodel.getClassifier(c.getName());
+			IClassNamespace ns = (IClassNamespace) metamodel.getClassifier(c.getName());
 			ns.attachResolvingRule(ruleName, returnType, rule);
 		}		
 	}
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getResolvingRules()
+	 */
+	@Override
 	public List<MatchedRule> getResolvingRules() {
 		return resolvingRules;
 	}
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getRules()
+	 */
+	@Override
 	public List<MatchedRule> getRules() {
 		return attachedRules;
 	}
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getAllSubclasses()
+	 */
+	@Override
 	public Collection<ClassNamespace> getAllSubclasses() {
 		return metamodel.getAllSubclasses(eClass);
 	}
 
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getDirectSubclasses()
+	 */
+	@Override
 	public Collection<ClassNamespace> getDirectSubclasses() {
 		return metamodel.getDirectSubclasses(eClass);		
 	}
 
 
+	/* (non-Javadoc)
+	 * @see genericity.compiler.atl.analyser.namespaces.IClassNamespace#getAllSuperClasses()
+	 */
+	@Override
 	public List<ClassNamespace> getAllSuperClasses() {
 		ArrayList<ClassNamespace> result = new ArrayList<ClassNamespace>();
 		for(EClass c : eClass.getESuperTypes()) {

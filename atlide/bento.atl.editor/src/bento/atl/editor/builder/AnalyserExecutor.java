@@ -36,6 +36,7 @@ import atl.metamodel.ATL.Module;
 import atl.metamodel.OCL.OclModel;
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
 import bento.analyser.footprint.TrafoMetamodelData;
+import bento.analyser.util.IgnoredProblems;
 import bento.analysis.atl_analysis.Problem;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 
@@ -118,21 +119,7 @@ public class AnalyserExecutor {
 		public List<Problem> getProblems() {
 			return problems;
 		}
-		
-		public List<Problem> getNonIgnoredProblems() {
-			ArrayList<Problem> result = new ArrayList<Problem>();
-			Module module = analyser.getATLModel().allObjectsOf(Module.class).get(0);
-			List<String> ignored = findIgnoredProblems(module);
 			
-			for (Problem problem : problems) {				
-				if ( problem instanceof bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature && ignored.contains("MissingBinding") ) continue;
-				
-				result.add(problem);	
-			}
-			
-			return result;
-		}
-		
 		public EPackage getSourceMetamodel() {
 			Module mod = analyser.getATLModel().allObjectsOf(Module.class).get(0);
 			String n = mod.getInModels().get(0).getMetamodel().getName();
@@ -191,26 +178,12 @@ public class AnalyserExecutor {
 			return path;
 		}
 
-
-		private static final String DISABLE = "@disable";
-		private List<String> findIgnoredProblems(Module module) {
-			List<String> result = new ArrayList<String>();
-			for (String str : module.getCommentsBefore()) {
-				String line = str.replaceAll("--", "").trim();
-				int index   = line.indexOf(DISABLE);
-				if ( index != -1 ) {
-					line = line.substring(index + DISABLE.length());
-					for(String s : line.split(",")) {
-						result.add(s.trim());
-					}
-				}			
-			}
-
-			return result;
-		}
-
 		public Analyser getAnalyser() {
 			return analyser;
+		}
+
+		public List<Problem> getNonIgnoredProblems() {
+			return IgnoredProblems.getNonIgnoredProblems(analyser);
 		}
 
 	}

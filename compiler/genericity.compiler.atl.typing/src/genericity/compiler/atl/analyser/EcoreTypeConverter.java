@@ -1,7 +1,7 @@
 package genericity.compiler.atl.analyser;
 
-import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.EnumNamespace;
+import genericity.compiler.atl.analyser.namespaces.IClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.IMetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.typing.atl_types.CollectionType;
@@ -43,7 +43,7 @@ public class EcoreTypeConverter {
 
 	public Type convert(EClassifier c, IMetamodelNamespace mspace) {
 		if ( c instanceof EClass ) {
-			return convertEClass((EClass) c, (ClassNamespace) mspace.getClassifier(c.getName()));
+			return convertEClass((EClass) c, (IClassNamespace) mspace.getClassifier(c.getName()));
 		} else if ( c instanceof EDataType ) {
 			return convertEDataType((EDataType) c);
 		}
@@ -51,12 +51,12 @@ public class EcoreTypeConverter {
 		throw new UnsupportedOperationException("Type " + c.getName() + " not supported");
 	}
 
-	public Metaclass convertEClass(EClass eClass, ClassNamespace cspace) {
+	public Metaclass convertEClass(EClass eClass, IClassNamespace cspace) {
 		Metaclass m = typ.newMetaclassType(eClass, false, cspace);
 		return m;
 	}
 	
-	public CollectionType convertAllInstancesOf(EClass eclass, ClassNamespace cspace) {
+	public CollectionType convertAllInstancesOf(EClass eclass, IClassNamespace cspace) {
 		return typ.newSequenceType( convertEClass(eclass, cspace) );
 	}
 	

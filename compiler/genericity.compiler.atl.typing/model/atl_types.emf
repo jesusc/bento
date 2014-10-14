@@ -61,6 +61,10 @@ class TypeError extends Type {
    
 }
 
+class UnresolvedTypeError extends TypeError, Metaclass {
+	
+}
+
 class UnknownFeature extends ecore.EStructuralFeature {
    ref EClass[1] theContainingClass;
 }

@@ -67,9 +67,9 @@ public class ExplicitTypeTraversal extends AbstractAnalyserVisitor {
 				return;
 			}
 
-			errors.signalNoClass(self.getName(), mmspace, self);
-			// TODO: Signal no class should recover more elegantly
-			attr.linkExprType(typ.newUnknownType());
+			// Recovery is done by generating a special error type
+			Type errorType = errors.signalNoClass(self.getName(), mmspace, self);
+			attr.linkExprType(errorType);
 			return;
 		}
 		Type type = (Type) tspace.createType(true);

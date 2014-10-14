@@ -1,6 +1,6 @@
 package genericity.compiler.atl.analyser;
 
-import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
+import genericity.compiler.atl.analyser.namespaces.IClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.TypeErrorNamespace;
 import genericity.compiler.atl.analyser.recovery.IRecoveryAction;
@@ -82,13 +82,14 @@ public class ErrorModel {
 		signalError(error, "Invalid meta-model: " + name, element);
 	}
 
-	public void signalNoClass(String name, MetamodelNamespace mmspace, LocatedElement element) {
+	public Type signalNoClass(String name, MetamodelNamespace mmspace, LocatedElement element) {
 		NoClassFoundInMetamodel error = AtlErrorsFactory.eINSTANCE.createNoClassFoundInMetamodel();
 		initProblem(error, element);
 		
 		error.setClassName(name);
 		
 		signalError(error, "No class " + name + " found in meta-model " + mmspace.getName(), element);
+		return AnalyserContext.getTypingModel().newUnresolvedType(error);
 	}
 
 	public Type signalNoFeature(EClass c, String featureName, LocatedElement element) {
@@ -184,7 +185,7 @@ public class ErrorModel {
 
 		error.setFeatureName(featureName);
 		error.setClassName(type.getName());
-		error.setMetamodelName(((ClassNamespace) type.getMetamodelRef()).getMetamodelName());
+		error.setMetamodelName(((IClassNamespace) type.getMetamodelRef()).getMetamodelName());
 		
 		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
 		recovery.setSubclassName(subtype.getName());
@@ -200,7 +201,7 @@ public class ErrorModel {
 
 		error.setOperationName(operationName);
 		error.setClassName(type.getName());
-		error.setMetamodelName(((ClassNamespace) type.getMetamodelRef()).getMetamodelName());
+		error.setMetamodelName(((IClassNamespace) type.getMetamodelRef()).getMetamodelName());
 		
 		FeatureFoundInSubclass recovery = AtlRecoveryFactory.eINSTANCE.createFeatureFoundInSubclass();
 		recovery.setSubclassName(subtype.getName());
@@ -305,7 +306,7 @@ public class ErrorModel {
 		NoContainerForRefImmediateComposite error = AtlErrorsFactory.eINSTANCE.createNoContainerForRefImmediateComposite();
 		initProblem(error, node);
 		error.setClassName(clazz.getName());
-		error.setMetamodelName(((ClassNamespace) clazz.getMetamodelRef()).getMetamodelName());
+		error.setMetamodelName(((IClassNamespace) clazz.getMetamodelRef()).getMetamodelName());
 		
 		signalNoRecoverableError("No container is possible for class " + clazz.getName(), node);
 	}

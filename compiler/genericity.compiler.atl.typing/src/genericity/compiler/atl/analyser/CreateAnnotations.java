@@ -2,6 +2,7 @@ package genericity.compiler.atl.analyser;
 
 import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
+import genericity.compiler.atl.analyser.namespaces.IClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.TransformationNamespace;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.ThisModuleType;
@@ -306,7 +307,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		Type targetVar = attr.typeOf( self.getOutPatternElement() );
 		ClassNamespace ns = (ClassNamespace) targetVar.getMetamodelRef();
 		Type tgtType = ns.getFeatureType(self.getPropertyName(), self);
-		EStructuralFeature f = ns.getFeatureInfo(self.getPropertyName());
+		EStructuralFeature f = ns.getStructuralFeatureInfo(self.getPropertyName());
 		
 		//Type tgtType = attr.typeOf(self.g);
 		
@@ -318,10 +319,10 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 
 		// System.out.println(self.getLocation() + " " + TypeUtils.typeToString(srcType));
 		for(Metaclass m: typ.getInvolvedMetaclasses(srcType)) {
-			ClassNamespace srcNs = (ClassNamespace) m.getMetamodelRef();
-			ArrayList<ClassNamespace> nss = new ArrayList<ClassNamespace>(srcNs.getAllSubclasses());
+			IClassNamespace srcNs = (IClassNamespace) m.getMetamodelRef();
+			ArrayList<IClassNamespace> nss = new ArrayList<IClassNamespace>(srcNs.getAllSubclasses());
 			nss.add(srcNs);
-			for(ClassNamespace sub : nss) {
+			for(IClassNamespace sub : nss) {
 				for(MatchedRule r : sub.getResolvingRules() ) {
 					// System.out.println("Resolved by " + r.getName());
 					ann.getResolvedBy().add( attr.<MatchedRuleOneAnn>annotationOf(r) ) ;					
@@ -408,8 +409,8 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 		ann.setReceptorType( srcType );
 		
 		if ( srcType instanceof Metaclass ) {
-			ClassNamespace cn = (ClassNamespace) srcType.getMetamodelRef();
-			EStructuralFeature f = cn.getFeatureInfo(self.getName());
+			IClassNamespace cn = (IClassNamespace) srcType.getMetamodelRef();
+			EStructuralFeature f = cn.getStructuralFeatureInfo(self.getName());
 			if ( f != null  ) {
 				ann.setUsedFeature(f);
 			} else {
@@ -433,7 +434,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	private void computeResolvers(PropertyCallExp self, CallExprAnn ann, String featureOrOperationName) {			
 		if ( ann.getSource().getType() instanceof Metaclass && !(self.getSource() instanceof OclModelElement) ) {
 			ann.setIsStaticCall(false);
-			ClassNamespace cn = (ClassNamespace) ann.getSource().getType().getMetamodelRef();
+			IClassNamespace cn = (IClassNamespace) ann.getSource().getType().getMetamodelRef();
 			if ( cn.getAttachedOclFeature(featureOrOperationName) != null ) {
 			
 				//System.out.println(TypeUtils.typeToString(ann.getSource().getType()) + "." + self.getOperationName() + " - " + self.getLocation());

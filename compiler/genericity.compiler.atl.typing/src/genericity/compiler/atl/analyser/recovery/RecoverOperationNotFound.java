@@ -2,7 +2,7 @@ package genericity.compiler.atl.analyser.recovery;
 
 import genericity.compiler.atl.analyser.AnalyserContext;
 import genericity.compiler.atl.analyser.ErrorModel;
-import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
+import genericity.compiler.atl.analyser.namespaces.IClassNamespace;
 import genericity.typing.atl_types.Type;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.LocatedElement;
@@ -13,7 +13,7 @@ public class RecoverOperationNotFound implements IRecoveryAction {
 
 	private LocatedElement	node;
 
-	public RecoverOperationNotFound(ClassNamespace classNamespace, String operationName, LocatedElement node) {
+	public RecoverOperationNotFound(IClassNamespace classNamespace, String operationName, LocatedElement node) {
 		this.node = node;
 	}
 

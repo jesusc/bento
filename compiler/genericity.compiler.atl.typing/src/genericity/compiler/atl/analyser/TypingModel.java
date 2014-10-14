@@ -8,9 +8,10 @@ import java.util.ListIterator;
 import javax.lang.model.type.ErrorType;
 
 import genericity.compiler.atl.analyser.namespaces.BooleanNamespace;
-import genericity.compiler.atl.analyser.namespaces.ClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.CollectionNamespace;
+import genericity.compiler.atl.analyser.namespaces.EmptyCollectionNamespace;
 import genericity.compiler.atl.analyser.namespaces.EnumNamespace;
+import genericity.compiler.atl.analyser.namespaces.IClassNamespace;
 import genericity.compiler.atl.analyser.namespaces.IMetamodelNamespace;
 import genericity.compiler.atl.analyser.namespaces.MapTypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.OclTypeNamespace;
@@ -19,6 +20,8 @@ import genericity.compiler.atl.analyser.namespaces.TupleTypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.TypeErrorNamespace;
 import genericity.compiler.atl.analyser.namespaces.UnionTypeNamespace;
 import genericity.compiler.atl.analyser.namespaces.UnknownNamespace;
+import genericity.compiler.atl.analyser.namespaces.UnresolvedTypeErrorNamespace;
+import genericity.typing.atl_types.AtlTypingPackage;
 import genericity.typing.atl_types.BooleanType;
 import genericity.typing.atl_types.CollectionType;
 import genericity.typing.atl_types.EmptyCollectionType;
@@ -41,6 +44,7 @@ import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.TypeError;
 import genericity.typing.atl_types.UnionType;
 import genericity.typing.atl_types.Unknown;
+import genericity.typing.atl_types.UnresolvedTypeError;
 import genericity.typing.atl_types.analysis.ControlFlow;
 import genericity.typing.atl_types.annotations.AtlAnnotation;
 import genericity.typing.atl_types.annotations.BindingAnn;
@@ -63,6 +67,7 @@ import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.TransformationAnn;
 import genericity.typing.atl_types.annotations.TupleExprAnn;
+import genericity.typing.atl_types.impl.AtlTypingFactoryImpl;
 
 import org.eclectic.modeling.emf.BasicEMFModel;
 import org.eclipse.emf.common.util.EList;
@@ -159,7 +164,7 @@ public class TypingModel {
 		return (OclUndefinedType) impl.createObject(OclUndefinedType.class.getSimpleName());				
 	}
 
-	public Metaclass newMetaclassType(EClass c, boolean isExplicitOcurrence, ClassNamespace cspace) {
+	public Metaclass newMetaclassType(EClass c, boolean isExplicitOcurrence, IClassNamespace cspace) {
 		Metaclass metaclass = (Metaclass) impl.createObject(Metaclass.class.getSimpleName());
 		metaclass.setKlass(c);
 		metaclass.setName(c.getName());
@@ -184,7 +189,7 @@ public class TypingModel {
 	
 	public Type newEmptyCollectionType() {
 		EmptyCollectionType u = (EmptyCollectionType) impl.createObject(EmptyCollectionType.class.getSimpleName());
-		u.setMetamodelRef(new UnknownNamespace(u));
+		u.setMetamodelRef(new EmptyCollectionNamespace(u));
 		return u;
 	}
 
@@ -256,13 +261,32 @@ public class TypingModel {
 		return te;
 	}
 
-	public Type newTypeErrorType(Problem p, TypeError t) {
+	/**
+	 * Creates a new error type which depends on a previous error (the dependent error) 
+	 * 
+	 * @param p
+	 * @param dependentError
+	 * @return
+	 */
+	public Type newTypeErrorType(Problem p, TypeError dependentError) {
 		TypeError te = (TypeError) impl.createObject(TypeError.class.getSimpleName());
 		te.setMetamodelRef(new TypeErrorNamespace(p, te));
-
+		
 		// te.setMetamodelRef(te.getMetamodelRef());
 		return te;
 	}
+	
+	public Type newUnresolvedType(Problem p) {
+		UnresolvedTypeError te = (UnresolvedTypeError) impl.createObject(UnresolvedTypeError.class.getSimpleName());
+		te.setMetamodelRef(new UnresolvedTypeErrorNamespace(p, te));
+				
+		// The "Metaclass" facet of the error must be filled as well
+		// There is no class to attach, so the error EClass is set as a representative of metaclass with errors
+		te.setKlass(AtlTypingPackage.eINSTANCE.getUnresolvedTypeError());
+		
+		return te;
+	}
+
 	
 	//
 	// Type comparisons
@@ -361,6 +385,8 @@ public class TypingModel {
 		} else if ( t1 instanceof OclUndefinedType ) {
 			return true;
 		} else if ( t1 instanceof Unknown ) {
+			return true;
+		} else if ( t1 instanceof EmptyCollectionType ) {
 			return true;
 		} else if ( (t1 instanceof CollectionType) && (t2 instanceof CollectionType) ) {
 			CollectionType ct1 = (CollectionType) t1;
@@ -775,6 +801,7 @@ public class TypingModel {
 	public Type getImplicitlyCasted(OclExpression expr) {
 		return implicitlyCasted.get(expr);
 	}
+
 
 	
 }

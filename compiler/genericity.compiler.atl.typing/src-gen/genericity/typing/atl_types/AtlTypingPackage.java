@@ -615,6 +615,79 @@ public interface AtlTypingPackage extends EPackage {
 	int TYPE_ERROR_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.impl.UnresolvedTypeErrorImpl <em>Unresolved Type Error</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.impl.UnresolvedTypeErrorImpl
+	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnresolvedTypeError()
+	 * @generated
+	 */
+	int UNRESOLVED_TYPE_ERROR = 14;
+
+	/**
+	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR__MULTIVALUED = TYPE_ERROR__MULTIVALUED;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel Ref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR__METAMODEL_REF = TYPE_ERROR__METAMODEL_REF;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR__NAME = TYPE_ERROR_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Explicit Ocurrence</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR__EXPLICIT_OCURRENCE = TYPE_ERROR_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Klass</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR__KLASS = TYPE_ERROR_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR__MODEL = TYPE_ERROR_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Type Error</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_TYPE_ERROR_FEATURE_COUNT = TYPE_ERROR_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.impl.UnknownFeatureImpl <em>Unknown Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -622,7 +695,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnknownFeature()
 	 * @generated
 	 */
-	int UNKNOWN_FEATURE = 14;
+	int UNKNOWN_FEATURE = 15;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -812,7 +885,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEmptyCollection()
 	 * @generated
 	 */
-	int EMPTY_COLLECTION = 15;
+	int EMPTY_COLLECTION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -849,7 +922,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getEnumType()
 	 * @generated
 	 */
-	int ENUM_TYPE = 16;
+	int ENUM_TYPE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -904,7 +977,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaModel()
 	 * @generated
 	 */
-	int META_MODEL = 17;
+	int META_MODEL = 18;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -932,7 +1005,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getMetaclass()
 	 * @generated
 	 */
-	int METACLASS = 18;
+	int METACLASS = 19;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1005,7 +1078,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveType()
 	 * @generated
 	 */
-	int REFLECTIVE_TYPE = 19;
+	int REFLECTIVE_TYPE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1042,7 +1115,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnionType()
 	 * @generated
 	 */
-	int UNION_TYPE = 20;
+	int UNION_TYPE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1088,7 +1161,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getThisModuleType()
 	 * @generated
 	 */
-	int THIS_MODULE_TYPE = 21;
+	int THIS_MODULE_TYPE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1125,7 +1198,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getReflectiveClass()
 	 * @generated
 	 */
-	int REFLECTIVE_CLASS = 22;
+	int REFLECTIVE_CLASS = 23;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1162,7 +1235,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getCollectionType()
 	 * @generated
 	 */
-	int COLLECTION_TYPE = 23;
+	int COLLECTION_TYPE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1208,7 +1281,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getSequenceType()
 	 * @generated
 	 */
-	int SEQUENCE_TYPE = 24;
+	int SEQUENCE_TYPE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1254,7 +1327,7 @@ public interface AtlTypingPackage extends EPackage {
 	 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getSetType()
 	 * @generated
 	 */
-	int SET_TYPE = 25;
+	int SET_TYPE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Multivalued</b></em>' attribute.
@@ -1520,6 +1593,16 @@ public interface AtlTypingPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTypeError();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.UnresolvedTypeError <em>Unresolved Type Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Type Error</em>'.
+	 * @see genericity.typing.atl_types.UnresolvedTypeError
+	 * @generated
+	 */
+	EClass getUnresolvedTypeError();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.UnknownFeature <em>Unknown Feature</em>}'.
@@ -1976,6 +2059,16 @@ public interface AtlTypingPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_ERROR = eINSTANCE.getTypeError();
+
+		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.UnresolvedTypeErrorImpl <em>Unresolved Type Error</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.impl.UnresolvedTypeErrorImpl
+		 * @see genericity.typing.atl_types.impl.AtlTypingPackageImpl#getUnresolvedTypeError()
+		 * @generated
+		 */
+		EClass UNRESOLVED_TYPE_ERROR = eINSTANCE.getUnresolvedTypeError();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.impl.UnknownFeatureImpl <em>Unknown Feature</em>}' class.

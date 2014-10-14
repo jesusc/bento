@@ -175,6 +175,16 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlTypingPackage.UNRESOLVED_TYPE_ERROR: {
+				UnresolvedTypeError unresolvedTypeError = (UnresolvedTypeError)theEObject;
+				T result = caseUnresolvedTypeError(unresolvedTypeError);
+				if (result == null) result = caseTypeError(unresolvedTypeError);
+				if (result == null) result = caseMetaclass(unresolvedTypeError);
+				if (result == null) result = caseRefType(unresolvedTypeError);
+				if (result == null) result = caseType(unresolvedTypeError);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlTypingPackage.UNKNOWN_FEATURE: {
 				UnknownFeature unknownFeature = (UnknownFeature)theEObject;
 				T result = caseUnknownFeature(unknownFeature);
@@ -476,6 +486,21 @@ public class AtlTypingSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeError(TypeError object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Type Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Type Error</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolvedTypeError(UnresolvedTypeError object) {
 		return null;
 	}
 
