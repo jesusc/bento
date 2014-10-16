@@ -472,32 +472,37 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		if ( ! (self.getArguments().get(1) instanceof StringExp ) ) {
 			System.out.println("Cannot deal with resolveTemp with second argument not being string: " + self.getLocation());
 			// attr.linkExprType(typ.newUnknownType());
-			attr.linkExprType(typ.newTypeErrorType(null));
+			// attr.linkExprType(typ.newTypeErrorType(null));
+			attr.linkExprType(typ.newUnknownType());
 			return;
 		}
 		
 		OclExpression resolvedObj = self.getArguments().get(0);
 		String expectedVarName = ((StringExp) self.getArguments().get(1)).getStringSymbol();
-		String compatibleRules  = "";
-		String withSameVarRules = "";
+		ArrayList<MatchedRule> compatibleRules = new ArrayList<MatchedRule>();
+		String withSameVarRules = ""; // TODO: Convert into a collection
+
 		Type selectedType = null;
-		
+		Type type_ = attr.typeOf(resolvedObj);
+
+		boolean sourceCompatibleRuleFound = false;
 		Module m = (Module) root;
 		for(ModuleElement e : m.getElements()) {
-			if ( e instanceof MatchedRule ) {
+			if ( e instanceof MatchedRule && ! ((MatchedRule) e).getIsAbstract()) {
 				MatchedRule mr = (MatchedRule) e;
 				if ( mr.getInPattern().getElements().size() == 1 ) {
 					SimpleInPatternElement pe = (SimpleInPatternElement) mr.getInPattern().getElements().get(0);
-					Type type_ = attr.typeOf(resolvedObj);
 					Type supertype = attr.typeOf(pe.getType());
 					
+					// System.out.println(self.getLocation() + ": " + type_ + " vs. " + supertype);
 					// System.out.println(TypeUtils.typeToString(type_) + " - " + TypeUtils.typeToString(supertype));
 					if ( typ.isCompatible(type_, supertype) ) {
-						compatibleRules += mr.getName() + ", ";
+						sourceCompatibleRuleFound = true;
+						
+						compatibleRules.add(mr);
 						
 						// This is the rule!
-						OutPattern po = mr.getOutPattern();
-						for(OutPatternElement ope : po.getElements()) {
+						for(OutPatternElement ope : ATLUtils.getAllOutputPatternElement(mr) ) {
 							SimpleOutPatternElement sope = (SimpleOutPatternElement) ope;
 							if ( sope.getVarName().equals(expectedVarName) ) {
 								Type t = attr.typeOf(sope.getType());
@@ -510,6 +515,7 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 								selectedType = t;								
 							}
 						}				
+						
 					}
 				}
 			}
@@ -520,7 +526,13 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 			return;
 		}
 		
-		errors.signalNoRecoverableError("No output pattern " + expectedVarName + " in rule(s): " + compatibleRules, self);
+		if ( ! sourceCompatibleRuleFound ) {
+			Type r = errors.signalResolveTempWithoutRule(self, type_); 
+			attr.linkExprType(r);
+		} else {
+			Type r = errors.signalResolveTempOutputPatternElementNotFound(self, type_, expectedVarName, compatibleRules);
+			attr.linkExprType(r);
+		}
 	}
 
 
@@ -570,7 +582,7 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 				t = null;
 			}
 
-			if ( AnalyserContext.isOclStrict() ) {
+			if ( AnalyserContext.isOclStrict() && t != null ) {
 				Type recType = errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {				
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {

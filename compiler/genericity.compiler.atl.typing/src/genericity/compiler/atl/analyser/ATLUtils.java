@@ -1,6 +1,13 @@
 package genericity.compiler.atl.analyser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
+
 import atl.metamodel.ATL.Helper;
+import atl.metamodel.ATL.MatchedRule;
+import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.OCL.Attribute;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OclType;
@@ -32,5 +39,32 @@ public class ATLUtils {
 		return self.getDefinition().getContext_().getContext_();
 	}
 
+	public static List<OutPatternElement> getAllOutputPatternElement(MatchedRule r) {
+		ArrayList<OutPatternElement> result = new ArrayList<OutPatternElement>();
+		Stack<MatchedRule> rules = new Stack<MatchedRule>();
+		rules.add(r);
+
+		while ( ! rules.isEmpty() ) {
+			r = rules.pop();
+			if ( r.getSuperRule() != null )
+				rules.push(r.getSuperRule());
+		
+			for(OutPatternElement ope : r.getOutPattern().getElements()) {
+				boolean alreadyDeclared = false;
+				for(OutPatternElement existing : result) {
+					if ( ope.getVarName().equals(existing.getVarName()) ) {
+						alreadyDeclared= true;
+						break;
+					}
+				}
+				
+				if ( ! alreadyDeclared ) {
+					result.add(ope);
+				}
+			}
+		}
+		
+		return result;
+	}
 
 }

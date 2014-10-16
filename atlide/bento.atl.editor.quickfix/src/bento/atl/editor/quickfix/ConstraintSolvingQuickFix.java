@@ -106,4 +106,10 @@ public class ConstraintSolvingQuickFix implements AtlProblemQuickfix {
 		return null;
 	}
 
+	@Override
+	public boolean isApplicable(IMarker marker) {
+		// TODO: Decide which errors are amenable to constraint solving
+		return true;
+	}
+
 }

@@ -55,4 +55,12 @@ public class RuleAnalysisTests extends BaseTest {
 				   new String[] { "UML", "PN" });
 	}
 
+	@Test
+	public void testResolveTemp_NoOutputPatternElement() throws IOException {
+		String ABCD_RESOLVE_TEMP_NO_OUTPUT_PATTERN_ELEMENT = "../bento.examples.analysis/tests/bento/tests/rules/abcd_no_output_pattern_element.atl.xmi";
+		
+		typing(ABCD_RESOLVE_TEMP_NO_OUTPUT_PATTERN_ELEMENT, new Object[] { ABCD_METAMODEL, WXYZ_METAMODEL}, 
+				   new String[] { "ABCD", "WXYZ" });
+	}
+
 }

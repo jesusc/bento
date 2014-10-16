@@ -135,6 +135,10 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 				return createBindingProblemAdapter();
 			}
 			@Override
+			public Adapter caseResolveTempProblem(ResolveTempProblem object) {
+				return createResolveTempProblemAdapter();
+			}
+			@Override
 			public Adapter caseNoBindingForCompulsoryFeature(NoBindingForCompulsoryFeature object) {
 				return createNoBindingForCompulsoryFeatureAdapter();
 			}
@@ -161,6 +165,14 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseResolvedRuleInfo(ResolvedRuleInfo object) {
 				return createResolvedRuleInfoAdapter();
+			}
+			@Override
+			public Adapter caseResolveTempWithoutRule(ResolveTempWithoutRule object) {
+				return createResolveTempWithoutRuleAdapter();
+			}
+			@Override
+			public Adapter caseResolveTempOutputPatternElementNotFound(ResolveTempOutputPatternElementNotFound object) {
+				return createResolveTempOutputPatternElementNotFoundAdapter();
 			}
 			@Override
 			public Adapter caseFlattenOverNonNestedCollection(FlattenOverNonNestedCollection object) {
@@ -453,6 +465,20 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.ResolveTempProblem <em>Resolve Temp Problem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolveTempProblem
+	 * @generated
+	 */
+	public Adapter createResolveTempProblemAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.NoBindingForCompulsoryFeature <em>No Binding For Compulsory Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -547,6 +573,34 @@ public class AtlErrorsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResolvedRuleInfoAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.ResolveTempWithoutRule <em>Resolve Temp Without Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolveTempWithoutRule
+	 * @generated
+	 */
+	public Adapter createResolveTempWithoutRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.analysis.atl_analysis.atl_error.ResolveTempOutputPatternElementNotFound <em>Resolve Temp Output Pattern Element Not Found</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolveTempOutputPatternElementNotFound
+	 * @generated
+	 */
+	public Adapter createResolveTempOutputPatternElementNotFoundAdapter() {
 		return null;
 	}
 

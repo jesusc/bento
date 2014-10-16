@@ -57,6 +57,8 @@ import bento.analysis.atl_analysis.atl_error.NoModelFound;
 import bento.analysis.atl_analysis.atl_error.OperationNotFound;
 import bento.analysis.atl_analysis.atl_error.OperationNotFoundInThisModule;
 import bento.analysis.atl_analysis.atl_error.ReadingTargetModel;
+import bento.analysis.atl_analysis.atl_error.ResolveTempOutputPatternElementNotFound;
+import bento.analysis.atl_analysis.atl_error.ResolveTempWithoutRule;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 import bento.analysis.atl_analysis.atl_recovery.AtlRecoveryFactory;
 import bento.analysis.atl_analysis.atl_recovery.FeatureFoundInSubclass;
@@ -141,6 +143,7 @@ public class ErrorModel {
 			signalWarning(error, "Collection operation over " + TypeUtils.typeToString(receptorType), element);
 			return result;
 		}
+
 		signalError(error, "Collection operation over " + TypeUtils.typeToString(receptorType), element);
 		return AnalyserContext.getTypingModel().newTypeErrorType(error);
 	}
@@ -362,9 +365,46 @@ public class ErrorModel {
 		error.setFeatureName(b.getPropertyName());
 		
 
-		signalWarning(error, "No rule for binding", b);
-		
+		signalWarning(error, "No rule for binding", b);		
 	}
+	
+	public Type signalResolveTempWithoutRule(OperationCallExp resolveTempOperation, Type sourceType) {
+		ResolveTempWithoutRule error = AtlErrorsFactory.eINSTANCE.createResolveTempWithoutRule();
+		initProblem(error, resolveTempOperation);
+		
+		if ( sourceType instanceof Metaclass) {
+			error.setSourceType(((Metaclass) sourceType).getKlass());
+		}
+
+		signalError(error, "No rule for resolveTemp", resolveTempOperation);				
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
+	}
+
+
+	public Type signalResolveTempOutputPatternElementNotFound(
+			OperationCallExp resolveTempOperation, Type type_, String expectedVarName,
+			List<MatchedRule> compatibleRules) {
+
+		ResolveTempOutputPatternElementNotFound error = AtlErrorsFactory.eINSTANCE.createResolveTempOutputPatternElementNotFound();
+
+		for (MatchedRule r : compatibleRules) {
+			ResolvedRuleInfo rinfo = AtlErrorsFactory.eINSTANCE.createResolvedRuleInfo();
+			rinfo.setLocation(r.getLocation());
+			rinfo.setElement(r.original_());
+			rinfo.setRuleName(r.getName());
+
+			error.getRules().add(rinfo);
+		}
+
+		String s = "In resolveTemp - no output pattern " + expectedVarName + " in rule(s): \n";
+		for (ResolvedRuleInfo rinfo : error.getRules()) {
+			s += "\t" + rinfo.getRuleName() + " " + rinfo.getLocation() + "\n";
+		}
+
+		signalError(error, s, resolveTempOperation);				
+		return AnalyserContext.getTypingModel().newTypeErrorType(error);
+	}
+
 	
 	public void signalBindingWithResolvedByIncompatibleRule(Binding b, EClass rightType, EClass targetType,
 			List<MatchedRule> problematicRules, List<EClass> sourceClasses, List<EClass> targetClasses) {

@@ -217,6 +217,15 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case AtlErrorsPackage.RESOLVE_TEMP_PROBLEM: {
+				ResolveTempProblem resolveTempProblem = (ResolveTempProblem)theEObject;
+				T result = caseResolveTempProblem(resolveTempProblem);
+				if (result == null) result = caseLocalProblem(resolveTempProblem);
+				if (result == null) result = caseProblem(resolveTempProblem);
+				if (result == null) result = caseAnalysisInfo(resolveTempProblem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case AtlErrorsPackage.NO_BINDING_FOR_COMPULSORY_FEATURE: {
 				NoBindingForCompulsoryFeature noBindingForCompulsoryFeature = (NoBindingForCompulsoryFeature)theEObject;
 				T result = caseNoBindingForCompulsoryFeature(noBindingForCompulsoryFeature);
@@ -280,6 +289,26 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 			case AtlErrorsPackage.RESOLVED_RULE_INFO: {
 				ResolvedRuleInfo resolvedRuleInfo = (ResolvedRuleInfo)theEObject;
 				T result = caseResolvedRuleInfo(resolvedRuleInfo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.RESOLVE_TEMP_WITHOUT_RULE: {
+				ResolveTempWithoutRule resolveTempWithoutRule = (ResolveTempWithoutRule)theEObject;
+				T result = caseResolveTempWithoutRule(resolveTempWithoutRule);
+				if (result == null) result = caseResolveTempProblem(resolveTempWithoutRule);
+				if (result == null) result = caseLocalProblem(resolveTempWithoutRule);
+				if (result == null) result = caseProblem(resolveTempWithoutRule);
+				if (result == null) result = caseAnalysisInfo(resolveTempWithoutRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AtlErrorsPackage.RESOLVE_TEMP_OUTPUT_PATTERN_ELEMENT_NOT_FOUND: {
+				ResolveTempOutputPatternElementNotFound resolveTempOutputPatternElementNotFound = (ResolveTempOutputPatternElementNotFound)theEObject;
+				T result = caseResolveTempOutputPatternElementNotFound(resolveTempOutputPatternElementNotFound);
+				if (result == null) result = caseResolveTempProblem(resolveTempOutputPatternElementNotFound);
+				if (result == null) result = caseLocalProblem(resolveTempOutputPatternElementNotFound);
+				if (result == null) result = caseProblem(resolveTempOutputPatternElementNotFound);
+				if (result == null) result = caseAnalysisInfo(resolveTempOutputPatternElementNotFound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -631,6 +660,21 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resolve Temp Problem</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resolve Temp Problem</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResolveTempProblem(ResolveTempProblem object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>No Binding For Compulsory Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -732,6 +776,36 @@ public class AtlErrorsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseResolvedRuleInfo(ResolvedRuleInfo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resolve Temp Without Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resolve Temp Without Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResolveTempWithoutRule(ResolveTempWithoutRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resolve Temp Output Pattern Element Not Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resolve Temp Output Pattern Element Not Found</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseResolveTempOutputPatternElementNotFound(ResolveTempOutputPatternElementNotFound object) {
 		return null;
 	}
 

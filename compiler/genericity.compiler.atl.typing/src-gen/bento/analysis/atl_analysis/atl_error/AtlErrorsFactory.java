@@ -170,6 +170,24 @@ public interface AtlErrorsFactory extends EFactory {
 	ResolvedRuleInfo createResolvedRuleInfo();
 
 	/**
+	 * Returns a new object of class '<em>Resolve Temp Without Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resolve Temp Without Rule</em>'.
+	 * @generated
+	 */
+	ResolveTempWithoutRule createResolveTempWithoutRule();
+
+	/**
+	 * Returns a new object of class '<em>Resolve Temp Output Pattern Element Not Found</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resolve Temp Output Pattern Element Not Found</em>'.
+	 * @generated
+	 */
+	ResolveTempOutputPatternElementNotFound createResolveTempOutputPatternElementNotFound();
+
+	/**
 	 * Returns a new object of class '<em>Flatten Over Non Nested Collection</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

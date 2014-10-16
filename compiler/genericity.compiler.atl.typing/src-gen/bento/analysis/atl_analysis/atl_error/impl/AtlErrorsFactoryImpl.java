@@ -76,6 +76,8 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 			case AtlErrorsPackage.BINDING_WITH_RESOLVED_BY_INCOMPATIBLE_RULE: return createBindingWithResolvedByIncompatibleRule();
 			case AtlErrorsPackage.BINDING_POSSIBLY_UNRESOLVED: return createBindingPossiblyUnresolved();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO: return createResolvedRuleInfo();
+			case AtlErrorsPackage.RESOLVE_TEMP_WITHOUT_RULE: return createResolveTempWithoutRule();
+			case AtlErrorsPackage.RESOLVE_TEMP_OUTPUT_PATTERN_ELEMENT_NOT_FOUND: return createResolveTempOutputPatternElementNotFound();
 			case AtlErrorsPackage.FLATTEN_OVER_NON_NESTED_COLLECTION: return createFlattenOverNonNestedCollection();
 			case AtlErrorsPackage.ITERATOR_OVER_EMPTY_SEQUENCE: return createIteratorOverEmptySequence();
 			case AtlErrorsPackage.READING_TARGET_MODEL: return createReadingTargetModel();
@@ -251,6 +253,26 @@ public class AtlErrorsFactoryImpl extends EFactoryImpl implements AtlErrorsFacto
 	public ResolvedRuleInfo createResolvedRuleInfo() {
 		ResolvedRuleInfoImpl resolvedRuleInfo = new ResolvedRuleInfoImpl();
 		return resolvedRuleInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResolveTempWithoutRule createResolveTempWithoutRule() {
+		ResolveTempWithoutRuleImpl resolveTempWithoutRule = new ResolveTempWithoutRuleImpl();
+		return resolveTempWithoutRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResolveTempOutputPatternElementNotFound createResolveTempOutputPatternElementNotFound() {
+		ResolveTempOutputPatternElementNotFoundImpl resolveTempOutputPatternElementNotFound = new ResolveTempOutputPatternElementNotFoundImpl();
+		return resolveTempOutputPatternElementNotFound;
 	}
 
 	/**
