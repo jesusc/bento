@@ -574,27 +574,18 @@ public class TypeAnalysisTraversal extends AbstractAnalyserVisitor {
 		}
 		
 		if ( ! ( receptorType instanceof CollectionType ) ) {
-			final Type t;
-			ITypeNamespace tspace = (ITypeNamespace) receptorType.getMetamodelRef();	
-			if ( tspace.hasOperation(self.getOperationName(), arguments)) {
-				t = tspace.getOperationType(self.getOperationName(), arguments, self);
-			} else {
-				t = null;
-			}
-
-			if ( AnalyserContext.isOclStrict() && t != null ) {
+			final ITypeNamespace tspace = (ITypeNamespace) receptorType.getMetamodelRef();	
+			if ( AnalyserContext.isOclStrict() ) {
 				Type recType = errors.signalCollectionOperationOverNoCollectionType(receptorType, self, new IRecoveryAction() {				
 					@Override
 					public Type recover(ErrorModel m, LocalProblem p) {
-						return t;
+						return tspace.getOperationType(self.getOperationName(), arguments, self);
 					}
 				});
 
 				attr.linkExprType( recType );
-			} else if ( t == null ) {
-				Type error = errors.signalNoOperationFound(receptorType, self.getOperationName(), self, null);
-				attr.linkExprType( error );
 			} else {
+				Type t = tspace.getOperationType(self.getOperationName(), arguments, self);
 				attr.linkExprType( t );
 			}
 			

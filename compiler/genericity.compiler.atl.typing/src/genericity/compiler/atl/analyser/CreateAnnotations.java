@@ -488,7 +488,8 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	
 	@Override
 	public void inCollectionOperationCallExp(CollectionOperationCallExp self) {
-		annotationOperationCall(self, self.getArguments());
+		CallExprAnn ann = annotationOperationCall(self, self.getArguments());
+		computeResolvers(self, ann, self.getOperationName());
 	}
 
 	@Override

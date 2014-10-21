@@ -246,15 +246,10 @@ public class ErrorPathGenerator {
 			parent = parent.container_();
 		}
 		
-	    AtlAnnotation ann = typ.getAnnotation(parent.original_());
-			
-		// QUITAR ESTE IF Y PONERLO EN PATH_TO_SOMEWHERE
 		if ( parent instanceof Rule ) {
 			return pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node, traversed);
 		} else if ( parent instanceof Helper ){
 			return pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node, traversed);			
-		//} else if ( parent instanceof IteratorExp ) {
-		//	pathToSomewhere(parent, node);
 		} else if ( parent instanceof IfExp ) {
 			return pathToIfExpr((IfExp) parent, (OclExpression) lastParent, node, traversed);
 		} else if ( parent instanceof LetExp ) {
@@ -426,9 +421,15 @@ public class ErrorPathGenerator {
 		return leadsToExecution;
 	}
 
-	private boolean pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent) {		
+	private boolean pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent) {
 		MatchedRule r = (MatchedRule) atlModel.findWrapper( rule.getRule() );
-		// VariableDeclaration v = r.getInPattern().getElements().get(0);
+		if ( r.getIsAbstract() ) {
+			for(MatchedRule cr : r.getChildren()) {
+				MatchedRuleAnn crann = (MatchedRuleAnn) typ.getAnnotation(cr.original_());
+				pathToMatchedRuleOne(crann, dependent);
+			}
+			return true;
+		}
 		
 		MatchedRuleExecution newNode = new MatchedRuleExecution(rule, r);
 		dependent.addDependency(newNode);

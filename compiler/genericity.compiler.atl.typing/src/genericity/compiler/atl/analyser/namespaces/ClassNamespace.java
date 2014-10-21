@@ -439,10 +439,18 @@ public class ClassNamespace extends AbstractTypeNamespace implements IClassNames
 	@Override
 	public List<ClassNamespace> getAllSuperClasses() {
 		ArrayList<ClassNamespace> result = new ArrayList<ClassNamespace>();
-		for(EClass c : eClass.getESuperTypes()) {
+		ArrayList<EClass> visit = new ArrayList<EClass>();
+		visit.addAll(eClass.getESuperTypes());
+		while ( ! visit.isEmpty() ) {
+			EClass c = visit.remove(0);
 			if ( c.eIsProxy() ) continue;
+			
 			ClassNamespace ns = (ClassNamespace) metamodel.getClassifier(c.getName());
 			result.add(ns);
+			
+			for(EClass sup : c.getESuperTypes()) {
+				visit.add(sup);
+			}
 		}
 		return result;
 	}
