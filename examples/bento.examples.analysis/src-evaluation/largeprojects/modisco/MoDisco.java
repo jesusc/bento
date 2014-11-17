@@ -43,6 +43,8 @@ public class MoDisco extends BaseTest {
 		
 		//
 	
+		selectedError = "736:3-736:18";
+		
 		typing(KDM2UML_TRANSFORMATION, new Object[] { KDM_METAMODEL, UML_METAMODEL }, 
 				   new String[] { "kdm", "uml" }, true);
 		

@@ -63,7 +63,7 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 	@Override
 	public void genGraphviz(GraphvizBuffer gv) {
 		super.genGraphviz(gv);
-		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - incompatible rules" + "\\n" + binding.getLocation(), leadsToExecution);
+		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - resolved with invalid target" + "\\n" + binding.getLocation(), leadsToExecution);
 	}
 
 	/*

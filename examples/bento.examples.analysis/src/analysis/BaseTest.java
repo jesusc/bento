@@ -322,4 +322,8 @@ public abstract class BaseTest {
 		return "." + File.separator + path;
 	}
 	
+	public String testr(String name) {
+		return "tests/" + getClass().getPackage().getName().replace(".", "/") + "/" + name;
+	}
+	
 }

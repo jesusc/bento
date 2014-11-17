@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="8:1-40:2" name="KDMtoUML">
+    <commentsBefore>-- @atlcompiler atl2006 </commentsBefore>
+    <commentsBefore>-- @nsURI uml=http://www.eclipse.org/uml2/2.1.0/UML</commentsBefore>
+    <commentsBefore>-- @nsURI kdm=http://www.eclipse.org/MoDisco/kdm</commentsBefore>
+    <commentsBefore>--</commentsBefore>
+    <commentsBefore>-- Tests unresolved bindings in lazy rules, called from imperative code.</commentsBefore>
+    <commentsBefore>-- Regression test from problem detected in KDM2UML, 736:3-736:18</commentsBefore>
+    <inModels location="9:29-9:43" name="kdmInput" metamodel="/2"/>
+    <outModels location="9:8-9:23" name="umlOutput" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="11:1-26:2" name="MemberUnitToProperty">
+      <outPattern location="13:2-13:22">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="13:5-13:22" varName="tgt">
+          <type xsi:type="ocl:OclModelElement" location="13:10-13:22" name="Property" model="/4"/>
+        </elements>
+      </outPattern>
+      <actionBlock location="14:2-25:3">
+        <statements xsi:type="atl:ExpressionStat" location="24:3-24:45">
+          <commentsBefore>-- Problem is here, if &quot;->&quot; is changed by &quot;.&quot; then it works</commentsBefore>
+          <commentsBefore>-- The detection of this problem is affecting the detection of the</commentsBefore>
+          <commentsBefore>-- possible unresolved binding in &quot;memberEnd &lt;- src&quot;.</commentsBefore>
+          <commentsBefore>--</commentsBefore>
+          <commentsBefore>-- The problem seems to be that the path generation algorithm</commentsBefore>
+          <commentsBefore>-- does not consider collection operations as &quot;function call expression&quot;</commentsBefore>
+          <commentsBefore>-- but the type checker does to recover from the error.</commentsBefore>
+          <commentsBefore>-- (Actually, it is in the TDG where they are not consider and the call/callee </commentsBefore>
+          <commentsBefore>--  are not established)</commentsBefore>
+          <expression xsi:type="ocl:CollectionOperationCallExp" location="24:3-24:44" operationName="DataElementToAssociation">
+            <commentsBefore>-- Problem is here, if &quot;->&quot; is changed by &quot;.&quot; then it works</commentsBefore>
+            <commentsBefore>-- The detection of this problem is affecting the detection of the</commentsBefore>
+            <commentsBefore>-- possible unresolved binding in &quot;memberEnd &lt;- src&quot;.</commentsBefore>
+            <commentsBefore>--</commentsBefore>
+            <commentsBefore>-- The problem seems to be that the path generation algorithm</commentsBefore>
+            <commentsBefore>-- does not consider collection operations as &quot;function call expression&quot;</commentsBefore>
+            <commentsBefore>-- but the type checker does to recover from the error.</commentsBefore>
+            <commentsBefore>-- (Actually, it is in the TDG where they are not consider and the call/callee </commentsBefore>
+            <commentsBefore>--  are not established)</commentsBefore>
+            <source xsi:type="ocl:VariableExp" location="24:3-24:13" referredVariable="/5">
+              <commentsBefore>-- Problem is here, if &quot;->&quot; is changed by &quot;.&quot; then it works</commentsBefore>
+              <commentsBefore>-- The detection of this problem is affecting the detection of the</commentsBefore>
+              <commentsBefore>-- possible unresolved binding in &quot;memberEnd &lt;- src&quot;.</commentsBefore>
+              <commentsBefore>--</commentsBefore>
+              <commentsBefore>-- The problem seems to be that the path generation algorithm</commentsBefore>
+              <commentsBefore>-- does not consider collection operations as &quot;function call expression&quot;</commentsBefore>
+              <commentsBefore>-- but the type checker does to recover from the error.</commentsBefore>
+              <commentsBefore>-- (Actually, it is in the TDG where they are not consider and the call/callee </commentsBefore>
+              <commentsBefore>--  are not established)</commentsBefore>
+            </source>
+            <arguments xsi:type="ocl:VariableExp" location="24:40-24:43" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+          </expression>
+        </statements>
+      </actionBlock>
+      <inPattern location="12:2-12:26">
+        <elements xsi:type="atl:SimpleInPatternElement" location="12:7-12:26" varName="src" variableExp="/0/@elements.0/@actionBlock/@statements.0/@expression/@arguments.0">
+          <type xsi:type="ocl:OclModelElement" location="12:12-12:26" name="MemberUnit" model="/3"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="29:1-34:2" name="DataElementToAssociation">
+      <outPattern location="31:2-33:3">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="31:5-33:3" varName="tgt">
+          <type xsi:type="ocl:OclModelElement" location="31:10-31:25" name="Association" model="/7"/>
+          <bindings location="32:3-32:18" propertyName="memberEnd">
+            <value xsi:type="ocl:VariableExp" location="32:15-32:18" referredVariable="/0/@elements.1/@inPattern/@elements.0"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="30:2-30:27">
+        <elements xsi:type="atl:SimpleInPatternElement" location="30:7-30:27" varName="src" variableExp="/0/@elements.1/@outPattern/@elements.0/@bindings.0/@value">
+          <type xsi:type="ocl:OclModelElement" location="30:12-30:27" name="DataElement" model="/6"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="36:1-40:2" name="StorableUnitToProperty">
+      <outPattern location="39:2-39:22">
+        <commentsBefore>-- Unresolved items</commentsBefore>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="39:5-39:22" varName="tgt">
+          <type xsi:type="ocl:OclModelElement" location="39:10-39:22" name="Property" model="/10"/>
+        </elements>
+      </outPattern>
+      <inPattern location="37:2-38:68">
+        <commentsAfter>-- Unresolved items</commentsAfter>
+        <elements xsi:type="atl:SimpleInPatternElement" location="37:7-37:28" varName="src" variableExp="/0/@elements.2/@inPattern/@filter/@source/@source/@source/@source /0/@elements.2/@inPattern/@filter/@arguments.0/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="37:12-37:28" name="StorableUnit" model="/8"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="37:30-38:67" operationName="and">
+          <source xsi:type="ocl:OperatorCallExp" location="37:30-37:53" operationName="not">
+            <source xsi:type="ocl:OperatorCallExp" location="37:35-37:52" operationName="=">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="37:35-37:43" name="kind">
+                <source xsi:type="ocl:VariableExp" location="37:35-37:38" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+              </source>
+              <arguments xsi:type="ocl:EnumLiteralExp" location="37:46-37:52" name="local"/>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="38:7-38:67" operationName="not">
+            <source xsi:type="ocl:OperationCallExp" location="38:12-38:66" operationName="oclIsTypeOf">
+              <source xsi:type="ocl:OperationCallExp" location="38:12-38:39" operationName="refImmediateComposite">
+                <source xsi:type="ocl:VariableExp" location="38:12-38:15" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+              </source>
+              <arguments xsi:type="ocl:OclModelElement" location="38:52-38:65" name="CodeModel" model="/9"/>
+            </source>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="9:20-9:23" name="uml" model="/0/@outModels.0"/>
+  <ocl:OclModel location="9:40-9:43" name="kdm" model="/0/@inModels.0"/>
+  <ocl:OclModel location="12:12-12:15" name="kdm" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="13:10-13:13" name="uml" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+  <ocl:VariableDeclaration location="24:3-24:13" varName="thisModule" variableExp="/0/@elements.0/@actionBlock/@statements.0/@expression/@source"/>
+  <ocl:OclModel location="30:12-30:15" name="kdm" elements="/0/@elements.1/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="31:10-31:13" name="uml" elements="/0/@elements.1/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="37:12-37:15" name="kdm" elements="/0/@elements.2/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="38:52-38:55" name="kdm" elements="/0/@elements.2/@inPattern/@filter/@arguments.0/@source/@arguments.0"/>
+  <ocl:OclModel location="39:10-39:13" name="uml" elements="/0/@elements.2/@outPattern/@elements.0/@type"/>
+</xmi:XMI>

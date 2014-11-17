@@ -29,53 +29,6 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		this.atlRule = atlRule;
 	}
 	
-	/*
-	@Override
-	public String genCSP(String dependent) {
-		Metaclass metaclass = null;
-		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
-		
-		if ( rule instanceof MatchedRuleOneAnn ) metaclass = ((MatchedRuleOneAnn) rule).getInPatternType();
-		else metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(0);
-		
-		String s = metaclass.getName() + "::allInstances()"; 
-		
-		boolean withExists = true;
-		
-		String depStr = "";
-		if ( rule.getFilter() != null ) {
-			if ( dependent != null ) 
-				depStr = " and \n\t " + dependent; 
-			s += "->exists(" + varDcl.getVarName() + "| " + constraint.genCSP(null) + depStr + ")";
-		} else if ( dependent != null ) {
-			s += "->exists(" + varDcl.getVarName() + "| " + dependent + ")";			
-		} else {
-			withExists = false;
-		}
-		
-		if ( rule instanceof MatchedRuleManyAnn ) {
-			for(int i = 1; i < ((MatchedRuleManyAnn) rule).getInPatternTypes().size(); i++) {
-				metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(i);
-				varDcl    = atlRule.getInPattern().getElements().get(i);
-				
-				if ( ! withExists ) {
-					s += "->size() > 0";
-				}
-
-				s = metaclass.getName() + "::allInstances()->exists(" + varDcl.getVarName() + "| " + s + ")"; 
-				
-			}
-			withExists = true;
-		}
-		
-		if ( ! withExists ) {
-			s += "->size() > 0";
-		}
-
-		return s;
-	}
-	*/
-
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
 		if ( rule instanceof MatchedRuleOneAnn ) {
@@ -103,39 +56,6 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
 		gv.addNode(this, rule.getName() + "\\nfrom: " + varDcl.getType().getName(), leadsToExecution ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf) {
-		Metaclass metaclass = null;
-		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
-		
-		if ( rule instanceof MatchedRuleOneAnn ) metaclass = ((MatchedRuleOneAnn) rule).getInPatternType();
-		else {
-			metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(0);
-		}
-
-		if ( rule instanceof MatchedRuleManyAnn ) {
-			for(int i = 1; i < ((MatchedRuleManyAnn) rule).getInPatternTypes().size(); i++) {
-				metaclass = ((MatchedRuleManyAnn) rule).getInPatternTypes().get(i);
-				varDcl    = atlRule.getInPattern().getElements().get(i);
-
-				String s = metaclass.getName() + ".allInstances()"; 
-				buf.generateLoop(s, "exists", varDcl.getVarName());
-			}
-		}
-
-		String s = metaclass.getName() + ".allInstances()"; 
-		
-		if ( rule.getFilter() != null ) {
-			buf.generateLoop(s, "exists", varDcl.getVarName());
-			this.getConstraint().getCSPText(buf);
-			// buf.generateIf(rule.getFilter(), true);
-		} else {
-			buf.generateLoop(s, "exists", varDcl.getVarName());
-		}
-
-	}
-	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
@@ -213,4 +133,19 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		return exists;
 	}
 		
+	/*
+	@Override
+	public void addDependency(DependencyNode node) {
+		// TODO Auto-generated method stub
+		System.out.println("MatchedRuleExecution.addDependency(" + node + ")");
+		super.addDependency(node);
+	}
+	
+	@Override
+	public void addDepending(DependencyNode node) {
+		if ( node instanceof RuleResolutionNode ) throw new IllegalArgumentException();
+		System.out.println("MatchedRuleExecution.addDepending(" + node + ")");
+		super.addDepending(node);
+	}
+	*/
 }

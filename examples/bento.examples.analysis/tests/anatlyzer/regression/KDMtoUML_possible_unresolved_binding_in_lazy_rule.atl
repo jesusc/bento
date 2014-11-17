@@ -1,0 +1,44 @@
+-- @atlcompiler atl2006 
+-- @nsURI uml=http://www.eclipse.org/uml2/2.1.0/UML
+-- @nsURI kdm=http://www.eclipse.org/MoDisco/kdm
+--
+-- Tests unresolved bindings in lazy rules, called from imperative code.
+-- Regression test from problem detected in KDM2UML, 736:3-736:18
+--
+-- Actual problem: "->" operator over non-collections, if used in a lazy rule, leads to a
+-- NullPointerException in the CSP Generator because the path is not computed from this
+-- point (this is visible in the path visualization)
+
+module KDMtoUML; 
+create umlOutput : uml from kdmInput : kdm;
+
+rule MemberUnitToProperty {
+	from src :kdm!MemberUnit
+	to tgt :uml!Property 
+	do {
+		-- Problem is here, if "->" is changed by "." then it works
+		-- The detection of this problem is affecting the detection of the
+		-- possible unresolved binding in "memberEnd <- src".
+		--
+		-- The problem seems to be that the path generation algorithm
+		-- does not consider collection operations as "function call expression"
+		-- but the type checker does to recover from the error.
+		-- (Actually, it is in the TDG where they are not consider and the call/callee 
+		--  are not established)
+		thisModule->DataElementToAssociation(src);
+	}
+}
+
+
+lazy rule DataElementToAssociation {
+	from src :kdm!DataElement
+	to tgt :uml!Association (
+		memberEnd<- src
+	)
+}
+
+rule StorableUnitToProperty  {
+	from src :kdm!StorableUnit (not (src.kind = #local)
+		and not (src.refImmediateComposite().oclIsTypeOf(kdm!CodeModel))) -- Unresolved items
+	to tgt :uml!Property
+}

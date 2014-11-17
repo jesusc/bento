@@ -33,31 +33,10 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 				": " + TypeUtils.typeToString(bindingAnn.getSourceType()) +"\\nresolvedBy", leadsToExecution);
 	}
 
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf) {
-		String s = "";
-		int i = 0;
-		int n = getDependencies().size();
-		for (DependencyNode d : getDependencies()) {
-			CSPBuffer buf2 = new CSPBuffer();
-			d.getCSPText(buf2);
-			
-			s += buf2.getText();
-			if ( i + 1 < n ) {
-				s += " or \n\t";
-			}			
-			i++;
-		}
-		
-		buf.generateExpression(null, s, "");
-		
-	}
-	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException(atlBinding.getLocation());
 	}
 	
 }
