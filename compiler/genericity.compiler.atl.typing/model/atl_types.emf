@@ -151,6 +151,11 @@ package annotations {
     val OutputPatternAnn[1..*] outputPatterns;
 
 	attr String[1] name;
+
+	//Not added yet because the information is already in the original ATL model
+	//ref RuleAnn[0..1]#subRules superRule;
+	//ref RuleAnn[*]#superRule subRules;
+
   }
   
   abstract class MatchedRuleAnn extends RuleAnn {

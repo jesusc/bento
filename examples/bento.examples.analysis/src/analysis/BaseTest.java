@@ -1,6 +1,8 @@
 package analysis;
 
 import genericity.compiler.atl.analyser.Analyser;
+import genericity.compiler.atl.analyser.ErrorModel;
+import genericity.compiler.atl.analyser.TypingModel;
 import genericity.compiler.atl.analyser.namespaces.GlobalNamespace;
 import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
 import genericity.compiler.atl.csp.CSPGenerator;
@@ -52,6 +54,7 @@ import bento.analysis.atl_analysis.atl_error.BindingPossiblyUnresolved;
 import bento.analysis.atl_analysis.atl_error.BindingWithoutRule;
 import bento.analysis.atl_analysis.atl_error.FeatureNotFound;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
+import bento.analysis.atl_analysis.atl_error.OperationNotFound;
 
 public abstract class BaseTest {
 
@@ -219,6 +222,10 @@ public abstract class BaseTest {
 		generateCSP(null);
 	}
 	
+	public ATLModel getAtlTransformation() {
+		return atlTransformation;
+	}
+	
 
 	protected void generateCSP_filtered(String location) throws IOException {
 		List<ProblemPath> problems = analyser.getDependencyGraph().getSortedPaths();
@@ -314,10 +321,26 @@ public abstract class BaseTest {
 	}
 		
 	
-	public BasicEMFModel getTypingModel() {
-		return typingModel;
+	public TypingModel getTypingModel() {
+		return analyser.getTyping();
 	}
+
 	
+	protected ErrorModel getErrorModel() {
+		return analyser.getErrors();
+	}
+
+	
+	protected LocalProblem findProblem(String selectedError, Class<?> klass) {
+		for(Problem p : getProblems()) {
+			LocalProblem lp = (LocalProblem) p;
+			if ( klass.isInstance(lp) && lp.getLocation().equals(selectedError) ) {
+				return lp;
+			}
+		}
+		throw new IllegalArgumentException("Not found problem at: " + selectedError);
+	}
+
 	public static String withDir(String path) {
 		return "." + File.separator + path;
 	}
