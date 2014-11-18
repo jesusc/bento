@@ -1,14 +1,10 @@
 package largeprojects.modisco;
 
 
-import genericity.compiler.atl.analyser.ErrorModel;
-import genericity.compiler.atl.graph.ErrorPathGenerator;
-
 import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;
 
-import bento.analysis.atl_analysis.atl_error.OperationNotFound;
 import analysis.BaseTest;
 
 public class MoDisco extends BaseTest {
@@ -47,7 +43,7 @@ public class MoDisco extends BaseTest {
 		
 		//
 	
-		selectedError = "736:3-736:18";
+		selectedError = "330:4-330:39"; 
 		
 		typing(KDM2UML_TRANSFORMATION, new Object[] { KDM_METAMODEL, UML_METAMODEL }, 
 				   new String[] { "kdm", "uml" }, true);
@@ -61,7 +57,11 @@ public class MoDisco extends BaseTest {
 		generateErrorSlice("uml", "tmp_/KDM2UML.slice.ecore", selectedError);
 		generateEffectiveMetamodel("uml", "tmp_/KDM2UML.effective.ecore");
 		generateCSP(selectedError);
+		
+		sliceTrafo(selectedError);
 	}
+
+	
 
 	
 }

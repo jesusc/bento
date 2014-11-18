@@ -324,6 +324,8 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			nss.add(srcNs);
 			for(IClassNamespace sub : nss) {
 				for(MatchedRule r : sub.getResolvingRules() ) {
+					if ( r.getIsAbstract() )
+						continue;
 					// System.out.println("Resolved by " + r.getName());
 					ann.getResolvedBy().add( attr.<MatchedRuleOneAnn>annotationOf(r) ) ;					
 				}

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="8:1-37:2" name="KDMtoUML">
+    <commentsBefore>-- @atlcompiler atl2006 </commentsBefore>
+    <commentsBefore>-- @nsURI uml=http://www.eclipse.org/uml2/2.1.0/UML</commentsBefore>
+    <commentsBefore>-- @nsURI kdm=http://www.eclipse.org/MoDisco/kdm</commentsBefore>
+    <commentsBefore>--</commentsBefore>
+    <commentsBefore>-- Tests abstract rules in the path of an error.</commentsBefore>
+    <commentsBefore>-- </commentsBefore>
+    <commentsAfter>--abstract rule TemplateUnitToTemplateableElement {</commentsAfter>
+    <commentsAfter>--	from src :kdm!TemplateUnit</commentsAfter>
+    <commentsAfter>--	to tgt :uml!TemplateableElement (</commentsAfter>
+    <commentsAfter>--		ownedTemplateSignature &lt;- signature</commentsAfter>
+    <commentsAfter>--	)</commentsAfter>
+    <commentsAfter>--	, signature :uml!RedefinableTemplateSignature (</commentsAfter>
+    <commentsAfter>--		name &lt;- src.name</commentsAfter>
+    <commentsAfter>----		,ownedParameter &lt;- src.codeElement->select(e | e.oclIsTypeOf(kdm!TemplateParameter))</commentsAfter>
+    <commentsAfter>----								->collect(parameter | thisModule->TemplateParameterToClassifierTemplateParameter(parameter))</commentsAfter>
+    <commentsAfter>--	)</commentsAfter>
+    <commentsAfter>--}</commentsAfter>
+    <commentsAfter>--</commentsAfter>
+    <commentsAfter>--rule TemplateUnitToOperation extends TemplateUnitToTemplateableElement {</commentsAfter>
+    <commentsAfter>--	from src :kdm!TemplateUnit (</commentsAfter>
+    <commentsAfter>--		src->getRealType().oclIsTypeOf(kdm!MethodUnit)</commentsAfter>
+    <commentsAfter>--	)</commentsAfter>
+    <commentsAfter>--	using {</commentsAfter>
+    <commentsAfter>--		realType :kdm!MethodUnit = src->getRealType();</commentsAfter>
+    <commentsAfter>--	}</commentsAfter>
+    <commentsAfter>--	to tgt :uml!Operation (</commentsAfter>
+    <commentsAfter>--		name &lt;- realType.name</commentsAfter>
+    <commentsAfter>--		,visibility &lt;- src->getVisibility()</commentsAfter>
+    <commentsAfter>--		,ownedParameter &lt;- realType.type.parameterUnit</commentsAfter>
+    <commentsAfter>--	)</commentsAfter>
+    <commentsAfter>--}</commentsAfter>
+    <inModels location="9:29-9:43" name="kdmInput" metamodel="/2"/>
+    <outModels location="9:8-9:23" name="umlOutput" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="11:1-18:2" name="KDMModelToModel">
+      <outPattern location="13:2-17:3">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="13:5-17:3" varName="tgt">
+          <type xsi:type="ocl:OclModelElement" location="13:10-13:19" name="Model" model="/4"/>
+          <bindings location="14:3-14:19" propertyName="name">
+            <commentsAfter>--		,packagedElement &lt;- src.extension</commentsAfter>
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="14:11-14:19" name="name">
+              <commentsAfter>--		,packagedElement &lt;- src.extension</commentsAfter>
+              <source xsi:type="ocl:VariableExp" location="14:11-14:14" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings location="16:4-16:39" propertyName="packagedElement">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="16:23-16:39" name="ownedElement">
+              <source xsi:type="ocl:VariableExp" location="16:23-16:26" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="12:2-12:24">
+        <elements xsi:type="atl:SimpleInPatternElement" location="12:7-12:24" varName="src" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source /0/@elements.0/@outPattern/@elements.0/@bindings.1/@value/@source">
+          <type xsi:type="ocl:OclModelElement" location="12:12-12:24" name="KDMModel" model="/3"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="20:1-26:2" name="KDMEntityToNamedElement" children="/0/@elements.2" isAbstract="true">
+      <outPattern location="22:2-25:3">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="22:5-25:3" varName="tgt">
+          <type xsi:type="ocl:OclModelElement" location="22:10-22:26" name="NamedElement" model="/6"/>
+          <bindings location="23:3-23:19" propertyName="name">
+            <commentsAfter>-- ,visibility &lt;- src->getVisibility()</commentsAfter>
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="23:11-23:19" name="name">
+              <commentsAfter>-- ,visibility &lt;- src->getVisibility()</commentsAfter>
+              <source xsi:type="ocl:VariableExp" location="23:11-23:14" referredVariable="/0/@elements.1/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="21:2-21:25">
+        <elements xsi:type="atl:SimpleInPatternElement" location="21:7-21:25" varName="src" variableExp="/0/@elements.1/@outPattern/@elements.0/@bindings.0/@value/@source">
+          <type xsi:type="ocl:OclModelElement" location="21:12-21:25" name="KDMEntity" model="/5"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="28:1-37:2" name="MethodUnitToOperation" superRule="/0/@elements.1">
+      <commentsAfter>--abstract rule TemplateUnitToTemplateableElement {</commentsAfter>
+      <commentsAfter>--	from src :kdm!TemplateUnit</commentsAfter>
+      <commentsAfter>--	to tgt :uml!TemplateableElement (</commentsAfter>
+      <commentsAfter>--		ownedTemplateSignature &lt;- signature</commentsAfter>
+      <commentsAfter>--	)</commentsAfter>
+      <commentsAfter>--	, signature :uml!RedefinableTemplateSignature (</commentsAfter>
+      <commentsAfter>--		name &lt;- src.name</commentsAfter>
+      <commentsAfter>----		,ownedParameter &lt;- src.codeElement->select(e | e.oclIsTypeOf(kdm!TemplateParameter))</commentsAfter>
+      <commentsAfter>----								->collect(parameter | thisModule->TemplateParameterToClassifierTemplateParameter(parameter))</commentsAfter>
+      <commentsAfter>--	)</commentsAfter>
+      <commentsAfter>--}</commentsAfter>
+      <commentsAfter>--</commentsAfter>
+      <commentsAfter>--rule TemplateUnitToOperation extends TemplateUnitToTemplateableElement {</commentsAfter>
+      <commentsAfter>--	from src :kdm!TemplateUnit (</commentsAfter>
+      <commentsAfter>--		src->getRealType().oclIsTypeOf(kdm!MethodUnit)</commentsAfter>
+      <commentsAfter>--	)</commentsAfter>
+      <commentsAfter>--	using {</commentsAfter>
+      <commentsAfter>--		realType :kdm!MethodUnit = src->getRealType();</commentsAfter>
+      <commentsAfter>--	}</commentsAfter>
+      <commentsAfter>--	to tgt :uml!Operation (</commentsAfter>
+      <commentsAfter>--		name &lt;- realType.name</commentsAfter>
+      <commentsAfter>--		,visibility &lt;- src->getVisibility()</commentsAfter>
+      <commentsAfter>--		,ownedParameter &lt;- realType.type.parameterUnit</commentsAfter>
+      <commentsAfter>--	)</commentsAfter>
+      <commentsAfter>--}</commentsAfter>
+      <outPattern location="34:2-36:3">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="34:5-36:3" varName="tgt">
+          <type xsi:type="ocl:OclModelElement" location="34:10-34:23" name="Operation" model="/10"/>
+        </elements>
+      </outPattern>
+      <inPattern location="29:2-33:3">
+        <elements xsi:type="atl:SimpleInPatternElement" location="29:7-29:26" varName="src" variableExp="/0/@elements.2/@inPattern/@filter/@source/@source/@source/@source/@source /0/@elements.2/@inPattern/@filter/@source/@arguments.0/@source/@source/@source /0/@elements.2/@inPattern/@filter/@arguments.0/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="29:12-29:26" name="MethodUnit" model="/7"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="30:3-32:67" operationName="and">
+          <commentsAfter>-- Unresolved items</commentsAfter>
+          <source xsi:type="ocl:OperatorCallExp" location="30:3-31:38" operationName="and">
+            <source xsi:type="ocl:OperatorCallExp" location="30:3-30:64" operationName="not">
+              <source xsi:type="ocl:OperationCallExp" location="30:7-30:64" operationName="oclIsTypeOf">
+                <source xsi:type="ocl:OperationCallExp" location="30:7-30:34" operationName="refImmediateComposite">
+                  <source xsi:type="ocl:VariableExp" location="30:7-30:10" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+                </source>
+                <arguments xsi:type="ocl:OclModelElement" location="30:47-30:63" name="TemplateUnit" model="/8"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:OperatorCallExp" location="31:7-31:38" operationName="not">
+              <source xsi:type="ocl:OperationCallExp" location="31:12-31:37" operationName="oclIsUndefined">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="31:12-31:20" name="type">
+                  <source xsi:type="ocl:VariableExp" location="31:12-31:15" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+                </source>
+              </source>
+            </arguments>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="32:7-32:67" operationName="not">
+            <commentsAfter>-- Unresolved items</commentsAfter>
+            <source xsi:type="ocl:OperationCallExp" location="32:12-32:66" operationName="oclIsTypeOf">
+              <source xsi:type="ocl:OperationCallExp" location="32:12-32:39" operationName="refImmediateComposite">
+                <source xsi:type="ocl:VariableExp" location="32:12-32:15" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+              </source>
+              <arguments xsi:type="ocl:OclModelElement" location="32:52-32:65" name="CodeModel" model="/9"/>
+            </source>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="9:20-9:23" name="uml" model="/0/@outModels.0"/>
+  <ocl:OclModel location="9:40-9:43" name="kdm" model="/0/@inModels.0"/>
+  <ocl:OclModel location="12:12-12:15" name="kdm" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="13:10-13:13" name="uml" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="21:12-21:15" name="kdm" elements="/0/@elements.1/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="22:10-22:13" name="uml" elements="/0/@elements.1/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="29:12-29:15" name="kdm" elements="/0/@elements.2/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="30:47-30:50" name="kdm" elements="/0/@elements.2/@inPattern/@filter/@source/@source/@source/@arguments.0"/>
+  <ocl:OclModel location="32:52-32:55" name="kdm" elements="/0/@elements.2/@inPattern/@filter/@arguments.0/@source/@arguments.0"/>
+  <ocl:OclModel location="34:10-34:13" name="uml" elements="/0/@elements.2/@outPattern/@elements.0/@type"/>
+</xmi:XMI>

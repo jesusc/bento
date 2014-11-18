@@ -1,8 +1,11 @@
 package genericity.compiler.atl.graph;
 
+import atl.metamodel.ATL.InPatternElement;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.RuleVariableDeclaration;
+import atl.metamodel.ATL.SimpleInPatternElement;
 import atl.metamodel.OCL.IfExp;
+import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
@@ -13,6 +16,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
@@ -86,7 +90,8 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		OperationCallExp allInstancesCall = model.createAllInstances(metaclass);
 		IteratorExp exists = model.createExists(allInstancesCall, varDcl.getVarName());
 		
-		model.addToScope(varDcl, exists.getIterators().get(0));
+		VariableDeclaration varDclMappedVar = exists.getIterators().get(0);
+		model.addToScope(varDcl, varDclMappedVar);
 		
 		LetExp letUsingDeclarations  = null;
 		LetExp lastLet  = null;
@@ -117,10 +122,12 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 				letUsingDeclarations .setIn_(ifExp);
 			
 			// => set <? : whenFilter>
+			mapSuperRuleVariables(varDclMappedVar, atlRule.getSuperRule(), model);
 			OclExpression whenFilterExpr = getDepending().genCSP(model);
 			ifExp.setThenExpression(whenFilterExpr);
 		} else {
 			// set <? : allInstancesBody>
+			mapSuperRuleVariables(varDclMappedVar, atlRule.getSuperRule(), model);
 			OclExpression whenFilterExpr = getDepending().genCSP(model);
 
 			// set <? : allInstancesBody>
@@ -132,20 +139,25 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		
 		return exists;
 	}
+
+	private void mapSuperRuleVariables(VariableDeclaration varDclMappedVar, MatchedRule superRule, CSPModel model) {
+		if ( superRule == null )
+			return;
 		
-	/*
+		if ( superRule.getInPattern().getElements().size() > 1 )
+			throw new UnsupportedOperationException("Only super rules with one input elements supported");
+		
+		
+		SimpleInPatternElement e = (SimpleInPatternElement) superRule.getInPattern().getElements().get(0);
+		model.addToScope(e, varDclMappedVar);
+		
+		mapSuperRuleVariables(varDclMappedVar, superRule.getSuperRule(), model);
+		
+	}
+		
 	@Override
-	public void addDependency(DependencyNode node) {
-		// TODO Auto-generated method stub
-		System.out.println("MatchedRuleExecution.addDependency(" + node + ")");
-		super.addDependency(node);
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
 	}
 	
-	@Override
-	public void addDepending(DependencyNode node) {
-		if ( node instanceof RuleResolutionNode ) throw new IllegalArgumentException();
-		System.out.println("MatchedRuleExecution.addDepending(" + node + ")");
-		super.addDepending(node);
-	}
-	*/
 }

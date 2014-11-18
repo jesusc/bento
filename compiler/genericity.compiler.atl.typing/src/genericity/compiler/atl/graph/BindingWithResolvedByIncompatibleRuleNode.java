@@ -8,6 +8,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Binding;
@@ -185,4 +186,9 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		return false;
 	}
 
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+	
 }

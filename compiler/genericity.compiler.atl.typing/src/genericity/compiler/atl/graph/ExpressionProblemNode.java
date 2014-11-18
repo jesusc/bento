@@ -6,6 +6,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import atl.metamodel.OCL.OclExpression;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 
@@ -18,12 +19,6 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 		this.expr = expr;
 	}
 
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf){
-		this.getDependency().getCSPText(buf);
-	}
-	*/
 	
 
 	@Override
@@ -45,6 +40,11 @@ public class ExpressionProblemNode<P extends LocalProblem> extends AbstractProbl
 		return model.createBooleanLiteral(true);
 	}
 
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+	
 	@Override
 	public boolean isStraightforward() {
 		return true;

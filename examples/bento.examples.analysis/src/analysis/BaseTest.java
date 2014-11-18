@@ -9,6 +9,7 @@ import genericity.compiler.atl.csp.CSPGenerator;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.ErrorSliceGenerator;
 import genericity.compiler.atl.csp.GraphvizGenerator;
+import genericity.compiler.atl.csp.TransformationSlicer;
 import genericity.compiler.atl.graph.ProblemGraph;
 import genericity.compiler.atl.graph.ProblemPath;
 import genericity.typing.atl_types.AtlTypingPackage;
@@ -68,7 +69,6 @@ public abstract class BaseTest {
 	private GlobalNamespace	mm;
 	private EPackage	metamodelPkg;
 	private Analyser	analyser;
-	private ErrorSlice	slice;
 	private String	atlTransformationFile;
 
 	public void typing(String atlTransformationFile, Object[] metamodels, String[] names) throws IOException {
@@ -235,7 +235,7 @@ public abstract class BaseTest {
 				continue;
 			
 			if ( p instanceof BindingWithoutRule || p instanceof BindingPossiblyUnresolved || p instanceof FeatureNotFound ) {
-				String s = new CSPGenerator(dependencyGraph, slice, new StandaloneAtlLoader()).generateCSP(path, analyser);
+				String s = new CSPGenerator(dependencyGraph, new StandaloneAtlLoader()).generateCSP(path, analyser);
 				if ( location != null ) {
 					System.out.println(s);
 				}
@@ -247,8 +247,7 @@ public abstract class BaseTest {
 	protected void generateCSP(String location) throws IOException {
 		//if ( slice == null )
 		//	throw new IllegalStateException("Error slice should be computed before generating CSP");
-				
-		String s = new CSPGenerator(dependencyGraph, slice, new StandaloneAtlLoader()).generateLoc(location, analyser);
+		String s = new CSPGenerator(dependencyGraph, new StandaloneAtlLoader()).generateLoc(location, analyser);
 		if ( location != null ) {
 			// Debugging purposes
 			System.out.println(s);
@@ -256,6 +255,10 @@ public abstract class BaseTest {
 		printToErrorFile(s);
 	}
 
+	protected void sliceTrafo(String location) {
+		new TransformationSlicer(dependencyGraph, new StandaloneAtlLoader()).generateLoc(location, analyser);
+	}
+	
 	private void printToErrorFile(String s) throws IOException {
 		if ( ! s.trim().isEmpty() ) {
 			
@@ -270,14 +273,14 @@ public abstract class BaseTest {
 	
 	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
-		slice = new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName);
+		new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName);
 		r.save(null);
 	}
 	
 
 	protected void generateErrorSlice(String metamodelName, String errorSliceMMUri, String location) throws IOException {
 		XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(errorSliceMMUri));
-		slice = new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName, location);
+		new ErrorSliceGenerator(analyser, dependencyGraph).generate(r, metamodelName, location);
 		r.save(null);
 	}
 	

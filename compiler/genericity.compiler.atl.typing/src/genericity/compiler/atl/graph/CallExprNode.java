@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
 import genericity.typing.atl_types.annotations.ModuleCallableAnn;
@@ -38,30 +39,6 @@ public class CallExprNode extends AbstractDependencyNode {
 		// this.end   = end;
 	}
 	
-	/*
-	@Override
-	public String genCSP(String dependent) {
-		// I could factorize in a let... somehow? Not the common case I guess
-		String s = "";
-		String g = OclGenerator.gen(start, null);
-		
-		if ( TypeUtils.isReference(ann.getType()) ) {
-			g = " not " + g + ".oclIsUndefined()";					
-		} else if ( TypeUtils.isCollection(ann.getType()) ) {
-			g = g + ".size() > 0";					
-		} else if ( ann.getType() instanceof StringType ) {
-			g = g + "STRING_NOT_SUPPORTED";
-		} else { 
-			throw new UnsupportedOperationException(ann.getType().getClass().toString());
-		}
-		
-		for(DependencyNode node : getDependencies()) {
-			s += node.genCSP(g) + "\n";
-		}
-		return s;
-	}
-	*/
-	
 	@Override
 	public void genErrorSlice(ErrorSlice slice) {
 		OclSlice.slice(slice, call.getSource());
@@ -74,15 +51,6 @@ public class CallExprNode extends AbstractDependencyNode {
 		super.genGraphviz(gv);
 		gv.addNode(this, OclGenerator.gen(call), leadsToExecution);
 	}
-
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf) {
-		this.getDependency().getCSPText(buf);
-		// TODO: Add parameters
-		buf.generateCallContext(call, ann.isIsStaticCall(), ann.getStaticResolver());
-	}
-	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
@@ -159,6 +127,11 @@ public class CallExprNode extends AbstractDependencyNode {
 				selfs.add(((VariableExp) atlObj).getReferredVariable());
 		}
 		return selfs;
+	}
+
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
 	}
 	
 }

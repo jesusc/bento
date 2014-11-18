@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Binding;
@@ -73,5 +74,11 @@ public class BindingWithoutRuleNode extends AbstractBindingAssignmentNode<Bindin
 	public boolean isStraightforward() {
 		return false;
 	}
+	
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+	
 
 }

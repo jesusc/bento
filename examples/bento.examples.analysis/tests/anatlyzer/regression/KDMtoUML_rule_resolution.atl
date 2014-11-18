@@ -1,0 +1,65 @@
+-- @atlcompiler atl2006 
+-- @nsURI uml=http://www.eclipse.org/uml2/2.1.0/UML
+-- @nsURI kdm=http://www.eclipse.org/MoDisco/kdm
+--
+-- Tests abstract rules in the path of an error.
+-- 
+
+module KDMtoUML; 
+create umlOutput : uml from kdmInput : kdm;
+
+rule KDMModelToModel {
+	from src :kdm!KDMModel
+	to tgt :uml!Model (
+		name <- src.name
+--		,packagedElement <- src.extension
+		,packagedElement <- src.ownedElement
+	)
+}
+
+abstract rule KDMEntityToNamedElement {
+	from src :kdm!KDMEntity
+	to tgt :uml!NamedElement (
+		name <- src.name
+		-- ,visibility <- src->getVisibility()
+	)
+}
+
+rule MethodUnitToOperation extends KDMEntityToNamedElement {
+	from src :kdm!MethodUnit (
+		not src.refImmediateComposite().oclIsTypeOf(kdm!TemplateUnit)
+		and not (src.type.oclIsUndefined())
+		and not (src.refImmediateComposite().oclIsTypeOf(kdm!CodeModel)) -- Unresolved items
+	)
+	to tgt :uml!Operation (
+		-- ownedParameter <- src.type.parameterUnit
+	)
+}
+
+--abstract rule TemplateUnitToTemplateableElement {
+--	from src :kdm!TemplateUnit
+--	to tgt :uml!TemplateableElement (
+--		ownedTemplateSignature <- signature
+--	)
+--	, signature :uml!RedefinableTemplateSignature (
+--		name <- src.name
+----		,ownedParameter <- src.codeElement->select(e | e.oclIsTypeOf(kdm!TemplateParameter))
+----								->collect(parameter | thisModule->TemplateParameterToClassifierTemplateParameter(parameter))
+--	)
+--}
+--
+--rule TemplateUnitToOperation extends TemplateUnitToTemplateableElement {
+--	from src :kdm!TemplateUnit (
+--		src->getRealType().oclIsTypeOf(kdm!MethodUnit)
+--	)
+--	using {
+--		realType :kdm!MethodUnit = src->getRealType();
+--	}
+--	to tgt :uml!Operation (
+--		name <- realType.name
+--		,visibility <- src->getVisibility()
+--		,ownedParameter <- realType.type.parameterUnit
+--	)
+--}
+
+

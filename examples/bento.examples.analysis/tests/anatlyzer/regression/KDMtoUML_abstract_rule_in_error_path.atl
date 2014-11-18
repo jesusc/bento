@@ -1,0 +1,58 @@
+-- @atlcompiler atl2006 
+-- @nsURI uml=http://www.eclipse.org/uml2/2.1.0/UML
+-- @nsURI kdm=http://www.eclipse.org/MoDisco/kdm
+--
+-- Tests abstract rules in the path of an error.
+-- 
+
+module KDMtoUML; 
+create umlOutput : uml from kdmInput : kdm;
+
+-- ERROR: Operation getMethodVisibility expected in Element but found in subtype MethodUnit. 
+helper context kdm!Element def : getVisibility() : uml!VisibilityKind =
+	self.getMethodVisibility();
+--  Original code:
+-- 
+--	if (self.oclIsTypeOf(kdm!MethodUnit)) then
+--		self.getMethodVisibility()
+--	else
+--		if (self.oclIsTypeOf(kdm!Datatype)) then
+--		 	self->getDatatypeVisibility()
+--		else
+--			#public
+--		endif
+--	endif;
+
+helper context kdm!MethodUnit def : getMethodVisibility() : uml!VisibilityKind =
+	if (self.export = #private) then
+		#private
+	else
+		if (self.export = #protected) then
+			#protected
+		else
+			#public
+		endif
+	endif;
+
+
+abstract rule KDMEntityToNamedElement {
+	from src :kdm!KDMEntity
+	to tgt :uml!NamedElement (
+		name <- src.name
+		,visibility <- src.getVisibility()
+	)
+}
+
+rule InventoryItemToArtifact extends KDMEntityToNamedElement {
+	from src :kdm!InventoryItem
+	to tgt :uml!Artifact (
+		-- fileName <- src.path
+	)
+}
+rule InventoryContainerToPackage extends KDMEntityToNamedElement {
+	from src :kdm!InventoryContainer
+	to tgt :uml!Package (
+		-- packagedElement <- src.inventoryElement
+	)
+}
+

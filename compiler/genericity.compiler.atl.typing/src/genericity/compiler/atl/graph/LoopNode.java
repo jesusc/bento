@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.OclExpression;
@@ -51,6 +52,11 @@ public class LoopNode extends AbstractDependencyNode {
 		exists.setBody(dep);
 		
 		return exists;
+	}
+
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
 	}
 	
 }

@@ -13,6 +13,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
@@ -82,4 +83,9 @@ public class MatchedRuleAbstract extends AbstractDependencyNode {
 		return orOp;
 	}
 		
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+	
 }

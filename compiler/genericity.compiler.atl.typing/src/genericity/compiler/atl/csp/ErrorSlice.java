@@ -56,18 +56,6 @@ public class ErrorSlice implements IEffectiveMetamodelData {
 		addMetaclassNeededInError(thisModuleClass);
 	}
 
-	/*
-	private HashSet<OclExpression> alreadyTraversed = new HashSet<OclExpression>();
-	public void markTraversed(OclExpression expr) {
-		alreadyTraversed.add(expr);
-	}
-	
-	public boolean alreadyTraversed(OclExpression expr) {
-		return alreadyTraversed.contains(expr);
-	}
-	*/
-
-
 	public void addExplicitMetaclass(Metaclass type) {
 		if ( type.getModel().getName().equals(metamodelName) )
 			explicitTypes.add(type.getKlass());

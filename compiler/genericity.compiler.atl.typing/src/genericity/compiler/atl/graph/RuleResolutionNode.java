@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.OCL.OclExpression;
@@ -37,6 +38,11 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		throw new UnsupportedOperationException(atlBinding.getLocation());
+	}
+	
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new IllegalArgumentException();
 	}
 	
 }

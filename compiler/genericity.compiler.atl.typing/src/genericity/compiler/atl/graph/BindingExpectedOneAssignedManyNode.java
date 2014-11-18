@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.OCL.OclExpression;
 import bento.analysis.atl_analysis.atl_error.BindingExpectedOneAssignedMany;
@@ -75,6 +76,11 @@ public class BindingExpectedOneAssignedManyNode extends AbstractBindingAssignmen
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+		
 	@Override
 	public boolean isStraightforward() {
 		// TODO Auto-generated method stub

@@ -108,7 +108,9 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	
 	@Override
 	public VisitingActions preSimpleOutPatternElement(SimpleOutPatternElement self) {
-		return actions("type" , "initExpression" , filter("getFlattenedBindings", self) , "reverseBindings");
+		// return actions("type" , "initExpression" , filter("getFlattenedBindings", self) , "reverseBindings");
+		return actions("type" , "initExpression" , "bindings", "reverseBindings");
+		// Using flattened bindings provoke error duplication in super/sub rules.
 	}
 	
 	public List<Binding> getFlattenedBindings(SimpleOutPatternElement self) {
@@ -190,6 +192,10 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 	public void inBinding(Binding self) {
 		Type rightType = attr.typeOf(self.getValue());
 	
+		if ( self.getLocation().equals("330:4-330:39") ) {
+			System.out.println("Aqui");
+		}
+		
 		Type targetVar = attr.typeOf( self.getOutPatternElement() );
 		IClassNamespace ns = (IClassNamespace) targetVar.getMetamodelRef();
 		EStructuralFeature f = ns.getStructuralFeatureInfo(self.getPropertyName());
@@ -306,6 +312,9 @@ public class RuleAnalysis extends AbstractAnalyserVisitor {
 		ArrayList<EClass> sourceClasses = new ArrayList<EClass>();
 		
 		for (MatchedRule matchedRule : resolvingRules) {
+			if ( matchedRule.getIsAbstract() )
+				continue;
+			
 			Metaclass srcMetaclass = (Metaclass) attr.typeOf( matchedRule.getInPattern().getElements().get(0) );
 			Metaclass tgtMetaclass = (Metaclass) attr.typeOf( matchedRule.getOutPattern().getElements().get(0) );
 			if ( ! TypeUtils.isClassAssignableTo(tgtMetaclass.getKlass(), targetType)  ) {

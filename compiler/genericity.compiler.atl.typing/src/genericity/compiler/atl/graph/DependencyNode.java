@@ -1,5 +1,6 @@
 package genericity.compiler.atl.graph;
 
+import genericity.compiler.atl.csp.TransformationSlice;
 import bento.analysis.atl_analysis.Problem;
 
 public interface DependencyNode extends GraphNode {

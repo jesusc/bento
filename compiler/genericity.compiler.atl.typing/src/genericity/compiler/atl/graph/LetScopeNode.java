@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
@@ -30,25 +31,15 @@ public class LetScopeNode extends AbstractDependencyNode {
 		gv.addNode(this, "let " + let.getVariable().getVarName() + " = ...", leadsToExecution);
 	}
 
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf) {
-		this.getDependency().getCSPText(buf);
-
-		if ( branch == TRUE_BRANCH ) {
-			buf.generateIf(ifExpr.getCondition(), true);
-		} else {
-			buf.generateIf(ifExpr.getCondition(), false);
-		}
-		
-	}
-	*/
-
-
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		return model.gen(let);
 	}
 
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+	
 	
 }

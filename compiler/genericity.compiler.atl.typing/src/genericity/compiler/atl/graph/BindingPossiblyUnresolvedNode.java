@@ -9,6 +9,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import atl.metamodel.ATLModel;
@@ -73,19 +74,6 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - possibly unresolved" + "\\n" + binding.getLocation(), leadsToExecution);
 	}
 
-
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf) {
-		getDependency().getCSPText(buf);
-		
-		buf.generateIf(binding.getValue(), "->size() > 0", true);
-		
-		// CSPBuffer buf2 = new CSPBuffer();
-		getConstraint().getCSPText(buf);
-		// System.out.println(buf2.getText());
-	}
-	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
@@ -184,4 +172,9 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 		return false;
 	}
 
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+	
 }

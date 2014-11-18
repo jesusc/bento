@@ -5,6 +5,7 @@ import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
 import genericity.compiler.atl.csp.OclGenerator;
 import genericity.compiler.atl.csp.OclSlice;
+import genericity.compiler.atl.csp.TransformationSlice;
 import atl.metamodel.OCL.OclExpression;
 
 public class RuleFilterNode implements ConstraintNode {
@@ -25,16 +26,18 @@ public class RuleFilterNode implements ConstraintNode {
 		gv.addNode(this, OclGenerator.gen(expr), true);
 	}
 
-	/*
+	/**
+	 * Rule filters should be calculated by Rule's nodes.
+	 */
 	@Override
-	public void getCSPText(CSPBuffer buf) {
-		buf.generateIf(expr, true);
-		// buf.generateExpression(OclGenerator.gen(expr));
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new IllegalStateException(); 
 	}
-	*/
 
+	
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		return model.gen(expr);
 	}
+
 }

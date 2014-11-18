@@ -3,6 +3,7 @@ package genericity.compiler.atl.graph;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
+import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.Metaclass;
 import genericity.typing.atl_types.Type;
 import genericity.typing.atl_types.annotations.CalledRuleAnn;
@@ -62,27 +63,15 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 		}
 		gv.addNode(this, "<<lazy>>\\n" + rule.getName() + fromPart, leadsToExecution ); //+ "\\n" + OclGenerator.gen(constraint) );
 	}
-	/*
-	@Override
-	public void getCSPText(CSPBuffer buf) {
-		if ( getDependencies().size() == 0 ) {
-			System.err.println("WARNING: Lazy rule " + rule.getName()+ " cannot be reached");
-		}
-		
-		for(DependencyNode n : getDependencies()) {
-			// 1. Generate code for the dependency node
-			n.getCSPText(buf);
-			// 2. Place the generated code in "if ( dependency = true ) then X else false endif"
-			// TODO: Do this.
-			// 3. X will be the code for the depending node
-		}
-	}
-	*/
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		return getDepending().genCSP(model);
 	}
 	
-	
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		throw new UnsupportedOperationException();
+	}
+		
 }

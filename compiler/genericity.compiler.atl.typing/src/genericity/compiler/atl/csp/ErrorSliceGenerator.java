@@ -3,6 +3,7 @@ package genericity.compiler.atl.csp;
 import genericity.compiler.atl.analyser.Analyser;
 import genericity.compiler.atl.analyser.ErrorUtils;
 import genericity.compiler.atl.graph.ProblemGraph;
+import genericity.compiler.atl.graph.ProblemNode;
 import genericity.compiler.atl.graph.ProblemPath;
 
 import java.util.List;
@@ -12,32 +13,39 @@ import org.eclipse.emf.ecore.resource.Resource;
 import bento.analyser.footprint.EffectiveMetamodelBuilder;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 
+
+/**
+ * 
+ * For each problem path an slice is computed. The result is attached 
+ * as an {@link ErrorSlice} attached to the corresponding error node of the
+ * problem path (via {@link ProblemNode#setErrorSlice(ErrorSlice)}.
+ * 
+ * @author jesus
+ *
+ */
 public class ErrorSliceGenerator {
 	
 	private ProblemGraph graph;
 	private Analyser	analyser;
-	private ErrorSlice	slice;
 	
 	public ErrorSliceGenerator(Analyser analyser, ProblemGraph g) {
 		this.graph = g;
 		this.analyser = analyser;
 	}
 
-	public ErrorSlice generate(String metamodelName) {
+	public void generate(String metamodelName) {
 		for(ProblemPath path : graph.getProblemPaths()) {
-			slice = new ErrorSlice(analyser, metamodelName);
+			ErrorSlice slice = new ErrorSlice(analyser, metamodelName);
 			path.getErrorNode().genErrorSlice(slice);
 			path.getErrorNode().setErrorSlice(slice);
 		}
-		
-		return slice;
 	}
 
-	public ErrorSlice generate(Resource r, String metamodelName, String location) {
+	public void generate(Resource r, String metamodelName, String location) {
 		int i = 0;
 		for(ProblemPath path : graph.getProblemPaths()) {
 			if ( path.getProblem().getLocation().equals(location) ) {
-				slice = new ErrorSlice(analyser, metamodelName);
+				ErrorSlice slice = new ErrorSlice(analyser, metamodelName);
 				path.getErrorNode().genErrorSlice(slice);
 				path.getErrorNode().setErrorSlice(slice);
 
@@ -51,18 +59,16 @@ public class ErrorSliceGenerator {
 				i++;				
 			}
 		}
-		
-		return slice;
 	}
 	
-	public ErrorSlice generate(Resource r, String metamodelName) {
+	public void generate(Resource r, String metamodelName) {
 		generate(metamodelName);
 
 		List<ProblemPath> sorted = graph.getSortedPaths();
 		
 		int i = 0;
 		for(ProblemPath path : sorted) {
-			slice = path.getErrorNode().getErrorSlice();
+			ErrorSlice slice = path.getErrorNode().getErrorSlice();
 			LocalProblem p = path.getProblem();
 			
 			String name = "error" + (i + 1);
@@ -71,12 +77,10 @@ public class ErrorSliceGenerator {
 			
 			i++;
 		}
-		
-		return slice;
 	}
 	
-	public ErrorSlice generate(ProblemPath path, Resource r, String metamodelName) {
-		slice = new ErrorSlice(analyser, metamodelName);
+	public void generate(ProblemPath path, Resource r, String metamodelName) {
+		ErrorSlice slice = new ErrorSlice(analyser, metamodelName);
 		path.getErrorNode().genErrorSlice(slice);
 		path.getErrorNode().setErrorSlice(slice);
 
@@ -87,14 +91,8 @@ public class ErrorSliceGenerator {
 		String info = ErrorUtils.getShortError(problemOfNode);
 
 		new EffectiveMetamodelBuilder(slice).extractSource(r, name, name, name, info);
-		return slice;
 	}
 	
-	
-	public ErrorSlice getSlice() {
-		return slice;
-	}
-
 	
 	
 }

@@ -227,6 +227,10 @@ public class CSPModel {
 		scope.put(varDcl, newVar);
 	}
 	
+	public void resetScope() {
+		scope.clear();
+	}
+	
 	public void openEmptyScope() {
 		previousScopes.push(scope);
 		scope = new CSPModelScope(scope.getThisModuleVar());
