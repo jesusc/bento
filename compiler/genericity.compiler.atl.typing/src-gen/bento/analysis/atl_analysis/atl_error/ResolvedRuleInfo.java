@@ -6,6 +6,7 @@
  */
 package bento.analysis.atl_analysis.atl_error;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getLocation <em>Location</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getElement <em>Element</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getAllInvolvedRules <em>All Involved Rules</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getRuleName <em>Rule Name</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getInputType <em>Input Type</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getOutputType <em>Output Type</em>}</li>
@@ -81,6 +83,22 @@ public interface ResolvedRuleInfo extends EObject {
 	 * @generated
 	 */
 	void setElement(EObject value);
+
+	/**
+	 * Returns the value of the '<em><b>All Involved Rules</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>All Involved Rules</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>All Involved Rules</em>' reference list.
+	 * @see bento.analysis.atl_analysis.atl_error.AtlErrorsPackage#getResolvedRuleInfo_AllInvolvedRules()
+	 * @model required="true"
+	 * @generated
+	 */
+	EList<EObject> getAllInvolvedRules();
 
 	/**
 	 * Returns the value of the '<em><b>Rule Name</b></em>' attribute.

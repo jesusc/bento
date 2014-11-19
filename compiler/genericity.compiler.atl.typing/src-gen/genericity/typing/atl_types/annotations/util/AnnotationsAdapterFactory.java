@@ -132,6 +132,10 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 				return createBindingAnnAdapter();
 			}
 			@Override
+			public Adapter caseRuleResolutionInfo(RuleResolutionInfo object) {
+				return createRuleResolutionInfoAdapter();
+			}
+			@Override
 			public Adapter caseExpressionAnnotation(ExpressionAnnotation object) {
 				return createExpressionAnnotationAdapter();
 			}
@@ -402,6 +406,20 @@ public class AnnotationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBindingAnnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link genericity.typing.atl_types.annotations.RuleResolutionInfo <em>Rule Resolution Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see genericity.typing.atl_types.annotations.RuleResolutionInfo
+	 * @generated
+	 */
+	public Adapter createRuleResolutionInfoAdapter() {
 		return null;
 	}
 

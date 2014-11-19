@@ -69,6 +69,7 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 			case AnnotationsPackage.MODULE_HELPER_ANN: return createModuleHelperAnn();
 			case AnnotationsPackage.CONTEXT_HELPER_ANN: return createContextHelperAnn();
 			case AnnotationsPackage.BINDING_ANN: return createBindingAnn();
+			case AnnotationsPackage.RULE_RESOLUTION_INFO: return createRuleResolutionInfo();
 			case AnnotationsPackage.LET_EXPR_ANN: return createLetExprAnn();
 			case AnnotationsPackage.IF_EXPR_ANN: return createIfExprAnn();
 			case AnnotationsPackage.CALL_EXPR_ANN: return createCallExprAnn();
@@ -171,6 +172,16 @@ public class AnnotationsFactoryImpl extends EFactoryImpl implements AnnotationsF
 	public BindingAnn createBindingAnn() {
 		BindingAnnImpl bindingAnn = new BindingAnnImpl();
 		return bindingAnn;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RuleResolutionInfo createRuleResolutionInfo() {
+		RuleResolutionInfoImpl ruleResolutionInfo = new RuleResolutionInfoImpl();
+		return ruleResolutionInfo;
 	}
 
 	/**

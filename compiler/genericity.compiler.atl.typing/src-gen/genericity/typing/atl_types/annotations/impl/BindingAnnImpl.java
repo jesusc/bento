@@ -14,6 +14,7 @@ import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
+import genericity.typing.atl_types.annotations.RuleResolutionInfo;
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,7 +25,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,14 +132,14 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 	protected ExpressionAnnotation value;
 
 	/**
-	 * The cached value of the '{@link #getResolvedBy() <em>Resolved By</em>}' reference list.
+	 * The cached value of the '{@link #getResolvedBy() <em>Resolved By</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getResolvedBy()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MatchedRuleOneAnn> resolvedBy;
+	protected EList<RuleResolutionInfo> resolvedBy;
 
 	/**
 	 * The cached value of the '{@link #getControlFlow() <em>Control Flow</em>}' reference.
@@ -426,9 +429,9 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MatchedRuleOneAnn> getResolvedBy() {
+	public EList<RuleResolutionInfo> getResolvedBy() {
 		if (resolvedBy == null) {
-			resolvedBy = new EObjectResolvingEList<MatchedRuleOneAnn>(MatchedRuleOneAnn.class, this, AnnotationsPackage.BINDING_ANN__RESOLVED_BY);
+			resolvedBy = new EObjectContainmentEList<RuleResolutionInfo>(RuleResolutionInfo.class, this, AnnotationsPackage.BINDING_ANN__RESOLVED_BY);
 		}
 		return resolvedBy;
 	}
@@ -481,6 +484,8 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 		switch (featureID) {
 			case AnnotationsPackage.BINDING_ANN__VALUE:
 				return basicSetValue(null, msgs);
+			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:
+				return ((InternalEList<?>)getResolvedBy()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -553,7 +558,7 @@ public class BindingAnnImpl extends AtlAnnotationImpl implements BindingAnn {
 				return;
 			case AnnotationsPackage.BINDING_ANN__RESOLVED_BY:
 				getResolvedBy().clear();
-				getResolvedBy().addAll((Collection<? extends MatchedRuleOneAnn>)newValue);
+				getResolvedBy().addAll((Collection<? extends RuleResolutionInfo>)newValue);
 				return;
 			case AnnotationsPackage.BINDING_ANN__CONTROL_FLOW:
 				setControlFlow((ControlFlow)newValue);

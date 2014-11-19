@@ -1,5 +1,7 @@
 package genericity.compiler.atl.graph;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
@@ -12,6 +14,7 @@ import genericity.compiler.atl.csp.OclSlice;
 import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.BindingAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
+import genericity.typing.atl_types.annotations.RuleResolutionInfo;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.MatchedRule;
@@ -59,11 +62,13 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 			slice.addMetaclassNeededInError(c);
 		}
 		
-		EList<MatchedRuleOneAnn> resolved = bindingAnn.getResolvedBy();
-		for (MatchedRuleOneAnn matchedRuleOneAnn : resolved) {
-			MatchedRule mr = (MatchedRule) atlModel.findWrapper(matchedRuleOneAnn.getRule());
-			if ( mr.getInPattern().getFilter() != null ) {
-				OclSlice.slice(slice, mr.getInPattern().getFilter());
+		List<RuleResolutionInfo> resolved = bindingAnn.getResolvedBy();
+		for (RuleResolutionInfo ruleInfo : resolved) {
+			for (MatchedRuleOneAnn matchedRuleOneAnn : ruleInfo.getAllInvolvedRules()) {			
+				MatchedRule mr = (MatchedRule) atlModel.findWrapper(matchedRuleOneAnn.getRule());
+				if ( mr.getInPattern().getFilter() != null ) {
+					OclSlice.slice(slice, mr.getInPattern().getFilter());
+				}
 			}
 		}
 	}
@@ -78,7 +83,7 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		OclExpression result = null;
-		EList<MatchedRuleOneAnn> rules = bindingAnn.getResolvedBy();
+		EList<RuleResolutionInfo> rules = bindingAnn.getResolvedBy();
 		assert(rules.size() > 0);
 		
 		OclExpression value = genBindingRightPart(model, binding, bindingAnn);		
@@ -106,7 +111,7 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 	}
 
 	private LetExp createReferenceConstraint(CSPModel model,
-			EList<MatchedRuleOneAnn> rules, OclExpression value) {
+			EList<RuleResolutionInfo> rules, OclExpression value) {
 		LetExp let = model.createLetScope(value, null, "_problem_");
 		VariableDeclaration varDcl = let.getVariable();
 		
@@ -122,16 +127,16 @@ public class BindingPossiblyUnresolvedNode extends AbstractBindingAssignmentNode
 	}
 
 	private OclExpression genAndRules(CSPModel model,
-			EList<MatchedRuleOneAnn> rules, VariableDeclaration varDcl) {
+			EList<RuleResolutionInfo> rules, VariableDeclaration varDcl) {
 		
 		OclExpression lastExpr = null;
-		for (MatchedRuleOneAnn rule : rules) {
-			MatchedRule r = (MatchedRule) atlModel.findWrapper(rule.getRule());
+		for (RuleResolutionInfo info : rules) {
+			MatchedRule r = (MatchedRule) atlModel.findWrapper(info.getRule().getRule());
 			
 			// => _problem_.oclIsKindOf(ruleFrom)
 			VariableExp v = model.create(VariableExp.class);
 			v.setReferredVariable(varDcl);				
-			OclExpression kindOfCondition = model.createKindOf_AllInstancesStyle(v, null, rule.getInPatternType().getName());			
+			OclExpression kindOfCondition = model.createKindOf_AllInstancesStyle(v, null, info.getRule().getInPatternType().getName());			
 			
 			// Generate the filter
 			OclExpression filter = null;

@@ -130,9 +130,11 @@ package atl_error {
 	   ref EClass[+] problematicClasses;
 	}
 	
-	class ResolvedRuleInfo {
+	class ResolvedRuleInfo {	   	
 	   	attr String[1] location;
 	   	ref  EObject[1] element;
+	   	ref  EObject[1..*] allInvolvedRules;
+	   	
 	   	attr String[1] ruleName;
 	   	
 		ref ecore.EClass[0..1] inputType;  

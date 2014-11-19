@@ -23,6 +23,7 @@ import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.RuleAnn;
+import genericity.typing.atl_types.annotations.RuleResolutionInfo;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
 import atl.metamodel.ATLModelBaseObjectInterface;
@@ -346,8 +347,8 @@ public class ErrorPathGenerator {
 	private void pathToBinding(Binding atlBinding , BindingAnn b, ProblemNode node, TraversedSet traversed) {
 		RuleResolutionNode resolutionNode = new RuleResolutionNode(atlBinding, b);
 		node.addConstraint(resolutionNode);
-		for(MatchedRuleAnn mr : b.getResolvedBy()) {
-			pathToRule(mr, resolutionNode, traversed);
+		for(RuleResolutionInfo rr : b.getResolvedBy()) {
+			pathToRule(rr.getRule(), resolutionNode, traversed);
 		}
 	}
 	

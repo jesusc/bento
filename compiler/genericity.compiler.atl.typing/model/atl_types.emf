@@ -230,9 +230,14 @@ package annotations {
 	
 	val ExpressionAnnotation[1] value;
 	
-	ref MatchedRuleOneAnn[*] resolvedBy;
-  
+	val RuleResolutionInfo[*] resolvedBy;
+	
   	ref analysis.ControlFlow[1] controlFlow;
+  }
+
+  class RuleResolutionInfo {
+	ref MatchedRuleOneAnn[1] rule;
+	ref MatchedRuleOneAnn[1..*] allInvolvedRules;  	
   }
 
   abstract class ExpressionAnnotation extends AtlAnnotation {

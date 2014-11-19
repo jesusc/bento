@@ -870,8 +870,17 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getResolvedRuleInfo_AllInvolvedRules() {
+		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getResolvedRuleInfo_RuleName() {
-		return (EAttribute)resolvedRuleInfoEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)resolvedRuleInfoEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -880,7 +889,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	public EReference getResolvedRuleInfo_InputType() {
-		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(3);
+		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -889,7 +898,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 	 * @generated
 	 */
 	public EReference getResolvedRuleInfo_OutputType() {
-		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(4);
+		return (EReference)resolvedRuleInfoEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1209,6 +1218,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		resolvedRuleInfoEClass = createEClass(RESOLVED_RULE_INFO);
 		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__LOCATION);
 		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__ELEMENT);
+		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__ALL_INVOLVED_RULES);
 		createEAttribute(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__RULE_NAME);
 		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__INPUT_TYPE);
 		createEReference(resolvedRuleInfoEClass, RESOLVED_RULE_INFO__OUTPUT_TYPE);
@@ -1400,6 +1410,7 @@ public class AtlErrorsPackageImpl extends EPackageImpl implements AtlErrorsPacka
 		initEClass(resolvedRuleInfoEClass, ResolvedRuleInfo.class, "ResolvedRuleInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResolvedRuleInfo_Location(), ecorePackage.getEString(), "location", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResolvedRuleInfo_Element(), ecorePackage.getEObject(), null, "element", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getResolvedRuleInfo_AllInvolvedRules(), ecorePackage.getEObject(), null, "allInvolvedRules", null, 1, -1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResolvedRuleInfo_RuleName(), ecorePackage.getEString(), "ruleName", null, 1, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResolvedRuleInfo_InputType(), ecorePackage.getEClass(), null, "inputType", null, 0, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getResolvedRuleInfo_OutputType(), ecorePackage.getEClass(), null, "outputType", null, 0, 1, ResolvedRuleInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

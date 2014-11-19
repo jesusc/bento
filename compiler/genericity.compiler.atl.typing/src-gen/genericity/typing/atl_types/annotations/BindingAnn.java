@@ -220,20 +220,20 @@ public interface BindingAnn extends AtlAnnotation {
 	void setValue(ExpressionAnnotation value);
 
 	/**
-	 * Returns the value of the '<em><b>Resolved By</b></em>' reference list.
-	 * The list contents are of type {@link genericity.typing.atl_types.annotations.MatchedRuleOneAnn}.
+	 * Returns the value of the '<em><b>Resolved By</b></em>' containment reference list.
+	 * The list contents are of type {@link genericity.typing.atl_types.annotations.RuleResolutionInfo}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resolved By</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resolved By</em>' reference list.
+	 * @return the value of the '<em>Resolved By</em>' containment reference list.
 	 * @see genericity.typing.atl_types.annotations.AnnotationsPackage#getBindingAnn_ResolvedBy()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<MatchedRuleOneAnn> getResolvedBy();
+	EList<RuleResolutionInfo> getResolvedBy();
 
 	/**
 	 * Returns the value of the '<em><b>Control Flow</b></em>' reference.

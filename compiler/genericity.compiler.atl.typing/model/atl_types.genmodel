@@ -149,6 +149,12 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/BindingAnn/controlFlow"/>
       </genClasses>
+      <genClasses ecoreClass="atl_types.ecore#//annotations/RuleResolutionInfo">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/RuleResolutionInfo/rule"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference atl_types.ecore#//annotations/RuleResolutionInfo/allInvolvedRules"/>
+      </genClasses>
       <genClasses ecoreClass="atl_types.ecore#//annotations/ExpressionAnnotation">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference atl_types.ecore#//annotations/ExpressionAnnotation/expr"/>

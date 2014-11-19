@@ -159,9 +159,15 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
           eType="#//annotations/ExpressionAnnotation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedBy" upperBound="-1"
-          eType="#//annotations/MatchedRuleOneAnn"/>
+          eType="#//annotations/RuleResolutionInfo" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlow" lowerBound="1"
           eType="#//analysis/ControlFlow"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RuleResolutionInfo">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1"
+          eType="#//annotations/MatchedRuleOneAnn"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allInvolvedRules" lowerBound="1"
+          upperBound="-1" eType="#//annotations/MatchedRuleOneAnn"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionAnnotation" abstract="true"
         eSuperTypes="#//annotations/AtlAnnotation">

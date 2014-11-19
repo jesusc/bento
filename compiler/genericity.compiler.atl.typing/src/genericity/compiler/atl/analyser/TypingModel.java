@@ -65,6 +65,7 @@ import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
+import genericity.typing.atl_types.annotations.RuleResolutionInfo;
 import genericity.typing.atl_types.annotations.TransformationAnn;
 import genericity.typing.atl_types.annotations.TupleExprAnn;
 import genericity.typing.atl_types.impl.AtlTypingFactoryImpl;
@@ -702,6 +703,17 @@ public class TypingModel {
 		
 		return ann;
 	}
+
+
+	public RuleResolutionInfo createRuleResolution(MatchedRuleOneAnn ruleAnn,
+			List<MatchedRuleOneAnn> superRules) {
+		RuleResolutionInfo rr = (RuleResolutionInfo) impl.createObject(RuleResolutionInfo.class.getSimpleName());
+		rr.setRule(ruleAnn);
+		rr.getAllInvolvedRules().add(ruleAnn);
+		rr.getAllInvolvedRules().addAll(superRules);
+		return rr;
+	}
+
 	
 	private void linkNodeToAnnotation(EObject obj, AtlAnnotation ann) {
 		if ( nodesToAnnotations.containsKey(obj) ) 

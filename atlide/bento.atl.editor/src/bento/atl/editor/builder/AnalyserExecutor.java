@@ -149,7 +149,7 @@ public class AnalyserExecutor {
 			String uri = mm + "_" + "error";
 			
 			XMIResourceImpl r =  new XMIResourceImpl(URI.createURI(uri));
-			ErrorSlice slice = new ErrorSliceGenerator(analyser, null).generate(path, r, mm);
+			new ErrorSliceGenerator(analyser, null).generate(path, r, mm);
 
 			return (EPackage) r.getContents().get(0);
 			// r.getContents()

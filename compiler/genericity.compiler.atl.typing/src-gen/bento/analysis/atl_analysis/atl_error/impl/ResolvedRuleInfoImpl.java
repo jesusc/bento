@@ -9,14 +9,17 @@ package bento.analysis.atl_analysis.atl_error.impl;
 import bento.analysis.atl_analysis.atl_error.AtlErrorsPackage;
 import bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +30,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getAllInvolvedRules <em>All Involved Rules</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getRuleName <em>Rule Name</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getInputType <em>Input Type</em>}</li>
  *   <li>{@link bento.analysis.atl_analysis.atl_error.impl.ResolvedRuleInfoImpl#getOutputType <em>Output Type</em>}</li>
@@ -65,6 +69,16 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 	 * @ordered
 	 */
 	protected EObject element;
+
+	/**
+	 * The cached value of the '{@link #getAllInvolvedRules() <em>All Involved Rules</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAllInvolvedRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EObject> allInvolvedRules;
 
 	/**
 	 * The default value of the '{@link #getRuleName() <em>Rule Name</em>}' attribute.
@@ -189,6 +203,18 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EObject> getAllInvolvedRules() {
+		if (allInvolvedRules == null) {
+			allInvolvedRules = new EObjectResolvingEList<EObject>(EObject.class, this, AtlErrorsPackage.RESOLVED_RULE_INFO__ALL_INVOLVED_RULES);
+		}
+		return allInvolvedRules;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getRuleName() {
 		return ruleName;
 	}
@@ -294,6 +320,8 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__ELEMENT:
 				if (resolve) return getElement();
 				return basicGetElement();
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__ALL_INVOLVED_RULES:
+				return getAllInvolvedRules();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				return getRuleName();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE:
@@ -311,6 +339,7 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -319,6 +348,10 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 				return;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__ELEMENT:
 				setElement((EObject)newValue);
+				return;
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__ALL_INVOLVED_RULES:
+				getAllInvolvedRules().clear();
+				getAllInvolvedRules().addAll((Collection<? extends EObject>)newValue);
 				return;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				setRuleName((String)newValue);
@@ -347,6 +380,9 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__ELEMENT:
 				setElement((EObject)null);
 				return;
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__ALL_INVOLVED_RULES:
+				getAllInvolvedRules().clear();
+				return;
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				setRuleName(RULE_NAME_EDEFAULT);
 				return;
@@ -372,6 +408,8 @@ public class ResolvedRuleInfoImpl extends EObjectImpl implements ResolvedRuleInf
 				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__ELEMENT:
 				return element != null;
+			case AtlErrorsPackage.RESOLVED_RULE_INFO__ALL_INVOLVED_RULES:
+				return allInvolvedRules != null && !allInvolvedRules.isEmpty();
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__RULE_NAME:
 				return RULE_NAME_EDEFAULT == null ? ruleName != null : !RULE_NAME_EDEFAULT.equals(ruleName);
 			case AtlErrorsPackage.RESOLVED_RULE_INFO__INPUT_TYPE:

@@ -22,6 +22,7 @@ import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.RuleAnn;
+import genericity.typing.atl_types.annotations.RuleResolutionInfo;
 import genericity.typing.atl_types.annotations.TransformationAnn;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import bento.analyser.util.ATLUtil;
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATL.Binding;
 import atl.metamodel.ATL.CalledRule;
@@ -326,8 +328,14 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 				for(MatchedRule r : sub.getResolvingRules() ) {
 					if ( r.getIsAbstract() )
 						continue;
-					// System.out.println("Resolved by " + r.getName());
-					ann.getResolvedBy().add( attr.<MatchedRuleOneAnn>annotationOf(r) ) ;					
+
+					List<MatchedRuleOneAnn> superRules = new ArrayList<MatchedRuleOneAnn>();
+					for(MatchedRule sup : ATLUtil.allSuperRules(r)) {
+						superRules.add( attr.<MatchedRuleOneAnn>annotationOf(sup) );
+					}
+					
+					RuleResolutionInfo ruleResolution = typ.createRuleResolution(attr.<MatchedRuleOneAnn>annotationOf(r), superRules);
+					ann.getResolvedBy().add( ruleResolution ) ;					
 				}
 			}
 		}

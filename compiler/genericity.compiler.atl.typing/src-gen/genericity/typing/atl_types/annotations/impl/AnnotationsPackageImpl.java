@@ -36,6 +36,7 @@ import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 import genericity.typing.atl_types.annotations.ModuleHelperAnn;
 import genericity.typing.atl_types.annotations.OutputPatternAnn;
 import genericity.typing.atl_types.annotations.RuleAnn;
+import genericity.typing.atl_types.annotations.RuleResolutionInfo;
 import genericity.typing.atl_types.annotations.TransformationAnn;
 
 import genericity.typing.atl_types.annotations.TupleExprAnn;
@@ -159,6 +160,13 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * @generated
 	 */
 	private EClass bindingAnnEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ruleResolutionInfoEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -770,6 +778,33 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRuleResolutionInfo() {
+		return ruleResolutionInfoEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRuleResolutionInfo_Rule() {
+		return (EReference)ruleResolutionInfoEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRuleResolutionInfo_AllInvolvedRules() {
+		return (EReference)ruleResolutionInfoEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExpressionAnnotation() {
 		return expressionAnnotationEClass;
 	}
@@ -1147,6 +1182,10 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		createEReference(bindingAnnEClass, BINDING_ANN__RESOLVED_BY);
 		createEReference(bindingAnnEClass, BINDING_ANN__CONTROL_FLOW);
 
+		ruleResolutionInfoEClass = createEClass(RULE_RESOLUTION_INFO);
+		createEReference(ruleResolutionInfoEClass, RULE_RESOLUTION_INFO__RULE);
+		createEReference(ruleResolutionInfoEClass, RULE_RESOLUTION_INFO__ALL_INVOLVED_RULES);
+
 		expressionAnnotationEClass = createEClass(EXPRESSION_ANNOTATION);
 		createEReference(expressionAnnotationEClass, EXPRESSION_ANNOTATION__EXPR);
 		createEReference(expressionAnnotationEClass, EXPRESSION_ANNOTATION__TYPE);
@@ -1315,8 +1354,12 @@ public class AnnotationsPackageImpl extends EPackageImpl implements AnnotationsP
 		initEReference(getBindingAnn_TargetType(), theAtlTypingPackage.getType(), null, "targetType", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_WrittenFeature(), ecorePackage.getEObject(), null, "writtenFeature", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_Value(), this.getExpressionAnnotation(), null, "value", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBindingAnn_ResolvedBy(), this.getMatchedRuleOneAnn(), null, "resolvedBy", null, 0, -1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingAnn_ResolvedBy(), this.getRuleResolutionInfo(), null, "resolvedBy", null, 0, -1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingAnn_ControlFlow(), theAnalysisPackage.getControlFlow(), null, "controlFlow", null, 1, 1, BindingAnn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ruleResolutionInfoEClass, RuleResolutionInfo.class, "RuleResolutionInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRuleResolutionInfo_Rule(), this.getMatchedRuleOneAnn(), null, "rule", null, 1, 1, RuleResolutionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRuleResolutionInfo_AllInvolvedRules(), this.getMatchedRuleOneAnn(), null, "allInvolvedRules", null, 1, -1, RuleResolutionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionAnnotationEClass, ExpressionAnnotation.class, "ExpressionAnnotation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpressionAnnotation_Expr(), ecorePackage.getEObject(), null, "expr", null, 0, 1, ExpressionAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

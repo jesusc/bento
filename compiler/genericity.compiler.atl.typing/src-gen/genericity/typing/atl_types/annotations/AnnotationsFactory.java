@@ -107,6 +107,15 @@ public interface AnnotationsFactory extends EFactory {
 	BindingAnn createBindingAnn();
 
 	/**
+	 * Returns a new object of class '<em>Rule Resolution Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule Resolution Info</em>'.
+	 * @generated
+	 */
+	RuleResolutionInfo createRuleResolutionInfo();
+
+	/**
 	 * Returns a new object of class '<em>Let Expr Ann</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

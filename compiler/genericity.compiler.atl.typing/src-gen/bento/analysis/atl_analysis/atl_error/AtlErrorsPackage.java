@@ -2215,13 +2215,22 @@ public interface AtlErrorsPackage extends EPackage {
 	int RESOLVED_RULE_INFO__ELEMENT = 1;
 
 	/**
+	 * The feature id for the '<em><b>All Involved Rules</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVED_RULE_INFO__ALL_INVOLVED_RULES = 2;
+
+	/**
 	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVED_RULE_INFO__RULE_NAME = 2;
+	int RESOLVED_RULE_INFO__RULE_NAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>Input Type</b></em>' reference.
@@ -2230,7 +2239,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVED_RULE_INFO__INPUT_TYPE = 3;
+	int RESOLVED_RULE_INFO__INPUT_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Output Type</b></em>' reference.
@@ -2239,7 +2248,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVED_RULE_INFO__OUTPUT_TYPE = 4;
+	int RESOLVED_RULE_INFO__OUTPUT_TYPE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Resolved Rule Info</em>' class.
@@ -2248,7 +2257,7 @@ public interface AtlErrorsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVED_RULE_INFO_FEATURE_COUNT = 5;
+	int RESOLVED_RULE_INFO_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link bento.analysis.atl_analysis.atl_error.impl.ResolveTempWithoutRuleImpl <em>Resolve Temp Without Rule</em>}' class.
@@ -4112,6 +4121,17 @@ public interface AtlErrorsPackage extends EPackage {
 	EReference getResolvedRuleInfo_Element();
 
 	/**
+	 * Returns the meta object for the reference list '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getAllInvolvedRules <em>All Involved Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>All Involved Rules</em>'.
+	 * @see bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getAllInvolvedRules()
+	 * @see #getResolvedRuleInfo()
+	 * @generated
+	 */
+	EReference getResolvedRuleInfo_AllInvolvedRules();
+
+	/**
 	 * Returns the meta object for the attribute '{@link bento.analysis.atl_analysis.atl_error.ResolvedRuleInfo#getRuleName <em>Rule Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4868,6 +4888,14 @@ public interface AtlErrorsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RESOLVED_RULE_INFO__ELEMENT = eINSTANCE.getResolvedRuleInfo_Element();
+
+		/**
+		 * The meta object literal for the '<em><b>All Involved Rules</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESOLVED_RULE_INFO__ALL_INVOLVED_RULES = eINSTANCE.getResolvedRuleInfo_AllInvolvedRules();
 
 		/**
 		 * The meta object literal for the '<em><b>Rule Name</b></em>' attribute feature.

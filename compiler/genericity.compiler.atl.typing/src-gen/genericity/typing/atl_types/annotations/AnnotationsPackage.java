@@ -1155,7 +1155,7 @@ public interface AnnotationsPackage extends EPackage {
 	int BINDING_ANN__VALUE = ATL_ANNOTATION_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Resolved By</b></em>' reference list.
+	 * The feature id for the '<em><b>Resolved By</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1182,6 +1182,43 @@ public interface AnnotationsPackage extends EPackage {
 	int BINDING_ANN_FEATURE_COUNT = ATL_ANNOTATION_FEATURE_COUNT + 9;
 
 	/**
+	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.RuleResolutionInfoImpl <em>Rule Resolution Info</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see genericity.typing.atl_types.annotations.impl.RuleResolutionInfoImpl
+	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getRuleResolutionInfo()
+	 * @generated
+	 */
+	int RULE_RESOLUTION_INFO = 15;
+
+	/**
+	 * The feature id for the '<em><b>Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_RESOLUTION_INFO__RULE = 0;
+
+	/**
+	 * The feature id for the '<em><b>All Involved Rules</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_RESOLUTION_INFO__ALL_INVOLVED_RULES = 1;
+
+	/**
+	 * The number of structural features of the '<em>Rule Resolution Info</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_RESOLUTION_INFO_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl <em>Expression Annotation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1189,7 +1226,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getExpressionAnnotation()
 	 * @generated
 	 */
-	int EXPRESSION_ANNOTATION = 15;
+	int EXPRESSION_ANNOTATION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1244,7 +1281,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getLetExprAnn()
 	 * @generated
 	 */
-	int LET_EXPR_ANN = 16;
+	int LET_EXPR_ANN = 17;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1317,7 +1354,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getIfExprAnn()
 	 * @generated
 	 */
-	int IF_EXPR_ANN = 17;
+	int IF_EXPR_ANN = 18;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1399,7 +1436,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getCallExprAnn()
 	 * @generated
 	 */
-	int CALL_EXPR_ANN = 18;
+	int CALL_EXPR_ANN = 19;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1499,7 +1536,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getAbstractIteratorExprAnn()
 	 * @generated
 	 */
-	int ABSTRACT_ITERATOR_EXPR_ANN = 19;
+	int ABSTRACT_ITERATOR_EXPR_ANN = 20;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1572,7 +1609,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getIteratorExprAnn()
 	 * @generated
 	 */
-	int ITERATOR_EXPR_ANN = 20;
+	int ITERATOR_EXPR_ANN = 21;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1645,7 +1682,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getIterateExprAnn()
 	 * @generated
 	 */
-	int ITERATE_EXPR_ANN = 21;
+	int ITERATE_EXPR_ANN = 22;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1727,7 +1764,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getCollectionExprAnn()
 	 * @generated
 	 */
-	int COLLECTION_EXPR_ANN = 22;
+	int COLLECTION_EXPR_ANN = 23;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1791,7 +1828,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getMapExprAnn()
 	 * @generated
 	 */
-	int MAP_EXPR_ANN = 23;
+	int MAP_EXPR_ANN = 24;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1864,7 +1901,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getTupleExprAnn()
 	 * @generated
 	 */
-	int TUPLE_EXPR_ANN = 24;
+	int TUPLE_EXPR_ANN = 25;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -1928,7 +1965,7 @@ public interface AnnotationsPackage extends EPackage {
 	 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getGenericExprAnn()
 	 * @generated
 	 */
-	int GENERIC_EXPR_ANN = 25;
+	int GENERIC_EXPR_ANN = 26;
 
 	/**
 	 * The feature id for the '<em><b>Expr</b></em>' reference.
@@ -2501,10 +2538,10 @@ public interface AnnotationsPackage extends EPackage {
 	EReference getBindingAnn_Value();
 
 	/**
-	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.BindingAnn#getResolvedBy <em>Resolved By</em>}'.
+	 * Returns the meta object for the containment reference list '{@link genericity.typing.atl_types.annotations.BindingAnn#getResolvedBy <em>Resolved By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Resolved By</em>'.
+	 * @return the meta object for the containment reference list '<em>Resolved By</em>'.
 	 * @see genericity.typing.atl_types.annotations.BindingAnn#getResolvedBy()
 	 * @see #getBindingAnn()
 	 * @generated
@@ -2521,6 +2558,38 @@ public interface AnnotationsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBindingAnn_ControlFlow();
+
+	/**
+	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.RuleResolutionInfo <em>Rule Resolution Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rule Resolution Info</em>'.
+	 * @see genericity.typing.atl_types.annotations.RuleResolutionInfo
+	 * @generated
+	 */
+	EClass getRuleResolutionInfo();
+
+	/**
+	 * Returns the meta object for the reference '{@link genericity.typing.atl_types.annotations.RuleResolutionInfo#getRule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rule</em>'.
+	 * @see genericity.typing.atl_types.annotations.RuleResolutionInfo#getRule()
+	 * @see #getRuleResolutionInfo()
+	 * @generated
+	 */
+	EReference getRuleResolutionInfo_Rule();
+
+	/**
+	 * Returns the meta object for the reference list '{@link genericity.typing.atl_types.annotations.RuleResolutionInfo#getAllInvolvedRules <em>All Involved Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>All Involved Rules</em>'.
+	 * @see genericity.typing.atl_types.annotations.RuleResolutionInfo#getAllInvolvedRules()
+	 * @see #getRuleResolutionInfo()
+	 * @generated
+	 */
+	EReference getRuleResolutionInfo_AllInvolvedRules();
 
 	/**
 	 * Returns the meta object for class '{@link genericity.typing.atl_types.annotations.ExpressionAnnotation <em>Expression Annotation</em>}'.
@@ -3308,7 +3377,7 @@ public interface AnnotationsPackage extends EPackage {
 		EReference BINDING_ANN__VALUE = eINSTANCE.getBindingAnn_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolved By</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Resolved By</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3322,6 +3391,32 @@ public interface AnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BINDING_ANN__CONTROL_FLOW = eINSTANCE.getBindingAnn_ControlFlow();
+
+		/**
+		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.RuleResolutionInfoImpl <em>Rule Resolution Info</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see genericity.typing.atl_types.annotations.impl.RuleResolutionInfoImpl
+		 * @see genericity.typing.atl_types.annotations.impl.AnnotationsPackageImpl#getRuleResolutionInfo()
+		 * @generated
+		 */
+		EClass RULE_RESOLUTION_INFO = eINSTANCE.getRuleResolutionInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE_RESOLUTION_INFO__RULE = eINSTANCE.getRuleResolutionInfo_Rule();
+
+		/**
+		 * The meta object literal for the '<em><b>All Involved Rules</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE_RESOLUTION_INFO__ALL_INVOLVED_RULES = eINSTANCE.getRuleResolutionInfo_AllInvolvedRules();
 
 		/**
 		 * The meta object literal for the '{@link genericity.typing.atl_types.annotations.impl.ExpressionAnnotationImpl <em>Expression Annotation</em>}' class.

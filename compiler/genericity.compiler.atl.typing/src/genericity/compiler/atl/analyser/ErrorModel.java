@@ -25,6 +25,7 @@ import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.OclModelElement;
 import atl.metamodel.OCL.OperationCallExp;
+import bento.analyser.util.ATLUtil;
 import bento.analysis.atl_analysis.AnalysisResult;
 import bento.analysis.atl_analysis.AtlAnalysisFactory;
 import bento.analysis.atl_analysis.Problem;
@@ -425,6 +426,12 @@ public class ErrorModel {
 			rinfo.setRuleName(r.getName());
 			rinfo.setInputType(sourceClasses.get(i));
 			rinfo.setOutputType(targetClasses.get(i));
+
+			rinfo.getAllInvolvedRules().add(r.original_());
+			for(MatchedRule sup : ATLUtil.allSuperRules(r)) {
+				rinfo.getAllInvolvedRules().add(sup.original_());
+			}
+			
 			i++;
 			error.getRules().add(rinfo);
 		}

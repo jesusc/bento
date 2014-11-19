@@ -1,6 +1,7 @@
 package genericity.compiler.atl.graph;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 import genericity.compiler.atl.analyser.TypeUtils;
 import genericity.compiler.atl.csp.CSPModel;
@@ -52,10 +53,12 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		OclSlice.slice(slice, binding.getValue());
 		
 		// Needed for the error
-		for(ResolvedRuleInfo r : problem.getRules()) {
-			MatchedRule mr = (MatchedRule) atlModel.findWrapper(r.getElement());
-			if ( mr.getInPattern().getFilter() != null ) {
-				OclSlice.slice(slice, mr.getInPattern().getFilter());
+		for(ResolvedRuleInfo rinfo : problem.getRules()) {
+			for(EObject rule : rinfo.getAllInvolvedRules()) {
+				MatchedRule mr = (MatchedRule) atlModel.findWrapper(rule);
+				if ( mr.getInPattern().getFilter() != null ) {
+					OclSlice.slice(slice, mr.getInPattern().getFilter());
+				}
 			}
 		}
 		
