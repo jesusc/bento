@@ -24,8 +24,8 @@ import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 
 public class MatchedRuleExecution extends AbstractDependencyNode implements ExecutionNode {
 
-	private MatchedRuleAnn rule;
-	private MatchedRule	atlRule;
+	protected MatchedRuleAnn rule;
+	protected MatchedRule	atlRule;
 	//private DependencyNode	constraint;
 
 	public MatchedRuleExecution(MatchedRuleAnn rule, MatchedRule atlRule) {
@@ -109,7 +109,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 			exists.setBody(letUsingDeclarations );
 		}
 		
-		
+		System.out.println(rule.getName());
 		if ( rule.getFilter() != null ) {
 			// => if ( filterCondition ) then <? : whenFilter> else false endif
 			OclExpression condition = this.getConstraint().genCSP(model);

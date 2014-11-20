@@ -27,6 +27,7 @@ import genericity.typing.atl_types.annotations.TransformationAnn;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -319,6 +320,14 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	
 		attr.linkAnnotation(self, ann);
 
+		// One problem of the following algorithm is that it looks every subclass
+		// of the class(es) of the right part of the binding. The same rule may
+		// resolve many of the subclasses (because getResolvingRules returns rules
+		// that matches all possible subtypes).
+		// 
+		// To avoid adding the same rules many times a set is used
+		HashSet<MatchedRule> alreadyAdded = new HashSet<MatchedRule>();
+		
 		// System.out.println(self.getLocation() + " " + TypeUtils.typeToString(srcType));
 		for(Metaclass m: typ.getInvolvedMetaclasses(srcType)) {
 			IClassNamespace srcNs = (IClassNamespace) m.getMetamodelRef();
@@ -326,9 +335,11 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 			nss.add(srcNs);
 			for(IClassNamespace sub : nss) {
 				for(MatchedRule r : sub.getResolvingRules() ) {
-					if ( r.getIsAbstract() )
+					if ( r.getIsAbstract() || alreadyAdded.contains(r) )
 						continue;
 
+					alreadyAdded.add(r);
+					
 					List<MatchedRuleOneAnn> superRules = new ArrayList<MatchedRuleOneAnn>();
 					for(MatchedRule sup : ATLUtil.allSuperRules(r)) {
 						superRules.add( attr.<MatchedRuleOneAnn>annotationOf(sup) );

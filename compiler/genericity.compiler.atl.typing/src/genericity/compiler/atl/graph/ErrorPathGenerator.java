@@ -169,7 +169,7 @@ public class ErrorPathGenerator {
 			
 		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
+		pathToRule(rule, node, new TraversedSet(), false);	
 		
 		pathToBinding(atlBinding, b, node, new TraversedSet());		
 	}
@@ -183,7 +183,7 @@ public class ErrorPathGenerator {
 		BindingAnn b = (BindingAnn) typ.getAnnotation(p.getElement());
 		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
+		pathToRule(rule, node, new TraversedSet(), false);	
 		
 		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
@@ -197,7 +197,7 @@ public class ErrorPathGenerator {
 		
 		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
+		pathToRule(rule, node, new TraversedSet(), false);	
 		
 		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
@@ -211,7 +211,7 @@ public class ErrorPathGenerator {
 		
 		OutputPatternAnn op = (OutputPatternAnn) b.eContainer();
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
+		pathToRule(rule, node, new TraversedSet(), false);	
 		
 		pathToBinding(atlBinding, b, node, new TraversedSet());
 	}
@@ -222,7 +222,7 @@ public class ErrorPathGenerator {
 		
 		OutputPatternAnn op = (OutputPatternAnn) typ.getAnnotation(p.getElement());
 		RuleAnn rule = (RuleAnn) op.eContainer();
-		pathToRule(rule, node, new TraversedSet());	
+		pathToRule(rule, node, new TraversedSet(), false);	
 	}
 
 
@@ -248,7 +248,7 @@ public class ErrorPathGenerator {
 		}
 		
 		if ( parent instanceof Rule ) {
-			return pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node, traversed);
+			return pathToRule((RuleAnn) typ.getAnnotation(parent.original_()), node, traversed, false);
 		} else if ( parent instanceof Helper ){
 			return pathToHelper((HelperAnn) typ.getAnnotation(parent.original_()), node, traversed);			
 		} else if ( parent instanceof IfExp ) {
@@ -348,13 +348,13 @@ public class ErrorPathGenerator {
 		RuleResolutionNode resolutionNode = new RuleResolutionNode(atlBinding, b);
 		node.addConstraint(resolutionNode);
 		for(RuleResolutionInfo rr : b.getResolvedBy()) {
-			pathToRule(rr.getRule(), resolutionNode, traversed);
+			pathToRule(rr.getRule(), resolutionNode, traversed, true);
 		}
 	}
 	
-	private boolean pathToRule(RuleAnn rule, DependencyNode dependent, TraversedSet traversed) {
+	private boolean pathToRule(RuleAnn rule, DependencyNode dependent, TraversedSet traversed, boolean isConstraint) {
 		if ( rule instanceof MatchedRuleAnn ) {
-			return pathToMatchedRuleOne((MatchedRuleAnn) rule, dependent);
+			return pathToMatchedRuleOne((MatchedRuleAnn) rule, dependent, isConstraint);
 		} else if ( rule instanceof ImperativeRuleAnn ) {
 			return pathToImperativeRule((ImperativeRuleAnn) rule, dependent, traversed);
 		} else {
@@ -422,12 +422,22 @@ public class ErrorPathGenerator {
 		return leadsToExecution;
 	}
 
-	private boolean pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent) {
+	/**
+	 * Computes a node representing the execution of a matched rule.
+	 * 
+	 * @param rule
+	 * @param dependent
+	 * @param isConstraint true means that the execution is required to satisfy an execution constraint of 
+	 *                     another false, while false means that the matched rule node to be computed is
+	 *                     part of the execution path of the error.
+	 * @return
+	 */
+	private boolean pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent, boolean isConstraint) {
 		MatchedRule r = (MatchedRule) atlModel.findWrapper( rule.getRule() );
 		if ( r.getIsAbstract() ) {
 			for(MatchedRule cr : r.getChildren()) {
 				MatchedRuleAnn crann = (MatchedRuleAnn) typ.getAnnotation(cr.original_());
-				pathToMatchedRuleOne(crann, dependent);
+				pathToMatchedRuleOne(crann, dependent, isConstraint);
 			}
 			return true;
 		}
@@ -440,7 +450,8 @@ public class ErrorPathGenerator {
 			newNode.addConstraint(constraint);
 		}
 		
-		currentPath.addRule(newNode);
+		if ( ! isConstraint )
+			currentPath.addRule(newNode);
 		
 		newNode.setLeadsToExecution(true);
 		return true;
