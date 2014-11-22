@@ -58,7 +58,7 @@ public class MoDisco extends BaseTest {
 		generateEffectiveMetamodel("uml", "tmp_/KDM2UML.effective.ecore");
 		generateCSP(selectedError);
 		
-		// if ( selectedError != null ) sliceTrafo(selectedError);
+		if ( selectedError != null ) sliceTrafo(selectedError);
 	}
 
 	

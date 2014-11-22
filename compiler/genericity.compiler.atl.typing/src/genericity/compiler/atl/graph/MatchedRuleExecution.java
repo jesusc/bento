@@ -109,7 +109,6 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 			exists.setBody(letUsingDeclarations );
 		}
 		
-		System.out.println(rule.getName());
 		if ( rule.getFilter() != null ) {
 			// => if ( filterCondition ) then <? : whenFilter> else false endif
 			OclExpression condition = this.getConstraint().genCSP(model);
@@ -157,7 +156,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		
 	@Override
 	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
+		slice.addRule(this.atlRule);
 	}
 	
 }

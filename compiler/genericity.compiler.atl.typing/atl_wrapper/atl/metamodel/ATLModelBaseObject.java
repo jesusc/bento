@@ -34,4 +34,13 @@ public abstract class ATLModelBaseObject implements ATLModelBaseObjectInterface 
 		EcoreUtil.replace(container, f, object, element.original_());
 	}
 	
+	public void delete() {
+		EcoreUtil.delete(object);
+	}
+	
+	public void deleteRecursive() {
+		EcoreUtil.delete(object, true);
+	}
+	
+	
 }

@@ -42,7 +42,9 @@ public class RuleResolutionNode extends AbstractDependencyNode implements Constr
 	
 	@Override
 	public void genTransformationSlice(TransformationSlice slice) {
-		throw new IllegalArgumentException();
+		for(DependencyNode n : dependencies) {
+			n.genTransformationSlice(slice);
+		}						
 	}
 	
 }

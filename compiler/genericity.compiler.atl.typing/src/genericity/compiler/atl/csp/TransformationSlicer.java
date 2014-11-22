@@ -1,22 +1,16 @@
 package genericity.compiler.atl.csp;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-
-import atl.metamodel.OCL.IteratorExp;
-import atl.metamodel.OCL.OclExpression;
-import bento.analyser.util.AtlLoader;
-import bento.analysis.atl_analysis.Problem;
-import bento.analysis.atl_analysis.atl_error.LocalProblem;
 import genericity.compiler.atl.analyser.Analyser;
-import genericity.compiler.atl.analyser.ErrorUtils;
+import genericity.compiler.atl.graph.DependencyNode;
 import genericity.compiler.atl.graph.ProblemGraph;
 import genericity.compiler.atl.graph.ProblemPath;
-import genericity.compiler.atl.graph.DependencyNode;
-import genericity.compiler.atl.graph.ExecutionNode;
-import genericity.compiler.atl.graph.HelperInvocationNode;
+
+import java.util.List;
+
+import atl.metamodel.ATLModel;
+import bento.analyser.util.ATLSerializer;
+import bento.analyser.util.AtlLoader;
+import bento.analysis.atl_analysis.atl_error.LocalProblem;
 
 public class TransformationSlicer {
 	
@@ -58,6 +52,25 @@ public class TransformationSlicer {
 		TransformationSlice slice = new TransformationSlice(analyser.getATLModel());
 		errorNode.genTransformationSlice(slice);
 		
-		throw new UnsupportedOperationException();
+		ATLModel result = slice.doSlice();
+		/*
+		try {
+			ModelFactory modelFactory = new EMFModelFactory();
+			IReferenceModel atlMetamodel = modelFactory
+					.getBuiltInResource("ATL.ecore"); //$NON-NLS-1$
+			IModel atlModel = modelFactory.newModel(atlMetamodel);
+	
+			EMFInjector injector = new EMFInjector();
+			injector.inject(atlModel, result.getResource());
+			System.out.println(result.getResource().getContents());
+			AtlParser atlParser = new AtlParser();
+			atlParser.extract(atlModel,  "/tmp/salid.atl");
+
+		} catch (ATLCoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		return ATLSerializer.serialize(result);
 	}
 }

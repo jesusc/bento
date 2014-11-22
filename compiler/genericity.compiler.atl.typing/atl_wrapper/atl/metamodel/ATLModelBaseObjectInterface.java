@@ -11,6 +11,9 @@ public interface ATLModelBaseObjectInterface {
 
 	public Class<?> getImplementedInterface();
 
+	public void delete();
+	public void deleteRecursive();
+	
 	public void replaceBy(ATLModelBaseObjectInterface element);
 
 }

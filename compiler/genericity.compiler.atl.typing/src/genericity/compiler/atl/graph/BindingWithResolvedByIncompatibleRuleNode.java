@@ -70,19 +70,15 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		gv.addNode(this, "Problem with binding:\\n" + binding.getPropertyName() + " - resolved with invalid target" + "\\n" + binding.getLocation(), leadsToExecution);
 	}
 
-	/*
 	@Override
-	public void getCSPText(CSPBuffer buf) {
-		getDependency().getCSPText(buf);
+	public void genTransformationSlice(TransformationSlice slice) {
+		for(DependencyNode n : dependencies) {
+			n.genTransformationSlice(slice);
+		}		
 		
-		buf.generateIf(binding.getValue(), "->size() > 0", true);
-		
-		// CSPBuffer buf2 = new CSPBuffer();
-		getConstraint().getCSPText(buf);
-		// System.out.println(buf2.getText());
+		this.getConstraint().genTransformationSlice(slice);
 	}
-	*/
-
+	
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		OclExpression result = null;
@@ -189,9 +185,6 @@ public class BindingWithResolvedByIncompatibleRuleNode extends AbstractBindingAs
 		return false;
 	}
 
-	@Override
-	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
-	}
+	
 	
 }

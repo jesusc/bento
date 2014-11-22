@@ -13,5 +13,11 @@
             apply="bento.atl.editor.quickfix.warnings.FlattenOverNonNestedCollectionQuickFix">
       </quickfix>
    </extension>
+   <extension
+         point="bento.atl.editor.quickfix">
+      <quickfix
+            apply="bento.atl.editor.quickfix.TransformationSliceQuickFix">
+      </quickfix>
+   </extension>
 
 </plugin>

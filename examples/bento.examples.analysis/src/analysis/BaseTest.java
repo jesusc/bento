@@ -256,7 +256,8 @@ public abstract class BaseTest {
 	}
 
 	protected void sliceTrafo(String location) {
-		new TransformationSlicer(dependencyGraph, new StandaloneAtlLoader()).generateLoc(location, analyser);
+		String s = new TransformationSlicer(dependencyGraph, new StandaloneAtlLoader()).generateLoc(location, analyser);
+		System.out.println(s);
 	}
 	
 	private void printToErrorFile(String s) throws IOException {

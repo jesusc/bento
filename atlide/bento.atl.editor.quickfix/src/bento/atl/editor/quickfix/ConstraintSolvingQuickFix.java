@@ -26,20 +26,14 @@ import bento.atl.editor.AtlEclipseLoader;
 import bento.atl.editor.builder.AnalyserExecutor.AnalyserData;
 import bento.atl.editor.builder.BentoATLBuilder;
 
-public class ConstraintSolvingQuickFix implements AtlProblemQuickfix {
-
-	private IMarker errorMarker;
-
-	public void setErrorMarker(IMarker marker) {		
-		this.errorMarker = marker;
-	}
+public class ConstraintSolvingQuickFix extends AbstractAtlQuickfix {
 	
 	@Override
 	public void apply(IDocument document) {
 
 		try {
-			Problem problem = (Problem) errorMarker.getAttribute(BentoATLBuilder.PROBLEM);
-			AnalyserData analysisData = (AnalyserData) errorMarker.getAttribute(BentoATLBuilder.ANALYSIS_DATA);
+			Problem problem = (Problem) marker.getAttribute(BentoATLBuilder.PROBLEM);
+			AnalyserData analysisData = (AnalyserData) marker.getAttribute(BentoATLBuilder.ANALYSIS_DATA);
 			
 			analysisData.computeProblemGraph(problem);
 
@@ -62,18 +56,6 @@ public class ConstraintSolvingQuickFix implements AtlProblemQuickfix {
 			e.printStackTrace();
 		}
 
-	}
-
-	private String getProjectPath() {
-		IWorkbenchWindow window= PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPage page = window.getActivePage();
-		IEditorPart editor = page.getActiveEditor();
-	    IEditorInput input = editor.getEditorInput();
-	    if (!(input instanceof IFileEditorInput))
-	    	throw new IllegalStateException();
-	    
-	    IFile file = ((IFileEditorInput)input).getFile();
-	    return file.getProject().getLocation().toOSString();
 	}
 
 
