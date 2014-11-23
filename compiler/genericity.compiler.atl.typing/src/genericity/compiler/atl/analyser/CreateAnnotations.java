@@ -273,10 +273,11 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	public void inLazyMatchedRule(LazyMatchedRule self) {
 		LazyRuleAnn ann = attr.annotationOf(self);
 
-		InPatternElement inPatternElement = self.getInPattern().getElements().get(0);
-		ann.getNames().add(inPatternElement.getVarName());
-		ann.getArguments().add(attr.typeOf(inPatternElement));
-		ann.getArgumentVars().add(inPatternElement.original_());
+		for(InPatternElement inPatternElement : self.getInPattern().getElements()) {
+			ann.getNames().add(inPatternElement.getVarName());
+			ann.getArguments().add(attr.typeOf(inPatternElement));
+			ann.getArgumentVars().add(inPatternElement.original_());
+		}
 		
 		createOutputPatternElements(self, ann);	
 	}

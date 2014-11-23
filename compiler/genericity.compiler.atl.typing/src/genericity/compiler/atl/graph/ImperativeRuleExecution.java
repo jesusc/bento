@@ -36,6 +36,15 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 	}
 
 	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		for(DependencyNode n : dependencies) {
+			n.genTransformationSlice(slice);
+		}					
+
+		// throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	public void genErrorSlice(ErrorSlice slice) {
 		if ( atlRule instanceof LazyMatchedRule ) {
 			slice.addExplicitMetaclass(((LazyRuleAnn) rule).getInPatternType());
@@ -69,9 +78,6 @@ public class ImperativeRuleExecution extends AbstractDependencyNode {
 		return getDepending().genCSP(model);
 	}
 	
-	@Override
-	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
-	}
+
 		
 }

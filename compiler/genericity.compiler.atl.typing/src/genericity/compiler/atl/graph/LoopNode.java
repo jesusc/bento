@@ -56,7 +56,11 @@ public class LoopNode extends AbstractDependencyNode {
 
 	@Override
 	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
+		// For the moment just gathering the enclosing element
+		for(DependencyNode n : dependencies) {
+			n.genTransformationSlice(slice);
+		}					
+
 	}
 	
 }

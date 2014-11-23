@@ -8,6 +8,9 @@ import genericity.compiler.atl.csp.OclSlice;
 import genericity.compiler.atl.csp.TransformationSlice;
 import genericity.typing.atl_types.annotations.CallExprAnn;
 import genericity.typing.atl_types.annotations.ContextHelperAnn;
+import genericity.typing.atl_types.annotations.HelperAnn;
+import genericity.typing.atl_types.annotations.ImperativeRuleAnn;
+import genericity.typing.atl_types.annotations.LazyRuleAnn;
 import genericity.typing.atl_types.annotations.ModuleCallableAnn;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import atl.metamodel.ATLModel;
 import atl.metamodel.ATLModelBaseObject;
+import atl.metamodel.ATL.LazyMatchedRule;
 import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
 import atl.metamodel.OCL.OperationCallExp;
@@ -131,7 +135,23 @@ public class CallExprNode extends AbstractDependencyNode {
 
 	@Override
 	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
+		// For the moment just gathering the enclosing element
+		for(DependencyNode n : dependencies) {
+			n.genTransformationSlice(slice);
+		}					
+
+		ModuleCallableAnn moduleCallableAnn = ann.getStaticResolver();
+		if ( moduleCallableAnn instanceof HelperAnn) {
+			throw new UnsupportedOperationException();
+		} else if ( moduleCallableAnn instanceof ImperativeRuleAnn) {
+			if ( moduleCallableAnn instanceof LazyRuleAnn) {
+				LazyMatchedRule r = (LazyMatchedRule) atlModel.findWrapper(((ImperativeRuleAnn) moduleCallableAnn).getRule());
+				// For the moment not distinguishing between lazy and normal
+				slice.addRule(r);
+			} else {
+				throw new UnsupportedOperationException("CalledRuleAnn not supported");
+			}
+		}
 	}
 	
 }

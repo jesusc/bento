@@ -41,7 +41,7 @@ public class CSPGenerator {
 
 			if ( location != null && ! lp.getLocation().equals(location) ) 
 				continue;
-				
+			
 			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
 			// System.out.println(lp.getLocation());
 			s += generateCSP(path, analyser);
@@ -65,6 +65,11 @@ public class CSPGenerator {
 	public String generateCSP(ProblemPath path, Analyser analyser) {
 		DependencyNode errorNode = path.getErrorNode();
 
+		if ( path.getExecutionNodes().size() == 0 ) {
+			// TODO: Signal this otherwise
+			return "Dead code";
+		}
+		
 		// Create the thisModule context at the top level
 		CSPModel model = new CSPModel(loader, analyser);
 

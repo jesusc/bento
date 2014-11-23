@@ -46,7 +46,15 @@ public class BindingWithoutRuleNode extends AbstractBindingAssignmentNode<Bindin
 	}
 
 
-
+	@Override
+	public void genTransformationSlice(TransformationSlice slice) {
+		for(DependencyNode n : dependencies) {
+			n.genTransformationSlice(slice);
+		}		
+		
+		// throw new UnsupportedOperationException();
+	}
+	
 	@Override
 	public OclExpression genCSP(CSPModel model) {
 		OclExpression result = null;
@@ -75,10 +83,6 @@ public class BindingWithoutRuleNode extends AbstractBindingAssignmentNode<Bindin
 		return false;
 	}
 	
-	@Override
-	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
-	}
 	
 
 }

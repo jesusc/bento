@@ -24,11 +24,10 @@ public class MoDisco extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		String selectedError = "75:3-75:30";
+		String selectedError = "625:3-625:21"; //"75:3-75:30";
 		
 		/*
 		 */
-		/*
 		typing(Java2KDM_TRANSFORMATION, new Object[] { JAVA_METAMODEL, KDM_METAMODEL }, 
 				   new String[] { "java", "kdm" }, true);
 		
@@ -38,12 +37,15 @@ public class MoDisco extends BaseTest {
 		generateGraphviz(selectedError);
 		generateErrorSlice("java", "tmp_/Java2KDM.slice.ecore", selectedError);
 		generateEffectiveMetamodel("java", "tmp_/Java2KDM.effective.ecore");
-		generateCSP(selectedError);
-		*/
+
+		if ( selectedError != null ) sliceTrafo(selectedError);
 		
+		generateCSP(selectedError);
+
+
 		//
-	
-		selectedError = "330:4-330:39"; 
+		/*
+		selectedError = null; //"330:4-330:39"; 
 		
 		typing(KDM2UML_TRANSFORMATION, new Object[] { KDM_METAMODEL, UML_METAMODEL }, 
 				   new String[] { "kdm", "uml" }, true);
@@ -59,6 +61,7 @@ public class MoDisco extends BaseTest {
 		generateCSP(selectedError);
 		
 		if ( selectedError != null ) sliceTrafo(selectedError);
+		*/
 	}
 
 	
