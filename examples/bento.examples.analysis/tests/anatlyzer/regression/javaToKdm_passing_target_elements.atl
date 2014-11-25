@@ -1,0 +1,87 @@
+-- @atlcompiler atl2006
+--Copyright (c) 2009 Mia-Software.
+--All rights reserved. This program and the accompanying materials
+--are made available under the terms of the Eclipse Public License v1.0
+--which accompanies this distribution, and is available at
+--http://www.eclipse.org/legal/epl-v10.html
+---
+--Contributors:
+--	  Gabriel BARBIER (Mia-Software) - initial API and implementation
+--    Fabien GIQUEL (Mia-Software) - initial API and implementation
+--
+-- @nsURI kdm=http://www.eclipse.org/MoDisco/kdm/action
+-- @nsURI java=http://www.eclipse.org/MoDisco/Java/0.2.incubation/java
+
+
+--
+--Transform Java Models to KDM models
+
+module javaToKdm;
+create OUT: kdm from IN: java;
+
+rule ClassDeclarationToTemplateUnit {
+	from
+		src: java!ClassDeclaration (
+			not src.typeParameters.isEmpty()
+		)
+	using {
+		javaAttributes: java!NamedElement = src.bodyDeclarations -> select(e | e.
+				oclIsTypeOf(java!FieldDeclaration)) -> collect(f | if ( f.
+				fragments->isEmpty() ) then
+   f
+else
+   f.fragments
+endif);
+	}
+	to
+		tgt: kdm!TemplateUnit,
+		type: kdm!ClassUnit (
+			isAbstract <- if (src.modifier.oclIsUndefined() ) then
+					OclUndefined
+				else
+					src.modifier.inheritance = 'abstract'
+				endif,
+			codeElement <- javaAttributes,
+			codeElement <- src.bodyDeclarations -> select(e | not e.
+					oclIsTypeOf(java!FieldDeclaration))
+		)
+	do {
+   type.codeRelation <- if (src.superClass.oclIsUndefined() ) then
+				Sequence { }
+			else
+				thisModule.CreateExtendsForTemplated(type, src.superClass)
+			endif;
+}
+}
+
+rule InterfaceDeclarationToTemplateUnit {
+	from
+		src: java!InterfaceDeclaration (
+			not src.typeParameters.isEmpty()
+		)
+	using {
+		javaAttributes: java!NamedElement = src.bodyDeclarations -> select(e | e.
+				oclIsTypeOf(java!FieldDeclaration)) -> collect(f | if ( f.
+				fragments->isEmpty() ) then
+   f
+else
+   f.fragments
+endif);
+	}
+	to
+		tgt: kdm!TemplateUnit,
+		type: kdm!InterfaceUnit (
+			codeElement <- javaAttributes,
+			codeElement <- src.bodyDeclarations -> select(e | not e.
+					oclIsTypeOf(java!FieldDeclaration))
+		)
+}
+
+lazy rule CreateExtendsForTemplated {
+	from targetFrom: kdm!CodeItem, sourceTo: java!TypeAccess
+	to
+		tgt: kdm!Extends (
+			from <- targetFrom,
+			to <- sourceTo -> getType()
+		)
+}

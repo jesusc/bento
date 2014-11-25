@@ -43,7 +43,7 @@ public class CSPGenerator {
 				continue;
 			
 			s += ErrorUtils.getErrorMessage(lp) + " (" + lp.getLocation() +"): \n";
-			// System.out.println(lp.getLocation());
+//			System.out.println(lp.getLocation());
 			s += generateCSP(path, analyser);
 			s += "\n\n";
 			// System.out.println(s);

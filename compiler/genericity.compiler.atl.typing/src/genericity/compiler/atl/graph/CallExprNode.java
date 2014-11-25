@@ -62,26 +62,30 @@ public class CallExprNode extends AbstractDependencyNode {
 		if ( ann.isIsStaticCall() ) {
 			ModuleCallableAnn moduleCallableAnn = ann.getStaticResolver();
 			
-			LetExp lastLet = null;
+			LetExp topLet = null;
+			LetExp innerLet = null;
 			for(int i = 0; i < moduleCallableAnn.getArguments().size(); i++) {
 				String varName = moduleCallableAnn.getNames().get(i);
-				OclExpression formalParameter = ((OperationCallExp) call).getArguments().get(i);
+				OclExpression actualParameter = ((OperationCallExp) call).getArguments().get(i);
 				VariableDeclaration paramVar  = (VariableDeclaration) atlModel.findWrapper(moduleCallableAnn.getArgumentVars().get(i));
 				
-				LetExp innerLet = model.createLetScope(model.gen(formalParameter), null, varName);
+				LetExp let = model.createLetScope(model.gen(actualParameter), null, varName);
 
-				VariableDeclaration newVar = innerLet.getVariable();
+				VariableDeclaration newVar = let.getVariable();
 				model.addToScope(paramVar, newVar);
 				
-				if ( lastLet != null )
-					lastLet.setIn_(innerLet);
-				lastLet = innerLet;
+				if ( topLet == null ) {
+					topLet = let;					
+				} else {
+					innerLet.setIn_(let);
+				}					
+				innerLet = let;
 			}
 			
 			OclExpression inlineCall   = getDepending().genCSP(model);
-			if ( lastLet != null ) {
-				lastLet.setIn_(inlineCall);
-				inlineCall = lastLet;
+			if ( topLet != null ) {
+				innerLet.setIn_(inlineCall);
+				inlineCall = topLet;
 			}
 			
 			return inlineCall;
@@ -93,30 +97,30 @@ public class CallExprNode extends AbstractDependencyNode {
 			ContextHelperAnn contextHelperAnn = ann.getDynamicResolvers().get(0);
 			
 			// TODO: There may be several helpers... ??
-			LetExp let = model.createLetScope(receptorExpr, null, "genSelf");
+			LetExp topLet = model.createLetScope(receptorExpr, null, "genSelf");
 			for (VariableDeclaration vd : findSelfReferences(contextHelperAnn)) {
-				model.addToScope(vd, let.getVariable());
+				model.addToScope(vd, topLet.getVariable());
 			}
 
-			LetExp lastLet = let;
+			LetExp innerLet = topLet;
 			for(int i = 0; i < contextHelperAnn.getArguments().size(); i++) {
 				String varName = contextHelperAnn.getNames().get(i);
 				OclExpression formalParameter = ((OperationCallExp) call).getArguments().get(i);
 				VariableDeclaration paramVar  = (VariableDeclaration) atlModel.findWrapper(contextHelperAnn.getArgumentVars().get(i));
 				
-				LetExp innerLet = model.createLetScope(model.gen(formalParameter), null, varName);
+				LetExp let = model.createLetScope(model.gen(formalParameter), null, varName);
 
-				VariableDeclaration newVar = innerLet.getVariable();
+				VariableDeclaration newVar = let.getVariable();
 				model.addToScope(paramVar, newVar);
 				
-				lastLet.setIn_(innerLet);
-				lastLet = innerLet;
+				innerLet.setIn_(let);
+				innerLet = let;
 			}
 
 			
 			OclExpression inlineCall   = getDepending().genCSP(model);
-			lastLet.setIn_(inlineCall);
-			return lastLet;	
+			innerLet.setIn_(inlineCall);
+			return topLet;	
 		}
 	}
 

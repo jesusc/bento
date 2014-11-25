@@ -1,7 +1,5 @@
 package anatlyzer.regression;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
 import org.eclectic.modeling.emf.Util;
@@ -13,6 +11,7 @@ import analysis.BaseTest;
 public class RegressionLazyRules extends BaseTest {
 	private final String UML_METAMODEL = testr("UML2_1_0.ecore");
 	private final String KDM_METAMODEL = testr("kdm.ecore");
+	private final String JAVA_METAMODEL = testr("java.ecore");
 	
 	
 	@BeforeClass
@@ -35,18 +34,23 @@ public class RegressionLazyRules extends BaseTest {
 		
 		printErrorsByType();
 	}
-	
-	/*
+
 	@Test
-	public void testFeatureNofFound() throws IOException {
-		String UML2PN_FEATURE_NOT_FOUND = "../bento.examples.analysis/tests/bento/tests/uml2pn_feature_not_found.atl.xmi";
+	public void testPassingTargetElements() throws IOException {
+		String TRAFO = testr("javaToKdm_passing_target_elements.atl.xmi");
+		String selectedError = "84:4-84:22";
 		
-		typing(UML2PN_FEATURE_NOT_FOUND, new Object[] { UML_METAMODEL, PN_METAMODEL}, 
-				   new String[] { "UML", "PN" }, true);
-	
-		generateCSP();
+		typing(TRAFO, new Object[] { JAVA_METAMODEL, KDM_METAMODEL }, 
+				   new String[] { "java", "kdm" }, true);
+		
+		generateGraphviz(selectedError);
+		generateErrorSlice("java", "tmp_/javaToKdm_error.slice.ecore"); //, selectedError);
+		generateEffectiveMetamodel("java", "tmp_/javaToKdm_error.effective.ecore");
+		generateCSP(selectedError);
+		
+		printErrorsByType();
 	}
-	*/
+
 	
 
 

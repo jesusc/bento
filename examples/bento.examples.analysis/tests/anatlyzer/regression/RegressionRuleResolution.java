@@ -13,7 +13,7 @@ import analysis.BaseTest;
 public class RegressionRuleResolution extends BaseTest {
 	private final String UML_METAMODEL = testr("UML2_1_0.ecore");
 	private final String KDM_METAMODEL = testr("kdm.ecore");
-	
+
 	
 	@BeforeClass
 	public static void setupEMF() {
@@ -35,18 +35,6 @@ public class RegressionRuleResolution extends BaseTest {
 		
 		printErrorsByType();
 	}
-	
-	/*
-	@Test
-	public void testFeatureNofFound() throws IOException {
-		String UML2PN_FEATURE_NOT_FOUND = "../bento.examples.analysis/tests/bento/tests/uml2pn_feature_not_found.atl.xmi";
-		
-		typing(UML2PN_FEATURE_NOT_FOUND, new Object[] { UML_METAMODEL, PN_METAMODEL}, 
-				   new String[] { "UML", "PN" }, true);
-	
-		generateCSP();
-	}
-	*/
 	
 
 

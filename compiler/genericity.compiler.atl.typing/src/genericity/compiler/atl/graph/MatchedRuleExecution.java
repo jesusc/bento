@@ -1,16 +1,22 @@
 package genericity.compiler.atl.graph;
 
+import java.util.ArrayList;
+
 import atl.metamodel.ATL.InPatternElement;
 import atl.metamodel.ATL.MatchedRule;
+import atl.metamodel.ATL.OutPatternElement;
 import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.ATL.SimpleInPatternElement;
+import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.OCL.IfExp;
 import atl.metamodel.OCL.Iterator;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.LetExp;
 import atl.metamodel.OCL.OclExpression;
+import atl.metamodel.OCL.OclUndefinedExp;
 import atl.metamodel.OCL.OperationCallExp;
 import atl.metamodel.OCL.VariableDeclaration;
+import atl.metamodel.OCL.VariableExp;
 import genericity.compiler.atl.csp.CSPModel;
 import genericity.compiler.atl.csp.ErrorSlice;
 import genericity.compiler.atl.csp.GraphvizBuffer;
@@ -92,22 +98,59 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 		
 		VariableDeclaration varDclMappedVar = exists.getIterators().get(0);
 		model.addToScope(varDcl, varDclMappedVar);
-		
+			
 		LetExp letUsingDeclarations  = null;
-		LetExp lastLet  = null;
+		LetExp letUsingDeclarationInnerLet  = null;
 		if ( atlRule.getVariables().size() > 0 ) {
 			for(RuleVariableDeclaration v : atlRule.getVariables()) {
 				LetExp let = model.createLetScope(model.gen(v.getInitExpression()), null, v.getVarName());
 				model.addToScope(v, let.getVariable());
 				if ( letUsingDeclarations  != null ) {
-					lastLet.setIn_(let);
+					letUsingDeclarationInnerLet.setIn_(let);
 				} else {
 					letUsingDeclarations = let; // the first let
 				}
-				lastLet  = let;
+				letUsingDeclarationInnerLet  = let;
 			}
-			exists.setBody(letUsingDeclarations );
 		}
+		
+		// For each target pattern element, a new local variable is introduced with
+		// value OclUndefined. This is needed because the output pattern variable needs
+		// to be in the scope when the parameter passing is done.
+		// Nevertheless, this is actually only needed for those output pattern elements used as
+		// parameters of helpers / lazy or called rules.
+		ArrayList<OutPatternElement> passedAsParameters = new ArrayList<OutPatternElement>();
+		for(OutPatternElement out : atlRule.getOutPattern().getElements()) {
+			for(VariableExp vexp : out.getVariableExp()) {
+				if ( vexp.container_() instanceof OperationCallExp ) {
+					// This indicates and usage of the variable
+					passedAsParameters.add(out);
+				}
+			}
+		}
+
+		if ( passedAsParameters.size() > 0 ) {
+			for(OutPatternElement v : passedAsParameters) {
+				OclUndefinedExp undefined = model.create(OclUndefinedExp.class);
+				LetExp let = model.createLetScope(undefined, null, v.getVarName());
+				model.addToScope(v, let.getVariable());
+
+				if ( letUsingDeclarations  != null ) {
+					letUsingDeclarationInnerLet.setIn_(let);
+				} else {
+					letUsingDeclarations = let; // the first let
+				}
+				letUsingDeclarationInnerLet  = let;
+			}
+		}
+
+		if ( atlRule.getVariables().size() > 0 || passedAsParameters.size() > 0 ) {			
+			exists.setBody(letUsingDeclarations);			
+		}
+		
+		// 
+		
+		
 		
 		if ( rule.getFilter() != null ) {
 			// => if ( filterCondition ) then <? : whenFilter> else false endif
@@ -115,10 +158,10 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 			IfExp ifExp = model.createIfExpression(condition, null, model.createBooleanLiteral(false) );
 			
 			// set <? : allInstancesBody>
-			if ( letUsingDeclarations  == null )
+			if ( letUsingDeclarations == null )
 				exists.setBody(ifExp);
 			else 
-				letUsingDeclarations .setIn_(ifExp);
+				letUsingDeclarationInnerLet.setIn_(ifExp);
 			
 			// => set <? : whenFilter>
 			mapSuperRuleVariables(varDclMappedVar, atlRule.getSuperRule(), model);
@@ -133,7 +176,7 @@ public class MatchedRuleExecution extends AbstractDependencyNode implements Exec
 			if ( letUsingDeclarations  == null )
 				exists.setBody(whenFilterExpr);
 			else 
-				letUsingDeclarations .setIn_(whenFilterExpr);
+				letUsingDeclarationInnerLet.setIn_(whenFilterExpr);
 		}
 		
 		return exists;
