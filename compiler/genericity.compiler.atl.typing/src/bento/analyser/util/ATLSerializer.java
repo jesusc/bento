@@ -84,8 +84,8 @@ public class ATLSerializer extends ATLModelVisitor {
 	}
 	
 	public void ruleGenerator(MatchedRule self, String header) {
-
-		String s = ifs(self.getIsAbstract(), "abstract ") + header + " " + self.getName() + " {" + cr();
+		String extends_ = self.getSuperRule() != null ? " extends " + self.getSuperRule().getName() : "";
+		String s = ifs(self.getIsAbstract(), "abstract ") + header + " " + self.getName() + extends_ + " {" + cr();
 				
 		s += tab(1) + "from " + g(self.getInPattern()) + cr();
 		if ( self.getVariables().size() > 0 ) {

@@ -24,7 +24,7 @@ public class MoDisco extends BaseTest {
 	}
 	
 	public void run() throws IOException {
-		String selectedError = "625:3-625:21"; //"75:3-75:30";
+		String selectedError = null;//"75:3-75:30";
 		
 		/*
 		 */

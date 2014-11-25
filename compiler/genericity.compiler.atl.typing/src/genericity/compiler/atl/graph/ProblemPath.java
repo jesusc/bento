@@ -7,7 +7,7 @@ import java.util.List;
 import bento.analysis.atl_analysis.atl_error.LocalProblem;
 
 public class ProblemPath {
-	public LinkedList<MatchedRuleExecution> rules = new LinkedList<MatchedRuleExecution>();
+	public LinkedList<ExecutionNode> rules = new LinkedList<ExecutionNode>();
 	private LocalProblem problem;
 	private ProblemNode errorNode;
 	
@@ -24,12 +24,12 @@ public class ProblemPath {
 		return problem;
 	}
 	
-	public void addRule(MatchedRuleExecution ruleNode) {
+	public void addRule(ExecutionNode ruleNode) {
 		rules.add(ruleNode);
 	}
 
 
-	public List<MatchedRuleExecution> getRules() {
+	public List<ExecutionNode> getRules() {
 		return Collections.unmodifiableList(rules);
 	}
 

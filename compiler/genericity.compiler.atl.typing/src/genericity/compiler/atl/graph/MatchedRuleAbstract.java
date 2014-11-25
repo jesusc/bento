@@ -1,5 +1,6 @@
 package genericity.compiler.atl.graph;
 
+import bento.analyser.util.Pair;
 import atl.metamodel.ATL.MatchedRule;
 import atl.metamodel.ATL.RuleVariableDeclaration;
 import atl.metamodel.OCL.IfExp;
@@ -19,15 +20,11 @@ import genericity.typing.atl_types.annotations.MatchedRuleAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleManyAnn;
 import genericity.typing.atl_types.annotations.MatchedRuleOneAnn;
 
-public class MatchedRuleAbstract extends AbstractDependencyNode {
+public class MatchedRuleAbstract extends MatchedRuleBase {
 
-	private MatchedRuleAnn rule;
-	private MatchedRule	atlRule;
-	//private DependencyNode	constraint;
 
 	public MatchedRuleAbstract(MatchedRuleAnn rule, MatchedRule atlRule) {
-		this.rule = rule;
-		this.atlRule = atlRule;
+		super(rule, atlRule);
 	}
 	
 
@@ -61,31 +58,42 @@ public class MatchedRuleAbstract extends AbstractDependencyNode {
 
 	@Override
 	public OclExpression genCSP(CSPModel model) {
-		Metaclass metaclass = null;
-		VariableDeclaration varDcl = atlRule.getInPattern().getElements().get(0);
+		// For target variables a new variable is generated, which is not a problem because they are
+		// set to undefined anyway. If not, a binding to overriding variables should be done instead.
+		Pair<LetExp, LetExp> letPair = genLocalVarsLet(model);
 		
-		if ( ! (rule instanceof MatchedRuleOneAnn) ) {
-			throw new UnsupportedOperationException();
-		}
-
-		OclExpression orOp = null;
-		for(DependencyNode d : getDependencies()) {
-			// TODO: So far assuming only non-abstract subrules
-			// MatchedRuleExecution ex = (MatchedRuleExecution) d;
+		LetExp letUsingDeclaration = letPair._1;
+		LetExp letUsingDeclarationInnerLet = letPair._2;
+		
+		OclExpression result = null;
+		
+		if ( atlRule.getInPattern().getFilter() != null ) {
+			OclExpression condition = this.getConstraint().genCSP(model);
+			IfExp ifExp = model.createIfExpression(condition, null, model.createBooleanLiteral(false) );
+			OclExpression whenFilterExpr = getDepending().genCSP(model);
 			
-			if ( orOp == null ) {
-				orOp = d.genCSP(model);
-			} else {
-				orOp = model.createBinaryOperator(orOp, d.genCSP(model), "or");
-			}
+			
+			ifExp.setThenExpression(whenFilterExpr);
+			result = ifExp;
+		} else {
+			OclExpression dep = getDepending().genCSP(model);
+			result = dep;			
 		}
 		
-		return orOp;
+		if ( letUsingDeclaration != null ) {
+			letUsingDeclarationInnerLet.setIn_(result);
+			result = letUsingDeclaration;
+		}
+		
+		return result;		
 	}
 		
 	@Override
 	public void genTransformationSlice(TransformationSlice slice) {
-		throw new UnsupportedOperationException();
+		slice.addRule(this.atlRule);
+		for(DependencyNode d : getDependencies()) {
+			d.genTransformationSlice(slice);
+		}
 	}
 	
 }

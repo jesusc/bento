@@ -434,15 +434,25 @@ public class ErrorPathGenerator {
 	 */
 	private boolean pathToMatchedRuleOne(MatchedRuleAnn rule, DependencyNode dependent, boolean isConstraint) {
 		MatchedRule r = (MatchedRule) atlModel.findWrapper( rule.getRule() );
+		DependencyNode newNode;
 		if ( r.getIsAbstract() ) {
+			newNode = new MatchedRuleAbstract(rule, r); 
+
 			for(MatchedRule cr : r.getChildren()) {
 				MatchedRuleAnn crann = (MatchedRuleAnn) typ.getAnnotation(cr.original_());
-				pathToMatchedRuleOne(crann, dependent, isConstraint);
+				pathToMatchedRuleOne(crann, newNode, isConstraint); 
+				// passing isConstraint = true because children rules are considered as
+				// constraints in the sense that we use the abstract rule as "launcher"
+				// of the children rules.
 			}
-			return true;
+		} else {
+			newNode = new MatchedRuleExecution(rule, r);
+			if ( ! isConstraint )
+				currentPath.addRule((ExecutionNode) newNode);
+			
+			newNode.setLeadsToExecution(true);
 		}
-		
-		MatchedRuleExecution newNode = new MatchedRuleExecution(rule, r);
+			 
 		dependent.addDependency(newNode);
 		
 		if ( rule.getFilter() != null ) {
@@ -450,10 +460,6 @@ public class ErrorPathGenerator {
 			newNode.addConstraint(constraint);
 		}
 		
-		if ( ! isConstraint )
-			currentPath.addRule(newNode);
-		
-		newNode.setLeadsToExecution(true);
 		return true;
 	}
 

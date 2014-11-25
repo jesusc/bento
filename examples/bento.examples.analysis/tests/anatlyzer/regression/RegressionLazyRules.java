@@ -38,7 +38,7 @@ public class RegressionLazyRules extends BaseTest {
 	@Test
 	public void testPassingTargetElements() throws IOException {
 		String TRAFO = testr("javaToKdm_passing_target_elements.atl.xmi");
-		String selectedError = "84:4-84:22";
+		String selectedError =  "136:4-136:22";
 		
 		typing(TRAFO, new Object[] { JAVA_METAMODEL, KDM_METAMODEL }, 
 				   new String[] { "java", "kdm" }, true);

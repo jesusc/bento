@@ -19,21 +19,68 @@
 module javaToKdm;
 create OUT: kdm from IN: java;
 
-rule ClassDeclarationToTemplateUnit {
+abstract rule TypeDeclarationToTemplateUnit {
 	from
+		src: java!TypeDeclaration (
+			not src.typeParameters.isEmpty()
+		)
+	to
+		tgt: kdm!TemplateUnit (
+			name <- src -> getGenericName(),
+			codeElement <- src.typeParameters,
+			codeElement <- type
+		),
+		type: kdm!Datatype (
+			name <- src.name,
+			codeRelation <- src.superInterfaces -> collect(e | if (src.
+					oclIsTypeOf(java!ClassDeclaration) ) then
+						thisModule.CreateImplementsForTemplated(type, e)
+					else
+						thisModule.CreateExtendsForTemplated(type, e)
+					endif),
+			comment <- src.comments,
+			comment <- if (src.originalCompilationUnit.oclIsUndefined() or not src.
+					refImmediateComposite().oclIsTypeOf(java!Package) ) then
+					Sequence { }
+				else
+					src.originalCompilationUnit.comments
+				endif,
+			source <- sourceRef,
+			attribute <- if (src.modifier.oclIsUndefined() ) then
+					Sequence { }
+				else
+					src.modifier
+				endif,
+			codeRelation <- src.annotations
+		),
+		sourceRef: kdm!SourceRef (
+			language <- 'java',
+			region <- sourceRegion
+		),
+		sourceRegion: kdm!SourceRegion (
+			language <- 'java',
+			file <- if (src.originalCompilationUnit.oclIsUndefined() ) then
+					src.originalClassFile
+				else
+					src.originalCompilationUnit
+				endif
+		)
+}
+
+rule ClassDeclarationToTemplateUnit extends TypeDeclarationToTemplateUnit { 
+   from
 		src: java!ClassDeclaration (
 			not src.typeParameters.isEmpty()
 		)
-	using {
-		javaAttributes: java!NamedElement = src.bodyDeclarations -> select(e | e.
-				oclIsTypeOf(java!FieldDeclaration)) -> collect(f | if ( f.
-				fragments->isEmpty() ) then
+using {
+   javaAttributes: java!NamedElement = src.bodyDeclarations -> select(e | e.
+		oclIsTypeOf(java!FieldDeclaration)) -> collect(f | if ( f.fragments->isEmpty() )
+		then
    f
 else
    f.fragments
-endif);
-	}
-	to
+endif);}
+     to
 		tgt: kdm!TemplateUnit,
 		type: kdm!ClassUnit (
 			isAbstract <- if (src.modifier.oclIsUndefined() ) then
@@ -45,7 +92,7 @@ endif);
 			codeElement <- src.bodyDeclarations -> select(e | not e.
 					oclIsTypeOf(java!FieldDeclaration))
 		)
-	do {
+do {
    type.codeRelation <- if (src.superClass.oclIsUndefined() ) then
 				Sequence { }
 			else
@@ -54,34 +101,34 @@ endif);
 }
 }
 
-rule InterfaceDeclarationToTemplateUnit {
-	from
+rule InterfaceDeclarationToTemplateUnit extends TypeDeclarationToTemplateUnit { 
+   from
 		src: java!InterfaceDeclaration (
 			not src.typeParameters.isEmpty()
 		)
-	using {
-		javaAttributes: java!NamedElement = src.bodyDeclarations -> select(e | e.
-				oclIsTypeOf(java!FieldDeclaration)) -> collect(f | if ( f.
-				fragments->isEmpty() ) then
+using {
+   javaAttributes: java!NamedElement = src.bodyDeclarations -> select(e | e.
+		oclIsTypeOf(java!FieldDeclaration)) -> collect(f | if ( f.fragments->isEmpty() )
+		then
    f
 else
    f.fragments
-endif);
-	}
-	to
+endif);}
+     to
 		tgt: kdm!TemplateUnit,
 		type: kdm!InterfaceUnit (
 			codeElement <- javaAttributes,
 			codeElement <- src.bodyDeclarations -> select(e | not e.
 					oclIsTypeOf(java!FieldDeclaration))
 		)
+
 }
 
 lazy rule CreateExtendsForTemplated {
 	from targetFrom: kdm!CodeItem, sourceTo: java!TypeAccess
 	to
 		tgt: kdm!Extends (
-			from <- targetFrom,
+			from <- targetFrom, -- Error starts here
 			to <- sourceTo -> getType()
 		)
 }
