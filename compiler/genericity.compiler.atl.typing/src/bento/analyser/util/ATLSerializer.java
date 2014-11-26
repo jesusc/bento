@@ -25,6 +25,7 @@ import atl.metamodel.ATL.SimpleOutPatternElement;
 import atl.metamodel.ATL.Statement;
 import atl.metamodel.OCL.CollectionOperationCallExp;
 import atl.metamodel.OCL.IfExp;
+import atl.metamodel.OCL.IntegerExp;
 import atl.metamodel.OCL.IteratorExp;
 import atl.metamodel.OCL.NavigationOrAttributeCallExp;
 import atl.metamodel.OCL.OclExpression;
@@ -250,6 +251,11 @@ public class ATLSerializer extends ATLModelVisitor {
 	@Override
 	public void inStringExp(StringExp self) {
 		s("'" + self.getStringSymbol() + "'");
+	}
+
+	@Override
+	public void inIntegerExp(IntegerExp self) {
+		s(self.getIntegerSymbol()+"");
 	}
 	
 	@Override
