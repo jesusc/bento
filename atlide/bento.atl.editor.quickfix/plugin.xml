@@ -19,5 +19,4 @@
             apply="bento.atl.editor.quickfix.TransformationSliceQuickFix">
       </quickfix>
    </extension>
-
 </plugin>

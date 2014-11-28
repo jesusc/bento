@@ -88,11 +88,10 @@ public class AnalysisQuickfixProcessor implements IQuickAssistProcessor {
 			AtlProblemQuickfix qf;
 			try {
 				qf = (AtlProblemQuickfix) ce.createExecutableExtension("apply");
-				if ( ! qf.isApplicable(iMarker) ) {
-					continue;
+				if ( qf.isApplicable(iMarker) ) {
+					qf.setErrorMarker(iMarker);
+					quickfixes.add(qf);
 				}
-				qf.setErrorMarker(iMarker);
-				quickfixes.add(qf);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
