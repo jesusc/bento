@@ -46,6 +46,23 @@
                label="Apply component"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
+         
+         <action
+               class="genericity.components.ui.popup.actions.InstallToLocalRepo"
+               enablesFor="1"
+               id="genericity.components.ui.InstallToLocalRepo"
+               label="Install to local repository"
+               menubarPath="genericity.components.ui.GComponentsMenu/group1">
+         </action>
+
+         <action
+               class="genericity.components.ui.popup.actions.UploadToRemoteRepo"
+               enablesFor="1"
+               id="genericity.components.ui.UploadToRemoteRepo"
+               label="Install to local repository"
+               menubarPath="genericity.components.ui.GComponentsMenu/group1">
+         </action>
+                  
          <action
                class="genericity.components.ui.popup.actions.ExportGComponentXMI"
                enablesFor="1"

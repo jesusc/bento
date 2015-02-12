@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.eclectic.idc.datatypes.ImmutableList;
 import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.idc.jvm.runtime.IMethodWrapper;
 import org.eclectic.idc.jvm.runtime.IModelMethodHandler;

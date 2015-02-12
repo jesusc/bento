@@ -30,6 +30,7 @@ class Metamodel extends Resource {
    attr ModelKind kind;
    
    val Concept[0..1] extractedConcept;
+   val ExtractedMetamodel[0..1] extractedMetamodel;
 }
 
 enum ModelKind {
@@ -38,7 +39,11 @@ enum ModelKind {
    INOUT = 2;
 }
 
-class Concept extends Resource {
+class ExtractedMetamodel extends Resource {
    attr String[1] name;
-   attr String[1] nsURI;
+   attr String[1] nsURI;	
 }
+
+class Concept extends ExtractedMetamodel {
+}
+

@@ -80,6 +80,8 @@ public abstract class BaseTest {
 		this.atlTransformationFile = atlTransformationFile;
 		// BasicEMFModel boundMM = TypeCheckLauncher.loadTransformationMetamodels(loader, BOUND_METAMODEL);
 
+		long diffs = 0;
+		for(int i = 0; i < 20; i++) {
 		BasicEMFModel atlTransformationEmfModel = loader
 				.basicModelFromFile(
 						withDir("../../compiler/genericity.compiler.atl/src/genericity/typecheck/atl/ATL.ecore"),
@@ -95,11 +97,18 @@ public abstract class BaseTest {
 		mm = loadMetamodels2(metamodels, names); // TypeCheckLauncher.loadTransformationMetamodels(loader, metamodels);
 		analyser = new Analyser(mm, atlTransformation, out);
 		analyser.setDoDependencyAnalysis(doDependencyAnalysis);
+		analyser.setDoDependencyAnalysis(false);
+		
+		long initTime = System.currentTimeMillis();
 		analyser.perform();
+		long finishTime = System.currentTimeMillis();
+		diffs += (finishTime - initTime);
+		typingModel = out;	
+		}
+		System.out.println("Time: " + (diffs / 1000.0) / 20);
 	
 		dependencyGraph = analyser.getDependencyGraph();
 		
-		typingModel = out;	
 		
 		System.out.println("Finished typing " + atlTransformationFile + "\n");
 	}

@@ -32,7 +32,7 @@ public class RevengFactoryImpl extends EFactoryImpl implements RevengFactory {
 	 */
 	public static RevengFactory init() {
 		try {
-			RevengFactory theRevengFactory = (RevengFactory)EPackage.Registry.INSTANCE.getEFactory("http://bento/componetization/reveng_model"); 
+			RevengFactory theRevengFactory = (RevengFactory)EPackage.Registry.INSTANCE.getEFactory(RevengPackage.eNS_URI);
 			if (theRevengFactory != null) {
 				return theRevengFactory;
 			}
@@ -64,6 +64,7 @@ public class RevengFactoryImpl extends EFactoryImpl implements RevengFactory {
 			case RevengPackage.REVENG_MODEL: return createRevengModel();
 			case RevengPackage.ATL_TRANSFORMATION: return createAtlTransformation();
 			case RevengPackage.METAMODEL: return createMetamodel();
+			case RevengPackage.EXTRACTED_METAMODEL: return createExtractedMetamodel();
 			case RevengPackage.CONCEPT: return createConcept();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -128,6 +129,16 @@ public class RevengFactoryImpl extends EFactoryImpl implements RevengFactory {
 	public Metamodel createMetamodel() {
 		MetamodelImpl metamodel = new MetamodelImpl();
 		return metamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExtractedMetamodel createExtractedMetamodel() {
+		ExtractedMetamodelImpl extractedMetamodel = new ExtractedMetamodelImpl();
+		return extractedMetamodel;
 	}
 
 	/**

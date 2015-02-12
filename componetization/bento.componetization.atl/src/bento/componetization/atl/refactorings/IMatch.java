@@ -6,6 +6,8 @@ import org.eclipse.emf.ecore.EClass;
 
 public interface IMatch {
 
+	public String getRefactoringHumanName();
+		
 	boolean coevolutionRequired();
 	
 	void apply();

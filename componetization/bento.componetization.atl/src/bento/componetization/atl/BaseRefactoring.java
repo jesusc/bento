@@ -40,5 +40,28 @@ public abstract class BaseRefactoring implements IConceptRefactoring {
 		}
 		
 	}
+	
+	public abstract class BaseMatch implements IMatch {
+		private BaseRefactoring refactoring;
+
+		public BaseMatch(BaseRefactoring refactoring) {
+			this.refactoring = refactoring;
+		}
+		
+		@Override
+		public String getRefactoringHumanName() {
+			String s = refactoring.getClass().getSimpleName();
+			String result = s.charAt(0) + "";
+			for(int i = 1; i < s.length(); i++) {
+				char c = s.charAt(i);
+				if ( Character.isUpperCase(c) ) {				
+					result = result + " " + c; 
+				} else {
+					result = result + c;
+				}
+			}
+			return result;
+		}
+	}
 
 }

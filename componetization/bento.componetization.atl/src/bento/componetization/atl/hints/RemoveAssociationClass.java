@@ -1,50 +1,48 @@
 package bento.componetization.atl.hints;
 
-import genericity.typing.atl_types.Metaclass;
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import atl.metamodel.ATLModel;
-import atl.metamodel.ATLModelBaseObject;
-import atl.metamodel.ATL.Helper;
-import atl.metamodel.ATL.Library;
-import atl.metamodel.ATL.Module;
-import atl.metamodel.ATL.Unit;
-import atl.metamodel.OCL.Attribute;
-import atl.metamodel.OCL.CollectionOperationCallExp;
-import atl.metamodel.OCL.Iterator;
-import atl.metamodel.OCL.IteratorExp;
-import atl.metamodel.OCL.NavigationOrAttributeCallExp;
-import atl.metamodel.OCL.OclAnyType;
-import atl.metamodel.OCL.OclContextDefinition;
-import atl.metamodel.OCL.OclExpression;
-import atl.metamodel.OCL.OclFeatureDefinition;
-import atl.metamodel.OCL.OclModel;
-import atl.metamodel.OCL.OclModelElement;
-import atl.metamodel.OCL.Operation;
-import atl.metamodel.OCL.OperationCallExp;
-import atl.metamodel.OCL.PropertyCallExp;
-import atl.metamodel.OCL.SequenceType;
-import atl.metamodel.OCL.TupleExp;
-import atl.metamodel.OCL.TuplePart;
-import atl.metamodel.OCL.TupleType;
-import atl.metamodel.OCL.TupleTypeAttribute;
-import atl.metamodel.OCL.VariableDeclaration;
-import atl.metamodel.OCL.VariableExp;
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.types.CollectionType;
+import anatlyzer.atl.types.Metaclass;
+import anatlyzer.atlext.ATL.ATLFactory;
+import anatlyzer.atlext.ATL.Helper;
+import anatlyzer.atlext.ATL.Library;
+import anatlyzer.atlext.ATL.Module;
+import anatlyzer.atlext.ATL.Unit;
+import anatlyzer.atlext.OCL.Attribute;
+import anatlyzer.atlext.OCL.CollectionOperationCallExp;
+import anatlyzer.atlext.OCL.Iterator;
+import anatlyzer.atlext.OCL.IteratorExp;
+import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
+import anatlyzer.atlext.OCL.OCLFactory;
+import anatlyzer.atlext.OCL.OclExpression;
+import anatlyzer.atlext.OCL.OclFeatureDefinition;
+import anatlyzer.atlext.OCL.OclModel;
+import anatlyzer.atlext.OCL.OclModelElement;
+import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.atlext.OCL.PropertyCallExp;
+import anatlyzer.atlext.OCL.SequenceType;
+import anatlyzer.atlext.OCL.TupleExp;
+import anatlyzer.atlext.OCL.TuplePart;
+import anatlyzer.atlext.OCL.TupleType;
+import anatlyzer.atlext.OCL.TupleTypeAttribute;
+import anatlyzer.atlext.OCL.VariableDeclaration;
+import anatlyzer.atlext.OCL.VariableExp;
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
-import bento.componetization.atl.hints.RemoveAssociationClass.RemoveAssociationClassMatch;
 import bento.componetization.atl.refactorings.IMatch;
+
 
 /**
  * This hints indicates the removal of a class that is between two classes
@@ -93,6 +91,8 @@ public class RemoveAssociationClass extends BaseRefactoring {
 				} else {
 					allInstances = analysis.getAllInstancesUsages(intermediate);
 				}
+			} else {
+				continue;
 			}
 
 			EReference pointingFeature = null;
@@ -132,7 +132,7 @@ public class RemoveAssociationClass extends BaseRefactoring {
 		return save(matches);
 	}
 
-	public class RemoveAssociationClassMatch implements IMatch {
+	public class RemoveAssociationClassMatch extends BaseMatch {
 
 		private EClass		intermediateClass;
 		private EReference	pointingFeature;
@@ -151,6 +151,7 @@ public class RemoveAssociationClass extends BaseRefactoring {
 		 * @param targetFeature
 		 */
 		public RemoveAssociationClassMatch(EClass intermediateClass, EReference pointingFeature, List<OperationCallExp> allInstances) {
+			super(RemoveAssociationClass.this);
 			this.intermediateClass = intermediateClass;
 			this.pointingFeature = pointingFeature;
 			this.intermediateReference = intermediateClass.getEReferences().get(0);
@@ -206,8 +207,7 @@ public class RemoveAssociationClass extends BaseRefactoring {
 					.allObjectsOf(NavigationOrAttributeCallExp.class);
 
 			for (NavigationOrAttributeCallExp nav : navs) {
-				ExpressionAnnotation ann = analysis.findExpressionAnnotation(nav.original_());
-				if (ann.getUsedFeature() == pointingFeature) {
+				if (nav.getUsedFeature() == pointingFeature) {
 					OclExpression closing = findClosingExpression(nav, targetType);
 
 					// This is the condition to know if the transformation can
@@ -228,22 +228,35 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			return true;
 		}
 
+		/**
+		 * Finds the first expression whose type is exactly the targetType.
+		 * This is to determine the extent of the refactoring.
+		 * 
+		 * @param nav
+		 * @param targetType
+		 * @return
+		 */
 		private OclExpression findClosingExpression(NavigationOrAttributeCallExp nav, EClass targetType) {
-
-			ATLModelBaseObject container = nav.container_();
+			EObject container = nav.eContainer();
 			while (container != null && container instanceof OclExpression) {
 				OclExpression expr = (OclExpression) container;
 
-				ExpressionAnnotation ann = analysis.findExpressionAnnotation(expr.original_());
-
-				if (ann.getType() instanceof Metaclass) {
-					Metaclass c = (Metaclass) ann.getType();
+				if (expr.getInferredType() instanceof Metaclass ) {
+					Metaclass c = (Metaclass) expr.getInferredType();
+					if (c.getKlass() == targetType) {
+						return expr;
+					}
+				}
+				
+				// Also needs to work with multivalued expressions
+				if ( expr.getInferredType() instanceof CollectionType && ((CollectionType) expr.getInferredType()).getContainedType() instanceof Metaclass ) {
+					Metaclass c = (Metaclass) ((CollectionType) expr.getInferredType()).getContainedType();
 					if (c.getKlass() == targetType) {
 						return expr;
 					}
 				}
 
-				container = expr.container_();
+				container = expr.eContainer();
 			}
 
 			return null;
@@ -269,7 +282,7 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			nav.setName( m.introducedFeatureName() );
 	
 			// Follow the path until closing
-			OclExpression src = (OclExpression) nav.container_();
+			OclExpression src = (OclExpression) nav.eContainer();
 			while ( src != closing ) {
 				src = refactor(src, m);
 			}
@@ -287,10 +300,10 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			
 			// If the intermediate reference is navigated, it is removed!
 			if ( src instanceof NavigationOrAttributeCallExp ) {
-				ExpressionAnnotation ann = analysis.findExpressionAnnotation(src.original_());
-				if ( ann.getUsedFeature() == m.intermediateReference ) {
+				NavigationOrAttributeCallExp nav = (NavigationOrAttributeCallExp) src;
+				if ( nav.getUsedFeature() == m.intermediateReference ) {
 					// Replace "src", the navigation expression in its container, by its source (receptor element)					
-					src.replaceBy( pcall.getSource() );
+					replace(src, pcall.getSource());
 					return null; // ?? Cannot proceed an return pcall.getSource()...
 				}
 			} else if ( src instanceof IteratorExp ) {
@@ -299,7 +312,7 @@ public class RemoveAssociationClass extends BaseRefactoring {
 				
 				// Re-refactor collect(g| g)
 				if ( it.getName().equals("collect") && it.getBody() instanceof VariableExp ) {
-					src.replaceBy( pcall.getSource() );					
+					replace(src, pcall.getSource() );					
 					return null; // ??
 				}
 			}
@@ -320,139 +333,120 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			OperationCallExp allInstancesOp = match.allInstances.get(0);
 			OclModel model = ((OclModelElement) allInstancesOp.getSource()).getModel();
 			
-			Helper helper = atl.create(Helper.class);
+			Helper helper = ATLFactory.eINSTANCE.createStaticHelper();
+			// Helper helper = atl.create(Helper.class);
 			
-			OclFeatureDefinition definition = atl.create(OclFeatureDefinition.class);
+			OclFeatureDefinition definition = OCLFactory.eINSTANCE.createOclFeatureDefinition(); 
 			helper.setDefinition(definition);	
 			
-			SequenceType returnType = atl.create(SequenceType.class);
-			TupleType    tupleType  = atl.create(TupleType.class);
+			SequenceType returnType = OCLFactory.eINSTANCE.createSequenceType();
+			TupleType    tupleType  = OCLFactory.eINSTANCE.createTupleType();
 			returnType.setElementType(tupleType);
 			
-			TupleTypeAttribute att1 = atl.create(TupleTypeAttribute.class); 
+			TupleTypeAttribute att1 = OCLFactory.eINSTANCE.createTupleTypeAttribute(); 
 			att1.setName(firstVarName);
-			att1.setType( atl.create(OclAnyType.class) );
-			tupleType.addAttributes(att1);
+			att1.setType( OCLFactory.eINSTANCE.createOclAnyType() );
+			tupleType.getAttributes().add(att1);
 			// TODO. SET THE TYPE OF THE TUPLE PARTS!!
 			
 			if ( secondVarName != null ) {
-				TupleTypeAttribute att2 = atl.create(TupleTypeAttribute.class); 
+				TupleTypeAttribute att2 = OCLFactory.eINSTANCE.createTupleTypeAttribute(); 
 				att2.setName(secondVarName);				
-				att2.setType( atl.create(OclAnyType.class) );
-				tupleType.addAttributes(att2);
-			
-				 /*			type = mm!OclModelElement {
-								location = "7:77-7:84"
-								name = "Node"
-							}
-				
-				 */
+				att2.setType( OCLFactory.eINSTANCE.createOclAnyType() );
+				tupleType.getAttributes().add(att2);
 			}
 			
 			
-			Attribute feature = atl.create(Attribute.class);
+			Attribute feature = OCLFactory.eINSTANCE.createAttribute();
 			feature.setName( helperName );
 			// feature.setType( atl.create(OclAnyType.class) );
 			feature.setType( returnType );
 			definition.setFeature(feature);
 			
-			CollectionOperationCallExp flatten = atl.create(CollectionOperationCallExp.class);
+			CollectionOperationCallExp flatten = OCLFactory.eINSTANCE.createCollectionOperationCallExp();
 			flatten.setOperationName("flatten");
 			feature.setInitExpression(flatten);
 			
-			IteratorExp collect1 = atl.create(IteratorExp.class);
+			IteratorExp collect1 = OCLFactory.eINSTANCE.createIteratorExp();
 			// feature.setInitExpression(collect1);			
 			flatten.setSource(collect1);
 			collect1.setName("collect");
-			Iterator itVarCollect1 = atl.create(Iterator.class);
+			Iterator itVarCollect1 = OCLFactory.eINSTANCE.createIterator();
 			itVarCollect1.setVarName(firstVarName);
-			collect1.addIterators(itVarCollect1);
+			collect1.getIterators().add(itVarCollect1);
 			
-			OperationCallExp allInstancesCall = atl.create(OperationCallExp.class);
+			OperationCallExp allInstancesCall = OCLFactory.eINSTANCE.createOperationCallExp();
 			allInstancesCall.setOperationName("allInstances");
 			collect1.setSource(allInstancesCall);
 			
-			OclModelElement classOclModelElement = atl.create(OclModelElement.class);
+			OclModelElement classOclModelElement = OCLFactory.eINSTANCE.createOclModelElement();
 			classOclModelElement.setName("Class"); // TODO: This is hardcoded!!!
 			classOclModelElement.setModel(model);
 			allInstancesCall.setSource(classOclModelElement);
 			
-			IteratorExp collect2 = atl.create(IteratorExp.class);
-			Iterator itVarCollect2 = atl.create(Iterator.class);
+			IteratorExp collect2 = OCLFactory.eINSTANCE.createIteratorExp();
+			Iterator itVarCollect2 = OCLFactory.eINSTANCE.createIterator();
 			itVarCollect2.setVarName(secondVarName);
-			collect2.addIterators(itVarCollect2);
+			collect2.getIterators().add(itVarCollect2);
 			collect1.setBody(collect2);			
 			collect2.setName("collect");
 			
-			NavigationOrAttributeCallExp navReference = atl.create(NavigationOrAttributeCallExp.class);
+			NavigationOrAttributeCallExp navReference = OCLFactory.eINSTANCE.createNavigationOrAttributeCallExp();
 			navReference.setName( match.introducedFeatureName() );
-			VariableExp varExp = atl.create(VariableExp.class);
+			VariableExp varExp = OCLFactory.eINSTANCE.createVariableExp();
 			varExp.setReferredVariable(itVarCollect1);
 			navReference.setSource(varExp);
 			collect2.setSource(navReference);
 			
-			TupleExp tupleValue = atl.create(TupleExp.class);
+			TupleExp tupleValue = OCLFactory.eINSTANCE.createTupleExp();
 			collect2.setBody(tupleValue);
 
-			TuplePart part1 = atl.create(TuplePart.class);
+			TuplePart part1 = OCLFactory.eINSTANCE.createTuplePart();
 			part1.setVarName(firstVarName);
-			VariableExp refToIt1 = atl.create(VariableExp.class);
+			VariableExp refToIt1 = OCLFactory.eINSTANCE.createVariableExp();
 			refToIt1.setReferredVariable(itVarCollect1);
 			part1.setInitExpression(refToIt1);
-			tupleValue.addTuplePart(part1);
+			tupleValue.getTuplePart().add(part1);
 
-			TuplePart part2 = atl.create(TuplePart.class);
+			TuplePart part2 = OCLFactory.eINSTANCE.createTuplePart();
 			part2.setVarName(secondVarName);
-			VariableExp refToIt2 = atl.create(VariableExp.class);
+			VariableExp refToIt2 = OCLFactory.eINSTANCE.createVariableExp();
 			refToIt2.setReferredVariable(itVarCollect2);
 			part2.setInitExpression(refToIt2);
-			tupleValue.addTuplePart(part2);
+			tupleValue.getTuplePart().add(part2);
 
 
 			Unit u = atl.allObjectsOf(Unit.class).get(0);
 			if ( u instanceof Library ) {
-				((Library) u).addHelpers(helper);
+				((Library) u).getHelpers().add(helper);
 			} else if ( u instanceof Module ) {
-				((Module) u).addElements(helper);
+				((Module) u).getElements().add(helper);
 			}
-			
-/*
-			OclContextDefinition oclContextDefinition = atl.create(OclContextDefinition.class);
-			OclModelElement modelContextDefinition = atl.create(OclModelElement.class);
-			
-			definition.setContext_(oclContextDefinition);
-			oclContextDefinition.setContext_(modelContextDefinition);
-			modelContextDefinition.setName()
-		context_ = mm!OclContextDefinition {
-						location = "3:8-3:24"
-						context_ = mm!OclModelElement {
-							location = "3:16-3:24"
-							name = "Class"
-						}
-					}
-				}
-			}
-			*/
-			
+	
 			for (OperationCallExp op : match.allInstances) {
-				NavigationOrAttributeCallExp call = atl.create(NavigationOrAttributeCallExp.class);
+				NavigationOrAttributeCallExp call = OCLFactory.eINSTANCE.createNavigationOrAttributeCallExp();
 				call.setName( helperName );
 				
 				// op.setOperationName( helperName );
 				
-				VariableDeclaration thisModule =  atl.create(VariableDeclaration.class);
+				VariableDeclaration thisModule =  OCLFactory.eINSTANCE.createVariableDeclaration();
 				thisModule.setVarName("thisModule");
 				
-				VariableExp exp =  atl.create(VariableExp.class);
+				VariableExp exp =  OCLFactory.eINSTANCE.createVariableExp();
 				exp.setReferredVariable(thisModule);
 				
 				call.setSource(exp);
 				
-				op.replaceBy(call);
+				replace(op, call);
 				// op.getSource().replaceBy(exp);
 			}
 		}
 
+	}
+
+
+	private void replace(EObject src, EObject replacement) {
+		EcoreUtil.replace(src, replacement);
 	}
 
 }

@@ -5,7 +5,6 @@ transformation component oo2java {
 	source model in : OO
 	target model out : Java
 	
-	//definition atl "oo2java.atl" 
 	definition atl "platform:/resource/genericity.benchmarks/components/oo2java/oo2java.atl"
         with IN : SimpleOO = in, OUT = out
 }

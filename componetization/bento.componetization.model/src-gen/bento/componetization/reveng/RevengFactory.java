@@ -53,6 +53,15 @@ public interface RevengFactory extends EFactory {
 	Metamodel createMetamodel();
 
 	/**
+	 * Returns a new object of class '<em>Extracted Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extracted Metamodel</em>'.
+	 * @generated
+	 */
+	ExtractedMetamodel createExtractedMetamodel();
+
+	/**
 	 * Returns a new object of class '<em>Concept</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

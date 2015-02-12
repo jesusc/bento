@@ -1,7 +1,5 @@
 package bento.componetization.atl;
 
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,11 +8,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import bento.analyser.footprint.CallSite;
-import atl.metamodel.ATLModel;
-import atl.metamodel.ATL.Helper;
-import atl.metamodel.ATL.Rule;
-import atl.metamodel.OCL.OperationCallExp;
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atlext.ATL.Helper;
+import anatlyzer.atlext.ATL.Rule;
+import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.footprint.CallSite;
 
 public interface IStaticAnalysisInfo {
 
@@ -24,11 +22,6 @@ public interface IStaticAnalysisInfo {
 	Set<EStructuralFeature> getUsedFeatures();	
 	
 	ATLModel getATL();
-
-	// Utilities to access the type model
-	
-	ExpressionAnnotation findExpressionAnnotation(EObject expr);
-
 
 	// Search utilities for the ATL model
 	List<OperationCallExp> getAllInstancesUsages(EClass clazz);

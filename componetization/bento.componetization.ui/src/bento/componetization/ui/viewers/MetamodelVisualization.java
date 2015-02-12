@@ -21,12 +21,21 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 
+import bento.componetization.reveng.Metamodel;
 import bento.componetization.ui.Activator;
+import bento.componetization.ui.RevengProcessManager;
 
 public class MetamodelVisualization implements ITreeContentProvider, ILabelProvider  {
 
 	private Resource resource;
 	private List<EClass> allClasses;
+	private RevengProcessManager manager;
+	private Metamodel metamodel;
+
+	public MetamodelVisualization(Metamodel mm, RevengProcessManager manager) {
+		this.manager = manager;
+		this.metamodel = mm;
+	}
 
 	@Override
 	public void dispose() {
@@ -36,7 +45,8 @@ public class MetamodelVisualization implements ITreeContentProvider, ILabelProvi
 
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		this.resource = (Resource) newInput;
+		this.resource = manager.getConceptResource(metamodel);
+		
 		this.allClasses  = new ArrayList<EClass>();
 		TreeIterator<EObject> it = resource.getAllContents();
 		while ( it.hasNext() ) {

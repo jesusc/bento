@@ -192,7 +192,7 @@ public class CreateAnnotations extends AbstractAnalyserVisitor {
 	
 	public void createCalledRuleAnnotation(CalledRule self) {
 		// TODO: Complete called rule annotations
-		System.err.println("TODO: Complete called rule annotations");
+		// System.err.println("TODO: Complete called rule annotations");
 		
 		CalledRuleAnn ann = typ.createCalledRuleAnn(self); // , (Metaclass) srcType, (Metaclass) tgtType);
 

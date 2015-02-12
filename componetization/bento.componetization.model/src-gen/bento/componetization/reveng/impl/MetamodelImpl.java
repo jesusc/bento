@@ -7,6 +7,7 @@
 package bento.componetization.reveng.impl;
 
 import bento.componetization.reveng.Concept;
+import bento.componetization.reveng.ExtractedMetamodel;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengPackage;
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#isBecomeConcept <em>Become Concept</em>}</li>
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getExtractedConcept <em>Extracted Concept</em>}</li>
+ *   <li>{@link bento.componetization.reveng.impl.MetamodelImpl#getExtractedMetamodel <em>Extracted Metamodel</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,6 +129,16 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 	 * @ordered
 	 */
 	protected Concept extractedConcept;
+
+	/**
+	 * The cached value of the '{@link #getExtractedMetamodel() <em>Extracted Metamodel</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtractedMetamodel()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExtractedMetamodel extractedMetamodel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -279,11 +291,56 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ExtractedMetamodel getExtractedMetamodel() {
+		return extractedMetamodel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExtractedMetamodel(ExtractedMetamodel newExtractedMetamodel, NotificationChain msgs) {
+		ExtractedMetamodel oldExtractedMetamodel = extractedMetamodel;
+		extractedMetamodel = newExtractedMetamodel;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__EXTRACTED_METAMODEL, oldExtractedMetamodel, newExtractedMetamodel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtractedMetamodel(ExtractedMetamodel newExtractedMetamodel) {
+		if (newExtractedMetamodel != extractedMetamodel) {
+			NotificationChain msgs = null;
+			if (extractedMetamodel != null)
+				msgs = ((InternalEObject)extractedMetamodel).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RevengPackage.METAMODEL__EXTRACTED_METAMODEL, null, msgs);
+			if (newExtractedMetamodel != null)
+				msgs = ((InternalEObject)newExtractedMetamodel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RevengPackage.METAMODEL__EXTRACTED_METAMODEL, null, msgs);
+			msgs = basicSetExtractedMetamodel(newExtractedMetamodel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RevengPackage.METAMODEL__EXTRACTED_METAMODEL, newExtractedMetamodel, newExtractedMetamodel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				return basicSetExtractedConcept(null, msgs);
+			case RevengPackage.METAMODEL__EXTRACTED_METAMODEL:
+				return basicSetExtractedMetamodel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -306,6 +363,8 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 				return getKind();
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				return getExtractedConcept();
+			case RevengPackage.METAMODEL__EXTRACTED_METAMODEL:
+				return getExtractedMetamodel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -332,6 +391,9 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 				return;
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				setExtractedConcept((Concept)newValue);
+				return;
+			case RevengPackage.METAMODEL__EXTRACTED_METAMODEL:
+				setExtractedMetamodel((ExtractedMetamodel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -360,6 +422,9 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				setExtractedConcept((Concept)null);
 				return;
+			case RevengPackage.METAMODEL__EXTRACTED_METAMODEL:
+				setExtractedMetamodel((ExtractedMetamodel)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -382,6 +447,8 @@ public class MetamodelImpl extends ResourceImpl implements Metamodel {
 				return kind != KIND_EDEFAULT;
 			case RevengPackage.METAMODEL__EXTRACTED_CONCEPT:
 				return extractedConcept != null;
+			case RevengPackage.METAMODEL__EXTRACTED_METAMODEL:
+				return extractedMetamodel != null;
 		}
 		return super.eIsSet(featureID);
 	}

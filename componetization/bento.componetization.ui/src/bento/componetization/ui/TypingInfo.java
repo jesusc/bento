@@ -2,7 +2,7 @@ package bento.componetization.ui;
 
 import java.util.List;
 
-import bento.analysis.atl_analysis.Problem;
+import anatlyzer.atl.errors.Problem;
 
 public class TypingInfo {
 	private List<Problem> messages;

@@ -1,57 +1,34 @@
 package bento.componetization.atl;
 
-import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.management.RuntimeErrorException;
-
-import org.eclectic.modeling.emf.BasicEMFModel;
-import org.eclectic.modeling.emf.IModel;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import atl.metamodel.ATLModel;
-import atl.metamodel.ATL.Helper;
-import atl.metamodel.ATL.PatternElement;
-import atl.metamodel.ATL.Rule;
-import atl.metamodel.OCL.OclContextDefinition;
-import atl.metamodel.OCL.OclModelElement;
-import atl.metamodel.OCL.OclType;
-import atl.metamodel.OCL.OperationCallExp;
-import bento.analyser.footprint.CallSite;
-import bento.analyser.footprint.FootprintComputation;
+import anatlyzer.atl.analyser.namespaces.MetamodelNamespace;
+import anatlyzer.atl.footprint.FootprintComputation;
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atlext.ATL.Helper;
+import anatlyzer.atlext.ATL.PatternElement;
+import anatlyzer.atlext.ATL.Rule;
+import anatlyzer.atlext.OCL.OclContextDefinition;
+import anatlyzer.atlext.OCL.OclModelElement;
+import anatlyzer.atlext.OCL.OclType;
+import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.footprint.CallSite;
 import bento.componetization.atl.hints.RemoveAssociationClass;
 import bento.componetization.atl.refactorings.IConceptRefactoring;
-import bento.componetization.atl.refactorings.PushDownFeature;
-import bento.componetization.atl.refactorings.RemoveEmptyClass;
 
 public class ConceptExtractor extends FootprintComputation implements IStaticAnalysisInfo, IMetamodelInfo {
 	
-	public ConceptExtractor(ATLModel atlModel, MetamodelNamespace mm,
-			BasicEMFModel typing, String slicedURI) {
-		super(atlModel, mm, typing, slicedURI);
+	public ConceptExtractor(ATLModel atlModel, MetamodelNamespace mm, String slicedURI) {
+		super(atlModel, mm);
 
 		computeFootprint();
 	}
-
-	/*
-	public ConceptExtractor(BasicEMFModel atlTransformation, IModel mm,
-			BasicEMFModel typing, String slicedURI) {
-		super(atlTransformation, mm, typing, slicedURI);
-		// TODO Auto-generated constructor stub
-
-		computeFootprint();
-	}
-	*/
 
 	public MetamodelNamespace refactor() {
 		// The order matters: In TrafoRunningExample RemoveAssociationClass -> PushDownFeature means
@@ -93,6 +70,7 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Set<EClass> getImplicitlyUsedTypes() {
 		return (Set<EClass>) this.indirectUsedTypes.clone();
 	}
@@ -137,18 +115,6 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 	}
 
 	@Override
-	public ExpressionAnnotation findExpressionAnnotation(EObject expr) {
-		for(Object o : this.typing.allObjectsOf(ExpressionAnnotation.class.getSimpleName()) ) {
-			ExpressionAnnotation ann = (ExpressionAnnotation) o;
-			if ( ann.getExpr() == expr ) {
-				return ann;
-			}
-		}
-		
-		throw new RuntimeException("Typing for node " + expr + " not found");
-	}
-
-	@Override
 	public List<OperationCallExp> getAllInstancesUsages(EClass clazz) {
 		ArrayList<OperationCallExp> result = new ArrayList<OperationCallExp>();
 
@@ -174,7 +140,7 @@ public class ConceptExtractor extends FootprintComputation implements IStaticAna
 		// Improve to consider subtypes...
 		for (PatternElement patternElement : elements) {
 			if ( checkCompatibility(patternElement.getType(), clazz) ) {
-				Rule r = (Rule) patternElement.container_().container_();
+				Rule r = (Rule) patternElement.eContainer().eContainer();
 				result.add(r);
 			}
 		}

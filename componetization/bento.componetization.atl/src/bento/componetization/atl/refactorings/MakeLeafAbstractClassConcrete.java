@@ -2,21 +2,14 @@ package bento.componetization.atl.refactorings;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
-import bento.componetization.atl.refactorings.PushDownFeature.PushDownFeatureMatch;
 
 /**
  * This refactoring makes leaf abstract classes concrete, to
@@ -59,11 +52,12 @@ public class MakeLeafAbstractClassConcrete extends BaseRefactoring {
 	}
 
 		
-	public class MakeLeafAbstractClassConcrete_Match implements IMatch {
+	public class MakeLeafAbstractClassConcrete_Match extends BaseMatch {
 		private EClass eClass;
 
 
 		public MakeLeafAbstractClassConcrete_Match(EClass eClass) {
+			super(MakeLeafAbstractClassConcrete.this);
 			this.eClass = eClass;
 		}
 

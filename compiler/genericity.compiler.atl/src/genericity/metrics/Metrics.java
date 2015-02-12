@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclectic.idc.datatypes.ImmutableList;
 import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.idc.jvm.runtime.IMethodWrapper;
 import org.eclectic.idc.jvm.runtime.IModelMethodHandler;
@@ -27,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 
 import eclectic.callexpr;
 import eclectic.composed_genericity;

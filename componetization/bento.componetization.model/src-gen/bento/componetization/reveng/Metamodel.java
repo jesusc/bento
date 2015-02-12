@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link bento.componetization.reveng.Metamodel#isBecomeConcept <em>Become Concept</em>}</li>
  *   <li>{@link bento.componetization.reveng.Metamodel#getKind <em>Kind</em>}</li>
  *   <li>{@link bento.componetization.reveng.Metamodel#getExtractedConcept <em>Extracted Concept</em>}</li>
+ *   <li>{@link bento.componetization.reveng.Metamodel#getExtractedMetamodel <em>Extracted Metamodel</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,5 +162,31 @@ public interface Metamodel extends Resource {
 	 * @generated
 	 */
 	void setExtractedConcept(Concept value);
+
+	/**
+	 * Returns the value of the '<em><b>Extracted Metamodel</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extracted Metamodel</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extracted Metamodel</em>' containment reference.
+	 * @see #setExtractedMetamodel(ExtractedMetamodel)
+	 * @see bento.componetization.reveng.RevengPackage#getMetamodel_ExtractedMetamodel()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ExtractedMetamodel getExtractedMetamodel();
+
+	/**
+	 * Sets the value of the '{@link bento.componetization.reveng.Metamodel#getExtractedMetamodel <em>Extracted Metamodel</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extracted Metamodel</em>' containment reference.
+	 * @see #getExtractedMetamodel()
+	 * @generated
+	 */
+	void setExtractedMetamodel(ExtractedMetamodel value);
 
 } // Metamodel

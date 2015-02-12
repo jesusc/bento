@@ -15,7 +15,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+import bento.componetization.reveng.Metamodel;
+import bento.componetization.reveng.ModelKind;
 import bento.componetization.ui.dialogs.FindFileDialog;
+
 import org.eclipse.swt.layout.RowLayout;
 
 public class MetamodelInfoDialog extends TitleAreaDialog {
@@ -32,6 +35,10 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 	private Text txtModelname;
 	private String modelName;
 	private boolean isSource;
+	private Text txtTargetmetamodel;
+	private Text txtTargeturi;
+	private String conceptName;
+	private String conceptNsURI;
 
 	/**
 	 * Create the dialog.
@@ -63,8 +70,9 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		createLastName(container);
 				new Label(container, SWT.NONE);
 				Label lbtLastName = new Label(container, SWT.NONE);
+				lbtLastName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 				lbtLastName.setAlignment(SWT.RIGHT);
-				lbtLastName.setText("Metamodel URI:");
+				lbtLastName.setText("Metamodel path:");
 		
 				GridData dataLastName = new GridData();
 				dataLastName.grabExcessHorizontalSpace = true;
@@ -106,6 +114,22 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 				btnConceptualize.setSelection(true);
 				btnConceptualize.setText("Conceptualize");
 				new Label(container, SWT.NONE);
+				
+				Label lblTat = new Label(container, SWT.NONE);
+				lblTat.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				lblTat.setText("Concept name:");
+				
+				txtTargetmetamodel = new Text(container, SWT.BORDER);
+				txtTargetmetamodel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+				new Label(container, SWT.NONE);
+				
+				Label lblTargetUri = new Label(container, SWT.NONE);
+				lblTargetUri.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				lblTargetUri.setText("Concept URI:");
+				
+				txtTargeturi = new Text(container, SWT.BORDER);
+				txtTargeturi.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+				new Label(container, SWT.NONE);
 
 		return area;
 	}
@@ -138,6 +162,8 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		isBecomeConcept = btnConceptualize.getSelection();
 		isSource = btnSource.getSelection();
 		modelName = txtModelname.getText();
+		conceptName = txtTargetmetamodel.getText();
+		conceptNsURI = txtTargeturi.getText();
 	}
 
 	//
@@ -164,20 +190,26 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 		return modelName;
 	}
 	
-	public void setData(String name, String path, String modelName, boolean isConcept, boolean isSource) {
-		txtMetamodelName.setText(name);
-		txtMetamodelURI.setText(path);
-		txtModelname.setText(modelName);
-		btnConceptualize.setSelection( isConcept );
+	public void setData(Metamodel mm) {
+		txtMetamodelName.setText(mm.getName());
+		if ( mm.getPath() != null )
+			txtMetamodelURI.setText(mm.getPath());
+		txtModelname.setText(mm.getModelName());
+		btnConceptualize.setSelection( mm.isBecomeConcept() );
 		
-		if ( isSource ) {
+		if ( mm.getKind() == ModelKind.IN ) {
 			btnSource.setSelection(true);
 			btnTarget.setSelection(false);
 		} else {
 			btnSource.setSelection(false);
 			btnTarget.setSelection(true);
 		}
-	}
+		
+		if ( mm.getExtractedConcept() != null ) {
+			txtTargetmetamodel.setText( mm.getExtractedConcept().getName() );
+			txtTargeturi.setText( mm.getExtractedConcept().getNsURI() );
+		}
+	}	
 	
 	public boolean isSource() {
 		return isSource;
@@ -189,6 +221,14 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 
 	public boolean isConcept() {
 		return isBecomeConcept;
+	}
+
+	public String getConceptName() {
+		return conceptName;
+	}
+	
+	public String getNsURI() {
+		return conceptNsURI;
 	}
 
 

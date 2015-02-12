@@ -26,17 +26,7 @@ public class MatchInfo {
 	}
 	
 	public String getRefactoringHumanName() {
-		String s = refactoring.getClass().getSimpleName();
-		String result = s.charAt(0) + "";
-		for(int i = 1; i < s.length(); i++) {
-			char c = s.charAt(i);
-			if ( Character.isUpperCase(c) ) {				
-				result = result + " " + c; 
-			} else {
-				result = result + c;
-			}
-		}
-		return result;
+		return match.getRefactoringHumanName();
 	}
 	
 	public void setSelected(boolean selected) {

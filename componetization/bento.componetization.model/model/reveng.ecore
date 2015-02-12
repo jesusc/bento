@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="reveng"
-    nsURI="http://bento/componetization/reveng_model" nsPrefix="reveng_model">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="reveng" nsURI="http://bento/componetization/reveng_model" nsPrefix="reveng_model">
   <eClassifiers xsi:type="ecore:EClass" name="RevengModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
         eType="#//Transformation" containment="true"/>
@@ -28,14 +26,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ModelKind"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extractedConcept" eType="#//Concept"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extractedMetamodel" eType="#//ExtractedMetamodel"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ModelKind">
     <eLiterals name="IN"/>
     <eLiterals name="OUT" value="1"/>
     <eLiterals name="INOUT" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Concept" eSuperTypes="#//Resource">
+  <eClassifiers xsi:type="ecore:EClass" name="ExtractedMetamodel" eSuperTypes="#//Resource">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Concept" eSuperTypes="#//ExtractedMetamodel"/>
 </ecore:EPackage>

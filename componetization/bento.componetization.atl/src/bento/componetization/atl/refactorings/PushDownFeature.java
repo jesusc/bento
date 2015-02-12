@@ -6,14 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import bento.analyser.footprint.CallSite;
+import anatlyzer.footprint.CallSite;
 import bento.componetization.atl.BaseRefactoring;
 import bento.componetization.atl.IMetamodelInfo;
 import bento.componetization.atl.IStaticAnalysisInfo;
@@ -79,12 +77,13 @@ public class PushDownFeature extends BaseRefactoring {
 		return null;
 	}
 
-	public class PushDownFeatureMatch implements IMatch {
+	public class PushDownFeatureMatch extends BaseMatch {
 
 		private Set<CallSite> occurrences;
 		private EStructuralFeature feature;
 
 		public PushDownFeatureMatch(EStructuralFeature f, Set<CallSite> occurrences) {
+			super(PushDownFeature.this);
 			this.feature     = f;
 			this.occurrences = occurrences;
 		}

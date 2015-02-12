@@ -7,7 +7,9 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+<!--
 	<classpathentry kind="lib" path="eclectic-gen"/>
 	<classpathentry kind="con" path="org.eclectic.ui.classpath.EclecticClasspathContainerInitializer"/>
+-->
 	<classpathentry kind="output" path="bin"/>
 </classpath>

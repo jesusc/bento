@@ -784,9 +784,9 @@ public class TypingModel {
 				// ignore
 			} else if ( t instanceof TypeError ) {
 			} else if ( t instanceof Unknown ) {
-				System.err.println("TODO: OclAny in right part of the binding. Nothing done so far.");
+				// System.err.println("TODO: OclAny in right part of the binding. Nothing done so far.");
 			} else if ( t instanceof EmptyCollectionType ) {
-				System.err.println("TODO: Empty collection in right part of the binding. Nothing done so far.");				
+				// System.err.println("TODO: Empty collection in right part of the binding. Nothing done so far.");				
 			} else {
 				throw new UnsupportedOperationException(t.getClass().getName());
 			}

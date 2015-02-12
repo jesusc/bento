@@ -75,12 +75,13 @@ public class SpecializeFeatureType extends BaseRefactoring {
 		return type;
 	}
 	
-	public class SpecializeFeatureTypeMatch implements IMatch {
+	public class SpecializeFeatureTypeMatch extends BaseMatch {
 
 		private EClass newFeatureType;
 		private EReference feature;
 
 		public SpecializeFeatureTypeMatch(EReference f, EClass newFeatureType) {
+			super(SpecializeFeatureType.this);
 			this.feature     = f;
 			this.newFeatureType = newFeatureType;
 		}

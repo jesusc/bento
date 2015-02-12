@@ -22,6 +22,7 @@ import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -29,8 +30,11 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -40,11 +44,13 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ISelectionStatusValidator;
@@ -66,14 +72,9 @@ import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.Activator;
 import bento.componetization.ui.MatchInfo;
 import bento.componetization.ui.RevengProcessManager;
-import bento.componetization.ui.viewers.MetamodelVisualization;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.jface.viewers.TreeViewerColumn;
-import bento.componetization.ui.viewers.MetricsTreeProvider;
 import bento.componetization.ui.viewers.MetamodelUsageProvider;
+import bento.componetization.ui.viewers.MetamodelVisualization;
+import bento.componetization.ui.viewers.MetricsTreeProvider;
 
 public class ConceptRefactoringPage extends FormPage {
 	private DataBindingContext m_bindingContext;
@@ -121,7 +122,6 @@ public class ConceptRefactoringPage extends FormPage {
 
 	@Override
 	public boolean isDirty() {
-		// System.out.println("TransformationConfigurationPage.isDirty()");
 		return isDirtyPage;
 	}
 
@@ -354,8 +354,8 @@ public class ConceptRefactoringPage extends FormPage {
 		trclmnValue.setText("Value");
 		treeMetricsViewer.setLabelProvider(new MetricsTreeProvider());
 		treeMetricsViewer.setContentProvider(new MetricsTreeProvider());
-		conceptTreeViewer.setLabelProvider(new MetamodelVisualization());
-		conceptTreeViewer.setContentProvider(new MetamodelVisualization());
+		conceptTreeViewer.setLabelProvider(new MetamodelVisualization(this.metamodel, this.manager));
+		conceptTreeViewer.setContentProvider(new MetamodelVisualization(this.metamodel, this.manager));
 		conceptTreeViewer.refresh();
 
 		Hyperlink hprlnkComputeMetrics = managedForm.getToolkit().createHyperlink(composite_3, "Compute metrics",
@@ -408,7 +408,7 @@ public class ConceptRefactoringPage extends FormPage {
 	protected void computeMetrics() {
 		try {
 			MyEcore2Measure runner = new MyEcore2Measure();
-			runner.loadFromResource(this.manager.getConcept(this.metamodel));
+			runner.loadFromResource(this.manager.getConceptResource(this.metamodel));
 			runner.wrappedEcore2measure(new NullProgressMonitor());
 		
 			RootMeasureSet m = runner.getOutputModel();
@@ -421,10 +421,10 @@ public class ConceptRefactoringPage extends FormPage {
 	}
 
 	private void myInitializations() {
-		Resource metamodelResource = this.manager.getConcept(this.metamodel);
+		Resource metamodelResource = this.manager.getConceptResource(this.metamodel);
 		conceptTreeViewer.setInput(metamodelResource);
 
-		treeMetamodelUsageViewer.setInput(this.manager.computeStaticAnalysis(this.metamodel));
+		// treeMetamodelUsageViewer.setInput(this.manager.computeStaticAnalysis(this.metamodel));
 		
 		
 		// Get Dirty flag...
@@ -451,7 +451,6 @@ public class ConceptRefactoringPage extends FormPage {
 		List<MatchInfo> matches = manager.findRefactorings(this.metamodel);
 		listRefactorings.setInput(matches);
 		listRefactorings.setAllChecked(true);
-
 	}
 
 	protected void deselectAll() {
@@ -467,20 +466,29 @@ public class ConceptRefactoringPage extends FormPage {
 			MatchInfo mi = ((MatchInfo) o);
 			Activator.log("  - Refactoring " + mi.getRefactoringHumanName() + " will be applied: " + mi.getText());
 
+			if ( mi.getMatch().coevolutionRequired() ) {
+				if (!MessageDialog.openConfirm(null, "Coevolution", 
+						"Refactoring " + mi.getRefactoringHumanName() + "requires (automatically) adapting the template.\n" + 
+						"Do you want to apply the refactoring anyway?")) {					
+					continue;
+				}
+			}				
 			matches.add(mi.getMatch());
 			uncheckedMatches.remove(o);
 		}
-
+		
 		manager.applyRefactorings(this.metamodel, matches);
+		
 		listRefactorings.setInput(uncheckedMatches);
 		listRefactorings.refresh();
 
+		conceptTreeViewer.setInput(manager.getConceptResource(metamodel)); 
 		conceptTreeViewer.refresh();
 
-		markAsDirty();
+		// markAsDirty();
 		
 		// Find again!! This is to remove stale information from applied refactorings
-		findNewRefactorings();
+		// findNewRefactorings();
 	}
 
 	private void showBrowseAtlFileDialog() {
@@ -631,13 +639,13 @@ public class ConceptRefactoringPage extends FormPage {
 		IObservableValue observeTextTxtConceptnameObserveWidget = WidgetProperties.text(SWT.Modify).observe(
 				txtConceptname);
 		IObservableValue metamodelNameObserveValue = EMFProperties.value(
-				FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.CONCEPT__NAME)).observe(metamodel);
+				FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.EXTRACTED_METAMODEL__NAME)).observe(metamodel);
 		bindingContext.bindValue(observeTextTxtConceptnameObserveWidget, metamodelNameObserveValue, null, null);
 		//
 		IObservableValue observeTextTxtConcepturiObserveWidget = WidgetProperties.text(SWT.Modify).observe(
 				txtConcepturi);
 		IObservableValue metamodelNsURIObserveValue = EMFProperties.value(
-				FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.CONCEPT__NS_URI)).observe(
+				FeaturePath.fromList(Literals.METAMODEL__EXTRACTED_CONCEPT, Literals.EXTRACTED_METAMODEL__NS_URI)).observe(
 				metamodel);
 		bindingContext.bindValue(observeTextTxtConcepturiObserveWidget, metamodelNsURIObserveValue, null, null);
 		//

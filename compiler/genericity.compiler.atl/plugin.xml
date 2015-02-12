@@ -14,7 +14,7 @@
       <package
             uri="http://genericity/types/atl"
             class="atl_types.Atl_typesPackage"
-            genModel="src/genericity/typecheck/atl/atl_types.genmodel"/>
+            genModel="bak-borrar/genericity/typecheck/atl/atl_types.genmodel"/>
    </extension>
 
 </plugin>

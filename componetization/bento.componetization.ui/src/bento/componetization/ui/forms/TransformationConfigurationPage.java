@@ -2,6 +2,7 @@ package bento.componetization.ui.forms;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.eclipse.core.databinding.DataBindingContext;
@@ -19,8 +20,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -30,6 +29,8 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.window.Window;
+import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -57,11 +58,19 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.sun.prism.impl.ManagedResource.PruningLevel;
+
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.util.ATLUtils;
+import anatlyzer.atl.util.ATLUtils.ModelInfo;
+import anatlyzer.ui.util.AtlEngineUtils;
 import bento.componetization.reveng.AtlTransformation;
+import bento.componetization.reveng.Concept;
 import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
+import bento.componetization.reveng.RevengPackage;
 import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.ITask;
 import bento.componetization.ui.RevengProcessManager;
@@ -81,6 +90,7 @@ public class TransformationConfigurationPage extends FormPage {
 	private TableViewer listMetamodels;
 	private RevengProcessManager manager;
 	private Text txtComponentFile;
+	private Hyperlink hprlnkCreateArtifacts;
 
 	/**
 	 * Create the form page.
@@ -150,6 +160,25 @@ public class TransformationConfigurationPage extends FormPage {
 		managedForm.getToolkit().paintBordersFor(composite);
 		sctnTransformation.setClient(composite);
 		composite.setLayout(new GridLayout(1, false));
+		
+		Composite composite_3 = new Composite(composite, SWT.NONE);
+		composite_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		managedForm.getToolkit().adapt(composite_3);
+		managedForm.getToolkit().paintBordersFor(composite_3);
+		composite_3.setLayout(new GridLayout(3, false));
+		
+		Label lblNewLabel = new Label(composite_3, SWT.NONE);
+		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		managedForm.getToolkit().adapt(lblNewLabel, true, true);
+		lblNewLabel.setText("Component:");
+		
+		txtComponentFile = new Text(composite_3, SWT.BORDER);
+		txtComponentFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		managedForm.getToolkit().adapt(txtComponentFile, true, true);
+		
+		Button btnBrowseComponentFile = new Button(composite_3, SWT.NONE);
+		managedForm.getToolkit().adapt(btnBrowseComponentFile, true, true);
+		btnBrowseComponentFile.setText("Browse...");
 
 		Composite compAtlFile = new Composite(composite, SWT.NONE);
 		compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -257,25 +286,32 @@ public class TransformationConfigurationPage extends FormPage {
 		Label lblApplyTheProcess = managedForm.getToolkit().createLabel(composite_2, "Apply the process iteratively.",
 				SWT.NONE);
 		lblApplyTheProcess.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		
+		Label label_5 = new Label(composite_2, SWT.NONE);
+		label_5.setText("0.");
+		managedForm.getToolkit().adapt(label_5, true, true);
+		
+		Hyperlink hprlnkConfigureComponent = managedForm.getToolkit().createHyperlink(composite_2, "Configure component", SWT.NONE);
+		managedForm.getToolkit().paintBordersFor(hprlnkConfigureComponent);
+		
+				Label label_2 = new Label(composite_2, SWT.NONE);
+				managedForm.getToolkit().adapt(label_2, true, true);
+				label_2.setText("1.");
+		
+				hprlnkCreateArtifacts = managedForm.getToolkit().createHyperlink(composite_2, "Create template",
+						SWT.NONE);
+				hprlnkCreateArtifacts.addHyperlinkListener(new IHyperlinkListener() {
+					public void linkActivated(HyperlinkEvent e) {
+						createArtifacts();
+					}
 
-		Label label_2 = new Label(composite_2, SWT.NONE);
-		managedForm.getToolkit().adapt(label_2, true, true);
-		label_2.setText("0.");
+					public void linkEntered(HyperlinkEvent e) {
+					}
 
-		Hyperlink hprlnkCreateTemplate = managedForm.getToolkit().createHyperlink(composite_2, "Create template",
-				SWT.NONE);
-		hprlnkCreateTemplate.addHyperlinkListener(new IHyperlinkListener() {
-			public void linkActivated(HyperlinkEvent e) {
-				createTemplateFile();
-			}
-
-			public void linkEntered(HyperlinkEvent e) {
-			}
-
-			public void linkExited(HyperlinkEvent e) {
-			}
-		});
-		managedForm.getToolkit().paintBordersFor(hprlnkCreateTemplate);
+					public void linkExited(HyperlinkEvent e) {
+					}
+				});
+				managedForm.getToolkit().paintBordersFor(hprlnkCreateArtifacts);
 
 		Label label_1 = managedForm.getToolkit().createLabel(composite_2, "1.", SWT.NONE);
 
@@ -295,11 +331,11 @@ public class TransformationConfigurationPage extends FormPage {
 
 		Label label = managedForm.getToolkit().createLabel(composite_2, "2.", SWT.NONE);
 
-		Hyperlink hprlnkExtractConcepts = managedForm.getToolkit().createHyperlink(composite_2, "Extract concepts",
+		Hyperlink hprlnkExtractConcepts = managedForm.getToolkit().createHyperlink(composite_2, "Prune initial concepts",
 				SWT.NONE);
 		hprlnkExtractConcepts.addHyperlinkListener(new IHyperlinkListener() {
 			public void linkActivated(HyperlinkEvent e) {
-				createConceptPages();
+				pruneInitialConcepts();
 			}
 
 			public void linkEntered(HyperlinkEvent e) {
@@ -345,48 +381,111 @@ public class TransformationConfigurationPage extends FormPage {
 		Button btnBrowse_1 = new Button(compAtlFile, SWT.NONE);
 		managedForm.getToolkit().adapt(btnBrowse_1, true, true);
 		btnBrowse_1.setText("Browse...");
-		
-		Composite composite_3 = new Composite(composite, SWT.NONE);
-		composite_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		managedForm.getToolkit().adapt(composite_3);
-		managedForm.getToolkit().paintBordersFor(composite_3);
-		composite_3.setLayout(new GridLayout(3, false));
-		
-		Label lblNewLabel = new Label(composite_3, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		managedForm.getToolkit().adapt(lblNewLabel, true, true);
-		lblNewLabel.setText("Component:");
-		
-		txtComponentFile = new Text(composite_3, SWT.BORDER);
-		txtComponentFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		managedForm.getToolkit().adapt(txtComponentFile, true, true);
-		
-		Button btnBrowse_2 = new Button(composite_3, SWT.NONE);
-		managedForm.getToolkit().adapt(btnBrowse_2, true, true);
-		btnBrowse_2.setText("Browse...");
 		sashForm.setWeights(new int[] {361, 381});
 
 		m_bindingContext = initDataBindings();
 		myDataBindings();
 		// ///////////
+		
+		checkProcessState();
 	}
 
 
+	///
+	/// Helper methods
+	///
 
-	protected void createTemplateFile() {
+	private void checkProcessState() {
+		// If the template has been created, notify as a piece of text
+		hprlnkCreateArtifacts.setText("Create artifacts");
+		if ( manager.isTemplateCreated() ) {
+			hprlnkCreateArtifacts.setText( hprlnkCreateArtifacts.getText() + " (done)");
+		}
+		
+		// Create the concept pages as they are configured in the resources exists.
+		initializeConceptPages();
+	}
+
+	/** 
+	 * Creates a new template file.
+	 */
+	protected void createArtifacts() {
 		String path = txtTemplatePath.getText().trim();
 		if (path.isEmpty())
 			return;
 
+		String trafoPath = txtAtlFile.getText().trim();
+		
+		IFile transformation = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(trafoPath));
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
 		if (file.exists()) {
 			if (!MessageDialog.openConfirm(null, "Template exists", "Do you want to replace the template file?"))
 				return;
 		}
 
-		manager.createTemplateFile(file);
+		manager.copyComponentFiles(transformation, file);
+		initializeConceptPages();
 	}
 
+	
+	/**
+	 * Initialize the concept pages according to the information stored in the
+	 * configuration model.
+	 */
+	protected void initializeConceptPages() {
+		manager.getMetamodelToBecomeConcepts().forEach(metamodel -> {
+			String pageId = metamodel.getName();
+
+			try {
+				if ( getEditor().findPage(pageId) == null && manager.existsConceptMetamodel(metamodel) ) 
+					getEditor().addPage(new ConceptRefactoringPage(getEditor(), pageId, manager, metamodel));
+			} catch (Exception e) {
+				WorkspaceLogger.generateLogEntry(Status.ERROR, e);
+			}			
+		});
+	}
+	
+	protected void pruneInitialConcepts() {
+		if (getEditor().isDirty()) {
+			MessageDialog.openError(getSite().getShell(), "Cannot execute command",
+					"The form needs to be saved before creating the pages");
+			return;
+		}
+
+		ITask.Runner.run(new ITask() {
+			private HashMap<String, Metamodel> pages = new HashMap<String, Metamodel>();
+
+			@Override
+			public void run(IProgressMonitor monitor) throws Exception {
+				EList<Metamodel> metamodels = atlTransformation.getMetamodels();
+				boolean retypingNeeded = false;
+				for (Metamodel metamodel : metamodels) {
+					if (metamodel.isBecomeConcept()) {
+						// String pageId = metamodel.getName();
+
+						//if (getEditor().findPage(pageId) != null) {
+						//	continue;
+						//}
+
+						retypingNeeded = retypingNeeded || manager.pruneMetamodel(metamodel);
+
+						// pages.put(pageId, metamodel);
+					}
+				}
+
+				if (retypingNeeded)
+					manager.applyTyping();
+			}
+
+			@Override
+			public void guiAction() throws Exception {
+				initializeConceptPages();
+			}
+		});
+
+	}
+	
+	
 	private void markAsDirty() {
 		isDirtyPage = true;
 		getManagedForm().dirtyStateChanged();
@@ -402,12 +501,13 @@ public class TransformationConfigurationPage extends FormPage {
 	}
 
 	protected void doAnalysis() {
+		
 		ITask.Runner.run(new ITask() {
 			TypingInfo info = null;
 
 			@Override
 			public void run(IProgressMonitor monitor) throws Exception {
-				info = manager.applyTyping();
+				// info = manager.applyTyping();
 			}
 
 			@Override
@@ -444,7 +544,7 @@ public class TransformationConfigurationPage extends FormPage {
 
 		MetamodelInfoDialog dialog = new MetamodelInfoDialog(this.getSite().getShell());
 		dialog.create();
-		dialog.setData(mm.getName(), mm.getPath(), mm.getModelName(), mm.isBecomeConcept(), mm.getKind() == ModelKind.IN);
+		dialog.setData(mm);
 
 		if (dialog.open() == MetamodelInfoDialog.OK) {
 			setMetamodelInfo(mm, dialog);
@@ -463,6 +563,12 @@ public class TransformationConfigurationPage extends FormPage {
 			mm.setKind(ModelKind.OUT);				
 		}
 		mm.setModelName(dialog.getModelName());
+		if ( dialog.isConcept() ) {
+			Concept concept = RevengFactory.eINSTANCE.createConcept();
+			concept.setName(dialog.getConceptName());
+			concept.setNsURI(dialog.getNsURI());
+			mm.setExtractedConcept(concept);
+		}
 	}
 	
 	protected void removeMetamodel() {
@@ -486,92 +592,67 @@ public class TransformationConfigurationPage extends FormPage {
 		manager.packageComponent();
 	}
 
-	protected void createConceptPages() {
-		if (getEditor().isDirty()) {
-			MessageDialog.openError(getSite().getShell(), "Cannot execute command",
-					"The form needs to be saved before creating the pages");
-			return;
-		}
-
-		ITask.Runner.run(new ITask() {
-			private HashMap<String, Metamodel> pages = new HashMap<String, Metamodel>();
-
-			@Override
-			public void run(IProgressMonitor monitor) throws Exception {
-				EList<Metamodel> metamodels = atlTransformation.getMetamodels();
-				boolean retypingNeeded = false;
-				for (Metamodel metamodel : metamodels) {
-					if (metamodel.isBecomeConcept()) {
-						String pageId = metamodel.getName();
-
-						if (getEditor().findPage(pageId) != null) {
-							continue;
-						}
-
-						retypingNeeded = retypingNeeded || manager.pruneMetamodel(metamodel);
-
-						pages.put(pageId, metamodel);
-					}
-				}
-
-				if (retypingNeeded)
-					manager.applyTyping();
-			}
-
-			@Override
-			public void guiAction() throws Exception {
-				try {
-					for (Entry<String, Metamodel> entry : pages.entrySet()) {
-						String pageId = entry.getKey();
-						Metamodel metamodel = entry.getValue();
-
-						getEditor().addPage(new ConceptRefactoringPage(getEditor(), pageId, manager, metamodel));
-					}
-
-				} catch (PartInitException e) {
-					WorkspaceLogger.generateLogEntry(Status.ERROR, e);
-				}
-			}
-		});
-
-	}
 
 	private void showBrowseAtlFileDialog() {
 
 		FindFileDialog listDialog = new FindFileDialog(null, "atl");
-		listDialog.open();
-		IResource r = (IResource) listDialog.getResult()[0];
-		String path = r.getFullPath().toPortableString();
-		txtAtlFile.setText(path);
+		if ( listDialog.open() == Window.OK ) { 		
+			IResource r = (IResource) listDialog.getResult()[0];
+			String path = r.getFullPath().toPortableString();
+			txtAtlFile.setText(path);
+	
+			if (txtTemplatePath.getText().trim().isEmpty()) {
+				String fileName = new Path(path).lastSegment();
+				IFolder folder = manager.getDefaultTemplateFolder();
+				IFile file = folder.getFile(fileName);
+	
+				txtTemplatePath.setText(file.getFullPath().toPortableString());
+				this.revengModel.getTemplate().setPath(txtTemplatePath.getText());
+				
+				// 
+				fillMetamodelTable((IFile) r);
+			}
+			
+			/*
+			if ( txtComponentFile.getText().trim().isEmpty()) {
+				String fileName = new Path(path).lastSegment();
+				IFolder folder = manager.getDefaultComponentFolder();
+				IFile file = folder.getFile(fileName);
+	
+				txtComponentFile.setText(file.getFullPath().removeFileExtension().addFileExtension("gcomponent").toPortableString());
+			} 
+			*/
 
-		if (txtTemplatePath.getText().trim().isEmpty()) {
-			String fileName = new Path(path).lastSegment();
-			IFolder folder = manager.getDefaultTemplateFolder();
-			IFile file = folder.getFile(fileName);
-
-			txtTemplatePath.setText(file.getFullPath().toPortableString());
 		}
-		
-		if ( txtComponentFile.getText().trim().isEmpty()) {
-			String fileName = new Path(path).lastSegment();
-			IFolder folder = manager.getDefaultComponentFolder();
-			IFile file = folder.getFile(fileName);
-
-			txtComponentFile.setText(file.getFullPath().removeFileExtension().addFileExtension("gcomponent").toPortableString());
-		} 
-
 	}
 
-	/*
-	 * public static class TextToTransformationConverter extends Converter {
-	 * public TextToTransformationConverter() { super(String.class,
-	 * AtlTransformation.class); }
-	 * 
-	 * @Override public Object convert(Object fromObject) { String text =
-	 * (String) fromObject; AtlTransformation atl =
-	 * RevengFactory.eINSTANCE.createAtlTransformation(); atl.setPath(text);
-	 * return atl; } }
-	 */
+	private void fillMetamodelTable(IFile file) {
+		if ( ! atlTransformation.getMetamodels().isEmpty() ) 
+			return;
+			
+		EMFModel model = AtlEngineUtils.loadATLFile(file);
+		ATLModel atlModel = new ATLModel(model.getResource());				
+		if ( model != null ) {			
+			for(ModelInfo m : ATLUtils.getModelInfo(atlModel)) {
+				Metamodel mm = RevengFactory.eINSTANCE.createMetamodel();
+				mm.setName(m.getMetamodelName());
+				mm.setModelName(m.getModelName());
+				
+				if ( m.hasMetamodelInfo() ) {
+					mm.setPath(m.getURIorPath());
+				}
+				
+				if ( m.isInput() ) {
+					mm.setBecomeConcept(true);
+				}
+				
+				this.atlTransformation.getMetamodels().add(mm);
+			}
+			markAsDirty();
+			listMetamodels.refresh();				
+		}		
+
+	}
 
 	public static class TransformationToTextConverter extends Converter {
 		public TransformationToTextConverter() {

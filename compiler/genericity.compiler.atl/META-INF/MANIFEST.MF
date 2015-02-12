@@ -8,10 +8,12 @@ Bundle-ClassPath: .,
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: genericity.compiler.atl,
- genericity.typecheck.atl
+Export-Package: genericity.compiler.atl
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  genericity.language.gbind;bundle-version="0.5.0",
- genericity.compiler.atl.typing;bundle-version="1.0.0"
+ org.eclectic.frontend;bundle-version="0.8.6",
+ org.eclectic.modeling;bundle-version="0.8.6",
+ anatlyzer.atl.typing,
+ org.eclectic.idc
 Bundle-ActivationPolicy: lazy

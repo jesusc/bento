@@ -102,9 +102,17 @@ public class RevengSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case RevengPackage.EXTRACTED_METAMODEL: {
+				ExtractedMetamodel extractedMetamodel = (ExtractedMetamodel)theEObject;
+				T result = caseExtractedMetamodel(extractedMetamodel);
+				if (result == null) result = caseResource(extractedMetamodel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case RevengPackage.CONCEPT: {
 				Concept concept = (Concept)theEObject;
 				T result = caseConcept(concept);
+				if (result == null) result = caseExtractedMetamodel(concept);
 				if (result == null) result = caseResource(concept);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -185,6 +193,21 @@ public class RevengSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMetamodel(Metamodel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extracted Metamodel</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extracted Metamodel</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtractedMetamodel(ExtractedMetamodel object) {
 		return null;
 	}
 

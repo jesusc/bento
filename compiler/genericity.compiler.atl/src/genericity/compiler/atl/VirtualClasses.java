@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclectic.idc.datatypes.ImmutableList;
 import org.eclectic.idc.datatypes.JavaListConverter;
 import org.eclectic.idc.jvm.runtime.IClosure;
 import org.eclectic.idc.jvm.runtime.IMethodWrapper;
@@ -27,17 +26,15 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 
+import anatlyzer.atl.types.CollectionType;
+import anatlyzer.atl.types.EnumType;
+import anatlyzer.atl.types.Metaclass;
+import anatlyzer.atl.types.PrimitiveType;
+import anatlyzer.atl.types.Type;
+import anatlyzer.atl.types.UnionType;
+import anatlyzer.atlext.OCL.OclExpression;
 import gbind.dsl.BindingModel;
-import genericity.typing.atl_types.CollectionType;
-import genericity.typing.atl_types.EnumType;
-import genericity.typing.atl_types.Metaclass;
-import genericity.typing.atl_types.PrimitiveType;
-import genericity.typing.atl_types.Type;
-import genericity.typing.atl_types.UnionType;
-import genericity.typing.atl_types.Unknown;
-import genericity.typing.atl_types.annotations.ExpressionAnnotation;
 
 public class VirtualClasses {
 
@@ -190,6 +187,12 @@ public class VirtualClasses {
 		}
 		
 		public Type atlType(){
+			if ( ((OclExpression) object).getInferredType() == null ) {
+				throw new IllegalStateException("No type assigned to " + object + " at " + model.getFeature(object, "location"));				
+			}
+			
+			return ((OclExpression) object).getInferredType();
+			/*
 			List<EObject> annotations = typingModel.allObjectsOf("ExpressionAnnotation");
 			for (EObject eObject : annotations) {
 				ExpressionAnnotation ann = (ExpressionAnnotation) eObject;
@@ -197,8 +200,8 @@ public class VirtualClasses {
 					return ann.getType();
 				}
 			}
-			
 			throw new IllegalStateException("No type assigned to " + object + " at " + model.getFeature(object, "location"));
+			*/
 		}
 
 		public String typeName (){

@@ -280,18 +280,18 @@ public class ErrorModel {
 		p.setDescription(msg);
 		p.setSeverity(SeverityKind.ERROR);
 		
-		System.out.println("ERROR: " + msg + ". " + l.getLocation());		
+		// System.out.println("ERROR: " + msg + ". " + l.getLocation());		
 	}
 	
 	private void signalWarning(Problem p, String msg, LocatedElement l) {
 		p.setDescription(msg);
 		p.setSeverity(SeverityKind.WARNING);
 		
-		System.out.println("WARNING: " + msg + ". " + l.getLocation());		
+		// System.out.println("WARNING: " + msg + ". " + l.getLocation());		
 	}
 
 	private void signalWarning_WITHOUTERROR_TODO( String msg, LocatedElement l) {
-		System.out.println("WARNING: " + msg + ". " + l.getLocation());		
+		// System.out.println("WARNING: " + msg + ". " + l.getLocation());		
 	}
 
 	public void warningVarDclIncoherentTypes(Type exprType, Type declared, LocatedElement node) {

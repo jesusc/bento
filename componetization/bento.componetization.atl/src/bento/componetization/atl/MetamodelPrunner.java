@@ -1,32 +1,27 @@
 package bento.componetization.atl;
 
-import genericity.compiler.atl.analyser.namespaces.MetamodelNamespace;
-import genericity.typing.atl_types.UnknownFeature;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import org.eclectic.modeling.emf.BasicEMFModel;
-import org.eclectic.modeling.emf.IModel;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import atl.metamodel.ATLModel;
-import bento.analyser.footprint.CallSite;
-import bento.analyser.footprint.FootprintComputation;
+import anatlyzer.atl.analyser.namespaces.MetamodelNamespace;
+import anatlyzer.atl.footprint.FootprintComputation;
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.types.UnknownFeature;
+import anatlyzer.footprint.CallSite;
 
 public class MetamodelPrunner extends FootprintComputation {
 
@@ -48,16 +43,10 @@ public class MetamodelPrunner extends FootprintComputation {
 	 * @param typing The model containing the typing information
 	 * @param slicedURI The URI of the meta-model of interest
 	 */
-	/*
-	public MetamodelPrunner(BasicEMFModel atlTransformation, IModel mm, BasicEMFModel typing, String slicedURI) {
-		super(atlTransformation, mm, typing, slicedURI);
-	}
-	*/
 
 
-	public MetamodelPrunner(ATLModel atlModel, MetamodelNamespace mm,
-			BasicEMFModel typing, String slicedURI) {
-		super(atlModel, mm, typing, slicedURI);
+	public MetamodelPrunner(ATLModel atlModel, MetamodelNamespace mm) {
+		super(atlModel, mm);
 	}
 	
 	public EPackage extractSource(Resource r, String name, String conceptURI, String conceptPrefix) {
@@ -137,12 +126,6 @@ public class MetamodelPrunner extends FootprintComputation {
 		}
 		
 		return type;
-	}
-
-	private void copyClasses(HashSet<EClass> usedTypes) {
-		for (EClass eClass : usedTypes) {
-			copyClass(eClass);
-		}
 	}
 
 	private EClass copyClass(EClass eClass) {
