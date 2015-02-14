@@ -112,7 +112,9 @@ public class RemoveAssociationClass extends BaseRefactoring {
 			if (pointingFeature != null && pointingFeature.isContainment()) {
 				if (intermediate.getEReferences().size() > 0 && intermediate.getEReferences().size() <= 2 && intermediate.getEAttributes().size() == 0) {
 					if ( intermediate.getEReferences().size() == 2 ) {
-						// Find the opposite of the pointing feature
+						// Find the opposite of the pointing feature. This is needed to decide
+						// which of the two references is the one to follow.
+						// The decision is made in RemoveAssociationClassMatch constructor.
 						if ( ! intermediate.getEReferences().contains(pointingFeature.getEOpposite() ) )
 							continue;
 					}

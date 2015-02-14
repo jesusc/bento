@@ -409,7 +409,7 @@ public class RevengProcessManager {
 
 	
 	public void packageComponent() {
-		IFile component = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(this.model.getComponentPath()));
+		IFile component = project.getFolder("META-INF").getFile(this.model.getComponentPath() + ".gcomponent");
 		try {
 			if (!component.getParent().exists()) {
 				((IFolder) component.getParent()).create(true, true, null);

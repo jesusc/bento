@@ -127,7 +127,8 @@ public class ConceptRefactoringPage extends FormPage {
 
 	public void saved() {
 		isDirtyPage = false;
-		getManagedForm().dirtyStateChanged();
+		if ( getManagedForm() != null )
+			getManagedForm().dirtyStateChanged();
 	}
 
 	/**

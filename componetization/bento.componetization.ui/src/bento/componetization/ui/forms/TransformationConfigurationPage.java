@@ -312,10 +312,27 @@ public class TransformationConfigurationPage extends FormPage {
 					}
 				});
 				managedForm.getToolkit().paintBordersFor(hprlnkCreateArtifacts);
+		
+				Label label = managedForm.getToolkit().createLabel(composite_2, "2.", SWT.NONE);
+		
+				Hyperlink hprlnkExtractConcepts = managedForm.getToolkit().createHyperlink(composite_2, "Prune initial concepts",
+						SWT.NONE);
+				hprlnkExtractConcepts.addHyperlinkListener(new IHyperlinkListener() {
+					public void linkActivated(HyperlinkEvent e) {
+						pruneInitialConcepts();
+					}
 
-		Label label_1 = managedForm.getToolkit().createLabel(composite_2, "1.", SWT.NONE);
+					public void linkEntered(HyperlinkEvent e) {
+					}
 
-		Hyperlink hprlnkAnalysis = managedForm.getToolkit().createHyperlink(composite_2, "Analysis", SWT.NONE);
+					public void linkExited(HyperlinkEvent e) {
+					}
+				});
+				managedForm.getToolkit().paintBordersFor(hprlnkExtractConcepts);
+
+		Label label_1 = managedForm.getToolkit().createLabel(composite_2, "3.", SWT.NONE);
+
+		Hyperlink hprlnkAnalysis = managedForm.getToolkit().createHyperlink(composite_2, "Review transformation", SWT.NONE);
 		hprlnkAnalysis.addHyperlinkListener(new IHyperlinkListener() {
 			public void linkActivated(HyperlinkEvent e) {
 				doAnalysis();
@@ -328,33 +345,20 @@ public class TransformationConfigurationPage extends FormPage {
 			}
 		});
 		managedForm.getToolkit().paintBordersFor(hprlnkAnalysis);
-
-		Label label = managedForm.getToolkit().createLabel(composite_2, "2.", SWT.NONE);
-
-		Hyperlink hprlnkExtractConcepts = managedForm.getToolkit().createHyperlink(composite_2, "Prune initial concepts",
-				SWT.NONE);
-		hprlnkExtractConcepts.addHyperlinkListener(new IHyperlinkListener() {
-			public void linkActivated(HyperlinkEvent e) {
-				pruneInitialConcepts();
-			}
-
-			public void linkEntered(HyperlinkEvent e) {
-			}
-
-			public void linkExited(HyperlinkEvent e) {
-			}
-		});
-		managedForm.getToolkit().paintBordersFor(hprlnkExtractConcepts);
+		
+		Label label_6 = managedForm.getToolkit().createLabel(composite_2, "4.", SWT.NONE);
+		
+		Label lblNewLabel_1 = managedForm.getToolkit().createLabel(composite_2, "Apply refactorings", SWT.NONE);
 		
 		Label label_3 = new Label(composite_2, SWT.NONE);
 		managedForm.getToolkit().adapt(label_3, true, true);
-		label_3.setText("3.");
+		label_3.setText("5.");
 		
 		Label lblDocumentnotIntegrated = managedForm.getToolkit().createLabel(composite_2, "Create documentation (not integrated yet)", SWT.NONE);
 		
 		Label label_4 = new Label(composite_2, SWT.NONE);
 		managedForm.getToolkit().adapt(label_4, true, true);
-		label_4.setText("4.");
+		label_4.setText("6.");
 		
 		Hyperlink hprlnkPackageComponent = managedForm.getToolkit().createHyperlink(composite_2, "Package component", SWT.NONE);
 		hprlnkPackageComponent.addHyperlinkListener(new IHyperlinkListener() {
