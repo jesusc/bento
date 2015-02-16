@@ -2,8 +2,11 @@ package bento.adapter.atl;
 
 import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.ClassBinding;
+import gbind.dsl.LocalHelper;
 import gbind.dsl.OclFeatureBinding;
 import gbind.dsl.RenamingFeatureBinding;
+import gbind.dsl.VirtualClassBinding;
+import gbind.dsl.VirtualMetaclass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,9 @@ public class BindingModel {
 
 	private List<ClassBinding> classBindings = new ArrayList<ClassBinding>();
 	private List<BaseFeatureBinding> featureBindings = new ArrayList<BaseFeatureBinding>();
+	private List<VirtualClassBinding> virtualClassBindings = new ArrayList<VirtualClassBinding>();
+	private List<VirtualMetaclass> virtualMetaclasses = new ArrayList<VirtualMetaclass>();
+	private List<LocalHelper> localHelpers = new ArrayList<LocalHelper>();
 	
 	public BindingModel(Resource r) {
 		this.resource = r;
@@ -36,6 +42,12 @@ public class BindingModel {
 				classBindings.add((ClassBinding) obj);
 			} else if ( obj instanceof BaseFeatureBinding ) {
 				featureBindings.add((BaseFeatureBinding) obj);
+			} else if ( obj instanceof VirtualClassBinding ) {
+				virtualClassBindings.add((VirtualClassBinding) obj);
+			} else if ( obj instanceof VirtualMetaclass ) {
+				virtualMetaclasses.add((VirtualMetaclass) obj);
+			} else if ( obj instanceof LocalHelper ) {
+				localHelpers.add((LocalHelper) obj);
 			}
 		}
 	}
@@ -44,7 +56,12 @@ public class BindingModel {
 	public gbind.dsl.BindingModel getRoot() {
 		return ( gbind.dsl.BindingModel) resource.getContents().get(0);
 	}
-	
+
+	public List<LocalHelper> getLocalHelpers() {
+		return localHelpers;
+	}
+
+
 	/**
 	 * Find those class bindings whose concept class name is equal to the
 	 * given one.
@@ -54,6 +71,15 @@ public class BindingModel {
 	 */
 	public Optional<ClassBinding> findClassBindingForConcept(String className) {
 		return classBindings.stream().filter(cb -> cb.getConcept().getName().equals(className)).findFirst();
+	}
+
+
+	public Optional<VirtualClassBinding> findVirtualClassBindingForConcept(String className) {
+		return virtualClassBindings.stream().filter(cb -> cb.getConcept().getName().equals(className)).findFirst();
+	}
+	
+	public Stream<VirtualClassBinding> findVirtualClassBindingsForConcept(String className) {
+		return virtualClassBindings.stream().filter(cb -> cb.getConcept().getName().equals(className));
 	}
 
 	public Stream<ClassBinding> findWhenClauseBindings() {
@@ -79,6 +105,22 @@ public class BindingModel {
 	public boolean isMultiBinding(ClassBinding cb) {
 		return cb.getConcrete().size() > 1;
 	}
+
+
+	public List<VirtualMetaclass> getVirtualClasses() {
+		return virtualMetaclasses;
+	}
+
+	public List<VirtualClassBinding> getVirtualClassBinding() {
+		return virtualClassBindings;
+	}
+
+
+	public boolean hasVirtualClasses() {
+		return virtualClassBindings.size() > 0;
+	}
+
+
 
 
 }

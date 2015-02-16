@@ -134,6 +134,15 @@ public interface DslFactory extends EFactory {
 	VirtualAttribute createVirtualAttribute();
 
 	/**
+	 * Returns a new object of class '<em>Virtual Tuple Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Tuple Exp</em>'.
+	 * @generated
+	 */
+	VirtualTupleExp createVirtualTupleExp();
+
+	/**
 	 * Returns a new object of class '<em>Virtual Class Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

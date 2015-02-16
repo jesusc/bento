@@ -1,0 +1,49 @@
+module uml2java;
+create OUT: Java from IN: Component;
+
+helper context Component!Property def: attName: OclAny =
+	'att' + self.Name;
+
+helper context Component!Port def: attName: OclAny =
+	'att' + self.Name;
+
+rule class2jclass {
+	from
+		umlClass: Component!Component
+	to
+		javaClass: Java!JavaClass (
+			name <- umlClass.name,
+			extends_ <- umlClass.superclasses -> first()
+		)
+}
+
+rule attribute2field_for_Port {
+	from
+		attr: Component!Port
+	to
+		javaClass: Java!Field (
+			owner <- attr.refImmediateComposite(),
+			name <- attr.attName,
+			isPublic <- attr.isPublic
+		)
+}
+
+rule attribute2field {
+	from
+		attr: Component!Property
+	to
+		javaClass: Java!Field (
+			owner <- attr.refImmediateComposite(),
+			name <- attr.attName,
+			isPublic <- attr.isPublic
+		)
+}
+
+helper context Component!Component def: superclasses: OclAny =
+	self.parents;
+
+helper context Component!Property def: isPublic: OclAny =
+	self.public;
+
+helper context Component!Port def: isPublic: OclAny =
+	true;

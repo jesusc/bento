@@ -1,0 +1,12 @@
+
+binding component2oo {
+	concept    OO  : "OO.ecore"
+	metamodel  Component : "Component.ecore"
+	
+	class Class to Component
+	class Attribute to Property, Port
+	
+	feature Class.superclasses is parents 
+	feature Attribute[Property].isPublic is public
+	feature Attribute[Port].isPublic = true
+}

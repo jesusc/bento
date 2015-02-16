@@ -1,0 +1,18 @@
+@namespace(uri="bento://miso.es/generic_table", prefix="generic_table")
+package Graph;
+
+class Graph {
+	ref RowHeaderNode[+] rows;
+	ref ColumnHeaderNode[+] cols;
+	
+	op String valueOf(Integer i, Integer j);
+}   
+
+
+class RowHeaderNode {
+  attr String[1] title;	
+}
+
+class ColumnHeaderNode {
+  attr String[1] title;
+}

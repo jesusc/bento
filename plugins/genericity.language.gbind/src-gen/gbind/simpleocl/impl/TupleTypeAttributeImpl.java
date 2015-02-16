@@ -136,7 +136,7 @@ public class TupleTypeAttributeImpl extends LocatedElementImpl implements TupleT
 	 */
 	public TupleType getTupleType() {
 		if (eContainerFeatureID() != SimpleoclPackage.TUPLE_TYPE_ATTRIBUTE__TUPLE_TYPE) return null;
-		return (TupleType)eContainer();
+		return (TupleType)eInternalContainer();
 	}
 
 	/**

@@ -243,7 +243,7 @@ RULES {
 
 			"concept" boundConcept
 			"metamodel" boundMetamodel
-			(virtualMetaclasses)?
+			(virtualMetaclasses)*
 			bindings*
 			helpers*
 			
@@ -273,7 +273,11 @@ RULES {
 
 	Dsl.VirtualMetaclass ::= "class" name[] "{"
 		(references|attributes)*
-	"}" "init" "=" init;
+	"}" "init" "=" init ";";
+	
+	@Operator(type="primitive", weight="20", superclass="OclExpression")
+	Dsl.VirtualTupleExp ::= "#" (typeName[]|typeName['"','"','\\']) "{" (tuplePart ("," tuplePart)*)? "}";
+	
 	
 	Dsl.VirtualReference ::= "ref" (name[]|name['"','"','\\']) ":" (type_[]|type_['"','"','\\'])
 	;

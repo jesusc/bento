@@ -31,7 +31,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	 */
 	public static DslFactory init() {
 		try {
-			DslFactory theDslFactory = (DslFactory)EPackage.Registry.INSTANCE.getEFactory("http://http://genericity/language/gbind/dsl"); 
+			DslFactory theDslFactory = (DslFactory)EPackage.Registry.INSTANCE.getEFactory(DslPackage.eNS_URI);
 			if (theDslFactory != null) {
 				return theDslFactory;
 			}
@@ -72,6 +72,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 			case DslPackage.VIRTUAL_FEATURE: return createVirtualFeature();
 			case DslPackage.VIRTUAL_REFERENCE: return createVirtualReference();
 			case DslPackage.VIRTUAL_ATTRIBUTE: return createVirtualAttribute();
+			case DslPackage.VIRTUAL_TUPLE_EXP: return createVirtualTupleExp();
 			case DslPackage.VIRTUAL_CLASS_BINDING: return createVirtualClassBinding();
 			case DslPackage.CONCEPT_FEATURE_REF: return createConceptFeatureRef();
 			case DslPackage.BASE_FEATURE_BINDING: return createBaseFeatureBinding();
@@ -204,6 +205,16 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public VirtualAttribute createVirtualAttribute() {
 		VirtualAttributeImpl virtualAttribute = new VirtualAttributeImpl();
 		return virtualAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VirtualTupleExp createVirtualTupleExp() {
+		VirtualTupleExpImpl virtualTupleExp = new VirtualTupleExpImpl();
+		return virtualTupleExp;
 	}
 
 	/**

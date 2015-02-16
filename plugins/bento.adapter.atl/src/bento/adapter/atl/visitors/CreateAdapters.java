@@ -35,7 +35,7 @@ public class CreateAdapters extends BaseAdapterVisitor {
 		// Feature renamings
 		Stream<RenamingFeatureBinding> features = bindingModel.findAllRenamingFeatureBindings().
 			filter(fb -> ! fb.getConceptFeature().equals(fb.getConcreteFeature()) 
-					     && isNormalFeatureBinding(fb) );
+					     && AdaptationUtils.isNormalFeatureBinding(fb) );
 			
 		features.forEach(fb -> {
 			if ( fb.getQualifier() == null ) {
@@ -48,7 +48,7 @@ public class CreateAdapters extends BaseAdapterVisitor {
 		
 		// Ocl feature bindings
 		Stream<OclFeatureBinding> oclFeatureBindings = bindingModel.findAllOclFeatureBindings().
-				filter(fb -> isNormalFeatureBinding(fb) );
+				filter(fb -> AdaptationUtils.isNormalFeatureBinding(fb) );
 				
 		oclFeatureBindings.forEach(fb -> {
 				if ( fb.getQualifier() == null ) {
@@ -145,9 +145,7 @@ public class CreateAdapters extends BaseAdapterVisitor {
 		atlModel.getModule().getElements().add(helper);		
 	}
 	
-	private boolean isNormalFeatureBinding(BaseFeatureBinding fb) {
-		return ((EObject) fb).eContainer() instanceof gbind.dsl.BindingModel;
-	}
+
 
 
 }

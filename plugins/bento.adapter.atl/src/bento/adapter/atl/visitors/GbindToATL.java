@@ -3,6 +3,7 @@ package bento.adapter.atl.visitors;
 import gbind.dsl.HelperParameter;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.MetamodelDeclaration;
+import gbind.dsl.VirtualTupleExp;
 import gbind.simpleocl.AddOpCallExp;
 import gbind.simpleocl.BooleanExp;
 import gbind.simpleocl.BooleanType;
@@ -48,6 +49,7 @@ import org.eclipse.emf.ecore.EObject;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.ATLFactory;
 import anatlyzer.atlext.ATL.ContextHelper;
+import anatlyzer.atlext.ATL.Helper;
 import anatlyzer.atlext.OCL.CollectionOperationCallExp;
 import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
 import anatlyzer.atlext.OCL.OCLFactory;
@@ -88,10 +90,10 @@ public class GbindToATL extends GBindVisitor {
 		this.currentMetamodel = currentMetamodel;
 	}
 	
-	public ContextHelper transform(LocalHelper self) { //, ExternalContext ctx) {
+	public Helper transform(LocalHelper self) { //, ExternalContext ctx) {
 		this.ctx = ctx;
 		startVisiting(self);
-		return (ContextHelper) g(self);
+		return (Helper) g(self);
 	}
 
 	public anatlyzer.atlext.OCL.OclExpression transform(OclExpression oclExpr) { //, ExternalContext ctx) {
@@ -127,8 +129,6 @@ public class GbindToATL extends GBindVisitor {
 		context_.setContext_( contextType );
 		
 		def.setContext_(context_);
-		
-		link(self, atl);
 	}
 
 	@Override
@@ -337,6 +337,20 @@ public class GbindToATL extends GBindVisitor {
 		anatlyzer.atlext.OCL.TupleExp atl = link(self, OCLFactory.eINSTANCE.createTupleExp() );
 		self.getTuplePart().forEach(p -> atl.getTuplePart().add( (TuplePart) g(p) ));
 	}
+
+	@Override
+	public void inVirtualTupleExp(VirtualTupleExp self) {
+		inTupleExp(self);
+		
+		TuplePart typePart = OCLFactory.eINSTANCE.createTuplePart();
+		typePart.setVarName( "type__" );
+		anatlyzer.atlext.OCL.StringExp stringLit = OCLFactory.eINSTANCE.createStringExp();
+		stringLit.setStringSymbol(self.getTypeName());
+		typePart.setInitExpression( stringLit );
+		
+		anatlyzer.atlext.OCL.TupleExp tuple = (anatlyzer.atlext.OCL.TupleExp) g(self);
+		tuple.getTuplePart().add(typePart);
+	}
 	
 	@Override
 	public void inTuplePart(gbind.simpleocl.TuplePart self) {
@@ -396,6 +410,8 @@ public class GbindToATL extends GBindVisitor {
 	}
 
 	protected <T extends EObject> T link(EObject s, T t) {
+		if ( trace.containsKey(s) ) 
+			throw new IllegalStateException("Object " + s + " already registered in the trace");
 		trace.put(s, t);
 		return (T) t;
 	}

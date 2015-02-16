@@ -95,7 +95,7 @@ public class LocalVariableImpl extends VariableDeclarationImpl implements LocalV
 	 */
 	public LetExp getLetExp() {
 		if (eContainerFeatureID() != SimpleoclPackage.LOCAL_VARIABLE__LET_EXP) return null;
-		return (LetExp)eContainer();
+		return (LetExp)eInternalContainer();
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class LocalVariableImpl extends VariableDeclarationImpl implements LocalV
 	 */
 	public IterateExp getBaseExp() {
 		if (eContainerFeatureID() != SimpleoclPackage.LOCAL_VARIABLE__BASE_EXP) return null;
-		return (IterateExp)eContainer();
+		return (IterateExp)eInternalContainer();
 	}
 
 	/**

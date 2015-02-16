@@ -1,0 +1,78 @@
+-- @path Graph=/bento.glib.graph2table/metamodels/Graph.ecore
+-- @path Table=/bento.glib.graph2table/metamodels/Table.ecore
+module graph2table;
+create OUT : Table from IN : MEASURE;
+
+lazy rule graph2table {
+   from graph : OclAny
+     to table : Table!Table(
+rows <- firtRowForColumnNames,
+rows <- thisModule.rows(graph)->collect(r | thisModule.RowHeaderNode2Row(r))
+), firtRowForColumnNames : Table!Row(
+cells <- upperLeftCell,
+cells <- thisModule.cols(graph)->collect(c | thisModule.ColumnHeaderNode2Cell(c))
+), upperLeftCell : Table!Cell(
+content <- ''
+)
+
+}
+
+lazy rule RowHeaderNode2Row {
+   from src : MEASURE!MeasureSet
+using {
+   graph : TupleType(measureSets : OclAny) = thisModule.ClassMeasureSet_AllInstances->any(g | thisModule.rows(g)->includes(src));   i : Integer = thisModule.rows(graph)->indexOf(src);}
+     to tgt : Table!Row(
+cells <- rowHeaderCell,
+cells <- thisModule.cols(graph)->collect(c | let j : Integer = thisModule.cols(graph)->indexOf(c)
+ in thisModule.text2cell(thisModule.valueOf(graph, i, j)))
+), rowHeaderCell : Table!Cell(
+content <- src.title
+)
+
+}
+
+lazy rule ColumnHeaderNode2Cell {
+   from src : MEASURE!Measure
+     to tgt : Table!Cell(
+content <- src.title
+)
+
+}
+
+rule text2cell( str : String) {
+     to c : Table!Cell(
+content <- str
+)
+do {
+   c;
+}
+}
+
+helper context MEASURE!MeasureSet def: title : OclAny = self.absoluteName;
+
+helper context MEASURE!Measure def: title : OclAny = self.metric.name;
+
+helper context MEASURE!MeasureSet def: absoluteName : OclAny = self.elementName;
+
+helper context MEASURE!IntegerMeasure def: stringValue : OclAny = self.value.toString();
+
+helper context MEASURE!DoubleMeasure def: stringValue : OclAny = self.value.toString();
+
+helper context MEASURE!PercentageMeasure def: stringValue : OclAny = self.value.toString();
+
+helper  def: __convertToSequence__(obj : OclAny) : OclAny = Sequence {obj }->flatten();
+
+helper  def: ClassMeasureSet_AllInstances : OclAny = Sequence {Tuple {measureSets = MEASURE!MeasureSet.allInstances()->select(ms | ms.elementType = #class)->select(ms | ms.measures->notEmpty()), type__ = 'ClassMeasureSet' } };
+
+helper  def: rows(self_ : TupleType(measureSets : OclAny)) : OclAny = self_.measureSets;
+
+helper  def: cols(self_ : TupleType(measureSets : OclAny)) : OclAny = self_.measureSets->first().measures;
+
+helper  def: valueOf(self_ : TupleType(measureSets : OclAny), i : Integer, j : Integer) : OclAny = self_.measureSets->at(i).measures->at(j).stringValue;
+
+endpoint rule graph2table_ForceTransformation( ) {
+using {
+   varToForceEvaluation : OclAny = thisModule.ClassMeasureSet_AllInstances->collect(it | thisModule.graph2table(it));}
+
+}
+

@@ -1,14 +1,21 @@
 package bento.adapter.atl;
 
+import java.io.IOException;
+
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import bento.adapter.atl.visitors.AdaptCode;
 import bento.adapter.atl.visitors.AdaptModelElements;
 import bento.adapter.atl.visitors.AdaptModuleElements;
+import bento.adapter.atl.visitors.AdaptVirtualClasses;
 import bento.adapter.atl.visitors.AdaptWhenClause;
 import bento.adapter.atl.visitors.CopyHelpers;
 import bento.adapter.atl.visitors.CreateAdapters;
+import anatlyzer.atl.editor.builder.AnalyserExecutor;
+import anatlyzer.atl.editor.builder.AnalyserExecutor.CannotLoadMetamodel;
 import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.util.ATLUtils;
 
 
 /**
@@ -35,6 +42,18 @@ public class ATLTrafoAdapter {
 	}
 
 	public void perform() {
+		if ( bindModel.hasVirtualClasses() ) {
+			// TODO: Create a utility class outside analyser.editor
+			//       Remove dependency from org.eclipse.resources
+			try {
+				System.out.println("Type checking");
+				new AnalyserExecutor().exec(null, this.atlModel, false);
+				
+				// new AdaptVirtualClasses(atlModel, bindModel, currentMetamodel);
+			} catch (IOException | CoreException | CannotLoadMetamodel e) {
+				throw new RuntimeException(e);
+			}
+		}
 
 		// adapt the code of all rules and helpers, e.g., oclIsKindOf...
 		System.out.println("Adapting OCL constructs");
@@ -56,10 +75,27 @@ public class ATLTrafoAdapter {
 
 		System.out.println("Copying helpers");
 		new CopyHelpers(atlModel, bindModel, currentMetamodel).perform();
-		
-		// adapt the rest of ocl model elements
+	
+		if ( bindModel.hasVirtualClasses() ) {
+			System.out.println("Creating virtual classes and adapting");
+			new AdaptVirtualClasses(atlModel, bindModel, currentMetamodel).perform();
+		}
+	
+		// Adapt the rest of ocl model elements
+		// This needs to be the last step because all the other adaptations work assuming
+		// that the metamodel is still the concept (i.e., comparison with the currentMetamodel)
 		System.out.println("Adapting model elements");
 		new AdaptModelElements(atlModel, bindModel, currentMetamodel).perform();
+	
+		
+		// Change the metamodel paths
+		ATLUtils.replacePathTag(atlModel.getRoot(), 
+				bindModel.getRoot().getBoundConcept().getName(), 
+				bindModel.getRoot().getBoundMetamodel().getName(),
+				bindModel.getRoot().getBoundMetamodel().getUri());
+		
 	}
+	
+	
 
 }

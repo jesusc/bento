@@ -1,6 +1,7 @@
 package bento.adapter.atl.visitors;
 
 import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atlext.ATL.Unit;
 import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
 import bento.adapter.atl.BindingModel;
@@ -13,7 +14,9 @@ public class AdaptModelElements extends BaseAdapterVisitor {
 
 	public void perform() {
 		// This is needed because OclModel elements are not contained in the root Module object
-		atlModel.getResource().getContents().stream().forEach(obj -> startVisiting(obj));
+		atlModel.getResource().getContents().stream().
+			filter(obj -> obj instanceof OclModel || obj instanceof Unit).
+			forEach(obj -> startVisiting(obj));
 		applyPending();		
 	}
 

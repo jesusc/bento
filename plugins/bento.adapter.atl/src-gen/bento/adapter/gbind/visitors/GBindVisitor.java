@@ -81,6 +81,10 @@ public class GBindVisitor {
 	public void inConcreteMetaclass(gbind.dsl.ConcreteMetaclass self) { if ( _debug ) System.out.println("Visiting ConcreteMetaclass"); }
 	public void beforeConcreteMetaclass(gbind.dsl.ConcreteMetaclass self) { }
 	public void afterConcreteMetaclass(gbind.dsl.ConcreteMetaclass self) { }
+	public VisitingActions preHelperParameter(gbind.dsl.HelperParameter self) { return new VisitingActions("type"); } 
+	public void inHelperParameter(gbind.dsl.HelperParameter self) { if ( _debug ) System.out.println("Visiting HelperParameter"); }
+	public void beforeHelperParameter(gbind.dsl.HelperParameter self) { }
+	public void afterHelperParameter(gbind.dsl.HelperParameter self) { }
 	public VisitingActions preSetType(gbind.simpleocl.SetType self) { return new VisitingActions("elementType"); } 
 	public void inSetType(gbind.simpleocl.SetType self) { if ( _debug ) System.out.println("Visiting SetType"); }
 	public void beforeSetType(gbind.simpleocl.SetType self) { }
@@ -137,10 +141,10 @@ public class GBindVisitor {
 	public void inNumericExp(gbind.simpleocl.NumericExp self) { if ( _debug ) System.out.println("Visiting NumericExp"); }
 	public void beforeNumericExp(gbind.simpleocl.NumericExp self) { }
 	public void afterNumericExp(gbind.simpleocl.NumericExp self) { }
-	public VisitingActions preLocalHelper(gbind.dsl.LocalHelper self) { return new VisitingActions("body" , "type" , "parameters"); } 
-	public void inLocalHelper(gbind.dsl.LocalHelper self) { if ( _debug ) System.out.println("Visiting LocalHelper"); }
-	public void beforeLocalHelper(gbind.dsl.LocalHelper self) { }
-	public void afterLocalHelper(gbind.dsl.LocalHelper self) { }
+	public VisitingActions preConceptHelper(gbind.dsl.ConceptHelper self) { return new VisitingActions("body" , "type"); } 
+	public void inConceptHelper(gbind.dsl.ConceptHelper self) { if ( _debug ) System.out.println("Visiting ConceptHelper"); }
+	public void beforeConceptHelper(gbind.dsl.ConceptHelper self) { }
+	public void afterConceptHelper(gbind.dsl.ConceptHelper self) { }
 	public VisitingActions preMetamodelDeclaration(gbind.dsl.MetamodelDeclaration self) { return new VisitingActions(); } 
 	public void inMetamodelDeclaration(gbind.dsl.MetamodelDeclaration self) { if ( _debug ) System.out.println("Visiting MetamodelDeclaration"); }
 	public void beforeMetamodelDeclaration(gbind.dsl.MetamodelDeclaration self) { }
@@ -173,18 +177,18 @@ public class GBindVisitor {
 	public void inNotOpCallExp(gbind.simpleocl.NotOpCallExp self) { if ( _debug ) System.out.println("Visiting NotOpCallExp"); }
 	public void beforeNotOpCallExp(gbind.simpleocl.NotOpCallExp self) { }
 	public void afterNotOpCallExp(gbind.simpleocl.NotOpCallExp self) { }
-	public VisitingActions preRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { return new VisitingActions(); } 
-	public void inRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { if ( _debug ) System.out.println("Visiting RenamingFeatureBinding"); }
-	public void beforeRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { }
-	public void afterRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { }
+	public VisitingActions preBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { return new VisitingActions(); } 
+	public void inBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { if ( _debug ) System.out.println("Visiting BaseFeatureBinding"); }
+	public void beforeBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { }
+	public void afterBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { }
 	public VisitingActions preEqOpCallExp(gbind.simpleocl.EqOpCallExp self) { return new VisitingActions("type" , "argument" , "source"); } 
 	public void inEqOpCallExp(gbind.simpleocl.EqOpCallExp self) { if ( _debug ) System.out.println("Visiting EqOpCallExp"); }
 	public void beforeEqOpCallExp(gbind.simpleocl.EqOpCallExp self) { }
 	public void afterEqOpCallExp(gbind.simpleocl.EqOpCallExp self) { }
-	public VisitingActions preOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { return new VisitingActions("concrete"); } 
-	public void inOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { if ( _debug ) System.out.println("Visiting OclFeatureBinding"); }
-	public void beforeOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { }
-	public void afterOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { }
+	public VisitingActions preRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { return new VisitingActions(); } 
+	public void inRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { if ( _debug ) System.out.println("Visiting RenamingFeatureBinding"); }
+	public void beforeRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { }
+	public void afterRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding self) { }
 	public VisitingActions preSequenceExp(gbind.simpleocl.SequenceExp self) { return new VisitingActions("type" , "elements"); } 
 	public void inSequenceExp(gbind.simpleocl.SequenceExp self) { if ( _debug ) System.out.println("Visiting SequenceExp"); }
 	public void beforeSequenceExp(gbind.simpleocl.SequenceExp self) { }
@@ -265,10 +269,10 @@ public class GBindVisitor {
 	public void inIntermediateClassBinding(gbind.dsl.IntermediateClassBinding self) { if ( _debug ) System.out.println("Visiting IntermediateClassBinding"); }
 	public void beforeIntermediateClassBinding(gbind.dsl.IntermediateClassBinding self) { }
 	public void afterIntermediateClassBinding(gbind.dsl.IntermediateClassBinding self) { }
-	public VisitingActions preBaseHelper(gbind.dsl.BaseHelper self) { return new VisitingActions("body" , "type"); } 
-	public void inBaseHelper(gbind.dsl.BaseHelper self) { if ( _debug ) System.out.println("Visiting BaseHelper"); }
-	public void beforeBaseHelper(gbind.dsl.BaseHelper self) { }
-	public void afterBaseHelper(gbind.dsl.BaseHelper self) { }
+	public VisitingActions preOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { return new VisitingActions("concrete"); } 
+	public void inOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { if ( _debug ) System.out.println("Visiting OclFeatureBinding"); }
+	public void beforeOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { }
+	public void afterOclFeatureBinding(gbind.dsl.OclFeatureBinding self) { }
 	public VisitingActions preIterateExp(gbind.simpleocl.IterateExp self) { return new VisitingActions("body" , "iterators" , "result"); } 
 	public void inIterateExp(gbind.simpleocl.IterateExp self) { if ( _debug ) System.out.println("Visiting IterateExp"); }
 	public void beforeIterateExp(gbind.simpleocl.IterateExp self) { }
@@ -277,10 +281,10 @@ public class GBindVisitor {
 	public void inLetExp(gbind.simpleocl.LetExp self) { if ( _debug ) System.out.println("Visiting LetExp"); }
 	public void beforeLetExp(gbind.simpleocl.LetExp self) { }
 	public void afterLetExp(gbind.simpleocl.LetExp self) { }
-	public VisitingActions preConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { return new VisitingActions(); } 
-	public void inConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { if ( _debug ) System.out.println("Visiting ConceptFeatureRef"); }
-	public void beforeConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { }
-	public void afterConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { }
+	public VisitingActions preVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { return new VisitingActions("refFeatures"); } 
+	public void inVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { if ( _debug ) System.out.println("Visiting VirtualClassBinding"); }
+	public void beforeVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { }
+	public void afterVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { }
 	public VisitingActions preEnumLiteralExp(gbind.simpleocl.EnumLiteralExp self) { return new VisitingActions("type"); } 
 	public void inEnumLiteralExp(gbind.simpleocl.EnumLiteralExp self) { if ( _debug ) System.out.println("Visiting EnumLiteralExp"); }
 	public void beforeEnumLiteralExp(gbind.simpleocl.EnumLiteralExp self) { }
@@ -297,10 +301,10 @@ public class GBindVisitor {
 	public void inParameter(gbind.simpleocl.Parameter self) { if ( _debug ) System.out.println("Visiting Parameter"); }
 	public void beforeParameter(gbind.simpleocl.Parameter self) { }
 	public void afterParameter(gbind.simpleocl.Parameter self) { }
-	public VisitingActions preBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { return new VisitingActions(); } 
-	public void inBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { if ( _debug ) System.out.println("Visiting BaseFeatureBinding"); }
-	public void beforeBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { }
-	public void afterBaseFeatureBinding(gbind.dsl.BaseFeatureBinding self) { }
+	public VisitingActions preConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { return new VisitingActions(); } 
+	public void inConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { if ( _debug ) System.out.println("Visiting ConceptFeatureRef"); }
+	public void beforeConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { }
+	public void afterConceptFeatureRef(gbind.dsl.ConceptFeatureRef self) { }
 	public VisitingActions preSuperExp(gbind.simpleocl.SuperExp self) { return new VisitingActions("type"); } 
 	public void inSuperExp(gbind.simpleocl.SuperExp self) { if ( _debug ) System.out.println("Visiting SuperExp"); }
 	public void beforeSuperExp(gbind.simpleocl.SuperExp self) { }
@@ -365,14 +369,14 @@ public class GBindVisitor {
 	public void inStringExp(gbind.simpleocl.StringExp self) { if ( _debug ) System.out.println("Visiting StringExp"); }
 	public void beforeStringExp(gbind.simpleocl.StringExp self) { }
 	public void afterStringExp(gbind.simpleocl.StringExp self) { }
-	public VisitingActions preHelperParameter(gbind.dsl.HelperParameter self) { return new VisitingActions("type"); } 
-	public void inHelperParameter(gbind.dsl.HelperParameter self) { if ( _debug ) System.out.println("Visiting HelperParameter"); }
-	public void beforeHelperParameter(gbind.dsl.HelperParameter self) { }
-	public void afterHelperParameter(gbind.dsl.HelperParameter self) { }
-	public VisitingActions preVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { return new VisitingActions("refFeatures"); } 
-	public void inVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { if ( _debug ) System.out.println("Visiting VirtualClassBinding"); }
-	public void beforeVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { }
-	public void afterVirtualClassBinding(gbind.dsl.VirtualClassBinding self) { }
+	public VisitingActions preLocalHelper(gbind.dsl.LocalHelper self) { return new VisitingActions("body" , "type" , "parameters"); } 
+	public void inLocalHelper(gbind.dsl.LocalHelper self) { if ( _debug ) System.out.println("Visiting LocalHelper"); }
+	public void beforeLocalHelper(gbind.dsl.LocalHelper self) { }
+	public void afterLocalHelper(gbind.dsl.LocalHelper self) { }
+	public VisitingActions preVirtualTupleExp(gbind.dsl.VirtualTupleExp self) { return new VisitingActions("type" , "tuplePart"); } 
+	public void inVirtualTupleExp(gbind.dsl.VirtualTupleExp self) { if ( _debug ) System.out.println("Visiting VirtualTupleExp"); }
+	public void beforeVirtualTupleExp(gbind.dsl.VirtualTupleExp self) { }
+	public void afterVirtualTupleExp(gbind.dsl.VirtualTupleExp self) { }
 	public VisitingActions preRealExp(gbind.simpleocl.RealExp self) { return new VisitingActions("type"); } 
 	public void inRealExp(gbind.simpleocl.RealExp self) { if ( _debug ) System.out.println("Visiting RealExp"); }
 	public void beforeRealExp(gbind.simpleocl.RealExp self) { }
@@ -397,10 +401,10 @@ public class GBindVisitor {
 	public void inTupleTypeAttribute(gbind.simpleocl.TupleTypeAttribute self) { if ( _debug ) System.out.println("Visiting TupleTypeAttribute"); }
 	public void beforeTupleTypeAttribute(gbind.simpleocl.TupleTypeAttribute self) { }
 	public void afterTupleTypeAttribute(gbind.simpleocl.TupleTypeAttribute self) { }
-	public VisitingActions preConceptHelper(gbind.dsl.ConceptHelper self) { return new VisitingActions("body" , "type"); } 
-	public void inConceptHelper(gbind.dsl.ConceptHelper self) { if ( _debug ) System.out.println("Visiting ConceptHelper"); }
-	public void beforeConceptHelper(gbind.dsl.ConceptHelper self) { }
-	public void afterConceptHelper(gbind.dsl.ConceptHelper self) { }
+	public VisitingActions preBaseHelper(gbind.dsl.BaseHelper self) { return new VisitingActions("body" , "type"); } 
+	public void inBaseHelper(gbind.dsl.BaseHelper self) { if ( _debug ) System.out.println("Visiting BaseHelper"); }
+	public void beforeBaseHelper(gbind.dsl.BaseHelper self) { }
+	public void afterBaseHelper(gbind.dsl.BaseHelper self) { }
 	public VisitingActions preModule(gbind.simpleocl.Module self) { return new VisitingActions("metamodels" , "imports" , "elements"); } 
 	public void inModule(gbind.simpleocl.Module self) { if ( _debug ) System.out.println("Visiting Module"); }
 	public void beforeModule(gbind.simpleocl.Module self) { }
@@ -679,6 +683,23 @@ public class GBindVisitor {
 		visitor.afterConcreteMetaclass(this_);
 		visitor.setCurrent(pop);	
 	} 
+	protected void visitHelperParameter(gbind.dsl.HelperParameter this_) {
+		GBindVisitor visitor = this;
+		VisitingActions v = visitor.preHelperParameter(this_);
+		if ( v == null ) {
+			return;
+		}
+	
+		EObject pop = visitor.getCurrent();
+		visitor.setCurrent(this_);
+		visitor.beforeHelperParameter(this_);
+		
+		visitActions(v, this_);		
+					
+		visitor.inHelperParameter(this_);
+		visitor.afterHelperParameter(this_);
+		visitor.setCurrent(pop);	
+	} 
 	protected void visitSetType(gbind.simpleocl.SetType this_) {
 		GBindVisitor visitor = this;
 		VisitingActions v = visitor.preSetType(this_);
@@ -849,21 +870,21 @@ public class GBindVisitor {
 		visitor.afterOclType(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitLocalHelper(gbind.dsl.LocalHelper this_) {
+	protected void visitConceptHelper(gbind.dsl.ConceptHelper this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preLocalHelper(this_);
+		VisitingActions v = visitor.preConceptHelper(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeLocalHelper(this_);
+		visitor.beforeConceptHelper(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inLocalHelper(this_);
-		visitor.afterLocalHelper(this_);
+		visitor.inConceptHelper(this_);
+		visitor.afterConceptHelper(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitMetamodelDeclaration(gbind.dsl.MetamodelDeclaration this_) {
@@ -985,21 +1006,21 @@ public class GBindVisitor {
 		visitor.afterNotOpCallExp(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding this_) {
+	protected void visitBaseFeatureBinding(gbind.dsl.BaseFeatureBinding this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preRenamingFeatureBinding(this_);
+		VisitingActions v = visitor.preBaseFeatureBinding(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeRenamingFeatureBinding(this_);
+		visitor.beforeBaseFeatureBinding(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inRenamingFeatureBinding(this_);
-		visitor.afterRenamingFeatureBinding(this_);
+		visitor.inBaseFeatureBinding(this_);
+		visitor.afterBaseFeatureBinding(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitEqOpCallExp(gbind.simpleocl.EqOpCallExp this_) {
@@ -1019,21 +1040,21 @@ public class GBindVisitor {
 		visitor.afterEqOpCallExp(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitOclFeatureBinding(gbind.dsl.OclFeatureBinding this_) {
+	protected void visitRenamingFeatureBinding(gbind.dsl.RenamingFeatureBinding this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preOclFeatureBinding(this_);
+		VisitingActions v = visitor.preRenamingFeatureBinding(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeOclFeatureBinding(this_);
+		visitor.beforeRenamingFeatureBinding(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inOclFeatureBinding(this_);
-		visitor.afterOclFeatureBinding(this_);
+		visitor.inRenamingFeatureBinding(this_);
+		visitor.afterRenamingFeatureBinding(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitSequenceExp(gbind.simpleocl.SequenceExp this_) {
@@ -1308,21 +1329,21 @@ public class GBindVisitor {
 		visitor.afterIntermediateClassBinding(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitBaseHelper(gbind.dsl.BaseHelper this_) {
+	protected void visitOclFeatureBinding(gbind.dsl.OclFeatureBinding this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preBaseHelper(this_);
+		VisitingActions v = visitor.preOclFeatureBinding(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeBaseHelper(this_);
+		visitor.beforeOclFeatureBinding(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inBaseHelper(this_);
-		visitor.afterBaseHelper(this_);
+		visitor.inOclFeatureBinding(this_);
+		visitor.afterOclFeatureBinding(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitIterateExp(gbind.simpleocl.IterateExp this_) {
@@ -1359,21 +1380,21 @@ public class GBindVisitor {
 		visitor.afterLetExp(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitConceptFeatureRef(gbind.dsl.ConceptFeatureRef this_) {
+	protected void visitVirtualClassBinding(gbind.dsl.VirtualClassBinding this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preConceptFeatureRef(this_);
+		VisitingActions v = visitor.preVirtualClassBinding(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeConceptFeatureRef(this_);
+		visitor.beforeVirtualClassBinding(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inConceptFeatureRef(this_);
-		visitor.afterConceptFeatureRef(this_);
+		visitor.inVirtualClassBinding(this_);
+		visitor.afterVirtualClassBinding(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitEnumLiteralExp(gbind.simpleocl.EnumLiteralExp this_) {
@@ -1427,21 +1448,21 @@ public class GBindVisitor {
 		visitor.afterParameter(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitBaseFeatureBinding(gbind.dsl.BaseFeatureBinding this_) {
+	protected void visitConceptFeatureRef(gbind.dsl.ConceptFeatureRef this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preBaseFeatureBinding(this_);
+		VisitingActions v = visitor.preConceptFeatureRef(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeBaseFeatureBinding(this_);
+		visitor.beforeConceptFeatureRef(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inBaseFeatureBinding(this_);
-		visitor.afterBaseFeatureBinding(this_);
+		visitor.inConceptFeatureRef(this_);
+		visitor.afterConceptFeatureRef(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitSuperExp(gbind.simpleocl.SuperExp this_) {
@@ -1682,38 +1703,38 @@ public class GBindVisitor {
 		visitor.afterStringExp(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitHelperParameter(gbind.dsl.HelperParameter this_) {
+	protected void visitLocalHelper(gbind.dsl.LocalHelper this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preHelperParameter(this_);
+		VisitingActions v = visitor.preLocalHelper(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeHelperParameter(this_);
+		visitor.beforeLocalHelper(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inHelperParameter(this_);
-		visitor.afterHelperParameter(this_);
+		visitor.inLocalHelper(this_);
+		visitor.afterLocalHelper(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitVirtualClassBinding(gbind.dsl.VirtualClassBinding this_) {
+	protected void visitVirtualTupleExp(gbind.dsl.VirtualTupleExp this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preVirtualClassBinding(this_);
+		VisitingActions v = visitor.preVirtualTupleExp(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeVirtualClassBinding(this_);
+		visitor.beforeVirtualTupleExp(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inVirtualClassBinding(this_);
-		visitor.afterVirtualClassBinding(this_);
+		visitor.inVirtualTupleExp(this_);
+		visitor.afterVirtualTupleExp(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitRealExp(gbind.simpleocl.RealExp this_) {
@@ -1801,21 +1822,21 @@ public class GBindVisitor {
 		visitor.afterTupleTypeAttribute(this_);
 		visitor.setCurrent(pop);	
 	} 
-	protected void visitConceptHelper(gbind.dsl.ConceptHelper this_) {
+	protected void visitBaseHelper(gbind.dsl.BaseHelper this_) {
 		GBindVisitor visitor = this;
-		VisitingActions v = visitor.preConceptHelper(this_);
+		VisitingActions v = visitor.preBaseHelper(this_);
 		if ( v == null ) {
 			return;
 		}
 	
 		EObject pop = visitor.getCurrent();
 		visitor.setCurrent(this_);
-		visitor.beforeConceptHelper(this_);
+		visitor.beforeBaseHelper(this_);
 		
 		visitActions(v, this_);		
 					
-		visitor.inConceptHelper(this_);
-		visitor.afterConceptHelper(this_);
+		visitor.inBaseHelper(this_);
+		visitor.afterBaseHelper(this_);
 		visitor.setCurrent(pop);	
 	} 
 	protected void visitModule(gbind.simpleocl.Module this_) {
@@ -1985,6 +2006,7 @@ public class GBindVisitor {
 	if ( obj.eClass().getName().equals("BagExp") ) { visitBagExp((gbind.simpleocl.BagExp) obj); return; }
 	if ( obj.eClass().getName().equals("RealType") ) { visitRealType((gbind.simpleocl.RealType) obj); return; }
 	if ( obj.eClass().getName().equals("ConcreteMetaclass") ) { visitConcreteMetaclass((gbind.dsl.ConcreteMetaclass) obj); return; }
+	if ( obj.eClass().getName().equals("HelperParameter") ) { visitHelperParameter((gbind.dsl.HelperParameter) obj); return; }
 	if ( obj.eClass().getName().equals("SetType") ) { visitSetType((gbind.simpleocl.SetType) obj); return; }
 	if ( obj.eClass().getName().equals("ConceptMetaclass") ) { visitConceptMetaclass((gbind.dsl.ConceptMetaclass) obj); return; }
 	if ( obj.eClass().getName().equals("LambdaType") ) { visitLambdaType((gbind.simpleocl.LambdaType) obj); return; }
@@ -1995,7 +2017,7 @@ public class GBindVisitor {
 	if ( obj.eClass().getName().equals("IntOpCallExp") ) { visitIntOpCallExp((gbind.simpleocl.IntOpCallExp) obj); return; }
 	if ( obj.eClass().getName().equals("OclContextDefinition") ) { visitOclContextDefinition((gbind.simpleocl.OclContextDefinition) obj); return; }
 	if ( obj.eClass().getName().equals("OclType") ) { visitOclType((gbind.simpleocl.OclType) obj); return; }
-	if ( obj.eClass().getName().equals("LocalHelper") ) { visitLocalHelper((gbind.dsl.LocalHelper) obj); return; }
+	if ( obj.eClass().getName().equals("ConceptHelper") ) { visitConceptHelper((gbind.dsl.ConceptHelper) obj); return; }
 	if ( obj.eClass().getName().equals("MetamodelDeclaration") ) { visitMetamodelDeclaration((gbind.dsl.MetamodelDeclaration) obj); return; }
 	if ( obj.eClass().getName().equals("SelfExp") ) { visitSelfExp((gbind.simpleocl.SelfExp) obj); return; }
 	if ( obj.eClass().getName().equals("VirtualFeature") ) { visitVirtualFeature((gbind.dsl.VirtualFeature) obj); return; }
@@ -2003,9 +2025,9 @@ public class GBindVisitor {
 	if ( obj.eClass().getName().equals("MapExp") ) { visitMapExp((gbind.simpleocl.MapExp) obj); return; }
 	if ( obj.eClass().getName().equals("BraceExp") ) { visitBraceExp((gbind.simpleocl.BraceExp) obj); return; }
 	if ( obj.eClass().getName().equals("NotOpCallExp") ) { visitNotOpCallExp((gbind.simpleocl.NotOpCallExp) obj); return; }
-	if ( obj.eClass().getName().equals("RenamingFeatureBinding") ) { visitRenamingFeatureBinding((gbind.dsl.RenamingFeatureBinding) obj); return; }
+	if ( obj.eClass().getName().equals("BaseFeatureBinding") ) { visitBaseFeatureBinding((gbind.dsl.BaseFeatureBinding) obj); return; }
 	if ( obj.eClass().getName().equals("EqOpCallExp") ) { visitEqOpCallExp((gbind.simpleocl.EqOpCallExp) obj); return; }
-	if ( obj.eClass().getName().equals("OclFeatureBinding") ) { visitOclFeatureBinding((gbind.dsl.OclFeatureBinding) obj); return; }
+	if ( obj.eClass().getName().equals("RenamingFeatureBinding") ) { visitRenamingFeatureBinding((gbind.dsl.RenamingFeatureBinding) obj); return; }
 	if ( obj.eClass().getName().equals("SequenceExp") ) { visitSequenceExp((gbind.simpleocl.SequenceExp) obj); return; }
 	if ( obj.eClass().getName().equals("OclModelElement") ) { visitOclModelElement((gbind.simpleocl.OclModelElement) obj); return; }
 	if ( obj.eClass().getName().equals("SetExp") ) { visitSetExp((gbind.simpleocl.SetExp) obj); return; }
@@ -2022,14 +2044,14 @@ public class GBindVisitor {
 	if ( obj.eClass().getName().equals("CollectionType") ) { visitCollectionType((gbind.simpleocl.CollectionType) obj); return; }
 	if ( obj.eClass().getName().equals("OrderedSetExp") ) { visitOrderedSetExp((gbind.simpleocl.OrderedSetExp) obj); return; }
 	if ( obj.eClass().getName().equals("IntermediateClassBinding") ) { visitIntermediateClassBinding((gbind.dsl.IntermediateClassBinding) obj); return; }
-	if ( obj.eClass().getName().equals("BaseHelper") ) { visitBaseHelper((gbind.dsl.BaseHelper) obj); return; }
+	if ( obj.eClass().getName().equals("OclFeatureBinding") ) { visitOclFeatureBinding((gbind.dsl.OclFeatureBinding) obj); return; }
 	if ( obj.eClass().getName().equals("IterateExp") ) { visitIterateExp((gbind.simpleocl.IterateExp) obj); return; }
 	if ( obj.eClass().getName().equals("LetExp") ) { visitLetExp((gbind.simpleocl.LetExp) obj); return; }
-	if ( obj.eClass().getName().equals("ConceptFeatureRef") ) { visitConceptFeatureRef((gbind.dsl.ConceptFeatureRef) obj); return; }
+	if ( obj.eClass().getName().equals("VirtualClassBinding") ) { visitVirtualClassBinding((gbind.dsl.VirtualClassBinding) obj); return; }
 	if ( obj.eClass().getName().equals("EnumLiteralExp") ) { visitEnumLiteralExp((gbind.simpleocl.EnumLiteralExp) obj); return; }
 	if ( obj.eClass().getName().equals("StringType") ) { visitStringType((gbind.simpleocl.StringType) obj); return; }
 	if ( obj.eClass().getName().equals("Parameter") ) { visitParameter((gbind.simpleocl.Parameter) obj); return; }
-	if ( obj.eClass().getName().equals("BaseFeatureBinding") ) { visitBaseFeatureBinding((gbind.dsl.BaseFeatureBinding) obj); return; }
+	if ( obj.eClass().getName().equals("ConceptFeatureRef") ) { visitConceptFeatureRef((gbind.dsl.ConceptFeatureRef) obj); return; }
 	if ( obj.eClass().getName().equals("SuperExp") ) { visitSuperExp((gbind.simpleocl.SuperExp) obj); return; }
 	if ( obj.eClass().getName().equals("StaticNavigationOrAttributeCall") ) { visitStaticNavigationOrAttributeCall((gbind.simpleocl.StaticNavigationOrAttributeCall) obj); return; }
 	if ( obj.eClass().getName().equals("OclUndefinedExp") ) { visitOclUndefinedExp((gbind.simpleocl.OclUndefinedExp) obj); return; }
@@ -2044,14 +2066,14 @@ public class GBindVisitor {
 	if ( obj.eClass().getName().equals("StaticOperationCall") ) { visitStaticOperationCall((gbind.simpleocl.StaticOperationCall) obj); return; }
 	if ( obj.eClass().getName().equals("IntegerType") ) { visitIntegerType((gbind.simpleocl.IntegerType) obj); return; }
 	if ( obj.eClass().getName().equals("StringExp") ) { visitStringExp((gbind.simpleocl.StringExp) obj); return; }
-	if ( obj.eClass().getName().equals("HelperParameter") ) { visitHelperParameter((gbind.dsl.HelperParameter) obj); return; }
-	if ( obj.eClass().getName().equals("VirtualClassBinding") ) { visitVirtualClassBinding((gbind.dsl.VirtualClassBinding) obj); return; }
+	if ( obj.eClass().getName().equals("LocalHelper") ) { visitLocalHelper((gbind.dsl.LocalHelper) obj); return; }
+	if ( obj.eClass().getName().equals("VirtualTupleExp") ) { visitVirtualTupleExp((gbind.dsl.VirtualTupleExp) obj); return; }
 	if ( obj.eClass().getName().equals("RealExp") ) { visitRealExp((gbind.simpleocl.RealExp) obj); return; }
 	if ( obj.eClass().getName().equals("VirtualMetaclass") ) { visitVirtualMetaclass((gbind.dsl.VirtualMetaclass) obj); return; }
 	if ( obj.eClass().getName().equals("VirtualAttribute") ) { visitVirtualAttribute((gbind.dsl.VirtualAttribute) obj); return; }
 	if ( obj.eClass().getName().equals("BooleanType") ) { visitBooleanType((gbind.simpleocl.BooleanType) obj); return; }
 	if ( obj.eClass().getName().equals("TupleTypeAttribute") ) { visitTupleTypeAttribute((gbind.simpleocl.TupleTypeAttribute) obj); return; }
-	if ( obj.eClass().getName().equals("ConceptHelper") ) { visitConceptHelper((gbind.dsl.ConceptHelper) obj); return; }
+	if ( obj.eClass().getName().equals("BaseHelper") ) { visitBaseHelper((gbind.dsl.BaseHelper) obj); return; }
 	if ( obj.eClass().getName().equals("Module") ) { visitModule((gbind.simpleocl.Module) obj); return; }
 	if ( obj.eClass().getName().equals("CollectionOperationCall") ) { visitCollectionOperationCall((gbind.simpleocl.CollectionOperationCall) obj); return; }
 	if ( obj.eClass().getName().equals("BagType") ) { visitBagType((gbind.simpleocl.BagType) obj); return; }

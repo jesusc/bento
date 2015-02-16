@@ -140,10 +140,6 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_simpleocl_SetExp((gbind.simpleocl.SetExp) element, globaltab, out);
 			return;
 		}
-		if (element instanceof gbind.simpleocl.TupleExp) {
-			print_gbind_simpleocl_TupleExp((gbind.simpleocl.TupleExp) element, globaltab, out);
-			return;
-		}
 		if (element instanceof gbind.simpleocl.TuplePart) {
 			print_gbind_simpleocl_TuplePart((gbind.simpleocl.TuplePart) element, globaltab, out);
 			return;
@@ -324,6 +320,10 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			print_gbind_dsl_VirtualMetaclass((gbind.dsl.VirtualMetaclass) element, globaltab, out);
 			return;
 		}
+		if (element instanceof gbind.dsl.VirtualTupleExp) {
+			print_gbind_dsl_VirtualTupleExp((gbind.dsl.VirtualTupleExp) element, globaltab, out);
+			return;
+		}
 		if (element instanceof gbind.dsl.VirtualReference) {
 			print_gbind_dsl_VirtualReference((gbind.dsl.VirtualReference) element, globaltab, out);
 			return;
@@ -366,6 +366,10 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		}
 		if (element instanceof gbind.simpleocl.LocalVariable) {
 			print_gbind_simpleocl_LocalVariable((gbind.simpleocl.LocalVariable) element, globaltab, out);
+			return;
+		}
+		if (element instanceof gbind.simpleocl.TupleExp) {
+			print_gbind_simpleocl_TupleExp((gbind.simpleocl.TupleExp) element, globaltab, out);
 			return;
 		}
 		if (element instanceof gbind.simpleocl.OperatorCallExp) {
@@ -6264,6 +6268,7 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		printCountingMap.put("options", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
+		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
@@ -6323,17 +6328,21 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			printCountingMap.put("boundMetamodel", count - 1);
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		sWriter = new java.io.StringWriter();
-		out1 = new java.io.PrintWriter(sWriter);
-		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-		print_gbind_dsl_BindingModel_1(element, localtab, out1, printCountingMap1);
-		if (printCountingMap.equals(printCountingMap1)) {
-			out1.close();
-		} else {
-			out1.flush();
-			out1.close();
-			out.print(sWriter.toString());
-			printCountingMap.putAll(printCountingMap1);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_gbind_dsl_BindingModel_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
 		}
 		// DEFINITION PART BEGINS (Containment)
 		count = printCountingMap.get("bindings");
@@ -6913,6 +6922,9 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 			}
 			printCountingMap.put("init", count - 1);
 		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print(";");
+		out.print(" ");
 	}
 	
 	public void print_gbind_dsl_VirtualMetaclass_0(gbind.dsl.VirtualMetaclass element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
@@ -6963,6 +6975,184 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 				}
 				printCountingMap.put("references", count - 1);
 			}
+		}
+	}
+	
+	
+	public void print_gbind_dsl_VirtualTupleExp(gbind.dsl.VirtualTupleExp element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(19);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TYPE));
+		printCountingMap.put("type", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__IF_EXP3));
+		printCountingMap.put("ifExp3", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__APPLIED_PROPERTY));
+		printCountingMap.put("appliedProperty", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__COLLECTION));
+		printCountingMap.put("collection", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__LET_EXP));
+		printCountingMap.put("letExp", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__LOOP_EXP));
+		printCountingMap.put("loopExp", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__PARENT_OPERATION));
+		printCountingMap.put("parentOperation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__INITIALIZED_VARIABLE));
+		printCountingMap.put("initializedVariable", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__IF_EXP2));
+		printCountingMap.put("ifExp2", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__OWNING_OPERATION));
+		printCountingMap.put("owningOperation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__IF_EXP1));
+		printCountingMap.put("ifExp1", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__OWNING_ATTRIBUTE));
+		printCountingMap.put("owningAttribute", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__APPLIED_OPERATOR));
+		printCountingMap.put("appliedOperator", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TUPLE_PART));
+		printCountingMap.put("tuplePart", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TYPE_NAME));
+		printCountingMap.put("typeName", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("#");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_gbind_dsl_VirtualTupleExp_0(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (CsString)
+		out.print("{");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_gbind_dsl_VirtualTupleExp_1(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("}");
+		out.print(" ");
+	}
+	
+	public void print_gbind_dsl_VirtualTupleExp_0(gbind.dsl.VirtualTupleExp element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"typeName"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"typeName"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("typeName");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TYPE_NAME));
+					if (o != null) {
+						genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TYPE_NAME), element));
+						out.print(" ");
+					}
+					printCountingMap.put("typeName", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("typeName");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TYPE_NAME));
+				if (o != null) {
+					genericity.language.gbind.IGbindTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TYPE_NAME), element));
+					out.print(" ");
+				}
+				printCountingMap.put("typeName", count - 1);
+			}
+		}
+	}
+	
+	public void print_gbind_dsl_VirtualTupleExp_1(gbind.dsl.VirtualTupleExp element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("tuplePart");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TUPLE_PART));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("tuplePart", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_gbind_dsl_VirtualTupleExp_1_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_gbind_dsl_VirtualTupleExp_1_0(gbind.dsl.VirtualTupleExp element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("tuplePart");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.VIRTUAL_TUPLE_EXP__TUPLE_PART));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("tuplePart", count - 1);
 		}
 	}
 	

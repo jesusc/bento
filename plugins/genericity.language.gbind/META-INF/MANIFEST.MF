@@ -7,8 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: 
- gbind.dsl,
+Export-Package: gbind.dsl,
  gbind.dsl.impl,
  gbind.dsl.util,
  gbind.simpleocl,

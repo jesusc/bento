@@ -84,13 +84,19 @@
 		</breakpoint>
 	</extension>
 	
-	<extension id="genericity.language.gbind.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
-		<super type="org.eclipse.debug.core.lineBreakpointMarker">
-		</super>
-		<super type="org.eclipse.core.resources.textmarker">
-		</super>
-		<persistent value="true">
-		</persistent>
-	</extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated gbind -->
+      <package
+            uri="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL"
+            class="gbind.simpleocl.SimpleoclPackage"
+            genModel="metamodel/gbind.genmodel"/>
+   </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated gbind -->
+      <package
+            uri="http://http://genericity/language/gbind/dsl"
+            class="gbind.dsl.DslPackage"
+            genModel="metamodel/gbind.genmodel"/>
+   </extension>
 </plugin>

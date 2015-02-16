@@ -214,7 +214,7 @@ public class BaseHelperImpl extends EObjectImpl implements BaseHelper {
 	 */
 	public BindingModel getModel_() {
 		if (eContainerFeatureID() != DslPackage.BASE_HELPER__MODEL_) return null;
-		return (BindingModel)eContainer();
+		return (BindingModel)eInternalContainer();
 	}
 
 	/**

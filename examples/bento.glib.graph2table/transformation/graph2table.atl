@@ -1,0 +1,53 @@
+-- @path Graph=/bento.glib.graph2table/metamodels/Graph.ecore
+-- @path Table=/bento.glib.graph2table/metamodels/Table.ecore
+
+module graph2table;
+create OUT : Table from IN : Graph;
+
+rule graph2table {
+	from
+		graph : Graph!Graph
+	to 
+		table : Table!Table (
+			rows <- firtRowForColumnNames,
+			rows <- graph.rows->collect(r | thisModule.RowHeaderNode2Row(r) )
+		), firtRowForColumnNames : Table!Row (
+			cells <- upperLeftCell,
+			cells <- graph.cols->collect(c | thisModule.ColumnHeaderNode2Cell(c) )
+		), upperLeftCell : Table!Cell (
+			content <- '' -- Could be defined in a helper	
+		)
+}
+
+lazy rule RowHeaderNode2Row{
+	from src : Graph!RowHeaderNode
+	using {
+		graph : Graph!Graph = Graph!Graph.allInstances()->any(g | g.rows->includes(src) );
+		i : Integer = graph.rows->indexOf(src);
+	}
+	to tgt : Table!Row(
+		cells <- rowHeaderCell,
+		cells <- graph.cols->collect(c | 
+			let j : Integer = graph.cols->indexOf(c)
+			 in thisModule.text2cell( graph.valueOf(i, j) ) )
+	), rowHeaderCell : Table!Cell (
+			content <- src.title
+	)
+}
+
+lazy rule ColumnHeaderNode2Cell{
+	from src : Graph!ColumnHeaderNode
+	  to tgt : Table!Cell(
+		content <- src.title
+	  )
+}
+
+rule text2cell(str : String) {
+	to 
+		c : Table!Cell (
+			content <- str
+		)
+	do {
+		c;	
+	}
+}

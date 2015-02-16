@@ -32,7 +32,7 @@ public class SimpleoclFactoryImpl extends EFactoryImpl implements SimpleoclFacto
 	 */
 	public static SimpleoclFactory init() {
 		try {
-			SimpleoclFactory theSimpleoclFactory = (SimpleoclFactory)EPackage.Registry.INSTANCE.getEFactory("http://soft.vub.ac.be/simpleocl/2011/SimpleOCL"); 
+			SimpleoclFactory theSimpleoclFactory = (SimpleoclFactory)EPackage.Registry.INSTANCE.getEFactory(SimpleoclPackage.eNS_URI);
 			if (theSimpleoclFactory != null) {
 				return theSimpleoclFactory;
 			}

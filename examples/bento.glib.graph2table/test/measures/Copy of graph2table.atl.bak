@@ -1,0 +1,67 @@
+-- @path MEASURE=/bento.glib.graph2table/test/measures/Measure.ecore
+-- @path Table=/bento.glib.graph2table/metamodels/Table.ecore
+module graph2table;
+create OUT : Table from IN : MEASURE;
+
+lazy rule graph2table {
+   from graph : OclAny
+     to table : Table!Table(
+rows <- graph.rows->collect(r | thisModule.RowHeaderNode2Row(r))
+)
+
+}
+
+lazy rule RowHeaderNode2Row {
+   from src : MEASURE!MeasureSet
+using {
+   graph : TupleType(measureSets : Sequence(MEASURE!MeasureSet), type__ : String)  = thisModule.ClassMeasureSet_AllInstances->any(g | g.rows->includes(src));   
+	i : Integer = graph.rows->indexOf(src);}
+     to tgt : Table!Row(
+cells <- graph.cols->collect(c | thisModule.ColumnHeaderNode2Cell(c)),
+cells <- graph.cols->collect(c | let j : Integer = graph.cols->indexOf(c)
+ in thisModule.text2cell(graph.valueOf(i, j)))
+)
+
+}
+
+lazy rule ColumnHeaderNode2Cell {
+   from src : MEASURE!Measure
+     to tgt : Table!Cell(
+content <- src.title
+)
+
+}
+
+rule text2cell( str : String) {
+     to c : Table!Cell(
+content <- str
+)
+do {
+   c;
+}
+}
+
+helper context MEASURE!MeasureSet def: title : OclAny = self.absoluteName;
+
+helper context MEASURE!Measure def: title : OclAny = self.metric;
+
+-- helper context MEASURE!ClassMeasureSet def: valueOf(i : Integer, j : Integer) : String = self.measureSets->at(i).measures->at(j).stringValue();
+
+helper context MEASURE!MeasureSet def: absoluteName : OclAny = self.elementName;
+
+helper context MEASURE!IntegerMeasure def: stringValue : OclAny = self.value.toString();
+
+helper context MEASURE!DoubleMeasure def: stringValue : OclAny = self.value.toString();
+
+helper context MEASURE!PercentageMeasure def: stringValue : OclAny = self.value.toString();
+
+helper  def: __convertToSequence__(obj : OclAny) : OclAny = Sequence {obj }->flatten();
+
+helper  def: ClassMeasureSet_AllInstances : OclAny = Sequence {Tuple {measureSets = MEASURE!MeasureSet.allInstances()->select(ms | ms.elementType = #class)->select(ms | ms.measures->notEmpty()), type__ = 'ClassMeasureSet' } };
+
+endpoint rule graph2table_ForceTransformation( ) {
+using {
+   varToForceEvaluation : OclAny = thisModule.ClassMeasureSet_AllInstances->collect(it | thisModule.graph2table(it));}
+
+}
+

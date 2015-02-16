@@ -473,6 +473,11 @@ package dsl {
 		val simpleocl.Primitive[1] type_;
 	}
 
+	class VirtualTupleExp extends simpleocl.TupleExp {
+	  attr String[1] typeName;
+	}
+
+
 	class VirtualClassBinding extends ConceptBinding {
 	  ref ConceptMetaclass[1] concept;
 	  ref VirtualMetaclass[1] virtual;

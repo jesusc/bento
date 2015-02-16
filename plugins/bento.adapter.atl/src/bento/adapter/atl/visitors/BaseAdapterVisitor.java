@@ -43,6 +43,10 @@ public class BaseAdapterVisitor extends AbstractVisitor {
 	protected void replaceContaining(EObject original, EObject replacement) {
 		EcoreUtil.replace(original, replacement);
 	}
+	
+	protected void replace(EObject original, EObject replacement) {
+		EcoreUtil.replace(original, replacement);		
+	}
 
 	public void deattach(EObject eobj) {
 		EcoreUtil.remove(eobj);

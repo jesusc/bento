@@ -1,7 +1,10 @@
 package bento.adapter.atl.visitors;
 
+import java.util.Optional;
+
 import gbind.dsl.LocalHelper;
 import gbind.dsl.Metaclass;
+import gbind.dsl.VirtualClassBinding;
 import gbind.simpleocl.OclExpression;
 
 import org.eclipse.emf.ecore.EObject;
@@ -23,14 +26,20 @@ public class CopyHelpers extends GBindVisitor {
 		this.bindingModel = bindingModel;
 		this.currentMetamodel = currentMetamodel;
 	}
-
-
+	
 	public void perform() {
 		startVisiting(bindingModel.getRoot());
 	}
 	
 	@Override
 	public void inLocalHelper(LocalHelper self) {
+		// Cross-cutting... weird to check this here! But this transformation has to be delayed until the
+		// virtual classes phase
+		Optional<VirtualClassBinding> opt = bindingModel.findVirtualClassBindingForConcept(self.getContext().getName());
+		if ( opt.isPresent() )
+			return;
+		
+		
 		OclExpression oclExpr = self.getBody();		
 		
 		GbindToATL gbindToATL = new GbindToATL(atlModel, currentMetamodel);
@@ -38,7 +47,7 @@ public class CopyHelpers extends GBindVisitor {
 		ContextHelper helper = null;
 
 		if ( self.getParameters().size() > 0 ) {
-			helper = gbindToATL.transform(self);			
+			helper = (ContextHelper) gbindToATL.transform(self);			
 		} else {
 			anatlyzer.atlext.OCL.OclExpression body = gbindToATL.transform(oclExpr);
 			

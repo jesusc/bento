@@ -5,7 +5,9 @@ Bundle-SymbolicName: bento.adapter.atl
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: bento.adapter.atl.Activator
 Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.9.1",
  anatlyzer.atl.typing;bundle-version="0.1.0",
+ anatlyzer.atl.editor;bundle-version="0.1.0",
  genericity.language.gbind
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

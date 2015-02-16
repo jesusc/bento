@@ -103,7 +103,7 @@ public abstract class ConceptBindingImpl extends EObjectImpl implements ConceptB
 	 */
 	public BindingModel getModel_() {
 		if (eContainerFeatureID() != DslPackage.CONCEPT_BINDING__MODEL_) return null;
-		return (BindingModel)eContainer();
+		return (BindingModel)eInternalContainer();
 	}
 
 	/**

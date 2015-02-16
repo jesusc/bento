@@ -1,0 +1,46 @@
+binding oo2ecore {  
+	concept   OO  : "platform:/resource/bento.componetization.atl.examples/concepts/uml2measure/UML2_concept.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+
+	class NamedElement to ENamedElement
+    class Dependency to NONE --??
+    class Class	     to EClass
+    class Property   to EStructuralFeature
+	class Feature	 to EOperation, EStructuralFeature
+    class Parameter	 to EParameter
+	class Model      to NONE
+	class Package    to EPackage
+	class PackageableElement to EClassifier, EPackage
+	class Classifier to EClassifier
+	class Behavior   to NONE
+	class Operation  to EOperation
+	class TypedElement to ETypedElement
+	-- class Generalization to virtual EcoreGeneralization
+	class VisibilityKind to NONE
+	
+	
+    -- class PackageableElement to ?
+     
+    feature NamedElement.name   is name
+    
+    feature Class.isAbstract is abstract
+    feature Class.nestedClassifier = Sequence { }
+    feature Class.ownedOperation   is eOperations
+    feature Class.ownedAttribute   is eStructuralFeatures
+
+	feature Class.generalizationGeneral is eSuperTypes
+       
+    feature Operation.ownedParameter is eParameters
+    feature Operation.method = Sequence { }
+    
+    feature Package.packagedElement = self.eClassifiers.union(self.eSubpackages)
+    
+    -- visibility???
+    feature TypedElement.type is eType
+    
+    -- Collapse NamedElement.visibility
+    -- feature Class.visibility = #public
+    -- feature Property.visibility = #public
+
+	feature NamedElement.visibility = #public
+}

@@ -1,0 +1,16 @@
+@namespace(uri="http://genericity/examples/oo", prefix="oo_mm")
+package oo;
+
+class OO {
+   val OOClass[*] classes;
+}
+
+class OOClass {
+   attr String[1] name;
+   ref OOClass[*] supers;
+   val Feature[*] features;
+}
+
+class Feature {
+   attr String[1] name;    
+}

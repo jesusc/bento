@@ -1,0 +1,734 @@
+--@atlcompiler	atl2006
+--@name			UML22Measure
+--@version		1.1
+--@domains		UML2, measurement data, metrics
+--@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
+--@date			2007/08/02
+--@description	This transformation is used to collect measurement data on a UML2 model, using libraries implementing some metrics (MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD).
+--@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
+-- @path Measure=/bento.rev.oo2measure/metamodels/Measure.ecore
+-- @path UML2=/bento.rev.oo2measure/metamodels/OO.ecore
+module UML22Measure;
+create OUT : Measure from IN : UML2;
+
+helper context UML2!Class def: coupledClasses : Set(UML2!Class) = self.allAttributesTypes->union(self.allParametersTypes);
+
+helper context UML2!Class def: newFeatures : Sequence(UML2!Feature) = self.newAttributes->union(self.newOperations);
+
+helper context UML2!Class def: definedFeatures : Sequence(UML2!Feature) = self.definedAttributes->union(self.definedOperations);
+
+helper context UML2!Class def: directlyInheritedFeatures : Sequence(UML2!Feature) = self.directlyInheritedAttributes->union(self.directlyInheritedOperations);
+
+helper context UML2!Class def: allInheritedFeatures : Sequence(UML2!Feature) = self.allInheritedAttributes->union(self.allInheritedOperations);
+
+helper context UML2!Class def: overriddenFeatures : Sequence(UML2!Feature) = self.overriddenAttributes->union(self.overriddenOperations);
+
+helper context UML2!Class def: allFeatures : Sequence(UML2!Feature) = self.allAttributes->union(self.allOperations);
+
+helper context UML2!Class def: newAttributes : Sequence(UML2!Property) = self.definedAttributes->select(da | self.allInheritedAttributes->collect(ia | ia.name)->excludes(da.name));
+
+helper context UML2!Class def: definedAttributes : Sequence(UML2!Property) = self.ownedAttribute;
+
+helper context UML2!Package def: definedAttributes : Sequence(UML2!Property) = self.allClasses->collect(c | c.definedAttributes)->flatten();
+
+helper context UML2!Class def: directlyInheritedAttributes : Sequence(UML2!Property) = self.parents->iterate(p;acc:Sequence(UML2!Property) = Sequence { } | acc->union(p.newAttributes));
+
+helper context UML2!Class def: allInheritedAttributes : Sequence(UML2!Property) = self.directlyInheritedAttributes->union(self.parents->collect(p | p.allInheritedAttributes)->flatten());
+
+helper context UML2!Class def: overriddenAttributes : Sequence(UML2!Property) = self.definedAttributes->select(da | self.allInheritedAttributes->collect(ia | ia.name)->includes(da.name));
+
+helper context UML2!Class def: allAttributes : Sequence(UML2!Property) = self.definedAttributes->union(self.allInheritedAttributes->reject(ia | self.overriddenAttributes->collect(oa | oa.name)->includes(ia.name)));
+
+helper context UML2!Package def: allAttributes : Sequence(UML2!Property) = self.allClasses->collect(c | c.allAttributes)->flatten();
+
+helper context UML2!Class def: allAttributesTypes : Set(UML2!Class) = self.allAttributes->collect(a | a.type)->flatten()->select(t | t.oclIsTypeOf(UML2!Class))->asSet();
+
+helper context UML2!Class def: newOperations : Sequence(UML2!Operation) = self.definedOperations->select(dop | self.allInheritedOperations->collect(iop | iop.name)->excludes(dop.name));
+
+helper context UML2!Class def: definedOperations : Sequence(UML2!Operation) = self.ownedOperation;
+
+helper context UML2!Package def: definedOperations : Sequence(UML2!Operation) = self.allClasses->collect(c | c.definedOperations)->flatten();
+
+helper context UML2!Class def: directlyInheritedOperations : Sequence(UML2!Operation) = self.parents->iterate(p;acc:Sequence(UML2!Operation) = Sequence { } | acc->union(p.newOperations));
+
+helper context UML2!Class def: allInheritedOperations : Sequence(UML2!Operation) = self.directlyInheritedOperations->union(self.parents->collect(p | p.allInheritedOperations)->flatten());
+
+helper context UML2!Class def: overriddenOperations : Sequence(UML2!Operation) = self.definedOperations->select(dop | self.allInheritedOperations->collect(iop | iop.name)->includes(dop.name));
+
+helper context UML2!Class def: allOperations : Sequence(UML2!Operation) = self.definedOperations->union(self.allInheritedOperations->reject(iop | self.overriddenOperations->collect(oop | oop.name)->includes(iop.name)));
+
+helper context UML2!Package def: allOperations : Sequence(UML2!Operation) = self.allClasses->collect(c | c.allOperations)->flatten()->asSet();
+
+helper context UML2!Class def: allParameters : Set(UML2!Parameter) = self.allOperations->collect(o | o.ownedParameter)->flatten()->select(t | t.oclIsTypeOf(UML2!Class))->asSet();
+
+helper context UML2!Class def: allParametersTypes : Set(UML2!Class) = self.allParameters->collect(param | param.type)->flatten()->select(t | t.oclIsTypeOf(UML2!Class))->asSet();
+
+helper context UML2!Operation def: allParametersTypes : Set(UML2!Class) = self.ownedParameter->collect(param | param.type)->flatten()->select(t | t.oclIsTypeOf(UML2!Class))->asSet();
+
+helper context UML2!Class def: isRoot : Boolean = self.parents->isEmpty();
+
+helper context UML2!Class def: isLeaf : Boolean = self.children->isEmpty();
+
+helper context UML2!Class def: children : Set(UML2!Class) = thisModule.AllInstancesOf_Generalization->select(g | g.general = self)->collect(g | g.specific)->excluding(self)->asSet();
+
+helper context UML2!Class def: descendants : Set(UML2!Class) = self.children->iterate(c;acc:Set(UML2!Class) = self.children | acc->union(c.descendants));
+
+helper context UML2!Class def: parents : Set(UML2!Class) = self.generalizationGeneral->excluding(self)->asSet();
+
+helper context UML2!Class def: ascendants : Set(UML2!Class) = self.parents->iterate(c;acc:Set(UML2!Class) = self.parents | acc->union(c.ascendants));
+
+helper context UML2!NamedElement def: client : Set(UML2!NamedElement) = UML2!Dependency.allInstances()->select(d | d.supplier->includes(self))->collect(d | d.client)->flatten()->asSet();
+
+helper context UML2!NamedElement def: allClients : Set(UML2!NamedElement) = self.client->union(self.client->collect(ne | ne.allClients)->flatten())->asSet();
+
+helper context UML2!Package def: contents : Sequence(UML2!PackageableElement) = self.packagedElement;
+
+helper context UML2!Package def: allClasses : Sequence(UML2!Class) = self.contents->select(c | c.oclIsKindOf(UML2!Class));
+
+helper context UML2!Package def: internalBaseClasses : Set(UML2!Class) = self.allClasses->iterate(c;acc:Set(UML2!Class) = Set { } | acc->union(c.parents));
+
+helper context UML2!Package def: internalSupplierClasses : Set(UML2!Class) = self.supplierClasses(self);
+
+helper context UML2!PackageableElement def: owner : UML2!Package = let owners : Sequence(UML2!Package) = UML2!Package.allInstances()->select(p | p.oclIsTypeOf(UML2!Package))->select(p | p.contents->includes(self))
+ in if ( owners->notEmpty() ) then
+   owners->first()
+else
+   OclUndefined
+endif;
+
+helper context UML2!Property def: AUN() : Integer = self.FUN();
+
+helper context UML2!Class def: FCV(f : UML2!Feature) : Boolean = f.visibility = #public or self.allFeatures->includes(f) or f.visibility = #protected and self.ascendants->exists(c | c.allFeatures->includes(f));
+
+helper context UML2!Class def: NAN() : Integer = self.newAttributes->size();
+
+helper context UML2!Class def: DAN() : Integer = self.definedAttributes->size();
+
+helper context UML2!Class def: IAN() : Integer = self.allInheritedAttributes->size();
+
+helper context UML2!Class def: OAN() : Integer = self.overriddenAttributes->size();
+
+helper context UML2!Class def: AAN() : Integer = self.allAttributes->size();
+
+helper context UML2!Class def: NON() : Integer = self.newOperations->size();
+
+helper context UML2!Class def: DON() : Integer = self.definedOperations->size();
+
+helper context UML2!Class def: ION() : Integer = self.allInheritedOperations->size();
+
+helper context UML2!Class def: OON() : Integer = self.overriddenOperations->size();
+
+helper context UML2!Class def: AON() : Integer = self.allOperations->size();
+
+helper context UML2!Class def: PRIAN() : Integer = self.allAttributes->select(a | a.visibility = #private)->size();
+
+helper context UML2!Class def: PROAN() : Integer = self.allAttributes->select(a | a.visibility = #protected)->size();
+
+helper context UML2!Class def: PUBAN() : Integer = self.allAttributes->select(a | a.visibility = #public)->size();
+
+helper context UML2!Class def: PRION() : Integer = self.allOperations->select(op | op.visibility = #private)->size();
+
+helper context UML2!Class def: PROON() : Integer = self.allOperations->select(op | op.visibility = #protected)->size();
+
+helper context UML2!Class def: PUBON() : Integer = self.allOperations->select(op | op.visibility = #public)->size();
+
+helper context UML2!Feature def: FUN() : Integer = self.allClients->size();
+
+helper context UML2!Class def: CHIN() : Integer = self.children->size();
+
+helper context UML2!Class def: DESN() : Integer = self.descendants->size();
+
+helper context UML2!Class def: PARN() : Integer = self.parents->size();
+
+helper context UML2!Class def: ASCN() : Integer = self.ascendants->size();
+
+helper context UML2!Operation def: OUN() : Integer = self.FUN();
+
+helper context UML2!Package def: isInternal(c : UML2!Class) : Boolean = self.contents->includes(c);
+
+helper context UML2!Package def: baseClasses(p : UML2!Package) : Set(UML2!Class) = self.internalBaseClasses->select(c | p.isInternal(c))->asSet();
+
+helper context UML2!Package def: baseClassesInPackages(p : UML2!Package) : Set(UML2!Class) = self.internalBaseClasses->union(p.internalBaseClasses);
+
+helper context UML2!Package def: supplierClasses(p : UML2!Package) : Set(UML2!Class) = self.allClasses->iterate(c;acc:Set(UML2!Class) = Set { } | acc->union(c.coupledClasses))->select(c | p.isInternal(c))->asSet();
+
+helper context UML2!Package def: supplierClassesInPackages(p : UML2!Package) : Set(UML2!Class) = self.internalSupplierClasses->union(p.internalSupplierClasses);
+
+helper context UML2!Package def: relatedClasses(p : UML2!Package) : Set(UML2!Class) = self.baseClasses(p)->union(self.supplierClasses(p));
+
+helper context UML2!Package def: CN() : Integer = self.allClasses->size();
+
+helper context UML2!Package def: PNAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.NAN);
+
+helper context UML2!Package def: PDAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.DAN());
+
+helper context UML2!Package def: PIAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.IAN());
+
+helper context UML2!Package def: POAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.OAN);
+
+helper context UML2!Package def: PAAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.AAN());
+
+helper context UML2!Package def: PNON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.NON());
+
+helper context UML2!Package def: PDON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.DON());
+
+helper context UML2!Package def: PION() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.ION());
+
+helper context UML2!Package def: POON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.OON());
+
+helper context UML2!Package def: PAON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.AON());
+
+helper context UML2!Package def: EILN(p : UML2!Package) : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.parents->select(g | p.isInternal(g))->size());
+
+helper context UML2!Package def: IILN : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.parents->select(g | self.isInternal(g))->size());
+
+helper context UML2!Package def: PILN(p : UML2!Package) : Integer = self.IILN + self.EILN(p);
+
+helper context UML2!Package def: ECLN(p : UML2!Package) : Integer = self.supplierClassesInPackages(p)->size();
+
+helper context UML2!Package def: ICLN() : Integer = self.internalSupplierClasses->size();
+
+helper context UML2!Package def: PCLN(p : UML2!Package) : Integer = self.ICLN() + self.ECLN(p);
+
+helper context UML2!Package def: AVN(a : UML2!Property) : Integer = self.FVN(a);
+
+helper context UML2!Package def: OVN(o : UML2!Operation) : Integer = self.FVN(o);
+
+helper context UML2!Package def: FVN(f : UML2!Feature) : Integer = self.allClasses->iterate(c;acc:Integer = 0 | if ( c.FCV(f) ) then
+   acc + 1
+else
+   acc
+endif);
+
+helper context UML2!Package def: APV(a : UML2!Property) : Real = if ( self.CN() > 1 ) then
+   self.AVN(a) - 1 / self.CN() - 1
+else
+   0
+endif;
+
+helper context UML2!Package def: OPV(o : UML2!Operation) : Real = if ( self.CN() > 1 ) then
+   self.OVN(o) - 1 / self.CN() - 1
+else
+   0
+endif;
+
+helper context UML2!Package def: FPV(f : UML2!Feature) : Real = if ( self.CN() > 1 ) then
+   self.FVN(f) - 1 / self.CN() - 1
+else
+   0
+endif;
+
+helper context UML2!Package def: AIF() : Real = if ( self.PAAN() > 0 ) then
+   self.PIAN() / self.PAAN()
+else
+   0
+endif;
+
+helper context UML2!Package def: OIF() : Real = if ( self.PAON() > 0 ) then
+   self.PION() / self.PAON()
+else
+   0
+endif;
+
+helper context UML2!Package def: IIF() : Real = if ( self.IILN > 0 ) then
+   self.IILN / self.PILN(self)
+else
+   0
+endif;
+
+helper context UML2!Package def: AHF() : Real = if ( self.CN() > 1 ) then
+   if ( self.PDAN() > 0 ) then
+   self.definedAttributes->iterate(a;acc:Real = 0 | acc + 1 - self.APV(a)) / self.PDAN()
+else
+   0
+endif
+else
+   0
+endif;
+
+helper context UML2!Package def: OHF() : Real = if ( self.CN() > 1 ) then
+   if ( self.PDON() > 0 ) then
+   self.definedOperations->iterate(o;acc:Real = 0 | acc + 1 - self.OPV(o)) / self.PDON()
+else
+   0
+endif
+else
+   0
+endif;
+
+helper context UML2!Package def: AHEF() : Real = let avnSum : Integer = self.allAttributes->iterate(a;acc:Integer = 0 | acc + self.AVN(a))
+ in if ( avnSum > 0 ) then
+   self.allAttributes->iterate(a;acc:Integer = 0 | acc + a.AUN()) / avnSum
+else
+   0
+endif;
+
+helper context UML2!Package def: OHEF() : Real = let ovnSum : Integer = self.allOperations->iterate(op;acc:Integer = 0 | acc + self.OVN(op))
+ in if ( ovnSum > 0 ) then
+   self.allOperations->iterate(op;acc:Integer = 0 | acc + op.OUN()) / ovnSum
+else
+   0
+endif;
+
+helper context UML2!Package def: BPF() : Real = if ( self.PAON() > 0 ) then
+   self.POON() / self.PAON()
+else
+   0
+endif;
+
+helper context UML2!Package def: CCF() : Real = if ( self.CN() > 1 ) then
+   self.ICLN() / self.CN() * self.CN() - self.CN().sqrt()
+else
+   0
+endif;
+
+helper context UML2!Package def: ICF() : Real = if ( self.ICLN() > 0 ) then
+   self.ICLN() / self.PCLN(self)
+else
+   0
+endif;
+
+helper context UML2!Class def: DIT() : Integer = if ( self.isRoot ) then
+   0
+else
+   if ( self.PARN() = 1 ) then
+   1
+else
+   0
+endif + self.parents->iterate(c;acc:Integer = 0 | acc + c.DIT())
+endif;
+
+helper context UML2!Class def: NOC() : Integer = self.CHIN();
+
+helper context UML2!Class def: CBO() : Integer = self.coupledClasses->size();
+
+helper context UML2!Class def: RFC() : Integer = self.allOperations->union(self.allOperations->collect(o | o.method->collect(m | m.allClients)->flatten()->asSet()->select(c | c.oclAsType(UML2!Operation))))->flatten()->asSet()->size();
+
+helper context UML2!Class def: NOM() : Integer = self.allOperations->select(o | o.visibility = #private)->size();
+
+helper context UML2!Class def: SIZE2() : Integer = self.DON() + self.DAN();
+
+helper context UML2!Package def: DSC() : Integer = self.CN();
+
+helper context UML2!Package def: NOH() : Integer = self.allClasses->collect(c | c.children)->flatten()->asSet()->size();
+
+helper context UML2!Package def: NIC() : Integer = self.allClasses->select(c | c.isLeaf)->size();
+
+helper context UML2!Package def: NSI() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | if ( c.PARN() = 1 ) then
+   acc + 1
+else
+   acc
+endif);
+
+helper context UML2!Package def: NNC() : Integer = self.NOH();
+
+helper context UML2!Package def: NAC() : Integer = self.allClasses->select(c | c.isAbstract)->size();
+
+helper context UML2!Package def: NLC() : Integer = self.allClasses->select(c | c.isLeaf)->size();
+
+helper context UML2!Package def: ADI() : Real = self.allClasses->iterate(c;acc:Real = 0 | acc + c.DIT() / self.CN());
+
+helper context UML2!Package def: AWI() : Real = self.allClasses->iterate(c;acc:Real = 0 | acc + c.CHIN() / self.CN());
+
+helper context UML2!Package def: ANA() : Real = if ( self.CN() > 0 ) then
+   self.internalBaseClasses->size() / self.CN()
+else
+   0
+endif;
+
+helper context UML2!Class def: MFA() : Integer = if ( self.AON() > 0 ) then
+   self.ION() / self.allOperations->iterate(o;acc:Integer = 0 | if ( self.FCV(o) ) then
+   acc + 1
+else
+   acc
+endif)
+else
+   0
+endif;
+
+helper context UML2!Class def: MAA() : Integer = let nbFCV : Integer = self.allAttributes->iterate(a;acc:Integer = 0 | if ( self.FCV(a) ) then
+   acc + 1
+else
+   acc
+endif)
+ in if ( nbFCV > 0 ) then
+   self.IAN() / nbFCV
+else
+   0
+endif;
+
+helper context UML2!Class def: MAT() : Integer = self.MFA() + self.MAA() / 2;
+
+helper context UML2!Class def: MOA() : Integer = let owner : UML2!Package = self.owner
+ in if ( not owner.oclIsUndefined() ) then
+   self.allAttributes->iterate(a;acc:Integer = 0 | if ( owner.allClasses->includes(a.type) ) then
+   acc + 1
+else
+   acc
+endif)
+else
+   0
+endif;
+
+helper context UML2!Class def: MRM() : Integer = self.DCC() + self.NAD();
+
+helper context UML2!Class def: DAM() : Integer = if ( self.AAN() > 0 ) then
+   self.PRIAN() / self.AAN()
+else
+   0
+endif;
+
+helper context UML2!Class def: OAM() : Integer = if ( self.AON() > 0 ) then
+   self.PUBON() / self.AON()
+else
+   0
+endif;
+
+helper context UML2!Class def: MAM() : Integer = 1 - self.DAM() + self.OAM() / 2;
+
+helper context UML2!Class def: NOA() : Integer = self.ASCN();
+
+helper context UML2!Class def: CIS() : Integer = self.PUBON();
+
+helper context UML2!Class def: NPT() : Integer = self.allParametersTypes->size();
+
+helper context UML2!Class def: NPM() : Integer = if ( self.AON() > 0 ) then
+   self.allParameters->size() / self.AON()
+else
+   0
+endif;
+
+helper context UML2!Class def: NOD() : Integer = self.AAN();
+
+helper context UML2!Class def: NAD() : Integer = self.allAttributesTypes->size();
+
+helper context UML2!Class def: NPA() : Integer = self.PUBAN();
+
+helper context UML2!Class def: CSM() : Integer = self.AAN() + self.AON();
+
+helper context UML2!Class def: CAM() : Integer = let divisor : Integer = self.AON() * self.allParametersTypes->size()
+ in if ( divisor > 0 ) then
+   self.allOperations->iterate(o;acc:Integer = 0 | acc + o.allParametersTypes->size()) / divisor
+else
+   0
+endif;
+
+helper context UML2!Class def: DCC() : Integer = self.allAttributesTypes->union(self.allParametersTypes)->size();
+
+helper context UML2!Class def: MCC() : Integer = self.allAttributesTypes->union(self.allParametersTypes)->iterate(t;acc:Sequence(UML2!Class) = Sequence { } | acc->union(t.allAttributesTypes)->union(t.allParametersTypes))->asSet()->size();
+
+helper context UML2!Class def: DAC() : Integer = self.allAttributesTypes->size();
+
+helper context UML2!Class def: DPC() : Integer = self.allParametersTypes->size();
+
+helper context UML2!Class def: MPC() : Integer = self.allParametersTypes->iterate(t;acc:Sequence(UML2!Class) = Sequence { } | acc->union(t.allParametersTypes))->asSet()->size();
+
+helper context UML2!Class def: CCD() : Integer = self.AAN() + self.allAttributesTypes->iterate(t;acc:Integer = 0 | acc + t.AAN());
+
+helper context UML2!Class def: CCP() : Integer = self.allParameters->size();
+
+helper context UML2!Class def: CCM() : Integer = self.CCD() + self.CCP();
+
+helper  def: measureLevel : Measure!ElementKind = #class;
+
+helper  def: root : Measure!RootMeasureSet = OclUndefined;
+
+helper  def: MetricByName : Map(String, Measure!Metric) = Map { };
+
+helper context UML2!NamedElement def: defaultName() : String = if ( self.name.oclIsUndefined() ) then
+   'Anonymous'
+else
+   self.name
+endif;
+
+entrypoint rule Metrics( ) {
+     to root : Measure!RootMeasureSet(
+modelType <- #UML2
+)
+do {
+   thisModule.root <- root;
+   if ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('MOOD', 'Metrics for Object-Oriented Design');
+
+thisModule.Metric('MOOD', 'AIF', 'Attributes Inheritance Factor');
+
+thisModule.Metric('MOOD', 'OIF', 'Operations Inheritance Factor');
+
+thisModule.Metric('MOOD', 'AHF', 'Attributes Hiding Factor');
+
+thisModule.Metric('MOOD', 'OHF', 'Operations Hiding Factor');
+
+thisModule.Metric('MOOD', 'BPF', 'Behavioral Polymorphism Factor');
+
+thisModule.Metric('MOOD', 'CCF', 'Class Coupling Factor');
+
+thisModule.Metric('MOOD', 'ICF', 'Internal Coupling Factor');
+
+root.categories <- thisModule.Category('MOOD2', 'Metrics for Object-Oriented Design 2');
+
+thisModule.Metric('MOOD2', 'IIF', 'Internal Inheritance Factor');
+
+thisModule.Metric('MOOD2', 'AHEF', 'Attributes Hiding Effectiveness Factor');
+
+thisModule.Metric('MOOD2', 'OHEF', 'Operations Hiding Effectiveness Factor'); }
+   if ( thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('MOOSE', 'Metrics for Object-Oriented Software Engineering');
+
+thisModule.Metric('MOOSE', 'DIT', 'Depth of Inheritance Tree');
+
+thisModule.Metric('MOOSE', 'NOC', 'Number of Children');
+
+thisModule.Metric('MOOSE', 'CBO', 'Coupling Between Objects');
+
+thisModule.Metric('MOOSE', 'RFC', 'Response for a Class');
+
+root.categories <- thisModule.Category('EMOOSE', 'Extended MOOSE');
+
+thisModule.Metric('EMOOSE', 'SIZE2', 'Number of local Attributes ' + 'and Operations defined in the Class'); }
+   if ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('QMOOD', 'Quality Model for Object-Oriented Design');
+
+thisModule.Metric('QMOOD', 'DSC', 'Design Size in Classes');
+
+thisModule.Metric('QMOOD', 'NOH', 'Number of Hierarchies');
+
+thisModule.Metric('QMOOD', 'NIC', 'Number of Independent Classes');
+
+thisModule.Metric('QMOOD', 'NSI', 'Number of Single Inheritance');
+
+thisModule.Metric('QMOOD', 'NNC', 'Number of Internal Classes');
+
+thisModule.Metric('QMOOD', 'NAC', 'Number of Abstract Classes');
+
+thisModule.Metric('QMOOD', 'NLC', 'Number of Leaf Classes');
+
+thisModule.Metric('QMOOD', 'ADI', 'Average Depth of Inheritance');
+
+thisModule.Metric('QMOOD', 'AWI', 'Average Width of Inheritance');
+
+thisModule.Metric('QMOOD', 'ANA', 'Average Number of Ancestors'); }
+   if ( thisModule.measureLevel = #class ) {
+   thisModule.Metric('QMOOD', 'MFA', 'Measure of Functional Abstraction');
+
+thisModule.Metric('QMOOD', 'MAA', 'Measure of Attribute Abstraction');
+
+thisModule.Metric('QMOOD', 'MAT', 'Measure of Abstraction');
+
+thisModule.Metric('QMOOD', 'MOA', 'Measure of Aggregation');
+
+thisModule.Metric('QMOOD', 'MRM', 'Modeled Relationship Measure');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'DAM', 'Data Access Metric', '>75');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'OAM', 'Operation Access Metric', '>75');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'MAM', 'Member Access Metric', '>75');
+
+thisModule.Metric('QMOOD', 'NOA', 'Number of Ancestors');
+
+thisModule.Metric('QMOOD', 'NOM', 'Number of Methods');
+
+thisModule.Metric('QMOOD', 'CIS', 'Class Interface Size');
+
+thisModule.Metric('QMOOD', 'NPT', 'Number of Unique Parameter Types');
+
+thisModule.Metric('QMOOD', 'NPM', 'Number of Parameters per Method');
+
+thisModule.Metric('QMOOD', 'NOD', 'Number of Attributes');
+
+thisModule.Metric('QMOOD', 'NAD', 'Number of Abstract Data Types');
+
+thisModule.Metric('QMOOD', 'NPA', 'Number of Public Attributes');
+
+thisModule.Metric('QMOOD', 'CSM', 'Class Size Metric');
+
+thisModule.Metric('QMOOD', 'CAM', 'Cohesion Among Methods of Class');
+
+thisModule.Metric('QMOOD', 'DCC', 'Direct Class Coupling');
+
+thisModule.Metric('QMOOD', 'MCC', 'Maximum Class Coupling');
+
+thisModule.Metric('QMOOD', 'DAC', 'Direct Attribute Based Coupling');
+
+thisModule.Metric('QMOOD', 'DPC', 'Direct Parameter Based Coupling');
+
+thisModule.Metric('QMOOD', 'MPC', 'Maximum Parameter Based Coupling');
+
+thisModule.Metric('QMOOD', 'CCD', 'Class Complexity Based on Data');
+
+thisModule.Metric('QMOOD', 'CCP', 'Class Complexity Based on Method Parameters');
+
+thisModule.Metric('QMOOD', 'CCM', 'Class Complexity Based on Members'); }
+}
+}
+
+rule Package2MeasureSet {
+   from ne : UML2!Package( ne.oclIsTypeOf(UML2!Package) or ne.oclIsTypeOf(UML2!Model) and thisModule.measureLevel = #package or thisModule.measureLevel = #class )
+     to ms : Measure!MeasureSet(
+elementName <- if ( ne.CN() > 0 ) then
+   ne.defaultName().debug('Processing metrics on package')
+else
+   ne.defaultName()
+endif,
+elementType <- if ( ne.oclIsTypeOf(UML2!Model) ) then
+   #model
+else
+   #package
+endif,
+subsets <- ne.contents,
+subsets <- ne.allClasses->collect(c | thisModule.Class2MeasureSet(c))
+)
+do {
+   if ( ne.oclIsTypeOf(UML2!Model) ) {
+   thisModule.root.measureSets <- ms; }
+   if ( ne.CN() > 0 ) {
+   ms.measures <- thisModule.PercentageMeasure('AIF', ne.AIF());
+
+ms.measures <- thisModule.PercentageMeasure('OIF', ne.OIF());
+
+ms.measures <- thisModule.PercentageMeasure('AHF', ne.AHF());
+
+ms.measures <- thisModule.PercentageMeasure('OHF', ne.OHF());
+
+ms.measures <- thisModule.PercentageMeasure('BPF', ne.BPF());
+
+ms.measures <- thisModule.PercentageMeasure('CCF', ne.CCF());
+
+ms.measures <- thisModule.PercentageMeasure('ICF', ne.ICF());
+
+ms.measures <- thisModule.PercentageMeasure('IIF', ne.IIF());
+
+ms.measures <- thisModule.PercentageMeasure('AHEF', ne.AHEF());
+
+ms.measures <- thisModule.PercentageMeasure('OHEF', ne.OHEF());
+
+ms.measures <- thisModule.IntegerMeasure('DSC', ne.DSC());
+
+ms.measures <- thisModule.IntegerMeasure('NOH', ne.NOH());
+
+ms.measures <- thisModule.IntegerMeasure('NIC', ne.NIC());
+
+ms.measures <- thisModule.IntegerMeasure('NSI', ne.NSI());
+
+ms.measures <- thisModule.IntegerMeasure('NNC', ne.NNC());
+
+ms.measures <- thisModule.IntegerMeasure('NAC', ne.NAC());
+
+ms.measures <- thisModule.IntegerMeasure('NLC', ne.NLC());
+
+ms.measures <- thisModule.DoubleMeasure('ADI', ne.ADI());
+
+ms.measures <- thisModule.DoubleMeasure('AWI', ne.AWI());
+
+ms.measures <- thisModule.DoubleMeasure('ANA', ne.ANA()); }
+}
+}
+
+lazy rule Class2MeasureSet {
+   from ne : UML2!Class( ne.oclIsTypeOf(UML2!Class) and thisModule.measureLevel = #class )
+     to ms : Measure!MeasureSet(
+elementName <- ne.defaultName().debug('Processing metrics on class'),
+elementType <- #class,
+subsets <- ne.nestedClassifier
+)
+do {
+   ms.measures <- thisModule.IntegerMeasure('DIT', ne.DIT());
+   ms.measures <- thisModule.IntegerMeasure('NOC', ne.NOC());
+   ms.measures <- thisModule.IntegerMeasure('CBO', ne.CBO());
+   ms.measures <- thisModule.IntegerMeasure('RFC', ne.RFC());
+   ms.measures <- thisModule.IntegerMeasure('SIZE2', ne.SIZE2());
+   ms.measures <- thisModule.PercentageMeasure('MFA', ne.MFA());
+   ms.measures <- thisModule.PercentageMeasure('MAA', ne.MAA());
+   ms.measures <- thisModule.PercentageMeasure('MAT', ne.MAT());
+   ms.measures <- thisModule.IntegerMeasure('MOA', ne.MOA());
+   ms.measures <- thisModule.IntegerMeasure('MRM', ne.MRM());
+   ms.measures <- thisModule.PercentageMeasure('DAM', ne.DAM());
+   ms.measures <- thisModule.PercentageMeasure('OAM', ne.OAM());
+   ms.measures <- thisModule.PercentageMeasure('MAM', ne.MAM());
+   ms.measures <- thisModule.IntegerMeasure('NOA', ne.NOA());
+   ms.measures <- thisModule.IntegerMeasure('NOM', ne.NOM());
+   ms.measures <- thisModule.IntegerMeasure('CIS', ne.CIS());
+   ms.measures <- thisModule.IntegerMeasure('NPT', ne.NPT());
+   ms.measures <- thisModule.DoubleMeasure('NPM', ne.NPM());
+   ms.measures <- thisModule.IntegerMeasure('NOD', ne.NOD());
+   ms.measures <- thisModule.IntegerMeasure('NAD', ne.NAD());
+   ms.measures <- thisModule.IntegerMeasure('NPA', ne.NPA());
+   ms.measures <- thisModule.IntegerMeasure('CSM', ne.CSM());
+   ms.measures <- thisModule.DoubleMeasure('CAM', ne.CAM());
+   ms.measures <- thisModule.IntegerMeasure('DCC', ne.DCC());
+   ms.measures <- thisModule.IntegerMeasure('MCC', ne.MCC());
+   ms.measures <- thisModule.IntegerMeasure('DAC', ne.DAC());
+   ms.measures <- thisModule.IntegerMeasure('DPC', ne.DPC());
+   ms.measures <- thisModule.IntegerMeasure('MPC', ne.MPC());
+   ms.measures <- thisModule.IntegerMeasure('CCD', ne.CCD());
+   ms.measures <- thisModule.IntegerMeasure('CCP', ne.CCP());
+   ms.measures <- thisModule.IntegerMeasure('CCM', ne.CCM());
+}
+}
+
+rule Category( name : String, desc : String) {
+     to cat : Measure!Category(
+name <- name,
+desc <- desc
+)
+do {
+   cat;
+}
+}
+
+rule Metric( catName : String, name : String, desc : String) {
+     to metric : Measure!Metric(
+name <- name,
+desc <- desc,
+preferredValue <- '!=0',
+category <- thisModule.root.categories->select(cat | cat.name = catName)->first()
+)
+do {
+   thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
+}
+}
+
+rule MetricWithPreferredValue( catName : String, name : String, desc : String, preferredValue : String) {
+     to metric : Measure!Metric(
+name <- name,
+desc <- desc,
+preferredValue <- preferredValue,
+category <- thisModule.root.categories->select(cat | cat.name = catName)->first()
+)
+do {
+   thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
+}
+}
+
+rule IntegerMeasure( name : String, value : Integer) {
+     to meas : Measure!IntegerMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+rule DoubleMeasure( name : String, value : Real) {
+     to meas : Measure!DoubleMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+rule PercentageMeasure( name : String, value : Real) {
+     to meas : Measure!PercentageMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+helper  def: AllInstancesOf_Generalization : Sequence(TupleType(specific : OclAny, general : OclAny)) = UML2!Class.allInstances()->collect(specific | specific.generalizationGeneral->collect(general | Tuple {specific = specific, general = general }))->flatten();
+

@@ -1,0 +1,12 @@
+composite component component2java {
+	uses "platform:/resource/bento.simple.oo2java/META-INF/oo2java.gcomponent"  
+	binding bindComponent = "platform:/resource/bento.simple.oo2java/tests/component2java/component2oo.gbind"
+			
+	source concept UML  : "Component.ecore"
+	target concept Java : "Java.ecore"
+	source model in  : UML  = "persons.uml" 
+	target model out : Java = "output-persons.xmi"
+	
+	compose apply oo2java(bindComponent(in)) -> (out)
+	
+}

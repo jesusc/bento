@@ -10,8 +10,10 @@ import gbind.dsl.*;
 
 import gbind.simpleocl.LocatedElement;
 import gbind.simpleocl.NamedElement;
+import gbind.simpleocl.OclExpression;
 import gbind.simpleocl.OclMetamodel;
 import gbind.simpleocl.OclModel;
+import gbind.simpleocl.TupleExp;
 import gbind.simpleocl.VariableDeclaration;
 
 import org.eclipse.emf.ecore.EObject;
@@ -170,6 +172,15 @@ public class DslSwitch<T> extends Switch<T> {
 				VirtualAttribute virtualAttribute = (VirtualAttribute)theEObject;
 				T result = caseVirtualAttribute(virtualAttribute);
 				if (result == null) result = caseVirtualFeature(virtualAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DslPackage.VIRTUAL_TUPLE_EXP: {
+				VirtualTupleExp virtualTupleExp = (VirtualTupleExp)theEObject;
+				T result = caseVirtualTupleExp(virtualTupleExp);
+				if (result == null) result = caseTupleExp(virtualTupleExp);
+				if (result == null) result = caseOclExpression(virtualTupleExp);
+				if (result == null) result = caseLocatedElement(virtualTupleExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -452,6 +463,21 @@ public class DslSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Virtual Tuple Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Virtual Tuple Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVirtualTupleExp(VirtualTupleExp object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Virtual Class Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -658,6 +684,36 @@ public class DslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariableDeclaration(VariableDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ocl Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ocl Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOclExpression(OclExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tuple Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tuple Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTupleExp(TupleExp object) {
 		return null;
 	}
 

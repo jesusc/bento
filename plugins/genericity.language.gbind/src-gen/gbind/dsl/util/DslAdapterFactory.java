@@ -10,8 +10,10 @@ import gbind.dsl.*;
 
 import gbind.simpleocl.LocatedElement;
 import gbind.simpleocl.NamedElement;
+import gbind.simpleocl.OclExpression;
 import gbind.simpleocl.OclMetamodel;
 import gbind.simpleocl.OclModel;
+import gbind.simpleocl.TupleExp;
 import gbind.simpleocl.VariableDeclaration;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -134,6 +136,10 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createVirtualAttributeAdapter();
 			}
 			@Override
+			public Adapter caseVirtualTupleExp(VirtualTupleExp object) {
+				return createVirtualTupleExpAdapter();
+			}
+			@Override
 			public Adapter caseVirtualClassBinding(VirtualClassBinding object) {
 				return createVirtualClassBindingAdapter();
 			}
@@ -188,6 +194,14 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableDeclaration(VariableDeclaration object) {
 				return createVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseOclExpression(OclExpression object) {
+				return createOclExpressionAdapter();
+			}
+			@Override
+			public Adapter caseTupleExp(TupleExp object) {
+				return createTupleExpAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -406,6 +420,20 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualTupleExp <em>Virtual Tuple Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.dsl.VirtualTupleExp
+	 * @generated
+	 */
+	public Adapter createVirtualTupleExpAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link gbind.dsl.VirtualClassBinding <em>Virtual Class Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -598,6 +626,34 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.OclExpression <em>Ocl Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.OclExpression
+	 * @generated
+	 */
+	public Adapter createOclExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link gbind.simpleocl.TupleExp <em>Tuple Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see gbind.simpleocl.TupleExp
+	 * @generated
+	 */
+	public Adapter createTupleExpAdapter() {
 		return null;
 	}
 

@@ -32,6 +32,7 @@ import gbind.dsl.VirtualFeature;
 import gbind.dsl.VirtualMetaclass;
 import gbind.dsl.VirtualReference;
 
+import gbind.dsl.VirtualTupleExp;
 import gbind.simpleocl.SimpleoclPackage;
 
 import gbind.simpleocl.impl.SimpleoclPackageImpl;
@@ -147,6 +148,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass virtualAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualTupleExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -678,6 +686,24 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getVirtualTupleExp() {
+		return virtualTupleExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVirtualTupleExp_TypeName() {
+		return (EAttribute)virtualTupleExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVirtualClassBinding() {
 		return virtualClassBindingEClass;
 	}
@@ -1002,6 +1028,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		virtualAttributeEClass = createEClass(VIRTUAL_ATTRIBUTE);
 		createEReference(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__TYPE_);
 
+		virtualTupleExpEClass = createEClass(VIRTUAL_TUPLE_EXP);
+		createEAttribute(virtualTupleExpEClass, VIRTUAL_TUPLE_EXP__TYPE_NAME);
+
 		virtualClassBindingEClass = createEClass(VIRTUAL_CLASS_BINDING);
 		createEReference(virtualClassBindingEClass, VIRTUAL_CLASS_BINDING__CONCEPT);
 		createEReference(virtualClassBindingEClass, VIRTUAL_CLASS_BINDING__VIRTUAL);
@@ -1079,6 +1108,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		virtualMetaclassEClass.getESuperTypes().add(this.getMetaclass());
 		virtualReferenceEClass.getESuperTypes().add(this.getVirtualFeature());
 		virtualAttributeEClass.getESuperTypes().add(this.getVirtualFeature());
+		virtualTupleExpEClass.getESuperTypes().add(theSimpleoclPackage.getTupleExp());
 		virtualClassBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		baseFeatureBindingEClass.getESuperTypes().add(this.getConceptBinding());
 		renamingFeatureBindingEClass.getESuperTypes().add(this.getBaseFeatureBinding());
@@ -1145,6 +1175,9 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		initEClass(virtualAttributeEClass, VirtualAttribute.class, "VirtualAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVirtualAttribute_Type_(), theSimpleoclPackage.getPrimitive(), null, "type_", null, 1, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(virtualTupleExpEClass, VirtualTupleExp.class, "VirtualTupleExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVirtualTupleExp_TypeName(), ecorePackage.getEString(), "typeName", null, 1, 1, VirtualTupleExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(virtualClassBindingEClass, VirtualClassBinding.class, "VirtualClassBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVirtualClassBinding_Concept(), this.getConceptMetaclass(), null, "concept", null, 1, 1, VirtualClassBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

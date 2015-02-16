@@ -1,0 +1,764 @@
+--@atlcompiler	atl2006
+--@name			UML22Measure
+--@version		1.1
+--@domains		UML2, measurement data, metrics
+--@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
+--@date			2007/08/02
+--@description	This transformation is used to collect measurement data on a UML2 model, using libraries implementing some metrics (MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD).
+--@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
+-- @path Measure=/bento.rev.oo2measure/metamodels/Measure.ecore
+-- @path UML2=/bento.rev.oo2measure/metamodels/OO.ecore
+module UML22Measure;
+create OUT : Measure from IN : ECORE;
+
+helper context ECORE!EClass def: coupledClasses : Set(ECORE!EClass) = self.allAttributesTypes->union(self.allParametersTypes);
+
+helper context ECORE!EClass def: newFeatures : Sequence(ECORE!EOperation) = self.newAttributes->union(self.newOperations);
+
+helper context ECORE!EClass def: definedFeatures : Sequence(ECORE!EOperation) = self.definedAttributes->union(self.definedOperations);
+
+helper context ECORE!EClass def: directlyInheritedFeatures : Sequence(ECORE!EOperation) = self.directlyInheritedAttributes->union(self.directlyInheritedOperations);
+
+helper context ECORE!EClass def: allInheritedFeatures : Sequence(ECORE!EOperation) = self.allInheritedAttributes->union(self.allInheritedOperations);
+
+helper context ECORE!EClass def: overriddenFeatures : Sequence(ECORE!EOperation) = self.overriddenAttributes->union(self.overriddenOperations);
+
+helper context ECORE!EClass def: allFeatures : Sequence(ECORE!EOperation) = self.allAttributes->union(self.allOperations);
+
+helper context ECORE!EClass def: newAttributes : Sequence(ECORE!EStructuralFeature) = self.definedAttributes->select(da | self.allInheritedAttributes->collect(ia | ia.name)->excludes(da.name));
+
+helper context ECORE!EClass def: definedAttributes : Sequence(ECORE!EStructuralFeature) = self.ownedAttribute;
+
+helper context ECORE!EPackage def: definedAttributes : Sequence(ECORE!EStructuralFeature) = self.allClasses->collect(c | c.definedAttributes)->flatten();
+
+helper context ECORE!EClass def: directlyInheritedAttributes : Sequence(ECORE!EStructuralFeature) = self.parents->iterate(p;acc:Sequence(ECORE!EStructuralFeature) = Sequence { } | acc->union(p.newAttributes));
+
+helper context ECORE!EClass def: allInheritedAttributes : Sequence(ECORE!EStructuralFeature) = self.directlyInheritedAttributes->union(self.parents->collect(p | p.allInheritedAttributes)->flatten());
+
+helper context ECORE!EClass def: overriddenAttributes : Sequence(ECORE!EStructuralFeature) = self.definedAttributes->select(da | self.allInheritedAttributes->collect(ia | ia.name)->includes(da.name));
+
+helper context ECORE!EClass def: allAttributes : Sequence(ECORE!EStructuralFeature) = self.definedAttributes->union(self.allInheritedAttributes->reject(ia | self.overriddenAttributes->collect(oa | oa.name)->includes(ia.name)));
+
+helper context ECORE!EPackage def: allAttributes : Sequence(ECORE!EStructuralFeature) = self.allClasses->collect(c | c.allAttributes)->flatten();
+
+helper context ECORE!EClass def: allAttributesTypes : Set(ECORE!EClass) = self.allAttributes->collect(a | a.type)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EClass def: newOperations : Sequence(ECORE!EOperation) = self.definedOperations->select(dop | self.allInheritedOperations->collect(iop | iop.name)->excludes(dop.name));
+
+helper context ECORE!EClass def: definedOperations : Sequence(ECORE!EOperation) = self.ownedOperation;
+
+helper context ECORE!EPackage def: definedOperations : Sequence(ECORE!EOperation) = self.allClasses->collect(c | c.definedOperations)->flatten();
+
+helper context ECORE!EClass def: directlyInheritedOperations : Sequence(ECORE!EOperation) = self.parents->iterate(p;acc:Sequence(ECORE!EOperation) = Sequence { } | acc->union(p.newOperations));
+
+helper context ECORE!EClass def: allInheritedOperations : Sequence(ECORE!EOperation) = self.directlyInheritedOperations->union(self.parents->collect(p | p.allInheritedOperations)->flatten());
+
+helper context ECORE!EClass def: overriddenOperations : Sequence(ECORE!EOperation) = self.definedOperations->select(dop | self.allInheritedOperations->collect(iop | iop.name)->includes(dop.name));
+
+helper context ECORE!EClass def: allOperations : Sequence(ECORE!EOperation) = self.definedOperations->union(self.allInheritedOperations->reject(iop | self.overriddenOperations->collect(oop | oop.name)->includes(iop.name)));
+
+helper context ECORE!EPackage def: allOperations : Sequence(ECORE!EOperation) = self.allClasses->collect(c | c.allOperations)->flatten()->asSet();
+
+helper context ECORE!EClass def: allParameters : Set(ECORE!EParameter) = self.allOperations->collect(o | o.ownedParameter)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EClass def: allParametersTypes : Set(ECORE!EClass) = self.allParameters->collect(param | param.type)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EOperation def: allParametersTypes : Set(ECORE!EClass) = self.ownedParameter->collect(param | param.type)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EClass def: isRoot : Boolean = self.parents->isEmpty();
+
+helper context ECORE!EClass def: isLeaf : Boolean = self.children->isEmpty();
+
+helper context ECORE!EClass def: children : Set(ECORE!EClass) = thisModule.AllInstancesOf_Generalization->select(g | g.general = self)->collect(g | g.specific)->excluding(self)->asSet();
+
+helper context ECORE!EClass def: descendants : Set(ECORE!EClass) = self.children->iterate(c;acc:Set(ECORE!EClass) = self.children | acc->union(c.descendants));
+
+helper context ECORE!EClass def: parents : Set(ECORE!EClass) = self.generalizationGeneral->excluding(self)->asSet();
+
+helper context ECORE!EClass def: ascendants : Set(ECORE!EClass) = self.parents->iterate(c;acc:Set(ECORE!EClass) = self.parents | acc->union(c.ascendants));
+
+helper context ECORE!ENamedElement def: client : Set(ECORE!ENamedElement) = Sequence { }->select(d | d.supplier->includes(self))->collect(d | d.client)->flatten()->asSet();
+
+helper context ECORE!ENamedElement def: allClients : Set(ECORE!ENamedElement) = self.client->union(self.client->collect(ne | ne.allClients)->flatten())->asSet();
+
+helper context ECORE!EPackage def: contents : Sequence(ECORE!EClassifier) = self.packagedElement;
+
+helper context ECORE!EPackage def: allClasses : Sequence(ECORE!EClass) = self.contents->select(c | c.oclIsKindOf(ECORE!EClass));
+
+helper context ECORE!EPackage def: internalBaseClasses : Set(ECORE!EClass) = self.allClasses->iterate(c;acc:Set(ECORE!EClass) = Set { } | acc->union(c.parents));
+
+helper context ECORE!EPackage def: internalSupplierClasses : Set(ECORE!EClass) = self.supplierClasses(self);
+
+helper context ECORE!EClassifier def: owner : ECORE!EPackage = let owners : Sequence(ECORE!EPackage) = ECORE!EPackage.allInstances()->select(p | p.oclIsTypeOf(ECORE!EPackage))->select(p | p.contents->includes(self))
+ in if ( owners->notEmpty() ) then
+   owners->first()
+else
+   OclUndefined
+endif;
+
+helper context ECORE!EPackage def: owner : ECORE!EPackage = let owners : Sequence(ECORE!EPackage) = ECORE!EPackage.allInstances()->select(p | p.oclIsTypeOf(ECORE!EPackage))->select(p | p.contents->includes(self))
+ in if ( owners->notEmpty() ) then
+   owners->first()
+else
+   OclUndefined
+endif;
+
+helper context ECORE!EStructuralFeature def: AUN() : Integer = self.FUN();
+
+helper context ECORE!EClass def: FCV(f : ECORE!EOperation) : Boolean = f.visibility = #public or self.allFeatures->includes(f) or f.visibility = #protected and self.ascendants->exists(c | c.allFeatures->includes(f));
+
+helper context ECORE!EClass def: NAN() : Integer = self.newAttributes->size();
+
+helper context ECORE!EClass def: DAN() : Integer = self.definedAttributes->size();
+
+helper context ECORE!EClass def: IAN() : Integer = self.allInheritedAttributes->size();
+
+helper context ECORE!EClass def: OAN() : Integer = self.overriddenAttributes->size();
+
+helper context ECORE!EClass def: AAN() : Integer = self.allAttributes->size();
+
+helper context ECORE!EClass def: NON() : Integer = self.newOperations->size();
+
+helper context ECORE!EClass def: DON() : Integer = self.definedOperations->size();
+
+helper context ECORE!EClass def: ION() : Integer = self.allInheritedOperations->size();
+
+helper context ECORE!EClass def: OON() : Integer = self.overriddenOperations->size();
+
+helper context ECORE!EClass def: AON() : Integer = self.allOperations->size();
+
+helper context ECORE!EClass def: PRIAN() : Integer = self.allAttributes->select(a | a.visibility = #private)->size();
+
+helper context ECORE!EClass def: PROAN() : Integer = self.allAttributes->select(a | a.visibility = #protected)->size();
+
+helper context ECORE!EClass def: PUBAN() : Integer = self.allAttributes->select(a | a.visibility = #public)->size();
+
+helper context ECORE!EClass def: PRION() : Integer = self.allOperations->select(op | op.visibility = #private)->size();
+
+helper context ECORE!EClass def: PROON() : Integer = self.allOperations->select(op | op.visibility = #protected)->size();
+
+helper context ECORE!EClass def: PUBON() : Integer = self.allOperations->select(op | op.visibility = #public)->size();
+
+helper context ECORE!EStructuralFeature def: FUN() : Integer = self.allClients->size();
+
+helper context ECORE!EOperation def: FUN() : Integer = self.allClients->size();
+
+helper context ECORE!EClass def: CHIN() : Integer = self.children->size();
+
+helper context ECORE!EClass def: DESN() : Integer = self.descendants->size();
+
+helper context ECORE!EClass def: PARN() : Integer = self.parents->size();
+
+helper context ECORE!EClass def: ASCN() : Integer = self.ascendants->size();
+
+helper context ECORE!EOperation def: OUN() : Integer = self.FUN();
+
+helper context ECORE!EPackage def: isInternal(c : ECORE!EClass) : Boolean = self.contents->includes(c);
+
+helper context ECORE!EPackage def: baseClasses(p : ECORE!EPackage) : Set(ECORE!EClass) = self.internalBaseClasses->select(c | p.isInternal(c))->asSet();
+
+helper context ECORE!EPackage def: baseClassesInPackages(p : ECORE!EPackage) : Set(ECORE!EClass) = self.internalBaseClasses->union(p.internalBaseClasses);
+
+helper context ECORE!EPackage def: supplierClasses(p : ECORE!EPackage) : Set(ECORE!EClass) = self.allClasses->iterate(c;acc:Set(ECORE!EClass) = Set { } | acc->union(c.coupledClasses))->select(c | p.isInternal(c))->asSet();
+
+helper context ECORE!EPackage def: supplierClassesInPackages(p : ECORE!EPackage) : Set(ECORE!EClass) = self.internalSupplierClasses->union(p.internalSupplierClasses);
+
+helper context ECORE!EPackage def: relatedClasses(p : ECORE!EPackage) : Set(ECORE!EClass) = self.baseClasses(p)->union(self.supplierClasses(p));
+
+helper context ECORE!EPackage def: CN() : Integer = self.allClasses->size();
+
+helper context ECORE!EPackage def: PNAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.NAN);
+
+helper context ECORE!EPackage def: PDAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.DAN());
+
+helper context ECORE!EPackage def: PIAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.IAN());
+
+helper context ECORE!EPackage def: POAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.OAN);
+
+helper context ECORE!EPackage def: PAAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.AAN());
+
+helper context ECORE!EPackage def: PNON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.NON());
+
+helper context ECORE!EPackage def: PDON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.DON());
+
+helper context ECORE!EPackage def: PION() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.ION());
+
+helper context ECORE!EPackage def: POON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.OON());
+
+helper context ECORE!EPackage def: PAON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.AON());
+
+helper context ECORE!EPackage def: EILN(p : ECORE!EPackage) : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.parents->select(g | p.isInternal(g))->size());
+
+helper context ECORE!EPackage def: IILN : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.parents->select(g | self.isInternal(g))->size());
+
+helper context ECORE!EPackage def: PILN(p : ECORE!EPackage) : Integer = self.IILN + self.EILN(p);
+
+helper context ECORE!EPackage def: ECLN(p : ECORE!EPackage) : Integer = self.supplierClassesInPackages(p)->size();
+
+helper context ECORE!EPackage def: ICLN() : Integer = self.internalSupplierClasses->size();
+
+helper context ECORE!EPackage def: PCLN(p : ECORE!EPackage) : Integer = self.ICLN() + self.ECLN(p);
+
+helper context ECORE!EPackage def: AVN(a : ECORE!EStructuralFeature) : Integer = self.FVN(a);
+
+helper context ECORE!EPackage def: OVN(o : ECORE!EOperation) : Integer = self.FVN(o);
+
+helper context ECORE!EPackage def: FVN(f : ECORE!EOperation) : Integer = self.allClasses->iterate(c;acc:Integer = 0 | if ( c.FCV(f) ) then
+   acc + 1
+else
+   acc
+endif);
+
+helper context ECORE!EPackage def: APV(a : ECORE!EStructuralFeature) : Real = if ( self.CN() > 1 ) then
+   self.AVN(a) - 1 / self.CN() - 1
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: OPV(o : ECORE!EOperation) : Real = if ( self.CN() > 1 ) then
+   self.OVN(o) - 1 / self.CN() - 1
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: FPV(f : ECORE!EOperation) : Real = if ( self.CN() > 1 ) then
+   self.FVN(f) - 1 / self.CN() - 1
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: AIF() : Real = if ( self.PAAN() > 0 ) then
+   self.PIAN() / self.PAAN()
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: OIF() : Real = if ( self.PAON() > 0 ) then
+   self.PION() / self.PAON()
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: IIF() : Real = if ( self.IILN > 0 ) then
+   self.IILN / self.PILN(self)
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: AHF() : Real = if ( self.CN() > 1 ) then
+   if ( self.PDAN() > 0 ) then
+   self.definedAttributes->iterate(a;acc:Real = 0 | acc + 1 - self.APV(a)) / self.PDAN()
+else
+   0
+endif
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: OHF() : Real = if ( self.CN() > 1 ) then
+   if ( self.PDON() > 0 ) then
+   self.definedOperations->iterate(o;acc:Real = 0 | acc + 1 - self.OPV(o)) / self.PDON()
+else
+   0
+endif
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: AHEF() : Real = let avnSum : Integer = self.allAttributes->iterate(a;acc:Integer = 0 | acc + self.AVN(a))
+ in if ( avnSum > 0 ) then
+   self.allAttributes->iterate(a;acc:Integer = 0 | acc + a.AUN()) / avnSum
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: OHEF() : Real = let ovnSum : Integer = self.allOperations->iterate(op;acc:Integer = 0 | acc + self.OVN(op))
+ in if ( ovnSum > 0 ) then
+   self.allOperations->iterate(op;acc:Integer = 0 | acc + op.OUN()) / ovnSum
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: BPF() : Real = if ( self.PAON() > 0 ) then
+   self.POON() / self.PAON()
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: CCF() : Real = if ( self.CN() > 1 ) then
+   self.ICLN() / self.CN() * self.CN() - self.CN().sqrt()
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: ICF() : Real = if ( self.ICLN() > 0 ) then
+   self.ICLN() / self.PCLN(self)
+else
+   0
+endif;
+
+helper context ECORE!EClass def: DIT() : Integer = if ( self.isRoot ) then
+   0
+else
+   if ( self.PARN() = 1 ) then
+   1
+else
+   0
+endif + self.parents->iterate(c;acc:Integer = 0 | acc + c.DIT())
+endif;
+
+helper context ECORE!EClass def: NOC() : Integer = self.CHIN();
+
+helper context ECORE!EClass def: CBO() : Integer = self.coupledClasses->size();
+
+helper context ECORE!EClass def: RFC() : Integer = self.allOperations->union(self.allOperations->collect(o | o.method->collect(m | m.allClients)->flatten()->asSet()->select(c | c.oclAsType(ECORE!EOperation))))->flatten()->asSet()->size();
+
+helper context ECORE!EClass def: NOM() : Integer = self.allOperations->select(o | o.visibility = #private)->size();
+
+helper context ECORE!EClass def: SIZE2() : Integer = self.DON() + self.DAN();
+
+helper context ECORE!EPackage def: DSC() : Integer = self.CN();
+
+helper context ECORE!EPackage def: NOH() : Integer = self.allClasses->collect(c | c.children)->flatten()->asSet()->size();
+
+helper context ECORE!EPackage def: NIC() : Integer = self.allClasses->select(c | c.isLeaf)->size();
+
+helper context ECORE!EPackage def: NSI() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | if ( c.PARN() = 1 ) then
+   acc + 1
+else
+   acc
+endif);
+
+helper context ECORE!EPackage def: NNC() : Integer = self.NOH();
+
+helper context ECORE!EPackage def: NAC() : Integer = self.allClasses->select(c | c.isAbstract)->size();
+
+helper context ECORE!EPackage def: NLC() : Integer = self.allClasses->select(c | c.isLeaf)->size();
+
+helper context ECORE!EPackage def: ADI() : Real = self.allClasses->iterate(c;acc:Real = 0 | acc + c.DIT() / self.CN());
+
+helper context ECORE!EPackage def: AWI() : Real = self.allClasses->iterate(c;acc:Real = 0 | acc + c.CHIN() / self.CN());
+
+helper context ECORE!EPackage def: ANA() : Real = if ( self.CN() > 0 ) then
+   self.internalBaseClasses->size() / self.CN()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: MFA() : Integer = if ( self.AON() > 0 ) then
+   self.ION() / self.allOperations->iterate(o;acc:Integer = 0 | if ( self.FCV(o) ) then
+   acc + 1
+else
+   acc
+endif)
+else
+   0
+endif;
+
+helper context ECORE!EClass def: MAA() : Integer = let nbFCV : Integer = self.allAttributes->iterate(a;acc:Integer = 0 | if ( self.FCV(a) ) then
+   acc + 1
+else
+   acc
+endif)
+ in if ( nbFCV > 0 ) then
+   self.IAN() / nbFCV
+else
+   0
+endif;
+
+helper context ECORE!EClass def: MAT() : Integer = self.MFA() + self.MAA() / 2;
+
+helper context ECORE!EClass def: MOA() : Integer = let owner : ECORE!EPackage = self.owner
+ in if ( not owner.oclIsUndefined() ) then
+   self.allAttributes->iterate(a;acc:Integer = 0 | if ( owner.allClasses->includes(a.type) ) then
+   acc + 1
+else
+   acc
+endif)
+else
+   0
+endif;
+
+helper context ECORE!EClass def: MRM() : Integer = self.DCC() + self.NAD();
+
+helper context ECORE!EClass def: DAM() : Integer = if ( self.AAN() > 0 ) then
+   self.PRIAN() / self.AAN()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: OAM() : Integer = if ( self.AON() > 0 ) then
+   self.PUBON() / self.AON()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: MAM() : Integer = 1 - self.DAM() + self.OAM() / 2;
+
+helper context ECORE!EClass def: NOA() : Integer = self.ASCN();
+
+helper context ECORE!EClass def: CIS() : Integer = self.PUBON();
+
+helper context ECORE!EClass def: NPT() : Integer = self.allParametersTypes->size();
+
+helper context ECORE!EClass def: NPM() : Integer = if ( self.AON() > 0 ) then
+   self.allParameters->size() / self.AON()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: NOD() : Integer = self.AAN();
+
+helper context ECORE!EClass def: NAD() : Integer = self.allAttributesTypes->size();
+
+helper context ECORE!EClass def: NPA() : Integer = self.PUBAN();
+
+helper context ECORE!EClass def: CSM() : Integer = self.AAN() + self.AON();
+
+helper context ECORE!EClass def: CAM() : Integer = let divisor : Integer = self.AON() * self.allParametersTypes->size()
+ in if ( divisor > 0 ) then
+   self.allOperations->iterate(o;acc:Integer = 0 | acc + o.allParametersTypes->size()) / divisor
+else
+   0
+endif;
+
+helper context ECORE!EClass def: DCC() : Integer = self.allAttributesTypes->union(self.allParametersTypes)->size();
+
+helper context ECORE!EClass def: MCC() : Integer = self.allAttributesTypes->union(self.allParametersTypes)->iterate(t;acc:Sequence(ECORE!EClass) = Sequence { } | acc->union(t.allAttributesTypes)->union(t.allParametersTypes))->asSet()->size();
+
+helper context ECORE!EClass def: DAC() : Integer = self.allAttributesTypes->size();
+
+helper context ECORE!EClass def: DPC() : Integer = self.allParametersTypes->size();
+
+helper context ECORE!EClass def: MPC() : Integer = self.allParametersTypes->iterate(t;acc:Sequence(ECORE!EClass) = Sequence { } | acc->union(t.allParametersTypes))->asSet()->size();
+
+helper context ECORE!EClass def: CCD() : Integer = self.AAN() + self.allAttributesTypes->iterate(t;acc:Integer = 0 | acc + t.AAN());
+
+helper context ECORE!EClass def: CCP() : Integer = self.allParameters->size();
+
+helper context ECORE!EClass def: CCM() : Integer = self.CCD() + self.CCP();
+
+helper  def: measureLevel : Measure!ElementKind = #class;
+
+helper  def: root : Measure!RootMeasureSet = OclUndefined;
+
+helper  def: MetricByName : Map(String, Measure!Metric) = Map { };
+
+helper context ECORE!ENamedElement def: defaultName() : String = if ( self.name.oclIsUndefined() ) then
+   'Anonymous'
+else
+   self.name
+endif;
+
+entrypoint rule Metrics( ) {
+     to root : Measure!RootMeasureSet(
+modelType <- #UML2
+)
+do {
+   thisModule.root <- root;
+   if ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('MOOD', 'Metrics for Object-Oriented Design');
+
+thisModule.Metric('MOOD', 'AIF', 'Attributes Inheritance Factor');
+
+thisModule.Metric('MOOD', 'OIF', 'Operations Inheritance Factor');
+
+thisModule.Metric('MOOD', 'AHF', 'Attributes Hiding Factor');
+
+thisModule.Metric('MOOD', 'OHF', 'Operations Hiding Factor');
+
+thisModule.Metric('MOOD', 'BPF', 'Behavioral Polymorphism Factor');
+
+thisModule.Metric('MOOD', 'CCF', 'Class Coupling Factor');
+
+thisModule.Metric('MOOD', 'ICF', 'Internal Coupling Factor');
+
+root.categories <- thisModule.Category('MOOD2', 'Metrics for Object-Oriented Design 2');
+
+thisModule.Metric('MOOD2', 'IIF', 'Internal Inheritance Factor');
+
+thisModule.Metric('MOOD2', 'AHEF', 'Attributes Hiding Effectiveness Factor');
+
+thisModule.Metric('MOOD2', 'OHEF', 'Operations Hiding Effectiveness Factor'); }
+   if ( thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('MOOSE', 'Metrics for Object-Oriented Software Engineering');
+
+thisModule.Metric('MOOSE', 'DIT', 'Depth of Inheritance Tree');
+
+thisModule.Metric('MOOSE', 'NOC', 'Number of Children');
+
+thisModule.Metric('MOOSE', 'CBO', 'Coupling Between Objects');
+
+thisModule.Metric('MOOSE', 'RFC', 'Response for a Class');
+
+root.categories <- thisModule.Category('EMOOSE', 'Extended MOOSE');
+
+thisModule.Metric('EMOOSE', 'SIZE2', 'Number of local Attributes ' + 'and Operations defined in the Class'); }
+   if ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('QMOOD', 'Quality Model for Object-Oriented Design');
+
+thisModule.Metric('QMOOD', 'DSC', 'Design Size in Classes');
+
+thisModule.Metric('QMOOD', 'NOH', 'Number of Hierarchies');
+
+thisModule.Metric('QMOOD', 'NIC', 'Number of Independent Classes');
+
+thisModule.Metric('QMOOD', 'NSI', 'Number of Single Inheritance');
+
+thisModule.Metric('QMOOD', 'NNC', 'Number of Internal Classes');
+
+thisModule.Metric('QMOOD', 'NAC', 'Number of Abstract Classes');
+
+thisModule.Metric('QMOOD', 'NLC', 'Number of Leaf Classes');
+
+thisModule.Metric('QMOOD', 'ADI', 'Average Depth of Inheritance');
+
+thisModule.Metric('QMOOD', 'AWI', 'Average Width of Inheritance');
+
+thisModule.Metric('QMOOD', 'ANA', 'Average Number of Ancestors'); }
+   if ( thisModule.measureLevel = #class ) {
+   thisModule.Metric('QMOOD', 'MFA', 'Measure of Functional Abstraction');
+
+thisModule.Metric('QMOOD', 'MAA', 'Measure of Attribute Abstraction');
+
+thisModule.Metric('QMOOD', 'MAT', 'Measure of Abstraction');
+
+thisModule.Metric('QMOOD', 'MOA', 'Measure of Aggregation');
+
+thisModule.Metric('QMOOD', 'MRM', 'Modeled Relationship Measure');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'DAM', 'Data Access Metric', '>75');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'OAM', 'Operation Access Metric', '>75');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'MAM', 'Member Access Metric', '>75');
+
+thisModule.Metric('QMOOD', 'NOA', 'Number of Ancestors');
+
+thisModule.Metric('QMOOD', 'NOM', 'Number of Methods');
+
+thisModule.Metric('QMOOD', 'CIS', 'Class Interface Size');
+
+thisModule.Metric('QMOOD', 'NPT', 'Number of Unique Parameter Types');
+
+thisModule.Metric('QMOOD', 'NPM', 'Number of Parameters per Method');
+
+thisModule.Metric('QMOOD', 'NOD', 'Number of Attributes');
+
+thisModule.Metric('QMOOD', 'NAD', 'Number of Abstract Data Types');
+
+thisModule.Metric('QMOOD', 'NPA', 'Number of Public Attributes');
+
+thisModule.Metric('QMOOD', 'CSM', 'Class Size Metric');
+
+thisModule.Metric('QMOOD', 'CAM', 'Cohesion Among Methods of Class');
+
+thisModule.Metric('QMOOD', 'DCC', 'Direct Class Coupling');
+
+thisModule.Metric('QMOOD', 'MCC', 'Maximum Class Coupling');
+
+thisModule.Metric('QMOOD', 'DAC', 'Direct Attribute Based Coupling');
+
+thisModule.Metric('QMOOD', 'DPC', 'Direct Parameter Based Coupling');
+
+thisModule.Metric('QMOOD', 'MPC', 'Maximum Parameter Based Coupling');
+
+thisModule.Metric('QMOOD', 'CCD', 'Class Complexity Based on Data');
+
+thisModule.Metric('QMOOD', 'CCP', 'Class Complexity Based on Method Parameters');
+
+thisModule.Metric('QMOOD', 'CCM', 'Class Complexity Based on Members'); }
+}
+}
+
+rule Package2MeasureSet {
+   from ne : ECORE!EPackage( ne.oclIsTypeOf(ECORE!EPackage) or false and thisModule.measureLevel = #package or thisModule.measureLevel = #class )
+     to ms : Measure!MeasureSet(
+elementName <- if ( ne.CN() > 0 ) then
+   ne.defaultName().debug('Processing metrics on package')
+else
+   ne.defaultName()
+endif,
+elementType <- if ( false ) then
+   #model
+else
+   #package
+endif,
+subsets <- ne.contents,
+subsets <- ne.allClasses->collect(c | thisModule.Class2MeasureSet(c))
+)
+do {
+   if ( false ) {
+   thisModule.root.measureSets <- ms; }
+   if ( ne.CN() > 0 ) {
+   ms.measures <- thisModule.PercentageMeasure('AIF', ne.AIF());
+
+ms.measures <- thisModule.PercentageMeasure('OIF', ne.OIF());
+
+ms.measures <- thisModule.PercentageMeasure('AHF', ne.AHF());
+
+ms.measures <- thisModule.PercentageMeasure('OHF', ne.OHF());
+
+ms.measures <- thisModule.PercentageMeasure('BPF', ne.BPF());
+
+ms.measures <- thisModule.PercentageMeasure('CCF', ne.CCF());
+
+ms.measures <- thisModule.PercentageMeasure('ICF', ne.ICF());
+
+ms.measures <- thisModule.PercentageMeasure('IIF', ne.IIF());
+
+ms.measures <- thisModule.PercentageMeasure('AHEF', ne.AHEF());
+
+ms.measures <- thisModule.PercentageMeasure('OHEF', ne.OHEF());
+
+ms.measures <- thisModule.IntegerMeasure('DSC', ne.DSC());
+
+ms.measures <- thisModule.IntegerMeasure('NOH', ne.NOH());
+
+ms.measures <- thisModule.IntegerMeasure('NIC', ne.NIC());
+
+ms.measures <- thisModule.IntegerMeasure('NSI', ne.NSI());
+
+ms.measures <- thisModule.IntegerMeasure('NNC', ne.NNC());
+
+ms.measures <- thisModule.IntegerMeasure('NAC', ne.NAC());
+
+ms.measures <- thisModule.IntegerMeasure('NLC', ne.NLC());
+
+ms.measures <- thisModule.DoubleMeasure('ADI', ne.ADI());
+
+ms.measures <- thisModule.DoubleMeasure('AWI', ne.AWI());
+
+ms.measures <- thisModule.DoubleMeasure('ANA', ne.ANA()); }
+}
+}
+
+lazy rule Class2MeasureSet {
+   from ne : ECORE!EClass( ne.oclIsTypeOf(ECORE!EClass) and thisModule.measureLevel = #class )
+     to ms : Measure!MeasureSet(
+elementName <- ne.defaultName().debug('Processing metrics on class'),
+elementType <- #class,
+subsets <- ne.nestedClassifier
+)
+do {
+   ms.measures <- thisModule.IntegerMeasure('DIT', ne.DIT());
+   ms.measures <- thisModule.IntegerMeasure('NOC', ne.NOC());
+   ms.measures <- thisModule.IntegerMeasure('CBO', ne.CBO());
+   ms.measures <- thisModule.IntegerMeasure('RFC', ne.RFC());
+   ms.measures <- thisModule.IntegerMeasure('SIZE2', ne.SIZE2());
+   ms.measures <- thisModule.PercentageMeasure('MFA', ne.MFA());
+   ms.measures <- thisModule.PercentageMeasure('MAA', ne.MAA());
+   ms.measures <- thisModule.PercentageMeasure('MAT', ne.MAT());
+   ms.measures <- thisModule.IntegerMeasure('MOA', ne.MOA());
+   ms.measures <- thisModule.IntegerMeasure('MRM', ne.MRM());
+   ms.measures <- thisModule.PercentageMeasure('DAM', ne.DAM());
+   ms.measures <- thisModule.PercentageMeasure('OAM', ne.OAM());
+   ms.measures <- thisModule.PercentageMeasure('MAM', ne.MAM());
+   ms.measures <- thisModule.IntegerMeasure('NOA', ne.NOA());
+   ms.measures <- thisModule.IntegerMeasure('NOM', ne.NOM());
+   ms.measures <- thisModule.IntegerMeasure('CIS', ne.CIS());
+   ms.measures <- thisModule.IntegerMeasure('NPT', ne.NPT());
+   ms.measures <- thisModule.DoubleMeasure('NPM', ne.NPM());
+   ms.measures <- thisModule.IntegerMeasure('NOD', ne.NOD());
+   ms.measures <- thisModule.IntegerMeasure('NAD', ne.NAD());
+   ms.measures <- thisModule.IntegerMeasure('NPA', ne.NPA());
+   ms.measures <- thisModule.IntegerMeasure('CSM', ne.CSM());
+   ms.measures <- thisModule.DoubleMeasure('CAM', ne.CAM());
+   ms.measures <- thisModule.IntegerMeasure('DCC', ne.DCC());
+   ms.measures <- thisModule.IntegerMeasure('MCC', ne.MCC());
+   ms.measures <- thisModule.IntegerMeasure('DAC', ne.DAC());
+   ms.measures <- thisModule.IntegerMeasure('DPC', ne.DPC());
+   ms.measures <- thisModule.IntegerMeasure('MPC', ne.MPC());
+   ms.measures <- thisModule.IntegerMeasure('CCD', ne.CCD());
+   ms.measures <- thisModule.IntegerMeasure('CCP', ne.CCP());
+   ms.measures <- thisModule.IntegerMeasure('CCM', ne.CCM());
+}
+}
+
+rule Category( name : String, desc : String) {
+     to cat : Measure!Category(
+name <- name,
+desc <- desc
+)
+do {
+   cat;
+}
+}
+
+rule Metric( catName : String, name : String, desc : String) {
+     to metric : Measure!Metric(
+name <- name,
+desc <- desc,
+preferredValue <- '!=0',
+category <- thisModule.root.categories->select(cat | cat.name = catName)->first()
+)
+do {
+   thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
+}
+}
+
+rule MetricWithPreferredValue( catName : String, name : String, desc : String, preferredValue : String) {
+     to metric : Measure!Metric(
+name <- name,
+desc <- desc,
+preferredValue <- preferredValue,
+category <- thisModule.root.categories->select(cat | cat.name = catName)->first()
+)
+do {
+   thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
+}
+}
+
+rule IntegerMeasure( name : String, value : Integer) {
+     to meas : Measure!IntegerMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+rule DoubleMeasure( name : String, value : Real) {
+     to meas : Measure!DoubleMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+rule PercentageMeasure( name : String, value : Real) {
+     to meas : Measure!PercentageMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+
+helper context ECORE!EClass def: isAbstract : OclAny = self.abstract;
+
+helper context ECORE!EClass def: ownedOperation : OclAny = self.eOperations;
+
+helper context ECORE!EClass def: ownedAttribute : OclAny = self.eStructuralFeatures;
+
+helper context ECORE!EClass def: generalizationGeneral : OclAny = self.eSuperTypes;
+
+helper context ECORE!EOperation def: ownedParameter : OclAny = self.eParameters;
+
+helper context ECORE!ETypedElement def: type : OclAny = self.eType;
+
+helper context ECORE!EClass def: nestedClassifier : OclAny = Sequence { };
+
+helper context ECORE!EOperation def: method : OclAny = Sequence { };
+
+helper context ECORE!EPackage def: packagedElement : OclAny = self.eClassifiers.union(self.eSubpackages);
+
+helper context ECORE!ENamedElement def: visibility : OclAny = #public;
+
+
+helper  def: AllInstancesOf_Generalization : Sequence(TupleType(specific : OclAny, general : OclAny)) = ECORE!EClass.allInstances()->collect(specific | specific.generalizationGeneral->collect(general | Tuple {specific = specific, general = general }))->flatten();

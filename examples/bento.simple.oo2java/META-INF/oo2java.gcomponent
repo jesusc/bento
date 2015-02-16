@@ -1,0 +1,10 @@
+
+transformation component oo2java {
+	source concept OO  : "OO.ecore"
+	target concept Java : "SimpleJava.ecore"
+	source model in : OO
+	target model out : Java
+	
+	definition atl "platform:/resource/bento.simple.oo2java/transformation/oo2java.atl"
+        with IN : SimpleOO = in, OUT = out
+}

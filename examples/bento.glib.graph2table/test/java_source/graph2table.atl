@@ -1,0 +1,75 @@
+-- @path JAVA=/bento.glib.graph2table/test/java_source/JavaSource.ecore
+-- @path Table=/bento.glib.graph2table/metamodels/Table.ecore
+
+
+module graph2table;
+create OUT: Table from IN: JAVA;
+
+rule graph2table {
+	from
+		graph: JAVA!JavaSource
+	to
+		table: Table!Table (
+			rows <- graph.rows -> collect(r | thisModule.RowHeaderNode2Row(r))
+		)
+}
+
+lazy rule RowHeaderNode2Row {
+	from
+		src: JAVA!MethodDefinition
+	using {
+		graph: JAVA!JavaSource = JAVA!JavaSource.allInstances() -> any(g | g.rows ->
+				includes(src));
+		i: Integer = graph.rows -> indexOf(src);
+	}
+	to
+		tgt: Table!Row (
+			cells <- graph.cols -> collect(c | thisModule.ColumnHeaderNode2Cell(c)),
+			cells <- graph.cols -> collect(c | let j: Integer =
+						graph.cols -> indexOf(c)
+					in
+						thisModule.text2cell(graph.valueOf(i, j)))
+		)
+}
+
+lazy rule ColumnHeaderNode2Cell {
+	from
+		src: JAVA!MethodDefinition
+	to
+		tgt: Table!Cell (
+			content <- src.title
+		)
+}
+
+rule text2cell( str: String) {
+     to
+		c: Table!Cell (
+			content <- str
+		)
+do {
+		c; 
+	}
+}
+
+helper context JAVA!JavaSource def: rows: OclAny =
+	self.allMethodDefs;
+
+helper context JAVA!JavaSource def: cols: OclAny =
+	self.allMethodDefs;
+
+helper context JAVA!MethodDefinition def: title: OclAny =
+	self.class.name + '.' + self.name;
+
+helper context JAVA!MethodDefinition def: title: OclAny =
+	self.class.name + '.' + self.name;
+
+helper context JAVA!JavaSource def: valueOf(i: Integer, j: Integer): String =
+	self.allMethodDefs -> at(i).computeContent(self.allMethodDefs -> at(j));
+
+helper context JAVA!JavaSource def: allMethodDefs: OclAny =
+	JAVA!MethodDefinition.allInstances() -> sortedBy(e | e.class.name + '_' + e.name);
+
+helper context JAVA!MethodDefinition def: computeContent(col: JAVA!MethodDefinition):
+		String =
+	self.invocations -> select(i | i.method.name = col.name and i.method.class.name = col.
+			class.name) -> size().toString();

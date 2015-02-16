@@ -841,6 +841,196 @@ public interface DslPackage extends EPackage {
 	int VIRTUAL_ATTRIBUTE_FEATURE_COUNT = VIRTUAL_FEATURE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link gbind.dsl.impl.VirtualTupleExpImpl <em>Virtual Tuple Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see gbind.dsl.impl.VirtualTupleExpImpl
+	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualTupleExp()
+	 * @generated
+	 */
+	int VIRTUAL_TUPLE_EXP = 14;
+
+	/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__LINE = SimpleoclPackage.TUPLE_EXP__LINE;
+
+	/**
+	 * The feature id for the '<em><b>Column</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__COLUMN = SimpleoclPackage.TUPLE_EXP__COLUMN;
+
+	/**
+	 * The feature id for the '<em><b>Char Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__CHAR_START = SimpleoclPackage.TUPLE_EXP__CHAR_START;
+
+	/**
+	 * The feature id for the '<em><b>Char End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__CHAR_END = SimpleoclPackage.TUPLE_EXP__CHAR_END;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__TYPE = SimpleoclPackage.TUPLE_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>If Exp3</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__IF_EXP3 = SimpleoclPackage.TUPLE_EXP__IF_EXP3;
+
+	/**
+	 * The feature id for the '<em><b>Applied Property</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__APPLIED_PROPERTY = SimpleoclPackage.TUPLE_EXP__APPLIED_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Collection</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__COLLECTION = SimpleoclPackage.TUPLE_EXP__COLLECTION;
+
+	/**
+	 * The feature id for the '<em><b>Let Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__LET_EXP = SimpleoclPackage.TUPLE_EXP__LET_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Loop Exp</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__LOOP_EXP = SimpleoclPackage.TUPLE_EXP__LOOP_EXP;
+
+	/**
+	 * The feature id for the '<em><b>Parent Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__PARENT_OPERATION = SimpleoclPackage.TUPLE_EXP__PARENT_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Initialized Variable</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__INITIALIZED_VARIABLE = SimpleoclPackage.TUPLE_EXP__INITIALIZED_VARIABLE;
+
+	/**
+	 * The feature id for the '<em><b>If Exp2</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__IF_EXP2 = SimpleoclPackage.TUPLE_EXP__IF_EXP2;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__OWNING_OPERATION = SimpleoclPackage.TUPLE_EXP__OWNING_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>If Exp1</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__IF_EXP1 = SimpleoclPackage.TUPLE_EXP__IF_EXP1;
+
+	/**
+	 * The feature id for the '<em><b>Owning Attribute</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__OWNING_ATTRIBUTE = SimpleoclPackage.TUPLE_EXP__OWNING_ATTRIBUTE;
+
+	/**
+	 * The feature id for the '<em><b>Applied Operator</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__APPLIED_OPERATOR = SimpleoclPackage.TUPLE_EXP__APPLIED_OPERATOR;
+
+	/**
+	 * The feature id for the '<em><b>Tuple Part</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__TUPLE_PART = SimpleoclPackage.TUPLE_EXP__TUPLE_PART;
+
+	/**
+	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP__TYPE_NAME = SimpleoclPackage.TUPLE_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Tuple Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TUPLE_EXP_FEATURE_COUNT = SimpleoclPackage.TUPLE_EXP_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.VirtualClassBindingImpl <em>Virtual Class Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -848,7 +1038,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getVirtualClassBinding()
 	 * @generated
 	 */
-	int VIRTUAL_CLASS_BINDING = 14;
+	int VIRTUAL_CLASS_BINDING = 15;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -912,7 +1102,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptFeatureRef()
 	 * @generated
 	 */
-	int CONCEPT_FEATURE_REF = 15;
+	int CONCEPT_FEATURE_REF = 16;
 
 	/**
 	 * The feature id for the '<em><b>Concept Class</b></em>' reference.
@@ -949,7 +1139,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseFeatureBinding()
 	 * @generated
 	 */
-	int BASE_FEATURE_BINDING = 16;
+	int BASE_FEATURE_BINDING = 17;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1013,7 +1203,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getRenamingFeatureBinding()
 	 * @generated
 	 */
-	int RENAMING_FEATURE_BINDING = 17;
+	int RENAMING_FEATURE_BINDING = 18;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1086,7 +1276,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getOclFeatureBinding()
 	 * @generated
 	 */
-	int OCL_FEATURE_BINDING = 18;
+	int OCL_FEATURE_BINDING = 19;
 
 	/**
 	 * The feature id for the '<em><b>Debug Name</b></em>' attribute.
@@ -1159,7 +1349,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getBaseHelper()
 	 * @generated
 	 */
-	int BASE_HELPER = 19;
+	int BASE_HELPER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1214,7 +1404,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getConceptHelper()
 	 * @generated
 	 */
-	int CONCEPT_HELPER = 20;
+	int CONCEPT_HELPER = 21;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1287,7 +1477,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getLocalHelper()
 	 * @generated
 	 */
-	int LOCAL_HELPER = 21;
+	int LOCAL_HELPER = 22;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -1360,7 +1550,7 @@ public interface DslPackage extends EPackage {
 	 * @see gbind.dsl.impl.DslPackageImpl#getHelperParameter()
 	 * @generated
 	 */
-	int HELPER_PARAMETER = 22;
+	int HELPER_PARAMETER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Line</b></em>' attribute.
@@ -1904,6 +2094,27 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVirtualAttribute_Type_();
+
+	/**
+	 * Returns the meta object for class '{@link gbind.dsl.VirtualTupleExp <em>Virtual Tuple Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Tuple Exp</em>'.
+	 * @see gbind.dsl.VirtualTupleExp
+	 * @generated
+	 */
+	EClass getVirtualTupleExp();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.VirtualTupleExp#getTypeName <em>Type Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Name</em>'.
+	 * @see gbind.dsl.VirtualTupleExp#getTypeName()
+	 * @see #getVirtualTupleExp()
+	 * @generated
+	 */
+	EAttribute getVirtualTupleExp_TypeName();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.VirtualClassBinding <em>Virtual Class Binding</em>}'.
@@ -2594,6 +2805,24 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VIRTUAL_ATTRIBUTE__TYPE_ = eINSTANCE.getVirtualAttribute_Type_();
+
+		/**
+		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualTupleExpImpl <em>Virtual Tuple Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see gbind.dsl.impl.VirtualTupleExpImpl
+		 * @see gbind.dsl.impl.DslPackageImpl#getVirtualTupleExp()
+		 * @generated
+		 */
+		EClass VIRTUAL_TUPLE_EXP = eINSTANCE.getVirtualTupleExp();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VIRTUAL_TUPLE_EXP__TYPE_NAME = eINSTANCE.getVirtualTupleExp_TypeName();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.VirtualClassBindingImpl <em>Virtual Class Binding</em>}' class.

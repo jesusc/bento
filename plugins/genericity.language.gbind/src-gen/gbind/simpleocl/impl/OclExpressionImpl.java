@@ -135,7 +135,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public IfExp getIfExp3() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__IF_EXP3) return null;
-		return (IfExp)eContainer();
+		return (IfExp)eInternalContainer();
 	}
 
 	/**
@@ -176,7 +176,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public PropertyCallExp getAppliedProperty() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__APPLIED_PROPERTY) return null;
-		return (PropertyCallExp)eContainer();
+		return (PropertyCallExp)eInternalContainer();
 	}
 
 	/**
@@ -217,7 +217,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public CollectionExp getCollection() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__COLLECTION) return null;
-		return (CollectionExp)eContainer();
+		return (CollectionExp)eInternalContainer();
 	}
 
 	/**
@@ -258,7 +258,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public LetExp getLetExp() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__LET_EXP) return null;
-		return (LetExp)eContainer();
+		return (LetExp)eInternalContainer();
 	}
 
 	/**
@@ -299,7 +299,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public LoopExp getLoopExp() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__LOOP_EXP) return null;
-		return (LoopExp)eContainer();
+		return (LoopExp)eInternalContainer();
 	}
 
 	/**
@@ -340,7 +340,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public OperationCall getParentOperation() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__PARENT_OPERATION) return null;
-		return (OperationCall)eContainer();
+		return (OperationCall)eInternalContainer();
 	}
 
 	/**
@@ -381,7 +381,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public LocalVariable getInitializedVariable() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__INITIALIZED_VARIABLE) return null;
-		return (LocalVariable)eContainer();
+		return (LocalVariable)eInternalContainer();
 	}
 
 	/**
@@ -422,7 +422,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public IfExp getIfExp2() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__IF_EXP2) return null;
-		return (IfExp)eContainer();
+		return (IfExp)eInternalContainer();
 	}
 
 	/**
@@ -463,7 +463,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public Operation getOwningOperation() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__OWNING_OPERATION) return null;
-		return (Operation)eContainer();
+		return (Operation)eInternalContainer();
 	}
 
 	/**
@@ -504,7 +504,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public IfExp getIfExp1() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__IF_EXP1) return null;
-		return (IfExp)eContainer();
+		return (IfExp)eInternalContainer();
 	}
 
 	/**
@@ -545,7 +545,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public Attribute getOwningAttribute() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__OWNING_ATTRIBUTE) return null;
-		return (Attribute)eContainer();
+		return (Attribute)eInternalContainer();
 	}
 
 	/**
@@ -586,7 +586,7 @@ public abstract class OclExpressionImpl extends LocatedElementImpl implements Oc
 	 */
 	public OperatorCallExp getAppliedOperator() {
 		if (eContainerFeatureID() != SimpleoclPackage.OCL_EXPRESSION__APPLIED_OPERATOR) return null;
-		return (OperatorCallExp)eContainer();
+		return (OperatorCallExp)eInternalContainer();
 	}
 
 	/**

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.language.gbind/src-gen"
-    modelPluginID="genericity.language.gbind" modelName="Gbind" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/genericity.language.gbind/src-gen" modelPluginID="genericity.language.gbind"
+    modelName="Gbind" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
   <foreignModel>gbind.ecore</foreignModel>
   <genPackages prefix="Gbind" basePackage="genericity.language" disposableProviderFactory="true"
       ecorePackage="gbind.ecore#/">
@@ -331,6 +330,9 @@
       </genClasses>
       <genClasses ecoreClass="gbind.ecore#//dsl/VirtualAttribute">
         <genFeatures createChild="false" ecoreFeature="ecore:EReference gbind.ecore#//dsl/VirtualAttribute/type_"/>
+      </genClasses>
+      <genClasses ecoreClass="gbind.ecore#//dsl/VirtualTupleExp">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/VirtualTupleExp/typeName"/>
       </genClasses>
       <genClasses ecoreClass="gbind.ecore#//dsl/VirtualClassBinding">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

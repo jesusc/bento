@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gbind"
-    nsURI="http://genericity/language/gbind" nsPrefix="gbind">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gbind" nsURI="http://genericity/language/gbind" nsPrefix="gbind">
   <eSubpackages name="simpleocl" nsURI="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL"
       nsPrefix="simpleocl">
     <eClassifiers xsi:type="ecore:EClass" name="LocatedElement" abstract="true">
@@ -455,6 +453,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="VirtualAttribute" eSuperTypes="#//dsl/VirtualFeature">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type_" lowerBound="1"
           eType="#//simpleocl/Primitive" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualTupleExp" eSuperTypes="#//simpleocl/TupleExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VirtualClassBinding" eSuperTypes="#//dsl/ConceptBinding">
       <eStructuralFeatures xsi:type="ecore:EReference" name="concept" lowerBound="1"
