@@ -24,6 +24,8 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLSerializer;
 import anatlyzer.atl.util.ATLUtils;
 import bento.adapter.atl.ATLTrafoAdapter;
+import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 /**
  * Holds an ATL template loaded in memory, adding the possibility
@@ -62,18 +64,51 @@ public class AtlMemoryTemplate implements AdaptationResult {
 
 		if ( atlBoundModel == null )
 			throw new IllegalArgumentException();
-
+		
 		// TODO: Load only the first time
 		Resource atlResource = loadAtlTransformation();
 		
+		ATLModel atlModel = new ATLModel(atlResource);
+		BindingModel bindModel = new BindingModel(loader.load());
+		
 		// TODO: The atl model is fixed, the others may vary in several invocations... 
-		ATLTrafoAdapter adapter = new ATLTrafoAdapter(atlResource, loader.load(), atlBoundModel.getAtlMetamodelName());
+		ATLTrafoAdapter adapter = new ATLTrafoAdapter(atlModel, bindModel, 
+				new EclipseComponentInfoForBinding(atlBoundModel.getAtlMetamodelName(), bindModel) );
 		
 		adapter.perform();
 		
 		this.adaptedAtlModel = adapter.getAdaptedATL();
 	}
 
+	public class EclipseComponentInfoForBinding implements IComponentInfoForBinding {
+		
+		private String conceptMetamodelName;
+		private BindingModel bindModel;
+
+		public EclipseComponentInfoForBinding(String conceptMetamodelName, BindingModel bindModel) {
+			this.conceptMetamodelName = conceptMetamodelName;
+			this.bindModel = bindModel;
+		}
+
+		@Override
+		public String getConceptMetamodelName() {
+			return conceptMetamodelName;
+		}
+
+		@Override
+		public String getBoundMetamodelName() {
+			return bindModel.getRoot().getBoundMetamodel().getName();
+		}
+
+		@Override
+		public String getBoundMetamodelURI() {
+			String uri = bindModel.getRoot().getBoundMetamodel().getMetamodelURI();
+			// quick trick			
+			return uri.replace("platform:/resource", "");
+		}
+		
+	}
+	
 	private Resource loadAtlTransformation() {
 		ModelFactory modelFactory = new EMFModelFactory();
 

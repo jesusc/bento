@@ -5,11 +5,12 @@ import anatlyzer.atlext.ATL.Unit;
 import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 public class AdaptModelElements extends BaseAdapterVisitor {
 	
-	public AdaptModelElements(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
-		super(atlModel, bindingModel, currentMetamodel);
+	public AdaptModelElements(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+		super(atlModel, bindingModel, info);
 	}
 
 	public void perform() {
@@ -32,7 +33,7 @@ public class AdaptModelElements extends BaseAdapterVisitor {
 	
 	@Override
 	public void inOclModel(OclModel self) {
-		if ( self.getName().equals(this.currentMetamodel) ) {
+		if ( self.getName().equals(info.getConceptMetamodelName()) ) {
 			String concreteMM = bindingModel.getRoot().getBoundMetamodel().getName();
 			self.setName(concreteMM);
 		}

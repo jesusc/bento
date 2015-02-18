@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Bento Componetization UI
 Bundle-SymbolicName: bento.componetization.ui; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Activator: bento.componetization.ui.Activator
 Bundle-Vendor: Miso Team
 Require-Bundle: org.eclipse.ui,
@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
  org.eclipse.ui.forms;bundle-version="3.5.100",
- bento.componetization.model;bundle-version="1.0.0",
+ bento.componetization.model;bundle-version="0.6.0",
  org.eclipse.core.databinding,
  org.eclipse.core.databinding.beans,
  org.eclipse.core.databinding.observable,
@@ -21,6 +21,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface.databinding,
  org.eclipse.emf;bundle-version="2.6.0",
  org.eclipse.emf.databinding,
+<<<<<<< HEAD
  bento.componetization.atl;bundle-version="1.0.0",
  bento.componetization.atl.metrics;bundle-version="1.0.0",
  anatlyzer.atl.typing,
@@ -28,6 +29,14 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.m2m.atl.engine,
  anatlyzer.atl.editor;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+=======
+ org.eclectic.modeling;bundle-version="0.8.6",
+ org.eclectic.idc;bundle-version="0.8.6",
+ genericity.compiler.atl.typing;bundle-version="1.0.0",
+ bento.componetization.atl;bundle-version="0.6.0",
+ bento.componetization.atl.metrics;bundle-version="0.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+>>>>>>> 823b86b5f91723c17368a3a764baf9f011da85c4
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  swing2swt.jar,

@@ -1,4 +1,4 @@
--- @path Graph=/bento.glib.graph2table/metamodels/Graph.ecore
+-- @path MEASURE=/bento.glib.graph2table/test/measures/Measure.ecore
 -- @path Table=/bento.glib.graph2table/metamodels/Table.ecore
 module graph2table;
 create OUT : Table from IN : MEASURE;

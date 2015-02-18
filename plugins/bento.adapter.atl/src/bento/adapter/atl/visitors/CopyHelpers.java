@@ -13,18 +13,19 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.ContextHelper;
 import anatlyzer.atlext.OCL.OclModel;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 import bento.adapter.gbind.visitors.GBindVisitor;
 
 public class CopyHelpers extends GBindVisitor {
 	
 	private BindingModel bindingModel;
 	private ATLModel atlModel;
-	private String currentMetamodel;
+	private IComponentInfoForBinding info;
 
-	public CopyHelpers(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
+	public CopyHelpers(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
 		this.atlModel = atlModel;
 		this.bindingModel = bindingModel;
-		this.currentMetamodel = currentMetamodel;
+		this.info = info;
 	}
 	
 	public void perform() {
@@ -42,7 +43,7 @@ public class CopyHelpers extends GBindVisitor {
 		
 		OclExpression oclExpr = self.getBody();		
 		
-		GbindToATL gbindToATL = new GbindToATL(atlModel, currentMetamodel);
+		GbindToATL gbindToATL = new GbindToATL(atlModel, info);
 		
 		ContextHelper helper = null;
 
@@ -51,7 +52,7 @@ public class CopyHelpers extends GBindVisitor {
 		} else {
 			anatlyzer.atlext.OCL.OclExpression body = gbindToATL.transform(oclExpr);
 			
-			OclModel metamodel  = AdaptationUtils.getMetamodel(atlModel, this.currentMetamodel);
+			OclModel metamodel  = AdaptationUtils.getMetamodel(atlModel, info.getConceptMetamodelName());
 			Metaclass metaclass = self.getContext();
 			helper = AdaptationUtils.createContextAttributeHelper(metamodel, metaclass.getName(), self.getFeature(), body, this::addToResource);
 		}

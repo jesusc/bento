@@ -266,7 +266,8 @@ public class RemoveAssociationClass extends BaseRefactoring {
 
 		@Override
 		public boolean coevolutionRequired() {
-			return this.navigations.size() > 0;
+			return this.navigations.size() > 0 ||
+				   this.updateAllInstances.size() > 0;
 		}
 
 	}

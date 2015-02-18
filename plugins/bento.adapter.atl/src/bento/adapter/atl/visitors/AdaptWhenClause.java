@@ -22,11 +22,12 @@ import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 public class AdaptWhenClause extends BaseAdapterVisitor {
 	
-	public AdaptWhenClause(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
-		super(atlModel, bindingModel, currentMetamodel);
+	public AdaptWhenClause(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+		super(atlModel, bindingModel, info);
 	}
 
 	public void perform() {
@@ -144,9 +145,9 @@ public class AdaptWhenClause extends BaseAdapterVisitor {
 	
 	
 	private void createHelperForWhenClauseExpression(ClassBinding cb) {
-		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, this.currentMetamodel);
+		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, info.getConceptMetamodelName());
 		
-		anatlyzer.atlext.OCL.OclExpression atlExpr = new GbindToATL(atlModel, currentMetamodel).transform(cb.getWhenClause());
+		anatlyzer.atlext.OCL.OclExpression atlExpr = new GbindToATL(atlModel, info).transform(cb.getWhenClause());
 		Helper helper = AdaptationUtils.createContextAttributeHelper(metamodel, cb.getConcept().getName(), 
 				getWhenHelperName(cb), atlExpr, this::addToResource);
 	
@@ -155,7 +156,7 @@ public class AdaptWhenClause extends BaseAdapterVisitor {
 
 	private Stream<ClassBinding> findAdaptedWhenClauseBindings(OclModelElement me) {
 		return bindingModel.findWhenClauseBindings().filter(cb -> 
-			me.getModel().getName().equals(this.currentMetamodel) && 
+			me.getModel().getName().equals(info.getConceptMetamodelName()) && 
 			me.getName().equals(cb.getConcept().getName()));
 	}
 	

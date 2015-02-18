@@ -1,14 +1,11 @@
 package bento.adapter.atl.visitors;
 
-import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.Metaclass;
 import gbind.dsl.OclFeatureBinding;
 import gbind.dsl.RenamingFeatureBinding;
 import gbind.simpleocl.OclExpression;
 
 import java.util.stream.Stream;
-
-import org.eclipse.emf.ecore.EObject;
 
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.ATLFactory;
@@ -24,11 +21,12 @@ import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 public class CreateAdapters extends BaseAdapterVisitor {
 	
-	public CreateAdapters(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
-		super(atlModel, bindingModel, currentMetamodel);
+	public CreateAdapters(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+		super(atlModel, bindingModel, info);
 	}
 
 	public void perform() {
@@ -93,7 +91,7 @@ public class CreateAdapters extends BaseAdapterVisitor {
 	 * @return
 	 */
 	private void createRenamingHelper(RenamingFeatureBinding fb, Metaclass metaclass) {
-		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, this.currentMetamodel);
+		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, info.getConceptMetamodelName());
 		
 		ContextHelper helper = ATLFactory.eINSTANCE.createContextHelper();
 		{
@@ -130,19 +128,19 @@ public class CreateAdapters extends BaseAdapterVisitor {
 			definition.setContext_(context_);
 		}
 
-		atlModel.getModule().getElements().add(helper);		
+		atlModel.getModule().getElements().add(0, helper);		
 	}
 
 	private void createOclHelper(OclFeatureBinding fb, Metaclass metaclass) {
-		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, this.currentMetamodel);
+		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, info.getConceptMetamodelName());
 		OclExpression oclExpr = fb.getConcrete();
 
-		anatlyzer.atlext.OCL.OclExpression body = new GbindToATL(atlModel, currentMetamodel).transform(oclExpr);
+		anatlyzer.atlext.OCL.OclExpression body = new GbindToATL(atlModel, info).transform(oclExpr);
 		
 		// Creates the helper
 		ContextHelper helper = AdaptationUtils.createContextAttributeHelper(metamodel, metaclass.getName(), fb.getConceptFeature(), body, this::addToResource);
 				
-		atlModel.getModule().getElements().add(helper);		
+		atlModel.getModule().getElements().add(0, helper);		
 	}
 	
 

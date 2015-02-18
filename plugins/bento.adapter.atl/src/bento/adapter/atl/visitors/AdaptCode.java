@@ -18,12 +18,13 @@ import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 import bento.adapter.atl.util.TPat;
 
 public class AdaptCode extends BaseAdapterVisitor {
 	
-	public AdaptCode(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
-		super(atlModel, bindingModel, currentMetamodel);
+	public AdaptCode(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+		super(atlModel, bindingModel, info);
 	}
 
 	public void perform() {

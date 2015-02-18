@@ -15,6 +15,7 @@ import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.HelperParameter;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.OclFeatureBinding;
+import gbind.dsl.RenamingFeatureBinding;
 import gbind.dsl.VirtualAttribute;
 import gbind.dsl.VirtualClassBinding;
 import gbind.dsl.VirtualMetaclass;
@@ -61,6 +62,7 @@ import anatlyzer.atlext.OCL.TupleTypeAttribute;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 
 /**
@@ -87,8 +89,8 @@ import bento.adapter.atl.BindingModel;
  */
 public class AdaptVirtualClasses extends BaseAdapterVisitor {
 	
-	public AdaptVirtualClasses(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
-		super(atlModel, bindingModel, currentMetamodel);
+	public AdaptVirtualClasses(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+		super(atlModel, bindingModel, info);
 	}
 	
 	public void perform() {
@@ -110,6 +112,20 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 		}		
 		
 		// Create adapters for virtual classes
+		// Renaming helpers
+		Stream<RenamingFeatureBinding> features = bindingModel.findAllRenamingFeatureBindings().
+				filter(fb -> AdaptationUtils.isNormalFeatureBinding(fb) );
+				
+			features.forEach(fb -> {
+				if ( fb.getQualifier() == null ) {
+					bindingModel.findVirtualClassBindingForConcept(fb.getConceptClass().getName()).
+						ifPresent(vcb -> createRenamingHelperForVirtualClass(fb, fb.getConceptClass(), vcb.getVirtual())); 
+				} else {
+					throw new UnsupportedOperationException(); // Virtual classes cannot be mapped to more than once... so far
+					// createRenamingHelper(fb, fb.getQualifier());
+				}
+			});
+		
 		// Ocl feature bindings
 		Stream<OclFeatureBinding> oclFeatureBindings = bindingModel.findAllOclFeatureBindings().
 				filter(fb -> AdaptationUtils.isNormalFeatureBinding(fb) );
@@ -137,7 +153,7 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 		if ( ! opt.isPresent() )
 			return;
 		
-		GbindToATL_For_VirtualClass gbindToATL = new GbindToATL_For_VirtualClass(atlModel, currentMetamodel);
+		GbindToATL_For_VirtualClass gbindToATL = new GbindToATL_For_VirtualClass(atlModel, info);
 		StaticHelper helper = (StaticHelper) gbindToATL.transform(self, opt.get().getVirtual());
 
 		
@@ -149,8 +165,8 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 
 		private VirtualMetaclass virtualClass;
 
-		public GbindToATL_For_VirtualClass(ATLModel atlModel, String currentMetamodel) {
-			super(atlModel, currentMetamodel);
+		public GbindToATL_For_VirtualClass(ATLModel atlModel, IComponentInfoForBinding info) {
+			super(atlModel, info);
 		}
 		
 		public Helper transform(LocalHelper self, VirtualMetaclass virtualClass) {
@@ -175,11 +191,27 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 
 	}
 
+	private void createRenamingHelperForVirtualClass(RenamingFeatureBinding fb, gbind.dsl.Metaclass metaclass, VirtualMetaclass vc) {
+		// Init expression (copied from CreateAdapters)
+		NavigationOrAttributeCallExp init = OCLFactory.eINSTANCE.createNavigationOrAttributeCallExp();
+		init.setName(fb.getConcreteFeature());
+		VariableExp varExp = OCLFactory.eINSTANCE.createVariableExp();
+		VariableDeclaration self = addToResource(OCLFactory.eINSTANCE.createVariableDeclaration());
+		self.setVarName("self");
+		varExp.setReferredVariable(self);
+		init.setSource(varExp);
 
+		anatlyzer.atlext.OCL.OclExpression body = init;
+		
+		StaticHelper helper = createOclHelperForVirtualClassAux(fb.getConceptFeature(), metaclass, body, vc, new Parameter[] { });
+		atlModel.getModule().getElements().add(helper);		
+		
+	}
+	
 	private void createOclHelperForVirtualClass(OclFeatureBinding fb, gbind.dsl.Metaclass metaclass, VirtualMetaclass vc) {
 		gbind.simpleocl.OclExpression oclExpr = fb.getConcrete();
 
-		anatlyzer.atlext.OCL.OclExpression body = new GbindToATL(atlModel, currentMetamodel).transform(oclExpr);
+		anatlyzer.atlext.OCL.OclExpression body = new GbindToATL(atlModel, info).transform(oclExpr);
 		
 		StaticHelper helper = createOclHelperForVirtualClassAux(fb.getConceptFeature(), metaclass, body, vc, new Parameter[] { });
 		atlModel.getModule().getElements().add(helper);		
@@ -624,7 +656,7 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 	private void createAllInstancesHelper(VirtualMetaclass v) {
 		gbind.simpleocl.OclExpression oclExpr = v.getInit();
 
-		anatlyzer.atlext.OCL.OclExpression body = new GbindToATL(atlModel, currentMetamodel).transform(oclExpr);
+		anatlyzer.atlext.OCL.OclExpression body = new GbindToATL(atlModel, info).transform(oclExpr);
 
 		StaticHelper helper = ATLFactory.eINSTANCE.createStaticHelper();
 		OclFeatureDefinition definition = OCLFactory.eINSTANCE.createOclFeatureDefinition();

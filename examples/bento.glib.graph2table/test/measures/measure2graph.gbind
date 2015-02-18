@@ -4,7 +4,7 @@
 --
 binding measure2graph {  
 	concept   GRAPH   : "platform:/resource/bento.library.graph2table/metamodels/Graph.ecore"
-	metamodel MEASURE : "platform:/resource/bento.library.graph2table/test/test1/Measure.ecore"
+	metamodel MEASURE : "platform:/resource/bento.glib.graph2table/test/measures/Measure.ecore"
 
 --    class PackageMeasureSet {
 --    	ref measureSets : MeasureSet

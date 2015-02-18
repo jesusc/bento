@@ -29,12 +29,12 @@ public class ATLTrafoAdapter {
 
 	private ATLModel atlModel;
 	private BindingModel bindModel;
-	private String currentMetamodel;
+	private IComponentInfoForBinding info;
 
-	public ATLTrafoAdapter(Resource atlResource, Resource bindingResource, String currentMetamodel) {
-		atlModel = new ATLModel(atlResource);
-		bindModel = new BindingModel(bindingResource);
-		this.currentMetamodel = currentMetamodel;
+	public ATLTrafoAdapter(ATLModel atlModel, BindingModel bindModel, IComponentInfoForBinding info) {
+		this.atlModel = atlModel; 
+		this.bindModel = bindModel;
+		this.info = info;
 	}
 
 	public ATLModel getAdaptedATL() {
@@ -57,42 +57,41 @@ public class ATLTrafoAdapter {
 
 		// adapt the code of all rules and helpers, e.g., oclIsKindOf...
 		System.out.println("Adapting OCL constructs");
-		new AdaptCode(atlModel, bindModel, currentMetamodel).perform();
+		new AdaptCode(atlModel, bindModel, info).perform();
 
-//		// adapt when clause (must be before rule copy and duplication, to ensure the original model elements has not
-//		// been changed, and then it is seamlessly propagated)
-		new AdaptWhenClause(atlModel, bindModel, currentMetamodel).perform();
+		// adapt when clause (must be before rule copy and duplication, to ensure the original model elements has not
+		// been changed, and then it is seamlessly propagated)
+		new AdaptWhenClause(atlModel, bindModel, info).perform();
 
-		//
-//		// adapt rules/helpers, copy rules/helpers for cardinality N	
+		// adapt rules/helpers, copy rules/helpers for cardinality N	
 		System.out.println("Adapting module elements");
-		new AdaptModuleElements(atlModel, bindModel, currentMetamodel).perform();
+		new AdaptModuleElements(atlModel, bindModel, info).perform();
 		
 		// create adapters (this has to be after adapt rules becuase the adapter helpers must not be replicated)
 		System.out.println("Creating adapters");
-		new CreateAdapters(atlModel, bindModel, currentMetamodel).perform();
+		new CreateAdapters(atlModel, bindModel, info).perform();
 		
 
 		System.out.println("Copying helpers");
-		new CopyHelpers(atlModel, bindModel, currentMetamodel).perform();
+		new CopyHelpers(atlModel, bindModel, info).perform();
 	
 		if ( bindModel.hasVirtualClasses() ) {
 			System.out.println("Creating virtual classes and adapting");
-			new AdaptVirtualClasses(atlModel, bindModel, currentMetamodel).perform();
+			new AdaptVirtualClasses(atlModel, bindModel, info).perform();
 		}
 	
 		// Adapt the rest of ocl model elements
 		// This needs to be the last step because all the other adaptations work assuming
 		// that the metamodel is still the concept (i.e., comparison with the currentMetamodel)
 		System.out.println("Adapting model elements");
-		new AdaptModelElements(atlModel, bindModel, currentMetamodel).perform();
+		new AdaptModelElements(atlModel, bindModel, info).perform();
 	
 		
 		// Change the metamodel paths
 		ATLUtils.replacePathTag(atlModel.getRoot(), 
-				bindModel.getRoot().getBoundConcept().getName(), 
-				bindModel.getRoot().getBoundMetamodel().getName(),
-				bindModel.getRoot().getBoundMetamodel().getUri());
+				info.getConceptMetamodelName(), 
+				info.getBoundMetamodelName(),
+				info.getBoundMetamodelURI());
 		
 	}
 	

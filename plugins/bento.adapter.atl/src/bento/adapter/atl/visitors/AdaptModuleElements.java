@@ -15,11 +15,12 @@ import anatlyzer.atlext.ATL.Module;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.OclType;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 public class AdaptModuleElements extends BaseAdapterVisitor {
 	
-	public AdaptModuleElements(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
-		super(atlModel, bindingModel, currentMetamodel);
+	public AdaptModuleElements(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+		super(atlModel, bindingModel, info);
 	}
 
 	public void perform() {

@@ -20,12 +20,12 @@ public class ATLInPlaceAdapter {
 
 	private ATLModel atlModel;
 	private BindingModel bindModel;
-	private String currentMetamodel;
+	private IComponentInfoForBinding info;
 
-	public ATLInPlaceAdapter(Resource atlResource, Resource bindingResource, String currentMetamodel) {
+	public ATLInPlaceAdapter(Resource atlResource, Resource bindingResource, IComponentInfoForBinding info) {
 		atlModel = new ATLModel(atlResource);
 		bindModel = new BindingModel(bindingResource);
-		this.currentMetamodel = currentMetamodel;
+		this.info = info;
 	}
 
 	public ATLModel getAdaptedATL() {
@@ -36,7 +36,7 @@ public class ATLInPlaceAdapter {
 		// For the moment only renamings
 		
 		System.out.println("Adapting model elements");
-		new AdaptModelElements(atlModel, bindModel, currentMetamodel).perform();
+		new AdaptModelElements(atlModel, bindModel, info).perform();
 
 	}
 

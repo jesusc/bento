@@ -12,17 +12,18 @@ import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.processing.AbstractVisitor;
 import bento.adapter.atl.BindingModel;
+import bento.adapter.atl.IComponentInfoForBinding;
 
 public class BaseAdapterVisitor extends AbstractVisitor {
 
 	protected ATLModel atlModel;
 	protected BindingModel bindingModel;
-	protected String currentMetamodel;
+	protected IComponentInfoForBinding info;
 
-	public BaseAdapterVisitor(ATLModel atlModel, BindingModel bindingModel, String currentMetamodel) {
+	public BaseAdapterVisitor(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
 		this.atlModel = atlModel;
 		this.bindingModel = bindingModel;
-		this.currentMetamodel = currentMetamodel;
+		this.info = info;
 	}
 
 	private static int uniqueId = 0;
@@ -53,7 +54,7 @@ public class BaseAdapterVisitor extends AbstractVisitor {
 	}
 	
 	protected boolean belongsToCurrentMetamodel(OclModelElement me) {
-		return me.getModel() != null && me.getModel().getName().equals(currentMetamodel);
+		return me.getModel() != null && me.getModel().getName().equals(info.getConceptMetamodelName());
 	}
 	
 	@SuppressWarnings("unchecked")

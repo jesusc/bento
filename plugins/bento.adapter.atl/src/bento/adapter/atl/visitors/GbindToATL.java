@@ -63,6 +63,7 @@ import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.Parameter;
 import anatlyzer.atlext.OCL.TuplePart;
 import anatlyzer.atlext.OCL.VariableDeclaration;
+import bento.adapter.atl.IComponentInfoForBinding;
 import bento.adapter.atl.util.TPat;
 import bento.adapter.gbind.visitors.GBindVisitor;
 
@@ -79,15 +80,15 @@ public class GbindToATL extends GBindVisitor {
 	public HashMap<EObject, EObject> trace = new HashMap<EObject, EObject>();
 	private ExternalContext ctx;
 	private ATLModel atlModel;
-	private String currentMetamodel;
+	private IComponentInfoForBinding info;
 
 	public static interface ExternalContext {
 		OclModel getTraceFor(MetamodelDeclaration mm);
 	}
 
-	public GbindToATL(ATLModel atlModel, String currentMetamodel) {
+	public GbindToATL(ATLModel atlModel, IComponentInfoForBinding info) {
 		this.atlModel = atlModel;
-		this.currentMetamodel = currentMetamodel;
+		this.info = info;
 	}
 	
 	public Helper transform(LocalHelper self) { //, ExternalContext ctx) {
@@ -123,7 +124,7 @@ public class GbindToATL extends GBindVisitor {
 
 		// Due to rewriting steps, in principle it doesn't matter to map this to the bound meta-model
 		// or to the concept meta-model
-		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, this.currentMetamodel);
+		OclModel metamodel = AdaptationUtils.getMetamodel(atlModel, info.getConceptMetamodelName());
 		contextType.setModel( metamodel );
 		
 		context_.setContext_( contextType );
