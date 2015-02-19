@@ -1,0 +1,78 @@
+
+@namespace(uri="km3", prefix="km3")
+package KM3;
+
+  abstract class LocatedElement {
+    !ordered attr String[1] location;
+  }
+
+  abstract class ModelElement extends LocatedElement {
+    !ordered attr String[1] name;
+    // !ordered ref Package[1]#contents ~package;
+  }
+
+  class Classifier extends ModelElement {
+  }
+
+  class DataType extends Classifier {
+  }
+
+  class Enumeration extends Classifier {
+    val EnumLiteral[*]#~enum literals;
+  }
+
+  class EnumLiteral extends ModelElement {
+    !ordered ref Enumeration[1]#literals ~enum;
+  }
+
+  class TemplateParameter extends Classifier {
+  }
+
+  class Class extends Classifier {
+    val TemplateParameter[*] parameters;
+    !ordered attr Boolean[1] isAbstract;
+    !ordered ref Class[*] supertypes;
+    val StructuralFeature[*]#owner structuralFeatures;
+    val Operation[*]#owner operations;
+  }
+
+  class TypedElement extends ModelElement {
+    !ordered attr Integer[1] lower;
+    !ordered attr Integer[1] upper;
+    !ordered attr Boolean[1] isOrdered;
+    !ordered attr Boolean[1] isUnique;
+    !ordered ref Classifier[1] type;
+  }
+
+  class StructuralFeature extends TypedElement {
+    !ordered ref Class[1]#structuralFeatures owner;
+    !ordered ref StructuralFeature[*]#derivedFrom subsetOf;
+    !ordered ref StructuralFeature[*]#subsetOf derivedFrom;
+  }
+
+  class Attribute extends StructuralFeature {
+  }
+
+  class Reference extends StructuralFeature {
+    !ordered attr Boolean[1] isContainer;
+    !ordered ref Reference opposite;
+  }
+
+  class Operation extends TypedElement {
+    !ordered ref Class[1]#operations owner;
+    val Parameter[*]#owner parameters;
+  }
+
+  class Parameter extends TypedElement {
+    !ordered ref Operation[1]#parameters owner;
+  }
+
+  class Package extends ModelElement {
+    val ModelElement[*]#~package contents;
+    !ordered ref Metamodel[1]#contents metamodel;
+  }
+
+  class Metamodel extends LocatedElement {
+    val Package[*]#metamodel contents;
+  }
+

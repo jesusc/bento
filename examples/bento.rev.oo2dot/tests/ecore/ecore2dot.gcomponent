@@ -1,0 +1,13 @@
+composite component ecore2dot {
+        uses "platform:/resource/bento.rev.oo2dot/META-INF/oo2dot.gcomponent"  
+        binding bindECORE = "platform:/resource/bento.rev.oo2dot/tests/ecore/oo2ecore.gbind"
+                        
+                        
+        source concept ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+        target concept DOT : "platform:/resource/bento.rev.oo2dot/metamodels/DOT.ecore"
+        
+        source model in  : ECORE  = "mm.ecore" 
+        target model out : DOT    = "out.xmi"
+        
+        compose apply oo2dot(bindECORE(in)) -> (out)
+}
