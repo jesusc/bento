@@ -1,0 +1,32 @@
+--
+-- In some way the concept is providing a domain-specific transformation language
+-- (with a generic syntax) to perform "to-table" transformations via simple mappings.
+--
+binding measure2graph {  
+	concept   GRAPH : "platform:/resource/bento.library.graph2table/metamodels/Graph.ecore"
+	metamodel JAVA  : "platform:/resource/bento.library.graph2table/test/java_source/JavaSource.ecore"
+
+    class Graph        to JavaSource
+
+	class RowHeaderNode    to MethodDefinition
+	class ColumnHeaderNode to MethodDefinition
+ 	
+ 	-- feature Graph.nodes        = self.XX
+ 	feature Graph.rows         = self.allMethodDefs
+ 	feature Graph.cols         = self.allMethodDefs
+       
+	feature RowHeaderNode.title    = self."class".name + '.' + self.name
+	feature ColumnHeaderNode.title = self."class".name + '.' + self.name
+		
+	helper JavaSource.valueOf(i : Integer, j : Integer) : String = self.allMethodDefs->at(i).computeContent(self.allMethodDefs->at(j)) 	
+
+	helper JavaSource.allMethodDefs : Sequence(JAVA!MethodDefinition) =
+        JAVA!MethodDefinition.allInstances()->sortedBy(e | e."class".name + '_' + e.name)
+	
+	helper MethodDefinition.computeContent(col : JAVA!MethodDefinition) : String =
+        self.invocations
+                ->select(i | i.method.name = col.name
+                                        and i.method."class".name = col."class".name)
+                ->size().toString()
+	
+}
