@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.EObject;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.ContextHelper;
 import anatlyzer.atlext.OCL.OclModel;
-import bento.adapter.atl.BindingModel;
 import bento.adapter.atl.IComponentInfoForBinding;
 import bento.adapter.gbind.visitors.GBindVisitor;
+import bento.binding.utils.BindingModel;
 
 public class CopyHelpers extends GBindVisitor {
 	

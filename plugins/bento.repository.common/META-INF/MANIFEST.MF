@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bento Repository Common
+Bundle-SymbolicName: bento.repository.common
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: bento.repository.common.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ bento.language.bentocomp;bundle-version="0.6.0",
+ genericity.language.gbind
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/unirest-java-1.3.28-SNAPSHOT-jar-with-dependencies.jar,
+ lib/zip4j/zip4j_1.3.2.jar,
+ lib/gson/gson-2.2.4.jar,
+ lib/commons-io/commons-io-2.4.jar,
+ .
+Export-Package: bento.repository,
+ bento.repository.common,
+ bento.repository.local,
+ bento.repository.rest,
+ bento.utils

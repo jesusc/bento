@@ -1,9 +1,0 @@
-transformation component oo2measure { 
-	source concept OO : "platform:/resource/bento.rev.oo2measure/metamodels/OO.ecore"
-	target concept Measure : "platform:/resource/bento.rev.oo2measure/metamodels/Measure.ecore"
-	source model in : OO
-	target model out : Measure
-	definition atl "platform:/resource/bento.rev.oo2measure/transformation/oo2measure_all.atl" with 
-		IN : UML2 = in, 
-		OUT : Measure = out
-}

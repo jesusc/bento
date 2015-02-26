@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bento Repository UI
+Bundle-SymbolicName: bento.repository.ui;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: bento.repository.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.ide,
+ org.eclipse.core.resources,
+ genericity.language.gbind;bundle-version="0.6.0",
+ bento.language.bentocomp;bundle-version="0.6.0",
+ bento.component.interpreter,
+ bento.repository.common;bundle-version="0.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: bento.repository.ui

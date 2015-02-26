@@ -61,8 +61,8 @@ import anatlyzer.atlext.OCL.TupleType;
 import anatlyzer.atlext.OCL.TupleTypeAttribute;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
-import bento.adapter.atl.BindingModel;
 import bento.adapter.atl.IComponentInfoForBinding;
+import bento.binding.utils.BindingModel;
 
 
 /**

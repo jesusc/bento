@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
+<stringAttribute key="ATL File Name" value="/genericity.benchmarks/components/oo2measure/ecore2measure/ecore2measure_uml.atl"/>
+<stringAttribute key="ATL VM" value="EMF-specific VM"/>
+<stringAttribute key="ATL_COMPILER" value="atl2006"/>
+<booleanAttribute key="IS_REFINING" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="IN" value="ECORE"/>
+</mapAttribute>
+<mapAttribute key="Libs"/>
+<mapAttribute key="Model Handler">
+<mapEntry key="ECORE" value="EMF"/>
+<mapEntry key="Measure" value="EMF"/>
+</mapAttribute>
+<mapAttribute key="ModelType">
+<mapEntry key="ECORE" value="METAMODELINPUT"/>
+<mapEntry key="IN" value="MODELINPUT"/>
+<mapEntry key="Measure" value="METAMODELOUTPUT"/>
+<mapEntry key="OUT" value="MODELOUTPUT"/>
+</mapAttribute>
+<mapAttribute key="Options">
+<mapEntry key="OPTION_CLEAR" value="false"/>
+<mapEntry key="OPTION_CONTENT_TYPE" value="false"/>
+<mapEntry key="OPTION_DERIVED" value="true"/>
+<mapEntry key="allowInterModelReferences" value="false"/>
+<mapEntry key="printExecutionTime" value="false"/>
+<mapEntry key="step" value="false"/>
+<mapEntry key="supportUML2Stereotypes" value="false"/>
+</mapAttribute>
+<listAttribute key="OrderedInput">
+<listEntry value="IN"/>
+</listAttribute>
+<listAttribute key="OrderedOutput">
+<listEntry value="OUT"/>
+</listAttribute>
+<mapAttribute key="Output">
+<mapEntry key="OUT" value="Measure"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="ECORE" value="uri:http://www.eclipse.org/emf/2002/Ecore"/>
+<mapEntry key="IN" value="/genericity.benchmarks/components/oo2measure/models/example-ecore.ecore"/>
+<mapEntry key="Measure" value="/genericity.benchmarks/components/oo2measure/metamodels/Measure.ecore"/>
+<mapEntry key="OUT" value="/genericity.benchmarks/tmp_/withOriginal_uml_effective.xmi"/>
+</mapAttribute>
+<listAttribute key="Superimpose"/>
+</launchConfiguration>

@@ -40,7 +40,7 @@ public class AdaptationUtils {
 						() -> atlModel.getModule().getOutModels().stream()
 								.filter(check).map(m -> m.getMetamodel())
 								.findFirst()
-								.orElseThrow(() -> new RuntimeException()));
+								.orElseThrow(() -> new RuntimeException("No meta-model " + mmName + " found")));
 	}
 
 	public static ContextHelper createContextOperationHelper(OclModel metamodel, String metaclassName, String featureName, OclExpression body, Consumer<EObject> addToResource) {

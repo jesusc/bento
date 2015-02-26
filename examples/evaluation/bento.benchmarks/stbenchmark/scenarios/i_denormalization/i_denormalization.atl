@@ -1,0 +1,143 @@
+-- @path BIO1=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+-- @path BIO2=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+module copybio_i_denormalization;
+create OUT : BIO2 from IN : BIO_TGT;
+
+rule model {
+ from
+  src : BIO_TGT!Model
+ to
+  tgt : BIO2!Model (
+   names <- thisModule.__convertToSequence__(src.names)->collect(__v__ |
+    if __v__.oclIsKindOf(BIO_TGT!Taxon) then
+     if thisModule.name__filter__(__v__) then
+      thisModule.name(__v__)
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   ),
+   nodes <- thisModule.__convertToSequence__(src.nodes)->collect(__v__ |
+    if __v__.oclIsKindOf(BIO_TGT!Taxon) then
+     thisModule.node(__v__)
+    else
+     __v__
+    endif
+   )
+  )
+}
+
+-- Rule from name
+unique lazy rule name {
+ from
+  -- The filter is just to check that class merge rewriting works fine
+  src : BIO_TGT!Taxon
+ to
+  tgt : BIO2!Name (
+   id <- src.id,
+   name <- src.uniqueName,
+   class <- src.class
+  )
+}
+
+-- Rule from node
+unique lazy rule node {
+ from
+  src : BIO_TGT!Taxon
+ to
+  tgt : BIO2!Node (
+   taxID <- src.taxID,
+   tax <- thisModule.__convertToSequence__(src.tax)->collect(__v__ |
+    if __v__.oclIsKindOf(BIO_TGT!Taxon) then
+     if thisModule.name__filter__(__v__) then
+      thisModule.name(__v__)
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   ),
+   parentID <- src.parentID,
+   parent <- thisModule.__convertToSequence__(src.parent)->collect(__v__ |
+    if __v__.oclIsKindOf(BIO_TGT!Taxon) then
+     if thisModule.name__filter__(__v__) then
+      thisModule.name(__v__)
+     else
+      __v__
+     endif
+    else
+     __v__
+    endif
+   ),
+   rank <- src.rank,
+   emblCode <- src.emblCode
+  )
+}
+
+helper def: name__filter__(src : OclAny) : Boolean =
+ src.oclIsKindOf(BIO_TGT!Taxon);
+
+endpoint rule node_ForceTransformation() {
+ using
+ {
+  varToForceEvaluation : OclAny = BIO_TGT!Taxon.allInstances()->collect(i |
+   thisModule.node(i)
+  );
+ }
+}
+
+endpoint rule name_ForceTransformation() {
+ using
+ {
+  varToForceEvaluation : OclAny = BIO_TGT!Taxon.allInstances()->collect(i |
+   thisModule.name(i)
+  );
+ }
+}
+
+helper def: __convertToSequence__(obj : OclAny) : OclAny =
+ if obj = OclUndefined then
+  Sequence {}
+ else
+  Sequence {obj}->flatten()
+ endif;
+
+helper context BIO_TGT!Taxon def: id : OclAny =
+ self.Id;
+
+helper context BIO_TGT!Taxon def: name : OclAny =
+ self.Name;
+
+helper context BIO_TGT!Taxon def: uniqueName : OclAny =
+ self.UniqueName;
+
+helper context BIO_TGT!Taxon def: class : OclAny =
+ self.Class;
+
+helper context BIO_TGT!Taxon def: taxID : OclAny =
+ self.Id;
+
+helper context BIO_TGT!Taxon def: parentID : OclAny =
+ self.ParentID;
+
+helper context BIO_TGT!Taxon def: parent : OclAny =
+ self.Parent;
+
+helper context BIO_TGT!Taxon def: rank : OclAny =
+ self.Rank;
+
+helper context BIO_TGT!Taxon def: emblCode : OclAny =
+ self.EmblCode;
+
+helper context BIO_TGT!Taxon def: tax : OclAny =
+ self;
+
+helper context BIO_TGT!Model def: names : OclAny =
+ self.taxonomies;
+
+helper context BIO_TGT!Model def: nodes : OclAny =
+ self.taxonomies;
+

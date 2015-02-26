@@ -1,0 +1,96 @@
+-- @path BIO1=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+-- @path BIO2=/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore
+module copybio;
+create OUT : BIO2 from IN : BIO_TGT;
+
+rule protein {
+ from
+  src : BIO_TGT!Protein
+ to
+  tgt : BIO2!Protein (
+   name <- src.name,
+   accession <- src.accession,
+   created <- src.created
+  )
+}
+
+rule gene {
+ from
+  src : BIO_TGT!Gene
+ to
+  tgt : BIO2!Gene (
+   name <- src.name,
+   type <- src.type,
+   protein <- src.protein
+  )
+}
+
+rule reaction {
+ from
+  src : BIO_TGT!Reaction
+ to
+  tgt : BIO2!Reaction (
+   entry <- src.entry,
+   name <- src.name,
+   comment <- src.comment,
+   orthology <- src.orthology,
+   definition <- src.definition,
+   equation <- src.equation
+  )
+}
+
+rule gene_Synonym {
+ from
+  src : BIO_TGT!Synonym
+ to
+  tgt : BIO2!Gene (
+   name <- src.name,
+   type <- src.type,
+   protein <- src.protein
+  )
+}
+
+helper context BIO_TGT!Protein def: name : OclAny =
+ self.Name;
+
+helper context BIO_TGT!Protein def: accession : OclAny =
+ self.Accession;
+
+helper context BIO_TGT!Protein def: created : OclAny =
+ self.Created;
+
+helper context BIO_TGT!Gene def: name : OclAny =
+ self.Name;
+
+helper context BIO_TGT!Gene def: protein : OclAny =
+ self.Protein;
+
+helper context BIO_TGT!Synonym def: name : OclAny =
+ self.Name;
+
+helper context BIO_TGT!Synonym def: protein : OclAny =
+ self.Protein;
+
+helper context BIO_TGT!Reaction def: entry : OclAny =
+ self.Entry;
+
+helper context BIO_TGT!Reaction def: name : OclAny =
+ self.Name;
+
+helper context BIO_TGT!Reaction def: comment : OclAny =
+ self.Comment;
+
+helper context BIO_TGT!Reaction def: orthology : OclAny =
+ self.Orthology;
+
+helper context BIO_TGT!Gene def: type : OclAny =
+ 'primary';
+
+helper context BIO_TGT!Synonym def: type : OclAny =
+ 'synonym';
+
+helper context BIO_TGT!Reaction def: definition : OclAny =
+ self.cofactor.Definition;
+
+helper context BIO_TGT!Reaction def: equation : OclAny =
+ self.cofactor.Equation;

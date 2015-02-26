@@ -21,8 +21,8 @@ import anatlyzer.atlext.OCL.OperationCallExp;
 import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
-import bento.adapter.atl.BindingModel;
 import bento.adapter.atl.IComponentInfoForBinding;
+import bento.binding.utils.BindingModel;
 
 public class AdaptWhenClause extends BaseAdapterVisitor {
 	

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bpmn20"
+    nsURI="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI/concept" nsPrefix="bpmn_concept">
+  <eClassifiers xsi:type="ecore:EClass" name="ParallelGateway" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EndEvent" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//ThrowEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExclusiveGateway" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Gateway" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InclusiveGateway" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//CallableElement /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowElementsContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventBasedGateway" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Gateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartEvent" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//CatchEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowNode" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//SequenceFlow"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//SequenceFlow/targetRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//SequenceFlow"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//SequenceFlow/sourceRef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceFlow" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetRef" lowerBound="1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRef" lowerBound="1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode/outgoing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowElement" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//BaseElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Activity /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//InteractionNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowElementsContainer" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//BaseElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowElements" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InteractionNode" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ThrowEvent" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//FlowNode /bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//InteractionNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CallableElement" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//RootElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RootElement" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//BaseElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CatchEvent" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BPMN.ecore#//Event"/>
+</ecore:EPackage>

@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: bento
+Bundle-SymbolicName: bento.language.bentocomp.resource.bento;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.change,
+ org.eclipse.emf.validation;resolution:=optional,
+ org.emftext.access;resolution:=optional,
+ org.eclipse.debug.core;resolution:=optional,
+ org.emftext.commons.antlr3_4_0,
+ bento.language.bentocomp,
+ org.eclipse.core.resources,
+ bento.repository.common;bundle-version="0.6.0",
+ bento.repository.ui;bundle-version="0.7.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: bento.language.bentocomp.resource.bento,
+  bento.language.bentocomp.resource.bento.analysis,
+  bento.language.bentocomp.resource.bento.mopp,
+  bento.language.bentocomp.resource.bento.debug,
+  bento.language.bentocomp.resource.bento.launch,
+  bento.language.bentocomp.resource.bento.grammar,
+  bento.language.bentocomp.resource.bento.util
+Bundle-Activator: bento.language.bentocomp.resource.bento.mopp.BentoPlugin

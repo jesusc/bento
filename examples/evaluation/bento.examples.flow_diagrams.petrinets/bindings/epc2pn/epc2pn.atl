@@ -1,0 +1,543 @@
+-- @path FD=/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore
+-- @path PN=/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore
+module flow2pn;
+create OUT : PN from IN : EPC;
+
+-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)
+--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; 
+helper context EPC!ProcessObject def: oclAsType(t : OclAny) : OclAny =
+ self;
+
+helper context EPC!ProcessObject def: typeName : String =
+ self.oclType().name;
+
+helper context EPC!ProcessObject def: isTask : Boolean =
+ let __unique_id__ : OclAny = self in
+ __unique_id__.oclIsKindOf(EPC!Function) or __unique_id__.oclIsKindOf(EPC!Event);
+
+helper context EPC!ProcessObject def: isFinalTask : Boolean =
+ let __unique_id___0 : OclAny = self in
+ if __unique_id___0.oclIsKindOf(EPC!Event) then
+  __unique_id___0.FinalTask__filter__
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: isTerminatingTask : Boolean =
+ if self.isFinalTask then
+  self.oclAsType(EPC!Event).isTerminating
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: isParallelSplit : Boolean =
+ let __unique_id___1 : OclAny = self in
+ if __unique_id___1.oclIsKindOf(EPC!And) then
+  __unique_id___1.ParallelSplit__filter__
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: isSynchronization : Boolean =
+ let __unique_id___2 : OclAny = self in
+ if __unique_id___2.oclIsKindOf(EPC!And) then
+  __unique_id___2.Synchronization__filter__
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: isExclusiveChoice : Boolean =
+ let __unique_id___3 : OclAny = self in
+ if __unique_id___3.oclIsKindOf(EPC!Xor) then
+  __unique_id___3.ExclusiveChoice__filter__
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: isSimpleMerge : Boolean =
+ let __unique_id___4 : OclAny = self in
+ if __unique_id___4.oclIsKindOf(EPC!Xor) then
+  __unique_id___4.SimpleMerge__filter__
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: isMultiChoice : Boolean =
+ let __unique_id___5 : OclAny = self in
+ if __unique_id___5.oclIsKindOf(EPC!Or) then
+  __unique_id___5.MultiChoice__filter__
+ else
+  false
+ endif;
+
+helper context EPC!ProcessObject def: toPlaceAsInput : Boolean =
+ self.isTask or self.isFinalTask or self.isExclusiveChoice or self.isSimpleMerge or self.isMultiChoice;
+
+helper context EPC!ProcessObject def: toPlaceAsOutput : Boolean =
+ self.isTask or self.isFinalTask or self.isExclusiveChoice;
+
+helper context EPC!ProcessObject def: toTransitionAsInput : Boolean =
+ self.isSynchronization or self.isParallelSplit;
+
+helper context EPC!ProcessObject def: toTransitionAsOutput : Boolean =
+ self.isSynchronization or self.isParallelSplit or self.isSimpleMerge or self.isMultiChoice;
+
+helper context EPC!ProcessObject def: parentFlowDiagram : EPC!EPCDiagram =
+ EPC!EPCDiagram.allInstances()->first();
+
+helper context EPC!ControlFlow def: parentFlowDiagram : EPC!EPCDiagram =
+ EPC!EPCDiagram.allInstances()->first();
+
+helper context Integer def: pow(m : Integer) : Integer =
+ if m > 1 then
+  self * self.pow(m - 1)
+ else
+  self
+ endif; -- n^m
+-- n^m
+helper context Integer def: toSequence() : Sequence(Integer) =
+ if self <= 0 then
+  Sequence {}
+ else
+  Sequence {self}.union((self - 1).toSequence())
+ endif; -- Sequence{1, 2..., n}
+-- Sequence{1, 2..., n}
+helper context Integer def: choices() : Sequence(Sequence(Boolean)) =
+ if self > 1 then
+  (self - 1).choices()->collect(n |
+   n->append(true)
+  )->union((self - 1).choices()->collect(n |
+   n->append(false)
+  ))
+ else
+  Sequence {Sequence {true}, Sequence {false}}
+ endif;
+
+helper context EPC!Or def: nodeGenerator : Sequence(TupleType(source : EPC!ProcessObject, num : Integer)) =
+ (2.pow(self.outs->size()) - 1).toSequence()->iterate(n; result : Sequence(TupleType(source : EPC!ProcessObject, num : Integer)) = Sequence {} |
+  let tuple : OclAny = Tuple {source : EPC!ProcessObject = self, num : Integer = n} in
+  result.including(tuple)
+ );
+
+rule create_transition(source : EPC!ProcessObject, num : Integer) {
+ using
+ {
+  choices : Sequence(Boolean) = source.outs->size().choices()->at(num);
+  icontrol : Sequence(OclAny) = source.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if source.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   name <- source.typeName + ' ' + num,
+   in <- icontrol.append(source),
+   out <- source.outs->size().toSequence()->iterate(i; result : Sequence(EPC!ProcessObject) = Sequence {} |
+    if choices->at(i) = true then
+     result->append(if source.outs->at(i).out.toPlaceAsInput then
+      source.outs.at(i).out
+     else
+      source.outs.at(i)
+     endif)
+    else
+     result
+    endif
+   ).append(ocontrol)
+  )
+ do {
+  -- This is important, it is the result value...
+  -- This is important, it is the result value...
+  transition;
+ }
+} -- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if the transition is not connected to a terminating final task
+-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:
+--   1) with an arc, if the transition is connected to a terminating final task
+--   2) with a loop, if the transition is not connected to a terminating final task
+helper context EPC!ControlFlow def: isConnectedToTerminating : Boolean =
+ self.out.isTerminatingTask;
+
+helper context EPC!ProcessObject def: isConnectedToTerminating : Boolean =
+ self.outs->exists(e |
+  e.isConnectedToTerminating
+ );
+
+helper context EPC!EPCDiagram def: control : Sequence(PN!Place) =
+ if self.nodes->exists(n |
+  n.isTerminatingTask
+ ) then
+  Sequence {thisModule.get_control(self)}
+ else
+  Sequence {}
+ endif;
+
+unique lazy rule get_control {
+ from
+  flow : EPC!EPCDiagram
+ to
+  place : PN!Place (
+   name <- 'Control',
+   tokens <- 1
+  )
+} -- BUILDING BLOCKS ---------------------------------------------------------------------------------------------
+-- the flow diagram is transformed into a Petri net 
+-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------
+-- the flow diagram is transformed into a Petri net 
+rule flowdiagram {
+ from
+  flow : EPC!EPCDiagram
+ to
+  net : PN!PetriNet (
+   elems <- flow.nodes.append(flow.edges.append(flow.nodes->select(n |
+    n.isSimpleMerge
+   )->collect(n |
+    thisModule.create_transition(n, 1)
+   ))).union(flow.nodes->select(n |
+    n.isMultiChoice
+   )->collect(n |
+    n.nodeGenerator
+   )->flatten()->collect(n |
+    thisModule.create_transition(n.source, n.num)
+   )).append(flow.control)->flatten()
+  )
+} -- each task is transformed into a place, with 1 token if it is initial
+-- Rule from task
+unique lazy rule task {
+ from
+  task : EPC!Function
+  (
+   task.Task__filter__
+  )
+ to
+  place : PN!Place (
+   name <- if task.isInitial then
+    'Initial: '.concat(task.name)
+   else
+    task.name
+   endif,
+   tokens <- if task.isInitial then
+    1
+   else
+    0
+   endif
+  )
+}
+
+-- Rule from finaltask
+unique lazy rule finaltask {
+ from
+  task : EPC!Event
+  (
+   task.FinalTask__filter__
+  )
+ to
+  place : PN!Place (
+   --name   <- if task.isTerminating then 'Final Terminating' else 'Final' endif,
+   name <- 'Final' + if task.isTerminating then
+    ' Terminating'
+   else
+    ''
+   endif + if task.isMandatory then
+    ' Mandatory'
+   else
+    ''
+   endif,
+   tokens <- 0
+  )
+}
+
+-- Rule from synchronization_all
+unique lazy rule synchronization_all {
+ from
+  synch : EPC!ProcessObject
+ using
+ {
+  icontrol : Sequence(OclAny) = synch.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if synch.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   name <- synch.typeName,
+   in <- synch.ins->select(e |
+    e.in.toPlaceAsOutput
+   )->collect(e |
+    e.in
+   ) -- connect to input places
+   ->union(synch.ins->select(e |
+    e.in.toTransitionAsOutput
+   )) -- connect to input transitions
+   .append(icontrol),
+   -- connect to control place   				
+   out <- synch.outs->select(e |
+    e.out.toPlaceAsInput
+   )->collect(e |
+    e.out
+   )->union(synch.outs->select(e |
+    e.out.toTransitionAsInput
+   )).append(ocontrol)
+  )
+}
+
+-- Rule from exclusive_choice
+unique lazy rule exclusive_choice {
+ from
+  choice : EPC!Xor
+  (
+   choice.ExclusiveChoice__filter__
+  )
+ to
+  place : PN!Place (
+   name <- choice.typeName,
+   tokens <- 0
+  )
+}
+
+-- Rule from simple_merge
+unique lazy rule simple_merge {
+ from
+  merge : EPC!Xor
+  (
+   merge.SimpleMerge__filter__
+  )
+ to
+  place : PN!Place (
+   name <- merge.typeName,
+   tokens <- 0
+  )
+}
+
+-- each multi choice is transformed into a place connected to (2^n)-1 transitions;
+-- the transitions are created by rule create_transition, invoked from rule flow_diagram
+rule multi_choice {
+ from
+  choice : EPC!Or
+  (
+   choice.MultiChoice__filter__
+  )
+ to
+  place : PN!Place (
+   name <- choice.typeName,
+   tokens <- 0
+  )
+} -- INTERCONNECTIONS --------------------------------------------------------------------------------------------
+-- flow edges connecting nodes that are transformed into places, 
+-- are transformed into transitions
+-- INTERCONNECTIONS --------------------------------------------------------------------------------------------
+-- flow edges connecting nodes that are transformed into places, 
+-- are transformed into transitions
+rule place_place {
+ from
+  edge : EPC!ControlFlow
+  (
+   edge.in.toPlaceAsOutput and edge.out.toPlaceAsInput
+  )
+ using
+ {
+  icontrol : Sequence(OclAny) = edge.parentFlowDiagram.control;
+  ocontrol : Sequence(OclAny) = if edge.isConnectedToTerminating then
+   Sequence {}
+  else
+   icontrol
+  endif;
+ }
+ to
+  transition : PN!Transition (
+   in <- icontrol.append(edge.in),
+   out <- ocontrol.append(edge.out)
+  )
+} -- flow edges connecting nodes that are transformed into transitions, 
+-- are transformed into places
+-- flow edges connecting nodes that are transformed into transitions, 
+-- are transformed into places
+rule transition_transition {
+ from
+  edge : EPC!ControlFlow
+  (
+   edge.in.toTransitionAsOutput and edge.out.toTransitionAsInput
+  )
+ -- should we differentiate transitionAsOutput when SimpleMerge???
+ -- should we differentiate transitionAsOutput when SimpleMerge???
+ to
+  place : PN!Place (
+   name <- edge.in.typeName + '-' + edge.out.typeName,
+   tokens <- 0
+  )
+}
+
+helper def: synchronization_all__filter__(synch : OclAny) : Boolean =
+ synch.isParallelSplit or synch.isSynchronization;
+
+endpoint rule Rule_To__ForceTransformation() {
+ using
+ {
+  synchronization_all_varToForceEvaluation : OclAny = EPC!ProcessObject.allInstances()->collect(i |
+   if thisModule.synchronization_all__filter__(i) then
+    thisModule.synchronization_all(i)
+   else
+    i
+   endif
+  );
+  exclusive_choice_varToForceEvaluation : OclAny = EPC!Xor.allInstances()->select(__v__ |
+   __v__.ExclusiveChoice__filter__
+  )->collect(i |
+   if true then
+    thisModule.exclusive_choice(i)
+   else
+    i
+   endif
+  );
+  task_varToForceEvaluation : OclAny = EPC!Function.allInstances()->select(__v__ |
+   __v__.Task__filter__
+  )->collect(i |
+   if true then
+    thisModule.task(i)
+   else
+    i
+   endif
+  );
+  simple_merge_varToForceEvaluation : OclAny = EPC!Xor.allInstances()->select(__v__ |
+   __v__.SimpleMerge__filter__
+  )->collect(i |
+   if true then
+    thisModule.simple_merge(i)
+   else
+    i
+   endif
+  );
+  finaltask_varToForceEvaluation : OclAny = EPC!Event.allInstances()->select(__v__ |
+   __v__.FinalTask__filter__
+  )->collect(i |
+   if true then
+    thisModule.finaltask(i)
+   else
+    i
+   endif
+  );
+ }
+}
+
+helper def: __convertToSequence__(obj : OclAny) : OclAny =
+ if obj = OclUndefined then
+  Sequence {}
+ else
+  Sequence {obj}->flatten()
+ endif;
+
+helper context EPC!Function def: Task__filter__ : Boolean =
+ if self.oclIsKindOf(EPC!Event) then
+  self.outgoing->size() > 0
+ else
+  true
+ endif;
+
+helper context EPC!Event def: FinalTask__filter__ : Boolean =
+ self.outgoing->size() = 0;
+
+helper context EPC!And def: ParallelSplit__filter__ : Boolean =
+ self.outgoing->size() > 1;
+
+helper context EPC!And def: Synchronization__filter__ : Boolean =
+ self.incoming->size() > 1;
+
+helper context EPC!Xor def: ExclusiveChoice__filter__ : Boolean =
+ self.incoming->size() = 1 and self.outgoing->size() > 1;
+
+helper context EPC!Xor def: SimpleMerge__filter__ : Boolean =
+ self.incoming->size() > 1 and self.outgoing->size() = 1;
+
+helper context EPC!Or def: MultiChoice__filter__ : Boolean =
+ self.incoming->size() = 1 and self.outgoing->size() > 1;
+
+-- Rule from task
+unique lazy rule task_Event {
+ from
+  task : EPC!Event
+  (
+   task.Task__filter__
+  )
+ to
+  place : PN!Place (
+   name <- if task.isInitial then
+    'Initial: '.concat(task.name)
+   else
+    task.name
+   endif,
+   tokens <- if task.isInitial then
+    1
+   else
+    0
+   endif
+  )
+}
+
+helper context EPC!Event def: Task__filter__ : Boolean =
+ if self.oclIsKindOf(EPC!Event) then
+  self.outgoing->size() > 0
+ else
+  true
+ endif;
+
+helper context EPC!Event def: Task__filter__ : Boolean =
+ if self.oclIsKindOf(EPC!Event) then
+  self.outgoing->size() > 0
+ else
+  true
+ endif;
+
+helper context EPC!EPCDiagram def: nodes : OclAny =
+ self.objects;
+
+helper context EPC!EPCDiagram def: edges : OclAny =
+ self.flows->select(f |
+  f.oclIsKindOf(EPC!ControlFlow)
+ );
+
+helper context EPC!EPCDiagram def: isFinalMandatory : OclAny =
+ true;
+
+helper context EPC!ProcessObject def: outs : OclAny =
+ Sequence {self.outgoing}->flatten();
+
+helper context EPC!ProcessObject def: ins : OclAny =
+ Sequence {self.incoming}->flatten();
+
+helper context EPC!Event def: isInitial : OclAny =
+ self.incoming->size() = 0;
+
+helper context EPC!Function def: isInitial : OclAny =
+ false;
+
+helper context EPC!Event def: isTerminating : OclAny =
+ true;
+
+helper context EPC!Event def: isMandatory : OclAny =
+ true;
+
+helper context EPC!ControlFlow def: "in" : OclAny =
+ if not self.fsource.oclIsUndefined() then
+  self.fsource
+ else
+  if self.lsource.oclIsUndefined() then
+   self.esource
+  else
+   self.lsource
+  endif
+ endif;
+
+helper context EPC!ControlFlow def: out : OclAny =
+ if not self.ftarget.oclIsUndefined() then
+  self.ftarget
+ else
+  if self.ltarget.oclIsUndefined() then
+   self.etarget
+  else
+   self.ltarget
+  endif
+ endif;

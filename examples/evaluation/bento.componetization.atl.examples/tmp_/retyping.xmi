@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:atl_types="http://genericity/types/atl">
+  <atl_types:Metaclass name="MetricsSet" explicitOcurrence="true" model="/5">
+    <klass href="../bento.componetization.atl.examples/src/paper/metrics/Metrics.ecore#//MetricsSet"/>
+  </atl_types:Metaclass>
+  <atl_types:IntegerType/>
+  <atl_types:Unknown/>
+  <atl_types:MetaModel name="UML"/>
+  <atl_types:Metaclass name="Class" explicitOcurrence="true" model="/15">
+    <klass href="tmp_/SimpleUML_concept.ecore#//Class"/>
+  </atl_types:Metaclass>
+  <atl_types:MetaModel name="Metrics"/>
+  <atl_types:MetaModel name="UML"/>
+  <atl_types:Metaclass name="Class" explicitOcurrence="true" model="/3">
+    <klass href="tmp_/SimpleUML_concept.ecore#//Class"/>
+  </atl_types:Metaclass>
+  <atl_types:SetType multivalued="true" containedType="/16"/>
+  <atl_types:SetType multivalued="true" containedType="/2"/>
+  <atl_types:Metaclass name="Class" explicitOcurrence="true" model="/6">
+    <klass href="tmp_/SimpleUML_concept.ecore#//Class"/>
+  </atl_types:Metaclass>
+  <atl_types:Unknown/>
+  <atl_types:Unknown/>
+  <atl_types:Metaclass name="Class" explicitOcurrence="true" model="/17">
+    <klass href="tmp_/SimpleUML_concept.ecore#//Class"/>
+  </atl_types:Metaclass>
+  <atl_types:FloatType/>
+  <atl_types:MetaModel name="UML"/>
+  <atl_types:IntegerType/>
+  <atl_types:MetaModel name="UML"/>
+  <atl_types:SetType multivalued="true" containedType="/4"/>
+  <atl_types:Unknown/>
+  <atl_types:StringType/>
+</xmi:XMI>

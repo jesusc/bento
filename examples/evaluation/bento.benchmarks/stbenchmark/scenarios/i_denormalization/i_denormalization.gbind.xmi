@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="h_self_join">
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="id" conceptClass="//@conceptMetaclasses.0" concreteFeature="Id"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" concreteFeature="Name"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="uniqueName" conceptClass="//@conceptMetaclasses.0" concreteFeature="UniqueName"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="class" conceptClass="//@conceptMetaclasses.0" concreteFeature="Class"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="taxID" conceptClass="//@conceptMetaclasses.1" concreteFeature="Id"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="tax" conceptClass="//@conceptMetaclasses.1">
+    <concrete xsi:type="simpleocl:SelfExp"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="parentID" conceptClass="//@conceptMetaclasses.1" concreteFeature="ParentID"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="parent" conceptClass="//@conceptMetaclasses.1" concreteFeature="Parent"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="rank" conceptClass="//@conceptMetaclasses.1" concreteFeature="Rank"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="emblCode" conceptClass="//@conceptMetaclasses.1" concreteFeature="EmblCode"/>
+  <conceptMetaclasses name="Name"/>
+  <conceptMetaclasses name="Node"/>
+  <concreteMetaclasses name="Taxon"/>
+  <boundConcept name="BIO_SRC" metamodelURI="platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_src.ecore"/>
+  <boundMetamodel name="BIO_TGT" metamodelURI="platform:/resource/genericity.benchmarks/stbenchmark/metamodels/bio_tgt.ecore"/>
+</bindingModel:BindingModel>

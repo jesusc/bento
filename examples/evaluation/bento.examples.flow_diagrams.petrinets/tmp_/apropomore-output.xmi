@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<petri_nets:PetriNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petri_nets="petri_nets">
+  <elems xsi:type="petri_nets:Place" name="Initial: init task" tokens="1"/>
+  <elems xsi:type="petri_nets:Place" name="med-task"/>
+  <elems xsi:type="petri_nets:Place" name="Final"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.0" out="//@elems.1"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.1" out="//@elems.2"/>
+</petri_nets:PetriNet>

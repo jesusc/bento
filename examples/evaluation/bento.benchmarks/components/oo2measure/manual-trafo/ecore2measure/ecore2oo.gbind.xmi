@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="ecore2oo">
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.2" concrete="//@concreteMetaclasses.2"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.3" concrete="//@concreteMetaclasses.3"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.4" concrete="//@concreteMetaclasses.4"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.5" concrete="//@concreteMetaclasses.5"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.6" concrete="//@concreteMetaclasses.6"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.0" concreteFeature="name"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="classes" conceptClass="//@conceptMetaclasses.1">
+    <concrete xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="eClassifiers"/>
+      <calls xsi:type="simpleocl:IteratorExp" name="select">
+        <body xsi:type="simpleocl:PropertyCallExp">
+          <calls xsi:type="simpleocl:OperationCall" operationName="oclIsKindOf">
+            <arguments xsi:type="simpleocl:OclModelElementExp" model="//@boundMetamodel" name="EClass"/>
+          </calls>
+          <source xsi:type="simpleocl:VariableExp" referredVariable="//@bindings.8/@concrete/@calls.1/@iterators.0"/>
+        </body>
+        <iterators varName="c" variableExp="//@bindings.8/@concrete/@calls.1/@body/@source"/>
+      </calls>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </concrete>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="isAbstract" conceptClass="//@conceptMetaclasses.2" concreteFeature="abstract"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="attributes" conceptClass="//@conceptMetaclasses.2">
+    <concrete xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="eStructuralFeatures"/>
+      <calls xsi:type="simpleocl:IteratorExp" name="select">
+        <body xsi:type="simpleocl:PropertyCallExp">
+          <calls xsi:type="simpleocl:OperationCall" operationName="oclIsKindOf">
+            <arguments xsi:type="simpleocl:OclModelElementExp" model="//@boundMetamodel" name="EReference"/>
+          </calls>
+          <source xsi:type="simpleocl:VariableExp" referredVariable="//@bindings.10/@concrete/@calls.1/@iterators.0"/>
+        </body>
+        <iterators varName="e" variableExp="//@bindings.10/@concrete/@calls.1/@body/@source"/>
+      </calls>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </concrete>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="operations" conceptClass="//@conceptMetaclasses.2" concreteFeature="eOperations"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="parents" conceptClass="//@conceptMetaclasses.2" concreteFeature="eSuperTypes"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="parameters" conceptClass="//@conceptMetaclasses.3" concreteFeature="eParameters"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="partype" conceptClass="//@conceptMetaclasses.6">
+    <concrete xsi:type="simpleocl:IfExp">
+      <thenExpression xsi:type="simpleocl:PropertyCallExp">
+        <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="eType"/>
+        <source xsi:type="simpleocl:SelfExp"/>
+      </thenExpression>
+      <condition xsi:type="simpleocl:PropertyCallExp">
+        <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="eType"/>
+        <calls xsi:type="simpleocl:OperationCall" operationName="oclIsKindOf">
+          <arguments xsi:type="simpleocl:OclModelElementExp" model="//@boundMetamodel" name="EClass"/>
+        </calls>
+        <source xsi:type="simpleocl:SelfExp"/>
+      </condition>
+      <elseExpression xsi:type="simpleocl:OclUndefinedExp"/>
+    </concrete>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="atttype" conceptClass="//@conceptMetaclasses.5" concreteFeature="eType"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="isPublic" conceptClass="//@conceptMetaclasses.4">
+    <concrete xsi:type="simpleocl:BooleanExp" booleanSymbol="true"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="isProtected" conceptClass="//@conceptMetaclasses.4">
+    <concrete xsi:type="simpleocl:BooleanExp"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="isPrivate" conceptClass="//@conceptMetaclasses.4">
+    <concrete xsi:type="simpleocl:BooleanExp"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="dependencies" conceptClass="//@conceptMetaclasses.1">
+    <concrete xsi:type="simpleocl:SequenceExp"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="method" conceptClass="//@conceptMetaclasses.3">
+    <concrete xsi:type="simpleocl:SequenceExp"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.7" concrete="//@concreteMetaclasses.7"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.8" concrete="//@concreteMetaclasses.7"/>
+  <conceptMetaclasses name="NamedElement"/>
+  <conceptMetaclasses name="Package"/>
+  <conceptMetaclasses name="Class"/>
+  <conceptMetaclasses name="Operation"/>
+  <conceptMetaclasses name="Feature"/>
+  <conceptMetaclasses name="Attribute"/>
+  <conceptMetaclasses name="Parameter"/>
+  <conceptMetaclasses name="Dependency"/>
+  <conceptMetaclasses name="Behaviour"/>
+  <concreteMetaclasses name="ENamedElement"/>
+  <concreteMetaclasses name="EPackage"/>
+  <concreteMetaclasses name="EClass"/>
+  <concreteMetaclasses name="EOperation"/>
+  <concreteMetaclasses name="EStructuralFeature"/>
+  <concreteMetaclasses name="EReference"/>
+  <concreteMetaclasses name="EParameter"/>
+  <concreteMetaclasses name="NONE"/>
+  <boundConcept name="OO" metamodelURI="platform:/resource/genericity.benchmarks/components/oo2measure/manual-trafo/OO_concept.ecore"/>
+  <boundMetamodel name="ECORE" metamodelURI="http://www.eclipse.org/emf/2002/Ecore"/>
+</bindingModel:BindingModel>

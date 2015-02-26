@@ -409,7 +409,7 @@ public class RevengProcessManager {
 
 	
 	public void packageComponent() {
-		IFile component = project.getFolder("META-INF").getFile(this.model.getComponentPath() + ".gcomponent");
+		IFile component = project.getFolder("META-INF").getFile(this.model.getComponentPath() + ".bento");
 		try {
 			if (!component.getParent().exists()) {
 				((IFolder) component.getParent()).create(true, true, null);
@@ -513,6 +513,10 @@ public class RevengProcessManager {
 		return getFileLocation(model.getTemplate().getPath());
 	}
 
+	public IFile getReadmeFile() {
+		return project.getFile("README.md");
+	}
+	
 	/**
 	 * @return true if the template file has been configured and it exists on disk.
 	 */

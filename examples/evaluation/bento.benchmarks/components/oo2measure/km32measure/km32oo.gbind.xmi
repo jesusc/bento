@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="km32oo">
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.2" concrete="//@concreteMetaclasses.2"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.3" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.4" concrete="//@concreteMetaclasses.3"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.5" concrete="//@concreteMetaclasses.4"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.6" concrete="//@concreteMetaclasses.5"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.7" concrete="//@concreteMetaclasses.6"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.8" concrete="//@concreteMetaclasses.7"/>
+  <bindings xsi:type="bindingModel:VirtualClassBinding" concept="//@conceptMetaclasses.9" virtual="//@virtualMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.10" concrete="//@concreteMetaclasses.3"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.11" concrete="//@concreteMetaclasses.8"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.12" concrete="//@concreteMetaclasses.9"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.13" concrete="//@concreteMetaclasses.8"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.14" concrete="//@concreteMetaclasses.4"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.15" concrete="//@concreteMetaclasses.3"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.16" concrete="//@concreteMetaclasses.3"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="packagedElement" conceptClass="//@conceptMetaclasses.1" concreteFeature="contents"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="ownedOperation" conceptClass="//@conceptMetaclasses.2" concreteFeature="operations"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="ownedAttribute" conceptClass="//@conceptMetaclasses.2" concreteFeature="structuralFeatures"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="nestedClassifier" conceptClass="//@conceptMetaclasses.2">
+    <concrete xsi:type="simpleocl:SequenceExp"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="name" conceptClass="//@conceptMetaclasses.3" concreteFeature="name"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="isAbstract" conceptClass="//@conceptMetaclasses.3">
+    <concrete xsi:type="simpleocl:IfExp">
+      <thenExpression xsi:type="simpleocl:PropertyCallExp">
+        <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="isAbstract"/>
+        <source xsi:type="simpleocl:SelfExp"/>
+      </thenExpression>
+      <condition xsi:type="simpleocl:PropertyCallExp">
+        <calls xsi:type="simpleocl:OperationCall" operationName="oclIsKindOf">
+          <arguments xsi:type="simpleocl:OclModelElementExp" model="//@boundMetamodel" name="Class"/>
+        </calls>
+        <source xsi:type="simpleocl:SelfExp"/>
+      </condition>
+      <elseExpression xsi:type="simpleocl:BooleanExp" booleanSymbol="true"/>
+    </concrete>
+  </bindings>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="visibility" conceptClass="//@conceptMetaclasses.3">
+    <concrete xsi:type="simpleocl:EnumLiteralExp" name="public"/>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="ownedParameter" conceptClass="//@conceptMetaclasses.5" concreteFeature="parameters"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="generalization" conceptClass="//@conceptMetaclasses.11">
+    <concrete xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="KM3Generalization_AllInstances"/>
+      <calls xsi:type="simpleocl:IteratorExp" name="select">
+        <body xsi:type="simpleocl:EqOpCallExp" operationName="=">
+          <argument xsi:type="simpleocl:SelfExp"/>
+          <source xsi:type="simpleocl:PropertyCallExp">
+            <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="specific"/>
+            <source xsi:type="simpleocl:VariableExp" referredVariable="//@bindings.25/@concrete/@calls.1/@iterators.0"/>
+          </source>
+        </body>
+        <iterators varName="g" variableExp="//@bindings.25/@concrete/@calls.1/@body/@source/@source"/>
+      </calls>
+      <source xsi:type="simpleocl:SelfExp"/>
+    </concrete>
+  </bindings>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="type" conceptClass="//@conceptMetaclasses.12" concreteFeature="type"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="method" conceptClass="//@conceptMetaclasses.14">
+    <concrete xsi:type="simpleocl:SequenceExp"/>
+  </bindings>
+  <conceptMetaclasses name="PackageableElement"/>
+  <conceptMetaclasses name="Package"/>
+  <conceptMetaclasses name="Class"/>
+  <conceptMetaclasses name="NamedElement"/>
+  <conceptMetaclasses name="Model"/>
+  <conceptMetaclasses name="Operation"/>
+  <conceptMetaclasses name="Feature"/>
+  <conceptMetaclasses name="Property"/>
+  <conceptMetaclasses name="Parameter"/>
+  <conceptMetaclasses name="Generalization"/>
+  <conceptMetaclasses name="Dependency"/>
+  <conceptMetaclasses name="Classifier"/>
+  <conceptMetaclasses name="TypedElement"/>
+  <conceptMetaclasses name="Type"/>
+  <conceptMetaclasses name="BehavioralFeature"/>
+  <conceptMetaclasses name="Behavior"/>
+  <conceptMetaclasses name="VisibilityKind"/>
+  <concreteMetaclasses name="ModelElement"/>
+  <concreteMetaclasses name="Package"/>
+  <concreteMetaclasses name="Class"/>
+  <concreteMetaclasses name="NONE"/>
+  <concreteMetaclasses name="Operation"/>
+  <concreteMetaclasses name="StructuralFeature"/>
+  <concreteMetaclasses name="Attribute"/>
+  <concreteMetaclasses name="Parameter"/>
+  <concreteMetaclasses name="Classifier"/>
+  <concreteMetaclasses name="TypedElement"/>
+  <virtualMetaclasses name="KM3Generalization">
+    <references name="general" type_="//@concreteMetaclasses.2"/>
+    <references name="specific" type_="//@concreteMetaclasses.2"/>
+    <init xsi:type="simpleocl:PropertyCallExp">
+      <calls xsi:type="simpleocl:OperationCall" operationName="allInstances"/>
+      <calls xsi:type="simpleocl:IteratorExp" name="collect">
+        <body xsi:type="simpleocl:PropertyCallExp">
+          <calls xsi:type="simpleocl:NavigationOrAttributeCall" name="superypes"/>
+          <calls xsi:type="simpleocl:IteratorExp" name="collect">
+            <body xsi:type="simpleocl:TupleExp">
+              <tuplePart varName="type__" eq="=">
+                <initExpression xsi:type="simpleocl:StringExp" stringSymbol="KM3Generalization"/>
+              </tuplePart>
+              <tuplePart varName="general" variableExp="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@body/@tuplePart.1/@initExpression" eq="=">
+                <initExpression xsi:type="simpleocl:VariableExp" referredVariable="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@body/@tuplePart.1"/>
+              </tuplePart>
+              <tuplePart varName="specific" variableExp="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@body/@tuplePart.2/@initExpression //@virtualMetaclasses.0/@init/@calls.1/@body/@source" eq="=">
+                <initExpression xsi:type="simpleocl:VariableExp" referredVariable="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@body/@tuplePart.2"/>
+              </tuplePart>
+            </body>
+            <iterators varName="general"/>
+          </calls>
+          <source xsi:type="simpleocl:VariableExp" referredVariable="//@virtualMetaclasses.0/@init/@calls.1/@body/@calls.1/@body/@tuplePart.2"/>
+        </body>
+        <iterators varName="specific"/>
+      </calls>
+      <calls xsi:type="simpleocl:CollectionOperationCall" operationName="flatten"/>
+      <source xsi:type="simpleocl:OclModelElementExp" model="//@boundMetamodel" name="Class"/>
+    </init>
+  </virtualMetaclasses>
+  <boundConcept name="OO" metamodelURI="platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/OO_concept.ecore"/>
+  <boundMetamodel name="KM3" metamodelURI="platform:/resource/genericity.benchmarks/components/oo2measure/metamodels/KM3.ecore"/>
+</bindingModel:BindingModel>

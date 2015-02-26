@@ -6,6 +6,7 @@ import bento.adapter.atl.visitors.AdaptCode;
 import bento.adapter.atl.visitors.AdaptModelElements;
 import bento.adapter.atl.visitors.AdaptModuleElements;
 import bento.adapter.atl.visitors.CreateAdapters;
+import bento.binding.utils.BindingModel;
 import anatlyzer.atl.model.ATLModel;
 
 

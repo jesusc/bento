@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="bento.language.bentocomp.resource.bento.ui.BentoUIMetaInformation" id="bento.language.bentocomp.resource.bento.ui.BentoUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="bento.language.bentocomp.resource.bento.ui.BentoEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="bento" icon="icons/editor_icon.gif" id="bento.language.bentocomp.resource.bento.ui.BentoEditor" name="EMFText bento Editor">
+			<contentTypeBinding contentTypeId="bento.language.bentocomp.resource.bento">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="bento.language.bentocomp.resource.bento.ui.BentoPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Bento Text Editor" id="bento.language.bentocomp.resource.bento.ui.BentoPreferencePage" class="bento.language.bentocomp.resource.bento.ui.BentoPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="bento.language.bentocomp.resource.bento.ui.BentoSyntaxColoringPreferencePage" class="bento.language.bentocomp.resource.bento.ui.BentoSyntaxColoringPreferencePage" category="bento.language.bentocomp.resource.bento.ui.BentoPreferencePage">
+		</page>
+		<page name="Brackets" id="bento.language.bentocomp.resource.bento.ui.BentoBracketPreferencePage" class="bento.language.bentocomp.resource.bento.ui.BentoBracketPreferencePage" category="bento.language.bentocomp.resource.bento.ui.BentoPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="bento.language.bentocomp.resource.bento.ui.BentoNewFileWizard" id="bento.language.bentocomp.resource.bento.ui.BentoNewFileWizard" name="EMFText .bento file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="bento.language.bentocomp.resource.bento.ui.BentoNewProjectWizard" id="bento.language.bentocomp.resource.bento.ui.BentoNewProjectWizard" name="EMFText bento project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="bento.language.bentocomp.resource.bento.ui.BentoMarkerResolutionGenerator" markerType="bento.language.bentocomp.resource.bento.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="bento.language.bentocomp.resource.bento.ui.BentoAnnotationModelFactory" extensions="bento">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="bento.language.bentocomp.resource.bento" name=".bento File" base-type="org.eclipse.core.runtime.text" file-extensions="bento">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="bento" id="bento.language.bentocomp.resource.bento.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="bento.language.bentocomp.resource.bento.ui.occurences">
+		</type>
+		<type name="bento.language.bentocomp.resource.bento.ui.occurences.declaration" super="bento.language.bentocomp.resource.bento.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="bento.language.bentocomp.resource.bento.ui.occurences" label="Occurrences (in .bento files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="bento.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="bento.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="bento.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="bento.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="bento.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="bento.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="bento.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="bento.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="bento.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="bento.language.bentocomp.resource.bento.ui.occurences.declaration" label="Declarations (in .bento files)" textPreferenceKey="bento.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="bento.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="bento.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="bento.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="bento.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="bento.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="bento.language.bentocomp.resource.bento.ui.launchConfigurationType" id="bento.language.bento.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="bento.language.bentocomp.resource.bento.ui.launchConfigurationType" class="bento.language.bentocomp.resource.bento.ui.launch.BentoLaunchConfigurationTabGroup" id="bento.language.bento.launchConfigurationTabGroup" helpContextId="bento.language.bento.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug bento model.">
+			</launchMode>
+			<launchMode mode="run" description="Run bento model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="bento Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="bento.language.bento.launch" modes="run,debug" class="bento.language.bentocomp.resource.bento.ui.launch.BentoLaunchShortcut" description="Launch a bento model" id="bento.language.bento.launchShortcut">
+			<description description="Run bento model" mode="run">
+			</description>
+			<description description="Debug bento model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="bento.language.bento.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="bento.language.bentocomp.resource.bento.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="bento.language.bento.PropertyTester" type="java.lang.Object" namespace="bento.language.bento" properties="isLaunchable" class="bento.language.bentocomp.resource.bento.ui.BentoPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="bento.language.bentocomp.resource.bento.ui.debug.lineBreakpoint" markerType="bento.language.bentocomp.resource.bento.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="bento.language.bentocomp.resource.bento.ui.debug.lineBreakpoint" label="Breakpoints (in .bento files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="bento.language.bentocomp.resource.bento.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="bento.language.bentocomp.resource.bento.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="bento.language.bentocomp.resource.bento.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="bento.language.bentocomp.resource.bento.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="bento.language.bentocomp.resource.bento.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="bento.language.bentocomp.resource.bento.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="bento.language.bentocomp.resource.bento.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="bento.language.bentocomp.resource.bento.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="bento.language.bentocomp.resource.bento.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="bento.language.bentocomp.resource.bento.ui.BentoEditor" class="bento.language.bentocomp.resource.bento.ui.debug.BentoAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="bento.language.bentocomp.resource.bento.debug.BentoDebugVariable" class="bento.language.bentocomp.resource.bento.ui.debug.BentoAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="bento.language.bentocomp.resource.bento.debug.BentoDebugVariable" class="bento.language.bentocomp.resource.bento.ui.debug.BentoAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="bento.language.bentocomp.resource.bento.ui.RulerPopupActions" targetID="bento.language.bentocomp.resource.bento.EditorRuler">
+			<action id="bento.language.bentocomp.resource.bento.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="bento.language.bentocomp.resource.bento.ui.BentoEditor" id="bento.language.bentocomp.resource.bento.ui.BreakpointRulerActions">
+			<action id="bento.language.bentocomp.resource.bento.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="bento.language.bentocomp.resource.bento.debugModel" class="bento.language.bentocomp.resource.bento.ui.debug.BentoDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

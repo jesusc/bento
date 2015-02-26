@@ -1,0 +1,11 @@
+transformation component bento.examples.oo2dot { 
+	source concept OO  : "OO.ecore"
+	target concept DOT : "DOT.ecore"
+	source model in : OO
+	target model out : DOT
+	definition atl "oo2dot.atl" with 
+		IN : OO = in, 
+		OUT : DOT = out
+
+	tags "object-oriented", "oo", "dot", "metamodel"
+}

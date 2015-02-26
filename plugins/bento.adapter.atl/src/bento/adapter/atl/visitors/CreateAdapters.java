@@ -20,8 +20,8 @@ import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
-import bento.adapter.atl.BindingModel;
 import bento.adapter.atl.IComponentInfoForBinding;
+import bento.binding.utils.BindingModel;
 
 public class CreateAdapters extends BaseAdapterVisitor {
 	

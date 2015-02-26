@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<reveng_model:RevengModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reveng_model="http://bento/componetization/reveng_model" componentPath="oo2dot">
+  <transformation xsi:type="reveng_model:AtlTransformation" path="/KM32DOT/Transformations/KM32DOT.atl">
+    <metamodels path="/bento.examples.oo2dot/reveng/original/KM3_modified.ecore" name="KM3" modelName="IN" becomeConcept="true">
+      <extractedConcept name="OO" nsURI="http://miso.es/oo2dot/oo_concept" path="/bento.examples.oo2dot/metamodels/OO.ecore"/>
+    </metamodels>
+    <metamodels path="/KM32DOT/Metamodels/DOT.ecore" name="DOT" modelName="OUT" kind="OUT"/>
+  </transformation>
+  <template xsi:type="reveng_model:AtlTransformation" path="/bento.examples.oo2dot/transformation/oo2dot.atl"/>
+</reveng_model:RevengModel>

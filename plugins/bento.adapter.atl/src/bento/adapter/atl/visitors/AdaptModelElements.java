@@ -4,8 +4,8 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.Unit;
 import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
-import bento.adapter.atl.BindingModel;
 import bento.adapter.atl.IComponentInfoForBinding;
+import bento.binding.utils.BindingModel;
 
 public class AdaptModelElements extends BaseAdapterVisitor {
 	

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<petri_nets:PetriNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petri_nets="petri_nets">
+  <elems xsi:type="petri_nets:Place" name="OpenMail"/>
+  <elems xsi:type="petri_nets:Place" name="Initial: org.eclipse.m2m.atl.engine.emfvm.lib.OclUndefined@40faa47b" tokens="1"/>
+  <elems xsi:type="petri_nets:Place" name="Activity"/>
+  <elems xsi:type="petri_nets:Place" name="ReadMail"/>
+  <elems xsi:type="petri_nets:Place" name="Activity"/>
+  <elems xsi:type="petri_nets:Place" name="Discard"/>
+  <elems xsi:type="petri_nets:Place" name="Final"/>
+  <elems xsi:type="petri_nets:Place" name="Invite Girl To Prom"/>
+  <elems xsi:type="petri_nets:Place" name="Activity"/>
+  <elems xsi:type="petri_nets:Place" name="Play XBOX"/>
+  <elems xsi:type="petri_nets:Place" name="Final"/>
+  <elems xsi:type="petri_nets:Place" name="Final"/>
+  <elems xsi:type="petri_nets:Place" name="Rent Tuxedo"/>
+  <elems xsi:type="petri_nets:Place" name="Attend Prom"/>
+  <elems xsi:type="petri_nets:Place" name="Initial: org.eclipse.m2m.atl.engine.emfvm.lib.OclUndefined@40faa47b" tokens="1"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.1" out="//@elems.0"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.0" out="//@elems.2"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.4" out="//@elems.5"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.2" out="//@elems.3"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.2" out="//@elems.4"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.3" out="//@elems.4"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.5" out="//@elems.6"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.9" out="//@elems.10"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.13" out="//@elems.11"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.12" out="//@elems.13"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.7" out="//@elems.8"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.8" out="//@elems.9"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.8" out="//@elems.12"/>
+  <elems xsi:type="petri_nets:Transition" in="//@elems.14" out="//@elems.7"/>
+</petri_nets:PetriNet>

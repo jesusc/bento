@@ -1,0 +1,45 @@
+-- @path Metrics=/bento.rev.oo2metrics_running_example/original/Metrics.ecore
+-- @path UML=/bento.rev.oo2metrics_running_example/original/SimpleUML.ecore
+
+
+module UML2Metrics;
+create OUT: Metrics from IN: UML;
+
+rule Class2MeasureSet {
+	from
+		class: UML!Class
+	to
+		set: Metrics!MetricsSet
+	do {
+		set.name <- 'class ' + class.name;
+		set.metrics <- thisModule.Metric('DIT', class.DIT());
+	}
+}
+
+rule Metric (name: String, value: Integer) {
+        to
+		metric: Metrics!Metric (
+			name <- name,
+			value <- value
+		)
+        do {
+		metric; 
+	}
+}
+
+helper context UML!Class def: DIT(): Real =
+	if (self.supers -> isEmpty()) then
+		0
+	else
+		let dits: Set(Real) =
+			self.supers -> collect(s | s.DIT())
+		in
+			1 + dits -> select(v | dits -> forAll(v2 | v >= v2)) -> first()
+	endif;
+
+helper context UML!Class def: supers: Set(UML!Class) =
+	self.generalization -> collect(g | g.general) -> excluding(self) -> asSet();
+
+helper context UML!Class def: children: Set(UML!Class) =
+	UML!Generalization.allInstances() -> select(g | g.general = self) -> collect(g | g.
+			specific) -> excluding(self) -> asSet();

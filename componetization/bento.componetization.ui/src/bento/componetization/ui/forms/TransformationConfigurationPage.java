@@ -1,9 +1,8 @@
 package bento.componetization.ui.forms;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
@@ -15,6 +14,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
@@ -45,7 +45,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
@@ -56,9 +60,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.wb.swt.SWTResourceManager;
-
-import com.sun.prism.impl.ManagedResource.PruningLevel;
 
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLUtils;
@@ -70,7 +73,6 @@ import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
-import bento.componetization.reveng.RevengPackage;
 import bento.componetization.reveng.RevengPackage.Literals;
 import bento.componetization.ui.ITask;
 import bento.componetization.ui.RevengProcessManager;
@@ -288,15 +290,16 @@ public class TransformationConfigurationPage extends FormPage {
 		lblApplyTheProcess.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		
 		Label label_5 = new Label(composite_2, SWT.NONE);
-		label_5.setText("0.");
+		label_5.setText("1.");
 		managedForm.getToolkit().adapt(label_5, true, true);
-		
-		Hyperlink hprlnkConfigureComponent = managedForm.getToolkit().createHyperlink(composite_2, "Configure component", SWT.NONE);
-		managedForm.getToolkit().paintBordersFor(hprlnkConfigureComponent);
+				
+				Label lblConfigureComponent = new Label(composite_2, SWT.NONE);
+				managedForm.getToolkit().adapt(lblConfigureComponent, true, true);
+				lblConfigureComponent.setText("Configure component");
 		
 				Label label_2 = new Label(composite_2, SWT.NONE);
 				managedForm.getToolkit().adapt(label_2, true, true);
-				label_2.setText("1.");
+				label_2.setText("2.");
 		
 				hprlnkCreateArtifacts = managedForm.getToolkit().createHyperlink(composite_2, "Create template",
 						SWT.NONE);
@@ -313,22 +316,6 @@ public class TransformationConfigurationPage extends FormPage {
 				});
 				managedForm.getToolkit().paintBordersFor(hprlnkCreateArtifacts);
 		
-				Label label = managedForm.getToolkit().createLabel(composite_2, "2.", SWT.NONE);
-		
-				Hyperlink hprlnkExtractConcepts = managedForm.getToolkit().createHyperlink(composite_2, "Prune initial concepts",
-						SWT.NONE);
-				hprlnkExtractConcepts.addHyperlinkListener(new IHyperlinkListener() {
-					public void linkActivated(HyperlinkEvent e) {
-						pruneInitialConcepts();
-					}
-
-					public void linkEntered(HyperlinkEvent e) {
-					}
-
-					public void linkExited(HyperlinkEvent e) {
-					}
-				});
-				managedForm.getToolkit().paintBordersFor(hprlnkExtractConcepts);
 
 		Label label_1 = managedForm.getToolkit().createLabel(composite_2, "3.", SWT.NONE);
 
@@ -345,20 +332,47 @@ public class TransformationConfigurationPage extends FormPage {
 			}
 		});
 		managedForm.getToolkit().paintBordersFor(hprlnkAnalysis);
+
+		Label label = managedForm.getToolkit().createLabel(composite_2, "4.", SWT.NONE);
 		
-		Label label_6 = managedForm.getToolkit().createLabel(composite_2, "4.", SWT.NONE);
+		Hyperlink hprlnkExtractConcepts = managedForm.getToolkit().createHyperlink(composite_2, "Prune initial concepts",
+				SWT.NONE);
+		hprlnkExtractConcepts.addHyperlinkListener(new IHyperlinkListener() {
+			public void linkActivated(HyperlinkEvent e) {
+				pruneInitialConcepts();
+			}
+
+			public void linkEntered(HyperlinkEvent e) {
+			}
+
+			public void linkExited(HyperlinkEvent e) {
+			}
+		});
+		managedForm.getToolkit().paintBordersFor(hprlnkExtractConcepts);
+
+		Label label_6 = managedForm.getToolkit().createLabel(composite_2, "5.", SWT.NONE);
 		
 		Label lblNewLabel_1 = managedForm.getToolkit().createLabel(composite_2, "Apply refactorings", SWT.NONE);
 		
 		Label label_3 = new Label(composite_2, SWT.NONE);
 		managedForm.getToolkit().adapt(label_3, true, true);
-		label_3.setText("5.");
+		label_3.setText("6.");
 		
-		Label lblDocumentnotIntegrated = managedForm.getToolkit().createLabel(composite_2, "Create documentation (not integrated yet)", SWT.NONE);
+		Hyperlink hprlnkCreateDocumentation = managedForm.getToolkit().createHyperlink(composite_2, "Create documentation", SWT.NONE);
+		hprlnkCreateDocumentation.addHyperlinkListener(new IHyperlinkListener() {
+			public void linkActivated(HyperlinkEvent e) {
+				createDocumentation();
+			}
+			public void linkEntered(HyperlinkEvent e) {
+			}
+			public void linkExited(HyperlinkEvent e) {
+			}
+		});
+		managedForm.getToolkit().paintBordersFor(hprlnkCreateDocumentation);
 		
 		Label label_4 = new Label(composite_2, SWT.NONE);
 		managedForm.getToolkit().adapt(label_4, true, true);
-		label_4.setText("6.");
+		label_4.setText("7.");
 		
 		Hyperlink hprlnkPackageComponent = managedForm.getToolkit().createHyperlink(composite_2, "Package component", SWT.NONE);
 		hprlnkPackageComponent.addHyperlinkListener(new IHyperlinkListener() {
@@ -592,6 +606,30 @@ public class TransformationConfigurationPage extends FormPage {
 		}
 	}
 
+	protected void createDocumentation() {
+		IFile file = manager.getReadmeFile();
+		
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+        IEditorDescriptor desc = PlatformUI.getWorkbench().
+                getEditorRegistry().getDefaultEditor(file.getName());
+        try {
+        	if ( ! file.exists() ) {
+        		String text = "# " + this.txtComponentFile.getText();
+        		
+        		ByteArrayInputStream bis = new ByteArrayInputStream(text.getBytes());        		
+        		file.create(bis, true, null);
+        	}
+        	IEditorPart part = page.openEditor(new FileEditorInput(file), desc.getId());
+        	
+        } catch (PartInitException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        } catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   		
+	}
+	
 	protected void packageComponent() {
 		manager.packageComponent();
 	}

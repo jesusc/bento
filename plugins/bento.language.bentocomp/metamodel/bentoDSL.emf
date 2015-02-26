@@ -1,0 +1,240 @@
+@namespace(uri="http://www.miso.es/bento/bentocomp", prefix="bentocomp")
+package bentocomp;
+
+class DummyClass { } // to generate a factory for the root package
+
+@namespace(uri="http://www.miso.es/bento/bentocomp/core", prefix="bentocomp_core")
+package core {
+	
+	abstract class NamedElement {
+	  attr String[1] name;
+	}
+
+	abstract class Component extends NamedElement, Tagged {
+ 		attr String[0..1] owner;
+ 		attr String[*] contributors;
+ 		attr String[1] version = "0";
+ 		attr Status[1] status;  
+
+        // All our components use concepts as "ports"?
+		val Concept[+] source; // should be ref
+		val Concept[*] target;
+	
+	    val ParameterModel[*] sourceModels;
+	    val ParameterModel[*] targetModels;
+		val GeneratedModel[*] generateModels;
+		
+		val variants.Parameter[*] formalParameters;	
+
+	}
+
+    abstract class Model extends NamedElement { }
+    class ParameterModel extends Model {
+       ref Concept[1] type;
+	   attr String[0..1] resourceName;
+    }
+    class GeneratedModel extends Model { }
+    
+ 
+	enum Status {
+	   UNKNOWN = 0;
+	   ALPHA   = 1;
+	   BETA    = 2;
+	   RELEASE = 3;
+	}
+
+	abstract class Tagged {
+	   val Tag[*] tags; // should be ref   
+	}
+	
+	class TransformationComponent extends Component {			
+		attr boolean isM2M = true; // specialization better?
+	    
+	    val Template[1] template;
+	
+	    // Puede tener constraints la transformacion en si?
+	    val Constraint[*] constraints;
+	}
+	
+	class CompositeComponent extends Component {
+	   ref Component[+] uses;
+	   val flowcontrol.Composition[1] composition;
+		
+	   val BindingDeclaration[*] bindings;
+	}
+	
+	class BindingDeclaration {
+	   attr String[1] name;
+	   attr String[1] fileName;
+	}
+	
+	abstract class Template { 
+	}
+
+	abstract class Constraint {
+	   
+	}
+	
+	class OclConstraint extends Constraint {
+	   
+	}
+
+	// Podriamos tener metamodelos que no fueran conceptos?
+	class Metamodel extends NamedElement {
+	   attr String[1] uri;
+	   // ref ecore.EPackage root;
+
+    	transient attr EResource resource;
+    
+	   val Constraint[*] constraints;
+	}
+	
+	class Tag {
+	   attr String[1] value;
+	}
+	
+	class Concept extends Metamodel, Tagged {
+	}
+
+	// Piece of meta-model for the specification?
+	class Documentation {
+	   
+	}
+
+}
+
+
+@namespace(uri="http://www.miso.es/bento/bentocomp/variants", prefix="bentocomp_variants")
+package variants {
+
+
+	abstract class Parameter extends core.NamedElement {
+	   
+	}
+	
+	abstract class Feature extends Parameter { }
+	class SingleFeature extends Feature {
+	
+	}
+	
+	abstract class CompositeFeature extends Feature {
+	   val Feature[+] children;
+	}
+	
+	class XorFeature extends CompositeFeature {
+	   
+	}
+}
+
+@namespace(uri="http://www.miso.es/bento/bentocomp/flowcontrol", prefix="bentocomp_flowcontrol")
+package flowcontrol {
+
+
+	class Composition extends core.NamedElement {
+	   val CompositionStep[1] step;	   
+	}
+
+	abstract class CompositionStep {
+	   
+	}
+	
+	class Apply extends CompositionStep {
+	   ref core.Component[1] component;
+	   val ApplyParameter[*] inputModels; 
+	   val ApplyParameter[*] outputModels; 
+	   
+	   //attr String[1] bindingName; // TODO: Change to a direct reference to a binding model
+	   //attr String[1] conceptName; 
+	}
+	
+	class ApplyParameter {  
+		ref core.Model[1] model;
+		
+		// Perhaps these two are not needed if some inference is done
+		// to check that the meta-model declared in the binding is compatible
+		// with the meta-model expected by the parameter
+		ref core.Component[0..1] boundConceptQualifier;
+		ref core.Concept[0..1] boundConcept;
+		
+		ref core.BindingDeclaration[0..1] binding;
+	}
+	// class ApplyParameterIdentity 
+	
+	class Seq extends CompositionStep {
+		// input and output models are implicitly connected through model names
+		val CompositionStep[*] steps;
+		
+	}
+	
+	class Xor extends CompositionStep {
+	   val XorCond[+] conditions;
+	}
+	
+	class XorCond {
+	   val BooleanValue[1] value;
+	   val CompositionStep[1] step;
+	}
+	
+	// Parallel step
+	class Par extends CompositionStep {
+	   // TODO: How to merge the values?
+	}
+	
+	abstract class Expression { }
+	abstract class Value { }
+	class BooleanValue extends Value { }
+	
+	class BooleanExpression extends Expression, BooleanValue {
+	     val BooleanValue[1] left;
+	     val BooleanValue[1] right;
+	     attr BooleanOperator[1] operator;
+	}
+
+    enum BooleanOperator {
+       AND          = 0;
+       OR           = 1;
+       LESS         = 2;
+       LESS_THAN    = 3;
+       GREATER      = 4;
+       GREATER_THAN = 5;
+       EQUAL        = 6;
+    }
+
+	class FeatureRef extends Expression, BooleanValue { 
+		ref variants.Feature[1] feature;
+	}
+
+}
+
+@namespace(uri="http://www.miso.es/bento/bentocomp/dsl", prefix="bentocomp_dsl")
+package dsl {
+	class DefinitionRoot {
+		val core.Component[1] component;
+	}
+}
+
+@namespace(uri="http://http://www.miso.es/bento/bentocomp/technologies", prefix="bentocomp_technologies")
+package technologies {
+
+	// Begin-of ATL	
+	class AtlTemplate extends core.Template {
+	   	attr String[1] template;
+    	
+		val AtlParameter[*] parameters;
+	}
+
+	class AtlParameter {
+	   	attr String[1] atlModelName;
+		attr String[0..1] atlMetamodelName; // could be inferred
+		ref core.Model model;
+	}
+	
+	// End-of ATL
+
+
+	// Begin-of Java
+	class JavaTemplate extends core.Template {
+	   attr String[1] qualifiedClassname;
+	}
+	// End-of Java
+}

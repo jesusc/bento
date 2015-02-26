@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bindingModel:BindingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bindingModel="http://http://genericity/language/gbind/dsl" xmlns:simpleocl="http://soft.vub.ac.be/simpleocl/2011/SimpleOCL" name="component2oo">
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.0" concrete="//@concreteMetaclasses.0"/>
+  <bindings xsi:type="bindingModel:ClassBinding" concept="//@conceptMetaclasses.1" concrete="//@concreteMetaclasses.1 //@concreteMetaclasses.2"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="superclasses" conceptClass="//@conceptMetaclasses.0" concreteFeature="parents"/>
+  <bindings xsi:type="bindingModel:RenamingFeatureBinding" conceptFeature="isPublic" conceptClass="//@conceptMetaclasses.1" qualifier="//@concreteMetaclasses.1" concreteFeature="public"/>
+  <bindings xsi:type="bindingModel:OclFeatureBinding" conceptFeature="isPublic" conceptClass="//@conceptMetaclasses.1" qualifier="//@concreteMetaclasses.2">
+    <concrete xsi:type="simpleocl:BooleanExp" booleanSymbol="true"/>
+  </bindings>
+  <conceptMetaclasses name="Class"/>
+  <conceptMetaclasses name="Attribute"/>
+  <concreteMetaclasses name="Component"/>
+  <concreteMetaclasses name="Property"/>
+  <concreteMetaclasses name="Port"/>
+  <boundConcept name="OO" metamodelURI="OO.ecore"/>
+  <boundMetamodel name="Component" metamodelURI="Component.ecore"/>
+</bindingModel:BindingModel>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<reveng_model:RevengModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reveng_model="http://bento/componetization/reveng_model" componentPath="/bento.examples.analysis/component/Ant2Maven.gcomponent">
-  <transformation xsi:type="reveng_model:AtlTransformation" path="/bento.examples.analysis/third-party/zoo/ant2maven/transfo/Ant2Maven.atl">
-    <metamodels path="/bento.examples.analysis/third-party/zoo/ant2maven/MM/MavenMaven.ecore" name="MavenMaven" modelName="OUTMaven" kind="OUT"/>
-    <metamodels path="/bento.examples.analysis/third-party/zoo/ant2maven/MM/MavenProject.ecore" name="MavenProject" modelName="OUTProject" kind="OUT"/>
-    <metamodels path="/bento.examples.analysis/third-party/zoo/ant2maven/MM/Ant.ecore" name="Ant" modelName="IN"/>
-  </transformation>
-  <template xsi:type="reveng_model:AtlTransformation" path="/bento.examples.analysis/third-party/zoo/ant2maven/transfo/Ant2Maven.atl"/>
-</reveng_model:RevengModel>

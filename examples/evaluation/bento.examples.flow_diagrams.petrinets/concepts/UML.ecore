@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uml"
+    nsURI="http://www.eclipse.org/uml2/3.0.0/UML/concept" nsPrefix="uml_concept">
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityFinalNode" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//FinalNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectNode" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JoinNode" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ControlNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutableNode" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//RedefinableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityEdge"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityEdge/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityEdge"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityEdge/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Behavior">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" upperBound="-1" eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edge" upperBound="-1" eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityEdge"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialNode" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ControlNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalNode" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ControlNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityEdge" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//RedefinableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode/incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ControlNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MergeNode" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ControlNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ForkNode" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ControlNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlNode" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ActivityNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RedefinableElement" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//EModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Behavior" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//EncapsulatedClassifier /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//BehavioredClassifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EncapsulatedClassifier" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//StructuredClassifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuredClassifier" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Classifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Namespace /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//RedefinableElement /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Type /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//TemplateableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//NamedElement /bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//ParameterableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterableElement" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateableElement" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BehavioredClassifier" abstract="true"
+      eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/UML.ecore#//Classifier"/>
+</ecore:EPackage>

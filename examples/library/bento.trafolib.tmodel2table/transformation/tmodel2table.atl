@@ -1,0 +1,51 @@
+-- @path TableModel=/bento.trafolib.tmodel2table/metamodels/TableModel.ecore
+-- @path Table=/bento.trafolib.tmodel2table/metamodels/Table.ecore
+module TableModel2table;
+create OUT : Table from IN : TableModel;
+
+rule TableModel2table {
+	from TableModel : TableModel!TableModel
+	to 
+		table : Table!Table (
+			rows <- firtRowForColumnNames,
+			rows <- TableModel.rows->collect(r | thisModule.RowHeaderNode2Row(r) )
+		), firtRowForColumnNames : Table!Row (
+			cells <- upperLeftCell,
+			cells <- TableModel.cols->collect(c | thisModule.ColumnHeaderNode2Cell(c) )
+		), upperLeftCell : Table!Cell (
+			content <- '' -- Could be defined in a helper	
+		)
+}
+
+lazy rule RowHeaderNode2Row{
+	from src : TableModel!RowHeaderNode
+	using {
+		t : TableModel!TableModel = TableModel!TableModel.allInstances()->any(g | g.rows->includes(src) );
+		i : Integer = t.rows->indexOf(src);
+	}
+	to tgt : Table!Row(
+		cells <- rowHeaderCell,
+		cells <- t.cols->collect(c | 
+			let j : Integer = t.cols->indexOf(c)
+			 in thisModule.text2cell( t.valueOf(i, j) ) )
+	), rowHeaderCell : Table!Cell (
+			content <- src.title
+	)
+}
+
+lazy rule ColumnHeaderNode2Cell{
+	from src : TableModel!ColumnHeaderNode
+	  to tgt : Table!Cell(
+		content <- src.title
+	  )
+}
+
+rule text2cell(str : String) {
+	to 
+		c : Table!Cell (
+			content <- str
+		)
+	do {
+		c;	
+	}
+}

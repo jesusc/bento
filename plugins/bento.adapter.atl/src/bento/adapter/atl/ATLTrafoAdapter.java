@@ -12,6 +12,7 @@ import bento.adapter.atl.visitors.AdaptVirtualClasses;
 import bento.adapter.atl.visitors.AdaptWhenClause;
 import bento.adapter.atl.visitors.CopyHelpers;
 import bento.adapter.atl.visitors.CreateAdapters;
+import bento.binding.utils.BindingModel;
 import anatlyzer.atl.editor.builder.AnalyserExecutor;
 import anatlyzer.atl.editor.builder.AnalyserExecutor.CannotLoadMetamodel;
 import anatlyzer.atl.model.ATLModel;

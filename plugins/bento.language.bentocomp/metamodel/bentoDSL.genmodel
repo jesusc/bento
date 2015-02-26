@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.language.bentocomp/src-gen" modelPluginID="bento.language.bentocomp"
+    modelName="bentoDSL" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>bentoDSL.ecore</foreignModel>
+  <genPackages prefix="Bentocomp" basePackage="bento.language" disposableProviderFactory="true"
+      ecorePackage="bentoDSL.ecore#/">
+    <genClasses ecoreClass="bentoDSL.ecore#//DummyClass"/>
+    <nestedGenPackages prefix="Core" basePackage="bento.language.bentocomp" disposableProviderFactory="true"
+        ecorePackage="bentoDSL.ecore#//core">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="bentoDSL.ecore#//core/Status">
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//core/Status/UNKNOWN"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//core/Status/ALPHA"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//core/Status/BETA"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//core/Status/RELEASE"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/NamedElement">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/NamedElement/name"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/Component">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Component/owner"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Component/contributors"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Component/version"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Component/status"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Component/source"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Component/target"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Component/sourceModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Component/targetModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Component/generateModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Component/formalParameters"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/Model"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/ParameterModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//core/ParameterModel/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/ParameterModel/resourceName"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/GeneratedModel"/>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/Tagged">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Tagged/tags"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/TransformationComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/TransformationComponent/isM2M"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/TransformationComponent/template"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/TransformationComponent/constraints"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/CompositeComponent">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//core/CompositeComponent/uses"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/CompositeComponent/composition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/CompositeComponent/bindings"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/BindingDeclaration">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/BindingDeclaration/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/BindingDeclaration/fileName"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/Template"/>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/Constraint"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/OclConstraint"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/Metamodel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Metamodel/uri"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Metamodel/resource"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Metamodel/constraints"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/Tag">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/Tag/value"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/Concept"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/Documentation"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Variants" basePackage="bento.language.bentocomp" disposableProviderFactory="true"
+        ecorePackage="bentoDSL.ecore#//variants">
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//variants/Parameter"/>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//variants/Feature"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//variants/SingleFeature"/>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//variants/CompositeFeature">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//variants/CompositeFeature/children"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//variants/XorFeature"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Flowcontrol" basePackage="bento.language.bentocomp"
+        disposableProviderFactory="true" ecorePackage="bentoDSL.ecore#//flowcontrol">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="bentoDSL.ecore#//flowcontrol/BooleanOperator">
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/AND"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/OR"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/LESS"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/LESS_THAN"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/GREATER"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/GREATER_THAN"/>
+        <genEnumLiterals ecoreEnumLiteral="bentoDSL.ecore#//flowcontrol/BooleanOperator/EQUAL"/>
+      </genEnums>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/Composition">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/Composition/step"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//flowcontrol/CompositionStep"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/Apply">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/Apply/component"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/Apply/inputModels"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/Apply/outputModels"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/ApplyParameter">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/ApplyParameter/model"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/ApplyParameter/boundConceptQualifier"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/ApplyParameter/boundConcept"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/ApplyParameter/binding"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/Seq">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/Seq/steps"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/Xor">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/Xor/conditions"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/XorCond">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/XorCond/value"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/XorCond/step"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/Par"/>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//flowcontrol/Expression"/>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//flowcontrol/Value"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/BooleanValue"/>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/BooleanExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/BooleanExpression/left"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/BooleanExpression/right"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//flowcontrol/BooleanExpression/operator"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//flowcontrol/FeatureRef">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//flowcontrol/FeatureRef/feature"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Dsl" basePackage="bento.language.bentocomp" disposableProviderFactory="true"
+        ecorePackage="bentoDSL.ecore#//dsl">
+      <genClasses ecoreClass="bentoDSL.ecore#//dsl/DefinitionRoot">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//dsl/DefinitionRoot/component"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Technologies" basePackage="bento.language.bentocomp"
+        disposableProviderFactory="true" ecorePackage="bentoDSL.ecore#//technologies">
+      <genClasses ecoreClass="bentoDSL.ecore#//technologies/AtlTemplate">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//technologies/AtlTemplate/template"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//technologies/AtlTemplate/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//technologies/AtlParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//technologies/AtlParameter/atlModelName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//technologies/AtlParameter/atlMetamodelName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference bentoDSL.ecore#//technologies/AtlParameter/model"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//technologies/JavaTemplate">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//technologies/JavaTemplate/qualifiedClassname"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

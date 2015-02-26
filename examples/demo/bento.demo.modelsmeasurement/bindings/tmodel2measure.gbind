@@ -1,0 +1,52 @@
+--
+-- In some way the concept is providing a domain-specific transformation language
+-- (with a generic syntax) to perform "to-table" transformations via simple mappings.
+--
+binding tmodel2measure {  
+	concept   TMODEL  : "bento:/bento.trafolib.tmodel2table/TableModel.ecore"
+	metamodel MEASURE : "bento:/bento.rev.oo2measure/Measure.ecore"
+	
+	class ClassMeasureSet {
+    	ref measureSets : MeasureSet
+    } init = Sequence { 
+    	#ClassMeasureSet { 
+    		measureSets = MEASURE!MeasureSet.allInstances()->select(ms|ms.elementType = #"class")->
+				select(ms|ms.measures->notEmpty())
+    	} 
+    };		
+
+	
+    class TableModel        to virtual ClassMeasureSet
+       	
+	class RowHeaderNode    to MeasureSet
+	class ColumnHeaderNode to Measure
+ 	
+ 	feature TableModel.rows         = self.measureSets 	
+ 	-- columns are metric names, but basically every measure share the metric name,
+ 	-- so it is enough to get use the measures of the measure set...
+ 	feature TableModel.cols         = self.measureSets->first().measures
+
+	feature RowHeaderNode.title    = self.absoluteName
+	feature ColumnHeaderNode.title = self.metric.name
+		
+	helper TableModel.valueOf(i : Integer, j : Integer) : String = self.measureSets->at(i).measures->at(j).stringValue	
+	
+	helper MeasureSet.absoluteName : String =
+		self.elementName
+	-- This fails with no trace for BraceExp... that is, the parenthesis
+    --    if (self.elementType = #model) then self.elementName
+    --    else if (self.parent.oclIsUndefined()) then ''
+    --    else if (self.parent.elementType = #model) then ''
+    --    else self.parent.absoluteName() + '.'
+    --    endif
+    --    endif + self.elementName
+    --    endif
+    --
+     
+    -- Look at MeasureHelpers to implement the correct conversions    	
+	-- TOOD: Be careful with () and no () because in ATL they are handled differently
+	helper IntegerMeasure.stringValue() : String = self.value.toString()
+	helper DoubleMeasure.stringValue() : String = self.value.toString()
+	helper PercentageMeasure.stringValue() : String = self.value.toString()
+	
+}

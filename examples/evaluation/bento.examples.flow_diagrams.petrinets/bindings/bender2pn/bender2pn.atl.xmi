@@ -1,0 +1,2109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="3:1-525:8" name="flow2pn">
+    <commentsBefore>-- @path FD=/bento.examples.flow_diagrams.petrinets/metamodels/flow_concept.ecore</commentsBefore>
+    <commentsBefore>-- @path PN=/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore</commentsBefore>
+    <inModels location="4:22-4:33" name="IN" metamodel="/2"/>
+    <outModels location="4:8-4:16" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:Helper" location="8:1-9:7">
+      <commentsBefore>-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)</commentsBefore>
+      <commentsBefore>--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; </commentsBefore>
+      <definition location="8:8-9:6">
+        <feature xsi:type="ocl:Operation" location="8:34-9:6" name="oclAsType">
+          <parameters location="8:44-8:54" varName="t">
+            <type xsi:type="ocl:OclAnyType" location="8:48-8:54"/>
+          </parameters>
+          <returnType xsi:type="ocl:OclAnyType" location="8:58-8:64"/>
+          <body xsi:type="ocl:VariableExp" location="9:2-9:6" referredVariable="/4"/>
+        </feature>
+        <context_ location="8:8-8:28">
+          <context_ xsi:type="ocl:OclModelElement" location="8:16-8:28" name="State" model="/3"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="11:1-12:22">
+      <definition location="11:8-12:21">
+        <feature xsi:type="ocl:Attribute" location="11:34-12:21" name="typeName">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="12:2-12:21" name="name">
+            <source xsi:type="ocl:OperationCallExp" location="12:2-12:16" operationName="oclType">
+              <source xsi:type="ocl:VariableExp" location="12:2-12:6" referredVariable="/6"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:StringType" location="11:45-11:51"/>
+        </feature>
+        <context_ location="11:8-11:28">
+          <context_ xsi:type="ocl:OclModelElement" location="11:16-11:28" name="State" model="/5"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="14:1-15:33">
+      <definition location="14:8-15:32">
+        <feature xsi:type="ocl:Attribute" location="14:34-15:32" name="isTask">
+          <initExpression xsi:type="ocl:OperationCallExp" location="15:2-15:32" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="15:2-15:6" referredVariable="/8"/>
+            <arguments xsi:type="ocl:OclModelElement" location="15:19-15:31" name="State" model="/9"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="14:43-14:50"/>
+        </feature>
+        <context_ location="14:8-14:28">
+          <context_ xsi:type="ocl:OclModelElement" location="14:16-14:28" name="State" model="/7"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="17:1-18:38">
+      <definition location="17:8-18:37">
+        <feature xsi:type="ocl:Attribute" location="17:34-18:37" name="isFinalTask">
+          <initExpression xsi:type="ocl:OperationCallExp" location="18:2-18:37" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="18:2-18:6" referredVariable="/11"/>
+            <arguments xsi:type="ocl:OclModelElement" location="18:19-18:36" name="FinalState" model="/12"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="17:48-17:55"/>
+        </feature>
+        <context_ location="17:8-17:28">
+          <context_ xsi:type="ocl:OclModelElement" location="17:16-17:28" name="State" model="/10"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="20:1-25:8">
+      <definition location="20:8-25:7">
+        <feature xsi:type="ocl:Attribute" location="20:34-25:7" name="isTerminatingTask">
+          <initExpression xsi:type="ocl:IfExp" location="21:2-25:7">
+            <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="22:3-22:50" name="isTerminating">
+              <source xsi:type="ocl:OperationCallExp" location="22:3-22:36" operationName="oclAsType">
+                <source xsi:type="ocl:VariableExp" location="22:3-22:7" referredVariable="/15"/>
+                <arguments xsi:type="ocl:OclModelElement" location="22:18-22:35" name="FinalState" model="/16"/>
+              </source>
+            </thenExpression>
+            <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="21:5-21:21" name="isFinalTask">
+              <source xsi:type="ocl:VariableExp" location="21:5-21:9" referredVariable="/14"/>
+            </condition>
+            <elseExpression xsi:type="ocl:BooleanExp" location="24:3-24:8"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="20:54-20:61"/>
+        </feature>
+        <context_ location="20:8-20:28">
+          <context_ xsi:type="ocl:OclModelElement" location="20:16-20:28" name="State" model="/13"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="27:1-28:8">
+      <definition location="27:8-28:7">
+        <feature xsi:type="ocl:Attribute" location="27:34-28:7" name="isParallelSplit">
+          <initExpression xsi:type="ocl:BooleanExp" location="28:2-28:7"/>
+          <type xsi:type="ocl:BooleanType" location="27:52-27:59"/>
+        </feature>
+        <context_ location="27:8-27:28">
+          <context_ xsi:type="ocl:OclModelElement" location="27:16-27:28" name="State" model="/17"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="30:1-31:8">
+      <definition location="30:8-31:7">
+        <feature xsi:type="ocl:Attribute" location="30:34-31:7" name="isSynchronization">
+          <initExpression xsi:type="ocl:BooleanExp" location="31:2-31:7"/>
+          <type xsi:type="ocl:BooleanType" location="30:54-30:61"/>
+        </feature>
+        <context_ location="30:8-30:28">
+          <context_ xsi:type="ocl:OclModelElement" location="30:16-30:28" name="State" model="/18"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="33:1-34:37">
+      <definition location="33:8-34:36">
+        <feature xsi:type="ocl:Attribute" location="33:34-34:36" name="isExclusiveChoice">
+          <initExpression xsi:type="ocl:OperationCallExp" location="34:2-34:36" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="34:2-34:6" referredVariable="/20"/>
+            <arguments xsi:type="ocl:OclModelElement" location="34:19-34:35" name="Collected" model="/21"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="33:54-33:61"/>
+        </feature>
+        <context_ location="33:8-33:28">
+          <context_ xsi:type="ocl:OclModelElement" location="33:16-33:28" name="State" model="/19"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="36:1-37:8">
+      <definition location="36:8-37:7">
+        <feature xsi:type="ocl:Attribute" location="36:34-37:7" name="isSimpleMerge">
+          <initExpression xsi:type="ocl:BooleanExp" location="37:2-37:7"/>
+          <type xsi:type="ocl:BooleanType" location="36:50-36:57"/>
+        </feature>
+        <context_ location="36:8-36:28">
+          <context_ xsi:type="ocl:OclModelElement" location="36:16-36:28" name="State" model="/22"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="39:1-40:8">
+      <definition location="39:8-40:7">
+        <feature xsi:type="ocl:Attribute" location="39:34-40:7" name="isMultiChoice">
+          <initExpression xsi:type="ocl:BooleanExp" location="40:2-40:7"/>
+          <type xsi:type="ocl:BooleanType" location="39:50-39:57"/>
+        </feature>
+        <context_ location="39:8-39:28">
+          <context_ xsi:type="ocl:OclModelElement" location="39:16-39:28" name="State" model="/23"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="42:1-43:104">
+      <definition location="42:8-43:103">
+        <feature xsi:type="ocl:Attribute" location="42:34-43:103" name="toPlaceAsInput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="43:2-43:103" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="43:2-43:81" operationName="or">
+              <source xsi:type="ocl:OperatorCallExp" location="43:2-43:59" operationName="or">
+                <source xsi:type="ocl:OperatorCallExp" location="43:2-43:33" operationName="or">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="43:2-43:13" name="isTask">
+                    <source xsi:type="ocl:VariableExp" location="43:2-43:6" referredVariable="/25"/>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="43:17-43:33" name="isFinalTask">
+                    <source xsi:type="ocl:VariableExp" location="43:17-43:21" referredVariable="/26"/>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="43:37-43:59" name="isExclusiveChoice">
+                  <source xsi:type="ocl:VariableExp" location="43:37-43:41" referredVariable="/27"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="43:63-43:81" name="isSimpleMerge">
+                <source xsi:type="ocl:VariableExp" location="43:63-43:67" referredVariable="/28"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="43:85-43:103" name="isMultiChoice">
+              <source xsi:type="ocl:VariableExp" location="43:85-43:89" referredVariable="/29"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="42:51-42:58"/>
+        </feature>
+        <context_ location="42:8-42:28">
+          <context_ xsi:type="ocl:OclModelElement" location="42:16-42:28" name="State" model="/24"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="45:1-46:60">
+      <definition location="45:8-46:59">
+        <feature xsi:type="ocl:Attribute" location="45:34-46:59" name="toPlaceAsOutput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="46:2-46:59" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="46:2-46:33" operationName="or">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="46:2-46:13" name="isTask">
+                <source xsi:type="ocl:VariableExp" location="46:2-46:6" referredVariable="/31"/>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="46:17-46:33" name="isFinalTask">
+                <source xsi:type="ocl:VariableExp" location="46:17-46:21" referredVariable="/32"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="46:37-46:59" name="isExclusiveChoice">
+              <source xsi:type="ocl:VariableExp" location="46:37-46:41" referredVariable="/33"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="45:52-45:59"/>
+        </feature>
+        <context_ location="45:8-45:28">
+          <context_ xsi:type="ocl:OclModelElement" location="45:16-45:28" name="State" model="/30"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="48:1-49:49">
+      <definition location="48:8-49:48">
+        <feature xsi:type="ocl:Attribute" location="48:34-49:48" name="toTransitionAsInput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="49:2-49:48" operationName="or">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="49:2-49:24" name="isSynchronization">
+              <source xsi:type="ocl:VariableExp" location="49:2-49:6" referredVariable="/35"/>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="49:28-49:48" name="isParallelSplit">
+              <source xsi:type="ocl:VariableExp" location="49:28-49:32" referredVariable="/36"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="48:56-48:63"/>
+        </feature>
+        <context_ location="48:8-48:28">
+          <context_ xsi:type="ocl:OclModelElement" location="48:16-48:28" name="State" model="/34"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="51:1-52:93">
+      <definition location="51:8-52:92">
+        <feature xsi:type="ocl:Attribute" location="51:34-52:92" name="toTransitionAsOutput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="52:2-52:92" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="52:2-52:70" operationName="or">
+              <source xsi:type="ocl:OperatorCallExp" location="52:2-52:48" operationName="or">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="52:2-52:24" name="isSynchronization">
+                  <source xsi:type="ocl:VariableExp" location="52:2-52:6" referredVariable="/38"/>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="52:28-52:48" name="isParallelSplit">
+                  <source xsi:type="ocl:VariableExp" location="52:28-52:32" referredVariable="/39"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="52:52-52:70" name="isSimpleMerge">
+                <source xsi:type="ocl:VariableExp" location="52:52-52:56" referredVariable="/40"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="52:74-52:92" name="isMultiChoice">
+              <source xsi:type="ocl:VariableExp" location="52:74-52:78" referredVariable="/41"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="51:57-51:64"/>
+        </feature>
+        <context_ location="51:8-51:28">
+          <context_ xsi:type="ocl:OclModelElement" location="51:16-51:28" name="State" model="/37"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="54:1-55:46">
+      <definition location="54:8-55:45">
+        <feature xsi:type="ocl:Attribute" location="54:34-55:45" name="parentFlowDiagram">
+          <initExpression xsi:type="ocl:CollectionOperationCallExp" location="55:2-55:45" operationName="first">
+            <source xsi:type="ocl:OperationCallExp" location="55:2-55:36" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="55:2-55:21" name="StateMachine" model="/44"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:OclModelElement" location="54:54-54:73" name="StateMachine" model="/43"/>
+        </feature>
+        <context_ location="54:8-54:28">
+          <context_ xsi:type="ocl:OclModelElement" location="54:16-54:28" name="State" model="/42"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="57:1-58:46">
+      <definition location="57:8-58:45">
+        <feature xsi:type="ocl:Attribute" location="57:39-58:45" name="parentFlowDiagram">
+          <initExpression xsi:type="ocl:CollectionOperationCallExp" location="58:2-58:45" operationName="first">
+            <source xsi:type="ocl:OperationCallExp" location="58:2-58:36" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="58:2-58:21" name="StateMachine" model="/47"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:OclModelElement" location="57:59-57:78" name="StateMachine" model="/46"/>
+        </feature>
+        <context_ location="57:8-57:33">
+          <context_ xsi:type="ocl:OclModelElement" location="57:16-57:33" name="Transition" model="/45"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="60:1-65:8">
+      <commentsAfter>-- n^m</commentsAfter>
+      <commentsAfter>-- n^m</commentsAfter>
+      <definition location="60:8-65:7">
+        <feature xsi:type="ocl:Operation" location="60:29-65:7" name="pow">
+          <parameters location="60:33-60:44" varName="m" variableExp="/0/@elements.16/@definition/@feature/@body/@condition/@source /0/@elements.16/@definition/@feature/@body/@thenExpression/@arguments.0/@arguments.0/@source">
+            <type xsi:type="ocl:IntegerType" location="60:37-60:44"/>
+          </parameters>
+          <returnType xsi:type="ocl:IntegerType" location="60:48-60:55"/>
+          <body xsi:type="ocl:IfExp" location="61:2-65:7">
+            <thenExpression xsi:type="ocl:OperatorCallExp" location="62:3-62:25" operationName="*">
+              <source xsi:type="ocl:VariableExp" location="62:3-62:7" referredVariable="/48"/>
+              <arguments xsi:type="ocl:OperationCallExp" location="62:10-62:25" operationName="pow">
+                <source xsi:type="ocl:VariableExp" location="62:10-62:14" referredVariable="/49"/>
+                <arguments xsi:type="ocl:OperatorCallExp" location="62:19-62:24" operationName="-">
+                  <source xsi:type="ocl:VariableExp" location="62:19-62:20" referredVariable="/0/@elements.16/@definition/@feature/@parameters.0"/>
+                  <arguments xsi:type="ocl:IntegerExp" location="62:23-62:24" integerSymbol="1"/>
+                </arguments>
+              </arguments>
+            </thenExpression>
+            <condition xsi:type="ocl:OperatorCallExp" location="61:5-61:10" operationName=">">
+              <source xsi:type="ocl:VariableExp" location="61:5-61:6" referredVariable="/0/@elements.16/@definition/@feature/@parameters.0"/>
+              <arguments xsi:type="ocl:IntegerExp" location="61:9-61:10" integerSymbol="1"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="64:3-64:7" referredVariable="/50"/>
+          </body>
+        </feature>
+        <context_ location="60:8-60:23">
+          <context_ xsi:type="ocl:IntegerType" location="60:16-60:23"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="67:1-72:8">
+      <commentsBefore>-- n^m</commentsBefore>
+      <commentsBefore>-- n^m</commentsBefore>
+      <commentsAfter>-- Sequence{1, 2..., n}</commentsAfter>
+      <commentsAfter>-- Sequence{1, 2..., n}</commentsAfter>
+      <definition location="67:8-72:7">
+        <feature xsi:type="ocl:Operation" location="67:29-72:7" name="toSequence">
+          <returnType xsi:type="ocl:SequenceType" location="67:44-67:61">
+            <elementType xsi:type="ocl:IntegerType" location="67:53-67:60"/>
+          </returnType>
+          <body xsi:type="ocl:IfExp" location="68:2-72:7">
+            <thenExpression xsi:type="ocl:SequenceExp" location="69:3-69:14"/>
+            <condition xsi:type="ocl:OperatorCallExp" location="68:5-68:14" operationName="&lt;=">
+              <source xsi:type="ocl:VariableExp" location="68:5-68:9" referredVariable="/51"/>
+              <arguments xsi:type="ocl:IntegerExp" location="68:13-68:14"/>
+            </condition>
+            <elseExpression xsi:type="ocl:OperationCallExp" location="71:3-71:49" operationName="union">
+              <source xsi:type="ocl:SequenceExp" location="71:3-71:18">
+                <elements xsi:type="ocl:VariableExp" location="71:13-71:17" referredVariable="/52"/>
+              </source>
+              <arguments xsi:type="ocl:OperationCallExp" location="71:25-71:48" operationName="toSequence">
+                <source xsi:type="ocl:OperatorCallExp" location="71:26-71:34" operationName="-">
+                  <source xsi:type="ocl:VariableExp" location="71:26-71:30" referredVariable="/53"/>
+                  <arguments xsi:type="ocl:IntegerExp" location="71:33-71:34" integerSymbol="1"/>
+                </source>
+              </arguments>
+            </elseExpression>
+          </body>
+        </feature>
+        <context_ location="67:8-67:23">
+          <context_ xsi:type="ocl:IntegerType" location="67:16-67:23"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="74:1-83:8">
+      <commentsBefore>-- Sequence{1, 2..., n}</commentsBefore>
+      <commentsBefore>-- Sequence{1, 2..., n}</commentsBefore>
+      <definition location="74:8-83:7">
+        <feature xsi:type="ocl:Operation" location="74:29-83:7" name="choices">
+          <returnType xsi:type="ocl:SequenceType" location="74:41-74:68">
+            <elementType xsi:type="ocl:SequenceType" location="74:50-74:67">
+              <elementType xsi:type="ocl:BooleanType" location="74:59-74:66"/>
+            </elementType>
+          </returnType>
+          <body xsi:type="ocl:IfExp" location="75:2-83:7">
+            <thenExpression xsi:type="ocl:CollectionOperationCallExp" location="76:3-80:5" operationName="union">
+              <source xsi:type="ocl:IteratorExp" location="76:3-78:4" name="collect">
+                <source xsi:type="ocl:OperationCallExp" location="76:3-76:23" operationName="choices">
+                  <source xsi:type="ocl:OperatorCallExp" location="76:4-76:12" operationName="-">
+                    <source xsi:type="ocl:VariableExp" location="76:4-76:8" referredVariable="/55"/>
+                    <arguments xsi:type="ocl:IntegerExp" location="76:11-76:12" integerSymbol="1"/>
+                  </source>
+                </source>
+                <body xsi:type="ocl:CollectionOperationCallExp" location="77:4-77:19" operationName="append">
+                  <source xsi:type="ocl:VariableExp" location="77:4-77:5" referredVariable="/0/@elements.18/@definition/@feature/@body/@thenExpression/@source/@iterators.0"/>
+                  <arguments xsi:type="ocl:BooleanExp" location="77:14-77:18" booleanSymbol="true"/>
+                </body>
+                <iterators location="76:33-76:34" varName="n" variableExp="/0/@elements.18/@definition/@feature/@body/@thenExpression/@source/@body/@source"/>
+              </source>
+              <arguments xsi:type="ocl:IteratorExp" location="78:12-80:4" name="collect">
+                <source xsi:type="ocl:OperationCallExp" location="78:12-78:32" operationName="choices">
+                  <source xsi:type="ocl:OperatorCallExp" location="78:13-78:21" operationName="-">
+                    <source xsi:type="ocl:VariableExp" location="78:13-78:17" referredVariable="/56"/>
+                    <arguments xsi:type="ocl:IntegerExp" location="78:20-78:21" integerSymbol="1"/>
+                  </source>
+                </source>
+                <body xsi:type="ocl:CollectionOperationCallExp" location="79:4-79:20" operationName="append">
+                  <source xsi:type="ocl:VariableExp" location="79:4-79:5" referredVariable="/0/@elements.18/@definition/@feature/@body/@thenExpression/@arguments.0/@iterators.0"/>
+                  <arguments xsi:type="ocl:BooleanExp" location="79:14-79:19"/>
+                </body>
+                <iterators location="78:42-78:43" varName="n" variableExp="/0/@elements.18/@definition/@feature/@body/@thenExpression/@arguments.0/@body/@source"/>
+              </arguments>
+            </thenExpression>
+            <condition xsi:type="ocl:OperatorCallExp" location="75:5-75:13" operationName=">">
+              <source xsi:type="ocl:VariableExp" location="75:5-75:9" referredVariable="/54"/>
+              <arguments xsi:type="ocl:IntegerExp" location="75:12-75:13" integerSymbol="1"/>
+            </condition>
+            <elseExpression xsi:type="ocl:SequenceExp" location="82:3-82:47">
+              <elements xsi:type="ocl:SequenceExp" location="82:13-82:28">
+                <elements xsi:type="ocl:BooleanExp" location="82:23-82:27" booleanSymbol="true"/>
+              </elements>
+              <elements xsi:type="ocl:SequenceExp" location="82:30-82:46">
+                <elements xsi:type="ocl:BooleanExp" location="82:40-82:45"/>
+              </elements>
+            </elseExpression>
+          </body>
+        </feature>
+        <context_ location="74:8-74:23">
+          <context_ xsi:type="ocl:IntegerType" location="74:16-74:23"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="85:1-117:2" name="create_transition">
+      <commentsAfter>-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:</commentsAfter>
+      <commentsAfter>--   1) with an arc, if the transition is connected to a terminating final task</commentsAfter>
+      <commentsAfter>--   2) with a loop, if the transition is not connected to a terminating final task</commentsAfter>
+      <commentsAfter>-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:</commentsAfter>
+      <commentsAfter>--   1) with an arc, if the transition is connected to a terminating final task</commentsAfter>
+      <commentsAfter>--   2) with a loop, if the transition is not connected to a terminating final task</commentsAfter>
+      <outPattern location="96:2-111:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="97:3-111:4" varName="transition" variableExp="/0/@elements.19/@actionBlock/@statements.0/@expression">
+          <type xsi:type="ocl:OclModelElement" location="97:16-97:29" name="Transition" model="/58"/>
+          <bindings location="98:4-98:39" propertyName="name">
+            <value xsi:type="ocl:OperatorCallExp" location="98:12-98:39" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="98:12-98:33" operationName="+">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="98:12-98:27" name="typeName">
+                  <source xsi:type="ocl:VariableExp" location="98:12-98:18" referredVariable="/0/@elements.19/@parameters.0"/>
+                </source>
+                <arguments xsi:type="ocl:StringExp" location="98:30-98:33" stringSymbol=" "/>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="98:36-98:39" referredVariable="/0/@elements.19/@parameters.1"/>
+            </value>
+          </bindings>
+          <bindings location="99:4-99:33" propertyName="in">
+            <value xsi:type="ocl:OperationCallExp" location="99:10-99:33" operationName="append">
+              <source xsi:type="ocl:VariableExp" location="99:10-99:18" referredVariable="/0/@elements.19/@variables.1"/>
+              <arguments xsi:type="ocl:VariableExp" location="99:26-99:32" referredVariable="/0/@elements.19/@parameters.0"/>
+            </value>
+          </bindings>
+          <bindings location="100:4-110:22" propertyName="out">
+            <value xsi:type="ocl:OperationCallExp" location="100:11-110:22" operationName="append">
+              <source xsi:type="ocl:IterateExp" location="100:11-110:5">
+                <source xsi:type="ocl:OperationCallExp" location="100:11-100:43" operationName="toSequence">
+                  <source xsi:type="ocl:CollectionOperationCallExp" location="100:11-100:30" operationName="size">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="100:11-100:22" name="outs">
+                      <source xsi:type="ocl:VariableExp" location="100:11-100:17" referredVariable="/0/@elements.19/@parameters.0"/>
+                    </source>
+                  </source>
+                </source>
+                <body xsi:type="ocl:IfExp" location="101:5-109:10">
+                  <thenExpression xsi:type="ocl:CollectionOperationCallExp" location="102:6-106:12" operationName="append">
+                    <source xsi:type="ocl:VariableExp" location="102:6-102:12" referredVariable="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@result"/>
+                    <arguments xsi:type="ocl:IfExp" location="102:21-106:11">
+                      <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="103:7-103:28" name="out">
+                        <source xsi:type="ocl:OperationCallExp" location="103:7-103:24" operationName="at">
+                          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="103:7-103:18" name="outs">
+                            <source xsi:type="ocl:VariableExp" location="103:7-103:13" referredVariable="/0/@elements.19/@parameters.0"/>
+                          </source>
+                          <arguments xsi:type="ocl:VariableExp" location="103:22-103:23" referredVariable="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@iterators.0"/>
+                        </source>
+                      </thenExpression>
+                      <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="102:24-102:61" name="toPlaceAsInput">
+                        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="102:24-102:46" name="out">
+                          <source xsi:type="ocl:CollectionOperationCallExp" location="102:24-102:42" operationName="at">
+                            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="102:24-102:35" name="outs">
+                              <source xsi:type="ocl:VariableExp" location="102:24-102:30" referredVariable="/0/@elements.19/@parameters.0"/>
+                            </source>
+                            <arguments xsi:type="ocl:VariableExp" location="102:40-102:41" referredVariable="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@iterators.0"/>
+                          </source>
+                        </source>
+                      </condition>
+                      <elseExpression xsi:type="ocl:OperationCallExp" location="105:7-105:24" operationName="at">
+                        <source xsi:type="ocl:NavigationOrAttributeCallExp" location="105:7-105:18" name="outs">
+                          <source xsi:type="ocl:VariableExp" location="105:7-105:13" referredVariable="/0/@elements.19/@parameters.0"/>
+                        </source>
+                        <arguments xsi:type="ocl:VariableExp" location="105:22-105:23" referredVariable="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@iterators.0"/>
+                      </elseExpression>
+                    </arguments>
+                  </thenExpression>
+                  <condition xsi:type="ocl:OperatorCallExp" location="101:8-101:29" operationName="=">
+                    <source xsi:type="ocl:CollectionOperationCallExp" location="101:8-101:22" operationName="at">
+                      <source xsi:type="ocl:VariableExp" location="101:8-101:15" referredVariable="/0/@elements.19/@variables.0"/>
+                      <arguments xsi:type="ocl:VariableExp" location="101:20-101:21" referredVariable="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@iterators.0"/>
+                    </source>
+                    <arguments xsi:type="ocl:BooleanExp" location="101:25-101:29" booleanSymbol="true"/>
+                  </condition>
+                  <elseExpression xsi:type="ocl:VariableExp" location="108:6-108:12" referredVariable="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@result"/>
+                </body>
+                <iterators location="100:53-100:54" varName="i" variableExp="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@condition/@source/@arguments.0 /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@arguments.0/@condition/@source/@source/@arguments.0 /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@arguments.0/@thenExpression/@source/@arguments.0 /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@arguments.0/@elseExpression/@arguments.0"/>
+                <result location="100:56-100:101" varName="result" variableExp="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@source /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@elseExpression">
+                  <type xsi:type="ocl:SequenceType" location="100:65-100:87">
+                    <elementType xsi:type="ocl:OclModelElement" location="100:74-100:86" name="State" model="/59"/>
+                  </type>
+                  <initExpression xsi:type="ocl:SequenceExp" location="100:90-100:101"/>
+                </result>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="110:13-110:21" referredVariable="/0/@elements.19/@variables.2"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <actionBlock location="112:2-116:3">
+        <statements xsi:type="atl:ExpressionStat" location="115:3-115:14">
+          <commentsBefore>-- This is important, it is the result value...</commentsBefore>
+          <commentsBefore>-- This is important, it is the result value...</commentsBefore>
+          <expression xsi:type="ocl:VariableExp" location="115:3-115:13" referredVariable="/0/@elements.19/@outPattern/@elements.0">
+            <commentsBefore>-- This is important, it is the result value...</commentsBefore>
+            <commentsBefore>-- This is important, it is the result value...</commentsBefore>
+          </expression>
+        </statements>
+      </actionBlock>
+      <variables location="88:3-88:72" varName="choices" variableExp="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@condition/@source/@source">
+        <type xsi:type="ocl:SequenceType" location="88:13-88:30">
+          <elementType xsi:type="ocl:BooleanType" location="88:22-88:29"/>
+        </type>
+        <initExpression xsi:type="ocl:CollectionOperationCallExp" location="88:33-88:71" operationName="at">
+          <source xsi:type="ocl:OperationCallExp" location="88:33-88:62" operationName="choices">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="88:33-88:52" operationName="size">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="88:33-88:44" name="outs">
+                <source xsi:type="ocl:VariableExp" location="88:33-88:39" referredVariable="/0/@elements.19/@parameters.0"/>
+              </source>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:VariableExp" location="88:67-88:70" referredVariable="/0/@elements.19/@parameters.1"/>
+        </initExpression>
+      </variables>
+      <variables location="89:3-89:66" varName="icontrol" variableExp="/0/@elements.19/@variables.2/@initExpression/@elseExpression /0/@elements.19/@outPattern/@elements.0/@bindings.1/@value/@source">
+        <type xsi:type="ocl:SequenceType" location="89:14-89:30">
+          <elementType xsi:type="ocl:OclAnyType" location="89:23-89:29"/>
+        </type>
+        <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="89:33-89:65" name="control">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="89:33-89:57" name="parentFlowDiagram">
+            <source xsi:type="ocl:VariableExp" location="89:33-89:39" referredVariable="/0/@elements.19/@parameters.0"/>
+          </source>
+        </initExpression>
+      </variables>
+      <variables location="90:3-94:9" varName="ocontrol" variableExp="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="90:14-90:30">
+          <elementType xsi:type="ocl:OclAnyType" location="90:23-90:29"/>
+        </type>
+        <initExpression xsi:type="ocl:IfExp" location="90:33-94:8">
+          <thenExpression xsi:type="ocl:SequenceExp" location="91:4-91:15"/>
+          <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="90:36-90:67" name="isConnectedToTerminating">
+            <source xsi:type="ocl:VariableExp" location="90:36-90:42" referredVariable="/0/@elements.19/@parameters.0"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="93:4-93:12" referredVariable="/0/@elements.19/@variables.1"/>
+        </initExpression>
+      </variables>
+      <parameters location="85:24-85:45" varName="source" variableExp="/0/@elements.19/@variables.0/@initExpression/@source/@source/@source/@source /0/@elements.19/@variables.1/@initExpression/@source/@source /0/@elements.19/@variables.2/@initExpression/@condition/@source /0/@elements.19/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source /0/@elements.19/@outPattern/@elements.0/@bindings.1/@value/@arguments.0 /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@source/@source /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@arguments.0/@condition/@source/@source/@source/@source /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@arguments.0/@thenExpression/@source/@source/@source /0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@body/@thenExpression/@arguments.0/@elseExpression/@source/@source">
+        <type xsi:type="ocl:OclModelElement" location="85:33-85:45" name="State" model="/57"/>
+      </parameters>
+      <parameters location="85:47-85:60" varName="num" variableExp="/0/@elements.19/@variables.0/@initExpression/@arguments.0 /0/@elements.19/@outPattern/@elements.0/@bindings.0/@value/@arguments.0">
+        <type xsi:type="ocl:IntegerType" location="85:53-85:60"/>
+      </parameters>
+    </elements>
+    <elements xsi:type="atl:Helper" location="123:1-124:29">
+      <commentsBefore>-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:</commentsBefore>
+      <commentsBefore>--   1) with an arc, if the transition is connected to a terminating final task</commentsBefore>
+      <commentsBefore>--   2) with a loop, if the transition is not connected to a terminating final task</commentsBefore>
+      <commentsBefore>-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:</commentsBefore>
+      <commentsBefore>--   1) with an arc, if the transition is connected to a terminating final task</commentsBefore>
+      <commentsBefore>--   2) with a loop, if the transition is not connected to a terminating final task</commentsBefore>
+      <definition location="123:8-124:28">
+        <feature xsi:type="ocl:Attribute" location="123:39-124:28" name="isConnectedToTerminating">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="124:2-124:28" name="isTerminatingTask">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="124:2-124:10" name="out">
+              <source xsi:type="ocl:VariableExp" location="124:2-124:6" referredVariable="/61"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="123:66-123:73"/>
+        </feature>
+        <context_ location="123:8-123:33">
+          <context_ xsi:type="ocl:OclModelElement" location="123:16-123:33" name="Transition" model="/60"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="126:1-129:4">
+      <definition location="126:8-129:3">
+        <feature xsi:type="ocl:Attribute" location="126:34-129:3" name="isConnectedToTerminating">
+          <initExpression xsi:type="ocl:IteratorExp" location="127:2-129:3" name="exists">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="127:2-127:11" name="outs">
+              <source xsi:type="ocl:VariableExp" location="127:2-127:6" referredVariable="/63"/>
+            </source>
+            <body xsi:type="ocl:NavigationOrAttributeCallExp" location="128:3-128:29" name="isConnectedToTerminating">
+              <source xsi:type="ocl:VariableExp" location="128:3-128:4" referredVariable="/0/@elements.21/@definition/@feature/@initExpression/@iterators.0"/>
+            </body>
+            <iterators location="127:20-127:21" varName="e" variableExp="/0/@elements.21/@definition/@feature/@initExpression/@body/@source"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="126:61-126:68"/>
+        </feature>
+        <context_ location="126:8-126:28">
+          <context_ xsi:type="ocl:OclModelElement" location="126:16-126:28" name="State" model="/62"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="131:1-138:8">
+      <definition location="131:8-138:7">
+        <feature xsi:type="ocl:Attribute" location="131:41-138:7" name="control">
+          <initExpression xsi:type="ocl:IfExp" location="132:2-138:7">
+            <thenExpression xsi:type="ocl:SequenceExp" location="135:3-135:42">
+              <elements xsi:type="ocl:OperationCallExp" location="135:13-135:41" operationName="get_control">
+                <source xsi:type="ocl:VariableExp" location="135:13-135:23" referredVariable="/67"/>
+                <arguments xsi:type="ocl:VariableExp" location="135:36-135:40" referredVariable="/68"/>
+              </elements>
+            </thenExpression>
+            <condition xsi:type="ocl:IteratorExp" location="132:5-134:3" name="exists">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="132:5-132:15" name="nodes">
+                <source xsi:type="ocl:VariableExp" location="132:5-132:9" referredVariable="/66"/>
+              </source>
+              <body xsi:type="ocl:NavigationOrAttributeCallExp" location="133:3-133:22" name="isTerminatingTask">
+                <source xsi:type="ocl:VariableExp" location="133:3-133:4" referredVariable="/0/@elements.22/@definition/@feature/@initExpression/@condition/@iterators.0"/>
+              </body>
+              <iterators location="132:24-132:25" varName="n" variableExp="/0/@elements.22/@definition/@feature/@initExpression/@condition/@body/@source"/>
+            </condition>
+            <elseExpression xsi:type="ocl:SequenceExp" location="137:3-137:14"/>
+          </initExpression>
+          <type xsi:type="ocl:SequenceType" location="131:51-131:69">
+            <elementType xsi:type="ocl:OclModelElement" location="131:60-131:68" name="Place" model="/65"/>
+          </type>
+        </feature>
+        <context_ location="131:8-131:35">
+          <context_ xsi:type="ocl:OclModelElement" location="131:16-131:35" name="StateMachine" model="/64"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="140:1-148:2" name="get_control" isUnique="true">
+      <commentsAfter>-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------</commentsAfter>
+      <commentsAfter>-- the flow diagram is transformed into a Petri net </commentsAfter>
+      <commentsAfter>-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------</commentsAfter>
+      <commentsAfter>-- the flow diagram is transformed into a Petri net </commentsAfter>
+      <outPattern location="143:2-147:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="144:3-147:4" varName="place">
+          <type xsi:type="ocl:OclModelElement" location="144:11-144:19" name="Place" model="/70"/>
+          <bindings location="145:4-145:21" propertyName="name">
+            <value xsi:type="ocl:StringExp" location="145:12-145:21" stringSymbol="Control"/>
+          </bindings>
+          <bindings location="146:4-146:15" propertyName="tokens">
+            <value xsi:type="ocl:IntegerExp" location="146:14-146:15" integerSymbol="1"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="141:2-142:29">
+        <elements xsi:type="atl:SimpleInPatternElement" location="142:3-142:29" varName="flow">
+          <type xsi:type="ocl:OclModelElement" location="142:10-142:29" name="StateMachine" model="/69"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="152:1-169:2" name="flowdiagram">
+      <commentsBefore>-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------</commentsBefore>
+      <commentsBefore>-- the flow diagram is transformed into a Petri net </commentsBefore>
+      <commentsBefore>-- BUILDING BLOCKS ---------------------------------------------------------------------------------------------</commentsBefore>
+      <commentsBefore>-- the flow diagram is transformed into a Petri net </commentsBefore>
+      <commentsAfter>-- each task is transformed into a place, with 1 token if it is initial</commentsAfter>
+      <commentsAfter>-- Rule from task</commentsAfter>
+      <outPattern location="155:2-168:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="156:3-168:4" varName="net">
+          <type xsi:type="ocl:OclModelElement" location="156:9-156:20" name="PetriNet" model="/72"/>
+          <bindings location="157:4-167:38" propertyName="elems">
+            <value xsi:type="ocl:CollectionOperationCallExp" location="157:13-167:38" operationName="flatten">
+              <source xsi:type="ocl:OperationCallExp" location="157:13-167:27" operationName="append">
+                <source xsi:type="ocl:OperationCallExp" location="157:13-167:6" operationName="union">
+                  <source xsi:type="ocl:OperationCallExp" location="157:13-161:7" operationName="append">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="157:13-157:23" name="nodes">
+                      <source xsi:type="ocl:VariableExp" location="157:13-157:17" referredVariable="/0/@elements.24/@inPattern/@elements.0"/>
+                    </source>
+                    <arguments xsi:type="ocl:OperationCallExp" location="157:31-161:6" operationName="append">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="157:31-157:41" name="edges">
+                        <source xsi:type="ocl:VariableExp" location="157:31-157:35" referredVariable="/0/@elements.24/@inPattern/@elements.0"/>
+                      </source>
+                      <arguments xsi:type="ocl:IteratorExp" location="157:49-161:5" name="collect">
+                        <source xsi:type="ocl:IteratorExp" location="157:49-159:5" name="select">
+                          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="157:49-157:59" name="nodes">
+                            <source xsi:type="ocl:VariableExp" location="157:49-157:53" referredVariable="/0/@elements.24/@inPattern/@elements.0"/>
+                          </source>
+                          <body xsi:type="ocl:NavigationOrAttributeCallExp" location="158:5-158:20" name="isSimpleMerge">
+                            <source xsi:type="ocl:VariableExp" location="158:5-158:6" referredVariable="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@arguments.0/@source/@iterators.0"/>
+                          </body>
+                          <iterators location="157:68-157:69" varName="n" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@arguments.0/@source/@body/@source"/>
+                        </source>
+                        <body xsi:type="ocl:OperationCallExp" location="160:5-160:39" operationName="create_transition">
+                          <source xsi:type="ocl:VariableExp" location="160:5-160:15" referredVariable="/73"/>
+                          <arguments xsi:type="ocl:VariableExp" location="160:34-160:35" referredVariable="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@arguments.0/@iterators.0"/>
+                          <arguments xsi:type="ocl:IntegerExp" location="160:37-160:38" integerSymbol="1"/>
+                        </body>
+                        <iterators location="159:15-159:16" varName="n" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@arguments.0/@body/@arguments.0"/>
+                      </arguments>
+                    </arguments>
+                  </source>
+                  <arguments xsi:type="ocl:IteratorExp" location="161:14-167:5" name="collect">
+                    <source xsi:type="ocl:CollectionOperationCallExp" location="161:14-165:16" operationName="flatten">
+                      <source xsi:type="ocl:IteratorExp" location="161:14-165:5" name="collect">
+                        <source xsi:type="ocl:IteratorExp" location="161:14-163:5" name="select">
+                          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="161:14-161:24" name="nodes">
+                            <source xsi:type="ocl:VariableExp" location="161:14-161:18" referredVariable="/0/@elements.24/@inPattern/@elements.0"/>
+                          </source>
+                          <body xsi:type="ocl:NavigationOrAttributeCallExp" location="162:5-162:20" name="isMultiChoice">
+                            <source xsi:type="ocl:VariableExp" location="162:5-162:6" referredVariable="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@source/@source/@source/@iterators.0"/>
+                          </body>
+                          <iterators location="161:33-161:34" varName="n" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@source/@source/@source/@body/@source"/>
+                        </source>
+                        <body xsi:type="ocl:NavigationOrAttributeCallExp" location="164:5-164:20" name="nodeGenerator">
+                          <source xsi:type="ocl:VariableExp" location="164:5-164:6" referredVariable="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@source/@source/@iterators.0"/>
+                        </body>
+                        <iterators location="163:15-163:16" varName="n" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@source/@source/@body/@source"/>
+                      </source>
+                    </source>
+                    <body xsi:type="ocl:OperationCallExp" location="166:5-166:50" operationName="create_transition">
+                      <source xsi:type="ocl:VariableExp" location="166:5-166:15" referredVariable="/74"/>
+                      <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="166:34-166:42" name="source">
+                        <source xsi:type="ocl:VariableExp" location="166:34-166:35" referredVariable="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@iterators.0"/>
+                      </arguments>
+                      <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="166:44-166:49" name="num">
+                        <source xsi:type="ocl:VariableExp" location="166:44-166:45" referredVariable="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@iterators.0"/>
+                      </arguments>
+                    </body>
+                    <iterators location="165:26-165:27" varName="n" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@body/@arguments.0/@source /0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@body/@arguments.1/@source"/>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="167:14-167:26" name="control">
+                  <source xsi:type="ocl:VariableExp" location="167:14-167:18" referredVariable="/0/@elements.24/@inPattern/@elements.0"/>
+                </arguments>
+              </source>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="153:2-154:29">
+        <elements xsi:type="atl:SimpleInPatternElement" location="154:3-154:29" varName="flow" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@source/@source /0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@source/@source /0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@arguments.0/@source/@source/@source /0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@source/@source/@source/@source/@source /0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="154:10-154:29" name="StateMachine" model="/71"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="171:1-187:2" name="task" isUnique="true">
+      <commentsBefore>-- each task is transformed into a place, with 1 token if it is initial</commentsBefore>
+      <commentsBefore>-- Rule from task</commentsBefore>
+      <commentsAfter>-- each final task is transformed into a place</commentsAfter>
+      <outPattern location="174:2-186:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="175:3-186:4" varName="place">
+          <type xsi:type="ocl:OclModelElement" location="175:11-175:19" name="Place" model="/76"/>
+          <bindings location="176:4-180:9" propertyName="name">
+            <value xsi:type="ocl:IfExp" location="176:12-180:9">
+              <thenExpression xsi:type="ocl:OperationCallExp" location="177:5-177:34" operationName="concat">
+                <source xsi:type="ocl:StringExp" location="177:5-177:16" stringSymbol="Initial: "/>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="177:24-177:33" name="name">
+                  <source xsi:type="ocl:VariableExp" location="177:24-177:28" referredVariable="/0/@elements.25/@inPattern/@elements.0"/>
+                </arguments>
+              </thenExpression>
+              <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="176:15-176:29" name="isInitial">
+                <source xsi:type="ocl:VariableExp" location="176:15-176:19" referredVariable="/0/@elements.25/@inPattern/@elements.0"/>
+              </condition>
+              <elseExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="179:5-179:14" name="name">
+                <source xsi:type="ocl:VariableExp" location="179:5-179:9" referredVariable="/0/@elements.25/@inPattern/@elements.0"/>
+              </elseExpression>
+            </value>
+          </bindings>
+          <bindings location="181:4-185:9" propertyName="tokens">
+            <value xsi:type="ocl:IfExp" location="181:14-185:9">
+              <thenExpression xsi:type="ocl:IntegerExp" location="182:5-182:6" integerSymbol="1"/>
+              <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="181:17-181:31" name="isInitial">
+                <source xsi:type="ocl:VariableExp" location="181:17-181:21" referredVariable="/0/@elements.25/@inPattern/@elements.0"/>
+              </condition>
+              <elseExpression xsi:type="ocl:IntegerExp" location="184:5-184:6"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="172:2-173:22">
+        <elements xsi:type="atl:SimpleInPatternElement" location="173:3-173:22" varName="task" variableExp="/0/@elements.25/@outPattern/@elements.0/@bindings.0/@value/@condition/@source /0/@elements.25/@outPattern/@elements.0/@bindings.0/@value/@thenExpression/@arguments.0/@source /0/@elements.25/@outPattern/@elements.0/@bindings.0/@value/@elseExpression/@source /0/@elements.25/@outPattern/@elements.0/@bindings.1/@value/@condition/@source">
+          <type xsi:type="ocl:OclModelElement" location="173:10-173:22" name="State" model="/75"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="190:1-207:2" name="finaltask">
+      <commentsBefore>-- each final task is transformed into a place</commentsBefore>
+      <commentsAfter>-- each parallel split  (i.e. fork) is transformed into a transition</commentsAfter>
+      <commentsAfter>-- each synchronization (i.e. join) is transformed into a transition</commentsAfter>
+      <commentsAfter>-- Rule from synchronization_all</commentsAfter>
+      <outPattern location="193:2-206:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="194:3-206:4" varName="place">
+          <type xsi:type="ocl:OclModelElement" location="194:11-194:19" name="Place" model="/78"/>
+          <bindings location="196:4-204:9" propertyName="name">
+            <commentsBefore>--name   &lt;- if task.isTerminating then 'Final Terminating' else 'Final' endif,</commentsBefore>
+            <value xsi:type="ocl:OperatorCallExp" location="196:12-204:9" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="196:12-200:9" operationName="+">
+                <source xsi:type="ocl:StringExp" location="196:12-196:19" stringSymbol="Final"/>
+                <arguments xsi:type="ocl:IfExp" location="196:22-200:9">
+                  <thenExpression xsi:type="ocl:StringExp" location="197:5-197:19" stringSymbol=" Terminating"/>
+                  <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="196:25-196:43" name="isTerminating">
+                    <source xsi:type="ocl:VariableExp" location="196:25-196:29" referredVariable="/0/@elements.26/@inPattern/@elements.0"/>
+                  </condition>
+                  <elseExpression xsi:type="ocl:StringExp" location="199:5-199:7" stringSymbol=""/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:IfExp" location="200:12-204:9">
+                <thenExpression xsi:type="ocl:StringExp" location="201:5-201:17" stringSymbol=" Mandatory"/>
+                <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="200:15-200:31" name="isMandatory">
+                  <source xsi:type="ocl:VariableExp" location="200:15-200:19" referredVariable="/0/@elements.26/@inPattern/@elements.0"/>
+                </condition>
+                <elseExpression xsi:type="ocl:StringExp" location="203:5-203:7" stringSymbol=""/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="205:4-205:15" propertyName="tokens">
+            <value xsi:type="ocl:IntegerExp" location="205:14-205:15"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="191:2-192:27">
+        <elements xsi:type="atl:SimpleInPatternElement" location="192:3-192:27" varName="task" variableExp="/0/@elements.26/@outPattern/@elements.0/@bindings.0/@value/@source/@arguments.0/@condition/@source /0/@elements.26/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@condition/@source">
+          <type xsi:type="ocl:OclModelElement" location="192:10-192:27" name="FinalState" model="/77"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="210:1-243:2" name="synchronization_all" isUnique="true">
+      <commentsBefore>-- each parallel split  (i.e. fork) is transformed into a transition</commentsBefore>
+      <commentsBefore>-- each synchronization (i.e. join) is transformed into a transition</commentsBefore>
+      <commentsBefore>-- Rule from synchronization_all</commentsBefore>
+      <commentsAfter>-- Rule from exclusive_choice</commentsAfter>
+      <outPattern location="222:2-242:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="223:3-242:4" varName="transition">
+          <type xsi:type="ocl:OclModelElement" location="223:16-223:29" name="Transition" model="/80"/>
+          <bindings location="224:4-224:26" propertyName="name">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="224:12-224:26" name="typeName">
+              <source xsi:type="ocl:VariableExp" location="224:12-224:17" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings location="225:4-233:21" propertyName="in">
+            <value xsi:type="ocl:OperationCallExp" location="225:10-233:21" operationName="append">
+              <source xsi:type="ocl:CollectionOperationCallExp" location="225:10-232:6" operationName="union">
+                <commentsAfter>-- connect to input transitions</commentsAfter>
+                <source xsi:type="ocl:IteratorExp" location="225:10-229:5" name="collect">
+                  <commentsAfter>-- connect to input places</commentsAfter>
+                  <source xsi:type="ocl:IteratorExp" location="225:10-227:5" name="select">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="225:10-225:19" name="ins">
+                      <source xsi:type="ocl:VariableExp" location="225:10-225:15" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+                    </source>
+                    <body xsi:type="ocl:NavigationOrAttributeCallExp" location="226:5-226:25" name="toPlaceAsOutput">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="226:5-226:9" name="in">
+                        <source xsi:type="ocl:VariableExp" location="226:5-226:6" referredVariable="/0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@iterators.0"/>
+                      </source>
+                    </body>
+                    <iterators location="225:28-225:29" varName="e" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@body/@source/@source"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="228:5-228:9" name="in">
+                    <source xsi:type="ocl:VariableExp" location="228:5-228:6" referredVariable="/0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@iterators.0"/>
+                  </body>
+                  <iterators location="227:15-227:16" varName="e" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@body/@source"/>
+                </source>
+                <arguments xsi:type="ocl:IteratorExp" location="230:12-232:5" name="select">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="230:12-230:21" name="ins">
+                    <source xsi:type="ocl:VariableExp" location="230:12-230:17" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="231:5-231:30" name="toTransitionAsOutput">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="231:5-231:9" name="in">
+                      <source xsi:type="ocl:VariableExp" location="231:5-231:6" referredVariable="/0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@arguments.0/@iterators.0"/>
+                    </source>
+                  </body>
+                  <iterators location="230:30-230:31" varName="e" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@arguments.0/@body/@source/@source"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="233:12-233:20" referredVariable="/0/@elements.27/@variables.0"/>
+            </value>
+          </bindings>
+          <bindings location="235:4-241:23" propertyName="out">
+            <commentsBefore>-- connect to control place   				</commentsBefore>
+            <value xsi:type="ocl:OperationCallExp" location="235:11-241:23" operationName="append">
+              <source xsi:type="ocl:CollectionOperationCallExp" location="235:11-241:6" operationName="union">
+                <source xsi:type="ocl:IteratorExp" location="235:11-239:5" name="collect">
+                  <source xsi:type="ocl:IteratorExp" location="235:11-237:5" name="select">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="235:11-235:21" name="outs">
+                      <source xsi:type="ocl:VariableExp" location="235:11-235:16" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+                    </source>
+                    <body xsi:type="ocl:NavigationOrAttributeCallExp" location="236:5-236:25" name="toPlaceAsInput">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="236:5-236:10" name="out">
+                        <source xsi:type="ocl:VariableExp" location="236:5-236:6" referredVariable="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@iterators.0"/>
+                      </source>
+                    </body>
+                    <iterators location="235:30-235:31" varName="e" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@body/@source/@source"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="238:5-238:10" name="out">
+                    <source xsi:type="ocl:VariableExp" location="238:5-238:6" referredVariable="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@iterators.0"/>
+                  </body>
+                  <iterators location="237:15-237:16" varName="e" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@body/@source"/>
+                </source>
+                <arguments xsi:type="ocl:IteratorExp" location="239:13-241:5" name="select">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="239:13-239:23" name="outs">
+                    <source xsi:type="ocl:VariableExp" location="239:13-239:18" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="240:5-240:30" name="toTransitionAsInput">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="240:5-240:10" name="out">
+                      <source xsi:type="ocl:VariableExp" location="240:5-240:6" referredVariable="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@arguments.0/@iterators.0"/>
+                    </source>
+                  </body>
+                  <iterators location="239:32-239:33" varName="e" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@arguments.0/@body/@source/@source"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="241:14-241:22" referredVariable="/0/@elements.27/@variables.1"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <variables location="215:3-215:65" varName="icontrol" variableExp="/0/@elements.27/@variables.1/@initExpression/@elseExpression /0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="215:14-215:30">
+          <elementType xsi:type="ocl:OclAnyType" location="215:23-215:29"/>
+        </type>
+        <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="215:33-215:64" name="control">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="215:33-215:56" name="parentFlowDiagram">
+            <source xsi:type="ocl:VariableExp" location="215:33-215:38" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+          </source>
+        </initExpression>
+      </variables>
+      <variables location="216:3-220:9" varName="ocontrol" variableExp="/0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="216:14-216:30">
+          <elementType xsi:type="ocl:OclAnyType" location="216:23-216:29"/>
+        </type>
+        <initExpression xsi:type="ocl:IfExp" location="216:33-220:8">
+          <thenExpression xsi:type="ocl:SequenceExp" location="217:4-217:15"/>
+          <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="216:36-216:66" name="isConnectedToTerminating">
+            <source xsi:type="ocl:VariableExp" location="216:36-216:41" referredVariable="/0/@elements.27/@inPattern/@elements.0"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="219:4-219:12" referredVariable="/0/@elements.27/@variables.0"/>
+        </initExpression>
+      </variables>
+      <inPattern location="211:2-212:23">
+        <elements xsi:type="atl:SimpleInPatternElement" location="212:3-212:23" varName="synch" variableExp="/0/@elements.27/@variables.0/@initExpression/@source/@source /0/@elements.27/@variables.1/@initExpression/@condition/@source /0/@elements.27/@outPattern/@elements.0/@bindings.0/@value/@source /0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@source/@source /0/@elements.27/@outPattern/@elements.0/@bindings.1/@value/@source/@arguments.0/@source/@source /0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@source/@source /0/@elements.27/@outPattern/@elements.0/@bindings.2/@value/@source/@arguments.0/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="212:11-212:23" name="State" model="/79"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="246:1-254:2" name="exclusive_choice" isUnique="true">
+      <commentsBefore>-- Rule from exclusive_choice</commentsBefore>
+      <commentsAfter>-- Rule from place_place</commentsAfter>
+      <outPattern location="249:2-253:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="250:3-253:4" varName="place">
+          <type xsi:type="ocl:OclModelElement" location="250:11-250:19" name="Place" model="/82"/>
+          <bindings location="251:4-251:27" propertyName="name">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="251:12-251:27" name="typeName">
+              <source xsi:type="ocl:VariableExp" location="251:12-251:18" referredVariable="/0/@elements.28/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings location="252:4-252:15" propertyName="tokens">
+            <value xsi:type="ocl:IntegerExp" location="252:14-252:15"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="247:2-248:28">
+        <elements xsi:type="atl:SimpleInPatternElement" location="248:3-248:28" varName="choice" variableExp="/0/@elements.28/@outPattern/@elements.0/@bindings.0/@value/@source">
+          <type xsi:type="ocl:OclModelElement" location="248:12-248:28" name="Collected" model="/81"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="257:1-274:2" name="place_place" isUnique="true">
+      <commentsBefore>-- Rule from place_place</commentsBefore>
+      <commentsAfter>-- Rule from transition_transition</commentsAfter>
+      <outPattern location="269:2-273:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="270:3-273:4" varName="transition">
+          <type xsi:type="ocl:OclModelElement" location="270:16-270:29" name="Transition" model="/84"/>
+          <bindings location="271:4-271:34" propertyName="in">
+            <value xsi:type="ocl:OperationCallExp" location="271:10-271:34" operationName="append">
+              <source xsi:type="ocl:VariableExp" location="271:10-271:18" referredVariable="/0/@elements.29/@variables.0"/>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="271:26-271:33" name="in">
+                <source xsi:type="ocl:VariableExp" location="271:26-271:30" referredVariable="/0/@elements.29/@inPattern/@elements.0"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="272:4-272:36" propertyName="out">
+            <value xsi:type="ocl:OperationCallExp" location="272:11-272:36" operationName="append">
+              <source xsi:type="ocl:VariableExp" location="272:11-272:19" referredVariable="/0/@elements.29/@variables.1"/>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="272:27-272:35" name="out">
+                <source xsi:type="ocl:VariableExp" location="272:27-272:31" referredVariable="/0/@elements.29/@inPattern/@elements.0"/>
+              </arguments>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <variables location="262:3-262:64" varName="icontrol" variableExp="/0/@elements.29/@variables.1/@initExpression/@elseExpression /0/@elements.29/@outPattern/@elements.0/@bindings.0/@value/@source">
+        <type xsi:type="ocl:SequenceType" location="262:14-262:30">
+          <elementType xsi:type="ocl:OclAnyType" location="262:23-262:29"/>
+        </type>
+        <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="262:33-262:63" name="control">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="262:33-262:55" name="parentFlowDiagram">
+            <source xsi:type="ocl:VariableExp" location="262:33-262:37" referredVariable="/0/@elements.29/@inPattern/@elements.0"/>
+          </source>
+        </initExpression>
+      </variables>
+      <variables location="263:3-267:9" varName="ocontrol" variableExp="/0/@elements.29/@outPattern/@elements.0/@bindings.1/@value/@source">
+        <type xsi:type="ocl:SequenceType" location="263:14-263:30">
+          <elementType xsi:type="ocl:OclAnyType" location="263:23-263:29"/>
+        </type>
+        <initExpression xsi:type="ocl:IfExp" location="263:33-267:8">
+          <thenExpression xsi:type="ocl:SequenceExp" location="264:4-264:15"/>
+          <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="263:36-263:65" name="isConnectedToTerminating">
+            <source xsi:type="ocl:VariableExp" location="263:36-263:40" referredVariable="/0/@elements.29/@inPattern/@elements.0"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="266:4-266:12" referredVariable="/0/@elements.29/@variables.0"/>
+        </initExpression>
+      </variables>
+      <inPattern location="258:2-259:27">
+        <elements xsi:type="atl:SimpleInPatternElement" location="259:3-259:27" varName="edge" variableExp="/0/@elements.29/@variables.0/@initExpression/@source/@source /0/@elements.29/@variables.1/@initExpression/@condition/@source /0/@elements.29/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source /0/@elements.29/@outPattern/@elements.0/@bindings.1/@value/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="259:10-259:27" name="Transition" model="/83"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="277:1-287:2" name="transition_transition" isUnique="true">
+      <commentsBefore>-- Rule from transition_transition</commentsBefore>
+      <outPattern location="282:2-286:4">
+        <commentsBefore>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsBefore>
+        <commentsBefore>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsBefore>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="283:3-286:4" varName="place">
+          <type xsi:type="ocl:OclModelElement" location="283:11-283:19" name="Place" model="/86"/>
+          <bindings location="284:4-284:54" propertyName="name">
+            <value xsi:type="ocl:OperatorCallExp" location="284:12-284:54" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="284:12-284:34" operationName="+">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="284:12-284:28" name="typeName">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="284:12-284:19" name="in">
+                    <source xsi:type="ocl:VariableExp" location="284:12-284:16" referredVariable="/0/@elements.30/@inPattern/@elements.0"/>
+                  </source>
+                </source>
+                <arguments xsi:type="ocl:StringExp" location="284:31-284:34" stringSymbol="-"/>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="284:37-284:54" name="typeName">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="284:37-284:45" name="out">
+                  <source xsi:type="ocl:VariableExp" location="284:37-284:41" referredVariable="/0/@elements.30/@inPattern/@elements.0"/>
+                </source>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="285:4-285:15" propertyName="tokens">
+            <value xsi:type="ocl:IntegerExp" location="285:14-285:15"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="278:2-279:27">
+        <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+        <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+        <elements xsi:type="atl:SimpleInPatternElement" location="279:3-279:27" varName="edge" variableExp="/0/@elements.30/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@source /0/@elements.30/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source/@source">
+          <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+          <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+          <type xsi:type="ocl:OclModelElement" location="279:10-279:27" name="Transition" model="/85">
+            <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+            <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+          </type>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:Helper" location="289:1-290:51">
+      <definition location="289:8-290:50">
+        <feature xsi:type="ocl:Operation" location="289:13-290:50" name="synchronization_all__filter__">
+          <parameters location="289:43-289:57" varName="synch" variableExp="/0/@elements.31/@definition/@feature/@body/@source/@source /0/@elements.31/@definition/@feature/@body/@arguments.0/@source">
+            <type xsi:type="ocl:OclAnyType" location="289:51-289:57"/>
+          </parameters>
+          <returnType xsi:type="ocl:BooleanType" location="289:61-289:68"/>
+          <body xsi:type="ocl:OperatorCallExp" location="290:2-290:50" operationName="or">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="290:2-290:23" name="isParallelSplit">
+              <source xsi:type="ocl:VariableExp" location="290:2-290:7" referredVariable="/0/@elements.31/@definition/@feature/@parameters.0"/>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="290:27-290:50" name="isSynchronization">
+              <source xsi:type="ocl:VariableExp" location="290:27-290:32" referredVariable="/0/@elements.31/@definition/@feature/@parameters.0"/>
+            </arguments>
+          </body>
+        </feature>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="292:1-293:64">
+      <definition location="292:8-293:63">
+        <feature xsi:type="ocl:Operation" location="292:13-293:63" name="transition_transition__filter__">
+          <parameters location="292:45-292:58" varName="edge" variableExp="/0/@elements.32/@definition/@feature/@body/@source/@source/@source /0/@elements.32/@definition/@feature/@body/@arguments.0/@source/@source">
+            <type xsi:type="ocl:OclAnyType" location="292:52-292:58"/>
+          </parameters>
+          <returnType xsi:type="ocl:BooleanType" location="292:62-292:69"/>
+          <body xsi:type="ocl:OperatorCallExp" location="293:2-293:63" operationName="and">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="293:2-293:30" name="toTransitionAsOutput">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="293:2-293:9" name="in">
+                <source xsi:type="ocl:VariableExp" location="293:2-293:6" referredVariable="/0/@elements.32/@definition/@feature/@parameters.0"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="293:35-293:63" name="toTransitionAsInput">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="293:35-293:43" name="out">
+                <source xsi:type="ocl:VariableExp" location="293:35-293:39" referredVariable="/0/@elements.32/@definition/@feature/@parameters.0"/>
+              </source>
+            </arguments>
+          </body>
+        </feature>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="295:1-296:54">
+      <definition location="295:8-296:53">
+        <feature xsi:type="ocl:Operation" location="295:13-296:53" name="place_place__filter__">
+          <parameters location="295:35-295:48" varName="edge" variableExp="/0/@elements.33/@definition/@feature/@body/@source/@source/@source /0/@elements.33/@definition/@feature/@body/@arguments.0/@source/@source">
+            <type xsi:type="ocl:OclAnyType" location="295:42-295:48"/>
+          </parameters>
+          <returnType xsi:type="ocl:BooleanType" location="295:52-295:59"/>
+          <body xsi:type="ocl:OperatorCallExp" location="296:2-296:53" operationName="and">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="296:2-296:25" name="toPlaceAsOutput">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="296:2-296:9" name="in">
+                <source xsi:type="ocl:VariableExp" location="296:2-296:6" referredVariable="/0/@elements.33/@definition/@feature/@parameters.0"/>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="296:30-296:53" name="toPlaceAsInput">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="296:30-296:38" name="out">
+                <source xsi:type="ocl:VariableExp" location="296:30-296:34" referredVariable="/0/@elements.33/@definition/@feature/@parameters.0"/>
+              </source>
+            </arguments>
+          </body>
+        </feature>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="298:1-337:2" name="Rule_To__ForceTransformation" isEndpoint="true">
+      <variables location="301:3-307:5" varName="synchronization_all_varToForceEvaluation">
+        <type xsi:type="ocl:OclAnyType" location="301:46-301:52"/>
+        <initExpression xsi:type="ocl:IteratorExp" location="301:55-307:4" name="collect">
+          <source xsi:type="ocl:OperationCallExp" location="301:55-301:82" operationName="allInstances">
+            <source xsi:type="ocl:OclModelElement" location="301:55-301:67" name="State" model="/87"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="302:4-306:9">
+            <thenExpression xsi:type="ocl:OperationCallExp" location="303:5-303:38" operationName="synchronization_all">
+              <source xsi:type="ocl:VariableExp" location="303:5-303:15" referredVariable="/89"/>
+              <arguments xsi:type="ocl:VariableExp" location="303:36-303:37" referredVariable="/0/@elements.34/@variables.0/@initExpression/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:OperationCallExp" location="302:7-302:50" operationName="synchronization_all__filter__">
+              <source xsi:type="ocl:VariableExp" location="302:7-302:17" referredVariable="/88"/>
+              <arguments xsi:type="ocl:VariableExp" location="302:48-302:49" referredVariable="/0/@elements.34/@variables.0/@initExpression/@iterators.0"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="305:5-305:6" referredVariable="/0/@elements.34/@variables.0/@initExpression/@iterators.0"/>
+          </body>
+          <iterators location="301:92-301:93" varName="i" variableExp="/0/@elements.34/@variables.0/@initExpression/@body/@condition/@arguments.0 /0/@elements.34/@variables.0/@initExpression/@body/@thenExpression/@arguments.0 /0/@elements.34/@variables.0/@initExpression/@body/@elseExpression"/>
+        </initExpression>
+      </variables>
+      <variables location="308:3-314:5" varName="exclusive_choice_varToForceEvaluation">
+        <type xsi:type="ocl:OclAnyType" location="308:43-308:49"/>
+        <initExpression xsi:type="ocl:IteratorExp" location="308:52-314:4" name="collect">
+          <source xsi:type="ocl:OperationCallExp" location="308:52-308:83" operationName="allInstances">
+            <source xsi:type="ocl:OclModelElement" location="308:52-308:68" name="Collected" model="/90"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="309:4-313:9">
+            <thenExpression xsi:type="ocl:OperationCallExp" location="310:5-310:35" operationName="exclusive_choice">
+              <source xsi:type="ocl:VariableExp" location="310:5-310:15" referredVariable="/91"/>
+              <arguments xsi:type="ocl:VariableExp" location="310:33-310:34" referredVariable="/0/@elements.34/@variables.1/@initExpression/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:BooleanExp" location="309:7-309:11" booleanSymbol="true"/>
+            <elseExpression xsi:type="ocl:VariableExp" location="312:5-312:6" referredVariable="/0/@elements.34/@variables.1/@initExpression/@iterators.0"/>
+          </body>
+          <iterators location="308:93-308:94" varName="i" variableExp="/0/@elements.34/@variables.1/@initExpression/@body/@thenExpression/@arguments.0 /0/@elements.34/@variables.1/@initExpression/@body/@elseExpression"/>
+        </initExpression>
+      </variables>
+      <variables location="315:3-321:5" varName="task_varToForceEvaluation">
+        <type xsi:type="ocl:OclAnyType" location="315:31-315:37"/>
+        <initExpression xsi:type="ocl:IteratorExp" location="315:40-321:4" name="collect">
+          <source xsi:type="ocl:OperationCallExp" location="315:40-315:67" operationName="allInstances">
+            <source xsi:type="ocl:OclModelElement" location="315:40-315:52" name="State" model="/92"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="316:4-320:9">
+            <thenExpression xsi:type="ocl:OperationCallExp" location="317:5-317:23" operationName="task">
+              <source xsi:type="ocl:VariableExp" location="317:5-317:15" referredVariable="/93"/>
+              <arguments xsi:type="ocl:VariableExp" location="317:21-317:22" referredVariable="/0/@elements.34/@variables.2/@initExpression/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:BooleanExp" location="316:7-316:11" booleanSymbol="true"/>
+            <elseExpression xsi:type="ocl:VariableExp" location="319:5-319:6" referredVariable="/0/@elements.34/@variables.2/@initExpression/@iterators.0"/>
+          </body>
+          <iterators location="315:77-315:78" varName="i" variableExp="/0/@elements.34/@variables.2/@initExpression/@body/@thenExpression/@arguments.0 /0/@elements.34/@variables.2/@initExpression/@body/@elseExpression"/>
+        </initExpression>
+      </variables>
+      <variables location="322:3-328:5" varName="transition_transition_varToForceEvaluation">
+        <type xsi:type="ocl:OclAnyType" location="322:48-322:54"/>
+        <initExpression xsi:type="ocl:IteratorExp" location="322:57-328:4" name="collect">
+          <source xsi:type="ocl:OperationCallExp" location="322:57-322:89" operationName="allInstances">
+            <source xsi:type="ocl:OclModelElement" location="322:57-322:74" name="Transition" model="/94"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="323:4-327:9">
+            <thenExpression xsi:type="ocl:OperationCallExp" location="324:5-324:40" operationName="transition_transition">
+              <source xsi:type="ocl:VariableExp" location="324:5-324:15" referredVariable="/96"/>
+              <arguments xsi:type="ocl:VariableExp" location="324:38-324:39" referredVariable="/0/@elements.34/@variables.3/@initExpression/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:OperationCallExp" location="323:7-323:52" operationName="transition_transition__filter__">
+              <source xsi:type="ocl:VariableExp" location="323:7-323:17" referredVariable="/95"/>
+              <arguments xsi:type="ocl:VariableExp" location="323:50-323:51" referredVariable="/0/@elements.34/@variables.3/@initExpression/@iterators.0"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="326:5-326:6" referredVariable="/0/@elements.34/@variables.3/@initExpression/@iterators.0"/>
+          </body>
+          <iterators location="322:99-322:100" varName="i" variableExp="/0/@elements.34/@variables.3/@initExpression/@body/@condition/@arguments.0 /0/@elements.34/@variables.3/@initExpression/@body/@thenExpression/@arguments.0 /0/@elements.34/@variables.3/@initExpression/@body/@elseExpression"/>
+        </initExpression>
+      </variables>
+      <variables location="329:3-335:5" varName="place_place_varToForceEvaluation">
+        <type xsi:type="ocl:OclAnyType" location="329:38-329:44"/>
+        <initExpression xsi:type="ocl:IteratorExp" location="329:47-335:4" name="collect">
+          <source xsi:type="ocl:OperationCallExp" location="329:47-329:79" operationName="allInstances">
+            <source xsi:type="ocl:OclModelElement" location="329:47-329:64" name="Transition" model="/97"/>
+          </source>
+          <body xsi:type="ocl:IfExp" location="330:4-334:9">
+            <thenExpression xsi:type="ocl:OperationCallExp" location="331:5-331:30" operationName="place_place">
+              <source xsi:type="ocl:VariableExp" location="331:5-331:15" referredVariable="/99"/>
+              <arguments xsi:type="ocl:VariableExp" location="331:28-331:29" referredVariable="/0/@elements.34/@variables.4/@initExpression/@iterators.0"/>
+            </thenExpression>
+            <condition xsi:type="ocl:OperationCallExp" location="330:7-330:42" operationName="place_place__filter__">
+              <source xsi:type="ocl:VariableExp" location="330:7-330:17" referredVariable="/98"/>
+              <arguments xsi:type="ocl:VariableExp" location="330:40-330:41" referredVariable="/0/@elements.34/@variables.4/@initExpression/@iterators.0"/>
+            </condition>
+            <elseExpression xsi:type="ocl:VariableExp" location="333:5-333:6" referredVariable="/0/@elements.34/@variables.4/@initExpression/@iterators.0"/>
+          </body>
+          <iterators location="329:89-329:90" varName="i" variableExp="/0/@elements.34/@variables.4/@initExpression/@body/@condition/@arguments.0 /0/@elements.34/@variables.4/@initExpression/@body/@thenExpression/@arguments.0 /0/@elements.34/@variables.4/@initExpression/@body/@elseExpression"/>
+        </initExpression>
+      </variables>
+    </elements>
+    <elements xsi:type="atl:Helper" location="339:1-344:8">
+      <commentsAfter>-- Rule from synchronization_all</commentsAfter>
+      <definition location="339:8-344:7">
+        <feature xsi:type="ocl:Operation" location="339:13-344:7" name="__convertToSequence__">
+          <parameters location="339:35-339:47" varName="obj" variableExp="/0/@elements.35/@definition/@feature/@body/@condition/@source /0/@elements.35/@definition/@feature/@body/@elseExpression/@source/@elements.0">
+            <type xsi:type="ocl:OclAnyType" location="339:41-339:47"/>
+          </parameters>
+          <returnType xsi:type="ocl:OclAnyType" location="339:51-339:57"/>
+          <body xsi:type="ocl:IfExp" location="340:2-344:7">
+            <thenExpression xsi:type="ocl:SequenceExp" location="341:3-341:14"/>
+            <condition xsi:type="ocl:OperatorCallExp" location="340:5-340:23" operationName="=">
+              <source xsi:type="ocl:VariableExp" location="340:5-340:8" referredVariable="/0/@elements.35/@definition/@feature/@parameters.0"/>
+              <arguments xsi:type="ocl:OclUndefinedExp" location="340:11-340:23"/>
+            </condition>
+            <elseExpression xsi:type="ocl:CollectionOperationCallExp" location="343:3-343:28" operationName="flatten">
+              <source xsi:type="ocl:SequenceExp" location="343:3-343:17">
+                <elements xsi:type="ocl:VariableExp" location="343:13-343:16" referredVariable="/0/@elements.35/@definition/@feature/@parameters.0"/>
+              </source>
+            </elseExpression>
+          </body>
+        </feature>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="347:1-380:2" name="synchronization_all_Collected" isUnique="true">
+      <commentsBefore>-- Rule from synchronization_all</commentsBefore>
+      <commentsAfter>-- Rule from place_place</commentsAfter>
+      <outPattern location="359:2-379:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="360:3-379:4" varName="transition">
+          <type xsi:type="ocl:OclModelElement" location="360:16-360:29" name="Transition" model="/101"/>
+          <bindings location="361:4-361:26" propertyName="name">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="361:12-361:26" name="typeName">
+              <source xsi:type="ocl:VariableExp" location="361:12-361:17" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings location="362:4-370:21" propertyName="in">
+            <value xsi:type="ocl:OperationCallExp" location="362:10-370:21" operationName="append">
+              <source xsi:type="ocl:CollectionOperationCallExp" location="362:10-369:6" operationName="union">
+                <commentsAfter>-- connect to input transitions</commentsAfter>
+                <source xsi:type="ocl:IteratorExp" location="362:10-366:5" name="collect">
+                  <commentsAfter>-- connect to input places</commentsAfter>
+                  <source xsi:type="ocl:IteratorExp" location="362:10-364:5" name="select">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="362:10-362:19" name="ins">
+                      <source xsi:type="ocl:VariableExp" location="362:10-362:15" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+                    </source>
+                    <body xsi:type="ocl:NavigationOrAttributeCallExp" location="363:5-363:25" name="toPlaceAsOutput">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="363:5-363:9" name="in">
+                        <source xsi:type="ocl:VariableExp" location="363:5-363:6" referredVariable="/0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@iterators.0"/>
+                      </source>
+                    </body>
+                    <iterators location="362:28-362:29" varName="e" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@body/@source/@source"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="365:5-365:9" name="in">
+                    <source xsi:type="ocl:VariableExp" location="365:5-365:6" referredVariable="/0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@iterators.0"/>
+                  </body>
+                  <iterators location="364:15-364:16" varName="e" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@body/@source"/>
+                </source>
+                <arguments xsi:type="ocl:IteratorExp" location="367:12-369:5" name="select">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="367:12-367:21" name="ins">
+                    <source xsi:type="ocl:VariableExp" location="367:12-367:17" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="368:5-368:30" name="toTransitionAsOutput">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="368:5-368:9" name="in">
+                      <source xsi:type="ocl:VariableExp" location="368:5-368:6" referredVariable="/0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@arguments.0/@iterators.0"/>
+                    </source>
+                  </body>
+                  <iterators location="367:30-367:31" varName="e" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@arguments.0/@body/@source/@source"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="370:12-370:20" referredVariable="/0/@elements.36/@variables.0"/>
+            </value>
+          </bindings>
+          <bindings location="372:4-378:23" propertyName="out">
+            <commentsBefore>-- connect to control place   				</commentsBefore>
+            <value xsi:type="ocl:OperationCallExp" location="372:11-378:23" operationName="append">
+              <source xsi:type="ocl:CollectionOperationCallExp" location="372:11-378:6" operationName="union">
+                <source xsi:type="ocl:IteratorExp" location="372:11-376:5" name="collect">
+                  <source xsi:type="ocl:IteratorExp" location="372:11-374:5" name="select">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="372:11-372:21" name="outs">
+                      <source xsi:type="ocl:VariableExp" location="372:11-372:16" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+                    </source>
+                    <body xsi:type="ocl:NavigationOrAttributeCallExp" location="373:5-373:25" name="toPlaceAsInput">
+                      <source xsi:type="ocl:NavigationOrAttributeCallExp" location="373:5-373:10" name="out">
+                        <source xsi:type="ocl:VariableExp" location="373:5-373:6" referredVariable="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@iterators.0"/>
+                      </source>
+                    </body>
+                    <iterators location="372:30-372:31" varName="e" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@body/@source/@source"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="375:5-375:10" name="out">
+                    <source xsi:type="ocl:VariableExp" location="375:5-375:6" referredVariable="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@iterators.0"/>
+                  </body>
+                  <iterators location="374:15-374:16" varName="e" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@body/@source"/>
+                </source>
+                <arguments xsi:type="ocl:IteratorExp" location="376:13-378:5" name="select">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="376:13-376:23" name="outs">
+                    <source xsi:type="ocl:VariableExp" location="376:13-376:18" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="377:5-377:30" name="toTransitionAsInput">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="377:5-377:10" name="out">
+                      <source xsi:type="ocl:VariableExp" location="377:5-377:6" referredVariable="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@arguments.0/@iterators.0"/>
+                    </source>
+                  </body>
+                  <iterators location="376:32-376:33" varName="e" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@arguments.0/@body/@source/@source"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="378:14-378:22" referredVariable="/0/@elements.36/@variables.1"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <variables location="352:3-352:65" varName="icontrol" variableExp="/0/@elements.36/@variables.1/@initExpression/@elseExpression /0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="352:14-352:30">
+          <elementType xsi:type="ocl:OclAnyType" location="352:23-352:29"/>
+        </type>
+        <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="352:33-352:64" name="control">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="352:33-352:56" name="parentFlowDiagram">
+            <source xsi:type="ocl:VariableExp" location="352:33-352:38" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+          </source>
+        </initExpression>
+      </variables>
+      <variables location="353:3-357:9" varName="ocontrol" variableExp="/0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="353:14-353:30">
+          <elementType xsi:type="ocl:OclAnyType" location="353:23-353:29"/>
+        </type>
+        <initExpression xsi:type="ocl:IfExp" location="353:33-357:8">
+          <thenExpression xsi:type="ocl:SequenceExp" location="354:4-354:15"/>
+          <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="353:36-353:66" name="isConnectedToTerminating">
+            <source xsi:type="ocl:VariableExp" location="353:36-353:41" referredVariable="/0/@elements.36/@inPattern/@elements.0"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="356:4-356:12" referredVariable="/0/@elements.36/@variables.0"/>
+        </initExpression>
+      </variables>
+      <inPattern location="348:2-349:27">
+        <elements xsi:type="atl:SimpleInPatternElement" location="349:3-349:27" varName="synch" variableExp="/0/@elements.36/@variables.0/@initExpression/@source/@source /0/@elements.36/@variables.1/@initExpression/@condition/@source /0/@elements.36/@outPattern/@elements.0/@bindings.0/@value/@source /0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@source/@source/@source/@source /0/@elements.36/@outPattern/@elements.0/@bindings.1/@value/@source/@arguments.0/@source/@source /0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source/@source/@source /0/@elements.36/@outPattern/@elements.0/@bindings.2/@value/@source/@arguments.0/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="349:11-349:27" name="Collected" model="/100"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="383:1-400:2" name="place_place_Branch" isUnique="true">
+      <commentsBefore>-- Rule from place_place</commentsBefore>
+      <commentsAfter>-- Rule from transition_transition</commentsAfter>
+      <outPattern location="395:2-399:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="396:3-399:4" varName="transition">
+          <type xsi:type="ocl:OclModelElement" location="396:16-396:29" name="Transition" model="/103"/>
+          <bindings location="397:4-397:34" propertyName="in">
+            <value xsi:type="ocl:OperationCallExp" location="397:10-397:34" operationName="append">
+              <source xsi:type="ocl:VariableExp" location="397:10-397:18" referredVariable="/0/@elements.37/@variables.0"/>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="397:26-397:33" name="in">
+                <source xsi:type="ocl:VariableExp" location="397:26-397:30" referredVariable="/0/@elements.37/@inPattern/@elements.0"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="398:4-398:36" propertyName="out">
+            <value xsi:type="ocl:OperationCallExp" location="398:11-398:36" operationName="append">
+              <source xsi:type="ocl:VariableExp" location="398:11-398:19" referredVariable="/0/@elements.37/@variables.1"/>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="398:27-398:35" name="out">
+                <source xsi:type="ocl:VariableExp" location="398:27-398:31" referredVariable="/0/@elements.37/@inPattern/@elements.0"/>
+              </arguments>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <variables location="388:3-388:64" varName="icontrol" variableExp="/0/@elements.37/@variables.1/@initExpression/@elseExpression /0/@elements.37/@outPattern/@elements.0/@bindings.0/@value/@source">
+        <type xsi:type="ocl:SequenceType" location="388:14-388:30">
+          <elementType xsi:type="ocl:OclAnyType" location="388:23-388:29"/>
+        </type>
+        <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="388:33-388:63" name="control">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="388:33-388:55" name="parentFlowDiagram">
+            <source xsi:type="ocl:VariableExp" location="388:33-388:37" referredVariable="/0/@elements.37/@inPattern/@elements.0"/>
+          </source>
+        </initExpression>
+      </variables>
+      <variables location="389:3-393:9" varName="ocontrol" variableExp="/0/@elements.37/@outPattern/@elements.0/@bindings.1/@value/@source">
+        <type xsi:type="ocl:SequenceType" location="389:14-389:30">
+          <elementType xsi:type="ocl:OclAnyType" location="389:23-389:29"/>
+        </type>
+        <initExpression xsi:type="ocl:IfExp" location="389:33-393:8">
+          <thenExpression xsi:type="ocl:SequenceExp" location="390:4-390:15"/>
+          <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="389:36-389:65" name="isConnectedToTerminating">
+            <source xsi:type="ocl:VariableExp" location="389:36-389:40" referredVariable="/0/@elements.37/@inPattern/@elements.0"/>
+          </condition>
+          <elseExpression xsi:type="ocl:VariableExp" location="392:4-392:12" referredVariable="/0/@elements.37/@variables.0"/>
+        </initExpression>
+      </variables>
+      <inPattern location="384:2-385:23">
+        <elements xsi:type="atl:SimpleInPatternElement" location="385:3-385:23" varName="edge" variableExp="/0/@elements.37/@variables.0/@initExpression/@source/@source /0/@elements.37/@variables.1/@initExpression/@condition/@source /0/@elements.37/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source /0/@elements.37/@outPattern/@elements.0/@bindings.1/@value/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="385:10-385:23" name="Branch" model="/102"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="403:1-413:2" name="transition_transition_Branch" isUnique="true">
+      <commentsBefore>-- Rule from transition_transition</commentsBefore>
+      <commentsAfter>-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)</commentsAfter>
+      <commentsAfter>--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; </commentsAfter>
+      <outPattern location="408:2-412:4">
+        <commentsBefore>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsBefore>
+        <commentsBefore>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsBefore>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="409:3-412:4" varName="place">
+          <type xsi:type="ocl:OclModelElement" location="409:11-409:19" name="Place" model="/105"/>
+          <bindings location="410:4-410:54" propertyName="name">
+            <value xsi:type="ocl:OperatorCallExp" location="410:12-410:54" operationName="+">
+              <source xsi:type="ocl:OperatorCallExp" location="410:12-410:34" operationName="+">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="410:12-410:28" name="typeName">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="410:12-410:19" name="in">
+                    <source xsi:type="ocl:VariableExp" location="410:12-410:16" referredVariable="/0/@elements.38/@inPattern/@elements.0"/>
+                  </source>
+                </source>
+                <arguments xsi:type="ocl:StringExp" location="410:31-410:34" stringSymbol="-"/>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="410:37-410:54" name="typeName">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="410:37-410:45" name="out">
+                  <source xsi:type="ocl:VariableExp" location="410:37-410:41" referredVariable="/0/@elements.38/@inPattern/@elements.0"/>
+                </source>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="411:4-411:15" propertyName="tokens">
+            <value xsi:type="ocl:IntegerExp" location="411:14-411:15"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="404:2-405:23">
+        <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+        <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+        <elements xsi:type="atl:SimpleInPatternElement" location="405:3-405:23" varName="edge" variableExp="/0/@elements.38/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@source /0/@elements.38/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source/@source">
+          <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+          <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+          <type xsi:type="ocl:OclModelElement" location="405:10-405:23" name="Branch" model="/104">
+            <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+            <commentsAfter>-- should we differentiate transitionAsOutput when SimpleMerge???</commentsAfter>
+          </type>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:Helper" location="417:1-418:7">
+      <commentsBefore>-- This is needed to emulate the casting... and facilitate life to the typechecker (not sure if it works generically for OclAny)</commentsBefore>
+      <commentsBefore>--helper context OclAny def: oclAsType(t : OclAny)  : OclAny  = self; </commentsBefore>
+      <definition location="417:8-418:6">
+        <feature xsi:type="ocl:Operation" location="417:38-418:6" name="oclAsType">
+          <parameters location="417:48-417:58" varName="t">
+            <type xsi:type="ocl:OclAnyType" location="417:52-417:58"/>
+          </parameters>
+          <returnType xsi:type="ocl:OclAnyType" location="417:62-417:68"/>
+          <body xsi:type="ocl:VariableExp" location="418:2-418:6" referredVariable="/107"/>
+        </feature>
+        <context_ location="417:8-417:32">
+          <context_ xsi:type="ocl:OclModelElement" location="417:16-417:32" name="Collected" model="/106"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="420:1-421:22">
+      <definition location="420:8-421:21">
+        <feature xsi:type="ocl:Attribute" location="420:38-421:21" name="typeName">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="421:2-421:21" name="name">
+            <source xsi:type="ocl:OperationCallExp" location="421:2-421:16" operationName="oclType">
+              <source xsi:type="ocl:VariableExp" location="421:2-421:6" referredVariable="/109"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:StringType" location="420:49-420:55"/>
+        </feature>
+        <context_ location="420:8-420:32">
+          <context_ xsi:type="ocl:OclModelElement" location="420:16-420:32" name="Collected" model="/108"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="423:1-424:33">
+      <definition location="423:8-424:32">
+        <feature xsi:type="ocl:Attribute" location="423:38-424:32" name="isTask">
+          <initExpression xsi:type="ocl:OperationCallExp" location="424:2-424:32" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="424:2-424:6" referredVariable="/111"/>
+            <arguments xsi:type="ocl:OclModelElement" location="424:19-424:31" name="State" model="/112"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="423:47-423:54"/>
+        </feature>
+        <context_ location="423:8-423:32">
+          <context_ xsi:type="ocl:OclModelElement" location="423:16-423:32" name="Collected" model="/110"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="426:1-427:38">
+      <definition location="426:8-427:37">
+        <feature xsi:type="ocl:Attribute" location="426:38-427:37" name="isFinalTask">
+          <initExpression xsi:type="ocl:OperationCallExp" location="427:2-427:37" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="427:2-427:6" referredVariable="/114"/>
+            <arguments xsi:type="ocl:OclModelElement" location="427:19-427:36" name="FinalState" model="/115"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="426:52-426:59"/>
+        </feature>
+        <context_ location="426:8-426:32">
+          <context_ xsi:type="ocl:OclModelElement" location="426:16-426:32" name="Collected" model="/113"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="429:1-434:8">
+      <definition location="429:8-434:7">
+        <feature xsi:type="ocl:Attribute" location="429:38-434:7" name="isTerminatingTask">
+          <initExpression xsi:type="ocl:IfExp" location="430:2-434:7">
+            <thenExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="431:3-431:50" name="isTerminating">
+              <source xsi:type="ocl:OperationCallExp" location="431:3-431:36" operationName="oclAsType">
+                <source xsi:type="ocl:VariableExp" location="431:3-431:7" referredVariable="/118"/>
+                <arguments xsi:type="ocl:OclModelElement" location="431:18-431:35" name="FinalState" model="/119"/>
+              </source>
+            </thenExpression>
+            <condition xsi:type="ocl:NavigationOrAttributeCallExp" location="430:5-430:21" name="isFinalTask">
+              <source xsi:type="ocl:VariableExp" location="430:5-430:9" referredVariable="/117"/>
+            </condition>
+            <elseExpression xsi:type="ocl:BooleanExp" location="433:3-433:8"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="429:58-429:65"/>
+        </feature>
+        <context_ location="429:8-429:32">
+          <context_ xsi:type="ocl:OclModelElement" location="429:16-429:32" name="Collected" model="/116"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="436:1-437:8">
+      <definition location="436:8-437:7">
+        <feature xsi:type="ocl:Attribute" location="436:38-437:7" name="isParallelSplit">
+          <initExpression xsi:type="ocl:BooleanExp" location="437:2-437:7"/>
+          <type xsi:type="ocl:BooleanType" location="436:56-436:63"/>
+        </feature>
+        <context_ location="436:8-436:32">
+          <context_ xsi:type="ocl:OclModelElement" location="436:16-436:32" name="Collected" model="/120"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="439:1-440:8">
+      <definition location="439:8-440:7">
+        <feature xsi:type="ocl:Attribute" location="439:38-440:7" name="isSynchronization">
+          <initExpression xsi:type="ocl:BooleanExp" location="440:2-440:7"/>
+          <type xsi:type="ocl:BooleanType" location="439:58-439:65"/>
+        </feature>
+        <context_ location="439:8-439:32">
+          <context_ xsi:type="ocl:OclModelElement" location="439:16-439:32" name="Collected" model="/121"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="442:1-443:37">
+      <definition location="442:8-443:36">
+        <feature xsi:type="ocl:Attribute" location="442:38-443:36" name="isExclusiveChoice">
+          <initExpression xsi:type="ocl:OperationCallExp" location="443:2-443:36" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="443:2-443:6" referredVariable="/123"/>
+            <arguments xsi:type="ocl:OclModelElement" location="443:19-443:35" name="Collected" model="/124"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="442:58-442:65"/>
+        </feature>
+        <context_ location="442:8-442:32">
+          <context_ xsi:type="ocl:OclModelElement" location="442:16-442:32" name="Collected" model="/122"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="445:1-446:8">
+      <definition location="445:8-446:7">
+        <feature xsi:type="ocl:Attribute" location="445:38-446:7" name="isSimpleMerge">
+          <initExpression xsi:type="ocl:BooleanExp" location="446:2-446:7"/>
+          <type xsi:type="ocl:BooleanType" location="445:54-445:61"/>
+        </feature>
+        <context_ location="445:8-445:32">
+          <context_ xsi:type="ocl:OclModelElement" location="445:16-445:32" name="Collected" model="/125"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="448:1-449:8">
+      <definition location="448:8-449:7">
+        <feature xsi:type="ocl:Attribute" location="448:38-449:7" name="isMultiChoice">
+          <initExpression xsi:type="ocl:BooleanExp" location="449:2-449:7"/>
+          <type xsi:type="ocl:BooleanType" location="448:54-448:61"/>
+        </feature>
+        <context_ location="448:8-448:32">
+          <context_ xsi:type="ocl:OclModelElement" location="448:16-448:32" name="Collected" model="/126"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="451:1-452:104">
+      <definition location="451:8-452:103">
+        <feature xsi:type="ocl:Attribute" location="451:38-452:103" name="toPlaceAsInput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="452:2-452:103" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="452:2-452:81" operationName="or">
+              <source xsi:type="ocl:OperatorCallExp" location="452:2-452:59" operationName="or">
+                <source xsi:type="ocl:OperatorCallExp" location="452:2-452:33" operationName="or">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="452:2-452:13" name="isTask">
+                    <source xsi:type="ocl:VariableExp" location="452:2-452:6" referredVariable="/128"/>
+                  </source>
+                  <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="452:17-452:33" name="isFinalTask">
+                    <source xsi:type="ocl:VariableExp" location="452:17-452:21" referredVariable="/129"/>
+                  </arguments>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="452:37-452:59" name="isExclusiveChoice">
+                  <source xsi:type="ocl:VariableExp" location="452:37-452:41" referredVariable="/130"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="452:63-452:81" name="isSimpleMerge">
+                <source xsi:type="ocl:VariableExp" location="452:63-452:67" referredVariable="/131"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="452:85-452:103" name="isMultiChoice">
+              <source xsi:type="ocl:VariableExp" location="452:85-452:89" referredVariable="/132"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="451:55-451:62"/>
+        </feature>
+        <context_ location="451:8-451:32">
+          <context_ xsi:type="ocl:OclModelElement" location="451:16-451:32" name="Collected" model="/127"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="454:1-455:60">
+      <definition location="454:8-455:59">
+        <feature xsi:type="ocl:Attribute" location="454:38-455:59" name="toPlaceAsOutput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="455:2-455:59" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="455:2-455:33" operationName="or">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="455:2-455:13" name="isTask">
+                <source xsi:type="ocl:VariableExp" location="455:2-455:6" referredVariable="/134"/>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="455:17-455:33" name="isFinalTask">
+                <source xsi:type="ocl:VariableExp" location="455:17-455:21" referredVariable="/135"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="455:37-455:59" name="isExclusiveChoice">
+              <source xsi:type="ocl:VariableExp" location="455:37-455:41" referredVariable="/136"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="454:56-454:63"/>
+        </feature>
+        <context_ location="454:8-454:32">
+          <context_ xsi:type="ocl:OclModelElement" location="454:16-454:32" name="Collected" model="/133"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="457:1-458:49">
+      <definition location="457:8-458:48">
+        <feature xsi:type="ocl:Attribute" location="457:38-458:48" name="toTransitionAsInput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="458:2-458:48" operationName="or">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="458:2-458:24" name="isSynchronization">
+              <source xsi:type="ocl:VariableExp" location="458:2-458:6" referredVariable="/138"/>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="458:28-458:48" name="isParallelSplit">
+              <source xsi:type="ocl:VariableExp" location="458:28-458:32" referredVariable="/139"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="457:60-457:67"/>
+        </feature>
+        <context_ location="457:8-457:32">
+          <context_ xsi:type="ocl:OclModelElement" location="457:16-457:32" name="Collected" model="/137"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="460:1-461:93">
+      <definition location="460:8-461:92">
+        <feature xsi:type="ocl:Attribute" location="460:38-461:92" name="toTransitionAsOutput">
+          <initExpression xsi:type="ocl:OperatorCallExp" location="461:2-461:92" operationName="or">
+            <source xsi:type="ocl:OperatorCallExp" location="461:2-461:70" operationName="or">
+              <source xsi:type="ocl:OperatorCallExp" location="461:2-461:48" operationName="or">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="461:2-461:24" name="isSynchronization">
+                  <source xsi:type="ocl:VariableExp" location="461:2-461:6" referredVariable="/141"/>
+                </source>
+                <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="461:28-461:48" name="isParallelSplit">
+                  <source xsi:type="ocl:VariableExp" location="461:28-461:32" referredVariable="/142"/>
+                </arguments>
+              </source>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="461:52-461:70" name="isSimpleMerge">
+                <source xsi:type="ocl:VariableExp" location="461:52-461:56" referredVariable="/143"/>
+              </arguments>
+            </source>
+            <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="461:74-461:92" name="isMultiChoice">
+              <source xsi:type="ocl:VariableExp" location="461:74-461:78" referredVariable="/144"/>
+            </arguments>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="460:61-460:68"/>
+        </feature>
+        <context_ location="460:8-460:32">
+          <context_ xsi:type="ocl:OclModelElement" location="460:16-460:32" name="Collected" model="/140"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="463:1-464:46">
+      <definition location="463:8-464:45">
+        <feature xsi:type="ocl:Attribute" location="463:38-464:45" name="parentFlowDiagram">
+          <initExpression xsi:type="ocl:CollectionOperationCallExp" location="464:2-464:45" operationName="first">
+            <source xsi:type="ocl:OperationCallExp" location="464:2-464:36" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="464:2-464:21" name="StateMachine" model="/147"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:OclModelElement" location="463:58-463:77" name="StateMachine" model="/146"/>
+        </feature>
+        <context_ location="463:8-463:32">
+          <context_ xsi:type="ocl:OclModelElement" location="463:16-463:32" name="Collected" model="/145"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="466:1-467:46">
+      <commentsAfter>-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:</commentsAfter>
+      <commentsAfter>--   1) with an arc, if the transition is connected to a terminating final task</commentsAfter>
+      <commentsAfter>--   2) with a loop, if the transition is not connected to a terminating final task</commentsAfter>
+      <definition location="466:8-467:45">
+        <feature xsi:type="ocl:Attribute" location="466:35-467:45" name="parentFlowDiagram">
+          <initExpression xsi:type="ocl:CollectionOperationCallExp" location="467:2-467:45" operationName="first">
+            <source xsi:type="ocl:OperationCallExp" location="467:2-467:36" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="467:2-467:21" name="StateMachine" model="/150"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:OclModelElement" location="466:55-466:74" name="StateMachine" model="/149"/>
+        </feature>
+        <context_ location="466:8-466:29">
+          <context_ xsi:type="ocl:OclModelElement" location="466:16-466:29" name="Branch" model="/148"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="472:1-473:29">
+      <commentsBefore>-- if the diagram contains terminating final tasks, we add a place 'Control' connected to all transitions in the net as follows:</commentsBefore>
+      <commentsBefore>--   1) with an arc, if the transition is connected to a terminating final task</commentsBefore>
+      <commentsBefore>--   2) with a loop, if the transition is not connected to a terminating final task</commentsBefore>
+      <definition location="472:8-473:28">
+        <feature xsi:type="ocl:Attribute" location="472:35-473:28" name="isConnectedToTerminating">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="473:2-473:28" name="isTerminatingTask">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="473:2-473:10" name="out">
+              <source xsi:type="ocl:VariableExp" location="473:2-473:6" referredVariable="/152"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="472:62-472:69"/>
+        </feature>
+        <context_ location="472:8-472:29">
+          <context_ xsi:type="ocl:OclModelElement" location="472:16-472:29" name="Branch" model="/151"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="475:1-478:4">
+      <definition location="475:8-478:3">
+        <feature xsi:type="ocl:Attribute" location="475:38-478:3" name="isConnectedToTerminating">
+          <initExpression xsi:type="ocl:IteratorExp" location="476:2-478:3" name="exists">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="476:2-476:11" name="outs">
+              <source xsi:type="ocl:VariableExp" location="476:2-476:6" referredVariable="/154"/>
+            </source>
+            <body xsi:type="ocl:NavigationOrAttributeCallExp" location="477:3-477:29" name="isConnectedToTerminating">
+              <source xsi:type="ocl:VariableExp" location="477:3-477:4" referredVariable="/0/@elements.56/@definition/@feature/@initExpression/@iterators.0"/>
+            </body>
+            <iterators location="476:20-476:21" varName="e" variableExp="/0/@elements.56/@definition/@feature/@initExpression/@body/@source"/>
+          </initExpression>
+          <type xsi:type="ocl:BooleanType" location="475:65-475:72"/>
+        </feature>
+        <context_ location="475:8-475:32">
+          <context_ xsi:type="ocl:OclModelElement" location="475:16-475:32" name="Collected" model="/153"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="480:1-481:14">
+      <definition location="480:8-481:13">
+        <feature xsi:type="ocl:Attribute" location="480:41-481:13" name="nodes">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="481:2-481:13" name="states">
+            <source xsi:type="ocl:VariableExp" location="481:2-481:6" referredVariable="/156"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="480:49-480:55"/>
+        </feature>
+        <context_ location="480:8-480:35">
+          <context_ xsi:type="ocl:OclModelElement" location="480:16-480:35" name="StateMachine" model="/155"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="483:1-484:11">
+      <definition location="483:8-484:10">
+        <feature xsi:type="ocl:Attribute" location="483:39-484:10" name="in">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="484:2-484:10" name="src">
+            <source xsi:type="ocl:VariableExp" location="484:2-484:6" referredVariable="/158"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="483:46-483:52"/>
+        </feature>
+        <context_ location="483:8-483:33">
+          <context_ xsi:type="ocl:OclModelElement" location="483:16-483:33" name="Transition" model="/157"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="486:1-487:14">
+      <definition location="486:8-487:13">
+        <feature xsi:type="ocl:Attribute" location="486:34-487:13" name="name">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="487:2-487:13" name="nombre">
+            <source xsi:type="ocl:VariableExp" location="487:2-487:6" referredVariable="/160"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="486:41-486:47"/>
+        </feature>
+        <context_ location="486:8-486:28">
+          <context_ xsi:type="ocl:OclModelElement" location="486:16-486:28" name="State" model="/159"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="489:1-490:16">
+      <definition location="489:8-490:15">
+        <feature xsi:type="ocl:Attribute" location="489:38-490:15" name="outs">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="490:2-490:15" name="branches">
+            <source xsi:type="ocl:VariableExp" location="490:2-490:6" referredVariable="/162"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="489:45-489:51"/>
+        </feature>
+        <context_ location="489:8-489:32">
+          <context_ xsi:type="ocl:OclModelElement" location="489:16-489:32" name="Collected" model="/161"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="492:1-495:14">
+      <definition location="492:8-495:13">
+        <feature xsi:type="ocl:Attribute" location="492:41-495:13" name="edges">
+          <initExpression xsi:type="ocl:OperationCallExp" location="493:2-495:13" operationName="flatten">
+            <source xsi:type="ocl:IteratorExp" location="493:2-495:3" name="collect">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="493:2-493:13" name="states">
+                <source xsi:type="ocl:VariableExp" location="493:2-493:6" referredVariable="/164"/>
+              </source>
+              <body xsi:type="ocl:NavigationOrAttributeCallExp" location="494:3-494:9" name="outs">
+                <source xsi:type="ocl:VariableExp" location="494:3-494:4" referredVariable="/0/@elements.61/@definition/@feature/@initExpression/@source/@iterators.0"/>
+              </body>
+              <iterators location="493:23-493:24" varName="s" variableExp="/0/@elements.61/@definition/@feature/@initExpression/@source/@body/@source"/>
+            </source>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="492:49-492:55"/>
+        </feature>
+        <context_ location="492:8-492:35">
+          <context_ xsi:type="ocl:OclModelElement" location="492:16-492:35" name="StateMachine" model="/163"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="497:1-502:8">
+      <definition location="497:8-502:7">
+        <feature xsi:type="ocl:Attribute" location="497:39-502:7" name="out">
+          <initExpression xsi:type="ocl:IfExp" location="498:2-502:7">
+            <thenExpression xsi:type="ocl:VariableExp" location="499:3-499:7" referredVariable="/168"/>
+            <condition xsi:type="ocl:OperationCallExp" location="498:5-498:39" operationName="oclIsKindOf">
+              <source xsi:type="ocl:VariableExp" location="498:5-498:9" referredVariable="/166"/>
+              <arguments xsi:type="ocl:OclModelElement" location="498:22-498:38" name="Collected" model="/167"/>
+            </condition>
+            <elseExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="501:3-501:18" name="defaultTar">
+              <source xsi:type="ocl:VariableExp" location="501:3-501:7" referredVariable="/169"/>
+            </elseExpression>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="497:45-497:51"/>
+        </feature>
+        <context_ location="497:8-497:33">
+          <context_ xsi:type="ocl:OclModelElement" location="497:16-497:33" name="Transition" model="/165"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="504:1-505:29">
+      <definition location="504:8-505:28">
+        <feature xsi:type="ocl:Attribute" location="504:35-505:28" name="in">
+          <initExpression xsi:type="ocl:NavigationOrAttributeCallExp" location="505:2-505:28" name="refImmediateComposite">
+            <source xsi:type="ocl:VariableExp" location="505:2-505:6" referredVariable="/171"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="504:42-504:48"/>
+        </feature>
+        <context_ location="504:8-504:29">
+          <context_ xsi:type="ocl:OclModelElement" location="504:16-504:29" name="Branch" model="/170"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="507:1-510:4">
+      <definition location="507:8-510:3">
+        <feature xsi:type="ocl:Attribute" location="507:34-510:3" name="ins">
+          <initExpression xsi:type="ocl:IteratorExp" location="508:2-510:3" name="select">
+            <source xsi:type="ocl:OperationCallExp" location="508:2-508:34" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="508:2-508:19" name="Transition" model="/173"/>
+            </source>
+            <body xsi:type="ocl:OperatorCallExp" location="509:3-509:22" operationName="=">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="509:3-509:15" name="defaultTar">
+                <source xsi:type="ocl:VariableExp" location="509:3-509:4" referredVariable="/0/@elements.64/@definition/@feature/@initExpression/@iterators.0"/>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="509:18-509:22" referredVariable="/174"/>
+            </body>
+            <iterators location="508:43-508:44" varName="t" variableExp="/0/@elements.64/@definition/@feature/@initExpression/@body/@source/@source"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="507:40-507:46"/>
+        </feature>
+        <context_ location="507:8-507:28">
+          <context_ xsi:type="ocl:OclModelElement" location="507:16-507:28" name="State" model="/172"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="512:1-513:18">
+      <definition location="512:8-513:17">
+        <feature xsi:type="ocl:Attribute" location="512:38-513:17" name="ins">
+          <initExpression xsi:type="ocl:SequenceExp" location="513:2-513:17">
+            <elements xsi:type="ocl:VariableExp" location="513:12-513:16" referredVariable="/176"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="512:44-512:50"/>
+        </feature>
+        <context_ location="512:8-512:32">
+          <context_ xsi:type="ocl:OclModelElement" location="512:16-512:32" name="Collected" model="/175"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="515:1-516:40">
+      <definition location="515:8-516:39">
+        <feature xsi:type="ocl:Attribute" location="515:34-516:39" name="isInitial">
+          <initExpression xsi:type="ocl:OperationCallExp" location="516:2-516:39" operationName="oclIsKindOf">
+            <source xsi:type="ocl:VariableExp" location="516:2-516:6" referredVariable="/178"/>
+            <arguments xsi:type="ocl:OclModelElement" location="516:19-516:38" name="InitialState" model="/179"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="515:46-515:52"/>
+        </feature>
+        <context_ location="515:8-515:28">
+          <context_ xsi:type="ocl:OclModelElement" location="515:16-515:28" name="State" model="/177"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="518:1-519:8">
+      <definition location="518:8-519:7">
+        <feature xsi:type="ocl:Attribute" location="518:38-519:7" name="isInitial">
+          <initExpression xsi:type="ocl:BooleanExp" location="519:2-519:7"/>
+          <type xsi:type="ocl:OclAnyType" location="518:50-518:56"/>
+        </feature>
+        <context_ location="518:8-518:32">
+          <context_ xsi:type="ocl:OclModelElement" location="518:16-518:32" name="Collected" model="/180"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="521:1-522:8">
+      <definition location="521:8-522:7">
+        <feature xsi:type="ocl:Attribute" location="521:39-522:7" name="isTerminating">
+          <initExpression xsi:type="ocl:BooleanExp" location="522:2-522:7"/>
+          <type xsi:type="ocl:OclAnyType" location="521:55-521:61"/>
+        </feature>
+        <context_ location="521:8-521:33">
+          <context_ xsi:type="ocl:OclModelElement" location="521:16-521:33" name="FinalState" model="/181"/>
+        </context_>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="524:1-525:8">
+      <definition location="524:8-525:7">
+        <feature xsi:type="ocl:Attribute" location="524:39-525:7" name="isMandatory">
+          <initExpression xsi:type="ocl:BooleanExp" location="525:2-525:7"/>
+          <type xsi:type="ocl:OclAnyType" location="524:53-524:59"/>
+        </feature>
+        <context_ location="524:8-524:33">
+          <context_ xsi:type="ocl:OclModelElement" location="524:16-524:33" name="FinalState" model="/182"/>
+        </context_>
+      </definition>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="4:14-4:16" name="PN" model="/0/@outModels.0"/>
+  <ocl:OclModel location="4:27-4:33" name="BENDER" model="/0/@inModels.0"/>
+  <ocl:OclModel location="8:16-8:22" name="BENDER" elements="/0/@elements.0/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="9:2-9:6" varName="self" variableExp="/0/@elements.0/@definition/@feature/@body"/>
+  <ocl:OclModel location="11:16-11:22" name="BENDER" elements="/0/@elements.1/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="12:2-12:6" varName="self" variableExp="/0/@elements.1/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="14:16-14:22" name="BENDER" elements="/0/@elements.2/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="15:2-15:6" varName="self" variableExp="/0/@elements.2/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="15:19-15:25" name="BENDER" elements="/0/@elements.2/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="17:16-17:22" name="BENDER" elements="/0/@elements.3/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="18:2-18:6" varName="self" variableExp="/0/@elements.3/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="18:19-18:25" name="BENDER" elements="/0/@elements.3/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="20:16-20:22" name="BENDER" elements="/0/@elements.4/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="21:5-21:9" varName="self" variableExp="/0/@elements.4/@definition/@feature/@initExpression/@condition/@source"/>
+  <ocl:VariableDeclaration location="22:3-22:7" varName="self" variableExp="/0/@elements.4/@definition/@feature/@initExpression/@thenExpression/@source/@source"/>
+  <ocl:OclModel location="22:18-22:24" name="BENDER" elements="/0/@elements.4/@definition/@feature/@initExpression/@thenExpression/@source/@arguments.0"/>
+  <ocl:OclModel location="27:16-27:22" name="BENDER" elements="/0/@elements.5/@definition/@context_/@context_"/>
+  <ocl:OclModel location="30:16-30:22" name="BENDER" elements="/0/@elements.6/@definition/@context_/@context_"/>
+  <ocl:OclModel location="33:16-33:22" name="BENDER" elements="/0/@elements.7/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="34:2-34:6" varName="self" variableExp="/0/@elements.7/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="34:19-34:25" name="BENDER" elements="/0/@elements.7/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="36:16-36:22" name="BENDER" elements="/0/@elements.8/@definition/@context_/@context_"/>
+  <ocl:OclModel location="39:16-39:22" name="BENDER" elements="/0/@elements.9/@definition/@context_/@context_"/>
+  <ocl:OclModel location="42:16-42:22" name="BENDER" elements="/0/@elements.10/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="43:2-43:6" varName="self" variableExp="/0/@elements.10/@definition/@feature/@initExpression/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="43:17-43:21" varName="self" variableExp="/0/@elements.10/@definition/@feature/@initExpression/@source/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="43:37-43:41" varName="self" variableExp="/0/@elements.10/@definition/@feature/@initExpression/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="43:63-43:67" varName="self" variableExp="/0/@elements.10/@definition/@feature/@initExpression/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="43:85-43:89" varName="self" variableExp="/0/@elements.10/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="45:16-45:22" name="BENDER" elements="/0/@elements.11/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="46:2-46:6" varName="self" variableExp="/0/@elements.11/@definition/@feature/@initExpression/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="46:17-46:21" varName="self" variableExp="/0/@elements.11/@definition/@feature/@initExpression/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="46:37-46:41" varName="self" variableExp="/0/@elements.11/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="48:16-48:22" name="BENDER" elements="/0/@elements.12/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="49:2-49:6" varName="self" variableExp="/0/@elements.12/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="49:28-49:32" varName="self" variableExp="/0/@elements.12/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="51:16-51:22" name="BENDER" elements="/0/@elements.13/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="52:2-52:6" varName="self" variableExp="/0/@elements.13/@definition/@feature/@initExpression/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="52:28-52:32" varName="self" variableExp="/0/@elements.13/@definition/@feature/@initExpression/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="52:52-52:56" varName="self" variableExp="/0/@elements.13/@definition/@feature/@initExpression/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="52:74-52:78" varName="self" variableExp="/0/@elements.13/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="54:16-54:22" name="BENDER" elements="/0/@elements.14/@definition/@context_/@context_"/>
+  <ocl:OclModel location="54:54-54:60" name="BENDER" elements="/0/@elements.14/@definition/@feature/@type"/>
+  <ocl:OclModel location="55:2-55:8" name="BENDER" elements="/0/@elements.14/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="57:16-57:22" name="BENDER" elements="/0/@elements.15/@definition/@context_/@context_"/>
+  <ocl:OclModel location="57:59-57:65" name="BENDER" elements="/0/@elements.15/@definition/@feature/@type"/>
+  <ocl:OclModel location="58:2-58:8" name="BENDER" elements="/0/@elements.15/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="62:3-62:7" varName="self" variableExp="/0/@elements.16/@definition/@feature/@body/@thenExpression/@source"/>
+  <ocl:VariableDeclaration location="62:10-62:14" varName="self" variableExp="/0/@elements.16/@definition/@feature/@body/@thenExpression/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="64:3-64:7" varName="self" variableExp="/0/@elements.16/@definition/@feature/@body/@elseExpression"/>
+  <ocl:VariableDeclaration location="68:5-68:9" varName="self" variableExp="/0/@elements.17/@definition/@feature/@body/@condition/@source"/>
+  <ocl:VariableDeclaration location="71:13-71:17" varName="self" variableExp="/0/@elements.17/@definition/@feature/@body/@elseExpression/@source/@elements.0"/>
+  <ocl:VariableDeclaration location="71:26-71:30" varName="self" variableExp="/0/@elements.17/@definition/@feature/@body/@elseExpression/@arguments.0/@source/@source"/>
+  <ocl:VariableDeclaration location="75:5-75:9" varName="self" variableExp="/0/@elements.18/@definition/@feature/@body/@condition/@source"/>
+  <ocl:VariableDeclaration location="76:4-76:8" varName="self" variableExp="/0/@elements.18/@definition/@feature/@body/@thenExpression/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="78:13-78:17" varName="self" variableExp="/0/@elements.18/@definition/@feature/@body/@thenExpression/@arguments.0/@source/@source/@source"/>
+  <ocl:OclModel location="85:33-85:39" name="BENDER" elements="/0/@elements.19/@parameters.0/@type"/>
+  <ocl:OclModel location="97:16-97:18" name="PN" elements="/0/@elements.19/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="100:74-100:80" name="BENDER" elements="/0/@elements.19/@outPattern/@elements.0/@bindings.2/@value/@source/@result/@type/@elementType"/>
+  <ocl:OclModel location="123:16-123:22" name="BENDER" elements="/0/@elements.20/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="124:2-124:6" varName="self" variableExp="/0/@elements.20/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="126:16-126:22" name="BENDER" elements="/0/@elements.21/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="127:2-127:6" varName="self" variableExp="/0/@elements.21/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="131:16-131:22" name="BENDER" elements="/0/@elements.22/@definition/@context_/@context_"/>
+  <ocl:OclModel location="131:60-131:62" name="PN" elements="/0/@elements.22/@definition/@feature/@type/@elementType"/>
+  <ocl:VariableDeclaration location="132:5-132:9" varName="self" variableExp="/0/@elements.22/@definition/@feature/@initExpression/@condition/@source/@source"/>
+  <ocl:VariableDeclaration location="135:13-135:23" varName="thisModule" variableExp="/0/@elements.22/@definition/@feature/@initExpression/@thenExpression/@elements.0/@source"/>
+  <ocl:VariableDeclaration location="135:36-135:40" varName="self" variableExp="/0/@elements.22/@definition/@feature/@initExpression/@thenExpression/@elements.0/@arguments.0"/>
+  <ocl:OclModel location="142:10-142:16" name="BENDER" elements="/0/@elements.23/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="144:11-144:13" name="PN" elements="/0/@elements.23/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="154:10-154:16" name="BENDER" elements="/0/@elements.24/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="156:9-156:11" name="PN" elements="/0/@elements.24/@outPattern/@elements.0/@type"/>
+  <ocl:VariableDeclaration location="160:5-160:15" varName="thisModule" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@arguments.0/@arguments.0/@body/@source"/>
+  <ocl:VariableDeclaration location="166:5-166:15" varName="thisModule" variableExp="/0/@elements.24/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@arguments.0/@body/@source"/>
+  <ocl:OclModel location="173:10-173:16" name="BENDER" elements="/0/@elements.25/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="175:11-175:13" name="PN" elements="/0/@elements.25/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="192:10-192:16" name="BENDER" elements="/0/@elements.26/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="194:11-194:13" name="PN" elements="/0/@elements.26/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="212:11-212:17" name="BENDER" elements="/0/@elements.27/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="223:16-223:18" name="PN" elements="/0/@elements.27/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="248:12-248:18" name="BENDER" elements="/0/@elements.28/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="250:11-250:13" name="PN" elements="/0/@elements.28/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="259:10-259:16" name="BENDER" elements="/0/@elements.29/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="270:16-270:18" name="PN" elements="/0/@elements.29/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="279:10-279:16" name="BENDER" elements="/0/@elements.30/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="283:11-283:13" name="PN" elements="/0/@elements.30/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="301:55-301:61" name="BENDER" elements="/0/@elements.34/@variables.0/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="302:7-302:17" varName="thisModule" variableExp="/0/@elements.34/@variables.0/@initExpression/@body/@condition/@source"/>
+  <ocl:VariableDeclaration location="303:5-303:15" varName="thisModule" variableExp="/0/@elements.34/@variables.0/@initExpression/@body/@thenExpression/@source"/>
+  <ocl:OclModel location="308:52-308:58" name="BENDER" elements="/0/@elements.34/@variables.1/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="310:5-310:15" varName="thisModule" variableExp="/0/@elements.34/@variables.1/@initExpression/@body/@thenExpression/@source"/>
+  <ocl:OclModel location="315:40-315:46" name="BENDER" elements="/0/@elements.34/@variables.2/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="317:5-317:15" varName="thisModule" variableExp="/0/@elements.34/@variables.2/@initExpression/@body/@thenExpression/@source"/>
+  <ocl:OclModel location="322:57-322:63" name="BENDER" elements="/0/@elements.34/@variables.3/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="323:7-323:17" varName="thisModule" variableExp="/0/@elements.34/@variables.3/@initExpression/@body/@condition/@source"/>
+  <ocl:VariableDeclaration location="324:5-324:15" varName="thisModule" variableExp="/0/@elements.34/@variables.3/@initExpression/@body/@thenExpression/@source"/>
+  <ocl:OclModel location="329:47-329:53" name="BENDER" elements="/0/@elements.34/@variables.4/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="330:7-330:17" varName="thisModule" variableExp="/0/@elements.34/@variables.4/@initExpression/@body/@condition/@source"/>
+  <ocl:VariableDeclaration location="331:5-331:15" varName="thisModule" variableExp="/0/@elements.34/@variables.4/@initExpression/@body/@thenExpression/@source"/>
+  <ocl:OclModel location="349:11-349:17" name="BENDER" elements="/0/@elements.36/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="360:16-360:18" name="PN" elements="/0/@elements.36/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="385:10-385:16" name="BENDER" elements="/0/@elements.37/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="396:16-396:18" name="PN" elements="/0/@elements.37/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="405:10-405:16" name="BENDER" elements="/0/@elements.38/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="409:11-409:13" name="PN" elements="/0/@elements.38/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="417:16-417:22" name="BENDER" elements="/0/@elements.39/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="418:2-418:6" varName="self" variableExp="/0/@elements.39/@definition/@feature/@body"/>
+  <ocl:OclModel location="420:16-420:22" name="BENDER" elements="/0/@elements.40/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="421:2-421:6" varName="self" variableExp="/0/@elements.40/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="423:16-423:22" name="BENDER" elements="/0/@elements.41/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="424:2-424:6" varName="self" variableExp="/0/@elements.41/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="424:19-424:25" name="BENDER" elements="/0/@elements.41/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="426:16-426:22" name="BENDER" elements="/0/@elements.42/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="427:2-427:6" varName="self" variableExp="/0/@elements.42/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="427:19-427:25" name="BENDER" elements="/0/@elements.42/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="429:16-429:22" name="BENDER" elements="/0/@elements.43/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="430:5-430:9" varName="self" variableExp="/0/@elements.43/@definition/@feature/@initExpression/@condition/@source"/>
+  <ocl:VariableDeclaration location="431:3-431:7" varName="self" variableExp="/0/@elements.43/@definition/@feature/@initExpression/@thenExpression/@source/@source"/>
+  <ocl:OclModel location="431:18-431:24" name="BENDER" elements="/0/@elements.43/@definition/@feature/@initExpression/@thenExpression/@source/@arguments.0"/>
+  <ocl:OclModel location="436:16-436:22" name="BENDER" elements="/0/@elements.44/@definition/@context_/@context_"/>
+  <ocl:OclModel location="439:16-439:22" name="BENDER" elements="/0/@elements.45/@definition/@context_/@context_"/>
+  <ocl:OclModel location="442:16-442:22" name="BENDER" elements="/0/@elements.46/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="443:2-443:6" varName="self" variableExp="/0/@elements.46/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="443:19-443:25" name="BENDER" elements="/0/@elements.46/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="445:16-445:22" name="BENDER" elements="/0/@elements.47/@definition/@context_/@context_"/>
+  <ocl:OclModel location="448:16-448:22" name="BENDER" elements="/0/@elements.48/@definition/@context_/@context_"/>
+  <ocl:OclModel location="451:16-451:22" name="BENDER" elements="/0/@elements.49/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="452:2-452:6" varName="self" variableExp="/0/@elements.49/@definition/@feature/@initExpression/@source/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="452:17-452:21" varName="self" variableExp="/0/@elements.49/@definition/@feature/@initExpression/@source/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="452:37-452:41" varName="self" variableExp="/0/@elements.49/@definition/@feature/@initExpression/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="452:63-452:67" varName="self" variableExp="/0/@elements.49/@definition/@feature/@initExpression/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="452:85-452:89" varName="self" variableExp="/0/@elements.49/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="454:16-454:22" name="BENDER" elements="/0/@elements.50/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="455:2-455:6" varName="self" variableExp="/0/@elements.50/@definition/@feature/@initExpression/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="455:17-455:21" varName="self" variableExp="/0/@elements.50/@definition/@feature/@initExpression/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="455:37-455:41" varName="self" variableExp="/0/@elements.50/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="457:16-457:22" name="BENDER" elements="/0/@elements.51/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="458:2-458:6" varName="self" variableExp="/0/@elements.51/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="458:28-458:32" varName="self" variableExp="/0/@elements.51/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="460:16-460:22" name="BENDER" elements="/0/@elements.52/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="461:2-461:6" varName="self" variableExp="/0/@elements.52/@definition/@feature/@initExpression/@source/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="461:28-461:32" varName="self" variableExp="/0/@elements.52/@definition/@feature/@initExpression/@source/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="461:52-461:56" varName="self" variableExp="/0/@elements.52/@definition/@feature/@initExpression/@source/@arguments.0/@source"/>
+  <ocl:VariableDeclaration location="461:74-461:78" varName="self" variableExp="/0/@elements.52/@definition/@feature/@initExpression/@arguments.0/@source"/>
+  <ocl:OclModel location="463:16-463:22" name="BENDER" elements="/0/@elements.53/@definition/@context_/@context_"/>
+  <ocl:OclModel location="463:58-463:64" name="BENDER" elements="/0/@elements.53/@definition/@feature/@type"/>
+  <ocl:OclModel location="464:2-464:8" name="BENDER" elements="/0/@elements.53/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="466:16-466:22" name="BENDER" elements="/0/@elements.54/@definition/@context_/@context_"/>
+  <ocl:OclModel location="466:55-466:61" name="BENDER" elements="/0/@elements.54/@definition/@feature/@type"/>
+  <ocl:OclModel location="467:2-467:8" name="BENDER" elements="/0/@elements.54/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="472:16-472:22" name="BENDER" elements="/0/@elements.55/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="473:2-473:6" varName="self" variableExp="/0/@elements.55/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="475:16-475:22" name="BENDER" elements="/0/@elements.56/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="476:2-476:6" varName="self" variableExp="/0/@elements.56/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:OclModel location="480:16-480:22" name="BENDER" elements="/0/@elements.57/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="481:2-481:6" varName="self" variableExp="/0/@elements.57/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="483:16-483:22" name="BENDER" elements="/0/@elements.58/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="484:2-484:6" varName="self" variableExp="/0/@elements.58/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="486:16-486:22" name="BENDER" elements="/0/@elements.59/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="487:2-487:6" varName="self" variableExp="/0/@elements.59/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="489:16-489:22" name="BENDER" elements="/0/@elements.60/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="490:2-490:6" varName="self" variableExp="/0/@elements.60/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="492:16-492:22" name="BENDER" elements="/0/@elements.61/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="493:2-493:6" varName="self" variableExp="/0/@elements.61/@definition/@feature/@initExpression/@source/@source/@source"/>
+  <ocl:OclModel location="497:16-497:22" name="BENDER" elements="/0/@elements.62/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="498:5-498:9" varName="self" variableExp="/0/@elements.62/@definition/@feature/@initExpression/@condition/@source"/>
+  <ocl:OclModel location="498:22-498:28" name="BENDER" elements="/0/@elements.62/@definition/@feature/@initExpression/@condition/@arguments.0"/>
+  <ocl:VariableDeclaration location="499:3-499:7" varName="self" variableExp="/0/@elements.62/@definition/@feature/@initExpression/@thenExpression"/>
+  <ocl:VariableDeclaration location="501:3-501:7" varName="self" variableExp="/0/@elements.62/@definition/@feature/@initExpression/@elseExpression/@source"/>
+  <ocl:OclModel location="504:16-504:22" name="BENDER" elements="/0/@elements.63/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="505:2-505:6" varName="self" variableExp="/0/@elements.63/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="507:16-507:22" name="BENDER" elements="/0/@elements.64/@definition/@context_/@context_"/>
+  <ocl:OclModel location="508:2-508:8" name="BENDER" elements="/0/@elements.64/@definition/@feature/@initExpression/@source/@source"/>
+  <ocl:VariableDeclaration location="509:18-509:22" varName="self" variableExp="/0/@elements.64/@definition/@feature/@initExpression/@body/@arguments.0"/>
+  <ocl:OclModel location="512:16-512:22" name="BENDER" elements="/0/@elements.65/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="513:12-513:16" varName="self" variableExp="/0/@elements.65/@definition/@feature/@initExpression/@elements.0"/>
+  <ocl:OclModel location="515:16-515:22" name="BENDER" elements="/0/@elements.66/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="516:2-516:6" varName="self" variableExp="/0/@elements.66/@definition/@feature/@initExpression/@source"/>
+  <ocl:OclModel location="516:19-516:25" name="BENDER" elements="/0/@elements.66/@definition/@feature/@initExpression/@arguments.0"/>
+  <ocl:OclModel location="518:16-518:22" name="BENDER" elements="/0/@elements.67/@definition/@context_/@context_"/>
+  <ocl:OclModel location="521:16-521:22" name="BENDER" elements="/0/@elements.68/@definition/@context_/@context_"/>
+  <ocl:OclModel location="524:16-524:22" name="BENDER" elements="/0/@elements.69/@definition/@context_/@context_"/>
+</xmi:XMI>

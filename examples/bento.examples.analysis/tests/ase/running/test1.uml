@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_-pQ5wcerEeOC9PziKHiOoQ">
-  <packagedElement xmi:type="uml:Activity" xmi:id="_CWv4IMesEeOC9PziKHiOoQ" partition="_Ho6locgKEeOfpJjGzbomew">
-    <node xmi:type="uml:InitialNode" xmi:id="_k1vsMMgKEeOfpJjGzbomew" name="start" inPartition="_Ho6locgKEeOfpJjGzbomew"/>
-    <node xmi:type="uml:CentralBufferNode" xmi:id="_cKbFYMgLEeOfpJjGzbomew" inPartition="_Ho6locgKEeOfpJjGzbomew"/>
-    <group xmi:type="uml:ActivityPartition" xmi:id="_Ho6locgKEeOfpJjGzbomew" name="partition" node="_k1vsMMgKEeOfpJjGzbomew _cKbFYMgLEeOfpJjGzbomew"/>
-  </packagedElement>
-</uml:Model>

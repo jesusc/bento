@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="apromore"
+    nsURI="apromore/concept" nsPrefix="apromore_concept">
+  <eClassifiers xsi:type="ecore:EClass" name="XORJoin" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Join"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ORSplit" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Split"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ANDSplit" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Split"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ANDJoin" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Join"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XORSplit" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Split"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Work"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Net"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Routing"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Routing" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Split" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Routing"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Work" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/APRO.ecore#//Node"/>
+</ecore:EPackage>

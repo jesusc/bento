@@ -1,0 +1,28 @@
+module uml2java;
+create OUT : Java from IN : SimpleOO;
+
+rule class2jclass {
+   from umlClass : SimpleOO!Component
+     to javaClass : Java!JavaClass(
+name <- umlClass.name,
+extends_ <- umlClass.superclasses->first()
+)
+
+}
+
+rule attribute2field {
+   from attr : SimpleOO!Property
+     to javaClass : Java!Field(
+owner <- attr.refImmediateComposite(),
+name <- attr.name,
+isPublic <- attr.isPublic
+)
+
+}
+
+helper context SimpleOO!Component def: superclasses : OclAny = self.parents;
+
+helper context SimpleOO!Property def: isPublic : OclAny = self.public;
+
+helper context SimpleOO!Port def: isPublic : OclAny = true;
+

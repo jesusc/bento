@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="bento.language.bentocomp.resource.bento.mopp.BentoMetaInformation" id="bento.language.bentocomp.resource.bento.mopp.BentoMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="bento.language.bentocomp.resource.bento.problem">
+		</super>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="bento.language.bentocomp.resource.bento.problem">
+		</super>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="bento.language.bentocomp.resource.bento.problem">
+		</super>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="bento.language.bentocomp.resource.bento.problem">
+		</super>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="bento.language.bentocomp.resource.bento.problem">
+		</super>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.nature" name="bento nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="bento.language.bentocomp.resource.bento.mopp.BentoNature">
+			</run>
+		</runtime>
+		<builder id="bento.language.bentocomp.resource.bento.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="bento.language.bentocomp.resource.bento.builder" name="bento Builder">
+		<builder hasNature="true">
+			<run class="bento.language.bentocomp.resource.bento.mopp.BentoBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="bento.language.bentocomp.resource.bento.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="bento.language.bentocomp.resource.bento.mopp.BentoResourceFactoryDelegator" type="bento">
+		</parser>
+	</extension>
+	
+	<extension-point id="bento.language.bentocomp.resource.bento.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="bento.language.bentocomp.resource.bento.debug.BentoLineBreakpoint" id="bento.language.bentocomp.resource.bento.debug.breakpoint" markerType="bento.language.bentocomp.resource.bento.debug.lineBreakpoint.marker" name="bento Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="bento.language.bentocomp.resource.bento.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="bento.language.bentocomp.resource.bento.ui.launchConfigurationType" delegate="bento.language.bentocomp.resource.bento.launch.BentoLaunchConfigurationDelegate" modes="run,debug" name="bento Application" sourceLocatorId="bento.language.bentocomp.resource.bento.ui.sourceLocator" sourcePathComputerId="bento.language.bentocomp.resource.bento.ui.sourcePathComputer" delegateName="bento Launch Tooling" delegateDescription="This will run or debug .bento files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="bento.language.bentocomp.resource.bento.debug.BentoSourcePathComputerDelegate" id="bento.language.bentocomp.resource.bento.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="bento.language.bentocomp.resource.bento.ui.sourceLocator" class="bento.language.bentocomp.resource.bento.debug.BentoSourceLocator" name="bento Source Locator">
+		</sourceLocator>
+	</extension>
+ <extension
+       point="bento.language.bentocomp.resource.bento.default_load_options">
+    <provider
+          class="bento.language.bentocomp.resource.bento.BentoPostProcessor"
+          id="bento.language.bentocomp.resource.bento.provider1">
+    </provider>
+ </extension>
+	
+</plugin>

@@ -1,0 +1,62 @@
+
+PACKAGE
+
+- AIF		X
+- OIF		X
+- AHF		X
+- OHF		X
+- BPF		X
+- CCF		X
+- ICF		X
+
+- IIF		X
+- AHEF
+- OHEF
+
+- DSC		X
+- NOH		X
+- NIC		X
+- NSI		X
+- NNC		X
+- NAC		X
+- NLC		X
+- ADI		X
+- AWI		X
+- ANA		X
+	
+CLASS
+
+- DIT		X
+- NOC		X
+- CBO		X
+- RFC
+
+- SIZE2		X
+
+- MFA		X
+- MAA		X
+- MAT		X
+- MOA		X
+- MRM		X
+- DAM		X
+- OAM		X
+- MAM		X
+- NOA		X
+- NOM		X
+- CIS		X
+- NPT		X
+- NPM		X		
+- NOD		X
+- NAD		X
+- NPA		X
+- CSM		X
+- CAM		X
+- DCC		X
+- MCC		X
+- DAC		X
+- DPC
+- MPC		X
+- CCD		X
+- CCP		X
+- CCM		X
+		

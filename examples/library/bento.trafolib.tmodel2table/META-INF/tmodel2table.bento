@@ -1,0 +1,12 @@
+transformation component bento.trafolib.tmodel2table { 
+	source concept TableModel : "TableModel.ecore"
+	target concept Table : "Table.ecore"
+	source model in : TableModel
+	target model out : Table
+	definition atl "tmodel2table.atl" with
+ 		IN : Graph = in, 
+		OUT : Table = out
+
+	tags table, tabular, "table generator"
+}
+

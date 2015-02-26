@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated bentoDSL -->
+      <package
+            uri="http://www.miso.es/bento/bentocomp"
+            class="bento.language.bentocomp.BentocompPackage"
+            genModel="metamodel/bentoDSL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated bentoDSL -->
+      <package
+            uri="http://www.miso.es/bento/bentocomp/core"
+            class="bento.language.bentocomp.core.CorePackage"
+            genModel="metamodel/bentoDSL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated bentoDSL -->
+      <package
+            uri="http://www.miso.es/bento/bentocomp/variants"
+            class="bento.language.bentocomp.variants.VariantsPackage"
+            genModel="metamodel/bentoDSL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated bentoDSL -->
+      <package
+            uri="http://www.miso.es/bento/bentocomp/flowcontrol"
+            class="bento.language.bentocomp.flowcontrol.FlowcontrolPackage"
+            genModel="metamodel/bentoDSL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated bentoDSL -->
+      <package
+            uri="http://www.miso.es/bento/bentocomp/dsl"
+            class="bento.language.bentocomp.dsl.DslPackage"
+            genModel="metamodel/bentoDSL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated bentoDSL -->
+      <package
+            uri="http://http://www.miso.es/bento/bentocomp/technologies"
+            class="bento.language.bentocomp.technologies.TechnologiesPackage"
+            genModel="metamodel/bentoDSL.genmodel"/>
+   </extension>
+
+</plugin>

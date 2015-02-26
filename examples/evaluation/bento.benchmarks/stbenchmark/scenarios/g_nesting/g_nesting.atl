@@ -1,0 +1,42 @@
+-- @path PUB1=/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore
+-- @path PUB2=/genericity.benchmarks/stbenchmark/metamodels/pub_src.ecore
+module copypub1;
+create OUT : PUB2 from IN : PUB_TGT;
+
+-- Rule from reference
+unique lazy rule reference {
+ from
+  src : PUB_TGT!"OclAny"
+ to
+  tgt : PUB2!Reference1 (
+   title <- src.title,
+   year <- src.year,
+   publishedIn <- src.publishedIn,
+   name <- src.name
+  )
+}
+
+helper def: UnnestedPeriodAuthorPublication_AllInstances : OclAny =
+ PUB_TGT!Period1.allInstances()->collect(p |
+  p.Authors->collect(a |
+   a.Publications->collect(pub |
+    Tuple {year = p.Year, title = pub.Title, name = a.Name, publishedIn = pub.PublishedIn}
+   )
+  )->flatten()
+ )->flatten();
+
+endpoint rule reference_ForceTransformation() {
+ using
+ {
+  varToForceEvaluation : OclAny = thisModule.UnnestedPeriodAuthorPublication_AllInstances->collect(i |
+   thisModule.reference(i)
+  );
+ }
+}
+
+helper def: __convertToSequence__(obj : OclAny) : OclAny =
+ if obj = OclUndefined then
+  Sequence {}
+ else
+  Sequence {obj}->flatten()
+ endif;

@@ -1,0 +1,17 @@
+@namespace(uri="bento://miso.es/generic_table_model", prefix="generic_table_model")
+package TableModel;
+
+class TableModel {
+	ref RowHeaderNode[+] rows;
+	ref ColumnHeaderNode[+] cols;
+	
+	op String valueOf(int i, int j);
+}   
+
+class RowHeaderNode {
+  attr String[1] title;	
+}
+
+class ColumnHeaderNode {
+  attr String[1] title;
+}

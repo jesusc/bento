@@ -1,0 +1,29 @@
+@namespace(uri="http://genericity/examples/component", prefix="component")
+package component;
+
+class Model {
+   val Component[*] components;
+}
+
+abstract class NamedElement {
+   attr String[1] name;   
+}
+
+class Component extends NamedElement {
+	val Property[*] properties;
+	val Port[*] ports;
+	ref Component[1] parents;
+}
+
+class Property extends NamedElement {
+   attr boolean[1] public;
+   attr boolean[1] isReadonly; 
+    
+}
+
+class Port extends NamedElement {
+   attr boolean[1] in; 
+   attr boolean[1] out; 	    
+}
+
+// TODO: NOS FALTA MAPEAR ENUMERADOS? ALGUN EJEMPLO?

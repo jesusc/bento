@@ -52,8 +52,8 @@ public class MetamodelInfoDialog extends TitleAreaDialog {
 	@Override
 	public void create() {
 		super.create();
-		setTitle("Transformation metamodels");
-		setMessage("This is a TitleAreaDialog", IMessageProvider.INFORMATION);
+		setTitle("Metamodel configuration");
+		setMessage("Configure a meta-model of the component", IMessageProvider.INFORMATION);
 	}
 
 	@Override

@@ -1,0 +1,32 @@
+@namespace(uri="http://bento/componetization/paper/simpleuml", prefix="simplesuml")
+package simpleuml;
+
+abstract class NamedElement {
+  attr String[1] name;
+}
+
+abstract class Feature extends NamedElement {
+}
+
+abstract class Type extends NamedElement {
+}
+
+abstract class Classifier extends Type {
+  val Generalization[*]#specific generalization;
+}
+
+abstract class StructuralFeature extends Feature {
+}
+
+class Class extends Classifier {
+  val Property[*] ownedAttribute;
+}
+
+class Property extends StructuralFeature {
+}
+
+class Generalization {
+  ref Classifier[1]#generalization specific;
+  ref Classifier[1] general;
+}
+

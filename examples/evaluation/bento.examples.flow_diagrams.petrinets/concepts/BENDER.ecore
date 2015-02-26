@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="stateMachine"
+    nsURI="umbra.StateMachine/concept" nsPrefix="umbra.StateMachine_concept">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultTar" eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State"
+        eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State/outs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Collected" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//IVREvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//Branch"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Branch" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="out" eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outs" upperBound="-1" eType="ecore:EClass /bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//Transition"
+        containment="true" eOpposite="/bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//Transition/src"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IVREvent" abstract="true" eSuperTypes="/bento.examples.flow_diagrams.petrinets/concepts/BENDER.ecore#//Transition"/>
+</ecore:EPackage>

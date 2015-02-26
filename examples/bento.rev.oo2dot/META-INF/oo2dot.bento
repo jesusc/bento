@@ -1,9 +1,0 @@
-transformation component oo2dot { 
-	source concept OO  : "platform:/resource//bento.rev.oo2dot/metamodels/OO.ecore"
-	target concept DOT : "platform:/resource//bento.rev.oo2dot/metamodels/DOT.ecore"
-	source model in : OO
-	target model out : DOT
-	definition atl "platform:/resource//bento.rev.oo2dot/transformation/oo2dot.atl" with 
-		IN : KM3 = in, 
-		OUT : DOT = out
-}
