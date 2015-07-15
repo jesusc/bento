@@ -2,6 +2,10 @@ package bento.component.atl;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -40,7 +44,7 @@ public class AtlMemoryTemplate implements AdaptationResult {
 	private AtlTemplate original;
 	private CompositeComponent topComposite;
 	private TransformationComponent component;
-	private ATLModel adaptedAtlModel;
+	// private ATLModel adaptedAtlModel;
 	private FilePathResolver filePathResolver;
 	
 	public AtlMemoryTemplate(TransformationComponent comp, FilePathResolver filePathResolver) {
@@ -49,35 +53,46 @@ public class AtlMemoryTemplate implements AdaptationResult {
 		this.filePathResolver = filePathResolver;
 	}
 
+	Supplier<ATLModel> pending ;
 	public void adapt(ParameterModel conceptModel, Model concreteModel, BindingModel bindingModel) {
-		if ( adaptedAtlModel != null ) {
+		if ( pending != null ) {
 			throw new UnsupportedOperationException("Multiple adaptations of the same template are not supported");
 		}
+	
+		pending = () -> {
 		
-		// Select the actual ATL model that is bound
-		AtlParameter atlBoundModel = null;
-		
-		for(AtlParameter p : original.getParameters()) {
-			if ( p.getModel() == conceptModel ) {
-				atlBoundModel = p;
+			/*
+			if ( adaptedAtlModel != null ) {
+				throw new UnsupportedOperationException("Multiple adaptations of the same template are not supported");
 			}
-		}
-
-		if ( atlBoundModel == null )
-			throw new IllegalArgumentException();
-		
-		// TODO: Load only the first time
-		Resource atlResource = loadAtlTransformation();
-		
-		ATLModel atlModel = new ATLModel(atlResource);
-		
-		// TODO: The atl model is fixed, the others may vary in several invocations... 
-		ATLTrafoAdapter adapter = new ATLTrafoAdapter(atlModel, bindingModel, 
-				new EclipseComponentInfoForBinding(atlBoundModel.getAtlMetamodelName(), bindingModel) );
-		
-		adapter.perform();
-		
-		this.adaptedAtlModel = adapter.getAdaptedATL();
+			*/
+			
+			// Select the actual ATL model that is bound
+			AtlParameter atlBoundModel = null;
+			
+			for(AtlParameter p : original.getParameters()) {
+				if ( p.getModel() == conceptModel ) {
+					atlBoundModel = p;
+				}
+			}
+	
+			if ( atlBoundModel == null )
+				throw new IllegalArgumentException();
+			
+			// TODO: Load only the first time
+			Resource atlResource = loadAtlTransformation();
+			
+			ATLModel atlModel = new ATLModel(atlResource);
+			
+			// TODO: The atl model is fixed, the others may vary in several invocations... 
+			ATLTrafoAdapter adapter = new ATLTrafoAdapter(atlModel, bindingModel, 
+					new EclipseComponentInfoForBinding(atlBoundModel.getAtlMetamodelName(), bindingModel) );
+			
+			adapter.perform();
+			
+			// this.adaptedAtlModel = adapter.getAdaptedATL();
+			return adapter.getAdaptedATL();
+		};
 	}
 
 	public class EclipseComponentInfoForBinding implements IComponentInfoForBinding {
@@ -102,9 +117,11 @@ public class AtlMemoryTemplate implements AdaptationResult {
 
 		@Override
 		public String getBoundMetamodelURI() {
-			String uri = bindModel.getRoot().getBoundMetamodel().getMetamodelURI();
-			// quick trick			
+			String uri = BentoURIResolver.tryResolveMetamodel(bindModel.getRoot().getBoundMetamodel().getMetamodelURI(), bindModel.getResource());
+//			String uri = bindModel.getRoot().getBoundMetamodel().getMetamodelURI();
+//			// quick trick			
 			return uri.replace("platform:/resource", "");
+			
 		}
 		
 	}
@@ -142,10 +159,9 @@ public class AtlMemoryTemplate implements AdaptationResult {
 			System.err.println("At some point I need to pass the top composite to generate a proper name at least...");
 		}
 		
-		// String atlFile = filePathResolver.resolve(original.getTemplate());		
-		String outputFileName = component.getName() + ".atl";		
-		String adaptedFileName = filePathResolver.createPlaceForAdaptation(topComposite, component);
-		adaptedFileName = adaptedFileName + ".atl"; // Not very clean...
+		ATLModel adaptedAtlModel = pending.get();
+		
+		String adaptedFileName = getAdaptedTemplateFileName();
 		
 		String result = ATLSerializer.serialize(adaptedAtlModel);
 		FileOutputStream fos = null;
@@ -167,6 +183,14 @@ public class AtlMemoryTemplate implements AdaptationResult {
 	@Override
 	public void setAdapterFor(CompositeComponent topComposite) {
 		this.topComposite = topComposite;
+	}
+
+
+	@Override
+	public String getAdaptedTemplateFileName() {
+		String adaptedFileName = filePathResolver.createPlaceForAdaptation(topComposite, component);
+		adaptedFileName = adaptedFileName + ".atl"; // Not very clean...
+		return adaptedFileName;
 	}
 	
 }

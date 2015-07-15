@@ -14,17 +14,23 @@ public class ResolveBentoQuickfix extends BentoQuickFix {
 		this.specifiedURI = specifiedURI;
 	}
 
-	
-	
 	@Override
-	public void applyChanges() {
+	public String apply(String currentText) {
 		String url = bento.repository.ui.Activator.getDefaultRepo();
 		String name = specifiedURI.replaceFirst("bento:/", "") ; // Only works with bento uris, but specifiedURI may be anything... 
 		
 		if ( ! RemoteRepositoryAccess.downloadAndInstall(url, name) ) {
 			System.out.println("Could not resolve!");
 			System.out.println("Applying changes! " + specifiedURI + " " + this.getContextObjects());
+		} else {
+			getResource().setModified(true);
 		}
 		
+		return null;
+	}
+	
+	@Override
+	public void applyChanges() {
+		// do nothing
 	}
 }

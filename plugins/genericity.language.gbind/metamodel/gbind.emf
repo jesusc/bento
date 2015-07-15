@@ -378,6 +378,8 @@ package simpleocl {
 package dsl {
 
 	class BindingModel {
+	    attr boolean[1] targetBinding = false;
+	    
 	    val ConceptBinding[*]#model_ bindings;
 	    val BaseHelper[*]#model_ helpers;
 	
@@ -402,6 +404,7 @@ package dsl {
 	
 	class MetamodelDeclaration extends simpleocl.OclMetamodel {
 	   attr String[0..1] metamodelURI;
+	   transient attr EResource resource;
 	}
 	
 	abstract class Metaclass {

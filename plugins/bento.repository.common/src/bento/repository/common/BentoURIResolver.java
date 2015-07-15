@@ -100,7 +100,8 @@ public class BentoURIResolver {
 			}
 			
 			IFile file = p.getFile(prefix + defaultFolder + "/" + identifier);
-			return "platform:/resource/" + file.getFullPath().toPortableString();
+			// return "platform:/resource/" + file.getFullPath().toPortableString();
+			return "platform:/resource" + file.getFullPath().toPortableString();
 		} else if ( identifier.startsWith("platform:/resource") ) {
 			return identifier;
 		} else {

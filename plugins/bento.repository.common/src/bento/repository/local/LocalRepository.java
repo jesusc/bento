@@ -17,6 +17,7 @@ public class LocalRepository implements FilePathResolver {
 		if (!local.exists()) {
 			try {
 				local.create(null);
+				local.open(null);
 			} catch (CoreException e) {
 				e.printStackTrace();
 				return null;

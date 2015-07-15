@@ -248,6 +248,6 @@ public class FindComponentWizardPage extends WizardPage {
 	
 	public String getSelectedComponent() {
 		TreeSelection s = (TreeSelection) treeViewer.getSelection();
-		return (String) s.getFirstElement();
+		return ((ComponentMetadata) s.getFirstElement()).getName();
 	}
 }

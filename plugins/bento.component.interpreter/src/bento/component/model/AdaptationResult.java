@@ -15,4 +15,6 @@ public interface AdaptationResult {
 	
 	void exportToFileSystem(FilePathResolver resolver);
 
+	String getAdaptedTemplateFileName();
+
 }

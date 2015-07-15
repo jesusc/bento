@@ -299,8 +299,8 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_Bindings() {
-		return (EReference)bindingModelEClass.getEStructuralFeatures().get(0);
+	public EAttribute getBindingModel_TargetBinding() {
+		return (EAttribute)bindingModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_Helpers() {
+	public EReference getBindingModel_Bindings() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -317,7 +317,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_ConceptMetaclasses() {
+	public EReference getBindingModel_Helpers() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -326,7 +326,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_ConcreteMetaclasses() {
+	public EReference getBindingModel_ConceptMetaclasses() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -335,7 +335,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_VirtualMetaclasses() {
+	public EReference getBindingModel_ConcreteMetaclasses() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -344,7 +344,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_BoundConcept() {
+	public EReference getBindingModel_VirtualMetaclasses() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -353,7 +353,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_BoundMetamodel() {
+	public EReference getBindingModel_BoundConcept() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -362,8 +362,17 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBindingModel_BoundMetamodel() {
+		return (EReference)bindingModelEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getBindingModel_Name() {
-		return (EAttribute)bindingModelEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)bindingModelEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -372,7 +381,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	public EReference getBindingModel_Options() {
-		return (EReference)bindingModelEClass.getEStructuralFeatures().get(8);
+		return (EReference)bindingModelEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -409,6 +418,15 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 */
 	public EAttribute getMetamodelDeclaration_MetamodelURI() {
 		return (EAttribute)metamodelDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetamodelDeclaration_Resource() {
+		return (EAttribute)metamodelDeclarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -971,6 +989,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		// Create classes and their features
 		bindingModelEClass = createEClass(BINDING_MODEL);
+		createEAttribute(bindingModelEClass, BINDING_MODEL__TARGET_BINDING);
 		createEReference(bindingModelEClass, BINDING_MODEL__BINDINGS);
 		createEReference(bindingModelEClass, BINDING_MODEL__HELPERS);
 		createEReference(bindingModelEClass, BINDING_MODEL__CONCEPT_METACLASSES);
@@ -986,6 +1005,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		metamodelDeclarationEClass = createEClass(METAMODEL_DECLARATION);
 		createEAttribute(metamodelDeclarationEClass, METAMODEL_DECLARATION__METAMODEL_URI);
+		createEAttribute(metamodelDeclarationEClass, METAMODEL_DECLARATION__RESOURCE);
 
 		metaclassEClass = createEClass(METACLASS);
 		createEAttribute(metaclassEClass, METACLASS__NAME);
@@ -1119,6 +1139,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(bindingModelEClass, BindingModel.class, "BindingModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBindingModel_TargetBinding(), ecorePackage.getEBoolean(), "targetBinding", "false", 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_Bindings(), this.getConceptBinding(), this.getConceptBinding_Model_(), "bindings", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_Helpers(), this.getBaseHelper(), this.getBaseHelper_Model_(), "helpers", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_ConceptMetaclasses(), this.getConceptMetaclass(), null, "conceptMetaclasses", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1134,6 +1155,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 
 		initEClass(metamodelDeclarationEClass, MetamodelDeclaration.class, "MetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetamodelDeclaration_MetamodelURI(), ecorePackage.getEString(), "metamodelURI", null, 0, 1, MetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetamodelDeclaration_Resource(), ecorePackage.getEResource(), "resource", null, 0, 1, MetamodelDeclaration.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaclassEClass, Metaclass.class, "Metaclass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetaclass_Name(), ecorePackage.getEString(), "name", null, 0, 1, Metaclass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

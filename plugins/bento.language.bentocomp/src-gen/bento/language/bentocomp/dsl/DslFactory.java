@@ -31,6 +31,15 @@ public interface DslFactory extends EFactory {
 	DefinitionRoot createDefinitionRoot();
 
 	/**
+	 * Returns a new object of class '<em>Component Execution</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Component Execution</em>'.
+	 * @generated
+	 */
+	ComponentExecution createComponentExecution();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

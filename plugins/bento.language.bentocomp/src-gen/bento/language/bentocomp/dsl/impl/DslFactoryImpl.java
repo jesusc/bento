@@ -57,6 +57,7 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DslPackage.DEFINITION_ROOT: return createDefinitionRoot();
+			case DslPackage.COMPONENT_EXECUTION: return createComponentExecution();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -70,6 +71,16 @@ public class DslFactoryImpl extends EFactoryImpl implements DslFactory {
 	public DefinitionRoot createDefinitionRoot() {
 		DefinitionRootImpl definitionRoot = new DefinitionRootImpl();
 		return definitionRoot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComponentExecution createComponentExecution() {
+		ComponentExecutionImpl componentExecution = new ComponentExecutionImpl();
+		return componentExecution;
 	}
 
 	/**

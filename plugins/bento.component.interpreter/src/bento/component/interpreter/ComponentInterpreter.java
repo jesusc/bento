@@ -1,5 +1,15 @@
 package bento.component.interpreter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
+
+import bento.binding.utils.BindingModel;
+import bento.component.atl.AtlMemoryTemplate;
+import bento.component.model.AdaptationResult;
+import bento.component.model.ComponentModel;
+import bento.component.model.MyComponentError;
 import bento.language.bentocomp.core.BindingDeclaration;
 import bento.language.bentocomp.core.Component;
 import bento.language.bentocomp.core.CompositeComponent;
@@ -14,16 +24,6 @@ import bento.language.bentocomp.flowcontrol.util.FlowcontrolSwitch;
 import bento.language.bentocomp.technologies.AtlTemplate;
 import bento.repository.local.FilePathResolver;
 import bento.utils.BindingUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import bento.binding.utils.BindingModel;
-import bento.component.atl.AtlMemoryTemplate;
-import bento.component.model.AdaptationResult;
-import bento.component.model.ComponentModel;
-import bento.component.model.MyComponentError;
 
 /**
  * Traverses a given component adapting their dependencies
@@ -41,7 +41,7 @@ public class ComponentInterpreter {
 		this.filePathResolver = filePathResolver;
 	}
 
-	public void execute() throws MyComponentError {
+	public void apply() throws MyComponentError {
 		List<AdaptationResult> result = null;
 		if ( component instanceof CompositeComponent ) {
 			result = adaptCompositeComponent((CompositeComponent) component);
@@ -51,6 +51,19 @@ public class ComponentInterpreter {
 		
 		result.forEach(r -> r.exportToFileSystem(filePathResolver));
 	}
+	
+	public void execute() throws MyComponentError {
+		
+		List<AdaptationResult> result = null;
+		if ( component instanceof CompositeComponent ) {
+			result = adaptCompositeComponent((CompositeComponent) component);
+		} else {
+			throw new MyComponentError("Only composite components can be adapted");
+		}
+		
+		result.forEach(r -> System.out.println( r.getAdaptedTemplateFileName() ) );
+	}
+	
 
 	/**
 	 * Computes the required adaptations of a composite component.
@@ -59,7 +72,7 @@ public class ComponentInterpreter {
 	 * @return the list of required adaptations
 	 * @throws MyComponentError 
 	 */
-	private List<AdaptationResult> adaptCompositeComponent(final CompositeComponent component) throws MyComponentError { 
+	private List<AdaptationResult> adaptCompositeComponent(final CompositeComponent component) { 
 		List<AdaptationResult> adaptations = doStep(component, component.getComposition().getStep(), component);
 		
 		return adaptations;
@@ -116,22 +129,23 @@ public class ComponentInterpreter {
 					return a;
 				});
 
-		AdaptationResult r = new CoreSwitch<AdaptationResult>() {
-			public AdaptationResult caseCompositeComponent(CompositeComponent object) {
-				throw new UnsupportedOperationException();
+		List<AdaptationResult> r = new CoreSwitch<List<AdaptationResult>>() {
+			public List<AdaptationResult> caseCompositeComponent(CompositeComponent object) {
+				return adaptCompositeComponent(object);
+				// throw new UnsupportedOperationException();
 			};
 			
-			public AdaptationResult caseTransformationComponent(bento.language.bentocomp.core.TransformationComponent comp) {
-				return applyTransformationComponent(comp, adaptations, topComposite);
+			public List<AdaptationResult> caseTransformationComponent(bento.language.bentocomp.core.TransformationComponent comp) {
+				return Collections.singletonList( applyTransformationComponent(comp, adaptations, topComposite) );
 			}
 
-			public AdaptationResult defaultCase(org.eclipse.emf.ecore.EObject object) {
+			public List<AdaptationResult> defaultCase(org.eclipse.emf.ecore.EObject object) {
 				throw new UnsupportedOperationException("Not supported: " + object);
 			}
 		}.doSwitch(applyCommand.getComponent()); 
 		
 		ArrayList<AdaptationResult> result = new ArrayList<AdaptationResult>();
-		result.add(r);
+		result.addAll(r);
 		return result;
 	};
 	
@@ -169,6 +183,8 @@ public class ComponentInterpreter {
 		BindingDeclaration appliedBinding;
 		Model concreteModel;	
 	}
+
+	
 	
 	
 }

@@ -1,5 +1,5 @@
--- @path PN=./PetriNetsTrafos/metamodels/PetriNet.ecore
--- @path MTX=./PetriNetsTrafos/metamodels/AlgebraicMatrix.ecore
+-- @path PN=/bento.trafolib.petrinet2matrix/metamodels/PetriNet.ecore
+-- @path MTX=/bento.trafolib.petrinet2matrix/metamodels/AlgebraicMatrix.ecore
 
 module pn2mat;
 create OUT : MTX from IN : PN;

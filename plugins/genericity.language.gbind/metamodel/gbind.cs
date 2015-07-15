@@ -28,12 +28,13 @@ OPTIONS {
 	overrideLineBreakpoint = "false";
 	//overrideLineBreakpointAdapter = "false";
 	//overrideUIManifest = "false";
-	//overrideNewFileWizard = "false";
-	//overrideNewFileWizardPage = "false";
+	overrideNewFileWizard = "false";
+	overrideNewFileWizardPage = "false";
 	//overrideNewProjectWizard = "false";
 	//overrideUIPluginXML = "false";
 	//overrideProjectFile = "false";
 	//overrideBuildProperties = "false";
+	overrideResourcePostProcessor = "false";
 	// END-OF OCL
 }
 
@@ -237,7 +238,7 @@ RULES {
 	Simpleocl.EnvType ::= name[ENVTYPE];
 	// END-OF OclRules
 
-	Dsl.BindingModel ::= "binding" name[] 
+	Dsl.BindingModel ::= targetBinding["target": ""] "binding" name[] 
 		"{"
 			(options)?
 

@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link gbind.dsl.impl.BindingModelImpl#isTargetBinding <em>Target Binding</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBindings <em>Bindings</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getHelpers <em>Helpers</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
@@ -55,6 +56,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class BindingModelImpl extends EObjectImpl implements BindingModel {
+	/**
+	 * The default value of the '{@link #isTargetBinding() <em>Target Binding</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTargetBinding()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TARGET_BINDING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTargetBinding() <em>Target Binding</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTargetBinding()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean targetBinding = TARGET_BINDING_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -172,6 +193,27 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	@Override
 	protected EClass eStaticClass() {
 		return DslPackage.Literals.BINDING_MODEL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTargetBinding() {
+		return targetBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetBinding(boolean newTargetBinding) {
+		boolean oldTargetBinding = targetBinding;
+		targetBinding = newTargetBinding;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__TARGET_BINDING, oldTargetBinding, targetBinding));
 	}
 
 	/**
@@ -437,6 +479,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DslPackage.BINDING_MODEL__TARGET_BINDING:
+				return isTargetBinding();
 			case DslPackage.BINDING_MODEL__BINDINGS:
 				return getBindings();
 			case DslPackage.BINDING_MODEL__HELPERS:
@@ -468,6 +512,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DslPackage.BINDING_MODEL__TARGET_BINDING:
+				setTargetBinding((Boolean)newValue);
+				return;
 			case DslPackage.BINDING_MODEL__BINDINGS:
 				getBindings().clear();
 				getBindings().addAll((Collection<? extends ConceptBinding>)newValue);
@@ -512,6 +559,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DslPackage.BINDING_MODEL__TARGET_BINDING:
+				setTargetBinding(TARGET_BINDING_EDEFAULT);
+				return;
 			case DslPackage.BINDING_MODEL__BINDINGS:
 				getBindings().clear();
 				return;
@@ -551,6 +601,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DslPackage.BINDING_MODEL__TARGET_BINDING:
+				return targetBinding != TARGET_BINDING_EDEFAULT;
 			case DslPackage.BINDING_MODEL__BINDINGS:
 				return bindings != null && !bindings.isEmpty();
 			case DslPackage.BINDING_MODEL__HELPERS:
@@ -583,7 +635,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (targetBinding: ");
+		result.append(targetBinding);
+		result.append(", name: ");
 		result.append(name);
 		result.append(')');
 		return result.toString();

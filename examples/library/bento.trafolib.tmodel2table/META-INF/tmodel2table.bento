@@ -4,7 +4,7 @@ transformation component bento.trafolib.tmodel2table {
 	source model in : TableModel
 	target model out : Table
 	definition atl "tmodel2table.atl" with
- 		IN : Graph = in, 
+ 		IN : TableModel = in, 
 		OUT : Table = out
 
 	tags table, tabular, "table generator"

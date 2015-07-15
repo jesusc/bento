@@ -17,6 +17,7 @@ public class BentoSyntaxCoverageInformationProvider {
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getTag(),
 			bento.language.bentocomp.variants.VariantsPackage.eINSTANCE.getSingleFeature(),
 			bento.language.bentocomp.variants.VariantsPackage.eINSTANCE.getXorFeature(),
+			bento.language.bentocomp.dsl.DslPackage.eINSTANCE.getComponentExecution(),
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getCompositeComponent(),
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getBindingDeclaration(),
 			bento.language.bentocomp.flowcontrol.FlowcontrolPackage.eINSTANCE.getComposition(),

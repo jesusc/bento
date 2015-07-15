@@ -6246,8 +6246,10 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(9);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(10);
 		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__TARGET_BINDING));
+		printCountingMap.put("targetBinding", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__BINDINGS));
 		printCountingMap.put("bindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__HELPERS));
@@ -6272,6 +6274,14 @@ public class GbindPrinter implements genericity.language.gbind.IGbindTextPrinter
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (BooleanTerminal)
+		count = printCountingMap.get("targetBinding");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(gbind.dsl.DslPackage.BINDING_MODEL__TARGET_BINDING));
+			if (o != null) {
+			}
+			printCountingMap.put("targetBinding", count - 1);
+		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print("binding");
 		out.print(" ");

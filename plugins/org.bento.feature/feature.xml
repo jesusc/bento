@@ -5,7 +5,7 @@
       version="0.7.0.qualifier"
       provider-name="Miso Team">
 
-   <description url="http://www.example.com/description">
+   <description url="http://sanchezcuadrado.es/projects/bento">
       A component model for model transformations.
    </description>
 
@@ -16,6 +16,10 @@
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
+
+   <url>
+      <discovery label="anATLyzer" url="http://sanchezcuadrado.es/projects/anatlyzer/sites/anatlyzer.updatesite/"/>
+   </url>
 
    <plugin
          id="genericity.components.ui"
@@ -88,6 +92,19 @@
          unpack="false"/>
 
    <plugin
+         id="bento.repository.common"
+         download-size="0"
+         install-size="0"
+         version="0.7.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="bento.repository.ui"
+         download-size="0"
+         install-size="0"
+         version="0.7.0.qualifier"/>
+
+   <plugin
          id="bento.language.bentocomp"
          download-size="0"
          install-size="0"
@@ -101,19 +118,6 @@
 
    <plugin
          id="bento.language.bentocomp.resource.bento.ui"
-         download-size="0"
-         install-size="0"
-         version="0.7.0.qualifier"/>
-
-   <plugin
-         id="bento.repository.common"
-         download-size="0"
-         install-size="0"
-         version="0.7.0.qualifier"
-         unpack="false"/>
-
-   <plugin
-         id="bento.repository.ui"
          download-size="0"
          install-size="0"
          version="0.7.0.qualifier"/>

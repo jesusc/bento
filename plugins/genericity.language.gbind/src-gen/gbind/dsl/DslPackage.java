@@ -72,13 +72,22 @@ public interface DslPackage extends EPackage {
 	int BINDING_MODEL = 0;
 
 	/**
+	 * The feature id for the '<em><b>Target Binding</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_MODEL__TARGET_BINDING = 0;
+
+	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__BINDINGS = 0;
+	int BINDING_MODEL__BINDINGS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Helpers</b></em>' containment reference list.
@@ -87,7 +96,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__HELPERS = 1;
+	int BINDING_MODEL__HELPERS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Concept Metaclasses</b></em>' containment reference list.
@@ -96,7 +105,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__CONCEPT_METACLASSES = 2;
+	int BINDING_MODEL__CONCEPT_METACLASSES = 3;
 
 	/**
 	 * The feature id for the '<em><b>Concrete Metaclasses</b></em>' containment reference list.
@@ -105,7 +114,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__CONCRETE_METACLASSES = 3;
+	int BINDING_MODEL__CONCRETE_METACLASSES = 4;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Metaclasses</b></em>' containment reference list.
@@ -114,7 +123,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__VIRTUAL_METACLASSES = 4;
+	int BINDING_MODEL__VIRTUAL_METACLASSES = 5;
 
 	/**
 	 * The feature id for the '<em><b>Bound Concept</b></em>' containment reference.
@@ -123,7 +132,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__BOUND_CONCEPT = 5;
+	int BINDING_MODEL__BOUND_CONCEPT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Bound Metamodel</b></em>' containment reference.
@@ -132,7 +141,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__BOUND_METAMODEL = 6;
+	int BINDING_MODEL__BOUND_METAMODEL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -141,7 +150,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__NAME = 7;
+	int BINDING_MODEL__NAME = 8;
 
 	/**
 	 * The feature id for the '<em><b>Options</b></em>' containment reference.
@@ -150,7 +159,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__OPTIONS = 8;
+	int BINDING_MODEL__OPTIONS = 9;
 
 	/**
 	 * The number of structural features of the '<em>Binding Model</em>' class.
@@ -159,7 +168,7 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL_FEATURE_COUNT = 9;
+	int BINDING_MODEL_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.BindingOptionsImpl <em>Binding Options</em>}' class.
@@ -281,13 +290,22 @@ public interface DslPackage extends EPackage {
 	int METAMODEL_DECLARATION__METAMODEL_URI = SimpleoclPackage.OCL_METAMODEL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METAMODEL_DECLARATION__RESOURCE = SimpleoclPackage.OCL_METAMODEL_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Metamodel Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_DECLARATION_FEATURE_COUNT = SimpleoclPackage.OCL_METAMODEL_FEATURE_COUNT + 1;
+	int METAMODEL_DECLARATION_FEATURE_COUNT = SimpleoclPackage.OCL_METAMODEL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link gbind.dsl.impl.MetaclassImpl <em>Metaclass</em>}' class.
@@ -1636,6 +1654,17 @@ public interface DslPackage extends EPackage {
 	EClass getBindingModel();
 
 	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.BindingModel#isTargetBinding <em>Target Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Binding</em>'.
+	 * @see gbind.dsl.BindingModel#isTargetBinding()
+	 * @see #getBindingModel()
+	 * @generated
+	 */
+	EAttribute getBindingModel_TargetBinding();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link gbind.dsl.BindingModel#getBindings <em>Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1775,6 +1804,17 @@ public interface DslPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMetamodelDeclaration_MetamodelURI();
+
+	/**
+	 * Returns the meta object for the attribute '{@link gbind.dsl.MetamodelDeclaration#getResource <em>Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resource</em>'.
+	 * @see gbind.dsl.MetamodelDeclaration#getResource()
+	 * @see #getMetamodelDeclaration()
+	 * @generated
+	 */
+	EAttribute getMetamodelDeclaration_Resource();
 
 	/**
 	 * Returns the meta object for class '{@link gbind.dsl.Metaclass <em>Metaclass</em>}'.
@@ -2437,6 +2477,14 @@ public interface DslPackage extends EPackage {
 		EClass BINDING_MODEL = eINSTANCE.getBindingModel();
 
 		/**
+		 * The meta object literal for the '<em><b>Target Binding</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BINDING_MODEL__TARGET_BINDING = eINSTANCE.getBindingModel_TargetBinding();
+
+		/**
 		 * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2543,6 +2591,14 @@ public interface DslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute METAMODEL_DECLARATION__METAMODEL_URI = eINSTANCE.getMetamodelDeclaration_MetamodelURI();
+
+		/**
+		 * The meta object literal for the '<em><b>Resource</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METAMODEL_DECLARATION__RESOURCE = eINSTANCE.getMetamodelDeclaration_Resource();
 
 		/**
 		 * The meta object literal for the '{@link gbind.dsl.impl.MetaclassImpl <em>Metaclass</em>}' class.

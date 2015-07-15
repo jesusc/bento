@@ -1,11 +1,11 @@
-composite component java_source2table {
-        uses "platform:/resource/bento.glib.graph2table/META-INF/graph2table.bento"  
-        binding bindJAVA = "platform:/resource/bento.glib.graph2table/test/java_source/java_source2graph.gbind"
+composite component tmodel2table.javasource2table {
+        uses "platform:/resource/bento.trafolib.tmodel2table/META-INF/tmodel2table.bento"  
+        binding bindJAVA = "platform:/resource/bento.trafolib.tmodel2table//test/java_source/java_source2graph.gbind"
                         
-        source concept JAVA : "platform:/resource/bento.glib.graph2table/test/java_source/JavaSource.ecore"
-        target concept TABLE : "platform:/resource/bento.glib.graph2table/metamodels/Table.ecore"
+        source concept JAVA : "platform:/resource/bento.trafolib.tmodel2table/test/java_source/JavaSource.ecore"
+        target concept TABLE : "platform:/resource/bento.trafolib.tmodel2table/metamodels/Table.ecore"
         source model in  : JAVA  = "platform:/resource/bento.glib.graph2table/test/java_source/javasource-example.xmi" 
         target model out : TABLE = "platform:/resource/bento.glib.graph2table/tmp_"
         
-        compose apply graph2table(bindJAVA(in)) -> (out)
+        compose apply tmodel2table(bindJAVA(in)) -> (out)
 }

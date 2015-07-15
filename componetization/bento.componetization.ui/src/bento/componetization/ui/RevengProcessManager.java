@@ -24,14 +24,14 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
 
+import anatlyzer.atl.analyser.AnalysisResult;
 import anatlyzer.atl.analyser.namespaces.MetamodelNamespace;
 import anatlyzer.atl.editor.builder.AnalyserExecutor;
-import anatlyzer.atl.editor.builder.AnalyserExecutor.CannotLoadMetamodel;
 import anatlyzer.atl.index.AnalysisIndex;
-import anatlyzer.atl.index.AnalysisResult;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLSerializer;
 import anatlyzer.atl.util.ATLUtils;
+import anatlyzer.atl.util.AnalyserUtils.CannotLoadMetamodel;
 import anatlyzer.ui.util.AtlEngineUtils;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;

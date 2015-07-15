@@ -3,8 +3,11 @@ package bento.adapter.atl;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.ecore.resource.Resource;
 
+import anatlyzer.atl.editor.builder.AnalyserExecutor;
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atl.util.ATLUtils;
+import anatlyzer.atl.util.AnalyserUtils.CannotLoadMetamodel;
 import bento.adapter.atl.visitors.AdaptCode;
 import bento.adapter.atl.visitors.AdaptModelElements;
 import bento.adapter.atl.visitors.AdaptModuleElements;
@@ -13,10 +16,6 @@ import bento.adapter.atl.visitors.AdaptWhenClause;
 import bento.adapter.atl.visitors.CopyHelpers;
 import bento.adapter.atl.visitors.CreateAdapters;
 import bento.binding.utils.BindingModel;
-import anatlyzer.atl.editor.builder.AnalyserExecutor;
-import anatlyzer.atl.editor.builder.AnalyserExecutor.CannotLoadMetamodel;
-import anatlyzer.atl.model.ATLModel;
-import anatlyzer.atl.util.ATLUtils;
 
 
 /**

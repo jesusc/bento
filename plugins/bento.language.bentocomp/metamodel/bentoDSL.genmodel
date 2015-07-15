@@ -139,6 +139,7 @@
       <genClasses ecoreClass="bentoDSL.ecore#//dsl/DefinitionRoot">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//dsl/DefinitionRoot/component"/>
       </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//dsl/ComponentExecution"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Technologies" basePackage="bento.language.bentocomp"
         disposableProviderFactory="true" ecorePackage="bentoDSL.ecore#//technologies">

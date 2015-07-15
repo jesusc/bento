@@ -178,10 +178,10 @@ public class TransformationConfigurationPage extends FormPage {
 		txtComponentFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		managedForm.getToolkit().adapt(txtComponentFile, true, true);
 		
-		Button btnBrowseComponentFile = new Button(composite_3, SWT.NONE);
-		managedForm.getToolkit().adapt(btnBrowseComponentFile, true, true);
-		btnBrowseComponentFile.setText("Browse...");
-
+//		Button btnBrowseComponentFile = new Button(composite_3, SWT.NONE);
+//		managedForm.getToolkit().adapt(btnBrowseComponentFile, true, true);
+//		btnBrowseComponentFile.setText("Browse...");
+				
 		Composite compAtlFile = new Composite(composite, SWT.NONE);
 		compAtlFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		managedForm.getToolkit().adapt(compAtlFile);

@@ -175,12 +175,13 @@ public class RemoteRepositoryAccess {
 			System.out.println(x.getStatus());
 			
 		} catch (IOException | ZipException | UnirestException e) {
+			// showError(e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
 		return true;
 	}
-	
+
 	private static String asJson(ComponentModel c) {
 		String tagList = c.getComponent().getTags().stream().
 				map(t -> q(t.getValue()) ).

@@ -373,6 +373,9 @@
   </eSubpackages>
   <eSubpackages name="dsl" nsURI="http://http://genericity/language/gbind/dsl" nsPrefix="bindingModel">
     <eClassifiers xsi:type="ecore:EClass" name="BindingModel">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetBinding" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
           eType="#//dsl/ConceptBinding" containment="true" eOpposite="#//dsl/ConceptBinding/model_"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="helpers" upperBound="-1"
@@ -398,6 +401,8 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MetamodelDeclaration" eSuperTypes="#//simpleocl/OclMetamodel">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResource"
+          transient="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Metaclass" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

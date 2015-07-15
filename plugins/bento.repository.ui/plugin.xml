@@ -9,8 +9,8 @@
             id="bento.repository.importation.ui.importWizards.sampleCategory">
       </category>
       <wizard
-            name="Bento Component Import"
-            icon="icons/sample.gif"
+            name="Import component"
+            icon="icons/bento_import_component.png"
             category="bento.repository.importation.ui.importWizards.sampleCategory"
             class="bento.repository.importation.ui.importWizards.ImportFromRepositoryWizard"
             id="bento.repository.importation.ui.importWizards.ImportFromRepositoryWizard">
@@ -29,7 +29,8 @@
             category="bento.repository.export.ui.exportWizards"
             class="bento.repository.export.ui.UploadWizard"
             id="bento.repository.ui.upload"
-            name="Bento upload component">
+            icon="icons/bento_export_component.png"
+            name="Export component">
       </wizard>
    </extension>
    <extension

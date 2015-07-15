@@ -37,7 +37,7 @@ public class ApplyComponent  implements IObjectActionDelegate {
 		ComponentModel m = ComponentUtils.readComponentDescription(f);
 		
 		try {
-			new ComponentInterpreter(m, new LocalRepository()).execute();
+			new ComponentInterpreter(m, new LocalRepository()).apply();
 		} catch (MyComponentError e) {
 			MessageDialog.openError(shell, "Component execution", e.getMessage());;
 		} catch (Exception e2) { // Capturing this because silent errors appears when trying to load unexisting files...

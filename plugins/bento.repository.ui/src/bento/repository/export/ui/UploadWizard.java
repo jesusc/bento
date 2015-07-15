@@ -2,6 +2,7 @@ package bento.repository.export.ui;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IExportWizard;
@@ -43,7 +44,11 @@ public class UploadWizard extends Wizard implements IExportWizard {
 		IProject project = f.getProject();
 		
 		
-		RemoteRepositoryAccess.uploadComponent(url, c, project);
+		boolean b = RemoteRepositoryAccess.uploadComponent(url, c, project);
+		if ( ! b ) {
+			MessageDialog.openError(getShell(), "Error", "Cannot upload component");
+		}
+		
 		
 		
 		// Create ComponentUtiles in .api in order to have things like "openComponentFile";

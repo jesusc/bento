@@ -211,6 +211,26 @@ package dsl {
 	class DefinitionRoot {
 		val core.Component[1] component;
 	}
+	
+	class ComponentExecution extends core.CompositeComponent {
+		
+	}
+	
+	/*
+	class ComponentExecution extends core.Component {
+	   ref core.Component[1] use;	
+	   val ConcreteModel[*] models;
+	   
+	   ref ConcreteModel[*] inputs;
+	   ref ConcreteModel[*] outputs;
+	}
+	   
+	
+	class ConcreteModel extends core.NamedElement {
+		attr String fileName;
+	}
+	*/
+	
 }
 
 @namespace(uri="http://http://www.miso.es/bento/bentocomp/technologies", prefix="bentocomp_technologies")

@@ -2,6 +2,10 @@
  */
 package bento.language.bentocomp.dsl.util;
 
+import bento.language.bentocomp.core.Component;
+import bento.language.bentocomp.core.CompositeComponent;
+import bento.language.bentocomp.core.NamedElement;
+import bento.language.bentocomp.core.Tagged;
 import bento.language.bentocomp.dsl.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -72,6 +76,26 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 				return createDefinitionRootAdapter();
 			}
 			@Override
+			public Adapter caseComponentExecution(ComponentExecution object) {
+				return createComponentExecutionAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseTagged(Tagged object) {
+				return createTaggedAdapter();
+			}
+			@Override
+			public Adapter caseComponent(Component object) {
+				return createComponentAdapter();
+			}
+			@Override
+			public Adapter caseCompositeComponent(CompositeComponent object) {
+				return createCompositeComponentAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -102,6 +126,76 @@ public class DslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinitionRootAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.dsl.ComponentExecution <em>Component Execution</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.dsl.ComponentExecution
+	 * @generated
+	 */
+	public Adapter createComponentExecutionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.core.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.Tagged <em>Tagged</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.core.Tagged
+	 * @generated
+	 */
+	public Adapter createTaggedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.Component <em>Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.core.Component
+	 * @generated
+	 */
+	public Adapter createComponentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.CompositeComponent <em>Composite Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.core.CompositeComponent
+	 * @generated
+	 */
+	public Adapter createCompositeComponentAdapter() {
 		return null;
 	}
 

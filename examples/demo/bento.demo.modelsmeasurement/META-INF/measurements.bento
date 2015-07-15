@@ -8,8 +8,8 @@ composite component measurements {
 	source concept ECORE    : "http://www.eclipse.org/emf/2002/Ecore"
 	target concept Table : "bento:/bento.trafolib.tmodel2table/Table.ecore"
 	
-	source model in  : ECORE = "in.xmi" 
-	target model out : Table = "out.xmi"
+	source model in  : ECORE 
+	target model out : Table
 	
 	compose seq 
 		apply oo2measure(bindECORE(in)) -> (measure)

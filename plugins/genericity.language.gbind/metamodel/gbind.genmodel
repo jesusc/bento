@@ -270,6 +270,7 @@
     <nestedGenPackages prefix="Dsl" basePackage="gbind" disposableProviderFactory="true"
         ecorePackage="gbind.ecore#//dsl">
       <genClasses ecoreClass="gbind.ecore#//dsl/BindingModel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/targetBinding"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/bindings"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/helpers"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/conceptMetaclasses"/>
@@ -285,6 +286,7 @@
       </genClasses>
       <genClasses ecoreClass="gbind.ecore#//dsl/MetamodelDeclaration">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/MetamodelDeclaration/metamodelURI"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/MetamodelDeclaration/resource"/>
       </genClasses>
       <genClasses image="false" ecoreClass="gbind.ecore#//dsl/Metaclass">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/Metaclass/name"/>

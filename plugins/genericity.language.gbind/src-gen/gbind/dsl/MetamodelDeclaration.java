@@ -7,6 +7,7 @@
 package gbind.dsl;
 
 import gbind.simpleocl.OclMetamodel;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ import gbind.simpleocl.OclMetamodel;
  * The following features are supported:
  * <ul>
  *   <li>{@link gbind.dsl.MetamodelDeclaration#getMetamodelURI <em>Metamodel URI</em>}</li>
+ *   <li>{@link gbind.dsl.MetamodelDeclaration#getResource <em>Resource</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +52,31 @@ public interface MetamodelDeclaration extends OclMetamodel {
 	 * @generated
 	 */
 	void setMetamodelURI(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resource</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resource</em>' attribute.
+	 * @see #setResource(Resource)
+	 * @see gbind.dsl.DslPackage#getMetamodelDeclaration_Resource()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Resource getResource();
+
+	/**
+	 * Sets the value of the '{@link gbind.dsl.MetamodelDeclaration#getResource <em>Resource</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resource</em>' attribute.
+	 * @see #getResource()
+	 * @generated
+	 */
+	void setResource(Resource value);
 
 } // MetamodelDeclaration

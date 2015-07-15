@@ -12,6 +12,12 @@ OPTIONS {
 //	resourceUIPluginID = "genericity.language.gbind.resource.ui";
 	overrideReferenceResolvers="false";
 	overrideChangeReferenceQuickFix="false";
+	
+	
+	// These two are needed because there are additional dependencies in ".resource.bento" and
+	// the load_options extension point is implemented.
+	overridePluginXML="false";
+	overrideManifest="false";
 
 	usePredefinedTokens = "false";
 	disableTokenSorting = "true";
@@ -45,11 +51,11 @@ RULES {
 	Core.TransformationComponent ::= 
 		"transformation" "component" name[QNAME] "{"
 			(
-			("source" source)
-			("target" target)
-			("source" sourceModels)
-			("target" targetModels)
-			)+
+			("source" source)+
+			("target" target)+
+			("source" sourceModels)+
+			("target" targetModels)+
+			)
 			
 			("variants" (formalParameters)+ )?
 			"definition" template
@@ -74,19 +80,38 @@ RULES {
     Variants.XorFeature ::= "+" name[] "xor" ;
     // End-of variants
 
-	// Begin-of composite components
-	
-	Core.CompositeComponent ::= 
-		"composite" "component" name[] "{"
+	// Begin-of component execution
+	Dsl.ComponentExecution ::= 
+		"component" "execution" name[] "{"
 			("uses" uses['"', '"'])+ 
 			(bindings)*		
 		
 			(
-			("source" source)
-			("target" target)
-			("source" sourceModels)
-			("target" targetModels)
-			)+
+			("source" source)+
+			("target" target)+
+			("source" sourceModels)+
+			("target" targetModels)+
+			)
+
+			composition
+		"}";
+
+		
+	// End-of component execution
+
+	// Begin-of composite components
+	
+	Core.CompositeComponent ::= 
+		"composite" "component" name[QNAME] "{"
+			("uses" uses['"', '"'])+ 
+			(bindings)*		
+		
+			(
+			("source" source)+
+			("target" target)+
+			("source" sourceModels)+
+			("target" targetModels)+
+			)
 
 			("variants" (formalParameters)+ )?
 			

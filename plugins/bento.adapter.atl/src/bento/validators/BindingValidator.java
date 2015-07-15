@@ -1,8 +1,12 @@
 package bento.validators;
 
+import gbind.dsl.BindingModel;
+import gbind.dsl.ClassBinding;
+import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.HelperParameter;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.MetamodelDeclaration;
+import gbind.dsl.VirtualClassBinding;
 import gbind.simpleocl.AddOpCallExp;
 import gbind.simpleocl.BooleanExp;
 import gbind.simpleocl.BooleanType;
@@ -39,10 +43,15 @@ import gbind.simpleocl.StringType;
 import gbind.simpleocl.TupleExp;
 import gbind.simpleocl.VariableExp;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import anatlyzer.atl.model.ATLModel;
@@ -66,20 +75,82 @@ import bento.adapter.gbind.visitors.GBindVisitor;
 
 
 /**
- * This visitor transforms an OCL expression in the GBind format to the
- * ATL format. 
+ * Validates a binding against the source and target meta-models.
+ * 
+ * Limitation: it should also validate the binding agains the template
  * 
  * @author jesus
  *
  */
 public class BindingValidator extends GBindVisitor {
 
-	private ATLModel atlModel;
-	private String currentMetamodel;
+	private BindingModel model;
+	private HashMap<String, EClass> classes;
+	private List<EClass> toCover;
 
-	public BindingValidator(ATLModel atlModel, String currentMetamodel) {
-		this.atlModel = atlModel;
-		this.currentMetamodel = currentMetamodel;
+	private List<BindingValidationProblem> problems;
+	
+	public BindingValidator(BindingModel model) {
+		// this.atlModel = atlModel;
+		// this.currentMetamodel = currentMetamodel;
+		this.model = model;
+
+		bento.binding.utils.BindingModel util = new bento.binding.utils.BindingModel(model.eResource());
+
+		classes = util.getConceptClasses();
+		toCover = classes.values().stream().filter(c -> ! c.isAbstract()).collect(Collectors.toList());
 	}
 	
+	public List<BindingValidationProblem> perform() {
+		startVisiting(model);
+
+		problems = new ArrayList<BindingValidationProblem>();
+		for (EClass eClass : toCover) {
+			problems.add(new MissingBinding("Missing binding for " + eClass.getName(), eClass));
+		}		
+		
+		return problems;
+	}
+	
+	public List<BindingValidationProblem> getProblems() {
+		return problems;
+	}
+	
+	@Override
+	public void inClassBinding(ClassBinding self) {
+		processClass(self.getConcept());
+	}
+
+	private void processClass(ConceptMetaclass conceptMetaclass) {
+		EClass c = classes.get(conceptMetaclass.getName());
+		EClass remove = null;
+		for (EClass eClass : toCover) {
+			if ( c == eClass || c.isSuperTypeOf(eClass) ) {
+				remove = eClass;
+			}
+		}
+		
+		if ( remove != null ) {
+			toCover.remove(remove);
+		}
+	}
+	
+	@Override
+	public void inVirtualClassBinding(VirtualClassBinding self) {
+		processClass(self.getConcept());
+	}
+	
+	public static class MissingBinding extends BindingValidationProblem {
+		private EClass klass;
+
+		public MissingBinding(String message, EClass klass) {
+			super(message);
+			this.klass = klass;
+		}
+
+		public EClass getKlass() {
+			return klass;
+		}
+	}
+
 }

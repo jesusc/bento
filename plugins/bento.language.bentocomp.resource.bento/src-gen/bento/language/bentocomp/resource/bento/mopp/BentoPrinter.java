@@ -80,6 +80,10 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 			print_bento_language_bentocomp_variants_XorFeature((bento.language.bentocomp.variants.XorFeature) element, globaltab, out);
 			return;
 		}
+		if (element instanceof bento.language.bentocomp.dsl.ComponentExecution) {
+			print_bento_language_bentocomp_dsl_ComponentExecution((bento.language.bentocomp.dsl.ComponentExecution) element, globaltab, out);
+			return;
+		}
 		if (element instanceof bento.language.bentocomp.core.CompositeComponent) {
 			print_bento_language_bentocomp_core_CompositeComponent((bento.language.bentocomp.core.CompositeComponent) element, globaltab, out);
 			return;
@@ -244,7 +248,6 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		printCountingMap.put("constraints", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
-		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
@@ -271,22 +274,6 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		out.print(" ");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_TransformationComponent_0(element, localtab, out, printCountingMap);
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-			print_bento_language_bentocomp_core_TransformationComponent_0(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -358,14 +345,82 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 	
 	public void print_bento_language_bentocomp_core_TransformationComponent_0(bento.language.bentocomp.core.TransformationComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_TransformationComponent_0_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_TransformationComponent_0_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_TransformationComponent_0_1(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_TransformationComponent_0_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_TransformationComponent_0_2(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_TransformationComponent_0_2(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_TransformationComponent_0_3(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_TransformationComponent_0_3(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 	}
 	
 	public void print_bento_language_bentocomp_core_TransformationComponent_0_0(bento.language.bentocomp.core.TransformationComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
@@ -761,12 +816,14 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.CONCEPT__NAME));
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.CONCEPT__URI));
 		printCountingMap.put("uri", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.CONCEPT__RESOURCE));
+		printCountingMap.put("resource", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.CONCEPT__CONSTRAINTS));
 		printCountingMap.put("constraints", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.CONCEPT__TAGS));
@@ -1094,6 +1151,347 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 	}
 	
 	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(15);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__TAGS));
+		printCountingMap.put("tags", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__OWNER));
+		printCountingMap.put("owner", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__CONTRIBUTORS));
+		printCountingMap.put("contributors", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__VERSION));
+		printCountingMap.put("version", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__STATUS));
+		printCountingMap.put("status", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__SOURCE));
+		printCountingMap.put("source", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__TARGET));
+		printCountingMap.put("target", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__SOURCE_MODELS));
+		printCountingMap.put("sourceModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__TARGET_MODELS));
+		printCountingMap.put("targetModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__GENERATE_MODELS));
+		printCountingMap.put("generateModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__FORMAL_PARAMETERS));
+		printCountingMap.put("formalParameters", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__USES));
+		printCountingMap.put("uses", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__COMPOSITION));
+		printCountingMap.put("composition", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__BINDINGS));
+		printCountingMap.put("bindings", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		// print collected hidden tokens
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("component");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("execution");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__NAME));
+			if (o != null) {
+				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("name", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("{");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_dsl_ComponentExecution_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_dsl_ComponentExecution_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_dsl_ComponentExecution_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_dsl_ComponentExecution_2(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("composition");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__COMPOSITION));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("composition", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("}");
+		out.print(" ");
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_0(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("uses");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("uses");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__USES));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getCompositeComponentUsesReferenceResolver().deResolve((bento.language.bentocomp.core.Component) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__USES)), element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__USES), element));
+				out.print(" ");
+			}
+			printCountingMap.put("uses", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_1(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("bindings");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__BINDINGS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("bindings", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_2(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_dsl_ComponentExecution_2_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_dsl_ComponentExecution_2_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_dsl_ComponentExecution_2_1(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_dsl_ComponentExecution_2_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_dsl_ComponentExecution_2_2(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_dsl_ComponentExecution_2_2(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_dsl_ComponentExecution_2_3(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_dsl_ComponentExecution_2_3(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_2_0(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("source");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("source");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__SOURCE));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("source", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_2_1(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("target");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("target");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__TARGET));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("target", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_2_2(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("source");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("sourceModels");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__SOURCE_MODELS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("sourceModels", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_dsl_ComponentExecution_2_3(bento.language.bentocomp.dsl.ComponentExecution element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("target");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("targetModels");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.dsl.DslPackage.COMPONENT_EXECUTION__TARGET_MODELS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("targetModels", count - 1);
+		}
+	}
+	
+	
 	public void print_bento_language_bentocomp_core_CompositeComponent(bento.language.bentocomp.core.CompositeComponent element, String outertab, java.io.PrintWriter out) {
 		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
@@ -1145,12 +1543,12 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		// DEFINITION PART BEGINS (CsString)
 		out.print("component");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
 		count = printCountingMap.get("name");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.COMPOSITE_COMPONENT__NAME));
 			if (o != null) {
-				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QNAME");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.COMPOSITE_COMPONENT__NAME), element));
 				out.print(" ");
@@ -1197,22 +1595,6 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_CompositeComponent_2(element, localtab, out, printCountingMap);
-		iterate = true;
-		while (iterate) {
-			sWriter = new java.io.StringWriter();
-			out1 = new java.io.PrintWriter(sWriter);
-			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-			print_bento_language_bentocomp_core_CompositeComponent_2(element, localtab, out1, printCountingMap1);
-			if (printCountingMap.equals(printCountingMap1)) {
-				iterate = false;
-				out1.close();
-			} else {
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -1302,14 +1684,82 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 	
 	public void print_bento_language_bentocomp_core_CompositeComponent_2(bento.language.bentocomp.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_CompositeComponent_2_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_CompositeComponent_2_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_CompositeComponent_2_1(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_CompositeComponent_2_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_CompositeComponent_2_2(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_CompositeComponent_2_2(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		print_bento_language_bentocomp_core_CompositeComponent_2_3(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_CompositeComponent_2_3(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
 	}
 	
 	public void print_bento_language_bentocomp_core_CompositeComponent_2_0(bento.language.bentocomp.core.CompositeComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {

@@ -230,7 +230,7 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 			newParams[i + 1] = params[i];
 		newParams[0] = p;
 		
-		StaticHelper helper = AdaptationUtils.createStaticOperationHelper(featureName, atlBody, returnType, newParams);
+		StaticHelper helper = AdaptationUtils.createStaticOperationHelper(getVirtualClassHelperName(featureName, metaclass), atlBody, returnType, newParams);
 				
 		// Replace every reference to self, to a reference to the parameter
 		TreeIterator<EObject> it = helper.eAllContents();
@@ -244,6 +244,10 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 		return helper;
 	}
 	
+	private String getVirtualClassHelperName(String featureName, gbind.dsl.Metaclass metaclass) {
+		return metaclass.getName() + "_" + featureName;
+	}
+
 	private OclType createTupleTypeForVirtualClass(VirtualMetaclass vc) {
 		TupleType t = OCLFactory.eINSTANCE.createTupleType();
 		for (VirtualReference ref : vc.getReferences()) {
@@ -440,7 +444,7 @@ public class AdaptVirtualClasses extends BaseAdapterVisitor {
 				// * self it will be transformed into an static operation call
 				
 				OperationCallExp op = OCLFactory.eINSTANCE.createOperationCallExp();
-				op.setOperationName(name);
+				op.setOperationName(getVirtualClassHelperName(name, vcb.getConcept()));
 				
 				op.getArguments().add(self.getSource());
 				if ( arguments != null )

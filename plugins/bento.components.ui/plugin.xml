@@ -3,6 +3,50 @@
 <plugin>
 
    <extension
+         id="bento.components.ui.bentoNature"
+         name="Bento Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="bento.components.ui.nature.BentoNature">
+         </run>
+      </runtime>
+      <!--
+      <builder id="anatlyzer.atl.editor.anatlyzerATLBuilder"></builder>
+      -->
+   </extension>
+
+   
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="bento.contribution1">
+         <menu
+               label="Bento"
+               path="additions"
+               id="genericity.components.ui.GComponentsMenu">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+
+         <action
+               label="Add/Remove Bento Nature"
+				icon="icons/bento_16x16.png"
+               class="bento.components.ui.nature.ToggleNatureAction"
+               menubarPath="genericity.components.ui.GComponentsMenu/group1"
+               enablesFor="+"
+               id="abento.components.ui.nature.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   
+   
+
+   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
@@ -18,6 +62,8 @@
                   name="genericity.gcomponents.ui.ExporterGroup">
             </groupMarker>
          </menu>
+
+         <!--
          <action
                label="gBind to XMI"
                class="genericity.components.ui.popup.actions.ExportGBindXMI"
@@ -39,11 +85,20 @@
                label="XMI to ATL"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
+         -->
          <action
                class="genericity.components.ui.popup.actions.ApplyComponent"
                enablesFor="1"
                id="genericity.components.ui.ApplyComponent"
                label="Apply component"
+               menubarPath="genericity.components.ui.GComponentsMenu/group1">
+         </action>
+
+         <action
+               class="genericity.components.ui.popup.actions.ExecuteComponent"
+               enablesFor="1"
+               id="genericity.components.ui.ExecuteComponent"
+               label="Execute"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
          
@@ -55,14 +110,7 @@
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
 
-         <action
-               class="genericity.components.ui.popup.actions.UploadToRemoteRepo"
-               enablesFor="1"
-               id="genericity.components.ui.UploadToRemoteRepo"
-               label="Install to local repository"
-               menubarPath="genericity.components.ui.GComponentsMenu/group1">
-         </action>
-                  
+		<!--                  
          <action
                class="genericity.components.ui.popup.actions.ExportGComponentXMI"
                enablesFor="1"
@@ -70,7 +118,9 @@
                label="gComponent to XMI"
                menubarPath="genericity.components.ui.GComponentsMenu/genericity.gcomponents.ui.ExporterGroup">
          </action>
+         -->
       </objectContribution>
    </extension>
+
 
 </plugin>

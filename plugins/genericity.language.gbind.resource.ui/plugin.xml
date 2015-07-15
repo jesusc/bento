@@ -116,4 +116,36 @@
 		</debugModelPresentation>
 	</extension>
 	
+	<!-- jesusc: context menu -->
+	   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.ui.IEditorInput"
+            nameFilter="*.*"
+            id="BentoPopupMenu.contribution1">
+         <menu
+               label="Bento"
+               path="additions"
+               id="BentoPopupMenu.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Validate binding"
+               class="gbind.resource.gbind.ui.custom.ValidateBinding"
+               menubarPath="BentoPopupMenu.menu1/group1"
+               enablesFor="1"
+               id="BentoPopupMenu.validateBinding">
+         </action>
+         <action
+               label="Initialize binding"
+               class="gbind.resource.gbind.ui.custom.InitBinding"
+               menubarPath="BentoPopupMenu.menu1/group1"
+               enablesFor="1"
+               id="BentoPopupMenu.initBinding">
+         </action>
+      </objectContribution>
+   </extension>
+	
 </plugin>

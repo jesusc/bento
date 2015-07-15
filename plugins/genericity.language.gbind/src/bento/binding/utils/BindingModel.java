@@ -3,17 +3,20 @@ package bento.binding.utils;
 import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.ClassBinding;
 import gbind.dsl.LocalHelper;
+import gbind.dsl.MetamodelDeclaration;
 import gbind.dsl.OclFeatureBinding;
 import gbind.dsl.RenamingFeatureBinding;
 import gbind.dsl.VirtualClassBinding;
 import gbind.dsl.VirtualMetaclass;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -52,6 +55,9 @@ public class BindingModel {
 		}
 	}
 
+	public Resource getResource() {
+		return resource;
+	}
 
 	public gbind.dsl.BindingModel getRoot() {
 		return ( gbind.dsl.BindingModel) resource.getContents().get(0);
@@ -70,7 +76,10 @@ public class BindingModel {
 	 * @return 
 	 */
 	public Optional<ClassBinding> findClassBindingForConcept(String className) {
-		return classBindings.stream().filter(cb -> cb.getConcept().getName().equals(className)).findFirst();
+		return classBindings.stream().filter(cb -> {
+			// System.out.println(cb.getConcept().getName());
+			return cb.getConcept().getName().equals(className);
+		}).findFirst();
 	}
 
 
@@ -120,7 +129,32 @@ public class BindingModel {
 		return virtualClassBindings.size() > 0;
 	}
 
+	
+	public HashMap<String, EClass> getConceptClasses() {
+		return computeClasses(getRoot().getBoundConcept());
+	}
 
+	public HashMap<String, EClass> getConcreteClasses() {
+		return computeClasses(getRoot().getBoundMetamodel());
+	}
+
+	private HashMap<String, EClass> computeClasses(MetamodelDeclaration m) {
+		HashMap<String, EClass> result = new HashMap<String, EClass>();
+		if (m == null)
+			return result;
+
+		TreeIterator<EObject> it = m.getResource().getAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (obj instanceof EClass) {
+				result.put(((EClass) obj).getName(), (EClass) obj);
+			}
+		}
+		return result;
+	}
+
+
+	
 
 
 }

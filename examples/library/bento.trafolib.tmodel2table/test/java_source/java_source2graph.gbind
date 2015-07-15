@@ -3,17 +3,16 @@
 -- (with a generic syntax) to perform "to-table" transformations via simple mappings.
 --
 binding measure2graph {  
-	concept   GRAPH : "platform:/resource/bento.library.graph2table/metamodels/Graph.ecore"
-	metamodel JAVA  : "platform:/resource/bento.library.graph2table/test/java_source/JavaSource.ecore"
+	concept   GRAPH : "platform:/resource/bento.trafolib.tmodel2table/metamodels/TableModel.ecore"
+	metamodel JAVA  : "platform:/resource/bento.trafolib.tmodel2table//test/java_source/JavaSource.ecore"
 
-    class Graph        to JavaSource
+    class TableModel        to JavaSource
 
 	class RowHeaderNode    to MethodDefinition
 	class ColumnHeaderNode to MethodDefinition
  	
- 	-- feature Graph.nodes        = self.XX
- 	feature Graph.rows         = self.allMethodDefs
- 	feature Graph.cols         = self.allMethodDefs
+ 	feature TableModel.rows         = self.allMethodDefs
+ 	feature TableModel.cols         = self.allMethodDefs
        
 	feature RowHeaderNode.title    = self."class".name + '.' + self.name
 	feature ColumnHeaderNode.title = self."class".name + '.' + self.name

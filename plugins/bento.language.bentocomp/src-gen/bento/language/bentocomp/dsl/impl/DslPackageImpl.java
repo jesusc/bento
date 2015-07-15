@@ -2,35 +2,25 @@
  */
 package bento.language.bentocomp.dsl.impl;
 
-import bento.language.bentocomp.BentocompPackage;
-
-import bento.language.bentocomp.core.CorePackage;
-
-import bento.language.bentocomp.core.impl.CorePackageImpl;
-
-import bento.language.bentocomp.dsl.DefinitionRoot;
-import bento.language.bentocomp.dsl.DslFactory;
-import bento.language.bentocomp.dsl.DslPackage;
-
-import bento.language.bentocomp.flowcontrol.FlowcontrolPackage;
-
-import bento.language.bentocomp.flowcontrol.impl.FlowcontrolPackageImpl;
-
-import bento.language.bentocomp.impl.BentocompPackageImpl;
-
-import bento.language.bentocomp.technologies.TechnologiesPackage;
-
-import bento.language.bentocomp.technologies.impl.TechnologiesPackageImpl;
-
-import bento.language.bentocomp.variants.VariantsPackage;
-
-import bento.language.bentocomp.variants.impl.VariantsPackageImpl;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import bento.language.bentocomp.BentocompPackage;
+import bento.language.bentocomp.core.CorePackage;
+import bento.language.bentocomp.core.impl.CorePackageImpl;
+import bento.language.bentocomp.dsl.ComponentExecution;
+import bento.language.bentocomp.dsl.DefinitionRoot;
+import bento.language.bentocomp.dsl.DslFactory;
+import bento.language.bentocomp.dsl.DslPackage;
+import bento.language.bentocomp.flowcontrol.FlowcontrolPackage;
+import bento.language.bentocomp.flowcontrol.impl.FlowcontrolPackageImpl;
+import bento.language.bentocomp.impl.BentocompPackageImpl;
+import bento.language.bentocomp.technologies.TechnologiesPackage;
+import bento.language.bentocomp.technologies.impl.TechnologiesPackageImpl;
+import bento.language.bentocomp.variants.VariantsPackage;
+import bento.language.bentocomp.variants.impl.VariantsPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,6 +35,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * @generated
 	 */
 	private EClass definitionRootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass componentExecutionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -147,6 +144,15 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getComponentExecution() {
+		return componentExecutionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DslFactory getDslFactory() {
 		return (DslFactory)getEFactoryInstance();
 	}
@@ -172,6 +178,8 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		// Create classes and their features
 		definitionRootEClass = createEClass(DEFINITION_ROOT);
 		createEReference(definitionRootEClass, DEFINITION_ROOT__COMPONENT);
+
+		componentExecutionEClass = createEClass(COMPONENT_EXECUTION);
 	}
 
 	/**
@@ -205,10 +213,13 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		componentExecutionEClass.getESuperTypes().add(theCorePackage.getCompositeComponent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(definitionRootEClass, DefinitionRoot.class, "DefinitionRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinitionRoot_Component(), theCorePackage.getComponent(), null, "component", null, 1, 1, DefinitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(componentExecutionEClass, ComponentExecution.class, "ComponentExecution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //DslPackageImpl

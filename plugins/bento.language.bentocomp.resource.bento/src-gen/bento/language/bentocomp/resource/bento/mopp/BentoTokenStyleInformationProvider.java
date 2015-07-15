@@ -50,10 +50,13 @@ public class BentoTokenStyleInformationProvider {
 		if ("xor".equals(tokenName)) {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
-		if ("composite".equals(tokenName)) {
+		if ("execution".equals(tokenName)) {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("uses".equals(tokenName)) {
+			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("composite".equals(tokenName)) {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("binding".equals(tokenName)) {

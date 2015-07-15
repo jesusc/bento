@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link gbind.dsl.BindingModel#isTargetBinding <em>Target Binding</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getBindings <em>Bindings</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getHelpers <em>Helpers</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getConceptMetaclasses <em>Concept Metaclasses</em>}</li>
@@ -35,6 +36,33 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface BindingModel extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Target Binding</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target Binding</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target Binding</em>' attribute.
+	 * @see #setTargetBinding(boolean)
+	 * @see gbind.dsl.DslPackage#getBindingModel_TargetBinding()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isTargetBinding();
+
+	/**
+	 * Sets the value of the '{@link gbind.dsl.BindingModel#isTargetBinding <em>Target Binding</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Binding</em>' attribute.
+	 * @see #isTargetBinding()
+	 * @generated
+	 */
+	void setTargetBinding(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
 	 * The list contents are of type {@link gbind.dsl.ConceptBinding}.
