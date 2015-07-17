@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -129,25 +131,28 @@ public class BindingModel {
 		return virtualClassBindings.size() > 0;
 	}
 
+	public HashMap<String, EEnum> getConceptEnumerations() {
+		return computeClassifiers(getRoot().getBoundConcept(), EEnum.class);
+	}
 	
 	public HashMap<String, EClass> getConceptClasses() {
-		return computeClasses(getRoot().getBoundConcept());
+		return computeClassifiers(getRoot().getBoundConcept(), EClass.class);
 	}
 
 	public HashMap<String, EClass> getConcreteClasses() {
-		return computeClasses(getRoot().getBoundMetamodel());
+		return computeClassifiers(getRoot().getBoundMetamodel(), EClass.class);
 	}
 
-	private HashMap<String, EClass> computeClasses(MetamodelDeclaration m) {
-		HashMap<String, EClass> result = new HashMap<String, EClass>();
+	private <T extends EClassifier> HashMap<String, T> computeClassifiers(MetamodelDeclaration m, Class<T> klass) {
+		HashMap<String, T> result = new HashMap<String, T>();
 		if (m == null)
 			return result;
 
 		TreeIterator<EObject> it = m.getResource().getAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
-			if (obj instanceof EClass) {
-				result.put(((EClass) obj).getName(), (EClass) obj);
+			if (klass.isInstance(obj)) {
+				result.put(((EClassifier) obj).getName(), klass.cast(obj));
 			}
 		}
 		return result;

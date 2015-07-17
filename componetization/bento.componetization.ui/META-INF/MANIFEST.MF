@@ -25,7 +25,8 @@ Require-Bundle: org.eclipse.ui,
  anatlyzer.atl.typing,
  org.eclipse.m2m.atl.core.emf,
  org.eclipse.m2m.atl.engine,
- anatlyzer.atl.editor;bundle-version="0.1.0"
+ anatlyzer.atl.editor;bundle-version="0.1.0",
+ bento.repository.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,

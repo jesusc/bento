@@ -168,7 +168,8 @@ public class BentoURIResolver {
 			String[] parts = name.split("\\.");
 			String nonQualified = parts[parts.length - 1];
 			
-			identifier = LOCAL_REPO_URI + name + "/META-INF/" + nonQualified + ".bento";
+			// Weird, this "/" is needed because it only works with ..download//...
+			identifier = LOCAL_REPO_URI + "/" + name + "/META-INF/" + nonQualified + ".bento";
 			System.out.println(original + " => " + identifier);
 		}
 		return identifier;

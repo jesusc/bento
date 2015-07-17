@@ -39,6 +39,15 @@ public class ApplyParameterModelReferenceResolver implements bento.language.bent
                     return;					
 				}
 			}	
+
+			// Look up the target model as well
+			for(ParameterModel m : root.getComponent().getTargetModels()) {
+				if ( m.getName().equals(identifier) ) {
+                    result.addMapping(identifier, m);
+                    return;					
+				}
+			}			
+
 		} else {
 			// Look up the target model
 			for(ParameterModel m : root.getComponent().getTargetModels()) {

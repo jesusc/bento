@@ -118,11 +118,16 @@ public class BindingValidator extends GBindVisitor {
 	
 	@Override
 	public void inClassBinding(ClassBinding self) {
+		System.out.println("Processing " + self.getConcept().getName());
 		processClass(self.getConcept());
 	}
 
 	private void processClass(ConceptMetaclass conceptMetaclass) {
 		EClass c = classes.get(conceptMetaclass.getName());
+		if ( c == null ) {
+			// it is an enum! skip for the moment
+			return;
+		}
 		EClass remove = null;
 		for (EClass eClass : toCover) {
 			if ( c == eClass || c.isSuperTypeOf(eClass) ) {

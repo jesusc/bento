@@ -1,8 +1,10 @@
 package bento.components.ui.nature;
 
+import java.io.ByteArrayInputStream;
 import java.util.function.Consumer;
 
 import org.eclipse.core.resources.ICommand;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -60,9 +62,20 @@ public class BentoNature implements IProjectNature {
 			}
 		};
 		
+		createIfNeeded.accept("bindings");
 		createIfNeeded.accept("metamodels");
 		createIfNeeded.accept("transformation");
 		createIfNeeded.accept("META-INF");			
+	
+		IFile readme = project.getFile("README.md");
+		if ( ! readme.exists() ) {
+			String text = "# " + project.getName() + "\n\n" + "Document your component!";
+			try {
+				readme.create(new ByteArrayInputStream(text.getBytes()), true, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/*

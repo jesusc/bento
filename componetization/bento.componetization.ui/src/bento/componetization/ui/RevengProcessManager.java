@@ -1,6 +1,7 @@
 package bento.componetization.ui;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,7 @@ import bento.componetization.reveng.Metamodel;
 import bento.componetization.reveng.ModelKind;
 import bento.componetization.reveng.RevengFactory;
 import bento.componetization.reveng.RevengModel;
+import bento.repository.common.BentoURIResolver;
 
 /**
  * This class is in charge of checking the consistency
@@ -102,7 +104,7 @@ public class RevengProcessManager {
 			if ( templateFile.exists() ) {
 				templateFile.delete(true, null);
 			}
-
+			
 			EMFModel loaded = AtlEngineUtils.loadATLFile(transformation);		
 			ATLModel original = new ATLModel(loaded.getResource(), transformation.getLocation().toPortableString()); 
 			
@@ -110,19 +112,37 @@ public class RevengProcessManager {
 				if ( m.getPath().startsWith("/") ) {
 					IFile f = getFileLocation(m.getPath());
 					String fileName = null;
+					IFile target = null;
+
 					if ( m.isBecomeConcept() ) {
 						fileName = m.getExtractedConcept().getName() + ".ecore";
+						target = project.getFolder("metamodels").getFile(fileName);
+						ATLUtils.replacePathTag(original, m.getName(), m.getExtractedConcept().getName(), target.getFullPath().toPortableString());
+			
+						// Change the meta-model, this could a facility somewhere else
+						String path = m.getPath();
+						if ( path.startsWith("/")) {
+							path = "platform:/resource" + path;
+						}
+						Resource r = BentoURIResolver.loadMetamodel(path);
+						EPackage pkg = (EPackage) r.getContents().get(0);
+						pkg.setName(m.getExtractedConcept().getName());
+						pkg.setNsURI(m.getExtractedConcept().getNsURI());
+						pkg.setNsPrefix(pkg.getName() + "_extracted");
+						
+						r.save(new FileOutputStream(target.getLocation().toPortableString()), null);
+						target.refreshLocal(0, null);
 					} else {
 						fileName = f.getLocation().segment(f.getLocation().segmentCount() - 1);
+						target = project.getFolder("metamodels").getFile(fileName);
+						ATLUtils.replacePathTag(original, m.getName(), target.getFullPath().toPortableString());
+
+						if ( target.exists() ) {
+							target.delete(true, null);
+						}
+						f.copy(target.getFullPath(), true, null);
 					}
-					IFile target = project.getFolder("metamodels").getFile(fileName);
-					
-					ATLUtils.replacePathTag(original.getRoot(), m.getName(), target.getFullPath().toPortableString());
-					
-					if ( target.exists() ) {
-						target.delete(true, null);
-					}
-					f.copy(target.getFullPath(), true, null);
+										
 					
 					// Set the computed path for the concept meta-model
 					if ( m.isBecomeConcept() ) {

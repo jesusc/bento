@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 
 import bento.adapter.gbind.visitors.GBindVisitor;
@@ -34,6 +35,7 @@ public class BindingMetamodelConformanceValidator extends GBindVisitor {
 	// private String currentMetamodel;
 
 	private List<ValidationProblem> problems = new ArrayList<ValidationProblem>();
+	private HashMap<String, EEnum> conceptEnumerations;
 
 	public BindingMetamodelConformanceValidator(BindingModel model) {
 		// this.atlModel = atlModel;
@@ -42,6 +44,7 @@ public class BindingMetamodelConformanceValidator extends GBindVisitor {
 
 		bento.binding.utils.BindingModel util = new bento.binding.utils.BindingModel(model.eResource());
 		this.conceptClasses = util.getConceptClasses();
+		this.conceptEnumerations = util.getConceptEnumerations();
 		this.concreteClasses = util.getConcreteClasses();
 	}
 
@@ -59,7 +62,7 @@ public class BindingMetamodelConformanceValidator extends GBindVisitor {
 	
 	@Override
 	public void inConceptMetaclass(ConceptMetaclass self) {
-		if (!conceptClasses.containsKey(self.getName())) {
+		if (!conceptClasses.containsKey(self.getName()) && !conceptEnumerations.containsKey(self.getName())) {
 			problems.add(new ValidationProblem("Class " + self.getName()
 					+ " not found in concept", self));
 		}
@@ -67,6 +70,9 @@ public class BindingMetamodelConformanceValidator extends GBindVisitor {
 
 	@Override
 	public void inConcreteMetaclass(ConcreteMetaclass self) {
+		if ( self.getName().toUpperCase().equals("NONE"))
+			return;
+		
 		if (!concreteClasses.containsKey(self.getName())) {
 			problems.add(new ValidationProblem("Class " + self.getName()
 					+ " not found in meta-model", self));

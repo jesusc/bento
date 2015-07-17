@@ -1,0 +1,14 @@
+composite component bento.trafolib.petrinet2matrix.simple {
+	uses "bento:/bento.trafolib.petrinet2matrix"
+
+	binding bindPN = "simple2petrinet.gbind"
+
+	source concept SimplePN : "petri_nets.ecore"
+	target concept Matrix : "bento:/bento.trafolib.petrinet2matrix/AlgebraicMatrix.ecore"
+	
+	source model in : SimplePN
+	target model out : Matrix
+	
+	compose 
+		apply petrinet2matrix(bindPN(in)) -> (out)
+}

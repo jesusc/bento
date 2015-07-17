@@ -452,7 +452,7 @@ public class TransformationConfigurationPage extends FormPage {
 	 */
 	protected void initializeConceptPages() {
 		manager.getMetamodelToBecomeConcepts().forEach(metamodel -> {
-			String pageId = metamodel.getName();
+			String pageId = metamodel.getExtractedConcept().getName();
 
 			try {
 				if ( getEditor().findPage(pageId) == null && manager.existsConceptMetamodel(metamodel) ) 

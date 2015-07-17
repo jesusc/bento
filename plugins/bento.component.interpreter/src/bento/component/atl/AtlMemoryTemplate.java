@@ -159,6 +159,9 @@ public class AtlMemoryTemplate implements AdaptationResult {
 			System.err.println("At some point I need to pass the top composite to generate a proper name at least...");
 		}
 		
+		if ( pending == null ) 
+			return;
+		
 		ATLModel adaptedAtlModel = pending.get();
 		
 		String adaptedFileName = getAdaptedTemplateFileName();

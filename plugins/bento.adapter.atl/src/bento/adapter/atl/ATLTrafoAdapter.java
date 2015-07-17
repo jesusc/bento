@@ -88,7 +88,7 @@ public class ATLTrafoAdapter {
 	
 		
 		// Change the metamodel paths
-		ATLUtils.replacePathTag(atlModel.getRoot(), 
+		ATLUtils.replacePathTag(atlModel, 
 				info.getConceptMetamodelName(), 
 				info.getBoundMetamodelName(),
 				info.getBoundMetamodelURI());

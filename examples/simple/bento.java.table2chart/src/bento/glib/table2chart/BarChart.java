@@ -227,15 +227,7 @@ public class BarChart extends ApplicationFrame {
     	
         final BarChart demo = new BarChart("Bar Chart Demo");
 
-        ResourceSet rs = new ResourceSetImpl();
-        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
-        
-        Resource mr = rs.getResource(URI.createURI("metamodels/Table.ecore"), true);
-        EPackage pkg = (EPackage) mr.getContents().get(0);
-        rs.getPackageRegistry().put(pkg.getNsURI(), pkg);
-        
-        Resource r = rs.getResource(URI.createURI(args[0]), true);
-        
+        Resource r = Util.load(args[0]);
         demo.perform(r, true);
         
         demo.pack();

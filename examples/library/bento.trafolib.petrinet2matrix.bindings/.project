@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>bento.trafolib.petrinet2matrix.bindings</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.m2m.atl.adt.builder.atlBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>genericity.language.gbind.resource.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>bento.language.bentocomp.resource.bento.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>anatlyzer.atl.editor.anatlyzerATLBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
+		<nature>genericity.language.gbind.resource.nature</nature>
+		<nature>bento.language.bentocomp.resource.bento.nature</nature>
+		<nature>anatlyzer.atl.editor.anatlyzerATLNature</nature>
+	</natures>
+</projectDescription>

@@ -6,2273 +6,758 @@
 --@date			2007/08/02
 --@description	This transformation is used to collect measurement data on a UML2 model, using libraries implementing some metrics (MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD).
 --@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
+-- @path Measure=/icmt.oo2measure/metamodels/Measure.ecore
+-- @path ECORE=http://www.eclipse.org/emf/2002/Ecore
 module UML22Measure;
 create OUT : Measure from IN : ECORE;
 
---@begin attribute helpers measureLevel
---@comments Defines the measure level among {#package,#class}. 
---@comments The package level allows measures on packages.
---@comments The class level allows measures on packages and classes.
-helper def: measureLevel : Measure!ElementKind =
- #class; --@end attribute helper measureLevel
---@begin attribute helper root
---@comments The root measure set.
---@end attribute helper measureLevel
---@begin attribute helper root
---@comments The root measure set.
-helper def: root : Measure!RootMeasureSet =
- OclUndefined; --@end attribute helper root
---@begin attribute helper MetricByName
---@comments The map of metrics by name.
---@end attribute helper root
---@begin attribute helper MetricByName
---@comments The map of metrics by name.
-helper def: MetricByName : Map(String, Measure!Metric) =
- Map {}; --@end attribute helper MetricByName
---@begin helper defaultName
---@comments Returns the name of the named element or "Anonymous".
---@end attribute helper MetricByName
---@begin helper defaultName
---@comments Returns the name of the named element or "Anonymous".
-helper context ECORE!ENamedElement def: defaultName() : String =
- if self.name.oclIsUndefined() then
-  'Anonymous'
- else
-  self.name
- endif; --@end helper defaultName
---@begin entrypoint rule Metrics
---@comments Registers the MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD metrics implemented in libraries.
---@end helper defaultName
---@begin entrypoint rule Metrics
---@comments Registers the MOOD, MOOD2, MOOSE, EMOOSE  and QMOOD metrics implemented in libraries.
-entrypoint rule Metrics() {
- to
-  root : Measure!RootMeasureSet (
-   modelType <- #UML2
-  )
- do {
-  thisModule.root <- root;
-  if(thisModule.measureLevel = #package or thisModule.measureLevel = #class) {
-   -- ==================================================
-   -- MOOD Metrics : Intra-Specification Level Metrics =
-   -- ==================================================
-   -- ==================================================
-   -- MOOD Metrics : Intra-Specification Level Metrics =
-   -- ==================================================
-   -- ==================================================
-   -- MOOD Metrics : Intra-Specification Level Metrics =
-   -- ==================================================
-   root.categories <- thisModule.Category('MOOD', 'Metrics for Object-Oriented Design');
-   thisModule.Metric('MOOD', 'AIF', 'Attributes Inheritance Factor');
-   thisModule.Metric('MOOD', 'OIF', 'Operations Inheritance Factor');
-   thisModule.Metric('MOOD', 'AHF', 'Attributes Hiding Factor');
-   thisModule.Metric('MOOD', 'OHF', 'Operations Hiding Factor');
-   thisModule.Metric('MOOD', 'BPF', 'Behavioral Polymorphism Factor');
-   thisModule.Metric('MOOD', 'CCF', 'Class Coupling Factor');
-   thisModule.Metric('MOOD', 'ICF', 'Internal Coupling Factor'); -- ===================================================
-   -- MOOD2 Metrics : Intra-Specification Level Metrics =
-   -- ===================================================
-   -- ===================================================
-   -- MOOD2 Metrics : Intra-Specification Level Metrics =
-   -- ===================================================
-   -- ===================================================
-   -- MOOD2 Metrics : Intra-Specification Level Metrics =
-   -- ===================================================
-   -- ===================================================
-   -- MOOD2 Metrics : Intra-Specification Level Metrics =
-   -- ===================================================
-   root.categories <- thisModule.Category('MOOD2', 'Metrics for Object-Oriented Design 2');
-   thisModule.Metric('MOOD2', 'IIF', 'Internal Inheritance Factor');
-   thisModule.Metric('MOOD2', 'AHEF', 'Attributes Hiding Effectiveness Factor');
-   thisModule.Metric('MOOD2', 'OHEF', 'Operations Hiding Effectiveness Factor');
-  }
-  if(thisModule.measureLevel = #class) {
-   -- ===============
-   -- MOOSE Metrics =
-   -- ===============
-   -- ===============
-   -- MOOSE Metrics =
-   -- ===============
-   -- ===============
-   -- MOOSE Metrics =
-   -- ===============
-   root.categories <- thisModule.Category('MOOSE', 'Metrics for Object-Oriented Software Engineering');
-   thisModule.Metric('MOOSE', 'DIT', 'Depth of Inheritance Tree');
-   thisModule.Metric('MOOSE', 'NOC', 'Number of Children');
-   thisModule.Metric('MOOSE', 'CBO', 'Coupling Between Objects');
-   thisModule.Metric('MOOSE', 'RFC', 'Response for a Class'); -- ================
-   -- EMOOSE Metrics =
-   -- ================
-   -- ================
-   -- EMOOSE Metrics =
-   -- ================
-   -- ================
-   -- EMOOSE Metrics =
-   -- ================
-   -- ================
-   -- EMOOSE Metrics =
-   -- ================
-   root.categories <- thisModule.Category('EMOOSE', 'Extended MOOSE');
-   thisModule.Metric('EMOOSE', 'SIZE2', 'Number of local Attributes ' + 'and Operations defined in the Class');
-  }
-  if(thisModule.measureLevel = #package or thisModule.measureLevel = #class) {
-   -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   root.categories <- thisModule.Category('QMOOD', 'Quality Model for Object-Oriented Design');
-   thisModule.Metric('QMOOD', 'DSC', 'Design Size in Classes');
-   thisModule.Metric('QMOOD', 'NOH', 'Number of Hierarchies');
-   thisModule.Metric('QMOOD', 'NIC', 'Number of Independent Classes');
-   thisModule.Metric('QMOOD', 'NSI', 'Number of Single Inheritance');
-   thisModule.Metric('QMOOD', 'NNC', 'Number of Internal Classes');
-   thisModule.Metric('QMOOD', 'NAC', 'Number of Abstract Classes');
-   thisModule.Metric('QMOOD', 'NLC', 'Number of Leaf Classes');
-   thisModule.Metric('QMOOD', 'ADI', 'Average Depth of Inheritance');
-   thisModule.Metric('QMOOD', 'AWI', 'Average Width of Inheritance');
-   thisModule.Metric('QMOOD', 'ANA', 'Average Number of Ancestors');
-  }
-  if(thisModule.measureLevel = #class) {
-   thisModule.Metric('QMOOD', 'MFA', 'Measure of Functional Abstraction');
-   thisModule.Metric('QMOOD', 'MAA', 'Measure of Attribute Abstraction');
-   thisModule.Metric('QMOOD', 'MAT', 'Measure of Abstraction');
-   thisModule.Metric('QMOOD', 'MOA', 'Measure of Aggregation');
-   thisModule.Metric('QMOOD', 'MRM', 'Modeled Relationship Measure');
-   thisModule.MetricWithPreferredValue('QMOOD', 'DAM', 'Data Access Metric', '>75');
-   thisModule.MetricWithPreferredValue('QMOOD', 'OAM', 'Operation Access Metric', '>75');
-   thisModule.MetricWithPreferredValue('QMOOD', 'MAM', 'Member Access Metric', '>75');
-   thisModule.Metric('QMOOD', 'NOA', 'Number of Ancestors');
-   thisModule.Metric('QMOOD', 'NOM', 'Number of Methods');
-   thisModule.Metric('QMOOD', 'CIS', 'Class Interface Size');
-   thisModule.Metric('QMOOD', 'NPT', 'Number of Unique Parameter Types');
-   thisModule.Metric('QMOOD', 'NPM', 'Number of Parameters per Method');
-   thisModule.Metric('QMOOD', 'NOD', 'Number of Attributes');
-   thisModule.Metric('QMOOD', 'NAD', 'Number of Abstract Data Types');
-   thisModule.Metric('QMOOD', 'NPA', 'Number of Public Attributes');
-   thisModule.Metric('QMOOD', 'CSM', 'Class Size Metric');
-   thisModule.Metric('QMOOD', 'CAM', 'Cohesion Among Methods of Class');
-   thisModule.Metric('QMOOD', 'DCC', 'Direct Class Coupling');
-   thisModule.Metric('QMOOD', 'MCC', 'Maximum Class Coupling');
-   thisModule.Metric('QMOOD', 'DAC', 'Direct Attribute Based Coupling');
-   thisModule.Metric('QMOOD', 'DPC', 'Direct Parameter Based Coupling');
-   thisModule.Metric('QMOOD', 'MPC', 'Maximum Parameter Based Coupling');
-   thisModule.Metric('QMOOD', 'CCD', 'Class Complexity Based on Data');
-   thisModule.Metric('QMOOD', 'CCP', 'Class Complexity Based on Method Parameters');
-   thisModule.Metric('QMOOD', 'CCM', 'Class Complexity Based on Members');
-  }
- }
-} --@end entrypoint rule Metrics
---@begin  rule Package2MeasureSet
---@comments Collects measurement data on the model (default package) or a package (measureLevel must be set to #package or #class).
---@end entrypoint rule Metrics
---@begin  rule Package2MeasureSet
---@comments Collects measurement data on the model (default package) or a package (measureLevel must be set to #package or #class).
-rule Package2MeasureSet {
- from
-  ne : ECORE!EPackage
-  (
-   ne.oclIsTypeOf(ECORE!EPackage) or false and thisModule.measureLevel = #package or thisModule.measureLevel = #class
-  )
- to
-  ms : Measure!MeasureSet (
-   elementName <- if ne.CN() > 0 then
-    ne.defaultName().debug('Processing metrics on package')
-   else
-    ne.defaultName()
-   endif,
-   elementType <- if false then
-    #model
-   else
-    #package
-   endif,
-   subsets <- ne.contents,
-   subsets <- ne.allClasses->collect(c |
-    thisModule.Class2MeasureSet(c)
-   )
-  )
- do {
-  if(false)
-   thisModule.root.measureSets <- ms;
-  if(ne.CN() > 0) {
-   -- ==================================================
-   -- MOOD Metrics : Intra-Specification Level Metrics =
-   -- ==================================================
-   -- ==================================================
-   -- MOOD Metrics : Intra-Specification Level Metrics =
-   -- ==================================================
-   -- ==================================================
-   -- MOOD Metrics : Intra-Specification Level Metrics =
-   -- ==================================================
-   ms.measures <- thisModule.PercentageMeasure('AIF', ne.AIF());
-   ms.measures <- thisModule.PercentageMeasure('OIF', ne.OIF());
-   ms.measures <- thisModule.PercentageMeasure('AHF', ne.AHF());
-   ms.measures <- thisModule.PercentageMeasure('OHF', ne.OHF());
-   ms.measures <- thisModule.PercentageMeasure('BPF', ne.BPF());
-   ms.measures <- thisModule.PercentageMeasure('CCF', ne.CCF());
-   ms.measures <- thisModule.PercentageMeasure('ICF', ne.ICF()); -- =============================================================
-   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
-   -- =============================================================
-   -- =============================================================
-   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
-   -- =============================================================
-   -- =============================================================
-   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
-   -- =============================================================
-   -- =============================================================
-   -- MOOD2 Metrics : Intra and Inter-Specification Level Metrics =
-   -- =============================================================
-   ms.measures <- thisModule.PercentageMeasure('IIF', ne.IIF());
-   ms.measures <- thisModule.PercentageMeasure('AHEF', ne.AHEF());
-   ms.measures <- thisModule.PercentageMeasure('OHEF', ne.OHEF()); -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   -- ===============
-   -- QMOOD Metrics =
-   -- ===============
-   ms.measures <- thisModule.IntegerMeasure('DSC', ne.DSC());
-   ms.measures <- thisModule.IntegerMeasure('NOH', ne.NOH());
-   ms.measures <- thisModule.IntegerMeasure('NIC', ne.NIC());
-   ms.measures <- thisModule.IntegerMeasure('NSI', ne.NSI());
-   ms.measures <- thisModule.IntegerMeasure('NNC', ne.NNC());
-   ms.measures <- thisModule.IntegerMeasure('NAC', ne.NAC());
-   ms.measures <- thisModule.IntegerMeasure('NLC', ne.NLC());
-   ms.measures <- thisModule.DoubleMeasure('ADI', ne.ADI());
-   ms.measures <- thisModule.DoubleMeasure('AWI', ne.AWI());
-   ms.measures <- thisModule.DoubleMeasure('ANA', ne.ANA());
-  }
- }
-} --@end rule Package2MeasureSet
---@begin lazy rule Class2MeasureSet
---@comments Collects measurement data on a class (measureLevel must be set to #class).
---@end rule Package2MeasureSet
---@begin lazy rule Class2MeasureSet
---@comments Collects measurement data on a class (measureLevel must be set to #class).
-lazy rule Class2MeasureSet {
- from
-  ne : ECORE!EClass
-  (
-   ne.oclIsTypeOf(ECORE!EClass) and thisModule.measureLevel = #class
-  )
- to
-  ms : Measure!MeasureSet (
-   elementName <- ne.defaultName().debug('Processing metrics on class'),
-   elementType <- #class,
-   subsets <- ne.nestedClassifier
-  )
- do {
-  -- ===============
-  -- MOOSE Metrics =
-  -- ===============
-  -- ===============
-  -- MOOSE Metrics =
-  -- ===============
-  -- ===============
-  -- MOOSE Metrics =
-  -- ===============
-  ms.measures <- thisModule.IntegerMeasure('DIT', ne.DIT());
-  ms.measures <- thisModule.IntegerMeasure('NOC', ne.NOC());
-  ms.measures <- thisModule.IntegerMeasure('CBO', ne.CBO());
-  ms.measures <- thisModule.IntegerMeasure('RFC', ne.RFC()); -- ================
-  -- EMOOSE Metrics =
-  -- ================
-  -- ================
-  -- EMOOSE Metrics =
-  -- ================
-  -- ================
-  -- EMOOSE Metrics =
-  -- ================
-  -- ================
-  -- EMOOSE Metrics =
-  -- ================
-  ms.measures <- thisModule.IntegerMeasure('SIZE2', ne.SIZE2()); -- ===============
-  -- QMOOD Metrics =
-  -- ===============
-  -- ===============
-  -- QMOOD Metrics =
-  -- ===============
-  -- ===============
-  -- QMOOD Metrics =
-  -- ===============
-  -- ===============
-  -- QMOOD Metrics =
-  -- ===============
-  ms.measures <- thisModule.PercentageMeasure('MFA', ne.MFA());
-  ms.measures <- thisModule.PercentageMeasure('MAA', ne.MAA());
-  ms.measures <- thisModule.PercentageMeasure('MAT', ne.MAT());
-  ms.measures <- thisModule.IntegerMeasure('MOA', ne.MOA());
-  ms.measures <- thisModule.IntegerMeasure('MRM', ne.MRM());
-  ms.measures <- thisModule.PercentageMeasure('DAM', ne.DAM());
-  ms.measures <- thisModule.PercentageMeasure('OAM', ne.OAM());
-  ms.measures <- thisModule.PercentageMeasure('MAM', ne.MAM());
-  ms.measures <- thisModule.IntegerMeasure('NOA', ne.NOA());
-  ms.measures <- thisModule.IntegerMeasure('NOM', ne.NOM());
-  ms.measures <- thisModule.IntegerMeasure('CIS', ne.CIS());
-  ms.measures <- thisModule.IntegerMeasure('NPT', ne.NPT());
-  ms.measures <- thisModule.DoubleMeasure('NPM', ne.NPM());
-  ms.measures <- thisModule.IntegerMeasure('NOD', ne.NOD());
-  ms.measures <- thisModule.IntegerMeasure('NAD', ne.NAD());
-  ms.measures <- thisModule.IntegerMeasure('NPA', ne.NPA());
-  ms.measures <- thisModule.IntegerMeasure('CSM', ne.CSM());
-  ms.measures <- thisModule.DoubleMeasure('CAM', ne.CAM());
-  ms.measures <- thisModule.IntegerMeasure('DCC', ne.DCC());
-  ms.measures <- thisModule.IntegerMeasure('MCC', ne.MCC());
-  ms.measures <- thisModule.IntegerMeasure('DAC', ne.DAC());
-  ms.measures <- thisModule.IntegerMeasure('DPC', ne.DPC());
-  ms.measures <- thisModule.IntegerMeasure('MPC', ne.MPC());
-  ms.measures <- thisModule.IntegerMeasure('CCD', ne.CCD());
-  ms.measures <- thisModule.IntegerMeasure('CCP', ne.CCP());
-  ms.measures <- thisModule.IntegerMeasure('CCM', ne.CCM());
- }
-} --@end lazy rule Class2MeasureSet
---@begin called rule Category
---@comments Creates a category for metric classification with a name and a description.
---@end lazy rule Class2MeasureSet
---@begin called rule Category
---@comments Creates a category for metric classification with a name and a description.
-rule Category(name : String, desc : String) {
- to
-  cat : Measure!Category (
-   name <- name,
-   desc <- desc
-  )
- do {
-  cat;
- }
-} --@end called rule Category
---@begin called rule Metric
---@comments Creates a metric for a category with a name and a description (the default preferred value for the metric is set to not equal to zero ['!=0']).
---@end called rule Category
---@begin called rule Metric
---@comments Creates a metric for a category with a name and a description (the default preferred value for the metric is set to not equal to zero ['!=0']).
-rule Metric(catName : String, name : String, desc : String) {
- to
-  metric : Measure!Metric (
-   name <- name,
-   desc <- desc,
-   preferredValue <- '!=0',
-   category <- thisModule.root.categories->select(cat |
-    cat.name = catName
-   )->first()
-  )
- do {
-  thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
- }
-} --@end called rule Metric
---@begin called rule MetricWithPreferredValue
---@comments Creates a metric for a category with a name, a description and a preferred value for the metric (an operator [<, <=, =, !=, >=, >] followed by a number).
---@end called rule Metric
---@begin called rule MetricWithPreferredValue
---@comments Creates a metric for a category with a name, a description and a preferred value for the metric (an operator [<, <=, =, !=, >=, >] followed by a number).
-rule MetricWithPreferredValue(catName : String, name : String, desc : String, preferredValue : String) {
- to
-  metric : Measure!Metric (
-   name <- name,
-   desc <- desc,
-   preferredValue <- preferredValue,
-   category <- thisModule.root.categories->select(cat |
-    cat.name = catName
-   )->first()
-  )
- do {
-  thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
- }
-} --@end called rule MetricWithPreferredValue
---@begin called rule IntegerMeasure
---@comments Stores an Integer measure for the metric which name and value are given.
---@end called rule MetricWithPreferredValue
---@begin called rule IntegerMeasure
---@comments Stores an Integer measure for the metric which name and value are given.
-rule IntegerMeasure(name : String, value : Integer) {
- to
-  meas : Measure!IntegerMeasure (
-   metric <- thisModule.MetricByName.get(name),
-   value <- value
-  )
- do {
-  meas;
- }
-} --@end called rule IntegerMeasure
---@begin called rule DoubleMeasure
---@comments Stores a Double measure for the metric which name and value are given.
---@end called rule IntegerMeasure
---@begin called rule DoubleMeasure
---@comments Stores a Double measure for the metric which name and value are given.
-rule DoubleMeasure(name : String, value : Real) {
- to
-  meas : Measure!DoubleMeasure (
-   metric <- thisModule.MetricByName.get(name),
-   value <- value
-  )
- do {
-  meas;
- }
-} --@end called rule DoubleMeasure
---@begin called rule PercentageMeasure
---@comments Stores a Percentage measure for the metric which name and value are given.
---@end called rule DoubleMeasure
---@begin called rule PercentageMeasure
---@comments Stores a Percentage measure for the metric which name and value are given.
-rule PercentageMeasure(name : String, value : Real) {
- to
-  meas : Measure!PercentageMeasure (
-   metric <- thisModule.MetricByName.get(name),
-   value <- value
-  )
- do {
-  meas;
- }
-} --@end called rule PercentageMeasure
---- LIBRARIES
---@atlcompiler	atl2006
---@name			QMOOD4UML2
---@version		1.0
---@domains		UML2, QMOOD, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/06/05
---@description	This library provides QMOOD (Quality Model for Object-Oriented Design) metrics suite on UML2 models (from Eclipse UML2 Project). The models have been extracted from Jar files using the Eclipse plug-in Jar2UML. Only the metrics that fit to UML2 models have been implemented.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library QMOOD4UML2; -- Library Template
--- uses FLAME4UML2;
--- ===============
--- QMOOD Metrics =
--- ===============
---@begin helper QMOOD::DSC
---@comments Design Size in Classes
---@comments Count of the total number of Classes in the design.
---@end called rule PercentageMeasure
---- LIBRARIES
---@atlcompiler	atl2006
---@name			QMOOD4UML2
---@version		1.0
---@domains		UML2, QMOOD, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/06/05
---@description	This library provides QMOOD (Quality Model for Object-Oriented Design) metrics suite on UML2 models (from Eclipse UML2 Project). The models have been extracted from Jar files using the Eclipse plug-in Jar2UML. Only the metrics that fit to UML2 models have been implemented.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library QMOOD4UML2; -- Library Template
--- uses FLAME4UML2;
--- ===============
--- QMOOD Metrics =
--- ===============
---@begin helper QMOOD::DSC
---@comments Design Size in Classes
---@comments Count of the total number of Classes in the design.
-helper context ECORE!EPackage def: DSC() : Integer =
- self.CN(); --@end helper QMOOD::DSC
---@begin helper QMOOD::NOH
---@comments Number of Hierarchies
---@comments Count of the number of Class hierarchies in the design.
---@comments In [Abreu et al., 2000], this metric has another interpretation.
---@comments  There, hierarchies are not the number of inheritance relations but the number of inheritance trees.
---@comments  In this case, this metric is always equal to 1 for systems developed in languages that have a common super class (like Object in Smalltalk and Java).
---@comments  This case shows that the metric is centered in the language, which is considered as a potential problem (Remember QMOOD metrics were created based upon C++). 
---@end helper QMOOD::DSC
---@begin helper QMOOD::NOH
---@comments Number of Hierarchies
---@comments Count of the number of Class hierarchies in the design.
---@comments In [Abreu et al., 2000], this metric has another interpretation.
---@comments  There, hierarchies are not the number of inheritance relations but the number of inheritance trees.
---@comments  In this case, this metric is always equal to 1 for systems developed in languages that have a common super class (like Object in Smalltalk and Java).
---@comments  This case shows that the metric is centered in the language, which is considered as a potential problem (Remember QMOOD metrics were created based upon C++). 
-helper context ECORE!EPackage def: NOH() : Integer =
- self.allClasses->collect(c |
-  c.children
- )->flatten()->asSet()->size(); --@end helper QMOOD::NOH
---@begin helper QMOOD::NIC
---@comments Number of Independent Classes
---@comments Count of the number of Classes that are not inherited by any Class in the design.
---@end helper QMOOD::NOH
---@begin helper QMOOD::NIC
---@comments Number of Independent Classes
---@comments Count of the number of Classes that are not inherited by any Class in the design.
-helper context ECORE!EPackage def: NIC() : Integer =
- self.allClasses->select(c |
-  c.isLeaf
- )->size(); --@end helper QMOOD::NIC
---@begin helper QMOOD::NSI
---@comments Number of Single Inheritance
---@comments Number of Classes (sub classes) that use inheritance in the design.
---@comments According to [Abreu et al., 2000], for the same reason than in NOH, this metric would be always equal to DSC (if the Classes belonging to the development environment were considered) or to DSC – 1 (in the opposite case).
---@comments This is another signal of language dependency.
---@end helper QMOOD::NIC
---@begin helper QMOOD::NSI
---@comments Number of Single Inheritance
---@comments Number of Classes (sub classes) that use inheritance in the design.
---@comments According to [Abreu et al., 2000], for the same reason than in NOH, this metric would be always equal to DSC (if the Classes belonging to the development environment were considered) or to DSC – 1 (in the opposite case).
---@comments This is another signal of language dependency.
-helper context ECORE!EPackage def: NSI() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  if c.PARN() = 1 then
+helper context ECORE!ENamedElement def: visibility : OclAny = #public;
+
+helper context ECORE!EPackage def: packagedElement : OclAny = self.eClassifiers.union(self.eSubpackages);
+
+helper context ECORE!EOperation def: method : OclAny = Sequence { };
+
+helper context ECORE!EClass def: nestedClassifier : OclAny = Sequence { };
+
+helper context ECORE!ETypedElement def: type : OclAny = self.eType;
+
+helper context ECORE!EOperation def: ownedParameter : OclAny = self.eParameters;
+
+helper context ECORE!EClass def: generalizationGeneral : OclAny = self.eSuperTypes;
+
+helper context ECORE!EClass def: ownedAttribute : OclAny = self.eStructuralFeatures;
+
+helper context ECORE!EClass def: ownedOperation : OclAny = self.eOperations;
+
+helper context ECORE!EClass def: isAbstract : OclAny = self.abstract;
+
+helper context ECORE!EClass def: coupledClasses : Set(ECORE!EClass) = self.allAttributesTypes->union(self.allParametersTypes);
+
+helper context ECORE!EClass def: newFeatures : Sequence(ECORE!EOperation) = self.newAttributes->union(self.newOperations);
+
+helper context ECORE!EClass def: definedFeatures : Sequence(ECORE!EOperation) = self.definedAttributes->union(self.definedOperations);
+
+helper context ECORE!EClass def: directlyInheritedFeatures : Sequence(ECORE!EOperation) = self.directlyInheritedAttributes->union(self.directlyInheritedOperations);
+
+helper context ECORE!EClass def: allInheritedFeatures : Sequence(ECORE!EOperation) = self.allInheritedAttributes->union(self.allInheritedOperations);
+
+helper context ECORE!EClass def: overriddenFeatures : Sequence(ECORE!EOperation) = self.overriddenAttributes->union(self.overriddenOperations);
+
+helper context ECORE!EClass def: allFeatures : Sequence(ECORE!EOperation) = self.allAttributes->union(self.allOperations);
+
+helper context ECORE!EClass def: newAttributes : Sequence(ECORE!EStructuralFeature) = self.definedAttributes->select(da | self.allInheritedAttributes->collect(ia | ia.name)->excludes(da.name));
+
+helper context ECORE!EClass def: definedAttributes : Sequence(ECORE!EStructuralFeature) = self.ownedAttribute;
+
+helper context ECORE!EPackage def: definedAttributes : Sequence(ECORE!EStructuralFeature) = self.allClasses->collect(c | c.definedAttributes)->flatten();
+
+helper context ECORE!EClass def: directlyInheritedAttributes : Sequence(ECORE!EStructuralFeature) = self.parents->iterate(p;acc:Sequence(ECORE!EStructuralFeature) = Sequence { } | acc->union(p.newAttributes));
+
+helper context ECORE!EClass def: allInheritedAttributes : Sequence(ECORE!EStructuralFeature) = self.directlyInheritedAttributes->union(self.parents->collect(p | p.allInheritedAttributes)->flatten());
+
+helper context ECORE!EClass def: overriddenAttributes : Sequence(ECORE!EStructuralFeature) = self.definedAttributes->select(da | self.allInheritedAttributes->collect(ia | ia.name)->includes(da.name));
+
+helper context ECORE!EClass def: allAttributes : Sequence(ECORE!EStructuralFeature) = self.definedAttributes->union(self.allInheritedAttributes->reject(ia | self.overriddenAttributes->collect(oa | oa.name)->includes(ia.name)));
+
+helper context ECORE!EPackage def: allAttributes : Sequence(ECORE!EStructuralFeature) = self.allClasses->collect(c | c.allAttributes)->flatten();
+
+helper context ECORE!EClass def: allAttributesTypes : Set(ECORE!EClass) = self.allAttributes->collect(a | a.type)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EClass def: newOperations : Sequence(ECORE!EOperation) = self.definedOperations->select(dop | self.allInheritedOperations->collect(iop | iop.name)->excludes(dop.name));
+
+helper context ECORE!EClass def: definedOperations : Sequence(ECORE!EOperation) = self.ownedOperation;
+
+helper context ECORE!EPackage def: definedOperations : Sequence(ECORE!EOperation) = self.allClasses->collect(c | c.definedOperations)->flatten();
+
+helper context ECORE!EClass def: directlyInheritedOperations : Sequence(ECORE!EOperation) = self.parents->iterate(p;acc:Sequence(ECORE!EOperation) = Sequence { } | acc->union(p.newOperations));
+
+helper context ECORE!EClass def: allInheritedOperations : Sequence(ECORE!EOperation) = self.directlyInheritedOperations->union(self.parents->collect(p | p.allInheritedOperations)->flatten());
+
+helper context ECORE!EClass def: overriddenOperations : Sequence(ECORE!EOperation) = self.definedOperations->select(dop | self.allInheritedOperations->collect(iop | iop.name)->includes(dop.name));
+
+helper context ECORE!EClass def: allOperations : Sequence(ECORE!EOperation) = self.definedOperations->union(self.allInheritedOperations->reject(iop | self.overriddenOperations->collect(oop | oop.name)->includes(iop.name)));
+
+helper context ECORE!EPackage def: allOperations : Sequence(ECORE!EOperation) = self.allClasses->collect(c | c.allOperations)->flatten()->asSet();
+
+helper context ECORE!EClass def: allParameters : Set(ECORE!EParameter) = self.allOperations->collect(o | o.ownedParameter)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EClass def: allParametersTypes : Set(ECORE!EClass) = self.allParameters->collect(param | param.type)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EOperation def: allParametersTypes : Set(ECORE!EClass) = self.ownedParameter->collect(param | param.type)->flatten()->select(t | t.oclIsTypeOf(ECORE!EClass))->asSet();
+
+helper context ECORE!EClass def: isRoot : Boolean = self.parents->isEmpty();
+
+helper context ECORE!EClass def: isLeaf : Boolean = self.children->isEmpty();
+
+helper context ECORE!EClass def: children : Set(ECORE!EClass) = thisModule.AllInstancesOf_Generalization->select(g | g.general = self)->collect(g | g.specific)->excluding(self)->asSet();
+
+helper context ECORE!EClass def: descendants : Set(ECORE!EClass) = self.children->iterate(c;acc:Set(ECORE!EClass) = self.children | acc->union(c.descendants));
+
+helper context ECORE!EClass def: parents : Set(ECORE!EClass) = self.generalizationGeneral->excluding(self)->asSet();
+
+helper context ECORE!EClass def: ascendants : Set(ECORE!EClass) = self.parents->iterate(c;acc:Set(ECORE!EClass) = self.parents | acc->union(c.ascendants));
+
+helper context ECORE!ENamedElement def: client : Set(ECORE!ENamedElement) = Sequence { }->select(d | d.supplier->includes(self))->collect(d | d.client)->flatten()->asSet();
+
+helper context ECORE!ENamedElement def: allClients : Set(ECORE!ENamedElement) = self.client->union(self.client->collect(ne | ne.allClients)->flatten())->asSet();
+
+helper context ECORE!EPackage def: contents : Sequence(ECORE!EClassifier) = self.packagedElement;
+
+helper context ECORE!EPackage def: allClasses : Sequence(ECORE!EClass) = self.contents->select(c | c.oclIsKindOf(ECORE!EClass));
+
+helper context ECORE!EPackage def: internalBaseClasses : Set(ECORE!EClass) = self.allClasses->iterate(c;acc:Set(ECORE!EClass) = Set { } | acc->union(c.parents));
+
+helper context ECORE!EPackage def: internalSupplierClasses : Set(ECORE!EClass) = self.supplierClasses(self);
+
+helper context ECORE!EClassifier def: owner : ECORE!EPackage = let owners : Sequence(ECORE!EPackage) = ECORE!EPackage.allInstances()->select(p | p.oclIsTypeOf(ECORE!EPackage))->select(p | p.contents->includes(self))
+ in if ( owners->notEmpty() ) then
+   owners->first()
+else
+   OclUndefined
+endif;
+
+helper context ECORE!EPackage def: owner : ECORE!EPackage = let owners : Sequence(ECORE!EPackage) = ECORE!EPackage.allInstances()->select(p | p.oclIsTypeOf(ECORE!EPackage))->select(p | p.contents->includes(self))
+ in if ( owners->notEmpty() ) then
+   owners->first()
+else
+   OclUndefined
+endif;
+
+helper context ECORE!EStructuralFeature def: AUN() : Integer = self.FUN();
+
+helper context ECORE!EClass def: FCV(f : ECORE!EOperation) : Boolean = ( f.visibility = #public or self.allFeatures->includes(f) or f.visibility = #protected ) and self.ascendants->exists(c | c.allFeatures->includes(f));
+
+helper context ECORE!EClass def: NAN() : Integer = self.newAttributes->size();
+
+helper context ECORE!EClass def: DAN() : Integer = self.definedAttributes->size();
+
+helper context ECORE!EClass def: IAN() : Integer = self.allInheritedAttributes->size();
+
+helper context ECORE!EClass def: OAN() : Integer = self.overriddenAttributes->size();
+
+helper context ECORE!EClass def: AAN() : Integer = self.allAttributes->size();
+
+helper context ECORE!EClass def: NON() : Integer = self.newOperations->size();
+
+helper context ECORE!EClass def: DON() : Integer = self.definedOperations->size();
+
+helper context ECORE!EClass def: ION() : Integer = self.allInheritedOperations->size();
+
+helper context ECORE!EClass def: OON() : Integer = self.overriddenOperations->size();
+
+helper context ECORE!EClass def: AON() : Integer = self.allOperations->size();
+
+helper context ECORE!EClass def: PRIAN() : Integer = self.allAttributes->select(a | a.visibility = #private)->size();
+
+helper context ECORE!EClass def: PROAN() : Integer = self.allAttributes->select(a | a.visibility = #protected)->size();
+
+helper context ECORE!EClass def: PUBAN() : Integer = self.allAttributes->select(a | a.visibility = #public)->size();
+
+helper context ECORE!EClass def: PRION() : Integer = self.allOperations->select(op | op.visibility = #private)->size();
+
+helper context ECORE!EClass def: PROON() : Integer = self.allOperations->select(op | op.visibility = #protected)->size();
+
+helper context ECORE!EClass def: PUBON() : Integer = self.allOperations->select(op | op.visibility = #public)->size();
+
+helper context ECORE!EStructuralFeature def: FUN() : Integer = self.allClients->size();
+
+helper context ECORE!EOperation def: FUN() : Integer = self.allClients->size();
+
+helper context ECORE!EClass def: CHIN() : Integer = self.children->size();
+
+helper context ECORE!EClass def: DESN() : Integer = self.descendants->size();
+
+helper context ECORE!EClass def: PARN() : Integer = self.parents->size();
+
+helper context ECORE!EClass def: ASCN() : Integer = self.ascendants->size();
+
+helper context ECORE!EOperation def: OUN() : Integer = self.FUN();
+
+helper context ECORE!EPackage def: isInternal(c : ECORE!EClass) : Boolean = self.contents->includes(c);
+
+helper context ECORE!EPackage def: baseClasses(p : ECORE!EPackage) : Set(ECORE!EClass) = self.internalBaseClasses->select(c | p.isInternal(c))->asSet();
+
+helper context ECORE!EPackage def: baseClassesInPackages(p : ECORE!EPackage) : Set(ECORE!EClass) = self.internalBaseClasses->union(p.internalBaseClasses);
+
+helper context ECORE!EPackage def: supplierClasses(p : ECORE!EPackage) : Set(ECORE!EClass) = self.allClasses->iterate(c;acc:Set(ECORE!EClass) = Set { } | acc->union(c.coupledClasses))->select(c | p.isInternal(c))->asSet();
+
+helper context ECORE!EPackage def: supplierClassesInPackages(p : ECORE!EPackage) : Set(ECORE!EClass) = self.internalSupplierClasses->union(p.internalSupplierClasses);
+
+helper context ECORE!EPackage def: relatedClasses(p : ECORE!EPackage) : Set(ECORE!EClass) = self.baseClasses(p)->union(self.supplierClasses(p));
+
+helper context ECORE!EPackage def: CN() : Integer = self.allClasses->size();
+
+helper context ECORE!EPackage def: PNAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.NAN);
+
+helper context ECORE!EPackage def: PDAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.DAN());
+
+helper context ECORE!EPackage def: PIAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.IAN());
+
+helper context ECORE!EPackage def: POAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.OAN);
+
+helper context ECORE!EPackage def: PAAN() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.AAN());
+
+helper context ECORE!EPackage def: PNON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.NON());
+
+helper context ECORE!EPackage def: PDON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.DON());
+
+helper context ECORE!EPackage def: PION() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.ION());
+
+helper context ECORE!EPackage def: POON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.OON());
+
+helper context ECORE!EPackage def: PAON() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.AON());
+
+helper context ECORE!EPackage def: EILN(p : ECORE!EPackage) : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.parents->select(g | p.isInternal(g))->size());
+
+helper context ECORE!EPackage def: IILN : Integer = self.allClasses->iterate(c;acc:Integer = 0 | acc + c.parents->select(g | self.isInternal(g))->size());
+
+helper context ECORE!EPackage def: PILN(p : ECORE!EPackage) : Integer = self.IILN + self.EILN(p);
+
+helper context ECORE!EPackage def: ECLN(p : ECORE!EPackage) : Integer = self.supplierClassesInPackages(p)->size();
+
+helper context ECORE!EPackage def: ICLN() : Integer = self.internalSupplierClasses->size();
+
+helper context ECORE!EPackage def: PCLN(p : ECORE!EPackage) : Integer = self.ICLN() + self.ECLN(p);
+
+helper context ECORE!EPackage def: AVN(a : ECORE!EStructuralFeature) : Integer = self.FVN(a);
+
+helper context ECORE!EPackage def: OVN(o : ECORE!EOperation) : Integer = self.FVN(o);
+
+helper context ECORE!EPackage def: FVN(f : ECORE!EOperation) : Integer = self.allClasses->iterate(c;acc:Integer = 0 | if ( c.FCV(f) ) then
    acc + 1
-  else
+else
    acc
-  endif
- ); --@end helper QMOOD::NSI
---@begin helper QMOOD::NNC
---@comments Number of Internal Classes
---@comments Count of the number of internal Classes defined for creating generalization-specialization structures in Class hierarchies of the design.
---@comments In this case, why to have the same value than NOH? Has this metric another interpretation? [Abreu et al., 2000] say that this metric is always equal to DSC or DSC -1, by the reasons pointed out in NOH and NSI.
---@end helper QMOOD::NSI
---@begin helper QMOOD::NNC
---@comments Number of Internal Classes
---@comments Count of the number of internal Classes defined for creating generalization-specialization structures in Class hierarchies of the design.
---@comments In this case, why to have the same value than NOH? Has this metric another interpretation? [Abreu et al., 2000] say that this metric is always equal to DSC or DSC -1, by the reasons pointed out in NOH and NSI.
-helper context ECORE!EPackage def: NNC() : Integer =
- self.NOH(); --@end helper QMOOD::NNC
---@begin helper QMOOD::NAC
---@comments Number of Abstract Classes
---@comments Count of the number of Classes that have been defined purely for organizing information in the design.
---@end helper QMOOD::NNC
---@begin helper QMOOD::NAC
---@comments Number of Abstract Classes
---@comments Count of the number of Classes that have been defined purely for organizing information in the design.
-helper context ECORE!EPackage def: NAC() : Integer =
- self.allClasses->select(c |
-  c.isAbstract
- )->size(); --@end helper QMOOD::NAC
---@begin helper QMOOD::NLC
---@comments Number of Leaf Classes
---@comments Count of the number of leaf Classes in the hierarchies of the design.
---@comments This metric is the same than NIC, defined above.
---@end helper QMOOD::NAC
---@begin helper QMOOD::NLC
---@comments Number of Leaf Classes
---@comments Count of the number of leaf Classes in the hierarchies of the design.
---@comments This metric is the same than NIC, defined above.
-helper context ECORE!EPackage def: NLC() : Integer =
- self.allClasses->select(c |
-  c.isLeaf
- )->size(); --@end helper QMOOD::NLC
---@begin helper QMOOD::ADI
---@comments Average Depth of Inheritance
---@comments The average depth of inheritance of Classes in the design. It is computed by dividing the summation of maximum path lengths to all Classes by the number of Classes. The path length for a Class is the number of edges from the root to the Class in an inheritance tree representation. 
---@end helper QMOOD::NLC
---@begin helper QMOOD::ADI
---@comments Average Depth of Inheritance
---@comments The average depth of inheritance of Classes in the design. It is computed by dividing the summation of maximum path lengths to all Classes by the number of Classes. The path length for a Class is the number of edges from the root to the Class in an inheritance tree representation. 
-helper context ECORE!EPackage def: ADI() : Real =
- self.allClasses->iterate(c; acc : Real = 0 |
-  (acc + c.DIT()) / self.CN()
- ); --@end helper QMOOD::ADI
---@begin helper QMOOD::AWI
---@comments Average Width of Inheritance
---@comments The average number of children per Class in the design. The metric is computed by dividing the summation of the number of children over all Classes by the number of Classes in the design.
---@comments Accordingly to a different view point, [Abreu et al., 2000] say this metric is always equal to DSC or DSC - 1, when multiple inheritance is not supported by the language, as in Smalltalk, Eiffel or Java. The same happens with NOH, NSI and NNC.
---@end helper QMOOD::ADI
---@begin helper QMOOD::AWI
---@comments Average Width of Inheritance
---@comments The average number of children per Class in the design. The metric is computed by dividing the summation of the number of children over all Classes by the number of Classes in the design.
---@comments Accordingly to a different view point, [Abreu et al., 2000] say this metric is always equal to DSC or DSC - 1, when multiple inheritance is not supported by the language, as in Smalltalk, Eiffel or Java. The same happens with NOH, NSI and NNC.
-helper context ECORE!EPackage def: AWI() : Real =
- self.allClasses->iterate(c; acc : Real = 0 |
-  (acc + c.CHIN()) / self.CN()
- ); --@end helper QMOOD::AWI
---@begin helper QMOOD::ANA
---@comments Average Number of Ancestors
---@comments The average number of Classes from which a class inherits information.
---@comments This metric is similar to the ADI measure and differs only when there are instances of multiple inheritance in the design.
---@end helper QMOOD::AWI
---@begin helper QMOOD::ANA
---@comments Average Number of Ancestors
---@comments The average number of Classes from which a class inherits information.
---@comments This metric is similar to the ADI measure and differs only when there are instances of multiple inheritance in the design.
-helper context ECORE!EPackage def: ANA() : Real =
- if self.CN() > 0 then
-  self.internalBaseClasses->size() / self.CN()
- else
-  0
- endif; --@end helper QMOOD::ANA
---@comments This metrics is not used because result can be negative.
---@begin helper QMOOD::MFM
---@comments Measure of Functional Modularity
---@comments Computes modularity based on the deviation of the number of Methods in a Class from the average number of Methods per Class in the design.
---@comments A value closer than zero is preferred for this metric. A lower value indicates a smaller deviation among Classes in the number of services provided.
---helper context UML2!Class
---def : MFM() : Integer =
---	let owner : UML2!Package = self.owner in
---	if not owner.oclIsUndefined()
---		then if owner.CN() > 0
---				then if owner.PAON() / owner.CN() > 0
---						then (self.allOperations->size() -
---							  (owner.PAON() / owner.CN())) /
---							  	(owner.PAON() / owner.CN())
---						else 0
---					endif
---				else 0
---			endif
---		else 0
---	endif;
---@end helper QMOOD::MFM
---@begin helper QMOOD::MFA
---@comments Measure of Functional Abstraction
---@comments The ratio of the number of Methods inherited by a class to the total number of Methods accessible by members in the Class.
---@comments In order to calculate MFA, the number of Operations must be greater than zero.
---@end helper QMOOD::ANA
---@comments This metrics is not used because result can be negative.
---@begin helper QMOOD::MFM
---@comments Measure of Functional Modularity
---@comments Computes modularity based on the deviation of the number of Methods in a Class from the average number of Methods per Class in the design.
---@comments A value closer than zero is preferred for this metric. A lower value indicates a smaller deviation among Classes in the number of services provided.
---helper context UML2!Class
---def : MFM() : Integer =
---	let owner : UML2!Package = self.owner in
---	if not owner.oclIsUndefined()
---		then if owner.CN() > 0
---				then if owner.PAON() / owner.CN() > 0
---						then (self.allOperations->size() -
---							  (owner.PAON() / owner.CN())) /
---							  	(owner.PAON() / owner.CN())
---						else 0
---					endif
---				else 0
---			endif
---		else 0
---	endif;
---@end helper QMOOD::MFM
---@begin helper QMOOD::MFA
---@comments Measure of Functional Abstraction
---@comments The ratio of the number of Methods inherited by a class to the total number of Methods accessible by members in the Class.
---@comments In order to calculate MFA, the number of Operations must be greater than zero.
-helper context ECORE!EClass def: MFA() : Integer =
- if self.AON() > 0 then
-  self.ION() / self.allOperations->iterate(o; acc : Integer = 0 |
-   if self.FCV(o) then
-    acc + 1
-   else
-    acc
-   endif
-  )
- else
-  0
- endif; --@end helper QMOOD::MFA
---@begin helper QMOOD::MAA
---@comments Measure of Attribute Abstraction
---@comments The ratio of the number of Attributes inherited by a Class to the total number of Attributes in the Class.
---@comments In order to calculate MAA, number of attributes must be greater than zero.
---@end helper QMOOD::MFA
---@begin helper QMOOD::MAA
---@comments Measure of Attribute Abstraction
---@comments The ratio of the number of Attributes inherited by a Class to the total number of Attributes in the Class.
---@comments In order to calculate MAA, number of attributes must be greater than zero.
-helper context ECORE!EClass def: MAA() : Integer =
- let nbFCV : Integer = self.allAttributes->iterate(a; acc : Integer = 0 |
-  if self.FCV(a) then
-   acc + 1
-  else
-   acc
-  endif
- ) in
- if nbFCV > 0 then
-  self.IAN() / nbFCV
- else
-  0
- endif; --@end helper QMOOD::MAA
---@begin helper QMOOD::MAT
---@comments Measure of Abstraction
---@comments The average of functional and attribute abstraction measures.
---@end helper QMOOD::MAA
---@begin helper QMOOD::MAT
---@comments Measure of Abstraction
---@comments The average of functional and attribute abstraction measures.
-helper context ECORE!EClass def: MAT() : Integer =
- (self.MFA() + self.MAA()) / 2; --@end helper QMOOD::MAT
---@begin helper QMOOD::MOA
---@comments Measure of Aggregation
---@comments Count of the number of data declarations whose types are user defined Classes.
---@end helper QMOOD::MAT
---@begin helper QMOOD::MOA
---@comments Measure of Aggregation
---@comments Count of the number of data declarations whose types are user defined Classes.
-helper context ECORE!EClass def: MOA() : Integer =
- let owner : ECORE!EPackage = self.owner in
- if not owner.oclIsUndefined() then
-  self.allAttributes->iterate(a; acc : Integer = 0 |
-   if owner.allClasses->includes(a.type) then
-    acc + 1
-   else
-    acc
-   endif
-  )
- else
-  0
- endif; --@end helper QMOOD::MOA
---@begin helper QMOOD::MRM
---@comments Modeled Relationship Measure
---@comments Measure of the total number of Attribute and Parameter based relationships in a Class.
---@end helper QMOOD::MOA
---@begin helper QMOOD::MRM
---@comments Modeled Relationship Measure
---@comments Measure of the total number of Attribute and Parameter based relationships in a Class.
-helper context ECORE!EClass def: MRM() : Integer =
- self.DCC() + self.NAD(); --@end helper QMOOD::MRM
---@begin helper QMOOD::DAM
---@comments Data Access Metric
---@comments The ratio of the number of private Attributes to the total number of Attributes declared in a Class.
---@comments A high value of DAM is desired. The pre-condition states that the Class must have Attributes.
---@end helper QMOOD::MRM
---@begin helper QMOOD::DAM
---@comments Data Access Metric
---@comments The ratio of the number of private Attributes to the total number of Attributes declared in a Class.
---@comments A high value of DAM is desired. The pre-condition states that the Class must have Attributes.
-helper context ECORE!EClass def: DAM() : Integer =
- if self.AAN() > 0 then
-  self.PRIAN() / self.AAN()
- else
-  0
- endif; --@end helper QMOOD::DAM
---@begin helper QMOOD::OAM
---@comments Operation Access Metric
---@comments The ratio of the number of public Methods to the total number of Methods declared in the Class.
---@comments A high value for OAM is desired. The pre-condition states that the Class must have Operations.
---@end helper QMOOD::DAM
---@begin helper QMOOD::OAM
---@comments Operation Access Metric
---@comments The ratio of the number of public Methods to the total number of Methods declared in the Class.
---@comments A high value for OAM is desired. The pre-condition states that the Class must have Operations.
-helper context ECORE!EClass def: OAM() : Integer =
- if self.AON() > 0 then
-  self.PUBON() / self.AON()
- else
-  0
- endif; --@end helper QMOOD::OAM
---@begin helper QMOOD::MAM
---@comments Member Access Metric
---@comments This metric computes the access to all the members (Attributes and Methods) of a Class.
---@comments A high value for MAM is desired.
---@end helper QMOOD::OAM
---@begin helper QMOOD::MAM
---@comments Member Access Metric
---@comments This metric computes the access to all the members (Attributes and Methods) of a Class.
---@comments A high value for MAM is desired.
-helper context ECORE!EClass def: MAM() : Integer =
- (1 - self.DAM() + self.OAM()) / 2; --@end helper QMOOD::MAM
---@begin helper QMOOD::NOA
---@comments Number of Ancestors
---@comments Counts the number of distinct Classes which a Class inherits.
---@end helper QMOOD::MAM
---@begin helper QMOOD::NOA
---@comments Number of Ancestors
---@comments Counts the number of distinct Classes which a Class inherits.
-helper context ECORE!EClass def: NOA() : Integer =
- self.ASCN(); --@end helper QMOOD::NOA
---@begin helper QMOOD::NOM
---@comments Number of Methods
---@comments Count of all the Methods defined in a Class.
---@end helper QMOOD::NOA
---@begin helper QMOOD::NOM
---@comments Number of Methods
---@comments Count of all the Methods defined in a Class.
-helper context ECORE!EClass def: NOM() : Integer =
- self.AON(); --@end helper QMOOD::NOM
---@begin helper QMOOD::CIS
---@comments Class Interface Size
---@comments Number of public Methods in a Class.
---@end helper QMOOD::NOM
---@begin helper QMOOD::CIS
---@comments Class Interface Size
---@comments Number of public Methods in a Class.
-helper context ECORE!EClass def: CIS() : Integer =
- self.PUBON(); --@end helper QMOOD::CIS
---@begin helper QMOOD::NPT
---@comments Number of Unique Parameter Types
---@comments Number of different Parameter types used in the Methods of the Class.
---@end helper QMOOD::CIS
---@begin helper QMOOD::NPT
---@comments Number of Unique Parameter Types
---@comments Number of different Parameter types used in the Methods of the Class.
-helper context ECORE!EClass def: NPT() : Integer =
- self.allParametersTypes->size(); --@end helper QMOOD::NPT
---@begin helper QMOOD::NPM
---@comments Number of Parameters per Method
---@comments Average of the number of Parameters per Method in the Class. Computed by summing the Parameters of all Methods and dividing by the number of Methods in the Class.
---@comments The pre-condition states the Class must have some Operations.
---@end helper QMOOD::NPT
---@begin helper QMOOD::NPM
---@comments Number of Parameters per Method
---@comments Average of the number of Parameters per Method in the Class. Computed by summing the Parameters of all Methods and dividing by the number of Methods in the Class.
---@comments The pre-condition states the Class must have some Operations.
-helper context ECORE!EClass def: NPM() : Integer =
- if self.AON() > 0 then
-  self.allParameters->size() / self.AON()
- else
-  0
- endif; --@end helper QMOOD::NPM
---@begin helper QMOOD::NOD
---@comments Number of Attributes
---@comments Number of Attributes in the Class.
---@end helper QMOOD::NPM
---@begin helper QMOOD::NOD
---@comments Number of Attributes
---@comments Number of Attributes in the Class.
-helper context ECORE!EClass def: NOD() : Integer =
- self.AAN(); --@end helper QMOOD::NOD
---@begin helper QMOOD::NAD
---@comments Number of Abstract Data Types
---@comments Number of user defined objects (ADTs) used as Attributes in the Class and which are necessary to instantiate an object instance of the (aggregate) Class.
---@end helper QMOOD::NOD
---@begin helper QMOOD::NAD
---@comments Number of Abstract Data Types
---@comments Number of user defined objects (ADTs) used as Attributes in the Class and which are necessary to instantiate an object instance of the (aggregate) Class.
-helper context ECORE!EClass def: NAD() : Integer =
- self.allAttributesTypes->size(); --@end helper QMOOD::NAD
---@begin helper QMOOD::NPA
---@comments Number of Public Attributes
---@comments Number of Attributes that are declared as public in the Class.
---@end helper QMOOD::NAD
---@begin helper QMOOD::NPA
---@comments Number of Public Attributes
---@comments Number of Attributes that are declared as public in the Class.
-helper context ECORE!EClass def: NPA() : Integer =
- self.PUBAN(); --@end helper QMOOD::NPA
---@begin helper QMOOD::CSM
---@comments Class Size Metric
---@comments Sum of the number of Methods and Attributes in the Class.
---@end helper QMOOD::NPA
---@begin helper QMOOD::CSM
---@comments Class Size Metric
---@comments Sum of the number of Methods and Attributes in the Class.
-helper context ECORE!EClass def: CSM() : Integer =
- self.AAN() + self.AON(); --@end helper QMOOD::CSM
---@begin helper QMOOD::CAM
---@comments Cohesion Among Methods of Class
---@comments Computes the relatedness among Methods of the Class based upon the Parameter list of the Methods.
---@comments The metrics is computed using the summation of the intersection of Parameters of a Method with the maximum independent set of all Parameter types in the Class.
---@end helper QMOOD::CSM
---@begin helper QMOOD::CAM
---@comments Cohesion Among Methods of Class
---@comments Computes the relatedness among Methods of the Class based upon the Parameter list of the Methods.
---@comments The metrics is computed using the summation of the intersection of Parameters of a Method with the maximum independent set of all Parameter types in the Class.
-helper context ECORE!EClass def: CAM() : Integer =
- let divisor : Integer = self.AON() * self.allParametersTypes->size() in
- if divisor > 0 then
-  self.allOperations->iterate(o; acc : Integer = 0 |
-   acc + o.allParametersTypes->size()
-  ) / divisor
- else
-  0
- endif; --@end helper QMOOD::CAM
---@begin helper QMOOD::DCC
---@comments Direct Class Coupling
---@comments Count of the different number of Classes that a Class is directly related to. The metric includes Classes that are directly related by Attribute declarations and message passing (Parameters) in Methods.
---@end helper QMOOD::CAM
---@begin helper QMOOD::DCC
---@comments Direct Class Coupling
---@comments Count of the different number of Classes that a Class is directly related to. The metric includes Classes that are directly related by Attribute declarations and message passing (Parameters) in Methods.
-helper context ECORE!EClass def: DCC() : Integer =
- self.allAttributesTypes->union(self.allParametersTypes)->size(); --@end helper QMOOD::DCC
---@begin helper QMOOD::MCC
---@comments Maximum Class Coupling
---@comments This metric not only includes Classes that are directly related to a Class by Attributes and Methods, but also Classes that are indirectly related through the directly related Classes.
---@end helper QMOOD::DCC
---@begin helper QMOOD::MCC
---@comments Maximum Class Coupling
---@comments This metric not only includes Classes that are directly related to a Class by Attributes and Methods, but also Classes that are indirectly related through the directly related Classes.
-helper context ECORE!EClass def: MCC() : Integer =
- self.allAttributesTypes->union(self.allParametersTypes)->iterate(t; acc : Sequence(ECORE!EClass) = Sequence {} |
-  acc->union(t.allAttributesTypes)->union(t.allParametersTypes)
- )->asSet()->size(); --@end helper QMOOD::MCC
---@begin helper QMOOD::DAC
---@comments Direct Attribute Based Coupling
---@comments This metric is a direct count of the number of different Class types that are declared as Attribute references inside a Class.
---@end helper QMOOD::MCC
---@begin helper QMOOD::DAC
---@comments Direct Attribute Based Coupling
---@comments This metric is a direct count of the number of different Class types that are declared as Attribute references inside a Class.
-helper context ECORE!EClass def: DAC() : Integer =
- self.allAttributesTypes->size(); --@end helper QMOOD::DAC
---@begin helper QMOOD::DPC
---@comments Direct Parameter Based Coupling
---@comments Number of Class object types that are required directly for a message passing (Parameters) to Methods in the Class.
---@end helper QMOOD::DAC
---@begin helper QMOOD::DPC
---@comments Direct Parameter Based Coupling
---@comments Number of Class object types that are required directly for a message passing (Parameters) to Methods in the Class.
-helper context ECORE!EClass def: DPC() : Integer =
- self.allParametersTypes->size(); --@end helper QMOOD::DPC
---@begin helper QMOOD::MPC
---@comments Maximum Parameter Based Coupling
---@comments Number of Class object types that are required directly and indirectly for message passing (Parameters) in the Class.
---@end helper QMOOD::DPC
---@begin helper QMOOD::MPC
---@comments Maximum Parameter Based Coupling
---@comments Number of Class object types that are required directly and indirectly for message passing (Parameters) in the Class.
-helper context ECORE!EClass def: MPC() : Integer =
- self.allParametersTypes->iterate(t; acc : Sequence(ECORE!EClass) = Sequence {} |
-  acc->union(t.allParametersTypes)
- )->asSet()->size(); --@end helper QMOOD::MPC
---@begin helper QMOOD::CCD
---@comments Class Complexity Based on Data
---@comments Computes complexity based upon the number of components (Attributes) that are defined in the Class.
---@comments All component declarations are resolved to the basic primitives (integers, doubles and characters).
---@comments The metric value is a count of the number of primitives.
---@end helper QMOOD::MPC
---@begin helper QMOOD::CCD
---@comments Class Complexity Based on Data
---@comments Computes complexity based upon the number of components (Attributes) that are defined in the Class.
---@comments All component declarations are resolved to the basic primitives (integers, doubles and characters).
---@comments The metric value is a count of the number of primitives.
-helper context ECORE!EClass def: CCD() : Integer =
- self.AAN() + self.allAttributesTypes->iterate(t; acc : Integer = 0 |
-  acc + t.AAN()
- ); --@end helper QMOOD::CCD
---@begin helper QMOOD::CCP
---@comments Class Complexity Based on Method Parameters
---@comments Estimates complexity based upon the number of Parameters required to call Methods of the Class.
---@comments Inherited Method Parameters are also included in the computation of the metric value.
---@end helper QMOOD::CCD
---@begin helper QMOOD::CCP
---@comments Class Complexity Based on Method Parameters
---@comments Estimates complexity based upon the number of Parameters required to call Methods of the Class.
---@comments Inherited Method Parameters are also included in the computation of the metric value.
-helper context ECORE!EClass def: CCP() : Integer =
- self.allParameters->size(); --@end helper QMOOD::CCP
---@begin helper QMOOD::CCM
---@comments Class Complexity Based on Members
---@comments This metric is an aggregate of the data and method Parameter complexities.
---@end helper QMOOD::CCP
---@begin helper QMOOD::CCM
---@comments Class Complexity Based on Members
---@comments This metric is an aggregate of the data and method Parameter complexities.
-helper context ECORE!EClass def: CCM() : Integer =
- self.CCD() + self.CCP(); --@end helper QMOOD::CCM
---@atlcompiler	atl2006
---@name			MOOD4UML2
---@version		1.0
---@domains		UML2, MOOD, MOOD2, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/06/05
---@description	This library provides MOOD (Metrics for Object-Oriented Design) and MOOD2 metrics suites on UML2 models (from Eclipse UML2 Project). The models have been extracted from Jar files using the Eclipse plug-in Jar2UML. Only the metrics that fit to UML2 models have been implemented.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library MOOD4UML2; -- Library Template
--- ============================================================
--- MOOD and MOOD2 Metrics : Intra-Specification Level Metrics =
--- ============================================================
---@begin helper MOOD::AIF
---@comments Attributes Inheritance Factor
---@comments Quotient between the number of inherited Properties in all Classes of the Package and the number of available Properties (locally defined plus inherited) for all Classes of the current Package.
---@comments The pre-condition states that the package must have available Properties.
---@comments AIF() = 0 means that there is no effective Property inheritance (either there are no inheritance hierarchies or all inherited Properties are redefined).
---@end helper QMOOD::CCM
---@atlcompiler	atl2006
---@name			MOOD4UML2
---@version		1.0
---@domains		UML2, MOOD, MOOD2, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/06/05
---@description	This library provides MOOD (Metrics for Object-Oriented Design) and MOOD2 metrics suites on UML2 models (from Eclipse UML2 Project). The models have been extracted from Jar files using the Eclipse plug-in Jar2UML. Only the metrics that fit to UML2 models have been implemented.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library MOOD4UML2; -- Library Template
--- ============================================================
--- MOOD and MOOD2 Metrics : Intra-Specification Level Metrics =
--- ============================================================
---@begin helper MOOD::AIF
---@comments Attributes Inheritance Factor
---@comments Quotient between the number of inherited Properties in all Classes of the Package and the number of available Properties (locally defined plus inherited) for all Classes of the current Package.
---@comments The pre-condition states that the package must have available Properties.
---@comments AIF() = 0 means that there is no effective Property inheritance (either there are no inheritance hierarchies or all inherited Properties are redefined).
-helper context ECORE!EPackage def: AIF() : Real =
- if self.PAAN() > 0 then
-  self.PIAN() / self.PAAN()
- else
-  0
- endif; --@end helper MOOD::AIF
---@begin helper MOOD::OIF
---@comments Operations Inheritance Factor
---@comments Quotient between the number of inherited Operations in all Classes of the Package and the number of available Operations (locally defined plus inherited) for all Classes of the current Package.
---@comments The pre-condition states that the package must have available Operations.
---@comments OIF() = 0 means that there is no effective Operation inheritance (either there are no inheritance hierarchies or all inherited Operations are redefined).
---@end helper MOOD::AIF
---@begin helper MOOD::OIF
---@comments Operations Inheritance Factor
---@comments Quotient between the number of inherited Operations in all Classes of the Package and the number of available Operations (locally defined plus inherited) for all Classes of the current Package.
---@comments The pre-condition states that the package must have available Operations.
---@comments OIF() = 0 means that there is no effective Operation inheritance (either there are no inheritance hierarchies or all inherited Operations are redefined).
-helper context ECORE!EPackage def: OIF() : Real =
- if self.PAON() > 0 then
-  self.PION() / self.PAON()
- else
-  0
- endif; --@end helper MOOD::OIF
---@begin helper MOOD2::IIF
---@comments Internal Inheritance Factor
---@comments Quotient between the number of inheritance links where both the base and derived Classes belong to the current Package and the total number of inheritance links originating in the current Package.
---@comments The pre-condition states that the package must have some inheritance links defined on it.
---@comments Inheritance links originating in the current package are those where the derived Class belongs to it.
---@comments The inheritance link is directed from the derived Class to the base one.
---@end helper MOOD::OIF
---@begin helper MOOD2::IIF
---@comments Internal Inheritance Factor
---@comments Quotient between the number of inheritance links where both the base and derived Classes belong to the current Package and the total number of inheritance links originating in the current Package.
---@comments The pre-condition states that the package must have some inheritance links defined on it.
---@comments Inheritance links originating in the current package are those where the derived Class belongs to it.
---@comments The inheritance link is directed from the derived Class to the base one.
-helper context ECORE!EPackage def: IIF() : Real =
- if self.IILN > 0 then
-  self.IILN / self.PILN(self)
- else
-  0
- endif; --@end helper MOOD2::IIF
---@begin helper MOOD::AHF
---@comments Attributes Hiding Factor
---@comments Quotient between the sum of the invisibilities of all Properties defined in all Classes in the current Package and the total number of Properties defined in the Package.
---@comments The invisibility of an Property is the percentage of the Classes in the package from which this Properties is not visible and is given by 1-APV( self ), where self is the current Package.
---@comments If all Properties are private, the numerator is 0 and as such, AHF() = 0.
---@comments If all Properties are public, the numerator is 0 and as such, AHF() = 1.
---@comments The pre-condition regarding the number of Classes is required for calculating the Properties visibility (the package must have some Classes).
---@comments The second pre-condition means that Properties are necessary for calculating the metric.
---@end helper MOOD2::IIF
---@begin helper MOOD::AHF
---@comments Attributes Hiding Factor
---@comments Quotient between the sum of the invisibilities of all Properties defined in all Classes in the current Package and the total number of Properties defined in the Package.
---@comments The invisibility of an Property is the percentage of the Classes in the package from which this Properties is not visible and is given by 1-APV( self ), where self is the current Package.
---@comments If all Properties are private, the numerator is 0 and as such, AHF() = 0.
---@comments If all Properties are public, the numerator is 0 and as such, AHF() = 1.
---@comments The pre-condition regarding the number of Classes is required for calculating the Properties visibility (the package must have some Classes).
---@comments The second pre-condition means that Properties are necessary for calculating the metric.
-helper context ECORE!EPackage def: AHF() : Real =
- if self.CN() > 1 then
-  if self.PDAN() > 0 then
-   self.definedAttributes->iterate(a; acc : Real = 0 |
-    acc + 1 - self.APV(a)
-   ) / self.PDAN()
-  else
+endif);
+
+helper context ECORE!EPackage def: APV(a : ECORE!EStructuralFeature) : Real = if ( self.CN() > 1 ) then
+   ( self.AVN(a) - 1 ) / ( self.CN() - 1 )
+else
    0
-  endif
- else
-  0
- endif; --@end helper MOOD::AHF
---@begin helper MOOD::OHF
---@comments Operations Hiding Factor
---@comments Quotient between the sum of the invisibilities of all Operations defined in all Classes in the current Package and the total number of Operations defined in the Package.
---@comments The invisibility of an Operation is the percentage of the total Classes in the package from which this Operation is not visible and is given by 1-OPV( self ), where self is the current package.
---@comments If all Operations are public the numerator equals the denominator and then OHF() = 1.
---@comments Otherwise, if all Operations are private, OHF() = 0.
---@comments The pre-condition regarding the number of Classes is required for calculating the Operations visibility (the package must have some Classes).
---@comments The second pre-condition means that Operations are necessary for calculating the metric.
---@end helper MOOD::AHF
---@begin helper MOOD::OHF
---@comments Operations Hiding Factor
---@comments Quotient between the sum of the invisibilities of all Operations defined in all Classes in the current Package and the total number of Operations defined in the Package.
---@comments The invisibility of an Operation is the percentage of the total Classes in the package from which this Operation is not visible and is given by 1-OPV( self ), where self is the current package.
---@comments If all Operations are public the numerator equals the denominator and then OHF() = 1.
---@comments Otherwise, if all Operations are private, OHF() = 0.
---@comments The pre-condition regarding the number of Classes is required for calculating the Operations visibility (the package must have some Classes).
---@comments The second pre-condition means that Operations are necessary for calculating the metric.
-helper context ECORE!EPackage def: OHF() : Real =
- if self.CN() > 1 then
-  if self.PDON() > 0 then
-   self.definedOperations->iterate(o; acc : Real = 0 |
-    acc + 1 - self.OPV(o)
-   ) / self.PDON()
-  else
+endif;
+
+helper context ECORE!EPackage def: OPV(o : ECORE!EOperation) : Real = if ( self.CN() > 1 ) then
+   ( self.OVN(o) - 1 ) / ( self.CN() - 1 )
+else
    0
-  endif
- else
-  0
- endif; --@end helper MOOD::OHF
---@begin helper MOOD2::AHEF
---@comments Attributes Hiding Effectiveness Factor
---@comments Quotient between the cumulative number of the Package Classes that do access the Package Properties and the cumulative number of the Package Classes that can access the Package Properties.
---@end helper MOOD::OHF
---@begin helper MOOD2::AHEF
---@comments Attributes Hiding Effectiveness Factor
---@comments Quotient between the cumulative number of the Package Classes that do access the Package Properties and the cumulative number of the Package Classes that can access the Package Properties.
-helper context ECORE!EPackage def: AHEF() : Real =
- let avnSum : Integer = self.allAttributes->iterate(a; acc : Integer = 0 |
-  acc + self.AVN(a)
- ) in
- if avnSum > 0 then
-  self.allAttributes->iterate(a; acc : Integer = 0 |
-   acc + a.AUN()
-  ) / avnSum
- else
-  0
- endif; --@end helper MOOD2::AHEF
---@begin helper MOOD2::OHEF
---@comments Operations Hiding Effectiveness Factor 
---@comments Quotient between the cumulative number of the Package Classes that do access the Package Operations and the cumulative number of the Package Classes that can access the Package Operations.
---@end helper MOOD2::AHEF
---@begin helper MOOD2::OHEF
---@comments Operations Hiding Effectiveness Factor 
---@comments Quotient between the cumulative number of the Package Classes that do access the Package Operations and the cumulative number of the Package Classes that can access the Package Operations.
-helper context ECORE!EPackage def: OHEF() : Real =
- let ovnSum : Integer = self.allOperations->iterate(op; acc : Integer = 0 |
-  acc + self.OVN(op)
- ) in
- if ovnSum > 0 then
-  self.allOperations->iterate(op; acc : Integer = 0 |
-   acc + op.OUN()
-  ) / ovnSum
- else
-  0
- endif; --@end helper MOOD2::OHEF
---@begin helper MOOD::BPF
---@comments Behavioral Polymorphism Factor
---@comments Quotient between the actual number of possible different polymorphic situations within the current Package and the maximum number of possible distinct polymorphic situations (due to inheritance).
---@comments An Operation in a Class Ci can have as many shapes ("morphos" in ancient Greek) as the number of times it is overridden (in Ci descendants).
---@comments This represents the actual number of, possible different, polymorphic situations for that Class (For this metric, the overriding of Operations is considered only when defined in the current package).
---@comments The maximum number of possible distinct polymorphic situations for Class Ci occurs if all new Operations defined in it are overridden in all of their derived Classes.
---@end helper MOOD2::OHEF
---@begin helper MOOD::BPF
---@comments Behavioral Polymorphism Factor
---@comments Quotient between the actual number of possible different polymorphic situations within the current Package and the maximum number of possible distinct polymorphic situations (due to inheritance).
---@comments An Operation in a Class Ci can have as many shapes ("morphos" in ancient Greek) as the number of times it is overridden (in Ci descendants).
---@comments This represents the actual number of, possible different, polymorphic situations for that Class (For this metric, the overriding of Operations is considered only when defined in the current package).
---@comments The maximum number of possible distinct polymorphic situations for Class Ci occurs if all new Operations defined in it are overridden in all of their derived Classes.
-helper context ECORE!EPackage def: BPF() : Real =
- if self.PAON() > 0 then
-  self.POON() / self.PAON()
- else
-  0
- endif; --@end helper MOOD::BPF
---@begin helper MOOD::CCF
---@comments Parametric Polymorphism Factor
---@comments Quotient between the actual number of coupled class-pairs within the Package and the maximum possible number of class-pair couplings in the Package. This coupling is the one not imputable to inheritance.
---@comments In a coupled class-pair one Class is the client and the other is the supplier.
---@comments These clientsupplier relations can have several shapes; see the function Class::CoupledClasses for details.
---@comments The pre-condition states that, with only one Class, there are no couplings within the package.
---@comments The square root counteracts for the fact that the couplings grow quadratically with the number of Classes.
---@end helper MOOD::BPF
---@begin helper MOOD::CCF
---@comments Parametric Polymorphism Factor
---@comments Quotient between the actual number of coupled class-pairs within the Package and the maximum possible number of class-pair couplings in the Package. This coupling is the one not imputable to inheritance.
---@comments In a coupled class-pair one Class is the client and the other is the supplier.
---@comments These clientsupplier relations can have several shapes; see the function Class::CoupledClasses for details.
---@comments The pre-condition states that, with only one Class, there are no couplings within the package.
---@comments The square root counteracts for the fact that the couplings grow quadratically with the number of Classes.
-helper context ECORE!EPackage def: CCF() : Real =
- if self.CN() > 1 then
-  (self.ICLN() / (self.CN() * self.CN() - self.CN())).sqrt()
- else
-  0
- endif; --@end helper MOOD::CCF
---@begin helper MOOD::ICF
---@comments Internal Coupling Factor
---@comments Quotient between the number of coupling links where both the client and supplier Classes belong to the current Package and the total number of coupling links originating in the current Package.
---@comments Coupling links originating in the current Package are those where the client Class belongs to it.
---@comments The coupling link is directed from the client Class to the supplier one.
---@end helper MOOD::CCF
---@begin helper MOOD::ICF
---@comments Internal Coupling Factor
---@comments Quotient between the number of coupling links where both the client and supplier Classes belong to the current Package and the total number of coupling links originating in the current Package.
---@comments Coupling links originating in the current Package are those where the client Class belongs to it.
---@comments The coupling link is directed from the client Class to the supplier one.
-helper context ECORE!EPackage def: ICF() : Real =
- if self.ICLN() > 0 then
-  self.ICLN() / self.PCLN(self)
- else
-  0
- endif; --@end helper MOOD::ICF
---@atlcompiler	atl2006
---@name			FLAME4UML2
---@version		1.1
---@domains		UML2, FLAME, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/08/02
---@description	This library implements a subset of FLAME (Formal Library for Aiding Metrics Extraction) functions applied on UML2 models (from Eclipse UML2 Project). These functions navigate through the UML2 metamodel and are used by other metrics libraries.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library UML22Measure; -- Library Template
---@begin attribute helper coupledClasses
---@comments Set of Classs to which the current Class is coupled (excluding inheritance).
---@end helper MOOD::ICF
---@atlcompiler	atl2006
---@name			FLAME4UML2
---@version		1.1
---@domains		UML2, FLAME, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/08/02
---@description	This library implements a subset of FLAME (Formal Library for Aiding Metrics Extraction) functions applied on UML2 models (from Eclipse UML2 Project). These functions navigate through the UML2 metamodel and are used by other metrics libraries.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library UML22Measure; -- Library Template
---@begin attribute helper coupledClasses
---@comments Set of Classs to which the current Class is coupled (excluding inheritance).
-helper context ECORE!EClass def: coupledClasses : Set(ECORE!EClass) =
- self.allAttributesTypes->union(self.allParametersTypes); --@end attribute helper coupledClasses
---@begin attribute helper newFeatures
---@comments Sequence of Features declared in the current Class. This definition excludes inherited Features (and consequently, it excludes overridden Features).
---@end attribute helper coupledClasses
---@begin attribute helper newFeatures
---@comments Sequence of Features declared in the current Class. This definition excludes inherited Features (and consequently, it excludes overridden Features).
-helper context ECORE!EClass def: newFeatures : Sequence(ECORE!EStructuralFeature) =
- self.newAttributes->union(self.newOperations); --@end attribute helper newFeatures
---@begin attribute helper definedFeatures
---@comments Sequence of Features declared in the Class, including overridden Features.
---@end attribute helper newFeatures
---@begin attribute helper definedFeatures
---@comments Sequence of Features declared in the Class, including overridden Features.
-helper context ECORE!EClass def: definedFeatures : Sequence(ECORE!EStructuralFeature) =
- self.definedAttributes->union(self.definedOperations); --@end attribute helper definedFeatures
---@begin attribute helper directlyInheritedFeatures
---@comments Sequence of directly inherited Features.
---@end attribute helper definedFeatures
---@begin attribute helper directlyInheritedFeatures
---@comments Sequence of directly inherited Features.
-helper context ECORE!EClass def: directlyInheritedFeatures : Sequence(ECORE!EStructuralFeature) =
- self.directlyInheritedAttributes->union(self.directlyInheritedOperations); --@end attribute helper directlyInheritedFeatures
---@begin attribute helper allInheritedFeatures
---@comments Sequence containing all Features of the Class itself and all its inherited Features (both directly and indirectly).
---@end attribute helper directlyInheritedFeatures
---@begin attribute helper allInheritedFeatures
---@comments Sequence containing all Features of the Class itself and all its inherited Features (both directly and indirectly).
-helper context ECORE!EClass def: allInheritedFeatures : Sequence(ECORE!EStructuralFeature) =
- self.allInheritedAttributes->union(self.allInheritedOperations); --@end attribute helper allInheritedFeatures
---@begin attribute helper overriddenFeatures
---@comments Sequence of redefined Features in the Class.
---@end attribute helper allInheritedFeatures
---@begin attribute helper overriddenFeatures
---@comments Sequence of redefined Features in the Class.
-helper context ECORE!EClass def: overriddenFeatures : Sequence(ECORE!EStructuralFeature) =
- self.overriddenAttributes->union(self.overriddenOperations); --@end attribute helper overriddenFeatures
---@begin attribute helper allFeatures
---@comments Sequence containing all Features of the Class itself and all its inherited Features.
---@end attribute helper overriddenFeatures
---@begin attribute helper allFeatures
---@comments Sequence containing all Features of the Class itself and all its inherited Features.
-helper context ECORE!EClass def: allFeatures : Sequence(ECORE!EStructuralFeature) =
- self.allAttributes->union(self.allOperations); --@end attribute helper allFeatures
---@begin attribute helper newAttributes
---@comments Sequence of Attributes declared in the current Class.
---@end attribute helper allFeatures
---@begin attribute helper newAttributes
---@comments Sequence of Attributes declared in the current Class.
-helper context ECORE!EClass def: newAttributes : Sequence(ECORE!EStructuralFeature) =
- self.definedAttributes->select(da |
-  self.allInheritedAttributes->collect(ia |
-   ia.name
-  )->excludes(da.name)
- ); --@end attribute helper newAttributes
---@begin attribute helper definedAttributes
---@comments Sequence of Properties declared in the Class, including overridden Properties.
---@end attribute helper newAttributes
---@begin attribute helper definedAttributes
---@comments Sequence of Properties declared in the Class, including overridden Properties.
-helper context ECORE!EClass def: definedAttributes : Sequence(ECORE!EStructuralFeature) =
- self.ownedAttribute;
+endif;
 
-helper context ECORE!EPackage def: definedAttributes : Sequence(ECORE!EStructuralFeature) =
- self.allClasses->collect(c |
-  c.definedAttributes
- )->flatten(); --@end attribute helper definedAttributes
---@begin attribute helper directlyInheritedAttributes
---@comments Sequence of directly inherited Properties.
---@end attribute helper definedAttributes
---@begin attribute helper directlyInheritedAttributes
---@comments Sequence of directly inherited Properties.
-helper context ECORE!EClass def: directlyInheritedAttributes : Sequence(ECORE!EStructuralFeature) =
- self.parents->iterate(p; acc : Sequence(ECORE!EStructuralFeature) = Sequence {} |
-  acc->union(p.newAttributes)
- ); --@end attribute helper directlyInheritedAttributes
---@begin attribute helper allInheritedAttributes
---@comments Sequence of all inherited Properties (both directly and indirectly).
---@end attribute helper directlyInheritedAttributes
---@begin attribute helper allInheritedAttributes
---@comments Sequence of all inherited Properties (both directly and indirectly).
-helper context ECORE!EClass def: allInheritedAttributes : Sequence(ECORE!EStructuralFeature) =
- self.directlyInheritedAttributes->union(self.parents->collect(p |
-  p.allInheritedAttributes
- )->flatten()); --@end attribute helper allInheritedAttributes
---@begin attribute helper overriddenAttributes
---@comments Sequence of redefined Properties in the Class.
---@end attribute helper allInheritedAttributes
---@begin attribute helper overriddenAttributes
---@comments Sequence of redefined Properties in the Class.
-helper context ECORE!EClass def: overriddenAttributes : Sequence(ECORE!EStructuralFeature) =
- self.definedAttributes->select(da |
-  self.allInheritedAttributes->collect(ia |
-   ia.name
-  )->includes(da.name)
- ); --@end attribute helper overriddenAttributes
---@begin attribute helper allAttributes
---@comments Sequence containing all Properties of the Class itself and all its inherited Properties (both directly and indirectly).
---@end attribute helper overriddenAttributes
---@begin attribute helper allAttributes
---@comments Sequence containing all Properties of the Class itself and all its inherited Properties (both directly and indirectly).
-helper context ECORE!EClass def: allAttributes : Sequence(ECORE!EStructuralFeature) =
- self.definedAttributes->union(self.allInheritedAttributes->reject(ia |
-  self.overriddenAttributes->collect(oa |
-   oa.name
-  )->includes(ia.name)
- ));
+helper context ECORE!EPackage def: FPV(f : ECORE!EOperation) : Real = if ( self.CN() > 1 ) then
+   ( self.FVN(f) - 1 ) / ( self.CN() - 1 )
+else
+   0
+endif;
 
-helper context ECORE!EPackage def: allAttributes : Sequence(ECORE!EStructuralFeature) =
- self.allClasses->collect(c |
-  c.allAttributes
- )->flatten(); --@end attribute helper allAttributes
---@begin attribute helper allAttributesTypes
---@comments Set containing all Types of all Attribtues of the Class.
---@end attribute helper allAttributes
---@begin attribute helper allAttributesTypes
---@comments Set containing all Types of all Attribtues of the Class.
-helper context ECORE!EClass def: allAttributesTypes : Set(ECORE!EClass) =
- self.allAttributes->collect(a |
-  a.type
- )->flatten()->select(t |
-  t.oclIsTypeOf(ECORE!EClass)
- )->asSet(); --@end attribute helper allAttributesTypes
---@begin attribute helper newOperations
---@comments Sequence of Operations declared in the current Class.
---@end attribute helper allAttributesTypes
---@begin attribute helper newOperations
---@comments Sequence of Operations declared in the current Class.
-helper context ECORE!EClass def: newOperations : Sequence(ECORE!EOperation) =
- self.definedOperations->select(dop |
-  self.allInheritedOperations->collect(iop |
-   iop.name
-  )->excludes(dop.name)
- ); --@end attribute helper newOperations
---@begin attribute helper definedOperations
---@comments Sequence of Operations declared in the Class, including overridden Operations.
---@end attribute helper newOperations
---@begin attribute helper definedOperations
---@comments Sequence of Operations declared in the Class, including overridden Operations.
-helper context ECORE!EClass def: definedOperations : Sequence(ECORE!EOperation) =
- self.ownedOperation;
+helper context ECORE!EPackage def: AIF() : Real = if ( self.PAAN() > 0 ) then
+   self.PIAN() / self.PAAN()
+else
+   0
+endif;
 
-helper context ECORE!EPackage def: definedOperations : Sequence(ECORE!EOperation) =
- self.allClasses->collect(c |
-  c.definedOperations
- )->flatten(); --@end attribute helper definedOperations
---@begin attribute helper directlyInheritedOperations
---@comments Sequence of directly inherited Operations.
---@end attribute helper definedOperations
---@begin attribute helper directlyInheritedOperations
---@comments Sequence of directly inherited Operations.
-helper context ECORE!EClass def: directlyInheritedOperations : Sequence(ECORE!EOperation) =
- self.parents->iterate(p; acc : Sequence(ECORE!EOperation) = Sequence {} |
-  acc->union(p.newOperations)
- ); --@end attribute helper directlyInheritedOperations
---@begin attribute helper allInheritedOperations
---@comments Sequence containing all Operations of the Class itself and all its inherited Operations (both directly and indirectly).
---@end attribute helper directlyInheritedOperations
---@begin attribute helper allInheritedOperations
---@comments Sequence containing all Operations of the Class itself and all its inherited Operations (both directly and indirectly).
-helper context ECORE!EClass def: allInheritedOperations : Sequence(ECORE!EOperation) =
- self.directlyInheritedOperations->union(self.parents->collect(p |
-  p.allInheritedOperations
- )->flatten()); --@end attribute helper allInheritedOperations
---@begin attribute helper overriddenOperations
---@comments Sequence of redefined Operations in the Class.
---@end attribute helper allInheritedOperations
---@begin attribute helper overriddenOperations
---@comments Sequence of redefined Operations in the Class.
-helper context ECORE!EClass def: overriddenOperations : Sequence(ECORE!EOperation) =
- self.definedOperations->select(dop |
-  self.allInheritedOperations->collect(iop |
-   iop.name
-  )->includes(dop.name)
- ); --@end attribute helper overriddenOperations
---@begin attribute helper allOperations
---@comments Sequence containing all Operations of the Class itself and all its inherited Operations.
---@end attribute helper overriddenOperations
---@begin attribute helper allOperations
---@comments Sequence containing all Operations of the Class itself and all its inherited Operations.
-helper context ECORE!EClass def: allOperations : Sequence(ECORE!EOperation) =
- self.definedOperations->union(self.allInheritedOperations->reject(iop |
-  self.overriddenOperations->collect(oop |
-   oop.name
-  )->includes(iop.name)
- ));
+helper context ECORE!EPackage def: OIF() : Real = if ( self.PAON() > 0 ) then
+   self.PION() / self.PAON()
+else
+   0
+endif;
 
-helper context ECORE!EPackage def: allOperations : Sequence(ECORE!EOperation) =
- self.allClasses->collect(c |
-  c.allOperations
- )->flatten()->asSet(); --@end attribute helper allOperations
---@begin attribute helper allParameters
---@comments Set containing all Parameters of all Operations of the Class.
---@end attribute helper allOperations
---@begin attribute helper allParameters
---@comments Set containing all Parameters of all Operations of the Class.
-helper context ECORE!EClass def: allParameters : Set(ECORE!EParameter) =
- self.allOperations->collect(o |
-  o.ownedParameter
- )->flatten()->select(t |
-  t.oclIsTypeOf(ECORE!EClass)
- )->asSet(); --@end attribute helper allParameters
---@begin attribute helper allParametersTypes
---@comments Set containing all Types of all Parameters of all Operations of the Class.
---@end attribute helper allParameters
---@begin attribute helper allParametersTypes
---@comments Set containing all Types of all Parameters of all Operations of the Class.
-helper context ECORE!EClass def: allParametersTypes : Set(ECORE!EClass) =
- self.allParameters->collect(param |
-  param.type
- )->flatten()->select(t |
-  t.oclIsTypeOf(ECORE!EClass)
- )->asSet();
+helper context ECORE!EPackage def: IIF() : Real = if ( self.IILN > 0 ) then
+   self.IILN / self.PILN(self)
+else
+   0
+endif;
 
-helper context ECORE!EOperation def: allParametersTypes : Set(ECORE!EClass) =
- self.ownedParameter->collect(param |
-  param.type
- )->flatten()->select(t |
-  t.oclIsTypeOf(ECORE!EClass)
- )->asSet(); --@end attribute helper allParametersTypes
---@begin attribute helper isRoot
---@comments Indicates whether the Class has ascendants or not. A true value indicates it has no ascendants and a false value indicates it has ascendants.
---@end attribute helper allParametersTypes
---@begin attribute helper isRoot
---@comments Indicates whether the Class has ascendants or not. A true value indicates it has no ascendants and a false value indicates it has ascendants.
-helper context ECORE!EClass def: isRoot : Boolean =
- self.parents->isEmpty(); --@end attribute helper isRoot
---@begin attribute helper isLeaf
---@comments Indicates whether the Class has descendants or not. A true value indicates it has no descendants and a false value indicates it has descendants.
---@end attribute helper isRoot
---@begin attribute helper isLeaf
---@comments Indicates whether the Class has descendants or not. A true value indicates it has no descendants and a false value indicates it has descendants.
-helper context ECORE!EClass def: isLeaf : Boolean =
- self.children->isEmpty(); --@end attribute helper isLeaf
---@begin attribute helper children
---@comments Set of directly derived Classs of the current Class.
---@end attribute helper isLeaf
---@begin attribute helper children
---@comments Set of directly derived Classs of the current Class.
-helper context ECORE!EClass def: children : Set(ECORE!EClass) =
- thisModule.EcoreGeneralization_AllInstances->select(g |
-  g.general = self
- )->collect(g |
-  g.specific
- )->excluding(self)->asSet(); --@end attribute helper children
---@begin attribute helper descendants
---@comments Set of all derived Classs (both directly and indirectly).
---@end attribute helper children
---@begin attribute helper descendants
---@comments Set of all derived Classs (both directly and indirectly).
-helper context ECORE!EClass def: descendants : Set(ECORE!EClass) =
- self.children->iterate(c; acc : Set(ECORE!EClass) = self.children |
-  acc->union(c.descendants)
- ); --@end attribute helper descendants
---@begin attribute helper parents
---@comments Set of Classs from which the current Class derives directly.
---@end attribute helper descendants
---@begin attribute helper parents
---@comments Set of Classs from which the current Class derives directly.
-helper context ECORE!EClass def: parents : Set(ECORE!EClass) =
- self.generalization->collect(g |
-  g.general
- )->excluding(self)->asSet(); --@end attribute helper parents
---@begin attribute helper ascendants
---@comments Set of all classes from which the current Class derives (both directly and indirectly).
---@end attribute helper parents
---@begin attribute helper ascendants
---@comments Set of all classes from which the current Class derives (both directly and indirectly).
-helper context ECORE!EClass def: ascendants : Set(ECORE!EClass) =
- self.parents->iterate(c; acc : Set(ECORE!EClass) = self.parents |
-  acc->union(c.ascendants)
- ); --@end attribute helper ascendants
---@begin attribute helper client
---@comments Set containing all direct clients of the NamedElement.
---@end attribute helper ascendants
---@begin attribute helper client
---@comments Set containing all direct clients of the NamedElement.
-helper context ECORE!ENamedElement def: client : Set(ECORE!ENamedElement) =
- --@comments reference supplierDependency does not exist in this UML2 metamodel (using allInstances instead)
- --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
- --@comments reference supplierDependency does not exist in this UML2 metamodel (using allInstances instead)
- --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
- --@comments reference supplierDependency does not exist in this UML2 metamodel (using allInstances instead)
- --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
- --@comments reference supplierDependency does not exist in this UML2 metamodel (using allInstances instead)
- --self.supplierDependency->collect(d|d.client)->flatten()->asSet();
- Sequence {}->select(d |
-  d.supplier->includes(self)
- )->collect(d |
-  d.client
- )->flatten()->asSet(); --@end attribute helper client
---@begin attribute helper allClients
---@comments Set containing all the NamedElements that are clients of this NamedElement, including the clients of these NamedElements. This is the transitive closure.
---@end attribute helper client
---@begin attribute helper allClients
---@comments Set containing all the NamedElements that are clients of this NamedElement, including the clients of these NamedElements. This is the transitive closure.
-helper context ECORE!ENamedElement def: allClients : Set(ECORE!ENamedElement) =
- self.client->union(self.client->collect(ne |
-  ne.allClients
- )->flatten())->asSet(); --@end attribute helper allClients
---@begin attribute helper contents
---@comments Sequence containing all PackageableElement contained by the Package.
---@end attribute helper allClients
---@begin attribute helper contents
---@comments Sequence containing all PackageableElement contained by the Package.
-helper context ECORE!EPackage def: contents : Sequence(ECORE!EClassifier) =
- self.packagedElement; --@end attribute helper contents
---@begin attribute helper allClasses
---@comments Sequence of all Classes belonging to the current Package.
---@end attribute helper contents
---@begin attribute helper allClasses
---@comments Sequence of all Classes belonging to the current Package.
-helper context ECORE!EPackage def: allClasses : Sequence(ECORE!EClass) =
- self.contents->select(c |
-  c.oclIsKindOf(ECORE!EClass)
- ); --@end attribute helper allClasses
---@begin attribute helper internalBaseClasses
---@comments Set of base Classes in the current Package.
---@end attribute helper allClasses
---@begin attribute helper internalBaseClasses
---@comments Set of base Classes in the current Package.
-helper context ECORE!EPackage def: internalBaseClasses : Set(ECORE!EClass) =
- self.allClasses->iterate(c; acc : Set(ECORE!EClass) = Set {} |
-  acc->union(c.parents)
- ); --@end attribute helper internalBaseClasses
---@begin attribute helper internalSupplierClasses
---@comments Set of supplier Classes in the current Package.
---@end attribute helper internalBaseClasses
---@begin attribute helper internalSupplierClasses
---@comments Set of supplier Classes in the current Package.
-helper context ECORE!EPackage def: internalSupplierClasses : Set(ECORE!EClass) =
- self.supplierClasses(self); --@end attribute helper internalSupplierClasses
---@begin attribute helper owner
---@comments This attribute helper is not include in FLAME library.
---@comments The package which contains this packageable element.
---@end attribute helper internalSupplierClasses
---@begin attribute helper owner
---@comments This attribute helper is not include in FLAME library.
---@comments The package which contains this packageable element.
-helper context ECORE!EClassifier def: owner : ECORE!EPackage =
- let owners : Sequence(ECORE!EPackage) = ECORE!EPackage.allInstances()->select(p |
-  p.oclIsTypeOf(ECORE!EPackage)
- )->select(p |
-  p.contents->includes(self)
- ) in
- if owners->notEmpty() then
-  owners->first()
- else
-  OclUndefined
- endif; --@end attribute helper owner
---@begin helper AUN
---@comments Attribute Use Number
---@comments Number of NamedElement that use the Property (excludes the NamedElement where the Property is declared).
---@end attribute helper owner
---@begin helper AUN
---@comments Attribute Use Number
---@comments Number of NamedElement that use the Property (excludes the NamedElement where the Property is declared).
-helper context ECORE!EStructuralFeature def: AUN() : Integer =
- self.FUN(); --@end helper AUN
---@begin helper FCV
---@comments Feature to Class Visibility
---@comments Indicates if a Class can access the Feature.
---@end helper AUN
---@begin helper FCV
---@comments Feature to Class Visibility
---@comments Indicates if a Class can access the Feature.
-helper context ECORE!EClass def: FCV(f : ECORE!EStructuralFeature) : Boolean =
- f.visibility = #public or self.allFeatures->includes(f) or f.visibility = #protected and self.ascendants->exists(c |
-  c.allFeatures->includes(f)
- ); --@end helper FCV
---@begin helper NAN
---@comments New Attributes Number
---@comments Number of new Properties belonging to the Class.
---@end helper FCV
---@begin helper NAN
---@comments New Attributes Number
---@comments Number of new Properties belonging to the Class.
-helper context ECORE!EClass def: NAN() : Integer =
- self.newAttributes->size(); --@end helper NAN
---@begin helper DAN
---@comments Defined Attributes Number
---@comments Number of defined Properties in the Class.
---@end helper NAN
---@begin helper DAN
---@comments Defined Attributes Number
---@comments Number of defined Properties in the Class.
-helper context ECORE!EClass def: DAN() : Integer =
- self.definedAttributes->size(); --@end helper DAN
---@begin helper IAN
---@comments Inherited Attributes Number
---@comments Number of inherited Properties in the Class.
---@end helper DAN
---@begin helper IAN
---@comments Inherited Attributes Number
---@comments Number of inherited Properties in the Class.
-helper context ECORE!EClass def: IAN() : Integer =
- self.allInheritedAttributes->size(); --@end helper IAN
---@begin helper OAN
---@comments Overridden Attributes Number
---@comments Number of overridden Properties in the Class.
---@end helper IAN
---@begin helper OAN
---@comments Overridden Attributes Number
---@comments Number of overridden Properties in the Class.
-helper context ECORE!EClass def: OAN() : Integer =
- self.overriddenAttributes->size(); --@end helper OAN
---@begin helper AAN
---@comments Available Attributes Number
---@comments Number of Properties in the Class.
---@end helper OAN
---@begin helper AAN
---@comments Available Attributes Number
---@comments Number of Properties in the Class.
-helper context ECORE!EClass def: AAN() : Integer =
- self.allAttributes->size(); --@end helper AAN
---@begin helper NON
---@comments New Operations Number
---@comments Number of new Operations in the Class.
---@end helper AAN
---@begin helper NON
---@comments New Operations Number
---@comments Number of new Operations in the Class.
-helper context ECORE!EClass def: NON() : Integer =
- self.newOperations->size(); --@end helper NON
---@begin helper DON
---@comments Defined Operations Number
---@comments Number of defined Operations in the Class.
---@end helper NON
---@begin helper DON
---@comments Defined Operations Number
---@comments Number of defined Operations in the Class.
-helper context ECORE!EClass def: DON() : Integer =
- self.definedOperations->size(); --@end helper DON
---@begin helper ION
---@comments Inherited Operations Number
---@comments Number of inherited Operations in the Class.
---@end helper DON
---@begin helper ION
---@comments Inherited Operations Number
---@comments Number of inherited Operations in the Class.
-helper context ECORE!EClass def: ION() : Integer =
- self.allInheritedOperations->size(); --@end helper ION
---@begin helper OON
---@comments Overridden Operations Number
---@comments Number of overridden Operations in the Class.
---@end helper ION
---@begin helper OON
---@comments Overridden Operations Number
---@comments Number of overridden Operations in the Class.
-helper context ECORE!EClass def: OON() : Integer =
- self.overriddenOperations->size(); --@end helper OON
---@begin helper AON
---@comments Available Operations Number
---@comments Number of Operations in the Class.
---@end helper OON
---@begin helper AON
---@comments Available Operations Number
---@comments Number of Operations in the Class.
-helper context ECORE!EClass def: AON() : Integer =
- self.allOperations->size(); --@end helper AON
---@begin helper PRIAN
---@comments PRIvate Attributes Number
---@comments Number of private Properties in the Class.
---@end helper AON
---@begin helper PRIAN
---@comments PRIvate Attributes Number
---@comments Number of private Properties in the Class.
-helper context ECORE!EClass def: PRIAN() : Integer =
- self.allAttributes->select(a |
-  a.visibility = #private
- )->size(); --@end helper PRIAN
---@begin helper PROAN
---@comments PROtected Properties Number
---@comments Number of protected Attributes in the Class.
---@end helper PRIAN
---@begin helper PROAN
---@comments PROtected Properties Number
---@comments Number of protected Attributes in the Class.
-helper context ECORE!EClass def: PROAN() : Integer =
- self.allAttributes->select(a |
-  a.visibility = #protected
- )->size(); --@end helper PROAN
---@begin helper PUBAN
---@comments PUBlic Properties Number
---@comments Number of public Attributes in the Class.
---@end helper PROAN
---@begin helper PUBAN
---@comments PUBlic Properties Number
---@comments Number of public Attributes in the Class.
-helper context ECORE!EClass def: PUBAN() : Integer =
- self.allAttributes->select(a |
-  a.visibility = #public
- )->size(); --@end helper PUBAN
---@begin helper PRION
---@comments PRIvate Operations Number
---@comments Number of private Operations in the Class.
---@end helper PUBAN
---@begin helper PRION
---@comments PRIvate Operations Number
---@comments Number of private Operations in the Class.
-helper context ECORE!EClass def: PRION() : Integer =
- self.allOperations->select(op |
-  op.visibility = #private
- )->size(); --@end helper PRION
---@begin helper PROON
---@comments PROtected Operations Number
---@comments Number of protected Operations in the Class.
---@end helper PRION
---@begin helper PROON
---@comments PROtected Operations Number
---@comments Number of protected Operations in the Class.
-helper context ECORE!EClass def: PROON() : Integer =
- self.allOperations->select(op |
-  op.visibility = #protected
- )->size(); --@end helper PROON
---@begin helper PUBON
---@comments PUBlic Operations Number
---@comments Number of public Operations in the Class.
---@end helper PROON
---@begin helper PUBON
---@comments PUBlic Operations Number
---@comments Number of public Operations in the Class.
-helper context ECORE!EClass def: PUBON() : Integer =
- self.allOperations->select(op |
-  op.visibility = #public
- )->size(); --@end helper PUBON
---@begin helper FUN
---@comments Feature Use Number
---@comments Number of NamedElement that use the Feature (excludes the NamedElement where the Feature is declared).
---@end helper PUBON
---@begin helper FUN
---@comments Feature Use Number
---@comments Number of NamedElement that use the Feature (excludes the NamedElement where the Feature is declared).
-helper context ECORE!EStructuralFeature def: FUN() : Integer =
- self.allClients->size(); --@end helper FUN
---@begin helper CHIN
---@comments CHIldren Number
---@comments Number of directly derived Classs.
---@end helper FUN
---@begin helper CHIN
---@comments CHIldren Number
---@comments Number of directly derived Classs.
-helper context ECORE!EClass def: CHIN() : Integer =
- self.children->size(); --@end helper CHIN
---@begin helper DESN
---@comments DEScendants Number
---@comments Number of all derived Classs (both directly and indirectly).
---@end helper CHIN
---@begin helper DESN
---@comments DEScendants Number
---@comments Number of all derived Classs (both directly and indirectly).
-helper context ECORE!EClass def: DESN() : Integer =
- self.descendants->size(); --@end helper DESN
---@begin helper PARN
---@comments PARents Number
---@comments Number of Classs from which the current Class derives directly.
---@end helper DESN
---@begin helper PARN
---@comments PARents Number
---@comments Number of Classs from which the current Class derives directly.
-helper context ECORE!EClass def: PARN() : Integer =
- self.parents->size(); --@end helper PARN
---@begin helper ASCN
---@comments ASCendants Number
---@comments Number of Classs from which the current Class derives (both directly and indirectly).
---@end helper PARN
---@begin helper ASCN
---@comments ASCendants Number
---@comments Number of Classs from which the current Class derives (both directly and indirectly).
-helper context ECORE!EClass def: ASCN() : Integer =
- self.ascendants->size(); --@end helper ASCN
---@begin helper OUN
---@comments Operation Use Number
---@comments Number of NamedElement that use the Operation (excludes the NamedElement where the Feature is declared).
---@end helper ASCN
---@begin helper OUN
---@comments Operation Use Number
---@comments Number of NamedElement that use the Operation (excludes the NamedElement where the Feature is declared).
-helper context ECORE!EOperation def: OUN() : Integer =
- self.FUN(); --@end helper OUN
---@begin helper isInternal
---@comments Indicates if the Class received as parameter belongs to the considered Package.
---@end helper OUN
---@begin helper isInternal
---@comments Indicates if the Class received as parameter belongs to the considered Package.
-helper context ECORE!EPackage def: isInternal(c : ECORE!EClass) : Boolean =
- self.contents->includes(c); --@end helper isInternal
---@begin helper baseClasses
---@comments Set of base Classes (from the current Package) that belong to the Package "p".
---@end helper isInternal
---@begin helper baseClasses
---@comments Set of base Classes (from the current Package) that belong to the Package "p".
-helper context ECORE!EPackage def: baseClasses(p : ECORE!EPackage) : Set(ECORE!EClass) =
- self.internalBaseClasses->select(c |
-  p.isInternal(c)
- )->asSet(); --@end helper baseClasses
---@begin helper baseClassesInPackages
---@comments Set of base Classes in both the current Package and the one bound to the parameter.
---@end helper baseClasses
---@begin helper baseClassesInPackages
---@comments Set of base Classes in both the current Package and the one bound to the parameter.
-helper context ECORE!EPackage def: baseClassesInPackages(p : ECORE!EPackage) : Set(ECORE!EClass) =
- self.internalBaseClasses->union(p.internalBaseClasses); --@end helper baseClassesInPackages
---@begin helper supplierClasses
---@comments Set of supplier Classes (from the current Package) that belong to the Package "p"(excludes inheritance).
---@end helper baseClassesInPackages
---@begin helper supplierClasses
---@comments Set of supplier Classes (from the current Package) that belong to the Package "p"(excludes inheritance).
-helper context ECORE!EPackage def: supplierClasses(p : ECORE!EPackage) : Set(ECORE!EClass) =
- self.allClasses->iterate(c; acc : Set(ECORE!EClass) = Set {} |
-  acc->union(c.coupledClasses)
- )->select(c |
-  p.isInternal(c)
- )->asSet(); --@end helper supplierClasses
---@begin helper supplierClassesInPackages
---@comments Set of supplier Classes in both the current Package and the one bound to the parameter.
---@end helper supplierClasses
---@begin helper supplierClassesInPackages
---@comments Set of supplier Classes in both the current Package and the one bound to the parameter.
-helper context ECORE!EPackage def: supplierClassesInPackages(p : ECORE!EPackage) : Set(ECORE!EClass) =
- self.internalSupplierClasses->union(p.internalSupplierClasses); --@end helper supplierClassesInPackages
---@begin helper relatedClasses
---@comments Set of Classes from the "p" Package that are either base or supplier Classes.
---@end helper supplierClassesInPackages
---@begin helper relatedClasses
---@comments Set of Classes from the "p" Package that are either base or supplier Classes.
-helper context ECORE!EPackage def: relatedClasses(p : ECORE!EPackage) : Set(ECORE!EClass) =
- self.baseClasses(p)->union(self.supplierClasses(p)); --@end helper relatedClasses
---@begin helper CN
---@comments Classes Number
---@comments Number of Classes in the Package.
---@end helper relatedClasses
---@begin helper CN
---@comments Classes Number
---@comments Number of Classes in the Package.
-helper context ECORE!EPackage def: CN() : Integer =
- self.allClasses->size(); --@end helper CN
---@begin helper PNAN
---@comments Package New Attributes Number
---@comments Number of new Properties in the Package.
---@end helper CN
---@begin helper PNAN
---@comments Package New Attributes Number
---@comments Number of new Properties in the Package.
-helper context ECORE!EPackage def: PNAN() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.NAN
- ); --@end helper PNAN
---@begin helper PDAN
---@comments Package Defined Attributes Number
---@comments Number of defined Properties in the Package.
---@end helper PNAN
---@begin helper PDAN
---@comments Package Defined Attributes Number
---@comments Number of defined Properties in the Package.
-helper context ECORE!EPackage def: PDAN() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.DAN()
- ); --@end helper PDAN
---@begin helper PIAN
---@comments Package Inherited Attributes Number
---@comments Number of Properties inherited in the Package.
---@end helper PDAN
---@begin helper PIAN
---@comments Package Inherited Attributes Number
---@comments Number of Properties inherited in the Package.
-helper context ECORE!EPackage def: PIAN() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.IAN()
- ); --@end helper PIAN
---@begin helper POAN
---@comments Package Overridden Attributes Number
---@comments Number of overridden Properties in the Package.
---@end helper PIAN
---@begin helper POAN
---@comments Package Overridden Attributes Number
---@comments Number of overridden Properties in the Package.
-helper context ECORE!EPackage def: POAN() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.OAN
- ); --@end helper POAN
---@begin helper PAAN
---@comments Package Available Attributes Number
---@comments Number of available Properties in the Package.
---@end helper POAN
---@begin helper PAAN
---@comments Package Available Attributes Number
---@comments Number of available Properties in the Package.
-helper context ECORE!EPackage def: PAAN() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.AAN()
- ); --@end helper PAAN
---@begin helper PNON
---@comments Package New Operations Number
---@comments Number of new Operations in the Package.
---@end helper PAAN
---@begin helper PNON
---@comments Package New Operations Number
---@comments Number of new Operations in the Package.
-helper context ECORE!EPackage def: PNON() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.NON()
- ); --@end helper PNON
---@begin helper PDON
---@comments Package Defined Operations Number
---@comments Number of defined Operations in the Package.
---@end helper PNON
---@begin helper PDON
---@comments Package Defined Operations Number
---@comments Number of defined Operations in the Package.
-helper context ECORE!EPackage def: PDON() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.DON()
- ); --@end helper PDON
---@begin helper PION
---@comments Package Inherited Operations Number
---@comments Number of inherited Operations in the Package.
---@end helper PDON
---@begin helper PION
---@comments Package Inherited Operations Number
---@comments Number of inherited Operations in the Package.
-helper context ECORE!EPackage def: PION() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.ION()
- ); --@end helper PION
---@begin helper POON
---@comments Package Overridden Operations Number
---@comments Number of overridden Operations in the Package.
---@end helper PION
---@begin helper POON
---@comments Package Overridden Operations Number
---@comments Number of overridden Operations in the Package.
-helper context ECORE!EPackage def: POON() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.OON()
- ); --@end helper POON
---@begin helper PAON
---@comments Package Available Operations Number
---@comments Number of available Operations in the Package.
---@end helper POON
---@begin helper PAON
---@comments Package Available Operations Number
---@comments Number of available Operations in the Package.
-helper context ECORE!EPackage def: PAON() : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.AON()
- ); --@end helper PAON
---@begin helper EILN
---@comments External Inheritance Links Number
---@comments Number of inheritance relations where the derived Classes belong to the current Package and the base ones belong to the Package "p" given as parameter.
---@end helper PAON
---@begin helper EILN
---@comments External Inheritance Links Number
---@comments Number of inheritance relations where the derived Classes belong to the current Package and the base ones belong to the Package "p" given as parameter.
-helper context ECORE!EPackage def: EILN(p : ECORE!EPackage) : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.parents->select(g |
-   p.isInternal(g)
-  )->size()
- ); --@end helper EILN
---@begin attribute helper IILN
---@comments Internal Inheritance Links Number
---@comments Number of inheritance relations where the base and derived Classes belong to the current Package.
---@end helper EILN
---@begin attribute helper IILN
---@comments Internal Inheritance Links Number
---@comments Number of inheritance relations where the base and derived Classes belong to the current Package.
-helper context ECORE!EPackage def: IILN : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  acc + c.parents->select(g |
-   self.isInternal(g)
-  )->size()
- ); --@end attribute helper IILN
---@begin helper PILN
---@comments Packages Inheritance Links Number
---@comments Number of inheritance relations between the current package and the one received as parameter.
---@end attribute helper IILN
---@begin helper PILN
---@comments Packages Inheritance Links Number
---@comments Number of inheritance relations between the current package and the one received as parameter.
-helper context ECORE!EPackage def: PILN(p : ECORE!EPackage) : Integer =
- self.IILN + self.EILN(p); --@end helper PILN
---@begin helper ECLN
---@comments External Coupling Links Number
---@comments Number of coupling relations where the client Class belongs to the current Package and the supplier Class belongs to the Package "p" (excludes inheritance).
---@end helper PILN
---@begin helper ECLN
---@comments External Coupling Links Number
---@comments Number of coupling relations where the client Class belongs to the current Package and the supplier Class belongs to the Package "p" (excludes inheritance).
-helper context ECORE!EPackage def: ECLN(p : ECORE!EPackage) : Integer =
- self.supplierClassesInPackages(p)->size(); --@end helper ECLN
---@begin helper ICLN
---@comments Internal Coupling Links Number
---@comments Number of distinct coupling relations where both the client and the supplier Classes belong to the current Package (excludes inheritance).
---@end helper ECLN
---@begin helper ICLN
---@comments Internal Coupling Links Number
---@comments Number of distinct coupling relations where both the client and the supplier Classes belong to the current Package (excludes inheritance).
-helper context ECORE!EPackage def: ICLN() : Integer =
- self.internalSupplierClasses->size(); --@end helper ICLN
---@begin helper PCLN
---@comments Packages Coupling Links Number
---@comments Number of coupling relations between the current package and the one received as parameter.
---@end helper ICLN
---@begin helper PCLN
---@comments Packages Coupling Links Number
---@comments Number of coupling relations between the current package and the one received as parameter.
-helper context ECORE!EPackage def: PCLN(p : ECORE!EPackage) : Integer =
- self.ICLN() + self.ECLN(p); --@end helper PCLN
---@begin helper AVN
---@comments Attribute Visibility Number
---@comments Number of Classes in the considered Package where the Property can be accessed.
---@end helper PCLN
---@begin helper AVN
---@comments Attribute Visibility Number
---@comments Number of Classes in the considered Package where the Property can be accessed.
-helper context ECORE!EPackage def: AVN(a : ECORE!EStructuralFeature) : Integer =
- self.FVN(a); --@end helper AVN
---@begin helper OVN
---@comments Operation Visibility Number
---@comments Number of Classes in the considered Package where the Operation can be accessed.
---@end helper AVN
---@begin helper OVN
---@comments Operation Visibility Number
---@comments Number of Classes in the considered Package where the Operation can be accessed.
-helper context ECORE!EPackage def: OVN(o : ECORE!EOperation) : Integer =
- self.FVN(o); --@end helper OVN
---@begin helper FVN
---@comments Feature Visibility Number
---@comments Number of Classes in the considered Package where the Feature can be accessed.
---@end helper OVN
---@begin helper FVN
---@comments Feature Visibility Number
---@comments Number of Classes in the considered Package where the Feature can be accessed.
-helper context ECORE!EPackage def: FVN(f : ECORE!EStructuralFeature) : Integer =
- self.allClasses->iterate(c; acc : Integer = 0 |
-  if c.FCV(f) then
-   acc + 1
-  else
-   acc
-  endif
- ); --@end helper FVN
---@begin helper APV
---@comments Attribute to Package Visibility
---@comments Percentage of Classes in the considered Package where the Property can be accessed (excludes the Class where the Property is declared).
---@end helper FVN
---@begin helper APV
---@comments Attribute to Package Visibility
---@comments Percentage of Classes in the considered Package where the Property can be accessed (excludes the Class where the Property is declared).
-helper context ECORE!EPackage def: APV(a : ECORE!EStructuralFeature) : Real =
- if self.CN() > 1 then
-  (self.AVN(a) - 1) / (self.CN() - 1)
- else
-  0
- endif; --@end helper APV
---@begin helper OPV
---@comments Operation to Package Visibility
---@comments Percentage of Classes in the considered Package where the Operation can be accessed (excludes the class where the Operation is declared).
---@end helper APV
---@begin helper OPV
---@comments Operation to Package Visibility
---@comments Percentage of Classes in the considered Package where the Operation can be accessed (excludes the class where the Operation is declared).
-helper context ECORE!EPackage def: OPV(o : ECORE!EOperation) : Real =
- if self.CN() > 1 then
-  (self.OVN(o) - 1) / (self.CN() - 1)
- else
-  0
- endif; --@end helper OPV
---@begin helper FPV
---@comments Feature to Package Visibility
---@comments Percentage of Classes in the considered Package where the Feature can be accessed (excludes the Class where the attribute is declared).
---@end helper OPV
---@begin helper FPV
---@comments Feature to Package Visibility
---@comments Percentage of Classes in the considered Package where the Feature can be accessed (excludes the Class where the attribute is declared).
-helper context ECORE!EPackage def: FPV(f : ECORE!EStructuralFeature) : Real =
- if self.CN() > 1 then
-  (self.FVN(f) - 1) / (self.CN() - 1)
- else
-  0
- endif; --@end helper FPV
---@atlcompiler	atl2006
---@name			EMOOSE4UML2
---@version		1.0
---@domains		UML2, MOOSE, EMOOSE, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/06/05
---@description	This library provides MOOSE (Metrics for Object-Oriented Software Engineering) and EMOOSE (Extended MOOSE) metrics suites on UML2 models (from Eclipse UML2 Project). The models have been extracted from Jar files using the Eclipse plug-in Jar2UML. Only the metrics that fit to UML2 models have been implemented.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library EMOOSE4UML2; -- Library Template
--- ===============
--- MOOSE Metrics =
--- ===============
---@begin helper MOOSE::DIT
---@comments Depth of Inheritance Tree
---@comments The length of the longest path of inheritance from the current Class to the root of the tree.
---@end helper FPV
---@atlcompiler	atl2006
---@name			EMOOSE4UML2
---@version		1.0
---@domains		UML2, MOOSE, EMOOSE, metrics
---@authors		Eric Vepa (evepa <at> sodius.com) for SODIUS (www.sodius.com)
---@date			2007/06/05
---@description	This library provides MOOSE (Metrics for Object-Oriented Software Engineering) and EMOOSE (Extended MOOSE) metrics suites on UML2 models (from Eclipse UML2 Project). The models have been extracted from Jar files using the Eclipse plug-in Jar2UML. Only the metrics that fit to UML2 models have been implemented.
---@see			Baroni, A.L.: Formal Definition of Object-Oriented Design Metrics. Master Thesis, Vrije University, Brussel, Belgium, 2002.
--- library EMOOSE4UML2; -- Library Template
--- ===============
--- MOOSE Metrics =
--- ===============
---@begin helper MOOSE::DIT
---@comments Depth of Inheritance Tree
---@comments The length of the longest path of inheritance from the current Class to the root of the tree.
-helper context ECORE!EClass def: DIT() : Integer =
- if self.isRoot then
-  0
- else
-  if self.PARN() = 1 then
+helper context ECORE!EPackage def: AHF() : Real = if ( self.CN() > 1 ) then
+   if ( self.PDAN() > 0 ) then
+   self.definedAttributes->iterate(a;acc:Real = 0 | acc + 1 - self.APV(a)) / self.PDAN()
+else
+   0
+endif
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: OHF() : Real = if ( self.CN() > 1 ) then
+   if ( self.PDON() > 0 ) then
+   self.definedOperations->iterate(o;acc:Real = 0 | acc + 1 - self.OPV(o)) / self.PDON()
+else
+   0
+endif
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: AHEF() : Real = let avnSum : Integer = self.allAttributes->iterate(a;acc:Integer = 0 | acc + self.AVN(a))
+ in if ( avnSum > 0 ) then
+   self.allAttributes->iterate(a;acc:Integer = 0 | acc + a.AUN()) / avnSum
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: OHEF() : Real = let ovnSum : Integer = self.allOperations->iterate(op;acc:Integer = 0 | acc + self.OVN(op))
+ in if ( ovnSum > 0 ) then
+   self.allOperations->iterate(op;acc:Integer = 0 | acc + op.OUN()) / ovnSum
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: BPF() : Real = if ( self.PAON() > 0 ) then
+   self.POON() / self.PAON()
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: CCF() : Real = if ( self.CN() > 1 ) then
+   self.ICLN() / self.CN() * self.CN() - self.CN().sqrt()
+else
+   0
+endif;
+
+helper context ECORE!EPackage def: ICF() : Real = if ( self.ICLN() > 0 ) then
+   self.ICLN() / self.PCLN(self)
+else
+   0
+endif;
+
+helper context ECORE!EClass def: DIT() : Integer = if ( self.isRoot ) then
+   0
+else
+   if ( self.PARN() = 1 ) then
    1
-  else
+else
    0
-  endif + self.parents->iterate(c; acc : Integer = 0 |
-   acc + c.DIT()
-  )
- endif; --@end helper MOOSE::DIT
---@begin helper MOOSE::NOC
---@comments Number of Children
---@comments The number of classes that inherit directly from the current Class.
---@end helper MOOSE::DIT
---@begin helper MOOSE::NOC
---@comments Number of Children
---@comments The number of classes that inherit directly from the current Class.
-helper context ECORE!EClass def: NOC() : Integer =
- self.CHIN(); --@end helper MOOSE::NOC
---@begin helper MOOSE::CBO
---@comments Coupling Between Objects
---@comments The number of other Classes that are coupled to the current one. Two Classes are coupled when methods declared in one Class use Methods or instance variables defined by the other Class.
---@end helper MOOSE::NOC
---@begin helper MOOSE::CBO
---@comments Coupling Between Objects
---@comments The number of other Classes that are coupled to the current one. Two Classes are coupled when methods declared in one Class use Methods or instance variables defined by the other Class.
-helper context ECORE!EClass def: CBO() : Integer =
- self.coupledClasses->size(); --@end helper MOOSE::CBO
---@begin helper MOOSE::RFC
---@comments Response for a Class
---@comments The number of Methods in the current Class that might respond to a message received by its object, including Methods both inside and outside of this Class.
---@comments RFC = {M} ∪all i {Ri} where {Ri} = set of Methods called by Method i and {M} = set of all Methods in a Class. Ri is dependent on the implementation of the Method i.
---@end helper MOOSE::CBO
---@begin helper MOOSE::RFC
---@comments Response for a Class
---@comments The number of Methods in the current Class that might respond to a message received by its object, including Methods both inside and outside of this Class.
---@comments RFC = {M} ∪all i {Ri} where {Ri} = set of Methods called by Method i and {M} = set of all Methods in a Class. Ri is dependent on the implementation of the Method i.
-helper context ECORE!EClass def: RFC() : Integer =
- self.allOperations->union(self.allOperations->collect(o |
-  o.method->collect(m |
-   m.allClients
-  )->flatten()->asSet()->select(c |
-   c.oclAsType(ECORE!EOperation)
-  )
- ))->flatten()->asSet()->size(); --@end helper MOOSE::RFC
--- ================
--- EMOOSE Metrics =
--- ================
---@begin helper EMOOSE::NOM
---@comments Number of Methods
---@comments Number of Operations that are local to the Class, i.e., that can only be accessed by other Class Operations (and not in other Classes).
---@comments The Class must have some Operations.
---helper context UML2!Class
---def : NOM() : Integer =
---	self.allOperations->select(o|o.visibility = #private)->size();
---@end helper EMOOSE::NOM
---@begin helper EMOOSE::SIZE2
---@comments Number of local Attributes and Operations defined in the Class.
---@end helper MOOSE::RFC
--- ================
--- EMOOSE Metrics =
--- ================
---@begin helper EMOOSE::NOM
---@comments Number of Methods
---@comments Number of Operations that are local to the Class, i.e., that can only be accessed by other Class Operations (and not in other Classes).
---@comments The Class must have some Operations.
---helper context UML2!Class
---def : NOM() : Integer =
---	self.allOperations->select(o|o.visibility = #private)->size();
---@end helper EMOOSE::NOM
---@begin helper EMOOSE::SIZE2
---@comments Number of local Attributes and Operations defined in the Class.
-helper context ECORE!EClass def: SIZE2() : Integer =
- self.DON() + self.DAN(); --@end helper EMOOSE::SIZE2
-helper def: EcoreGeneralization_AllInstances : OclAny =
- ECORE!EClass.allInstances()->collect(specific |
-  specific.eSuperTypes->collect(general |
-   Tuple {type__ = 'EcoreGeneralization', general = general, specific = specific}
-  )
- )->flatten();
+endif + self.parents->iterate(c;acc:Integer = 0 | acc + c.DIT())
+endif;
 
-helper context ECORE!ENamedElement def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EClass def: NOC() : Integer = self.CHIN();
 
-helper context ECORE!EClass def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EClass def: CBO() : Integer = self.coupledClasses->size();
 
-helper context ECORE!EStructuralFeature def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EClass def: RFC() : Integer = self.allOperations->union(self.allOperations->collect(o | o.method->collect(m | m.allClients)->flatten()->asSet()->select(c | c.oclAsType(ECORE!EOperation))))->flatten()->asSet()->size();
 
-helper context ECORE!EParameter def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EClass def: NOM() : Integer = self.allOperations->select(o | o.visibility = #private)->size();
 
-helper context ECORE!EPackage def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EClass def: SIZE2() : Integer = self.DON() + self.DAN();
 
-helper context ECORE!EClassifier def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EPackage def: DSC() : Integer = self.CN();
 
-helper context ECORE!EOperation def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EPackage def: NOH() : Integer = self.allClasses->collect(c | c.children)->flatten()->asSet()->size();
 
-helper context ECORE!ETypedElement def: EcoreGeneralization_AllInstances : OclAny =
- thisModule.EcoreGeneralization_AllInstances;
+helper context ECORE!EPackage def: NIC() : Integer = self.allClasses->select(c | c.isLeaf)->size();
 
-helper def: __convertToSequence__(obj : OclAny) : OclAny =
- if obj = OclUndefined then
-  Sequence {}
- else
-  Sequence {obj}->flatten()
- endif;
+helper context ECORE!EPackage def: NSI() : Integer = self.allClasses->iterate(c;acc:Integer = 0 | if ( c.PARN() = 1 ) then
+   acc + 1
+else
+   acc
+endif);
 
---@end attribute helper internalSupplierClasses
---@begin attribute helper owner
---@comments This attribute helper is not include in FLAME library.
---@comments The package which contains this packageable element.
-helper context ECORE!EPackage def: owner : ECORE!EPackage =
- let owners : Sequence(ECORE!EPackage) = ECORE!EPackage.allInstances()->select(p |
-  p.oclIsTypeOf(ECORE!EPackage)
- )->select(p |
-  p.contents->includes(self)
- ) in
- if owners->notEmpty() then
-  owners->first()
- else
-  OclUndefined
- endif; --@end attribute helper owner
---@begin helper AUN
---@comments Attribute Use Number
---@comments Number of NamedElement that use the Property (excludes the NamedElement where the Property is declared).
-helper context ECORE!EClass def: isAbstract : OclAny =
- self.abstract;
+helper context ECORE!EPackage def: NNC() : Integer = self.NOH();
 
-helper context ECORE!EClass def: ownedOperation : OclAny =
- self.eOperations;
+helper context ECORE!EPackage def: NAC() : Integer = self.allClasses->select(c | c.isAbstract)->size();
 
-helper context ECORE!EClass def: ownedAttribute : OclAny =
- self.eStructuralFeatures;
+helper context ECORE!EPackage def: NLC() : Integer = self.allClasses->select(c | c.isLeaf)->size();
 
-helper context ECORE!EOperation def: ownedParameter : OclAny =
- self.eParameters;
+helper context ECORE!EPackage def: ADI() : Real = self.allClasses->iterate(c;acc:Real = 0 | ( acc + c.DIT() ) / self.CN());
 
-helper context ECORE!ETypedElement def: type : OclAny =
- self.eType;
+helper context ECORE!EPackage def: AWI() : Real = self.allClasses->iterate(c;acc:Real = 0 | ( acc + c.CHIN() ) / self.CN());
 
-helper context ECORE!EClass def: nestedClassifier : OclAny =
- Sequence {};
+helper context ECORE!EPackage def: ANA() : Real = if ( self.CN() > 0 ) then
+   self.internalBaseClasses->size() / self.CN()
+else
+   0
+endif;
 
-helper context ECORE!EClass def: generalization : OclAny =
- self.EcoreGeneralization_AllInstances->select(g |
-  g.specific = self
- );
+helper context ECORE!EClass def: MFA() : Integer = if ( self.AON() > 0 ) then
+   self.ION() / self.allOperations->iterate(o;acc:Integer = 0 | if ( self.FCV(o) ) then
+   acc + 1
+else
+   acc
+endif)
+else
+   0
+endif;
 
-helper context ECORE!EOperation def: method : OclAny =
- Sequence {};
+helper context ECORE!EClass def: MAA() : Integer = let nbFCV : Integer = self.allAttributes->iterate(a;acc:Integer = 0 | if ( self.FCV(a) ) then
+   acc + 1
+else
+   acc
+endif)
+ in if ( nbFCV > 0 ) then
+   self.IAN() / nbFCV
+else
+   0
+endif;
 
-helper context ECORE!EPackage def: packagedElement : OclAny =
- self.eClassifiers.union(self.eSubpackages);
+helper context ECORE!EClass def: MAT() : Integer = ( self.MFA() + self.MAA() ) / 2;
 
-helper context ECORE!EClass def: visibility : OclAny =
- #public;
+helper context ECORE!EClass def: MOA() : Integer = let owner : ECORE!EPackage = self.owner
+ in if ( not owner.oclIsUndefined() ) then
+   self.allAttributes->iterate(a;acc:Integer = 0 | if ( owner.allClasses->includes(a.type) ) then
+   acc + 1
+else
+   acc
+endif)
+else
+   0
+endif;
 
-helper context ECORE!EStructuralFeature def: visibility : OclAny =
- #public;
---@end helper EMOOSE::SIZE2
+helper context ECORE!EClass def: MRM() : Integer = self.DCC() + self.NAD();
+
+helper context ECORE!EClass def: DAM() : Integer = if ( self.AAN() > 0 ) then
+   self.PRIAN() / self.AAN()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: OAM() : Integer = if ( self.AON() > 0 ) then
+   self.PUBON() / self.AON()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: MAM() : Integer = ( 1 - self.DAM() + self.OAM() ) / 2;
+
+helper context ECORE!EClass def: NOA() : Integer = self.ASCN();
+
+helper context ECORE!EClass def: CIS() : Integer = self.PUBON();
+
+helper context ECORE!EClass def: NPT() : Integer = self.allParametersTypes->size();
+
+helper context ECORE!EClass def: NPM() : Integer = if ( self.AON() > 0 ) then
+   self.allParameters->size() / self.AON()
+else
+   0
+endif;
+
+helper context ECORE!EClass def: NOD() : Integer = self.AAN();
+
+helper context ECORE!EClass def: NAD() : Integer = self.allAttributesTypes->size();
+
+helper context ECORE!EClass def: NPA() : Integer = self.PUBAN();
+
+helper context ECORE!EClass def: CSM() : Integer = self.AAN() + self.AON();
+
+helper context ECORE!EClass def: CAM() : Integer = let divisor : Integer = self.AON() * self.allParametersTypes->size()
+ in if ( divisor > 0 ) then
+   self.allOperations->iterate(o;acc:Integer = 0 | acc + o.allParametersTypes->size()) / divisor
+else
+   0
+endif;
+
+helper context ECORE!EClass def: DCC() : Integer = self.allAttributesTypes->union(self.allParametersTypes)->size();
+
+helper context ECORE!EClass def: MCC() : Integer = self.allAttributesTypes->union(self.allParametersTypes)->iterate(t;acc:Sequence(ECORE!EClass) = Sequence { } | acc->union(t.allAttributesTypes)->union(t.allParametersTypes))->asSet()->size();
+
+helper context ECORE!EClass def: DAC() : Integer = self.allAttributesTypes->size();
+
+helper context ECORE!EClass def: DPC() : Integer = self.allParametersTypes->size();
+
+helper context ECORE!EClass def: MPC() : Integer = self.allParametersTypes->iterate(t;acc:Sequence(ECORE!EClass) = Sequence { } | acc->union(t.allParametersTypes))->asSet()->size();
+
+helper context ECORE!EClass def: CCD() : Integer = self.AAN() + self.allAttributesTypes->iterate(t;acc:Integer = 0 | acc + t.AAN());
+
+helper context ECORE!EClass def: CCP() : Integer = self.allParameters->size();
+
+helper context ECORE!EClass def: CCM() : Integer = self.CCD() + self.CCP();
+
+helper  def: measureLevel : Measure!ElementKind = #class;
+
+helper  def: root : Measure!RootMeasureSet = OclUndefined;
+
+helper  def: MetricByName : Map(String, Measure!Metric) = Map { };
+
+helper context ECORE!ENamedElement def: defaultName() : String = if ( self.name.oclIsUndefined() ) then
+   'Anonymous'
+else
+   self.name
+endif;
+
+entrypoint rule Metrics( ) {
+     to root : Measure!RootMeasureSet(
+modelType <- #UML2
+)
+do {
+   thisModule.root <- root;
+   if ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('MOOD', 'Metrics for Object-Oriented Design');
+
+thisModule.Metric('MOOD', 'AIF', 'Attributes Inheritance Factor');
+
+thisModule.Metric('MOOD', 'OIF', 'Operations Inheritance Factor');
+
+thisModule.Metric('MOOD', 'AHF', 'Attributes Hiding Factor');
+
+thisModule.Metric('MOOD', 'OHF', 'Operations Hiding Factor');
+
+thisModule.Metric('MOOD', 'BPF', 'Behavioral Polymorphism Factor');
+
+thisModule.Metric('MOOD', 'CCF', 'Class Coupling Factor');
+
+thisModule.Metric('MOOD', 'ICF', 'Internal Coupling Factor');
+
+root.categories <- thisModule.Category('MOOD2', 'Metrics for Object-Oriented Design 2');
+
+thisModule.Metric('MOOD2', 'IIF', 'Internal Inheritance Factor');
+
+thisModule.Metric('MOOD2', 'AHEF', 'Attributes Hiding Effectiveness Factor');
+
+thisModule.Metric('MOOD2', 'OHEF', 'Operations Hiding Effectiveness Factor'); }
+   if ( thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('MOOSE', 'Metrics for Object-Oriented Software Engineering');
+
+thisModule.Metric('MOOSE', 'DIT', 'Depth of Inheritance Tree');
+
+thisModule.Metric('MOOSE', 'NOC', 'Number of Children');
+
+thisModule.Metric('MOOSE', 'CBO', 'Coupling Between Objects');
+
+thisModule.Metric('MOOSE', 'RFC', 'Response for a Class');
+
+root.categories <- thisModule.Category('EMOOSE', 'Extended MOOSE');
+
+thisModule.Metric('EMOOSE', 'SIZE2', 'Number of local Attributes ' + 'and Operations defined in the Class'); }
+   if ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) {
+   root.categories <- thisModule.Category('QMOOD', 'Quality Model for Object-Oriented Design');
+
+thisModule.Metric('QMOOD', 'DSC', 'Design Size in Classes');
+
+thisModule.Metric('QMOOD', 'NOH', 'Number of Hierarchies');
+
+thisModule.Metric('QMOOD', 'NIC', 'Number of Independent Classes');
+
+thisModule.Metric('QMOOD', 'NSI', 'Number of Single Inheritance');
+
+thisModule.Metric('QMOOD', 'NNC', 'Number of Internal Classes');
+
+thisModule.Metric('QMOOD', 'NAC', 'Number of Abstract Classes');
+
+thisModule.Metric('QMOOD', 'NLC', 'Number of Leaf Classes');
+
+thisModule.Metric('QMOOD', 'ADI', 'Average Depth of Inheritance');
+
+thisModule.Metric('QMOOD', 'AWI', 'Average Width of Inheritance');
+
+thisModule.Metric('QMOOD', 'ANA', 'Average Number of Ancestors'); }
+   if ( thisModule.measureLevel = #class ) {
+   thisModule.Metric('QMOOD', 'MFA', 'Measure of Functional Abstraction');
+
+thisModule.Metric('QMOOD', 'MAA', 'Measure of Attribute Abstraction');
+
+thisModule.Metric('QMOOD', 'MAT', 'Measure of Abstraction');
+
+thisModule.Metric('QMOOD', 'MOA', 'Measure of Aggregation');
+
+thisModule.Metric('QMOOD', 'MRM', 'Modeled Relationship Measure');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'DAM', 'Data Access Metric', '>75');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'OAM', 'Operation Access Metric', '>75');
+
+thisModule.MetricWithPreferredValue('QMOOD', 'MAM', 'Member Access Metric', '>75');
+
+thisModule.Metric('QMOOD', 'NOA', 'Number of Ancestors');
+
+thisModule.Metric('QMOOD', 'NOM', 'Number of Methods');
+
+thisModule.Metric('QMOOD', 'CIS', 'Class Interface Size');
+
+thisModule.Metric('QMOOD', 'NPT', 'Number of Unique Parameter Types');
+
+thisModule.Metric('QMOOD', 'NPM', 'Number of Parameters per Method');
+
+thisModule.Metric('QMOOD', 'NOD', 'Number of Attributes');
+
+thisModule.Metric('QMOOD', 'NAD', 'Number of Abstract Data Types');
+
+thisModule.Metric('QMOOD', 'NPA', 'Number of Public Attributes');
+
+thisModule.Metric('QMOOD', 'CSM', 'Class Size Metric');
+
+thisModule.Metric('QMOOD', 'CAM', 'Cohesion Among Methods of Class');
+
+thisModule.Metric('QMOOD', 'DCC', 'Direct Class Coupling');
+
+thisModule.Metric('QMOOD', 'MCC', 'Maximum Class Coupling');
+
+thisModule.Metric('QMOOD', 'DAC', 'Direct Attribute Based Coupling');
+
+thisModule.Metric('QMOOD', 'DPC', 'Direct Parameter Based Coupling');
+
+thisModule.Metric('QMOOD', 'MPC', 'Maximum Parameter Based Coupling');
+
+thisModule.Metric('QMOOD', 'CCD', 'Class Complexity Based on Data');
+
+thisModule.Metric('QMOOD', 'CCP', 'Class Complexity Based on Method Parameters');
+
+thisModule.Metric('QMOOD', 'CCM', 'Class Complexity Based on Members'); }
+}
+}
+
+rule Package2MeasureSet {
+   from ne : ECORE!EPackage( ( ne.oclIsTypeOf(ECORE!EPackage) or false ) and ( thisModule.measureLevel = #package or thisModule.measureLevel = #class ) )
+     to ms : Measure!MeasureSet(
+elementName <- if ( ne.CN() > 0 ) then
+   ne.defaultName().debug('Processing metrics on package')
+else
+   ne.defaultName()
+endif,
+elementType <- if ( false ) then
+   #model
+else
+   #package
+endif,
+subsets <- ne.contents,
+subsets <- ne.allClasses->collect(c | thisModule.Class2MeasureSet(c))
+)
+do {
+   if ( false ) {
+   thisModule.root.measureSets <- ms; }
+   if ( ne.CN() > 0 ) {
+   ms.measures <- thisModule.PercentageMeasure('AIF', ne.AIF());
+
+ms.measures <- thisModule.PercentageMeasure('OIF', ne.OIF());
+
+ms.measures <- thisModule.PercentageMeasure('AHF', ne.AHF());
+
+ms.measures <- thisModule.PercentageMeasure('OHF', ne.OHF());
+
+ms.measures <- thisModule.PercentageMeasure('BPF', ne.BPF());
+
+ms.measures <- thisModule.PercentageMeasure('CCF', ne.CCF());
+
+ms.measures <- thisModule.PercentageMeasure('ICF', ne.ICF());
+
+ms.measures <- thisModule.PercentageMeasure('IIF', ne.IIF());
+
+ms.measures <- thisModule.PercentageMeasure('AHEF', ne.AHEF());
+
+ms.measures <- thisModule.PercentageMeasure('OHEF', ne.OHEF());
+
+ms.measures <- thisModule.IntegerMeasure('DSC', ne.DSC());
+
+ms.measures <- thisModule.IntegerMeasure('NOH', ne.NOH());
+
+ms.measures <- thisModule.IntegerMeasure('NIC', ne.NIC());
+
+ms.measures <- thisModule.IntegerMeasure('NSI', ne.NSI());
+
+ms.measures <- thisModule.IntegerMeasure('NNC', ne.NNC());
+
+ms.measures <- thisModule.IntegerMeasure('NAC', ne.NAC());
+
+ms.measures <- thisModule.IntegerMeasure('NLC', ne.NLC());
+
+ms.measures <- thisModule.DoubleMeasure('ADI', ne.ADI());
+
+ms.measures <- thisModule.DoubleMeasure('AWI', ne.AWI());
+
+ms.measures <- thisModule.DoubleMeasure('ANA', ne.ANA()); }
+}
+}
+
+lazy rule Class2MeasureSet {
+   from ne : ECORE!EClass( ne.oclIsTypeOf(ECORE!EClass) and thisModule.measureLevel = #class )
+     to ms : Measure!MeasureSet(
+elementName <- ne.defaultName().debug('Processing metrics on class'),
+elementType <- #class,
+subsets <- ne.nestedClassifier
+)
+do {
+   ms.measures <- thisModule.IntegerMeasure('DIT', ne.DIT());
+   ms.measures <- thisModule.IntegerMeasure('NOC', ne.NOC());
+   ms.measures <- thisModule.IntegerMeasure('CBO', ne.CBO());
+   ms.measures <- thisModule.IntegerMeasure('RFC', ne.RFC());
+   ms.measures <- thisModule.IntegerMeasure('SIZE2', ne.SIZE2());
+   ms.measures <- thisModule.PercentageMeasure('MFA', ne.MFA());
+   ms.measures <- thisModule.PercentageMeasure('MAA', ne.MAA());
+   ms.measures <- thisModule.PercentageMeasure('MAT', ne.MAT());
+   ms.measures <- thisModule.IntegerMeasure('MOA', ne.MOA());
+   ms.measures <- thisModule.IntegerMeasure('MRM', ne.MRM());
+   ms.measures <- thisModule.PercentageMeasure('DAM', ne.DAM());
+   ms.measures <- thisModule.PercentageMeasure('OAM', ne.OAM());
+   ms.measures <- thisModule.PercentageMeasure('MAM', ne.MAM());
+   ms.measures <- thisModule.IntegerMeasure('NOA', ne.NOA());
+   ms.measures <- thisModule.IntegerMeasure('NOM', ne.NOM());
+   ms.measures <- thisModule.IntegerMeasure('CIS', ne.CIS());
+   ms.measures <- thisModule.IntegerMeasure('NPT', ne.NPT());
+   ms.measures <- thisModule.DoubleMeasure('NPM', ne.NPM());
+   ms.measures <- thisModule.IntegerMeasure('NOD', ne.NOD());
+   ms.measures <- thisModule.IntegerMeasure('NAD', ne.NAD());
+   ms.measures <- thisModule.IntegerMeasure('NPA', ne.NPA());
+   ms.measures <- thisModule.IntegerMeasure('CSM', ne.CSM());
+   ms.measures <- thisModule.DoubleMeasure('CAM', ne.CAM());
+   ms.measures <- thisModule.IntegerMeasure('DCC', ne.DCC());
+   ms.measures <- thisModule.IntegerMeasure('MCC', ne.MCC());
+   ms.measures <- thisModule.IntegerMeasure('DAC', ne.DAC());
+   ms.measures <- thisModule.IntegerMeasure('DPC', ne.DPC());
+   ms.measures <- thisModule.IntegerMeasure('MPC', ne.MPC());
+   ms.measures <- thisModule.IntegerMeasure('CCD', ne.CCD());
+   ms.measures <- thisModule.IntegerMeasure('CCP', ne.CCP());
+   ms.measures <- thisModule.IntegerMeasure('CCM', ne.CCM());
+}
+}
+
+rule Category( name : String, desc : String) {
+     to cat : Measure!Category(
+name <- name,
+desc <- desc
+)
+do {
+   cat;
+}
+}
+
+rule Metric( catName : String, name : String, desc : String) {
+     to metric : Measure!Metric(
+name <- name,
+desc <- desc,
+preferredValue <- '!=0',
+category <- thisModule.root.categories->select(cat | cat.name = catName)->first()
+)
+do {
+   thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
+}
+}
+
+rule MetricWithPreferredValue( catName : String, name : String, desc : String, preferredValue : String) {
+     to metric : Measure!Metric(
+name <- name,
+desc <- desc,
+preferredValue <- preferredValue,
+category <- thisModule.root.categories->select(cat | cat.name = catName)->first()
+)
+do {
+   thisModule.MetricByName <- thisModule.MetricByName.including(metric.name, metric);
+}
+}
+
+rule IntegerMeasure( name : String, value : Integer) {
+     to meas : Measure!IntegerMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+rule DoubleMeasure( name : String, value : Real) {
+     to meas : Measure!DoubleMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+rule PercentageMeasure( name : String, value : Real) {
+     to meas : Measure!PercentageMeasure(
+metric <- thisModule.MetricByName.get(name),
+value <- value
+)
+do {
+   meas;
+}
+}
+
+helper  def: AllInstancesOf_Generalization : Sequence(TupleType(specific : OclAny, general : OclAny)) = ECORE!EClass.allInstances()->collect(specific | specific.generalizationGeneral->collect(general | Tuple {specific = specific, general = general }))->flatten();
+

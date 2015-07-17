@@ -1,0 +1,12 @@
+transformation component bento.trafolib.petrinet2matrix { 
+	source concept PN : "PetriNet.ecore"
+	target concept MTX : "AlgebraicMatrix.ecore"
+	source model in : PN
+	target model out : MTX
+	definition atl "PN2matrix.atl" with 
+		IN : PN = in, 
+		OUT : MTX = out
+	
+	version "0.5"
+	tags "Petri net", "Matrix"
+}

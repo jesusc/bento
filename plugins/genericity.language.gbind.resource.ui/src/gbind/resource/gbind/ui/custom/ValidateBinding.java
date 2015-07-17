@@ -57,6 +57,7 @@ public class ValidateBinding implements IObjectActionDelegate {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
