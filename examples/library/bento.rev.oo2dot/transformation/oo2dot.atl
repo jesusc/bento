@@ -264,46 +264,46 @@ rule Datatypes {
 	-- ClassWithSupertypesGeneralizationsDrawn2Node
 	-- Transforms a class into a node, and creates the generalization arcs
 	-- foreach superclass
-rule ClassWithSupertypesGeneralizationsDrawn2Node {
-	from
-		c: OO!Class (
-			not(c.supertypes->isEmpty())	and 
-			(thisModule.Invisible() or 
-			(thisModule.DiagramMode('Generalization') or 
-			thisModule.DiagramMode('All')))
-		)
-	to
-		out: DOT!Node (
-			name <- c.name,
-			shape <- nodeShape,
-			refers <- Sequence {c.structuralFeatures->select( e |
-					e.oclIsKindOf(OO!Reference))}->append(supertypeClasses)
-		),
-		nodeShape: DOT!RecordNodeShape (
-			name <- 'record',
-			label <- NodeLabel
-		),
-		NodeLabel : DOT!SimpleLabel (
-			content <- c.getLabel()	
-		),
-		supertypeClasses: distinct DOT!DirectedArc 
-		foreach(super_ in c.supertypes) (
-			constraint <- (thisModule.DiagramType() = 'Generalization' or
-				thisModule.DiagramType() = 'None'),
-			style <- if thisModule.DiagramMode('Generalization') or 
-			thisModule.DiagramMode('All') then 'none' else 'invis' endif,
-			fromNode <- c,
-			toNode <- super_,
-			group <- super_.name,
-			minlen <- thisModule.MinimumArcLength(),
-			arrowHead <- arrowHeadShape
-		),
-		arrowHeadShape: distinct DOT!ArrowShape 
-		foreach(super_ in c.supertypes) (
-			name <- 'normal',
-			isPlain <- true
-		)
-}
+--rule ClassWithSupertypesGeneralizationsDrawn2Node {
+--	from
+--		c: OO!Class (
+--			not(c.supertypes->isEmpty())	and 
+--			(thisModule.Invisible() or 
+--			(thisModule.DiagramMode('Generalization') or 
+--			thisModule.DiagramMode('All')))
+--		)
+--	to
+--		out: DOT!Node (
+--			name <- c.name,
+--			shape <- nodeShape,
+--			refers <- Sequence {c.structuralFeatures->select( e |
+--					e.oclIsKindOf(OO!Reference))}->append(supertypeClasses)
+--		),
+--		nodeShape: DOT!RecordNodeShape (
+--			name <- 'record',
+--			label <- NodeLabel
+--		),
+--		NodeLabel : DOT!SimpleLabel (
+--			content <- c.getLabel()	
+--		),
+--		supertypeClasses: distinct DOT!DirectedArc 
+--		foreach(super_ in c.supertypes) (
+--			constraint <- (thisModule.DiagramType() = 'Generalization' or
+--				thisModule.DiagramType() = 'None'),
+--			style <- if thisModule.DiagramMode('Generalization') or 
+--			thisModule.DiagramMode('All') then 'none' else 'invis' endif,
+--			fromNode <- c,
+--			toNode <- super_,
+--			group <- super_.name,
+--			minlen <- thisModule.MinimumArcLength(),
+--			arrowHead <- arrowHeadShape
+--		),
+--		arrowHeadShape: distinct DOT!ArrowShape 
+--		foreach(super_ in c.supertypes) (
+--			name <- 'normal',
+--			isPlain <- true
+--		)
+--}
 
 	-- ClassWithSupertypesGeneralizationsNotDrawn2Node
 	-- Transforms a class into a node, and does not create the generalization 

@@ -31,7 +31,10 @@ public class BentoURIResolver {
 	
 	public static IProject getProject(Resource r) {
 		if ( r.getURI().isPlatformResource() ) {
-			String projectName = r.getURI().segment(1);				
+			String projectName = r.getURI().segment(1);			
+			// Dirty hack for the platform:/resource// problem		
+			if ( projectName.isEmpty() ) 
+				projectName = r.getURI().segment(2);			
 			IProject p = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 			return p;
 		} else {
@@ -49,9 +52,16 @@ public class BentoURIResolver {
 			
 			identifier = LOCAL_REPO + qualifiedName + "/" + defaultFolder + "/" + resourcePath;			
 			IFile f = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(identifier));
-			return f.exists();
+			return f.exists() || 
+					// checkResourceExists("platform:/resource/" + path, defaultFolder, r) ||
+					checkResourceExists("platform:/resource/" + qualifiedName + "/" + defaultFolder + "/" + resourcePath, defaultFolder, r) ;
 		} else if ( ! identifier.startsWith("platform:/resource") && r.getURI().isPlatformResource() ) {
-			String projectName = r.getURI().segment(1);				
+			String projectName = r.getURI().segment(1);			
+			System.out.println("[" + projectName + "]");
+			// Dirty hack for the platform:/resource// problem		
+			if ( projectName.isEmpty() ) 
+				projectName = r.getURI().segment(2);
+
 			IProject p = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 			
 			String prefix = "";
@@ -83,11 +93,25 @@ public class BentoURIResolver {
 			String qualifiedName = parts[0];
 			String resourcePath = path.replaceFirst(qualifiedName, "");
 			
-			identifier = LOCAL_REPO_URI + qualifiedName + "/" + defaultFolder + "/" + resourcePath;			
-			return identifier;
+			// identifier = LOCAL_REPO_URI + qualifiedName + "/" + defaultFolder + "/" + resourcePath;			
+			identifier = LOCAL_REPO + qualifiedName + "/" + defaultFolder + "/" + resourcePath;			
+
+			IFile f = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(identifier));
+			if ( f.exists() ) {
+				// It is in the repository
+				return identifier;
+			}
+			
+			// If not, try a local project
+			return "platform:/resource/" + qualifiedName + "/" + defaultFolder + "/" + resourcePath;			
 		
 		} else if ( ! identifier.startsWith("platform:/resource") && r.getURI().isPlatformResource() ) {
-			String projectName = r.getURI().segment(1);				
+			String projectName = r.getURI().segment(1);		
+			// Dirty hack for the platform:/resource// problem		
+			if ( projectName.isEmpty() ) 
+				projectName = r.getURI().segment(2);
+			
+			System.out.println("[" + projectName + "]");
 			IProject p = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 			
 			String prefix = "";
@@ -168,9 +192,20 @@ public class BentoURIResolver {
 			String[] parts = name.split("\\.");
 			String nonQualified = parts[parts.length - 1];
 			
-			// Weird, this "/" is needed because it only works with ..download//...
-			identifier = LOCAL_REPO_URI + "/" + name + "/META-INF/" + nonQualified + ".bento";
-			System.out.println(original + " => " + identifier);
+			
+			identifier = LOCAL_REPO + name + "/META-INF/" + nonQualified + ".bento";
+
+			IFile f = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(identifier));
+			if ( f.exists() ) {
+				// It is in the repository
+				// Weird, this "/" is needed because it only works with ..download//...
+				identifier = LOCAL_REPO_URI + "/" + name + "/META-INF/" + nonQualified + ".bento";
+				return identifier;
+			}
+			
+			// If not, try a local project
+			return "platform:/resource//" + name + "/META-INF/" + nonQualified + ".bento";			
+			
 		}
 		return identifier;
 	}

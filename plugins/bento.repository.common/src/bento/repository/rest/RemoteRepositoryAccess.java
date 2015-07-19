@@ -164,6 +164,8 @@ public class RemoteRepositoryAccess {
 			zipFile.addFolder(project.getFolder("META-INF").getLocation().toPortableString(), parameters);
 			zipFile.addFolder(project.getFolder("metamodels").getLocation().toPortableString(), parameters);
 			zipFile.addFolder(project.getFolder("transformation").getLocation().toPortableString(), parameters);
+			if ( project.getFolder("bindings").exists() )
+				zipFile.addFolder(project.getFolder("bindings").getLocation().toPortableString(), parameters);
 			
 			temp.deleteOnExit();
 		

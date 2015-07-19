@@ -21,12 +21,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>anatlyzer.atl.editor.anatlyzerATLBuilder</name>
+			<name>bento.language.bentocomp.resource.bento.builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>bento.language.bentocomp.resource.bento.builder</name>
+			<name>anatlyzer.atl.editor.anatlyzerATLBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -35,7 +35,7 @@
 		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
 		<nature>genericity.language.gcomponent.resource.gcomponent.nature</nature>
 		<nature>genericity.language.gbind.resource.nature</nature>
-		<nature>anatlyzer.atl.editor.anatlyzerATLNature</nature>
 		<nature>bento.language.bentocomp.resource.bento.nature</nature>
+		<nature>anatlyzer.atl.editor.anatlyzerATLNature</nature>
 	</natures>
 </projectDescription>

@@ -1,0 +1,12 @@
+composite component bento.examples.ecore2dot {
+        uses "bento://bento.examples.oo2dot"  
+        binding bindECORE = "oo2ecore.gbind"
+                        
+        source concept ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+        target concept DOT : "bento:/bento.examples.oo2dot/DOT.ecore"
+        
+        source model in  : ECORE 
+        target model out : DOT   
+        
+        compose apply oo2dot(bindECORE(in)) -> (out)
+}

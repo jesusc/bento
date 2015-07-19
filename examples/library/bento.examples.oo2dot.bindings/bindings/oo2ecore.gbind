@@ -1,25 +1,21 @@
 binding oo2ecore {  
-  concept   OO    : "platform:/resource/bento.rev.oo2dot/metamodels/OO.ecore"
-  metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	concept   OO    : "bento:/bento.examples.oo2dot/OO.ecore"
+	metamodel ECORE : "http://www.eclipse.org/emf/2002/Ecore"
 
-  class EMetamodel {
-   	ref contents : EPackage
-  } init = Sequence { 
-	#EMetamodel { 
-		contents = ECORE!EPackage.allInstances()->
-			select(p | p.eSuperpackage().oclIsUndefined() )
-		} };
+	class EMetamodel {
+		ref contents : EPackage
+	} init = Sequence { 
+		#EMetamodel { 
+			contents = ECORE!EPackage.allInstances()->
+				select(p | p.refImmediateComposite().oclIsUndefined() )
+		}
+	};
 
-  class Metamodel to virtual EMetamodel	
-  class Package   to EPackage
-  class Class     to EClass
-
-  feature Class.structuralFeatures is eStructuralFeatures
-  feature Package.contents = 
-      self.eClassifiers.union(self.eSubpackages)	
-	
-	
 	class Operation to EOperation
+	class Package   to EPackage
+	class Metamodel to virtual EMetamodel
+	
+	class Class        to EClass
 	class Classifier   to EClassifier
 	class DataType     to EDataType
 	class TypedElement to ETypedElement
@@ -31,8 +27,9 @@ binding oo2ecore {
 	
 	class Parameter to EParameter
 	
+	
 	feature Metamodel.contents       is contents
-	feature Package.contents         = self.eClassifiers.union(self.eSubpackages)
+	feature Package.contents         is eClassifiers
 	
 	feature Class.structuralFeatures is eStructuralFeatures
 	feature Class.operations         is eOperations

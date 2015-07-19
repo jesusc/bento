@@ -98,10 +98,11 @@
                class="genericity.components.ui.popup.actions.ExecuteComponent"
                enablesFor="1"
                id="genericity.components.ui.ExecuteComponent"
-               label="Execute"
+               label="Execute component"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
          
+         <!--
          <action
                class="genericity.components.ui.popup.actions.InstallToLocalRepo"
                enablesFor="1"
@@ -109,6 +110,7 @@
                label="Install to local repository"
                menubarPath="genericity.components.ui.GComponentsMenu/group1">
          </action>
+         -->
 
 		<!--                  
          <action
