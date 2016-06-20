@@ -1,69 +1,102 @@
--- @path PN2=/bento.trafolib.petrinet2matrix.bindings/metamodels/petri_nets.ecore
+-- @path PN2=/bento.trafolib.petrinet2matrix.bindings/metamodels/3_no_arc_petri_net.ecore
 -- @path MTX=/bento.trafolib.petrinet2matrix/metamodels/AlgebraicMatrix.ecore
+
+
 module pn2mat;
-create OUT : MTX from IN : PN2;
+create OUT: MTX from IN: PN2;
 
-helper context PN2!PetriNet def: arcs : OclAny = thisModule.TPArc_AllInstances->union(thisModule.PTArc_AllInstances);
+helper context PN2!PetriNet def: arcs: OclAny =
+	thisModule.TPArc_AllInstances -> union(thisModule.PTArc_AllInstances);
 
-helper context PN2!PetriNet def: transitions : OclAny = self.elems->select(e | e.oclIsKindOf(PN2!Transition));
+helper context PN2!PetriNet def: transitions: OclAny =
+	self.elems -> select(e | e.oclIsKindOf(PN2!Transition));
 
-helper context PN2!PetriNet def: places : OclAny = self.elems->select(e | e.oclIsKindOf(PN2!Place));
+helper context PN2!PetriNet def: places: OclAny =
+	self.elems -> select(e | e.oclIsKindOf(PN2!Place));
 
 rule Net2Matrix {
-   from n : PN2!PetriNet
-     to s : MTX!Matrix(
-horzLength <- n.places->size(),
-vertLength <- n.transitions->size(),
-rows <- n.transitions
-)
-
+	from
+		n: PN2!PetriNet
+	to
+		s: MTX!Matrix (
+			horzLength <- n.places -> size(),
+			vertLength <- n.transitions -> size(),
+			rows <- n.transitions
+		)
 }
 
 rule Transition2Row {
-   from t : PN2!Transition
-     to r : MTX!Row(
-cells <- PN2!Place.allInstances()->collect(p | thisModule.PlaceValue(p, t))
-)
-
+	from
+		t: PN2!Transition
+	to
+		r: MTX!Row (
+			cells <- PN2!Place.allInstances() -> collect(p | thisModule.PlaceValue(p, t))
+		)
 }
 
 lazy rule PlaceValue {
-   from p : PN2!Place, tt : PN2!Transition
-     to c : MTX!Cell(
-value <- thisModule.inPlaceVal(p, tt) - thisModule.outPlaceVal(p, tt)
-)
-
+	from p: PN2!Place, tt: PN2!Transition
+	to
+		c: MTX!Cell (
+			value <- thisModule.inPlaceVal(p, tt) - thisModule.outPlaceVal(p, tt)
+		)
 }
 
-helper  def: inPlaceVal(p : PN2!Place, t : PN2!Transition) : Integer = let inPlaces : Sequence(TupleType(source : OclAny, target : OclAny)) = thisModule.TPArc_AllInstances->select(arc | thisModule.TransToPlaceArc_source(arc) = t and thisModule.TransToPlaceArc_target(arc) = p)
- in if ( inPlaces->size() > 0 ) then
-   inPlaces->collect(a | thisModule.TransToPlaceArc_weight(a))->sum()
-else
-   0
-endif;
+helper def: inPlaceVal(p: PN2!Place, t: PN2!Transition): Integer =
+	let inPlaces: Sequence(TupleType(source: OclAny, target: OclAny)) =
+		thisModule.TPArc_AllInstances -> select(arc | thisModule.
+				TransToPlaceArc_source(arc) = t and thisModule.
+				TransToPlaceArc_target(arc) = p)
+	in
+		if (inPlaces -> size() > 0 ) then
+			inPlaces -> collect(a | thisModule.TransToPlaceArc_weight(a)) -> sum()
+		else
+			0
+		endif;
 
-helper  def: outPlaceVal(p : PN2!Place, t : PN2!Transition) : Integer = let outPlaces : Sequence(TupleType(source : OclAny, target : OclAny)) = thisModule.PTArc_AllInstances->select(arc | thisModule.PlaceToTransArc_source(arc) = p and thisModule.PlaceToTransArc_target(arc) = t)
- in if ( outPlaces->size() > 0 ) then
-   outPlaces->collect(a | thisModule.PlaceToTransArc_weight(a))->sum()
-else
-   0
-endif;
+helper def: outPlaceVal(p: PN2!Place, t: PN2!Transition): Integer =
+	let outPlaces: Sequence(TupleType(source: OclAny, target: OclAny)) =
+		thisModule.PTArc_AllInstances -> select(arc | thisModule.
+				PlaceToTransArc_source(arc) = p and thisModule.
+				PlaceToTransArc_target(arc) = t)
+	in
+		if (outPlaces -> size() > 0 ) then
+			outPlaces -> collect(a | thisModule.PlaceToTransArc_weight(a)) -> sum()
+		else
+			0
+		endif;
 
-helper  def: __convertToSequence__(obj : OclAny) : OclAny = Sequence {obj }->flatten();
+helper def: __convertToSequence__(obj: OclAny): OclAny =
+	Sequence{obj} -> flatten();
 
-helper  def: PTArc_AllInstances : OclAny = PN2!Transition.allInstances()->collect(t | t.in->collect(src | Tuple {source = src, target = t, type__ = 'PTArc' }))->flatten();
+helper def: PTArc_AllInstances: OclAny =
+	PN2!Transition.allInstances() -> collect(t | t.in -> collect(src | Tuple{source =
+			src, target = t, type__ = 'PTArc'})) -> flatten();
 
-helper  def: TPArc_AllInstances : OclAny = PN2!Transition.allInstances()->collect(t | t.out->collect(tgt | Tuple {source = t, target = tgt, type__ = 'TPArc' }))->flatten();
+helper def: TPArc_AllInstances: OclAny =
+	PN2!Transition.allInstances() -> collect(t | t.out -> collect(tgt | Tuple{source = t,
+			target = tgt, type__ = 'TPArc'})) -> flatten();
 
-helper  def: PlaceToTransArc_weight(self_ : TupleType(source : OclAny, target : OclAny)) : OclAny = 2;
+helper def: PlaceToTransArc_weight(self_: TupleType(source: OclAny, target: OclAny)):
+		OclAny =
+	1;
 
-helper  def: TransToPlaceArc_weight(self_ : TupleType(source : OclAny, target : OclAny)) : OclAny = 1;
+helper def: TransToPlaceArc_weight(self_: TupleType(source: OclAny, target: OclAny)):
+		OclAny =
+	1;
 
-helper  def: TransToPlaceArc_source(self_ : TupleType(source : OclAny, target : OclAny)) : OclAny = self_.source;
+helper def: TransToPlaceArc_source(self_: TupleType(source: OclAny, target: OclAny)):
+		OclAny =
+	self_.source;
 
-helper  def: TransToPlaceArc_target(self_ : TupleType(source : OclAny, target : OclAny)) : OclAny = self_.target;
+helper def: TransToPlaceArc_target(self_: TupleType(source: OclAny, target: OclAny)):
+		OclAny =
+	self_.target;
 
-helper  def: PlaceToTransArc_source(self_ : TupleType(source : OclAny, target : OclAny)) : OclAny = self_.source;
+helper def: PlaceToTransArc_source(self_: TupleType(source: OclAny, target: OclAny)):
+		OclAny =
+	self_.source;
 
-helper  def: PlaceToTransArc_target(self_ : TupleType(source : OclAny, target : OclAny)) : OclAny = self_.target;
-
+helper def: PlaceToTransArc_target(self_: TupleType(source: OclAny, target: OclAny)):
+		OclAny =
+	self_.target;

@@ -33,6 +33,7 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLSerializer;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atl.util.AnalyserUtils.CannotLoadMetamodel;
+import anatlyzer.atl.util.AnalyserUtils.PreconditionParseError;
 import anatlyzer.ui.util.AtlEngineUtils;
 import bento.componetization.atl.ConceptExtractor;
 import bento.componetization.atl.MetamodelPrunner;
@@ -334,7 +335,7 @@ public class RevengProcessManager {
 	public AnalysisResult applyTyping() {
 		try {
 			return new AnalyserExecutor().exec(getTemplateFile(), true);
-		} catch (IOException | CoreException | CannotLoadMetamodel e) {
+		} catch (IOException | CoreException | CannotLoadMetamodel | PreconditionParseError e) {
 			e.printStackTrace();
 			WorkspaceLogger.generateLogEntry(Status.ERROR, e);
 		}	

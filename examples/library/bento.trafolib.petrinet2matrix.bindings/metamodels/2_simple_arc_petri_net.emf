@@ -1,0 +1,27 @@
+@namespace(uri="http://bento/simple_arc_PetriNet", prefix="PetriNet")
+package PetriNet;
+
+class PetriNet {
+  val Node[*] nodes;
+  val Arc[*] arcs;
+}
+
+abstract class Node {
+	attr String[1] name;
+}
+
+class Place extends Node {
+  attr int[1] marking;
+}
+
+class Transition extends Node {
+}
+
+class Arc {
+  attr String[1] name; 
+  attr int[1] weight;
+
+  ref Node[1] source;
+  ref Node[1] target;
+}
+

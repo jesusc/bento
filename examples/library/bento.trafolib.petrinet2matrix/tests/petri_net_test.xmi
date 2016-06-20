@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ASCII"?>
+<PetriNet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:PetriNet="http://bento/PetriNet"
+    xsi:schemaLocation="http://bento/PetriNet ../metamodels/PetriNet.ecore">
+  <places/>
+  <places/>
+  <places/>
+  <places/>
+  <transitions/>
+  <transitions/>
+  <transitions/>
+  <arcs xsi:type="PetriNet:PlaceToTransArc"
+      weight="1"
+      source="//@places.0"
+      target="//@transitions.0"/>
+  <arcs xsi:type="PetriNet:TransToPlaceArc"
+      weight="4"
+      source="//@transitions.0"
+      target="//@places.2"/>
+  <arcs xsi:type="PetriNet:PlaceToTransArc"
+      weight="1"
+      source="//@places.2"
+      target="//@transitions.1"/>
+  <arcs xsi:type="PetriNet:TransToPlaceArc"
+      weight="1"
+      source="//@transitions.1"
+      target="//@places.3"/>
+  <arcs xsi:type="PetriNet:PlaceToTransArc"
+      weight="2"
+      source="//@places.3"
+      target="//@transitions.2"/>
+  <arcs xsi:type="PetriNet:TransToPlaceArc"
+      weight="1"
+      source="//@transitions.2"
+      target="//@places.1"/>
+  <arcs xsi:type="PetriNet:PlaceToTransArc"
+      weight="1"
+      source="//@places.1"
+      target="//@transitions.0"/>
+  <arcs xsi:type="PetriNet:PlaceToTransArc"
+      weight="2"
+      source="//@places.2"
+      target="//@transitions.2"/>
+</PetriNet:PetriNet>

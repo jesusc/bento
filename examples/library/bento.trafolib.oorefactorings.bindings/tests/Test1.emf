@@ -1,0 +1,16 @@
+@namespace(
+	uri="http://miso.es/oorefactorings/removeemtpy",
+	prefix="remove_empty_oo")
+package oo_remove_empty;
+
+class A {
+	val B[*] refToB;	
+}
+
+class B {
+	
+}
+
+class C extends B {
+	
+}

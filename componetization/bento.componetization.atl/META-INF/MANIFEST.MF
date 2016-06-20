@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Bento componenization of ATL transformations
 Bundle-SymbolicName: bento.componetization.atl
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.7.1.qualifier
 Bundle-Activator: bento.componetization.atl.Activator
 Bundle-Vendor: Miso Team
 Require-Bundle: org.eclipse.core.runtime,

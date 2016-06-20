@@ -1,0 +1,12 @@
+@namespace(
+	uri="http://miso.es/oorefactorings/removeemtpy",
+	prefix="remove_empty_oo")
+package oo_remove_empty;
+
+class Class {
+	val Feature[*] features;	
+}
+
+class Feature {
+	ref Class[1] type;
+}

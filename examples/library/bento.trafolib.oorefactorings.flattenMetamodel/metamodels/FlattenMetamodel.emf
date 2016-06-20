@@ -1,0 +1,17 @@
+@namespace(
+	uri="http://miso.es/oorefactorings/oo_flatten_metamodel",
+	prefix="oo_flatten_metamodel")
+package oo_flatten_metamodel;
+
+class Package extends PackageContent {
+	val Classifier[*]#container classifiers;	
+	val Package[*] subpackages;
+	
+}
+
+abstract class PackageContent {
+}
+
+class Classifier extends PackageContent {
+	ref Package[0..1]#classifiers container;	
+}

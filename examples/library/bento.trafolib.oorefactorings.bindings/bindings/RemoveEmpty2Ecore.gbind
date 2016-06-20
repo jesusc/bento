@@ -1,0 +1,10 @@
+binding RemoveEmptyClass2Ecore {
+	concept   OO  : "bento:/bento.trafolib.oorefactorings.removeEmptyClass/RemoveEmptyClass.ecore"
+	metamodel Ecore : "http://www.eclipse.org/emf/2002/Ecore"
+	
+	class Class to EClass		
+	class Feature to EStructuralFeature
+
+	feature Class.features is eStructuralFeatures
+	feature Feature.type is eType
+}

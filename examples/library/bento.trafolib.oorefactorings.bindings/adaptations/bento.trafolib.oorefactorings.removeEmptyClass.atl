@@ -1,0 +1,16 @@
+-- @atlcompiler atl2010
+-- @path Ecore=http://www.eclipse.org/emf/2002/Ecore
+module removeemptyclass;
+create OUT : Ecore refining IN : Ecore;
+
+helper context Ecore!EStructuralFeature def: type : OclAny = self.eType;
+
+helper context Ecore!EClass def: features : OclAny = self.eStructuralFeatures;
+
+rule removeEmptyClass {
+   from class : Ecore!EClass( class.features->isEmpty() and ( not Ecore!EStructuralFeature.allInstances()->exists(f | f.type = class) ) )
+     to 
+	drop
+
+}
+

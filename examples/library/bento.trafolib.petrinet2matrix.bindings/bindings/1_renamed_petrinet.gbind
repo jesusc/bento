@@ -1,0 +1,27 @@
+binding simple2petrinet {
+	concept   PN  : "bento:/bento.trafolib.petrinet2matrix/PetriNet.ecore"
+	metamodel PN2 : "1_renamed_petri_net.ecore"
+	
+	class PetriNet to PetriNet
+	class Place to Place
+	class Transition to Transition
+	class TransToPlaceArc to TPArc
+	class PlaceToTransArc to PTArc
+	
+	feature PetriNet.places = self.nodes->select(e | e.oclIsKindOf(PN2!Place))
+	feature PetriNet.transitions = self.nodes->select(e | e.oclIsKindOf(PN2!Transition))
+
+	feature PetriNet.arcs is arcs
+	
+	-- feature Arc.weight is weight
+	feature TransToPlaceArc.weight is weight
+	feature PlaceToTransArc.weight is weight
+	
+	
+	feature TransToPlaceArc.source   is source
+	feature TransToPlaceArc."target" is "target"
+
+	feature PlaceToTransArc.source   is source
+	feature PlaceToTransArc."target" is "target"
+		
+}

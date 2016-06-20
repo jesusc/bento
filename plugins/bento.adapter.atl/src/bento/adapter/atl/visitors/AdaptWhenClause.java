@@ -161,7 +161,7 @@ public class AdaptWhenClause extends BaseAdapterVisitor {
 	}
 	
 	private String getWhenHelperName(ClassBinding cb) {
-		return cb.getConcept() + "__filter__";
+		return cb.getConcept().getName() + "__filter__";
 	}
 
 }

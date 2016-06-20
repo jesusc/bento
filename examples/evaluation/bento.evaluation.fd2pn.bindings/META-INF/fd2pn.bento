@@ -1,0 +1,16 @@
+
+transformation component bento.evaluation.fd2pn {
+	source concept FD  : "flow_concept.ecore"
+	target concept PN  : "petri_nets.ecore"
+	
+	source model fd : FD
+	target model pn : PN
+	
+	variants 
+		+ finalStateSemantics xor // we should say if they are compulsory...
+			- terminating
+			- nonTerminating
+	
+	definition atl "flow2pn.atl" 
+		with IN : FD = fd, OUT : PN = pn
+}

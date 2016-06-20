@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<AlgebraicMatrix:Matrix xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:AlgebraicMatrix="http://bento/AlgebraicMatrix" horzLength="4" vertLength="3">
+  <rows>
+    <cells value="-1"/>
+    <cells value="-1"/>
+    <cells value="4"/>
+    <cells/>
+  </rows>
+  <rows>
+    <cells/>
+    <cells/>
+    <cells value="-1"/>
+    <cells value="1"/>
+  </rows>
+  <rows>
+    <cells/>
+    <cells value="1"/>
+    <cells value="-2"/>
+    <cells value="-2"/>
+  </rows>
+</AlgebraicMatrix:Matrix>

@@ -1,0 +1,14 @@
+transformation component bento.trafolib.oorefactorings.removeEmptyClass {
+	source concept OO : "RemoveEmptyClass.ecore"
+	target concept OO : "RemoveEmptyClass.ecore"
+	
+	source model in  : OO
+	target model out : OO
+	
+	definition atl "remove_empty_class.atl" with 
+		IN  : OO = in,
+		OUT : OO = out
+
+	version "0.1"
+	tags "remove emtpy class", "refactoring", "oo"
+}

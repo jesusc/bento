@@ -1,0 +1,14 @@
+composite component bento.trafolib.oorefactorings.removeEmptyClassEcore {
+	uses "bento:/bento.trafolib.oorefactorings.removeEmptyClass"
+
+	binding bindECORE = "RemoveEmpty2Ecore.gbind"
+
+	source concept ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	target concept ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	
+	source model in : ECORE
+	target model out : ECORE
+	
+	compose 
+		apply removeEmptyClass(bindECORE(in)) -> (out)
+}

@@ -1,0 +1,64 @@
+-- @path JAVA=/bento.trafolib.tmodel2table//test/java_source/JavaSource.ecore
+-- @path Table=/bento.trafolib.tmodel2table/metamodels/Table.ecore
+module TableModel2table;
+create OUT : Table from IN : JAVA;
+
+helper context JAVA!MethodDefinition def: title : OclAny = self.class.name + '.' + self.name;
+
+helper context JAVA!MethodDefinition def: title : OclAny = self.class.name + '.' + self.name;
+
+helper context JAVA!JavaSource def: cols : OclAny = self.allMethodDefs;
+
+helper context JAVA!JavaSource def: rows : OclAny = self.allMethodDefs;
+
+rule TableModel2table {
+   from TableModel : JAVA!JavaSource
+     to table : Table!Table(
+rows <- firtRowForColumnNames,
+rows <- TableModel.rows->collect(r | thisModule.RowHeaderNode2Row(r))
+), firtRowForColumnNames : Table!Row(
+cells <- upperLeftCell,
+cells <- TableModel.cols->collect(c | thisModule.ColumnHeaderNode2Cell(c))
+), upperLeftCell : Table!Cell(
+content <- ''
+)
+
+}
+
+lazy rule RowHeaderNode2Row {
+   from src : JAVA!MethodDefinition
+using {
+   t : JAVA!JavaSource = JAVA!JavaSource.allInstances()->any(g | g.rows->includes(src));   i : Integer = t.rows->indexOf(src);}
+     to tgt : Table!Row(
+cells <- rowHeaderCell,
+cells <- t.cols->collect(c | let j : Integer = t.cols->indexOf(c)
+ in thisModule.text2cell(t.valueOf(i, j)))
+), rowHeaderCell : Table!Cell(
+content <- src.title
+)
+
+}
+
+lazy rule ColumnHeaderNode2Cell {
+   from src : JAVA!MethodDefinition
+     to tgt : Table!Cell(
+content <- src.title
+)
+
+}
+
+rule text2cell( str : String) {
+     to c : Table!Cell(
+content <- str
+)
+do {
+   c;
+}
+}
+
+helper context JAVA!JavaSource def: valueOf(i : Integer, j : Integer) : String = self.allMethodDefs->at(i).computeContent(self.allMethodDefs->at(j));
+
+helper context JAVA!JavaSource def: allMethodDefs : OclAny = JAVA!MethodDefinition.allInstances()->sortedBy(e | e.class.name + '_' + e.name);
+
+helper context JAVA!MethodDefinition def: computeContent(col : JAVA!MethodDefinition) : String = self.invocations->select(i | i.method.name = col.name and i.method.class.name = col.class.name)->size().toString();
+

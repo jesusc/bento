@@ -1,0 +1,11 @@
+composite component uml22pn {
+	uses "platform:/resource/bento.examples.flow_diagrams.petrinets/fd2pn.gcomponent"    
+	binding bindUML = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/uml22pn/uml2.gbind"
+			
+	source concept UML : "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/uml22pn/UML.ecore"
+	target concept PN    : "platform:/resource/bento.examples.flow_diagrams.petrinets/metamodels/petri_nets.ecore"
+	source model in  : UML = "platform:/resource/bento.examples.flow_diagrams.petrinets/bindings/uml22pn/examples/install_component.uml" 
+	target model out : PN = "platform:/resource/bento.examples.flow_diagrams.petrinets/tmp_/uml-output.xmi"
+	
+	compose apply fd2pn(bindUML(in)) -> (out)
+}

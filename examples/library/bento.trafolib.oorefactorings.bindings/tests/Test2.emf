@@ -1,0 +1,38 @@
+@namespace(
+	uri="http://test2",
+	prefix="test2")
+package test2;
+
+class A {
+	val B[*] refToB;	
+}
+
+class B {
+	
+}
+
+class C extends B {
+	
+}
+
+@namespace(
+	uri="http://test2sub",
+	prefix="test2sub")
+package test2sub1 {
+	class D {
+		
+	}
+	
+	class D2 extends D {
+		
+	}
+}
+
+@namespace(
+	uri="http://test2sub2",
+	prefix="test2sub2")
+package test2sub2 {
+	class E {
+		
+	}
+}

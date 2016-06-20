@@ -83,14 +83,14 @@ public class ComponentInterpreter {
 		return adaptations;
 	}
 
-	private List<AdaptationResult> doStep(CompositeComponent component, final CompositionStep step, List<Adaptation> parentAdaptations, Component topComposite) {
+	private List<AdaptationResult> doStep(CompositeComponent component, final CompositionStep step, List<Adaptation> parentAdaptations, CompositeComponent topComposite) {
 		List<AdaptationResult> adaptations = new FlowcontrolSwitch<List<AdaptationResult>>() {
 			public List<AdaptationResult> caseApply(bento.language.bentocomp.flowcontrol.Apply object) {
-				return doApplyTransformation(component, object, parentAdaptations, component);
+				return doApplyTransformation(component, object, parentAdaptations, topComposite);
 			}
 		
 			public java.util.List<AdaptationResult> caseSeq(bento.language.bentocomp.flowcontrol.Seq object) {
-				return doSeq(component, object, parentAdaptations, component);				
+				return doSeq(component, object, parentAdaptations, topComposite);				
 			};
 			
 			public java.util.List<AdaptationResult> defaultCase(org.eclipse.emf.ecore.EObject object) {

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="DOT">
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.0" group="Classifier" minlen="2" headlabel="/1">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="none" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="general{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.2" group="NamedElement" minlen="2" headlabel="/3">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="none" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="supplier[1-*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.2" group="NamedElement" minlen="2" headlabel="/5">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="none" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="client[1-*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.3" constraint="true" group="PackageableElement" minlen="2" headlabel="/7">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="diamond" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="packagedElement[*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.5" constraint="true" group="Classifier" minlen="2" headlabel="/9">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="diamond" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="nestedClassifier[*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.5" constraint="true" group="Operation" minlen="2" headlabel="/11">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="diamond" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="ownedOperation[*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.12" constraint="true" group="Property" minlen="2" headlabel="/13">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="diamond" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="ownedAttribute[*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.13" group="Type" minlen="2" headlabel="/15">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="none" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="type[0-1]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.17" group="Behavior" minlen="2" headlabel="/17">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="none" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="method[*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.17" constraint="true" group="Parameter" minlen="2" headlabel="/19">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="diamond" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="ownedParameter[*]{ordered}"/>
+  <DirectedArc style="none" fromNode="/22/@nodes.0/@nodes.20" group="Element" minlen="2" headlabel="/21">
+    <arrowHead name="vee" clipping="none"/>
+    <arrowTail name="none" clipping="none"/>
+  </DirectedArc>
+  <SimpleLabel content="owner[0-1]{ordered}"/>
+  <Graph name="KM3 Model in DOT" type="digraph" rankDir="BT" labeljust="l" labelloc="t" compound="true" nodeSeparation="0.75">
+    <nodes xsi:type="SubGraph" name="cluster_OO" color="black" labelloc="t">
+      <label xsi:type="SimpleLabel" content="OO"/>
+      <nodes xsi:type="Node" name="Generalization" refers="/0">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Generalization| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Operation">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Operation| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Dependency" refers="/2 /4">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Dependency| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Package" refers="/6">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Package| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Parameter">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Parameter| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Class" refers="/8 /10">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Class| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="PackageableElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/PackageableElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Feature">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Feature/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Model">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Model| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="NamedElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/NamedElement/|name[0-1] : String\nvisibility[0-1] : VisibilityKind| }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Property">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{Property| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Classifier">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Classifier/|isAbstract : Boolean| }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="StructuredClassifier" refers="/12">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/StructuredClassifier/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="TypedElement" refers="/14">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/TypedElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Type">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Type/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Boolean">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{&amp;#171;DataType&amp;#187;\nBoolean|}"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="RedefinableElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/RedefinableElement/|isLeaf : Boolean| }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="BehavioralFeature" refers="/16 /18">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/BehavioralFeature/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Behavior">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Behavior/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="String">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{&amp;#171;DataType&amp;#187;\nString|}"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Element" refers="/20">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Element/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="VisibilityKind">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{&amp;#171;DataType&amp;#187;\nVisibilityKind|}"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="DirectedRelationship">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/DirectedRelationship/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Relationship">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Relationship/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="EModelElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/EModelElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="Namespace">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/Namespace/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="ParameterableElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/ParameterableElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="TemplateableElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/TemplateableElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="ConnectableElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/ConnectableElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="MultiplicityElement">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/MultiplicityElement/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="EncapsulatedClassifier">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/EncapsulatedClassifier/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="BehavioredClassifier">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/BehavioredClassifier/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="StructuralFeature">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/StructuralFeature/| | }"/>
+        </shape>
+      </nodes>
+      <nodes xsi:type="Node" name="DeploymentTarget">
+        <shape xsi:type="RecordNodeShape" name="record">
+          <label xsi:type="SimpleLabel" content="{/DeploymentTarget/| | }"/>
+        </shape>
+      </nodes>
+    </nodes>
+  </Graph>
+</xmi:XMI>

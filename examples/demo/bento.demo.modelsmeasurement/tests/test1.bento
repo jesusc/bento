@@ -1,0 +1,13 @@
+component execution test1 {
+	uses "platform:/resource/bento.demo.modelsmeasurement/META-INF/measurements.bento"
+			
+	source concept ECORE : "http://www.eclipse.org/emf/2002/Ecore"
+	target concept Table : "bento:/bento.trafolib.tmodel2table/Table.ecore"
+	
+	source model in  : ECORE = "platform:/resource/bento.rev.oo2measure/metamodels/OO.ecore"
+	target model out : Table = "platform:/resource/bento.demo.modelsmeasurement/out.xmi"
+	
+	compose apply measurements(in) -> (out)
+		
+}
+

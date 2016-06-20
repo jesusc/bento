@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<petri_nets:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:petri_nets="petri_nets"
+    xsi:schemaLocation="petri_nets ../metamodels/3_no_arc_petri_net.ecore">
+  <elems xsi:type="petri_nets:Place"
+      name="p1"
+      tokens="1"/>
+  <elems xsi:type="petri_nets:Place"
+      name="p2"
+      tokens="1"/>
+  <elems xsi:type="petri_nets:Place"
+      name="p3"
+      tokens="1"/>
+  <elems xsi:type="petri_nets:Place"
+      name="p4"
+      tokens="1"/>
+  <elems xsi:type="petri_nets:Transition"
+      name="t1"
+      in="//@elems.0 //@elems.1"
+      out="//@elems.2"/>
+  <elems xsi:type="petri_nets:Transition"
+      name="t2"
+      in="//@elems.2"
+      out="//@elems.3"/>
+  <elems xsi:type="petri_nets:Transition"
+      name="t3"
+      in="//@elems.3 //@elems.2"
+      out="//@elems.1"/>
+</petri_nets:PetriNet>

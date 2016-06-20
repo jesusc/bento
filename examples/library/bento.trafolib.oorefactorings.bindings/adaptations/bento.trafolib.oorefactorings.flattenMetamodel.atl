@@ -1,0 +1,26 @@
+-- @atlcompiler atl2010
+-- @path Ecore=http://www.eclipse.org/emf/2002/Ecore
+module flattenmetamodel;
+create OUT : Ecore refining IN : Ecore;
+
+helper context Ecore!EClassifier def: container : OclAny = self.refImmediateComposite();
+
+helper context Ecore!EPackage def: classifiers : OclAny = self.eClassifiers;
+
+helper context Ecore!EPackage def: subpackages : OclAny = self.eSubpackages;
+
+rule rootPackage {
+   from root : Ecore!EPackage( not Ecore!EPackage.allInstances()->exists(anotherPkg | anotherPkg.subpackages->includes(root)) )
+     to newRoot : Ecore!EPackage(
+eClassifiers <- Ecore!EClassifier.allInstances()->select(c | c.container <> root)
+)
+
+}
+
+rule nonRootPackage {
+   from root : Ecore!EPackage( Ecore!EPackage.allInstances()->exists(anotherPkg | anotherPkg.subpackages->includes(root)) )
+     to 
+	drop
+
+}
+

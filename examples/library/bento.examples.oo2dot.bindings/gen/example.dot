@@ -1,0 +1,1202 @@
+digraph "KM3 Model in DOT" {
+graph[rankdir=BT,labeljust=l,labelloc=t,nodeSep=0.75,compound=true];
+ subgraph "cluster_uml"{
+labelloc=t
+color=black
+label=uml
+ node[shape=record];
+Integer[label="{&#171;DataType&#187;\nInteger|}"]
+;
+ node[shape=record];
+Boolean[label="{&#171;DataType&#187;\nBoolean|}"]
+;
+ node[shape=record];
+String[label="{&#171;DataType&#187;\nString|}"]
+;
+ node[shape=record];
+UnlimitedNatural[label="{&#171;DataType&#187;\nUnlimitedNatural|}"]
+;
+ node[shape=record];
+Comment[label="{Comment|body[0-1] : String| }"]
+ Comment->Element[arrowhead=vee,arrowtail=none,headlabel="annotatedElement[*]",group=Element,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Element[label="{/Element/| | }"]
+ Element->Element[arrowhead=none,arrowtail=none,headlabel="owner[0-1]",taillabel="ownedElement[*]",group=Element,minlen=2,constraint=false,]
+ Element->Comment[arrowhead=vee,arrowtail=diamond,headlabel="ownedComment[*]",group=Comment,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Package[label="{Package| | }"]
+ Package->PackageableElement[arrowhead=vee,arrowtail=diamond,headlabel="packagedElement[*]",group=PackageableElement,minlen=2,constraint=true,]
+ Package->Package[arrowhead=none,arrowtail=none,headlabel="nestingPackage[0-1]",taillabel="nestedPackage[*]",group=Package,minlen=2,constraint=false,]
+;
+ node[shape=record];
+PackageableElement[label="{/PackageableElement/| | }"]
+;
+ node[shape=record];
+NamedElement[label="{/NamedElement/|name[0-1] : String\nvisibility[0-1] : VisibilityKind\nqualifiedName[0-1] : String| }"]
+ NamedElement->StringExpression[arrowhead=vee,arrowtail=diamond,headlabel="nameExpression[0-1]",group=StringExpression,minlen=2,constraint=true,]
+;
+ node[shape=record];
+VisibilityKind[label="{&#171;DataType&#187;\nVisibilityKind|}"]
+;
+ node[shape=record];
+Dependency[label="{Dependency| | }"]
+ Dependency->NamedElement[arrowhead=vee,arrowtail=none,headlabel="supplier[1-*]",group=NamedElement,minlen=2,constraint=false,]
+ Dependency->NamedElement[arrowhead=none,arrowtail=none,headlabel="client[1-*]",taillabel="clientDependency[*]",group=NamedElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+DirectedRelationship[label="{/DirectedRelationship/| | }"]
+ DirectedRelationship->Element[arrowhead=vee,arrowtail=none,headlabel="source[1-*]",group=Element,minlen=2,constraint=false,]
+ DirectedRelationship->Element[arrowhead=vee,arrowtail=none,headlabel="target[1-*]",group=Element,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Relationship[label="{/Relationship/| | }"]
+ Relationship->Element[arrowhead=vee,arrowtail=none,headlabel="relatedElement[1-*]",group=Element,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Namespace[label="{/Namespace/| | }"]
+ Namespace->NamedElement[arrowhead=vee,arrowtail=none,headlabel="member[*]",group=NamedElement,minlen=2,constraint=false,]
+ Namespace->PackageableElement[arrowhead=vee,arrowtail=none,headlabel="importedMember[*]",group=PackageableElement,minlen=2,constraint=false,]
+ Namespace->NamedElement[arrowhead=none,arrowtail=none,headlabel="ownedMember[*]",taillabel="namespace[0-1]",group=NamedElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ElementImport[label="{ElementImport|visibility : VisibilityKind\nalias[0-1] : String| }"]
+ ElementImport->PackageableElement[arrowhead=vee,arrowtail=none,headlabel="importedElement",group=PackageableElement,minlen=2,constraint=false,]
+ ElementImport->Namespace[arrowhead=diamond,arrowtail=none,headlabel="importingNamespace",taillabel="elementImport[*]",group=Namespace,minlen=2,constraint=true,]
+;
+ node[shape=record];
+PackageImport[label="{PackageImport|visibility : VisibilityKind| }"]
+ PackageImport->Package[arrowhead=vee,arrowtail=none,headlabel="importedPackage",group=Package,minlen=2,constraint=false,]
+ PackageImport->Namespace[arrowhead=diamond,arrowtail=none,headlabel="importingNamespace",taillabel="packageImport[*]",group=Namespace,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Constraint[label="{Constraint| | }"]
+ Constraint->Element[arrowhead=vee,arrowtail=none,headlabel="constrainedElement[*]{ordered}",group=Element,minlen=2,constraint=false,]
+ Constraint->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="specification",group=ValueSpecification,minlen=2,constraint=true,]
+ Constraint->Namespace[arrowhead=diamond,arrowtail=none,headlabel="context[0-1]",taillabel="ownedRule[*]",group=Namespace,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ValueSpecification[label="{/ValueSpecification/| | }"]
+;
+ node[shape=record];
+TypedElement[label="{/TypedElement/| | }"]
+ TypedElement->Type[arrowhead=vee,arrowtail=none,headlabel="type[0-1]",group=Type,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Type[label="{/Type/| | }"]
+ Type->Package[arrowhead=none,arrowtail=none,headlabel="package[0-1]",taillabel="ownedType[*]",group=Package,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Association[label="{Association|isDerived : Boolean| }"]
+ Association->Type[arrowhead=vee,arrowtail=none,headlabel="endType[1-*]{ordered}",group=Type,minlen=2,constraint=false,]
+ Association->Property[arrowhead=vee,arrowtail=none,headlabel="navigableOwnedEnd[*]",group=Property,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Classifier[label="{/Classifier/|isAbstract : Boolean| }"]
+ Classifier->NamedElement[arrowhead=vee,arrowtail=none,headlabel="inheritedMember[*]",group=NamedElement,minlen=2,constraint=false,]
+ Classifier->Classifier[arrowhead=vee,arrowtail=none,headlabel="redefinedClassifier[*]",group=Classifier,minlen=2,constraint=false,]
+ Classifier->Classifier[arrowhead=vee,arrowtail=none,headlabel="general[*]",group=Classifier,minlen=2,constraint=false,]
+ Classifier->Property[arrowhead=vee,arrowtail=none,headlabel="attribute[*]",group=Property,minlen=2,constraint=false,]
+ Classifier->CollaborationUse[arrowhead=vee,arrowtail=none,headlabel="representation[0-1]",group=CollaborationUse,minlen=2,constraint=false,]
+ Classifier->CollaborationUse[arrowhead=vee,arrowtail=diamond,headlabel="collaborationUse[*]",group=CollaborationUse,minlen=2,constraint=true,]
+ Classifier->UseCase[arrowhead=vee,arrowtail=diamond,headlabel="ownedUseCase[*]",group=UseCase,minlen=2,constraint=true,]
+;
+ node[shape=record];
+RedefinableElement[label="{/RedefinableElement/|isLeaf : Boolean| }"]
+ RedefinableElement->RedefinableElement[arrowhead=vee,arrowtail=none,headlabel="redefinedElement[*]",group=RedefinableElement,minlen=2,constraint=false,]
+ RedefinableElement->Classifier[arrowhead=vee,arrowtail=none,headlabel="redefinitionContext[*]",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+TemplateableElement[label="{/TemplateableElement/| | }"]
+;
+ node[shape=record];
+TemplateBinding[label="{TemplateBinding| | }"]
+ TemplateBinding->TemplateSignature[arrowhead=vee,arrowtail=none,headlabel="signature",group=TemplateSignature,minlen=2,constraint=false,]
+ TemplateBinding->TemplateableElement[arrowhead=diamond,arrowtail=none,headlabel="boundElement",taillabel="templateBinding[*]",group=TemplateableElement,minlen=2,constraint=true,]
+;
+ node[shape=record];
+TemplateSignature[label="{TemplateSignature| | }"]
+ TemplateSignature->TemplateParameter[arrowhead=vee,arrowtail=none,headlabel="parameter[1-*]{ordered}",group=TemplateParameter,minlen=2,constraint=false,]
+ TemplateSignature->TemplateableElement[arrowhead=diamond,arrowtail=none,headlabel="template",taillabel="ownedTemplateSignature[0-1]",group=TemplateableElement,minlen=2,constraint=true,]
+;
+ node[shape=record];
+TemplateParameter[label="{TemplateParameter| | }"]
+ TemplateParameter->TemplateSignature[arrowhead=diamond,arrowtail=none,headlabel="signature",taillabel="ownedParameter[*]{ordered}",group=TemplateSignature,minlen=2,constraint=true,]
+ TemplateParameter->ParameterableElement[arrowhead=vee,arrowtail=none,headlabel="default[0-1]",group=ParameterableElement,minlen=2,constraint=false,]
+ TemplateParameter->ParameterableElement[arrowhead=vee,arrowtail=diamond,headlabel="ownedDefault[0-1]",group=ParameterableElement,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ParameterableElement[label="{/ParameterableElement/| | }"]
+ ParameterableElement->TemplateParameter[arrowhead=diamond,arrowtail=none,headlabel="owningTemplateParameter[0-1]",taillabel="ownedParameteredElement[0-1]",group=TemplateParameter,minlen=2,constraint=true,]
+ ParameterableElement->TemplateParameter[arrowhead=none,arrowtail=none,headlabel="templateParameter[0-1]",taillabel="parameteredElement",group=TemplateParameter,minlen=2,constraint=false,]
+;
+ node[shape=record];
+TemplateParameterSubstitution[label="{TemplateParameterSubstitution| | }"]
+ TemplateParameterSubstitution->TemplateParameter[arrowhead=vee,arrowtail=none,headlabel="formal",group=TemplateParameter,minlen=2,constraint=false,]
+ TemplateParameterSubstitution->ParameterableElement[arrowhead=vee,arrowtail=none,headlabel="actual",group=ParameterableElement,minlen=2,constraint=false,]
+ TemplateParameterSubstitution->ParameterableElement[arrowhead=vee,arrowtail=diamond,headlabel="ownedActual[0-1]",group=ParameterableElement,minlen=2,constraint=true,]
+ TemplateParameterSubstitution->TemplateBinding[arrowhead=diamond,arrowtail=none,headlabel="templateBinding",taillabel="parameterSubstitution[*]",group=TemplateBinding,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Generalization[label="{Generalization|isSubstitutable[0-1] : Boolean| }"]
+ Generalization->Classifier[arrowhead=vee,arrowtail=none,headlabel="general",group=Classifier,minlen=2,constraint=false,]
+ Generalization->Classifier[arrowhead=diamond,arrowtail=none,headlabel="specific",taillabel="generalization[*]",group=Classifier,minlen=2,constraint=true,]
+;
+ node[shape=record];
+GeneralizationSet[label="{GeneralizationSet|isCovering : Boolean\nisDisjoint : Boolean| }"]
+ GeneralizationSet->Classifier[arrowhead=none,arrowtail=none,headlabel="powertype[0-1]",taillabel="powertypeExtent[*]",group=Classifier,minlen=2,constraint=false,]
+ GeneralizationSet->Generalization[arrowhead=none,arrowtail=none,headlabel="generalization[*]",taillabel="generalizationSet[*]",group=Generalization,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Feature[label="{/Feature/|isStatic : Boolean| }"]
+ Feature->Classifier[arrowhead=none,arrowtail=none,headlabel="featuringClassifier[*]",taillabel="feature[*]",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Substitution[label="{Substitution| | }"]
+ Substitution->Classifier[arrowhead=vee,arrowtail=none,headlabel="contract",group=Classifier,minlen=2,constraint=false,]
+ Substitution->Classifier[arrowhead=diamond,arrowtail=none,headlabel="substitutingClassifier",taillabel="substitution[*]",group=Classifier,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Realization[label="{Realization| | }"]
+;
+ node[shape=record];
+Abstraction[label="{Abstraction| | }"]
+ Abstraction->OpaqueExpression[arrowhead=vee,arrowtail=diamond,headlabel="mapping[0-1]",group=OpaqueExpression,minlen=2,constraint=true,]
+;
+ node[shape=record];
+OpaqueExpression[label="{OpaqueExpression|body[*] : String\nlanguage[*] : String| }"]
+ OpaqueExpression->Parameter[arrowhead=vee,arrowtail=none,headlabel="result[0-1]",group=Parameter,minlen=2,constraint=false,]
+ OpaqueExpression->Behavior[arrowhead=vee,arrowtail=none,headlabel="behavior[0-1]",group=Behavior,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Parameter[label="{Parameter|direction : ParameterDirectionKind\ndefault[0-1] : String\nisException : Boolean\nisStream : Boolean\neffect[0-1] : ParameterEffectKind| }"]
+ Parameter->Operation[arrowhead=vee,arrowtail=none,headlabel="operation[0-1]",group=Operation,minlen=2,constraint=false,]
+ Parameter->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="defaultValue[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+MultiplicityElement[label="{/MultiplicityElement/|isOrdered : Boolean\nisUnique : Boolean\nupper[0-1] : UnlimitedNatural\nlower[0-1] : Integer| }"]
+ MultiplicityElement->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="upperValue[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+ MultiplicityElement->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="lowerValue[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ConnectableElement[label="{/ConnectableElement/| | }"]
+ ConnectableElement->ConnectorEnd[arrowhead=vee,arrowtail=none,headlabel="end[*]{ordered}",group=ConnectorEnd,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ConnectorEnd[label="{ConnectorEnd| | }"]
+ ConnectorEnd->Property[arrowhead=vee,arrowtail=none,headlabel="definingEnd[0-1]",group=Property,minlen=2,constraint=false,]
+ ConnectorEnd->ConnectableElement[arrowhead=vee,arrowtail=none,headlabel="role",group=ConnectableElement,minlen=2,constraint=false,]
+ ConnectorEnd->Property[arrowhead=vee,arrowtail=none,headlabel="partWithPort[0-1]",group=Property,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Property[label="{Property|isDerived : Boolean\nisDerivedUnion : Boolean\ndefault[0-1] : String\naggregation : AggregationKind\nisComposite : Boolean| }"]
+ Property->Class[arrowhead=vee,arrowtail=none,headlabel="class[0-1]",group=Class,minlen=2,constraint=false,]
+ Property->DataType[arrowhead=diamond,arrowtail=none,headlabel="datatype[0-1]",taillabel="ownedAttribute[*]{ordered}",group=DataType,minlen=2,constraint=true,]
+ Property->Property[arrowhead=vee,arrowtail=none,headlabel="redefinedProperty[*]",group=Property,minlen=2,constraint=false,]
+ Property->Association[arrowhead=diamond,arrowtail=none,headlabel="owningAssociation[0-1]",taillabel="ownedEnd[*]{ordered}",group=Association,minlen=2,constraint=true,]
+ Property->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="defaultValue[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+ Property->Property[arrowhead=vee,arrowtail=none,headlabel="opposite[0-1]",group=Property,minlen=2,constraint=false,]
+ Property->Property[arrowhead=vee,arrowtail=none,headlabel="subsettedProperty[*]",group=Property,minlen=2,constraint=false,]
+ Property->Association[arrowhead=none,arrowtail=none,headlabel="association[0-1]",taillabel="memberEnd[2-*]{ordered}",group=Association,minlen=2,constraint=false,]
+ Property->Property[arrowhead=diamond,arrowtail=none,headlabel="associationEnd[0-1]",taillabel="qualifier[*]{ordered}",group=Property,minlen=2,constraint=true,]
+;
+ node[shape=record];
+DeploymentTarget[label="{/DeploymentTarget/| | }"]
+ DeploymentTarget->PackageableElement[arrowhead=vee,arrowtail=none,headlabel="deployedElement[*]",group=PackageableElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Deployment[label="{Deployment| | }"]
+ Deployment->DeployedArtifact[arrowhead=vee,arrowtail=none,headlabel="deployedArtifact[*]",group=DeployedArtifact,minlen=2,constraint=false,]
+ Deployment->DeploymentTarget[arrowhead=diamond,arrowtail=none,headlabel="location",taillabel="deployment[*]",group=DeploymentTarget,minlen=2,constraint=true,]
+;
+ node[shape=record];
+DeployedArtifact[label="{/DeployedArtifact/| | }"]
+;
+ node[shape=record];
+DeploymentSpecification[label="{DeploymentSpecification|deploymentLocation[0-1] : String\nexecutionLocation[0-1] : String| }"]
+ DeploymentSpecification->Deployment[arrowhead=diamond,arrowtail=none,headlabel="deployment[0-1]",taillabel="configuration[*]",group=Deployment,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Artifact[label="{Artifact|fileName[0-1] : String| }"]
+ Artifact->Artifact[arrowhead=vee,arrowtail=diamond,headlabel="nestedArtifact[*]",group=Artifact,minlen=2,constraint=true,]
+ Artifact->Manifestation[arrowhead=vee,arrowtail=diamond,headlabel="manifestation[*]",group=Manifestation,minlen=2,constraint=true,]
+ Artifact->Operation[arrowhead=vee,arrowtail=diamond,headlabel="ownedOperation[*]{ordered}",group=Operation,minlen=2,constraint=true,]
+ Artifact->Property[arrowhead=vee,arrowtail=diamond,headlabel="ownedAttribute[*]{ordered}",group=Property,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Manifestation[label="{Manifestation| | }"]
+ Manifestation->PackageableElement[arrowhead=vee,arrowtail=none,headlabel="utilizedElement",group=PackageableElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Operation[label="{Operation|isQuery : Boolean\nisOrdered : Boolean\nisUnique : Boolean\nlower[0-1] : Integer\nupper[0-1] : UnlimitedNatural| }"]
+ Operation->Interface[arrowhead=diamond,arrowtail=none,headlabel="interface[0-1]",taillabel="ownedOperation[*]{ordered}",group=Interface,minlen=2,constraint=true,]
+ Operation->Class[arrowhead=diamond,arrowtail=none,headlabel="class[0-1]",taillabel="ownedOperation[*]{ordered}",group=Class,minlen=2,constraint=true,]
+ Operation->Constraint[arrowhead=vee,arrowtail=none,headlabel="precondition[*]",group=Constraint,minlen=2,constraint=false,]
+ Operation->Constraint[arrowhead=vee,arrowtail=none,headlabel="postcondition[*]",group=Constraint,minlen=2,constraint=false,]
+ Operation->Operation[arrowhead=vee,arrowtail=none,headlabel="redefinedOperation[*]",group=Operation,minlen=2,constraint=false,]
+ Operation->DataType[arrowhead=diamond,arrowtail=none,headlabel="datatype[0-1]",taillabel="ownedOperation[*]{ordered}",group=DataType,minlen=2,constraint=true,]
+ Operation->Constraint[arrowhead=vee,arrowtail=none,headlabel="bodyCondition[0-1]",group=Constraint,minlen=2,constraint=false,]
+ Operation->Type[arrowhead=vee,arrowtail=none,headlabel="type[0-1]",group=Type,minlen=2,constraint=false,]
+;
+ node[shape=record];
+BehavioralFeature[label="{/BehavioralFeature/|isAbstract : Boolean\nconcurrency : CallConcurrencyKind| }"]
+ BehavioralFeature->Parameter[arrowhead=vee,arrowtail=diamond,headlabel="ownedParameter[*]{ordered}",group=Parameter,minlen=2,constraint=true,]
+ BehavioralFeature->Type[arrowhead=vee,arrowtail=none,headlabel="raisedException[*]",group=Type,minlen=2,constraint=false,]
+ BehavioralFeature->ParameterSet[arrowhead=vee,arrowtail=diamond,headlabel="ownedParameterSet[*]",group=ParameterSet,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Behavior[label="{/Behavior/|isReentrant : Boolean| }"]
+ Behavior->Behavior[arrowhead=vee,arrowtail=none,headlabel="redefinedBehavior[*]",group=Behavior,minlen=2,constraint=false,]
+ Behavior->Parameter[arrowhead=vee,arrowtail=diamond,headlabel="ownedParameter[*]{ordered}",group=Parameter,minlen=2,constraint=true,]
+ Behavior->BehavioredClassifier[arrowhead=vee,arrowtail=none,headlabel="context[0-1]",group=BehavioredClassifier,minlen=2,constraint=false,]
+ Behavior->Constraint[arrowhead=vee,arrowtail=none,headlabel="precondition[*]",group=Constraint,minlen=2,constraint=false,]
+ Behavior->Constraint[arrowhead=vee,arrowtail=none,headlabel="postcondition[*]",group=Constraint,minlen=2,constraint=false,]
+ Behavior->ParameterSet[arrowhead=vee,arrowtail=diamond,headlabel="ownedParameterSet[*]",group=ParameterSet,minlen=2,constraint=true,]
+ Behavior->BehavioralFeature[arrowhead=none,arrowtail=none,headlabel="specification[0-1]",taillabel="method[*]",group=BehavioralFeature,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Class[label="{Class|isActive : Boolean| }"]
+ Class->Classifier[arrowhead=vee,arrowtail=diamond,headlabel="nestedClassifier[*]{ordered}",group=Classifier,minlen=2,constraint=true,]
+ Class->Class[arrowhead=vee,arrowtail=none,headlabel="superClass[*]",group=Class,minlen=2,constraint=false,]
+ Class->Reception[arrowhead=vee,arrowtail=diamond,headlabel="ownedReception[*]",group=Reception,minlen=2,constraint=true,]
+;
+ node[shape=record];
+BehavioredClassifier[label="{/BehavioredClassifier/| | }"]
+ BehavioredClassifier->Behavior[arrowhead=vee,arrowtail=diamond,headlabel="ownedBehavior[*]",group=Behavior,minlen=2,constraint=true,]
+ BehavioredClassifier->Behavior[arrowhead=vee,arrowtail=none,headlabel="classifierBehavior[0-1]",group=Behavior,minlen=2,constraint=false,]
+ BehavioredClassifier->Trigger[arrowhead=vee,arrowtail=diamond,headlabel="ownedTrigger[*]",group=Trigger,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InterfaceRealization[label="{InterfaceRealization| | }"]
+ InterfaceRealization->Interface[arrowhead=vee,arrowtail=none,headlabel="contract",group=Interface,minlen=2,constraint=false,]
+ InterfaceRealization->BehavioredClassifier[arrowhead=diamond,arrowtail=none,headlabel="implementingClassifier",taillabel="interfaceRealization[*]",group=BehavioredClassifier,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Interface[label="{Interface| | }"]
+ Interface->Property[arrowhead=vee,arrowtail=diamond,headlabel="ownedAttribute[*]{ordered}",group=Property,minlen=2,constraint=true,]
+ Interface->Classifier[arrowhead=vee,arrowtail=diamond,headlabel="nestedClassifier[*]{ordered}",group=Classifier,minlen=2,constraint=true,]
+ Interface->Interface[arrowhead=vee,arrowtail=none,headlabel="redefinedInterface[*]",group=Interface,minlen=2,constraint=false,]
+ Interface->Reception[arrowhead=vee,arrowtail=diamond,headlabel="ownedReception[*]",group=Reception,minlen=2,constraint=true,]
+ Interface->ProtocolStateMachine[arrowhead=vee,arrowtail=diamond,headlabel="protocol[0-1]",group=ProtocolStateMachine,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Reception[label="{Reception| | }"]
+ Reception->Signal[arrowhead=vee,arrowtail=none,headlabel="signal[0-1]",group=Signal,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Signal[label="{Signal| | }"]
+ Signal->Property[arrowhead=vee,arrowtail=diamond,headlabel="ownedAttribute[*]{ordered}",group=Property,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ProtocolStateMachine[label="{ProtocolStateMachine| | }"]
+;
+ node[shape=record];
+StateMachine[label="{StateMachine| | }"]
+ StateMachine->StateMachine[arrowhead=vee,arrowtail=none,headlabel="extendedStateMachine[*]",group=StateMachine,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Region[label="{Region| | }"]
+ Region->State[arrowhead=diamond,arrowtail=none,headlabel="state[0-1]",taillabel="region[*]",group=State,minlen=2,constraint=true,]
+ Region->Region[arrowhead=vee,arrowtail=none,headlabel="extendedRegion[0-1]",group=Region,minlen=2,constraint=false,]
+ Region->StateMachine[arrowhead=diamond,arrowtail=none,headlabel="stateMachine[0-1]",taillabel="region[1-*]",group=StateMachine,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Vertex[label="{/Vertex/| | }"]
+ Vertex->Transition[arrowhead=vee,arrowtail=none,headlabel="outgoing[*]",group=Transition,minlen=2,constraint=false,]
+ Vertex->Transition[arrowhead=vee,arrowtail=none,headlabel="incoming[*]",group=Transition,minlen=2,constraint=false,]
+ Vertex->Region[arrowhead=diamond,arrowtail=none,headlabel="container[0-1]",taillabel="subvertex[*]",group=Region,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Transition[label="{Transition|kind : TransitionKind| }"]
+ Transition->Region[arrowhead=diamond,arrowtail=none,headlabel="container",taillabel="transition[*]",group=Region,minlen=2,constraint=true,]
+ Transition->Vertex[arrowhead=vee,arrowtail=none,headlabel="source",group=Vertex,minlen=2,constraint=false,]
+ Transition->Vertex[arrowhead=vee,arrowtail=none,headlabel="target",group=Vertex,minlen=2,constraint=false,]
+ Transition->Transition[arrowhead=vee,arrowtail=none,headlabel="redefinedTransition[0-1]",group=Transition,minlen=2,constraint=false,]
+ Transition->Constraint[arrowhead=vee,arrowtail=none,headlabel="guard[0-1]",group=Constraint,minlen=2,constraint=false,]
+ Transition->Behavior[arrowhead=vee,arrowtail=diamond,headlabel="effect[0-1]",group=Behavior,minlen=2,constraint=true,]
+ Transition->Trigger[arrowhead=vee,arrowtail=diamond,headlabel="trigger[*]",group=Trigger,minlen=2,constraint=true,]
+;
+ node[shape=record];
+TransitionKind[label="{&#171;DataType&#187;\nTransitionKind|}"]
+;
+ node[shape=record];
+Trigger[label="{Trigger| | }"]
+ Trigger->Event[arrowhead=vee,arrowtail=none,headlabel="event",group=Event,minlen=2,constraint=false,]
+ Trigger->Port[arrowhead=vee,arrowtail=none,headlabel="port[*]",group=Port,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Event[label="{/Event/| | }"]
+;
+ node[shape=record];
+Port[label="{Port|isBehavior : Boolean\nisService : Boolean| }"]
+ Port->Interface[arrowhead=vee,arrowtail=none,headlabel="required[*]",group=Interface,minlen=2,constraint=false,]
+ Port->Port[arrowhead=vee,arrowtail=none,headlabel="redefinedPort[*]",group=Port,minlen=2,constraint=false,]
+ Port->Interface[arrowhead=vee,arrowtail=none,headlabel="provided[*]",group=Interface,minlen=2,constraint=false,]
+ Port->ProtocolStateMachine[arrowhead=vee,arrowtail=none,headlabel="protocol[0-1]",group=ProtocolStateMachine,minlen=2,constraint=false,]
+;
+ node[shape=record];
+State[label="{State|isComposite : Boolean\nisOrthogonal : Boolean\nisSimple : Boolean\nisSubmachineState : Boolean| }"]
+ State->StateMachine[arrowhead=none,arrowtail=none,headlabel="submachine[0-1]",taillabel="submachineState[*]",group=StateMachine,minlen=2,constraint=false,]
+ State->State[arrowhead=vee,arrowtail=none,headlabel="redefinedState[0-1]",group=State,minlen=2,constraint=false,]
+ State->Constraint[arrowhead=vee,arrowtail=diamond,headlabel="stateInvariant[0-1]",group=Constraint,minlen=2,constraint=true,]
+ State->Behavior[arrowhead=vee,arrowtail=diamond,headlabel="entry[0-1]",group=Behavior,minlen=2,constraint=true,]
+ State->Behavior[arrowhead=vee,arrowtail=diamond,headlabel="exit[0-1]",group=Behavior,minlen=2,constraint=true,]
+ State->Behavior[arrowhead=vee,arrowtail=diamond,headlabel="doActivity[0-1]",group=Behavior,minlen=2,constraint=true,]
+ State->Trigger[arrowhead=vee,arrowtail=diamond,headlabel="deferrableTrigger[*]",group=Trigger,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ConnectionPointReference[label="{ConnectionPointReference| | }"]
+ ConnectionPointReference->Pseudostate[arrowhead=vee,arrowtail=none,headlabel="entry[*]",group=Pseudostate,minlen=2,constraint=false,]
+ ConnectionPointReference->Pseudostate[arrowhead=vee,arrowtail=none,headlabel="exit[*]",group=Pseudostate,minlen=2,constraint=false,]
+ ConnectionPointReference->State[arrowhead=diamond,arrowtail=none,headlabel="state[0-1]",taillabel="connection[*]",group=State,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Pseudostate[label="{Pseudostate|kind : PseudostateKind| }"]
+ Pseudostate->StateMachine[arrowhead=diamond,arrowtail=none,headlabel="stateMachine[0-1]",taillabel="connectionPoint[*]",group=StateMachine,minlen=2,constraint=true,]
+ Pseudostate->State[arrowhead=diamond,arrowtail=none,headlabel="state[0-1]",taillabel="connectionPoint[*]",group=State,minlen=2,constraint=true,]
+;
+ node[shape=record];
+PseudostateKind[label="{&#171;DataType&#187;\nPseudostateKind|}"]
+;
+ node[shape=record];
+ProtocolConformance[label="{ProtocolConformance| | }"]
+ ProtocolConformance->ProtocolStateMachine[arrowhead=vee,arrowtail=none,headlabel="generalMachine",group=ProtocolStateMachine,minlen=2,constraint=false,]
+ ProtocolConformance->ProtocolStateMachine[arrowhead=diamond,arrowtail=none,headlabel="specificMachine",taillabel="conformance[*]",group=ProtocolStateMachine,minlen=2,constraint=true,]
+;
+ node[shape=record];
+EncapsulatedClassifier[label="{/EncapsulatedClassifier/| | }"]
+ EncapsulatedClassifier->Port[arrowhead=vee,arrowtail=none,headlabel="ownedPort[*]",group=Port,minlen=2,constraint=false,]
+;
+ node[shape=record];
+StructuredClassifier[label="{/StructuredClassifier/| | }"]
+ StructuredClassifier->Property[arrowhead=vee,arrowtail=diamond,headlabel="ownedAttribute[*]{ordered}",group=Property,minlen=2,constraint=true,]
+ StructuredClassifier->Property[arrowhead=vee,arrowtail=none,headlabel="part[*]",group=Property,minlen=2,constraint=false,]
+ StructuredClassifier->ConnectableElement[arrowhead=vee,arrowtail=none,headlabel="role[*]",group=ConnectableElement,minlen=2,constraint=false,]
+ StructuredClassifier->Connector[arrowhead=vee,arrowtail=diamond,headlabel="ownedConnector[*]",group=Connector,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Connector[label="{Connector|kind[0-1] : ConnectorKind| }"]
+ Connector->Association[arrowhead=vee,arrowtail=none,headlabel="type[0-1]",group=Association,minlen=2,constraint=false,]
+ Connector->Connector[arrowhead=vee,arrowtail=none,headlabel="redefinedConnector[*]",group=Connector,minlen=2,constraint=false,]
+ Connector->ConnectorEnd[arrowhead=vee,arrowtail=diamond,headlabel="end[2-*]{ordered}",group=ConnectorEnd,minlen=2,constraint=true,]
+ Connector->Behavior[arrowhead=vee,arrowtail=none,headlabel="contract[*]",group=Behavior,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ConnectorKind[label="{&#171;DataType&#187;\nConnectorKind|}"]
+;
+ node[shape=record];
+Extension[label="{Extension|isRequired : Boolean| }"]
+ Extension->Class[arrowhead=none,arrowtail=none,headlabel="metaclass",taillabel="extension[*]",group=Class,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ExtensionEnd[label="{ExtensionEnd| | }"]
+;
+ node[shape=record];
+Stereotype[label="{Stereotype| | }"]
+ Stereotype->Image[arrowhead=vee,arrowtail=diamond,headlabel="icon[*]",group=Image,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Image[label="{Image|content[0-1] : String\nlocation[0-1] : String\nformat[0-1] : String| }"]
+;
+ node[shape=record];
+Profile[label="{Profile| | }"]
+ Profile->Stereotype[arrowhead=vee,arrowtail=none,headlabel="ownedStereotype[*]",group=Stereotype,minlen=2,constraint=false,]
+ Profile->ElementImport[arrowhead=vee,arrowtail=none,headlabel="metaclassReference[*]",group=ElementImport,minlen=2,constraint=false,]
+ Profile->PackageImport[arrowhead=vee,arrowtail=none,headlabel="metamodelReference[*]",group=PackageImport,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Model[label="{Model|viewpoint[0-1] : String| }"]
+;
+ node[shape=record];
+ParameterSet[label="{ParameterSet| | }"]
+ ParameterSet->Parameter[arrowhead=none,arrowtail=none,headlabel="parameter[1-*]",taillabel="parameterSet[*]",group=Parameter,minlen=2,constraint=false,]
+ ParameterSet->Constraint[arrowhead=vee,arrowtail=diamond,headlabel="condition[*]",group=Constraint,minlen=2,constraint=true,]
+;
+ node[shape=record];
+CallConcurrencyKind[label="{&#171;DataType&#187;\nCallConcurrencyKind|}"]
+;
+ node[shape=record];
+DataType[label="{DataType| | }"]
+;
+ node[shape=record];
+OperationTemplateParameter[label="{OperationTemplateParameter| | }"]
+;
+ node[shape=record];
+StructuralFeature[label="{/StructuralFeature/|isReadOnly : Boolean| }"]
+;
+ node[shape=record];
+AggregationKind[label="{&#171;DataType&#187;\nAggregationKind|}"]
+;
+ node[shape=record];
+ConnectableElementTemplateParameter[label="{ConnectableElementTemplateParameter| | }"]
+;
+ node[shape=record];
+ParameterDirectionKind[label="{&#171;DataType&#187;\nParameterDirectionKind|}"]
+;
+ node[shape=record];
+ParameterEffectKind[label="{&#171;DataType&#187;\nParameterEffectKind|}"]
+;
+ node[shape=record];
+CollaborationUse[label="{CollaborationUse| | }"]
+ CollaborationUse->Collaboration[arrowhead=vee,arrowtail=none,headlabel="type",group=Collaboration,minlen=2,constraint=false,]
+ CollaborationUse->Dependency[arrowhead=vee,arrowtail=diamond,headlabel="roleBinding[*]",group=Dependency,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Collaboration[label="{Collaboration| | }"]
+ Collaboration->ConnectableElement[arrowhead=vee,arrowtail=none,headlabel="collaborationRole[*]",group=ConnectableElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+UseCase[label="{UseCase| | }"]
+ UseCase->Classifier[arrowhead=none,arrowtail=none,headlabel="subject[*]",taillabel="useCase[*]",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Include[label="{Include| | }"]
+ Include->UseCase[arrowhead=vee,arrowtail=none,headlabel="addition",group=UseCase,minlen=2,constraint=false,]
+ Include->UseCase[arrowhead=diamond,arrowtail=none,headlabel="includingCase",taillabel="include[*]",group=UseCase,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Extend[label="{Extend| | }"]
+ Extend->UseCase[arrowhead=vee,arrowtail=none,headlabel="extendedCase",group=UseCase,minlen=2,constraint=false,]
+ Extend->Constraint[arrowhead=vee,arrowtail=diamond,headlabel="condition[0-1]",group=Constraint,minlen=2,constraint=true,]
+ Extend->ExtensionPoint[arrowhead=vee,arrowtail=none,headlabel="extensionLocation[1-*]{ordered}",group=ExtensionPoint,minlen=2,constraint=false,]
+ Extend->UseCase[arrowhead=diamond,arrowtail=none,headlabel="extension",taillabel="extend[*]",group=UseCase,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ExtensionPoint[label="{ExtensionPoint| | }"]
+ ExtensionPoint->UseCase[arrowhead=diamond,arrowtail=none,headlabel="useCase",taillabel="extensionPoint[*]",group=UseCase,minlen=2,constraint=true,]
+;
+ node[shape=record];
+RedefinableTemplateSignature[label="{RedefinableTemplateSignature| | }"]
+ RedefinableTemplateSignature->RedefinableTemplateSignature[arrowhead=vee,arrowtail=none,headlabel="extendedSignature[*]",group=RedefinableTemplateSignature,minlen=2,constraint=false,]
+ RedefinableTemplateSignature->TemplateParameter[arrowhead=vee,arrowtail=none,headlabel="inheritedParameter[*]",group=TemplateParameter,minlen=2,constraint=false,]
+ RedefinableTemplateSignature->Classifier[arrowhead=vee,arrowtail=none,headlabel="classifier",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ClassifierTemplateParameter[label="{ClassifierTemplateParameter|allowSubstitutable : Boolean| }"]
+ ClassifierTemplateParameter->Classifier[arrowhead=vee,arrowtail=none,headlabel="constrainingClassifier[*]",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+StringExpression[label="{StringExpression| | }"]
+ StringExpression->StringExpression[arrowhead=diamond,arrowtail=none,headlabel="owningExpression[0-1]",taillabel="subExpression[*]",group=StringExpression,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Expression[label="{Expression|symbol[0-1] : String| }"]
+ Expression->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="operand[*]{ordered}",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Usage[label="{Usage| | }"]
+;
+ node[shape=record];
+PackageMerge[label="{PackageMerge| | }"]
+ PackageMerge->Package[arrowhead=vee,arrowtail=none,headlabel="mergedPackage",group=Package,minlen=2,constraint=false,]
+ PackageMerge->Package[arrowhead=diamond,arrowtail=none,headlabel="receivingPackage",taillabel="packageMerge[*]",group=Package,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ProfileApplication[label="{ProfileApplication|isStrict : Boolean| }"]
+ ProfileApplication->Profile[arrowhead=vee,arrowtail=none,headlabel="appliedProfile",group=Profile,minlen=2,constraint=false,]
+ ProfileApplication->Package[arrowhead=diamond,arrowtail=none,headlabel="applyingPackage",taillabel="profileApplication[*]",group=Package,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Enumeration[label="{Enumeration| | }"]
+;
+ node[shape=record];
+EnumerationLiteral[label="{EnumerationLiteral| | }"]
+ EnumerationLiteral->Enumeration[arrowhead=diamond,arrowtail=none,headlabel="enumeration[0-1]",taillabel="ownedLiteral[*]{ordered}",group=Enumeration,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InstanceSpecification[label="{InstanceSpecification| | }"]
+ InstanceSpecification->Classifier[arrowhead=vee,arrowtail=none,headlabel="classifier[*]",group=Classifier,minlen=2,constraint=false,]
+ InstanceSpecification->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="specification[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Slot[label="{Slot| | }"]
+ Slot->StructuralFeature[arrowhead=vee,arrowtail=none,headlabel="definingFeature",group=StructuralFeature,minlen=2,constraint=false,]
+ Slot->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="value[*]{ordered}",group=ValueSpecification,minlen=2,constraint=true,]
+ Slot->InstanceSpecification[arrowhead=diamond,arrowtail=none,headlabel="owningInstance",taillabel="slot[*]",group=InstanceSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+PrimitiveType[label="{PrimitiveType| | }"]
+;
+ node[shape=record];
+LiteralSpecification[label="{/LiteralSpecification/| | }"]
+;
+ node[shape=record];
+LiteralInteger[label="{LiteralInteger|value : Integer| }"]
+;
+ node[shape=record];
+LiteralString[label="{LiteralString|value[0-1] : String| }"]
+;
+ node[shape=record];
+LiteralBoolean[label="{LiteralBoolean|value : Boolean| }"]
+;
+ node[shape=record];
+LiteralNull[label="{LiteralNull| | }"]
+;
+ node[shape=record];
+InstanceValue[label="{InstanceValue| | }"]
+ InstanceValue->InstanceSpecification[arrowhead=vee,arrowtail=none,headlabel="instance",group=InstanceSpecification,minlen=2,constraint=false,]
+;
+ node[shape=record];
+LiteralUnlimitedNatural[label="{LiteralUnlimitedNatural|value : UnlimitedNatural| }"]
+;
+ node[shape=record];
+OpaqueBehavior[label="{OpaqueBehavior|body[*] : String\nlanguage[*] : String| }"]
+;
+ node[shape=record];
+FunctionBehavior[label="{FunctionBehavior| | }"]
+;
+ node[shape=record];
+OpaqueAction[label="{OpaqueAction|body[*] : String\nlanguage[*] : String| }"]
+ OpaqueAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="inputValue[*]",group=InputPin,minlen=2,constraint=true,]
+ OpaqueAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="outputValue[*]",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Action[label="{/Action/| | }"]
+ Action->OutputPin[arrowhead=vee,arrowtail=none,headlabel="output[*]{ordered}",group=OutputPin,minlen=2,constraint=false,]
+ Action->InputPin[arrowhead=vee,arrowtail=none,headlabel="input[*]{ordered}",group=InputPin,minlen=2,constraint=false,]
+ Action->Classifier[arrowhead=vee,arrowtail=none,headlabel="context[0-1]",group=Classifier,minlen=2,constraint=false,]
+ Action->Constraint[arrowhead=vee,arrowtail=diamond,headlabel="localPrecondition[*]",group=Constraint,minlen=2,constraint=true,]
+ Action->Constraint[arrowhead=vee,arrowtail=diamond,headlabel="localPostcondition[*]",group=Constraint,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ExecutableNode[label="{/ExecutableNode/| | }"]
+;
+ node[shape=record];
+ActivityNode[label="{/ActivityNode/| | }"]
+ ActivityNode->StructuredActivityNode[arrowhead=diamond,arrowtail=none,headlabel="inStructuredNode[0-1]",taillabel="node[*]",group=StructuredActivityNode,minlen=2,constraint=true,]
+ ActivityNode->Activity[arrowhead=diamond,arrowtail=none,headlabel="activity[0-1]",taillabel="node[*]",group=Activity,minlen=2,constraint=true,]
+ ActivityNode->ActivityNode[arrowhead=vee,arrowtail=none,headlabel="redefinedNode[*]",group=ActivityNode,minlen=2,constraint=false,]
+;
+ node[shape=record];
+StructuredActivityNode[label="{StructuredActivityNode|mustIsolate : Boolean| }"]
+;
+ node[shape=record];
+ActivityGroup[label="{/ActivityGroup/| | }"]
+ ActivityGroup->ActivityGroup[arrowhead=none,arrowtail=none,headlabel="superGroup[0-1]",taillabel="subgroup[*]",group=ActivityGroup,minlen=2,constraint=false,]
+ ActivityGroup->Activity[arrowhead=diamond,arrowtail=none,headlabel="inActivity[0-1]",taillabel="group[*]",group=Activity,minlen=2,constraint=true,]
+ ActivityGroup->ActivityNode[arrowhead=none,arrowtail=none,headlabel="containedNode[*]",taillabel="inGroup[*]",group=ActivityNode,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Activity[label="{Activity|isReadOnly : Boolean\nisSingleExecution : Boolean| }"]
+ Activity->StructuredActivityNode[arrowhead=vee,arrowtail=none,headlabel="structuredNode[*]",group=StructuredActivityNode,minlen=2,constraint=false,]
+ Activity->ActivityPartition[arrowhead=vee,arrowtail=none,headlabel="partition[*]",group=ActivityPartition,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Variable[label="{Variable| | }"]
+ Variable->StructuredActivityNode[arrowhead=diamond,arrowtail=none,headlabel="scope[0-1]",taillabel="variable[*]",group=StructuredActivityNode,minlen=2,constraint=true,]
+ Variable->Activity[arrowhead=diamond,arrowtail=none,headlabel="activityScope[0-1]",taillabel="variable[*]",group=Activity,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ActivityEdge[label="{/ActivityEdge/| | }"]
+ ActivityEdge->ActivityNode[arrowhead=none,arrowtail=none,headlabel="source",taillabel="outgoing[*]",group=ActivityNode,minlen=2,constraint=false,]
+ ActivityEdge->ActivityNode[arrowhead=none,arrowtail=none,headlabel="target",taillabel="incoming[*]",group=ActivityNode,minlen=2,constraint=false,]
+ ActivityEdge->ActivityEdge[arrowhead=vee,arrowtail=none,headlabel="redefinedEdge[*]",group=ActivityEdge,minlen=2,constraint=false,]
+ ActivityEdge->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="guard",group=ValueSpecification,minlen=2,constraint=true,]
+ ActivityEdge->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="weight",group=ValueSpecification,minlen=2,constraint=true,]
+ ActivityEdge->StructuredActivityNode[arrowhead=diamond,arrowtail=none,headlabel="inStructuredNode[0-1]",taillabel="edge[*]",group=StructuredActivityNode,minlen=2,constraint=true,]
+ ActivityEdge->ActivityGroup[arrowhead=none,arrowtail=none,headlabel="inGroup[*]",taillabel="containedEdge[*]",group=ActivityGroup,minlen=2,constraint=false,]
+ ActivityEdge->Activity[arrowhead=diamond,arrowtail=none,headlabel="activity[0-1]",taillabel="edge[*]",group=Activity,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ActivityPartition[label="{ActivityPartition|isDimension : Boolean\nisExternal : Boolean| }"]
+ ActivityPartition->ActivityNode[arrowhead=none,arrowtail=none,headlabel="node[*]",taillabel="inPartition[*]",group=ActivityNode,minlen=2,constraint=false,]
+ ActivityPartition->ActivityPartition[arrowhead=diamond,arrowtail=none,headlabel="superPartition[0-1]",taillabel="subpartition[*]",group=ActivityPartition,minlen=2,constraint=true,]
+ ActivityPartition->Element[arrowhead=vee,arrowtail=none,headlabel="represents[0-1]",group=Element,minlen=2,constraint=false,]
+ ActivityPartition->ActivityEdge[arrowhead=none,arrowtail=none,headlabel="edge[*]",taillabel="inPartition[*]",group=ActivityEdge,minlen=2,constraint=false,]
+;
+ node[shape=record];
+InterruptibleActivityRegion[label="{InterruptibleActivityRegion| | }"]
+ InterruptibleActivityRegion->ActivityNode[arrowhead=none,arrowtail=none,headlabel="node[*]",taillabel="inInterruptibleRegion[*]",group=ActivityNode,minlen=2,constraint=false,]
+ InterruptibleActivityRegion->ActivityEdge[arrowhead=none,arrowtail=none,headlabel="interruptingEdge[*]",taillabel="interrupts[0-1]",group=ActivityEdge,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ExceptionHandler[label="{ExceptionHandler| | }"]
+ ExceptionHandler->ExecutableNode[arrowhead=vee,arrowtail=none,headlabel="handlerBody",group=ExecutableNode,minlen=2,constraint=false,]
+ ExceptionHandler->ObjectNode[arrowhead=vee,arrowtail=none,headlabel="exceptionInput",group=ObjectNode,minlen=2,constraint=false,]
+ ExceptionHandler->Classifier[arrowhead=vee,arrowtail=none,headlabel="exceptionType[1-*]",group=Classifier,minlen=2,constraint=false,]
+ ExceptionHandler->ExecutableNode[arrowhead=diamond,arrowtail=none,headlabel="protectedNode",taillabel="handler[*]",group=ExecutableNode,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ObjectNode[label="{/ObjectNode/|ordering : ObjectNodeOrderingKind\nisControlType : Boolean| }"]
+ ObjectNode->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="upperBound",group=ValueSpecification,minlen=2,constraint=true,]
+ ObjectNode->State[arrowhead=vee,arrowtail=none,headlabel="inState[*]",group=State,minlen=2,constraint=false,]
+ ObjectNode->Behavior[arrowhead=vee,arrowtail=none,headlabel="selection[0-1]",group=Behavior,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ObjectNodeOrderingKind[label="{&#171;DataType&#187;\nObjectNodeOrderingKind|}"]
+;
+ node[shape=record];
+OutputPin[label="{OutputPin| | }"]
+;
+ node[shape=record];
+Pin[label="{Pin|isControl : Boolean| }"]
+;
+ node[shape=record];
+InputPin[label="{InputPin| | }"]
+;
+ node[shape=record];
+CallAction[label="{/CallAction/|isSynchronous : Boolean| }"]
+ CallAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[*]{ordered}",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InvocationAction[label="{/InvocationAction/| | }"]
+ InvocationAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="argument[*]{ordered}",group=InputPin,minlen=2,constraint=true,]
+ InvocationAction->Port[arrowhead=vee,arrowtail=none,headlabel="onPort[0-1]",group=Port,minlen=2,constraint=false,]
+;
+ node[shape=record];
+SendSignalAction[label="{SendSignalAction| | }"]
+ SendSignalAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="target",group=InputPin,minlen=2,constraint=true,]
+ SendSignalAction->Signal[arrowhead=vee,arrowtail=none,headlabel="signal",group=Signal,minlen=2,constraint=false,]
+;
+ node[shape=record];
+CallOperationAction[label="{CallOperationAction| | }"]
+ CallOperationAction->Operation[arrowhead=vee,arrowtail=none,headlabel="operation",group=Operation,minlen=2,constraint=false,]
+ CallOperationAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="target",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+CallBehaviorAction[label="{CallBehaviorAction| | }"]
+ CallBehaviorAction->Behavior[arrowhead=vee,arrowtail=none,headlabel="behavior",group=Behavior,minlen=2,constraint=false,]
+;
+ node[shape=record];
+SequenceNode[label="{SequenceNode| | }"]
+ SequenceNode->ExecutableNode[arrowhead=vee,arrowtail=diamond,headlabel="executableNode[*]{ordered}",group=ExecutableNode,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ControlNode[label="{/ControlNode/| | }"]
+;
+ node[shape=record];
+ControlFlow[label="{ControlFlow| | }"]
+;
+ node[shape=record];
+InitialNode[label="{InitialNode| | }"]
+;
+ node[shape=record];
+ActivityParameterNode[label="{ActivityParameterNode| | }"]
+ ActivityParameterNode->Parameter[arrowhead=vee,arrowtail=none,headlabel="parameter",group=Parameter,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ValuePin[label="{ValuePin| | }"]
+ ValuePin->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="value",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Message[label="{Message|messageKind : MessageKind\nmessageSort : MessageSort| }"]
+ Message->MessageEnd[arrowhead=vee,arrowtail=none,headlabel="receiveEvent[0-1]",group=MessageEnd,minlen=2,constraint=false,]
+ Message->MessageEnd[arrowhead=vee,arrowtail=none,headlabel="sendEvent[0-1]",group=MessageEnd,minlen=2,constraint=false,]
+ Message->Connector[arrowhead=vee,arrowtail=none,headlabel="connector[0-1]",group=Connector,minlen=2,constraint=false,]
+ Message->Interaction[arrowhead=diamond,arrowtail=none,headlabel="interaction",taillabel="message[*]",group=Interaction,minlen=2,constraint=true,]
+ Message->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="argument[*]{ordered}",group=ValueSpecification,minlen=2,constraint=true,]
+ Message->NamedElement[arrowhead=vee,arrowtail=none,headlabel="signature[0-1]",group=NamedElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+MessageKind[label="{&#171;DataType&#187;\nMessageKind|}"]
+;
+ node[shape=record];
+MessageSort[label="{&#171;DataType&#187;\nMessageSort|}"]
+;
+ node[shape=record];
+MessageEnd[label="{/MessageEnd/| | }"]
+ MessageEnd->Message[arrowhead=vee,arrowtail=none,headlabel="message[0-1]",group=Message,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Interaction[label="{Interaction| | }"]
+ Interaction->Action[arrowhead=vee,arrowtail=diamond,headlabel="action[*]",group=Action,minlen=2,constraint=true,]
+ Interaction->Gate[arrowhead=vee,arrowtail=diamond,headlabel="formalGate[*]",group=Gate,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InteractionFragment[label="{/InteractionFragment/| | }"]
+ InteractionFragment->GeneralOrdering[arrowhead=vee,arrowtail=diamond,headlabel="generalOrdering[*]",group=GeneralOrdering,minlen=2,constraint=true,]
+ InteractionFragment->Interaction[arrowhead=diamond,arrowtail=none,headlabel="enclosingInteraction[0-1]",taillabel="fragment[*]{ordered}",group=Interaction,minlen=2,constraint=true,]
+ InteractionFragment->InteractionOperand[arrowhead=diamond,arrowtail=none,headlabel="enclosingOperand[0-1]",taillabel="fragment[*]{ordered}",group=InteractionOperand,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Lifeline[label="{Lifeline| | }"]
+ Lifeline->ConnectableElement[arrowhead=vee,arrowtail=none,headlabel="represents[0-1]",group=ConnectableElement,minlen=2,constraint=false,]
+ Lifeline->Interaction[arrowhead=diamond,arrowtail=none,headlabel="interaction",taillabel="lifeline[*]",group=Interaction,minlen=2,constraint=true,]
+ Lifeline->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="selector[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+ Lifeline->PartDecomposition[arrowhead=vee,arrowtail=none,headlabel="decomposedAs[0-1]",group=PartDecomposition,minlen=2,constraint=false,]
+ Lifeline->InteractionFragment[arrowhead=none,arrowtail=none,headlabel="coveredBy[*]",taillabel="covered[*]",group=InteractionFragment,minlen=2,constraint=false,]
+;
+ node[shape=record];
+PartDecomposition[label="{PartDecomposition| | }"]
+;
+ node[shape=record];
+InteractionUse[label="{InteractionUse| | }"]
+ InteractionUse->Interaction[arrowhead=vee,arrowtail=none,headlabel="refersTo",group=Interaction,minlen=2,constraint=false,]
+ InteractionUse->Gate[arrowhead=vee,arrowtail=diamond,headlabel="actualGate[*]",group=Gate,minlen=2,constraint=true,]
+ InteractionUse->Action[arrowhead=vee,arrowtail=diamond,headlabel="argument[*]{ordered}",group=Action,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Gate[label="{Gate| | }"]
+;
+ node[shape=record];
+GeneralOrdering[label="{GeneralOrdering| | }"]
+;
+ node[shape=record];
+OccurrenceSpecification[label="{OccurrenceSpecification| | }"]
+ OccurrenceSpecification->GeneralOrdering[arrowhead=none,arrowtail=none,headlabel="toBefore[*]",taillabel="after",group=GeneralOrdering,minlen=2,constraint=false,]
+ OccurrenceSpecification->Event[arrowhead=vee,arrowtail=none,headlabel="event",group=Event,minlen=2,constraint=false,]
+ OccurrenceSpecification->GeneralOrdering[arrowhead=none,arrowtail=none,headlabel="toAfter[*]",taillabel="before",group=GeneralOrdering,minlen=2,constraint=false,]
+;
+ node[shape=record];
+InteractionOperand[label="{InteractionOperand| | }"]
+ InteractionOperand->InteractionConstraint[arrowhead=vee,arrowtail=diamond,headlabel="guard[0-1]",group=InteractionConstraint,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InteractionConstraint[label="{InteractionConstraint| | }"]
+ InteractionConstraint->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="minint[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+ InteractionConstraint->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="maxint[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ExecutionSpecification[label="{/ExecutionSpecification/| | }"]
+ ExecutionSpecification->OccurrenceSpecification[arrowhead=vee,arrowtail=none,headlabel="start",group=OccurrenceSpecification,minlen=2,constraint=false,]
+ ExecutionSpecification->OccurrenceSpecification[arrowhead=vee,arrowtail=none,headlabel="finish",group=OccurrenceSpecification,minlen=2,constraint=false,]
+;
+ node[shape=record];
+StateInvariant[label="{StateInvariant| | }"]
+ StateInvariant->Constraint[arrowhead=vee,arrowtail=diamond,headlabel="invariant",group=Constraint,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ActionExecutionSpecification[label="{ActionExecutionSpecification| | }"]
+ ActionExecutionSpecification->Action[arrowhead=vee,arrowtail=none,headlabel="action",group=Action,minlen=2,constraint=false,]
+;
+ node[shape=record];
+BehaviorExecutionSpecification[label="{BehaviorExecutionSpecification| | }"]
+ BehaviorExecutionSpecification->Behavior[arrowhead=vee,arrowtail=none,headlabel="behavior[0-1]",group=Behavior,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ExecutionEvent[label="{ExecutionEvent| | }"]
+;
+ node[shape=record];
+CreationEvent[label="{CreationEvent| | }"]
+;
+ node[shape=record];
+DestructionEvent[label="{DestructionEvent| | }"]
+;
+ node[shape=record];
+SendOperationEvent[label="{SendOperationEvent| | }"]
+ SendOperationEvent->Operation[arrowhead=vee,arrowtail=none,headlabel="operation",group=Operation,minlen=2,constraint=false,]
+;
+ node[shape=record];
+MessageEvent[label="{/MessageEvent/| | }"]
+;
+ node[shape=record];
+SendSignalEvent[label="{SendSignalEvent| | }"]
+ SendSignalEvent->Signal[arrowhead=vee,arrowtail=none,headlabel="signal",group=Signal,minlen=2,constraint=false,]
+;
+ node[shape=record];
+MessageOccurrenceSpecification[label="{MessageOccurrenceSpecification| | }"]
+;
+ node[shape=record];
+ExecutionOccurrenceSpecification[label="{ExecutionOccurrenceSpecification| | }"]
+ ExecutionOccurrenceSpecification->ExecutionSpecification[arrowhead=vee,arrowtail=none,headlabel="execution",group=ExecutionSpecification,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ReceiveOperationEvent[label="{ReceiveOperationEvent| | }"]
+ ReceiveOperationEvent->Operation[arrowhead=vee,arrowtail=none,headlabel="operation",group=Operation,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ReceiveSignalEvent[label="{ReceiveSignalEvent| | }"]
+ ReceiveSignalEvent->Signal[arrowhead=vee,arrowtail=none,headlabel="signal",group=Signal,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Actor[label="{Actor| | }"]
+;
+ node[shape=record];
+CallEvent[label="{CallEvent| | }"]
+ CallEvent->Operation[arrowhead=vee,arrowtail=none,headlabel="operation",group=Operation,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ChangeEvent[label="{ChangeEvent| | }"]
+ ChangeEvent->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="changeExpression",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+SignalEvent[label="{SignalEvent| | }"]
+ SignalEvent->Signal[arrowhead=vee,arrowtail=none,headlabel="signal",group=Signal,minlen=2,constraint=false,]
+;
+ node[shape=record];
+AnyReceiveEvent[label="{AnyReceiveEvent| | }"]
+;
+ node[shape=record];
+ForkNode[label="{ForkNode| | }"]
+;
+ node[shape=record];
+FlowFinalNode[label="{FlowFinalNode| | }"]
+;
+ node[shape=record];
+FinalNode[label="{/FinalNode/| | }"]
+;
+ node[shape=record];
+CentralBufferNode[label="{CentralBufferNode| | }"]
+;
+ node[shape=record];
+MergeNode[label="{MergeNode| | }"]
+;
+ node[shape=record];
+DecisionNode[label="{DecisionNode| | }"]
+ DecisionNode->Behavior[arrowhead=vee,arrowtail=none,headlabel="decisionInput[0-1]",group=Behavior,minlen=2,constraint=false,]
+ DecisionNode->ObjectFlow[arrowhead=vee,arrowtail=none,headlabel="decisionInputFlow[0-1]",group=ObjectFlow,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ObjectFlow[label="{ObjectFlow|isMulticast : Boolean\nisMultireceive : Boolean| }"]
+ ObjectFlow->Behavior[arrowhead=vee,arrowtail=none,headlabel="transformation[0-1]",group=Behavior,minlen=2,constraint=false,]
+ ObjectFlow->Behavior[arrowhead=vee,arrowtail=none,headlabel="selection[0-1]",group=Behavior,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ActivityFinalNode[label="{ActivityFinalNode| | }"]
+;
+ node[shape=record];
+ComponentRealization[label="{ComponentRealization| | }"]
+ ComponentRealization->Component[arrowhead=diamond,arrowtail=none,headlabel="abstraction[0-1]",taillabel="realization[*]",group=Component,minlen=2,constraint=true,]
+ ComponentRealization->Classifier[arrowhead=vee,arrowtail=none,headlabel="realizingClassifier[1-*]",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Component[label="{Component|isIndirectlyInstantiated : Boolean| }"]
+ Component->Interface[arrowhead=vee,arrowtail=none,headlabel="required[*]",group=Interface,minlen=2,constraint=false,]
+ Component->Interface[arrowhead=vee,arrowtail=none,headlabel="provided[*]",group=Interface,minlen=2,constraint=false,]
+ Component->PackageableElement[arrowhead=vee,arrowtail=diamond,headlabel="packagedElement[*]",group=PackageableElement,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Node[label="{Node| | }"]
+ Node->Node[arrowhead=vee,arrowtail=diamond,headlabel="nestedNode[*]",group=Node,minlen=2,constraint=true,]
+;
+ node[shape=record];
+CommunicationPath[label="{CommunicationPath| | }"]
+;
+ node[shape=record];
+Device[label="{Device| | }"]
+;
+ node[shape=record];
+ExecutionEnvironment[label="{ExecutionEnvironment| | }"]
+;
+ node[shape=record];
+CombinedFragment[label="{CombinedFragment|interactionOperator : InteractionOperatorKind| }"]
+ CombinedFragment->InteractionOperand[arrowhead=vee,arrowtail=diamond,headlabel="operand[1-*]{ordered}",group=InteractionOperand,minlen=2,constraint=true,]
+ CombinedFragment->Gate[arrowhead=vee,arrowtail=diamond,headlabel="cfragmentGate[*]",group=Gate,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InteractionOperatorKind[label="{&#171;DataType&#187;\nInteractionOperatorKind|}"]
+;
+ node[shape=record];
+Continuation[label="{Continuation|setting : Boolean| }"]
+;
+ node[shape=record];
+ConsiderIgnoreFragment[label="{ConsiderIgnoreFragment| | }"]
+ ConsiderIgnoreFragment->NamedElement[arrowhead=vee,arrowtail=none,headlabel="message[*]",group=NamedElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+CreateObjectAction[label="{CreateObjectAction| | }"]
+ CreateObjectAction->Classifier[arrowhead=vee,arrowtail=none,headlabel="classifier",group=Classifier,minlen=2,constraint=false,]
+ CreateObjectAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+DestroyObjectAction[label="{DestroyObjectAction|isDestroyLinks : Boolean\nisDestroyOwnedObjects : Boolean| }"]
+ DestroyObjectAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="target",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+TestIdentityAction[label="{TestIdentityAction| | }"]
+ TestIdentityAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="first",group=InputPin,minlen=2,constraint=true,]
+ TestIdentityAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="second",group=InputPin,minlen=2,constraint=true,]
+ TestIdentityAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReadSelfAction[label="{ReadSelfAction| | }"]
+ ReadSelfAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+StructuralFeatureAction[label="{/StructuralFeatureAction/| | }"]
+ StructuralFeatureAction->StructuralFeature[arrowhead=vee,arrowtail=none,headlabel="structuralFeature",group=StructuralFeature,minlen=2,constraint=false,]
+ StructuralFeatureAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReadStructuralFeatureAction[label="{ReadStructuralFeatureAction| | }"]
+ ReadStructuralFeatureAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+WriteStructuralFeatureAction[label="{/WriteStructuralFeatureAction/| | }"]
+ WriteStructuralFeatureAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="value",group=InputPin,minlen=2,constraint=true,]
+ WriteStructuralFeatureAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[0-1]",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ClearStructuralFeatureAction[label="{ClearStructuralFeatureAction| | }"]
+ ClearStructuralFeatureAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[0-1]",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+RemoveStructuralFeatureValueAction[label="{RemoveStructuralFeatureValueAction|isRemoveDuplicates : Boolean| }"]
+ RemoveStructuralFeatureValueAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="removeAt[0-1]",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+AddStructuralFeatureValueAction[label="{AddStructuralFeatureValueAction|isReplaceAll : Boolean| }"]
+ AddStructuralFeatureValueAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="insertAt[0-1]",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+LinkAction[label="{/LinkAction/| | }"]
+ LinkAction->LinkEndData[arrowhead=vee,arrowtail=diamond,headlabel="endData[2-*]",group=LinkEndData,minlen=2,constraint=true,]
+ LinkAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="inputValue[1-*]",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+LinkEndData[label="{LinkEndData| | }"]
+ LinkEndData->InputPin[arrowhead=vee,arrowtail=none,headlabel="value[0-1]",group=InputPin,minlen=2,constraint=false,]
+ LinkEndData->Property[arrowhead=vee,arrowtail=none,headlabel="end",group=Property,minlen=2,constraint=false,]
+ LinkEndData->QualifierValue[arrowhead=vee,arrowtail=diamond,headlabel="qualifier[*]",group=QualifierValue,minlen=2,constraint=true,]
+;
+ node[shape=record];
+QualifierValue[label="{QualifierValue| | }"]
+ QualifierValue->Property[arrowhead=vee,arrowtail=none,headlabel="qualifier",group=Property,minlen=2,constraint=false,]
+ QualifierValue->InputPin[arrowhead=vee,arrowtail=none,headlabel="value",group=InputPin,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ReadLinkAction[label="{ReadLinkAction| | }"]
+ ReadLinkAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+LinkEndCreationData[label="{LinkEndCreationData|isReplaceAll : Boolean| }"]
+ LinkEndCreationData->InputPin[arrowhead=vee,arrowtail=none,headlabel="insertAt[0-1]",group=InputPin,minlen=2,constraint=false,]
+;
+ node[shape=record];
+CreateLinkAction[label="{CreateLinkAction| | }"]
+;
+ node[shape=record];
+WriteLinkAction[label="{/WriteLinkAction/| | }"]
+;
+ node[shape=record];
+DestroyLinkAction[label="{DestroyLinkAction| | }"]
+;
+ node[shape=record];
+LinkEndDestructionData[label="{LinkEndDestructionData|isDestroyDuplicates : Boolean| }"]
+ LinkEndDestructionData->InputPin[arrowhead=vee,arrowtail=none,headlabel="destroyAt[0-1]",group=InputPin,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ClearAssociationAction[label="{ClearAssociationAction| | }"]
+ ClearAssociationAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+ ClearAssociationAction->Association[arrowhead=vee,arrowtail=none,headlabel="association",group=Association,minlen=2,constraint=false,]
+;
+ node[shape=record];
+BroadcastSignalAction[label="{BroadcastSignalAction| | }"]
+ BroadcastSignalAction->Signal[arrowhead=vee,arrowtail=none,headlabel="signal",group=Signal,minlen=2,constraint=false,]
+;
+ node[shape=record];
+SendObjectAction[label="{SendObjectAction| | }"]
+ SendObjectAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="target",group=InputPin,minlen=2,constraint=true,]
+ SendObjectAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="request",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ValueSpecificationAction[label="{ValueSpecificationAction| | }"]
+ ValueSpecificationAction->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="value",group=ValueSpecification,minlen=2,constraint=true,]
+ ValueSpecificationAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+TimeExpression[label="{TimeExpression| | }"]
+ TimeExpression->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="expr[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+ TimeExpression->Observation[arrowhead=vee,arrowtail=none,headlabel="observation[*]",group=Observation,minlen=2,constraint=false,]
+;
+ node[shape=record];
+Observation[label="{/Observation/| | }"]
+;
+ node[shape=record];
+Duration[label="{Duration| | }"]
+ Duration->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="expr[0-1]",group=ValueSpecification,minlen=2,constraint=true,]
+ Duration->Observation[arrowhead=vee,arrowtail=none,headlabel="observation[*]",group=Observation,minlen=2,constraint=false,]
+;
+ node[shape=record];
+DurationInterval[label="{DurationInterval| | }"]
+;
+ node[shape=record];
+Interval[label="{Interval| | }"]
+ Interval->ValueSpecification[arrowhead=vee,arrowtail=none,headlabel="min",group=ValueSpecification,minlen=2,constraint=false,]
+ Interval->ValueSpecification[arrowhead=vee,arrowtail=none,headlabel="max",group=ValueSpecification,minlen=2,constraint=false,]
+;
+ node[shape=record];
+TimeConstraint[label="{TimeConstraint|firstEvent[0-1] : Boolean| }"]
+;
+ node[shape=record];
+IntervalConstraint[label="{IntervalConstraint| | }"]
+;
+ node[shape=record];
+TimeInterval[label="{TimeInterval| | }"]
+;
+ node[shape=record];
+DurationConstraint[label="{DurationConstraint|firstEvent[0-2] : Boolean| }"]
+;
+ node[shape=record];
+TimeObservation[label="{TimeObservation|firstEvent : Boolean| }"]
+ TimeObservation->NamedElement[arrowhead=vee,arrowtail=none,headlabel="event",group=NamedElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+DurationObservation[label="{DurationObservation|firstEvent[0-2] : Boolean| }"]
+ DurationObservation->NamedElement[arrowhead=vee,arrowtail=none,headlabel="event[12]",group=NamedElement,minlen=2,constraint=false,]
+;
+ node[shape=record];
+FinalState[label="{FinalState| | }"]
+;
+ node[shape=record];
+TimeEvent[label="{TimeEvent|isRelative : Boolean| }"]
+ TimeEvent->TimeExpression[arrowhead=vee,arrowtail=diamond,headlabel="when",group=TimeExpression,minlen=2,constraint=true,]
+;
+ node[shape=record];
+VariableAction[label="{/VariableAction/| | }"]
+ VariableAction->Variable[arrowhead=vee,arrowtail=none,headlabel="variable",group=Variable,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ReadVariableAction[label="{ReadVariableAction| | }"]
+ ReadVariableAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+WriteVariableAction[label="{/WriteVariableAction/| | }"]
+ WriteVariableAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="value",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ClearVariableAction[label="{ClearVariableAction| | }"]
+;
+ node[shape=record];
+AddVariableValueAction[label="{AddVariableValueAction|isReplaceAll : Boolean| }"]
+ AddVariableValueAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="insertAt[0-1]",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+RemoveVariableValueAction[label="{RemoveVariableValueAction|isRemoveDuplicates : Boolean| }"]
+ RemoveVariableValueAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="removeAt[0-1]",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+RaiseExceptionAction[label="{RaiseExceptionAction| | }"]
+ RaiseExceptionAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="exception",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ActionInputPin[label="{ActionInputPin| | }"]
+ ActionInputPin->Action[arrowhead=vee,arrowtail=diamond,headlabel="fromAction",group=Action,minlen=2,constraint=true,]
+;
+ node[shape=record];
+InformationItem[label="{InformationItem| | }"]
+ InformationItem->Classifier[arrowhead=vee,arrowtail=none,headlabel="represented[*]",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+InformationFlow[label="{InformationFlow| | }"]
+ InformationFlow->Relationship[arrowhead=vee,arrowtail=none,headlabel="realization[*]",group=Relationship,minlen=2,constraint=false,]
+ InformationFlow->Classifier[arrowhead=vee,arrowtail=none,headlabel="conveyed[1-*]",group=Classifier,minlen=2,constraint=false,]
+ InformationFlow->NamedElement[arrowhead=vee,arrowtail=none,headlabel="informationSource[1-*]",group=NamedElement,minlen=2,constraint=false,]
+ InformationFlow->NamedElement[arrowhead=vee,arrowtail=none,headlabel="informationTarget[1-*]",group=NamedElement,minlen=2,constraint=false,]
+ InformationFlow->ActivityEdge[arrowhead=vee,arrowtail=none,headlabel="realizingActivityEdge[*]",group=ActivityEdge,minlen=2,constraint=false,]
+ InformationFlow->Connector[arrowhead=vee,arrowtail=none,headlabel="realizingConnector[*]",group=Connector,minlen=2,constraint=false,]
+ InformationFlow->Message[arrowhead=vee,arrowtail=none,headlabel="realizingMessage[*]",group=Message,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ReadExtentAction[label="{ReadExtentAction| | }"]
+ ReadExtentAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+ ReadExtentAction->Classifier[arrowhead=vee,arrowtail=none,headlabel="classifier",group=Classifier,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ReclassifyObjectAction[label="{ReclassifyObjectAction|isReplaceAll : Boolean| }"]
+ ReclassifyObjectAction->Classifier[arrowhead=vee,arrowtail=none,headlabel="oldClassifier[*]",group=Classifier,minlen=2,constraint=false,]
+ ReclassifyObjectAction->Classifier[arrowhead=vee,arrowtail=none,headlabel="newClassifier[*]",group=Classifier,minlen=2,constraint=false,]
+ ReclassifyObjectAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReadIsClassifiedObjectAction[label="{ReadIsClassifiedObjectAction|isDirect : Boolean| }"]
+ ReadIsClassifiedObjectAction->Classifier[arrowhead=vee,arrowtail=none,headlabel="classifier",group=Classifier,minlen=2,constraint=false,]
+ ReadIsClassifiedObjectAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+ ReadIsClassifiedObjectAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+StartClassifierBehaviorAction[label="{StartClassifierBehaviorAction| | }"]
+ StartClassifierBehaviorAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReadLinkObjectEndAction[label="{ReadLinkObjectEndAction| | }"]
+ ReadLinkObjectEndAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+ ReadLinkObjectEndAction->Property[arrowhead=vee,arrowtail=none,headlabel="end",group=Property,minlen=2,constraint=false,]
+ ReadLinkObjectEndAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReadLinkObjectEndQualifierAction[label="{ReadLinkObjectEndQualifierAction| | }"]
+ ReadLinkObjectEndQualifierAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+ ReadLinkObjectEndQualifierAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+ ReadLinkObjectEndQualifierAction->Property[arrowhead=vee,arrowtail=none,headlabel="qualifier",group=Property,minlen=2,constraint=false,]
+;
+ node[shape=record];
+CreateLinkObjectAction[label="{CreateLinkObjectAction| | }"]
+ CreateLinkObjectAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+AcceptEventAction[label="{AcceptEventAction|isUnmarshall : Boolean| }"]
+ AcceptEventAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[*]",group=OutputPin,minlen=2,constraint=true,]
+ AcceptEventAction->Trigger[arrowhead=vee,arrowtail=diamond,headlabel="trigger[1-*]",group=Trigger,minlen=2,constraint=true,]
+;
+ node[shape=record];
+AcceptCallAction[label="{AcceptCallAction| | }"]
+ AcceptCallAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="returnInformation",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReplyAction[label="{ReplyAction| | }"]
+ ReplyAction->Trigger[arrowhead=vee,arrowtail=none,headlabel="replyToCall",group=Trigger,minlen=2,constraint=false,]
+ ReplyAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="returnInformation",group=InputPin,minlen=2,constraint=true,]
+ ReplyAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="replyValue[*]",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+UnmarshallAction[label="{UnmarshallAction| | }"]
+ UnmarshallAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[1-*]",group=OutputPin,minlen=2,constraint=true,]
+ UnmarshallAction->Classifier[arrowhead=vee,arrowtail=none,headlabel="unmarshallType",group=Classifier,minlen=2,constraint=false,]
+ UnmarshallAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ReduceAction[label="{ReduceAction|isOrdered : Boolean| }"]
+ ReduceAction->Behavior[arrowhead=vee,arrowtail=none,headlabel="reducer",group=Behavior,minlen=2,constraint=false,]
+ ReduceAction->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result",group=OutputPin,minlen=2,constraint=true,]
+ ReduceAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="collection",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+StartObjectBehaviorAction[label="{StartObjectBehaviorAction| | }"]
+ StartObjectBehaviorAction->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="object",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+JoinNode[label="{JoinNode|isCombineDuplicate : Boolean| }"]
+ JoinNode->ValueSpecification[arrowhead=vee,arrowtail=diamond,headlabel="joinSpec",group=ValueSpecification,minlen=2,constraint=true,]
+;
+ node[shape=record];
+DataStoreNode[label="{DataStoreNode| | }"]
+;
+ node[shape=record];
+ConditionalNode[label="{ConditionalNode|isDeterminate : Boolean\nisAssured : Boolean| }"]
+ ConditionalNode->Clause[arrowhead=vee,arrowtail=diamond,headlabel="clause[1-*]",group=Clause,minlen=2,constraint=true,]
+ ConditionalNode->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[*]{ordered}",group=OutputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+Clause[label="{Clause| | }"]
+ Clause->ExecutableNode[arrowhead=vee,arrowtail=none,headlabel="test[*]",group=ExecutableNode,minlen=2,constraint=false,]
+ Clause->ExecutableNode[arrowhead=vee,arrowtail=none,headlabel="body[*]",group=ExecutableNode,minlen=2,constraint=false,]
+ Clause->Clause[arrowhead=none,arrowtail=none,headlabel="successorClause[*]",taillabel="predecessorClause[*]",group=Clause,minlen=2,constraint=false,]
+ Clause->OutputPin[arrowhead=vee,arrowtail=none,headlabel="decider",group=OutputPin,minlen=2,constraint=false,]
+ Clause->OutputPin[arrowhead=vee,arrowtail=none,headlabel="bodyOutput[*]{ordered}",group=OutputPin,minlen=2,constraint=false,]
+;
+ node[shape=record];
+LoopNode[label="{LoopNode|isTestedFirst : Boolean| }"]
+ LoopNode->ExecutableNode[arrowhead=vee,arrowtail=none,headlabel="bodyPart[*]",group=ExecutableNode,minlen=2,constraint=false,]
+ LoopNode->ExecutableNode[arrowhead=vee,arrowtail=none,headlabel="setupPart[*]",group=ExecutableNode,minlen=2,constraint=false,]
+ LoopNode->OutputPin[arrowhead=vee,arrowtail=none,headlabel="decider",group=OutputPin,minlen=2,constraint=false,]
+ LoopNode->ExecutableNode[arrowhead=vee,arrowtail=none,headlabel="test[*]",group=ExecutableNode,minlen=2,constraint=false,]
+ LoopNode->OutputPin[arrowhead=vee,arrowtail=diamond,headlabel="result[*]{ordered}",group=OutputPin,minlen=2,constraint=true,]
+ LoopNode->OutputPin[arrowhead=vee,arrowtail=none,headlabel="loopVariable[*]{ordered}",group=OutputPin,minlen=2,constraint=false,]
+ LoopNode->OutputPin[arrowhead=vee,arrowtail=none,headlabel="bodyOutput[*]{ordered}",group=OutputPin,minlen=2,constraint=false,]
+ LoopNode->InputPin[arrowhead=vee,arrowtail=diamond,headlabel="loopVariableInput[*]{ordered}",group=InputPin,minlen=2,constraint=true,]
+;
+ node[shape=record];
+ExpansionNode[label="{ExpansionNode| | }"]
+;
+ node[shape=record];
+ExpansionRegion[label="{ExpansionRegion|mode : ExpansionKind| }"]
+ ExpansionRegion->ExpansionNode[arrowhead=none,arrowtail=none,headlabel="inputElement[1-*]",taillabel="regionAsInput[0-1]",group=ExpansionNode,minlen=2,constraint=false,]
+ ExpansionRegion->ExpansionNode[arrowhead=none,arrowtail=none,headlabel="outputElement[*]",taillabel="regionAsOutput[0-1]",group=ExpansionNode,minlen=2,constraint=false,]
+;
+ node[shape=record];
+ExpansionKind[label="{&#171;DataType&#187;\nExpansionKind|}"]
+;
+ node[shape=record];
+ProtocolTransition[label="{ProtocolTransition| | }"]
+ ProtocolTransition->Constraint[arrowhead=vee,arrowtail=none,headlabel="postCondition[0-1]",group=Constraint,minlen=2,constraint=false,]
+ ProtocolTransition->Operation[arrowhead=vee,arrowtail=none,headlabel="referred[*]",group=Operation,minlen=2,constraint=false,]
+ ProtocolTransition->Constraint[arrowhead=vee,arrowtail=none,headlabel="preCondition[0-1]",group=Constraint,minlen=2,constraint=false,]
+;
+ node[shape=record];
+AssociationClass[label="{AssociationClass| | }"]
+;
+
+}
+}

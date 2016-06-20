@@ -1,0 +1,17 @@
+binding RemoveEmptyClass2Ecore {
+	concept   OO  : "bento:/bento.trafolib.oorefactorings.flattenMetamodel/FlattenMetamodel.ecore"
+	metamodel Ecore : "http://www.eclipse.org/emf/2002/Ecore"
+	
+	class Package    to EPackage
+	class Classifier to EClassifier
+	
+	feature Package.subpackages is eSubpackages
+	feature Package.classifiers is eClassifiers
+	
+	feature Classifier.container = self.refImmediateComposite()
+
+	-- [tgt]
+	-- feature Package.classifiers is eClassifiers
+	
+}
+

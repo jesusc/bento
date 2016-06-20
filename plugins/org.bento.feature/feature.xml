@@ -2,7 +2,7 @@
 <feature
       id="org.bento.feature"
       label="Bento Feature"
-      version="0.7.0.qualifier"
+      version="0.7.1.qualifier"
       provider-name="Miso Team">
 
    <description url="http://sanchezcuadrado.es/projects/bento">
@@ -25,101 +25,101 @@
          id="genericity.components.ui"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="genericity.language.gbind"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="genericity.language.gbind.resource"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="genericity.language.gbind.resource.ui"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.componetization.atl"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.componetization.atl.metrics"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.componetization.model"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.componetization.ui"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.adapter.atl"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.component.interpreter"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.repository.common"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"
+         version="0.7.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="bento.repository.ui"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"/>
+         version="0.7.1.qualifier"/>
 
    <plugin
          id="bento.language.bentocomp"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"/>
+         version="0.7.1.qualifier"/>
 
    <plugin
          id="bento.language.bentocomp.resource.bento"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"/>
+         version="0.7.1.qualifier"/>
 
    <plugin
          id="bento.language.bentocomp.resource.bento.ui"
          download-size="0"
          install-size="0"
-         version="0.7.0.qualifier"/>
+         version="0.7.1.qualifier"/>
 
 </feature>

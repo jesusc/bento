@@ -8,6 +8,7 @@ import anatlyzer.atl.editor.builder.AnalyserExecutor;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atl.util.AnalyserUtils.CannotLoadMetamodel;
+import anatlyzer.atl.util.AnalyserUtils.PreconditionParseError;
 import bento.adapter.atl.visitors.AdaptCode;
 import bento.adapter.atl.visitors.AdaptModelElements;
 import bento.adapter.atl.visitors.AdaptModuleElements;
@@ -50,7 +51,7 @@ public class ATLTrafoAdapter {
 				new AnalyserExecutor().exec(null, this.atlModel, false);
 				
 				// new AdaptVirtualClasses(atlModel, bindModel, currentMetamodel);
-			} catch (IOException | CoreException | CannotLoadMetamodel e) {
+			} catch (IOException | CoreException | CannotLoadMetamodel | PreconditionParseError e) {
 				throw new RuntimeException(e);
 			}
 		}

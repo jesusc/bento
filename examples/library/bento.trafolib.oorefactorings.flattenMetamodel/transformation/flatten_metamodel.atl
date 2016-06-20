@@ -1,0 +1,26 @@
+-- @atlcompiler atl2010
+-- @path OO=/bento.trafolib.oorefactorings.flattenMetamodel/metamodels/FlattenMetamodel.ecore
+
+module flattenmetamodel;
+create OUT : OO refining IN : OO;
+
+rule rootPackage {
+	from root : OO!Package (
+		not OO!Package.allInstances()->exists(anotherPkg | anotherPkg.subpackages->includes(root) )
+	)
+	to newRoot : OO!Package (
+		classifiers <- OO!Classifier.allInstances()->select(c | 
+			c.container <> root	 
+		)	
+	)
+}
+
+rule nonRootPackage {
+	from root : OO!Package (
+		OO!Package.allInstances()->exists(anotherPkg | anotherPkg.subpackages->includes(root) )
+	)
+	to drop
+}
+
+
+

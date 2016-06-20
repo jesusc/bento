@@ -20,16 +20,10 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>anatlyzer.atl.editor.anatlyzerATLBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
 		<nature>genericity.language.gbind.resource.nature</nature>
 		<nature>bento.language.bentocomp.resource.bento.nature</nature>
-		<nature>anatlyzer.atl.editor.anatlyzerATLNature</nature>
 	</natures>
 </projectDescription>

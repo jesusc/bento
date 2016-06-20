@@ -1,0 +1,13 @@
+-- @atlcompiler atl2010
+-- @path OO=/bento.trafolib.oorefactorings/metamodels/RemoveEmptyClass.ecore
+
+module removeemptyclass;
+create OUT : OO refining IN : OO;
+
+rule removeEmptyClass {
+	from class : OO!Class (
+		class.features->isEmpty() and 
+		not OO!Feature.allInstances()->exists(f | f.type = class)	
+	)
+	to drop
+}
