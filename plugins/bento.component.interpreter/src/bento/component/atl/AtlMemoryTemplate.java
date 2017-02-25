@@ -56,7 +56,23 @@ public class AtlMemoryTemplate implements AdaptationResult {
 	Supplier<ATLModel> pending ;
 	public void adapt(ParameterModel conceptModel, Model concreteModel, BindingModel bindingModel) {
 		if ( pending != null ) {
-			throw new UnsupportedOperationException("Multiple adaptations of the same template are not supported");
+			Supplier<ATLModel> oldPending = pending;
+			pending = () -> {
+				AtlParameter atlBoundModel = selectBoundModel(conceptModel);
+				
+				// Get the adapted from from the previous adaptation
+				ATLModel atlModel = oldPending.get();
+
+				ATLTrafoAdapter adapter = new ATLTrafoAdapter(atlModel, bindingModel, 
+						new EclipseComponentInfoForBinding(atlBoundModel.getAtlMetamodelName(), bindingModel) );
+				
+				adapter.perform();
+				
+				// this.adaptedAtlModel = adapter.getAdaptedATL();
+				return adapter.getAdaptedATL();				
+			};
+			return;
+			// throw new UnsupportedOperationException("Multiple adaptations of the same template are not supported");
 		}
 	
 		pending = () -> {
@@ -67,17 +83,7 @@ public class AtlMemoryTemplate implements AdaptationResult {
 			}
 			*/
 			
-			// Select the actual ATL model that is bound
-			AtlParameter atlBoundModel = null;
-			
-			for(AtlParameter p : original.getParameters()) {
-				if ( p.getModel() == conceptModel ) {
-					atlBoundModel = p;
-				}
-			}
-	
-			if ( atlBoundModel == null )
-				throw new IllegalArgumentException();
+			AtlParameter atlBoundModel = selectBoundModel(conceptModel);
 			
 			// TODO: Load only the first time
 			Resource atlResource = loadAtlTransformation();
@@ -93,6 +99,22 @@ public class AtlMemoryTemplate implements AdaptationResult {
 			// this.adaptedAtlModel = adapter.getAdaptedATL();
 			return adapter.getAdaptedATL();
 		};
+	}
+
+
+	private AtlParameter selectBoundModel(ParameterModel conceptModel) {
+		// Select the actual ATL model that is bound
+		AtlParameter atlBoundModel = null;
+		
+		for(AtlParameter p : original.getParameters()) {
+			if ( p.getModel() == conceptModel ) {
+				atlBoundModel = p;
+			}
+		}
+
+		if ( atlBoundModel == null )
+			throw new IllegalArgumentException();
+		return atlBoundModel;
 	}
 
 	public class EclipseComponentInfoForBinding implements IComponentInfoForBinding {
