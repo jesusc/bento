@@ -35,6 +35,7 @@ import gbind.simpleocl.RealType;
 import gbind.simpleocl.RelOpCallExp;
 import gbind.simpleocl.SelfExp;
 import gbind.simpleocl.SequenceExp;
+import gbind.simpleocl.SetExp;
 import gbind.simpleocl.StringExp;
 import gbind.simpleocl.StringType;
 import gbind.simpleocl.TupleExp;
@@ -398,6 +399,15 @@ public class GbindToATL extends GBindVisitor {
 		link(self, OCLFactory.eINSTANCE.createStringType());
 	}
 		
+	@Override
+	public void inSetExp(SetExp self) {
+		anatlyzer.atlext.OCL.SetExp atl = OCLFactory.eINSTANCE.createSetExp();
+		self.getElements().forEach(e -> atl.getElements().add(expr(e)) );
+		link(self, atl);
+	}
+	
+	
+	
 	///
 	
 	@Override
