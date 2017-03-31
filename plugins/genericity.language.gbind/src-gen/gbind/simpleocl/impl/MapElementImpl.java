@@ -27,12 +27,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.MapElementImpl#getMap <em>Map</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.MapElementImpl#getKey <em>Key</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.MapElementImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

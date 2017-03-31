@@ -14,10 +14,10 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclInstanceModel#getMetamodel <em>Metamodel</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclInstanceModel()
  * @model

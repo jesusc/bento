@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.StaticPropertyCallExp#getSource <em>Source</em>}</li>
  *   <li>{@link gbind.simpleocl.StaticPropertyCallExp#getStaticCall <em>Static Call</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getStaticPropertyCallExp()
  * @model

@@ -2,10 +2,12 @@ package bento.component.atl;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -22,6 +24,7 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLSerializer;
 import bento.adapter.atl.ATLTrafoAdapter;
 import bento.adapter.atl.IComponentInfoForBinding;
+import bento.adapter.atl.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.binding.utils.BindingModel;
 import bento.component.model.AdaptationResult;
 import bento.language.bentocomp.core.CompositeComponent;
@@ -32,6 +35,7 @@ import bento.language.bentocomp.technologies.AtlParameter;
 import bento.language.bentocomp.technologies.AtlTemplate;
 import bento.repository.common.BentoURIResolver;
 import bento.repository.local.FilePathResolver;
+import gbind.dsl.MetamodelDeclaration;
 
 /**
  * Holds an ATL template loaded in memory, adding the possibility
@@ -133,19 +137,36 @@ public class AtlMemoryTemplate implements AdaptationResult {
 		}
 
 		@Override
+		public List<IBoundMetamodelInfo> getBoundMetamodels() {
+			return this.bindModel.getRoot().getBoundMetamodels().stream().map(m -> new EclipseBoundMetamodel(m, bindModel)).collect(Collectors.toList());
+		}
+		
+
+	}
+	
+	public static class EclipseBoundMetamodel implements IBoundMetamodelInfo {
+
+		private MetamodelDeclaration metamodel;
+		private BindingModel bindModel;
+
+		public EclipseBoundMetamodel(MetamodelDeclaration m, BindingModel bindModel) {
+			this.metamodel = m;
+			this.bindModel = bindModel;
+		}
+
+		@Override
 		public String getBoundMetamodelName() {
-			return bindModel.getRoot().getBoundMetamodel().getName();
+			return metamodel.getName();
 		}
 
 		@Override
 		public String getBoundMetamodelURI() {
-			String uri = BentoURIResolver.tryResolveMetamodel(bindModel.getRoot().getBoundMetamodel().getMetamodelURI(), bindModel.getResource());
+			String uri = BentoURIResolver.tryResolveMetamodel(metamodel.getMetamodelURI(), bindModel.getResource());
 //			String uri = bindModel.getRoot().getBoundMetamodel().getMetamodelURI();
 //			// quick trick			
 			return uri.replace("platform:/resource", "");
 			
-		}
-		
+		}		
 	}
 	
 	private Resource loadAtlTransformation() {

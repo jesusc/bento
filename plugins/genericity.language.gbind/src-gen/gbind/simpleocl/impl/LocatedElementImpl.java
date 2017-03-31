@@ -19,13 +19,13 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.LocatedElementImpl#getLine <em>Line</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LocatedElementImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LocatedElementImpl#getCharStart <em>Char Start</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LocatedElementImpl#getCharEnd <em>Char End</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

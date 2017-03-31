@@ -27,12 +27,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.TupleTypeAttributeImpl#getType <em>Type</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.TupleTypeAttributeImpl#getTupleType <em>Tuple Type</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.TupleTypeAttributeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -118,7 +118,7 @@ public class RevengProcessManager {
 					if ( m.isBecomeConcept() ) {
 						fileName = m.getExtractedConcept().getName() + ".ecore";
 						target = project.getFolder("metamodels").getFile(fileName);
-						ATLUtils.replacePathTag(original, m.getName(), m.getExtractedConcept().getName(), target.getFullPath().toPortableString());
+						ATLUtils.modifyOclModelPathTag(original, m.getName(), m.getExtractedConcept().getName(), target.getFullPath().toPortableString());
 			
 						// Change the meta-model, this could a facility somewhere else
 						String path = m.getPath();

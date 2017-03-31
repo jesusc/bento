@@ -20,12 +20,12 @@ import bento.validators.BindingMetamodelConformanceValidator.ValidationProblem;
 
 public class GbindResourcePostProcessor implements genericity.language.gbind.IGbindResourcePostProcessor {
 	
+		
 	public void process(genericity.language.gbind.mopp.GbindResource resource) {
 		BindingModel root = (BindingModel) resource.getContents().get(0);		
 		boolean metamodelsOk = true;
 		
-		if ( root.getBoundMetamodel() != null ) {
-			MetamodelDeclaration m = root.getBoundMetamodel();
+		for (MetamodelDeclaration m : root.getBoundMetamodels()) {		
 			if ( ! canBeLoaded(m, resource) ) {
 				GbindProblem p = new GbindProblem("Cannot resolve " + m.getMetamodelURI(), 
 						GbindEProblemType.ANALYSIS_PROBLEM, 

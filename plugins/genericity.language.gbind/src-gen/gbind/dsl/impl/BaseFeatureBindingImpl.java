@@ -24,12 +24,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.BaseFeatureBindingImpl#getConceptFeature <em>Concept Feature</em>}</li>
  *   <li>{@link gbind.dsl.impl.BaseFeatureBindingImpl#getConceptClass <em>Concept Class</em>}</li>
  *   <li>{@link gbind.dsl.impl.BaseFeatureBindingImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

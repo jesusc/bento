@@ -15,12 +15,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.VariableDeclaration#getVarName <em>Var Name</em>}</li>
  *   <li>{@link gbind.simpleocl.VariableDeclaration#getType <em>Type</em>}</li>
  *   <li>{@link gbind.simpleocl.VariableDeclaration#getVariableExp <em>Variable Exp</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getVariableDeclaration()
  * @model abstract="true"

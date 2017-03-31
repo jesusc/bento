@@ -11,10 +11,10 @@ import gbind.simpleocl.TupleExp;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.VirtualTupleExp#getTypeName <em>Type Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getVirtualTupleExp()
  * @model

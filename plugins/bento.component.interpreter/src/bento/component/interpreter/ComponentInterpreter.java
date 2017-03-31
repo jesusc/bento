@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.emf.common.util.EList;
+
 import bento.binding.utils.BindingModel;
 import bento.component.atl.AtlMemoryTemplate;
 import bento.component.model.AdaptationResult;
@@ -125,37 +127,12 @@ public class ComponentInterpreter {
 		
 		// Required adaptations for an applied component
 		// TODO: What happens if a parameter in a position of a parent adaptation has also been applied a binding?
-		List<Adaptation> adaptations = applyCommand
-				.getInputModels()
-				.stream()
-				.filter(m -> m.getBinding() != null )
-				.map(m -> {
-					Adaptation a = new Adaptation();
-					a.parameterIndex = applyCommand.getInputModels().indexOf(m);
-					a.concreteModel = m.getModel();
-					a.appliedBinding = m.getBinding();
-					return a;
-				}).collect(Collectors.toList());
+		List<Adaptation> adaptations = computeAdaptationsForApply(applyCommand, true);
+		adaptations.addAll(computeAdaptationsForApply(applyCommand, false));
 
 		// Required adaptations specified in a parent component
-		List<Adaptation> requiredByParent = parentAdaptations.stream().
-			flatMap(a -> {
-				ParameterModel m = parent.getSourceModels().get(a.parameterIndex);
-				
-				Optional<ApplyParameter> opt = applyCommand.getInputModels().stream().
-					filter(p -> p.getModel() == m).
-					findAny();
-				
-				if ( opt.isPresent() ) {				
-					Adaptation newAdaptation = new Adaptation();
-					newAdaptation.parameterIndex = applyCommand.getInputModels().indexOf(opt.get());
-					newAdaptation.concreteModel = a.concreteModel;
-					newAdaptation.appliedBinding = a.appliedBinding;
-					return Stream.of(newAdaptation);
-				} else {
-					return Stream.empty();
-				}
-			}).collect(Collectors.toList());
+		List<Adaptation> requiredByParent = computeParentAdaptations(parent, applyCommand, parentAdaptations, true);
+		requiredByParent.addAll( computeParentAdaptations(parent, applyCommand, parentAdaptations, false) );
 				
 		adaptations.addAll(requiredByParent);
 		
@@ -177,6 +154,49 @@ public class ComponentInterpreter {
 		ArrayList<AdaptationResult> result = new ArrayList<AdaptationResult>();
 		result.addAll(r);
 		return result;
+	}
+
+	private List<Adaptation> computeParentAdaptations(CompositeComponent parent, Apply applyCommand,
+			List<Adaptation> parentAdaptations, boolean isSource) {
+		List<ParameterModel> parentModels = isSource ? parent.getSourceModels() : parent.getTargetModels();
+		List<ApplyParameter> applyModels  = isSource ? applyCommand.getInputModels() : applyCommand.getOutputModels();
+
+		
+		return parentAdaptations.stream().
+			flatMap(a -> {
+				ParameterModel m = parentModels.get(a.parameterIndex);
+				
+				Optional<ApplyParameter> opt = applyModels.stream().
+					filter(p -> p.getModel() == m).
+					findAny();
+				
+				if ( opt.isPresent() ) {				
+					Adaptation newAdaptation = new Adaptation();
+					newAdaptation.isSource = isSource;
+					newAdaptation.parameterIndex = applyModels.indexOf(opt.get());
+					newAdaptation.concreteModel = a.concreteModel;
+					newAdaptation.appliedBinding = a.appliedBinding;
+					return Stream.of(newAdaptation);
+				} else {
+					return Stream.empty();
+				}
+			}).collect(Collectors.toList());
+	}
+
+	private List<Adaptation> computeAdaptationsForApply(Apply applyCommand, boolean isSource) {
+		List<ApplyParameter> models = isSource ? applyCommand.getInputModels() : applyCommand.getOutputModels();
+		
+		List<Adaptation> adaptations = models.stream()
+				.filter(m -> m.getBinding() != null )
+				.map(m -> {
+					Adaptation a = new Adaptation();
+					a.isSource = isSource;
+					a.parameterIndex = models.indexOf(m);
+					a.concreteModel = m.getModel();
+					a.appliedBinding = m.getBinding();
+					return a;
+				}).collect(Collectors.toList());
+		return adaptations;
 	};
 	
 	/**
@@ -196,7 +216,7 @@ public class ComponentInterpreter {
 		AtlMemoryTemplate template = new AtlMemoryTemplate(comp, filePathResolver);
 		template.setAdapterFor(topComposite);
 		adaptations.forEach(a -> {
-			ParameterModel conceptModel = comp.getSourceModels().get(a.parameterIndex);
+			ParameterModel conceptModel = a.isSource ? comp.getSourceModels().get(a.parameterIndex) : comp.getTargetModels().get(a.parameterIndex);
 			// BindingModelLoader2 loader = new BindingModelLoader2( a.appliedBinding.getFileName() );
 			BindingModel bindingModel = BindingUtils.readBindingDescription( a.appliedBinding );
 			
@@ -208,6 +228,7 @@ public class ComponentInterpreter {
 	};		
 	
 	private class Adaptation {
+		public boolean isSource;
 		int parameterIndex;
 		Model conceptModel;
 		BindingDeclaration appliedBinding;

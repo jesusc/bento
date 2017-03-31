@@ -1,6 +1,9 @@
 package bento.adapter.atl.visitors;
 
 import gbind.dsl.BaseFeatureBinding;
+import gbind.dsl.ClassBinding;
+import gbind.dsl.ConcreteMetaclass;
+import gbind.dsl.MetamodelDeclaration;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -22,6 +25,7 @@ import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.OclType;
 import anatlyzer.atlext.OCL.Operation;
 import anatlyzer.atlext.OCL.Parameter;
+import bento.binding.utils.BindingModel;
 
 public class AdaptationUtils {
 
@@ -116,4 +120,32 @@ public class AdaptationUtils {
 		return helper;
 	}
 
+	public static void adaptModelElement(OclModelElement self, ConcreteMetaclass cm, AdaptationContext ctx) {
+		BindingModel bindingModel = ctx.getBindingModel();
+		
+		
+		self.setName(cm.getName());		
+
+		
+		
+		// The meta-model name until the end of the adaptation process
+		// We can have a pending list, but a simpler way is to annotate
+		// the change, and let the adaptation handle this
+		MetamodelDeclaration mm = bindingModel.getMetamodelOf(cm);
+		self.getAnnotations().put("DELAYED_MODEL_ADAPTATION", mm.getName());
+	}
+
+	public static void finisModelElementAdaptation(ATLModel m, AdaptationContext ctx) {
+		for (OclModelElement model : m.allObjectsOf(OclModelElement.class)) {
+			String name = model.getAnnotations().get("DELAYED_MODEL_ADAPTATION");
+			if ( name != null ) {
+				// TODO: Take into account the "IN" modifier...
+				model.setModel( ctx.getOclModelOf(name) );				
+			}
+			model.getAnnotations().remove("DELAYED_MODEL_ADAPTATION");
+		}
+	}
+
+	
+	
 }

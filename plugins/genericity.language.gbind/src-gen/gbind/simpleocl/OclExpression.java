@@ -14,6 +14,7 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclExpression#getType <em>Type</em>}</li>
  *   <li>{@link gbind.simpleocl.OclExpression#getIfExp3 <em>If Exp3</em>}</li>
@@ -29,7 +30,6 @@ package gbind.simpleocl;
  *   <li>{@link gbind.simpleocl.OclExpression#getOwningAttribute <em>Owning Attribute</em>}</li>
  *   <li>{@link gbind.simpleocl.OclExpression#getAppliedOperator <em>Applied Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclExpression()
  * @model abstract="true"

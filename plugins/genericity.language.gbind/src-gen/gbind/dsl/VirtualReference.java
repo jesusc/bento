@@ -14,10 +14,10 @@ package gbind.dsl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.VirtualReference#getType_ <em>Type </em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getVirtualReference()
  * @model

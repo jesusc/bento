@@ -14,10 +14,10 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.EnumLiteralExp#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getEnumLiteralExp()
  * @model

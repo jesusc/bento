@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.BindingModel#isTargetBinding <em>Target Binding</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getBindings <em>Bindings</em>}</li>
@@ -25,11 +26,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link gbind.dsl.BindingModel#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getVirtualMetaclasses <em>Virtual Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getBoundConcept <em>Bound Concept</em>}</li>
- *   <li>{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}</li>
+ *   <li>{@link gbind.dsl.BindingModel#getBoundMetamodels <em>Bound Metamodels</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getName <em>Name</em>}</li>
  *   <li>{@link gbind.dsl.BindingModel#getOptions <em>Options</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getBindingModel()
  * @model
@@ -174,30 +174,20 @@ public interface BindingModel extends EObject {
 	void setBoundConcept(MetamodelDeclaration value);
 
 	/**
-	 * Returns the value of the '<em><b>Bound Metamodel</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Bound Metamodels</b></em>' containment reference list.
+	 * The list contents are of type {@link gbind.dsl.MetamodelDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Bound Metamodel</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Bound Metamodels</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bound Metamodel</em>' containment reference.
-	 * @see #setBoundMetamodel(MetamodelDeclaration)
-	 * @see gbind.dsl.DslPackage#getBindingModel_BoundMetamodel()
+	 * @return the value of the '<em>Bound Metamodels</em>' containment reference list.
+	 * @see gbind.dsl.DslPackage#getBindingModel_BoundMetamodels()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	MetamodelDeclaration getBoundMetamodel();
-
-	/**
-	 * Sets the value of the '{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bound Metamodel</em>' containment reference.
-	 * @see #getBoundMetamodel()
-	 * @generated
-	 */
-	void setBoundMetamodel(MetamodelDeclaration value);
+	EList<MetamodelDeclaration> getBoundMetamodels();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

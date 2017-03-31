@@ -2,6 +2,7 @@ package bento.binding.utils;
 
 import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.ClassBinding;
+import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.MetamodelDeclaration;
 import gbind.dsl.OclFeatureBinding;
@@ -9,10 +10,12 @@ import gbind.dsl.RenamingFeatureBinding;
 import gbind.dsl.VirtualClassBinding;
 import gbind.dsl.VirtualMetaclass;
 
+import java.nio.channels.IllegalSelectorException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -65,6 +68,10 @@ public class BindingModel {
 		return ( gbind.dsl.BindingModel) resource.getContents().get(0);
 	}
 
+	public boolean isSourceBinding() {
+		return ! getRoot().isTargetBinding();
+	}
+	
 	public List<LocalHelper> getLocalHelpers() {
 		return localHelpers;
 	}
@@ -103,6 +110,11 @@ public class BindingModel {
 				map(fb -> (RenamingFeatureBinding) fb);		
 	}
 
+	public List<BaseFeatureBinding> findFeatureBindingsFor(ClassBinding cb) {
+		return featureBindings.stream().filter(fb -> fb.getConceptClass().getName().equals(cb.getConcept().getName())).collect(Collectors.toList());
+	}
+
+	
 	public Stream<OclFeatureBinding> findAllOclFeatureBindings() {
 		return featureBindings.stream().
 				filter(fb -> (fb instanceof OclFeatureBinding)).
@@ -140,9 +152,30 @@ public class BindingModel {
 	}
 
 	public HashMap<String, EClass> getConcreteClasses() {
-		return computeClassifiers(getRoot().getBoundMetamodel(), EClass.class);
+		HashMap<String, EClass> result = new HashMap<String, EClass>();
+		// TODO: Deal with name clashes
+		getRoot().getBoundMetamodels().forEach(m -> result.putAll(computeClassifiers(m, EClass.class)));
+		return result;
 	}
 
+	private HashMap<ConcreteMetaclass, MetamodelDeclaration> concreteToMetamodel = new HashMap<ConcreteMetaclass, MetamodelDeclaration>();
+	
+	public MetamodelDeclaration getMetamodelOf(ConcreteMetaclass cm) {
+		MetamodelDeclaration r = concreteToMetamodel.get(cm);
+		if ( r != null )
+			return r;
+		
+		for (MetamodelDeclaration mm : getRoot().getBoundMetamodels()) {
+			if ( computeClassifiers(mm, EClass.class).containsKey(cm.getName()) ) {
+				concreteToMetamodel.put(cm, mm);
+				return mm;
+			}
+		}
+		
+		throw new IllegalStateException("Not found: " + cm.getName());
+	}
+
+	
 	private <T extends EClassifier> HashMap<String, T> computeClassifiers(MetamodelDeclaration m, Class<T> klass) {
 		HashMap<String, T> result = new HashMap<String, T>();
 		if (m == null)
@@ -157,7 +190,6 @@ public class BindingModel {
 		}
 		return result;
 	}
-
 
 	
 

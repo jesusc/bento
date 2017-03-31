@@ -25,11 +25,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.StaticPropertyCallExpImpl#getSource <em>Source</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.StaticPropertyCallExpImpl#getStaticCall <em>Static Call</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

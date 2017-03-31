@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclContextDefinition#getDefinition <em>Definition</em>}</li>
  *   <li>{@link gbind.simpleocl.OclContextDefinition#getContext_ <em>Context </em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclContextDefinition()
  * @model

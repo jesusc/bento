@@ -390,7 +390,7 @@ package dsl {
 	    //attr String[1] metamodel;
 	    //attr String[0..1] metamodelURI;
 	    val MetamodelDeclaration[1] boundConcept;
-	    val MetamodelDeclaration[1] boundMetamodel;
+	    val MetamodelDeclaration[+] boundMetamodels;
 	    
 	    attr String[1] name;
 		//attr String[0..1] componentURI;

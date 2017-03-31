@@ -14,12 +14,12 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OperatorCallExp#getArgument <em>Argument</em>}</li>
  *   <li>{@link gbind.simpleocl.OperatorCallExp#getOperationName <em>Operation Name</em>}</li>
  *   <li>{@link gbind.simpleocl.OperatorCallExp#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOperatorCallExp()
  * @model

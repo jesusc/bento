@@ -33,12 +33,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.VirtualClassBindingImpl#getConcept <em>Concept</em>}</li>
  *   <li>{@link gbind.dsl.impl.VirtualClassBindingImpl#getVirtual <em>Virtual</em>}</li>
  *   <li>{@link gbind.dsl.impl.VirtualClassBindingImpl#getRefFeatures <em>Ref Features</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

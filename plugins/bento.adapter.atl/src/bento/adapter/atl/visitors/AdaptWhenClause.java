@@ -26,8 +26,8 @@ import bento.binding.utils.BindingModel;
 
 public class AdaptWhenClause extends BaseAdapterVisitor {
 	
-	public AdaptWhenClause(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
-		super(atlModel, bindingModel, info);
+	public AdaptWhenClause(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info, AdaptationContext ctx) {
+		super(atlModel, bindingModel, info, ctx);
 	}
 
 	public void perform() {

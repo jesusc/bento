@@ -15,12 +15,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.VirtualClassBinding#getConcept <em>Concept</em>}</li>
  *   <li>{@link gbind.dsl.VirtualClassBinding#getVirtual <em>Virtual</em>}</li>
  *   <li>{@link gbind.dsl.VirtualClassBinding#getRefFeatures <em>Ref Features</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getVirtualClassBinding()
  * @model

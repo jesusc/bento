@@ -23,11 +23,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.OclModelElementExpImpl#getModel <em>Model</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OclModelElementExpImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

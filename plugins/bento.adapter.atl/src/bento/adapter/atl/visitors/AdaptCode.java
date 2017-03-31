@@ -23,8 +23,8 @@ import bento.binding.utils.BindingModel;
 
 public class AdaptCode extends BaseAdapterVisitor {
 	
-	public AdaptCode(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
-		super(atlModel, bindingModel, info);
+	public AdaptCode(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info, AdaptationContext ctx) {
+		super(atlModel, bindingModel, info, ctx);
 	}
 
 	public void perform() {

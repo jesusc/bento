@@ -14,12 +14,12 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.MapElement#getMap <em>Map</em>}</li>
  *   <li>{@link gbind.simpleocl.MapElement#getKey <em>Key</em>}</li>
  *   <li>{@link gbind.simpleocl.MapElement#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getMapElement()
  * @model

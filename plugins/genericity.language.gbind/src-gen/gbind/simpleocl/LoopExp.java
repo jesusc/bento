@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.LoopExp#getBody <em>Body</em>}</li>
  *   <li>{@link gbind.simpleocl.LoopExp#getIterators <em>Iterators</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getLoopExp()
  * @model abstract="true"

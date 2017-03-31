@@ -1,5 +1,6 @@
 package bento.adapter.atl;
 
+import java.util.List;
 
 /**
  * This interface represents the information that a component must
@@ -16,14 +17,22 @@ public interface IComponentInfoForBinding {
 	public String getConceptMetamodelName();
 	
 	/**
-	 * @return the logical name of the bound meta-model, that will be replace
-	 *         the concept metamodel name.
+	 * @return The set of bound meta-models.
 	 */
-	public String getBoundMetamodelName();
+	public List<IBoundMetamodelInfo> getBoundMetamodels();	
 	
-	/**
-	 * @return the URI of the bound meta-model, in the style of ATL (e.g., without platform:/resource)
-	 */
-	public String getBoundMetamodelURI();
+	public static interface IBoundMetamodelInfo {
+
+		/**
+		 * @return the logical name of the bound meta-model, that will be replace
+		 *         the concept metamodel name.
+		 */
+		public String getBoundMetamodelName();
+		
+		/**
+		 * @return the URI of the bound meta-model, in the style of ATL (e.g., without platform:/resource)
+		 */
+		public String getBoundMetamodelURI();		
+	}
 	
 }

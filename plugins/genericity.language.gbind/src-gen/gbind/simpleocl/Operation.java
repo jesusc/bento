@@ -15,12 +15,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.Operation#getParameters <em>Parameters</em>}</li>
  *   <li>{@link gbind.simpleocl.Operation#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link gbind.simpleocl.Operation#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOperation()
  * @model

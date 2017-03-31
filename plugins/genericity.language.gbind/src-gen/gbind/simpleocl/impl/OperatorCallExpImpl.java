@@ -24,12 +24,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.OperatorCallExpImpl#getArgument <em>Argument</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OperatorCallExpImpl#getOperationName <em>Operation Name</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OperatorCallExpImpl#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

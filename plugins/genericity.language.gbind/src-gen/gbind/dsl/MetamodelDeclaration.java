@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.resource.Resource;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.MetamodelDeclaration#getMetamodelURI <em>Metamodel URI</em>}</li>
  *   <li>{@link gbind.dsl.MetamodelDeclaration#getResource <em>Resource</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getMetamodelDeclaration()
  * @model

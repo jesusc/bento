@@ -14,10 +14,10 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.IntegerExp#getIntegerSymbol <em>Integer Symbol</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getIntegerExp()
  * @model

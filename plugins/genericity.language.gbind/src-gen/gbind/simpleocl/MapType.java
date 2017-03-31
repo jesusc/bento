@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.MapType#getValueType <em>Value Type</em>}</li>
  *   <li>{@link gbind.simpleocl.MapType#getKeyType <em>Key Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getMapType()
  * @model

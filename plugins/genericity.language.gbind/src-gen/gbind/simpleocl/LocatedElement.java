@@ -15,13 +15,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.LocatedElement#getLine <em>Line</em>}</li>
  *   <li>{@link gbind.simpleocl.LocatedElement#getColumn <em>Column</em>}</li>
  *   <li>{@link gbind.simpleocl.LocatedElement#getCharStart <em>Char Start</em>}</li>
  *   <li>{@link gbind.simpleocl.LocatedElement#getCharEnd <em>Char End</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getLocatedElement()
  * @model abstract="true"

@@ -27,11 +27,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.ConceptBindingImpl#getDebugName <em>Debug Name</em>}</li>
  *   <li>{@link gbind.dsl.impl.ConceptBindingImpl#getModel_ <em>Model </em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

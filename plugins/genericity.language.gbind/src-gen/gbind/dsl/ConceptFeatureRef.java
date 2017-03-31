@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.ConceptFeatureRef#getConceptClass <em>Concept Class</em>}</li>
  *   <li>{@link gbind.dsl.ConceptFeatureRef#getFeatureName <em>Feature Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getConceptFeatureRef()
  * @model

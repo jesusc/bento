@@ -28,13 +28,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.LocalVariableImpl#getLetExp <em>Let Exp</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LocalVariableImpl#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LocalVariableImpl#getBaseExp <em>Base Exp</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LocalVariableImpl#getEq <em>Eq</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

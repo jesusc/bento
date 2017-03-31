@@ -24,11 +24,11 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.ConceptFeatureRefImpl#getConceptClass <em>Concept Class</em>}</li>
  *   <li>{@link gbind.dsl.impl.ConceptFeatureRefImpl#getFeatureName <em>Feature Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

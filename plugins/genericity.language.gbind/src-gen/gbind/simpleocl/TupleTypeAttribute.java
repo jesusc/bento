@@ -14,12 +14,12 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.TupleTypeAttribute#getType <em>Type</em>}</li>
  *   <li>{@link gbind.simpleocl.TupleTypeAttribute#getTupleType <em>Tuple Type</em>}</li>
  *   <li>{@link gbind.simpleocl.TupleTypeAttribute#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getTupleTypeAttribute()
  * @model

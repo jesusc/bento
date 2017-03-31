@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.OclTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OclTypeImpl#getDefinitions <em>Definitions</em>}</li>
@@ -50,7 +51,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link gbind.simpleocl.impl.OclTypeImpl#getLambdaArgType <em>Lambda Arg Type</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OclTypeImpl#getStaticPropertyCall <em>Static Property Call</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

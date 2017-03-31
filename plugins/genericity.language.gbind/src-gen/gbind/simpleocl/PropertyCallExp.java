@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.PropertyCallExp#getCalls <em>Calls</em>}</li>
  *   <li>{@link gbind.simpleocl.PropertyCallExp#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getPropertyCallExp()
  * @model

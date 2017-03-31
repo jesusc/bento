@@ -17,12 +17,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.ClassBinding#getConcept <em>Concept</em>}</li>
  *   <li>{@link gbind.dsl.ClassBinding#getConcrete <em>Concrete</em>}</li>
  *   <li>{@link gbind.dsl.ClassBinding#getWhenClause <em>When Clause</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getClassBinding()
  * @model

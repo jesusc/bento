@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.BindingOptions#isEnableClassMerge <em>Enable Class Merge</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getBindingOptions()
  * @model

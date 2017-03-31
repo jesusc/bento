@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.OclInstanceModelImpl#getMetamodel <em>Metamodel</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

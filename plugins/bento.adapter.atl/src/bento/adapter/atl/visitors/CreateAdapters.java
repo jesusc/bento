@@ -25,8 +25,8 @@ import bento.binding.utils.BindingModel;
 
 public class CreateAdapters extends BaseAdapterVisitor {
 	
-	public CreateAdapters(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
-		super(atlModel, bindingModel, info);
+	public CreateAdapters(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info, AdaptationContext ctx) {
+		super(atlModel, bindingModel, info, ctx);
 	}
 
 	public void perform() {

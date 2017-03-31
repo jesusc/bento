@@ -15,10 +15,10 @@ import gbind.simpleocl.OclExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.OclFeatureBinding#getConcrete <em>Concrete</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getOclFeatureBinding()
  * @model

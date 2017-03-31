@@ -17,12 +17,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.VirtualMetaclass#getReferences <em>References</em>}</li>
  *   <li>{@link gbind.dsl.VirtualMetaclass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link gbind.dsl.VirtualMetaclass#getInit <em>Init</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getVirtualMetaclass()
  * @model

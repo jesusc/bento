@@ -135,13 +135,13 @@ public interface DslPackage extends EPackage {
 	int BINDING_MODEL__BOUND_CONCEPT = 6;
 
 	/**
-	 * The feature id for the '<em><b>Bound Metamodel</b></em>' containment reference.
+	 * The feature id for the '<em><b>Bound Metamodels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_MODEL__BOUND_METAMODEL = 7;
+	int BINDING_MODEL__BOUND_METAMODELS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1731,15 +1731,15 @@ public interface DslPackage extends EPackage {
 	EReference getBindingModel_BoundConcept();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link gbind.dsl.BindingModel#getBoundMetamodel <em>Bound Metamodel</em>}'.
+	 * Returns the meta object for the containment reference list '{@link gbind.dsl.BindingModel#getBoundMetamodels <em>Bound Metamodels</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Bound Metamodel</em>'.
-	 * @see gbind.dsl.BindingModel#getBoundMetamodel()
+	 * @return the meta object for the containment reference list '<em>Bound Metamodels</em>'.
+	 * @see gbind.dsl.BindingModel#getBoundMetamodels()
 	 * @see #getBindingModel()
 	 * @generated
 	 */
-	EReference getBindingModel_BoundMetamodel();
+	EReference getBindingModel_BoundMetamodels();
 
 	/**
 	 * Returns the meta object for the attribute '{@link gbind.dsl.BindingModel#getName <em>Name</em>}'.
@@ -2533,12 +2533,12 @@ public interface DslPackage extends EPackage {
 		EReference BINDING_MODEL__BOUND_CONCEPT = eINSTANCE.getBindingModel_BoundConcept();
 
 		/**
-		 * The meta object literal for the '<em><b>Bound Metamodel</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Bound Metamodels</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BINDING_MODEL__BOUND_METAMODEL = eINSTANCE.getBindingModel_BoundMetamodel();
+		EReference BINDING_MODEL__BOUND_METAMODELS = eINSTANCE.getBindingModel_BoundMetamodels();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

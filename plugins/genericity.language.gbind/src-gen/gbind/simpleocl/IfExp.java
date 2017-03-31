@@ -14,12 +14,12 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.IfExp#getThenExpression <em>Then Expression</em>}</li>
  *   <li>{@link gbind.simpleocl.IfExp#getCondition <em>Condition</em>}</li>
  *   <li>{@link gbind.simpleocl.IfExp#getElseExpression <em>Else Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getIfExp()
  * @model

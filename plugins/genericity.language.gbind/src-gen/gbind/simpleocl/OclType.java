@@ -14,6 +14,7 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclType#getName <em>Name</em>}</li>
  *   <li>{@link gbind.simpleocl.OclType#getDefinitions <em>Definitions</em>}</li>
@@ -29,7 +30,6 @@ package gbind.simpleocl;
  *   <li>{@link gbind.simpleocl.OclType#getLambdaArgType <em>Lambda Arg Type</em>}</li>
  *   <li>{@link gbind.simpleocl.OclType#getStaticPropertyCall <em>Static Property Call</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclType()
  * @model

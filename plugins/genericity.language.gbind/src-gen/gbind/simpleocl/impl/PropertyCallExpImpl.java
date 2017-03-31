@@ -32,11 +32,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.PropertyCallExpImpl#getCalls <em>Calls</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.PropertyCallExpImpl#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

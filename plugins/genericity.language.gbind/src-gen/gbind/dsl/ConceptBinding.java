@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.ConceptBinding#getDebugName <em>Debug Name</em>}</li>
  *   <li>{@link gbind.dsl.ConceptBinding#getModel_ <em>Model </em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getConceptBinding()
  * @model abstract="true"

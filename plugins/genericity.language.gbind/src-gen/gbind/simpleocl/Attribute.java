@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.Attribute#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link gbind.simpleocl.Attribute#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getAttribute()
  * @model

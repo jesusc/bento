@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.LocalHelper#getContext <em>Context</em>}</li>
  *   <li>{@link gbind.dsl.LocalHelper#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getLocalHelper()
  * @model

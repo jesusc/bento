@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclFeature#getDefinition <em>Definition</em>}</li>
  *   <li>{@link gbind.simpleocl.OclFeature#getEq <em>Eq</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclFeature()
  * @model abstract="true"

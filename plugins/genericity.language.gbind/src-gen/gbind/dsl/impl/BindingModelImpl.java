@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#isTargetBinding <em>Target Binding</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBindings <em>Bindings</em>}</li>
@@ -47,11 +48,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getConcreteMetaclasses <em>Concrete Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getVirtualMetaclasses <em>Virtual Metaclasses</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundConcept <em>Bound Concept</em>}</li>
- *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundMetamodel <em>Bound Metamodel</em>}</li>
+ *   <li>{@link gbind.dsl.impl.BindingModelImpl#getBoundMetamodels <em>Bound Metamodels</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link gbind.dsl.impl.BindingModelImpl#getOptions <em>Options</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -137,14 +137,14 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	protected MetamodelDeclaration boundConcept;
 
 	/**
-	 * The cached value of the '{@link #getBoundMetamodel() <em>Bound Metamodel</em>}' containment reference.
+	 * The cached value of the '{@link #getBoundMetamodels() <em>Bound Metamodels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBoundMetamodel()
+	 * @see #getBoundMetamodels()
 	 * @generated
 	 * @ordered
 	 */
-	protected MetamodelDeclaration boundMetamodel;
+	protected EList<MetamodelDeclaration> boundMetamodels;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -324,42 +324,11 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetamodelDeclaration getBoundMetamodel() {
-		return boundMetamodel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetBoundMetamodel(MetamodelDeclaration newBoundMetamodel, NotificationChain msgs) {
-		MetamodelDeclaration oldBoundMetamodel = boundMetamodel;
-		boundMetamodel = newBoundMetamodel;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__BOUND_METAMODEL, oldBoundMetamodel, newBoundMetamodel);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<MetamodelDeclaration> getBoundMetamodels() {
+		if (boundMetamodels == null) {
+			boundMetamodels = new EObjectContainmentEList<MetamodelDeclaration>(MetamodelDeclaration.class, this, DslPackage.BINDING_MODEL__BOUND_METAMODELS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBoundMetamodel(MetamodelDeclaration newBoundMetamodel) {
-		if (newBoundMetamodel != boundMetamodel) {
-			NotificationChain msgs = null;
-			if (boundMetamodel != null)
-				msgs = ((InternalEObject)boundMetamodel).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DslPackage.BINDING_MODEL__BOUND_METAMODEL, null, msgs);
-			if (newBoundMetamodel != null)
-				msgs = ((InternalEObject)newBoundMetamodel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DslPackage.BINDING_MODEL__BOUND_METAMODEL, null, msgs);
-			msgs = basicSetBoundMetamodel(newBoundMetamodel, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DslPackage.BINDING_MODEL__BOUND_METAMODEL, newBoundMetamodel, newBoundMetamodel));
+		return boundMetamodels;
 	}
 
 	/**
@@ -463,8 +432,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return ((InternalEList<?>)getVirtualMetaclasses()).basicRemove(otherEnd, msgs);
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				return basicSetBoundConcept(null, msgs);
-			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
-				return basicSetBoundMetamodel(null, msgs);
+			case DslPackage.BINDING_MODEL__BOUND_METAMODELS:
+				return ((InternalEList<?>)getBoundMetamodels()).basicRemove(otherEnd, msgs);
 			case DslPackage.BINDING_MODEL__OPTIONS:
 				return basicSetOptions(null, msgs);
 		}
@@ -493,8 +462,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return getVirtualMetaclasses();
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				return getBoundConcept();
-			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
-				return getBoundMetamodel();
+			case DslPackage.BINDING_MODEL__BOUND_METAMODELS:
+				return getBoundMetamodels();
 			case DslPackage.BINDING_MODEL__NAME:
 				return getName();
 			case DslPackage.BINDING_MODEL__OPTIONS:
@@ -538,8 +507,9 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				setBoundConcept((MetamodelDeclaration)newValue);
 				return;
-			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
-				setBoundMetamodel((MetamodelDeclaration)newValue);
+			case DslPackage.BINDING_MODEL__BOUND_METAMODELS:
+				getBoundMetamodels().clear();
+				getBoundMetamodels().addAll((Collection<? extends MetamodelDeclaration>)newValue);
 				return;
 			case DslPackage.BINDING_MODEL__NAME:
 				setName((String)newValue);
@@ -580,8 +550,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				setBoundConcept((MetamodelDeclaration)null);
 				return;
-			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
-				setBoundMetamodel((MetamodelDeclaration)null);
+			case DslPackage.BINDING_MODEL__BOUND_METAMODELS:
+				getBoundMetamodels().clear();
 				return;
 			case DslPackage.BINDING_MODEL__NAME:
 				setName(NAME_EDEFAULT);
@@ -615,8 +585,8 @@ public class BindingModelImpl extends EObjectImpl implements BindingModel {
 				return virtualMetaclasses != null && !virtualMetaclasses.isEmpty();
 			case DslPackage.BINDING_MODEL__BOUND_CONCEPT:
 				return boundConcept != null;
-			case DslPackage.BINDING_MODEL__BOUND_METAMODEL:
-				return boundMetamodel != null;
+			case DslPackage.BINDING_MODEL__BOUND_METAMODELS:
+				return boundMetamodels != null && !boundMetamodels.isEmpty();
 			case DslPackage.BINDING_MODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DslPackage.BINDING_MODEL__OPTIONS:

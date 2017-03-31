@@ -277,7 +277,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/concreteMetaclasses"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/virtualMetaclasses"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundConcept"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundMetamodel"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/boundMetamodels"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gbind.ecore#//dsl/BindingModel/name"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gbind.ecore#//dsl/BindingModel/options"/>
       </genClasses>

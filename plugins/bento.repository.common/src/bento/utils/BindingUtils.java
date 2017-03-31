@@ -46,7 +46,7 @@ public class BindingUtils {
 		};
 		
 		load.accept(m.getBoundConcept());
-		load.accept(m.getBoundMetamodel());		
+		m.getBoundMetamodels().forEach(load::accept);
 	}
 	
 	public static Collection<EClass> getAvailableConcreteClasses(gbind.dsl.BindingModel model) {

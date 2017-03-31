@@ -33,12 +33,12 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.ClassBindingImpl#getConcept <em>Concept</em>}</li>
  *   <li>{@link gbind.dsl.impl.ClassBindingImpl#getConcrete <em>Concrete</em>}</li>
  *   <li>{@link gbind.dsl.impl.ClassBindingImpl#getWhenClause <em>When Clause</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

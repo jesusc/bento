@@ -31,12 +31,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.ModuleImpl#getMetamodels <em>Metamodels</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.ModuleImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.ModuleImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -14,13 +14,13 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.LocalVariable#getLetExp <em>Let Exp</em>}</li>
  *   <li>{@link gbind.simpleocl.LocalVariable#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link gbind.simpleocl.LocalVariable#getBaseExp <em>Base Exp</em>}</li>
  *   <li>{@link gbind.simpleocl.LocalVariable#getEq <em>Eq</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getLocalVariable()
  * @model

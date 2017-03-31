@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclModelElementExp#getModel <em>Model</em>}</li>
  *   <li>{@link gbind.simpleocl.OclModelElementExp#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclModelElementExp()
  * @model

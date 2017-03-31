@@ -15,10 +15,10 @@ import gbind.simpleocl.Primitive;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.VirtualAttribute#getType_ <em>Type </em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getVirtualAttribute()
  * @model

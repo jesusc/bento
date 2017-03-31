@@ -31,11 +31,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.LambdaTypeImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LambdaTypeImpl#getArgumentTypes <em>Argument Types</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

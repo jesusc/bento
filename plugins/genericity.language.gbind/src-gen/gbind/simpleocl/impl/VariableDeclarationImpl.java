@@ -32,12 +32,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.VariableDeclarationImpl#getVarName <em>Var Name</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.VariableDeclarationImpl#getVariableExp <em>Variable Exp</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

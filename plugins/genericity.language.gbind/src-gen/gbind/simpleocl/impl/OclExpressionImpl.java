@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.OclExpressionImpl#getType <em>Type</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OclExpressionImpl#getIfExp3 <em>If Exp3</em>}</li>
@@ -51,7 +52,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link gbind.simpleocl.impl.OclExpressionImpl#getOwningAttribute <em>Owning Attribute</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.OclExpressionImpl#getAppliedOperator <em>Applied Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -14,11 +14,11 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.LetExp#getVariable <em>Variable</em>}</li>
  *   <li>{@link gbind.simpleocl.LetExp#getIn_ <em>In </em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getLetExp()
  * @model

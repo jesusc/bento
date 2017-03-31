@@ -14,12 +14,12 @@ package gbind.simpleocl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.OclFeatureDefinition#getFeature <em>Feature</em>}</li>
  *   <li>{@link gbind.simpleocl.OclFeatureDefinition#getContext_ <em>Context </em>}</li>
  *   <li>{@link gbind.simpleocl.OclFeatureDefinition#isStatic <em>Static</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.simpleocl.SimpleoclPackage#getOclFeatureDefinition()
  * @model

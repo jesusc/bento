@@ -31,11 +31,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.StaticOperationCallImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.StaticOperationCallImpl#getOperationName <em>Operation Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

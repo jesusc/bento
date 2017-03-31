@@ -18,13 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.BaseHelper#getFeature <em>Feature</em>}</li>
  *   <li>{@link gbind.dsl.BaseHelper#getBody <em>Body</em>}</li>
  *   <li>{@link gbind.dsl.BaseHelper#getType <em>Type</em>}</li>
  *   <li>{@link gbind.dsl.BaseHelper#getModel_ <em>Model </em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getBaseHelper()
  * @model

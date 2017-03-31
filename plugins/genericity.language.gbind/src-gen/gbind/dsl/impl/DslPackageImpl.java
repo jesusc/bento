@@ -362,7 +362,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingModel_BoundMetamodel() {
+	public EReference getBindingModel_BoundMetamodels() {
 		return (EReference)bindingModelEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -996,7 +996,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		createEReference(bindingModelEClass, BINDING_MODEL__CONCRETE_METACLASSES);
 		createEReference(bindingModelEClass, BINDING_MODEL__VIRTUAL_METACLASSES);
 		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_CONCEPT);
-		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_METAMODEL);
+		createEReference(bindingModelEClass, BINDING_MODEL__BOUND_METAMODELS);
 		createEAttribute(bindingModelEClass, BINDING_MODEL__NAME);
 		createEReference(bindingModelEClass, BINDING_MODEL__OPTIONS);
 
@@ -1146,7 +1146,7 @@ public class DslPackageImpl extends EPackageImpl implements DslPackage {
 		initEReference(getBindingModel_ConcreteMetaclasses(), this.getConcreteMetaclass(), null, "concreteMetaclasses", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_VirtualMetaclasses(), this.getVirtualMetaclass(), null, "virtualMetaclasses", null, 0, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_BoundConcept(), this.getMetamodelDeclaration(), null, "boundConcept", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBindingModel_BoundMetamodel(), this.getMetamodelDeclaration(), null, "boundMetamodel", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBindingModel_BoundMetamodels(), this.getMetamodelDeclaration(), null, "boundMetamodels", null, 1, -1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBindingModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingModel_Options(), this.getBindingOptions(), null, "options", null, 1, 1, BindingModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

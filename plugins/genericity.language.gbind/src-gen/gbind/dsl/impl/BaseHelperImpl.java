@@ -30,13 +30,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.BaseHelperImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link gbind.dsl.impl.BaseHelperImpl#getBody <em>Body</em>}</li>
  *   <li>{@link gbind.dsl.impl.BaseHelperImpl#getType <em>Type</em>}</li>
  *   <li>{@link gbind.dsl.impl.BaseHelperImpl#getModel_ <em>Model </em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -24,11 +24,11 @@ import org.eclipse.emf.ecore.resource.Resource;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.MetamodelDeclarationImpl#getMetamodelURI <em>Metamodel URI</em>}</li>
  *   <li>{@link gbind.dsl.impl.MetamodelDeclarationImpl#getResource <em>Resource</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

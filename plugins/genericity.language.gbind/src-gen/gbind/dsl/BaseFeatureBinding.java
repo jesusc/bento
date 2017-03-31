@@ -14,12 +14,12 @@ package gbind.dsl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.BaseFeatureBinding#getConceptFeature <em>Concept Feature</em>}</li>
  *   <li>{@link gbind.dsl.BaseFeatureBinding#getConceptClass <em>Concept Class</em>}</li>
  *   <li>{@link gbind.dsl.BaseFeatureBinding#getQualifier <em>Qualifier</em>}</li>
  * </ul>
- * </p>
  *
  * @see gbind.dsl.DslPackage#getBaseFeatureBinding()
  * @model

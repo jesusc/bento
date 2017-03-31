@@ -19,8 +19,8 @@ import bento.binding.utils.BindingModel;
 
 public class AdaptModuleElements extends BaseAdapterVisitor {
 	
-	public AdaptModuleElements(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
-		super(atlModel, bindingModel, info);
+	public AdaptModuleElements(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info, AdaptationContext ctx) {
+		super(atlModel, bindingModel, info, ctx);
 	}
 
 	public void perform() {
@@ -88,7 +88,10 @@ public class AdaptModuleElements extends BaseAdapterVisitor {
 	 * @param concreteMetaclass
 	 */
 	private void adaptMatchedRule1(MatchedRule r, ClassBinding cb, ConcreteMetaclass concreteMetaclass) {
-		r.getInPattern().getElements().get(0).getType().setName(concreteMetaclass.getName());
+		// r.getInPattern().getElements().get(0).getType().setName(concreteMetaclass.getName());
+		
+		OclModelElement oclType = (OclModelElement) r.getInPattern().getElements().get(0).getType();
+		AdaptationUtils.adaptModelElement(oclType, concreteMetaclass, ctx);		
 	}
 
 	private void adaptMatchedRuleN(MatchedRule self, ClassBinding cb) {
@@ -127,8 +130,8 @@ public class AdaptModuleElements extends BaseAdapterVisitor {
 	//
 	
 	private void adaptHelper1(Helper h, ClassBinding cb, ConcreteMetaclass concreteMetaclass) {
-		OclType oclType = h.getDefinition().getContext_().getContext_();
-		oclType.setName(concreteMetaclass.getName());
+		OclModelElement oclType = (OclModelElement) h.getDefinition().getContext_().getContext_();
+		AdaptationUtils.adaptModelElement(oclType, concreteMetaclass, ctx);
 	}
 
 	private void adaptHelperN(Helper self, ClassBinding cb) {

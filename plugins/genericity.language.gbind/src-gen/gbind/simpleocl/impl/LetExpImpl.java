@@ -25,11 +25,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.LetExpImpl#getVariable <em>Variable</em>}</li>
  *   <li>{@link gbind.simpleocl.impl.LetExpImpl#getIn_ <em>In </em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

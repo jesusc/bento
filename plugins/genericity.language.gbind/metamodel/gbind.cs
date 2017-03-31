@@ -243,7 +243,7 @@ RULES {
 			(options)?
 
 			"concept" boundConcept
-			"metamodel" boundMetamodel
+			("metamodel" boundMetamodels)+
 			(virtualMetaclasses)*
 			bindings*
 			helpers*

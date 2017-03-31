@@ -26,10 +26,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.simpleocl.impl.PropertyCallImpl#getCallExp <em>Call Exp</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

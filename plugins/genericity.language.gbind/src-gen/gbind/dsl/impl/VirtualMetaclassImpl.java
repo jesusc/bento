@@ -34,12 +34,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link gbind.dsl.impl.VirtualMetaclassImpl#getReferences <em>References</em>}</li>
  *   <li>{@link gbind.dsl.impl.VirtualMetaclassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link gbind.dsl.impl.VirtualMetaclassImpl#getInit <em>Init</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

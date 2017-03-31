@@ -19,11 +19,13 @@ public class BaseAdapterVisitor extends AbstractVisitor {
 	protected ATLModel atlModel;
 	protected BindingModel bindingModel;
 	protected IComponentInfoForBinding info;
+	protected AdaptationContext ctx;
 
-	public BaseAdapterVisitor(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info) {
+	public BaseAdapterVisitor(ATLModel atlModel, BindingModel bindingModel, IComponentInfoForBinding info, AdaptationContext ctx) {
 		this.atlModel = atlModel;
 		this.bindingModel = bindingModel;
 		this.info = info;
+		this.ctx = ctx;
 	}
 
 	private static int uniqueId = 0;
