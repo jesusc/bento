@@ -1,11 +1,14 @@
 package bento.validators;
 
+import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.BindingModel;
 import gbind.dsl.ClassBinding;
 import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.HelperParameter;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.MetamodelDeclaration;
+import gbind.dsl.OclFeatureBinding;
+import gbind.dsl.RenamingFeatureBinding;
 import gbind.dsl.VirtualClassBinding;
 import gbind.simpleocl.AddOpCallExp;
 import gbind.simpleocl.BooleanExp;
@@ -53,6 +56,7 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.ATLFactory;
@@ -87,6 +91,7 @@ public class BindingValidator extends GBindVisitor {
 	private BindingModel model;
 	private HashMap<String, EClass> classes;
 	private List<EClass> toCover;
+	private List<EStructuralFeature> toCoverFeatures;
 
 	private List<BindingValidationProblem> problems;
 	
@@ -99,6 +104,7 @@ public class BindingValidator extends GBindVisitor {
 
 		classes = util.getConceptClasses();
 		toCover = classes.values().stream().filter(c -> ! c.isAbstract()).collect(Collectors.toList());
+		toCoverFeatures = classes.values().stream().flatMap(c -> c.getEStructuralFeatures().stream()).collect(Collectors.toList());
 	}
 	
 	public List<BindingValidationProblem> perform() {
@@ -106,9 +112,13 @@ public class BindingValidator extends GBindVisitor {
 
 		problems = new ArrayList<BindingValidationProblem>();
 		for (EClass eClass : toCover) {
-			problems.add(new MissingBinding("Missing binding for " + eClass.getName(), eClass));
+			problems.add(new MissingBinding("No binding for " + eClass.getName(), eClass));
 		}		
-		
+
+		for (EStructuralFeature f : toCoverFeatures) {
+			problems.add(new MissingFeatureBinding("No binding for " + f.getEContainingClass().getName() + "." + f.getName(), f));
+		}		
+
 		return problems;
 	}
 	
@@ -116,6 +126,29 @@ public class BindingValidator extends GBindVisitor {
 		return problems;
 	}
 	
+	
+	@Override
+	public void inRenamingFeatureBinding(RenamingFeatureBinding self) {
+		checkFeature(self);
+	}
+
+	@Override
+	public void inOclFeatureBinding(OclFeatureBinding self) {
+		checkFeature(self);	
+	}
+
+	private void checkFeature(BaseFeatureBinding self) {
+		EClass c = classes.get(self.getConceptClass().getName());
+		EStructuralFeature f = c.getEStructuralFeature(self.getConceptFeature());
+		if ( f == null ) {
+			// Notify error or this is already done??
+			return;
+		}
+		
+		toCoverFeatures.remove(f);
+	}
+	
+
 	@Override
 	public void inClassBinding(ClassBinding self) {
 		System.out.println("Processing " + self.getConcept().getName());
@@ -155,6 +188,19 @@ public class BindingValidator extends GBindVisitor {
 
 		public EClass getKlass() {
 			return klass;
+		}
+	}
+
+	public static class MissingFeatureBinding extends BindingValidationProblem {
+		private EStructuralFeature f;
+
+		public MissingFeatureBinding(String message, EStructuralFeature f) {
+			super(message);
+			this.f = f;
+		}
+
+		public EStructuralFeature getFeature() {
+			return f;
 		}
 	}
 

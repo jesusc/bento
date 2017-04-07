@@ -21,6 +21,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.internal.WorkbenchPlugin;
 
+import bento.language.bentocomp.resource.bento.ResolveBentoQuickfix;
 import bento.utils.BindingUtils;
 import bento.validators.BindingValidationProblem;
 import bento.validators.BindingValidator;
@@ -49,6 +50,8 @@ public class ValidateBinding implements IObjectActionDelegate {
 				BindingUtils.loadMetamodels(root);				
 				
 				List<BindingValidationProblem> problems = new BindingValidator(root).perform();
+				// Get the corresponding quickfix new ResolveBentoQuickfix("Resolve component", null, m, m.getUri())
+				
 				for (BindingValidationProblem problem : problems) {
 					GbindProblem p = new GbindProblem(problem.getMessage(), 
 							GbindEProblemType.ANALYSIS_PROBLEM, 

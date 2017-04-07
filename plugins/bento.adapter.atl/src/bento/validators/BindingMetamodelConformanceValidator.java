@@ -4,6 +4,7 @@ import gbind.dsl.BindingModel;
 import gbind.dsl.ConceptMetaclass;
 import gbind.dsl.ConcreteMetaclass;
 import gbind.dsl.MetamodelDeclaration;
+import gbind.dsl.RenamingFeatureBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +80,17 @@ public class BindingMetamodelConformanceValidator extends GBindVisitor {
 		}
 	}
 
+	@Override
+	public void inRenamingFeatureBinding(RenamingFeatureBinding self) {
+		EClass c = this.conceptClasses.get(self.getConceptClass().getName());
+		if ( c != null ) {
+			if ( c.getEStructuralFeature(self.getConceptFeature()) == null ) {
+				problems.add(new ValidationProblem("Feature " + self.getConceptFeature()
+				+ " not found in concept class " + c.getName(), self));				
+			}
+		}
+	}
+	
 	public static class ValidationProblem extends BindingValidationProblem {
 		private EObject element;
 
