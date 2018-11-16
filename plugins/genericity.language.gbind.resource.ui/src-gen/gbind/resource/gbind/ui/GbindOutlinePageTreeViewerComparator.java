@@ -64,9 +64,9 @@ public class GbindOutlinePageTreeViewerComparator extends org.eclipse.jface.view
 		return packageID;
 	}
 	
-	public java.util.Comparator<?> getComparator() {
-		return this.comparator;
-	}
+//	public java.util.Comparator<?> getComparator() {
+//		return this.comparator;
+//	}
 	
 	public int compare(org.eclipse.jface.viewers.Viewer viewer, Object o1, Object o2) {
 		// first check categories
