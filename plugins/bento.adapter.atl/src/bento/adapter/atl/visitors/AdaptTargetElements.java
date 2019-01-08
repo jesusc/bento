@@ -6,10 +6,13 @@ import java.util.stream.Collectors;
 
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.Binding;
+import anatlyzer.atlext.ATL.CalledRule;
 import anatlyzer.atlext.ATL.ContextHelper;
 import anatlyzer.atlext.ATL.MatchedRule;
 import anatlyzer.atlext.ATL.OutPatternElement;
+import anatlyzer.atlext.ATL.Rule;
 import anatlyzer.atlext.OCL.OclModelElement;
+import anatlyzer.atlext.OCL.Parameter;
 import bento.adapter.atl.IComponentInfoForBinding;
 import bento.binding.utils.BindingModel;
 import gbind.dsl.BaseFeatureBinding;
@@ -31,6 +34,34 @@ public class AdaptTargetElements extends BaseAdapterVisitor {
 	
 	@Override
 	public void inMatchedRule(MatchedRule self) {
+		processRule(self);
+	}
+	
+	@Override
+	public void inCalledRule(CalledRule self) {
+		processRule(self);
+		for (Parameter parameter : self.getParameters()) {
+			if ( parameter.getType() instanceof OclModelElement ) {
+				OclModelElement me = (OclModelElement) parameter.getType();
+				if ( belongsToCurrentMetamodel(me) ) {
+					Optional<ClassBinding> opt = bindingModel.findClassBindingForConcept(me.getName());
+					ClassBinding cb = opt.get();
+					if ( bindingModel.isNoneBinding(cb) ) {
+						// adaptMatchedRuleNone(self, cb);
+						throw new UnsupportedOperationException();
+					} else if ( bindingModel.isMultiBinding(cb) ) {
+						throw new UnsupportedOperationException();
+					} else {
+						me.setName(cb.getConcrete().get(0).getName());
+					}
+				}
+			}
+			
+		}
+		// TODO: Adapt parameters
+	}
+	
+	private void processRule(Rule self) {
 		for (OutPatternElement outElem : self.getOutPattern().getElements()) {
 			OclModelElement me = (OclModelElement) outElem.getType();
 			if ( belongsToCurrentMetamodel(me) ) {
@@ -49,9 +80,9 @@ public class AdaptTargetElements extends BaseAdapterVisitor {
 					}
 				}
 			}
-		}
+		}		
 	}
-	
+	 
 	@Override
 	public void inContextHelper(ContextHelper self) {	
 		// This cannot happen in the target		

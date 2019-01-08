@@ -59,12 +59,16 @@ public class AdaptWhenClause extends BaseAdapterVisitor {
 		if ( r.getInPattern().getFilter() == null ) {
 			r.getInPattern().setFilter(call);
 		} else {
-			OperatorCallExp operator = OCLFactory.eINSTANCE.createOperatorCallExp();
-			operator.setOperationName("and");
-			operator.setSource(r.getInPattern().getFilter());
-			operator.getArguments().add(call);
-
-			r.getInPattern().setFilter(operator);
+			IfExp ifExp = OCLFactory.eINSTANCE.createIfExp();
+			ifExp.setCondition(call);
+			
+			ifExp.setThenExpression(r.getInPattern().getFilter());
+			
+			BooleanExp falseValue = OCLFactory.eINSTANCE.createBooleanExp();
+			falseValue.setBooleanSymbol(false);
+			ifExp.setElseExpression(falseValue);
+			
+			r.getInPattern().setFilter(ifExp);
 		}				
 	}
 
