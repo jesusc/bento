@@ -1,7 +1,5 @@
 package bento.adapter.atl.visitors;
 
-import gbind.dsl.ClassBinding;
-
 import java.util.stream.Stream;
 
 import anatlyzer.atl.model.ATLModel;
@@ -18,11 +16,11 @@ import anatlyzer.atlext.OCL.OCLFactory;
 import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.OperationCallExp;
-import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
-import bento.adapter.atl.IComponentInfoForBinding;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
+import gbind.dsl.ClassBinding;
 
 public class AdaptWhenClause extends BaseAdapterVisitor {
 	

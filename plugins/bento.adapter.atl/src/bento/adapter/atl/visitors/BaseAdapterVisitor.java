@@ -11,8 +11,8 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.processing.AbstractVisitor;
-import bento.adapter.atl.IComponentInfoForBinding;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
 
 public class BaseAdapterVisitor extends AbstractVisitor {
 

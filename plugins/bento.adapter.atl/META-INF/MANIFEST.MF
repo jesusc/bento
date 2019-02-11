@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.9.1",
  anatlyzer.atl.typing;bundle-version="0.1.0",
  anatlyzer.atl.editor;bundle-version="0.1.0",
- genericity.language.gbind
+ genericity.language.gbind,
+ bento.common;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: bento.adapter.atl,

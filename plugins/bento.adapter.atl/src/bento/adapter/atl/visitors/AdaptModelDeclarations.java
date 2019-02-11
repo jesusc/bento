@@ -5,9 +5,9 @@ import org.eclipse.emf.common.util.EList;
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.OCL.OCLFactory;
 import anatlyzer.atlext.OCL.OclModel;
-import bento.adapter.atl.IComponentInfoForBinding;
-import bento.adapter.atl.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
+import bento.common.adapter.IComponentInfoForBinding.IBoundMetamodelInfo;
 
 public class AdaptModelDeclarations extends BaseAdapterVisitor {
 	

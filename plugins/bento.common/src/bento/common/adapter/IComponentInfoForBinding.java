@@ -1,4 +1,4 @@
-package bento.adapter.atl;
+package bento.common.adapter;
 
 import java.util.List;
 

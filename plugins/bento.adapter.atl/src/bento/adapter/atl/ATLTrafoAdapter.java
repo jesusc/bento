@@ -10,7 +10,6 @@ import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atl.util.AnalyserUtils.CannotLoadMetamodel;
 import anatlyzer.atl.util.AnalyserUtils.PreconditionParseError;
-import bento.adapter.atl.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.adapter.atl.visitors.AdaptCode;
 import bento.adapter.atl.visitors.AdaptModelDeclarations;
 import bento.adapter.atl.visitors.AdaptModelElements;
@@ -22,6 +21,8 @@ import bento.adapter.atl.visitors.AdaptationContext;
 import bento.adapter.atl.visitors.CopyHelpers;
 import bento.adapter.atl.visitors.CreateAdapters;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
+import bento.common.adapter.IComponentInfoForBinding.IBoundMetamodelInfo;
 
 
 /**

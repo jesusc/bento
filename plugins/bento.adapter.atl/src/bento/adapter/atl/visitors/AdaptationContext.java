@@ -3,8 +3,8 @@ package bento.adapter.atl.visitors;
 import java.util.HashMap;
 
 import anatlyzer.atlext.OCL.OclModel;
-import bento.adapter.atl.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding.IBoundMetamodelInfo;
 
 /**
  * This class gathers the temporary information computed as part of the 

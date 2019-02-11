@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.core.runtime,
  anatlyzer.atl.typing,
  bento.adapter.atl,
  bento.language.bentocomp,
- bento.repository.common;bundle-version="0.6.0"
+ bento.repository.common;bundle-version="0.6.0",
+ bento.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: bento.component.atl,

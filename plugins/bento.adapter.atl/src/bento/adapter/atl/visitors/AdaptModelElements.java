@@ -1,15 +1,11 @@
 package bento.adapter.atl.visitors;
 
 import anatlyzer.atl.model.ATLModel;
-import anatlyzer.atl.util.ATLUtils;
 import anatlyzer.atlext.ATL.Unit;
-import anatlyzer.atlext.OCL.OCLFactory;
 import anatlyzer.atlext.OCL.OclModel;
 import anatlyzer.atlext.OCL.OclModelElement;
-import bento.adapter.atl.IComponentInfoForBinding;
-import bento.adapter.atl.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.binding.utils.BindingModel;
-import gbind.dsl.MetamodelDeclaration;
+import bento.common.adapter.IComponentInfoForBinding;
 
 public class AdaptModelElements extends BaseAdapterVisitor {
 	

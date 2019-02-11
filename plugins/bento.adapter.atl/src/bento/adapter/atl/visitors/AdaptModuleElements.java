@@ -1,8 +1,5 @@
 package bento.adapter.atl.visitors;
 
-import gbind.dsl.ClassBinding;
-import gbind.dsl.ConcreteMetaclass;
-
 import java.util.Optional;
 
 import anatlyzer.atl.model.ATLModel;
@@ -14,8 +11,10 @@ import anatlyzer.atlext.ATL.MatchedRule;
 import anatlyzer.atlext.ATL.Module;
 import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.OclType;
-import bento.adapter.atl.IComponentInfoForBinding;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
+import gbind.dsl.ClassBinding;
+import gbind.dsl.ConcreteMetaclass;
 
 public class AdaptModuleElements extends BaseAdapterVisitor {
 	

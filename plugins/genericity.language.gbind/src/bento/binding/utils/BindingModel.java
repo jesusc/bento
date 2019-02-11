@@ -114,6 +114,13 @@ public class BindingModel {
 		return featureBindings.stream().filter(fb -> fb.getConceptClass().getName().equals(cb.getConcept().getName())).collect(Collectors.toList());
 	}
 
+	public Optional<BaseFeatureBinding> findFeatureFinding(String conceptClass, String featureName) {
+		Optional<ClassBinding> opt = findClassBindingForConcept(conceptClass);
+		if ( opt.isPresent() ) {
+			return findFeatureBindingsFor(opt.get()).stream().filter(f -> f.getConceptFeature().equals(featureName)).findFirst();
+		}
+		return Optional.empty();
+	}
 	
 	public Stream<OclFeatureBinding> findAllOclFeatureBindings() {
 		return featureBindings.stream().

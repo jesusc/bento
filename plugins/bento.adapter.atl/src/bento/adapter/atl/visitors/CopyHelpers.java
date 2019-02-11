@@ -2,19 +2,18 @@ package bento.adapter.atl.visitors;
 
 import java.util.Optional;
 
-import gbind.dsl.LocalHelper;
-import gbind.dsl.Metaclass;
-import gbind.dsl.VirtualClassBinding;
-import gbind.simpleocl.OclExpression;
-
 import org.eclipse.emf.ecore.EObject;
 
 import anatlyzer.atl.model.ATLModel;
 import anatlyzer.atlext.ATL.ContextHelper;
 import anatlyzer.atlext.OCL.OclModel;
-import bento.adapter.atl.IComponentInfoForBinding;
 import bento.adapter.gbind.visitors.GBindVisitor;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
+import gbind.dsl.LocalHelper;
+import gbind.dsl.Metaclass;
+import gbind.dsl.VirtualClassBinding;
+import gbind.simpleocl.OclExpression;
 
 public class CopyHelpers extends GBindVisitor {
 	

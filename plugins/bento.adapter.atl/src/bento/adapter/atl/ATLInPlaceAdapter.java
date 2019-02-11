@@ -9,6 +9,7 @@ import bento.adapter.atl.visitors.AdaptModuleElements;
 import bento.adapter.atl.visitors.AdaptationContext;
 import bento.adapter.atl.visitors.CreateAdapters;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
 import anatlyzer.atl.model.ATLModel;
 
 

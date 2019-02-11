@@ -1,5 +1,31 @@
 package bento.adapter.atl.visitors;
 
+import java.util.HashMap;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+import org.eclipse.emf.ecore.EObject;
+
+import anatlyzer.atl.model.ATLModel;
+import anatlyzer.atlext.ATL.ATLFactory;
+import anatlyzer.atlext.ATL.ContextHelper;
+import anatlyzer.atlext.ATL.Helper;
+import anatlyzer.atlext.OCL.CollectionOperationCallExp;
+import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
+import anatlyzer.atlext.OCL.OCLFactory;
+import anatlyzer.atlext.OCL.OclContextDefinition;
+import anatlyzer.atlext.OCL.OclFeatureDefinition;
+import anatlyzer.atlext.OCL.OclModel;
+import anatlyzer.atlext.OCL.OclModelElement;
+import anatlyzer.atlext.OCL.OclType;
+import anatlyzer.atlext.OCL.Operation;
+import anatlyzer.atlext.OCL.OperationCallExp;
+import anatlyzer.atlext.OCL.Parameter;
+import anatlyzer.atlext.OCL.TuplePart;
+import anatlyzer.atlext.OCL.VariableDeclaration;
+import bento.adapter.atl.util.TPat;
+import bento.adapter.gbind.visitors.GBindVisitor;
+import bento.common.adapter.IComponentInfoForBinding;
 import gbind.dsl.HelperParameter;
 import gbind.dsl.LocalHelper;
 import gbind.dsl.MetamodelDeclaration;
@@ -40,33 +66,6 @@ import gbind.simpleocl.StringExp;
 import gbind.simpleocl.StringType;
 import gbind.simpleocl.TupleExp;
 import gbind.simpleocl.VariableExp;
-
-import java.util.HashMap;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
-import org.eclipse.emf.ecore.EObject;
-
-import anatlyzer.atl.model.ATLModel;
-import anatlyzer.atlext.ATL.ATLFactory;
-import anatlyzer.atlext.ATL.ContextHelper;
-import anatlyzer.atlext.ATL.Helper;
-import anatlyzer.atlext.OCL.CollectionOperationCallExp;
-import anatlyzer.atlext.OCL.NavigationOrAttributeCallExp;
-import anatlyzer.atlext.OCL.OCLFactory;
-import anatlyzer.atlext.OCL.OclContextDefinition;
-import anatlyzer.atlext.OCL.OclFeatureDefinition;
-import anatlyzer.atlext.OCL.OclModel;
-import anatlyzer.atlext.OCL.OclModelElement;
-import anatlyzer.atlext.OCL.OclType;
-import anatlyzer.atlext.OCL.Operation;
-import anatlyzer.atlext.OCL.OperationCallExp;
-import anatlyzer.atlext.OCL.Parameter;
-import anatlyzer.atlext.OCL.TuplePart;
-import anatlyzer.atlext.OCL.VariableDeclaration;
-import bento.adapter.atl.IComponentInfoForBinding;
-import bento.adapter.atl.util.TPat;
-import bento.adapter.gbind.visitors.GBindVisitor;
 
 
 /**

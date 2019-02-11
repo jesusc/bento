@@ -17,9 +17,9 @@ import anatlyzer.atlext.OCL.OperatorCallExp;
 import anatlyzer.atlext.OCL.SequenceExp;
 import anatlyzer.atlext.OCL.VariableDeclaration;
 import anatlyzer.atlext.OCL.VariableExp;
-import bento.adapter.atl.IComponentInfoForBinding;
 import bento.adapter.atl.util.TPat;
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding;
 
 public class AdaptCode extends BaseAdapterVisitor {
 	
