@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.CompositionImpl#getStep <em>Step</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

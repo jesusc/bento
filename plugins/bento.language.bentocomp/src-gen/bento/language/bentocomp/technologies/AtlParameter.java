@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.technologies.AtlParameter#getAtlModelName <em>Atl Model Name</em>}</li>
  *   <li>{@link bento.language.bentocomp.technologies.AtlParameter#getAtlMetamodelName <em>Atl Metamodel Name</em>}</li>
  *   <li>{@link bento.language.bentocomp.technologies.AtlParameter#getModel <em>Model</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.technologies.TechnologiesPackage#getAtlParameter()
  * @model

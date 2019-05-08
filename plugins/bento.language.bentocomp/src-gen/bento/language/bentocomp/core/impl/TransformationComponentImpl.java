@@ -30,16 +30,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.impl.TransformationComponentImpl#isIsM2M <em>Is M2M</em>}</li>
- *   <li>{@link bento.language.bentocomp.core.impl.TransformationComponentImpl#getTemplate <em>Template</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.TransformationComponentImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class TransformationComponentImpl extends ComponentImpl implements TransformationComponent {
+public class TransformationComponentImpl extends TemplateBasedComponentImpl implements TransformationComponent {
 	/**
 	 * The default value of the '{@link #isIsM2M() <em>Is M2M</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -59,16 +58,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 	 * @ordered
 	 */
 	protected boolean isM2M = IS_M2M_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTemplate()
-	 * @generated
-	 * @ordered
-	 */
-	protected Template template;
 
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
@@ -125,49 +114,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Template getTemplate() {
-		return template;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTemplate(Template newTemplate, NotificationChain msgs) {
-		Template oldTemplate = template;
-		template = newTemplate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE, oldTemplate, newTemplate);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTemplate(Template newTemplate) {
-		if (newTemplate != template) {
-			NotificationChain msgs = null;
-			if (template != null)
-				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE, null, msgs);
-			if (newTemplate != null)
-				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE, null, msgs);
-			msgs = basicSetTemplate(newTemplate, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE, newTemplate, newTemplate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Constraint> getConstraints() {
 		if (constraints == null) {
 			constraints = new EObjectContainmentEList<Constraint>(Constraint.class, this, CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS);
@@ -183,8 +129,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE:
-				return basicSetTemplate(null, msgs);
 			case CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
@@ -201,8 +145,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 		switch (featureID) {
 			case CorePackage.TRANSFORMATION_COMPONENT__IS_M2M:
 				return isIsM2M();
-			case CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE:
-				return getTemplate();
 			case CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS:
 				return getConstraints();
 		}
@@ -220,9 +162,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 		switch (featureID) {
 			case CorePackage.TRANSFORMATION_COMPONENT__IS_M2M:
 				setIsM2M((Boolean)newValue);
-				return;
-			case CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE:
-				setTemplate((Template)newValue);
 				return;
 			case CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS:
 				getConstraints().clear();
@@ -243,9 +182,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 			case CorePackage.TRANSFORMATION_COMPONENT__IS_M2M:
 				setIsM2M(IS_M2M_EDEFAULT);
 				return;
-			case CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE:
-				setTemplate((Template)null);
-				return;
 			case CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS:
 				getConstraints().clear();
 				return;
@@ -263,8 +199,6 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 		switch (featureID) {
 			case CorePackage.TRANSFORMATION_COMPONENT__IS_M2M:
 				return isM2M != IS_M2M_EDEFAULT;
-			case CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE:
-				return template != null;
 			case CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
 		}
@@ -280,7 +214,7 @@ public class TransformationComponentImpl extends ComponentImpl implements Transf
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (isM2M: ");
 		result.append(isM2M);
 		result.append(')');

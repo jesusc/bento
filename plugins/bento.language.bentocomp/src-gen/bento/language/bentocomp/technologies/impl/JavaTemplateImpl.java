@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.technologies.impl.JavaTemplateImpl#getQualifiedClassname <em>Qualified Classname</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -154,7 +154,7 @@ public class JavaTemplateImpl extends TemplateImpl implements JavaTemplate {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (qualifiedClassname: ");
 		result.append(qualifiedClassname);
 		result.append(')');

@@ -92,8 +92,16 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createTaggedAdapter();
 			}
 			@Override
+			public Adapter caseTemplateBasedComponent(TemplateBasedComponent object) {
+				return createTemplateBasedComponentAdapter();
+			}
+			@Override
 			public Adapter caseTransformationComponent(TransformationComponent object) {
 				return createTransformationComponentAdapter();
+			}
+			@Override
+			public Adapter caseGraphicalEditorComponent(GraphicalEditorComponent object) {
+				return createGraphicalEditorComponentAdapter();
 			}
 			@Override
 			public Adapter caseCompositeComponent(CompositeComponent object) {
@@ -236,6 +244,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.TemplateBasedComponent <em>Template Based Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.core.TemplateBasedComponent
+	 * @generated
+	 */
+	public Adapter createTemplateBasedComponentAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.TransformationComponent <em>Transformation Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -246,6 +268,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransformationComponentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.core.GraphicalEditorComponent <em>Graphical Editor Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.core.GraphicalEditorComponent
+	 * @generated
+	 */
+	public Adapter createGraphicalEditorComponentAdapter() {
 		return null;
 	}
 

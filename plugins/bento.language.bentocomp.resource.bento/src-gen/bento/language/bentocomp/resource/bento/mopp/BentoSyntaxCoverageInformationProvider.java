@@ -12,6 +12,7 @@ public class BentoSyntaxCoverageInformationProvider {
 		return new org.eclipse.emf.ecore.EClass[] {
 			bento.language.bentocomp.dsl.DslPackage.eINSTANCE.getDefinitionRoot(),
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getTransformationComponent(),
+			bento.language.bentocomp.core.CorePackage.eINSTANCE.getGraphicalEditorComponent(),
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getConcept(),
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getParameterModel(),
 			bento.language.bentocomp.core.CorePackage.eINSTANCE.getTag(),
@@ -30,6 +31,7 @@ public class BentoSyntaxCoverageInformationProvider {
 			bento.language.bentocomp.technologies.TechnologiesPackage.eINSTANCE.getAtlTemplate(),
 			bento.language.bentocomp.technologies.TechnologiesPackage.eINSTANCE.getAtlParameter(),
 			bento.language.bentocomp.technologies.TechnologiesPackage.eINSTANCE.getJavaTemplate(),
+			bento.language.bentocomp.technologies.TechnologiesPackage.eINSTANCE.getSiriusTemplate(),
 		};
 	}
 	

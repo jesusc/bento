@@ -21,12 +21,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.BooleanExpressionImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.BooleanExpressionImpl#getRight <em>Right</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.BooleanExpressionImpl#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -300,7 +300,7 @@ public class BooleanExpressionImpl extends ExpressionImpl implements BooleanExpr
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (operator: ");
 		result.append(operator);
 		result.append(')');

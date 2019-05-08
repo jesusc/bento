@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.impl.ParameterModelImpl#getType <em>Type</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.ParameterModelImpl#getResourceName <em>Resource Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -214,7 +214,7 @@ public class ParameterModelImpl extends ModelImpl implements ParameterModel {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (resourceName: ");
 		result.append(resourceName);
 		result.append(')');

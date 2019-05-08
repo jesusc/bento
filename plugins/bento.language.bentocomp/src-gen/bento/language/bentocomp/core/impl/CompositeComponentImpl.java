@@ -31,12 +31,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.impl.CompositeComponentImpl#getUses <em>Uses</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.CompositeComponentImpl#getComposition <em>Composition</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.CompositeComponentImpl#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

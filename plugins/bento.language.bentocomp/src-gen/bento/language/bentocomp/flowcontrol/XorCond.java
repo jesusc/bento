@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.XorCond#getValue <em>Value</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.XorCond#getStep <em>Step</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.flowcontrol.FlowcontrolPackage#getXorCond()
  * @model

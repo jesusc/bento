@@ -46,14 +46,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1"
           eType="#//core/Tag" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TransformationComponent" eSuperTypes="#//core/Component">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isM2M" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-          defaultValueLiteral="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TemplateBasedComponent" abstract="true"
+        eSuperTypes="#//core/Component">
       <eStructuralFeatures xsi:type="ecore:EReference" name="template" lowerBound="1"
           eType="#//core/Template" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TransformationComponent" eSuperTypes="#//core/TemplateBasedComponent">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isM2M" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
           eType="#//core/Constraint" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GraphicalEditorComponent" eSuperTypes="#//core/TemplateBasedComponent"/>
     <eClassifiers xsi:type="ecore:EClass" name="CompositeComponent" eSuperTypes="#//core/Component">
       <eStructuralFeatures xsi:type="ecore:EReference" name="uses" lowerBound="1"
           upperBound="-1" eType="#//core/Component"/>
@@ -183,6 +187,10 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="JavaTemplate" eSuperTypes="#//core/Template">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedClassname" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SiriusTemplate" eSuperTypes="#//core/Template">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="oDesignFile" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>

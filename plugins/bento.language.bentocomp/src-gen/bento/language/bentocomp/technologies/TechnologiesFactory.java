@@ -49,6 +49,15 @@ public interface TechnologiesFactory extends EFactory {
 	JavaTemplate createJavaTemplate();
 
 	/**
+	 * Returns a new object of class '<em>Sirius Template</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sirius Template</em>'.
+	 * @generated
+	 */
+	SiriusTemplate createSiriusTemplate();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

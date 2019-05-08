@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.dsl.DefinitionRoot#getComponent <em>Component</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.dsl.DslPackage#getDefinitionRoot()
  * @model

@@ -122,6 +122,21 @@ public class BindingModel {
 		return Optional.empty();
 	}
 	
+	public Optional<BaseFeatureBinding> findFeatureFinding(String conceptClass, String featureName, String qualifierClassName) {
+		Optional<ClassBinding> opt = findClassBindingForConcept(conceptClass);
+		if ( opt.isPresent() ) {
+			Optional<BaseFeatureBinding> r = findFeatureBindingsFor(opt.get()).stream().filter(f -> f.getConceptFeature().equals(featureName)).
+					filter(f -> f.getQualifier() != null && f.getQualifier().getName().equals(qualifierClassName)).
+					findFirst();
+			
+			if (! r.isPresent()) {
+				r = findFeatureFinding(conceptClass, featureName);
+			}
+			return r;
+		}
+		return Optional.empty();
+	}
+	
 	public Stream<OclFeatureBinding> findAllOclFeatureBindings() {
 		return featureBindings.stream().
 				filter(fb -> (fb instanceof OclFeatureBinding)).

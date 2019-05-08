@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyParameterImpl#getModel <em>Model</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyParameterImpl#getBoundConceptQualifier <em>Bound Concept Qualifier</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyParameterImpl#getBoundConcept <em>Bound Concept</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyParameterImpl#getBinding <em>Binding</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

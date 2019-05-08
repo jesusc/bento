@@ -19,6 +19,7 @@ import bento.language.bentocomp.core.Component;
 import bento.language.bentocomp.core.CompositeComponent;
 import bento.language.bentocomp.core.Model;
 import bento.language.bentocomp.core.ParameterModel;
+import bento.language.bentocomp.core.TemplateBasedComponent;
 import bento.language.bentocomp.core.TransformationComponent;
 import bento.language.bentocomp.core.util.CoreSwitch;
 import bento.language.bentocomp.flowcontrol.Apply;
@@ -143,9 +144,14 @@ public class ComponentInterpreter {
 			};
 			
 			public List<AdaptationResult> caseTransformationComponent(bento.language.bentocomp.core.TransformationComponent comp) {
-				return Collections.singletonList( applyTransformationComponent(comp, adaptations, topComposite) );
+				return Collections.singletonList( applyTemplateBasedComponent(comp, adaptations, topComposite) );
 			}
 
+			
+			public java.util.List<AdaptationResult> caseGraphicalEditorComponent(bento.language.bentocomp.core.GraphicalEditorComponent comp) {
+				return Collections.singletonList( applyTemplateBasedComponent(comp, adaptations, topComposite) );				
+			};
+			
 			public List<AdaptationResult> defaultCase(org.eclipse.emf.ecore.EObject object) {
 				throw new UnsupportedOperationException("Not supported: " + object);
 			}
@@ -208,12 +214,22 @@ public class ComponentInterpreter {
 	 * @param topComposite 
 	 * @return 
 	 */
-	private AdaptationResult applyTransformationComponent(TransformationComponent comp, List<Adaptation> adaptations, CompositeComponent topComposite) {
-		if ( ! ( comp.getTemplate() instanceof AtlTemplate) ) {
+	private AdaptationResult applyTemplateBasedComponent(Component comp, List<Adaptation> adaptations, CompositeComponent topComposite) {
+		if ( ! (comp instanceof TemplateBasedComponent) ) {
+			throw new UnsupportedOperationException();
+		}
+		TemplateBasedComponent component = (TemplateBasedComponent) comp;
+		
+		TechnologyConfiguration.TechnologyHandler handler = TechnologyConfiguration.INSTANCE.getHandler(component.getTemplate().eClass());
+		if ( handler != null ) {
+			return handler.adapt(comp, adaptations, topComposite, filePathResolver);
+		}
+		
+		if ( ! ( component.getTemplate() instanceof AtlTemplate) ) {
 			throw new UnsupportedOperationException();
 		}
 
-		AtlMemoryTemplate template = new AtlMemoryTemplate(comp, filePathResolver);
+		AtlMemoryTemplate template = new AtlMemoryTemplate((TransformationComponent) component, filePathResolver);
 		template.setAdapterFor(topComposite);
 		adaptations.forEach(a -> {
 			ParameterModel conceptModel = a.isSource ? comp.getSourceModels().get(a.parameterIndex) : comp.getTargetModels().get(a.parameterIndex);
@@ -227,12 +243,32 @@ public class ComponentInterpreter {
 		return template;
 	};		
 	
-	private class Adaptation {
-		public boolean isSource;
-		int parameterIndex;
-		Model conceptModel;
-		BindingDeclaration appliedBinding;
-		Model concreteModel;	
+	public static class Adaptation {
+		private boolean isSource;
+		private int parameterIndex;
+		private Model conceptModel;
+		private BindingDeclaration appliedBinding;
+		private Model concreteModel;	
+	
+		public boolean isSource() {
+			return isSource;
+		}
+		
+		public int getParameterIndex() {
+			return parameterIndex;
+		}
+		
+		public Model getConceptModel() {
+			return conceptModel;
+		}
+		
+		public BindingDeclaration getAppliedBinding() {
+			return appliedBinding;
+		}
+		
+		public Model getConcreteModel() {
+			return concreteModel;
+		}
 	}
 
 	

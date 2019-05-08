@@ -60,6 +60,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.PARAMETER_MODEL: return createParameterModel();
 			case CorePackage.GENERATED_MODEL: return createGeneratedModel();
 			case CorePackage.TRANSFORMATION_COMPONENT: return createTransformationComponent();
+			case CorePackage.GRAPHICAL_EDITOR_COMPONENT: return createGraphicalEditorComponent();
 			case CorePackage.COMPOSITE_COMPONENT: return createCompositeComponent();
 			case CorePackage.BINDING_DECLARATION: return createBindingDeclaration();
 			case CorePackage.OCL_CONSTRAINT: return createOclConstraint();
@@ -130,6 +131,16 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	public TransformationComponent createTransformationComponent() {
 		TransformationComponentImpl transformationComponent = new TransformationComponentImpl();
 		return transformationComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GraphicalEditorComponent createGraphicalEditorComponent() {
+		GraphicalEditorComponentImpl graphicalEditorComponent = new GraphicalEditorComponentImpl();
+		return graphicalEditorComponent;
 	}
 
 	/**

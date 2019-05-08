@@ -29,11 +29,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.technologies.impl.AtlTemplateImpl#getTemplate <em>Template</em>}</li>
  *   <li>{@link bento.language.bentocomp.technologies.impl.AtlTemplateImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -213,7 +213,7 @@ public class AtlTemplateImpl extends TemplateImpl implements AtlTemplate {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (template: ");
 		result.append(template);
 		result.append(')');

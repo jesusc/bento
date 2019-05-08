@@ -13,6 +13,7 @@ import bento.language.bentocomp.core.CoreFactory;
 import bento.language.bentocomp.core.CorePackage;
 import bento.language.bentocomp.core.Documentation;
 import bento.language.bentocomp.core.GeneratedModel;
+import bento.language.bentocomp.core.GraphicalEditorComponent;
 import bento.language.bentocomp.core.Metamodel;
 import bento.language.bentocomp.core.Model;
 import bento.language.bentocomp.core.NamedElement;
@@ -22,6 +23,7 @@ import bento.language.bentocomp.core.Status;
 import bento.language.bentocomp.core.Tag;
 import bento.language.bentocomp.core.Tagged;
 import bento.language.bentocomp.core.Template;
+import bento.language.bentocomp.core.TemplateBasedComponent;
 import bento.language.bentocomp.core.TransformationComponent;
 
 import bento.language.bentocomp.dsl.DslPackage;
@@ -104,7 +106,21 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass templateBasedComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass transformationComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass graphicalEditorComponentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -204,7 +220,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link CorePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -218,16 +234,22 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		if (isInited) return (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
 
 		// Obtain or create and register package
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CorePackageImpl());
+		Object registeredCorePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		CorePackageImpl theCorePackage = registeredCorePackage instanceof CorePackageImpl ? (CorePackageImpl)registeredCorePackage : new CorePackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) instanceof BentocompPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) : BentocompPackage.eINSTANCE);
-		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) : VariantsPackage.eINSTANCE);
-		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) : FlowcontrolPackage.eINSTANCE);
-		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
-		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI);
+		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(registeredPackage instanceof BentocompPackageImpl ? registeredPackage : BentocompPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI);
+		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(registeredPackage instanceof VariantsPackageImpl ? registeredPackage : VariantsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI);
+		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(registeredPackage instanceof FlowcontrolPackageImpl ? registeredPackage : FlowcontrolPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI);
+		DslPackageImpl theDslPackage = (DslPackageImpl)(registeredPackage instanceof DslPackageImpl ? registeredPackage : DslPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(registeredPackage instanceof TechnologiesPackageImpl ? registeredPackage : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theCorePackage.createPackageContents();
@@ -248,7 +270,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		// Mark meta-data to indicate it can't be changed
 		theCorePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(CorePackage.eNS_URI, theCorePackage);
 		return theCorePackage;
@@ -439,6 +460,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTemplateBasedComponent() {
+		return templateBasedComponentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTemplateBasedComponent_Template() {
+		return (EReference)templateBasedComponentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransformationComponent() {
 		return transformationComponentEClass;
 	}
@@ -457,7 +496,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTransformationComponent_Template() {
+	public EReference getTransformationComponent_Constraints() {
 		return (EReference)transformationComponentEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -466,8 +505,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTransformationComponent_Constraints() {
-		return (EReference)transformationComponentEClass.getEStructuralFeatures().get(2);
+	public EClass getGraphicalEditorComponent() {
+		return graphicalEditorComponentEClass;
 	}
 
 	/**
@@ -695,10 +734,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		taggedEClass = createEClass(TAGGED);
 		createEReference(taggedEClass, TAGGED__TAGS);
 
+		templateBasedComponentEClass = createEClass(TEMPLATE_BASED_COMPONENT);
+		createEReference(templateBasedComponentEClass, TEMPLATE_BASED_COMPONENT__TEMPLATE);
+
 		transformationComponentEClass = createEClass(TRANSFORMATION_COMPONENT);
 		createEAttribute(transformationComponentEClass, TRANSFORMATION_COMPONENT__IS_M2M);
-		createEReference(transformationComponentEClass, TRANSFORMATION_COMPONENT__TEMPLATE);
 		createEReference(transformationComponentEClass, TRANSFORMATION_COMPONENT__CONSTRAINTS);
+
+		graphicalEditorComponentEClass = createEClass(GRAPHICAL_EDITOR_COMPONENT);
 
 		compositeComponentEClass = createEClass(COMPOSITE_COMPONENT);
 		createEReference(compositeComponentEClass, COMPOSITE_COMPONENT__USES);
@@ -768,7 +811,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		modelEClass.getESuperTypes().add(this.getNamedElement());
 		parameterModelEClass.getESuperTypes().add(this.getModel());
 		generatedModelEClass.getESuperTypes().add(this.getModel());
-		transformationComponentEClass.getESuperTypes().add(this.getComponent());
+		templateBasedComponentEClass.getESuperTypes().add(this.getComponent());
+		transformationComponentEClass.getESuperTypes().add(this.getTemplateBasedComponent());
+		graphicalEditorComponentEClass.getESuperTypes().add(this.getTemplateBasedComponent());
 		compositeComponentEClass.getESuperTypes().add(this.getComponent());
 		oclConstraintEClass.getESuperTypes().add(this.getConstraint());
 		metamodelEClass.getESuperTypes().add(this.getNamedElement());
@@ -802,10 +847,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(taggedEClass, Tagged.class, "Tagged", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTagged_Tags(), this.getTag(), null, "tags", null, 0, -1, Tagged.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(templateBasedComponentEClass, TemplateBasedComponent.class, "TemplateBasedComponent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTemplateBasedComponent_Template(), this.getTemplate(), null, "template", null, 1, 1, TemplateBasedComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(transformationComponentEClass, TransformationComponent.class, "TransformationComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransformationComponent_IsM2M(), ecorePackage.getEBoolean(), "isM2M", "true", 0, 1, TransformationComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransformationComponent_Template(), this.getTemplate(), null, "template", null, 1, 1, TransformationComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationComponent_Constraints(), this.getConstraint(), null, "constraints", null, 0, -1, TransformationComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(graphicalEditorComponentEClass, GraphicalEditorComponent.class, "GraphicalEditorComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(compositeComponentEClass, CompositeComponent.class, "CompositeComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeComponent_Uses(), this.getComponent(), null, "uses", null, 1, -1, CompositeComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

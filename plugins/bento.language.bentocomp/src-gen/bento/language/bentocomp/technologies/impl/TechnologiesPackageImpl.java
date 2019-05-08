@@ -21,6 +21,7 @@ import bento.language.bentocomp.impl.BentocompPackageImpl;
 import bento.language.bentocomp.technologies.AtlParameter;
 import bento.language.bentocomp.technologies.AtlTemplate;
 import bento.language.bentocomp.technologies.JavaTemplate;
+import bento.language.bentocomp.technologies.SiriusTemplate;
 import bento.language.bentocomp.technologies.TechnologiesFactory;
 import bento.language.bentocomp.technologies.TechnologiesPackage;
 
@@ -64,6 +65,13 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 	private EClass javaTemplateEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass siriusTemplateEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -91,7 +99,7 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link TechnologiesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -105,16 +113,22 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 		if (isInited) return (TechnologiesPackage)EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TechnologiesPackageImpl());
+		Object registeredTechnologiesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TechnologiesPackageImpl theTechnologiesPackage = registeredTechnologiesPackage instanceof TechnologiesPackageImpl ? (TechnologiesPackageImpl)registeredTechnologiesPackage : new TechnologiesPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) instanceof BentocompPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) : BentocompPackage.eINSTANCE);
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
-		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) : VariantsPackage.eINSTANCE);
-		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) : FlowcontrolPackage.eINSTANCE);
-		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI);
+		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(registeredPackage instanceof BentocompPackageImpl ? registeredPackage : BentocompPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
+		CorePackageImpl theCorePackage = (CorePackageImpl)(registeredPackage instanceof CorePackageImpl ? registeredPackage : CorePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI);
+		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(registeredPackage instanceof VariantsPackageImpl ? registeredPackage : VariantsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI);
+		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(registeredPackage instanceof FlowcontrolPackageImpl ? registeredPackage : FlowcontrolPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI);
+		DslPackageImpl theDslPackage = (DslPackageImpl)(registeredPackage instanceof DslPackageImpl ? registeredPackage : DslPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTechnologiesPackage.createPackageContents();
@@ -135,7 +149,6 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 		// Mark meta-data to indicate it can't be changed
 		theTechnologiesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TechnologiesPackage.eNS_URI, theTechnologiesPackage);
 		return theTechnologiesPackage;
@@ -227,6 +240,24 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSiriusTemplate() {
+		return siriusTemplateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSiriusTemplate_ODesignFile() {
+		return (EAttribute)siriusTemplateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TechnologiesFactory getTechnologiesFactory() {
 		return (TechnologiesFactory)getEFactoryInstance();
 	}
@@ -261,6 +292,9 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 
 		javaTemplateEClass = createEClass(JAVA_TEMPLATE);
 		createEAttribute(javaTemplateEClass, JAVA_TEMPLATE__QUALIFIED_CLASSNAME);
+
+		siriusTemplateEClass = createEClass(SIRIUS_TEMPLATE);
+		createEAttribute(siriusTemplateEClass, SIRIUS_TEMPLATE__ODESIGN_FILE);
 	}
 
 	/**
@@ -296,6 +330,7 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 		// Add supertypes to classes
 		atlTemplateEClass.getESuperTypes().add(theCorePackage.getTemplate());
 		javaTemplateEClass.getESuperTypes().add(theCorePackage.getTemplate());
+		siriusTemplateEClass.getESuperTypes().add(theCorePackage.getTemplate());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(atlTemplateEClass, AtlTemplate.class, "AtlTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -309,6 +344,9 @@ public class TechnologiesPackageImpl extends EPackageImpl implements Technologie
 
 		initEClass(javaTemplateEClass, JavaTemplate.class, "JavaTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJavaTemplate_QualifiedClassname(), ecorePackage.getEString(), "qualifiedClassname", null, 1, 1, JavaTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(siriusTemplateEClass, SiriusTemplate.class, "SiriusTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSiriusTemplate_ODesignFile(), ecorePackage.getEString(), "oDesignFile", null, 1, 1, SiriusTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //TechnologiesPackageImpl

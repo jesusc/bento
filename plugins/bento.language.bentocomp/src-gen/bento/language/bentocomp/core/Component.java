@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.Component#getOwner <em>Owner</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.Component#getContributors <em>Contributors</em>}</li>
@@ -25,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link bento.language.bentocomp.core.Component#getGenerateModels <em>Generate Models</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.Component#getFormalParameters <em>Formal Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.core.CorePackage#getComponent()
  * @model abstract="true"

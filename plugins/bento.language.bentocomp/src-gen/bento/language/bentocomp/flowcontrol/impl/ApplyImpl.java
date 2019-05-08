@@ -29,12 +29,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyImpl#getInputModels <em>Input Models</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.impl.ApplyImpl#getOutputModels <em>Output Models</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

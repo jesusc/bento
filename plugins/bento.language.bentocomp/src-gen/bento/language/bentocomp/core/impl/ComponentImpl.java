@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.impl.ComponentImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.ComponentImpl#getOwner <em>Owner</em>}</li>
@@ -48,7 +49,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link bento.language.bentocomp.core.impl.ComponentImpl#getGenerateModels <em>Generate Models</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.ComponentImpl#getFormalParameters <em>Formal Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -605,7 +605,7 @@ public abstract class ComponentImpl extends NamedElementImpl implements Componen
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (owner: ");
 		result.append(owner);
 		result.append(", contributors: ");

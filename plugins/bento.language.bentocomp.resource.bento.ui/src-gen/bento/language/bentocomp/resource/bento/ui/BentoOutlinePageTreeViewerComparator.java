@@ -6,6 +6,8 @@
  */
 package bento.language.bentocomp.resource.bento.ui;
 
+import java.util.Comparator;
+
 public class BentoOutlinePageTreeViewerComparator extends org.eclipse.jface.viewers.ViewerComparator {
 	
 	private static java.util.Map<org.eclipse.emf.ecore.EPackage, Integer> ePackageMap = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EPackage, Integer>();
@@ -64,9 +66,9 @@ public class BentoOutlinePageTreeViewerComparator extends org.eclipse.jface.view
 		return packageID;
 	}
 	
-//	public java.util.Comparator<?> getComparator() {
-//		return this.comparator;
-//	}
+	public Comparator<? super String> getComparator() {
+		return this.comparator;
+	}
 	
 	public int compare(org.eclipse.jface.viewers.Viewer viewer, Object o1, Object o2) {
 		// first check categories

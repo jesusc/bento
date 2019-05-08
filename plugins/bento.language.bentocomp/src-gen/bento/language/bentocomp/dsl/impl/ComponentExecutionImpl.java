@@ -12,8 +12,6 @@ import bento.language.bentocomp.dsl.DslPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Component Execution</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

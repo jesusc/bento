@@ -21,12 +21,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.technologies.impl.AtlParameterImpl#getAtlModelName <em>Atl Model Name</em>}</li>
  *   <li>{@link bento.language.bentocomp.technologies.impl.AtlParameterImpl#getAtlMetamodelName <em>Atl Metamodel Name</em>}</li>
  *   <li>{@link bento.language.bentocomp.technologies.impl.AtlParameterImpl#getModel <em>Model</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -268,7 +268,7 @@ public class AtlParameterImpl extends EObjectImpl implements AtlParameter {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (atlModelName: ");
 		result.append(atlModelName);
 		result.append(", atlMetamodelName: ");

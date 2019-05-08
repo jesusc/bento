@@ -29,12 +29,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.impl.MetamodelImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.MetamodelImpl#getResource <em>Resource</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.impl.MetamodelImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -265,7 +265,7 @@ public class MetamodelImpl extends NamedElementImpl implements Metamodel {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (uri: ");
 		result.append(uri);
 		result.append(", resource: ");

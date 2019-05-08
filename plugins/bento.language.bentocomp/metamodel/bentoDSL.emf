@@ -46,14 +46,19 @@ package core {
 	abstract class Tagged {
 	   val Tag[*] tags; // should be ref   
 	}
+
+	abstract class TemplateBasedComponent extends Component {
+		val Template[1] template;
+	}
 	
-	class TransformationComponent extends Component {			
+	class TransformationComponent extends TemplateBasedComponent {			
 		attr boolean isM2M = true; // specialization better?
 	    
-	    val Template[1] template;
-	
 	    // Puede tener constraints la transformacion en si?
 	    val Constraint[*] constraints;
+	}
+	
+	class GraphicalEditorComponent extends TemplateBasedComponent {			
 	}
 	
 	class CompositeComponent extends Component {
@@ -257,4 +262,11 @@ package technologies {
 	   attr String[1] qualifiedClassname;
 	}
 	// End-of Java
+
+	// Begin-of Sirius
+	class SiriusTemplate extends core.Template {
+	   	attr String[1] oDesignFile; 
+    }
+	
+	// End-of Sirius
 }

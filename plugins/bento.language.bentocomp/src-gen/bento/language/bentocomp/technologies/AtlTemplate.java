@@ -13,11 +13,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.technologies.AtlTemplate#getTemplate <em>Template</em>}</li>
  *   <li>{@link bento.language.bentocomp.technologies.AtlTemplate#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.technologies.TechnologiesPackage#getAtlTemplate()
  * @model

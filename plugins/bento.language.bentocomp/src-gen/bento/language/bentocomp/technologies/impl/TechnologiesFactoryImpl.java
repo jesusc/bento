@@ -59,6 +59,7 @@ public class TechnologiesFactoryImpl extends EFactoryImpl implements Technologie
 			case TechnologiesPackage.ATL_TEMPLATE: return createAtlTemplate();
 			case TechnologiesPackage.ATL_PARAMETER: return createAtlParameter();
 			case TechnologiesPackage.JAVA_TEMPLATE: return createJavaTemplate();
+			case TechnologiesPackage.SIRIUS_TEMPLATE: return createSiriusTemplate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +93,16 @@ public class TechnologiesFactoryImpl extends EFactoryImpl implements Technologie
 	public JavaTemplate createJavaTemplate() {
 		JavaTemplateImpl javaTemplate = new JavaTemplateImpl();
 		return javaTemplate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SiriusTemplate createSiriusTemplate() {
+		SiriusTemplateImpl siriusTemplate = new SiriusTemplateImpl();
+		return siriusTemplate;
 	}
 
 	/**

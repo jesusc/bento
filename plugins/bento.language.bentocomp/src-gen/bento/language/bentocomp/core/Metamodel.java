@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.resource.Resource;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.Metamodel#getUri <em>Uri</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.Metamodel#getResource <em>Resource</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.Metamodel#getConstraints <em>Constraints</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.core.CorePackage#getMetamodel()
  * @model

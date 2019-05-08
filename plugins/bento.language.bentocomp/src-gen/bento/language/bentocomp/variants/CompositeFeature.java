@@ -11,10 +11,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.variants.CompositeFeature#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.variants.VariantsPackage#getCompositeFeature()
  * @model abstract="true"

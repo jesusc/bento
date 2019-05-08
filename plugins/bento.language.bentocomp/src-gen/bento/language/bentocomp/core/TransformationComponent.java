@@ -11,18 +11,17 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.TransformationComponent#isIsM2M <em>Is M2M</em>}</li>
- *   <li>{@link bento.language.bentocomp.core.TransformationComponent#getTemplate <em>Template</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.TransformationComponent#getConstraints <em>Constraints</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.core.CorePackage#getTransformationComponent()
  * @model
  * @generated
  */
-public interface TransformationComponent extends Component {
+public interface TransformationComponent extends TemplateBasedComponent {
 	/**
 	 * Returns the value of the '<em><b>Is M2M</b></em>' attribute.
 	 * The default value is <code>"true"</code>.
@@ -49,32 +48,6 @@ public interface TransformationComponent extends Component {
 	 * @generated
 	 */
 	void setIsM2M(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Template</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Template</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Template</em>' containment reference.
-	 * @see #setTemplate(Template)
-	 * @see bento.language.bentocomp.core.CorePackage#getTransformationComponent_Template()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	Template getTemplate();
-
-	/**
-	 * Sets the value of the '{@link bento.language.bentocomp.core.TransformationComponent#getTemplate <em>Template</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Template</em>' containment reference.
-	 * @see #getTemplate()
-	 * @generated
-	 */
-	void setTemplate(Template value);
 
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.

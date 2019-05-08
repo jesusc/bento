@@ -49,6 +49,15 @@ public interface CoreFactory extends EFactory {
 	TransformationComponent createTransformationComponent();
 
 	/**
+	 * Returns a new object of class '<em>Graphical Editor Component</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Graphical Editor Component</em>'.
+	 * @generated
+	 */
+	GraphicalEditorComponent createGraphicalEditorComponent();
+
+	/**
 	 * Returns a new object of class '<em>Composite Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

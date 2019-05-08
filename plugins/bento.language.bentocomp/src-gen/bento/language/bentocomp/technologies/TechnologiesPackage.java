@@ -170,6 +170,35 @@ public interface TechnologiesPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link bento.language.bentocomp.technologies.impl.SiriusTemplateImpl <em>Sirius Template</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.language.bentocomp.technologies.impl.SiriusTemplateImpl
+	 * @see bento.language.bentocomp.technologies.impl.TechnologiesPackageImpl#getSiriusTemplate()
+	 * @generated
+	 */
+	int SIRIUS_TEMPLATE = 3;
+
+	/**
+	 * The feature id for the '<em><b>ODesign File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_TEMPLATE__ODESIGN_FILE = CorePackage.TEMPLATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Sirius Template</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_TEMPLATE_FEATURE_COUNT = CorePackage.TEMPLATE_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link bento.language.bentocomp.technologies.AtlTemplate <em>Atl Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -264,6 +293,27 @@ public interface TechnologiesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getJavaTemplate_QualifiedClassname();
+
+	/**
+	 * Returns the meta object for class '{@link bento.language.bentocomp.technologies.SiriusTemplate <em>Sirius Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sirius Template</em>'.
+	 * @see bento.language.bentocomp.technologies.SiriusTemplate
+	 * @generated
+	 */
+	EClass getSiriusTemplate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link bento.language.bentocomp.technologies.SiriusTemplate#getODesignFile <em>ODesign File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>ODesign File</em>'.
+	 * @see bento.language.bentocomp.technologies.SiriusTemplate#getODesignFile()
+	 * @see #getSiriusTemplate()
+	 * @generated
+	 */
+	EAttribute getSiriusTemplate_ODesignFile();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -364,6 +414,24 @@ public interface TechnologiesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute JAVA_TEMPLATE__QUALIFIED_CLASSNAME = eINSTANCE.getJavaTemplate_QualifiedClassname();
+
+		/**
+		 * The meta object literal for the '{@link bento.language.bentocomp.technologies.impl.SiriusTemplateImpl <em>Sirius Template</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.language.bentocomp.technologies.impl.SiriusTemplateImpl
+		 * @see bento.language.bentocomp.technologies.impl.TechnologiesPackageImpl#getSiriusTemplate()
+		 * @generated
+		 */
+		EClass SIRIUS_TEMPLATE = eINSTANCE.getSiriusTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>ODesign File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIRIUS_TEMPLATE__ODESIGN_FILE = eINSTANCE.getSiriusTemplate_ODesignFile();
 
 	}
 

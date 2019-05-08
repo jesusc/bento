@@ -65,6 +65,21 @@ RULES {
 			("tags" tags ("," tags)*)?
 		"}";
 	
+	Core.GraphicalEditorComponent ::= 
+		"graphical" "component" name[QNAME] "{"
+			(
+			("source" source)+
+			("source" sourceModels)+
+			)
+			
+			("variants" (formalParameters)+ )?
+			"definition" template
+
+			("version" version['"','"'])?			
+			("contributos" (contributors[]|contributors['"', '"']) ("," (contributors[]|contributors['"', '"']))*)?
+			("tags" tags ("," tags)*)?
+		"}";
+	
 	Core.Concept ::= "concept" name[] ":" uri['"', '"']
 		("tags" tags ("," tags)*)?
 		// TODO: constraints	
@@ -108,9 +123,9 @@ RULES {
 		
 			(
 			("source" source)+
-			("target" target)+
+			("target" target)*
 			("source" sourceModels)+
-			("target" targetModels)+
+			("target" targetModels)*
 			)
 
 			("variants" (formalParameters)+ )?
@@ -165,5 +180,6 @@ RULES {
 	//Technologies.AtlMetamodelParameter ::= atlModelName[] "=" concept[];
 	Technologies.JavaTemplate ::= "java" qualifiedClassname['"', '"'];
 	
+	Technologies.SiriusTemplate ::= "sirius" oDesignFile['"', '"'];
 	// End-of technologies
 }	

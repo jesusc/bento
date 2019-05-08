@@ -13,12 +13,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.CompositeComponent#getUses <em>Uses</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.CompositeComponent#getComposition <em>Composition</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.CompositeComponent#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.core.CorePackage#getCompositeComponent()
  * @model

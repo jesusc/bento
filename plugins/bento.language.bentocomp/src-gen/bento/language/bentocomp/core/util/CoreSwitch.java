@@ -47,7 +47,7 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -109,12 +109,32 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CorePackage.TEMPLATE_BASED_COMPONENT: {
+				TemplateBasedComponent templateBasedComponent = (TemplateBasedComponent)theEObject;
+				T result = caseTemplateBasedComponent(templateBasedComponent);
+				if (result == null) result = caseComponent(templateBasedComponent);
+				if (result == null) result = caseNamedElement(templateBasedComponent);
+				if (result == null) result = caseTagged(templateBasedComponent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CorePackage.TRANSFORMATION_COMPONENT: {
 				TransformationComponent transformationComponent = (TransformationComponent)theEObject;
 				T result = caseTransformationComponent(transformationComponent);
+				if (result == null) result = caseTemplateBasedComponent(transformationComponent);
 				if (result == null) result = caseComponent(transformationComponent);
 				if (result == null) result = caseNamedElement(transformationComponent);
 				if (result == null) result = caseTagged(transformationComponent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.GRAPHICAL_EDITOR_COMPONENT: {
+				GraphicalEditorComponent graphicalEditorComponent = (GraphicalEditorComponent)theEObject;
+				T result = caseGraphicalEditorComponent(graphicalEditorComponent);
+				if (result == null) result = caseTemplateBasedComponent(graphicalEditorComponent);
+				if (result == null) result = caseComponent(graphicalEditorComponent);
+				if (result == null) result = caseNamedElement(graphicalEditorComponent);
+				if (result == null) result = caseTagged(graphicalEditorComponent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -275,6 +295,21 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Template Based Component</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Template Based Component</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateBasedComponent(TemplateBasedComponent object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Transformation Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -286,6 +321,21 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTransformationComponent(TransformationComponent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Graphical Editor Component</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Graphical Editor Component</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGraphicalEditorComponent(GraphicalEditorComponent object) {
 		return null;
 	}
 

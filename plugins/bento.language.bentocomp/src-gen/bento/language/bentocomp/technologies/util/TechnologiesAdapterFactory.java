@@ -82,6 +82,10 @@ public class TechnologiesAdapterFactory extends AdapterFactoryImpl {
 				return createJavaTemplateAdapter();
 			}
 			@Override
+			public Adapter caseSiriusTemplate(SiriusTemplate object) {
+				return createSiriusTemplateAdapter();
+			}
+			@Override
 			public Adapter caseTemplate(Template object) {
 				return createTemplateAdapter();
 			}
@@ -144,6 +148,20 @@ public class TechnologiesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJavaTemplateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link bento.language.bentocomp.technologies.SiriusTemplate <em>Sirius Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see bento.language.bentocomp.technologies.SiriusTemplate
+	 * @generated
+	 */
+	public Adapter createSiriusTemplateAdapter() {
 		return null;
 	}
 

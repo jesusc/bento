@@ -200,76 +200,84 @@ public class BentoPrinter2 implements bento.language.bentocomp.resource.bento.IB
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_1, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.core.Concept) {
+		if (element instanceof bento.language.bentocomp.core.GraphicalEditorComponent) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.core.ParameterModel) {
+		if (element instanceof bento.language.bentocomp.core.Concept) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_3, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.core.Tag) {
+		if (element instanceof bento.language.bentocomp.core.ParameterModel) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.variants.SingleFeature) {
+		if (element instanceof bento.language.bentocomp.core.Tag) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_5, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.variants.XorFeature) {
+		if (element instanceof bento.language.bentocomp.variants.SingleFeature) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_6, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.dsl.ComponentExecution) {
+		if (element instanceof bento.language.bentocomp.variants.XorFeature) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_7, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.core.CompositeComponent) {
+		if (element instanceof bento.language.bentocomp.dsl.ComponentExecution) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_8, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.core.BindingDeclaration) {
+		if (element instanceof bento.language.bentocomp.core.CompositeComponent) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_9, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.Composition) {
+		if (element instanceof bento.language.bentocomp.core.BindingDeclaration) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_10, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.Xor) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.Composition) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_11, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.XorCond) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.Xor) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_12, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.Apply) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.XorCond) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_13, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.ApplyParameter) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.Apply) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_14, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.Seq) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.ApplyParameter) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_15, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.flowcontrol.FeatureRef) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.Seq) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_16, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.technologies.AtlTemplate) {
+		if (element instanceof bento.language.bentocomp.flowcontrol.FeatureRef) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_17, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.technologies.AtlParameter) {
+		if (element instanceof bento.language.bentocomp.technologies.AtlTemplate) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_18, foundFormattingElements);
 			return;
 		}
-		if (element instanceof bento.language.bentocomp.technologies.JavaTemplate) {
+		if (element instanceof bento.language.bentocomp.technologies.AtlParameter) {
 			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_19, foundFormattingElements);
+			return;
+		}
+		if (element instanceof bento.language.bentocomp.technologies.JavaTemplate) {
+			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_20, foundFormattingElements);
+			return;
+		}
+		if (element instanceof bento.language.bentocomp.technologies.SiriusTemplate) {
+			printInternal(element, bento.language.bentocomp.resource.bento.grammar.BentoGrammarInformationProvider.BENTO_21, foundFormattingElements);
 			return;
 		}
 		

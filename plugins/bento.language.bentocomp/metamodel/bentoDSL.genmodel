@@ -40,11 +40,14 @@
       <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/Tagged">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/Tagged/tags"/>
       </genClasses>
+      <genClasses image="false" ecoreClass="bentoDSL.ecore#//core/TemplateBasedComponent">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/TemplateBasedComponent/template"/>
+      </genClasses>
       <genClasses ecoreClass="bentoDSL.ecore#//core/TransformationComponent">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//core/TransformationComponent/isM2M"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/TransformationComponent/template"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference bentoDSL.ecore#//core/TransformationComponent/constraints"/>
       </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//core/GraphicalEditorComponent"/>
       <genClasses ecoreClass="bentoDSL.ecore#//core/CompositeComponent">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference bentoDSL.ecore#//core/CompositeComponent/uses"/>
@@ -155,6 +158,9 @@
       </genClasses>
       <genClasses ecoreClass="bentoDSL.ecore#//technologies/JavaTemplate">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//technologies/JavaTemplate/qualifiedClassname"/>
+      </genClasses>
+      <genClasses ecoreClass="bentoDSL.ecore#//technologies/SiriusTemplate">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bentoDSL.ecore#//technologies/SiriusTemplate/oDesignFile"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

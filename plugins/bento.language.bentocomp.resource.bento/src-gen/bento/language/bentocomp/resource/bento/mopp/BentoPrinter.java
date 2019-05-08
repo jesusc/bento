@@ -60,6 +60,10 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 			print_bento_language_bentocomp_core_TransformationComponent((bento.language.bentocomp.core.TransformationComponent) element, globaltab, out);
 			return;
 		}
+		if (element instanceof bento.language.bentocomp.core.GraphicalEditorComponent) {
+			print_bento_language_bentocomp_core_GraphicalEditorComponent((bento.language.bentocomp.core.GraphicalEditorComponent) element, globaltab, out);
+			return;
+		}
 		if (element instanceof bento.language.bentocomp.core.Concept) {
 			print_bento_language_bentocomp_core_Concept((bento.language.bentocomp.core.Concept) element, globaltab, out);
 			return;
@@ -130,6 +134,10 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		}
 		if (element instanceof bento.language.bentocomp.technologies.JavaTemplate) {
 			print_bento_language_bentocomp_technologies_JavaTemplate((bento.language.bentocomp.technologies.JavaTemplate) element, globaltab, out);
+			return;
+		}
+		if (element instanceof bento.language.bentocomp.technologies.SiriusTemplate) {
+			print_bento_language_bentocomp_technologies_SiriusTemplate((bento.language.bentocomp.technologies.SiriusTemplate) element, globaltab, out);
 			return;
 		}
 		
@@ -240,10 +248,10 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		printCountingMap.put("generateModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.TRANSFORMATION_COMPONENT__FORMAL_PARAMETERS));
 		printCountingMap.put("formalParameters", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
-		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.TRANSFORMATION_COMPONENT__IS_M2M));
-		printCountingMap.put("isM2M", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.TRANSFORMATION_COMPONENT__TEMPLATE));
 		printCountingMap.put("template", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.TRANSFORMATION_COMPONENT__IS_M2M));
+		printCountingMap.put("isM2M", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.TRANSFORMATION_COMPONENT__CONSTRAINTS));
 		printCountingMap.put("constraints", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
@@ -794,6 +802,520 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 		count = printCountingMap.get("tags");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.TRANSFORMATION_COMPONENT__TAGS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("tags", count - 1);
+		}
+	}
+	
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(13);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TAGS));
+		printCountingMap.put("tags", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__OWNER));
+		printCountingMap.put("owner", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS));
+		printCountingMap.put("contributors", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__VERSION));
+		printCountingMap.put("version", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__STATUS));
+		printCountingMap.put("status", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__SOURCE));
+		printCountingMap.put("source", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TARGET));
+		printCountingMap.put("target", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__SOURCE_MODELS));
+		printCountingMap.put("sourceModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TARGET_MODELS));
+		printCountingMap.put("targetModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__GENERATE_MODELS));
+		printCountingMap.put("generateModels", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__FORMAL_PARAMETERS));
+		printCountingMap.put("formalParameters", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TEMPLATE));
+		printCountingMap.put("template", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("graphical");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("component");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__NAME));
+			if (o != null) {
+				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QNAME");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__NAME), element));
+				out.print(" ");
+			}
+			printCountingMap.put("name", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("{");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_0(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_1(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("definition");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("template");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TEMPLATE));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("template", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_2(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_3(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_4(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print("}");
+		out.print(" ");
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_0(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_0_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_GraphicalEditorComponent_0_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_0_1(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_GraphicalEditorComponent_0_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_0_0(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("source");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("source");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__SOURCE));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("source", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_0_1(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("source");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("sourceModels");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__SOURCE_MODELS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("sourceModels", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_1(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("variants");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_1_0(element, localtab, out, printCountingMap);
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_GraphicalEditorComponent_1_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_1_0(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("formalParameters");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__FORMAL_PARAMETERS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("formalParameters", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_2(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("version");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("version");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__VERSION));
+			if (o != null) {
+				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__VERSION), element));
+				out.print(" ");
+			}
+			printCountingMap.put("version", count - 1);
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_3(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("contributos");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_3_0(element, localtab, out, printCountingMap);
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_GraphicalEditorComponent_3_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_3_0(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"contributors"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"contributors"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("contributors");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS));
+					java.util.List<?> list = (java.util.List<?>) o;
+					int index = list.size() - count;
+					if (index >= 0) {
+						o = list.get(index);
+					} else {
+						o = null;
+					}
+					if (o != null) {
+						bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS), element));
+						out.print(" ");
+					}
+					printCountingMap.put("contributors", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("contributors");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS));
+				java.util.List<?> list = (java.util.List<?>) o;
+				int index = list.size() - count;
+				if (index >= 0) {
+					o = list.get(index);
+				} else {
+					o = null;
+				}
+				if (o != null) {
+					bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS), element));
+					out.print(" ");
+				}
+				printCountingMap.put("contributors", count - 1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_3_1(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		print_bento_language_bentocomp_core_GraphicalEditorComponent_3_1_0(element, localtab, out, printCountingMap);
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_3_1_0(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"contributors"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"contributors"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderInQuotes)
+				count = printCountingMap.get("contributors");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS));
+					java.util.List<?> list = (java.util.List<?>) o;
+					int index = list.size() - count;
+					if (index >= 0) {
+						o = list.get(index);
+					} else {
+						o = null;
+					}
+					if (o != null) {
+						bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS), element));
+						out.print(" ");
+					}
+					printCountingMap.put("contributors", count - 1);
+				}
+			}
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+			count = printCountingMap.get("contributors");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS));
+				java.util.List<?> list = (java.util.List<?>) o;
+				int index = list.size() - count;
+				if (index >= 0) {
+					o = list.get(index);
+				} else {
+					o = null;
+				}
+				if (o != null) {
+					bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS), element));
+					out.print(" ");
+				}
+				printCountingMap.put("contributors", count - 1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_4(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("tags");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("tags");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TAGS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("tags", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_bento_language_bentocomp_core_GraphicalEditorComponent_4_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+	}
+	
+	public void print_bento_language_bentocomp_core_GraphicalEditorComponent_4_0(bento.language.bentocomp.core.GraphicalEditorComponent element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("tags");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.core.CorePackage.GRAPHICAL_EDITOR_COMPONENT__TAGS));
 			java.util.List<?> list = (java.util.List<?>) o;
 			int index = list.size() - count;
 			if (index >= 0) {
@@ -1707,7 +2229,6 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 			}
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		print_bento_language_bentocomp_core_CompositeComponent_2_1(element, localtab, out, printCountingMap);
 		iterate = true;
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
@@ -1743,7 +2264,6 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 			}
 		}
 		// DEFINITION PART BEGINS (CompoundDefinition)
-		print_bento_language_bentocomp_core_CompositeComponent_2_3(element, localtab, out, printCountingMap);
 		iterate = true;
 		while (iterate) {
 			sWriter = new java.io.StringWriter();
@@ -2692,6 +3212,36 @@ public class BentoPrinter implements bento.language.bentocomp.resource.bento.IBe
 				out.print(" ");
 			}
 			printCountingMap.put("qualifiedClassname", count - 1);
+		}
+	}
+	
+	
+	public void print_bento_language_bentocomp_technologies_SiriusTemplate(bento.language.bentocomp.technologies.SiriusTemplate element, String outertab, java.io.PrintWriter out) {
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(1);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.technologies.TechnologiesPackage.SIRIUS_TEMPLATE__ODESIGN_FILE));
+		printCountingMap.put("oDesignFile", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print("sirius");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("oDesignFile");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(bento.language.bentocomp.technologies.TechnologiesPackage.SIRIUS_TEMPLATE__ODESIGN_FILE));
+			if (o != null) {
+				bento.language.bentocomp.resource.bento.IBentoTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(bento.language.bentocomp.technologies.TechnologiesPackage.SIRIUS_TEMPLATE__ODESIGN_FILE), element));
+				out.print(" ");
+			}
+			printCountingMap.put("oDesignFile", count - 1);
 		}
 	}
 	

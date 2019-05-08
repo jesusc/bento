@@ -52,6 +52,7 @@ public class AtlMemoryTemplate implements AdaptationResult {
 	}
 
 	Supplier<ATLModel> pending ;
+	
 	public void adapt(ParameterModel conceptModel, Model concreteModel, BindingModel bindingModel) {
 		if ( pending != null ) {
 			Supplier<ATLModel> oldPending = pending;

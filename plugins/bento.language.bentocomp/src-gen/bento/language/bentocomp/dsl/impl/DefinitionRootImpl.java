@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.dsl.impl.DefinitionRootImpl#getComponent <em>Component</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

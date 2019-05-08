@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.Tagged#getTags <em>Tags</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.core.CorePackage#getTagged()
  * @model abstract="true"

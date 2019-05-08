@@ -180,7 +180,7 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FlowcontrolPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -194,16 +194,22 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 		if (isInited) return (FlowcontrolPackage)EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI);
 
 		// Obtain or create and register package
-		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FlowcontrolPackageImpl());
+		Object registeredFlowcontrolPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FlowcontrolPackageImpl theFlowcontrolPackage = registeredFlowcontrolPackage instanceof FlowcontrolPackageImpl ? (FlowcontrolPackageImpl)registeredFlowcontrolPackage : new FlowcontrolPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) instanceof BentocompPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) : BentocompPackage.eINSTANCE);
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
-		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI) : VariantsPackage.eINSTANCE);
-		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
-		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI);
+		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(registeredPackage instanceof BentocompPackageImpl ? registeredPackage : BentocompPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
+		CorePackageImpl theCorePackage = (CorePackageImpl)(registeredPackage instanceof CorePackageImpl ? registeredPackage : CorePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI);
+		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(registeredPackage instanceof VariantsPackageImpl ? registeredPackage : VariantsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI);
+		DslPackageImpl theDslPackage = (DslPackageImpl)(registeredPackage instanceof DslPackageImpl ? registeredPackage : DslPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(registeredPackage instanceof TechnologiesPackageImpl ? registeredPackage : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theFlowcontrolPackage.createPackageContents();
@@ -224,7 +230,6 @@ public class FlowcontrolPackageImpl extends EPackageImpl implements FlowcontrolP
 		// Mark meta-data to indicate it can't be changed
 		theFlowcontrolPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FlowcontrolPackage.eNS_URI, theFlowcontrolPackage);
 		return theFlowcontrolPackage;

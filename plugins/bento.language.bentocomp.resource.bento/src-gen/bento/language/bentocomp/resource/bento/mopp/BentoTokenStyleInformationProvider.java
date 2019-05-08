@@ -41,6 +41,9 @@ public class BentoTokenStyleInformationProvider {
 		if ("tags".equals(tokenName)) {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
+		if ("graphical".equals(tokenName)) {
+			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
 		if ("concept".equals(tokenName)) {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
@@ -81,6 +84,9 @@ public class BentoTokenStyleInformationProvider {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("java".equals(tokenName)) {
+			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
+		}
+		if ("sirius".equals(tokenName)) {
 			return new bento.language.bentocomp.resource.bento.mopp.BentoTokenStyle(new int[] {0x80, 0x00, 0x55}, null, true, false, false, false);
 		}
 		if ("QUOTED_34_34".equals(tokenName)) {

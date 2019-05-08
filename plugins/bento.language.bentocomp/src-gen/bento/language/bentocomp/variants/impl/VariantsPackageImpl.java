@@ -106,7 +106,7 @@ public class VariantsPackageImpl extends EPackageImpl implements VariantsPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link VariantsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -120,16 +120,22 @@ public class VariantsPackageImpl extends EPackageImpl implements VariantsPackage
 		if (isInited) return (VariantsPackage)EPackage.Registry.INSTANCE.getEPackage(VariantsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		VariantsPackageImpl theVariantsPackage = (VariantsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof VariantsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new VariantsPackageImpl());
+		Object registeredVariantsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		VariantsPackageImpl theVariantsPackage = registeredVariantsPackage instanceof VariantsPackageImpl ? (VariantsPackageImpl)registeredVariantsPackage : new VariantsPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) instanceof BentocompPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI) : BentocompPackage.eINSTANCE);
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
-		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) instanceof FlowcontrolPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI) : FlowcontrolPackage.eINSTANCE);
-		DslPackageImpl theDslPackage = (DslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) instanceof DslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI) : DslPackage.eINSTANCE);
-		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) instanceof TechnologiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI) : TechnologiesPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(BentocompPackage.eNS_URI);
+		BentocompPackageImpl theBentocompPackage = (BentocompPackageImpl)(registeredPackage instanceof BentocompPackageImpl ? registeredPackage : BentocompPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
+		CorePackageImpl theCorePackage = (CorePackageImpl)(registeredPackage instanceof CorePackageImpl ? registeredPackage : CorePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FlowcontrolPackage.eNS_URI);
+		FlowcontrolPackageImpl theFlowcontrolPackage = (FlowcontrolPackageImpl)(registeredPackage instanceof FlowcontrolPackageImpl ? registeredPackage : FlowcontrolPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DslPackage.eNS_URI);
+		DslPackageImpl theDslPackage = (DslPackageImpl)(registeredPackage instanceof DslPackageImpl ? registeredPackage : DslPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TechnologiesPackage.eNS_URI);
+		TechnologiesPackageImpl theTechnologiesPackage = (TechnologiesPackageImpl)(registeredPackage instanceof TechnologiesPackageImpl ? registeredPackage : TechnologiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theVariantsPackage.createPackageContents();
@@ -150,7 +156,6 @@ public class VariantsPackageImpl extends EPackageImpl implements VariantsPackage
 		// Mark meta-data to indicate it can't be changed
 		theVariantsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(VariantsPackage.eNS_URI, theVariantsPackage);
 		return theVariantsPackage;

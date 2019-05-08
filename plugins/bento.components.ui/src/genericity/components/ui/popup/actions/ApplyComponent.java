@@ -39,10 +39,10 @@ public class ApplyComponent  implements IObjectActionDelegate {
 		try {
 			new ComponentInterpreter(m, new LocalRepository()).apply();
 		} catch (MyComponentError e) {
-			MessageDialog.openError(shell, "Component execution", e.getMessage());;
+			MessageDialog.openError(shell, "Component execution", "Can't apply components: " + e.getMessage());;
 		} catch (Exception e2) { // Capturing this because silent errors appears when trying to load unexisting files...
 			e2.printStackTrace();
-			MessageDialog.openError(shell, "Component execution", e2.getMessage());;			
+			MessageDialog.openError(shell, "Component execution", "Can't apply components: " + e2.getMessage());;			
 		}
 	}
 

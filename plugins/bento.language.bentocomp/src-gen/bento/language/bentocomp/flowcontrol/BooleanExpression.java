@@ -10,12 +10,12 @@ package bento.language.bentocomp.flowcontrol;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.BooleanExpression#getLeft <em>Left</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.BooleanExpression#getRight <em>Right</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.BooleanExpression#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.flowcontrol.FlowcontrolPackage#getBooleanExpression()
  * @model

@@ -11,10 +11,10 @@ import bento.language.bentocomp.variants.Feature;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.FeatureRef#getFeature <em>Feature</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.flowcontrol.FlowcontrolPackage#getFeatureRef()
  * @model

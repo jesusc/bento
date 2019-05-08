@@ -10,11 +10,11 @@ package bento.language.bentocomp.core;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.core.ParameterModel#getType <em>Type</em>}</li>
  *   <li>{@link bento.language.bentocomp.core.ParameterModel#getResourceName <em>Resource Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.core.CorePackage#getParameterModel()
  * @model

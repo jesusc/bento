@@ -342,14 +342,14 @@ public interface CorePackage extends EPackage {
 	int TAGGED_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link bento.language.bentocomp.core.impl.TransformationComponentImpl <em>Transformation Component</em>}' class.
+	 * The meta object id for the '{@link bento.language.bentocomp.core.impl.TemplateBasedComponentImpl <em>Template Based Component</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see bento.language.bentocomp.core.impl.TransformationComponentImpl
-	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getTransformationComponent()
+	 * @see bento.language.bentocomp.core.impl.TemplateBasedComponentImpl
+	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getTemplateBasedComponent()
 	 * @generated
 	 */
-	int TRANSFORMATION_COMPONENT = 6;
+	int TEMPLATE_BASED_COMPONENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -358,7 +358,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__NAME = COMPONENT__NAME;
+	int TEMPLATE_BASED_COMPONENT__NAME = COMPONENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -367,7 +367,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__TAGS = COMPONENT__TAGS;
+	int TEMPLATE_BASED_COMPONENT__TAGS = COMPONENT__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' attribute.
@@ -376,7 +376,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__OWNER = COMPONENT__OWNER;
+	int TEMPLATE_BASED_COMPONENT__OWNER = COMPONENT__OWNER;
 
 	/**
 	 * The feature id for the '<em><b>Contributors</b></em>' attribute list.
@@ -385,7 +385,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__CONTRIBUTORS = COMPONENT__CONTRIBUTORS;
+	int TEMPLATE_BASED_COMPONENT__CONTRIBUTORS = COMPONENT__CONTRIBUTORS;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -394,7 +394,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__VERSION = COMPONENT__VERSION;
+	int TEMPLATE_BASED_COMPONENT__VERSION = COMPONENT__VERSION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -403,7 +403,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__STATUS = COMPONENT__STATUS;
+	int TEMPLATE_BASED_COMPONENT__STATUS = COMPONENT__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference list.
@@ -412,7 +412,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__SOURCE = COMPONENT__SOURCE;
+	int TEMPLATE_BASED_COMPONENT__SOURCE = COMPONENT__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
@@ -421,7 +421,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__TARGET = COMPONENT__TARGET;
+	int TEMPLATE_BASED_COMPONENT__TARGET = COMPONENT__TARGET;
 
 	/**
 	 * The feature id for the '<em><b>Source Models</b></em>' containment reference list.
@@ -430,7 +430,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__SOURCE_MODELS = COMPONENT__SOURCE_MODELS;
+	int TEMPLATE_BASED_COMPONENT__SOURCE_MODELS = COMPONENT__SOURCE_MODELS;
 
 	/**
 	 * The feature id for the '<em><b>Target Models</b></em>' containment reference list.
@@ -439,7 +439,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__TARGET_MODELS = COMPONENT__TARGET_MODELS;
+	int TEMPLATE_BASED_COMPONENT__TARGET_MODELS = COMPONENT__TARGET_MODELS;
 
 	/**
 	 * The feature id for the '<em><b>Generate Models</b></em>' containment reference list.
@@ -448,7 +448,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__GENERATE_MODELS = COMPONENT__GENERATE_MODELS;
+	int TEMPLATE_BASED_COMPONENT__GENERATE_MODELS = COMPONENT__GENERATE_MODELS;
 
 	/**
 	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
@@ -457,16 +457,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__FORMAL_PARAMETERS = COMPONENT__FORMAL_PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Is M2M</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_COMPONENT__IS_M2M = COMPONENT_FEATURE_COUNT + 0;
+	int TEMPLATE_BASED_COMPONENT__FORMAL_PARAMETERS = COMPONENT__FORMAL_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Template</b></em>' containment reference.
@@ -475,7 +466,152 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__TEMPLATE = COMPONENT_FEATURE_COUNT + 1;
+	int TEMPLATE_BASED_COMPONENT__TEMPLATE = COMPONENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Template Based Component</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_BASED_COMPONENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link bento.language.bentocomp.core.impl.TransformationComponentImpl <em>Transformation Component</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.language.bentocomp.core.impl.TransformationComponentImpl
+	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getTransformationComponent()
+	 * @generated
+	 */
+	int TRANSFORMATION_COMPONENT = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__NAME = TEMPLATE_BASED_COMPONENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__TAGS = TEMPLATE_BASED_COMPONENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Owner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__OWNER = TEMPLATE_BASED_COMPONENT__OWNER;
+
+	/**
+	 * The feature id for the '<em><b>Contributors</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__CONTRIBUTORS = TEMPLATE_BASED_COMPONENT__CONTRIBUTORS;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__VERSION = TEMPLATE_BASED_COMPONENT__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__STATUS = TEMPLATE_BASED_COMPONENT__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__SOURCE = TEMPLATE_BASED_COMPONENT__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__TARGET = TEMPLATE_BASED_COMPONENT__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__SOURCE_MODELS = TEMPLATE_BASED_COMPONENT__SOURCE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Target Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__TARGET_MODELS = TEMPLATE_BASED_COMPONENT__TARGET_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Generate Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__GENERATE_MODELS = TEMPLATE_BASED_COMPONENT__GENERATE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__FORMAL_PARAMETERS = TEMPLATE_BASED_COMPONENT__FORMAL_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Template</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__TEMPLATE = TEMPLATE_BASED_COMPONENT__TEMPLATE;
+
+	/**
+	 * The feature id for the '<em><b>Is M2M</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_COMPONENT__IS_M2M = TEMPLATE_BASED_COMPONENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -484,7 +620,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT__CONSTRAINTS = COMPONENT_FEATURE_COUNT + 2;
+	int TRANSFORMATION_COMPONENT__CONSTRAINTS = TEMPLATE_BASED_COMPONENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Transformation Component</em>' class.
@@ -493,7 +629,143 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_COMPONENT_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 3;
+	int TRANSFORMATION_COMPONENT_FEATURE_COUNT = TEMPLATE_BASED_COMPONENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link bento.language.bentocomp.core.impl.GraphicalEditorComponentImpl <em>Graphical Editor Component</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see bento.language.bentocomp.core.impl.GraphicalEditorComponentImpl
+	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getGraphicalEditorComponent()
+	 * @generated
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__NAME = TEMPLATE_BASED_COMPONENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__TAGS = TEMPLATE_BASED_COMPONENT__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Owner</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__OWNER = TEMPLATE_BASED_COMPONENT__OWNER;
+
+	/**
+	 * The feature id for the '<em><b>Contributors</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__CONTRIBUTORS = TEMPLATE_BASED_COMPONENT__CONTRIBUTORS;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__VERSION = TEMPLATE_BASED_COMPONENT__VERSION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__STATUS = TEMPLATE_BASED_COMPONENT__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__SOURCE = TEMPLATE_BASED_COMPONENT__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__TARGET = TEMPLATE_BASED_COMPONENT__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__SOURCE_MODELS = TEMPLATE_BASED_COMPONENT__SOURCE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Target Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__TARGET_MODELS = TEMPLATE_BASED_COMPONENT__TARGET_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Generate Models</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__GENERATE_MODELS = TEMPLATE_BASED_COMPONENT__GENERATE_MODELS;
+
+	/**
+	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__FORMAL_PARAMETERS = TEMPLATE_BASED_COMPONENT__FORMAL_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Template</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT__TEMPLATE = TEMPLATE_BASED_COMPONENT__TEMPLATE;
+
+	/**
+	 * The number of structural features of the '<em>Graphical Editor Component</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHICAL_EDITOR_COMPONENT_FEATURE_COUNT = TEMPLATE_BASED_COMPONENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link bento.language.bentocomp.core.impl.CompositeComponentImpl <em>Composite Component</em>}' class.
@@ -503,7 +775,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getCompositeComponent()
 	 * @generated
 	 */
-	int COMPOSITE_COMPONENT = 7;
+	int COMPOSITE_COMPONENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -657,7 +929,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getBindingDeclaration()
 	 * @generated
 	 */
-	int BINDING_DECLARATION = 8;
+	int BINDING_DECLARATION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -694,7 +966,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getTemplate()
 	 * @generated
 	 */
-	int TEMPLATE = 9;
+	int TEMPLATE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Template</em>' class.
@@ -713,7 +985,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 10;
+	int CONSTRAINT = 12;
 
 	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
@@ -732,7 +1004,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getOclConstraint()
 	 * @generated
 	 */
-	int OCL_CONSTRAINT = 11;
+	int OCL_CONSTRAINT = 13;
 
 	/**
 	 * The number of structural features of the '<em>Ocl Constraint</em>' class.
@@ -751,7 +1023,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getMetamodel()
 	 * @generated
 	 */
-	int METAMODEL = 12;
+	int METAMODEL = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -806,7 +1078,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getTag()
 	 * @generated
 	 */
-	int TAG = 13;
+	int TAG = 15;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -834,7 +1106,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getConcept()
 	 * @generated
 	 */
-	int CONCEPT = 14;
+	int CONCEPT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -898,7 +1170,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getDocumentation()
 	 * @generated
 	 */
-	int DOCUMENTATION = 15;
+	int DOCUMENTATION = 17;
 
 	/**
 	 * The number of structural features of the '<em>Documentation</em>' class.
@@ -917,7 +1189,7 @@ public interface CorePackage extends EPackage {
 	 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getStatus()
 	 * @generated
 	 */
-	int STATUS = 16;
+	int STATUS = 18;
 
 
 	/**
@@ -1135,6 +1407,27 @@ public interface CorePackage extends EPackage {
 	EReference getTagged_Tags();
 
 	/**
+	 * Returns the meta object for class '{@link bento.language.bentocomp.core.TemplateBasedComponent <em>Template Based Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Template Based Component</em>'.
+	 * @see bento.language.bentocomp.core.TemplateBasedComponent
+	 * @generated
+	 */
+	EClass getTemplateBasedComponent();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link bento.language.bentocomp.core.TemplateBasedComponent#getTemplate <em>Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Template</em>'.
+	 * @see bento.language.bentocomp.core.TemplateBasedComponent#getTemplate()
+	 * @see #getTemplateBasedComponent()
+	 * @generated
+	 */
+	EReference getTemplateBasedComponent_Template();
+
+	/**
 	 * Returns the meta object for class '{@link bento.language.bentocomp.core.TransformationComponent <em>Transformation Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1156,17 +1449,6 @@ public interface CorePackage extends EPackage {
 	EAttribute getTransformationComponent_IsM2M();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link bento.language.bentocomp.core.TransformationComponent#getTemplate <em>Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Template</em>'.
-	 * @see bento.language.bentocomp.core.TransformationComponent#getTemplate()
-	 * @see #getTransformationComponent()
-	 * @generated
-	 */
-	EReference getTransformationComponent_Template();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link bento.language.bentocomp.core.TransformationComponent#getConstraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1176,6 +1458,16 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransformationComponent_Constraints();
+
+	/**
+	 * Returns the meta object for class '{@link bento.language.bentocomp.core.GraphicalEditorComponent <em>Graphical Editor Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Graphical Editor Component</em>'.
+	 * @see bento.language.bentocomp.core.GraphicalEditorComponent
+	 * @generated
+	 */
+	EClass getGraphicalEditorComponent();
 
 	/**
 	 * Returns the meta object for class '{@link bento.language.bentocomp.core.CompositeComponent <em>Composite Component</em>}'.
@@ -1571,6 +1863,24 @@ public interface CorePackage extends EPackage {
 		EReference TAGGED__TAGS = eINSTANCE.getTagged_Tags();
 
 		/**
+		 * The meta object literal for the '{@link bento.language.bentocomp.core.impl.TemplateBasedComponentImpl <em>Template Based Component</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.language.bentocomp.core.impl.TemplateBasedComponentImpl
+		 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getTemplateBasedComponent()
+		 * @generated
+		 */
+		EClass TEMPLATE_BASED_COMPONENT = eINSTANCE.getTemplateBasedComponent();
+
+		/**
+		 * The meta object literal for the '<em><b>Template</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEMPLATE_BASED_COMPONENT__TEMPLATE = eINSTANCE.getTemplateBasedComponent_Template();
+
+		/**
 		 * The meta object literal for the '{@link bento.language.bentocomp.core.impl.TransformationComponentImpl <em>Transformation Component</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1589,20 +1899,22 @@ public interface CorePackage extends EPackage {
 		EAttribute TRANSFORMATION_COMPONENT__IS_M2M = eINSTANCE.getTransformationComponent_IsM2M();
 
 		/**
-		 * The meta object literal for the '<em><b>Template</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRANSFORMATION_COMPONENT__TEMPLATE = eINSTANCE.getTransformationComponent_Template();
-
-		/**
 		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRANSFORMATION_COMPONENT__CONSTRAINTS = eINSTANCE.getTransformationComponent_Constraints();
+
+		/**
+		 * The meta object literal for the '{@link bento.language.bentocomp.core.impl.GraphicalEditorComponentImpl <em>Graphical Editor Component</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see bento.language.bentocomp.core.impl.GraphicalEditorComponentImpl
+		 * @see bento.language.bentocomp.core.impl.CorePackageImpl#getGraphicalEditorComponent()
+		 * @generated
+		 */
+		EClass GRAPHICAL_EDITOR_COMPONENT = eINSTANCE.getGraphicalEditorComponent();
 
 		/**
 		 * The meta object literal for the '{@link bento.language.bentocomp.core.impl.CompositeComponentImpl <em>Composite Component</em>}' class.

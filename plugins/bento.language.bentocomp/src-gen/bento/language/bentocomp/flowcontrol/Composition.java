@@ -11,10 +11,10 @@ import bento.language.bentocomp.core.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.Composition#getStep <em>Step</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.flowcontrol.FlowcontrolPackage#getComposition()
  * @model

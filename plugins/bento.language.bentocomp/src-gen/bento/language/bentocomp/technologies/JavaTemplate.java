@@ -11,10 +11,10 @@ import bento.language.bentocomp.core.Template;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.technologies.JavaTemplate#getQualifiedClassname <em>Qualified Classname</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.technologies.TechnologiesPackage#getJavaTemplate()
  * @model

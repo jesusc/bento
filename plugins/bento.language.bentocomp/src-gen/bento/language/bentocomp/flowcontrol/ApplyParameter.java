@@ -16,13 +16,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.ApplyParameter#getModel <em>Model</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.ApplyParameter#getBoundConceptQualifier <em>Bound Concept Qualifier</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.ApplyParameter#getBoundConcept <em>Bound Concept</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.ApplyParameter#getBinding <em>Binding</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.flowcontrol.FlowcontrolPackage#getApplyParameter()
  * @model

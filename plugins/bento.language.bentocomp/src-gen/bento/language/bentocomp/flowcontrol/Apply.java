@@ -13,12 +13,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link bento.language.bentocomp.flowcontrol.Apply#getComponent <em>Component</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.Apply#getInputModels <em>Input Models</em>}</li>
  *   <li>{@link bento.language.bentocomp.flowcontrol.Apply#getOutputModels <em>Output Models</em>}</li>
  * </ul>
- * </p>
  *
  * @see bento.language.bentocomp.flowcontrol.FlowcontrolPackage#getApply()
  * @model
