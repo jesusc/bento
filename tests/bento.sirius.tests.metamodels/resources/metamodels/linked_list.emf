@@ -1,0 +1,26 @@
+@namespace(
+	uri="http://bento/sirius/tests/linked_list",
+	prefix="linked_list")
+package linkedlist;
+
+class LinkedList {
+	val ListNode[*] nodes;
+}
+
+abstract class AbstractListNode {
+	// TODO: Assertions to make sure that it is [1] for Initial and ListNode
+	val AbstractListNode[0..1] next;
+}
+
+class InitialNode extends AbstractListNode {
+	
+}
+
+class ListNode extends AbstractListNode {
+	attr String[1] value;
+}
+
+class FinalNode extends AbstractListNode {
+	
+}
+

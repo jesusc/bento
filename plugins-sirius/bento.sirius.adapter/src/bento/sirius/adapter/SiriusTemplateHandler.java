@@ -22,6 +22,9 @@ import bento.utils.BindingUtils;
 
 public class SiriusTemplateHandler implements TechnologyConfiguration.TechnologyHandler {
 
+	/**
+	 * @param topComposite the component that is reusing "comp"
+	 */
 	@Override
 	public AdaptationResult adapt(Component comp, List<Adaptation> adaptations, CompositeComponent topComposite, FilePathResolver filePathResolver) {
 		SiriusAdaptedTemplate template = new SiriusAdaptedTemplate((GraphicalEditorComponent) comp, filePathResolver);
@@ -31,7 +34,7 @@ public class SiriusTemplateHandler implements TechnologyConfiguration.Technology
 			// BindingModelLoader2 loader = new BindingModelLoader2( a.appliedBinding.getFileName() );
 			BindingModel bindingModel = BindingUtils.readBindingDescription( a.getAppliedBinding() );
 			
-			template.adapt(conceptModel, a.getConcreteModel(), bindingModel);
+			template.adapt(conceptModel, a.getConcreteModel(), bindingModel, topComposite.getName());
 			
 		});
 		
@@ -60,7 +63,7 @@ public class SiriusTemplateHandler implements TechnologyConfiguration.Technology
 
 		Supplier<SiriusModel> pending ;
 		
-		public void adapt(ParameterModel conceptModel, Model concreteModel, BindingModel bindingModel) {
+		public void adapt(ParameterModel conceptModel, Model concreteModel, BindingModel bindingModel, String componentName) {
 			if ( pending != null ) {
 				Supplier<SiriusModel> oldPending = pending;
 				pending = () -> {
@@ -72,7 +75,7 @@ public class SiriusTemplateHandler implements TechnologyConfiguration.Technology
 			pending = () -> {
 				SiriusModel templateModel = new SiriusModel(original.getODesignFile());
 				
-				SiriusAdapter adapter = new SiriusAdapter(templateModel.getResource(), bindingModel, conceptModel.getName());
+				SiriusAdapter adapter = new SiriusAdapter(templateModel.getResource(), bindingModel, conceptModel.getName(), componentName);
 
 				return adapter.perform().getSiriusModel();
 			};

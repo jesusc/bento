@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="network" nsURI="http://bento/sirius/tests/network" nsPrefix="network">
+  <eClassifiers xsi:type="ecore:EClass" name="NetworkModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//NetworkNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="#//NetworkConnection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NetworkNode" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Computer" eSuperTypes="#//NetworkNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Router" eSuperTypes="#//NetworkNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NetworkConnection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NetworkNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NetworkNode"/>
+  </eClassifiers>
+</ecore:EPackage>

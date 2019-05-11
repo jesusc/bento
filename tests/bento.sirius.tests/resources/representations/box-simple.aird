@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:boxes="http://bento/sirius/tests/boxes" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_GwYNoHGYEemZiLIm33hBLg" selectedViews="_HS0MUHGYEemZiLIm33hBLg" version="14.1.0.201810161215">
+    <semanticResources>../models/boxes/box-simple-1.xmi</semanticResources>
+    <semanticResources>../box-simple/boxes-simple.odesign</semanticResources>
+    <semanticResources>environment:/viewpoint</semanticResources>
+    <semanticResources>../metamodels/boxes.ecore</semanticResources>
+    <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_HS0MUHGYEemZiLIm33hBLg">
+      <viewpoint xmi:type="description:Viewpoint" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_PuVnIHGYEemZiLIm33hBLg" name="box-simple-1" repPath="#_PtAKYHGYEemZiLIm33hBLg">
+        <description xmi:type="description_1:DiagramDescription" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']"/>
+        <target xmi:type="boxes:Model" href="../models/boxes/box-simple-1.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_PtAKYHGYEemZiLIm33hBLg" name="box-simple-1">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_PuRVsHGYEemZiLIm33hBLg" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_PuR8wHGYEemZiLIm33hBLg"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_Pu9SMHGYEemZiLIm33hBLg" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_Pu9SMXGYEemZiLIm33hBLg" type="Sirius" element="_PtAKYHGYEemZiLIm33hBLg" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_UYyKwHGdEemTNZKYn06pEQ" type="2001" element="_UYeBsHGdEemTNZKYn06pEQ">
+          <children xmi:type="notation:Node" xmi:id="_UY6toHGdEemTNZKYn06pEQ" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_UY6toXGdEemTNZKYn06pEQ" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_UZCCYHGdEemTNZKYn06pEQ" type="3003" element="_UYiTIHGdEemTNZKYn06pEQ">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_UZCCYXGdEemTNZKYn06pEQ" fontName="Noto Sans"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UZCCYnGdEemTNZKYn06pEQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_UYyKwXGdEemTNZKYn06pEQ" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UYyKwnGdEemTNZKYn06pEQ" x="75" y="75" width="30" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_UZANMHGdEemTNZKYn06pEQ" type="2001" element="_UYl9gHGdEemTNZKYn06pEQ">
+          <children xmi:type="notation:Node" xmi:id="_UZBbUHGdEemTNZKYn06pEQ" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_UZBbUXGdEemTNZKYn06pEQ" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_UZCpcHGdEemTNZKYn06pEQ" type="3003" element="_UYl9gXGdEemTNZKYn06pEQ">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_UZCpcXGdEemTNZKYn06pEQ" fontName="Noto Sans"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UZCpcnGdEemTNZKYn06pEQ"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_UZANMXGdEemTNZKYn06pEQ" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UZANMnGdEemTNZKYn06pEQ" x="175" y="70" width="30" height="30"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_Pu9SMnGYEemZiLIm33hBLg"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_UYeBsHGdEemTNZKYn06pEQ" name="Box1" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="boxes:BoxNode" href="../models/boxes/box-simple-1.xmi#//@boxes.0"/>
+      <semanticElements xmi:type="boxes:BoxNode" href="../models/boxes/box-simple-1.xmi#//@boxes.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_UYiTIHGdEemTNZKYn06pEQ" labelSize="12" labelPosition="node">
+        <description xmi:type="style:SquareDescription" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']/@defaultLayer/@nodeMappings[name='BoxNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']/@defaultLayer/@nodeMappings[name='BoxNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_UYl9gHGdEemTNZKYn06pEQ" name="Box2" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="boxes:BoxNode" href="../models/boxes/box-simple-1.xmi#//@boxes.1"/>
+      <semanticElements xmi:type="boxes:BoxNode" href="../models/boxes/box-simple-1.xmi#//@boxes.1"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_UYl9gXGdEemTNZKYn06pEQ" labelSize="12" labelPosition="node">
+        <description xmi:type="style:SquareDescription" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']/@defaultLayer/@nodeMappings[name='BoxNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']/@defaultLayer/@nodeMappings[name='BoxNode']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_PtItQHGYEemZiLIm33hBLg"/>
+    <activatedLayers xmi:type="description_1:Layer" href="../box-simple/boxes-simple.odesign#//@ownedViewpoints[name='box-simple']/@ownedRepresentations[name='Model']/@defaultLayer"/>
+    <target xmi:type="boxes:Model" href="../models/boxes/box-simple-1.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

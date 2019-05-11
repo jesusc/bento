@@ -10,8 +10,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>bento.language.bentocomp.resource.bento.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
+		<nature>bento.language.bentocomp.resource.bento.nature</nature>
 	</natures>
 </projectDescription>

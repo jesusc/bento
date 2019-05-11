@@ -1,0 +1,14 @@
+@namespace(
+	uri="http://bento/sirius/tests/sequence",
+	prefix="sequence")
+package sequence;
+
+class SequenceModel {
+	val Element[*] element;
+}
+
+class Element {
+	attr String[1] value;
+	val Element[0..1] next;
+}
+

@@ -42,6 +42,8 @@ public class ComponentInterpreter {
 	private Component component;
 	private FilePathResolver filePathResolver;
 	
+	private List<String> generatedArtifacts = new ArrayList<String>();
+	
 	public ComponentInterpreter(ComponentModel model, FilePathResolver filePathResolver) {
 		this.component = model.getComponent();
 		this.filePathResolver = filePathResolver;
@@ -55,7 +57,14 @@ public class ComponentInterpreter {
 			throw new MyComponentError("Only composite components can be adapted");
 		}
 		
-		result.forEach(r -> r.exportToFileSystem(filePathResolver));
+		result.forEach(r -> {
+			r.exportToFileSystem(filePathResolver);
+			generatedArtifacts.add(r.getAdaptedTemplateFileName());
+		});
+	}
+	
+	public List<? extends String> getGeneratedArtifacts() {
+		return generatedArtifacts;
 	}
 	
 	public void execute() throws MyComponentError {

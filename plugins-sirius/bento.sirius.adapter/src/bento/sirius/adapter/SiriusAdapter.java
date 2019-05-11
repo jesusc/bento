@@ -50,7 +50,7 @@ public class SiriusAdapter {
 
 	private Result result;
 	private BindingModel bindingSpec;
-	private IComponentInfoForBinding info;
+	private SiriusComponentInfo info;
 	private List<Change<?>> changesToPerform;
 	private Map<String, EPackage> targetMetamodelNameToPackage;
 	private Map<String, EPackage> siriusMetamodelNameToPackage;
@@ -83,21 +83,20 @@ public class SiriusAdapter {
 	
 	public SiriusAdapter(String odesignFile, String bindingFile, String conceptName) {
 		this(new ResourceSetImpl().getResource(URI.createURI(odesignFile), true),
-				BindingUtils.readBindingDescription(bindingFile), conceptName);
+				BindingUtils.readBindingDescription(bindingFile), conceptName, "generated");
 	}
 	
-	public SiriusAdapter(Resource siriusResource, BindingModel bindingSpec, String conceptName) {
+	public SiriusAdapter(Resource siriusResource, BindingModel bindingSpec, String conceptName, String componentName) {
 		this.result = new Result(siriusResource);
 		this.bindingSpec = bindingSpec;
-		this.info = new SiriusComponentInfo(conceptName, bindingSpec);
+		this.info = new SiriusComponentInfo(conceptName, bindingSpec, componentName);
 		this.changesToPerform = new ArrayList<>();
 		this.targetMetamodelNameToPackage = new HashMap<>();
 		this.siriusMetamodelNameToPackage = new HashMap<>();
 	}
 	
-	// TODO: Generate a proper view point name from component info
 	private String getAdaptedViewpointName() {
-		return "viewpoint adapted";
+		return info.getComponentName() + "GraphicalView";
 	}
 	
 	public Resource getSiriusResource() {

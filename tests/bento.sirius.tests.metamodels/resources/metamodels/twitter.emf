@@ -1,0 +1,13 @@
+@namespace(
+	uri="http://bento/sirius/tests/twitter",
+	prefix="twitter")
+package twitter;
+
+class TwitterModel {
+	val User[*] user;
+}
+
+class User {
+	attr String[1] userId;
+	ref User[*] following;
+}

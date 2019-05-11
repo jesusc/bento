@@ -1,0 +1,18 @@
+binding network2graph {  
+	concept   GRAPH : "http://bento/sirius/tests/graph"
+	metamodel NETWORK : "http://bento/sirius/tests/network"
+	
+	class GraphModel to NetworkModel
+	class Node to NetworkNode
+	-- We need to map the subclasses if want different graphical symbols!
+	
+	class Edge to NetworkConnection 
+	
+	feature GraphModel.node is node
+	feature GraphModel.edge is edge
+	
+	feature Node.value is nodeId
+	feature Edge.label is connectionId
+	feature Edge.src is source
+	feature Edge.tgt is "target"	
+}

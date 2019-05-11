@@ -1,0 +1,12 @@
+composite component sirius.network {
+	uses "platform:/resource/bento.sirius.tests/resources/components/graph/graph.bento"
+	                          
+	binding bindGRAPH   = "platform:/resource/bento.sirius.tests/resources/reuse/network/network2graph.gbind"
+			
+	source concept NETWORK  : "platform:/resource/bento.sirius.tests.metamodels/resources/metamodels/network.ecore"
+	source model in  : NETWORK 
+	
+	compose 
+		apply graph(bindGRAPH(in)) -> ()
+		
+}

@@ -1,0 +1,6 @@
+graphical component sirius.graph {
+	source concept GRAPH  : "platform:/resource/bento.sirius.tests.metamodels/resources/concepts/graph.ecore"
+	source model in : GRAPH
+	
+	definition sirius "platform:/resource/bento.sirius.tests/resources/components/graph/graph-simple.odesign"
+}

@@ -1,0 +1,20 @@
+@namespace(
+	uri="http://bento/sirius/tests/graph",
+	prefix="graph")
+package graph;
+
+class GraphModel {
+	val Node[*] node;
+	val Edge[*] edge;
+}
+
+class Node {
+	attr String[1] value;
+}
+
+class Edge {
+	attr String[1] label;
+	ref Node[1] src;
+	ref Node[1] tgt;
+}
+

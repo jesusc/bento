@@ -11,10 +11,12 @@ import gbind.dsl.MetamodelDeclaration;
 public class SiriusComponentInfo implements IComponentInfoForBinding {
 	private String conceptMetamodelName;
 	private BindingModel bindModel;
+	private String componentName;
 
-	public SiriusComponentInfo(String conceptMetamodelName, BindingModel bindModel) {
+	public SiriusComponentInfo(String conceptMetamodelName, BindingModel bindModel, String componentName) {
 		this.conceptMetamodelName = conceptMetamodelName;
 		this.bindModel = bindModel;
+		this.componentName = componentName;
 	}
 
 	@Override
@@ -25,6 +27,10 @@ public class SiriusComponentInfo implements IComponentInfoForBinding {
 	@Override
 	public List<IBoundMetamodelInfo> getBoundMetamodels() {
 		return this.bindModel.getRoot().getBoundMetamodels().stream().map(m -> new EclipseBoundMetamodel(m, bindModel)).collect(Collectors.toList());
+	}
+
+	public String getComponentName() {
+		return componentName;
 	}
 	
 

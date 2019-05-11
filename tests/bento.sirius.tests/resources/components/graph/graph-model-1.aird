@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:graph="http://bento/sirius/tests/graph" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_dbjlEHQJEem4upw99sx8EA" selectedViews="_eMhvAHQJEem4upw99sx8EA" version="14.1.0.201810161215">
+    <semanticResources>graph-model-1.xmi</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_eMhvAHQJEem4upw99sx8EA">
+      <viewpoint xmi:type="description:Viewpoint" href="graph-simple.odesign#//@ownedViewpoints[name='Graph']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_gZc5kHQJEem4upw99sx8EA" name="graph-model-1" repPath="#_gYkv0HQJEem4upw99sx8EA">
+        <description xmi:type="description_1:DiagramDescription" href="graph-simple.odesign#//@ownedViewpoints[name='Graph']/@ownedRepresentations[name='Graph']"/>
+        <target xmi:type="graph:GraphModel" href="graph-model-1.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_gYkv0HQJEem4upw99sx8EA" name="graph-model-1">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_gZVk0HQJEem4upw99sx8EA" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_gZVk0XQJEem4upw99sx8EA"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_gaA6QHQJEem4upw99sx8EA" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_gaBhUHQJEem4upw99sx8EA" type="Sirius" element="_gYkv0HQJEem4upw99sx8EA" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_hNbUMHQJEem4upw99sx8EA" type="2001" element="_hNFV8HQJEem4upw99sx8EA">
+          <children xmi:type="notation:Node" xmi:id="_hNgMsHQJEem4upw99sx8EA" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_hNgMsXQJEem4upw99sx8EA" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_hNjQAHQJEem4upw99sx8EA" type="3016" element="_hNMDoHQJEem4upw99sx8EA">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_hNjQAXQJEem4upw99sx8EA" fontName="Noto Sans"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hNjQAnQJEem4upw99sx8EA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_hNbUMXQJEem4upw99sx8EA" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hNbUMnQJEem4upw99sx8EA" x="245" y="100" width="30" height="30"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_gaBhUXQJEem4upw99sx8EA"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_hNFV8HQJEem4upw99sx8EA" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="graph:Node" href="graph-model-1.xmi#//@node.0"/>
+      <semanticElements xmi:type="graph:Node" href="graph-model-1.xmi#//@node.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Ellipse" uid="_hNMDoHQJEem4upw99sx8EA" labelSize="12" showIcon="false" labelPosition="node">
+        <description xmi:type="style:EllipseNodeDescription" href="graph-simple.odesign#//@ownedViewpoints[name='Graph']/@ownedRepresentations[name='Graph']/@defaultLayer/@nodeMappings[name='Node']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="graph-simple.odesign#//@ownedViewpoints[name='Graph']/@ownedRepresentations[name='Graph']/@defaultLayer/@nodeMappings[name='Node']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="graph-simple.odesign#//@ownedViewpoints[name='Graph']/@ownedRepresentations[name='Graph']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_gYw9EHQJEem4upw99sx8EA"/>
+    <activatedLayers xmi:type="description_1:Layer" href="graph-simple.odesign#//@ownedViewpoints[name='Graph']/@ownedRepresentations[name='Graph']/@defaultLayer"/>
+    <target xmi:type="graph:GraphModel" href="graph-model-1.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

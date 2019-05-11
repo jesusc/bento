@@ -1,5 +1,7 @@
 package bento.component.utils;
 
+import java.io.File;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -19,6 +21,14 @@ public class ComponentUtils {
 		
 		return new ComponentModel(r);
 	}
+	
+	public static ComponentModel readComponentDescription(File f) {
+		ResourceSet rs = new ResourceSetImpl();
+		Resource r = rs.getResource(URI.createFileURI(f.getAbsolutePath()), true);
+		
+		return new ComponentModel(r);
+	}
+	
 	
 	public static Resource copyResolvingCrossReferences(Resource r, URI uri) {
 		ResourceSet rs  = new ResourceSetImpl();

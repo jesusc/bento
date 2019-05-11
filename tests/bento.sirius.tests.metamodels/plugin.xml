@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated boxes -->
+      <package
+            uri="http://bento/sirius/tests/boxes"
+            class="bento.sirius.tests.boxes.BoxesPackage"
+            genModel="resources/metamodels/boxes.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated graph -->
+      <package
+            uri="http://bento/sirius/tests/graph"
+            class="bento.sirius.tests.metamodels.graph.GraphPackage"
+            genModel="resources/concepts/graph.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated linked_list -->
+      <package
+            uri="http://bento/sirius/tests/linked_list"
+            class="bento.sirius.tests.metamodels.linkedlist.LinkedlistPackage"
+            genModel="resources/metamodels/linked_list.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated network -->
+      <package
+            uri="http://bento/sirius/tests/network"
+            class="bento.sirius.tests.metamodels.network.NetworkPackage"
+            genModel="resources/metamodels/network.genmodel"/>
+   </extension>
+
+</plugin>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boxes:Model
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:boxes="http://bento/sirius/tests/boxes"
+    xsi:schemaLocation="http://bento/sirius/tests/boxes ../../../bento.sirius.tests.metamodels/metamodels/boxes.ecore">
+  <boxes label="Box1"/>
+  <boxes label="Box2"/>
+</boxes:Model>

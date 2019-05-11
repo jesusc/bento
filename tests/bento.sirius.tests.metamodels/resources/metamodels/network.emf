@@ -1,0 +1,27 @@
+@namespace(
+	uri="http://bento/sirius/tests/network",
+	prefix="network")
+package network;
+
+class NetworkModel {
+	val NetworkNode[*] nodes;
+	val NetworkConnection[*] connections;
+}
+
+abstract class NetworkNode {
+	attr String[1] nodeId;
+}
+
+class Computer extends NetworkNode {
+	
+}
+
+class Router extends NetworkNode {
+	
+}
+
+class NetworkConnection {
+	attr String[0..1] connectionId;
+	ref NetworkNode[1] source;
+	ref NetworkNode[1] target;	
+}

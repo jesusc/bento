@@ -1,0 +1,12 @@
+composite component sirius.twitter {
+	uses "platform:/resource//bento.sirius.tests/resources/components/graph/graph.bento"
+	                          
+	binding bindGRAPH   = "platform:/resource/bento.sirius.tests/resources/reuse/twitter/twitter2graph.gbind"
+			
+	source concept GRAPH  : "platform:/resource/bento.sirius.tests.metamodels/resources/concepts/graph.ecore"
+	source model in  : STEP 
+	
+	compose 
+		apply activities(bindSTEP(in)) -> ()
+		
+}

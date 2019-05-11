@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.sirius.tests.metamodels/src-gen" modelPluginID="bento.sirius.tests.metamodels"
+    modelName="Linked_list" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>linked_list.ecore</foreignModel>
+  <genPackages prefix="Linkedlist" basePackage="bento.sirius.tests.metamodels" disposableProviderFactory="true"
+      ecorePackage="linked_list.ecore#/">
+    <genClasses ecoreClass="linked_list.ecore#//LinkedList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference linked_list.ecore#//LinkedList/nodes"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="linked_list.ecore#//AbstractListNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference linked_list.ecore#//AbstractListNode/next"/>
+    </genClasses>
+    <genClasses ecoreClass="linked_list.ecore#//InitialNode"/>
+    <genClasses ecoreClass="linked_list.ecore#//ListNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute linked_list.ecore#//ListNode/value"/>
+    </genClasses>
+    <genClasses ecoreClass="linked_list.ecore#//FinalNode"/>
+  </genPackages>
+</genmodel:GenModel>

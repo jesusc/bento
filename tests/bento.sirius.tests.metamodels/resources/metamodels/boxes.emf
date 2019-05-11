@@ -1,0 +1,21 @@
+@namespace(
+	uri="http://bento/sirius/tests/boxes",
+	prefix="boxes")
+package boxes;
+
+class Model {
+	val BoxNode[*] boxes;
+	val Arrow[*] arrows;
+}
+
+class BoxNode {
+	attr String[1] label;
+}
+
+class Arrow {
+	attr String[1] label;
+
+	ref BoxNode[1] src;
+	ref BoxNode[1] tgt;
+}
+

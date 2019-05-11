@@ -23,3 +23,5 @@
 !componetization/bento.componetization.ui/swing2swt.jar
 
 /compiler/genericity.compiler.atl/bin/genericity/compiler/atl/*.qool
+
+/tests/bento.sirius.tests/test-outputs/*
