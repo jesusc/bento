@@ -43,7 +43,7 @@ public class TestSiriusValidity {
 		assertOdesignValidity(odesign);
 	}
 
-	/*pp*/ static void assertOdesignValidity(File odesign) {
+	/*pp*/ static Resource assertOdesignValidity(File odesign) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource r = rs.getResource(URI.createFileURI(odesign.getAbsolutePath()), true);
 		
@@ -66,6 +66,8 @@ public class TestSiriusValidity {
 				assertEquals(Diagnostic.OK, d.getSeverity());
 			}
 		}
+		
+		return r;
 	}
 
 }

@@ -5,11 +5,13 @@ binding network2graph {
 	class GraphModel to NetworkModel
 	class Node to NetworkNode
 	-- We need to map the subclasses if want different graphical symbols!
+	-- For the palette, we check that NetworkNode is abstract, and therefore we have
+	-- to create one element per subclass
 	
 	class Edge to NetworkConnection 
 	
-	feature GraphModel.node is node
-	feature GraphModel.edge is edge
+	feature GraphModel.node is nodes
+	feature GraphModel.edge is connections
 	
 	feature Node.value is nodeId
 	feature Edge.label is connectionId

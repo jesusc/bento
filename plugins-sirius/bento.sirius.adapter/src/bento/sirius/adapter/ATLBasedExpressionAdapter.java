@@ -61,14 +61,12 @@ public class ATLBasedExpressionAdapter {
 
 	private BindingModel bindingSpec;
 	private String result;
-	private IComponentInfoForBinding mmInfo;
-	private Map<String, EPackage> targetMetamodelNamesToPackages;
+	private SiriusComponentInfo mmInfo;
 	private @Nullable String boundClass;
 
-	public ATLBasedExpressionAdapter(EClass contextClass, String expression, @Nullable String boundClass, BindingModel bindingSpec, Map<String, EPackage> metamodelNamesToPackages, IComponentInfoForBinding mmInfo, Map<String, EPackage> targetMetamodelNamesToPackages) {
+	public ATLBasedExpressionAdapter(EClass contextClass, String expression, @Nullable String boundClass, BindingModel bindingSpec, SiriusComponentInfo mmInfo) {
 		this.bindingSpec = bindingSpec;
 		this.mmInfo = mmInfo;
-		this.targetMetamodelNamesToPackages = targetMetamodelNamesToPackages;
 		this.boundClass = boundClass;
 		
 		AQL2ATL converter = new AQL2ATL();
@@ -78,7 +76,8 @@ public class ATLBasedExpressionAdapter {
 		List<Resource> resources = new ArrayList<>();
 		
 		HashMap<String, Resource> namesToResources = new HashMap<String, Resource>();
-		metamodelNamesToPackages.forEach((k, v) -> {
+		
+		mmInfo.getSiriusPackages().forEach((k, v) -> {
 			namesToResources.put(k, v.eResource());
 		
 			names.add(k);
@@ -215,7 +214,7 @@ public class ATLBasedExpressionAdapter {
 		// This is duplicated form SiriusAdapter - Find a better way
 		private String getBoundMetamodelName() {
 			String dcl = mmInfo.getBoundMetamodels().get(0).getBoundMetamodelName();
-			EPackage metamodel = targetMetamodelNamesToPackages.get(dcl);
+			EPackage metamodel = mmInfo.getTargetMetamodelPackage(dcl);
 			return metamodel.getName();
 		}
 		

@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +28,7 @@ import bento.language.bentocomp.core.Component;
 import bento.language.bentocomp.technologies.TechnologiesPackage;
 import bento.repository.local.FilePathResolver;
 import bento.sirius.adapter.SiriusTemplateHandler;
-import bento.utils.BindingUtils;
+import bento.sirius.tests.model.SiriusSpecificationModel;
 
 @RunWith(Parameterized.class)
 public class TestSiriusAdapter {
@@ -35,8 +36,7 @@ public class TestSiriusAdapter {
     @Parameters(name="{0}")
     public static Collection<Object> data() {
         return Arrays.asList(new Object[] {    
-                "resources/reuse/network/network.bento"
-                
+                "resources/reuse/network/network.bento"                
            });
     }
 
@@ -67,6 +67,13 @@ public class TestSiriusAdapter {
     
 	@Test
 	public void test() throws MyComponentError {
+		File folder = bentoFile.getParentFile();
+		File specFile = new File(folder.getAbsoluteFile() + File.separator + "spec.yaml");
+		SiriusSpecificationModel spec = null;
+		if (specFile.exists()) {
+			spec = TestUtils.loadRequirementsAsYaml(specFile.getAbsolutePath());
+		}
+				
 		ComponentModel m = ComponentUtils.readComponentDescription(bentoFile);
 		
 		TestBentoFileResolver resolver = new TestBentoFileResolver();		
@@ -78,7 +85,9 @@ public class TestSiriusAdapter {
 			assertTrue(fileName.endsWith(".odesign"));
 			
 			File f = new File(fileName);
-			TestSiriusValidity.assertOdesignValidity(f);
+			Resource r = TestSiriusValidity.assertOdesignValidity(f);
+			
+			spec.assertExpectations(r);
 		}
 	}
 

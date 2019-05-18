@@ -1,0 +1,10 @@
+
+# Actions that need to exist
+create:
+# This is implicit!
+#   - className: NetworkModel
+   - className: Computer
+   - className: Router
+   - className: NetworkConnection
+
+   
