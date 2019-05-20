@@ -6,9 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -42,6 +44,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 	
 	public static class Context {
 		private String contextType = null;
+		private NodeCreationDescription toolElement;
 		
 		public void setContextType(String contextType) {
 			this.contextType = contextType;
@@ -49,6 +52,15 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		
 		public String getContextType() {
 			return contextType;
+		}
+
+		public void setToolElement(NodeCreationDescription desc) {
+			if ( this.toolElement != null ) throw new IllegalStateException("Parent operation shouldn't be rewritten");
+			this.toolElement = desc;
+		}
+		
+		public NodeCreationDescription getToolElement() {
+			return toolElement;
 		}
 	}
 	
@@ -60,11 +72,37 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		//  <viewVariable name="containerView"/> ??? what does this means?
 		
 		InitialNodeCreationOperation operation = desc.getInitialOperation();
-		ModelOperation firstModelOperations = operation.getFirstModelOperations();
 		
-		dispatch(firstModelOperations, new Context());		
+		// ModelOperation firstModelOperation = operation.getFirstModelOperations();
+		// dispatch(firstModelOperation, new Context());
+		
+		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
+		if ( instances.size() == 0 ) {
+			// ok, we do nothing but this is probably wrong
+		} else if ( instances.size() == 1 ) {
+			// CreateInstance instance = instances.get(0);
+			Context ctx = new Context();
+			ctx.setToolElement(desc);
+			dispatch(operation.getFirstModelOperations(), ctx);
+		} else {
+			throw new UnsupportedOperationException("No support for this yet");
+		}
+		
 	}
 
+	@SuppressWarnings("unchecked")
+	private <T> List<T> findChildren(EObject container, Predicate<EObject> predicate) {
+		List<T> result = new ArrayList<T>();
+		TreeIterator<EObject> it = container.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (predicate.test(obj)) {
+				result.add((T) obj);
+			}
+		}
+		return result;
+	}
+	
 	private void dispatch(ModelOperation op, Context context) {
 		if (op instanceof ChangeContext) {
 			handleChangeContext((ChangeContext) op, context);
@@ -90,6 +128,8 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 	}
 
 	private void handleCreateInstance(CreateInstance instance_, Context context) {
+		NodeCreationDescription toolElement_ = context.getToolElement();
+		
 		final EClass domainClass = getDomainClassAsEClass(instance_.getTypeName());
 		String containerType = context.getContextType();
 		String referenceName = instance_.getReferenceName();
@@ -97,20 +137,27 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		
 		if ( isMappedToNone(domainClass) ) {
 			// This may not work in all cases, let's see
-			EcoreUtil.delete(instance_, true);
+			EcoreUtil.delete(toolElement_, true);
 		}
 			
 		// switch for / pending.add
-		pending.add(instance_, (instanceElem) -> {
+		pending.add(toolElement_, (toolElementElem) -> {
 			int i = 0;
 			for(String targetDomainClass: mapToNonAbstract(getTargetDomainClassN(instance_.getTypeName())) ) {
+				NodeCreationDescription toolElement;
 				CreateInstance instance;
+				
 				if (i == 0) {
 					// This is not the best strategy, probably safer to copy all except the last one!
-					instance = instanceElem;
+					toolElement = toolElementElem;
+					instance = instance_;
 				} else {
-					instance = EcoreUtil.copy(instanceElem);
-					addToContainer(instance, instanceElem.eContainingFeature(), instanceElem.eContainer());
+					toolElement = EcoreUtil.copy(toolElementElem);
+					toolElement.setName(toolElementElem.getName() + (i + 1));
+					List<CreateInstance> copiedInstances = findChildren(toolElement, (o) -> o instanceof CreateInstance);
+					instance = copiedInstances.get(0); // size() == 1
+					
+					addToContainer(toolElement, toolElementElem.eContainingFeature(), toolElementElem.eContainer());
 				}
 				
 				instance.setTypeName(toSiriusClassName(targetDomainClass));
@@ -160,8 +207,6 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 				
 				i++;
 			}
-
-			
 		});
 			
 	}

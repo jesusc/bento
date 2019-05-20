@@ -29,6 +29,20 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="CreateEdge" edgeMappings="//@ownedViewpoints[name='Graph']/@ownedRepresentations[name='Graph']/@defaultLayer/@edgeMappings[name='Edge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="graph::Edge" referenceName="node">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="src" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="tgt" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
