@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,17 +17,24 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
+import org.eclipse.sirius.diagram.description.EdgeMapping;
+import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationVariable;
 import org.eclipse.sirius.viewpoint.description.tool.ChangeContext;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
+import org.eclipse.sirius.viewpoint.description.tool.InitEdgeCreationOperation;
 import org.eclipse.sirius.viewpoint.description.tool.InitialNodeCreationOperation;
+import org.eclipse.sirius.viewpoint.description.tool.MappingBasedToolDescription;
 import org.eclipse.sirius.viewpoint.description.tool.ModelOperation;
 import org.eclipse.sirius.viewpoint.description.tool.SetValue;
 
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.AdapterTypeUtils;
 import bento.common.adapter.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.sirius.adapter.SiriusAdapter.Result;
 import gbind.dsl.BaseFeatureBinding;
@@ -44,7 +53,8 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 	
 	public static class Context {
 		private String contextType = null;
-		private NodeCreationDescription toolElement;
+		private MappingBasedToolDescription toolElement;
+		private Map<String, EClass> variables = new HashMap<String, EClass>();
 		
 		public void setContextType(String contextType) {
 			this.contextType = contextType;
@@ -54,27 +64,28 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			return contextType;
 		}
 
-		public void setToolElement(NodeCreationDescription desc) {
+		public void setToolElement(MappingBasedToolDescription desc) {
 			if ( this.toolElement != null ) throw new IllegalStateException("Parent operation shouldn't be rewritten");
 			this.toolElement = desc;
 		}
 		
-		public NodeCreationDescription getToolElement() {
+		public MappingBasedToolDescription getToolElement() {
 			return toolElement;
+		}
+
+		public void addVariable(String name, EClass type) {
+			variables.put(name, type);
+		}
+		
+		public EClass getVariableType(String name) {
+			if ( ! variables.containsKey(name) ) 
+				throw new IllegalStateException();
+			return variables.get(name);
 		}
 	}
 	
-	public void applyTo(NodeCreationDescription desc) {
-		NodeCreationVariable variable = desc.getVariable();
-		if ( "container".equals(variable.getName()) ) {
-			// this is context
-		}
-		//  <viewVariable name="containerView"/> ??? what does this means?
-		
+	public void applyTo(NodeCreationDescription desc) {	
 		InitialNodeCreationOperation operation = desc.getInitialOperation();
-		
-		// ModelOperation firstModelOperation = operation.getFirstModelOperations();
-		// dispatch(firstModelOperation, new Context());
 		
 		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
 		if ( instances.size() == 0 ) {
@@ -86,8 +97,48 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			dispatch(operation.getFirstModelOperations(), ctx);
 		} else {
 			throw new UnsupportedOperationException("No support for this yet");
-		}
+		}		
+	}
+	
+	public void applyTo(EdgeCreationDescription desc) {
+		InitEdgeCreationOperation operation = desc.getInitialOperation();
 		
+		// Make the assumption that all edge mapping maps to the same meta-model element, or at least there
+		// is a compatible superclass that allows us to get the source and target features
+		EdgeMapping mapping = desc.getEdgeMappings().get(0);
+		EClass contextType = getDomainClassAsEClass(mapping.getDomainClass());
+		Context ctx = new Context();
+		// I could use source finder expression/target finder expression and type check
+		// The easy way, and not sure if fully correct
+		DiagramElementMapping src = mapping.getSourceMapping().get(0);
+		DiagramElementMapping tgt = mapping.getTargetMapping().get(0);
+		
+		
+		if ( desc.getSourceVariable() != null ) {
+			String name = desc.getSourceVariable().getName();
+			String domainClass = SiriusUtils.getDomainClass(src);
+			EClass type = getDomainClassAsEClass(domainClass);
+			ctx.addVariable(name, type);
+		} 
+		
+		if ( desc.getTargetVariable() != null ) {
+			String name = desc.getTargetVariable().getName();
+			String domainClass = SiriusUtils.getDomainClass(tgt);
+			EClass type = getDomainClassAsEClass(domainClass);
+			ctx.addVariable(name, type);
+		} 
+		
+		
+		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
+		if ( instances.size() == 0 ) {
+			// ok, we do nothing but this is probably wrong
+		} else if ( instances.size() == 1 ) {
+			// CreateInstance instance = instances.get(0);
+			ctx.setToolElement(desc);
+			dispatch(operation.getFirstModelOperations(), ctx);
+		} else {
+			throw new UnsupportedOperationException("No support for this yet");
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -115,7 +166,43 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		String contextType;
 		String newContext = op.getBrowseExpression();
 		if (newContext.equals("var:container")) {
+			// Generalize this adding this variable to the context above
 			contextType = getRawDomainClassName(SiriusUtils.getClosestContainerClass(op));
+		} else if (newContext.startsWith("var:") ) {
+			String varname = newContext.replace("var:", "");
+			contextType = context.getVariableType(varname).getName();
+		} else if (newContext.startsWith("aql:")) {
+			String expr = newContext.replace("aql:", "");
+			// This requires a compiler... we can map to ATL as we do for adapters or we can use the default Sirius checker?
+			// Meanwhile:
+			Pattern pat = Pattern.compile("(.+)\\.eContainer\\(\\)");
+			Matcher matcher = pat.matcher(expr);			
+			if ( matcher.matches() ) {
+				String featureName = matcher.group(1);
+				EClass eclass = context.getVariableType(featureName);
+				// AnATLyzer is able to do this analysis... but let's do it in poor's man way
+				
+				contextType = null;
+				
+				CHECK_ALL:
+				for(EClass c : getAllSourceClasses()) {
+					for (EReference eReference : c.getEAllReferences()) {
+						if (eReference.isContainment() && 
+								AdapterTypeUtils.isAssignable(eReference.getEReferenceType(), eclass) ) {
+							// This is suboptimal because we don't check further...
+							contextType = eReference.getEContainingClass().getName();
+							break CHECK_ALL;
+						}
+					}
+				}	
+
+				if (contextType == null)
+					throw new IllegalStateException("No container found for: " + newContext);
+
+				// contextType = container;
+			} else {
+				throw new UnsupportedOperationException("Browse operation not supported: " + newContext);
+			}
 		} else {
 			throw new UnsupportedOperationException("Browse operation not supported: " + newContext);
 		}
@@ -128,7 +215,8 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 	}
 
 	private void handleCreateInstance(CreateInstance instance_, Context context) {
-		NodeCreationDescription toolElement_ = context.getToolElement();
+		/* Either a node-based or an edge-based tool description */
+		MappingBasedToolDescription toolElement_ = context.getToolElement();
 		
 		final EClass domainClass = getDomainClassAsEClass(instance_.getTypeName());
 		String containerType = context.getContextType();
@@ -144,7 +232,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		pending.add(toolElement_, (toolElementElem) -> {
 			int i = 0;
 			for(String targetDomainClass: mapToNonAbstract(getTargetDomainClassN(instance_.getTypeName())) ) {
-				NodeCreationDescription toolElement;
+				MappingBasedToolDescription toolElement;
 				CreateInstance instance;
 				
 				if (i == 0) {
@@ -159,6 +247,10 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 					
 					addToContainer(toolElement, toolElementElem.eContainingFeature(), toolElementElem.eContainer());
 				}
+
+				// TODO: I put here "Create X" but this is something that can't be known generally
+				// we need optional binding specific info here (tool-level binding)
+				toolElement.setLabel("Create " + targetDomainClass);
 				
 				instance.setTypeName(toSiriusClassName(targetDomainClass));
 				
@@ -172,6 +264,8 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 				
 				instance.setReferenceName(rb.getConcreteFeature());
 			
+				List<ModelOperation> unsupported = new ArrayList<>();
+				
 				// It is way better to handle SetValue because we have the context of the instance
 				for (ModelOperation modelOperation : instance.getSubModelOperations()) {
 					if ( modelOperation instanceof SetValue ) {
@@ -182,6 +276,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 							sv.setFeatureName(((RenamingFeatureBinding) featureBinding).getConcreteFeature());
 						} else {
 							// This is handled in a separate loop, see below
+							unsupported.add(modelOperation);
 							continue;
 						}
 						
@@ -192,7 +287,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 
 
 				// Handle things that we don't support
-				for (ModelOperation modelOperation : instance.getSubModelOperations()) {
+				for (ModelOperation modelOperation : unsupported) {
 					if ( modelOperation instanceof SetValue ) {
 						SetValue sv = (SetValue) modelOperation;
 						
@@ -201,7 +296,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 							result.addNotMapped(modelOperation);
 							// pending.add(modelOperation, (mo) -> EcoreUtil.remove(mo));
 							EcoreUtil.remove(modelOperation);
-						}
+						}						
 					}
 				}
 				
@@ -227,6 +322,18 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		}
 		
 		return result.stream().map(c -> c.getName()).collect(Collectors.toList());
+	}
+
+	private List<EClass> getAllSourceClasses() {
+		List<EClass> result = new ArrayList<EClass>();
+		for (EPackage pkg : info.getSiriusPackages().values()) {
+			for (EClassifier c : pkg.getEClassifiers()) {
+				if (c instanceof EClass) {
+					result.add((EClass) c);
+				}
+			}
+		}
+		return result;
 	}
 	
 	/**

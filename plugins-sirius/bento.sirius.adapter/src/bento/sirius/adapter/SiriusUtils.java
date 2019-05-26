@@ -3,6 +3,11 @@ package bento.sirius.adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
+import org.eclipse.sirius.diagram.description.EdgeMapping;
+import org.eclipse.sirius.diagram.description.NodeMapping;
+import org.eclipse.sirius.diagram.description.util.DescriptionSwitch;
+import org.eclipse.sirius.diagram.util.DiagramSwitch;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 
 /**
@@ -38,4 +43,27 @@ public class SiriusUtils {
 		return containerClass;
 	}
 
+	private static final DomainClassSwitch DOMAIN_CLASS_SWITCH = new DomainClassSwitch();
+	
+	public static String getDomainClass(DiagramElementMapping mapping) {
+		return DOMAIN_CLASS_SWITCH.doSwitch(mapping);
+	}
+	
+	public static class DomainClassSwitch extends DescriptionSwitch<String> {
+		@Override
+		public String defaultCase(EObject object) {
+			throw new UnsupportedOperationException();
+		}
+		
+		@Override
+		public String caseNodeMapping(NodeMapping object) {
+			return object.getDomainClass();
+		}
+		
+		@Override
+		public String caseEdgeMapping(EdgeMapping object) {
+			return object.getDomainClass();
+		}
+	}
+	
 }

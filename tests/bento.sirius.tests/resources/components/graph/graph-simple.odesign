@@ -36,7 +36,7 @@
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainer()">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="graph::Edge" referenceName="node">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="graph::Edge" referenceName="edge">
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="src" valueExpression="var:source"/>
                   <subModelOperations xsi:type="tool_1:SetValue" featureName="tgt" valueExpression="var:target"/>
                 </subModelOperations>

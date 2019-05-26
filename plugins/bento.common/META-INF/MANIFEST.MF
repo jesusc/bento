@@ -5,7 +5,8 @@ Bundle-SymbolicName: bento.common
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: bento.common.Activator
 Bundle-Vendor: Miso
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: bento.common.adapter

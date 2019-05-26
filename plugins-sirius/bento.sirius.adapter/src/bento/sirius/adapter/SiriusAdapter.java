@@ -25,6 +25,7 @@ import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
+import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.description.style.BasicLabelStyleDescription;
@@ -143,10 +144,13 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 
 			
 			if (obj instanceof NodeCreationDescription) {
+				// Create node tool
 				NodeCreationDescription desc = (NodeCreationDescription) obj;
 				new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc);
-				
-				// setLabel, setName
+			} else if (obj instanceof EdgeCreationDescription ) {
+				// Create edge tool
+				EdgeCreationDescription desc = (EdgeCreationDescription) obj;
+				new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc);				
 			}
 
 		}

@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<network:NetworkModel
-    xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:network="http://bento/sirius/tests/network"
-    xsi:schemaLocation="http://bento/sirius/tests/network ../../../bento.sirius.tests.metamodels/resources/metamodels/network.ecore">
-  <nodes xsi:type="network:Computer"
-      nodeId="computer1"/>
-  <nodes xsi:type="network:Router"
-      nodeId="homeRouter"/>
-  <nodes xsi:type="network:Computer"
-      nodeId="computer2"/>
-  <connections
-      connectionId="c1-homeRouter"
-      source="//@nodes.0"
-      target="//@nodes.1"/>
-  <connections
-      connectionId="c2-homeRouter"
-      source="//@nodes.2"
-      target="//@nodes.1"/>
+<network:NetworkModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:network="http://bento/sirius/tests/network">
+  <nodes xsi:type="network:Computer" nodeId="Computer1"/>
+  <nodes xsi:type="network:Router" nodeId="Router"/>
+  <nodes xsi:type="network:Computer" nodeId="Computer2"/>
+  <connections source="//@nodes.2" target="//@nodes.1"/>
+  <connections source="//@nodes.0" target="//@nodes.1"/>
 </network:NetworkModel>
