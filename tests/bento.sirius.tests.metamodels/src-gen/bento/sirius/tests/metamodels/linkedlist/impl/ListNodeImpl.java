@@ -19,31 +19,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link bento.sirius.tests.metamodels.linkedlist.impl.ListNodeImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link bento.sirius.tests.metamodels.linkedlist.impl.ListNodeImpl#getNodeValue <em>Node Value</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getNodeValue() <em>Node Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getNodeValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = null;
+	protected static final String NODE_VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getNodeValue() <em>Node Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getNodeValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected String value = VALUE_EDEFAULT;
+	protected String nodeValue = NODE_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,8 +70,8 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	 * @generated
 	 */
 	@Override
-	public String getValue() {
-		return value;
+	public String getNodeValue() {
+		return nodeValue;
 	}
 
 	/**
@@ -80,11 +80,11 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	 * @generated
 	 */
 	@Override
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
+	public void setNodeValue(String newNodeValue) {
+		String oldNodeValue = nodeValue;
+		nodeValue = newNodeValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LinkedlistPackage.LIST_NODE__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, LinkedlistPackage.LIST_NODE__NODE_VALUE, oldNodeValue, nodeValue));
 	}
 
 	/**
@@ -95,8 +95,8 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LinkedlistPackage.LIST_NODE__VALUE:
-				return getValue();
+			case LinkedlistPackage.LIST_NODE__NODE_VALUE:
+				return getNodeValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +109,8 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LinkedlistPackage.LIST_NODE__VALUE:
-				setValue((String)newValue);
+			case LinkedlistPackage.LIST_NODE__NODE_VALUE:
+				setNodeValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +124,8 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LinkedlistPackage.LIST_NODE__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case LinkedlistPackage.LIST_NODE__NODE_VALUE:
+				setNodeValue(NODE_VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,8 +139,8 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LinkedlistPackage.LIST_NODE__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case LinkedlistPackage.LIST_NODE__NODE_VALUE:
+				return NODE_VALUE_EDEFAULT == null ? nodeValue != null : !NODE_VALUE_EDEFAULT.equals(nodeValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,8 +155,8 @@ public class ListNodeImpl extends AbstractListNodeImpl implements ListNode {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (nodeValue: ");
+		result.append(nodeValue);
 		result.append(')');
 		return result.toString();
 	}

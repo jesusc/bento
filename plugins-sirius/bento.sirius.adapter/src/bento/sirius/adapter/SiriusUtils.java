@@ -1,5 +1,12 @@
 package bento.sirius.adapter;
 
+import java.nio.channels.IllegalSelectorException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
@@ -52,7 +59,7 @@ public class SiriusUtils {
 	public static class DomainClassSwitch extends DescriptionSwitch<String> {
 		@Override
 		public String defaultCase(EObject object) {
-			throw new UnsupportedOperationException();
+			throw new UnsupportedOperationException("Domain class: " + object);
 		}
 		
 		@Override
@@ -64,6 +71,24 @@ public class SiriusUtils {
 		public String caseEdgeMapping(EdgeMapping object) {
 			return object.getDomainClass();
 		}
+		
+		public String caseContainerMapping(org.eclipse.sirius.diagram.description.ContainerMapping object) {
+			return object.getDomainClass();
+		}
+	}
+
+	public static EClass getCommonDomainClass(List<? extends DiagramElementMapping> mappings, Function<String, EClass> classNameToEClass) {
+		List<EClass> classes = new ArrayList<EClass>();
+		for (DiagramElementMapping m : mappings) {
+			EClass eclass = classNameToEClass.apply(getDomainClass(m));			
+			classes.add(eclass);
+		}
+
+		if (classes.size() > 1) {
+			throw new UnsupportedOperationException();
+		}
+		
+		return classes.get(0);
 	}
 	
 }

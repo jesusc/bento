@@ -186,7 +186,7 @@ public class LinkedlistPackageImpl extends EPackageImpl implements LinkedlistPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getListNode_Value() {
+	public EAttribute getListNode_NodeValue() {
 		return (EAttribute)listNodeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -238,7 +238,7 @@ public class LinkedlistPackageImpl extends EPackageImpl implements LinkedlistPac
 		initialNodeEClass = createEClass(INITIAL_NODE);
 
 		listNodeEClass = createEClass(LIST_NODE);
-		createEAttribute(listNodeEClass, LIST_NODE__VALUE);
+		createEAttribute(listNodeEClass, LIST_NODE__NODE_VALUE);
 
 		finalNodeEClass = createEClass(FINAL_NODE);
 	}
@@ -285,7 +285,7 @@ public class LinkedlistPackageImpl extends EPackageImpl implements LinkedlistPac
 		initEClass(initialNodeEClass, InitialNode.class, "InitialNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(listNodeEClass, ListNode.class, "ListNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getListNode_Value(), ecorePackage.getEString(), "value", null, 1, 1, ListNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getListNode_NodeValue(), ecorePackage.getEString(), "nodeValue", null, 1, 1, ListNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(finalNodeEClass, FinalNode.class, "FinalNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

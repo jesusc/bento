@@ -38,4 +38,12 @@
             genModel="resources/metamodels/network.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sequence -->
+      <package
+            uri="http://bento/sirius/tests/sequence"
+            class="bento.sirius.tests.metamodels.sequence.SequencePackage"
+            genModel="resources/concepts/sequence.genmodel"/>
+   </extension>
+
 </plugin>

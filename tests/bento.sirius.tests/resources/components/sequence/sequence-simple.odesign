@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" name="sequence-simple" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="sequence-simple" version="12.0.0.2017041100">
   <ownedViewpoints name="SequenceSimple">
-    <ownedRepresentations xsi:type="description_1:DiagramDescription" enablePopupBars="true">
-      <metamodel href="../../../bento.sirius.tests.metamodels/resources/concepts/sequence.ecore#/"/>
-      <defaultLayer name="Default"/>
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Sequence" domainClass="sequence::SequenceModel" enablePopupBars="true">
+      <metamodel href="http://bento/sirius/tests/sequence#/"/>
+      <defaultLayer name="Default">
+        <edgeMappings name="NextElementArrow" sourceMapping="//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']" targetMapping="//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']" targetFinderExpression="feature:next">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="SeqElement" domainClass="sequence::Element">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="feature:value">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateSeqElement" label="Create element" containerMappings="//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sequence::Element" referenceName="elements"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="CreateEdge" label="Create edge" precondition="aql:preTarget.next = null" edgeMappings="//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="next" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
     </ownedRepresentations>
   </ownedViewpoints>
 </description:Group>

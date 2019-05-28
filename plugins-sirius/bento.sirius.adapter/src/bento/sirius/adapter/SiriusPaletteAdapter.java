@@ -106,7 +106,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		// Make the assumption that all edge mapping maps to the same meta-model element, or at least there
 		// is a compatible superclass that allows us to get the source and target features
 		EdgeMapping mapping = desc.getEdgeMappings().get(0);
-		EClass contextType = getDomainClassAsEClass(mapping.getDomainClass());
+		
 		Context ctx = new Context();
 		// I could use source finder expression/target finder expression and type check
 		// The easy way, and not sure if fully correct

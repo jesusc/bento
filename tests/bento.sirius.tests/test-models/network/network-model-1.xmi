@@ -3,6 +3,8 @@
   <nodes xsi:type="network:Computer" nodeId="Computer1"/>
   <nodes xsi:type="network:Router" nodeId="Router"/>
   <nodes xsi:type="network:Computer" nodeId="Computer2"/>
+  <nodes xsi:type="network:Router" nodeId="Router2"/>
   <connections source="//@nodes.2" target="//@nodes.1"/>
   <connections source="//@nodes.0" target="//@nodes.1"/>
+  <connections source="//@nodes.1" target="//@nodes.3"/>
 </network:NetworkModel>

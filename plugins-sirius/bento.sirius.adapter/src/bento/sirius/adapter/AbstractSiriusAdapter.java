@@ -63,7 +63,7 @@ public abstract class AbstractSiriusAdapter {
 	}
 	
 	protected List<String> getTargetDomainClassN(String domainClassName) {
-		String realClassName = getRawDomainClassName(domainClassName);
+		String realClassName = domainClassName.contains("::") ? getRawDomainClassName(domainClassName) : domainClassName;
 		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(realClassName).orElseThrow(() -> new RuntimeException("Can't find " + realClassName));
 		return classBinding.getConcrete().stream().map(cb -> cb.getName()).collect(Collectors.toList());
 	}
@@ -75,7 +75,7 @@ public abstract class AbstractSiriusAdapter {
 //	}
 	
 	protected String getTargetDomainClass1(String domainClassName) {
-		String realClassName = getRawDomainClassName(domainClassName);
+		String realClassName = domainClassName.contains("::") ? getRawDomainClassName(domainClassName) : domainClassName;
 		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(realClassName).orElseThrow(() -> new RuntimeException("Can't find " + realClassName));
 		List<ConcreteMetaclass> concreteClasses = classBinding.getConcrete();
 		if ( concreteClasses.size() > 1 ) {

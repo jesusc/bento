@@ -15,7 +15,7 @@
     </genClasses>
     <genClasses ecoreClass="linked_list.ecore#//InitialNode"/>
     <genClasses ecoreClass="linked_list.ecore#//ListNode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute linked_list.ecore#//ListNode/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute linked_list.ecore#//ListNode/nodeValue"/>
     </genClasses>
     <genClasses ecoreClass="linked_list.ecore#//FinalNode"/>
   </genPackages>

@@ -19,7 +19,10 @@ Export-Package: bento.sirius.tests.boxes,
  bento.sirius.tests.metamodels.linkedlist.util,
  bento.sirius.tests.metamodels.network,
  bento.sirius.tests.metamodels.network.impl,
- bento.sirius.tests.metamodels.network.util
+ bento.sirius.tests.metamodels.network.util,
+ bento.sirius.tests.metamodels.sequence,
+ bento.sirius.tests.metamodels.sequence.impl,
+ bento.sirius.tests.metamodels.sequence.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

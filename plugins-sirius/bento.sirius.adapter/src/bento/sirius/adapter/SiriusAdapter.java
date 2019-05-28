@@ -25,8 +25,13 @@ import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
+import org.eclipse.sirius.diagram.description.style.SquareDescription;
+import org.eclipse.sirius.diagram.description.style.StyleFactory;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
+import org.eclipse.sirius.viewpoint.description.ColorDescription;
+import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
+import org.eclipse.sirius.viewpoint.description.FixedColor;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.description.style.BasicLabelStyleDescription;
 
@@ -107,8 +112,11 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 				handleAbstractNodeMapping((AbstractNodeMapping ) obj);
 			} else if (obj instanceof EdgeMapping) {
 				handleEdgeMapping((EdgeMapping) obj);
+			}
+
 			
-			// Styles
+			/*
+			 * 			// Styles
 			} else if (obj instanceof BasicLabelStyleDescription) {
 				BasicLabelStyleDescription label_ = (BasicLabelStyleDescription) obj;
 				DiagramElementMapping mapping = getContainer(DiagramElementMapping.class, label_);
@@ -125,7 +133,14 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 					});
 				} else if ( mapping instanceof EdgeMapping ) {
 					EdgeMapping node = (EdgeMapping) mapping;
-					final EClass domainClass = getDomainClassAsEClass(node.getDomainClass());
+					
+					final EClass domainClass; 
+					if (node.isUseDomainElement()) {
+						domainClass = getDomainClassAsEClass(node.getDomainClass());
+					} else {
+						// Relation based edge
+						domainClass = SiriusUtils.getCommonDomainClass(node.getSourceMapping(), this::getDomainClassAsEClass);
+					}
 					final String labelExpr = label_.getLabelExpression();
 					
 					add(label_, notEmpty(labelExpr), (label) -> {
@@ -136,6 +151,8 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 			}
 
 
+			 */
+			
 			// Actions - Palette
 //			if (obj instanceof CreateInstance) {
 //				CreateInstance instance_ = (CreateInstance) obj;
@@ -164,24 +181,64 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 
 
 	private void handleEdgeMapping(EdgeMapping edgeMapping_) {
-		final EClass domainClass = getDomainClassAsEClass(edgeMapping_.getDomainClass());
-		final String targetDomainClass = getTargetDomainClass1(edgeMapping_.getDomainClass());
-		
-		add(edgeMapping_, (edgeMapping) -> {
-			edgeMapping.setLabel(getLabelValue(edgeMapping.getDomainClass()));
+		if (edgeMapping_.isUseDomainElement()) {
+			// Element-based edge
+			final EClass domainClass = getDomainClassAsEClass(edgeMapping_.getDomainClass());
+			final String targetDomainClass = getTargetDomainClass1(edgeMapping_.getDomainClass());
+			
+			add(edgeMapping_, (edgeMapping) -> {
+				edgeMapping.setLabel(getLabelValue(edgeMapping.getDomainClass()));
+	
+				edgeMapping.setDomainClass(toSiriusClassName(targetDomainClass));
+				
+				// sourceFinder
+				// targetFinder
+				// sourceMapping and targetMapping are references, which have already been changed
+				
+				String sourceFinderAdapted = adaptExpression(domainClass, edgeMapping.getSourceFinderExpression());
+				String targetFinderAdapted = adaptExpression(domainClass, edgeMapping.getTargetFinderExpression());
+			
+				edgeMapping.setSourceFinderExpression(sourceFinderAdapted);
+				edgeMapping.setTargetFinderExpression(targetFinderAdapted);
+			});
+		} else {
+			// Relation-based edge
+			EClass type = SiriusUtils.getCommonDomainClass(edgeMapping_.getSourceMapping(), this::getDomainClassAsEClass);
+			// final String targetDomainClass = getTargetDomainClass1(type.getName());
 
-			edgeMapping.setDomainClass(toSiriusClassName(targetDomainClass));
+			add(edgeMapping_, isNotMappedToNone(type), (edgeMapping) -> {
+				List<String> domainClasses = getTargetDomainClassN(type.getName());
+				int i = 0;
+				
+				final String sourceFinderExpression = edgeMapping.getSourceFinderExpression();
+				final String targetFinderExpression = edgeMapping.getTargetFinderExpression();
+				
+				for(String domainClass : domainClasses) {
+					EdgeMapping edgeMappingToBeModified = edgeMapping;
+					if (i > 0) {
+						edgeMappingToBeModified = EcoreUtil.copy(edgeMapping);
+						edgeMappingToBeModified.setName(edgeMapping.getName() + "_" + domainClass);
+						// Add the created element
+						EObject container = edgeMapping.eContainer();
+						((List<Object>) container.eGet(edgeMapping.eContainingFeature())).add(edgeMappingToBeModified);
+					} 
+					
 			
-			// sourceFinder
-			// targetFinder
-			// sourceMapping and targetMapping are references, which have already been changed
-			
-			String sourceFinderAdapted = adaptExpression(domainClass, edgeMapping.getSourceFinderExpression());
-			String targetFinderAdapted = adaptExpression(domainClass, edgeMapping.getTargetFinderExpression());
+					edgeMappingToBeModified.setLabel(getLabelValue(domainClass));
+					
+					edgeMappingToBeModified.setDomainClass(toSiriusClassName(domainClass));
+	
+					String sourceFinderAdapted = adaptExpression(type, sourceFinderExpression);
+					String targetFinderAdapted = adaptExpression(type, targetFinderExpression);
+				
+					edgeMapping.setSourceFinderExpression(sourceFinderAdapted);
+					edgeMapping.setTargetFinderExpression(targetFinderAdapted);
+				
+					i++;
+				}
+			}, this::removeElement);			
+		}
 		
-			edgeMapping.setSourceFinderExpression(sourceFinderAdapted);
-			edgeMapping.setTargetFinderExpression(targetFinderAdapted);
-		});
 	}
 
 	private void handleAbstractNodeMapping(AbstractNodeMapping nm_) {
@@ -211,33 +268,49 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 				AbstractNodeMapping nmMapped = nm_;
 				String siriusClassName = toSiriusClassName(domainClass);
 				
-				if (i > 0) {
-					nmMapped = EcoreUtil.copy(nm_);
-				}
+				nmMapped = EcoreUtil.copy(nm_);
 				
-				if ( domainClasses.size() > 1 ) {
+				//if ( domainClasses.size() > 1 ) {
 					nmMapped.setName(name + "_" + getRawDomainClassName(siriusClassName)); // + (i + 1));
 					// nmMapped.setLabel(nmMapped.getLabel() + (i + 1));
+					
 					nmMapped.setLabel(name + "_" + getLabelValue(siriusClassName));
 					
 					// Add to the container in a more or less generic way
 					EObject container = nm_.eContainer();
 					((List<Object>) container.eGet(nm_.eContainingFeature())).add(nmMapped);					
-				} else {
+				//} else {
 					// TOOD: We need to be smart here: the original editor may have used the same name as the domain class
 					//       or a custom one
-					nmMapped.setLabel(getLabelValue(nm.getDomainClass()));
-				}
+					// nmMapped.setLabel(getLabelValue(nm.getDomainClass()));
+				//}
 				
 				nmMapped.setDomainClass(siriusClassName);
 				
 				nmMapped.setPreconditionExpression(adaptExpression(originalDomainClass, preconditionExpression, domainClass));
 	
 				nmMapped.setSemanticCandidatesExpression(adaptExpression(containerDomainClass_, semanticCandidates, domainClass));
+
+
+				// Map the styles
+				TreeIterator<EObject> it = nmMapped.eAllContents();
+				while (it.hasNext()) {
+					EObject obj = it.next();
+					if (obj instanceof BasicLabelStyleDescription) {
+						BasicLabelStyleDescription label_ = (BasicLabelStyleDescription) obj;
 			
+						String expression = adaptExpression(originalDomainClass, label_.getLabelExpression(), domainClass);
+						label_.setLabelExpression(expression);
+					}
+				}
+				
 				i++;
 			}
 
+			// Remove the object... I'm not sure that this is correct. Even more, if we have edges pointing to this mapping
+			// we need to re-structure them properly (in particular if we N-plicate this!)
+			EcoreUtil.remove(nm_);
+				
 		}, this::removeElement);
 
 	

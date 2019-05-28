@@ -36,7 +36,8 @@ public class TestSiriusAdapter {
     @Parameters(name="{0}")
     public static Collection<Object> data() {
         return Arrays.asList(new Object[] {    
-                "resources/reuse/network/network.bento"                
+                "resources/reuse/network/network.bento",
+                "resources/reuse/linkedlist/linkedlist.bento"
            });
     }
 

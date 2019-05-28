@@ -12,7 +12,7 @@ package bento.sirius.tests.metamodels.linkedlist;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link bento.sirius.tests.metamodels.linkedlist.ListNode#getValue <em>Value</em>}</li>
+ *   <li>{@link bento.sirius.tests.metamodels.linkedlist.ListNode#getNodeValue <em>Node Value</em>}</li>
  * </ul>
  *
  * @see bento.sirius.tests.metamodels.linkedlist.LinkedlistPackage#getListNode()
@@ -21,29 +21,29 @@ package bento.sirius.tests.metamodels.linkedlist;
  */
 public interface ListNode extends AbstractListNode {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * Returns the value of the '<em><b>Node Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Node Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(String)
-	 * @see bento.sirius.tests.metamodels.linkedlist.LinkedlistPackage#getListNode_Value()
+	 * @return the value of the '<em>Node Value</em>' attribute.
+	 * @see #setNodeValue(String)
+	 * @see bento.sirius.tests.metamodels.linkedlist.LinkedlistPackage#getListNode_NodeValue()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getValue();
+	String getNodeValue();
 
 	/**
-	 * Sets the value of the '{@link bento.sirius.tests.metamodels.linkedlist.ListNode#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link bento.sirius.tests.metamodels.linkedlist.ListNode#getNodeValue <em>Node Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Node Value</em>' attribute.
+	 * @see #getNodeValue()
 	 * @generated
 	 */
-	void setValue(String value);
+	void setNodeValue(String value);
 
 } // ListNode

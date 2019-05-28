@@ -17,7 +17,7 @@ class InitialNode extends AbstractListNode {
 }
 
 class ListNode extends AbstractListNode {
-	attr String[1] value;
+	attr String[1] nodeValue;
 }
 
 class FinalNode extends AbstractListNode {

@@ -11,7 +11,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InitialNode" eSuperTypes="#//AbstractListNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ListNode" eSuperTypes="#//AbstractListNode">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nodeValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FinalNode" eSuperTypes="#//AbstractListNode"/>
 </ecore:EPackage>

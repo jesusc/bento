@@ -4,7 +4,7 @@
 package sequence;
 
 class SequenceModel {
-	val Element[*] element;
+	val Element[*] elements;
 }
 
 class Element {

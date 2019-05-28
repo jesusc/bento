@@ -187,13 +187,13 @@ public interface LinkedlistPackage extends EPackage {
 	int LIST_NODE__NEXT = ABSTRACT_LIST_NODE__NEXT;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Node Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_NODE__VALUE = ABSTRACT_LIST_NODE_FEATURE_COUNT + 0;
+	int LIST_NODE__NODE_VALUE = ABSTRACT_LIST_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>List Node</em>' class.
@@ -314,15 +314,15 @@ public interface LinkedlistPackage extends EPackage {
 	EClass getListNode();
 
 	/**
-	 * Returns the meta object for the attribute '{@link bento.sirius.tests.metamodels.linkedlist.ListNode#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link bento.sirius.tests.metamodels.linkedlist.ListNode#getNodeValue <em>Node Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see bento.sirius.tests.metamodels.linkedlist.ListNode#getValue()
+	 * @return the meta object for the attribute '<em>Node Value</em>'.
+	 * @see bento.sirius.tests.metamodels.linkedlist.ListNode#getNodeValue()
 	 * @see #getListNode()
 	 * @generated
 	 */
-	EAttribute getListNode_Value();
+	EAttribute getListNode_NodeValue();
 
 	/**
 	 * Returns the meta object for class '{@link bento.sirius.tests.metamodels.linkedlist.FinalNode <em>Final Node</em>}'.
@@ -414,12 +414,12 @@ public interface LinkedlistPackage extends EPackage {
 		EClass LIST_NODE = eINSTANCE.getListNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Node Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LIST_NODE__VALUE = eINSTANCE.getListNode_Value();
+		EAttribute LIST_NODE__NODE_VALUE = eINSTANCE.getListNode_NodeValue();
 
 		/**
 		 * The meta object literal for the '{@link bento.sirius.tests.metamodels.linkedlist.impl.FinalNodeImpl <em>Final Node</em>}' class.

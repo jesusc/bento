@@ -11,6 +11,9 @@ binding network2graph {
 	class Edge to NetworkConnection 
 	
 	feature GraphModel.node is nodes
+	-- @create router=self.connectionsRouter
+	-- @create computer=self.connectionsComputer
+	-- feature GraphModel.edge = self.connectionsRouter->union(self.connectionsComputer)
 	feature GraphModel.edge is connections
 	
 	feature Node.value is nodeId
