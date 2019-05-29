@@ -1,0 +1,16 @@
+binding network2graph {  
+	concept   SEQ  : "http://bento/sirius/tests/sequence"
+	metamodel LIST : "http://bento/sirius/tests/linked_list"
+	
+	class SequenceModel to LinkedList
+	class Element to InitialNode, ListNode, FinalNode
+
+	feature SequenceModel.elements is nodes
+	feature Element[InitialNode].next is next
+	feature Element[ListNode].next is next
+	feature Element[FinalNode].next is next
+	
+	feature Element[InitialNode].value = 'Initial'
+	feature Element[ListNode].value is nodeValue
+	feature Element[FinalNode].value = 'Final'
+}

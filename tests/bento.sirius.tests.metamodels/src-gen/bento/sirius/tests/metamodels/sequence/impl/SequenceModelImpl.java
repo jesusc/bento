@@ -1,10 +1,11 @@
 /**
  */
-package bento.sirius.tests.metamodels.linkedlist.impl;
+package bento.sirius.tests.metamodels.sequence.impl;
 
-import bento.sirius.tests.metamodels.linkedlist.AbstractListNode;
-import bento.sirius.tests.metamodels.linkedlist.LinkedList;
-import bento.sirius.tests.metamodels.linkedlist.LinkedlistPackage;
+import bento.sirius.tests.metamodels.sequence.Element;
+import bento.sirius.tests.metamodels.sequence.SequenceModel;
+import bento.sirius.tests.metamodels.sequence.SequencePackage;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -21,34 +22,33 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Linked List</b></em>'.
+ * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link bento.sirius.tests.metamodels.linkedlist.impl.LinkedListImpl#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link bento.sirius.tests.metamodels.sequence.impl.SequenceModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LinkedListImpl extends MinimalEObjectImpl.Container implements LinkedList {
+public class SequenceModelImpl extends MinimalEObjectImpl.Container implements SequenceModel {
 	/**
-	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNodes()
+	 * @see #getElements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractListNode> nodes;
-
+	protected EList<Element> elements;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LinkedListImpl() {
+	protected SequenceModelImpl() {
 		super();
 	}
 
@@ -59,7 +59,7 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return LinkedlistPackage.Literals.LINKED_LIST;
+		return SequencePackage.Literals.SEQUENCE_MODEL;
 	}
 
 	/**
@@ -68,11 +68,11 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	 * @generated
 	 */
 	@Override
-	public EList<AbstractListNode> getNodes() {
-		if (nodes == null) {
-			nodes = new EObjectContainmentEList<AbstractListNode>(AbstractListNode.class, this, LinkedlistPackage.LINKED_LIST__NODES);
+	public EList<Element> getElements() {
+		if (elements == null) {
+			elements = new EObjectContainmentEList<Element>(Element.class, this, SequencePackage.SEQUENCE_MODEL__ELEMENTS);
 		}
-		return nodes;
+		return elements;
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LinkedlistPackage.LINKED_LIST__NODES:
-				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+			case SequencePackage.SEQUENCE_MODEL__ELEMENTS:
+				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,8 +97,8 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LinkedlistPackage.LINKED_LIST__NODES:
-				return getNodes();
+			case SequencePackage.SEQUENCE_MODEL__ELEMENTS:
+				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,9 +112,9 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LinkedlistPackage.LINKED_LIST__NODES:
-				getNodes().clear();
-				getNodes().addAll((Collection<? extends AbstractListNode>)newValue);
+			case SequencePackage.SEQUENCE_MODEL__ELEMENTS:
+				getElements().clear();
+				getElements().addAll((Collection<? extends Element>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +128,8 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LinkedlistPackage.LINKED_LIST__NODES:
-				getNodes().clear();
+			case SequencePackage.SEQUENCE_MODEL__ELEMENTS:
+				getElements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,10 +143,10 @@ public class LinkedListImpl extends MinimalEObjectImpl.Container implements Link
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LinkedlistPackage.LINKED_LIST__NODES:
-				return nodes != null && !nodes.isEmpty();
+			case SequencePackage.SEQUENCE_MODEL__ELEMENTS:
+				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //LinkedListImpl
+} //SequenceModelImpl

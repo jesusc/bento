@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:linked_list="http://bento/sirius/tests/linked_list" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_t4j5YIIHEemX9K5Ja9727A" selectedViews="_uodFQIIHEemX9K5Ja9727A" version="14.1.0.201810161215">
+    <semanticResources>linkedlist-model-1.xmi</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_uodFQIIHEemX9K5Ja9727A">
+      <viewpoint xmi:type="description:Viewpoint" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_zBds4IIHEemX9K5Ja9727A" name="linkedlist-model-1" repPath="#_zAwiQIIHEemX9K5Ja9727A">
+        <description xmi:type="description_1:DiagramDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']"/>
+        <target xmi:type="linked_list:LinkedList" href="linkedlist-model-1.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_zAwiQIIHEemX9K5Ja9727A" name="linkedlist-model-1">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_zBW_MIIHEemX9K5Ja9727A" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_zBXmQIIHEemX9K5Ja9727A"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_zCCUoIIHEemX9K5Ja9727A" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_zCCUoYIHEemX9K5Ja9727A" type="Sirius" element="_zAwiQIIHEemX9K5Ja9727A" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_zmu9IIIHEemX9K5Ja9727A" type="2002" element="_zmdQUIIHEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_zmyAcIIHEemX9K5Ja9727A" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_zmzOkIIHEemX9K5Ja9727A" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_zmzOkYIHEemX9K5Ja9727A"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_zmzOkoIHEemX9K5Ja9727A"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_zmu9IYIHEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zmu9IoIHEemX9K5Ja9727A" x="80" y="70"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_0UpMAIIHEemX9K5Ja9727A" type="2002" element="_0UjscIIHEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_0UqaIIIHEemX9K5Ja9727A" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_0UrBMIIHEemX9K5Ja9727A" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_0UrBMYIHEemX9K5Ja9727A"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_0UrBMoIHEemX9K5Ja9727A"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_0UpMAYIHEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0UpMAoIHEemX9K5Ja9727A" x="380" y="124"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_96XSqIITEemX9K5Ja9727A" type="2002" element="_96VdcIITEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_96X5sIITEemX9K5Ja9727A" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_96X5sYITEemX9K5Ja9727A" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_96X5soITEemX9K5Ja9727A"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_96X5s4ITEemX9K5Ja9727A"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_96XSqYITEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_96XSqoITEemX9K5Ja9727A" x="465" y="270"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_B-IDAIIUEemX9K5Ja9727A" type="2002" element="_B-FmwIIUEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_B-IDA4IUEemX9K5Ja9727A" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_B-IDBIIUEemX9K5Ja9727A" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_B-IDBYIUEemX9K5Ja9727A"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_B-IDBoIUEemX9K5Ja9727A"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_B-IDAYIUEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_B-IDAoIUEemX9K5Ja9727A" x="640" y="104"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_zCCUooIHEemX9K5Ja9727A"/>
+        <edges xmi:type="notation:Edge" xmi:id="_skcIoIITEemX9K5Ja9727A" type="4001" element="_skZsYIITEemX9K5Ja9727A" source="_zmu9IIIHEemX9K5Ja9727A" target="_0UpMAIIHEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_skcIpIITEemX9K5Ja9727A" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_skcIpYITEemX9K5Ja9727A" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_skcIpoITEemX9K5Ja9727A" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_skcIp4ITEemX9K5Ja9727A" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_skcIqIITEemX9K5Ja9727A" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_skcIqYITEemX9K5Ja9727A" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_skcIoYITEemX9K5Ja9727A"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_skcIooITEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_skcIo4ITEemX9K5Ja9727A" points="[0, 0, -152, -23]$[152, 23, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_skcvsIITEemX9K5Ja9727A" id="(1.0,0.6470588235294118)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_skcvsYITEemX9K5Ja9727A" id="(0.0,0.19117647058823528)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_Bgr5EIIUEemX9K5Ja9727A" type="4001" element="_Bgpc0IIUEemX9K5Ja9727A" source="_0UpMAIIHEemX9K5Ja9727A" target="_96XSqIITEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_Bgr5FIIUEemX9K5Ja9727A" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bgr5FYIUEemX9K5Ja9727A" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Bgr5FoIUEemX9K5Ja9727A" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bgr5F4IUEemX9K5Ja9727A" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Bgr5GIIUEemX9K5Ja9727A" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bgr5GYIUEemX9K5Ja9727A" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_Bgr5EYIUEemX9K5Ja9727A"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_Bgr5EoIUEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Bgr5E4IUEemX9K5Ja9727A" points="[0, 0, -74, -78]$[74, 78, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bgr5GoIUEemX9K5Ja9727A" id="(0.5743243243243243,1.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bgr5G4IUEemX9K5Ja9727A" id="(0.5,0.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_CT768IIUEemX9K5Ja9727A" type="4001" element="_CT5etIIUEemX9K5Ja9727A" source="_96XSqIITEemX9K5Ja9727A" target="_B-IDAIIUEemX9K5Ja9727A">
+          <children xmi:type="notation:Node" xmi:id="_CT769IIUEemX9K5Ja9727A" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CT769YIUEemX9K5Ja9727A" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_CT769oIUEemX9K5Ja9727A" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CT7694IUEemX9K5Ja9727A" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_CT76-IIUEemX9K5Ja9727A" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CT76-YIUEemX9K5Ja9727A" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_CT768YIUEemX9K5Ja9727A"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_CT768oIUEemX9K5Ja9727A" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CT7684IUEemX9K5Ja9727A" points="[0, 0, -110, 98]$[110, -98, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CT8iAIIUEemX9K5Ja9727A" id="(0.7094594594594594,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CT8iAYIUEemX9K5Ja9727A" id="(0.2702702702702703,1.0)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_zmdQUIIHEemX9K5Ja9727A" name="Initial" outgoingEdges="_skZsYIITEemX9K5Ja9727A">
+      <target xmi:type="linked_list:InitialNode" href="linkedlist-model-1.xmi#//@nodes.0"/>
+      <semanticElements xmi:type="linked_list:InitialNode" href="linkedlist-model-1.xmi#//@nodes.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_zmiv4IIHEemX9K5Ja9727A" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_InitialNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_InitialNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_0UjscIIHEemX9K5Ja9727A" name="John" outgoingEdges="_Bgpc0IIUEemX9K5Ja9727A" incomingEdges="_skZsYIITEemX9K5Ja9727A">
+      <target xmi:type="linked_list:ListNode" href="linkedlist-model-1.xmi#//@nodes.0/@next"/>
+      <semanticElements xmi:type="linked_list:ListNode" href="linkedlist-model-1.xmi#//@nodes.0/@next"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_0UlhoIIHEemX9K5Ja9727A" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_ListNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_ListNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_skZsYIITEemX9K5Ja9727A" sourceNode="_zmdQUIIHEemX9K5Ja9727A" targetNode="_0UjscIIHEemX9K5Ja9727A">
+      <target xmi:type="linked_list:InitialNode" href="linkedlist-model-1.xmi#//@nodes.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_skZsYYITEemX9K5Ja9727A" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@edgeMappings[name='NextElementArrow_InitialNode']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_skZsYoITEemX9K5Ja9727A" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@edgeMappings[name='NextElementArrow_InitialNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_96VdcIITEemX9K5Ja9727A" name="Jane" outgoingEdges="_CT5etIIUEemX9K5Ja9727A" incomingEdges="_Bgpc0IIUEemX9K5Ja9727A">
+      <target xmi:type="linked_list:ListNode" href="linkedlist-model-1.xmi#//@nodes.0/@next/@next"/>
+      <semanticElements xmi:type="linked_list:ListNode" href="linkedlist-model-1.xmi#//@nodes.0/@next/@next"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_96VdcYITEemX9K5Ja9727A" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_ListNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_ListNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Bgpc0IIUEemX9K5Ja9727A" sourceNode="_0UjscIIHEemX9K5Ja9727A" targetNode="_96VdcIITEemX9K5Ja9727A">
+      <target xmi:type="linked_list:ListNode" href="linkedlist-model-1.xmi#//@nodes.0/@next"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Bgpc0YIUEemX9K5Ja9727A" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@edgeMappings[name='NextElementArrow_ListNode']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Bgpc0oIUEemX9K5Ja9727A" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@edgeMappings[name='NextElementArrow_ListNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_B-FmwIIUEemX9K5Ja9727A" name="Final" incomingEdges="_CT5etIIUEemX9K5Ja9727A">
+      <target xmi:type="linked_list:FinalNode" href="linkedlist-model-1.xmi#//@nodes.0/@next/@next/@next"/>
+      <semanticElements xmi:type="linked_list:FinalNode" href="linkedlist-model-1.xmi#//@nodes.0/@next/@next/@next"/>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_B-FmwYIUEemX9K5Ja9727A" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_FinalNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@containerMappings[name='SeqElement_FinalNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_CT5etIIUEemX9K5Ja9727A" sourceNode="_96VdcIITEemX9K5Ja9727A" targetNode="_B-FmwIIUEemX9K5Ja9727A">
+      <target xmi:type="linked_list:ListNode" href="linkedlist-model-1.xmi#//@nodes.0/@next/@next"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_CT5etYIUEemX9K5Ja9727A" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@edgeMappings[name='NextElementArrow_ListNode']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_CT5etoIUEemX9K5Ja9727A" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer/@edgeMappings[name='NextElementArrow_ListNode']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_zA5sMIIHEemX9K5Ja9727A"/>
+    <activatedLayers xmi:type="description_1:Layer" href="../../test-outputs/sirius.linkedlist.odesign#//@ownedViewpoints[name='sirius.linkedlistGraphicalView']/@ownedRepresentations[name='linkedlist']/@defaultLayer"/>
+    <target xmi:type="linked_list:LinkedList" href="linkedlist-model-1.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

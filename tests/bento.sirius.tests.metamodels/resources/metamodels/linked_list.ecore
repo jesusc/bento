@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="linkedlist" nsURI="http://bento/sirius/tests/linked_list" nsPrefix="linked_list">
   <eClassifiers xsi:type="ecore:EClass" name="LinkedList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-        eType="#//ListNode" containment="true"/>
+        eType="#//AbstractListNode" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractListNode" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//AbstractListNode"

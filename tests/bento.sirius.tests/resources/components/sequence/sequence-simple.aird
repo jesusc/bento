@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sequence="http://bento/sirius/tests/sequence" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_edCS0H_TEemIbMxROKJ-mw" selectedViews="_fM1YEH_TEemIbMxROKJ-mw" version="14.1.0.201810161215">
+    <semanticResources>sequence-simple.odesign</semanticResources>
+    <semanticResources>environment:/viewpoint</semanticResources>
+    <semanticResources>http://bento/sirius/tests/sequence</semanticResources>
+    <semanticResources>sequence-model-1.xmi</semanticResources>
+    <semanticResources>platform:/resource/bento.sirius.tests.metamodels/resources/concepts/sequence.genmodel</semanticResources>
+    <semanticResources>platform:/resource/bento.sirius.tests.metamodels/resources/concepts/sequence.ecore</semanticResources>
+    <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_fM1YEH_TEemIbMxROKJ-mw">
+      <viewpoint xmi:type="description:Viewpoint" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_l5ut4H_TEemIbMxROKJ-mw" name="sequence-simple-1" repPath="#_l4ohsH_TEemIbMxROKJ-mw">
+        <description xmi:type="description_1:DiagramDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']"/>
+        <target xmi:type="sequence:SequenceModel" href="sequence-model-1.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_l4ohsH_TEemIbMxROKJ-mw" name="sequence-simple-1">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_l5p1YH_TEemIbMxROKJ-mw" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_l5qccH_TEemIbMxROKJ-mw"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_l6KLsH_TEemIbMxROKJ-mw" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_l6KLsX_TEemIbMxROKJ-mw" type="Sirius" element="_l4ohsH_TEemIbMxROKJ-mw" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_l6aqYH_TEemIbMxROKJ-mw" type="2002" element="_l5IQ8H_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_l6hYEH_TEemIbMxROKJ-mw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_l6jNQH_TEemIbMxROKJ-mw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_l6jNQX_TEemIbMxROKJ-mw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_l6jNQn_TEemIbMxROKJ-mw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_l6aqYX_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l6aqYn_TEemIbMxROKJ-mw" y="260"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_l6os0H_TEemIbMxROKJ-mw" type="2002" element="_l5grcH_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_l6pT4H_TEemIbMxROKJ-mw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_l6pT4X_TEemIbMxROKJ-mw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_l6pT4n_TEemIbMxROKJ-mw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_l6pT43_TEemIbMxROKJ-mw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_l6os0X_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l6os0n_TEemIbMxROKJ-mw" x="105" y="115"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_l6p68H_TEemIbMxROKJ-mw" type="2002" element="_l5grc3_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_l6p683_TEemIbMxROKJ-mw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_l6p69H_TEemIbMxROKJ-mw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_l6p69X_TEemIbMxROKJ-mw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_l6p69n_TEemIbMxROKJ-mw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_l6p68X_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l6p68n_TEemIbMxROKJ-mw" x="310" y="105"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_o336Bn_TEemIbMxROKJ-mw" type="2002" element="_o3zBgH_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_o34hEH_TEemIbMxROKJ-mw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_o34hEX_TEemIbMxROKJ-mw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_o34hEn_TEemIbMxROKJ-mw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_o34hE3_TEemIbMxROKJ-mw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_o336B3_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_o336CH_TEemIbMxROKJ-mw" x="510" y="105"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_l6KLsn_TEemIbMxROKJ-mw"/>
+        <edges xmi:type="notation:Edge" xmi:id="_l66ZoH_TEemIbMxROKJ-mw" type="4001" element="_l5mLAH_TEemIbMxROKJ-mw" source="_l6aqYH_TEemIbMxROKJ-mw" target="_l6os0H_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_l67nwH_TEemIbMxROKJ-mw" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l67nwX_TEemIbMxROKJ-mw" x="-12" y="-9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_l69c8H_TEemIbMxROKJ-mw" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l69c8X_TEemIbMxROKJ-mw" x="10" y="7"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_l69c8n_TEemIbMxROKJ-mw" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l69c83_TEemIbMxROKJ-mw" x="10" y="6"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_l66ZoX_TEemIbMxROKJ-mw"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_l66Zon_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_l66Zo3_TEemIbMxROKJ-mw" points="[0, 0, -105, 77]$[105, -77, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_l7K4UH_TEemIbMxROKJ-mw" id="(0.5067567567567568,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_l7K4UX_TEemIbMxROKJ-mw" id="(0.5067567567567568,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_l7LfYH_TEemIbMxROKJ-mw" type="4001" element="_l5onQH_TEemIbMxROKJ-mw" source="_l6os0H_TEemIbMxROKJ-mw" target="_l6p68H_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_l7LfZH_TEemIbMxROKJ-mw" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l7LfZX_TEemIbMxROKJ-mw" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_l7LfZn_TEemIbMxROKJ-mw" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l7LfZ3_TEemIbMxROKJ-mw" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_l7MGcH_TEemIbMxROKJ-mw" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l7MGcX_TEemIbMxROKJ-mw" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_l7LfYX_TEemIbMxROKJ-mw"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_l7LfYn_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_l7LfY3_TEemIbMxROKJ-mw" points="[10, -9, -132, -25]$[67, -9, -75, -25]$[67, -9, -75, -25]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_l7MGcn_TEemIbMxROKJ-mw" id="(0.9324324324324325,0.6176470588235294)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_l7MGc3_TEemIbMxROKJ-mw" id="(0.5067567567567568,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_sozN8H_TEemIbMxROKJ-mw" type="4001" element="_sovjlH_TEemIbMxROKJ-mw" source="_l6p68H_TEemIbMxROKJ-mw" target="_o336Bn_TEemIbMxROKJ-mw">
+          <children xmi:type="notation:Node" xmi:id="_soz1AH_TEemIbMxROKJ-mw" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_soz1AX_TEemIbMxROKJ-mw" x="-1" y="-9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_soz1An_TEemIbMxROKJ-mw" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_soz1A3_TEemIbMxROKJ-mw" x="-3" y="7"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_soz1BH_TEemIbMxROKJ-mw" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_soz1BX_TEemIbMxROKJ-mw" x="-13" y="8"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_sozN8X_TEemIbMxROKJ-mw"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_sozN8n_TEemIbMxROKJ-mw" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_sozN83_TEemIbMxROKJ-mw" points="[0, 0, -52, 0]$[52, 0, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_soz1Bn_TEemIbMxROKJ-mw" id="(1.0,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_soz1B3_TEemIbMxROKJ-mw" id="(0.0,0.5)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_l5IQ8H_TEemIbMxROKJ-mw" name="E1" outgoingEdges="_l5mLAH_TEemIbMxROKJ-mw">
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_l5Z9wH_TEemIbMxROKJ-mw" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0"/>
+      <semanticElements xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_l5grcH_TEemIbMxROKJ-mw" name="E2" outgoingEdges="_l5onQH_TEemIbMxROKJ-mw" incomingEdges="_l5mLAH_TEemIbMxROKJ-mw">
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_l5grcX_TEemIbMxROKJ-mw" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next"/>
+      <semanticElements xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_l5grc3_TEemIbMxROKJ-mw" name="E3" outgoingEdges="_sovjlH_TEemIbMxROKJ-mw" incomingEdges="_l5onQH_TEemIbMxROKJ-mw">
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_l5grdH_TEemIbMxROKJ-mw" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next/@next"/>
+      <semanticElements xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next/@next"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_l5mLAH_TEemIbMxROKJ-mw" sourceNode="_l5IQ8H_TEemIbMxROKJ-mw" targetNode="_l5grcH_TEemIbMxROKJ-mw">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_l5oAMH_TEemIbMxROKJ-mw" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_l5oAMX_TEemIbMxROKJ-mw" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_l5onQH_TEemIbMxROKJ-mw" sourceNode="_l5grcH_TEemIbMxROKJ-mw" targetNode="_l5grc3_TEemIbMxROKJ-mw">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_l5onQX_TEemIbMxROKJ-mw" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_l5onQn_TEemIbMxROKJ-mw" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_o3zBgH_TEemIbMxROKJ-mw" name="E4" incomingEdges="_sovjlH_TEemIbMxROKJ-mw">
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_o3zokH_TEemIbMxROKJ-mw" labelSize="12" showIcon="false" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@containerMappings[name='SeqElement']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next/@next/@next"/>
+      <semanticElements xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next/@next/@next"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_sovjlH_TEemIbMxROKJ-mw" sourceNode="_l5grc3_TEemIbMxROKJ-mw" targetNode="_o3zBgH_TEemIbMxROKJ-mw">
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_sovjlX_TEemIbMxROKJ-mw" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_sovjln_TEemIbMxROKJ-mw" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer/@edgeMappings[name='NextElementArrow']"/>
+      <target xmi:type="sequence:Element" href="sequence-model-1.xmi#//@elements.0/@next/@next"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_l4wdgH_TEemIbMxROKJ-mw"/>
+    <activatedLayers xmi:type="description_1:Layer" href="sequence-simple.odesign#//@ownedViewpoints[name='SequenceSimple']/@ownedRepresentations[name='Sequence']/@defaultLayer"/>
+    <target xmi:type="sequence:SequenceModel" href="sequence-model-1.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

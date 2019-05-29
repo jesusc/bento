@@ -1,6 +1,7 @@
 package bento.sirius.adapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,8 +21,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.diagram.description.ContainerMapping;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
+import org.eclipse.sirius.diagram.description.NodeMapping;
+import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationVariable;
@@ -84,8 +88,33 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		}
 	}
 	
+	public void applyTo(ContainerCreationDescription desc) {	
+		InitialNodeCreationOperation operation = desc.getInitialOperation();
+		
+		List<DiagramElementMapping> mappedSources = this.pending.getMappings().getTargets(desc.getContainerMappings());
+		desc.getContainerMappings().clear();		
+		desc.getContainerMappings().addAll((Collection<? extends ContainerMapping>) mappedSources);
+		
+		// The rest is just similar to applyTo(NodeCreationDescription) -- Try to factorise
+		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
+		if ( instances.size() == 0 ) {
+			// ok, we do nothing but this is probably wrong
+		} else if ( instances.size() == 1 ) {
+			// CreateInstance instance = instances.get(0);
+			Context ctx = new Context();
+			ctx.setToolElement(desc);
+			dispatch(operation.getFirstModelOperations(), ctx);
+		} else {
+			throw new UnsupportedOperationException("No support for this yet");
+		}		
+	}
+	
 	public void applyTo(NodeCreationDescription desc) {	
 		InitialNodeCreationOperation operation = desc.getInitialOperation();
+		
+		List<DiagramElementMapping> mappedSources = this.pending.getMappings().getTargets(desc.getNodeMappings());
+		desc.getNodeMappings().clear();		
+		desc.getNodeMappings().addAll((Collection<? extends NodeMapping>) mappedSources);
 		
 		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
 		if ( instances.size() == 0 ) {
@@ -112,6 +141,10 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		// The easy way, and not sure if fully correct
 		DiagramElementMapping src = mapping.getSourceMapping().get(0);
 		DiagramElementMapping tgt = mapping.getTargetMapping().get(0);
+		
+		List<DiagramElementMapping> mappedSources = this.pending.getMappings().getTargets(desc.getEdgeMappings());
+		desc.getEdgeMappings().clear();		
+		desc.getEdgeMappings().addAll((Collection<? extends EdgeMapping>) mappedSources);
 		
 		
 		if ( desc.getSourceVariable() != null ) {

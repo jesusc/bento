@@ -1,0 +1,6 @@
+graphical component sirius.sequence {
+	source concept SEQ  : "platform:/resource/bento.sirius.tests.metamodels/resources/concepts/sequence.ecore"
+	source model in : SEQ
+	
+	definition sirius "platform:/resource/bento.sirius.tests/resources/components/sequence/sequence-simple.odesign"
+}

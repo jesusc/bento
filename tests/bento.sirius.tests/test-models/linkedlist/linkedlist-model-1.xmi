@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<linked_list:LinkedList xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:linked_list="http://bento/sirius/tests/linked_list">
+  <nodes xsi:type="linked_list:InitialNode">
+    <next xsi:type="linked_list:ListNode" nodeValue="John">
+      <next xsi:type="linked_list:ListNode" nodeValue="Jane">
+        <next xsi:type="linked_list:FinalNode"/>
+      </next>
+    </next>
+  </nodes>
+</linked_list:LinkedList>

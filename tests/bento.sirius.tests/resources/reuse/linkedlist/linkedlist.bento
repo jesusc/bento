@@ -1,0 +1,12 @@
+composite component sirius.linkedlist {
+	uses "platform:/resource/bento.sirius.tests/resources/components/sequence/sequence.bento"
+	                          
+	binding bindSeq   = "platform:/resource/bento.sirius.tests/resources/reuse/linkedlist/linkedlist2sequence.gbind"
+			
+	source concept LINKEDLIST  : "platform:/resource/bento.sirius.tests.metamodels/resources/metamodels/linked_list.ecore"
+	source model in  : LINKEDLIST 
+	
+	compose 
+		apply sequence(bindSeq(in)) -> ()
+		
+}

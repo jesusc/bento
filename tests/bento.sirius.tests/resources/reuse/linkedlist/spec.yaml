@@ -1,0 +1,7 @@
+
+# Actions that need to exist
+create:
+   - className: ListNode
+   - className: InitialNode
+   - className: FinalNode
+      

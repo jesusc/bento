@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface LinkedList extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
-	 * The list contents are of type {@link bento.sirius.tests.metamodels.linkedlist.ListNode}.
+	 * The list contents are of type {@link bento.sirius.tests.metamodels.linkedlist.AbstractListNode}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
@@ -37,6 +37,6 @@ public interface LinkedList extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ListNode> getNodes();
+	EList<AbstractListNode> getNodes();
 
 } // LinkedList

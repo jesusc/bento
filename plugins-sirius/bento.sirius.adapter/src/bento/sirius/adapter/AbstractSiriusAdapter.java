@@ -138,11 +138,6 @@ public abstract class AbstractSiriusAdapter {
 		}
 		return true;
 	}
-
-	protected void removeElement(EObject o) {
-		// This needs to be smart and remove every reference...
-		EcoreUtil.delete(o);
-	}
 	
 	protected <T> T getContainer(Class<T> klass, EObject obj) {
 		if ( obj == null ) {
@@ -208,6 +203,13 @@ public abstract class AbstractSiriusAdapter {
 			}
 		} else if ( expression.startsWith("feature:") ) {
 			String featureName = expression.replaceFirst("feature:", "");
+			// Try to adapt with the expression adapter
+			ATLBasedExpressionAdapter adapter = new ATLBasedExpressionAdapter(contextClass, "self." + featureName, boundClass, bindingSpec, info);
+			String s = adapter.getResult();
+			if ( s != null )
+				return "aql: " + s;
+			
+			
 			BaseFeatureBinding feature = getFeature(contextClass, featureName);
 			if ( feature == null ) {
 				throw new AdapterError("Feature " + featureName + " not found.");

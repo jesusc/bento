@@ -52,7 +52,7 @@ public class SiriusModel {
 		List<T> result = new ArrayList<T>();
 		for (Entry<EClass, List<EObject>> entry : elements.entrySet()) {
 			Class<?> k = entry.getKey().getInstanceClass();
-			if (k.isAssignableFrom(c)) {
+			if (c.isAssignableFrom(k)) {
 				result.addAll((Collection<? extends T>) entry.getValue());
 			}
 		}

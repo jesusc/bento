@@ -1,53 +1,41 @@
 package bento.sirius.adapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
-import org.eclipse.sirius.diagram.description.NodeMapping;
-import org.eclipse.sirius.diagram.description.style.SquareDescription;
-import org.eclipse.sirius.diagram.description.style.StyleFactory;
+import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
-import org.eclipse.sirius.viewpoint.description.ColorDescription;
-import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
-import org.eclipse.sirius.viewpoint.description.FixedColor;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.description.style.BasicLabelStyleDescription;
 
 import bento.binding.utils.BindingModel;
 import bento.common.adapter.IComponentInfoForBinding.IBoundMetamodelInfo;
-import bento.sirius.adapter.AbstractSiriusAdapter.Change;
 import bento.utils.BindingUtils;
-import gbind.dsl.BaseFeatureBinding;
-import gbind.dsl.ClassBinding;
-import gbind.dsl.ConcreteMetaclass;
-import gbind.dsl.RenamingFeatureBinding;
 
 public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskExecutor {
 
 	private Result result;
 	private List<Change<?>> changesToPerform;
+	private List<EObject> toRemove;
+
+	private SiriusModel siriusModel;
+	private Trace<DiagramElementMapping, DiagramElementMapping> mappings = new Trace<>();
+	
 	
 	public static class Result {
 		private Resource siriusResource;
@@ -83,8 +71,9 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 	public SiriusAdapter(Resource siriusResource, BindingModel bindingSpec, String conceptName, String componentName) {
 		super(bindingSpec, new SiriusComponentInfo(conceptName, bindingSpec, componentName));
 		this.result = new Result(siriusResource);
+		this.siriusModel = this.result.getSiriusModel();
 		this.changesToPerform = new ArrayList<>();
-		
+		this.toRemove = new ArrayList<>();
 	}
 	
 	private String getAdaptedViewpointName() {
@@ -95,26 +84,47 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		return result.getSiriusResource();
 	}
 	
+	@Override
+	public Trace<DiagramElementMapping, DiagramElementMapping> getMappings() {
+		return mappings;
+	}
+	
 	public Result perform() {
-		TreeIterator<EObject> iterator = result.getSiriusResource().getAllContents();		
+		// TreeIterator<EObject> iterator = result.getSiriusResource().getAllContents();		
 		
-		while (iterator.hasNext()) {
-			EObject obj = iterator.next();
+		List<? extends Viewpoint> viewpoints = siriusModel.allInstancesOf(Viewpoint.class);
+		viewpoints.forEach(this::transformViewpoint);
+		
+		// The transformation of diagram descriptions also allows us to to all the meta-model information
+		List<? extends DiagramDescription> descriptions = siriusModel.allInstancesOf(DiagramDescription.class);
+		descriptions.forEach(this::handleDiagramDescription);
+		
+		// Node and Container mappings. As a side effect we generate an explicit mapping so that it is possible
+		// to properly link node mappings later
+		List<? extends AbstractNodeMapping> mappings = siriusModel.allInstancesOf(AbstractNodeMapping.class);
+		mappings.forEach(this::handleAbstractNodeMapping);
 
-			if (obj instanceof Viewpoint) {
-				transformViewpoint((Viewpoint) obj);
+		// Now edges
+		List<? extends EdgeMapping> edges = siriusModel.allInstancesOf(EdgeMapping.class);
+		edges.forEach(this::handleEdgeMapping);
+		
+		// Tool section
+		List<? extends NodeCreationDescription> nodeTools = siriusModel.allInstancesOf(NodeCreationDescription.class);
+		nodeTools.forEach(desc -> new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc));
+
+		List<? extends ContainerCreationDescription> containerTools = siriusModel.allInstancesOf(ContainerCreationDescription.class);
+		containerTools.forEach(desc -> new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc));
+
+		List<? extends EdgeCreationDescription> edgeTools = siriusModel.allInstancesOf(EdgeCreationDescription.class);
+		edgeTools.forEach(desc -> new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc));
+		
+		changesToPerform.forEach(Change::apply);
+		changesToPerform.clear();
+		
+		for(EObject o : toRemove) {
+			EcoreUtil.delete(o);
+		}
 				
-			// Mappings	
-			} else if (obj instanceof DiagramDescription) {
-				handleDiagramDescription((DiagramDescription) obj);				
-			} else if (obj instanceof AbstractNodeMapping) {
-				// Handles both NodeMapping and ContainerMapping
-				handleAbstractNodeMapping((AbstractNodeMapping ) obj);
-			} else if (obj instanceof EdgeMapping) {
-				handleEdgeMapping((EdgeMapping) obj);
-			}
-
-			
 			/*
 			 * 			// Styles
 			} else if (obj instanceof BasicLabelStyleDescription) {
@@ -149,80 +159,94 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 					});				
 				}
 			}
+*/
 
-
-			 */
-			
-			// Actions - Palette
-//			if (obj instanceof CreateInstance) {
-//				CreateInstance instance_ = (CreateInstance) obj;
-//				handleCreateInstance(instance_);				
-//			}			
-
-			
-			if (obj instanceof NodeCreationDescription) {
-				// Create node tool
-				NodeCreationDescription desc = (NodeCreationDescription) obj;
-				new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc);
-			} else if (obj instanceof EdgeCreationDescription ) {
-				// Create edge tool
-				EdgeCreationDescription desc = (EdgeCreationDescription) obj;
-				new SiriusPaletteAdapter(bindingSpec, info, result, this).applyTo(desc);				
-			}
-
-		}
-
-		for (Change<?> change : changesToPerform) {
-			change.apply();
-		}
-				
 		return result;
 	}
 
 
 	private void handleEdgeMapping(EdgeMapping edgeMapping_) {
+		final List<DiagramElementMapping> sourceMappings = new ArrayList<>(edgeMapping_.getSourceMapping());
+		final List<DiagramElementMapping> targetMappings = new ArrayList<>(edgeMapping_.getTargetMapping());
+
 		if (edgeMapping_.isUseDomainElement()) {
 			// Element-based edge
 			final EClass domainClass = getDomainClassAsEClass(edgeMapping_.getDomainClass());
 			final String targetDomainClass = getTargetDomainClass1(edgeMapping_.getDomainClass());
 			
-			add(edgeMapping_, (edgeMapping) -> {
-				edgeMapping.setLabel(getLabelValue(edgeMapping.getDomainClass()));
+			EdgeMapping edgeMappingToBeModified = EcoreUtil.copy(edgeMapping_);
+			this.mappings.add(edgeMapping_, edgeMappingToBeModified);
+			this.removeElement(edgeMapping_);
+			
+			add(edgeMappingToBeModified, (x) -> {
+				edgeMappingToBeModified.setLabel(getLabelValue(edgeMappingToBeModified.getDomainClass()));
+
+				// Add the created element
+					EObject container = edgeMapping_.eContainer();
+					((List<Object>) container.eGet(edgeMapping_.eContainingFeature())).add(edgeMappingToBeModified);
 	
-				edgeMapping.setDomainClass(toSiriusClassName(targetDomainClass));
+				edgeMappingToBeModified.setDomainClass(toSiriusClassName(targetDomainClass));
+				
+				List<DiagramElementMapping> mappedSources = mappings.getTargets(sourceMappings);
+				List<DiagramElementMapping> mappedTargets = mappings.getTargets(targetMappings);
+				
+				edgeMappingToBeModified.getSourceMapping().clear();
+				edgeMappingToBeModified.getTargetMapping().clear();
+
+				edgeMappingToBeModified.getSourceMapping().addAll(mappedSources);
+				edgeMappingToBeModified.getTargetMapping().addAll(mappedTargets);
 				
 				// sourceFinder
 				// targetFinder
 				// sourceMapping and targetMapping are references, which have already been changed
 				
-				String sourceFinderAdapted = adaptExpression(domainClass, edgeMapping.getSourceFinderExpression());
-				String targetFinderAdapted = adaptExpression(domainClass, edgeMapping.getTargetFinderExpression());
+				String sourceFinderAdapted = adaptExpression(domainClass, edgeMappingToBeModified.getSourceFinderExpression());
+				String targetFinderAdapted = adaptExpression(domainClass, edgeMappingToBeModified.getTargetFinderExpression());
 			
-				edgeMapping.setSourceFinderExpression(sourceFinderAdapted);
-				edgeMapping.setTargetFinderExpression(targetFinderAdapted);
+				edgeMappingToBeModified.setSourceFinderExpression(sourceFinderAdapted);
+				edgeMappingToBeModified.setTargetFinderExpression(targetFinderAdapted);
 			});
 		} else {
 			// Relation-based edge
 			EClass type = SiriusUtils.getCommonDomainClass(edgeMapping_.getSourceMapping(), this::getDomainClassAsEClass);
 			// final String targetDomainClass = getTargetDomainClass1(type.getName());
 
-			add(edgeMapping_, isNotMappedToNone(type), (edgeMapping) -> {
+			if ( isNotMappedToNone(type) ) {
 				List<String> domainClasses = getTargetDomainClassN(type.getName());
 				int i = 0;
 				
-				final String sourceFinderExpression = edgeMapping.getSourceFinderExpression();
-				final String targetFinderExpression = edgeMapping.getTargetFinderExpression();
+				final String sourceFinderExpression = edgeMapping_.getSourceFinderExpression();
+				final String targetFinderExpression = edgeMapping_.getTargetFinderExpression();
 				
 				for(String domainClass : domainClasses) {
-					EdgeMapping edgeMappingToBeModified = edgeMapping;
-					if (i > 0) {
-						edgeMappingToBeModified = EcoreUtil.copy(edgeMapping);
-						edgeMappingToBeModified.setName(edgeMapping.getName() + "_" + domainClass);
+
+					EdgeMapping edgeMappingToBeModified = EcoreUtil.copy(edgeMapping_);
+					edgeMappingToBeModified.setName(edgeMapping_.getName() + "_" + domainClass);
+					
+					mappings.add(edgeMapping_, edgeMappingToBeModified);
+					
+					add(edgeMapping_, (edgeMapping) -> {
 						// Add the created element
 						EObject container = edgeMapping.eContainer();
 						((List<Object>) container.eGet(edgeMapping.eContainingFeature())).add(edgeMappingToBeModified);
-					} 
+					});
+						
+					List<DiagramElementMapping> mappedSources = mappings.getTargets(sourceMappings);
+					List<DiagramElementMapping> mappedTargets = mappings.getTargets(targetMappings);
+
+					// We need to filter the mapped sources to get only those that has as source the
+					// current mapping. 
+					List<DiagramElementMapping> filteredSources = mappedSources.stream().filter(m -> getRawDomainClassName(SiriusUtils.getDomainClass(m)).equals(domainClass)).collect(Collectors.toList());
+					if (filteredSources.size() != 1) 
+						throw new IllegalStateException();
 					
+					
+					edgeMappingToBeModified.getSourceMapping().clear();
+					edgeMappingToBeModified.getTargetMapping().clear();
+
+					edgeMappingToBeModified.getSourceMapping().addAll(filteredSources);
+					edgeMappingToBeModified.getTargetMapping().addAll(mappedTargets);
+
 			
 					edgeMappingToBeModified.setLabel(getLabelValue(domainClass));
 					
@@ -231,12 +255,16 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 					String sourceFinderAdapted = adaptExpression(type, sourceFinderExpression);
 					String targetFinderAdapted = adaptExpression(type, targetFinderExpression);
 				
-					edgeMapping.setSourceFinderExpression(sourceFinderAdapted);
-					edgeMapping.setTargetFinderExpression(targetFinderAdapted);
+					edgeMapping_.setSourceFinderExpression(sourceFinderAdapted);
+					edgeMapping_.setTargetFinderExpression(targetFinderAdapted);
 				
 					i++;
 				}
-			}, this::removeElement);			
+				
+				this.removeElement(edgeMapping_);				
+			} else {
+				this.removeElement(edgeMapping_);			
+			}
 		}
 		
 	}
@@ -259,16 +287,16 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		final EClass containerDomainClass_ = containerDomainClass;
 		final String preconditionExpression = nm_.getPreconditionExpression();
 		
-		add(nm_, isNotMappedToNone(originalDomainClass), (nm) -> {
+		if (! isMappedToNone(originalDomainClass)) {		
 			int i = 0;
 			List<String> domainClasses = getTargetDomainClassN(nm_.getDomainClass());
 			
-			String name = nm.getName();
+			String name = nm_.getName();
 			for(String domainClass : domainClasses) {
-				AbstractNodeMapping nmMapped = nm_;
 				String siriusClassName = toSiriusClassName(domainClass);
 				
-				nmMapped = EcoreUtil.copy(nm_);
+				AbstractNodeMapping nmMapped = EcoreUtil.copy(nm_);
+				mappings.add(nm_, nmMapped);
 				
 				//if ( domainClasses.size() > 1 ) {
 					nmMapped.setName(name + "_" + getRawDomainClassName(siriusClassName)); // + (i + 1));
@@ -277,8 +305,11 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 					nmMapped.setLabel(name + "_" + getLabelValue(siriusClassName));
 					
 					// Add to the container in a more or less generic way
-					EObject container = nm_.eContainer();
-					((List<Object>) container.eGet(nm_.eContainingFeature())).add(nmMapped);					
+					add(nm_, (x) -> {
+						EObject container = nm_.eContainer();
+						((List<Object>) container.eGet(nm_.eContainingFeature())).add(nmMapped);
+					});
+					
 				//} else {
 					// TOOD: We need to be smart here: the original editor may have used the same name as the domain class
 					//       or a custom one
@@ -299,8 +330,10 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 					if (obj instanceof BasicLabelStyleDescription) {
 						BasicLabelStyleDescription label_ = (BasicLabelStyleDescription) obj;
 			
-						String expression = adaptExpression(originalDomainClass, label_.getLabelExpression(), domainClass);
-						label_.setLabelExpression(expression);
+						add(label_, (x) -> {
+							String expression = adaptExpression(originalDomainClass, label_.getLabelExpression(), domainClass);
+							label_.setLabelExpression(expression);
+						});
 					}
 				}
 				
@@ -309,10 +342,10 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 
 			// Remove the object... I'm not sure that this is correct. Even more, if we have edges pointing to this mapping
 			// we need to re-structure them properly (in particular if we N-plicate this!)
-			EcoreUtil.remove(nm_);
-				
-		}, this::removeElement);
-
+			removeElement(nm_);			
+		} else {
+			removeElement(nm_);
+		}
 	
 			
 	}
@@ -376,6 +409,8 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		this.changesToPerform.add(change);
 	}
 
-	
+	protected void removeElement(EObject o) {
+		toRemove.add(o);
+	}
 
 }

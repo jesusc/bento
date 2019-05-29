@@ -277,7 +277,7 @@ public class LinkedlistPackageImpl extends EPackageImpl implements LinkedlistPac
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(linkedListEClass, LinkedList.class, "LinkedList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLinkedList_Nodes(), this.getListNode(), null, "nodes", null, 0, -1, LinkedList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkedList_Nodes(), this.getAbstractListNode(), null, "nodes", null, 0, -1, LinkedList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractListNodeEClass, AbstractListNode.class, "AbstractListNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractListNode_Next(), this.getAbstractListNode(), null, "next", null, 0, 1, AbstractListNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
