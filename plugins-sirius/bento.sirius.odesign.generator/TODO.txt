@@ -1,0 +1,2 @@
+- The creation of nodes features for edge and container 
+- The modification of names of the classe (Ask again Jesus and Javi)

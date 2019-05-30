@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.odesign*"
+            id="com.odesign.generator.ui.popusmenu.contribution.IFile">
+         <action
+               class="com.odesign.generator.ui.popusmenu.MetamodelGenerator"
+               enablesFor="+"
+               id="com.odesign.generator.popusmenu.MetamodelGenerator"
+               icon="icons/settings.gif"
+               label="Generate new Odesign"
+               menubarPath="additions"/>
+      </objectContribution>
+   </extension>
+</plugin>
