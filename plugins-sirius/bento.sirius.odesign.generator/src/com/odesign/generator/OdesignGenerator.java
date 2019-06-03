@@ -510,7 +510,7 @@ public class OdesignGenerator {
 				.createChangeContext();
 		CreateInstance edgeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createCreateInstance();
-		edgeInstance.setReferenceName("containsIntermediatElement");
+		edgeInstance.setReferenceName("containsIntermediateElement");
 		edgeInstance.setTypeName(ep.getName() + "::IntemediateElement");
 		edgeInstance.setVariableName("instance");
 		changecontext.getSubModelOperations().add(edgeInstance);

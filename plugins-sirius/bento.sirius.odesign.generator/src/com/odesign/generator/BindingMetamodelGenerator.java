@@ -272,17 +272,17 @@ public class BindingMetamodelGenerator {
 		metamodelElementFeatureRef.setUpperBound(-1);
 		metamodelElementFeatureRef.setContainment(true);
 
-		EReference intemediateAttribute = EcoreFactory.eINSTANCE.createEReference();
-		intemediateAttribute.setName("intermediateElement");
-		intemediateAttribute.setEType(this.intermediateElement);
-		intemediateAttribute.setLowerBound(0);
-		intemediateAttribute.setUpperBound(-1);
+//		EReference intemediateAttribute = EcoreFactory.eINSTANCE.createEReference();
+//		intemediateAttribute.setName("intermediateElement");
+//		intemediateAttribute.setEType(this.intermediateElement);
+//		intemediateAttribute.setLowerBound(0);
+//		intemediateAttribute.setUpperBound(-1);
 
 		EReference bindingAttribute = EcoreFactory.eINSTANCE.createEReference();
 		bindingAttribute.setName("bindingElement");
 		bindingAttribute.setEType(this.bindingElement);
-		bindingAttribute.setLowerBound(0);
-		bindingAttribute.setUpperBound(-1);
+		bindingAttribute.setLowerBound(1);
+		bindingAttribute.setUpperBound(1);
 
 		EReference metamodelAttribute = EcoreFactory.eINSTANCE.createEReference();
 		metamodelAttribute.setName("metamodElelement");
@@ -296,10 +296,10 @@ public class BindingMetamodelGenerator {
 		intemediateAttribute2.setLowerBound(0);
 		intemediateAttribute2.setUpperBound(-1);
 
-		this.bindingElement.getEReferences().add(intemediateAttribute);
+//		this.bindingElement.getEReferences().add(intemediateAttribute);
 		this.intermediateElement.getEReferences().add(bindingAttribute);
 		this.intermediateElement.getEReferences().add(metamodelAttribute);
-		this.metamodelElement.getEReferences().add(intemediateAttribute2);
+//		this.metamodelElement.getEReferences().add(intemediateAttribute2);
 
 		EAttribute nameElement = EcoreFactory.eINSTANCE.createEAttribute();
 		nameElement.setName("name");
@@ -357,13 +357,13 @@ public class BindingMetamodelGenerator {
 //			final List<EObject> eObjects = new ArrayList<EObject>(copier.copyAll(ep.eContents()));
 //			copier.copyReferences();
 			final Resource resource = rs.createResource(URI.createFileURI(file.getAbsolutePath() + "/new-" + ep.getName() + ".ecore"));
-		
+			
 			resource.getContents().add(ep);
 		
             resource.setURI(URI.createFileURI(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore"));
          
-            this.generatedFile = new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore");
-			resource.save(new FileOutputStream(generatedFile), null);
+			resource.save(new FileOutputStream(
+					new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore")), null);
 			
 //			ep.eResource().save(new FileOutputStream(
 //					new File(file.getAbsolutePath() + "/GENERATED-" + this.ep.getName() + ".ecore")), null);
