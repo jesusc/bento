@@ -1,11 +1,14 @@
 package bento.sirius.adapter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -14,6 +17,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
+import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
 
 import bento.binding.utils.BindingModel;
@@ -28,6 +33,8 @@ public abstract class AbstractSiriusAdapter {
 	protected BindingModel bindingSpec;
 	protected SiriusComponentInfo info;
 
+	protected final Predicate<String> ONLY_MAPPED = (d) -> !isMappedToNone(d);
+		
 	public AbstractSiriusAdapter(BindingModel bindingSpec, SiriusComponentInfo info) {
 		this.bindingSpec = bindingSpec;	
 		this.info = info;
@@ -63,7 +70,7 @@ public abstract class AbstractSiriusAdapter {
 	}
 	
 	protected List<String> getTargetDomainClassN(String domainClassName) {
-		String realClassName = domainClassName.contains("::") ? getRawDomainClassName(domainClassName) : domainClassName;
+		String realClassName = getRawDomainClassName(domainClassName);
 		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(realClassName).orElseThrow(() -> new RuntimeException("Can't find " + realClassName));
 		return classBinding.getConcrete().stream().map(cb -> cb.getName()).collect(Collectors.toList());
 	}
@@ -121,24 +128,21 @@ public abstract class AbstractSiriusAdapter {
 	}
 
 	protected boolean isMappedToNone(EClass originalDomainClass) {
-		return ! isNotMappedToNone(originalDomainClass.getName());
+		return isMappedToNone(originalDomainClass.getName());
 	}
 	
-	protected boolean isNotMappedToNone(EClass originalDomainClass) {
-		return isNotMappedToNone(originalDomainClass.getName());
-	}
-	
-	protected boolean isNotMappedToNone(String originalDomainClass) {
-		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(originalDomainClass)
-				.orElseThrow(() -> new AdapterError("Can't find " + originalDomainClass));
+	protected boolean isMappedToNone(String originalDomainClass) {
+		String domainClass = getRawDomainClassName(originalDomainClass);
+		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(domainClass)
+				.orElseThrow(() -> new AdapterError("Can't find " + domainClass));
 		
 		for(ConcreteMetaclass c : classBinding.getConcrete()) {
 			 if ( c.getName().toLowerCase().equals("none") ) 
-				 return false;
+				 return true;
 		}
-		return true;
+		return false;
 	}
-	
+		
 	protected <T> T getContainer(Class<T> klass, EObject obj) {
 		if ( obj == null ) {
 			return null;
@@ -204,7 +208,7 @@ public abstract class AbstractSiriusAdapter {
 		} else if ( expression.startsWith("feature:") ) {
 			String featureName = expression.replaceFirst("feature:", "");
 			// Try to adapt with the expression adapter
-			ATLBasedExpressionAdapter adapter = new ATLBasedExpressionAdapter(contextClass, "self." + featureName, boundClass, bindingSpec, info);
+			ATLBasedExpressionAdapter adapter = new ATLBasedExpressionAdapter(contextClass, "self." + SiriusUtils.toAQLIdentifier(featureName), boundClass, bindingSpec, info);
 			String s = adapter.getResult();
 			if ( s != null )
 				return "aql: " + s;

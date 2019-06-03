@@ -25,9 +25,9 @@ public class TestSiriusValidity {
     @Parameters(name="{0}")
     public static Collection<Object> data() {
         return Arrays.asList(new Object[] {    
-                "resources/box-simple/boxes-simple.odesign",
                 "resources/components/graph/graph-simple.odesign",
-                
+                "resources/components/sequence/sequence-simple.odesign",
+                "resources/components/workflow/workflow.odesign",
            });
     }
 

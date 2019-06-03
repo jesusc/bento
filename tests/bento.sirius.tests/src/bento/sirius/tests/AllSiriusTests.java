@@ -5,7 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestSiriusAdapter.class, TestSiriusValidity.class })
+@SuiteClasses({ 
+	TestSiriusAdapter.class, 
+	TestSiriusValidity.class })
 public class AllSiriusTests {
 
 }

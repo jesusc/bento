@@ -70,6 +70,8 @@ public class ATLBasedExpressionAdapter {
 		this.boundClass = boundClass;
 		
 		AQL2ATL converter = new AQL2ATL();
+		converter.addMetamodels(mmInfo.getSiriusPackages().values());
+		
 		OclExpression atl = converter.toExpression(expression);
 		
 		List<String> names = new ArrayList<>();

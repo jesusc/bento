@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:stepeasy="http://bento/sirius/stepeasy" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_fK3lgIXvEemP6oEFwIH1kw" selectedViews="_giuwUIXvEemP6oEFwIH1kw" version="14.1.0.201810161215">
+    <semanticResources>stepeasy-1.xmi</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_giuwUIXvEemP6oEFwIH1kw">
+      <viewpoint xmi:type="description:Viewpoint" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_j8eTUIXvEemP6oEFwIH1kw" name="stepeasy-1" repPath="#_j4cu8IXvEemP6oEFwIH1kw">
+        <description xmi:type="description_1:DiagramDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']"/>
+        <target xmi:type="stepeasy:StepEasyMachine" href="stepeasy-1.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_j4cu8IXvEemP6oEFwIH1kw" name="stepeasy-1">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_j8YzwIXvEemP6oEFwIH1kw" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_j8Za0IXvEemP6oEFwIH1kw"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_j9EJMIXvEemP6oEFwIH1kw" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_j9EJMYXvEemP6oEFwIH1kw" type="Sirius" element="_j4cu8IXvEemP6oEFwIH1kw" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_j9b8oIXvEemP6oEFwIH1kw" type="2001" element="_j8FRwIXvEemP6oEFwIH1kw">
+          <children xmi:type="notation:Node" xmi:id="_j9ow8IXvEemP6oEFwIH1kw" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_j9ow8YXvEemP6oEFwIH1kw" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_j-Y-4IXvEemP6oEFwIH1kw" type="3002" element="_j8MmgIXvEemP6oEFwIH1kw">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_j-Y-4YXvEemP6oEFwIH1kw" fontName="Noto Sans"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_j-Y-4oXvEemP6oEFwIH1kw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_j9b8oYXvEemP6oEFwIH1kw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_j9b8ooXvEemP6oEFwIH1kw" x="105" y="85" width="30" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_pJ3lQIXvEemP6oEFwIH1kw" type="2002" element="_pJwQgIXvEemP6oEFwIH1kw">
+          <children xmi:type="notation:Node" xmi:id="_pJ4MUIXvEemP6oEFwIH1kw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_pJ6BgIXvEemP6oEFwIH1kw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_pJ6BgYXvEemP6oEFwIH1kw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_pJ6BgoXvEemP6oEFwIH1kw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_pJ3lQYXvEemP6oEFwIH1kw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pJ3lQoXvEemP6oEFwIH1kw" x="270" y="55"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_j9EJMoXvEemP6oEFwIH1kw"/>
+        <edges xmi:type="notation:Edge" xmi:id="_rKVBIIXvEemP6oEFwIH1kw" type="4001" element="_rKIM0IXvEemP6oEFwIH1kw" source="_j9b8oIXvEemP6oEFwIH1kw" target="_pJ3lQIXvEemP6oEFwIH1kw">
+          <children xmi:type="notation:Node" xmi:id="_rKWPQIXvEemP6oEFwIH1kw" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKWPQYXvEemP6oEFwIH1kw" x="-1" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_rKW2UIXvEemP6oEFwIH1kw" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKW2UYXvEemP6oEFwIH1kw" x="-1" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_rKXdYIXvEemP6oEFwIH1kw" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKXdYYXvEemP6oEFwIH1kw" y="9"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_rKVBIYXvEemP6oEFwIH1kw"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_rKVBIoXvEemP6oEFwIH1kw" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rKVBI4XvEemP6oEFwIH1kw" points="[0, 0, -135, 23]$[135, -23, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_rKZ5oIXvEemP6oEFwIH1kw" id="(1.0,0.6666666666666666)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_rKZ5oYXvEemP6oEFwIH1kw" id="(0.0,0.39705882352941174)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_j8FRwIXvEemP6oEFwIH1kw" name="InitialA" outgoingEdges="_rKIM0IXvEemP6oEFwIH1kw" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="stepeasy:InitialTask" href="stepeasy-1.xmi#//@tasks.0"/>
+      <semanticElements xmi:type="stepeasy:InitialTask" href="stepeasy-1.xmi#//@tasks.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Dot" uid="_j8MmgIXvEemP6oEFwIH1kw" labelSize="12" labelPosition="node" backgroundColor="0,0,0">
+        <description xmi:type="style:DotDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@nodeMappings[name='Initial_InitialTask']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@nodeMappings[name='Initial_InitialTask']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_pJwQgIXvEemP6oEFwIH1kw" incomingEdges="_rKIM0IXvEemP6oEFwIH1kw">
+      <target xmi:type="stepeasy:AwsLambdaTask" href="stepeasy-1.xmi#//@tasks.1"/>
+      <semanticElements xmi:type="stepeasy:AwsLambdaTask" href="stepeasy-1.xmi#//@tasks.1"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_pJyswIXvEemP6oEFwIH1kw" labelSize="12" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@containerMappings[name='Task_AwsLambdaTask']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@containerMappings[name='Task_AwsLambdaTask']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_rKIM0IXvEemP6oEFwIH1kw" sourceNode="_j8FRwIXvEemP6oEFwIH1kw" targetNode="_pJwQgIXvEemP6oEFwIH1kw">
+      <target xmi:type="stepeasy:Transition" href="stepeasy-1.xmi#//@transitions.0"/>
+      <semanticElements xmi:type="stepeasy:Transition" href="stepeasy-1.xmi#//@transitions.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_rKKpEIXvEemP6oEFwIH1kw" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@edgeMappings[name='FlowEdge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_rKKpEYXvEemP6oEFwIH1kw" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@edgeMappings[name='FlowEdge']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_j4rYcIXvEemP6oEFwIH1kw"/>
+    <activatedLayers xmi:type="description_1:Layer" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer"/>
+    <target xmi:type="stepeasy:StepEasyMachine" href="stepeasy-1.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

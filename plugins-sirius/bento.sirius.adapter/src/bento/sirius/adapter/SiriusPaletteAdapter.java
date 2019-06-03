@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.diagram.description.ContainerMapping;
+import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
@@ -92,6 +93,11 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		InitialNodeCreationOperation operation = desc.getInitialOperation();
 		
 		List<DiagramElementMapping> mappedSources = this.pending.getMappings().getTargets(desc.getContainerMappings());
+		if (mappedSources.isEmpty()) {
+			// If all the source mappings are mapped to none, then we just remove the tool element
+			pending.removeElement(desc);
+			return;
+		}
 		desc.getContainerMappings().clear();		
 		desc.getContainerMappings().addAll((Collection<? extends ContainerMapping>) mappedSources);
 		
@@ -112,7 +118,12 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 	public void applyTo(NodeCreationDescription desc) {	
 		InitialNodeCreationOperation operation = desc.getInitialOperation();
 		
-		List<DiagramElementMapping> mappedSources = this.pending.getMappings().getTargets(desc.getNodeMappings());
+		List<DiagramElementMapping> mappedSources = this.pending.getMappings().getTargets(SiriusUtils.filter(desc.getNodeMappings(), ONLY_MAPPED));
+		if (mappedSources.isEmpty()) {
+			// If all the source mappings are mapped to none, then we just remove the tool element
+			pending.removeElement(desc);
+			return;
+		}
 		desc.getNodeMappings().clear();		
 		desc.getNodeMappings().addAll((Collection<? extends NodeMapping>) mappedSources);
 		
@@ -128,7 +139,7 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			throw new UnsupportedOperationException("No support for this yet");
 		}		
 	}
-	
+
 	public void applyTo(EdgeCreationDescription desc) {
 		InitEdgeCreationOperation operation = desc.getInitialOperation();
 		
@@ -252,7 +263,12 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		MappingBasedToolDescription toolElement_ = context.getToolElement();
 		
 		final EClass domainClass = getDomainClassAsEClass(instance_.getTypeName());
-		String containerType = context.getContextType();
+		final String containerType;
+		if (context.getContextType() == null) {
+			containerType = getDefaultContainer(instance_);
+		} else {
+			containerType = context.getContextType();
+		}
 		String referenceName = instance_.getReferenceName();
 		
 		
@@ -337,6 +353,13 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			}
 		});
 			
+	}
+
+	private String getDefaultContainer(EObject obj) {
+		DiagramDescription d = getContainer(DiagramDescription.class, obj);
+		if (d == null)
+			throw new AdapterError("No default container for " + obj);
+		return getRawDomainClassName(d.getDomainClass());
 	}
 
 	/**
