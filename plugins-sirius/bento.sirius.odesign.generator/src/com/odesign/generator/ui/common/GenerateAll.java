@@ -18,73 +18,62 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 
 import com.odesign.generator.Generate;
 
 
 
 
+
 public class GenerateAll {
 
-	/**
-	 * The model URI.
-	 */
-	private String modelURI;
-
-	/**
-	 * The output folder.
-	 */
-	private IContainer targetFolder;
-
-	/**
-	 * The other arguments.
-	 */
-	List<? extends Object> arguments;
+	private EPackage epacakge;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param modelURI2
-	 *            is the URI of the model.
-	 * @param targetFolder
-	 *            is the output folder
-	 * @param arguments
-	 *            are the other arguments
-	 * @throws IOException
-	 *             Thrown when the output cannot be saved.
+	 * @param modelURI2    is the URI of the model.
+	 * @param targetFolder is the output folder
+	 * @param arguments    are the other arguments
+	 * @throws IOException Thrown when the output cannot be saved.
 	 * @generated
 	 */
-	public GenerateAll(String modelURI2, IContainer targetFolder, List<? extends Object> arguments) {
-		this.modelURI = modelURI2;
-		this.targetFolder = targetFolder;
-		this.arguments = arguments;
-		
-		
+	public GenerateAll() {
+
 	}
 
 	/**
 	 * Launches the generation.
 	 *
-	 * @param monitor
-	 *            This will be used to display progress information to the user.
-	 * @throws IOException
-	 *             Thrown when the output cannot be saved.
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @param monitor This will be used to display progress information to the user.
+	 * @throws IOException            Thrown when the output cannot be saved.
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 * @generated
 	 */
-	public void doGenerate(IProgressMonitor monitor) throws IOException, InstantiationException, IllegalAccessException {
+	public void doGenerate(String modelURI, IProgressMonitor monitor, IContainer targetFolder,
+			List<? extends Object> arguments) throws IOException, InstantiationException, IllegalAccessException {
 		if (!targetFolder.getLocation().toFile().exists()) {
 			targetFolder.getLocation().toFile().mkdirs();
 		}
+
+		monitor.subTask("Loading odesign...");
+		System.out.println("\"generated-metamodel-and-odesign\"");
+
 		
-		monitor.subTask("Loading...");
-		System.out.println("---> target file iiis readyy !");
-        Generate gen0 = new  Generate(modelURI, targetFolder.getLocation().toFile(), arguments);
+		Generate generate=new Generate();
+		generate.GenerateOdesignMM(modelURI, targetFolder.getLocation().toFile(), arguments);
 		monitor.worked(1);
 
-	
-		
+		this.epacakge = generate.getEpack();
+
 	}
 
+	public EPackage getEPacakeg() {
+		return this.epacakge;
+	}
+	
+
 }
+

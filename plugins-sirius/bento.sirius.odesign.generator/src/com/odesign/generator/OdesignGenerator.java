@@ -82,7 +82,8 @@ public class OdesignGenerator {
 	private List<NodeMapping> nmlist = new ArrayList<>();
 	private Group group;
 	private Viewpoint viewPoint;
-	private File generatedFile;;
+	private File generatedFile;
+	private List<EdgeMapping> emlist = new ArrayList<>();
 
 	public Resource getResource() {
 		return resource;
@@ -123,7 +124,7 @@ public class OdesignGenerator {
 			if (obj instanceof DiagramDescription) {
 				this.diagramDescription = (DiagramDescription) obj;
 				this.epackage = ((DiagramDescription) obj).getMetamodel().get(0);
-				
+
 			}
 
 			if (obj instanceof Group) {
@@ -231,10 +232,10 @@ public class OdesignGenerator {
 								sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
 								sd.setBorderSizeComputationExpression("2");
 								sd.setWidth(12);
-								String attrname=featureCLass.getName()
-										.replace(Tools.upperCaseFirst(((EdgeMapping) obj).getName())," ");
-								
-								sd.setLabelExpression("aql: '"+attrname+ " = '+ self.eContainer()." +attrname);
+								String attrname = featureCLass.getName()
+										.replace(Tools.upperCaseFirst(((EdgeMapping) obj).getName()), " ");
+
+								sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
 								nmd.setStyle(sd);
 								EdgeMapping em = DescriptionFactory.eINSTANCE.createEdgeMapping();
 
@@ -282,10 +283,10 @@ public class OdesignGenerator {
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
-							String attrname=featureCLass.getName()
-									.replace(Tools.upperCaseFirst(((ContainerMapping) obj).getName())," ");
-							
-							sd.setLabelExpression("aql: '"+attrname+ " = '+ self.eContainer()." +attrname);
+							String attrname = featureCLass.getName()
+									.replace(Tools.upperCaseFirst(((ContainerMapping) obj).getName()), " ");
+
+							sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
 							nmd.setStyle(sd);
 							EdgeMapping em = DescriptionFactory.eINSTANCE.createEdgeMapping();
 
@@ -349,19 +350,19 @@ public class OdesignGenerator {
 							sd.setColor(attributesFixedColor);
 							sd.setShowIcon(false);
 							sd.setLabelPosition(LabelPosition.NODE_LITERAL);
-							
+
 							sd.setHeight(3);
 							sd.setWidth(12);
-							String attrname=featureCLass.getName()
-									.replace(Tools.upperCaseFirst(((NodeMapping) obj).getName())," ");
-							
-							sd.setLabelExpression("aql: '"+attrname+ " = '+ self.eContainer()." +attrname);
+							String attrname = featureCLass.getName()
+									.replace(Tools.upperCaseFirst(((NodeMapping) obj).getName()), " ");
+
+							sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
 
 							System.out.println(((NodeMapping) obj).getName());
 							nmd.setStyle(sd);
 							EdgeMapping em = DescriptionFactory.eINSTANCE.createEdgeMapping();
 							// em.createEdge(nm, (NodeMapping)obj,);
-
+							emlist.add(em);
 							em.getTargetMapping().add(nmd);
 							em.getSourceMapping().add((NodeMapping) obj);
 							em.setName(featureCLass.getName() + "Connector");
@@ -400,10 +401,10 @@ public class OdesignGenerator {
 		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
 
 		cm.setStyle(csd);
-        csd.setShowIcon(false);
-        csd.setLabelExpression("aql:self.name");
-        csd.setBorderSizeComputationExpression("2");
-        csd.setBorderColor(featuresFixedColor);
+		csd.setShowIcon(false);
+		csd.setLabelExpression("aql:self.name");
+		csd.setBorderSizeComputationExpression("2");
+		csd.setBorderColor(featuresFixedColor);
 		cm.setLabel(metamodelElement.getName());
 		cm.setName(metamodelElement.getName());
 		cm.setDomainClass(ep.getName() + "::" + metamodelElement.getName());
@@ -438,17 +439,44 @@ public class OdesignGenerator {
 		edgeintermediate.setSourceFinderExpression("[self.metamodElelement/]");
 		edgeintermediate.setTargetFinderExpression("[self.bindingElement/]");
 		edgeintermediate.getSourceMapping().add(cm);
+
 		for (EdgeMapping edge : edgeList) {
 			edgeintermediate.getTargetMapping().add(edge);
+
 		}
+
 		for (NodeMapping node : nodeList) {
+
 			edgeintermediate.getTargetMapping().add(node);
+
 		}
 
 		for (ContainerMapping container : containerList) {
+
 			edgeintermediate.getTargetMapping().add(container);
+
 		}
 
+		List<DiagramElementMapping> targetM = new ArrayList<>();
+
+		for (DiagramElementMapping dem : edgeintermediate.getTargetMapping()) {
+			targetM.add(dem);
+		}
+
+		
+		for (DiagramElementMapping dem:targetM) {
+			for (NodeMapping nme:this.nmlist) {
+				if(nme.getName().equals(dem.getName())) {
+					edgeintermediate.getTargetMapping().remove(dem);
+				}
+			}
+			
+			for (EdgeMapping nme:this.emlist) {
+				if(nme.getName().equals(dem.getName())) {
+					edgeintermediate.getTargetMapping().remove(dem);
+				}
+			}
+		}
 		edgeintermediate.setSemanticCandidatesExpression("feature:containsIntermediateElement");
 		dd.getAllLayers().get(0).getEdgeMappings().add(edgeintermediate);
 
@@ -473,10 +501,37 @@ public class OdesignGenerator {
 		ToolSection toolsec = ToolFactory.eINSTANCE.createToolSection();
 
 		toolsec.setName(com.odesign.generator.values.ToolSection.getName());
+		EdgeCreationDescription featureedgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
+		featureedgecreationdesc.setName("Attribute Binding Edge");
+		featureedgecreationdesc.setLabel("Attribute Binding Edge");
+		featureedgecreationdesc.getEdgeMappings().add(pointTo);
+		toolsec.getOwnedTools().add(featureedgecreationdesc);
+
+		InitEdgeCreationOperation init3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitEdgeCreationOperation();
+
+		ChangeContext changecontext3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		CreateInstance featureedgeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createCreateInstance();
+		featureedgeInstance.setReferenceName("containsIntermediateElement");
+		featureedgeInstance.setTypeName(ep.getName() + "::IntemediateElement");
+		featureedgeInstance.setVariableName("instance");
+		changecontext3.getSubModelOperations().add(featureedgeInstance);
+		init3.setFirstModelOperations(changecontext3);
+		SetValue setValue13 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValue13.setFeatureName("featureClass");
+		setValue13.setValueExpression("[target/]");
+
+		featureedgeInstance.getSubModelOperations().add(setValue13);
+
+		changecontext3.setBrowseExpression("[source/]");
+		featureedgecreationdesc.setInitialOperation(init3);
+
 		EdgeCreationDescription edgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
 
 		NodeCreationDescription metamodelElementFeaturedesc = ToolFactory.eINSTANCE.createNodeCreationDescription();
-		metamodelElementFeaturedesc.setName(nm.getName());
+		metamodelElementFeaturedesc.setName("Metamodel Element Feature");
 		metamodelElementFeaturedesc.getNodeMappings().add(nm);
 		metamodelElementFeaturedesc.setName(MetamodelElementFeature.getName());
 		toolsec.getOwnedTools().add(metamodelElementFeaturedesc);
@@ -499,7 +554,7 @@ public class OdesignGenerator {
 
 		metamodelElementFeaturedesc.setInitialOperation(init22);
 
-		edgecreationdesc.setName(intermediateElement.getName());
+		edgecreationdesc.setName("Class Binding Edge ");
 		edgecreationdesc.getEdgeMappings().add(edgeintermediate);
 		toolsec.getOwnedTools().add(edgecreationdesc);
 
@@ -528,7 +583,7 @@ public class OdesignGenerator {
 		edgecreationdesc.setInitialOperation(init);
 
 		ContainerCreationDescription containerCreation = ToolFactory.eINSTANCE.createContainerCreationDescription();
-		containerCreation.setName(cm.getName());
+		containerCreation.setName("Metamodel Element");
 		containerCreation.getContainerMappings().add(cm);
 		toolsec.getOwnedTools().add(containerCreation);
 
@@ -557,12 +612,11 @@ public class OdesignGenerator {
 
 		dd.getAllLayers().get(0).getToolSections().add(toolsec);
 
-		
 		try {
 			// jesusc: we should probably find a better name
 			String diagramName = this.diagramDescription.getName() + "_" + ep.getName();
-			
-			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + "_generated.odesign");			
+
+			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + "_generated.odesign");
 			resource.save(new FileOutputStream(generatedFile), null);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -577,7 +631,7 @@ public class OdesignGenerator {
 	public File getGeneratedFile() {
 		return generatedFile;
 	}
-	
+
 	public void GenerateContainersVersion(EPackage ep, File file, HashMap<EClass, List<EClass>> newClassifiers,
 			EClass metamodelElement, EClass intermediateElement) throws FileNotFoundException, IOException {
 
