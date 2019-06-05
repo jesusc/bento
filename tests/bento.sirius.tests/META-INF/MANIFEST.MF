@@ -23,6 +23,7 @@ Require-Bundle: org.eclipse.core.runtime,
  bento.repository.common;bundle-version="0.7.1",
  bento.sirius.adapter;bundle-version="1.0.0",
  org.eclipse.jdt.annotation,
- org.eclipse.sirius
+ org.eclipse.sirius,
+ org.eclipse.sirius.diagram
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.sirius.diagram.description
