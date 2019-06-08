@@ -4,7 +4,7 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="FlowDiagram" domainClass="workflow::FlowDiagram" enablePopupBars="true">
       <metamodel href="../../../../bento.sirius.tests.metamodels/resources/concepts/flow_concept.ecore#/"/>
       <defaultLayer name="Default">
-        <nodeMappings name="Initial" preconditionExpression="aql:self.isInitial" domainClass="workflow::Task">
+        <nodeMappings name="Initial" preconditionExpression="aql:self.isInitial" labelDirectEdit="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit%20names']" domainClass="workflow::Task">
           <style xsi:type="style:DotDescription" labelSize="12" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -33,7 +33,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <containerMappings name="Task" label="Task" preconditionExpression="aql:not self.isInitial" semanticCandidatesExpression="aql:self.nodes->filter(workflow::Task)" domainClass="workflow::Task">
+        <containerMappings name="Task" label="Task" preconditionExpression="aql:not self.isInitial" labelDirectEdit="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit%20names']" semanticCandidatesExpression="aql:self.nodes->filter(workflow::Task)" domainClass="workflow::Task">
           <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -90,6 +90,12 @@
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::ParallelSplit" referenceName="nodes"/>
               </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="Edit names">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
             </initialOperation>
           </ownedTools>
         </toolSections>
