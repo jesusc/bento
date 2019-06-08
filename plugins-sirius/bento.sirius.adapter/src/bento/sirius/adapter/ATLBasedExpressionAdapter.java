@@ -40,7 +40,7 @@ import bento.adapter.atl.visitors.AdaptationError;
 import bento.adapter.atl.visitors.GbindToATL;
 import bento.binding.utils.BindingModel;
 import bento.common.adapter.IComponentInfoForBinding;
-import esolver.aql.AQL2ATL;
+import efinder.aql.AQL2ATL;
 import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.ClassBinding;
 import gbind.dsl.ConcreteMetaclass;

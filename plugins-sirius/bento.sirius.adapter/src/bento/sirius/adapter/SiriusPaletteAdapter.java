@@ -98,8 +98,8 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			pending.removeElement(desc);
 			return;
 		}
-		desc.getContainerMappings().clear();		
-		desc.getContainerMappings().addAll((Collection<? extends ContainerMapping>) mappedSources);
+		//desc.getContainerMappings().clear();		
+		//desc.getContainerMappings().addAll((Collection<? extends ContainerMapping>) mappedSources);
 		
 		// The rest is just similar to applyTo(NodeCreationDescription) -- Try to factorise
 		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
@@ -124,9 +124,13 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			pending.removeElement(desc);
 			return;
 		}
-		desc.getNodeMappings().clear();		
-		desc.getNodeMappings().addAll((Collection<? extends NodeMapping>) mappedSources);
 		
+		// nodeMappings are handled in handleCreateInstance 
+		// TODO: Do the duplication and the handling here, it is better
+		// desc.getNodeMappings().clear();		
+		// desc.getNodeMappings().addAll((Collection<? extends NodeMapping>) mappedSources);
+
+
 		List<CreateInstance> instances = findChildren(operation, (o) -> o instanceof CreateInstance);
 		if ( instances.size() == 0 ) {
 			// ok, we do nothing but this is probably wrong
@@ -276,7 +280,24 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 			// This may not work in all cases, let's see
 			EcoreUtil.delete(toolElement_, true);
 		}
-			
+
+		// I don't like this
+		final NodeMapping nodeMapping;
+		final ContainerMapping containerMapping;
+		if (toolElement_ instanceof NodeCreationDescription) {
+			List<NodeMapping> m = ((NodeCreationDescription) toolElement_).getNodeMappings();
+			nodeMapping = m.get(0); 
+			containerMapping = null;
+		} else if (toolElement_ instanceof ContainerCreationDescription) {
+			List<ContainerMapping> m = ((ContainerCreationDescription) toolElement_).getContainerMappings();
+			containerMapping = m.get(0); 
+			nodeMapping = null;
+		} else {
+			nodeMapping = null;
+			containerMapping = null;
+		}
+
+		
 		// switch for / pending.add
 		pending.add(toolElement_, (toolElementElem) -> {
 			int i = 0;
@@ -302,6 +323,25 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 				toolElement.setLabel("Create " + targetDomainClass);
 				
 				instance.setTypeName(toSiriusClassName(targetDomainClass));
+
+				// This assumes that the visualization part also maps non-abstract classes to concrete classes
+				if (toolElement instanceof NodeCreationDescription) {
+					((NodeCreationDescription) toolElement).getNodeMappings().clear();					
+					List<? extends DiagramElementMapping> targets = this.pending.getMappings().getTargets(nodeMapping);
+					for (DiagramElementMapping diagramElementMapping : targets) {
+						if (instance.getTypeName().equals(SiriusUtils.getDomainClass(diagramElementMapping))) {
+							((NodeCreationDescription) toolElement).getNodeMappings().add((NodeMapping) diagramElementMapping);
+						}
+					}	
+				} else if (toolElement instanceof ContainerCreationDescription) {
+					((ContainerCreationDescription) toolElement).getContainerMappings().clear();					
+					List<? extends DiagramElementMapping> targets = this.pending.getMappings().getTargets(containerMapping);
+					for (DiagramElementMapping diagramElementMapping : targets) {
+						if (instance.getTypeName().equals(SiriusUtils.getDomainClass(diagramElementMapping))) {
+							((ContainerCreationDescription) toolElement).getContainerMappings().add((ContainerMapping) diagramElementMapping);
+						}
+					}					
+				}				
 				
 				System.out.println("Processing feature: " + containerType + "::" + referenceName);
 				BaseFeatureBinding b = bindingSpec.findFeatureFinding(containerType, referenceName, targetDomainClass).get();
@@ -362,90 +402,6 @@ public class SiriusPaletteAdapter extends AbstractSiriusAdapter {
 		return getRawDomainClassName(d.getDomainClass());
 	}
 
-	/**
-	 * Takes a list of classes of the concrete meta-model. For each of them
-	 * that is abstract, the concrete subclasses are returned.
-	 */
-	private List<String> mapToNonAbstract(List<String> classes) {
-		List<EClass> result = new ArrayList<EClass>();
-		for (String c : classes) {
-			EClass k = findTargetClass(c);
-			if (k.isAbstract()) {
-				result.addAll( allConcreteSubclasses(k) );
-			} else {
-				result.add(k);
-			}
-		}
-		
-		return result.stream().map(c -> c.getName()).collect(Collectors.toList());
-	}
-
-	private List<EClass> getAllSourceClasses() {
-		List<EClass> result = new ArrayList<EClass>();
-		for (EPackage pkg : info.getSiriusPackages().values()) {
-			for (EClassifier c : pkg.getEClassifiers()) {
-				if (c instanceof EClass) {
-					result.add((EClass) c);
-				}
-			}
-		}
-		return result;
-	}
 	
-	/**
-	 * Get the list of "more direct" concrete subclasses covering k.
-	 * @param k
-	 * @return
-	 */
-	private List<EClass> allConcreteSubclasses(EClass k) {
-		List<EClass> result = new ArrayList<EClass>();
-		
-		Map<EClass, Set<EClass>> sub = getSubclassesMap();
-		Set<EClass> subclasses = sub.get(k);
-		for (EClass eClass : subclasses) {
-			if (eClass.isAbstract()) {
-				List<EClass> subs = allConcreteSubclasses(eClass);
-				result.addAll(subs);
-			} else {
-				result.add(eClass);
-			}
-		}
-		
-		return result;
-	}
-
-	private Map<EClass, Set<EClass>> subclassesMap = null;
-
-	private Map<EClass, Set<EClass>> getSubclassesMap() {
-		if (subclassesMap != null)
-			return subclassesMap;
-		
-		Map<EClass, Set<EClass>> subclasses = new HashMap<>();
-		
-		for (IBoundMetamodelInfo b : info.getBoundMetamodels()) {
-			EPackage pkg = info.getTargetMetamodelPackage(b.getBoundMetamodelName());
-			for(EClassifier c : pkg.getEClassifiers()) {
-				if ( c instanceof EClass ) {
-					EClass k = (EClass) c;
-					for (EClass eClass : ((EClass) c).getESuperTypes()) {
-						subclasses.computeIfAbsent(eClass, (key) -> new HashSet<EClass>());
-						subclasses.get(eClass).add(k);
-					}
-				}
-			}			
-		}
-		
-		return subclasses;
-	}
-	
-	private EClass findTargetClass(String c) {
-		for (IBoundMetamodelInfo b : info.getBoundMetamodels()) {
-			EPackage pkg = info.getTargetMetamodelPackage(b.getBoundMetamodelName());
-			EClassifier k = pkg.getEClassifier(c);
-			if ( k instanceof EClass )
-				return (EClass) k;
-		}
-		throw new IllegalStateException();
-	}
 
 }

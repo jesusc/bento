@@ -125,7 +125,11 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		for(EObject o : toRemove) {
 			EcoreUtil.delete(o);
 		}
-
+		
+		siriusModel.flush();
+		SiriusCleaner cleaner = new SiriusCleaner(siriusModel, info.getSiriusPackages().values());
+		cleaner.perform();
+		
 		return result;
 	}
 
@@ -256,7 +260,7 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		
 		if (! isMappedToNone(originalDomainClass)) {		
 			int i = 0;
-			List<String> domainClasses = getTargetDomainClassN(nm_.getDomainClass());
+			List<String> domainClasses = mapToNonAbstract(getTargetDomainClassN(nm_.getDomainClass()));
 			
 			String name = nm_.getName();
 			for(String domainClass : domainClasses) {

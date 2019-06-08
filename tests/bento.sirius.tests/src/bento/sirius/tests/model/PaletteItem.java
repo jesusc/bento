@@ -18,7 +18,7 @@ public class PaletteItem {
 
 	public void setContainer(String name) {
 		this.name = name;
-		this.kind = ItemKind.NODE;
+		this.kind = ItemKind.CONTAINER;
 	}
 
 	public void setEdge(String name) {
@@ -34,4 +34,8 @@ public class PaletteItem {
 		return name;
 	}
 	
+	@Override
+	public String toString() {
+		return kind.name().toLowerCase() + ": " + name ;
+	}
 }

@@ -59,5 +59,11 @@ public class SiriusModel {
 		
 		return result;
 	}
+	
+	
+	public void flush() {
+		elements.clear();
+		setup(resource);
+	}
 
 }

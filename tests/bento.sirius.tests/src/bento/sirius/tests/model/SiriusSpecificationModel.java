@@ -85,12 +85,14 @@ public class SiriusSpecificationModel {
 				}
 			}
 		}
-		
-		System.out.println(nonMatchedItems);
-		System.out.println(nonMatchedTools);
 
-		if (spec.isStrict()) {
-			assertTrue(nonMatchedItems.isEmpty() && nonMatchedTools.isEmpty());
+		if (spec.isStrict()) {			
+			boolean ok = nonMatchedItems.isEmpty() && nonMatchedTools.isEmpty();
+			if (! ok) {
+				System.out.println(nonMatchedItems);
+				System.out.println(nonMatchedTools);
+			}
+			assertTrue(ok);
 		} else {
 			assertTrue(nonMatchedItems.isEmpty());
 		}
@@ -101,15 +103,15 @@ public class SiriusSpecificationModel {
 		if (entry instanceof NodeCreationDescription) {
 			NodeCreationDescription n = (NodeCreationDescription) entry;
 			return item.getKind() == ItemKind.NODE &&
-					item.getName().equals(n.getName());
+					item.getName().equals(n.getLabel());
 		} else if (entry instanceof ContainerCreationDescription) {
 			ContainerCreationDescription c = (ContainerCreationDescription) entry;
 			return item.getKind() == ItemKind.CONTAINER &&
-					item.getName().equals(c.getName());
+					item.getName().equals(c.getLabel());
 		} else if (entry instanceof EdgeCreationDescription) {
 			EdgeCreationDescription e = (EdgeCreationDescription) entry;
 			return item.getKind() == ItemKind.EDGE &&
-					item.getName().equals(e.getName());
+					item.getName().equals(e.getLabel());
 		}
 		return false;
 	}

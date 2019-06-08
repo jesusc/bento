@@ -110,5 +110,14 @@ public class SiriusUtils {
 		// return "\"" + id + "\"";
 		return "_" + id;
 	}
-	
+
+	protected static <T> T getContainer(Class<T> klass, EObject obj) {
+		if ( obj == null ) {
+			return null;
+		} else if ( klass.isInstance(obj) ) {
+			return klass.cast(obj);
+		} else {
+			return getContainer(klass, obj.eContainer());
+		}
+	}
 }
