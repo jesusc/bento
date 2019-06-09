@@ -355,15 +355,17 @@ public class BindingMetamodelGenerator {
 //			final Copier copier = new Copier();
 //			final List<EObject> eObjects = new ArrayList<EObject>(copier.copyAll(ep.eContents()));
 //			copier.copyReferences();
+			
+			generatedFile = new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore");
 			final Resource resource = rs
-					.createResource(URI.createFileURI(file.getAbsolutePath() + "/new-" + ep.getName() + ".ecore"));
+					.createResource(URI.createFileURI(generatedFile.getAbsolutePath()));
 
 			resource.getContents().add(ep);
 
-			resource.setURI(URI.createFileURI(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore"));
+			resource.setURI(URI.createFileURI(generatedFile.getAbsolutePath()));
 
 			resource.save(
-					new FileOutputStream(new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore")),
+					new FileOutputStream(new File(generatedFile.getAbsolutePath())),
 					null);
 
 //			ep.eResource().save(new FileOutputStream(

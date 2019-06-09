@@ -32,6 +32,8 @@ public class Generate {
 
 	private EPackage epack;
 	private EPackage originalEPack;
+	private File odesignGeneratedFile;
+	private File metamodelGeneratedFile;
 
 	public void GenerateOdesignMM(String modelURI, File file) throws IOException {
 
@@ -72,6 +74,8 @@ public class Generate {
 		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), file, this.epack,
 				metamodelGenerator.getMetamodelElement(), metamodelGenerator.getIntermediateElement());
 
+		this.odesignGeneratedFile = odesigngenerator.getGeneratedFile();
+		this.metamodelGeneratedFile = metamodelGenerator.getGeneratedFile();
 	}
 
 	public EPackage getEpack() {
@@ -83,6 +87,12 @@ public class Generate {
 		return this.originalEPack;
 	}
 	
+	public File getOdesignGeneratedFile() {
+		return odesignGeneratedFile;
+	}
 	
+	public File getMetamodelGeneratedFile() {
+		return metamodelGeneratedFile;
+	}
 
 }
