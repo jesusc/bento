@@ -6,6 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
@@ -43,5 +48,13 @@ public class TestUtils {
 		
 		throw new IllegalStateException();
 	}
+
+	public static List<EObject> getAllElements(Resource originalModel) {
+		List<EObject> elements = new ArrayList<EObject>();
+		originalModel.getAllContents().forEachRemaining(elements::add);
+		return elements;
+	}
+	
+	
 	
 }

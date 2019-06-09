@@ -249,6 +249,10 @@ public class ModelGenerator {
 				null);
 	}
 
+	public Resource getGeneratedModel() {
+		return resource2;
+	}
+	
 	public ModelGenerator(String modelURI, File file, EPackage originalMetamodel, EPackage targetMetamodel,
 			String output) throws FileNotFoundException, IOException {
 		/**
