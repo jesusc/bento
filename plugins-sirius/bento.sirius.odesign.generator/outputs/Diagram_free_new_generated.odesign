@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="free" version="12.0.0.2017041100">
+  <ownedViewpoints name="MyViewpoint_GraphicalBinding">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Diagram" domainClass="free_new::Diagram" enablePopupBars="true">
+      <metamodel href="../outputs/generated-free_new.ecore#/"/>
+      <defaultLayer name="Default Layer">
+        <nodeMappings name="node " semanticCandidatesExpression="feature:node" domainClass="free_new::Node">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelPosition="node" resizeKind="NSEW" width="12" height="5">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="nameLink" domainClass="free_new::nameLink">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="aql: 'name  = '+ self.eContainer().name " labelPosition="node" width="12" height="3" color="//@userColorsPalettes[name=null]/@entries[name=null]">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="nameNode" domainClass="free_new::nameNode">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="aql: 'nameNode = '+ self.eContainer().nameNode" labelPosition="node" width="12" height="3" color="//@userColorsPalettes[name=null]/@entries[name=null]">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="Link" label="Link" semanticCandidatesExpression="feature:link" sourceMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='node%20']" targetMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='node%20']" targetFinderExpression="aql:self.nodetarget" sourceFinderExpression="aql:self.nodesource" domainClass="free_new::Link" useDomainElement="true">
+          <style lineStyle="dash_dot" sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="nameLinkConnector" sourceMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='Link']" targetMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='nameLink']" targetFinderExpression="feature:containsnameLink">
+          <style lineStyle="dash" targetArrow="NoDecoration" routingStyle="tree">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="nameNodeConnector" sourceMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='node%20']" targetMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='nameNode']" targetFinderExpression="feature:containsnameNode">
+          <style lineStyle="dash" targetArrow="NoDecoration" routingStyle="tree">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="IntemediateElement" semanticCandidatesExpression="feature:containsIntermediateElement" sourceMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']" targetMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='Link'] //@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='nameLinkConnector'] //@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='node%20']" targetFinderExpression="[self.bindingElement/]" sourceFinderExpression="[self.metamodElelement/]" domainClass="free_new::IntemediateElement" useDomainElement="true">
+          <style>
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="pointTo" sourceMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']" targetMapping="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='nameLink'] //@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='nameNode']">
+          <style>
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="MetamodelElement" label="MetamodelElement" domainClass="free_new::MetamodelElement">
+          <borderedNodeMappings name="BorderedNodeFeature" domainClass="free_new::MetamodelElementFeature">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="[name/]" labelPosition="node" width="12" height="3" color="//@userColorsPalettes[name=null]/@entries[name=null]">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </style>
+          </borderedNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" borderColor="//@userColorsPalettes[name=null]/@entries[name=null]" showIcon="false" labelExpression="aql:self.name">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Generated Tools Section">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Attribute Binding Edge" label="Attribute Binding Edge" edgeMappings="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="featureClass" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name=" name" label="Metamodel Element Feature" nodeMappings="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="free_new::MetamodelElementFeature" referenceName="metamodelElementFeature"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Class Binding Edge " edgeMappings="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source.eContainer()/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="free_new::IntemediateElement" referenceName="containsIntermediateElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="metamodElelement" valueExpression="[source/]"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="bindingElement" valueExpression="[target/]"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Metamodel Element" containerMappings="//@ownedViewpoints[name='MyViewpoint_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="free_new::MetamodelElement" referenceName="containsMetamodelElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="[name/]"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+  <userColorsPalettes>
+    <entries xsi:type="description:UserFixedColor" red="161" green="189" blue="226"/>
+    <entries xsi:type="description:UserFixedColor" red="134" green="187" blue="187"/>
+  </userColorsPalettes>
+</description:Group>

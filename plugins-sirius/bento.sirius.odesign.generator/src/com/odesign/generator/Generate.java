@@ -31,14 +31,15 @@ public class Generate {
 	 */
 
 	private EPackage epack;
+	private EPackage originalEPack;
 
-	public void GenerateOdesignMM(String modelURI, File file, List<? extends Object> arguments) throws IOException {
+	public void GenerateOdesignMM(String modelURI, File file) throws IOException {
 
 		OdesignGenerator odesigngenerator = new OdesignGenerator(modelURI, file);
 		EPackage ep = odesigngenerator.getEpackage();
 
 		ResourceSet rs = new ResourceSetImpl();
-
+		this.originalEPack = ep;
 		EPackage copy = EcoreUtil.copy(ep);
 
 		final Resource resource = rs
@@ -76,5 +77,12 @@ public class Generate {
 	public EPackage getEpack() {
 		return this.epack;
 	}
+
+	public EPackage getOriginaleEPakage() {
+		
+		return this.originalEPack;
+	}
+	
+	
 
 }

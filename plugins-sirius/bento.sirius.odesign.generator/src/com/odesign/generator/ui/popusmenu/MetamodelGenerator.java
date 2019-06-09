@@ -37,6 +37,7 @@ public class MetamodelGenerator extends ActionDelegate implements IActionDelegat
 	 */
 	protected List<IFile> files;
 	protected EPackage ep;
+	protected EPackage originalep;
 
 	@SuppressWarnings("unchecked")
 	public void selectionChanged(IAction action, ISelection selection) {
@@ -98,12 +99,13 @@ public class MetamodelGenerator extends ActionDelegate implements IActionDelegat
 									if(model.getFileExtension().equals("odesign")) {
 									GenerateAll generator = new GenerateAll();
 									generator.doGenerate(modelURI, monitor, target, listFiles);
-									ep=generator.getEPacakeg();}
+									ep=generator.getEPacakeg();
+									originalep=generator.getOriginalEPackage();}
 									
 									else {
 									
-										GenerateAllModel generatemodel=new GenerateAllModel(modelURI, target, getArguments());
-										generatemodel.doGenerateModel(monitor,ep);
+										GenerateAllModel generatemodel=new GenerateAllModel(modelURI, target);
+										generatemodel.doGenerateModel(monitor,originalep,ep);
 									}
 								} catch (InstantiationException e) {
 									// TODO Auto-generated catch block

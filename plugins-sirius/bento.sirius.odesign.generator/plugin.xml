@@ -5,7 +5,7 @@
       <objectContribution
             adaptable="true"
             objectClass="org.eclipse.core.resources.IFile"
-            nameFilter="*.odesign*"
+            nameFilter="*.*"
             id="com.odesign.generator.ui.popusmenu.contribution.IFile">
          <action
                class="com.odesign.generator.ui.popusmenu.MetamodelGenerator"

@@ -28,7 +28,7 @@ public class GenerateAllModel {
 	 * @throws IOException Thrown when the output cannot be saved.
 	 * @generated
 	 */
-	public GenerateAllModel(String modelURI, IContainer targetFolder, List<? extends Object> arguments) {
+	public GenerateAllModel(String modelURI, IContainer targetFolder) {
 		this.modelURI = modelURI;
 		this.targetFolder = targetFolder;
 
@@ -43,7 +43,7 @@ public class GenerateAllModel {
 	 * @throws InstantiationException
 	 */
 
-	public void doGenerateModel(IProgressMonitor monitor, EPackage ep)
+	public void doGenerateModel(IProgressMonitor monitor, EPackage ep,EPackage ep1)
 			throws IOException, InstantiationException, IllegalAccessException {
 		if (!targetFolder.getLocation().toFile().exists()) {
 			targetFolder.getLocation().toFile().mkdirs();
@@ -52,7 +52,7 @@ public class GenerateAllModel {
 		monitor.subTask("Loading Model...");
 		System.out.println("\"generated-model\"");
 		System.out.println(this.targetFolder.getLocation().toFile());
-		new ModelGenerator(this.modelURI, targetFolder.getLocation().toFile(), ep);
+		new ModelGenerator(this.modelURI, targetFolder.getLocation().toFile(),ep,ep1);
 		monitor.worked(1);
 
 	}

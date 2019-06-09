@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" name="free" version="12.0.0.2017041100">
+  <ownedViewpoints name="MyViewpoint">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Diagram" domainClass="free::Diagram" enablePopupBars="true">
+      <metamodel href="http://www.example.org/free#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="node " semanticCandidatesExpression="feature:node" domainClass="free::Node">
+          <style xsi:type="style:SquareDescription" labelSize="12" labelPosition="node" resizeKind="NSEW" width="12" height="5">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="Link" label="Link" semanticCandidatesExpression="feature:link" sourceMapping="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='node%20']" targetMapping="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='node%20']" targetFinderExpression="aql:self.nodetarget" sourceFinderExpression="aql:self.nodesource" domainClass="free::Link" useDomainElement="true">
+          <style lineStyle="dash_dot" sizeComputationExpression="2" routingStyle="manhattan">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+</description:Group>

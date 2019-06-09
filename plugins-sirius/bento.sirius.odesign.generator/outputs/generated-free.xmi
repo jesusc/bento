@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<free_new:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:free_new="free_new">
+  <node name="NOde 1">
+    <containsnameNode value="NOde 1"/>
+  </node>
+  <node name="NOde 2 ">
+    <containsnameNode value="NOde 2 "/>
+  </node>
+  <link name="edge 1">
+    <containsnameLink value="edge 1"/>
+  </link>
+</free_new:Diagram>

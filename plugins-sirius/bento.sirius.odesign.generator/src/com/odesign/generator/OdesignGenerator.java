@@ -411,15 +411,15 @@ public class OdesignGenerator {
 		dd.getAllLayers().get(0).getContainerMappings().add(cm);
 		NodeMapping nm = DescriptionFactory.eINSTANCE.createNodeMapping();
 		EList<EReference> listERef = metamodelElement.getEAllContainments();
-		for (EReference eref : listERef) {
+		
 			nm.setName(BorderedNodeCreation.getName());
-			nm.setDomainClass(ep.getName() + "::" + eref.getEType().getName());
+			nm.setDomainClass(ep.getName() + "::MetamodelElementFeature");
 			SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 
 			sd.setLabelExpression("aql:self.name");
 			nm.setStyle(sd);
 
-			sd.setLabelExpression(eref.getEType().getName());
+			sd.setLabelExpression("[name/]");
 			cm.getBorderedNodeMappings().add(nm);
 
 			sd.setColor(featuresFixedColor);
@@ -431,7 +431,7 @@ public class OdesignGenerator {
 			sd.setHeight(3);
 			sd.setWidth(12);
 
-		}
+		
 
 		EdgeMapping edgeintermediate = DescriptionFactory.eINSTANCE.createEdgeMappingUsingDomainElement();
 		edgeintermediate.setName(intermediateElement.getName());
@@ -512,18 +512,13 @@ public class OdesignGenerator {
 
 		ChangeContext changecontext3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createChangeContext();
-		CreateInstance featureedgeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createCreateInstance();
-		featureedgeInstance.setReferenceName("containsIntermediateElement");
-		featureedgeInstance.setTypeName(ep.getName() + "::IntemediateElement");
-		featureedgeInstance.setVariableName("instance");
-		changecontext3.getSubModelOperations().add(featureedgeInstance);
+	
 		init3.setFirstModelOperations(changecontext3);
 		SetValue setValue13 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
 		setValue13.setFeatureName("featureClass");
 		setValue13.setValueExpression("[target/]");
 
-		featureedgeInstance.getSubModelOperations().add(setValue13);
+		changecontext3.getSubModelOperations().add(setValue13);
 
 		changecontext3.setBrowseExpression("[source/]");
 		featureedgecreationdesc.setInitialOperation(init3);
@@ -532,6 +527,7 @@ public class OdesignGenerator {
 
 		NodeCreationDescription metamodelElementFeaturedesc = ToolFactory.eINSTANCE.createNodeCreationDescription();
 		metamodelElementFeaturedesc.setName("Metamodel Element Feature");
+		metamodelElementFeaturedesc.setLabel("Metamodel Element Feature");
 		metamodelElementFeaturedesc.getNodeMappings().add(nm);
 		metamodelElementFeaturedesc.setName(MetamodelElementFeature.getName());
 		toolsec.getOwnedTools().add(metamodelElementFeaturedesc);
@@ -554,6 +550,8 @@ public class OdesignGenerator {
 
 		metamodelElementFeaturedesc.setInitialOperation(init22);
 
+		
+		
 		edgecreationdesc.setName("Class Binding Edge ");
 		edgecreationdesc.getEdgeMappings().add(edgeintermediate);
 		toolsec.getOwnedTools().add(edgecreationdesc);

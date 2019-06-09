@@ -29,6 +29,7 @@ import com.odesign.generator.Generate;
 public class GenerateAll {
 
 	private EPackage epacakge;
+	private EPackage originalEPackage;
 
 	/**
 	 * Constructor.
@@ -63,15 +64,20 @@ public class GenerateAll {
 
 		
 		Generate generate=new Generate();
-		generate.GenerateOdesignMM(modelURI, targetFolder.getLocation().toFile(), arguments);
+		generate.GenerateOdesignMM(modelURI, targetFolder.getLocation().toFile());
 		monitor.worked(1);
 
 		this.epacakge = generate.getEpack();
+		this.originalEPackage = generate.getOriginaleEPakage();
 
 	}
 
 	public EPackage getEPacakeg() {
 		return this.epacakge;
+	}
+	
+	public EPackage getOriginalEPackage() {
+		return this.originalEPackage;
 	}
 	
 

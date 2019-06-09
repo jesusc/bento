@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_-mN5YIawEem5fYpMPeLJ7Q" selectedViews="__Ouq4IawEem5fYpMPeLJ7Q" version="14.1.0.201810161215">
+  <semanticResources>GraphModel.xmi</semanticResources>
+  <ownedViews xmi:type="viewpoint:DView" uid="__Ouq4IawEem5fYpMPeLJ7Q">
+    <viewpoint xmi:type="description:Viewpoint" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']"/>
+  </ownedViews>
+</viewpoint:DAnalysis>

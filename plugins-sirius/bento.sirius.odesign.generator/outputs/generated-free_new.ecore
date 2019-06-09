@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="free_new" nsURI="http://www.example.org/free_new" nsPrefix="free_new">
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//NamedElement #//BindingElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkin" eType="#//Link"
+        eOpposite="#//Link/nodetarget"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkout" eType="#//Link"
+        eOpposite="#//Link/nodesource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsnameNode" eType="#//nameNode"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//NamedElement #//BindingElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodetarget" eType="#//Node"
+        eOpposite="#//Node/linkin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodesource" eType="#//Node"
+        eOpposite="#//Node/linkout"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsnameLink" eType="#//nameLink"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" upperBound="-1" eType="#//Node"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="#//Link"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsMetamodelElement"
+        upperBound="-1" eType="#//MetamodelElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsIntermediateElement"
+        upperBound="-1" eType="#//IntemediateElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsFeatureClass" upperBound="-1"
+        eType="#//FeatureClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsMetamodelElementFeature"
+        upperBound="-1" eType="#//FeatureClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="nameNode" eSuperTypes="#//FeatureClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="nameLink" eSuperTypes="#//FeatureClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodelElementFeature"
+        upperBound="-1" eType="#//MetamodelElementFeature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntemediateElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindingElement" lowerBound="1"
+        eType="#//BindingElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodElelement" lowerBound="1"
+        eType="#//MetamodelElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelElementFeature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureClass" upperBound="-1"
+        eType="#//FeatureClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureClass" abstract="true"/>
+</ecore:EPackage>

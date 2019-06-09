@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="sequence-simple" version="12.0.0.2017041100">
+  <ownedViewpoints name="SequenceSimple_GraphicalBinding">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Diagram" domainClass="sequence_new::SequenceModel" enablePopupBars="true">
+      <metamodel href="../../../generated-metamodel-and-odesign/generated-sequence_new.ecore#/"/>
+      <defaultLayer name="Default Layer">
+        <nodeMappings name="valueElement" domainClass="sequence_new::valueElement">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="aql: 'valueElement = '+ self.eContainer().valueElement" labelPosition="node" width="12" height="3" color="//@userColorsPalettes[name=null]/@entries[name=null]">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="NextElementArrow" sourceMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='SeqElement']" targetMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='SeqElement']" targetFinderExpression="feature:next">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="valueElementConnector" sourceMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='SeqElement']" targetMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='valueElement']" targetFinderExpression="feature:containsvalueElement">
+          <style lineStyle="dash" targetArrow="NoDecoration" routingStyle="tree">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="IntemediateElement" semanticCandidatesExpression="feature:containsIntermediateElement" sourceMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']" targetMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='NextElementArrow'] //@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='SeqElement']" targetFinderExpression="[self.bindingElement/]" sourceFinderExpression="[self.metamodElelement/]" domainClass="sequence_new::IntemediateElement" useDomainElement="true">
+          <style>
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="pointTo" sourceMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']" targetMapping="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='valueElement']">
+          <style>
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="SeqElement" domainClass="sequence_new::Element">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" showIcon="false" labelExpression="feature:value">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="MetamodelElement" label="MetamodelElement" domainClass="sequence_new::MetamodelElement">
+          <borderedNodeMappings name="BorderedNodeFeature" domainClass="sequence_new::MetamodelElementFeature">
+            <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="[name/]" labelPosition="node" width="12" height="3" color="//@userColorsPalettes[name=null]/@entries[name=null]">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            </style>
+          </borderedNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="2" borderColor="//@userColorsPalettes[name=null]/@entries[name=null]" showIcon="false" labelExpression="aql:self.name">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#/0/@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateSeqElement" label="Create element" containerMappings="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='SeqElement']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sequence_new::Element" referenceName="elements"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="CreateEdge" label="Create edge" precondition="aql:preTarget.next = null" edgeMappings="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='NextElementArrow']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="next" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="Generated Tools Section">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Attribute Binding Edge" label="Attribute Binding Edge" edgeMappings="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="featureClass" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name=" name" label="Metamodel Element Feature" nodeMappings="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sequence_new::MetamodelElementFeature" referenceName="metamodelElementFeature"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Class Binding Edge " edgeMappings="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source.eContainer()/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sequence_new::IntemediateElement" referenceName="containsIntermediateElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="metamodElelement" valueExpression="[source/]"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="bindingElement" valueExpression="[target/]"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Metamodel Element" containerMappings="//@ownedViewpoints[name='SequenceSimple_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="sequence_new::MetamodelElement" referenceName="containsMetamodelElement">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="[name/]"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+  <userColorsPalettes>
+    <entries xsi:type="description:UserFixedColor" red="161" green="189" blue="226"/>
+    <entries xsi:type="description:UserFixedColor" red="134" green="187" blue="187"/>
+  </userColorsPalettes>
+</description:Group>

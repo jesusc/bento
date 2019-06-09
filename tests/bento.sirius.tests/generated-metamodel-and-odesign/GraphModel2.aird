@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:graph_new="http://bento/sirius/tests/graph_new" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://bento/sirius/tests/graph_new generated-graph_new.ecore http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_9M544Ia3EemJb_4qF3nj6w" selectedViews="_96pvsIa3EemJb_4qF3nj6w" version="14.1.0.201810161215">
+    <semanticResources>GraphModel.xmi</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_96pvsIa3EemJb_4qF3nj6w">
+      <viewpoint xmi:type="description:Viewpoint" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_E4SlU4a6EemJb_4qF3nj6w" name="new Diagram" repPath="#_E4RXMIa6EemJb_4qF3nj6w">
+        <description xmi:type="description_1:DiagramDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']"/>
+        <target xmi:type="graph_new:GraphModel" href="GraphModel.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_E4RXMIa6EemJb_4qF3nj6w" name="new Diagram">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_E4SlUIa6EemJb_4qF3nj6w" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_E4SlUYa6EemJb_4qF3nj6w"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_E4TMYIa6EemJb_4qF3nj6w" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_E4TMYYa6EemJb_4qF3nj6w" type="Sirius" element="_E4RXMIa6EemJb_4qF3nj6w" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_E79kYIa6EemJb_4qF3nj6w" type="2001" element="_E7m_EIa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E7-LcIa6EemJb_4qF3nj6w" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_E7-LcYa6EemJb_4qF3nj6w" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8AAqYa6EemJb_4qF3nj6w" type="3016" element="_E7nmIIa6EemJb_4qF3nj6w">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E8AAqoa6EemJb_4qF3nj6w" fontName="Ubuntu"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8AAq4a6EemJb_4qF3nj6w"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_E79kYYa6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E79kYoa6EemJb_4qF3nj6w" x="936" y="173" width="37" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_E7-Lcoa6EemJb_4qF3nj6w" type="2001" element="_E7nmIoa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E7-ygIa6EemJb_4qF3nj6w" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_E7-ygYa6EemJb_4qF3nj6w" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8AnsIa6EemJb_4qF3nj6w" type="3016" element="_E7nmI4a6EemJb_4qF3nj6w">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E8AnsYa6EemJb_4qF3nj6w" fontName="Ubuntu"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8Ansoa6EemJb_4qF3nj6w"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_E7-Lc4a6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E7-LdIa6EemJb_4qF3nj6w" x="672" y="180" width="37" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_E7-ygoa6EemJb_4qF3nj6w" type="2001" element="_E7oNMIa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E7-yhYa6EemJb_4qF3nj6w" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_E7-yhoa6EemJb_4qF3nj6w" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8Ans4a6EemJb_4qF3nj6w" type="3003" element="_E7oNMYa6EemJb_4qF3nj6w">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E8AntIa6EemJb_4qF3nj6w" fontName="Ubuntu"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8AntYa6EemJb_4qF3nj6w"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_E7-yg4a6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E7-yhIa6EemJb_4qF3nj6w" x="768" y="96" width="120" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_E7_ZkIa6EemJb_4qF3nj6w" type="2001" element="_E7oNM4a6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E7_Zk4a6EemJb_4qF3nj6w" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_E7_ZlIa6EemJb_4qF3nj6w" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8BOwIa6EemJb_4qF3nj6w" type="3003" element="_E7oNNIa6EemJb_4qF3nj6w">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E8BOwYa6EemJb_4qF3nj6w" fontName="Ubuntu"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8BOwoa6EemJb_4qF3nj6w"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_E7_ZkYa6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E7_Zkoa6EemJb_4qF3nj6w" x="1056" y="108" width="120" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_E7_ZlYa6EemJb_4qF3nj6w" type="2001" element="_E7o0QYa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E8AAoIa6EemJb_4qF3nj6w" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_E8AAoYa6EemJb_4qF3nj6w" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8BOw4a6EemJb_4qF3nj6w" type="3003" element="_E7o0Qoa6EemJb_4qF3nj6w">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E8BOxIa6EemJb_4qF3nj6w" fontName="Ubuntu"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8BOxYa6EemJb_4qF3nj6w"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_E7_Zloa6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E7_Zl4a6EemJb_4qF3nj6w" x="516" y="144" width="120" height="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_DQJwwIbkEem-G8rJ08q_PQ" type="2002" element="_DP55IIbkEem-G8rJ08q_PQ">
+          <children xmi:type="notation:Node" xmi:id="_DQKX0IbkEem-G8rJ08q_PQ" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_DQKX0YbkEem-G8rJ08q_PQ" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_DQKX0obkEem-G8rJ08q_PQ"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_DQKX04bkEem-G8rJ08q_PQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_D66O4IbtEem-G8rJ08q_PQ" type="3012" element="_D6v20IbtEem-G8rJ08q_PQ">
+            <children xmi:type="notation:Node" xmi:id="_D66O44btEem-G8rJ08q_PQ" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_D66O5IbtEem-G8rJ08q_PQ" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_D6618IbtEem-G8rJ08q_PQ" type="3003" element="_D6wd4IbtEem-G8rJ08q_PQ">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_D6618YbtEem-G8rJ08q_PQ" fontName="Ubuntu"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_D6618obtEem-G8rJ08q_PQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_D66O4YbtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_D66O4obtEem-G8rJ08q_PQ" x="140" y="12" width="120" height="30"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_DQJwwYbkEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DQJwwobkEem-G8rJ08q_PQ" x="972" y="348"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zZS2sIbsEem-G8rJ08q_PQ" type="2002" element="_zY84cobsEem-G8rJ08q_PQ">
+          <children xmi:type="notation:Node" xmi:id="_zZTdwIbsEem-G8rJ08q_PQ" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_zZTdwYbsEem-G8rJ08q_PQ" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_zZTdwobsEem-G8rJ08q_PQ"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_zZTdw4bsEem-G8rJ08q_PQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_DW7_IIbtEem-G8rJ08q_PQ" type="3012" element="_DWvx4IbtEem-G8rJ08q_PQ">
+            <children xmi:type="notation:Node" xmi:id="_DW8mMIbtEem-G8rJ08q_PQ" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_DW8mMYbtEem-G8rJ08q_PQ" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_DW9NQIbtEem-G8rJ08q_PQ" type="3003" element="_DWvx4YbtEem-G8rJ08q_PQ">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_DW9NQYbtEem-G8rJ08q_PQ" fontName="Ubuntu"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DW9NQobtEem-G8rJ08q_PQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_DW7_IYbtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DW7_IobtEem-G8rJ08q_PQ" x="-112" y="12" width="120" height="30"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_zZS2sYbsEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zZS2sobsEem-G8rJ08q_PQ" x="516" y="432"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_K7hx8IbtEem-G8rJ08q_PQ" type="2002" element="_K7Z2IIbtEem-G8rJ08q_PQ">
+          <children xmi:type="notation:Node" xmi:id="_K7hx84btEem-G8rJ08q_PQ" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_K7iZAIbtEem-G8rJ08q_PQ" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_K7iZAYbtEem-G8rJ08q_PQ"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_K7iZAobtEem-G8rJ08q_PQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_PqZ74IbtEem-G8rJ08q_PQ" type="3012" element="_PqO8wIbtEem-G8rJ08q_PQ">
+            <children xmi:type="notation:Node" xmi:id="_Pqai8IbtEem-G8rJ08q_PQ" type="5010">
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_Pqai8YbtEem-G8rJ08q_PQ" y="5"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_PqbKAIbtEem-G8rJ08q_PQ" type="3003" element="_PqPj0IbtEem-G8rJ08q_PQ">
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_PqbKAYbtEem-G8rJ08q_PQ" fontName="Ubuntu"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PqbKAobtEem-G8rJ08q_PQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_PqZ74YbtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PqZ74obtEem-G8rJ08q_PQ" x="-112" y="24" width="120" height="30"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_K7hx8YbtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_K7hx8obtEem-G8rJ08q_PQ" x="804" y="444"/>
+        </children>
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_E4TMYoa6EemJb_4qF3nj6w"/>
+        <edges xmi:type="notation:Edge" xmi:id="_E8DrAIa6EemJb_4qF3nj6w" type="4001" element="_E7vh8Ya6EemJb_4qF3nj6w" source="_E79kYIa6EemJb_4qF3nj6w" target="_E7-Lcoa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E8DrBIa6EemJb_4qF3nj6w" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8DrBYa6EemJb_4qF3nj6w" x="8" y="-6"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8DrBoa6EemJb_4qF3nj6w" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8DrB4a6EemJb_4qF3nj6w" x="-6" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8DrCIa6EemJb_4qF3nj6w" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8DrCYa6EemJb_4qF3nj6w" x="-6" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_E8DrAYa6EemJb_4qF3nj6w"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_E8DrAoa6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_E8DrA4a6EemJb_4qF3nj6w" points="[-15, 2, 213, -35]$[-228, 37, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8ESEIa6EemJb_4qF3nj6w" id="(0.4054054054054055,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8ESEYa6EemJb_4qF3nj6w" id="(1.3783783783783783,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_E8ESEoa6EemJb_4qF3nj6w" type="4001" element="_E7wJBIa6EemJb_4qF3nj6w" source="_E79kYIa6EemJb_4qF3nj6w" target="_E7_ZkIa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E8ESFoa6EemJb_4qF3nj6w" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8ESF4a6EemJb_4qF3nj6w" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8ESGIa6EemJb_4qF3nj6w" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8ESGYa6EemJb_4qF3nj6w" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8ESGoa6EemJb_4qF3nj6w" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8ESG4a6EemJb_4qF3nj6w" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_E8ESE4a6EemJb_4qF3nj6w" routing="Tree"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_E8ESFIa6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_E8ESFYa6EemJb_4qF3nj6w" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8ESHIa6EemJb_4qF3nj6w" id="(0.4054054054054055,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8E5IIa6EemJb_4qF3nj6w" id="(0.5,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_E8E5IYa6EemJb_4qF3nj6w" type="4001" element="_E7wwEIa6EemJb_4qF3nj6w" source="_E7-Lcoa6EemJb_4qF3nj6w" target="_E7_ZlYa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E8E5JYa6EemJb_4qF3nj6w" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8E5Joa6EemJb_4qF3nj6w" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8E5J4a6EemJb_4qF3nj6w" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8E5KIa6EemJb_4qF3nj6w" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8E5KYa6EemJb_4qF3nj6w" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8E5Koa6EemJb_4qF3nj6w" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_E8E5Ioa6EemJb_4qF3nj6w" routing="Tree"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_E8E5I4a6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_E8E5JIa6EemJb_4qF3nj6w" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8E5K4a6EemJb_4qF3nj6w" id="(1.3783783783783783,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8E5LIa6EemJb_4qF3nj6w" id="(0.5,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_E8E5LYa6EemJb_4qF3nj6w" type="4001" element="_E7wwFYa6EemJb_4qF3nj6w" source="_E8DrAIa6EemJb_4qF3nj6w" target="_E7-ygoa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_E8FgMIa6EemJb_4qF3nj6w" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8FgMYa6EemJb_4qF3nj6w" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8FgMoa6EemJb_4qF3nj6w" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8FgM4a6EemJb_4qF3nj6w" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8FgNIa6EemJb_4qF3nj6w" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E8FgNYa6EemJb_4qF3nj6w" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_E8E5Loa6EemJb_4qF3nj6w" routing="Tree"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_E8E5L4a6EemJb_4qF3nj6w" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_E8E5MIa6EemJb_4qF3nj6w" points="[0, 0, -45, 0]$[45, 0, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8FgNoa6EemJb_4qF3nj6w" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_E8FgN4a6EemJb_4qF3nj6w" id="(0.5,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_zZWhEobsEem-G8rJ08q_PQ" type="4001" element="_zY_7wIbsEem-G8rJ08q_PQ" source="_DQJwwIbkEem-G8rJ08q_PQ" target="_E79kYIa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_zZXIIIbsEem-G8rJ08q_PQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zZXIIYbsEem-G8rJ08q_PQ" x="6" y="-8"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_zZXIIobsEem-G8rJ08q_PQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zZXII4bsEem-G8rJ08q_PQ" x="-5" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_zZXIJIbsEem-G8rJ08q_PQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zZXIJYbsEem-G8rJ08q_PQ" x="-6" y="7"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_zZWhE4bsEem-G8rJ08q_PQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zZWhFIbsEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZWhFYbsEem-G8rJ08q_PQ" points="[-12, -34, 56, 160]$[-63, -179, 5, 15]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_zZXIJobsEem-G8rJ08q_PQ" id="(0.5,0.5)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_zZXIJ4bsEem-G8rJ08q_PQ" id="(1.1486486486486487,0.5)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_JmAJcIbtEem-G8rJ08q_PQ" type="4001" element="_Jl2_gIbtEem-G8rJ08q_PQ" source="_D66O4IbtEem-G8rJ08q_PQ" target="_E7_ZkIa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_JmAwgIbtEem-G8rJ08q_PQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JmAwgYbtEem-G8rJ08q_PQ" x="12" y="-7"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JmAwgobtEem-G8rJ08q_PQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JmAwg4btEem-G8rJ08q_PQ" x="-9" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_JmAwhIbtEem-G8rJ08q_PQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JmAwhYbtEem-G8rJ08q_PQ" x="-10" y="4"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_JmAJcYbtEem-G8rJ08q_PQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_JmAJcobtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JmAJc4btEem-G8rJ08q_PQ" points="[0, 0, 75, 222]$[-75, -222, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JmBXkIbtEem-G8rJ08q_PQ" id="(0.7583333333333333,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JmBXkYbtEem-G8rJ08q_PQ" id="(0.6,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_Qhi_QIbtEem-G8rJ08q_PQ" type="4001" element="_QhbqgobtEem-G8rJ08q_PQ" source="_PqZ74IbtEem-G8rJ08q_PQ" target="_E7_ZlYa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_QhjmUIbtEem-G8rJ08q_PQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QhjmUYbtEem-G8rJ08q_PQ" x="1" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_QhjmUobtEem-G8rJ08q_PQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QhjmU4btEem-G8rJ08q_PQ" x="1" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_QhjmVIbtEem-G8rJ08q_PQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QhjmVYbtEem-G8rJ08q_PQ" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_Qhi_QYbtEem-G8rJ08q_PQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_Qhi_QobtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Qhi_Q4btEem-G8rJ08q_PQ" points="[0, 0, 132, 294]$[-132, -294, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QhjmVobtEem-G8rJ08q_PQ" id="(0.43333333333333335,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QhjmV4btEem-G8rJ08q_PQ" id="(0.8,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_Q_p3kIbtEem-G8rJ08q_PQ" type="4001" element="_Q_mNOIbtEem-G8rJ08q_PQ" source="_DW7_IIbtEem-G8rJ08q_PQ" target="_E7_ZlYa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_Q_p3lIbtEem-G8rJ08q_PQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Q_p3lYbtEem-G8rJ08q_PQ" x="-2" y="-11"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Q_p3lobtEem-G8rJ08q_PQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Q_p3l4btEem-G8rJ08q_PQ" x="4" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Q_qeoIbtEem-G8rJ08q_PQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Q_qeoYbtEem-G8rJ08q_PQ" x="3" y="9"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_Q_p3kYbtEem-G8rJ08q_PQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_Q_p3kobtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Q_p3k4btEem-G8rJ08q_PQ" points="[0, 0, -83, 270]$[83, -270, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q_qeoobtEem-G8rJ08q_PQ" id="(0.5416666666666666,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Q_qeo4btEem-G8rJ08q_PQ" id="(0.3,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_Sd4JEIbtEem-G8rJ08q_PQ" type="4001" element="_SdvmNIbtEem-G8rJ08q_PQ" source="_zZS2sIbsEem-G8rJ08q_PQ" target="_E7-Lcoa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_Sd4JFIbtEem-G8rJ08q_PQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Sd4JFYbtEem-G8rJ08q_PQ" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Sd4wIIbtEem-G8rJ08q_PQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Sd4wIYbtEem-G8rJ08q_PQ" x="1" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Sd4wIobtEem-G8rJ08q_PQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Sd4wI4btEem-G8rJ08q_PQ" x="-1" y="9"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_Sd4JEYbtEem-G8rJ08q_PQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_Sd4JEobtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Sd4JE4btEem-G8rJ08q_PQ" points="[0, 0, -93, 222]$[93, -222, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Sd4wJIbtEem-G8rJ08q_PQ" id="(0.5878378378378378,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Sd4wJYbtEem-G8rJ08q_PQ" id="(0.6486486486486487,1.0)"/>
+        </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_lYvQkIbtEem-G8rJ08q_PQ" type="4001" element="_lYpxBIbtEem-G8rJ08q_PQ" source="_K7hx8IbtEem-G8rJ08q_PQ" target="_E7-Lcoa6EemJb_4qF3nj6w">
+          <children xmi:type="notation:Node" xmi:id="_lYvQlIbtEem-G8rJ08q_PQ" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lYvQlYbtEem-G8rJ08q_PQ" y="-10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_lYvQlobtEem-G8rJ08q_PQ" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lYvQl4btEem-G8rJ08q_PQ" y="10"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_lYv3oIbtEem-G8rJ08q_PQ" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lYv3oYbtEem-G8rJ08q_PQ" y="10"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_lYvQkYbtEem-G8rJ08q_PQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_lYvQkobtEem-G8rJ08q_PQ" fontName="Ubuntu" fontHeight="8"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_lYvQk4btEem-G8rJ08q_PQ" points="[0, 0, 120, 234]$[-120, -234, 0, 0]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lYv3oobtEem-G8rJ08q_PQ" id="(0.08108108108108109,0.0)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lYv3o4btEem-G8rJ08q_PQ" id="(0.6486486486486487,1.0)"/>
+        </edges>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_E7m_EIa6EemJb_4qF3nj6w" name="B" outgoingEdges="_E7vh8Ya6EemJb_4qF3nj6w _E7wJBIa6EemJb_4qF3nj6w" incomingEdges="_zY_7wIbsEem-G8rJ08q_PQ" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="graph_new:Node" href="GraphModel.xmi#//@node.0"/>
+      <semanticElements xmi:type="graph_new:Node" href="GraphModel.xmi#//@node.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Ellipse" uid="_E7nmIIa6EemJb_4qF3nj6w" labelSize="12" showIcon="false" labelPosition="node">
+        <description xmi:type="style:EllipseNodeDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='Node']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='Node']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_E7nmIoa6EemJb_4qF3nj6w" name="A" outgoingEdges="_E7wwEIa6EemJb_4qF3nj6w" incomingEdges="_E7vh8Ya6EemJb_4qF3nj6w _SdvmNIbtEem-G8rJ08q_PQ _lYpxBIbtEem-G8rJ08q_PQ" width="3" height="3" resizeKind="NSEW">
+      <target xmi:type="graph_new:Node" href="GraphModel.xmi#//@node.1"/>
+      <semanticElements xmi:type="graph_new:Node" href="GraphModel.xmi#//@node.1"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Ellipse" uid="_E7nmI4a6EemJb_4qF3nj6w" labelSize="12" showIcon="false" labelPosition="node">
+        <description xmi:type="style:EllipseNodeDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='Node']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='Node']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_E7oNMIa6EemJb_4qF3nj6w" name="label  = link 1" incomingEdges="_E7wwFYa6EemJb_4qF3nj6w" width="12" height="3">
+      <target xmi:type="graph_new:labelEdge" href="GraphModel.xmi#//@edge.0/@containslabelEdge"/>
+      <semanticElements xmi:type="graph_new:labelEdge" href="GraphModel.xmi#//@edge.0/@containslabelEdge"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_E7oNMYa6EemJb_4qF3nj6w" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderLineStyle="dash" labelPosition="node" width="12" height="3" color="161,189,226">
+        <description xmi:type="style:SquareDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='labelEdge']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='labelEdge']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_E7oNM4a6EemJb_4qF3nj6w" name="value  = B" incomingEdges="_E7wJBIa6EemJb_4qF3nj6w _Jl2_gIbtEem-G8rJ08q_PQ" width="12" height="3">
+      <target xmi:type="graph_new:valueNode" href="GraphModel.xmi#//@node.0/@containsvalueNode"/>
+      <semanticElements xmi:type="graph_new:valueNode" href="GraphModel.xmi#//@node.0/@containsvalueNode"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_E7oNNIa6EemJb_4qF3nj6w" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderLineStyle="dash" labelPosition="node" width="12" height="3" color="161,189,226">
+        <description xmi:type="style:SquareDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='valueNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='valueNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_E7o0QYa6EemJb_4qF3nj6w" name="value  = A" incomingEdges="_E7wwEIa6EemJb_4qF3nj6w _QhbqgobtEem-G8rJ08q_PQ _Q_mNOIbtEem-G8rJ08q_PQ" width="12" height="3">
+      <target xmi:type="graph_new:valueNode" href="GraphModel.xmi#//@node.1/@containsvalueNode"/>
+      <semanticElements xmi:type="graph_new:valueNode" href="GraphModel.xmi#//@node.1/@containsvalueNode"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_E7o0Qoa6EemJb_4qF3nj6w" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderLineStyle="dash" labelPosition="node" width="12" height="3" color="161,189,226">
+        <description xmi:type="style:SquareDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='valueNode']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@nodeMappings[name='valueNode']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_E7vh8Ya6EemJb_4qF3nj6w" outgoingEdges="_E7wwFYa6EemJb_4qF3nj6w" sourceNode="_E7m_EIa6EemJb_4qF3nj6w" targetNode="_E7nmIoa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:Edge" href="GraphModel.xmi#//@edge.0"/>
+      <semanticElements xmi:type="graph_new:Edge" href="GraphModel.xmi#//@edge.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_E7wJAIa6EemJb_4qF3nj6w" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='Edge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_E7wJAYa6EemJb_4qF3nj6w" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='Edge']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_E7wJBIa6EemJb_4qF3nj6w" sourceNode="_E7m_EIa6EemJb_4qF3nj6w" targetNode="_E7oNM4a6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:Node" href="GraphModel.xmi#//@node.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_E7wJBYa6EemJb_4qF3nj6w" lineStyle="dash" targetArrow="NoDecoration" routingStyle="tree">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='valueNodeConnector']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_E7wJBoa6EemJb_4qF3nj6w"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='valueNodeConnector']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_E7wwEIa6EemJb_4qF3nj6w" sourceNode="_E7nmIoa6EemJb_4qF3nj6w" targetNode="_E7o0QYa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:Node" href="GraphModel.xmi#//@node.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_E7wwEYa6EemJb_4qF3nj6w" lineStyle="dash" targetArrow="NoDecoration" routingStyle="tree">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='valueNodeConnector']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_E7wwEoa6EemJb_4qF3nj6w"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='valueNodeConnector']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_E7wwFYa6EemJb_4qF3nj6w" sourceNode="_E7vh8Ya6EemJb_4qF3nj6w" targetNode="_E7oNMIa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:Edge" href="GraphModel.xmi#//@edge.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_E7wwFoa6EemJb_4qF3nj6w" lineStyle="dash" targetArrow="NoDecoration" routingStyle="tree">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='labelEdgeConnector']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_E7xXIIa6EemJb_4qF3nj6w"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='labelEdgeConnector']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_DP55IIbkEem-G8rJ08q_PQ" name="START" outgoingEdges="_zY_7wIbsEem-G8rJ08q_PQ">
+      <target xmi:type="graph_new:MetamodelElement" href="GraphModel.xmi#//@containsMetamodelElement.0"/>
+      <semanticElements xmi:type="graph_new:MetamodelElement" href="GraphModel.xmi#//@containsMetamodelElement.0"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_D6v20IbtEem-G8rJ08q_PQ" name="name" outgoingEdges="_Jl2_gIbtEem-G8rJ08q_PQ" width="12" height="3">
+        <target xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.0/@metamodelElementFeature.0"/>
+        <semanticElements xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.0/@metamodelElementFeature.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_D6wd4IbtEem-G8rJ08q_PQ" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderLineStyle="dash" labelPosition="node" width="12" height="3" color="161,189,226">
+          <description xmi:type="style:SquareDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_DP6gMIbkEem-G8rJ08q_PQ" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="161,189,226">
+        <description xmi:type="style:FlatContainerStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_zY84cobsEem-G8rJ08q_PQ" name="STEP" outgoingEdges="_SdvmNIbtEem-G8rJ08q_PQ">
+      <target xmi:type="graph_new:MetamodelElement" href="GraphModel.xmi#//@containsMetamodelElement.1"/>
+      <semanticElements xmi:type="graph_new:MetamodelElement" href="GraphModel.xmi#//@containsMetamodelElement.1"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_DWvx4IbtEem-G8rJ08q_PQ" name="name" outgoingEdges="_Q_mNOIbtEem-G8rJ08q_PQ" width="12" height="3">
+        <target xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.1/@metamodelElementFeature.0"/>
+        <semanticElements xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.1/@metamodelElementFeature.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_DWvx4YbtEem-G8rJ08q_PQ" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderLineStyle="dash" labelPosition="node" width="12" height="3" color="161,189,226">
+          <description xmi:type="style:SquareDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_zY84c4bsEem-G8rJ08q_PQ" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="161,189,226">
+        <description xmi:type="style:FlatContainerStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_zY_7wIbsEem-G8rJ08q_PQ" sourceNode="_DP55IIbkEem-G8rJ08q_PQ" targetNode="_E7m_EIa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:IntemediateElement" href="GraphModel.xmi#//@containsIntermediateElement.0"/>
+      <semanticElements xmi:type="graph_new:IntemediateElement" href="GraphModel.xmi#//@containsIntermediateElement.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_zY_7wYbsEem-G8rJ08q_PQ">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_zY_7wobsEem-G8rJ08q_PQ"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Jl2_gIbtEem-G8rJ08q_PQ" sourceNode="_D6v20IbtEem-G8rJ08q_PQ" targetNode="_E7oNM4a6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.0/@metamodelElementFeature.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Jl2_gYbtEem-G8rJ08q_PQ">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Jl2_gobtEem-G8rJ08q_PQ"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_K7Z2IIbtEem-G8rJ08q_PQ" name="END" outgoingEdges="_lYpxBIbtEem-G8rJ08q_PQ">
+      <target xmi:type="graph_new:MetamodelElement" href="GraphModel.xmi#//@containsMetamodelElement.2"/>
+      <semanticElements xmi:type="graph_new:MetamodelElement" href="GraphModel.xmi#//@containsMetamodelElement.2"/>
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_PqO8wIbtEem-G8rJ08q_PQ" name="name" outgoingEdges="_QhbqgobtEem-G8rJ08q_PQ" width="12" height="3">
+        <target xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.2/@metamodelElementFeature.0"/>
+        <semanticElements xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.2/@metamodelElementFeature.0"/>
+        <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+        <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+        <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+        <ownedStyle xmi:type="diagram:Square" uid="_PqPj0IbtEem-G8rJ08q_PQ" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderLineStyle="dash" labelPosition="node" width="12" height="3" color="161,189,226">
+          <description xmi:type="style:SquareDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@borderedNodeMappings[name='BorderedNodeFeature']"/>
+      </ownedBorderedNodes>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_K7adMIbtEem-G8rJ08q_PQ" showIcon="false" borderSize="2" borderSizeComputationExpression="2" borderColor="161,189,226">
+        <description xmi:type="style:FlatContainerStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@containerMappings[name='MetamodelElement']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_QhbqgobtEem-G8rJ08q_PQ" sourceNode="_PqO8wIbtEem-G8rJ08q_PQ" targetNode="_E7o0QYa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.2/@metamodelElementFeature.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Qhbqg4btEem-G8rJ08q_PQ">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_QhbqhIbtEem-G8rJ08q_PQ"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_Q_mNOIbtEem-G8rJ08q_PQ" sourceNode="_DWvx4IbtEem-G8rJ08q_PQ" targetNode="_E7o0QYa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:MetamodelElementFeature" href="GraphModel.xmi#//@containsMetamodelElement.1/@metamodelElementFeature.0"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_Q_mNOYbtEem-G8rJ08q_PQ">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_Q_mNOobtEem-G8rJ08q_PQ"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='pointTo']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_SdvmNIbtEem-G8rJ08q_PQ" sourceNode="_zY84cobsEem-G8rJ08q_PQ" targetNode="_E7nmIoa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:IntemediateElement" href="GraphModel.xmi#//@containsIntermediateElement.1"/>
+      <semanticElements xmi:type="graph_new:IntemediateElement" href="GraphModel.xmi#//@containsIntermediateElement.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_SdvmNYbtEem-G8rJ08q_PQ">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_SdvmNobtEem-G8rJ08q_PQ"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_lYpxBIbtEem-G8rJ08q_PQ" sourceNode="_K7Z2IIbtEem-G8rJ08q_PQ" targetNode="_E7nmIoa6EemJb_4qF3nj6w">
+      <target xmi:type="graph_new:IntemediateElement" href="GraphModel.xmi#//@containsIntermediateElement.2"/>
+      <semanticElements xmi:type="graph_new:IntemediateElement" href="GraphModel.xmi#//@containsIntermediateElement.2"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_lYpxBYbtEem-G8rJ08q_PQ">
+        <description xmi:type="style:EdgeStyleDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_lYpxBobtEem-G8rJ08q_PQ"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer/@edgeMappings[name='IntemediateElement']"/>
+    </ownedDiagramElements>
+    <description xmi:type="description_1:DiagramDescription" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_E4RXMYa6EemJb_4qF3nj6w"/>
+    <activatedLayers xmi:type="description_1:Layer" href="Diagram_graph_new_generated.odesign#//@ownedViewpoints[name='Graph_GraphicalBinding']/@ownedRepresentations[name='Diagram']/@defaultLayer"/>
+    <target xmi:type="graph_new:GraphModel" href="GraphModel.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>
