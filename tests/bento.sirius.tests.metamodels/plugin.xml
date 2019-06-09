@@ -62,4 +62,12 @@
             genModel="resources/metamodels/stepeasy/stepeasy.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated uiflow -->
+      <package
+            uri="http://bento/sirius/uiflow"
+            class="bento.sirius.tests.uiflow.UiflowPackage"
+            genModel="resources/metamodels/uiflow/uiflow.genmodel"/>
+   </extension>
+
 </plugin>

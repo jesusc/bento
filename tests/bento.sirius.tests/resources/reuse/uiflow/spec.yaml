@@ -1,0 +1,11 @@
+
+palettes:
+  - name: "Main"
+    strict: true
+    items:
+    - node: "Create InitialTask"
+    - edge: "Create Transition"
+    - container: "Create AwsLambdaTask"
+
+#  
+    

@@ -1,0 +1,30 @@
+/* This is based on http://step-easy.s3-website-us-west-2.amazonaws.com/ */
+@namespace(
+	uri="http://bento/sirius/uiflow",
+	prefix="uiflow")
+package uiflow;
+
+class UIFlow {
+	val FlowElement[*] elements;		
+}
+
+abstract class FlowElement {
+	attr String[0..1] name;
+	val FlowTransition[*] next;
+}
+
+class FlowTransition {
+	ref FlowElement[1] element;
+}
+
+class Initial extends FlowElement {
+	
+}
+
+class Action extends FlowElement {
+	
+}
+
+class View extends FlowElement {
+	
+}
