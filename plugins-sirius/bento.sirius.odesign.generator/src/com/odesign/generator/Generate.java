@@ -63,9 +63,9 @@ public class Generate {
 
 		metamodelGenerator.setEp(this.epack);
 
-		this.epack.setName(ep.getName() + "_new");
-		this.epack.setNsPrefix(ep.getNsPrefix() + "_new");
-		this.epack.setNsURI(ep.getNsURI() + "_new");
+		this.epack.setName(ep.getName() + "_bdsl");
+		this.epack.setNsPrefix(ep.getNsPrefix() + "_bdsl");
+		this.epack.setNsURI(ep.getNsURI() + "_bdsl");
 
 		metamodelGenerator.createFeatureCLasses();
 		metamodelGenerator.createBindingClass();
