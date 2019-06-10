@@ -20,8 +20,8 @@ public class GeneratorTest {
 	public void test() throws FileNotFoundException, IOException {
 		String PATH="/home/souhaila/git/sirius-bento"
 				+ "/plugins-sirius/bento.sirius.odesign.generator/";
-		String sourceOdesignURI = PATH+"source/free.odesign";
-		String sourceModelURI=PATH+"source/My.free";
+		String sourceOdesignURI = PATH+"source/sequence-simple.odesign";
+		String sourceModelURI=PATH+"source/sequence-model-1.free";
 		String outputURI   = PATH+"outputs";
 		
 		

@@ -39,7 +39,6 @@ public class BindingMetamodelGenerator {
 	private HashMap<EClass, List<EClass>> newClassifiers = new HashMap<EClass, List<EClass>>();
 	private List<EClass> newEClass = new ArrayList<>();
 	private File generatedFile;
-//	private EPackage newepack=EcoreFactory.eINSTANCE.createEPackage();
 
 	public HashMap<EClass, List<EClass>> getNewClassifiers() {
 		return newClassifiers;
@@ -62,11 +61,6 @@ public class BindingMetamodelGenerator {
 	}
 
 	public void setRoot(EClass root) {
-//		Copier copier= new Copier();
-//		this.root = EcoreFactory.eINSTANCE.createEClass();
-//		this.root=(EClass) copier.copy(root);
-//		copier.copyReferences();
-//		this.newepack.getEClassifiers().add(this.root);
 
 		this.root = root;
 	}
@@ -111,14 +105,6 @@ public class BindingMetamodelGenerator {
 		this.newEClass = newEClass;
 	}
 
-//	public EPackage getNewepack() {
-//		return newepack;
-//	}
-//
-//	public void setNewepack(EPackage newepack) {
-//		this.newepack = newepack;
-//	}
-
 	public List<EClass> getOriClassifiers() {
 		return oriClassifiers;
 	}
@@ -153,10 +139,9 @@ public class BindingMetamodelGenerator {
 					klass.setName(eattribute.getName() + (eklass).getName());// WordUtils.capitalize(eattribute.getName())
 					this.ep.getEClassifiers().add(klass);
 					this.newEClass.add(klass);
-					// oriClassifiers.add((EClass) klass);
+
 					listFeatures.add(klass);
 
-//				newClassifiers.put((EClass)obj,klass);
 					EReference containement = EcoreFactory.eINSTANCE.createEReference();
 					containement.setName("contains" + klass.getName());
 
@@ -166,8 +151,6 @@ public class BindingMetamodelGenerator {
 
 					EAttribute attri = EcoreFactory.eINSTANCE.createEAttribute();
 					attri.setName("value");
-					// attri=eattribute;
-//					attri.setDefaultValue(eattribute.getDefaultValue());
 
 					attri.setEType(eattribute.getEType());
 					attri.setDefaultValue(eattribute.getDefaultValue());
@@ -221,7 +204,6 @@ public class BindingMetamodelGenerator {
 
 	public void createBindingClass() {
 
-		// Biding Element Class
 		this.bindingElement = EcoreFactory.eINSTANCE.createEClass();
 		this.bindingElement.setName("BindingElement");
 		((EClass) this.bindingElement).setAbstract(true);
@@ -341,40 +323,23 @@ public class BindingMetamodelGenerator {
 	public void save(File file) {
 		System.out.println("Savingthe new metamodel ...");
 		try {
-//			
-//			newepack.setName(ep.getName() + "_new");
-//			newepack.setNsPrefix(ep.getNsPrefix() + "_new");
-//			newepack.setNsURI(ep.getNsURI() + "_new");
-//			ResourceSet rs = new ResourceSetImpl();
-//			Resource resource = rs.createResource(URI.createFileURI(file.getAbsolutePath() + "/GENERATED-" + this.newepack.getName() + ".ecore"));
-//			resource.getContents().add(this.newepack);
-
-			// EPackage.Registry.INSTANCE.put(ep.getNsURI()+"_gen", ep);
 
 			ResourceSet rs = new ResourceSetImpl();
-//			final Copier copier = new Copier();
-//			final List<EObject> eObjects = new ArrayList<EObject>(copier.copyAll(ep.eContents()));
-//			copier.copyReferences();
-			
+
 			generatedFile = new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore");
-			final Resource resource = rs
-					.createResource(URI.createFileURI(generatedFile.getAbsolutePath()));
+			final Resource resource = rs.createResource(URI.createFileURI(generatedFile.getAbsolutePath()));
 
 			resource.getContents().add(ep);
 
 			resource.setURI(URI.createFileURI(generatedFile.getAbsolutePath()));
 
-			resource.save(
-					new FileOutputStream(new File(generatedFile.getAbsolutePath())),
-					null);
+			resource.save(new FileOutputStream(new File(generatedFile.getAbsolutePath())), null);
 
-//			ep.eResource().save(new FileOutputStream(
-//					new File(file.getAbsolutePath() + "/GENERATED-" + this.ep.getName() + ".ecore")), null);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		System.out.println("Saved !");

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence:SequenceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sequence="http://bento/sirius/tests/sequence">
+  <elements value="E1">
+    <next value="E2">
+      <next value="E3">
+        <next value="E4"/>
+      </next>
+    </next>
+  </elements>
+</sequence:SequenceModel>

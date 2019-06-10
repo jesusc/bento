@@ -22,14 +22,6 @@ import com.odesign.generator.tools.Tools;
 
 public class Generate {
 
-	/**
-	 * @param modelURI
-	 * @param file
-	 * @param arguments
-	 * @return
-	 * @throws IOException
-	 */
-
 	private EPackage epack;
 	private EPackage originalEPack;
 	private File odesignGeneratedFile;
@@ -83,14 +75,14 @@ public class Generate {
 	}
 
 	public EPackage getOriginaleEPakage() {
-		
+
 		return this.originalEPack;
 	}
-	
+
 	public File getOdesignGeneratedFile() {
 		return odesignGeneratedFile;
 	}
-	
+
 	public File getMetamodelGeneratedFile() {
 		return metamodelGeneratedFile;
 	}

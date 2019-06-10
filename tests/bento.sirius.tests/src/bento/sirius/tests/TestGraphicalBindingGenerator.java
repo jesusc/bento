@@ -31,6 +31,8 @@ public class TestGraphicalBindingGenerator {
                 
            });
     }
+    
+
 
 	private File odesign;	
 	

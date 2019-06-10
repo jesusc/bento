@@ -4,14 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -26,7 +24,6 @@ import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeRouting;
 import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.LineStyle;
-import org.eclipse.sirius.diagram.description.AdditionalLayer;
 import org.eclipse.sirius.diagram.description.ContainerMapping;
 import org.eclipse.sirius.diagram.description.DescriptionFactory;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
@@ -37,7 +34,6 @@ import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.description.style.CenterLabelStyleDescription;
 import org.eclipse.sirius.diagram.description.style.EdgeStyleDescription;
 import org.eclipse.sirius.diagram.description.style.FlatContainerStyleDescription;
-import org.eclipse.sirius.diagram.description.style.NodeStyleDescription;
 import org.eclipse.sirius.diagram.description.style.SquareDescription;
 import org.eclipse.sirius.diagram.description.style.StyleFactory;
 import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
@@ -45,14 +41,8 @@ import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.ToolFactory;
 import org.eclipse.sirius.diagram.description.tool.ToolSection;
-import org.eclipse.sirius.diagram.description.tool.impl.EdgeCreationDescriptionImpl;
-import org.eclipse.sirius.viewpoint.ToolSectionInstance;
-import org.eclipse.sirius.viewpoint.description.ColorDescription;
-import org.eclipse.sirius.viewpoint.description.FeatureExtensionDescription;
-import org.eclipse.sirius.viewpoint.description.FixedColor;
 import org.eclipse.sirius.viewpoint.description.Group;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
-import org.eclipse.sirius.viewpoint.description.SystemColor;
 import org.eclipse.sirius.viewpoint.description.UserColorsPalette;
 import org.eclipse.sirius.viewpoint.description.UserFixedColor;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
@@ -60,8 +50,6 @@ import org.eclipse.sirius.viewpoint.description.tool.ChangeContext;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
 import org.eclipse.sirius.viewpoint.description.tool.InitEdgeCreationOperation;
 import org.eclipse.sirius.viewpoint.description.tool.InitialNodeCreationOperation;
-import org.eclipse.sirius.viewpoint.description.tool.InitialOperation;
-import org.eclipse.sirius.viewpoint.description.tool.ModelOperation;
 import org.eclipse.sirius.viewpoint.description.tool.SetValue;
 
 import com.odesign.generator.tools.Tools;
@@ -726,9 +714,6 @@ public class OdesignGenerator {
 			edgeintermediate.getTargetMapping().add(node);
 		}
 
-//		for (ContainerMapping container : cont) {
-//			edgeintermediate.getTargetMapping().add(container);
-//		}
 
 		edgeintermediate.setSemanticCandidatesExpression("feature:containsIntermediateElement");
 		dd.getAllLayers().get(0).getEdgeMappings().add(edgeintermediate);
@@ -836,12 +821,8 @@ public class OdesignGenerator {
 
 		dd.getAllLayers().get(0).getToolSections().add(toolsec);
 
-		ToolSectionInstance toolsection;
-
-		// toolsection.getTools().add(arg0);
-
-		// resource.save(new FileOutputStream(new File(file.getAbsolutePath() +
-		// "/generated-odesign.odesign")), null);
+		
+		
 	}
 
 }

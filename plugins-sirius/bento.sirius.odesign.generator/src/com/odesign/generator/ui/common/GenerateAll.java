@@ -31,28 +31,12 @@ public class GenerateAll {
 	private EPackage epacakge;
 	private EPackage originalEPackage;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param modelURI2    is the URI of the model.
-	 * @param targetFolder is the output folder
-	 * @param arguments    are the other arguments
-	 * @throws IOException Thrown when the output cannot be saved.
-	 * @generated
-	 */
+
 	public GenerateAll() {
 
 	}
 
-	/**
-	 * Launches the generation.
-	 *
-	 * @param monitor This will be used to display progress information to the user.
-	 * @throws IOException            Thrown when the output cannot be saved.
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 * @generated
-	 */
+	
 	public void doGenerate(String modelURI, IProgressMonitor monitor, IContainer targetFolder,
 			List<? extends Object> arguments) throws IOException, InstantiationException, IllegalAccessException {
 		if (!targetFolder.getLocation().toFile().exists()) {

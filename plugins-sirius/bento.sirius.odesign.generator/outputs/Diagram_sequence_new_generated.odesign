@@ -2,7 +2,7 @@
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="sequence-simple" version="12.0.0.2017041100">
   <ownedViewpoints name="SequenceSimple_GraphicalBinding">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Diagram" domainClass="sequence_new::SequenceModel" enablePopupBars="true">
-      <metamodel href="../../../generated-metamodel-and-odesign/generated-sequence_new.ecore#/"/>
+      <metamodel href="../outputs/generated-sequence_new.ecore#/"/>
       <defaultLayer name="Default Layer">
         <nodeMappings name="valueElement" domainClass="sequence_new::valueElement">
           <style xsi:type="style:SquareDescription" borderSizeComputationExpression="2" borderLineStyle="dash" showIcon="false" labelExpression="aql: 'valueElement = '+ self.eContainer().valueElement" labelPosition="node" width="12" height="3" color="//@userColorsPalettes[name=null]/@entries[name=null]">

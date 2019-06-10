@@ -17,31 +17,14 @@ public class GenerateAllModel {
 	private String modelURI;
 	private IContainer targetFolder;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param              modelURI, IContainer ta
-	 * 
-	 * @param modelURI2    is the URI of the model.
-	 * @param targetFolder is the output folder
-	 * @param arguments    are the other arguments
-	 * @throws IOException Thrown when the output cannot be saved.
-	 * @generated
-	 */
+
 	public GenerateAllModel(String modelURI, IContainer targetFolder) {
 		this.modelURI = modelURI;
 		this.targetFolder = targetFolder;
 
 	}
 
-	/**
-	 * Launches the generation.
-	 *
-	 * @param monitor This will be used to display progress information to the user.
-	 * @throws IOException            Thrown when the output cannot be saved.
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 */
+	
 
 	public void doGenerateModel(IProgressMonitor monitor, EPackage ep,EPackage ep1)
 			throws IOException, InstantiationException, IllegalAccessException {
