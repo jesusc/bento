@@ -602,7 +602,7 @@ public class OdesignGenerator {
 			// jesusc: we should probably find a better name
 			String diagramName = this.diagramDescription.getName() + "_" + ep.getName();
 
-			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + "_generated.odesign");
+			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + ".odesign");
 			resource.save(new FileOutputStream(generatedFile), null);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

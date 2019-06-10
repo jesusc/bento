@@ -142,6 +142,7 @@ public class BindingMetamodelGenerator {
 
 					listFeatures.add(klass);
 
+
 					EReference containement = EcoreFactory.eINSTANCE.createEReference();
 					containement.setName("contains" + klass.getName());
 
@@ -204,6 +205,7 @@ public class BindingMetamodelGenerator {
 
 	public void createBindingClass() {
 
+	
 		this.bindingElement = EcoreFactory.eINSTANCE.createEClass();
 		this.bindingElement.setName("BindingElement");
 		((EClass) this.bindingElement).setAbstract(true);
@@ -324,6 +326,7 @@ public class BindingMetamodelGenerator {
 		System.out.println("Savingthe new metamodel ...");
 		try {
 
+
 			ResourceSet rs = new ResourceSetImpl();
 
 			generatedFile = new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore");
@@ -335,11 +338,12 @@ public class BindingMetamodelGenerator {
 
 			resource.save(new FileOutputStream(new File(generatedFile.getAbsolutePath())), null);
 
-		} catch (FileNotFoundException e) {
 
+		} catch (FileNotFoundException e) {
+		
 			e.printStackTrace();
 		} catch (IOException e) {
-
+		
 			e.printStackTrace();
 		}
 		System.out.println("Saved !");
