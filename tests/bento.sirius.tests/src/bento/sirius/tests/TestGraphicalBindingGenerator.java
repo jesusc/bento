@@ -1,6 +1,7 @@
 package bento.sirius.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -34,9 +35,9 @@ public class TestGraphicalBindingGenerator {
     public static Collection<Object> data() {
         return Arrays.asList(new Object[] {    
                 t("resources/components/sequence/sequence-simple.odesign", 
-                		"resources/components/graph/graph-model-1.xmi"),
+                		"resources/components/sequence/sequence-model-1.xmi"),
                 t("resources/components/graph/graph-simple.odesign",    
-                		 "resources/components/sequence/sequence-model-1.xmi")
+                		 "resources/components/graph/graph-model-1.xmi")
            });
     }
 
@@ -78,18 +79,18 @@ public class TestGraphicalBindingGenerator {
 		Generate generate = new Generate();
 		generate.GenerateOdesignMM(this.odesign.getAbsolutePath(), testOutputs);
 		
-		ResourceSet rs = new ResourceSetImpl();
-		Resource mm = rs.getResource(URI.createFileURI(generate.getMetamodelGeneratedFile().getAbsolutePath()), true);
+		// ResourceSet rs = new ResourceSetImpl();
+		// Resource mm = rs.getResource(URI.createFileURI(generate.getMetamodelGeneratedFile().getAbsolutePath()), true);
+		EPackage originalPackage = generate.getOriginaleEPakage();
+		EPackage generatedPackage = generate.getEpack();
 		
-		assertEquals(1, mm.getContents().size());
-		Diagnostic result = Diagnostician.INSTANCE.validate(mm.getContents().get(0));
+		assertNotNull(generatedPackage);
+		Diagnostic result = Diagnostician.INSTANCE.validate(generatedPackage);
 		assertEquals(Diagnostic.OK, result.getCode());		
 		
 		// Uncomment and fix
 		// TestSiriusValidity.assertOdesignValidity(generate.getOdesignGeneratedFile());
 		
-		EPackage originalPackage = generate.getOriginaleEPakage();
-		EPackage generatedPackage = (EPackage) mm.getContents().get(0);
 		
 		File modelOutputs = testOutputs.toPath().resolve("models-" + originalPackage.getName()).toFile();
 		if (! modelOutputs.exists()) {
@@ -97,17 +98,15 @@ public class TestGraphicalBindingGenerator {
 		}
 		
 		for (String model : models) {			
-			testModel(model, originalPackage, generatedPackage, modelOutputs);
+			testModel(new File(model), originalPackage, generatedPackage, modelOutputs);
 		}
 	}
 
-	private void testModel(String model, EPackage originalPackage, EPackage generatedPackage, File modelOutputs) throws FileNotFoundException, IOException {
+	private void testModel(File model, EPackage originalPackage, EPackage generatedPackage, File modelOutputs) throws FileNotFoundException, IOException {
 		ResourceSet rs = new ResourceSetImpl();
-		rs.getPackageRegistry().put(originalPackage.getNsURI(), originalPackage); // Just to be on the safe side
+		Resource originalModel = rs.getResource(URI.createFileURI(model.getAbsolutePath()), true);
 		
-		Resource originalModel = rs.getResource(URI.createFileURI(model), true);
-		
-		ModelGenerator generator = new ModelGenerator(model, modelOutputs, originalPackage, generatedPackage);
+		ModelGenerator generator = new ModelGenerator(model.getAbsolutePath(), modelOutputs, originalPackage, generatedPackage);
 		Resource generatedModel = generator.getGeneratedModel();
 		
 		List<EObject> originalObjects = TestUtils.getAllElements(originalModel);
@@ -120,3 +119,4 @@ public class TestGraphicalBindingGenerator {
 
 	
 }
+
