@@ -87,7 +87,7 @@ public class Tools {
 			}
 
 		}
-		System.err.println(isContainer);
+	
 		return isContainer;
 	}
 

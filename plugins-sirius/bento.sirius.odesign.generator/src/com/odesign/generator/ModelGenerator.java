@@ -6,15 +6,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -25,7 +30,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.odesign.generator.tools.Tools;
-
 
 /**
  * @author souhaila
@@ -87,17 +91,31 @@ public class ModelGenerator {
 
 		List<EClassifier> listEClassifiersTarget = this.targetMetamodel.getEClassifiers();
 		List<EClassifier> listEClassifiersSource = this.originalMetamodel.getEClassifiers();
-
+		List<EEnum> listEEnumSource =new ArrayList<>();		
+		List<EEnum> listEEnumTarget =new ArrayList<>();
 		// HashMap < target EClass, source EClass >
 
 		HashMap<EClass, EClass> corespondingEClasses = new HashMap<EClass, EClass>();
-
+		HashMap<EEnum, EEnum> corespondingEEnums=new HashMap<>();
 		try {
 			for (EClassifier eclassOriginal : listEClassifiersSource) {
+				if(eclassOriginal instanceof EEnum) {
+					listEEnumSource.add((EEnum) eclassOriginal);
+				}
 				for (EClassifier eclassTarget : listEClassifiersTarget) {
+					if(eclassTarget instanceof EEnum) {
+						listEEnumTarget.add((EEnum) eclassTarget);
+					}
 					if (eclassOriginal.getName().equals(eclassTarget.getName())) {
 						if (eclassOriginal instanceof EClass && eclassTarget instanceof EClass) {
 							corespondingEClasses.put((EClass) eclassTarget, (EClass) eclassOriginal);
+						}
+					}
+					
+					if (eclassOriginal.getName().equals(eclassTarget.getName())) {
+						if (eclassOriginal instanceof EEnum && eclassTarget instanceof EEnum) {
+							
+							corespondingEEnums.put((EEnum) eclassOriginal, (EEnum) eclassTarget);
 						}
 					}
 
@@ -110,9 +128,17 @@ public class ModelGenerator {
 		HashMap<EObject, EObject> corespondingObjects = new HashMap<EObject, EObject>();
 
 		// Get the target model's root
-		List<EClass> containersList = Tools.fillContainersList(this.targetMetamodel);
-		EClass rootTarget = Tools.findRoot(containersList);
+//		List<EClass> containersList = Tools.fillContainersList(this.targetMetamodel);
+//		EClass rootTarget = Tools.findRoot(containersList);
 
+		List<EClass> containersList = Tools.fillContainersList(this.originalMetamodel);
+		EClass rootOriginal = Tools.findRoot(containersList);
+		EClass rootTarget = null;
+		for (EClassifier eclassifier : listEClassifiersTarget) {
+			if (rootOriginal.getName().equals(eclassifier.getName())) {
+				rootTarget = (EClass) eclassifier;
+			}
+		}
 		// Create the target models root object
 		EObject rootObject = efactory.create(rootTarget);
 		resourceTarget.getContents().add(rootObject);
@@ -120,26 +146,23 @@ public class ModelGenerator {
 		// Get the EReferenvces of the root
 		List<EReference> listRootEreferences = rootTarget.getEAllReferences();
 
-		// get the original model's root
-		List<EClass> containersList2 = Tools.fillContainersList(this.originalMetamodel);
-		EClass rootOriginal = Tools.findRoot(containersList);
-
 		// get the EReferenvces of the root
 		List<EReference> listRootOriginalEreferences = rootTarget.getEAllReferences();
 
 		List<String> listNameRootOriginalRef = new ArrayList<>();
 		List<EClass> copyList = new ArrayList<EClass>();
 		for (EClassifier newTarget1 : listEClassifiersTarget) {
-			copyList.add((EClass) newTarget1);
+			if (newTarget1 instanceof EClass)
+				copyList.add((EClass) newTarget1);
 		}
 
 		for (EClassifier newTarget : listEClassifiersTarget) {
 			for (EClassifier oldSource : listEClassifiersSource) {
+				if (newTarget instanceof EClass && oldSource instanceof EClass)
+					if ((((EClass) newTarget).getName()).equals(((EClass) oldSource).getName())) {
 
-				if ((((EClass) newTarget).getName()).equals(((EClass) oldSource).getName())) {
-
-					copyList.remove(newTarget);
-				}
+						copyList.remove(newTarget);
+					}
 			}
 
 		}
@@ -176,8 +199,10 @@ public class ModelGenerator {
 									if (ref.isMany()) {
 										Collection<EObject> col = (Collection<EObject>) rootObject.eGet(ref);
 										col.add(obj);
+										break;
 									} else {
 										rootObject.eSet(ref, obj);
+										break;
 									}
 								} catch (Exception e) {
 									e.printStackTrace();
@@ -201,8 +226,30 @@ public class ModelGenerator {
 
 								for (EStructuralFeature source : listAttributeSource) {
 									if (target.getName().equals(source.getName())) {
+										
 										sourceOfTarget = source;
-										obj.eSet(target, o.eGet((EStructuralFeature) source));
+										//System.out.println(source.getEType().getName());
+										if (source.getEType() instanceof EDataType) {
+											
+											if (!(source.getEType() instanceof EEnum))
+											obj.eSet(target, o.eGet((EStructuralFeature) source));
+											break;}
+										if (source.getEType() instanceof EEnum){
+											if (!source.getEType().getName().equals("EString")) {
+											
+
+										
+											
+											org.eclipse.emf.common.util.Enumerator enumeration= (Enumerator) (o.eGet((EStructuralFeature) source));
+											String literal=enumeration.getLiteral();
+											EEnum targetEnum=corespondingEEnums.get(source.getEType());
+											
+								
+											obj.eSet(target, targetEnum.getEEnumLiteral(literal));
+											break;
+										}
+										}
+										
 									}
 								}
 							} catch (Exception e) {
@@ -210,13 +257,27 @@ public class ModelGenerator {
 							}
 
 							for (EClassifier featureEClassifier : listEClassifiersTarget) {
-								System.out.println(featureEClassifier.getName() + "==" + target.getName().toLowerCase()
-										+ Tools.upperCaseFirst(ec.getName()));
+//								System.out.println(featureEClassifier.getName() + "==" + target.getName().toLowerCase()
+//										+ Tools.upperCaseFirst(ec.getName()));
 								if (featureEClassifier.getName()
 										.equals(target.getName().toLowerCase() + Tools.upperCaseFirst(ec.getName()))) {
+									if (featureEClassifier instanceof EClass) {
 									attributeClassObject = efactory.create((EClass) featureEClassifier);
 									EAttribute attribute = ((EClass) featureEClassifier).getEAllAttributes().get(0);
-									attributeClassObject.eSet(attribute, o.eGet((EStructuralFeature) sourceOfTarget));
+								
+									//PROBLEM HERE !
+									
+									if (sourceOfTarget.getEType() instanceof EEnum){
+										if (!sourceOfTarget.getEType().getName().equals("EString")) {
+									org.eclipse.emf.common.util.Enumerator enumeration= (Enumerator) (o.eGet((EStructuralFeature) sourceOfTarget));
+									String literal=enumeration.getLiteral();
+									EEnum targetEnum=corespondingEEnums.get(sourceOfTarget.getEType());
+									
+						
+									attributeClassObject.eSet(attribute, targetEnum.getEEnumLiteral(literal));
+									}}
+									
+									else {attributeClassObject.eSet(attribute, o.eGet((EStructuralFeature) sourceOfTarget));}
 									for (EReference erefTarget : listReferencesesTarget) {
 										if (erefTarget.getEType().equals((EClass) featureEClassifier)) {
 											if (erefTarget.isMany()) {
@@ -229,7 +290,7 @@ public class ModelGenerator {
 										}
 
 									}
-									break;
+									break;}
 								}
 							}
 
@@ -250,66 +311,51 @@ public class ModelGenerator {
 
 		TreeIterator<EObject> createdTargetObjects1 = this.resourceTarget.getAllContents();
 
-//		while (createdTargetObjects1.hasNext()) {
-//			EObject createdTargetObject = createdTargetObjects.next();
-//			for (EClassifier targetEClass : listEClassifiersTarget) {
-//				if (createdTargetObject.eClass().equals(targetEClass)) {
-//					for (EReference refTarget:((EClass)targetEClass).getEAllReferences()){
-//					if (!copyList.contains(refTarget.getEType())) {
-//						
-//						for (EReference refSource: corespondingEClasses.get(targetEClass).getEAllReferences()) {
-//							if (refSource.getName().equals(refTarget.getName())) {
-//								for (EObject sourceObject:listOfSourceObjects ) {
-//									
-//									
-//								}
-//									SOMETHING HERE
-//							}
-//						}
-//					}
-//						
-//					}
-//				}
-//			}
-//
-//		}
+		for (EObject sourceA : listOfSourceObjects) {
+			if (!sourceA.eClass().getName().equals(rootOriginal.getName())) {
 
-		for (EObject sourceA:listOfSourceObjects) {
-			if(!sourceA.eClass().getName().equals(rootOriginal.getName())) {
-		  
-			for (EReference erefSource : sourceA.eClass().getEAllReferences()) {
-				if(erefSource.isMany()) {
-					Collection<EObject> col = (Collection<EObject>) sourceA.eGet(erefSource);
-					//List<EObject> listSourceB=new ArrayList<>();
-					
-					Iterator<EObject> it=col.iterator();
-					while(it.hasNext()) {
-						EObject sourceB=(EObject) it.next();
-						EObject targetA=corespondingObjects.get(sourceA);
-					//	listSourceB.add(targetA);
-						for (EReference erefTarget:targetA.eClass().getEAllReferences()) {
-							
-							if(erefSource.getName().equals(erefTarget.getName())) {
-								EObject targetB=corespondingObjects.get(sourceB);
-								targetA.eSet((EStructuralFeature)erefTarget, targetB);
+				for (EReference erefSource : sourceA.eClass().getEAllReferences()) {
+					if (erefSource.isMany()) {
+						Collection<EObject> col = (Collection<EObject>) sourceA.eGet(erefSource);
+						// List<EObject> listSourceB=new ArrayList<>();
+
+						Iterator<EObject> it = col.iterator();
+						while (it.hasNext()) {
+							EObject sourceB = (EObject) it.next();
+							EObject targetA = corespondingObjects.get(sourceA);
+							// listSourceB.add(targetA);
+							for (EReference erefTarget : targetA.eClass().getEAllReferences()) {
+
+								if (erefSource.getName().equals(erefTarget.getName())) {
+									EObject targetB = corespondingObjects.get(sourceB);
+									if (erefTarget.isMany()) {
+										Collection<EObject> col1 = (Collection<EObject>) targetA.eGet(erefTarget);
+										col1.add(targetB);
+									
+									}
+									
+									else {targetA.eSet((EStructuralFeature) erefTarget, targetB);}
+								
+								break;
+								}
 							}
 						}
-					}
-					
-				}
-				else {
-				EObject sourceB = (EObject) sourceA.eGet((EStructuralFeature)erefSource);
-				EObject targetA=corespondingObjects.get(sourceA);
-				for (EReference erefTarget:targetA.eClass().getEAllReferences()) {
-					
-					if(erefSource.getName().equals(erefTarget.getName())) {
-						EObject targetB=corespondingObjects.get(sourceB);
-						targetA.eSet((EStructuralFeature)erefTarget, targetB);
-					}
-				}
 
+					} else {
+						EObject sourceB = (EObject) sourceA.eGet((EStructuralFeature) erefSource);
+						EObject targetA = corespondingObjects.get(sourceA);
+						for (EReference erefTarget : targetA.eClass().getEAllReferences()) {
+
+							if (erefSource.getName().equals(erefTarget.getName())) {
+								EObject targetB = corespondingObjects.get(sourceB);
+								targetA.eSet((EStructuralFeature) erefTarget, targetB);
+							}
+						}
+
+					}
 				}
-		}}}
+			}
+		}
 
 		this.resourceTarget.save(
 				new FileOutputStream(
@@ -317,11 +363,10 @@ public class ModelGenerator {
 				null);
 	}
 
-
 	public Resource getGeneratedModel() {
 		return resourceTarget;
 	}
-	
+
 	public ModelGenerator(String modelURI, File file, EPackage originalMetamodel, EPackage targetMetamodel,
 			String output) throws FileNotFoundException, IOException {
 		/**
@@ -507,7 +552,6 @@ public class ModelGenerator {
 
 		this.resourceSource.save(new FileOutputStream(output + this.originalMetamodel.getName() + ".xmi"), null);
 	}
-
 
 	public Resource getResource() {
 		return resourceSource;

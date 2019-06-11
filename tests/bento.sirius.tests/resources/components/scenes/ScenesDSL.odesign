@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="ScenesDS" version="12.0.0.2017041100">
+  <ownedViewpoints name="ScenesViewpoint" modelFileExtension="scenes ">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="history" label="History" domainClass="scenes::History" enablePopupBars="true">
+      <metamodel href="wakame.scene#/"/>
+      <defaultLayer name="Main">
+        <edgeMappings name="nextScene" label="Next Scene" sourceMapping="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']" targetMapping="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']" targetFinderExpression="aql: self.next">
+          <style lineStyle="dash" sourceArrow="OutputFillClosedArrow" sizeComputationExpression="2" routingStyle="manhattan" endsCentering="Both">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <centerLabelStyleDescription labelSize="12" labelExpression="[name + '-' + next.name/]">
+              <labelFormat>bold</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="scene" label="Scene" semanticCandidatesExpression="aql: self.scenes" domainClass="scenes::Scene">
+          <subNodeMappings name="character" label="Character" semanticCandidatesExpression="aql: self.elements" doubleClickDescription="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@toolSections.0/@ownedTools[name='doubleclick']" domainClass="scenes::Character">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/none.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+            <conditionnalStyles predicateExpression="aql: self.name = 'man1'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/man1.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'man2'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/man2.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'alien1'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/alien1.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'alien2'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/alien2.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'woman1'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/woman1.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'woman2'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/woman2.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'monster1'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/monster1.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'monster2'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/characters/monster2.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+          </subNodeMappings>
+          <subNodeMappings name="place" label="Place" semanticCandidatesExpression="aql: self.elements" domainClass="scenes::Place">
+            <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/places/noplace.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+            <conditionnalStyles predicateExpression="aql: self.name = 'cliff'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/places/cliff.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'mountain'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/places/mountain.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'road'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/places/road.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'sea'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/places/sea.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.name = 'moon'">
+              <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/places/moon.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              </style>
+            </conditionnalStyles>
+          </subNodeMappings>
+          <subNodeMappings name="action" label="Action" semanticCandidatesExpression="aql: self.actions" domainClass="scenes::Action">
+            <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="feature:type" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/actions/love.png">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            </style>
+            <conditionnalStyles predicateExpression="aql: self.type =scenes::ActionType::FIGHT">
+              <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="feature:type" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/actions/fight.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.type =scenes::ActionType::CALL">
+              <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="feature:type" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/actions/call.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.type =scenes::ActionType::MOVE">
+              <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="feature:type" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/actions/move.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              </style>
+            </conditionnalStyles>
+            <conditionnalStyles predicateExpression="aql: self.type =scenes::ActionType::TALK">
+              <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="feature:type" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/wakame.test.ScenesDSL.design/icons/actions/talk.png">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+              </style>
+            </conditionnalStyles>
+          </subNodeMappings>
+          <subNodeMappings name="comment" label="Comment" labelDirectEdit="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@toolSections.0/@ownedTools[name='editLabel']" semanticCandidatesExpression="feature:description" domainClass="scenes::Comment">
+            <style xsi:type="style:SquareDescription" borderLineStyle="dash" labelSize="12" showIcon="false" labelExpression="feature:text" sizeComputationExpression="7" labelPosition="node" resizeKind="NSEW" width="15" height="6">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:WorkspaceImageDescription" labelSize="12" showIcon="false" tooltipExpression="[name/]" workspacePath="/wakame.test.ScenesDSL.design/icons/scene2.png">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Main">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="scene" label="Scene" containerMappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="scenes::Scene" referenceName="scenes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="character" label="Character" nodeMappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']/@subNodeMappings[name='character']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[eContainer().eContainer()/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="scenes::Character" referenceName="elements">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql: container.eContainer()">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="elements" valueExpression="var:instance"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DoubleClickDescription" name="doubleclick" label="Seleccionar" mappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']/@subNodeMappings[name='character']">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:Let" variableName="foundCharacter" valueExpression="service: getNextCharacter()">
+                  <subModelOperations xsi:type="tool_1:If" conditionExpression="[foundCharacter &lt;> null and element &lt;> foundCharacter/]">
+                    <subModelOperations xsi:type="tool_1:Let" variableName="currentScene" valueExpression="[Scene.allInstances()->select( sce | sce.elements->includes(element))->asSequence()->last()/]">
+                      <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:currentScene">
+                        <subModelOperations xsi:type="tool_1:SetValue" featureName="elements" valueExpression="var:foundCharacter"/>
+                        <subModelOperations xsi:type="tool_1:If" conditionExpression="[Scene.allInstances()->select( sce | sce.elements->includes(element))->size()>1/]">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[currentScene/]"/>
+                          <subModelOperations xsi:type="tool_1:Unset" featureName="elements" elementExpression="[element/]"/>
+                        </subModelOperations>
+                        <subModelOperations xsi:type="tool_1:If" conditionExpression="[Scene.allInstances()->select( sce | sce.elements->includes(element))->size()=1/]">
+                          <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                            <subModelOperations xsi:type="tool_1:RemoveElement"/>
+                          </subModelOperations>
+                        </subModelOperations>
+                      </subModelOperations>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="action" label="Action" nodeMappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']/@subNodeMappings[name='action']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="scenes::Action" referenceName="actions">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="type" valueExpression="[scenes::ActionType::FIGHT/]"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="default"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="nextScene" label="Next Scene" edgeMappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@edgeMappings[name='nextScene']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="next" valueExpression="[target/]"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="place" label="Place" nodeMappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']/@subNodeMappings[name='place']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[eContainer().eContainer()/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="scenes::Place" referenceName="elements">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql: container.eContainer()">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="elements" valueExpression="var:instance"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="new"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="comment" label="Comment" nodeMappings="//@ownedViewpoints[name='ScenesViewpoint']/@ownedRepresentations[name='history']/@defaultLayer/@containerMappings[name='scene']/@subNodeMappings[name='comment']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="scenes::Comment" referenceName="description"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="editLabel" label="Edit Label">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="text" valueExpression="[arg0/]"/>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="wakame.test.ScenesDSL.design.Services"/>
+  </ownedViewpoints>
+</description:Group>

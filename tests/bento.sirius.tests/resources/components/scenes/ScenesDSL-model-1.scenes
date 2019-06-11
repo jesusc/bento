@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wakame.scene:History xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wakame.scene="wakame.scene">
+  <scenes name="SC 1" elements="//@elements.0" next="//@scenes.1">
+    <actions name="ACtion 1"/>
+    <description text="I am a comment "/>
+  </scenes>
+  <scenes name="SC 2"/>
+  <elements xsi:type="wakame.scene:Character" name="souhaila"/>
+  <elements xsi:type="wakame.scene:Place" name="umu"/>
+</wakame.scene:History>

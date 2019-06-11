@@ -30,17 +30,13 @@ import com.odesign.generator.ModelGenerator;
 @RunWith(Parameterized.class)
 public class GeneratorTest {
 
-	 @Parameters
-	    public static Collection<Object[]> data() {
-	        return Arrays.asList(new Object[][] {     
-	                 { "sequence/sequence-simple.odesign", "sequence/sequence-model-1.xmi"  },
-	                 { "graph/graph-simple.odesign", "graph/graph-model-1.xmi" }  
-	           });
-	    }
-	
-	
-//{ "graph-simple.odesign", "graph-model-1.xmi" }
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] { { "sequence/sequence-simple.odesign", "sequence/sequence-model-1.xmi" },
+				{ "graph/graph-simple.odesign", "graph/graph-model-1.xmi" } });
+	}
 
+//{ "graph-simple.odesign", "graph-model-1.xmi" }
 
 	private String odesignURI;
 	private String modelURI;
@@ -53,46 +49,42 @@ public class GeneratorTest {
 	@Test
 	public void test() throws FileNotFoundException, IOException {
 		File testOutputs = new File("/home/souhaila/git/sirius-bento/tests/bento.sirius.tests/test-outputs");
-		if (! testOutputs.exists()) {
+		if (!testOutputs.exists()) {
 			testOutputs.mkdirs();
 		}
 		String PATH = "resources/components/";
 		String sourceOdesignURI = PATH + odesignURI;
 		String sourceModelURI = PATH + modelURI;
-		String outputURI   = PATH+"outputs";
+		
 
-		
-		Generate generate=new Generate();
-		generate.GenerateOdesignMM(sourceOdesignURI,testOutputs);
-	
-		
-		
+		Generate generate = new Generate();
+		generate.GenerateOdesignMM(sourceOdesignURI, testOutputs);
+
 		EPackage ep = generate.getEpack();
-		EPackage originalep = generate.getOriginaleEPakage();	
-		
+		EPackage originalep = generate.getOriginaleEPakage();
+
 		ResourceSet rs = new ResourceSetImpl();
 		Resource mm = rs.getResource(URI.createFileURI(generate.getMetamodelGeneratedFile().getAbsolutePath()), true);
-		
+
 		assertEquals(1, mm.getContents().size());
 		Diagnostic result = Diagnostician.INSTANCE.validate(mm.getContents().get(0));
-		assertEquals(Diagnostic.OK, result.getCode());		
-		
+		assertEquals(Diagnostic.OK, result.getCode());
+
 		File modelOutputs = testOutputs.toPath().resolve("models-" + originalep.getName()).toFile();
-		if (! modelOutputs.exists()) {
+		if (!modelOutputs.exists()) {
 			modelOutputs.mkdirs();
 		}
-		ModelGenerator generator=new ModelGenerator(sourceModelURI,modelOutputs ,originalep,ep);
-		
+		ModelGenerator generator = new ModelGenerator(sourceModelURI, modelOutputs, originalep, ep);
+
 		Resource originalModel = rs.getResource(URI.createFileURI(sourceModelURI), true);
 		Resource generatedModel = generator.getGeneratedModel();
 		List<EObject> originalObjects = TestUtils.getAllElements(originalModel);
 		List<EObject> generatedObjects = TestUtils.getAllElements(generatedModel);
-		
-		
+
 		// At least we put all objects in the target model
-				assertTrue("Generated objects " + generatedObjects.size() + " is less than the original " + originalObjects.size(), 
-						generatedObjects.size() >= originalObjects.size());		
-			}
-	
+		assertTrue(
+				"Generated objects " + generatedObjects.size() + " is less than the original " + originalObjects.size(),
+				generatedObjects.size() >= originalObjects.size());
+	}
 
 }
