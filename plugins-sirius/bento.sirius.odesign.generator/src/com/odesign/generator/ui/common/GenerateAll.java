@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.odesign.generator.ui.common;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,8 @@ public class GenerateAll {
 
 		
 		Generate generate=new Generate();
-		generate.GenerateOdesignMM(modelURI, targetFolder.getLocation().toFile());
+		File outputFolder = targetFolder.getLocation().toFile();
+		generate.GenerateOdesignMM(modelURI, outputFolder, outputFolder);
 		monitor.worked(1);
 
 		this.epacakge = generate.getEpack();

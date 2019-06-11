@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bento Test Sirius Outputs
+Bundle-SymbolicName: bento.sirius.tests.metamodels.output
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: bento.sirius.tests.metamodels.output
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

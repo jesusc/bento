@@ -37,7 +37,7 @@ public class TestGraphicalBindingGenerator {
                 t("resources/components/sequence/sequence-simple.odesign", 
                 		"resources/components/sequence/sequence-model-1.xmi"),
                 t("resources/components/scenes/ScenesDSL.odesign", 
-                		"/resources/components/scenes/ScenesDSL-model-1.scenes"),
+                		"resources/components/scenes/ScenesDSL-model-1.scenes"),
                 t("resources/components/graph/graph-simple.odesign",    
                 		 "resources/components/graph/graph-model-1.xmi")
            });
@@ -78,10 +78,11 @@ public class TestGraphicalBindingGenerator {
 	@Test
 	public void test() throws IOException {
 		File testOutputs = new File("test-outputs");
+		File metamodelOutputs = new File("../test-outputs/bento.sirius.tests.metamodels.output/models");
 		System.out.println("Testing: " + odesign.getAbsolutePath());
 		
 		Generate generate = new Generate();
-		generate.GenerateOdesignMM(this.odesign.getAbsolutePath(), testOutputs);
+		generate.GenerateOdesignMM(this.odesign.getAbsolutePath(), testOutputs, metamodelOutputs);
 		
 		// ResourceSet rs = new ResourceSetImpl();
 		// Resource mm = rs.getResource(URI.createFileURI(generate.getMetamodelGeneratedFile().getAbsolutePath()), true);
