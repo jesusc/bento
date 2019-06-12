@@ -56,7 +56,7 @@ public class ModelGenerator {
 	private Resource resourceTarget;
 
 	@SuppressWarnings("unchecked")
-	public ModelGenerator(String modelURI, File file, EPackage originalMetamodel, EPackage targetMetamodel)
+	public ModelGenerator(String modelURI, File outputFile, EPackage originalMetamodel, EPackage targetMetamodel)
 			throws FileNotFoundException, IOException {
 
 		// Read the original model
@@ -83,7 +83,7 @@ public class ModelGenerator {
 		ResourceSet rs2 = new ResourceSetImpl();
 		try {
 			this.resourceTarget = rs2.createResource(URI
-					.createFileURI(file.getAbsolutePath() + "/new-model-" + this.targetMetamodel.getName() + ".xmi"));
+					.createFileURI(outputFile.getAbsolutePath()));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -363,7 +363,7 @@ public class ModelGenerator {
 		options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		this.resourceTarget.save(
 				new FileOutputStream(
-						new File(file.getAbsolutePath() + "/generated-" + this.originalMetamodel.getName() + ".xmi")),
+						new File(outputFile.getAbsolutePath())),
 				options);
 	}
 

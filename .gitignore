@@ -26,3 +26,7 @@
 
 /tests/bento.sirius.tests/test-outputs/*
 /test-outputs/bento.sirius.tests.metamodels.output/models/*.ecore
+
+/tests/test-outputs/bento.sirius.tests.metamodels.output/src-gen/
+
+/tests/test-outputs/bento.sirius.tests.metamodels.output/models/
