@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -238,6 +239,7 @@ public class ModelGenerator {
 											if (!source.getEType().getName().equals("EString")) {
 											
 
+
 										
 											
 											org.eclipse.emf.common.util.Enumerator enumeration= (Enumerator) (o.eGet((EStructuralFeature) source));
@@ -309,23 +311,38 @@ public class ModelGenerator {
 			listCReateObjects.add(createdTargetObject);
 		}
 
-		TreeIterator<EObject> createdTargetObjects1 = this.resourceTarget.getAllContents();
-
+		
+		//This part is for setting the references 
+		
+		// for each element sourceA in the list of the object of the source metamodel
 		for (EObject sourceA : listOfSourceObjects) {
+			
+			// Exclude the case of that sourceA is the root of the model.
 			if (!sourceA.eClass().getName().equals(rootOriginal.getName())) {
-
-				for (EReference erefSource : sourceA.eClass().getEAllReferences()) {
+				
+				// Get the list of the EReferences of the the EClass of sourceA
+				// And for each EReference 
+				for (EReference erefSource : sourceA.eClass().getEReferences()) {
+					// if it is a collection 
 					if (erefSource.isMany()) {
+						// 
 						Collection<EObject> col = (Collection<EObject>) sourceA.eGet(erefSource);
-						// List<EObject> listSourceB=new ArrayList<>();
+					
 
 						Iterator<EObject> it = col.iterator();
+						
+						// Iterate over the collection 
 						while (it.hasNext()) {
+							
+							// And set sourceB the object targeted by the reference
 							EObject sourceB = (EObject) it.next();
+							// Get the corresponding object of sourceA which is source B 
 							EObject targetA = corespondingObjects.get(sourceA);
-							// listSourceB.add(targetA);
-							for (EReference erefTarget : targetA.eClass().getEAllReferences()) {
+							
+							// Iterate over the EReferences of the targetA 
+							for (EReference erefTarget : targetA.eClass().getEReferences()) {
 
+								
 								if (erefSource.getName().equals(erefTarget.getName())) {
 									EObject targetB = corespondingObjects.get(sourceB);
 									if (erefTarget.isMany()) {
@@ -336,7 +353,7 @@ public class ModelGenerator {
 									
 									else {targetA.eSet((EStructuralFeature) erefTarget, targetB);}
 								
-								break;
+								
 								}
 							}
 						}
@@ -348,7 +365,13 @@ public class ModelGenerator {
 
 							if (erefSource.getName().equals(erefTarget.getName())) {
 								EObject targetB = corespondingObjects.get(sourceB);
-								targetA.eSet((EStructuralFeature) erefTarget, targetB);
+								if (erefTarget.isMany()) {
+									Collection<EObject> col1 = (Collection<EObject>) targetA.eGet(erefTarget);
+									col1.add(targetB);
+								
+								}
+								
+								else {targetA.eSet((EStructuralFeature) erefTarget, targetB);}
 							}
 						}
 
@@ -356,13 +379,16 @@ public class ModelGenerator {
 				}
 			}
 		}
-
+try {
+		
 		this.resourceTarget.save(
 				new FileOutputStream(
 						new File(file.getAbsolutePath() + "/generated-" + this.originalMetamodel.getName() + ".xmi")),
 				null);
 	}
-
+	catch(Exception e) {
+		e.printStackTrace();}
+	}
 	public Resource getGeneratedModel() {
 		return resourceTarget;
 	}

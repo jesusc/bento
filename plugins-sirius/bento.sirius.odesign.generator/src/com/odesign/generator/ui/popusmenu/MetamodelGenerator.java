@@ -123,32 +123,7 @@ public class MetamodelGenerator extends ActionDelegate implements IActionDelegat
 								}
 							}
 						}
-//						else{
-//							System.out.println(model.getFileExtension()+"  file uploaded");
-//							String modelURI = model.getLocation().toString();
-//							IContainer targetFolder = null;
-//							try {
-//								IContainer target = model.getProject().getFolder("generated-model");
-//								targetFolder = target;
-//							
-//								try {
-//									generator.doGenerateModel(monitor);
-//								} catch (InstantiationException e) {
-//									// TODO Auto-generated catch block
-//									e.printStackTrace();
-//								} catch (IllegalAccessException e) {
-//									// TODO Auto-generated catch block
-//									e.printStackTrace();
-//								}
-//							} catch (IOException e) {
-//								IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
-//								Activator.getDefault().getLog().log(status);
-//							} finally {
-//								if (targetFolder != null) {
-//									targetFolder.getProject().refreshLocal(IResource.DEPTH_INFINITE, monitor);
-//								}
-//							}
-//						}}
+
 					} catch (CoreException e) {
 						IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e);
 						Activator.getDefault().getLog().log(status);

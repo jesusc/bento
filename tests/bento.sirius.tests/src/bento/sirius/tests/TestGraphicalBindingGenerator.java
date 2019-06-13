@@ -37,7 +37,7 @@ public class TestGraphicalBindingGenerator {
                 t("resources/components/sequence/sequence-simple.odesign", 
                 		"resources/components/sequence/sequence-model-1.xmi"),
                 t("resources/components/scenes/ScenesDSL.odesign", 
-                		"/resources/components/scenes/ScenesDSL-model-1.scenes"),
+                		"resources/components/scenes/ScenesDSL-model-1.scenes"),
                 t("resources/components/graph/graph-simple.odesign",    
                 		 "resources/components/graph/graph-model-1.xmi")
            });
