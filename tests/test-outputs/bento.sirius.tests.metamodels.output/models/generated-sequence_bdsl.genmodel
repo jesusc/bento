@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.sirius.tests.metamodels.output/src" modelPluginID="bento.sirius.tests.metamodels.output"
+    modelName="Generated-sequence_bdsl" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>generated-sequence_bdsl.ecore</foreignModel>
+  <genPackages prefix="Sequence_bdsl" disposableProviderFactory="true" ecorePackage="generated-sequence_bdsl.ecore#/">
+    <genClasses ecoreClass="generated-sequence_bdsl.ecore#//SequenceModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//SequenceModel/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//SequenceModel/containsMetamodelElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//SequenceModel/containsIntermediateElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//SequenceModel/containsFeatureClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//SequenceModel/containsMetamodelElementFeature"/>
+    </genClasses>
+    <genClasses ecoreClass="generated-sequence_bdsl.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generated-sequence_bdsl.ecore#//Element/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//Element/next"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//Element/containsvalueElement"/>
+    </genClasses>
+    <genClasses ecoreClass="generated-sequence_bdsl.ecore#//valueElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generated-sequence_bdsl.ecore#//valueElement/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="generated-sequence_bdsl.ecore#//BindingElement"/>
+    <genClasses ecoreClass="generated-sequence_bdsl.ecore#//MetamodelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generated-sequence_bdsl.ecore#//MetamodelElement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//MetamodelElement/metamodelElementFeature"/>
+    </genClasses>
+    <genClasses ecoreClass="generated-sequence_bdsl.ecore#//IntemediateElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//IntemediateElement/bindingElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//IntemediateElement/metamodElelement"/>
+    </genClasses>
+    <genClasses ecoreClass="generated-sequence_bdsl.ecore#//MetamodelElementFeature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generated-sequence_bdsl.ecore#//MetamodelElementFeature/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference generated-sequence_bdsl.ecore#//MetamodelElementFeature/featureClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="generated-sequence_bdsl.ecore#//FeatureClass"/>
+  </genPackages>
+</genmodel:GenModel>

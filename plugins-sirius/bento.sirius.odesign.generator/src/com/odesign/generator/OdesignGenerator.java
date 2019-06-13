@@ -132,7 +132,7 @@ public class OdesignGenerator {
 			EClass metamodelElement, EClass intermediateElement) {
 
 		this.diagramDescription.getMetamodel().clear();
-		ep.setNsURI(ep.getName());
+//		ep.setNsURI(ep.getName());
 		this.diagramDescription.getMetamodel().add(ep);
 		DiagramDescription dd = DescriptionFactory.eINSTANCE.createDiagramDescription();
 		dd = this.diagramDescription;

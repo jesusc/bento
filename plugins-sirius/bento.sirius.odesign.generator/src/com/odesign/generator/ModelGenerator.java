@@ -143,7 +143,10 @@ public class ModelGenerator {
 		// Create the target models root object
 		EObject rootObject = efactory.create(rootTarget);
 		resourceTarget.getContents().add(rootObject);
+		
 
+		
+		
 		// Get the EReferenvces of the root
 		List<EReference> listRootEreferences = rootTarget.getEAllReferences();
 

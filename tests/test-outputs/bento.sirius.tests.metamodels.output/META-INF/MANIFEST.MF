@@ -1,7 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Bento Test Sirius Outputs
-Bundle-SymbolicName: bento.sirius.tests.metamodels.output
+Bundle-Name: %pluginName
+Bundle-SymbolicName: bento.sirius.tests.metamodels.output;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Automatic-Module-Name: bento.sirius.tests.metamodels.output
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: sequence_bdsl,
+ sequence_bdsl.impl,
+ sequence_bdsl.util,
+ scenes_bdsl,
+ scenes_bdsl.impl,
+ scenes_bdsl.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy

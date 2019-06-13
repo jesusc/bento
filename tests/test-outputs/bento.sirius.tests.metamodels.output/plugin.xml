@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated generated-sequence_bdsl -->
+      <package
+            uri="http://bento/sirius/tests/sequence_bdsl"
+            class="sequence_bdsl.Sequence_bdslPackage"
+            genModel="models/generated-sequence_bdsl.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated generated-scenes_bdsl -->
+      <package
+            uri="wakame.scene_bdsl"
+            class="scenes_bdsl.Scenes_bdslPackage"
+            genModel="models/generated-scenes_bdsl.genmodel"/>
+   </extension>
+
+</plugin>
