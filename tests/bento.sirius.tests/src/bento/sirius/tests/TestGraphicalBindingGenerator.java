@@ -111,7 +111,10 @@ public class TestGraphicalBindingGenerator {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource originalModel = rs.getResource(URI.createFileURI(model.getAbsolutePath()), true);
 		
-		ModelGenerator generator = new ModelGenerator(model.getAbsolutePath(), modelOutputs, originalPackage, generatedPackage);
+		String filename  = model.getName();
+		File outputFile = new File(modelOutputs.getAbsolutePath() + File.separator + "bdsl-" + filename);
+		
+		ModelGenerator generator = new ModelGenerator(model.getAbsolutePath(), outputFile, originalPackage, generatedPackage);
 		Resource generatedModel = generator.getGeneratedModel();
 		
 		List<EObject> originalObjects = TestUtils.getAllElements(originalModel);

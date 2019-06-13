@@ -10,6 +10,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 
 import com.odesign.generator.tools.Tools;
 
@@ -55,7 +57,7 @@ public class ModelGenerator {
 	private Resource resourceTarget;
 
 	@SuppressWarnings("unchecked")
-	public ModelGenerator(String modelURI, File file, EPackage originalMetamodel, EPackage targetMetamodel)
+	public ModelGenerator(String modelURI, File outputFile, EPackage originalMetamodel, EPackage targetMetamodel)
 			throws FileNotFoundException, IOException {
 
 		// Read the original model
@@ -82,7 +84,7 @@ public class ModelGenerator {
 		ResourceSet rs2 = new ResourceSetImpl();
 		try {
 			this.resourceTarget = rs2.createResource(URI
-					.createFileURI(file.getAbsolutePath() + "/new-model-" + this.targetMetamodel.getName() + ".xmi"));
+					.createFileURI(outputFile.getAbsolutePath()));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -382,12 +384,17 @@ public class ModelGenerator {
 				}
 			}
 		}
+
 try {
-		
+
+
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+
 		this.resourceTarget.save(
 				new FileOutputStream(
-						new File(file.getAbsolutePath() + "/generated-" + this.originalMetamodel.getName() + ".xmi")),
-				null);
+						new File(outputFile.getAbsolutePath())),
+				options);
 	}
 	catch(Exception e) {
 		e.printStackTrace();}
