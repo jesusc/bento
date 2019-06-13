@@ -27,9 +27,9 @@ public class Generate {
 	private File odesignGeneratedFile;
 	private File metamodelGeneratedFile;
 
-	public void GenerateOdesignMM(String modelURI, File file) throws IOException {
+	public void GenerateOdesignMM(String modelURI, File odesignOutputFolder, File metamodelOutputFolder) throws IOException {
 
-		OdesignGenerator odesigngenerator = new OdesignGenerator(modelURI, file);
+		OdesignGenerator odesigngenerator = new OdesignGenerator(modelURI, odesignOutputFolder);
 		EPackage ep = odesigngenerator.getEpackage();
 
 		ResourceSet rs = new ResourceSetImpl();
@@ -37,7 +37,7 @@ public class Generate {
 		EPackage copy = EcoreUtil.copy(ep);
 
 		final Resource resource = rs
-				.createResource(URI.createFileURI(file.getAbsolutePath() + "/new-" + ep.getName() + ".ecore"));
+				.createResource(URI.createFileURI(odesignOutputFolder.getAbsolutePath() + "/new-" + ep.getName() + ".ecore"));
 
 		resource.getContents().add(copy);
 
@@ -62,8 +62,8 @@ public class Generate {
 		metamodelGenerator.createFeatureCLasses();
 		metamodelGenerator.createBindingClass();
 		metamodelGenerator.addBindingElementEsuperType();
-		metamodelGenerator.save(file);
-		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), file, this.epack,
+		metamodelGenerator.save(metamodelOutputFolder);
+		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), odesignOutputFolder, this.epack,
 				metamodelGenerator.getMetamodelElement(), metamodelGenerator.getIntermediateElement());
 
 		this.odesignGeneratedFile = odesigngenerator.getGeneratedFile();

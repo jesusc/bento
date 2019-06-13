@@ -25,3 +25,4 @@
 /compiler/genericity.compiler.atl/bin/genericity/compiler/atl/*.qool
 
 /tests/bento.sirius.tests/test-outputs/*
+/test-outputs/bento.sirius.tests.metamodels.output/models/*.ecore
