@@ -329,7 +329,7 @@ public class BindingMetamodelGenerator {
 
 			ResourceSet rs = new ResourceSetImpl();
 
-			generatedFile = new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore");
+			generatedFile = new File(file.getAbsolutePath() + "/" + ep.getName() + ".ecore");
 			final Resource resource = rs.createResource(URI.createFileURI(generatedFile.getAbsolutePath()));
 
 			resource.getContents().add(ep);
