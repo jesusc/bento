@@ -421,7 +421,6 @@ public class OdesignGenerator {
 			sd.setLabelExpression("aql:self.name");
 			nm.setStyle(sd);
 
-			sd.setLabelExpression("[name/]");
 			cm.getBorderedNodeMappings().add(nm);
 
 			sd.setColor(featuresFixedColor);
@@ -529,8 +528,8 @@ public class OdesignGenerator {
 		EdgeCreationDescription edgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
 
 		NodeCreationDescription metamodelElementFeaturedesc = ToolFactory.eINSTANCE.createNodeCreationDescription();
-		metamodelElementFeaturedesc.setName("Metamodel Element Feature");
-		metamodelElementFeaturedesc.setLabel("Metamodel Element Feature");
+		metamodelElementFeaturedesc.setName("Feature");
+		metamodelElementFeaturedesc.setLabel("Feature");
 		metamodelElementFeaturedesc.getNodeMappings().add(nm);
 		metamodelElementFeaturedesc.setName(MetamodelElementFeature.getName());
 		toolsec.getOwnedTools().add(metamodelElementFeaturedesc);
@@ -584,7 +583,7 @@ public class OdesignGenerator {
 		edgecreationdesc.setInitialOperation(init);
 
 		ContainerCreationDescription containerCreation = ToolFactory.eINSTANCE.createContainerCreationDescription();
-		containerCreation.setName("Metamodel Element");
+		containerCreation.setName("Class");
 		containerCreation.getContainerMappings().add(cm);
 		toolsec.getOwnedTools().add(containerCreation);
 
@@ -605,7 +604,7 @@ public class OdesignGenerator {
 		init2.setFirstModelOperations(changecontext1);
 		SetValue setValue3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
 		setValue3.setFeatureName("name");
-		setValue3.setValueExpression("[name/]");
+		setValue3.setValueExpression("aql:'Class name'");
 
 		containerInstance.getSubModelOperations().add(setValue3);
 
