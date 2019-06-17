@@ -3,6 +3,7 @@ package bento.sirius.adapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
@@ -35,7 +37,6 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 
 	private SiriusModel siriusModel;
 	private Trace<DiagramElementMapping, DiagramElementMapping> mappings = new Trace<>();
-	
 	
 	public static class Result {
 		private Resource siriusResource;
@@ -124,43 +125,11 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		for(EObject o : toRemove) {
 			EcoreUtil.delete(o);
 		}
-				
-			/*
-			 * 			// Styles
-			} else if (obj instanceof BasicLabelStyleDescription) {
-				BasicLabelStyleDescription label_ = (BasicLabelStyleDescription) obj;
-				DiagramElementMapping mapping = getContainer(DiagramElementMapping.class, label_);
-				
-				// This is not the best idea. It would be better to go from each NodeMapping or EdgeMapping to the
-				// corresponding styling objects
-				if ( mapping instanceof NodeMapping ) {
-					NodeMapping node = (NodeMapping) mapping;
-					final EClass domainClass = getDomainClassAsEClass(node.getDomainClass());
-	
-					add(label_, isNotMappedToNone(domainClass), (label) -> {
-						String expression = adaptExpression(domainClass, label.getLabelExpression());
-						label.setLabelExpression(expression);
-					});
-				} else if ( mapping instanceof EdgeMapping ) {
-					EdgeMapping node = (EdgeMapping) mapping;
-					
-					final EClass domainClass; 
-					if (node.isUseDomainElement()) {
-						domainClass = getDomainClassAsEClass(node.getDomainClass());
-					} else {
-						// Relation based edge
-						domainClass = SiriusUtils.getCommonDomainClass(node.getSourceMapping(), this::getDomainClassAsEClass);
-					}
-					final String labelExpr = label_.getLabelExpression();
-					
-					add(label_, notEmpty(labelExpr), (label) -> {
-						String expression = adaptExpression(domainClass, labelExpr);
-						label.setLabelExpression(expression);
-					});				
-				}
-			}
-*/
-
+		
+		siriusModel.flush();
+		SiriusCleaner cleaner = new SiriusCleaner(siriusModel, info.getSiriusPackages().values());
+		cleaner.perform();
+		
 		return result;
 	}
 
@@ -187,8 +156,9 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 	
 				edgeMappingToBeModified.setDomainClass(toSiriusClassName(targetDomainClass));
 				
-				List<DiagramElementMapping> mappedSources = mappings.getTargets(sourceMappings);
-				List<DiagramElementMapping> mappedTargets = mappings.getTargets(targetMappings);
+				List<DiagramElementMapping> mappedSources = mappings.getTargets(SiriusUtils.filter(sourceMappings, ONLY_MAPPED));
+				List<DiagramElementMapping> mappedTargets = mappings.getTargets(SiriusUtils.filter(targetMappings, ONLY_MAPPED));
+				// What happend if any of them has no elements because of all them has been mapped to none?
 				
 				edgeMappingToBeModified.getSourceMapping().clear();
 				edgeMappingToBeModified.getTargetMapping().clear();
@@ -211,7 +181,7 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 			EClass type = SiriusUtils.getCommonDomainClass(edgeMapping_.getSourceMapping(), this::getDomainClassAsEClass);
 			// final String targetDomainClass = getTargetDomainClass1(type.getName());
 
-			if ( isNotMappedToNone(type) ) {
+			if ( ! isMappedToNone(type) ) {
 				List<String> domainClasses = getTargetDomainClassN(type.getName());
 				int i = 0;
 				
@@ -269,6 +239,7 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		
 	}
 
+
 	private void handleAbstractNodeMapping(AbstractNodeMapping nm_) {
 		final EClass originalDomainClass = getDomainClassAsEClass(nm_.getDomainClass());
 
@@ -278,7 +249,7 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		// Handling semanticCandidates is more delicate because "self" refers to a container element
 		// which is implicit (I guess) in the DiagramDescription or if there is a parte node mapping.
 		String semanticCandidates = nm_.getSemanticCandidatesExpression();
-		if ( semanticCandidates != null && isNotMappedToNone(originalDomainClass) ) {
+		if ( semanticCandidates != null && ! isMappedToNone(originalDomainClass) ) {
 			// find the closest container element
 			String containerClass = SiriusUtils.getClosestContainerClass(nm_);
 			containerDomainClass = getDomainClassAsEClass(containerClass);
@@ -289,7 +260,7 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		
 		if (! isMappedToNone(originalDomainClass)) {		
 			int i = 0;
-			List<String> domainClasses = getTargetDomainClassN(nm_.getDomainClass());
+			List<String> domainClasses = mapToNonAbstract(getTargetDomainClassN(nm_.getDomainClass()));
 			
 			String name = nm_.getName();
 			for(String domainClass : domainClasses) {
@@ -409,7 +380,8 @@ public class SiriusAdapter extends AbstractSiriusAdapter implements PendingTaskE
 		this.changesToPerform.add(change);
 	}
 
-	protected void removeElement(EObject o) {
+	@Override
+	public void removeElement(@NonNull EObject o) {
 		toRemove.add(o);
 	}
 

@@ -1,21 +1,20 @@
 package bento.sirius.adapter;
 
-import java.nio.channels.IllegalSelectorException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.description.util.DescriptionSwitch;
-import org.eclipse.sirius.diagram.util.DiagramSwitch;
-import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 
 /**
  * Utility methods to deal with Sirius models. Also check SiriusModel for more
@@ -26,8 +25,24 @@ import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
  */
 public class SiriusUtils {
 
-	public static String getRawClassName(String siriusClassName) {
+	@NonNull
+	public static String getRawClassName(@NonNull String siriusClassName) {
+		if (! siriusClassName.contains("::")) {
+			return siriusClassName;
+		}
 		return siriusClassName.substring(siriusClassName.lastIndexOf(":") + 1);
+	}
+	
+	@NonNull
+	public static <T extends DiagramElementMapping> List<T> filter(@NonNull List<? extends T> mappings, Predicate<String> filter) {
+		List<T> result = new ArrayList<T>();
+		for (T m: mappings) {
+			String domainClass = getDomainClass(m);
+			if (filter.test(domainClass)) {
+				result.add(m);
+			}
+		}
+		return result;
 	}
 	
 	public static String getClosestContainerClass(EObject nm_) {
@@ -90,5 +105,19 @@ public class SiriusUtils {
 		
 		return classes.get(0);
 	}
-	
+
+	public static String toAQLIdentifier(String id) {
+		// return "\"" + id + "\"";
+		return "_" + id;
+	}
+
+	protected static <T> T getContainer(Class<T> klass, EObject obj) {
+		if ( obj == null ) {
+			return null;
+		} else if ( klass.isInstance(obj) ) {
+			return klass.cast(obj);
+		} else {
+			return getContainer(klass, obj.eContainer());
+		}
+	}
 }

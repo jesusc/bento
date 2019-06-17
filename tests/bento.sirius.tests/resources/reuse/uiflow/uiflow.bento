@@ -1,0 +1,12 @@
+composite component sirius.uiflow {
+	uses "platform:/resource/bento.sirius.tests/resources/components/workflow/workflow.bento"
+	                          
+	binding bindUIFlow   = "platform:/resource/bento.sirius.tests/resources/reuse/uiflow/uiflow2workflow.gbind"
+			
+	source concept STEP  : "platform:/resource/bento.sirius.tests.metamodels/resources/metamodels/uiflow/uiflow.ecore"	
+	source model in  : STEP 
+	
+	compose 
+		apply workflow(bindUIFlow(in)) -> ()
+		
+}

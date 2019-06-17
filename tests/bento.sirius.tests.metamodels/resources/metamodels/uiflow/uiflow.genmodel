@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.sirius.tests.metamodels/src-gen" modelPluginID="bento.sirius.tests.metamodels"
+    modelName="Uiflow" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>uiflow.ecore</foreignModel>
+  <genPackages prefix="Uiflow" basePackage="bento.sirius.tests" disposableProviderFactory="true"
+      ecorePackage="uiflow.ecore#/">
+    <genClasses ecoreClass="uiflow.ecore#//UIFlow">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uiflow.ecore#//UIFlow/elements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="uiflow.ecore#//FlowElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uiflow.ecore#//FlowElement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uiflow.ecore#//FlowElement/next"/>
+    </genClasses>
+    <genClasses ecoreClass="uiflow.ecore#//FlowTransition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uiflow.ecore#//FlowTransition/element"/>
+    </genClasses>
+    <genClasses ecoreClass="uiflow.ecore#//Initial"/>
+    <genClasses ecoreClass="uiflow.ecore#//Action"/>
+    <genClasses ecoreClass="uiflow.ecore#//View"/>
+  </genPackages>
+</genmodel:GenModel>

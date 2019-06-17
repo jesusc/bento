@@ -15,8 +15,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.nodes.Tag;
 
 import bento.sirius.tests.model.AllowCreate;
+import bento.sirius.tests.model.PaletteSpec;
 import bento.sirius.tests.model.SiriusSpecificationModel;
 
 public class TestUtils {
@@ -31,6 +33,11 @@ public class TestUtils {
 		constructor = new Constructor(SiriusSpecificationModel.class);
 		TypeDescription customTypeDescription = new TypeDescription(SiriusSpecificationModel.class);
 		customTypeDescription.addPropertyParameters("create", AllowCreate.class);
+		customTypeDescription.addPropertyParameters("palette", PaletteSpec.class);
+		
+		// Constructor palConstructor = new Constructor(PaletteSpec.class);
+		//constructor.addTypeDescription(new TypeDescription(PaletteNodeItem.class, new Tag("!node")));
+		
 		constructor.addTypeDescription(customTypeDescription);
 		
 		Yaml yaml = new Yaml(constructor);

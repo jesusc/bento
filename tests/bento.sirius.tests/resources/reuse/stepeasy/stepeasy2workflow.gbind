@@ -1,0 +1,27 @@
+binding stepeasy2workflow {  
+	concept   WORKFLOW : "http://bento/flow_concept"
+	metamodel STEPEASY : "http://bento/sirius/stepeasy"
+	
+	class FlowDiagram to StepEasyMachine
+	class Node to Task
+	class Task to InitialTask, AwsLambdaTask 
+	class FlowEdge to Transition
+	 
+	class ParallelSplit to NONE
+	class ExclusiveChoice to NONE
+	
+	feature FlowDiagram.nodes is tasks
+	feature FlowDiagram.edges is transitions
+	
+	feature Task[InitialTask].name is name
+	feature Task[AwsLambdaTask].name is name
+	
+	feature Task[InitialTask].isInitial = true
+	feature Task[AwsLambdaTask].isInitial = false
+	
+	-- We don't have names for edges, we may need this
+	-- feature FlowEdge.name is name
+	feature FlowEdge."in" is source
+	feature FlowEdge."out" is "target"
+	
+}

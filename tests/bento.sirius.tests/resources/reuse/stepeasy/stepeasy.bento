@@ -1,0 +1,12 @@
+composite component sirius.stepeasy {
+	uses "platform:/resource/bento.sirius.tests/resources/components/workflow/workflow.bento"
+	                          
+	binding bindSTEP   = "platform:/resource/bento.sirius.tests/resources/reuse/stepeasy/stepeasy2workflow.gbind"
+			
+	source concept STEP  : "platform:/resource/bento.sirius.tests.metamodels/resources/metamodels/stepeasy/stepeasy.ecore"	
+	source model in  : STEP 
+	
+	compose 
+		apply workflow(bindSTEP(in)) -> ()
+		
+}

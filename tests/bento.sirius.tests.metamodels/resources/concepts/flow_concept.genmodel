@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.sirius.tests.metamodels/src-gen" modelPluginID="bento.sirius.tests.metamodels"
+    modelName="Flow_concept" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>flow_concept.ecore</foreignModel>
+  <genPackages prefix="Workflow" basePackage="bento.sirius.tests.metamodels" disposableProviderFactory="true"
+      ecorePackage="flow_concept.ecore#/">
+    <genClasses ecoreClass="flow_concept.ecore#//FlowDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference flow_concept.ecore#//FlowDiagram/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference flow_concept.ecore#//FlowDiagram/edges"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute flow_concept.ecore#//FlowDiagram/isFinalMandatory"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="flow_concept.ecore#//Node">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference flow_concept.ecore#//Node/outs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference flow_concept.ecore#//Node/ins"/>
+    </genClasses>
+    <genClasses ecoreClass="flow_concept.ecore#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute flow_concept.ecore#//Task/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute flow_concept.ecore#//Task/isInitial"/>
+    </genClasses>
+    <genClasses ecoreClass="flow_concept.ecore#//FinalTask">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute flow_concept.ecore#//FinalTask/isTerminating"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute flow_concept.ecore#//FinalTask/isMandatory"/>
+    </genClasses>
+    <genClasses ecoreClass="flow_concept.ecore#//ParallelSplit"/>
+    <genClasses ecoreClass="flow_concept.ecore#//Synchronization"/>
+    <genClasses ecoreClass="flow_concept.ecore#//ExclusiveChoice"/>
+    <genClasses ecoreClass="flow_concept.ecore#//SimpleMerge"/>
+    <genClasses ecoreClass="flow_concept.ecore#//MultiChoice"/>
+    <genClasses ecoreClass="flow_concept.ecore#//FlowEdge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference flow_concept.ecore#//FlowEdge/in"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference flow_concept.ecore#//FlowEdge/out"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

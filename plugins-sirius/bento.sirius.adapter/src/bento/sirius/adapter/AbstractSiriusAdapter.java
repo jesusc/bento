@@ -1,11 +1,18 @@
 package bento.sirius.adapter;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -14,9 +21,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
+import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
 
 import bento.binding.utils.BindingModel;
+import bento.common.adapter.IComponentInfoForBinding.IBoundMetamodelInfo;
 import bento.sirius.adapter.AbstractSiriusAdapter.Change;
 import gbind.dsl.BaseFeatureBinding;
 import gbind.dsl.ClassBinding;
@@ -28,6 +38,8 @@ public abstract class AbstractSiriusAdapter {
 	protected BindingModel bindingSpec;
 	protected SiriusComponentInfo info;
 
+	protected final Predicate<String> ONLY_MAPPED = (d) -> !isMappedToNone(d);
+		
 	public AbstractSiriusAdapter(BindingModel bindingSpec, SiriusComponentInfo info) {
 		this.bindingSpec = bindingSpec;	
 		this.info = info;
@@ -63,7 +75,7 @@ public abstract class AbstractSiriusAdapter {
 	}
 	
 	protected List<String> getTargetDomainClassN(String domainClassName) {
-		String realClassName = domainClassName.contains("::") ? getRawDomainClassName(domainClassName) : domainClassName;
+		String realClassName = getRawDomainClassName(domainClassName);
 		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(realClassName).orElseThrow(() -> new RuntimeException("Can't find " + realClassName));
 		return classBinding.getConcrete().stream().map(cb -> cb.getName()).collect(Collectors.toList());
 	}
@@ -121,32 +133,23 @@ public abstract class AbstractSiriusAdapter {
 	}
 
 	protected boolean isMappedToNone(EClass originalDomainClass) {
-		return ! isNotMappedToNone(originalDomainClass.getName());
+		return isMappedToNone(originalDomainClass.getName());
 	}
 	
-	protected boolean isNotMappedToNone(EClass originalDomainClass) {
-		return isNotMappedToNone(originalDomainClass.getName());
-	}
-	
-	protected boolean isNotMappedToNone(String originalDomainClass) {
-		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(originalDomainClass)
-				.orElseThrow(() -> new AdapterError("Can't find " + originalDomainClass));
+	protected boolean isMappedToNone(String originalDomainClass) {
+		String domainClass = getRawDomainClassName(originalDomainClass);
+		ClassBinding classBinding = bindingSpec.findClassBindingForConcept(domainClass)
+				.orElseThrow(() -> new AdapterError("Can't find " + domainClass));
 		
 		for(ConcreteMetaclass c : classBinding.getConcrete()) {
 			 if ( c.getName().toLowerCase().equals("none") ) 
-				 return false;
+				 return true;
 		}
-		return true;
+		return false;
 	}
-	
+		
 	protected <T> T getContainer(Class<T> klass, EObject obj) {
-		if ( obj == null ) {
-			return null;
-		} else if ( klass.isInstance(obj) ) {
-			return klass.cast(obj);
-		} else {
-			return getContainer(klass, obj.eContainer());
-		}
+		return SiriusUtils.getContainer(klass, obj);
 	}
 
 	protected String adaptExpression(@NonNull EClass contextClass, @NonNull String expression) {
@@ -204,7 +207,7 @@ public abstract class AbstractSiriusAdapter {
 		} else if ( expression.startsWith("feature:") ) {
 			String featureName = expression.replaceFirst("feature:", "");
 			// Try to adapt with the expression adapter
-			ATLBasedExpressionAdapter adapter = new ATLBasedExpressionAdapter(contextClass, "self." + featureName, boundClass, bindingSpec, info);
+			ATLBasedExpressionAdapter adapter = new ATLBasedExpressionAdapter(contextClass, "self." + SiriusUtils.toAQLIdentifier(featureName), boundClass, bindingSpec, info);
 			String s = adapter.getResult();
 			if ( s != null )
 				return "aql: " + s;
@@ -254,4 +257,92 @@ public abstract class AbstractSiriusAdapter {
 		}
 		
 	}
+	
+	
+	/**
+	 * Takes a list of classes of the concrete meta-model. For each of them
+	 * that is abstract, the concrete subclasses are returned.
+	 */
+	protected List<String> mapToNonAbstract(List<String> classes) {
+		List<EClass> result = new ArrayList<EClass>();
+		for (String c : classes) {
+			EClass k = findTargetClass(c);
+			if (k.isAbstract()) {
+				result.addAll( allConcreteSubclasses(k) );
+			} else {
+				result.add(k);
+			}
+		}
+		
+		return result.stream().map(c -> c.getName()).collect(Collectors.toList());
+	}
+
+	protected List<EClass> getAllSourceClasses() {
+		List<EClass> result = new ArrayList<EClass>();
+		for (EPackage pkg : info.getSiriusPackages().values()) {
+			for (EClassifier c : pkg.getEClassifiers()) {
+				if (c instanceof EClass) {
+					result.add((EClass) c);
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Get the list of "more direct" concrete subclasses covering k.
+	 * @param k
+	 * @return
+	 */
+	private List<EClass> allConcreteSubclasses(EClass k) {
+		List<EClass> result = new ArrayList<EClass>();
+		
+		Map<EClass, Set<EClass>> sub = getSubclassesMap();
+		Set<EClass> subclasses = sub.get(k);
+		for (EClass eClass : subclasses) {
+			if (eClass.isAbstract()) {
+				List<EClass> subs = allConcreteSubclasses(eClass);
+				result.addAll(subs);
+			} else {
+				result.add(eClass);
+			}
+		}
+		
+		return result;
+	}
+
+	private Map<EClass, Set<EClass>> subclassesMap = null;
+
+	private Map<EClass, Set<EClass>> getSubclassesMap() {
+		if (subclassesMap != null)
+			return subclassesMap;
+		
+		Map<EClass, Set<EClass>> subclasses = new HashMap<>();
+		
+		for (IBoundMetamodelInfo b : info.getBoundMetamodels()) {
+			EPackage pkg = info.getTargetMetamodelPackage(b.getBoundMetamodelName());
+			for(EClassifier c : pkg.getEClassifiers()) {
+				if ( c instanceof EClass ) {
+					EClass k = (EClass) c;
+					for (EClass eClass : ((EClass) c).getESuperTypes()) {
+						subclasses.computeIfAbsent(eClass, (key) -> new HashSet<EClass>());
+						subclasses.get(eClass).add(k);
+					}
+				}
+			}			
+		}
+		
+		return subclasses;
+	}
+
+	private EClass findTargetClass(String c) {
+		for (IBoundMetamodelInfo b : info.getBoundMetamodels()) {
+			EPackage pkg = info.getTargetMetamodelPackage(b.getBoundMetamodelName());
+			EClassifier k = pkg.getEClassifier(c);
+			if ( k instanceof EClass )
+				return (EClass) k;
+		}
+		throw new IllegalStateException();
+	}
+	
 }

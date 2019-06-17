@@ -1,0 +1,6 @@
+graphical component sirius.workflow {
+	source concept WF  : "platform:/resource/bento.sirius.tests.metamodels/resources/concepts/flow_concept.ecore"
+	source model in : WF
+	
+	definition sirius "platform:/resource/bento.sirius.tests/resources/components/workflow/workflow.odesign"
+}
