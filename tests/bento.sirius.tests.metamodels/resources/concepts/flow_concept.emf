@@ -1,0 +1,49 @@
+@namespace(uri="http://bento/flow_concept", prefix="flow_concept")
+package workflow;
+
+// REMOVE THIS CLASS ---------
+class FlowDiagram {
+   val  Node[*]     nodes;
+   val  FlowEdge[*] edges;
+   
+   attr boolean[1] isFinalMandatory;   
+} 
+// ---------------------------
+
+// Names in/out changed for ins/outs to avoid conflict in double role het.
+abstract class Node {
+   ref FlowEdge[*]#in  outs;
+   ref FlowEdge[*]#out ins;
+}
+
+@cardinality(min="0",max="*")
+class Task extends Node {
+   attr String[1]  name;
+   attr boolean[1] isInitial;
+}
+
+@cardinality(min="0",max="*")
+class FinalTask extends Node {
+   attr boolean[1] isTerminating; // when a final task is reached... true => existing running processes terminate; false => existing running processes continue
+   attr boolean[1] isMandatory;   // true => a succesful execution always reaches one of these; false => there may be sucessful executions reaching none of these
+}
+
+@cardinality(min="0",max="1")
+class ParallelSplit extends Node {}
+
+@cardinality(min="0",max="1")
+class Synchronization extends Node {}
+
+@cardinality(min="0",max="1")
+class ExclusiveChoice extends Node {}
+
+@cardinality(min="0",max="1")
+class SimpleMerge extends Node {}
+
+@cardinality(min="0",max="1")
+class MultiChoice extends Node {}
+
+class FlowEdge {
+   ref Node#outs in; 
+   ref Node#ins  out; 
+}

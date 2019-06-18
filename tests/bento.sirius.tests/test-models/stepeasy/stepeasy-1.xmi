@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stepeasy:StepEasyMachine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stepeasy="http://bento/sirius/stepeasy">
+  <tasks xsi:type="stepeasy:InitialTask" name="InitialA"/>
+  <tasks xsi:type="stepeasy:AwsLambdaTask"/>
+  <transitions source="//@tasks.0" target="//@tasks.1"/>
+</stepeasy:StepEasyMachine>

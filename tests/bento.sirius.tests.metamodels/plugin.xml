@@ -46,4 +46,28 @@
             genModel="resources/concepts/sequence.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated flow_concept -->
+      <package
+            uri="http://bento/flow_concept"
+            class="bento.sirius.tests.metamodels.workflow.WorkflowPackage"
+            genModel="resources/concepts/flow_concept.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated stepeasy -->
+      <package
+            uri="http://bento/sirius/stepeasy"
+            class="bento.sirius.tests.metamodels.stepeasy.StepeasyPackage"
+            genModel="resources/metamodels/stepeasy/stepeasy.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated uiflow -->
+      <package
+            uri="http://bento/sirius/uiflow"
+            class="bento.sirius.tests.uiflow.UiflowPackage"
+            genModel="resources/metamodels/uiflow/uiflow.genmodel"/>
+   </extension>
+
 </plugin>

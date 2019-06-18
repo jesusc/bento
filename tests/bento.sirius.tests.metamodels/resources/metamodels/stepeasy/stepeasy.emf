@@ -1,0 +1,34 @@
+/* This is based on http://step-easy.s3-website-us-west-2.amazonaws.com/ */
+@namespace(
+	uri="http://bento/sirius/stepeasy",
+	prefix="stepeasy")
+package stepeasy;
+
+@"http://www.eclipse.org/ocl/examples/OCL"(invName="self.tasks->select(t | t.oclIsKindOf(Task)) = 1")
+class StepEasyMachine {
+	val Task[*] tasks;
+	val Transition[*] transitions;		
+}
+
+abstract class Task {
+	attr String[1] name;
+}
+
+/* There is always one initial ask */
+class InitialTask extends Task {
+	
+}
+
+class AwsLambdaTask extends Task {
+	attr String[1] arn;
+	attr int[1] functionTimeout;
+}
+
+
+class Transition {
+	attr String[1] name;
+	ref Task[1] source;
+	ref Task[1] target;	
+}
+
+

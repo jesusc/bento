@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow_concept:FlowDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow_concept="http://bento/flow_concept">
+  <nodes xsi:type="flow_concept:Task" outs="//@edges.0" isInitial="true"/>
+  <nodes xsi:type="flow_concept:Task" outs="//@edges.1" ins="//@edges.0" name="Task"/>
+  <nodes xsi:type="flow_concept:ExclusiveChoice" outs="//@edges.2 //@edges.3" ins="//@edges.1"/>
+  <nodes xsi:type="flow_concept:Task" ins="//@edges.2" name="Task"/>
+  <nodes xsi:type="flow_concept:Task" ins="//@edges.3"/>
+  <nodes xsi:type="flow_concept:Task"/>
+  <edges in="//@nodes.0" out="//@nodes.1"/>
+  <edges in="//@nodes.1" out="//@nodes.2"/>
+  <edges in="//@nodes.2" out="//@nodes.3"/>
+  <edges in="//@nodes.2" out="//@nodes.4"/>
+</flow_concept:FlowDiagram>

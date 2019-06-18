@@ -37,7 +37,8 @@ public class TestSiriusAdapter {
     public static Collection<Object> data() {
         return Arrays.asList(new Object[] {    
                 "resources/reuse/network/network.bento",
-                "resources/reuse/linkedlist/linkedlist.bento"
+                "resources/reuse/linkedlist/linkedlist.bento",
+                "resources/reuse/stepeasy/stepeasy.bento",
            });
     }
 
@@ -88,7 +89,8 @@ public class TestSiriusAdapter {
 			File f = new File(fileName);
 			Resource r = TestSiriusValidity.assertOdesignValidity(f);
 			
-			spec.assertExpectations(r);
+			if (spec != null)
+				spec.assertExpectations(r);
 		}
 	}
 

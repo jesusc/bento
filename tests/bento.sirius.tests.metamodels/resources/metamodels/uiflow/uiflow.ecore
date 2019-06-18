@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uiflow" nsURI="http://bento/sirius/uiflow" nsPrefix="uiflow">
+  <eClassifiers xsi:type="ecore:EClass" name="UIFlow">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//FlowElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" upperBound="-1" eType="#//FlowTransition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowTransition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//FlowElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//FlowElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="#//FlowElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//FlowElement"/>
+</ecore:EPackage>

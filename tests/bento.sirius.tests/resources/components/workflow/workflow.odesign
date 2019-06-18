@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="WorkflowDiagramComponent" version="12.0.0.2017041100">
+  <ownedViewpoints name="FlowDiagramComponentViewpoint">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="FlowDiagram" domainClass="workflow::FlowDiagram" enablePopupBars="true">
+      <metamodel href="../../../../bento.sirius.tests.metamodels/resources/concepts/flow_concept.ecore#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="Initial" preconditionExpression="aql:self.isInitial" labelDirectEdit="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit%20names']" domainClass="workflow::Task">
+          <style xsi:type="style:DotDescription" labelSize="12" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="ParallelSplit" domainClass="workflow::ParallelSplit">
+          <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:''" labelPosition="node" resizeKind="NORTH_SOUTH" width="1" height="5">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="ExclusiveChoice" domainClass="workflow::ExclusiveChoice">
+          <style xsi:type="style:LozengeNodeDescription" labelSize="12" showIcon="false" labelExpression="aql:''" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="FlowEdge" sourceMapping="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@containerMappings[name='Task'] //@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='Initial'] //@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='ParallelSplit'] //@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='ExclusiveChoice']" targetMapping="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@containerMappings[name='Task'] //@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='ParallelSplit'] //@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='ExclusiveChoice']" targetFinderExpression="feature:out" sourceFinderExpression="feature:in" domainClass="workflow::FlowEdge" useDomainElement="true">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="Task" label="Task" preconditionExpression="aql:not self.isInitial" labelDirectEdit="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit%20names']" semanticCandidatesExpression="aql:self.nodes->filter(workflow::Task)" domainClass="workflow::Task">
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="ToolSection">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateInitial" nodeMappings="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='Initial']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::Task" referenceName="nodes">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="isInitial" valueExpression="aql:true"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CreateTask" containerMappings="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@containerMappings[name='Task']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::Task" referenceName="nodes">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="isInitial" valueExpression="aql:false"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="CreateFlow" edgeMappings="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@edgeMappings[name='FlowEdge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="aql:source.eContainer()">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::FlowEdge" referenceName="edges">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="in" valueExpression="var:source"/>
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="out" valueExpression="var:target"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateExclusiveChoice" nodeMappings="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='ExclusiveChoice']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::ExclusiveChoice" referenceName="nodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CreateParallelSplit" nodeMappings="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@nodeMappings[name='ParallelSplit']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::ParallelSplit" referenceName="nodes"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="Edit names">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+</description:Group>
