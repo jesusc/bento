@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
-import com.odesign.generator.tools.Tools;
+import com.odesign.generator.tools.BindingTools;
 
 /**
  * @author souhaila
@@ -134,8 +134,8 @@ public class ModelGenerator {
 //		List<EClass> containersList = Tools.fillContainersList(this.targetMetamodel);
 //		EClass rootTarget = Tools.findRoot(containersList);
 
-		List<EClass> containersList = Tools.fillContainersList(this.originalMetamodel);
-		EClass rootOriginal = Tools.findRoot(containersList);
+		List<EClass> containersList = BindingTools.fillContainersList(this.originalMetamodel);
+		EClass rootOriginal = BindingTools.findRoot(containersList);
 		EClass rootTarget = null;
 		for (EClassifier eclassifier : listEClassifiersTarget) {
 			if (rootOriginal.getName().equals(eclassifier.getName())) {
@@ -267,7 +267,7 @@ public class ModelGenerator {
 //								System.out.println(featureEClassifier.getName() + "==" + target.getName().toLowerCase()
 //										+ Tools.upperCaseFirst(ec.getName()));
 								if (featureEClassifier.getName()
-										.equals(target.getName().toLowerCase() + Tools.upperCaseFirst(ec.getName()))) {
+										.equals(target.getName().toLowerCase() + BindingTools.upperCaseFirst(ec.getName()))) {
 									if (featureEClassifier instanceof EClass) {
 									attributeClassObject = efactory.create((EClass) featureEClassifier);
 									EAttribute attribute = ((EClass) featureEClassifier).getEAllAttributes().get(0);
@@ -458,8 +458,8 @@ try {
 		}
 
 		// get the target model's root
-		List<EClass> containersList = Tools.fillContainersList(this.targetMetamodel);
-		EClass rootTarget = Tools.findRoot(containersList);
+		List<EClass> containersList = BindingTools.fillContainersList(this.targetMetamodel);
+		EClass rootTarget = BindingTools.findRoot(containersList);
 
 		// create the target models root
 		EObject rootObject = efactory.create(rootTarget);
@@ -469,8 +469,8 @@ try {
 		List<EReference> listRootEreferences = rootTarget.getEAllReferences();
 
 		// get the original model's root
-		List<EClass> containersList2 = Tools.fillContainersList(this.originalMetamodel);
-		EClass rootOriginal = Tools.findRoot(containersList);
+		List<EClass> containersList2 = BindingTools.fillContainersList(this.originalMetamodel);
+		EClass rootOriginal = BindingTools.findRoot(containersList);
 
 		// get the EReferenvces of the root
 		List<EReference> listRootOriginalEreferences = rootTarget.getEAllReferences();
@@ -557,9 +557,9 @@ try {
 
 							for (EClassifier featureEClassifier : listEClassifiersTarget) {
 								System.out.println(featureEClassifier.getName() + "==" + target.getName().toLowerCase()
-										+ Tools.upperCaseFirst(ec.getName()));
+										+ BindingTools.upperCaseFirst(ec.getName()));
 								if (featureEClassifier.getName()
-										.equals(target.getName().toLowerCase() + Tools.upperCaseFirst(ec.getName()))) {
+										.equals(target.getName().toLowerCase() + BindingTools.upperCaseFirst(ec.getName()))) {
 									attributeClassObject = efactory.create((EClass) featureEClassifier);
 									EAttribute attribute = ((EClass) featureEClassifier).getEAllAttributes().get(0);
 									attributeClassObject.eSet(attribute, o.eGet((EStructuralFeature) sourceOfTarget));

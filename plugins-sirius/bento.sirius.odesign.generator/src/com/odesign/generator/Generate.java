@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.odesign.generator.tools.Tools;
+import com.odesign.generator.tools.BindingTools;
 
 /**
  * 
@@ -49,9 +49,9 @@ public class Generate {
 
 		this.epack = (EPackage) resource1.getContents().get(0);
 
-		List<EClass> containerslist = Tools.fillContainersList(this.epack);
+		List<EClass> containerslist = BindingTools.fillContainersList(this.epack);
 
-		EClass root = Tools.findRoot(containerslist);
+		EClass root = BindingTools.findRoot(containerslist);
 
 		BindingMetamodelGenerator metamodelGenerator = new BindingMetamodelGenerator();
 

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.sirius.diagram.ContainerLayout;
 import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeRouting;
 import org.eclipse.sirius.diagram.LabelPosition;
@@ -36,11 +37,13 @@ import org.eclipse.sirius.diagram.description.style.EdgeStyleDescription;
 import org.eclipse.sirius.diagram.description.style.FlatContainerStyleDescription;
 import org.eclipse.sirius.diagram.description.style.SquareDescription;
 import org.eclipse.sirius.diagram.description.style.StyleFactory;
+import org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription;
 import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.ToolFactory;
 import org.eclipse.sirius.diagram.description.tool.ToolSection;
+import org.eclipse.sirius.viewpoint.LabelAlignment;
 import org.eclipse.sirius.viewpoint.description.Group;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.UserColorsPalette;
@@ -52,7 +55,8 @@ import org.eclipse.sirius.viewpoint.description.tool.InitEdgeCreationOperation;
 import org.eclipse.sirius.viewpoint.description.tool.InitialNodeCreationOperation;
 import org.eclipse.sirius.viewpoint.description.tool.SetValue;
 
-import com.odesign.generator.tools.Tools;
+import com.odesign.generator.tools.BindingTools;
+import com.odesign.generator.tools.OdesignTools;
 import com.odesign.generator.values.BorderedNodeCreation;
 import com.odesign.generator.values.MetamodelElementFeature;
 
@@ -72,6 +76,10 @@ public class OdesignGenerator {
 	private Viewpoint viewPoint;
 	private File generatedFile;
 	private List<EdgeMapping> emlist = new ArrayList<>();
+
+	private EList<EdgeMapping> oroginalEdges;
+	private EList<NodeMapping> oroginalNodes;
+	private EList<ContainerMapping> oroginalContainers;
 
 	public Resource getResource() {
 		return resource;
@@ -112,6 +120,9 @@ public class OdesignGenerator {
 			if (obj instanceof DiagramDescription) {
 				this.diagramDescription = (DiagramDescription) obj;
 				this.epackage = ((DiagramDescription) obj).getMetamodel().get(0);
+				this.oroginalEdges = this.diagramDescription.getAllEdgeMappings();
+				this.oroginalNodes = this.diagramDescription.getAllNodeMappings();
+				this.oroginalContainers = this.diagramDescription.getAllContainerMappings();
 
 			}
 
@@ -157,6 +168,13 @@ public class OdesignGenerator {
 		featuresFixedColor.setGreen(187);
 		featuresFixedColor.setRed(134);
 
+		UserFixedColor featuresFixedColorRed = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
+				.createUserFixedColor();
+		colorPallette.getEntries().add(featuresFixedColorRed);
+		featuresFixedColor.setBlue(0);
+		featuresFixedColor.setGreen(0);
+		featuresFixedColor.setRed(255);
+
 		List<EdgeMapping> edgeList = new ArrayList<>();
 		List<NodeMapping> nodeList = new ArrayList<>();
 		List<ContainerMapping> containerList = new ArrayList<>();
@@ -186,8 +204,8 @@ public class OdesignGenerator {
 				}
 				if (obj instanceof DiagramDescription) {
 					((DiagramDescription) obj)
-							.setDomainClass(ep.getName() + "::" + ((DiagramDescription) obj).getDomainClass()
-									.substring(((DiagramDescription) obj).getDomainClass().lastIndexOf(":") + 1));
+							.setDomainClass(ep.getName() + "." + ((DiagramDescription) obj).getDomainClass()
+									.substring(((DiagramDescription) obj).getDomainClass().lastIndexOf(".") + 1));
 
 				}
 
@@ -195,10 +213,10 @@ public class OdesignGenerator {
 
 					if (((EdgeMapping) obj).isUseDomainElement()) {
 						edgeList.add((EdgeMapping) obj);
-						((EdgeMapping) obj).setDomainClass(ep.getName() + "::" + ((EdgeMapping) obj).getDomainClass()
-								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(":") + 1));
+						((EdgeMapping) obj).setDomainClass(ep.getName() + "." + ((EdgeMapping) obj).getDomainClass()
+								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(".") + 1));
 						if (((EdgeMapping) obj).getDomainClass()
-								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(":") + 1)
+								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(".") + 1)
 								.equals(entry.getKey().getName())) {
 
 							for (EClass featureCLass : entry.getValue()) {
@@ -207,7 +225,7 @@ public class OdesignGenerator {
 
 								this.nmlist.add(nmd);
 								nmd.setName(featureCLass.getName());
-								nmd.setDomainClass(ep.getName() + "::" + featureCLass.getName());
+								nmd.setDomainClass(ep.getName() + "." + featureCLass.getName());
 								layer.getNodeMappings().add(nmd);
 
 								SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
@@ -222,8 +240,9 @@ public class OdesignGenerator {
 								sd.setBorderSizeComputationExpression("2");
 								sd.setWidth(12);
 								String classname = ((EdgeMapping) obj).getDomainClass()
-										.substring(((((EdgeMapping) obj).getDomainClass()).lastIndexOf(":")) + 1);
-								String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(), " ");
+										.substring(((((EdgeMapping) obj).getDomainClass()).lastIndexOf(".")) + 1);
+								String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(),
+										" ");
 								System.out.println(featureCLass);
 								System.out.println(classname);
 
@@ -257,11 +276,11 @@ public class OdesignGenerator {
 				if (obj instanceof ContainerMapping) {
 					containerList.add((ContainerMapping) obj);
 					((ContainerMapping) obj)
-							.setDomainClass(ep.getName() + "::" + ((ContainerMapping) obj).getDomainClass()
-									.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(":") + 1));
+							.setDomainClass(ep.getName() + "." + ((ContainerMapping) obj).getDomainClass()
+									.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(".") + 1));
 
 					if (((ContainerMapping) obj).getDomainClass()
-							.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(":") + 1)
+							.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(".") + 1)
 							.equals(entry.getKey().getName())) {
 
 						for (EClass featureCLass : entry.getValue()) {
@@ -270,14 +289,15 @@ public class OdesignGenerator {
 
 							this.nmlist.add(nmd);
 							nmd.setName(featureCLass.getName());
-							nmd.setDomainClass(ep.getName() + "::" + featureCLass.getName());
+							nmd.setDomainClass(ep.getName() + "." + featureCLass.getName());
 							layer.getNodeMappings().add(nmd);
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
 							String classname = ((ContainerMapping) obj).getDomainClass()
-									.substring(((((ContainerMapping) obj).getDomainClass()).lastIndexOf(":")) + 1);
-							String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(), " ");
+									.substring(((((ContainerMapping) obj).getDomainClass()).lastIndexOf(".")) + 1);
+							String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(),
+									" ");
 							System.out.println(featureCLass.getName());
 							System.out.println(classname);
 
@@ -319,15 +339,15 @@ public class OdesignGenerator {
 
 				if (obj instanceof NodeMapping) {
 					nodeList.add((NodeMapping) obj);
-					((NodeMapping) obj).setDomainClass(ep.getName() + "::" + ((NodeMapping) obj).getDomainClass()
-							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(":") + 1));
-					// layer.getNodeMappings().add((NodeMapping) obj);
+					((NodeMapping) obj).setDomainClass(ep.getName() + "." + ((NodeMapping) obj).getDomainClass()
+							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(".") + 1));
+					
 					System.out.println(((NodeMapping) obj).getDomainClass()
-							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(":") + 1)
+							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(".") + 1)
 							.equalsIgnoreCase(entry.getKey().getName()));
 
 					if (((NodeMapping) obj).getDomainClass()
-							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(":") + 1)
+							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(".") + 1)
 							.equals(entry.getKey().getName())) {
 
 						for (EClass featureCLass : entry.getValue()) {
@@ -336,7 +356,7 @@ public class OdesignGenerator {
 
 							this.nmlist.add(nmd);
 							nmd.setName(featureCLass.getName());
-							nmd.setDomainClass(ep.getName() + "::" + featureCLass.getName());
+							nmd.setDomainClass(ep.getName() + "." + featureCLass.getName());
 							layer.getNodeMappings().add(nmd);
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
@@ -349,8 +369,9 @@ public class OdesignGenerator {
 							sd.setHeight(3);
 							sd.setWidth(12);
 							String classname = ((NodeMapping) obj).getDomainClass()
-									.substring(((((NodeMapping) obj).getDomainClass()).lastIndexOf(":")) + 1);
-							String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(), " ");
+									.substring(((((NodeMapping) obj).getDomainClass()).lastIndexOf(".")) + 1);
+							String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(),
+									" ");
 							System.out.println(featureCLass);
 							System.out.println(classname);
 							sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
@@ -380,59 +401,104 @@ public class OdesignGenerator {
 						}
 
 					}
-					// ((NodeMapping) obj).setDomainClass(ep.getName() + "::" + ((NodeMapping)
+					// ((NodeMapping) obj).setDomainClass(ep.getName() + "." + ((NodeMapping)
 					// obj).getName());
 				}
 
 				if (obj instanceof CreateInstance) {
 					// nodeList.add((CreateInstance) obj);
-					((CreateInstance) obj).setTypeName(ep.getName() + "::" + ((CreateInstance) obj).getTypeName()
-							.substring(((CreateInstance) obj).getTypeName().lastIndexOf(":") + 1));
+					((CreateInstance) obj).setTypeName(ep.getName() + "." + ((CreateInstance) obj).getTypeName()
+							.substring(((CreateInstance) obj).getTypeName().lastIndexOf(".") + 1));
 				}
 
 			}
 
 		}
 
-		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
-		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
+		// The NONE creation
+		
+		NodeMapping nonemapping = DescriptionFactory.eINSTANCE.createNodeMapping();
+		nonemapping.setName("None Element");
+		nonemapping.setDomainClass(ep.getName() + ".NoneElement");
+		nonemapping.setSemanticCandidatesExpression("feature:containsNoneElement");
+		dd.getAllLayers().get(0).getNodeMappings().add(nonemapping);	
+		
+		
+		//NodeMapping noneNodeMapping=OdesignTools.createNode("None", ep, "NoneElement","containsNoneElement", dd);
+		WorkspaceImageDescription workspaceimage = StyleFactory.eINSTANCE.createWorkspaceImageDescription();
 
+		workspaceimage.setLabelExpression("[''/]");
+		nonemapping.setStyle(workspaceimage);
+		// workspaceimage.setWorkspacePath(value);
+	workspaceimage.setWorkspacePath("/com.workflow2.editor.design/trash -128.png");
+		workspaceimage.setIconPath("/com.workflow2.editor.design/trash -128.png");
+		
+		workspaceimage.setShowIcon(false);
+		
+
+		
+		EdgeStyleDescription edgestylenone = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+		CenterLabelStyleDescription labelstylenone = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
+		edgestylenone.setCenterLabelStyleDescription(labelstylenone);
+		edgestylenone.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+		edgestylenone.setStrokeColor(featuresFixedColorRed);
+		
+		
+		
+		EdgeMapping mapToNone = DescriptionFactory.eINSTANCE.createEdgeMapping();
+		mapToNone.setName("Map to NONE");
+
+		// pointTo.setTargetExpression("feature:featureClass");
+		mapToNone.setTargetFinderExpression("feature:noneElement");
+		mapToNone.getTargetMapping().add(nonemapping);
+		mapToNone.setStyle(edgestylenone);
+		dd.getAllLayers().get(0).getEdgeMappings().add(mapToNone);
+
+		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
+		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
 		cm.setStyle(csd);
+		csd.setWidthComputationExpression("6");
+		csd.setHeightComputationExpression("7");
 		csd.setShowIcon(false);
+		
 		csd.setLabelExpression("aql:self.name");
 		csd.setBorderSizeComputationExpression("2");
 		csd.setBorderColor(featuresFixedColor);
+
+		
+		cm.setChildrenPresentation(ContainerLayout.VERTICAL_STACK);
 		cm.setLabel(metamodelElement.getName());
 		cm.setName(metamodelElement.getName());
-		cm.setDomainClass(ep.getName() + "::" + metamodelElement.getName());
+		cm.setDomainClass(ep.getName() + "." + metamodelElement.getName());
 		dd.getAllLayers().get(0).getContainerMappings().add(cm);
-		NodeMapping nm = DescriptionFactory.eINSTANCE.createNodeMapping();
-		EList<EReference> listERef = metamodelElement.getEAllContainments();
 
-		nm.setName(BorderedNodeCreation.getName());
-		nm.setDomainClass(ep.getName() + "::MetamodelElementFeature");
+		
+		
+		
+		//feature
+		ContainerMapping nm = DescriptionFactory.eINSTANCE.createContainerMapping();
+		nm.setName("Feature");
+		nm.setDomainClass(ep.getName() + ".MetamodelElementFeature");
 		nm.setSemanticCandidatesExpression("feature:metamodelElementFeature");
-		SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
+		FlatContainerStyleDescription csdfeature = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
+		nm.setStyle(csdfeature);
+		csdfeature.setShowIcon(false);
+		csdfeature.setLabelExpression("aql:self.name");
+		//csdfeature.setBorderSizeComputationExpression("2");
+		//csdfeature.setBorderColor(featuresFixedColor);	
+	//	dd.getAllLayers().get(0).getContainerMappings().add(nm);
+		try {
+		cm.getSubContainerMappings().add(nm);
+		//cm.getAllContainerMappings().add(nm);
+		}catch(Exception e) {e.printStackTrace();}
 
-		sd.setLabelExpression("aql:self.name");
-		nm.setStyle(sd);
-
-		cm.getBorderedNodeMappings().add(nm);
-
-		sd.setColor(featuresFixedColor);
-		sd.setShowIcon(false);
-		sd.setLabelPosition(LabelPosition.NODE_LITERAL);
-		// sd.setSizeComputationExpression("2");
-		sd.setBorderSizeComputationExpression("2");
-		sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
-		sd.setHeight(3);
-		sd.setWidth(12);
+	
 
 		EdgeMapping edgeintermediate = DescriptionFactory.eINSTANCE.createEdgeMappingUsingDomainElement();
 		edgeintermediate.setName(intermediateElement.getName());
-		edgeintermediate.setDomainClass(ep.getName() + "::" + intermediateElement.getName());
-		edgeintermediate.setSourceFinderExpression("[self.metamodElelement/]");
-		edgeintermediate.setTargetFinderExpression("[self.bindingElement/]");
+		edgeintermediate.setDomainClass(ep.getName() + "." + intermediateElement.getName());
+		edgeintermediate.setSourceFinderExpression("[metamodelElement/]");
+		edgeintermediate.setTargetFinderExpression("[bindingElement/]");
 		edgeintermediate.getSourceMapping().add(cm);
 
 		for (EdgeMapping edge : edgeList) {
@@ -482,127 +548,275 @@ public class OdesignGenerator {
 		EdgeMapping pointTo = DescriptionFactory.eINSTANCE.createEdgeMapping();
 		pointTo.setName("Bind attributes");
 		pointTo.getSourceMapping().add(nm);
-		// pointTo.setTargetExpression("feature:featureClass");
+
 		pointTo.setTargetFinderExpression("feature:featureClass");
 		for (NodeMapping nmiterator : this.nmlist) {
 			pointTo.getTargetMapping().add(nmiterator);
 		}
+		
+		//pointTo.setStyle(edgestyleVA);
+
+		dd.getAllLayers().get(0).getEdgeMappings().add(pointTo);
+
 		EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 		CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
 		edgestyle1.setCenterLabelStyleDescription(labelstyle1);
-
 		pointTo.setStyle(edgestyle1);
-		dd.getAllLayers().get(0).getEdgeMappings().add(pointTo);
-// Tool section part 
-		ToolSection toolsec = ToolFactory.eINSTANCE.createToolSection();
+		
+		
+		
+		NodeMapping virtualAttributeNode = DescriptionFactory.eINSTANCE.createNodeMapping();
+		virtualAttributeNode.setName("Virtual Attribute");
+		virtualAttributeNode.setDomainClass(ep.getName() + ".VirtualAttribute");
+		virtualAttributeNode.setSemanticCandidatesExpression("feature:containsVirtualAttribute");
 
-		toolsec.setName(com.odesign.generator.values.ToolSection.getName());
+		SquareDescription sdVA = StyleFactory.eINSTANCE.createSquareDescription();
+		sdVA.setBorderSizeComputationExpression("2");
+		sdVA.setBorderLineStyle(LineStyle.DASH_LITERAL);
+		sdVA.setColor(attributesFixedColor);
+		sdVA.setShowIcon(false);
+		sdVA.setLabelPosition(LabelPosition.NODE_LITERAL);
+
+		sdVA.setHeight(3);
+		sdVA.setWidth(12);
+		sdVA.setLabelExpression("");
+
+		virtualAttributeNode.setStyle(sdVA);
+
+		dd.getAllLayers().get(0).getNodeMappings().add(virtualAttributeNode);
+
+		EdgeMapping virtualAttributeEdge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+		virtualAttributeEdge.getSourceMapping().add(cm);
+		virtualAttributeEdge.getTargetMapping().add(virtualAttributeNode);
+		virtualAttributeEdge.setTargetFinderExpression("feature:virtualAttribute");
+
+		EdgeStyleDescription edgestyleVA = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+		CenterLabelStyleDescription labelstyleVA = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
+		edgestyleVA.setCenterLabelStyleDescription(labelstyleVA);
+		edgestyleVA.setLineStyle(LineStyle.DASH_LITERAL);
+
+		edgestyleVA.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+		edgestyleVA.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+		edgestyleVA.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+
+		edgestyleVA.setStrokeColor(featuresFixedColor);
+
+		virtualAttributeEdge.setStyle(edgestyleVA);
+
+		
+		//pointTo.setStyle(edgestyleVA);
+		dd.getAllLayers().get(0).getEdgeMappings().add(virtualAttributeEdge);
+
+		EdgeMapping to_virtualAttributeEdge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+		to_virtualAttributeEdge.setName("Map a virtual attribute");
+		to_virtualAttributeEdge.getSourceMapping().add(cm);
+
+		to_virtualAttributeEdge.setTargetFinderExpression("feature:featureClass");
+		for (NodeMapping nmiterator : this.nmlist) {
+			to_virtualAttributeEdge.getTargetMapping().add(nmiterator);
+		}
+
+		to_virtualAttributeEdge.setTargetFinderExpression("feature:to_virtualAttribute");
+
+		EdgeStyleDescription to_edgestyleVA = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+		CenterLabelStyleDescription to_labelstyleVA = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
+		to_edgestyleVA.setCenterLabelStyleDescription(to_labelstyleVA);
+		to_edgestyleVA.setStrokeColor(featuresFixedColor);
+
+		to_virtualAttributeEdge.setStyle(to_edgestyleVA);
+
+		dd.getAllLayers().get(0).getEdgeMappings().add(to_virtualAttributeEdge);
+		
+// Tool section part 
+
+		// Tool section creation
+		ToolSection toolsec = ToolFactory.eINSTANCE.createToolSection();
+		toolsec.setName("Generated Tools section");
+
+		// Bind attributes edge
 		EdgeCreationDescription featureedgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
-		featureedgecreationdesc.setName("Bind attributes");
+		featureedgecreationdesc.setName("Bind Attributes");
 		featureedgecreationdesc.setLabel("Bind Attributes");
 		featureedgecreationdesc.getEdgeMappings().add(pointTo);
 		toolsec.getOwnedTools().add(featureedgecreationdesc);
-
-		InitEdgeCreationOperation init3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createInitEdgeCreationOperation();
-
 		ChangeContext changecontext3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createChangeContext();
-
+		InitEdgeCreationOperation init3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitEdgeCreationOperation();
 		init3.setFirstModelOperations(changecontext3);
 		SetValue setValue13 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
 		setValue13.setFeatureName("featureClass");
-		setValue13.setValueExpression("[target/]");
-
+		setValue13.setValueExpression("var:target");
 		changecontext3.getSubModelOperations().add(setValue13);
-
-		changecontext3.setBrowseExpression("[source/]");
+		changecontext3.setBrowseExpression("var:source");
 		featureedgecreationdesc.setInitialOperation(init3);
+		
+		
+		
+		
+		
+		//None node creation
+		NodeCreationDescription nonecreation = ToolFactory.eINSTANCE.createNodeCreationDescription();
+		nonecreation.setName("NONE");
+		nonecreation.setLabel("NONE");
+		nonecreation.getNodeMappings().add(nonemapping);
+		toolsec.getOwnedTools().add(nonecreation);
+		ChangeContext changecontextnone = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		changecontextnone.setBrowseExpression("var:container");
+		CreateInstance noneInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createCreateInstance();
+		noneInstance.setReferenceName("containsNoneElement");
+		noneInstance.setTypeName(ep.getName() + ".NoneElement");
+		noneInstance.setVariableName("instance");
+		changecontextnone.getSubModelOperations().add(noneInstance);
+		InitialNodeCreationOperation initnone = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitialNodeCreationOperation();
+		nonecreation.setInitialOperation(initnone);
+		initnone.setFirstModelOperations(changecontextnone);
+		nonecreation.setInitialOperation(initnone);
+		nonecreation.setIconPath("/com.workflow2.editor.design/trash.png");
 
-		EdgeCreationDescription edgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
-
-		NodeCreationDescription metamodelElementFeaturedesc = ToolFactory.eINSTANCE.createNodeCreationDescription();
+		//MetamodelELement feature Node
+		ContainerCreationDescription metamodelElementFeaturedesc = ToolFactory.eINSTANCE.createContainerCreationDescription();
 		metamodelElementFeaturedesc.setName("Feature");
 		metamodelElementFeaturedesc.setLabel("Feature");
-		metamodelElementFeaturedesc.getNodeMappings().add(nm);
-		metamodelElementFeaturedesc.setName(MetamodelElementFeature.getName());
-		toolsec.getOwnedTools().add(metamodelElementFeaturedesc);
-
-		ChangeContext changecontext11 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createChangeContext();
+		metamodelElementFeaturedesc.getContainerMappings().add(nm);	
+		toolsec.getOwnedTools().add(metamodelElementFeaturedesc);		
+		ChangeContext changecontext11 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createChangeContext();
 		changecontext11.setBrowseExpression("var:container");
-		CreateInstance nodeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createCreateInstance();
+		CreateInstance nodeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createCreateInstance();
 		nodeInstance.setReferenceName("metamodelElementFeature");
-		nodeInstance.setTypeName(ep.getName() + "::MetamodelElementFeature");
+		nodeInstance.setTypeName(ep.getName() + ".MetamodelElementFeature");
 		nodeInstance.setVariableName("instance");
 		changecontext11.getSubModelOperations().add(nodeInstance);
-		InitialNodeCreationOperation init22 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createInitialNodeCreationOperation();
-
+		InitialNodeCreationOperation init22 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createInitialNodeCreationOperation();
 		metamodelElementFeaturedesc.setInitialOperation(init22);
-
 		init22.setFirstModelOperations(changecontext11);
-
 		metamodelElementFeaturedesc.setInitialOperation(init22);
-
+		
+		
+		//The edge from metamodelEElemnt to BindingEelement: IntermediateElement
+		EdgeCreationDescription edgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
 		edgecreationdesc.setName("Bind Classes");
 		edgecreationdesc.getEdgeMappings().add(edgeintermediate);
 		toolsec.getOwnedTools().add(edgecreationdesc);
-
 		InitEdgeCreationOperation init = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createInitEdgeCreationOperation();
-
-		ChangeContext changecontext = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+		ChangeContext changecontextIntermediate = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createChangeContext();
 		CreateInstance edgeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createCreateInstance();
 		edgeInstance.setReferenceName("containsIntermediateElement");
-		edgeInstance.setTypeName(ep.getName() + "::IntemediateElement");
+		edgeInstance.setTypeName(ep.getName() + ".IntemediateElement");
 		edgeInstance.setVariableName("instance");
-		changecontext.getSubModelOperations().add(edgeInstance);
-		init.setFirstModelOperations(changecontext);
+		changecontextIntermediate.getSubModelOperations().add(edgeInstance);
+		init.setFirstModelOperations(changecontextIntermediate);
 		SetValue setValue1 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
-		setValue1.setFeatureName("metamodElelement");
-		setValue1.setValueExpression("[source/]");
-
+		setValue1.setFeatureName("metamodelElement");
+		setValue1.setValueExpression("var:source");
 		SetValue setValue2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
 		setValue2.setFeatureName("bindingElement");
-		setValue2.setValueExpression("[target/]");
+		setValue2.setValueExpression("var:target");
 		edgeInstance.getSubModelOperations().add(setValue1);
 		edgeInstance.getSubModelOperations().add(setValue2);
-		changecontext.setBrowseExpression("[source.eContainer()/]");
+		changecontextIntermediate.setBrowseExpression("[source.eContainer()/]");
 		edgecreationdesc.setInitialOperation(init);
 
+	
+		//The container of MetamodelElement
 		ContainerCreationDescription containerCreation = ToolFactory.eINSTANCE.createContainerCreationDescription();
 		containerCreation.setName("Class");
 		containerCreation.getContainerMappings().add(cm);
 		toolsec.getOwnedTools().add(containerCreation);
-
 		ChangeContext changecontext1 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createChangeContext();
 		changecontext1.setBrowseExpression("var:container");
 		CreateInstance containerInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createCreateInstance();
 		containerInstance.setReferenceName("containsMetamodelElement");
-		containerInstance.setTypeName(ep.getName() + "::MetamodelElement");
+		containerInstance.setTypeName(ep.getName() + ".MetamodelElement");
 		containerInstance.setVariableName("instance");
 		changecontext1.getSubModelOperations().add(containerInstance);
 		InitialNodeCreationOperation init2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
 				.createInitialNodeCreationOperation();
-
 		containerCreation.setInitialOperation(init2);
-
 		init2.setFirstModelOperations(changecontext1);
 		SetValue setValue3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
 		setValue3.setFeatureName("name");
 		setValue3.setValueExpression("aql:'Class name'");
-
 		containerInstance.getSubModelOperations().add(setValue3);
-
 		containerCreation.setInitialOperation(init2);
-
 		dd.getAllLayers().get(0).getToolSections().add(toolsec);
+        
+		for (NodeMapping nmapp : this.oroginalNodes) {
+			mapToNone.getSourceMapping().add(nmapp);
+
+		}
+
+		for (EdgeMapping edgemapp : this.oroginalEdges) {
+			mapToNone.getSourceMapping().add(edgemapp);
+		}
+
+		for (ContainerMapping nmapp : this.oroginalContainers) {
+			mapToNone.getSourceMapping().add(nmapp);
+		}
+		
+		
+
+		EdgeCreationDescription edgecreationdescNone = ToolFactory.eINSTANCE.createEdgeCreationDescription();
+
+		edgecreationdescNone.setName("Map To NONE");
+		edgecreationdescNone.getEdgeMappings().add(mapToNone);
+		toolsec.getOwnedTools().add(edgecreationdescNone);
+
+		InitEdgeCreationOperation initNone = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitEdgeCreationOperation();
+
+		ChangeContext changecontextNone = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		changecontextNone.setBrowseExpression("var:source");
+		initNone.setFirstModelOperations(changecontextNone);
+		SetValue setValueNone = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValueNone.setFeatureName("noneElement");
+		setValueNone.setValueExpression("var:target");
+		changecontextNone.getSubModelOperations().add(setValueNone);
+		
+		edgecreationdescNone.setInitialOperation(initNone);
+
+		
+		// Bind virtual attributes edge
+		EdgeCreationDescription to_virtualAttributeEdgeCreation = ToolFactory.eINSTANCE.createEdgeCreationDescription();
+		to_virtualAttributeEdgeCreation.setName("Map to virtual Attribute");
+		to_virtualAttributeEdgeCreation.setLabel("Map to virtual Attribute");
+		to_virtualAttributeEdgeCreation.getEdgeMappings().add(to_virtualAttributeEdge);
+		toolsec.getOwnedTools().add(to_virtualAttributeEdgeCreation);
+
+		// Operations of Bind attributes
+
+		// 1
+		ChangeContext changecontextVA = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		// 2
+		InitEdgeCreationOperation initVA = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitEdgeCreationOperation();
+		initVA.setFirstModelOperations(changecontextVA);
+
+//		// Set operation 1
+		SetValue setValue1VA = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValue1VA.setFeatureName("to_virtualAttribute");
+		setValue1VA.setValueExpression("var:target");
+
+//		CreateInstance virtualAttributeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+//				.createCreateInstance();
+//		virtualAttributeInstance.setReferenceName("virtualAttribute");
+//		virtualAttributeInstance.setTypeName(ep.getName() + ".VirtualAttribute");
+//		virtualAttributeInstance.setVariableName("instance");
+		changecontextVA.getSubModelOperations().add(setValue1VA);
+//		changecontextVA.getSubModelOperations().add(virtualAttributeInstance);
+		changecontextVA.setBrowseExpression("var:source");
+		to_virtualAttributeEdgeCreation.setInitialOperation(initVA);
 
 		try {
 			// jesusc: we should probably find a better name
@@ -622,210 +836,6 @@ public class OdesignGenerator {
 
 	public File getGeneratedFile() {
 		return generatedFile;
-	}
-
-	public void GenerateContainersVersion(EPackage ep, File file, HashMap<EClass, List<EClass>> newClassifiers,
-			EClass metamodelElement, EClass intermediateElement) throws FileNotFoundException, IOException {
-
-		List<NodeMapping> creatednmList = new ArrayList<NodeMapping>();
-		TreeIterator<EObject> content = this.resource.getAllContents();
-		DiagramDescription dd = null;
-		List<EdgeMapping> edgeList = new ArrayList<>();
-		List<NodeMapping> nodeList = new ArrayList<>();
-		NodeMapping nmd = DescriptionFactory.eINSTANCE.createNodeMapping();
-		while (content.hasNext()) {
-			EObject obj = content.next();
-			if (obj instanceof DiagramDescription) {
-				dd = (DiagramDescription) obj;
-				((DiagramDescription) obj).setDomainClass(ep.getName() + "::" + ((DiagramDescription) obj).getName());
-			}
-
-			if (obj instanceof EdgeMapping) {
-
-				edgeList.add((EdgeMapping) obj);
-				if (((EdgeMapping) obj).isUseDomainElement() && !((EdgeMapping) obj).getDomainClass().isEmpty()) {
-					((EdgeMapping) obj).setDomainClass(ep.getName() + "::" + ((EdgeMapping) obj).getName());
-				}
-			}
-			if (obj instanceof NodeMapping) {
-				if (!((NodeMapping) obj).getName().equals("") && !(creatednmList.contains((NodeMapping) obj))) {
-					nodeList.add((NodeMapping) obj);
-					ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
-					FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
-
-					cm.setStyle(csd);
-					System.out.println("");
-					cm.setLabel(((NodeMapping) obj).getLabel());
-					cm.setName(((NodeMapping) obj).getName());
-					cm.setDomainClass(ep.getName() + "::" + ((NodeMapping) obj).getName());
-					dd.getAllLayers().get(0).getContainerMappings().add(cm);
-
-					for (Entry<EClass, List<EClass>> entry : newClassifiers.entrySet()) {
-						if (entry.getKey().getName().equals(((NodeMapping) obj).getDomainClass()
-								.substring((((NodeMapping) obj).getDomainClass()).lastIndexOf(":") + 1))) {
-
-							for (EClass eclass : entry.getValue()) {
-
-								SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
-								nmd.setName(eclass.getName());
-								nmd.setLabel(eclass.getName());
-								nmd.setDomainClass(ep.getName() + "::" + eclass.getName());
-								sd.setLabelExpression(eclass.getName());
-								nmd.setStyle(sd);
-								cm.getBorderedNodeMappings().add(nmd);
-								creatednmList.add(nmd);
-
-							}
-
-						}
-
-					}
-
-					dd.getAllLayers().get(0).getNodeMappings().remove(obj);
-				}
-
-			}
-		}
-
-		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
-		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
-
-		cm.setStyle(csd);
-
-		cm.setLabel(metamodelElement.getName());
-		cm.setName(metamodelElement.getName());
-		cm.setDomainClass(ep.getName() + "::" + metamodelElement.getName());
-		dd.getAllLayers().get(0).getContainerMappings().add(cm);
-		NodeMapping nm = DescriptionFactory.eINSTANCE.createNodeMapping();
-		EList<EReference> listERef = metamodelElement.getEAllContainments();
-		for (EReference eref : listERef) {
-
-			nm.setDomainClass(ep.getName() + "" + eref.getEType().getName());
-			SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
-			sd.setLabelExpression(eref.getEType().getName());
-			cm.getBorderedNodeMappings().add(nm);
-
-		}
-
-		EdgeMapping edgeintermediate = DescriptionFactory.eINSTANCE.createEdgeMappingUsingDomainElement();
-		edgeintermediate.setName(intermediateElement.getName());
-		edgeintermediate.setDomainClass(ep.getName() + "::" + intermediateElement.getName());
-		edgeintermediate.setSourceFinderExpression("[self.metamodElelement/]");
-		edgeintermediate.setTargetFinderExpression("[self.bindingElement/]");
-		edgeintermediate.getSourceMapping().add(cm);
-		for (EdgeMapping edge : edgeList) {
-			edgeintermediate.getTargetMapping().add(edge);
-		}
-		for (NodeMapping node : nodeList) {
-			edgeintermediate.getTargetMapping().add(node);
-		}
-
-		edgeintermediate.setSemanticCandidatesExpression("feature:containsIntermediateElement");
-		dd.getAllLayers().get(0).getEdgeMappings().add(edgeintermediate);
-
-		EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
-		CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
-		edgestyle.setCenterLabelStyleDescription(labelstyle);
-		edgeintermediate.setStyle(edgestyle);
-
-		EdgeMapping pointTo = DescriptionFactory.eINSTANCE.createEdgeMapping();
-		pointTo.setName("pointTo");
-		pointTo.getSourceMapping().add(nm);
-		pointTo.getTargetMapping().add(nmd);
-		EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
-		CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
-		edgestyle1.setCenterLabelStyleDescription(labelstyle1);
-
-		pointTo.setStyle(edgestyle1);
-		dd.getAllLayers().get(0).getEdgeMappings().add(pointTo);
-
-		// Tool section part
-		ToolSection toolsec = ToolFactory.eINSTANCE.createToolSection();
-		toolsec.setName("Tools");
-
-		NodeCreationDescription metamodelElementFeatureDesc = ToolFactory.eINSTANCE.createNodeCreationDescription();
-		metamodelElementFeatureDesc.setName("MetamodelElementFeature");
-		metamodelElementFeatureDesc.getNodeMappings().add(nm);
-		toolsec.getOwnedTools().add(metamodelElementFeatureDesc);
-
-		ChangeContext changecontext11 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createChangeContext();
-		changecontext11.setBrowseExpression("var:container");
-		CreateInstance nodeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createCreateInstance();
-		nodeInstance.setReferenceName("metamodelElementFeature");
-		nodeInstance.setTypeName(ep.getName() + "::MetamodelElementFeature");
-		nodeInstance.setVariableName("instance");
-		changecontext11.getSubModelOperations().add(nodeInstance);
-		InitialNodeCreationOperation init22 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createInitialNodeCreationOperation();
-
-		metamodelElementFeatureDesc.setInitialOperation(init22);
-
-		init22.setFirstModelOperations(changecontext11);
-
-		metamodelElementFeatureDesc.setInitialOperation(init22);
-
-		EdgeCreationDescription edgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
-
-		edgecreationdesc.setName(intermediateElement.getName());
-		edgecreationdesc.getEdgeMappings().add(edgeintermediate);
-		toolsec.getOwnedTools().add(edgecreationdesc);
-
-		InitEdgeCreationOperation init = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createInitEdgeCreationOperation();
-
-		ChangeContext changecontext = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createChangeContext();
-		CreateInstance edgeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createCreateInstance();
-		edgeInstance.setReferenceName("containsIntermediatElement");
-		edgeInstance.setTypeName(ep.getName() + "::IntemediateElement");
-		edgeInstance.setVariableName("instance");
-		changecontext.getSubModelOperations().add(edgeInstance);
-		init.setFirstModelOperations(changecontext);
-		SetValue setValue1 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
-		setValue1.setFeatureName("metamodElelement");
-		setValue1.setValueExpression("[source/]");
-
-		SetValue setValue2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
-		setValue2.setFeatureName("bindingElement");
-		setValue2.setValueExpression("[target/]");
-		edgeInstance.getSubModelOperations().add(setValue1);
-		edgeInstance.getSubModelOperations().add(setValue2);
-		changecontext.setBrowseExpression("[source.eContainer()/]");
-		edgecreationdesc.setInitialOperation(init);
-
-		ContainerCreationDescription containerCreation = ToolFactory.eINSTANCE.createContainerCreationDescription();
-		containerCreation.setName(cm.getName());
-		containerCreation.getContainerMappings().add(cm);
-		toolsec.getOwnedTools().add(containerCreation);
-
-		ChangeContext changecontext1 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createChangeContext();
-		changecontext1.setBrowseExpression("var:container");
-		CreateInstance containerInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createCreateInstance();
-		containerInstance.setReferenceName("conatainsMetamodelElement");
-		containerInstance.setTypeName(ep.getName() + "::MetamodelElement");
-		containerInstance.setVariableName("instance");
-		changecontext1.getSubModelOperations().add(containerInstance);
-		InitialNodeCreationOperation init2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
-				.createInitialNodeCreationOperation();
-
-		containerCreation.setInitialOperation(init2);
-
-		init2.setFirstModelOperations(changecontext1);
-		SetValue setValue3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
-		setValue3.setFeatureName("name");
-		setValue3.setValueExpression("[name/]");
-
-		containerInstance.getSubModelOperations().add(setValue3);
-
-		containerCreation.setInitialOperation(init2);
-
-		dd.getAllLayers().get(0).getToolSections().add(toolsec);
-
 	}
 
 }

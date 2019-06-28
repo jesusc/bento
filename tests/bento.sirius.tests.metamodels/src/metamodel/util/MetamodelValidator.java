@@ -1,0 +1,557 @@
+/**
+ */
+package metamodel.util;
+
+import java.util.Map;
+
+import metamodel.BatchProcess;
+import metamodel.Component;
+import metamodel.ConveyorBelt;
+import metamodel.Distribution;
+import metamodel.Flow;
+import metamodel.Gaussian;
+import metamodel.MetamodelPackage;
+import metamodel.Model;
+import metamodel.OrderOnStockThreshold;
+import metamodel.OrderType;
+import metamodel.Output;
+import metamodel.OutputType;
+import metamodel.Poisson;
+import metamodel.Probability;
+import metamodel.ProcessOutputFlow;
+import metamodel.Query;
+import metamodel.QueryType;
+import metamodel.Scalar;
+import metamodel.Storage;
+import metamodel.StorageOutputFlow;
+import metamodel.Supplier;
+import metamodel.Uniform;
+
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.util.EObjectValidator;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Validator</b> for the model.
+ * <!-- end-user-doc -->
+ * @see metamodel.MetamodelPackage
+ * @generated
+ */
+public class MetamodelValidator extends EObjectValidator {
+	/**
+	 * The cached model package
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final MetamodelValidator INSTANCE = new MetamodelValidator();
+
+	/**
+	 * A constant for the {@link org.eclipse.emf.common.util.Diagnostic#getSource() source} of diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode() codes} from this package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.common.util.Diagnostic#getSource()
+	 * @see org.eclipse.emf.common.util.Diagnostic#getCode()
+	 * @generated
+	 */
+	public static final String DIAGNOSTIC_SOURCE = "metamodel";
+
+	/**
+	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 0;
+
+	/**
+	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
+
+	/**
+	 * Creates an instance of the switch.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetamodelValidator() {
+		super();
+	}
+
+	/**
+	 * Returns the package of this validator switch.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EPackage getEPackage() {
+	  return MetamodelPackage.eINSTANCE;
+	}
+
+	/**
+	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		switch (classifierID) {
+			case MetamodelPackage.MODEL:
+				return validateModel((Model)value, diagnostics, context);
+			case MetamodelPackage.QUERY:
+				return validateQuery((Query)value, diagnostics, context);
+			case MetamodelPackage.STORAGE:
+				return validateStorage((Storage)value, diagnostics, context);
+			case MetamodelPackage.SUPPLIER:
+				return validateSupplier((Supplier)value, diagnostics, context);
+			case MetamodelPackage.BATCH_PROCESS:
+				return validateBatchProcess((BatchProcess)value, diagnostics, context);
+			case MetamodelPackage.OUTPUT:
+				return validateOutput((Output)value, diagnostics, context);
+			case MetamodelPackage.STORAGE_OUTPUT_FLOW:
+				return validateStorageOutputFlow((StorageOutputFlow)value, diagnostics, context);
+			case MetamodelPackage.PROCESS_OUTPUT_FLOW:
+				return validateProcessOutputFlow((ProcessOutputFlow)value, diagnostics, context);
+			case MetamodelPackage.PROCESS:
+				return validateProcess((metamodel.Process)value, diagnostics, context);
+			case MetamodelPackage.ORDER_ON_STOCK_THRESHOLD:
+				return validateOrderOnStockThreshold((OrderOnStockThreshold)value, diagnostics, context);
+			case MetamodelPackage.COMPONENT:
+				return validateComponent((Component)value, diagnostics, context);
+			case MetamodelPackage.FLOW:
+				return validateFlow((Flow)value, diagnostics, context);
+			case MetamodelPackage.PROBABILITY:
+				return validateProbability((Probability)value, diagnostics, context);
+			case MetamodelPackage.DISTRIBUTION:
+				return validateDistribution((Distribution)value, diagnostics, context);
+			case MetamodelPackage.SCALAR:
+				return validateScalar((Scalar)value, diagnostics, context);
+			case MetamodelPackage.GAUSSIAN:
+				return validateGaussian((Gaussian)value, diagnostics, context);
+			case MetamodelPackage.POISSON:
+				return validatePoisson((Poisson)value, diagnostics, context);
+			case MetamodelPackage.UNIFORM:
+				return validateUniform((Uniform)value, diagnostics, context);
+			case MetamodelPackage.CONVEYOR_BELT:
+				return validateConveyorBelt((ConveyorBelt)value, diagnostics, context);
+			case MetamodelPackage.ORDER_TYPE:
+				return validateOrderType((OrderType)value, diagnostics, context);
+			case MetamodelPackage.OUTPUT_TYPE:
+				return validateOutputType((OutputType)value, diagnostics, context);
+			case MetamodelPackage.QUERY_TYPE:
+				return validateQueryType((QueryType)value, diagnostics, context);
+			case MetamodelPackage.PERCENT:
+				return validatePercent((Double)value, diagnostics, context);
+			case MetamodelPackage.POSITIVE_INT:
+				return validatePositiveInt((Integer)value, diagnostics, context);
+			case MetamodelPackage.POSITIVE_DOUBLE:
+				return validatePositiveDouble((Double)value, diagnostics, context);
+			case MetamodelPackage.POSITIVE_INT_NOT_NULL:
+				return validatePositiveIntNotNull((Integer)value, diagnostics, context);
+			case MetamodelPackage.POSITIVE_DOUBLE_NOT_NULL:
+				return validatePositiveDoubleNotNull((Double)value, diagnostics, context);
+			default:
+				return true;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateModel(Model model, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(model, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateQuery(Query query, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(query, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStorage(Storage storage, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(storage, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSupplier(Supplier supplier, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(supplier, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBatchProcess(BatchProcess batchProcess, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(batchProcess, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOutput(Output output, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(output, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStorageOutputFlow(StorageOutputFlow storageOutputFlow, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(storageOutputFlow, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProcessOutputFlow(ProcessOutputFlow processOutputFlow, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(processOutputFlow, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProcess(metamodel.Process process, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(process, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOrderOnStockThreshold(OrderOnStockThreshold orderOnStockThreshold, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(orderOnStockThreshold, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateComponent(Component component, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(component, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFlow(Flow flow, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(flow, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateProbability(Probability probability, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(probability, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDistribution(Distribution distribution, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(distribution, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateScalar(Scalar scalar, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(scalar, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateGaussian(Gaussian gaussian, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(gaussian, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePoisson(Poisson poisson, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(poisson, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUniform(Uniform uniform, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(uniform, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateConveyorBelt(ConveyorBelt conveyorBelt, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(conveyorBelt, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOrderType(OrderType orderType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOutputType(OutputType outputType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateQueryType(QueryType queryType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePercent(Double percent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validatePercent_Min(percent, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePercent_Max(percent, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @see #validatePercent_Min
+	 */
+	public static final Double PERCENT__MIN__VALUE = 0.0;
+
+	/**
+	 * Validates the Min constraint of '<em>Percent</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePercent_Min(Double percent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = percent.compareTo(PERCENT__MIN__VALUE) >= 0;
+		if (!result && diagnostics != null)
+			reportMinViolation(MetamodelPackage.Literals.PERCENT, percent, PERCENT__MIN__VALUE, true, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @see #validatePercent_Max
+	 */
+	public static final Double PERCENT__MAX__VALUE = 100.0;
+
+	/**
+	 * Validates the Max constraint of '<em>Percent</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePercent_Max(Double percent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = percent.compareTo(PERCENT__MAX__VALUE) <= 0;
+		if (!result && diagnostics != null)
+			reportMaxViolation(MetamodelPackage.Literals.PERCENT, percent, PERCENT__MAX__VALUE, true, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveInt(Integer positiveInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validatePositiveInt_Min(positiveInt, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @see #validatePositiveInt_Min
+	 */
+	public static final Integer POSITIVE_INT__MIN__VALUE = 0;
+
+	/**
+	 * Validates the Min constraint of '<em>Positive Int</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveInt_Min(Integer positiveInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = positiveInt.compareTo(POSITIVE_INT__MIN__VALUE) >= 0;
+		if (!result && diagnostics != null)
+			reportMinViolation(MetamodelPackage.Literals.POSITIVE_INT, positiveInt, POSITIVE_INT__MIN__VALUE, true, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveDouble(Double positiveDouble, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validatePositiveDouble_Min(positiveDouble, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @see #validatePositiveDouble_Min
+	 */
+	public static final Double POSITIVE_DOUBLE__MIN__VALUE = 0.0;
+
+	/**
+	 * Validates the Min constraint of '<em>Positive Double</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveDouble_Min(Double positiveDouble, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = positiveDouble.compareTo(POSITIVE_DOUBLE__MIN__VALUE) >= 0;
+		if (!result && diagnostics != null)
+			reportMinViolation(MetamodelPackage.Literals.POSITIVE_DOUBLE, positiveDouble, POSITIVE_DOUBLE__MIN__VALUE, true, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveIntNotNull(Integer positiveIntNotNull, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validatePositiveIntNotNull_Min(positiveIntNotNull, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @see #validatePositiveIntNotNull_Min
+	 */
+	public static final Integer POSITIVE_INT_NOT_NULL__MIN__VALUE = 1;
+
+	/**
+	 * Validates the Min constraint of '<em>Positive Int Not Null</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveIntNotNull_Min(Integer positiveIntNotNull, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = positiveIntNotNull.compareTo(POSITIVE_INT_NOT_NULL__MIN__VALUE) >= 0;
+		if (!result && diagnostics != null)
+			reportMinViolation(MetamodelPackage.Literals.POSITIVE_INT_NOT_NULL, positiveIntNotNull, POSITIVE_INT_NOT_NULL__MIN__VALUE, true, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveDoubleNotNull(Double positiveDoubleNotNull, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validatePositiveDoubleNotNull_Min(positiveDoubleNotNull, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @see #validatePositiveDoubleNotNull_Min
+	 */
+	public static final Double POSITIVE_DOUBLE_NOT_NULL__MIN__VALUE = 0.0;
+
+	/**
+	 * Validates the Min constraint of '<em>Positive Double Not Null</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePositiveDoubleNotNull_Min(Double positiveDoubleNotNull, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = positiveDoubleNotNull.compareTo(POSITIVE_DOUBLE_NOT_NULL__MIN__VALUE) > 0;
+		if (!result && diagnostics != null)
+			reportMinViolation(MetamodelPackage.Literals.POSITIVE_DOUBLE_NOT_NULL, positiveDoubleNotNull, POSITIVE_DOUBLE_NOT_NULL__MIN__VALUE, false, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		// TODO
+		// Specialize this to return a resource locator for messages specific to this validator.
+		// Ensure that you remove @generated or mark it @generated NOT
+		return super.getResourceLocator();
+	}
+
+} //MetamodelValidator

@@ -41,6 +41,7 @@ public class MetamodelGenerator extends ActionDelegate implements IActionDelegat
 
 	@SuppressWarnings("unchecked")
 	public void selectionChanged(IAction action, ISelection selection) {
+		
 		if (selection instanceof IStructuredSelection) {
 			files = ((IStructuredSelection) selection).toList();
 		}

@@ -1,0 +1,203 @@
+public void GenerateContainersVersion(EPackage ep, File file, HashMap<EClass, List<EClass>> newClassifiers,
+			EClass metamodelElement, EClass intermediateElement) throws FileNotFoundException, IOException {
+
+		List<NodeMapping> creatednmList = new ArrayList<NodeMapping>();
+		TreeIterator<EObject> content = this.resource.getAllContents();
+		DiagramDescription dd = null;
+		List<EdgeMapping> edgeList = new ArrayList<>();
+		List<NodeMapping> nodeList = new ArrayList<>();
+		NodeMapping nmd = DescriptionFactory.eINSTANCE.createNodeMapping();
+		while (content.hasNext()) {
+			EObject obj = content.next();
+			if (obj instanceof DiagramDescription) {
+				dd = (DiagramDescription) obj;
+				((DiagramDescription) obj).setDomainClass(ep.getName() + "::" + ((DiagramDescription) obj).getName());
+			}
+
+			if (obj instanceof EdgeMapping) {
+
+				edgeList.add((EdgeMapping) obj);
+				if (((EdgeMapping) obj).isUseDomainElement() && !((EdgeMapping) obj).getDomainClass().isEmpty()) {
+					((EdgeMapping) obj).setDomainClass(ep.getName() + "::" + ((EdgeMapping) obj).getName());
+				}
+			}
+			if (obj instanceof NodeMapping) {
+				if (!((NodeMapping) obj).getName().equals("") && !(creatednmList.contains((NodeMapping) obj))) {
+					nodeList.add((NodeMapping) obj);
+					ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
+					FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
+
+					cm.setStyle(csd);
+					System.out.println("");
+					cm.setLabel(((NodeMapping) obj).getLabel());
+					cm.setName(((NodeMapping) obj).getName());
+					cm.setDomainClass(ep.getName() + "::" + ((NodeMapping) obj).getName());
+					dd.getAllLayers().get(0).getContainerMappings().add(cm);
+
+					for (Entry<EClass, List<EClass>> entry : newClassifiers.entrySet()) {
+						if (entry.getKey().getName().equals(((NodeMapping) obj).getDomainClass()
+								.substring((((NodeMapping) obj).getDomainClass()).lastIndexOf(":") + 1))) {
+
+							for (EClass eclass : entry.getValue()) {
+
+								SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
+								nmd.setName(eclass.getName());
+								nmd.setLabel(eclass.getName());
+								nmd.setDomainClass(ep.getName() + "::" + eclass.getName());
+								sd.setLabelExpression(eclass.getName());
+								nmd.setStyle(sd);
+								cm.getBorderedNodeMappings().add(nmd);
+								creatednmList.add(nmd);
+
+							}
+
+						}
+
+					}
+
+					dd.getAllLayers().get(0).getNodeMappings().remove(obj);
+				}
+
+			}
+		}
+
+		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
+		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
+
+		cm.setStyle(csd);
+
+		cm.setLabel(metamodelElement.getName());
+		cm.setName(metamodelElement.getName());
+		cm.setDomainClass(ep.getName() + "::" + metamodelElement.getName());
+		dd.getAllLayers().get(0).getContainerMappings().add(cm);
+		NodeMapping nm = DescriptionFactory.eINSTANCE.createNodeMapping();
+		EList<EReference> listERef = metamodelElement.getEAllContainments();
+		for (EReference eref : listERef) {
+
+			nm.setDomainClass(ep.getName() + "" + eref.getEType().getName());
+			SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
+			sd.setLabelExpression(eref.getEType().getName());
+			cm.getBorderedNodeMappings().add(nm);
+
+		}
+
+		EdgeMapping edgeintermediate = DescriptionFactory.eINSTANCE.createEdgeMappingUsingDomainElement();
+		edgeintermediate.setName(intermediateElement.getName());
+		edgeintermediate.setDomainClass(ep.getName() + "::" + intermediateElement.getName());
+		edgeintermediate.setSourceFinderExpression("[self.metamodElelement/]");
+		edgeintermediate.setTargetFinderExpression("[self.bindingElement/]");
+		edgeintermediate.getSourceMapping().add(cm);
+		for (EdgeMapping edge : edgeList) {
+			edgeintermediate.getTargetMapping().add(edge);
+		}
+		for (NodeMapping node : nodeList) {
+			edgeintermediate.getTargetMapping().add(node);
+		}
+
+		edgeintermediate.setSemanticCandidatesExpression("feature:containsIntermediateElement");
+		dd.getAllLayers().get(0).getEdgeMappings().add(edgeintermediate);
+
+		EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+		CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
+		edgestyle.setCenterLabelStyleDescription(labelstyle);
+		edgeintermediate.setStyle(edgestyle);
+
+		EdgeMapping pointTo = DescriptionFactory.eINSTANCE.createEdgeMapping();
+		pointTo.setName("pointTo");
+		pointTo.getSourceMapping().add(nm);
+		pointTo.getTargetMapping().add(nmd);
+		EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+		CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
+		edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+
+		pointTo.setStyle(edgestyle1);
+		dd.getAllLayers().get(0).getEdgeMappings().add(pointTo);
+
+		// Tool section part
+		ToolSection toolsec = ToolFactory.eINSTANCE.createToolSection();
+		toolsec.setName("Tools");
+
+		NodeCreationDescription metamodelElementFeatureDesc = ToolFactory.eINSTANCE.createNodeCreationDescription();
+		metamodelElementFeatureDesc.setName("MetamodelElementFeature");
+		metamodelElementFeatureDesc.getNodeMappings().add(nm);
+		toolsec.getOwnedTools().add(metamodelElementFeatureDesc);
+
+		ChangeContext changecontext11 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		changecontext11.setBrowseExpression("var:container");
+		CreateInstance nodeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createCreateInstance();
+		nodeInstance.setReferenceName("metamodelElementFeature");
+		nodeInstance.setTypeName(ep.getName() + "::MetamodelElementFeature");
+		nodeInstance.setVariableName("instance");
+		changecontext11.getSubModelOperations().add(nodeInstance);
+		InitialNodeCreationOperation init22 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitialNodeCreationOperation();
+
+		metamodelElementFeatureDesc.setInitialOperation(init22);
+
+		init22.setFirstModelOperations(changecontext11);
+
+		metamodelElementFeatureDesc.setInitialOperation(init22);
+
+		EdgeCreationDescription edgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
+
+		edgecreationdesc.setName(intermediateElement.getName());
+		edgecreationdesc.getEdgeMappings().add(edgeintermediate);
+		toolsec.getOwnedTools().add(edgecreationdesc);
+
+		InitEdgeCreationOperation init = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitEdgeCreationOperation();
+
+		ChangeContext changecontext = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		CreateInstance edgeInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createCreateInstance();
+		edgeInstance.setReferenceName("containsIntermediatElement");
+		edgeInstance.setTypeName(ep.getName() + "::IntemediateElement");
+		edgeInstance.setVariableName("instance");
+		changecontext.getSubModelOperations().add(edgeInstance);
+		init.setFirstModelOperations(changecontext);
+		SetValue setValue1 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValue1.setFeatureName("metamodElelement");
+		setValue1.setValueExpression("[source/]");
+
+		SetValue setValue2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValue2.setFeatureName("bindingElement");
+		setValue2.setValueExpression("[target/]");
+		edgeInstance.getSubModelOperations().add(setValue1);
+		edgeInstance.getSubModelOperations().add(setValue2);
+		changecontext.setBrowseExpression("[source.eContainer()/]");
+		edgecreationdesc.setInitialOperation(init);
+
+		ContainerCreationDescription containerCreation = ToolFactory.eINSTANCE.createContainerCreationDescription();
+		containerCreation.setName(cm.getName());
+		containerCreation.getContainerMappings().add(cm);
+		toolsec.getOwnedTools().add(containerCreation);
+
+		ChangeContext changecontext1 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createChangeContext();
+		changecontext1.setBrowseExpression("var:container");
+		CreateInstance containerInstance = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createCreateInstance();
+		containerInstance.setReferenceName("conatainsMetamodelElement");
+		containerInstance.setTypeName(ep.getName() + "::MetamodelElement");
+		containerInstance.setVariableName("instance");
+		changecontext1.getSubModelOperations().add(containerInstance);
+		InitialNodeCreationOperation init2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE
+				.createInitialNodeCreationOperation();
+
+		containerCreation.setInitialOperation(init2);
+
+		init2.setFirstModelOperations(changecontext1);
+		SetValue setValue3 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValue3.setFeatureName("name");
+		setValue3.setValueExpression("[name/]");
+
+		containerInstance.getSubModelOperations().add(setValue3);
+
+		containerCreation.setInitialOperation(init2);
+
+		dd.getAllLayers().get(0).getToolSections().add(toolsec);
+
+	}

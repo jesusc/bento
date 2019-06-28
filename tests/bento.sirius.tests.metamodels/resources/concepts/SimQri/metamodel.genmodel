@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bento.sirius.tests.metamodels/src" modelPluginID="bento.sirius.tests.metamodels"
+    modelName="Metamodel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="10.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>metamodel.ecore</foreignModel>
+  <genPackages prefix="Metamodel" disposableProviderFactory="true" ecorePackage="metamodel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel.ecore#//OrderType">
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//OrderType/FIXED"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//OrderType/REFILL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel.ecore#//OutputType">
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//OutputType/SUCCESS"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//OutputType/FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//OutputType/LOWER_QUALITY"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//OutputType/TRASH"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel.ecore#//QueryType">
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//QueryType/DELAY"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//QueryType/QUANTITY"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//QueryType/QUALITY"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodel.ecore#//QueryType/UNDEFINED"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="metamodel.ecore#//Percent"/>
+    <genDataTypes ecoreDataType="metamodel.ecore#//PositiveInt"/>
+    <genDataTypes ecoreDataType="metamodel.ecore#//PositiveDouble"/>
+    <genDataTypes ecoreDataType="metamodel.ecore#//PositiveIntNotNull"/>
+    <genDataTypes ecoreDataType="metamodel.ecore#//PositiveDoubleNotNull"/>
+    <genClasses ecoreClass="metamodel.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Model/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Model/query"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Model/orderOnStockThreshold"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Model/component"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Model/flow"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Query">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Query/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Query/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Query/error"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Query/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Query/system"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Storage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Storage/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Storage/initialContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Storage/overflow"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Storage/storageOutputFlow"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Storage/orderOnStockThreshold"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Storage/processOutputFlow"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Supplier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Supplier/deliveredPercentage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Supplier/refillPolicy"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Supplier/supplierDelay"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//BatchProcess">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//BatchProcess/percentageOfSuccess"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//BatchProcess/numberOfChains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//BatchProcess/outputs"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Output">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Output/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Output/processOutputFlow"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Output/description"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//StorageOutputFlow">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//StorageOutputFlow/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//StorageOutputFlow/destination"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//ProcessOutputFlow">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//ProcessOutputFlow/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//ProcessOutputFlow/processOutputFlowDelay"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//ProcessOutputFlow/destination"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//Process">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//Process/storageOutputFlow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Process/duration"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//OrderOnStockThreshold">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//OrderOnStockThreshold/period"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//OrderOnStockThreshold/threshold"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//OrderOnStockThreshold/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//OrderOnStockThreshold/orderQuantity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//OrderOnStockThreshold/orderType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//OrderOnStockThreshold/supplier"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel.ecore#//OrderOnStockThreshold/storage"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//Component">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Component/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//Flow">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//Flow/quantity"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//Probability"/>
+    <genClasses image="false" ecoreClass="metamodel.ecore#//Distribution"/>
+    <genClasses ecoreClass="metamodel.ecore#//Scalar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Scalar/value"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Gaussian">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Gaussian/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Gaussian/scale"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Poisson">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Poisson/interval"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//Uniform">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Uniform/minimum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//Uniform/maximum"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel.ecore#//ConveyorBelt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel.ecore#//ConveyorBelt/minimalSeparationBetweenBatches"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel.ecore#//ConveyorBelt/output"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

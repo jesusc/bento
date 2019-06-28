@@ -39,7 +39,9 @@ public class TestGraphicalBindingGenerator {
                 t("resources/components/scenes/ScenesDSL.odesign", 
                 		"resources/components/scenes/ScenesDSL-model-1.scenes"),
                 t("resources/components/graph/graph-simple.odesign",    
-                		 "resources/components/graph/graph-model-1.xmi")
+                		 "resources/components/graph/graph-model-1.xmi"),
+                t("resources/components/[From -Sirius-Gallery]SimQRi/simqri.odesign",    
+               		 "resources/components/[From -Sirius-Gallery]SimQRi/simqri-model-1.xmi")
            });
     }
     
