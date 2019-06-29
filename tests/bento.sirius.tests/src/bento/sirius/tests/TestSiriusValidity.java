@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -46,6 +47,9 @@ public class TestSiriusValidity {
 	/*pp*/ static Resource assertOdesignValidity(File odesign) {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource r = rs.getResource(URI.createFileURI(odesign.getAbsolutePath()), true);
+		
+		// Seems to be needed for org.eclipse.sirius.diagram.business.internal.metamodel.description.tool.spec.DirectEditLabelSpec.getMapping(DirectEditLabelSpec.java:51)
+		r.eAdapters().add(new ECrossReferenceAdapter());
 		
 		for(EObject x : r.getContents()) {
 			Diagnostic d = Diagnostician.INSTANCE.validate(x);

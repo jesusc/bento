@@ -60,6 +60,11 @@ public class SiriusSpecificationModel {
 		if (palettes.size() != 1) 
 			throw new UnsupportedOperationException("Only one palette supported at the moment");
 		
+		Set<Class<?>> paletteElements = new HashSet<Class<?>>();
+		paletteElements.add(NodeCreationDescription.class);
+		paletteElements.add(ContainerCreationDescription.class);
+		paletteElements.add(EdgeCreationDescription.class);
+				
 		PaletteSpec spec = palettes.get(0);
 		List<ToolEntry> entries = new ArrayList<>();
 				
@@ -77,6 +82,11 @@ public class SiriusSpecificationModel {
 		
 		TOOLS:
 		for (ToolEntry entry : entries) {
+			if (! paletteElements.contains(entry.eClass().getInstanceClass())) {
+				nonMatchedTools.remove(entry);
+				continue;
+			}
+			
 			for(PaletteItem item : spec.getItems()) {
 				if (matches(entry, item)) {
 					nonMatchedItems.remove(item);

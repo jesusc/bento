@@ -46,8 +46,10 @@
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::Task" referenceName="nodes">
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="isInitial" valueExpression="aql:true"/>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::Task" referenceName="nodes">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="isInitial" valueExpression="aql:true"/>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -55,8 +57,14 @@
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::Task" referenceName="nodes">
-                <subModelOperations xsi:type="tool_1:SetValue" featureName="isInitial" valueExpression="aql:false"/>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                    <subModelOperations xsi:type="tool_1:CreateInstance" typeName="workflow::Task" referenceName="nodes">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="isInitial" valueExpression="aql:false"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
