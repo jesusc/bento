@@ -90,6 +90,7 @@ public class GaussianImpl extends DistributionImpl implements Gaussian {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public double getLocation() {
 		return location;
 	}
@@ -99,6 +100,7 @@ public class GaussianImpl extends DistributionImpl implements Gaussian {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocation(double newLocation) {
 		double oldLocation = location;
 		location = newLocation;
@@ -111,6 +113,7 @@ public class GaussianImpl extends DistributionImpl implements Gaussian {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getScale() {
 		return scale;
 	}
@@ -120,6 +123,7 @@ public class GaussianImpl extends DistributionImpl implements Gaussian {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setScale(Double newScale) {
 		Double oldScale = scale;
 		scale = newScale;

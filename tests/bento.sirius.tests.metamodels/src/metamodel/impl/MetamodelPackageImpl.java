@@ -291,6 +291,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 		EValidator.Registry.INSTANCE.put
 			(theMetamodelPackage,
 			 new EValidator.Descriptor() {
+				 @Override
 				 public EValidator getEValidator() {
 					 return MetamodelValidator.INSTANCE;
 				 }
@@ -309,6 +310,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getModel() {
 		return modelEClass;
 	}
@@ -318,6 +320,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getModel_Name() {
 		return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
 	}
@@ -327,6 +330,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModel_Query() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(1);
 	}
@@ -336,6 +340,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModel_OrderOnStockThreshold() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(2);
 	}
@@ -345,6 +350,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModel_Component() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(3);
 	}
@@ -354,6 +360,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModel_Flow() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(4);
 	}
@@ -363,6 +370,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getQuery() {
 		return queryEClass;
 	}
@@ -372,6 +380,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getQuery_Name() {
 		return (EAttribute)queryEClass.getEStructuralFeatures().get(0);
 	}
@@ -381,6 +390,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getQuery_Value() {
 		return (EAttribute)queryEClass.getEStructuralFeatures().get(1);
 	}
@@ -390,6 +400,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getQuery_Error() {
 		return (EAttribute)queryEClass.getEStructuralFeatures().get(2);
 	}
@@ -399,6 +410,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getQuery_Type() {
 		return (EAttribute)queryEClass.getEStructuralFeatures().get(3);
 	}
@@ -408,6 +420,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getQuery_System() {
 		return (EAttribute)queryEClass.getEStructuralFeatures().get(4);
 	}
@@ -417,6 +430,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStorage() {
 		return storageEClass;
 	}
@@ -426,6 +440,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStorage_Size() {
 		return (EAttribute)storageEClass.getEStructuralFeatures().get(0);
 	}
@@ -435,6 +450,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStorage_InitialContent() {
 		return (EAttribute)storageEClass.getEStructuralFeatures().get(1);
 	}
@@ -444,6 +460,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStorage_Overflow() {
 		return (EAttribute)storageEClass.getEStructuralFeatures().get(2);
 	}
@@ -453,6 +470,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStorage_StorageOutputFlow() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(3);
 	}
@@ -462,6 +480,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStorage_OrderOnStockThreshold() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(4);
 	}
@@ -471,6 +490,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStorage_ProcessOutputFlow() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(5);
 	}
@@ -480,6 +500,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSupplier() {
 		return supplierEClass;
 	}
@@ -489,6 +510,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSupplier_DeliveredPercentage() {
 		return (EAttribute)supplierEClass.getEStructuralFeatures().get(0);
 	}
@@ -498,6 +520,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSupplier_RefillPolicy() {
 		return (EReference)supplierEClass.getEStructuralFeatures().get(1);
 	}
@@ -507,6 +530,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSupplier_SupplierDelay() {
 		return (EReference)supplierEClass.getEStructuralFeatures().get(2);
 	}
@@ -516,6 +540,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBatchProcess() {
 		return batchProcessEClass;
 	}
@@ -525,6 +550,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBatchProcess_PercentageOfSuccess() {
 		return (EAttribute)batchProcessEClass.getEStructuralFeatures().get(0);
 	}
@@ -534,6 +560,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBatchProcess_NumberOfChains() {
 		return (EAttribute)batchProcessEClass.getEStructuralFeatures().get(1);
 	}
@@ -543,6 +570,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBatchProcess_Outputs() {
 		return (EReference)batchProcessEClass.getEStructuralFeatures().get(2);
 	}
@@ -552,6 +580,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOutput() {
 		return outputEClass;
 	}
@@ -561,6 +590,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOutput_Type() {
 		return (EAttribute)outputEClass.getEStructuralFeatures().get(0);
 	}
@@ -570,6 +600,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOutput_ProcessOutputFlow() {
 		return (EReference)outputEClass.getEStructuralFeatures().get(1);
 	}
@@ -579,6 +610,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOutput_Description() {
 		return (EAttribute)outputEClass.getEStructuralFeatures().get(2);
 	}
@@ -588,6 +620,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStorageOutputFlow() {
 		return storageOutputFlowEClass;
 	}
@@ -597,6 +630,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStorageOutputFlow_Source() {
 		return (EReference)storageOutputFlowEClass.getEStructuralFeatures().get(0);
 	}
@@ -606,6 +640,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStorageOutputFlow_Destination() {
 		return (EReference)storageOutputFlowEClass.getEStructuralFeatures().get(1);
 	}
@@ -615,6 +650,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProcessOutputFlow() {
 		return processOutputFlowEClass;
 	}
@@ -624,6 +660,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcessOutputFlow_Source() {
 		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(0);
 	}
@@ -633,6 +670,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcessOutputFlow_ProcessOutputFlowDelay() {
 		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(1);
 	}
@@ -642,6 +680,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcessOutputFlow_Destination() {
 		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(2);
 	}
@@ -651,6 +690,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProcess() {
 		return processEClass;
 	}
@@ -660,6 +700,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcess_StorageOutputFlow() {
 		return (EReference)processEClass.getEStructuralFeatures().get(0);
 	}
@@ -669,6 +710,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcess_Duration() {
 		return (EReference)processEClass.getEStructuralFeatures().get(1);
 	}
@@ -678,6 +720,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOrderOnStockThreshold() {
 		return orderOnStockThresholdEClass;
 	}
@@ -687,6 +730,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrderOnStockThreshold_Period() {
 		return (EAttribute)orderOnStockThresholdEClass.getEStructuralFeatures().get(0);
 	}
@@ -696,6 +740,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrderOnStockThreshold_Threshold() {
 		return (EAttribute)orderOnStockThresholdEClass.getEStructuralFeatures().get(1);
 	}
@@ -705,6 +750,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrderOnStockThreshold_Name() {
 		return (EAttribute)orderOnStockThresholdEClass.getEStructuralFeatures().get(2);
 	}
@@ -714,6 +760,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrderOnStockThreshold_OrderQuantity() {
 		return (EAttribute)orderOnStockThresholdEClass.getEStructuralFeatures().get(3);
 	}
@@ -723,6 +770,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getOrderOnStockThreshold_OrderType() {
 		return (EAttribute)orderOnStockThresholdEClass.getEStructuralFeatures().get(4);
 	}
@@ -732,6 +780,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOrderOnStockThreshold_Supplier() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(5);
 	}
@@ -741,6 +790,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOrderOnStockThreshold_Storage() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(6);
 	}
@@ -750,6 +800,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComponent() {
 		return componentEClass;
 	}
@@ -759,6 +810,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getComponent_Name() {
 		return (EAttribute)componentEClass.getEStructuralFeatures().get(0);
 	}
@@ -768,6 +820,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFlow() {
 		return flowEClass;
 	}
@@ -777,6 +830,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFlow_Quantity() {
 		return (EReference)flowEClass.getEStructuralFeatures().get(0);
 	}
@@ -786,6 +840,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProbability() {
 		return probabilityEClass;
 	}
@@ -795,6 +850,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDistribution() {
 		return distributionEClass;
 	}
@@ -804,6 +860,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getScalar() {
 		return scalarEClass;
 	}
@@ -813,6 +870,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getScalar_Value() {
 		return (EAttribute)scalarEClass.getEStructuralFeatures().get(0);
 	}
@@ -822,6 +880,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGaussian() {
 		return gaussianEClass;
 	}
@@ -831,6 +890,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGaussian_Location() {
 		return (EAttribute)gaussianEClass.getEStructuralFeatures().get(0);
 	}
@@ -840,6 +900,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getGaussian_Scale() {
 		return (EAttribute)gaussianEClass.getEStructuralFeatures().get(1);
 	}
@@ -849,6 +910,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPoisson() {
 		return poissonEClass;
 	}
@@ -858,6 +920,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPoisson_Interval() {
 		return (EAttribute)poissonEClass.getEStructuralFeatures().get(0);
 	}
@@ -867,6 +930,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUniform() {
 		return uniformEClass;
 	}
@@ -876,6 +940,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUniform_Minimum() {
 		return (EAttribute)uniformEClass.getEStructuralFeatures().get(0);
 	}
@@ -885,6 +950,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUniform_Maximum() {
 		return (EAttribute)uniformEClass.getEStructuralFeatures().get(1);
 	}
@@ -894,6 +960,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConveyorBelt() {
 		return conveyorBeltEClass;
 	}
@@ -903,6 +970,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getConveyorBelt_MinimalSeparationBetweenBatches() {
 		return (EAttribute)conveyorBeltEClass.getEStructuralFeatures().get(0);
 	}
@@ -912,6 +980,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConveyorBelt_Output() {
 		return (EReference)conveyorBeltEClass.getEStructuralFeatures().get(1);
 	}
@@ -921,6 +990,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getOrderType() {
 		return orderTypeEEnum;
 	}
@@ -930,6 +1000,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getOutputType() {
 		return outputTypeEEnum;
 	}
@@ -939,6 +1010,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getQueryType() {
 		return queryTypeEEnum;
 	}
@@ -948,6 +1020,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPercent() {
 		return percentEDataType;
 	}
@@ -957,6 +1030,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPositiveInt() {
 		return positiveIntEDataType;
 	}
@@ -966,6 +1040,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPositiveDouble() {
 		return positiveDoubleEDataType;
 	}
@@ -975,6 +1050,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPositiveIntNotNull() {
 		return positiveIntNotNullEDataType;
 	}
@@ -984,6 +1060,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getPositiveDoubleNotNull() {
 		return positiveDoubleNotNullEDataType;
 	}
@@ -993,6 +1070,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MetamodelFactory getMetamodelFactory() {
 		return (MetamodelFactory)getEFactoryInstance();
 	}

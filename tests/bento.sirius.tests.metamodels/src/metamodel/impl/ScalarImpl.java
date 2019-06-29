@@ -69,6 +69,7 @@ public class ScalarImpl extends ProbabilityImpl implements Scalar {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getValue() {
 		return value;
 	}
@@ -78,6 +79,7 @@ public class ScalarImpl extends ProbabilityImpl implements Scalar {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Double newValue) {
 		Double oldValue = value;
 		value = newValue;

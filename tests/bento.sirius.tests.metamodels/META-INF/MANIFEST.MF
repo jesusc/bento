@@ -31,7 +31,10 @@ Export-Package: bento.sirius.tests.boxes,
  bento.sirius.tests.metamodels.stepeasy.util,
  bento.sirius.tests.uiflow,
  bento.sirius.tests.uiflow.impl,
- bento.sirius.tests.uiflow.util
+ bento.sirius.tests.uiflow.util,
+ metamodel,
+ metamodel.impl,
+ metamodel.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

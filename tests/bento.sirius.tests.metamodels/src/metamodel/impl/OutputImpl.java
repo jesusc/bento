@@ -113,6 +113,7 @@ public class OutputImpl extends MinimalEObjectImpl.Container implements Output {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OutputType getType() {
 		return type;
 	}
@@ -122,6 +123,7 @@ public class OutputImpl extends MinimalEObjectImpl.Container implements Output {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(OutputType newType) {
 		OutputType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
@@ -134,6 +136,7 @@ public class OutputImpl extends MinimalEObjectImpl.Container implements Output {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ProcessOutputFlow> getProcessOutputFlow() {
 		if (processOutputFlow == null) {
 			processOutputFlow = new EObjectWithInverseResolvingEList<ProcessOutputFlow>(ProcessOutputFlow.class, this, MetamodelPackage.OUTPUT__PROCESS_OUTPUT_FLOW, MetamodelPackage.PROCESS_OUTPUT_FLOW__SOURCE);
@@ -146,6 +149,7 @@ public class OutputImpl extends MinimalEObjectImpl.Container implements Output {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -155,6 +159,7 @@ public class OutputImpl extends MinimalEObjectImpl.Container implements Output {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;

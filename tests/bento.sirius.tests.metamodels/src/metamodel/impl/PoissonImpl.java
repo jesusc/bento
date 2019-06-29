@@ -69,6 +69,7 @@ public class PoissonImpl extends DistributionImpl implements Poisson {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getInterval() {
 		return interval;
 	}
@@ -78,6 +79,7 @@ public class PoissonImpl extends DistributionImpl implements Poisson {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInterval(Double newInterval) {
 		Double oldInterval = interval;
 		interval = newInterval;

@@ -102,6 +102,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getDeliveredPercentage() {
 		return deliveredPercentage;
 	}
@@ -111,6 +112,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeliveredPercentage(Double newDeliveredPercentage) {
 		Double oldDeliveredPercentage = deliveredPercentage;
 		deliveredPercentage = newDeliveredPercentage;
@@ -123,6 +125,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OrderOnStockThreshold> getRefillPolicy() {
 		if (refillPolicy == null) {
 			refillPolicy = new EObjectWithInverseResolvingEList<OrderOnStockThreshold>(OrderOnStockThreshold.class, this, MetamodelPackage.SUPPLIER__REFILL_POLICY, MetamodelPackage.ORDER_ON_STOCK_THRESHOLD__SUPPLIER);
@@ -135,6 +138,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Probability getSupplierDelay() {
 		return supplierDelay;
 	}
@@ -159,6 +163,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSupplierDelay(Probability newSupplierDelay) {
 		if (newSupplierDelay != supplierDelay) {
 			NotificationChain msgs = null;

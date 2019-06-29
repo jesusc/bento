@@ -181,6 +181,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getPeriod() {
 		return period;
 	}
@@ -190,6 +191,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPeriod(Double newPeriod) {
 		Double oldPeriod = period;
 		period = newPeriod;
@@ -202,6 +204,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getThreshold() {
 		return threshold;
 	}
@@ -211,6 +214,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThreshold(Integer newThreshold) {
 		Integer oldThreshold = threshold;
 		threshold = newThreshold;
@@ -223,6 +227,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -232,6 +237,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -244,6 +250,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getOrderQuantity() {
 		return orderQuantity;
 	}
@@ -253,6 +260,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOrderQuantity(Integer newOrderQuantity) {
 		Integer oldOrderQuantity = orderQuantity;
 		orderQuantity = newOrderQuantity;
@@ -265,6 +273,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OrderType getOrderType() {
 		return orderType;
 	}
@@ -274,6 +283,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOrderType(OrderType newOrderType) {
 		OrderType oldOrderType = orderType;
 		orderType = newOrderType == null ? ORDER_TYPE_EDEFAULT : newOrderType;
@@ -286,6 +296,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Supplier getSupplier() {
 		if (supplier != null && supplier.eIsProxy()) {
 			InternalEObject oldSupplier = (InternalEObject)supplier;
@@ -327,6 +338,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSupplier(Supplier newSupplier) {
 		if (newSupplier != supplier) {
 			NotificationChain msgs = null;
@@ -346,6 +358,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Storage getStorage() {
 		if (storage != null && storage.eIsProxy()) {
 			InternalEObject oldStorage = (InternalEObject)storage;
@@ -387,6 +400,7 @@ public class OrderOnStockThresholdImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStorage(Storage newStorage) {
 		if (newStorage != storage) {
 			NotificationChain msgs = null;

@@ -156,6 +156,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getSize() {
 		return size;
 	}
@@ -165,6 +166,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSize(Integer newSize) {
 		Integer oldSize = size;
 		size = newSize;
@@ -177,6 +179,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getInitialContent() {
 		return initialContent;
 	}
@@ -186,6 +189,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitialContent(Integer newInitialContent) {
 		Integer oldInitialContent = initialContent;
 		initialContent = newInitialContent;
@@ -198,6 +202,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isOverflow() {
 		return overflow;
 	}
@@ -207,6 +212,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOverflow(boolean newOverflow) {
 		boolean oldOverflow = overflow;
 		overflow = newOverflow;
@@ -219,6 +225,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<StorageOutputFlow> getStorageOutputFlow() {
 		if (storageOutputFlow == null) {
 			storageOutputFlow = new EObjectWithInverseResolvingEList<StorageOutputFlow>(StorageOutputFlow.class, this, MetamodelPackage.STORAGE__STORAGE_OUTPUT_FLOW, MetamodelPackage.STORAGE_OUTPUT_FLOW__SOURCE);
@@ -231,6 +238,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OrderOnStockThreshold> getOrderOnStockThreshold() {
 		if (orderOnStockThreshold == null) {
 			orderOnStockThreshold = new EObjectWithInverseResolvingEList<OrderOnStockThreshold>(OrderOnStockThreshold.class, this, MetamodelPackage.STORAGE__ORDER_ON_STOCK_THRESHOLD, MetamodelPackage.ORDER_ON_STOCK_THRESHOLD__STORAGE);
@@ -243,6 +251,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ProcessOutputFlow> getProcessOutputFlow() {
 		if (processOutputFlow == null) {
 			processOutputFlow = new EObjectWithInverseResolvingEList<ProcessOutputFlow>(ProcessOutputFlow.class, this, MetamodelPackage.STORAGE__PROCESS_OUTPUT_FLOW, MetamodelPackage.PROCESS_OUTPUT_FLOW__DESTINATION);

@@ -159,6 +159,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Model createModel() {
 		ModelImpl model = new ModelImpl();
 		return model;
@@ -169,6 +170,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Query createQuery() {
 		QueryImpl query = new QueryImpl();
 		return query;
@@ -179,6 +181,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Storage createStorage() {
 		StorageImpl storage = new StorageImpl();
 		return storage;
@@ -189,6 +192,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Supplier createSupplier() {
 		SupplierImpl supplier = new SupplierImpl();
 		return supplier;
@@ -199,6 +203,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BatchProcess createBatchProcess() {
 		BatchProcessImpl batchProcess = new BatchProcessImpl();
 		return batchProcess;
@@ -209,6 +214,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Output createOutput() {
 		OutputImpl output = new OutputImpl();
 		return output;
@@ -219,6 +225,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StorageOutputFlow createStorageOutputFlow() {
 		StorageOutputFlowImpl storageOutputFlow = new StorageOutputFlowImpl();
 		return storageOutputFlow;
@@ -229,6 +236,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProcessOutputFlow createProcessOutputFlow() {
 		ProcessOutputFlowImpl processOutputFlow = new ProcessOutputFlowImpl();
 		return processOutputFlow;
@@ -239,6 +247,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OrderOnStockThreshold createOrderOnStockThreshold() {
 		OrderOnStockThresholdImpl orderOnStockThreshold = new OrderOnStockThresholdImpl();
 		return orderOnStockThreshold;
@@ -249,6 +258,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Scalar createScalar() {
 		ScalarImpl scalar = new ScalarImpl();
 		return scalar;
@@ -259,6 +269,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Gaussian createGaussian() {
 		GaussianImpl gaussian = new GaussianImpl();
 		return gaussian;
@@ -269,6 +280,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Poisson createPoisson() {
 		PoissonImpl poisson = new PoissonImpl();
 		return poisson;
@@ -279,6 +291,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Uniform createUniform() {
 		UniformImpl uniform = new UniformImpl();
 		return uniform;
@@ -289,6 +302,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConveyorBelt createConveyorBelt() {
 		ConveyorBeltImpl conveyorBelt = new ConveyorBeltImpl();
 		return conveyorBelt;
@@ -449,6 +463,7 @@ public class MetamodelFactoryImpl extends EFactoryImpl implements MetamodelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MetamodelPackage getMetamodelPackage() {
 		return (MetamodelPackage)getEPackage();
 	}

@@ -86,6 +86,7 @@ public class ProcessOutputFlowImpl extends FlowImpl implements ProcessOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Output getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -127,6 +128,7 @@ public class ProcessOutputFlowImpl extends FlowImpl implements ProcessOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(Output newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
@@ -146,6 +148,7 @@ public class ProcessOutputFlowImpl extends FlowImpl implements ProcessOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Probability getProcessOutputFlowDelay() {
 		return processOutputFlowDelay;
 	}
@@ -170,6 +173,7 @@ public class ProcessOutputFlowImpl extends FlowImpl implements ProcessOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProcessOutputFlowDelay(Probability newProcessOutputFlowDelay) {
 		if (newProcessOutputFlowDelay != processOutputFlowDelay) {
 			NotificationChain msgs = null;
@@ -189,6 +193,7 @@ public class ProcessOutputFlowImpl extends FlowImpl implements ProcessOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Storage getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
@@ -230,6 +235,7 @@ public class ProcessOutputFlowImpl extends FlowImpl implements ProcessOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDestination(Storage newDestination) {
 		if (newDestination != destination) {
 			NotificationChain msgs = null;

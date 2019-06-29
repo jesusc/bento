@@ -73,6 +73,7 @@ public class StorageOutputFlowImpl extends FlowImpl implements StorageOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Storage getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
@@ -114,6 +115,7 @@ public class StorageOutputFlowImpl extends FlowImpl implements StorageOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(Storage newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
@@ -133,6 +135,7 @@ public class StorageOutputFlowImpl extends FlowImpl implements StorageOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public metamodel.Process getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
@@ -174,6 +177,7 @@ public class StorageOutputFlowImpl extends FlowImpl implements StorageOutputFlow
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDestination(metamodel.Process newDestination) {
 		if (newDestination != destination) {
 			NotificationChain msgs = null;

@@ -70,4 +70,12 @@
             genModel="resources/metamodels/uiflow/uiflow.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated metamodel -->
+      <package
+            uri="http://www.example.org/metamodel"
+            class="metamodel.MetamodelPackage"
+            genModel="resources/concepts/SimQri/metamodel.genmodel"/>
+   </extension>
+
 </plugin>

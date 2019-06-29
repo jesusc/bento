@@ -127,6 +127,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -136,6 +137,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -148,6 +150,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Query> getQuery() {
 		if (query == null) {
 			query = new EObjectContainmentEList<Query>(Query.class, this, MetamodelPackage.MODEL__QUERY);
@@ -160,6 +163,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OrderOnStockThreshold> getOrderOnStockThreshold() {
 		if (orderOnStockThreshold == null) {
 			orderOnStockThreshold = new EObjectContainmentEList<OrderOnStockThreshold>(OrderOnStockThreshold.class, this, MetamodelPackage.MODEL__ORDER_ON_STOCK_THRESHOLD);
@@ -172,6 +176,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Component> getComponent() {
 		if (component == null) {
 			component = new EObjectContainmentEList<Component>(Component.class, this, MetamodelPackage.MODEL__COMPONENT);
@@ -184,6 +189,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Flow> getFlow() {
 		if (flow == null) {
 			flow = new EObjectContainmentEList<Flow>(Flow.class, this, MetamodelPackage.MODEL__FLOW);

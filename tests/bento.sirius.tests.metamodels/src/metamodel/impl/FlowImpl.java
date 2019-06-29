@@ -63,6 +63,7 @@ public abstract class FlowImpl extends MinimalEObjectImpl.Container implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Probability getQuantity() {
 		return quantity;
 	}
@@ -87,6 +88,7 @@ public abstract class FlowImpl extends MinimalEObjectImpl.Container implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setQuantity(Probability newQuantity) {
 		if (newQuantity != quantity) {
 			NotificationChain msgs = null;

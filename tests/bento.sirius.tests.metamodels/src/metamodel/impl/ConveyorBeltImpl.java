@@ -83,6 +83,7 @@ public class ConveyorBeltImpl extends ProcessImpl implements ConveyorBelt {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getMinimalSeparationBetweenBatches() {
 		return minimalSeparationBetweenBatches;
 	}
@@ -92,6 +93,7 @@ public class ConveyorBeltImpl extends ProcessImpl implements ConveyorBelt {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinimalSeparationBetweenBatches(Double newMinimalSeparationBetweenBatches) {
 		Double oldMinimalSeparationBetweenBatches = minimalSeparationBetweenBatches;
 		minimalSeparationBetweenBatches = newMinimalSeparationBetweenBatches;
@@ -104,6 +106,7 @@ public class ConveyorBeltImpl extends ProcessImpl implements ConveyorBelt {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Output getOutput() {
 		return output;
 	}
@@ -128,6 +131,7 @@ public class ConveyorBeltImpl extends ProcessImpl implements ConveyorBelt {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOutput(Output newOutput) {
 		if (newOutput != output) {
 			NotificationChain msgs = null;

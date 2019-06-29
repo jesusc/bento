@@ -90,6 +90,7 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public double getMinimum() {
 		return minimum;
 	}
@@ -99,6 +100,7 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinimum(double newMinimum) {
 		double oldMinimum = minimum;
 		minimum = newMinimum;
@@ -111,6 +113,7 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public double getMaximum() {
 		return maximum;
 	}
@@ -120,6 +123,7 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMaximum(double newMaximum) {
 		double oldMaximum = maximum;
 		maximum = newMaximum;

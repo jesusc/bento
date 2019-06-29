@@ -111,6 +111,7 @@ public class BatchProcessImpl extends ProcessImpl implements BatchProcess {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Double getPercentageOfSuccess() {
 		return percentageOfSuccess;
 	}
@@ -120,6 +121,7 @@ public class BatchProcessImpl extends ProcessImpl implements BatchProcess {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPercentageOfSuccess(Double newPercentageOfSuccess) {
 		Double oldPercentageOfSuccess = percentageOfSuccess;
 		percentageOfSuccess = newPercentageOfSuccess;
@@ -132,6 +134,7 @@ public class BatchProcessImpl extends ProcessImpl implements BatchProcess {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getNumberOfChains() {
 		return numberOfChains;
 	}
@@ -141,6 +144,7 @@ public class BatchProcessImpl extends ProcessImpl implements BatchProcess {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNumberOfChains(Integer newNumberOfChains) {
 		Integer oldNumberOfChains = numberOfChains;
 		numberOfChains = newNumberOfChains;
@@ -153,6 +157,7 @@ public class BatchProcessImpl extends ProcessImpl implements BatchProcess {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Output> getOutputs() {
 		if (outputs == null) {
 			outputs = new EObjectContainmentEList<Output>(Output.class, this, MetamodelPackage.BATCH_PROCESS__OUTPUTS);

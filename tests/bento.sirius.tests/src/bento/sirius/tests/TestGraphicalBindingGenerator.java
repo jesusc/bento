@@ -67,6 +67,11 @@ public class TestGraphicalBindingGenerator {
 		public String[] getModels() {
 			return models;
 		}
+		
+		@Override
+		public String toString() {
+			return odesign;
+		}
 	}
 	
 	private File odesign;

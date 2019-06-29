@@ -80,6 +80,7 @@ public abstract class ProcessImpl extends ComponentImpl implements metamodel.Pro
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<StorageOutputFlow> getStorageOutputFlow() {
 		if (storageOutputFlow == null) {
 			storageOutputFlow = new EObjectWithInverseResolvingEList<StorageOutputFlow>(StorageOutputFlow.class, this, MetamodelPackage.PROCESS__STORAGE_OUTPUT_FLOW, MetamodelPackage.STORAGE_OUTPUT_FLOW__DESTINATION);
@@ -92,6 +93,7 @@ public abstract class ProcessImpl extends ComponentImpl implements metamodel.Pro
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Probability getDuration() {
 		return duration;
 	}
@@ -116,6 +118,7 @@ public abstract class ProcessImpl extends ComponentImpl implements metamodel.Pro
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDuration(Probability newDuration) {
 		if (newDuration != duration) {
 			NotificationChain msgs = null;
