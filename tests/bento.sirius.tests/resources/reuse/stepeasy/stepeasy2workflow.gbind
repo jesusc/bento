@@ -25,3 +25,4 @@ binding stepeasy2workflow {
 	feature FlowEdge."out" is "target"
 	
 }
+

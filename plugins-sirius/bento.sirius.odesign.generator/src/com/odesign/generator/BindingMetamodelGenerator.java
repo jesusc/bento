@@ -9,25 +9,23 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.print.attribute.standard.Copies;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+
+import com.odesign.generator.tools.BindingTools;
+import com.odesign.generator.values.Datatypes;
 
 public class BindingMetamodelGenerator {
-
+	
+	private EClass virtualAttribute;
+	private EClass noneElement;
 	private EPackage ep;
 	private EClass FeatureCLass;
 	private EClass root;
@@ -117,6 +115,9 @@ public class BindingMetamodelGenerator {
 	}
 
 	public void createFeatureCLasses() {
+		if (this.root==null) {
+			this.root=(EClass) this.ep.getEClassifiers().get(0);
+		}
 		for (EClassifier eclassifier : this.ep.getEClassifiers()) {
 			if ((eclassifier instanceof EClass) && !((EClass) eclassifier).getName().isEmpty()
 					&& !((EClass) eclassifier).isAbstract()
@@ -131,31 +132,17 @@ public class BindingMetamodelGenerator {
 				List<EClass> listFeatures = new ArrayList<EClass>();
 				listFeatures.clear();
 				EList<EAttribute> attributesList = (eklass).getEAllAttributes();
-				int i = 0;
+
 				for (EAttribute eattribute : attributesList) {
 
-					EClass klass = EcoreFactory.eINSTANCE.createEClass();
+					EClass klass = BindingTools.createEClass(eattribute.getName() + (eklass).getName(), false, this.ep,
+							eklass);
 
-					klass.setName(eattribute.getName() + (eklass).getName());// WordUtils.capitalize(eattribute.getName())
-					this.ep.getEClassifiers().add(klass);
 					this.newEClass.add(klass);
 
 					listFeatures.add(klass);
 
-
-					EReference containement = EcoreFactory.eINSTANCE.createEReference();
-					containement.setName("contains" + klass.getName());
-
-					containement.setContainment(true);
-					containement.setEType(klass);
-					eklass.getEReferences().add(containement);
-
-					EAttribute attri = EcoreFactory.eINSTANCE.createEAttribute();
-					attri.setName("value");
-
-					attri.setEType(eattribute.getEType());
-					attri.setDefaultValue(eattribute.getDefaultValue());
-					klass.getEAttributes().add(attri);
+					BindingTools.createEAttribute("value", eattribute.getEType(), klass);
 
 				}
 				newClassifiers.put(eklass, listFeatures);
@@ -177,6 +164,7 @@ public class BindingMetamodelGenerator {
 		this.ep = ep;
 	}
 
+	// Add the binding elements
 	public void addBindingElementEsuperType() {
 
 		int i = 0;
@@ -203,133 +191,42 @@ public class BindingMetamodelGenerator {
 		}
 	}
 
+	/**
+	 * Creating the Binding classes
+	 */
 	public void createBindingClass() {
 
-	
-		this.bindingElement = EcoreFactory.eINSTANCE.createEClass();
-		this.bindingElement.setName("BindingElement");
-		((EClass) this.bindingElement).setAbstract(true);
-		this.ep.getEClassifiers().add(bindingElement);
-
-		// MetamodelElement Class
-		this.metamodelElement = EcoreFactory.eINSTANCE.createEClass();
-		this.metamodelElement.setName("MetamodelElement");
-		this.ep.getEClassifiers().add(this.metamodelElement);
-
-		// IntermediateElement Class
-		this.intermediateElement = EcoreFactory.eINSTANCE.createEClass();
-		this.intermediateElement.setName("IntemediateElement");
-		this.ep.getEClassifiers().add(this.intermediateElement);
-		// ((EClass) this.intermediateElement).setAbstract(true);
-
-		// MetamodelElementFeature Class
-		this.metamodelElementFeature = EcoreFactory.eINSTANCE.createEClass();
-		this.metamodelElementFeature.setName("MetamodelElementFeature");
-		// ((EClass) this.metamodelElementFeature).setAbstract(true);
-		this.ep.getEClassifiers().add(this.metamodelElementFeature);
-
-		EAttribute nameMetamodelElementFeature = EcoreFactory.eINSTANCE.createEAttribute();
-		nameMetamodelElementFeature.setName("name");
-		nameMetamodelElementFeature.setEType(EcorePackage.eINSTANCE.getEString());
-		metamodelElementFeature.getEAttributes().add(nameMetamodelElementFeature);
-
-		this.FeatureCLass = EcoreFactory.eINSTANCE.createEClass();
-		this.FeatureCLass.setName("FeatureClass");
-		this.FeatureCLass.setAbstract(true);
-
-		this.ep.getEClassifiers().add(this.FeatureCLass);
-
+		this.noneElement = BindingTools.createEClass("NoneElement", false, this.ep, this.root);
+		this.bindingElement = BindingTools.createEClass("BindingElement", true, this.ep, this.root);
+		this.intermediateElement = BindingTools.createEClass("IntermediateElement", false, this.ep, this.root);
+		this.metamodelElement = BindingTools.createEClass("MetamodelElement", false, this.ep, this.root);
+		this.metamodelElementFeature = BindingTools.createEClass("MetamodelElementFeature", false, this.ep, this.root);
+		this.FeatureCLass = BindingTools.createEClass("BindingAttribute", true, this.ep, this.root);
+		this.virtualAttribute = BindingTools.createEClass("VirtualAttribute", false, this.ep, this.root);
+		
 		for (EClass eclass : this.newEClass) {
 			eclass.getESuperTypes().add(this.FeatureCLass);
-		}
-
-		EReference feature = EcoreFactory.eINSTANCE.createEReference();
-		feature.setName("featureClass");
-		feature.setEType(this.FeatureCLass);
-		feature.setUpperBound(-1);
-		feature.setLowerBound(0);
-
-		EReference metamodelElementFeatureRef = EcoreFactory.eINSTANCE.createEReference();
-		metamodelElementFeatureRef.setName("metamodelElementFeature");
-		metamodelElementFeatureRef.setEType(this.metamodelElementFeature);
-		metamodelElementFeatureRef.setLowerBound(0);
-		metamodelElementFeatureRef.setUpperBound(-1);
-		metamodelElementFeatureRef.setContainment(true);
-
-//		EReference intemediateAttribute = EcoreFactory.eINSTANCE.createEReference();
-//		intemediateAttribute.setName("intermediateElement");
-//		intemediateAttribute.setEType(this.intermediateElement);
-//		intemediateAttribute.setLowerBound(0);
-//		intemediateAttribute.setUpperBound(-1);
-
-		EReference bindingAttribute = EcoreFactory.eINSTANCE.createEReference();
-		bindingAttribute.setName("bindingElement");
-		bindingAttribute.setEType(this.bindingElement);
-		bindingAttribute.setLowerBound(1);
-		bindingAttribute.setUpperBound(1);
-
-		EReference metamodelAttribute = EcoreFactory.eINSTANCE.createEReference();
-		metamodelAttribute.setName("metamodElelement");
-		metamodelAttribute.setEType(this.metamodelElement);
-		metamodelAttribute.setLowerBound(1);
-		metamodelAttribute.setUpperBound(1);
-
-		EReference intemediateAttribute2 = EcoreFactory.eINSTANCE.createEReference();
-		intemediateAttribute2.setName("intermediateElement");
-		intemediateAttribute2.setEType(this.intermediateElement);
-		intemediateAttribute2.setLowerBound(0);
-		intemediateAttribute2.setUpperBound(-1);
-
-//		this.bindingElement.getEReferences().add(intemediateAttribute);
-		this.intermediateElement.getEReferences().add(bindingAttribute);
-		this.intermediateElement.getEReferences().add(metamodelAttribute);
-//		this.metamodelElement.getEReferences().add(intemediateAttribute2);
-
-		EAttribute nameElement = EcoreFactory.eINSTANCE.createEAttribute();
-		nameElement.setName("name");
-		nameElement.setEType(EcorePackage.eINSTANCE.getEString());
-		metamodelElement.getEAttributes().add(nameElement);
-
-		EReference cont1 = EcoreFactory.eINSTANCE.createEReference();
-		cont1.setContainment(true);
-		cont1.setName("containsMetamodelElement");
-		cont1.setEType(this.metamodelElement);
-		cont1.setUpperBound(-1);
-
-		EReference cont2 = EcoreFactory.eINSTANCE.createEReference();
-		cont2.setContainment(true);
-		cont2.setEType(this.intermediateElement);
-		cont2.setName("containsIntermediateElement");
-		cont2.setUpperBound(-1);
-
-		EReference cont3 = EcoreFactory.eINSTANCE.createEReference();
-		cont3.setContainment(true);
-		cont3.setEType(this.FeatureCLass);
-		cont3.setName("containsFeatureClass");
-		cont3.setUpperBound(-1);
-
-		EReference cont4 = EcoreFactory.eINSTANCE.createEReference();
-		cont4.setContainment(true);
-		cont4.setEType(this.FeatureCLass);
-		cont4.setName("containsMetamodelElementFeature");
-		cont4.setUpperBound(-1);
-		this.metamodelElement.getEReferences().add(metamodelElementFeatureRef);
-		this.metamodelElementFeature.getEReferences().add(feature);
-		this.root.getEReferences().add(cont1);
-		this.root.getEReferences().add(cont2);
-		this.root.getEReferences().add(cont3);
-		this.root.getEReferences().add(cont4);
-		System.out.println("BINDING CLASS CREATED");
+		}	
+		
+		BindingTools.createEReference("virtualAttribute", true, this.virtualAttribute, -1, 0, this.metamodelElement);
+		BindingTools.createEReference("noneElement", false, this.noneElement, -1, 0, this.bindingElement);
+		BindingTools.createEReference("featureClass", false, this.FeatureCLass, -1, 0, this.metamodelElementFeature);
+		BindingTools.createEReference("metamodelElementFeature", true, this.metamodelElementFeature, -1, 0,this.metamodelElement);
+		BindingTools.createEReference("bindingElement", false, this.bindingElement, 1, 1, this.intermediateElement);
+		BindingTools.createEReference("metamodelElement", false, this.metamodelElement, -1, 0,this.intermediateElement);
+		BindingTools.createEReference("to_virtualAttribute", false, this.FeatureCLass, -1, 0, this.metamodelElement);
+		
+		BindingTools.createEAttribute("name", Datatypes.get_string(), this.metamodelElement);
+		BindingTools.createEAttribute("name", Datatypes.get_string(), this.metamodelElementFeature);
 	}
 
 	public void save(File file) {
 		System.out.println("Savingthe new metamodel ...");
 		try {
 
-
 			ResourceSet rs = new ResourceSetImpl();
 
-			generatedFile = new File(file.getAbsolutePath() + "/generated-" + ep.getName() + ".ecore");
+			generatedFile = new File(file.getAbsolutePath() + "/" + ep.getName() + ".ecore");
 			final Resource resource = rs.createResource(URI.createFileURI(generatedFile.getAbsolutePath()));
 
 			resource.getContents().add(ep);
@@ -338,12 +235,11 @@ public class BindingMetamodelGenerator {
 
 			resource.save(new FileOutputStream(new File(generatedFile.getAbsolutePath())), null);
 
-
 		} catch (FileNotFoundException e) {
-		
+
 			e.printStackTrace();
 		} catch (IOException e) {
-		
+
 			e.printStackTrace();
 		}
 		System.out.println("Saved !");

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<free:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:free="http://www.example.org/free">
-  <node name="NOde 1" linkout="//@link.0"/>
-  <node name="NOde 2 " linkin="//@link.0"/>
-  <link name="edge 1" nodetarget="//@node.1" nodesource="//@node.0"/>
-</free:Diagram>

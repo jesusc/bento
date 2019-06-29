@@ -26,6 +26,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.sirius,
  bento.sirius.odesign.generator,
  bento.sirius.tests.metamodels.output;bundle-version="1.0.0",
- org.eclipse.sirius.diagram
+ org.eclipse.sirius.diagram,
+ com.test.workflow;bundle-version="0.1.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.sirius.diagram.description

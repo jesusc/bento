@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.odesign.generator.tools.Tools;
+import com.odesign.generator.tools.BindingTools;
 
 /**
  * 
@@ -29,15 +29,19 @@ public class Generate {
 
 	public void GenerateOdesignMM(String modelURI, File odesignOutputFolder, File metamodelOutputFolder) throws IOException {
 
+		//1
 		OdesignGenerator odesigngenerator = new OdesignGenerator(modelURI, odesignOutputFolder);
+		//2
 		EPackage ep = odesigngenerator.getEpackage();
 
 		ResourceSet rs = new ResourceSetImpl();
 		this.originalEPack = ep;
+		
 		EPackage copy = EcoreUtil.copy(ep);
 
 		final Resource resource = rs
-				.createResource(URI.createFileURI(odesignOutputFolder.getAbsolutePath() + "/new-" + ep.getName() + ".ecore"));
+				.createResource(URI.createFileURI(odesignOutputFolder.getAbsolutePath() + "/" + ep.getName() + "_bdsl" + ".ecore"));
+
 
 		resource.getContents().add(copy);
 
@@ -45,9 +49,9 @@ public class Generate {
 
 		this.epack = (EPackage) resource1.getContents().get(0);
 
-		List<EClass> containerslist = Tools.fillContainersList(this.epack);
+		List<EClass> containerslist = BindingTools.fillContainersList(this.epack);
 
-		EClass root = Tools.findRoot(containerslist);
+		EClass root = BindingTools.findRoot(containerslist);
 
 		BindingMetamodelGenerator metamodelGenerator = new BindingMetamodelGenerator();
 
@@ -60,13 +64,18 @@ public class Generate {
 		this.epack.setNsURI(ep.getNsURI() + "_bdsl");
 
 		metamodelGenerator.createFeatureCLasses();
+		
 		metamodelGenerator.createBindingClass();
+		
 		metamodelGenerator.addBindingElementEsuperType();
+		
 		metamodelGenerator.save(metamodelOutputFolder);
+		
 		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), odesignOutputFolder, this.epack,
 				metamodelGenerator.getMetamodelElement(), metamodelGenerator.getIntermediateElement());
 
 		this.odesignGeneratedFile = odesigngenerator.getGeneratedFile();
+		
 		this.metamodelGeneratedFile = metamodelGenerator.getGeneratedFile();
 	}
 
