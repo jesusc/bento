@@ -203,7 +203,7 @@ public class BindingMetamodelGenerator {
 		this.metamodelElementFeature = BindingTools.createEClass("MetamodelElementFeature", false, this.ep, this.root);
 		this.FeatureCLass = BindingTools.createEClass("BindingAttribute", true, this.ep, this.root);
 		this.virtualAttribute = BindingTools.createEClass("VirtualAttribute", false, this.ep, this.root);
-		
+	
 		for (EClass eclass : this.newEClass) {
 			eclass.getESuperTypes().add(this.FeatureCLass);
 		}	
@@ -214,12 +214,16 @@ public class BindingMetamodelGenerator {
 		BindingTools.createEReference("metamodelElementFeature", true, this.metamodelElementFeature, -1, 0,this.metamodelElement);
 		BindingTools.createEReference("bindingElement", false, this.bindingElement, 1, 1, this.intermediateElement);
 		BindingTools.createEReference("metamodelElement", false, this.metamodelElement, -1, 0,this.intermediateElement);
-		BindingTools.createEReference("to_virtualAttribute", false, this.FeatureCLass, -1, 0, this.metamodelElement);
+		BindingTools.createEReference("to_virtualAttribute", false, this.FeatureCLass, 1, 0, this.virtualAttribute);
+		
 		
 		BindingTools.createEAttribute("name", Datatypes.get_string(), this.metamodelElement);
 		BindingTools.createEAttribute("name", Datatypes.get_string(), this.metamodelElementFeature);
-	}
+		BindingTools.createEAttribute("name", Datatypes.get_string(), this.virtualAttribute);
+		BindingTools.createEAttribute("Expression", Datatypes.get_string(), this.virtualAttribute);
+}
 
+	
 	public void save(File file) {
 		System.out.println("Savingthe new metamodel ...");
 		try {
