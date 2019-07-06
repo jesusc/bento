@@ -39,10 +39,12 @@ import org.eclipse.sirius.diagram.description.style.SquareDescription;
 import org.eclipse.sirius.diagram.description.style.StyleFactory;
 import org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription;
 import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
+import org.eclipse.sirius.diagram.description.tool.DirectEditLabel;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.ToolFactory;
 import org.eclipse.sirius.diagram.description.tool.ToolSection;
+import org.eclipse.sirius.viewpoint.FontFormat;
 import org.eclipse.sirius.viewpoint.LabelAlignment;
 import org.eclipse.sirius.viewpoint.description.Group;
 import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
@@ -51,8 +53,10 @@ import org.eclipse.sirius.viewpoint.description.UserFixedColor;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.description.tool.ChangeContext;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
+import org.eclipse.sirius.viewpoint.description.tool.EditMaskVariables;
 import org.eclipse.sirius.viewpoint.description.tool.InitEdgeCreationOperation;
 import org.eclipse.sirius.viewpoint.description.tool.InitialNodeCreationOperation;
+import org.eclipse.sirius.viewpoint.description.tool.InitialOperation;
 import org.eclipse.sirius.viewpoint.description.tool.SetValue;
 
 import com.odesign.generator.tools.BindingTools;
@@ -174,11 +178,20 @@ public class OdesignGenerator {
 
 		UserFixedColor featuresFixedColorRed = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
 				.createUserFixedColor();
+		featuresFixedColorRed.setName("red-rose");
 		colorPallette.getEntries().add(featuresFixedColorRed);
-		featuresFixedColor.setBlue(0);
-		featuresFixedColor.setGreen(0);
-		featuresFixedColor.setRed(255);
+		featuresFixedColorRed.setBlue(85);
+		featuresFixedColorRed.setGreen(85);
+		featuresFixedColorRed.setRed(169);
 
+		
+		UserFixedColor darkBlue = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
+				.createUserFixedColor();
+		colorPallette.getEntries().add(darkBlue);
+		darkBlue.setBlue(171);
+		darkBlue.setGreen(114);
+		darkBlue.setRed(76);
+		
 		List<EdgeMapping> edgeList = new ArrayList<>();
 		List<NodeMapping> nodeList = new ArrayList<>();
 		List<ContainerMapping> containerList = new ArrayList<>();
@@ -428,6 +441,7 @@ public class OdesignGenerator {
 		dd.getAllLayers().get(0).getNodeMappings().add(nonemapping);	
 		
 		
+		
 		//NodeMapping noneNodeMapping=OdesignTools.createNode("None", ep, "NoneElement","containsNoneElement", dd);
 		WorkspaceImageDescription workspaceimage = StyleFactory.eINSTANCE.createWorkspaceImageDescription();
 
@@ -461,14 +475,19 @@ public class OdesignGenerator {
 		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
 		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
 		cm.setStyle(csd);
-		csd.setWidthComputationExpression("6");
-		csd.setHeightComputationExpression("7");
+		csd.setWidthComputationExpression("12");
+		csd.setHeightComputationExpression("8");
 		csd.setShowIcon(false);
+		csd.setLabelSize(10);
 		
+		csd.getLabelFormat().add(FontFormat.BOLD_LITERAL);
+	
+	    csd.setLabelColor(darkBlue);
 		csd.setLabelExpression("aql:self.name");
-		csd.setBorderSizeComputationExpression("2");
+		csd.setBorderSizeComputationExpression("3");
 		csd.setBorderColor(featuresFixedColor);
 
+		csd.setRoundedCorner(true);
 		
 		cm.setChildrenPresentation(ContainerLayout.VERTICAL_STACK);
 		cm.setLabel(metamodelElement.getName());
@@ -477,6 +496,8 @@ public class OdesignGenerator {
 		dd.getAllLayers().get(0).getContainerMappings().add(cm);
 
 		
+
+		 
 		
 		
 		//feature
@@ -488,12 +509,11 @@ public class OdesignGenerator {
 		nm.setStyle(csdfeature);
 		csdfeature.setShowIcon(false);
 		csdfeature.setLabelExpression("aql:self.name");
-		//csdfeature.setBorderSizeComputationExpression("2");
-		//csdfeature.setBorderColor(featuresFixedColor);	
-	//	dd.getAllLayers().get(0).getContainerMappings().add(nm);
+		
+ 
 		try {
 		cm.getSubContainerMappings().add(nm);
-		//cm.getAllContainerMappings().add(nm);
+		
 		}catch(Exception e) {e.printStackTrace();}
 
 	
@@ -548,7 +568,11 @@ public class OdesignGenerator {
 		CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
 		edgestyle.setCenterLabelStyleDescription(labelstyle);
 		edgeintermediate.setStyle(edgestyle);
-
+		edgestyle.setSizeComputationExpression("3");
+        edgestyle.setTargetArrow(EdgeArrows.INPUT_FILL_CLOSED_ARROW_LITERAL);
+        edgestyle.setStrokeColor(featuresFixedColorRed);
+        edgestyle.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+        
 		EdgeMapping pointTo = DescriptionFactory.eINSTANCE.createEdgeMapping();
 		pointTo.setName("Bind attributes");
 		pointTo.getSourceMapping().add(nm);
@@ -566,7 +590,8 @@ public class OdesignGenerator {
 		CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
 		edgestyle1.setCenterLabelStyleDescription(labelstyle1);
 		pointTo.setStyle(edgestyle1);
-		
+		edgestyle1.setSizeComputationExpression("3");
+		edgestyle1.setRoutingStyle(EdgeRouting.TREE_LITERAL);
 		ContainerMapping virtualAttributeContainer=DescriptionFactory.eINSTANCE.createContainerMapping();
 		virtualAttributeContainer.setName("Virtual Attribute");
 		virtualAttributeContainer.setDomainClass(ep.getName() + separator+"VirtualAttribute");
@@ -595,6 +620,8 @@ public class OdesignGenerator {
 
 		EdgeStyleDescription to_edgestyleVA = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 		CenterLabelStyleDescription to_labelstyleVA = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
+		to_edgestyleVA.setSizeComputationExpression("3");
+		to_edgestyleVA.setRoutingStyle(EdgeRouting.TREE_LITERAL);
 		to_edgestyleVA.setCenterLabelStyleDescription(to_labelstyleVA);
 		to_edgestyleVA.setStrokeColor(featuresFixedColor);
 
@@ -603,11 +630,40 @@ public class OdesignGenerator {
 		dd.getAllLayers().get(0).getEdgeMappings().add(to_virtualAttributeEdge);
 		
 // Tool section part 
-
 		// Tool section creation
 		ToolSection toolsec = ToolFactory.eINSTANCE.createToolSection();
 		toolsec.setName("Generated Tools section");
 
+		
+		
+    	 DirectEditLabel directEditLable=ToolFactory.eINSTANCE.createDirectEditLabel();
+		 EditMaskVariables editMakVariable = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createEditMaskVariables();	 
+		 editMakVariable.setMask("{0}");
+		 directEditLable.setMask(editMakVariable);
+		 directEditLable.setName("EditeLabel"+"MetamodelElement");
+//		 
+//		 try {
+//		 directEditLable.getMapping().add((DiagramElementMapping)cm);}
+//		 catch(Exception e) {
+//			 e.printStackTrace();
+//		 }
+		 directEditLable.getMapping();
+		 InitialOperation initialOperation=org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createInitialOperation();
+		 SetValue setValue= org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		 setValue.setFeatureName("name");
+		 setValue.setValueExpression("[arg0/]");
+		 initialOperation.setFirstModelOperations(setValue);
+		 directEditLable.setInitialOperation(initialOperation);
+		 toolsec.getOwnedTools().add(directEditLable);
+		
+		
+		
+		
+		
+		
+		
+		
+	
 		// Bind attributes edge
 		EdgeCreationDescription featureedgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
 		featureedgecreationdesc.setName("Bind Attributes");
@@ -650,7 +706,7 @@ public class OdesignGenerator {
 		nonecreation.setInitialOperation(initnone);
 		initnone.setFirstModelOperations(changecontextnone);
 		nonecreation.setInitialOperation(initnone);
-		nonecreation.setIconPath("/com.workflow2.editor.design/trash.png");
+		nonecreation.setIconPath("/bento.sirius.odesign.generator/icons/trash.png");
 
 		//MetamodelELement feature Node
 		ContainerCreationDescription metamodelElementFeaturedesc = ToolFactory.eINSTANCE.createContainerCreationDescription();
@@ -717,7 +773,7 @@ public class OdesignGenerator {
 		edgeInstance.getSubModelOperations().add(setValue2);
 		changecontextIntermediate.setBrowseExpression("[source.eContainer()/]");
 		edgecreationdesc.setInitialOperation(init);
-
+		edgecreationdesc.setIconPath("/bento.sirius.odesign.generator/icons/link.png");
 	
 		//The container of MetamodelElement
 		ContainerCreationDescription containerCreation = ToolFactory.eINSTANCE.createContainerCreationDescription();
@@ -743,7 +799,7 @@ public class OdesignGenerator {
 		containerInstance.getSubModelOperations().add(setValue3);
 		containerCreation.setInitialOperation(init2);
 		dd.getAllLayers().get(0).getToolSections().add(toolsec);
-        
+        containerCreation.setIconPath("/bento.sirius.odesign.generator/icons/class.png");
 		for (NodeMapping nmapp : this.oroginalNodes) {
 			mapToNone.getSourceMapping().add(nmapp);
 
@@ -778,7 +834,7 @@ public class OdesignGenerator {
 		changecontextNone.getSubModelOperations().add(setValueNone);
 		
 		edgecreationdescNone.setInitialOperation(initNone);
-
+       
 		
 		// Bind attributes edge
 				EdgeCreationDescription vaedgecreationdesc = ToolFactory.eINSTANCE.createEdgeCreationDescription();
