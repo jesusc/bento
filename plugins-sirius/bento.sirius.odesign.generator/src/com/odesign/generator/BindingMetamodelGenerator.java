@@ -246,7 +246,7 @@ public class BindingMetamodelGenerator {
 
 			e.printStackTrace();
 		}
-		System.out.println("Saved !");
+		System.out.println("Saved! " + generatedFile.getAbsolutePath());
 	}
 
 	public File getGeneratedFile() {

@@ -22,4 +22,12 @@
             genModel="models/generated-scenes_bdsl.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated workflow_bdsl -->
+      <package
+            uri="http://bento/flow_concept_bdsl"
+            class="bento.sirius.tests.metamodels.output.workflow_bdsl.Workflow_bdslPackage"
+            genModel="models/workflow_bdsl.genmodel"/>
+   </extension>
+
 </plugin>

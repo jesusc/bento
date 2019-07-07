@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -84,6 +86,8 @@ public class OdesignGenerator {
 	private EList<EdgeMapping> oroginalEdges;
 	private EList<NodeMapping> oroginalNodes;
 	private EList<ContainerMapping> oroginalContainers;
+	private String originalPackageName;
+	private String targetPackageName;
 
 	public Resource getResource() {
 		return resource;
@@ -98,9 +102,6 @@ public class OdesignGenerator {
 		return epackage;
 	}
 
-	public void setEpackage(EPackage epackage) {
-		this.epackage = epackage;
-	}
 
 	public DiagramDescription getDiagramDescription() {
 		return diagramDescription;
@@ -146,6 +147,14 @@ public class OdesignGenerator {
 	public void GenerateNodesVersion(HashMap<EClass, List<EClass>> eclassMap, File file, EPackage ep,
 			EClass metamodelElement, EClass intermediateElement) {
 
+		// Let's assume there is only one meta-model for the moment
+		if (diagramDescription.getMetamodel().size() != 1)
+			throw new UnsupportedOperationException("Only one meta-model supported so far");
+	
+		this.originalPackageName = diagramDescription.getMetamodel().get(0).getName();
+		this.targetPackageName = ep.getName();
+		
+		
 		this.diagramDescription.getMetamodel().clear();
 
 		this.diagramDescription.getMetamodel().add(ep);
@@ -296,6 +305,11 @@ public class OdesignGenerator {
 							.setDomainClass(ep.getName() + separator + ((ContainerMapping) obj).getDomainClass()
 									.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1));
 
+					// Make sure the expression is properly rewritten if needed
+					ContainerMapping mapping = ((ContainerMapping) obj);
+					adaptExpressionIfNeeded(mapping.getSemanticCandidatesExpression(), mapping::setSemanticCandidatesExpression);
+					
+					
 					if (((ContainerMapping) obj).getDomainClass()
 							.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
 							.equals(entry.getKey().getName())) {
@@ -636,25 +650,25 @@ public class OdesignGenerator {
 
 		
 		
-    	 DirectEditLabel directEditLable=ToolFactory.eINSTANCE.createDirectEditLabel();
-		 EditMaskVariables editMakVariable = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createEditMaskVariables();	 
-		 editMakVariable.setMask("{0}");
-		 directEditLable.setMask(editMakVariable);
-		 directEditLable.setName("EditeLabel"+"MetamodelElement");
-//		 
-//		 try {
-//		 directEditLable.getMapping().add((DiagramElementMapping)cm);}
-//		 catch(Exception e) {
-//			 e.printStackTrace();
-//		 }
-		 directEditLable.getMapping();
-		 InitialOperation initialOperation=org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createInitialOperation();
-		 SetValue setValue= org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
-		 setValue.setFeatureName("name");
-		 setValue.setValueExpression("[arg0/]");
-		 initialOperation.setFirstModelOperations(setValue);
-		 directEditLable.setInitialOperation(initialOperation);
-		 toolsec.getOwnedTools().add(directEditLable);
+//    	 DirectEditLabel directEditLable=ToolFactory.eINSTANCE.createDirectEditLabel();
+//		 EditMaskVariables editMakVariable = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createEditMaskVariables();	 
+//		 editMakVariable.setMask("{0}");
+//		 directEditLable.setMask(editMakVariable);
+//		 directEditLable.setName("EditeLabel"+"MetamodelElement");
+////		 
+////		 try {
+////		 directEditLable.getMapping().add((DiagramElementMapping)cm);}
+////		 catch(Exception e) {
+////			 e.printStackTrace();
+////		 }
+//		 directEditLable.getMapping();
+//		 InitialOperation initialOperation=org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createInitialOperation();
+//		 SetValue setValue= org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+//		 setValue.setFeatureName("name");
+//		 setValue.setValueExpression("[arg0/]");
+//		 initialOperation.setFirstModelOperations(setValue);
+//		 directEditLable.setInitialOperation(initialOperation);
+//		 toolsec.getOwnedTools().add(directEditLable);
 		
 		
 		
@@ -860,6 +874,7 @@ public class OdesignGenerator {
 
 			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + ".odesign");
 			resource.save(new FileOutputStream(generatedFile), null);
+			System.out.println("Saved: " + generatedFile.getAbsolutePath());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -868,6 +883,18 @@ public class OdesignGenerator {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void adaptExpressionIfNeeded(String expr, Consumer<String> setter) {
+		if (expr == null)
+			return;
+		
+		String needle = this.originalPackageName + "::";
+		String replacement = this.targetPackageName + "::";
+		if (expr.contains(needle)) {
+			String newExpr = expr.replace(needle, replacement);
+			setter.accept(newExpr);
+		}
 	}
 
 	public File getGeneratedFile() {

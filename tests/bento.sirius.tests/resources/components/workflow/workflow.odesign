@@ -2,7 +2,7 @@
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="WorkflowDiagramComponent" version="12.0.0.2017041100">
   <ownedViewpoints name="FlowDiagramComponentViewpoint">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="FlowDiagram" domainClass="workflow::FlowDiagram" enablePopupBars="true">
-      <metamodel href="../../../../bento.sirius.tests.metamodels/resources/concepts/flow_concept.ecore#/"/>
+      <metamodel href="http://bento/flow_concept#/"/>
       <defaultLayer name="Default">
         <nodeMappings name="Initial" preconditionExpression="aql:self.isInitial" labelDirectEdit="//@ownedViewpoints[name='FlowDiagramComponentViewpoint']/@ownedRepresentations[name='FlowDiagram']/@defaultLayer/@toolSections.0/@ownedTools[name='Edit%20names']" domainClass="workflow::Task">
           <style xsi:type="style:DotDescription" labelSize="12" labelPosition="node" resizeKind="NSEW">

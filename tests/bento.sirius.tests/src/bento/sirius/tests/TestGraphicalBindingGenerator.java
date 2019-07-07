@@ -6,10 +6,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -20,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -27,6 +31,8 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.odesign.generator.Generate;
 import com.odesign.generator.ModelGenerator;
+
+import bento.sirius.odesign.ModelCopierByName;
 
 @RunWith(Parameterized.class)
 public class TestGraphicalBindingGenerator {
@@ -40,8 +46,10 @@ public class TestGraphicalBindingGenerator {
                 		"resources/components/scenes/ScenesDSL-model-1.scenes"),
                 t("resources/components/graph/graph-simple.odesign",    
                 		 "resources/components/graph/graph-model-1.xmi"),
-                t("resources/components/[From -Sirius-Gallery]SimQRi/simqri.odesign",    
-               		 "resources/components/[From -Sirius-Gallery]SimQRi/simqri-model-1.xmi")
+                t("resources/components/workflow/workflow.odesign",    
+               		 "resources/components/workflow/workflow-1.xmi"),
+                t("resources/components/sirius-gallery-simqri/simqri.odesign",    
+               		 "resources/components/sirius-gallery-simqri/simqri-model-1.xmi")
            });
     }
     
@@ -121,8 +129,19 @@ public class TestGraphicalBindingGenerator {
 		String filename  = model.getName();
 		File outputFile = new File(modelOutputs.getAbsolutePath() + File.separator + "bdsl-" + filename);
 		
-		ModelGenerator generator = new ModelGenerator(model.getAbsolutePath(), outputFile, originalPackage, generatedPackage);
-		Resource generatedModel = generator.getGeneratedModel();
+		Resource generatedModel = rs.createResource(URI.createFileURI(outputFile.getAbsolutePath()));
+		
+		ModelCopierByName lifter = new ModelCopierByName(originalPackage, generatedPackage);
+		lifter.copy(originalModel, generatedModel);
+		
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+
+		generatedModel.save(new FileOutputStream(new File(outputFile.getAbsolutePath())), options);
+
+		
+		// ModelGenerator generator = new ModelGenerator(model.getAbsolutePath(), outputFile, originalPackage, generatedPackage);
+		// Resource generatedModel = generator.getGeneratedModel();
 		
 		List<EObject> originalObjects = TestUtils.getAllElements(originalModel);
 		List<EObject> generatedObjects = TestUtils.getAllElements(generatedModel);

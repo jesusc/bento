@@ -80,6 +80,8 @@ public class ModelGenerator {
 		this.targetMetamodel = targetMetamodel;
 		this.originalMetamodel = originalMetamodel;
 
+		sanityCheck(originalMetamodel, listOfSourceObjects);
+		
 		// Create the target resource
 		ResourceSet rs2 = new ResourceSetImpl();
 		try {
@@ -100,8 +102,8 @@ public class ModelGenerator {
 
 		HashMap<EClass, EClass> corespondingEClasses = new HashMap<EClass, EClass>();
 		HashMap<EEnum, EEnum> corespondingEEnums=new HashMap<>();
-		try {
-			for (EClassifier eclassOriginal : listEClassifiersSource) {
+		
+		for (EClassifier eclassOriginal : listEClassifiersSource) {
 				if(eclassOriginal instanceof EEnum) {
 					listEEnumSource.add((EEnum) eclassOriginal);
 				}
@@ -124,9 +126,7 @@ public class ModelGenerator {
 
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 
 		HashMap<EObject, EObject> corespondingObjects = new HashMap<EObject, EObject>();
 
@@ -195,6 +195,7 @@ public class ModelGenerator {
 
 				for (EObject o : listOfSourceObjects) {
 
+					System.out.println(o.eClass().getName());
 					if (o.eClass().equals(corespondingEClasses.get(ec))) {
 						System.out.println("The EClass is " + ec.getName() + " and the object is " + o.toString());
 						EObject obj = efactory.create((EClass) ec);
@@ -385,208 +386,39 @@ public class ModelGenerator {
 			}
 		}
 
-try {
+		try {
 
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 
-		Map<Object, Object> options = new HashMap<Object, Object>();
-		options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+			this.resourceTarget.save(new FileOutputStream(new File(outputFile.getAbsolutePath())), options);
+		} catch (Exception e) {
+			e.printStackTrace();
 
-		this.resourceTarget.save(
-				new FileOutputStream(
-						new File(outputFile.getAbsolutePath())),
-				options);
+		}
+
 	}
-	catch(Exception e) {
-		e.printStackTrace();}
+	
+	/**
+	 * All source objects should be defined in the meta-model
+	 */
+	private void sanityCheck(EPackage metamodel, List<? extends EObject> objects) {
+		EOBJECT: 
+		for (EObject eObject : objects) {
+			for (EClassifier eClassifier : metamodel.getEClassifiers()) {
+				System.out.println(eClassifier);
+				if (eObject.eClass() == eClassifier) {
+					break EOBJECT;
+				}
+			}
+			System.out.println("---");
+			System.out.println(eObject.eClass());
+			throw new IllegalStateException("Object " + eObject + " not found in package " + metamodel.getNsURI());
+		}
 	}
+	
 	public Resource getGeneratedModel() {
 		return resourceTarget;
-	}
-
-	public ModelGenerator(String modelURI, File file, EPackage originalMetamodel, EPackage targetMetamodel,
-			String output) throws FileNotFoundException, IOException {
-		/**
-		 * Read the original model
-		 */
-		ResourceSet rs = new ResourceSetImpl();
-		this.resourceSource = rs.getResource(URI.createFileURI(modelURI), true);
-
-		this.targetMetamodel = targetMetamodel;
-		this.originalMetamodel = originalMetamodel;
-
-		ResourceSet rs2 = new ResourceSetImpl();
-		try {
-			this.resourceTarget = rs2.createResource(URI
-					.createFileURI(file.getAbsolutePath() + "/new-model-" + this.targetMetamodel.getName() + ".xmi"));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		TreeIterator<EObject> el = resourceSource.getAllContents();
-
-		List<EObject> listOfObjects = new ArrayList<>();
-
-		while (el.hasNext())
-
-		{
-			EObject objModel = el.next();
-
-			listOfObjects.add(objModel);
-
-		}
-
-		EFactory efactory = this.targetMetamodel.getEFactoryInstance();
-
-		List<EClassifier> listEClassifiersTarget = this.targetMetamodel.getEClassifiers();
-		List<EClassifier> listOriginalEClassifiers = this.originalMetamodel.getEClassifiers();
-		HashMap<EClass, EClass> corespondingEClasses = new HashMap<EClass, EClass>();
-
-		try {
-			for (EClassifier eclassOriginal : listOriginalEClassifiers) {
-				for (EClassifier eclassTarget : listEClassifiersTarget) {
-					if (eclassOriginal.getName().equals(eclassTarget.getName())) {
-						if (eclassOriginal instanceof EClass && eclassTarget instanceof EClass) {
-							corespondingEClasses.put((EClass) eclassTarget, (EClass) eclassOriginal);
-						}
-					}
-
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// get the target model's root
-		List<EClass> containersList = BindingTools.fillContainersList(this.targetMetamodel);
-		EClass rootTarget = BindingTools.findRoot(containersList);
-
-		// create the target models root
-		EObject rootObject = efactory.create(rootTarget);
-		resourceTarget.getContents().add(rootObject);
-
-		// get the EReferenvces of the root
-		List<EReference> listRootEreferences = rootTarget.getEAllReferences();
-
-		// get the original model's root
-		List<EClass> containersList2 = BindingTools.fillContainersList(this.originalMetamodel);
-		EClass rootOriginal = BindingTools.findRoot(containersList);
-
-		// get the EReferenvces of the root
-		List<EReference> listRootOriginalEreferences = rootTarget.getEAllReferences();
-
-		List<String> listNameRootOriginalRef = new ArrayList<>();
-		List<EClass> copyList = new ArrayList<EClass>();
-		for (EClassifier newTarget1 : listEClassifiersTarget) {
-			copyList.add((EClass) newTarget1);
-		}
-
-		for (EClassifier newTarget : listEClassifiersTarget) {
-			for (EClassifier oldSource : listOriginalEClassifiers) {
-
-				if ((((EClass) newTarget).getName()).equals(((EClass) oldSource).getName())) {
-
-					copyList.remove(newTarget);
-				}
-			}
-
-		}
-		for (EReference erefOrigRoot : listRootOriginalEreferences) {
-			listNameRootOriginalRef.add(erefOrigRoot.getEType().getName());
-
-		}
-
-		for (EStructuralFeature target1 : listRootEreferences) {
-			if (target1 instanceof EReference) {
-				if (((EReference) target1).isContainment()) {
-					String typeName = target1.getEType().getName();
-
-					if (listNameRootOriginalRef.contains(typeName)) {
-						copyList.remove(target1.getEType());
-					}
-
-				}
-			}
-		}
-
-		for (EClassifier ec : listEClassifiersTarget) {
-			if (!ec.equals(rootTarget)) {
-
-				for (EObject o : listOfObjects) {
-
-					if (o.eClass().equals(corespondingEClasses.get(ec))) {
-						System.out.println("The EClass is " + ec.getName() + " and the object is " + o.toString());
-						EObject obj = efactory.create((EClass) ec);
-
-						for (EReference ref : listRootEreferences) {
-							if (ref.getEType().equals(ec)) {
-								try {
-									if (ref.isMany()) {
-										Collection<EObject> col = (Collection<EObject>) rootObject.eGet(ref);
-										col.add(obj);
-									} else {
-										rootObject.eSet(ref, obj);
-									}
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-
-							}
-						}
-
-						List<EAttribute> listAttributesTarget = ((EClass) ec).getEAllAttributes();
-						List<EAttribute> listAttributeSource = (corespondingEClasses.get(ec)).getEAllAttributes();
-
-						List<EReference> listReferencesesTarget = ((EClass) ec).getEAllReferences();
-						List<EReference> listReferencesSource = (corespondingEClasses.get(ec)).getEAllReferences();
-						for (EStructuralFeature target : listAttributesTarget) {
-
-							EStructuralFeature sourceOfTarget = null;
-							EObject attributeClassObject = null;
-							try {
-//
-								for (EStructuralFeature source : listAttributeSource) {
-									if (target.getName().equals(source.getName())) {
-										sourceOfTarget = source;
-										obj.eSet(target, o.eGet((EStructuralFeature) source));
-									}
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-							for (EClassifier featureEClassifier : listEClassifiersTarget) {
-								System.out.println(featureEClassifier.getName() + "==" + target.getName().toLowerCase()
-										+ BindingTools.upperCaseFirst(ec.getName()));
-								if (featureEClassifier.getName()
-										.equals(target.getName().toLowerCase() + BindingTools.upperCaseFirst(ec.getName()))) {
-									attributeClassObject = efactory.create((EClass) featureEClassifier);
-									EAttribute attribute = ((EClass) featureEClassifier).getEAllAttributes().get(0);
-									attributeClassObject.eSet(attribute, o.eGet((EStructuralFeature) sourceOfTarget));
-									for (EReference erefTarget : listReferencesesTarget) {
-										if (erefTarget.getEType().equals((EClass) featureEClassifier)) {
-											if (erefTarget.isMany()) {
-												Collection<EObject> col = (Collection<EObject>) obj.eGet(erefTarget);
-
-												col.add((EObject) attributeClassObject);
-											} else {
-												obj.eSet(erefTarget, attributeClassObject);
-											}
-										}
-
-									}
-									break;
-								}
-							}
-
-						}
-
-					}
-				}
-			}
-		}
-
-		this.resourceSource.save(new FileOutputStream(output + this.originalMetamodel.getName() + ".xmi"), null);
 	}
 
 	public Resource getResource() {
