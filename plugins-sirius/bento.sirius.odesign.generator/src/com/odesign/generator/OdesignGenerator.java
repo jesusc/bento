@@ -27,6 +27,7 @@ import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeRouting;
 import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.LineStyle;
+import org.eclipse.sirius.diagram.description.AdditionalLayer;
 import org.eclipse.sirius.diagram.description.ContainerMapping;
 import org.eclipse.sirius.diagram.description.DescriptionFactory;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
@@ -164,8 +165,15 @@ public class OdesignGenerator {
 		String separator=".";
 		if(dd.getDomainClass().contains("::"))
 			separator="::";
-		Layer layer = dd.getDefaultLayer();
-
+	    AdditionalLayer layer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
+	    dd.getAdditionalLayers().add(layer);
+	    layer.setName("Generated Layer");
+	    
+	    
+	    AdditionalLayer attributesLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
+	    dd.getAdditionalLayers().add(attributesLayer);
+	    attributesLayer.setName("Generated Attributes Layer");
+	    
 		// Creating the colors pallette
 
 		UserColorsPalette colorPallette = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
@@ -207,8 +215,8 @@ public class OdesignGenerator {
 		dd.setName("Diagram");
 		this.diagramsList.add(dd);
 
-		layer.setName("Default Layer");
-		dd.setDefaultLayer(layer);
+		
+		//dd.setDefaultLayer(layer);
 		for (Entry<EClass, List<EClass>> entry : eclassMap.entrySet()) {
 
 			List<EObject> all = new ArrayList<>();
@@ -252,7 +260,7 @@ public class OdesignGenerator {
 								this.nmlist.add(nmd);
 								nmd.setName(featureCLass.getName());
 								nmd.setDomainClass(ep.getName() + separator+ featureCLass.getName());
-								layer.getNodeMappings().add(nmd);
+								attributesLayer.getNodeMappings().add(nmd);
 
 								SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 								sd.setColor(attributesFixedColor);
@@ -281,7 +289,7 @@ public class OdesignGenerator {
 								em.setName(featureCLass.getName() + "Connector");
 								em.setUseDomainElement(false);
 								em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-								layer.getEdgeMappings().add(em);
+								attributesLayer.getEdgeMappings().add(em);
 
 								EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 								CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
@@ -321,7 +329,7 @@ public class OdesignGenerator {
 							this.nmlist.add(nmd);
 							nmd.setName(featureCLass.getName());
 							nmd.setDomainClass(ep.getName() + separator + featureCLass.getName());
-							layer.getNodeMappings().add(nmd);
+							attributesLayer.getNodeMappings().add(nmd);
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
@@ -350,7 +358,7 @@ public class OdesignGenerator {
 							em.setName(featureCLass.getName() + "Connector");
 							em.setUseDomainElement(false);
 							em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-							layer.getEdgeMappings().add(em);
+							attributesLayer.getEdgeMappings().add(em);
 
 							EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 							CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
@@ -388,7 +396,7 @@ public class OdesignGenerator {
 							this.nmlist.add(nmd);
 							nmd.setName(featureCLass.getName());
 							nmd.setDomainClass(ep.getName() +separator  + featureCLass.getName());
-							layer.getNodeMappings().add(nmd);
+							attributesLayer.getNodeMappings().add(nmd);
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 							sd.setBorderSizeComputationExpression("2");
@@ -417,7 +425,7 @@ public class OdesignGenerator {
 							em.setName(featureCLass.getName() + "Connector");
 							em.setUseDomainElement(false);
 							em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-							layer.getEdgeMappings().add(em);
+							attributesLayer.getEdgeMappings().add(em);
 
 							EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 							CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
@@ -452,7 +460,7 @@ public class OdesignGenerator {
 		nonemapping.setName("None Element");
 		nonemapping.setDomainClass(ep.getName() + ".NoneElement");
 		nonemapping.setSemanticCandidatesExpression("feature:containsNoneElement");
-		dd.getAllLayers().get(0).getNodeMappings().add(nonemapping);	
+		layer.getNodeMappings().add(nonemapping);	
 		
 		
 		
@@ -484,7 +492,7 @@ public class OdesignGenerator {
 		mapToNone.setTargetFinderExpression("feature:noneElement");
 		mapToNone.getTargetMapping().add(nonemapping);
 		mapToNone.setStyle(edgestylenone);
-		dd.getAllLayers().get(0).getEdgeMappings().add(mapToNone);
+		layer.getEdgeMappings().add(mapToNone);
 
 		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
 		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
@@ -507,7 +515,7 @@ public class OdesignGenerator {
 		cm.setLabel(metamodelElement.getName());
 		cm.setName(metamodelElement.getName());
 		cm.setDomainClass(ep.getName() + "." + metamodelElement.getName());
-		dd.getAllLayers().get(0).getContainerMappings().add(cm);
+		layer.getContainerMappings().add(cm);
 
 		
 
@@ -576,7 +584,7 @@ public class OdesignGenerator {
 			}
 		}
 		edgeintermediate.setSemanticCandidatesExpression("feature:containsIntermediateElement");
-		dd.getAllLayers().get(0).getEdgeMappings().add(edgeintermediate);
+		attributesLayer.getEdgeMappings().add(edgeintermediate);
 
 		EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 		CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
@@ -598,7 +606,7 @@ public class OdesignGenerator {
 		
 		//pointTo.setStyle(edgestyleVA);
 
-		dd.getAllLayers().get(0).getEdgeMappings().add(pointTo);
+		attributesLayer.getEdgeMappings().add(pointTo);
 
 		EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 		CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
@@ -641,7 +649,7 @@ public class OdesignGenerator {
 
 		to_virtualAttributeEdge.setStyle(to_edgestyleVA);
 
-		dd.getAllLayers().get(0).getEdgeMappings().add(to_virtualAttributeEdge);
+		layer.getEdgeMappings().add(to_virtualAttributeEdge);
 		
 // Tool section part 
 		// Tool section creation
@@ -812,7 +820,7 @@ public class OdesignGenerator {
 		setValue3.setValueExpression("aql:'Class name'");
 		containerInstance.getSubModelOperations().add(setValue3);
 		containerCreation.setInitialOperation(init2);
-		dd.getAllLayers().get(0).getToolSections().add(toolsec);
+		layer.getToolSections().add(toolsec);
         containerCreation.setIconPath("/bento.sirius.odesign.generator/icons/class.png");
 		for (NodeMapping nmapp : this.oroginalNodes) {
 			mapToNone.getSourceMapping().add(nmapp);
@@ -867,7 +875,17 @@ public class OdesignGenerator {
 				changecontextVAE.getSubModelOperations().add(setValueVAE);
 				changecontextVAE.setBrowseExpression("var:source");
 				vaedgecreationdesc.setInitialOperation(initVAE);
+				
+				
+				
+				saveOdesign(file, ep);
+		
+	}
 
+	
+	
+	private void saveOdesign(File file, EPackage ep) {
+		
 		try {
 			// jesusc: we should probably find a better name
 			String diagramName = this.diagramDescription.getName() + "_" + ep.getName();
@@ -883,8 +901,8 @@ public class OdesignGenerator {
 			e.printStackTrace();
 		}
 
+		
 	}
-
 	private void adaptExpressionIfNeeded(String expr, Consumer<String> setter) {
 		if (expr == null)
 			return;
