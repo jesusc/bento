@@ -2,6 +2,7 @@ package com.odesign.generator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.diagram.description.DiagramDescription;
 
 import com.odesign.generator.tools.BindingTools;
 
@@ -71,12 +73,26 @@ public class Generate {
 		
 		metamodelGenerator.save(metamodelOutputFolder);
 		
+		
+		List<DiagramDescription> diagramRepresenation=new ArrayList<DiagramDescription>();
+		
+		
+		
+		for (DiagramDescription dd : odesigngenerator.getDiagramsList()) {
+			
+			diagramRepresenation.add(dd);
+		}
+		
+		for(DiagramDescription dd : diagramRepresenation) { 
 		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), odesignOutputFolder, this.epack,
-				metamodelGenerator.getMetamodelElement(), metamodelGenerator.getIntermediateElement());
-
+				metamodelGenerator.getMetamodelElement(), metamodelGenerator.getIntermediateElement(),dd);
+		}
+		
 		this.odesignGeneratedFile = odesigngenerator.getGeneratedFile();
 		
 		this.metamodelGeneratedFile = metamodelGenerator.getGeneratedFile();
+		
+		odesigngenerator.saveOdesign(odesignOutputFolder, this.epack);
 	}
 
 	public EPackage getEpack() {

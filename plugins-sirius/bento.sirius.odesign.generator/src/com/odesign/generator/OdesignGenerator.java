@@ -77,16 +77,16 @@ public class OdesignGenerator {
 	private Resource resource;
 	private EPackage epackage;
 	private DiagramDescription diagramDescription;
-	private EList<RepresentationDescription> diagramsList;
+	private List<DiagramDescription> diagramsList=new ArrayList<>();
 	private List<NodeMapping> nmlist = new ArrayList<>();
 	private Group group;
 	private Viewpoint viewPoint;
 	private File generatedFile;
 	private List<EdgeMapping> emlist = new ArrayList<>();
 
-	private EList<EdgeMapping> oroginalEdges;
-	private EList<NodeMapping> oroginalNodes;
-	private EList<ContainerMapping> oroginalContainers;
+	private EList<EdgeMapping> originalEdges;
+	private EList<NodeMapping> originalNodes;
+	private EList<ContainerMapping> originalContainers;
 	private String originalPackageName;
 	private String targetPackageName;
 
@@ -111,13 +111,72 @@ public class OdesignGenerator {
 	public void setDiagramDescription(DiagramDescription diagramDescription) {
 		this.diagramDescription = diagramDescription;
 	}
+	
+	
+
+	public List<DiagramDescription> getDiagramsList() {
+		return diagramsList;
+	}
+
+	public void setDiagramsList(EList<DiagramDescription> diagramsList) {
+		this.diagramsList = diagramsList;
+	}
+
+	public Viewpoint getViewPoint() {
+		return viewPoint;
+	}
+
+	public void setViewPoint(Viewpoint viewPoint) {
+		this.viewPoint = viewPoint;
+	}
+
+	public EList<EdgeMapping> getOriginalEdges() {
+		return originalEdges;
+	}
+
+	public void setOriginalEdges(EList<EdgeMapping> originalEdges) {
+		this.originalEdges = originalEdges;
+	}
+
+	public EList<NodeMapping> getOriginalNodes() {
+		return originalNodes;
+	}
+
+	public void setOriginalNodes(EList<NodeMapping> originalNodes) {
+		this.originalNodes = originalNodes;
+	}
+
+	public EList<ContainerMapping> getOriginalContainers() {
+		return originalContainers;
+	}
+
+	public void setOriginalContainers(EList<ContainerMapping> originalContainers) {
+		this.originalContainers = originalContainers;
+	}
+
+	public String getOriginalPackageName() {
+		return originalPackageName;
+	}
+
+	public void setOriginalPackageName(String originalPackageName) {
+		this.originalPackageName = originalPackageName;
+	}
+
+	public void setEpackage(EPackage epackage) {
+		this.epackage = epackage;
+	}
+
+	public void setGeneratedFile(File generatedFile) {
+		this.generatedFile = generatedFile;
+	}
 
 	public OdesignGenerator(String modelURI, File file) {
 		super();
 
 		ResourceSet rs = new ResourceSetImpl();
+		try {
 		this.resource = rs.getResource(URI.createFileURI(modelURI), true);
-
+		} catch(Exception e) {e.printStackTrace();}
 		TreeIterator<EObject> content = resource.getAllContents();
 
 		while (content.hasNext()) {
@@ -126,14 +185,14 @@ public class OdesignGenerator {
 			if (obj instanceof DiagramDescription) {
 				this.diagramDescription = (DiagramDescription) obj;
 				this.epackage = ((DiagramDescription) obj).getMetamodel().get(0);
-				this.oroginalEdges = this.diagramDescription.getAllEdgeMappings();
-				this.oroginalNodes = this.diagramDescription.getAllNodeMappings();
-				this.oroginalContainers = this.diagramDescription.getAllContainerMappings();
-
+				this.originalEdges = this.diagramDescription.getAllEdgeMappings();
+				this.originalNodes = this.diagramDescription.getAllNodeMappings();
+				this.originalContainers = this.diagramDescription.getAllContainerMappings();
+				this.diagramsList.add((DiagramDescription) obj);
 			}
 
 			if (obj instanceof Group) {
-				this.diagramsList = ((Group) obj).getOwnedViewpoints().get(0).getOwnedRepresentations();
+			//	this.diagramsList = ((Group) obj).getOwnedViewpoints().get(0).getOwnedRepresentations();
 				this.group = (Group) obj;
 			}
 
@@ -146,7 +205,7 @@ public class OdesignGenerator {
 	}
 
 	public void GenerateNodesVersion(HashMap<EClass, List<EClass>> eclassMap, File file, EPackage ep,
-			EClass metamodelElement, EClass intermediateElement) {
+			EClass metamodelElement, EClass intermediateElement, DiagramDescription diagram) {
 
 		// Let's assume there is only one meta-model for the moment
 		if (diagramDescription.getMetamodel().size() != 1)
@@ -156,11 +215,11 @@ public class OdesignGenerator {
 		this.targetPackageName = ep.getName();
 		
 		
-		this.diagramDescription.getMetamodel().clear();
+		diagram.getMetamodel().clear();
 
-		this.diagramDescription.getMetamodel().add(ep);
+		diagram.getMetamodel().add(ep);
 		DiagramDescription dd = DescriptionFactory.eINSTANCE.createDiagramDescription();
-		dd = this.diagramDescription;
+		dd = diagram;
 		
 		String separator=".";
 		if(dd.getDomainClass().contains("::"))
@@ -212,7 +271,7 @@ public class OdesignGenerator {
 		List<EdgeMapping> edgeList = new ArrayList<>();
 		List<NodeMapping> nodeList = new ArrayList<>();
 		List<ContainerMapping> containerList = new ArrayList<>();
-		dd.setName("Diagram");
+		//dd.setName("Diagram");
 		this.diagramsList.add(dd);
 
 		
@@ -822,16 +881,16 @@ public class OdesignGenerator {
 		containerCreation.setInitialOperation(init2);
 		layer.getToolSections().add(toolsec);
         containerCreation.setIconPath("/bento.sirius.odesign.generator/icons/class.png");
-		for (NodeMapping nmapp : this.oroginalNodes) {
+		for (NodeMapping nmapp : this.originalNodes) {
 			mapToNone.getSourceMapping().add(nmapp);
 
 		}
 
-		for (EdgeMapping edgemapp : this.oroginalEdges) {
+		for (EdgeMapping edgemapp : this.originalEdges) {
 			mapToNone.getSourceMapping().add(edgemapp);
 		}
 
-		for (ContainerMapping nmapp : this.oroginalContainers) {
+		for (ContainerMapping nmapp : this.originalContainers) {
 			mapToNone.getSourceMapping().add(nmapp);
 		}
 		
@@ -878,17 +937,17 @@ public class OdesignGenerator {
 				
 				
 				
-				saveOdesign(file, ep);
+				//saveOdesign(file, ep);
 		
 	}
 
 	
 	
-	private void saveOdesign(File file, EPackage ep) {
+	public void saveOdesign(File file, EPackage ep) {
 		
 		try {
 			// jesusc: we should probably find a better name
-			String diagramName = this.diagramDescription.getName() + "_" + ep.getName();
+			String diagramName = this.viewPoint.getName() + "_" + ep.getName();
 
 			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + ".odesign");
 			resource.save(new FileOutputStream(generatedFile), null);
