@@ -134,7 +134,7 @@ public class GbindGenerator {
 				}
 
 			}
-
+			sb.append(System.getProperty("line.separator"));
 			if (obj.eClass().getName().equals("MetamodelElementFeature")) {
 
 				EList<EObject> list = obj.eCrossReferences();
@@ -159,7 +159,7 @@ public class GbindGenerator {
 				}}
 				sb.append(System.getProperty("line.separator"));
 				System.out.println();
-			}
+			} 
 			
 			if (obj.eClass().getName().equals("VirtualAttribute")) {
 				EList<EObject> references = obj.eCrossReferences();
