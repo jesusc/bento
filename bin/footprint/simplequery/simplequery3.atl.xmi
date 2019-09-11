@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Library location="1:1-8:21" name="simplequery1">
+    <helpers location="6:1-8:21">
+      <commentsBefore>-- helper context CD!Class def : myQuery() : OclAny = </commentsBefore>
+      <commentsBefore>--	self.features->select(f|f.name = 'X');</commentsBefore>
+      <definition location="6:8-8:20">
+        <feature xsi:type="ocl:Attribute" location="6:30-8:20" name="super_">
+          <initExpression xsi:type="ocl:CollectionOperationCallExp" location="7:2-8:20" operationName="excluding">
+            <source xsi:type="ocl:IteratorExp" location="7:2-7:45" name="collect">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="7:2-7:21" name="generalization">
+                <source xsi:type="ocl:VariableExp" location="7:2-7:6" referredVariable="/2"/>
+              </source>
+              <body xsi:type="ocl:NavigationOrAttributeCallExp" location="7:35-7:44" name="general">
+                <source xsi:type="ocl:VariableExp" location="7:35-7:36" referredVariable="/0/@helpers.0/@definition/@feature/@initExpression/@source/@iterators.0"/>
+              </body>
+              <iterators location="7:31-7:32" varName="g" variableExp="/0/@helpers.0/@definition/@feature/@initExpression/@source/@body/@source"/>
+            </source>
+            <arguments xsi:type="ocl:VariableExp" location="8:15-8:19" referredVariable="/3"/>
+          </initExpression>
+          <type xsi:type="ocl:OclAnyType" location="6:39-6:45"/>
+        </feature>
+        <context_ location="6:8-6:24">
+          <context_ xsi:type="ocl:OclModelElement" location="6:16-6:24" name="Class" model="/1"/>
+        </context_>
+      </definition>
+    </helpers>
+  </atl:Library>
+  <ocl:OclModel location="6:16-6:18" name="CD" elements="/0/@helpers.0/@definition/@context_/@context_"/>
+  <ocl:VariableDeclaration location="7:2-7:6" varName="self" variableExp="/0/@helpers.0/@definition/@feature/@initExpression/@source/@source/@source"/>
+  <ocl:VariableDeclaration location="8:15-8:19" varName="self" variableExp="/0/@helpers.0/@definition/@feature/@initExpression/@arguments.0"/>
+</xmi:XMI>

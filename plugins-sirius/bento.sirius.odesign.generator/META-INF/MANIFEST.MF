@@ -42,4 +42,8 @@ Require-Bundle: org.eclipse.osgi;bundle-version="3.13.0",
  com.google.guava;bundle-version="18.0.0"
 Export-Package: bento.sirius.odesign,
  com.odesign.generator,
- com.odesign.generator.ui.common
+ com.odesign.generator.tools,
+ com.odesign.generator.ui.common,
+ com.odesign.generator.values,
+ com.odesign.generator.ui,
+ com.odesign.generator.ui.popusmenu

@@ -1,0 +1,31 @@
+binding tasks_flow2scenes {
+	 concept SCENES : "wakame.scene"
+	 metamodel TASKS_FLOW : "wakame.tasksflow"
+
+	 class History to TasksFlow
+
+
+	 class Action to NONE
+
+	 class Place to NONE
+
+	 class Scene to Task
+
+	 class Comment to TaskDetails
+
+	 class Character to TaskPerformer
+
+
+
+	 feature Scene.name  to  Task.title
+
+
+	 feature Comment.text  to  TaskDetails.text
+
+
+	 feature Character.name  to  TaskPerformer.name
+
+ }
+ 
+ 
+ 

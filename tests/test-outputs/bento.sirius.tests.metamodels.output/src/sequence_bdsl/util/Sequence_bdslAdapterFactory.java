@@ -80,24 +80,32 @@ public class Sequence_bdslAdapterFactory extends AdapterFactoryImpl {
 				return createvalueElementAdapter();
 			}
 			@Override
+			public Adapter caseNoneElement(NoneElement object) {
+				return createNoneElementAdapter();
+			}
+			@Override
 			public Adapter caseBindingElement(BindingElement object) {
 				return createBindingElementAdapter();
+			}
+			@Override
+			public Adapter caseIntermediateElement(IntermediateElement object) {
+				return createIntermediateElementAdapter();
 			}
 			@Override
 			public Adapter caseMetamodelElement(MetamodelElement object) {
 				return createMetamodelElementAdapter();
 			}
 			@Override
-			public Adapter caseIntemediateElement(IntemediateElement object) {
-				return createIntemediateElementAdapter();
-			}
-			@Override
 			public Adapter caseMetamodelElementFeature(MetamodelElementFeature object) {
 				return createMetamodelElementFeatureAdapter();
 			}
 			@Override
-			public Adapter caseFeatureClass(FeatureClass object) {
-				return createFeatureClassAdapter();
+			public Adapter caseBindingAttribute(BindingAttribute object) {
+				return createBindingAttributeAdapter();
+			}
+			@Override
+			public Adapter caseVirtualAttribute(VirtualAttribute object) {
+				return createVirtualAttributeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -162,6 +170,20 @@ public class Sequence_bdslAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link sequence_bdsl.NoneElement <em>None Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see sequence_bdsl.NoneElement
+	 * @generated
+	 */
+	public Adapter createNoneElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link sequence_bdsl.BindingElement <em>Binding Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -172,6 +194,20 @@ public class Sequence_bdslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBindingElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link sequence_bdsl.IntermediateElement <em>Intermediate Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see sequence_bdsl.IntermediateElement
+	 * @generated
+	 */
+	public Adapter createIntermediateElementAdapter() {
 		return null;
 	}
 
@@ -190,20 +226,6 @@ public class Sequence_bdslAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link sequence_bdsl.IntemediateElement <em>Intemediate Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see sequence_bdsl.IntemediateElement
-	 * @generated
-	 */
-	public Adapter createIntemediateElementAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link sequence_bdsl.MetamodelElementFeature <em>Metamodel Element Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -218,16 +240,30 @@ public class Sequence_bdslAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link sequence_bdsl.FeatureClass <em>Feature Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link sequence_bdsl.BindingAttribute <em>Binding Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see sequence_bdsl.FeatureClass
+	 * @see sequence_bdsl.BindingAttribute
 	 * @generated
 	 */
-	public Adapter createFeatureClassAdapter() {
+	public Adapter createBindingAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link sequence_bdsl.VirtualAttribute <em>Virtual Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see sequence_bdsl.VirtualAttribute
+	 * @generated
+	 */
+	public Adapter createVirtualAttributeAdapter() {
 		return null;
 	}
 

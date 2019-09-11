@@ -2,13 +2,20 @@
  */
 package sequence_bdsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import sequence_bdsl.Element;
 import sequence_bdsl.Sequence_bdslPackage;
@@ -61,14 +68,14 @@ public class ElementImpl extends BindingElementImpl implements Element {
 	protected Element next;
 
 	/**
-	 * The cached value of the '{@link #getContainsvalueElement() <em>Containsvalue Element</em>}' containment reference.
+	 * The cached value of the '{@link #getContainsvalueElement() <em>Containsvalue Element</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getContainsvalueElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected valueElement containsvalueElement;
+	protected EList<valueElement> containsvalueElement;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -158,42 +165,11 @@ public class ElementImpl extends BindingElementImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public valueElement getContainsvalueElement() {
+	public EList<valueElement> getContainsvalueElement() {
+		if (containsvalueElement == null) {
+			containsvalueElement = new EObjectContainmentEList<valueElement>(valueElement.class, this, Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT);
+		}
 		return containsvalueElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetContainsvalueElement(valueElement newContainsvalueElement, NotificationChain msgs) {
-		valueElement oldContainsvalueElement = containsvalueElement;
-		containsvalueElement = newContainsvalueElement;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT, oldContainsvalueElement, newContainsvalueElement);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContainsvalueElement(valueElement newContainsvalueElement) {
-		if (newContainsvalueElement != containsvalueElement) {
-			NotificationChain msgs = null;
-			if (containsvalueElement != null)
-				msgs = ((InternalEObject)containsvalueElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT, null, msgs);
-			if (newContainsvalueElement != null)
-				msgs = ((InternalEObject)newContainsvalueElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT, null, msgs);
-			msgs = basicSetContainsvalueElement(newContainsvalueElement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT, newContainsvalueElement, newContainsvalueElement));
 	}
 
 	/**
@@ -207,7 +183,7 @@ public class ElementImpl extends BindingElementImpl implements Element {
 			case Sequence_bdslPackage.ELEMENT__NEXT:
 				return basicSetNext(null, msgs);
 			case Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT:
-				return basicSetContainsvalueElement(null, msgs);
+				return ((InternalEList<?>)getContainsvalueElement()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -235,6 +211,7 @@ public class ElementImpl extends BindingElementImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -245,7 +222,8 @@ public class ElementImpl extends BindingElementImpl implements Element {
 				setNext((Element)newValue);
 				return;
 			case Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT:
-				setContainsvalueElement((valueElement)newValue);
+				getContainsvalueElement().clear();
+				getContainsvalueElement().addAll((Collection<? extends valueElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -266,7 +244,7 @@ public class ElementImpl extends BindingElementImpl implements Element {
 				setNext((Element)null);
 				return;
 			case Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT:
-				setContainsvalueElement((valueElement)null);
+				getContainsvalueElement().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -285,7 +263,7 @@ public class ElementImpl extends BindingElementImpl implements Element {
 			case Sequence_bdslPackage.ELEMENT__NEXT:
 				return next != null;
 			case Sequence_bdslPackage.ELEMENT__CONTAINSVALUE_ELEMENT:
-				return containsvalueElement != null;
+				return containsvalueElement != null && !containsvalueElement.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

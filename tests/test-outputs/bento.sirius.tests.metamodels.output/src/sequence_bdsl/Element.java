@@ -2,6 +2,7 @@
  */
 package sequence_bdsl;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,29 +76,19 @@ public interface Element extends BindingElement {
 	void setNext(Element value);
 
 	/**
-	 * Returns the value of the '<em><b>Containsvalue Element</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Containsvalue Element</b></em>' containment reference list.
+	 * The list contents are of type {@link sequence_bdsl.valueElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Containsvalue Element</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Containsvalue Element</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Containsvalue Element</em>' containment reference.
-	 * @see #setContainsvalueElement(valueElement)
+	 * @return the value of the '<em>Containsvalue Element</em>' containment reference list.
 	 * @see sequence_bdsl.Sequence_bdslPackage#getElement_ContainsvalueElement()
 	 * @model containment="true"
 	 * @generated
 	 */
-	valueElement getContainsvalueElement();
-
-	/**
-	 * Sets the value of the '{@link sequence_bdsl.Element#getContainsvalueElement <em>Containsvalue Element</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Containsvalue Element</em>' containment reference.
-	 * @see #getContainsvalueElement()
-	 * @generated
-	 */
-	void setContainsvalueElement(valueElement value);
+	EList<valueElement> getContainsvalueElement();
 
 } // Element

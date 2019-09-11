@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<reveng_model:RevengModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reveng_model="http://bento/componetization/reveng_model" componentPath="/bento.componetization.atl.examples/component/oo2measure.gcomponent">
+  <transformation xsi:type="reveng_model:AtlTransformation" path="/bento.componetization.atl.examples/src/zoo/uml2measure/uml2measure-all.atl">
+    <metamodels path="/bento.componetization.atl.examples/src/zoo/uml2measure/UML2_3_0_0.ecore" name="UML2" modelName="IN" becomeConcept="true">
+      <extractedConcept path="/bento.componetization.atl.examples/concepts/UML2.ecore"/>
+    </metamodels>
+    <metamodels path="/bento.componetization.atl.examples/src/zoo/uml2measure/Measure.ecore" name="Measure" modelName="OUT" kind="OUT"/>
+  </transformation>
+  <template xsi:type="reveng_model:AtlTransformation" path="/bento.componetization.atl.examples/template/uml2measure-all.atl"/>
+</reveng_model:RevengModel>

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -392,6 +395,7 @@ public class ModelGenerator {
 			options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 
 			this.resourceTarget.save(new FileOutputStream(new File(outputFile.getAbsolutePath())), options);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 

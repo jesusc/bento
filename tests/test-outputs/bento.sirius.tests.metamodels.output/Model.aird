@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:metamodel_bdsl="http://www.example.org/metamodel_bdsl" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description">
+  <viewpoint:DAnalysis uid="_lHFCUK7NEemKSMtNheMnQg" selectedViews="_o6j7AK7NEemKSMtNheMnQg" version="14.1.0.201810161215">
+    <semanticResources>Model.xmi</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_o6j7AK7NEemKSMtNheMnQg">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/resource/bento.sirius.tests/test-outputs/SimQRi%20Design_GraphicalBinding_metamodel_bdsl.odesign#//@ownedViewpoints[name='SimQRi%20Design_GraphicalBinding']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_p2HkUK7NEemKSMtNheMnQg" name="new SimQRi Diagram" repPath="#_p15h4K7NEemKSMtNheMnQg">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/resource/bento.sirius.tests/test-outputs/SimQRi%20Design_GraphicalBinding_metamodel_bdsl.odesign#//@ownedViewpoints[name='SimQRi%20Design_GraphicalBinding']/@ownedRepresentations[name='SimQRi%20Diagram']"/>
+        <target xmi:type="metamodel_bdsl:Model" href="Model.xmi#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_p15h4K7NEemKSMtNheMnQg" name="new SimQRi Diagram">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_p2D58K7NEemKSMtNheMnQg" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_p2D58a7NEemKSMtNheMnQg"/>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_p2QuQK7NEemKSMtNheMnQg" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_p2RVUK7NEemKSMtNheMnQg" type="Sirius" element="_p15h4K7NEemKSMtNheMnQg" measurementUnit="Pixel">
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_p2RVUa7NEemKSMtNheMnQg"/>
+      </data>
+    </ownedAnnotationEntries>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/resource/bento.sirius.tests/test-outputs/SimQRi%20Design_GraphicalBinding_metamodel_bdsl.odesign#//@ownedViewpoints[name='SimQRi%20Design_GraphicalBinding']/@ownedRepresentations[name='SimQRi%20Diagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_p16wAK7NEemKSMtNheMnQg"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/resource/bento.sirius.tests/test-outputs/SimQRi%20Design_GraphicalBinding_metamodel_bdsl.odesign#//@ownedViewpoints[name='SimQRi%20Design_GraphicalBinding']/@ownedRepresentations[name='SimQRi%20Diagram']/@defaultLayer"/>
+    <activatedLayers xmi:type="description_1:AdditionalLayer" href="platform:/resource/bento.sirius.tests/test-outputs/SimQRi%20Design_GraphicalBinding_metamodel_bdsl.odesign#//@ownedViewpoints[name='SimQRi%20Design_GraphicalBinding']/@ownedRepresentations[name='SimQRi%20Diagram']/@additionalLayers[name='SD_edges']"/>
+    <target xmi:type="metamodel_bdsl:Model" href="Model.xmi#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>

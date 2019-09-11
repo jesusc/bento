@@ -64,8 +64,9 @@ public class Generate {
 		this.epack.setName(ep.getName() + "_bdsl");
 		this.epack.setNsPrefix(ep.getNsPrefix() + "_bdsl");
 		this.epack.setNsURI(ep.getNsURI() + "_bdsl");
-
+		metamodelGenerator.createEReferencesClasses();
 		metamodelGenerator.createFeatureCLasses();
+	
 		
 		metamodelGenerator.createBindingClass();
 		
@@ -84,7 +85,7 @@ public class Generate {
 		}
 		
 		for(DiagramDescription dd : diagramRepresenation) { 
-		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), odesignOutputFolder, this.epack,
+		odesigngenerator.GenerateNodesVersion(metamodelGenerator.getNewClassifiers(), metamodelGenerator.getTagsEReferences(), odesignOutputFolder, this.epack,
 				metamodelGenerator.getMetamodelElement(), metamodelGenerator.getIntermediateElement(),dd);
 		}
 		

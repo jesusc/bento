@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import sequence_bdsl.FeatureClass;
+import sequence_bdsl.BindingAttribute;
 import sequence_bdsl.MetamodelElementFeature;
 import sequence_bdsl.Sequence_bdslPackage;
 
@@ -27,13 +27,23 @@ import sequence_bdsl.Sequence_bdslPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link sequence_bdsl.impl.MetamodelElementFeatureImpl#getName <em>Name</em>}</li>
  *   <li>{@link sequence_bdsl.impl.MetamodelElementFeatureImpl#getFeatureClass <em>Feature Class</em>}</li>
+ *   <li>{@link sequence_bdsl.impl.MetamodelElementFeatureImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container implements MetamodelElementFeature {
+	/**
+	 * The cached value of the '{@link #getFeatureClass() <em>Feature Class</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFeatureClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BindingAttribute> featureClass;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,16 +65,6 @@ public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container im
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFeatureClass() <em>Feature Class</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFeatureClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<FeatureClass> featureClass;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -81,6 +81,18 @@ public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container im
 	@Override
 	protected EClass eStaticClass() {
 		return Sequence_bdslPackage.Literals.METAMODEL_ELEMENT_FEATURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BindingAttribute> getFeatureClass() {
+		if (featureClass == null) {
+			featureClass = new EObjectResolvingEList<BindingAttribute>(BindingAttribute.class, this, Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS);
+		}
+		return featureClass;
 	}
 
 	/**
@@ -109,25 +121,13 @@ public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<FeatureClass> getFeatureClass() {
-		if (featureClass == null) {
-			featureClass = new EObjectResolvingEList<FeatureClass>(FeatureClass.class, this, Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS);
-		}
-		return featureClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
-				return getName();
 			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS:
 				return getFeatureClass();
+			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,12 +141,12 @@ public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
-				setName((String)newValue);
-				return;
 			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS:
 				getFeatureClass().clear();
-				getFeatureClass().addAll((Collection<? extends FeatureClass>)newValue);
+				getFeatureClass().addAll((Collection<? extends BindingAttribute>)newValue);
+				return;
+			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -160,11 +160,11 @@ public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS:
 				getFeatureClass().clear();
+				return;
+			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -178,10 +178,10 @@ public class MetamodelElementFeatureImpl extends MinimalEObjectImpl.Container im
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS:
 				return featureClass != null && !featureClass.isEmpty();
+			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}

@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.rowset.serial.SerialStruct;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -21,7 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import com.odesign.generator.tools.BindingTools;
-import com.sun.xml.internal.messaging.saaj.util.transform.EfficientStreamingTransformer;
+
 
 /**
  * @author souhaila
@@ -88,7 +86,7 @@ public class GbindGenerator {
 
 	public void createHeader(StringBuilder header, MetamodelInfo source, MetamodelInfo target) {
 		header.append("binding " + target.name + "2" + source.name + " {");
-		header.append(System.getProperty("line.separator"));
+
 		header.append(System.getProperty("line.separator"));
 		header.append("\t concept " + source.name.toUpperCase() + " : " + "\"" + source.uri + "\"");
 
@@ -96,6 +94,7 @@ public class GbindGenerator {
 		header.append("\t metamodel " + target.name.toUpperCase() + " : " + "\"" + target.uri + "\"");
 		header.append(System.getProperty("line.separator"));
 		header.append(System.getProperty("line.separator"));
+
 	}
 
 	public void createRootBinding(StringBuilder binding, MetamodelInfo concept, MetamodelInfo metamodel) {
@@ -104,7 +103,7 @@ public class GbindGenerator {
 		String sourceRootName = (BindingTools.findRoot(BindingTools.fillContainersList(sourceEP))).getName();
 
 		EPackage targetEP = BindingTools.getEPackage(metamodel.resource);
-		String targetRootName = (BindingTools.findRoot(BindingTools.fillContainersList(targetEP))).getName();
+		String targetRootName = "TasksFlow";//(BindingTools.findRoot(BindingTools.fillContainersList(targetEP))).getName();
 
 		binding.append("\t class " + sourceRootName + " to " + targetRootName);
 		binding.append(System.getProperty("line.separator"));
@@ -118,6 +117,15 @@ public class GbindGenerator {
 			EObject obj = content.next();
 			EObject sourceObj;
 			EObject targetObj;
+
+			EList<EObject> listRefs = obj.eCrossReferences();
+			for (EObject eobject : listRefs) {
+				if (eobject.eClass().getName().equals("NoneElement")) {
+					sb.append("\t class " + obj.eClass().getName() + " to NONE");
+				}
+			}
+			System.out.println();
+
 			if (obj.eClass().getName().equals("IntermediateElement")) {
 
 				EList<EObject> refs = obj.eCrossReferences();
@@ -134,54 +142,56 @@ public class GbindGenerator {
 				}
 
 			}
+
 			sb.append(System.getProperty("line.separator"));
 			if (obj.eClass().getName().equals("MetamodelElementFeature")) {
 
 				EList<EObject> list = obj.eCrossReferences();
 				EObject feature = list.get(0);
-				
-				String containerOfFeature = feature.eContainer().eClass().getName();
-				String nameOfFeature=feature.eClass().getName().replace(containerOfFeature, "");
-			
-				EObject container = obj.eContainer();
-				
-				for (EStructuralFeature estructural:obj.eClass().getEAllAttributes()) {
-					if(estructural.getName().equals("name")) {
-				
-				EList<EAttribute> attributes = container.eClass().getEAllAttributes();
-				for (EAttribute attr : attributes) {
-					if (attr.getName().equals("name")) {
-						
-						sb.append("\t feature "+ containerOfFeature+"."+nameOfFeature +
-								"  to  "+
-								container.eGet((EStructuralFeature)attr)+"."+obj.eGet((EStructuralFeature)estructural));
-					}}
-				}}
-				sb.append(System.getProperty("line.separator"));
-				System.out.println();
-			} 
-			
-			if (obj.eClass().getName().equals("VirtualAttribute")) {
-				EList<EObject> references = obj.eCrossReferences();
-				
-				EObject targetFeature = references.get(0);
-				EList<EAttribute> listAttributes = obj.eClass().getEAllAttributes();
-				for (EAttribute attribute: listAttributes) {
-					if (attribute.getName().equals("Expression")) { 
 
-						
-						String containerOfTargetFeature = targetFeature.eContainer().eClass().getName();
-						String targetFeatureName=targetFeature.eClass().getName().replace(containerOfTargetFeature, "");
-						
-						sb.append(
-								"\t feature "+ containerOfTargetFeature+"."+targetFeatureName 
-								+" = " + 
-										obj.eGet((EStructuralFeature )attribute));
+				String containerOfFeature = feature.eContainer().eClass().getName();
+				String nameOfFeature = feature.eClass().getName().replace(containerOfFeature, "");
+
+				EObject container = obj.eContainer();
+
+				for (EStructuralFeature estructural : obj.eClass().getEAllAttributes()) {
+					if (estructural.getName().equals("name")) {
+
+						EList<EAttribute> attributes = container.eClass().getEAllAttributes();
+						for (EAttribute attr : attributes) {
+							if (attr.getName().equals("name")) {
+
+								sb.append("\t feature " + containerOfFeature + "." + nameOfFeature + "  to  "
+										+ container.eGet((EStructuralFeature) attr) + "."
+										+ obj.eGet((EStructuralFeature) estructural));
+							}
+						}
 					}
 				}
-			
+				sb.append(System.getProperty("line.separator"));
+				System.out.println();
 			}
-		}			
+
+			if (obj.eClass().getName().equals("VirtualAttribute")) {
+				EList<EObject> references = obj.eCrossReferences();
+
+				EObject targetFeature = references.get(0);
+				EList<EAttribute> listAttributes = obj.eClass().getEAllAttributes();
+				for (EAttribute attribute : listAttributes) {
+					if (attribute.getName().equals("Expression")) {
+
+						String containerOfTargetFeature = targetFeature.eContainer().eClass().getName();
+						String targetFeatureName = targetFeature.eClass().getName().replace(containerOfTargetFeature,
+								"");
+
+						sb.append("\t feature " + containerOfTargetFeature + "." + targetFeatureName + " = "
+								+ obj.eGet((EStructuralFeature) attribute));
+					}
+				}
+
+			}
+
+		}
 	}
 
 	public void saveGbindFile(String outputURI, String filename, StringBuilder sb) {

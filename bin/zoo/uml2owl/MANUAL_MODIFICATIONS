@@ -1,0 +1,17 @@
+
+- Replace "uml::" -> "" . Not supported by our checker
+
+- Replace CLass by Class. Developer error.
+
+- property.Class by .class . This is due to evolution of the UML2 meta-model
+- InstanceSpecification.Classifier => .classifier
+
+- Line 594
+  Commented this:
+
+  	do {
+		for( i in s.value ) {
+			thisModule.createStatement( s, i );
+		}
+	}
+  
