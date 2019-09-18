@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link metamodel_bdsl.Output#getType <em>Type</em>}</li>
  *   <li>{@link metamodel_bdsl.Output#getProcessOutputFlow <em>Process Output Flow</em>}</li>
  *   <li>{@link metamodel_bdsl.Output#getDescription <em>Description</em>}</li>
+ *   <li>{@link metamodel_bdsl.Output#getEref_processOutputFlowOutput51 <em>Eref process Output Flow Output51</em>}</li>
  *   <li>{@link metamodel_bdsl.Output#getContainstypeOutput <em>Containstype Output</em>}</li>
  *   <li>{@link metamodel_bdsl.Output#getContainsdescriptionOutput <em>Containsdescription Output</em>}</li>
  * </ul>
@@ -97,6 +98,32 @@ public interface Output extends BindingElement {
 	 * @generated
 	 */
 	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref process Output Flow Output51</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref process Output Flow Output51</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref process Output Flow Output51</em>' containment reference.
+	 * @see #setEref_processOutputFlowOutput51(processOutputFlowOutput51)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getOutput_Eref_processOutputFlowOutput51()
+	 * @model containment="true"
+	 * @generated
+	 */
+	processOutputFlowOutput51 getEref_processOutputFlowOutput51();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Output#getEref_processOutputFlowOutput51 <em>Eref process Output Flow Output51</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref process Output Flow Output51</em>' containment reference.
+	 * @see #getEref_processOutputFlowOutput51()
+	 * @generated
+	 */
+	void setEref_processOutputFlowOutput51(processOutputFlowOutput51 value);
 
 	/**
 	 * Returns the value of the '<em><b>Containstype Output</b></em>' containment reference list.

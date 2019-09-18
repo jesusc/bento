@@ -23,6 +23,7 @@ import metamodel_bdsl.Probability;
 import metamodel_bdsl.ProcessOutputFlow;
 import metamodel_bdsl.Query;
 import metamodel_bdsl.Scalar;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Storage;
 import metamodel_bdsl.StorageOutputFlow;
 import metamodel_bdsl.Supplier;
@@ -30,6 +31,10 @@ import metamodel_bdsl.Uniform;
 import metamodel_bdsl.VirtualAttribute;
 import metamodel_bdsl.deliveredPercentageSupplier;
 import metamodel_bdsl.descriptionOutput;
+import metamodel_bdsl.destinationProcessOutputFlow74;
+import metamodel_bdsl.destinationStorageOutputFlow63;
+import metamodel_bdsl.durationBatchProcess42;
+import metamodel_bdsl.durationConveyorBelt132;
 import metamodel_bdsl.errorQuery;
 import metamodel_bdsl.initialContentStorage;
 import metamodel_bdsl.intervalPoisson;
@@ -44,13 +49,30 @@ import metamodel_bdsl.nameQuery;
 import metamodel_bdsl.nameStorage;
 import metamodel_bdsl.nameSupplier;
 import metamodel_bdsl.numberOfChainsBatchProcess;
+import metamodel_bdsl.orderOnStockThresholdStorage22;
 import metamodel_bdsl.orderQuantityOrderOnStockThreshold;
 import metamodel_bdsl.orderTypeOrderOnStockThreshold;
+import metamodel_bdsl.outputConveyorBelt133;
+import metamodel_bdsl.outputsBatchProcess43;
 import metamodel_bdsl.overflowStorage;
 import metamodel_bdsl.percentageOfSuccessBatchProcess;
 import metamodel_bdsl.periodOrderOnStockThreshold;
+import metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73;
+import metamodel_bdsl.processOutputFlowOutput51;
+import metamodel_bdsl.processOutputFlowStorage23;
+import metamodel_bdsl.quantityProcessOutputFlow71;
+import metamodel_bdsl.quantityStorageOutputFlow61;
+import metamodel_bdsl.refillPolicySupplier31;
 import metamodel_bdsl.scaleGaussian;
 import metamodel_bdsl.sizeStorage;
+import metamodel_bdsl.sourceProcessOutputFlow72;
+import metamodel_bdsl.sourceStorageOutputFlow62;
+import metamodel_bdsl.storageOrderOnStockThreshold82;
+import metamodel_bdsl.storageOutputFlowBatchProcess41;
+import metamodel_bdsl.storageOutputFlowConveyorBelt131;
+import metamodel_bdsl.storageOutputFlowStorage21;
+import metamodel_bdsl.supplierDelaySupplier32;
+import metamodel_bdsl.supplierOrderOnStockThreshold81;
 import metamodel_bdsl.systemQuery;
 import metamodel_bdsl.thresholdOrderOnStockThreshold;
 import metamodel_bdsl.typeOutput;
@@ -198,6 +220,90 @@ public class Metamodel_bdslAdapterFactory extends AdapterFactoryImpl {
 				return createConveyorBeltAdapter();
 			}
 			@Override
+			public Adapter casestorageOutputFlowStorage21(storageOutputFlowStorage21 object) {
+				return createstorageOutputFlowStorage21Adapter();
+			}
+			@Override
+			public Adapter caseorderOnStockThresholdStorage22(orderOnStockThresholdStorage22 object) {
+				return createorderOnStockThresholdStorage22Adapter();
+			}
+			@Override
+			public Adapter caseprocessOutputFlowStorage23(processOutputFlowStorage23 object) {
+				return createprocessOutputFlowStorage23Adapter();
+			}
+			@Override
+			public Adapter caserefillPolicySupplier31(refillPolicySupplier31 object) {
+				return createrefillPolicySupplier31Adapter();
+			}
+			@Override
+			public Adapter casesupplierDelaySupplier32(supplierDelaySupplier32 object) {
+				return createsupplierDelaySupplier32Adapter();
+			}
+			@Override
+			public Adapter casestorageOutputFlowBatchProcess41(storageOutputFlowBatchProcess41 object) {
+				return createstorageOutputFlowBatchProcess41Adapter();
+			}
+			@Override
+			public Adapter casedurationBatchProcess42(durationBatchProcess42 object) {
+				return createdurationBatchProcess42Adapter();
+			}
+			@Override
+			public Adapter caseoutputsBatchProcess43(outputsBatchProcess43 object) {
+				return createoutputsBatchProcess43Adapter();
+			}
+			@Override
+			public Adapter caseprocessOutputFlowOutput51(processOutputFlowOutput51 object) {
+				return createprocessOutputFlowOutput51Adapter();
+			}
+			@Override
+			public Adapter casequantityStorageOutputFlow61(quantityStorageOutputFlow61 object) {
+				return createquantityStorageOutputFlow61Adapter();
+			}
+			@Override
+			public Adapter casesourceStorageOutputFlow62(sourceStorageOutputFlow62 object) {
+				return createsourceStorageOutputFlow62Adapter();
+			}
+			@Override
+			public Adapter casedestinationStorageOutputFlow63(destinationStorageOutputFlow63 object) {
+				return createdestinationStorageOutputFlow63Adapter();
+			}
+			@Override
+			public Adapter casequantityProcessOutputFlow71(quantityProcessOutputFlow71 object) {
+				return createquantityProcessOutputFlow71Adapter();
+			}
+			@Override
+			public Adapter casesourceProcessOutputFlow72(sourceProcessOutputFlow72 object) {
+				return createsourceProcessOutputFlow72Adapter();
+			}
+			@Override
+			public Adapter caseprocessOutputFlowDelayProcessOutputFlow73(processOutputFlowDelayProcessOutputFlow73 object) {
+				return createprocessOutputFlowDelayProcessOutputFlow73Adapter();
+			}
+			@Override
+			public Adapter casedestinationProcessOutputFlow74(destinationProcessOutputFlow74 object) {
+				return createdestinationProcessOutputFlow74Adapter();
+			}
+			@Override
+			public Adapter casesupplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81 object) {
+				return createsupplierOrderOnStockThreshold81Adapter();
+			}
+			@Override
+			public Adapter casestorageOrderOnStockThreshold82(storageOrderOnStockThreshold82 object) {
+				return createstorageOrderOnStockThreshold82Adapter();
+			}
+			@Override
+			public Adapter casestorageOutputFlowConveyorBelt131(storageOutputFlowConveyorBelt131 object) {
+				return createstorageOutputFlowConveyorBelt131Adapter();
+			}
+			@Override
+			public Adapter casedurationConveyorBelt132(durationConveyorBelt132 object) {
+				return createdurationConveyorBelt132Adapter();
+			}
+			@Override
+			public Adapter caseoutputConveyorBelt133(outputConveyorBelt133 object) {
+				return createoutputConveyorBelt133Adapter();
+			}
+			@Override
 			public Adapter casenameQuery(nameQuery object) {
 				return createnameQueryAdapter();
 			}
@@ -340,6 +446,10 @@ public class Metamodel_bdslAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVirtualAttribute(VirtualAttribute object) {
 				return createVirtualAttributeAdapter();
+			}
+			@Override
+			public Adapter caseSiriusTag(SiriusTag object) {
+				return createSiriusTagAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -624,6 +734,300 @@ public class Metamodel_bdslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConveyorBeltAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.storageOutputFlowStorage21 <em>storage Output Flow Storage21</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.storageOutputFlowStorage21
+	 * @generated
+	 */
+	public Adapter createstorageOutputFlowStorage21Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.orderOnStockThresholdStorage22 <em>order On Stock Threshold Storage22</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.orderOnStockThresholdStorage22
+	 * @generated
+	 */
+	public Adapter createorderOnStockThresholdStorage22Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.processOutputFlowStorage23 <em>process Output Flow Storage23</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.processOutputFlowStorage23
+	 * @generated
+	 */
+	public Adapter createprocessOutputFlowStorage23Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.refillPolicySupplier31 <em>refill Policy Supplier31</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.refillPolicySupplier31
+	 * @generated
+	 */
+	public Adapter createrefillPolicySupplier31Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.supplierDelaySupplier32 <em>supplier Delay Supplier32</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.supplierDelaySupplier32
+	 * @generated
+	 */
+	public Adapter createsupplierDelaySupplier32Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.storageOutputFlowBatchProcess41 <em>storage Output Flow Batch Process41</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.storageOutputFlowBatchProcess41
+	 * @generated
+	 */
+	public Adapter createstorageOutputFlowBatchProcess41Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.durationBatchProcess42 <em>duration Batch Process42</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.durationBatchProcess42
+	 * @generated
+	 */
+	public Adapter createdurationBatchProcess42Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.outputsBatchProcess43 <em>outputs Batch Process43</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.outputsBatchProcess43
+	 * @generated
+	 */
+	public Adapter createoutputsBatchProcess43Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.processOutputFlowOutput51 <em>process Output Flow Output51</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.processOutputFlowOutput51
+	 * @generated
+	 */
+	public Adapter createprocessOutputFlowOutput51Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.quantityStorageOutputFlow61 <em>quantity Storage Output Flow61</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.quantityStorageOutputFlow61
+	 * @generated
+	 */
+	public Adapter createquantityStorageOutputFlow61Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.sourceStorageOutputFlow62 <em>source Storage Output Flow62</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.sourceStorageOutputFlow62
+	 * @generated
+	 */
+	public Adapter createsourceStorageOutputFlow62Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.destinationStorageOutputFlow63 <em>destination Storage Output Flow63</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.destinationStorageOutputFlow63
+	 * @generated
+	 */
+	public Adapter createdestinationStorageOutputFlow63Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.quantityProcessOutputFlow71 <em>quantity Process Output Flow71</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.quantityProcessOutputFlow71
+	 * @generated
+	 */
+	public Adapter createquantityProcessOutputFlow71Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.sourceProcessOutputFlow72 <em>source Process Output Flow72</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.sourceProcessOutputFlow72
+	 * @generated
+	 */
+	public Adapter createsourceProcessOutputFlow72Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73 <em>process Output Flow Delay Process Output Flow73</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73
+	 * @generated
+	 */
+	public Adapter createprocessOutputFlowDelayProcessOutputFlow73Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.destinationProcessOutputFlow74 <em>destination Process Output Flow74</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.destinationProcessOutputFlow74
+	 * @generated
+	 */
+	public Adapter createdestinationProcessOutputFlow74Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.supplierOrderOnStockThreshold81 <em>supplier Order On Stock Threshold81</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.supplierOrderOnStockThreshold81
+	 * @generated
+	 */
+	public Adapter createsupplierOrderOnStockThreshold81Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.storageOrderOnStockThreshold82 <em>storage Order On Stock Threshold82</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.storageOrderOnStockThreshold82
+	 * @generated
+	 */
+	public Adapter createstorageOrderOnStockThreshold82Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.storageOutputFlowConveyorBelt131 <em>storage Output Flow Conveyor Belt131</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.storageOutputFlowConveyorBelt131
+	 * @generated
+	 */
+	public Adapter createstorageOutputFlowConveyorBelt131Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.durationConveyorBelt132 <em>duration Conveyor Belt132</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.durationConveyorBelt132
+	 * @generated
+	 */
+	public Adapter createdurationConveyorBelt132Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.outputConveyorBelt133 <em>output Conveyor Belt133</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.outputConveyorBelt133
+	 * @generated
+	 */
+	public Adapter createoutputConveyorBelt133Adapter() {
 		return null;
 	}
 
@@ -1128,6 +1532,20 @@ public class Metamodel_bdslAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVirtualAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link metamodel_bdsl.SiriusTag <em>Sirius Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see metamodel_bdsl.SiriusTag
+	 * @generated
+	 */
+	public Adapter createSiriusTagAdapter() {
 		return null;
 	}
 

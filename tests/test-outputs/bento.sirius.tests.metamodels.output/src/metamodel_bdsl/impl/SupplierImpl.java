@@ -9,10 +9,13 @@ import metamodel_bdsl.Metamodel_bdslPackage;
 import metamodel_bdsl.NoneElement;
 import metamodel_bdsl.OrderOnStockThreshold;
 import metamodel_bdsl.Probability;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Supplier;
 import metamodel_bdsl.deliveredPercentageSupplier;
 import metamodel_bdsl.nameSupplier;
 
+import metamodel_bdsl.refillPolicySupplier31;
+import metamodel_bdsl.supplierDelaySupplier32;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -36,10 +39,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getContainsSiriusTag <em>Contains Sirius Tag</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getNoneElement <em>None Element</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getDeliveredPercentage <em>Delivered Percentage</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getRefillPolicy <em>Refill Policy</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getSupplierDelay <em>Supplier Delay</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getEref_refillPolicySupplier31 <em>Eref refill Policy Supplier31</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getEref_supplierDelaySupplier32 <em>Eref supplier Delay Supplier32</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getContainsnameSupplier <em>Containsname Supplier</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.SupplierImpl#getContainsdeliveredPercentageSupplier <em>Containsdelivered Percentage Supplier</em>}</li>
  * </ul>
@@ -47,6 +53,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class SupplierImpl extends ComponentImpl implements Supplier {
+	/**
+	 * The cached value of the '{@link #getContainsSiriusTag() <em>Contains Sirius Tag</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainsSiriusTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SiriusTag> containsSiriusTag;
+
 	/**
 	 * The cached value of the '{@link #getNoneElement() <em>None Element</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -98,6 +114,26 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	protected Probability supplierDelay;
 
 	/**
+	 * The cached value of the '{@link #getEref_refillPolicySupplier31() <em>Eref refill Policy Supplier31</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_refillPolicySupplier31()
+	 * @generated
+	 * @ordered
+	 */
+	protected refillPolicySupplier31 eref_refillPolicySupplier31;
+
+	/**
+	 * The cached value of the '{@link #getEref_supplierDelaySupplier32() <em>Eref supplier Delay Supplier32</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_supplierDelaySupplier32()
+	 * @generated
+	 * @ordered
+	 */
+	protected supplierDelaySupplier32 eref_supplierDelaySupplier32;
+
+	/**
 	 * The cached value of the '{@link #getContainsnameSupplier() <em>Containsname Supplier</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,6 +170,18 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	@Override
 	protected EClass eStaticClass() {
 		return Metamodel_bdslPackage.Literals.SUPPLIER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SiriusTag> getContainsSiriusTag() {
+		if (containsSiriusTag == null) {
+			containsSiriusTag = new EObjectContainmentEList<SiriusTag>(SiriusTag.class, this, Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG);
+		}
+		return containsSiriusTag;
 	}
 
 	/**
@@ -229,6 +277,92 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public refillPolicySupplier31 getEref_refillPolicySupplier31() {
+		return eref_refillPolicySupplier31;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_refillPolicySupplier31(refillPolicySupplier31 newEref_refillPolicySupplier31, NotificationChain msgs) {
+		refillPolicySupplier31 oldEref_refillPolicySupplier31 = eref_refillPolicySupplier31;
+		eref_refillPolicySupplier31 = newEref_refillPolicySupplier31;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31, oldEref_refillPolicySupplier31, newEref_refillPolicySupplier31);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_refillPolicySupplier31(refillPolicySupplier31 newEref_refillPolicySupplier31) {
+		if (newEref_refillPolicySupplier31 != eref_refillPolicySupplier31) {
+			NotificationChain msgs = null;
+			if (eref_refillPolicySupplier31 != null)
+				msgs = ((InternalEObject)eref_refillPolicySupplier31).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31, null, msgs);
+			if (newEref_refillPolicySupplier31 != null)
+				msgs = ((InternalEObject)newEref_refillPolicySupplier31).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31, null, msgs);
+			msgs = basicSetEref_refillPolicySupplier31(newEref_refillPolicySupplier31, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31, newEref_refillPolicySupplier31, newEref_refillPolicySupplier31));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public supplierDelaySupplier32 getEref_supplierDelaySupplier32() {
+		return eref_supplierDelaySupplier32;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_supplierDelaySupplier32(supplierDelaySupplier32 newEref_supplierDelaySupplier32, NotificationChain msgs) {
+		supplierDelaySupplier32 oldEref_supplierDelaySupplier32 = eref_supplierDelaySupplier32;
+		eref_supplierDelaySupplier32 = newEref_supplierDelaySupplier32;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32, oldEref_supplierDelaySupplier32, newEref_supplierDelaySupplier32);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_supplierDelaySupplier32(supplierDelaySupplier32 newEref_supplierDelaySupplier32) {
+		if (newEref_supplierDelaySupplier32 != eref_supplierDelaySupplier32) {
+			NotificationChain msgs = null;
+			if (eref_supplierDelaySupplier32 != null)
+				msgs = ((InternalEObject)eref_supplierDelaySupplier32).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32, null, msgs);
+			if (newEref_supplierDelaySupplier32 != null)
+				msgs = ((InternalEObject)newEref_supplierDelaySupplier32).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32, null, msgs);
+			msgs = basicSetEref_supplierDelaySupplier32(newEref_supplierDelaySupplier32, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32, newEref_supplierDelaySupplier32, newEref_supplierDelaySupplier32));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<nameSupplier> getContainsnameSupplier() {
 		if (containsnameSupplier == null) {
 			containsnameSupplier = new EObjectContainmentEList<nameSupplier>(nameSupplier.class, this, Metamodel_bdslPackage.SUPPLIER__CONTAINSNAME_SUPPLIER);
@@ -271,10 +405,16 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG:
+				return ((InternalEList<?>)getContainsSiriusTag()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.SUPPLIER__REFILL_POLICY:
 				return ((InternalEList<?>)getRefillPolicy()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.SUPPLIER__SUPPLIER_DELAY:
 				return basicSetSupplierDelay(null, msgs);
+			case Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31:
+				return basicSetEref_refillPolicySupplier31(null, msgs);
+			case Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32:
+				return basicSetEref_supplierDelaySupplier32(null, msgs);
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSNAME_SUPPLIER:
 				return ((InternalEList<?>)getContainsnameSupplier()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSDELIVERED_PERCENTAGE_SUPPLIER:
@@ -291,6 +431,8 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG:
+				return getContainsSiriusTag();
 			case Metamodel_bdslPackage.SUPPLIER__NONE_ELEMENT:
 				return getNoneElement();
 			case Metamodel_bdslPackage.SUPPLIER__DELIVERED_PERCENTAGE:
@@ -299,6 +441,10 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 				return getRefillPolicy();
 			case Metamodel_bdslPackage.SUPPLIER__SUPPLIER_DELAY:
 				return getSupplierDelay();
+			case Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31:
+				return getEref_refillPolicySupplier31();
+			case Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32:
+				return getEref_supplierDelaySupplier32();
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSNAME_SUPPLIER:
 				return getContainsnameSupplier();
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSDELIVERED_PERCENTAGE_SUPPLIER:
@@ -316,6 +462,10 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG:
+				getContainsSiriusTag().clear();
+				getContainsSiriusTag().addAll((Collection<? extends SiriusTag>)newValue);
+				return;
 			case Metamodel_bdslPackage.SUPPLIER__NONE_ELEMENT:
 				getNoneElement().clear();
 				getNoneElement().addAll((Collection<? extends NoneElement>)newValue);
@@ -329,6 +479,12 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 				return;
 			case Metamodel_bdslPackage.SUPPLIER__SUPPLIER_DELAY:
 				setSupplierDelay((Probability)newValue);
+				return;
+			case Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31:
+				setEref_refillPolicySupplier31((refillPolicySupplier31)newValue);
+				return;
+			case Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32:
+				setEref_supplierDelaySupplier32((supplierDelaySupplier32)newValue);
 				return;
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSNAME_SUPPLIER:
 				getContainsnameSupplier().clear();
@@ -350,6 +506,9 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG:
+				getContainsSiriusTag().clear();
+				return;
 			case Metamodel_bdslPackage.SUPPLIER__NONE_ELEMENT:
 				getNoneElement().clear();
 				return;
@@ -361,6 +520,12 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 				return;
 			case Metamodel_bdslPackage.SUPPLIER__SUPPLIER_DELAY:
 				setSupplierDelay((Probability)null);
+				return;
+			case Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31:
+				setEref_refillPolicySupplier31((refillPolicySupplier31)null);
+				return;
+			case Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32:
+				setEref_supplierDelaySupplier32((supplierDelaySupplier32)null);
 				return;
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSNAME_SUPPLIER:
 				getContainsnameSupplier().clear();
@@ -380,6 +545,8 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG:
+				return containsSiriusTag != null && !containsSiriusTag.isEmpty();
 			case Metamodel_bdslPackage.SUPPLIER__NONE_ELEMENT:
 				return noneElement != null && !noneElement.isEmpty();
 			case Metamodel_bdslPackage.SUPPLIER__DELIVERED_PERCENTAGE:
@@ -388,6 +555,10 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 				return refillPolicy != null && !refillPolicy.isEmpty();
 			case Metamodel_bdslPackage.SUPPLIER__SUPPLIER_DELAY:
 				return supplierDelay != null;
+			case Metamodel_bdslPackage.SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31:
+				return eref_refillPolicySupplier31 != null;
+			case Metamodel_bdslPackage.SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32:
+				return eref_supplierDelaySupplier32 != null;
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSNAME_SUPPLIER:
 				return containsnameSupplier != null && !containsnameSupplier.isEmpty();
 			case Metamodel_bdslPackage.SUPPLIER__CONTAINSDELIVERED_PERCENTAGE_SUPPLIER:
@@ -405,6 +576,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingElement.class) {
 			switch (derivedFeatureID) {
+				case Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG: return Metamodel_bdslPackage.BINDING_ELEMENT__CONTAINS_SIRIUS_TAG;
 				case Metamodel_bdslPackage.SUPPLIER__NONE_ELEMENT: return Metamodel_bdslPackage.BINDING_ELEMENT__NONE_ELEMENT;
 				default: return -1;
 			}
@@ -421,6 +593,7 @@ public class SupplierImpl extends ComponentImpl implements Supplier {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingElement.class) {
 			switch (baseFeatureID) {
+				case Metamodel_bdslPackage.BINDING_ELEMENT__CONTAINS_SIRIUS_TAG: return Metamodel_bdslPackage.SUPPLIER__CONTAINS_SIRIUS_TAG;
 				case Metamodel_bdslPackage.BINDING_ELEMENT__NONE_ELEMENT: return Metamodel_bdslPackage.SUPPLIER__NONE_ELEMENT;
 				default: return -1;
 			}

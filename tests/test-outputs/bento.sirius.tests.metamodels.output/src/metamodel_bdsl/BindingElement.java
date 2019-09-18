@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link metamodel_bdsl.BindingElement#getContainsSiriusTag <em>Contains Sirius Tag</em>}</li>
  *   <li>{@link metamodel_bdsl.BindingElement#getNoneElement <em>None Element</em>}</li>
  * </ul>
  *
@@ -23,6 +24,22 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface BindingElement extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * The list contents are of type {@link metamodel_bdsl.SiriusTag}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contains Sirius Tag</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Contains Sirius Tag</em>' containment reference list.
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getBindingElement_ContainsSiriusTag()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<SiriusTag> getContainsSiriusTag();
+
 	/**
 	 * Returns the value of the '<em><b>None Element</b></em>' reference list.
 	 * The list contents are of type {@link metamodel_bdsl.NoneElement}.

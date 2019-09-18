@@ -23,6 +23,7 @@ import metamodel_bdsl.Probability;
 import metamodel_bdsl.ProcessOutputFlow;
 import metamodel_bdsl.Query;
 import metamodel_bdsl.Scalar;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Storage;
 import metamodel_bdsl.StorageOutputFlow;
 import metamodel_bdsl.Supplier;
@@ -30,6 +31,10 @@ import metamodel_bdsl.Uniform;
 import metamodel_bdsl.VirtualAttribute;
 import metamodel_bdsl.deliveredPercentageSupplier;
 import metamodel_bdsl.descriptionOutput;
+import metamodel_bdsl.destinationProcessOutputFlow74;
+import metamodel_bdsl.destinationStorageOutputFlow63;
+import metamodel_bdsl.durationBatchProcess42;
+import metamodel_bdsl.durationConveyorBelt132;
 import metamodel_bdsl.errorQuery;
 import metamodel_bdsl.initialContentStorage;
 import metamodel_bdsl.intervalPoisson;
@@ -44,13 +49,30 @@ import metamodel_bdsl.nameQuery;
 import metamodel_bdsl.nameStorage;
 import metamodel_bdsl.nameSupplier;
 import metamodel_bdsl.numberOfChainsBatchProcess;
+import metamodel_bdsl.orderOnStockThresholdStorage22;
 import metamodel_bdsl.orderQuantityOrderOnStockThreshold;
 import metamodel_bdsl.orderTypeOrderOnStockThreshold;
+import metamodel_bdsl.outputConveyorBelt133;
+import metamodel_bdsl.outputsBatchProcess43;
 import metamodel_bdsl.overflowStorage;
 import metamodel_bdsl.percentageOfSuccessBatchProcess;
 import metamodel_bdsl.periodOrderOnStockThreshold;
+import metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73;
+import metamodel_bdsl.processOutputFlowOutput51;
+import metamodel_bdsl.processOutputFlowStorage23;
+import metamodel_bdsl.quantityProcessOutputFlow71;
+import metamodel_bdsl.quantityStorageOutputFlow61;
+import metamodel_bdsl.refillPolicySupplier31;
 import metamodel_bdsl.scaleGaussian;
 import metamodel_bdsl.sizeStorage;
+import metamodel_bdsl.sourceProcessOutputFlow72;
+import metamodel_bdsl.sourceStorageOutputFlow62;
+import metamodel_bdsl.storageOrderOnStockThreshold82;
+import metamodel_bdsl.storageOutputFlowBatchProcess41;
+import metamodel_bdsl.storageOutputFlowConveyorBelt131;
+import metamodel_bdsl.storageOutputFlowStorage21;
+import metamodel_bdsl.supplierDelaySupplier32;
+import metamodel_bdsl.supplierOrderOnStockThreshold81;
 import metamodel_bdsl.systemQuery;
 import metamodel_bdsl.thresholdOrderOnStockThreshold;
 import metamodel_bdsl.typeOutput;
@@ -261,6 +283,153 @@ public class Metamodel_bdslSwitch<T> extends Switch<T> {
 				if (result == null) result = caseProcess(conveyorBelt);
 				if (result == null) result = caseBindingElement(conveyorBelt);
 				if (result == null) result = caseComponent(conveyorBelt);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_STORAGE21: {
+				storageOutputFlowStorage21 storageOutputFlowStorage21 = (storageOutputFlowStorage21)theEObject;
+				T result = casestorageOutputFlowStorage21(storageOutputFlowStorage21);
+				if (result == null) result = caseBindingAttribute(storageOutputFlowStorage21);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD_STORAGE22: {
+				orderOnStockThresholdStorage22 orderOnStockThresholdStorage22 = (orderOnStockThresholdStorage22)theEObject;
+				T result = caseorderOnStockThresholdStorage22(orderOnStockThresholdStorage22);
+				if (result == null) result = caseBindingAttribute(orderOnStockThresholdStorage22);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_STORAGE23: {
+				processOutputFlowStorage23 processOutputFlowStorage23 = (processOutputFlowStorage23)theEObject;
+				T result = caseprocessOutputFlowStorage23(processOutputFlowStorage23);
+				if (result == null) result = caseBindingAttribute(processOutputFlowStorage23);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.REFILL_POLICY_SUPPLIER31: {
+				refillPolicySupplier31 refillPolicySupplier31 = (refillPolicySupplier31)theEObject;
+				T result = caserefillPolicySupplier31(refillPolicySupplier31);
+				if (result == null) result = caseBindingAttribute(refillPolicySupplier31);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.SUPPLIER_DELAY_SUPPLIER32: {
+				supplierDelaySupplier32 supplierDelaySupplier32 = (supplierDelaySupplier32)theEObject;
+				T result = casesupplierDelaySupplier32(supplierDelaySupplier32);
+				if (result == null) result = caseBindingAttribute(supplierDelaySupplier32);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_BATCH_PROCESS41: {
+				storageOutputFlowBatchProcess41 storageOutputFlowBatchProcess41 = (storageOutputFlowBatchProcess41)theEObject;
+				T result = casestorageOutputFlowBatchProcess41(storageOutputFlowBatchProcess41);
+				if (result == null) result = caseBindingAttribute(storageOutputFlowBatchProcess41);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.DURATION_BATCH_PROCESS42: {
+				durationBatchProcess42 durationBatchProcess42 = (durationBatchProcess42)theEObject;
+				T result = casedurationBatchProcess42(durationBatchProcess42);
+				if (result == null) result = caseBindingAttribute(durationBatchProcess42);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.OUTPUTS_BATCH_PROCESS43: {
+				outputsBatchProcess43 outputsBatchProcess43 = (outputsBatchProcess43)theEObject;
+				T result = caseoutputsBatchProcess43(outputsBatchProcess43);
+				if (result == null) result = caseBindingAttribute(outputsBatchProcess43);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_OUTPUT51: {
+				processOutputFlowOutput51 processOutputFlowOutput51 = (processOutputFlowOutput51)theEObject;
+				T result = caseprocessOutputFlowOutput51(processOutputFlowOutput51);
+				if (result == null) result = caseBindingAttribute(processOutputFlowOutput51);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.QUANTITY_STORAGE_OUTPUT_FLOW61: {
+				quantityStorageOutputFlow61 quantityStorageOutputFlow61 = (quantityStorageOutputFlow61)theEObject;
+				T result = casequantityStorageOutputFlow61(quantityStorageOutputFlow61);
+				if (result == null) result = caseBindingAttribute(quantityStorageOutputFlow61);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.SOURCE_STORAGE_OUTPUT_FLOW62: {
+				sourceStorageOutputFlow62 sourceStorageOutputFlow62 = (sourceStorageOutputFlow62)theEObject;
+				T result = casesourceStorageOutputFlow62(sourceStorageOutputFlow62);
+				if (result == null) result = caseBindingAttribute(sourceStorageOutputFlow62);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.DESTINATION_STORAGE_OUTPUT_FLOW63: {
+				destinationStorageOutputFlow63 destinationStorageOutputFlow63 = (destinationStorageOutputFlow63)theEObject;
+				T result = casedestinationStorageOutputFlow63(destinationStorageOutputFlow63);
+				if (result == null) result = caseBindingAttribute(destinationStorageOutputFlow63);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.QUANTITY_PROCESS_OUTPUT_FLOW71: {
+				quantityProcessOutputFlow71 quantityProcessOutputFlow71 = (quantityProcessOutputFlow71)theEObject;
+				T result = casequantityProcessOutputFlow71(quantityProcessOutputFlow71);
+				if (result == null) result = caseBindingAttribute(quantityProcessOutputFlow71);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.SOURCE_PROCESS_OUTPUT_FLOW72: {
+				sourceProcessOutputFlow72 sourceProcessOutputFlow72 = (sourceProcessOutputFlow72)theEObject;
+				T result = casesourceProcessOutputFlow72(sourceProcessOutputFlow72);
+				if (result == null) result = caseBindingAttribute(sourceProcessOutputFlow72);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73: {
+				processOutputFlowDelayProcessOutputFlow73 processOutputFlowDelayProcessOutputFlow73 = (processOutputFlowDelayProcessOutputFlow73)theEObject;
+				T result = caseprocessOutputFlowDelayProcessOutputFlow73(processOutputFlowDelayProcessOutputFlow73);
+				if (result == null) result = caseBindingAttribute(processOutputFlowDelayProcessOutputFlow73);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.DESTINATION_PROCESS_OUTPUT_FLOW74: {
+				destinationProcessOutputFlow74 destinationProcessOutputFlow74 = (destinationProcessOutputFlow74)theEObject;
+				T result = casedestinationProcessOutputFlow74(destinationProcessOutputFlow74);
+				if (result == null) result = caseBindingAttribute(destinationProcessOutputFlow74);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.SUPPLIER_ORDER_ON_STOCK_THRESHOLD81: {
+				supplierOrderOnStockThreshold81 supplierOrderOnStockThreshold81 = (supplierOrderOnStockThreshold81)theEObject;
+				T result = casesupplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81);
+				if (result == null) result = caseBindingAttribute(supplierOrderOnStockThreshold81);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.STORAGE_ORDER_ON_STOCK_THRESHOLD82: {
+				storageOrderOnStockThreshold82 storageOrderOnStockThreshold82 = (storageOrderOnStockThreshold82)theEObject;
+				T result = casestorageOrderOnStockThreshold82(storageOrderOnStockThreshold82);
+				if (result == null) result = caseBindingAttribute(storageOrderOnStockThreshold82);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131: {
+				storageOutputFlowConveyorBelt131 storageOutputFlowConveyorBelt131 = (storageOutputFlowConveyorBelt131)theEObject;
+				T result = casestorageOutputFlowConveyorBelt131(storageOutputFlowConveyorBelt131);
+				if (result == null) result = caseBindingAttribute(storageOutputFlowConveyorBelt131);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.DURATION_CONVEYOR_BELT132: {
+				durationConveyorBelt132 durationConveyorBelt132 = (durationConveyorBelt132)theEObject;
+				T result = casedurationConveyorBelt132(durationConveyorBelt132);
+				if (result == null) result = caseBindingAttribute(durationConveyorBelt132);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.OUTPUT_CONVEYOR_BELT133: {
+				outputConveyorBelt133 outputConveyorBelt133 = (outputConveyorBelt133)theEObject;
+				T result = caseoutputConveyorBelt133(outputConveyorBelt133);
+				if (result == null) result = caseBindingAttribute(outputConveyorBelt133);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -506,6 +675,12 @@ public class Metamodel_bdslSwitch<T> extends Switch<T> {
 			case Metamodel_bdslPackage.VIRTUAL_ATTRIBUTE: {
 				VirtualAttribute virtualAttribute = (VirtualAttribute)theEObject;
 				T result = caseVirtualAttribute(virtualAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Metamodel_bdslPackage.SIRIUS_TAG: {
+				SiriusTag siriusTag = (SiriusTag)theEObject;
+				T result = caseSiriusTag(siriusTag);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -795,6 +970,321 @@ public class Metamodel_bdslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConveyorBelt(ConveyorBelt object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>storage Output Flow Storage21</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>storage Output Flow Storage21</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casestorageOutputFlowStorage21(storageOutputFlowStorage21 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>order On Stock Threshold Storage22</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>order On Stock Threshold Storage22</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseorderOnStockThresholdStorage22(orderOnStockThresholdStorage22 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>process Output Flow Storage23</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>process Output Flow Storage23</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseprocessOutputFlowStorage23(processOutputFlowStorage23 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>refill Policy Supplier31</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>refill Policy Supplier31</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caserefillPolicySupplier31(refillPolicySupplier31 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>supplier Delay Supplier32</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>supplier Delay Supplier32</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casesupplierDelaySupplier32(supplierDelaySupplier32 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>storage Output Flow Batch Process41</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>storage Output Flow Batch Process41</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casestorageOutputFlowBatchProcess41(storageOutputFlowBatchProcess41 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>duration Batch Process42</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>duration Batch Process42</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casedurationBatchProcess42(durationBatchProcess42 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>outputs Batch Process43</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>outputs Batch Process43</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseoutputsBatchProcess43(outputsBatchProcess43 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>process Output Flow Output51</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>process Output Flow Output51</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseprocessOutputFlowOutput51(processOutputFlowOutput51 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>quantity Storage Output Flow61</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>quantity Storage Output Flow61</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casequantityStorageOutputFlow61(quantityStorageOutputFlow61 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>source Storage Output Flow62</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>source Storage Output Flow62</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casesourceStorageOutputFlow62(sourceStorageOutputFlow62 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>destination Storage Output Flow63</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>destination Storage Output Flow63</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casedestinationStorageOutputFlow63(destinationStorageOutputFlow63 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>quantity Process Output Flow71</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>quantity Process Output Flow71</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casequantityProcessOutputFlow71(quantityProcessOutputFlow71 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>source Process Output Flow72</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>source Process Output Flow72</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casesourceProcessOutputFlow72(sourceProcessOutputFlow72 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>process Output Flow Delay Process Output Flow73</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>process Output Flow Delay Process Output Flow73</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseprocessOutputFlowDelayProcessOutputFlow73(processOutputFlowDelayProcessOutputFlow73 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>destination Process Output Flow74</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>destination Process Output Flow74</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casedestinationProcessOutputFlow74(destinationProcessOutputFlow74 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>supplier Order On Stock Threshold81</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>supplier Order On Stock Threshold81</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casesupplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>storage Order On Stock Threshold82</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>storage Order On Stock Threshold82</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casestorageOrderOnStockThreshold82(storageOrderOnStockThreshold82 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>storage Output Flow Conveyor Belt131</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>storage Output Flow Conveyor Belt131</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casestorageOutputFlowConveyorBelt131(storageOutputFlowConveyorBelt131 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>duration Conveyor Belt132</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>duration Conveyor Belt132</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casedurationConveyorBelt132(durationConveyorBelt132 object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>output Conveyor Belt133</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>output Conveyor Belt133</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseoutputConveyorBelt133(outputConveyorBelt133 object) {
 		return null;
 	}
 
@@ -1335,6 +1825,21 @@ public class Metamodel_bdslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVirtualAttribute(VirtualAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sirius Tag</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sirius Tag</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSiriusTag(SiriusTag object) {
 		return null;
 	}
 

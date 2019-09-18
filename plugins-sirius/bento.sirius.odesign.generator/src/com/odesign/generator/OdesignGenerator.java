@@ -233,16 +233,17 @@ public class OdesignGenerator {
 	    AdditionalLayer attributesLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
 	    dd.getAdditionalLayers().add(attributesLayer);
 	    attributesLayer.setName("Generated Attributes Layer");
-	    
+	    attributesLayer.setActiveByDefault(true);
 	    
 	    AdditionalLayer siriusTagsLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
 	    dd.getAdditionalLayers().add(siriusTagsLayer);
 	    siriusTagsLayer.setName("Sirius Tags Layer");
-	    
+	    siriusTagsLayer.setActiveByDefault(true);
 	    
 	    AdditionalLayer ereferencesLayerLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
 	    dd.getAdditionalLayers().add(ereferencesLayerLayer);
 	    ereferencesLayerLayer.setName("EReferences Layer");
+	    ereferencesLayerLayer.setActiveByDefault(true);
 	    // Creating the colors pallette
 
 		UserColorsPalette colorPallette = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
@@ -261,6 +262,15 @@ public class OdesignGenerator {
 		featuresFixedColor.setBlue(187);
 		featuresFixedColor.setGreen(187);
 		featuresFixedColor.setRed(134);
+		
+		
+		UserFixedColor siriusTagsFixedColor = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
+				.createUserFixedColor();
+		colorPallette.getEntries().add(siriusTagsFixedColor);
+		siriusTagsFixedColor.setName("Sirius Tags Color");
+		siriusTagsFixedColor.setBlue(232);
+		siriusTagsFixedColor.setGreen(135);
+		siriusTagsFixedColor.setRed(232);
 
 		UserFixedColor featuresFixedColorRed = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
 				.createUserFixedColor();
@@ -270,6 +280,14 @@ public class OdesignGenerator {
 		featuresFixedColorRed.setGreen(85);
 		featuresFixedColorRed.setRed(169);
 
+		
+		UserFixedColor whiteFixedColorRed = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
+				.createUserFixedColor();
+		whiteFixedColorRed.setName("white fixed color");
+		colorPallette.getEntries().add(whiteFixedColorRed);
+		whiteFixedColorRed.setBlue(85);
+		whiteFixedColorRed.setGreen(85);
+		whiteFixedColorRed.setRed(169);
 		
 		UserFixedColor darkBlue = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
 				.createUserFixedColor();
@@ -314,6 +332,48 @@ public class OdesignGenerator {
 
 				if (obj instanceof EdgeMapping) {
 
+					NodeMapping siriusTagNode = DescriptionFactory.eINSTANCE.createNodeMapping();
+					siriusTagNode .setName(((EdgeMapping) obj).getName()+"SiriusTag");
+					siriusTagNode .setDomainClass(ep.getName() + separator+ "SiriusTag");
+					siriusTagsLayer.getNodeMappings().add(siriusTagNode);
+					
+					LozengeNodeDescription lnd=StyleFactory.eINSTANCE.createLozengeNodeDescription();
+					lnd.setLabelExpression("RbE");
+					lnd.setColor(siriusTagsFixedColor);
+					lnd.setLabelPosition(LabelPosition.NODE_LITERAL);
+					lnd.setLabelSize(12);
+					lnd.setLabelColor(whiteFixedColorRed);
+					
+					siriusTagNode.setStyle(lnd);
+					lnd.setShowIcon(false);
+					
+					
+					
+					EdgeMapping edge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+					edge.getTargetMapping().add(siriusTagNode);
+					edge.getSourceMapping().add((EdgeMapping) obj);
+					edge.setName("RbEtagConnector_"+((EdgeMapping) obj).getName());
+					edge.setUseDomainElement(false);
+				//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+					siriusTagsLayer.getEdgeMappings().add(edge);
+
+					
+					
+					
+					EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+					CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
+							.createCenterLabelStyleDescription();
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setLineStyle(LineStyle.DASH_LITERAL);
+					edgestyle.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edgestyle.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edge.setStyle(edgestyle);
+					edge.setTargetFinderExpression("feature:containsSiriusTag");
+					
+					
 					if (((EdgeMapping) obj).isUseDomainElement()) {
 						edgeList.add((EdgeMapping) obj);
 						((EdgeMapping) obj).setDomainClass(ep.getName() + separator + ((EdgeMapping) obj).getDomainClass()
@@ -322,41 +382,46 @@ public class OdesignGenerator {
 								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
 								.equals(entry.getKey().getName())) {
 
-							NodeMapping siriusTagNode = DescriptionFactory.eINSTANCE.createNodeMapping();
-							siriusTagNode .setName(((EdgeMapping) obj).getName()+"SiriusTag");
-							siriusTagNode .setDomainClass(ep.getName() + separator+ "SiriusTag");
-							siriusTagsLayer.getNodeMappings().add(siriusTagNode);
+							NodeMapping siriusTagNode1 = DescriptionFactory.eINSTANCE.createNodeMapping();
+							siriusTagNode1 .setName(((EdgeMapping) obj).getName()+"SiriusTag");
+							siriusTagNode1 .setDomainClass(ep.getName() + separator+ "SiriusTag");
+							siriusTagsLayer.getNodeMappings().add(siriusTagNode1);
 							
-							LozengeNodeDescription lnd=StyleFactory.eINSTANCE.createLozengeNodeDescription();
-							lnd.setLabelExpression("EbE");
-							siriusTagNode.setStyle(lnd);
-							lnd.setShowIcon(false);
+							LozengeNodeDescription lnd1=StyleFactory.eINSTANCE.createLozengeNodeDescription();
+							lnd1.setLabelExpression("RbE");
+							lnd1.setColor(siriusTagsFixedColor);
+							lnd1.setLabelPosition(LabelPosition.NODE_LITERAL);
+							lnd1.setLabelSize(12);
+							lnd1.setLabelColor(whiteFixedColorRed);
+							
+							siriusTagNode1.setStyle(lnd1);
+							lnd1.setShowIcon(false);
 							
 							
 							
-							EdgeMapping edge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+							EdgeMapping edge1 = DescriptionFactory.eINSTANCE.createEdgeMapping();
 
-							edge.getTargetMapping().add(siriusTagNode);
-							edge.getSourceMapping().add((EdgeMapping) obj);
-							edge.setName("EbEtagConnector_"+((EdgeMapping) obj).getName());
-							edge.setUseDomainElement(false);
+							edge1.getTargetMapping().add(siriusTagNode1);
+							edge1.getSourceMapping().add((EdgeMapping) obj);
+							edge1.setName("EbEtagConnector_"+((EdgeMapping) obj).getName());
+							edge1.setUseDomainElement(false);
 						//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-							siriusTagsLayer.getEdgeMappings().add(edge);
+							siriusTagsLayer.getEdgeMappings().add(edge1);
 
 							
 							
 							
-							EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
-							CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
+							EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+							CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE
 									.createCenterLabelStyleDescription();
-							edgestyle.setCenterLabelStyleDescription(labelstyle);
-							edgestyle.setLineStyle(LineStyle.DASH_LITERAL);
-							edgestyle.setRoutingStyle(EdgeRouting.TREE_LITERAL);
-							edgestyle.setCenterLabelStyleDescription(labelstyle);
-							edgestyle.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
-							edgestyle.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
-							edge.setStyle(edgestyle);
-							
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							edgestyle1.setLineStyle(LineStyle.DASH_LITERAL);
+							edgestyle1.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							edgestyle1.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edgestyle1.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edge1.setStyle(edgestyle1);
+							edge.setTargetFinderExpression("feature:containsSiriusTag");
 							for (EClass featureCLass : entry.getValue()) {
 
 								NodeMapping nmd = DescriptionFactory.eINSTANCE.createNodeMapping();
@@ -395,16 +460,16 @@ public class OdesignGenerator {
 								em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
 								attributesLayer.getEdgeMappings().add(em);
 
-								EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
-								CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE
+								EdgeStyleDescription edgestyle2 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+								CenterLabelStyleDescription labelstyle2 = StyleFactory.eINSTANCE
 										.createCenterLabelStyleDescription();
-								edgestyle1.setCenterLabelStyleDescription(labelstyle1);
-								edgestyle1.setLineStyle(LineStyle.DASH_LITERAL);
-								edgestyle1.setRoutingStyle(EdgeRouting.TREE_LITERAL);
-								edgestyle1.setCenterLabelStyleDescription(labelstyle1);
-								edgestyle1.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
-								edgestyle1.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
-								em.setStyle(edgestyle1);
+								edgestyle2.setCenterLabelStyleDescription(labelstyle2);
+								edgestyle2.setLineStyle(LineStyle.DASH_LITERAL);
+								edgestyle2.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+								edgestyle2.setCenterLabelStyleDescription(labelstyle2);
+								edgestyle2.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+								edgestyle2.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+								em.setStyle(edgestyle2);
 							}
 //
 						}
@@ -428,6 +493,10 @@ public class OdesignGenerator {
 					lnd.setLabelExpression("C");
 					siriusTagNode.setStyle(lnd);
 					lnd.setShowIcon(false);
+					lnd.setColor(siriusTagsFixedColor);
+					lnd.setLabelPosition(LabelPosition.NODE_LITERAL);
+					lnd.setLabelSize(12);
+					lnd.setLabelColor(whiteFixedColorRed);
 					
 					
 					
@@ -439,7 +508,7 @@ public class OdesignGenerator {
 					edge.setUseDomainElement(false);
 				//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
 					siriusTagsLayer.getEdgeMappings().add(edge);
-					
+					edge.setTargetFinderExpression("feature:containsSiriusTag");
 					
 
 					EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
@@ -531,6 +600,10 @@ public class OdesignGenerator {
 					lnd.setLabelExpression("N");
 					siriusTagNode.setStyle(lnd);
 					lnd.setShowIcon(false);
+					lnd.setColor(siriusTagsFixedColor);
+					lnd.setLabelPosition(LabelPosition.NODE_LITERAL);
+					lnd.setLabelSize(12);
+					lnd.setLabelColor(whiteFixedColorRed);
 					
 					
 					
@@ -540,6 +613,7 @@ public class OdesignGenerator {
 					edge.getSourceMapping().add((NodeMapping) obj);
 					edge.setName("NtagConnector_"+((NodeMapping) obj).getName());
 					edge.setUseDomainElement(false);
+					edge.setTargetFinderExpression("feature:containsSiriusTag");
 				//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
 					siriusTagsLayer.getEdgeMappings().add(edge);
 					
@@ -555,6 +629,7 @@ public class OdesignGenerator {
 					edgestyle.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
 					edgestyle.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
 					edge.setStyle(edgestyle);
+					
 					
 					
 					System.out.println(((NodeMapping) obj).getDomainClass()

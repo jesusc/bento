@@ -20,6 +20,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getOrderType <em>Order Type</em>}</li>
  *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getSupplier <em>Supplier</em>}</li>
  *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getStorage <em>Storage</em>}</li>
+ *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getEref_supplierOrderOnStockThreshold81 <em>Eref supplier Order On Stock Threshold81</em>}</li>
+ *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getEref_storageOrderOnStockThreshold82 <em>Eref storage Order On Stock Threshold82</em>}</li>
  *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getContainsperiodOrderOnStockThreshold <em>Containsperiod Order On Stock Threshold</em>}</li>
  *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getContainsthresholdOrderOnStockThreshold <em>Containsthreshold Order On Stock Threshold</em>}</li>
  *   <li>{@link metamodel_bdsl.OrderOnStockThreshold#getContainsnameOrderOnStockThreshold <em>Containsname Order On Stock Threshold</em>}</li>
@@ -223,6 +225,58 @@ public interface OrderOnStockThreshold extends BindingElement {
 	 * @generated
 	 */
 	void setStorage(Storage value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref supplier Order On Stock Threshold81</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref supplier Order On Stock Threshold81</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref supplier Order On Stock Threshold81</em>' containment reference.
+	 * @see #setEref_supplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getOrderOnStockThreshold_Eref_supplierOrderOnStockThreshold81()
+	 * @model containment="true"
+	 * @generated
+	 */
+	supplierOrderOnStockThreshold81 getEref_supplierOrderOnStockThreshold81();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.OrderOnStockThreshold#getEref_supplierOrderOnStockThreshold81 <em>Eref supplier Order On Stock Threshold81</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref supplier Order On Stock Threshold81</em>' containment reference.
+	 * @see #getEref_supplierOrderOnStockThreshold81()
+	 * @generated
+	 */
+	void setEref_supplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81 value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref storage Order On Stock Threshold82</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref storage Order On Stock Threshold82</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref storage Order On Stock Threshold82</em>' containment reference.
+	 * @see #setEref_storageOrderOnStockThreshold82(storageOrderOnStockThreshold82)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getOrderOnStockThreshold_Eref_storageOrderOnStockThreshold82()
+	 * @model containment="true"
+	 * @generated
+	 */
+	storageOrderOnStockThreshold82 getEref_storageOrderOnStockThreshold82();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.OrderOnStockThreshold#getEref_storageOrderOnStockThreshold82 <em>Eref storage Order On Stock Threshold82</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref storage Order On Stock Threshold82</em>' containment reference.
+	 * @see #getEref_storageOrderOnStockThreshold82()
+	 * @generated
+	 */
+	void setEref_storageOrderOnStockThreshold82(storageOrderOnStockThreshold82 value);
 
 	/**
 	 * Returns the value of the '<em><b>Containsperiod Order On Stock Threshold</b></em>' containment reference list.

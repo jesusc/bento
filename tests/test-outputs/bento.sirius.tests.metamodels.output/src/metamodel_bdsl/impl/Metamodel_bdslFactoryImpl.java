@@ -21,6 +21,7 @@ import metamodel_bdsl.ProcessOutputFlow;
 import metamodel_bdsl.Query;
 import metamodel_bdsl.QueryType;
 import metamodel_bdsl.Scalar;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Storage;
 import metamodel_bdsl.StorageOutputFlow;
 import metamodel_bdsl.Supplier;
@@ -28,6 +29,10 @@ import metamodel_bdsl.Uniform;
 import metamodel_bdsl.VirtualAttribute;
 import metamodel_bdsl.deliveredPercentageSupplier;
 import metamodel_bdsl.descriptionOutput;
+import metamodel_bdsl.destinationProcessOutputFlow74;
+import metamodel_bdsl.destinationStorageOutputFlow63;
+import metamodel_bdsl.durationBatchProcess42;
+import metamodel_bdsl.durationConveyorBelt132;
 import metamodel_bdsl.errorQuery;
 import metamodel_bdsl.initialContentStorage;
 import metamodel_bdsl.intervalPoisson;
@@ -42,13 +47,30 @@ import metamodel_bdsl.nameQuery;
 import metamodel_bdsl.nameStorage;
 import metamodel_bdsl.nameSupplier;
 import metamodel_bdsl.numberOfChainsBatchProcess;
+import metamodel_bdsl.orderOnStockThresholdStorage22;
 import metamodel_bdsl.orderQuantityOrderOnStockThreshold;
 import metamodel_bdsl.orderTypeOrderOnStockThreshold;
+import metamodel_bdsl.outputConveyorBelt133;
+import metamodel_bdsl.outputsBatchProcess43;
 import metamodel_bdsl.overflowStorage;
 import metamodel_bdsl.percentageOfSuccessBatchProcess;
 import metamodel_bdsl.periodOrderOnStockThreshold;
+import metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73;
+import metamodel_bdsl.processOutputFlowOutput51;
+import metamodel_bdsl.processOutputFlowStorage23;
+import metamodel_bdsl.quantityProcessOutputFlow71;
+import metamodel_bdsl.quantityStorageOutputFlow61;
+import metamodel_bdsl.refillPolicySupplier31;
 import metamodel_bdsl.scaleGaussian;
 import metamodel_bdsl.sizeStorage;
+import metamodel_bdsl.sourceProcessOutputFlow72;
+import metamodel_bdsl.sourceStorageOutputFlow62;
+import metamodel_bdsl.storageOrderOnStockThreshold82;
+import metamodel_bdsl.storageOutputFlowBatchProcess41;
+import metamodel_bdsl.storageOutputFlowConveyorBelt131;
+import metamodel_bdsl.storageOutputFlowStorage21;
+import metamodel_bdsl.supplierDelaySupplier32;
+import metamodel_bdsl.supplierOrderOnStockThreshold81;
 import metamodel_bdsl.systemQuery;
 import metamodel_bdsl.thresholdOrderOnStockThreshold;
 import metamodel_bdsl.typeOutput;
@@ -125,6 +147,27 @@ public class Metamodel_bdslFactoryImpl extends EFactoryImpl implements Metamodel
 			case Metamodel_bdslPackage.POISSON: return createPoisson();
 			case Metamodel_bdslPackage.UNIFORM: return createUniform();
 			case Metamodel_bdslPackage.CONVEYOR_BELT: return createConveyorBelt();
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_STORAGE21: return createstorageOutputFlowStorage21();
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD_STORAGE22: return createorderOnStockThresholdStorage22();
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_STORAGE23: return createprocessOutputFlowStorage23();
+			case Metamodel_bdslPackage.REFILL_POLICY_SUPPLIER31: return createrefillPolicySupplier31();
+			case Metamodel_bdslPackage.SUPPLIER_DELAY_SUPPLIER32: return createsupplierDelaySupplier32();
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_BATCH_PROCESS41: return createstorageOutputFlowBatchProcess41();
+			case Metamodel_bdslPackage.DURATION_BATCH_PROCESS42: return createdurationBatchProcess42();
+			case Metamodel_bdslPackage.OUTPUTS_BATCH_PROCESS43: return createoutputsBatchProcess43();
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_OUTPUT51: return createprocessOutputFlowOutput51();
+			case Metamodel_bdslPackage.QUANTITY_STORAGE_OUTPUT_FLOW61: return createquantityStorageOutputFlow61();
+			case Metamodel_bdslPackage.SOURCE_STORAGE_OUTPUT_FLOW62: return createsourceStorageOutputFlow62();
+			case Metamodel_bdslPackage.DESTINATION_STORAGE_OUTPUT_FLOW63: return createdestinationStorageOutputFlow63();
+			case Metamodel_bdslPackage.QUANTITY_PROCESS_OUTPUT_FLOW71: return createquantityProcessOutputFlow71();
+			case Metamodel_bdslPackage.SOURCE_PROCESS_OUTPUT_FLOW72: return createsourceProcessOutputFlow72();
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73: return createprocessOutputFlowDelayProcessOutputFlow73();
+			case Metamodel_bdslPackage.DESTINATION_PROCESS_OUTPUT_FLOW74: return createdestinationProcessOutputFlow74();
+			case Metamodel_bdslPackage.SUPPLIER_ORDER_ON_STOCK_THRESHOLD81: return createsupplierOrderOnStockThreshold81();
+			case Metamodel_bdslPackage.STORAGE_ORDER_ON_STOCK_THRESHOLD82: return createstorageOrderOnStockThreshold82();
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131: return createstorageOutputFlowConveyorBelt131();
+			case Metamodel_bdslPackage.DURATION_CONVEYOR_BELT132: return createdurationConveyorBelt132();
+			case Metamodel_bdslPackage.OUTPUT_CONVEYOR_BELT133: return createoutputConveyorBelt133();
 			case Metamodel_bdslPackage.NAME_QUERY: return createnameQuery();
 			case Metamodel_bdslPackage.VALUE_QUERY: return createvalueQuery();
 			case Metamodel_bdslPackage.ERROR_QUERY: return createerrorQuery();
@@ -159,6 +202,7 @@ public class Metamodel_bdslFactoryImpl extends EFactoryImpl implements Metamodel
 			case Metamodel_bdslPackage.METAMODEL_ELEMENT: return createMetamodelElement();
 			case Metamodel_bdslPackage.METAMODEL_ELEMENT_FEATURE: return createMetamodelElementFeature();
 			case Metamodel_bdslPackage.VIRTUAL_ATTRIBUTE: return createVirtualAttribute();
+			case Metamodel_bdslPackage.SIRIUS_TAG: return createSiriusTag();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -360,6 +404,216 @@ public class Metamodel_bdslFactoryImpl extends EFactoryImpl implements Metamodel
 	public ConveyorBelt createConveyorBelt() {
 		ConveyorBeltImpl conveyorBelt = new ConveyorBeltImpl();
 		return conveyorBelt;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public storageOutputFlowStorage21 createstorageOutputFlowStorage21() {
+		storageOutputFlowStorage21Impl storageOutputFlowStorage21 = new storageOutputFlowStorage21Impl();
+		return storageOutputFlowStorage21;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public orderOnStockThresholdStorage22 createorderOnStockThresholdStorage22() {
+		orderOnStockThresholdStorage22Impl orderOnStockThresholdStorage22 = new orderOnStockThresholdStorage22Impl();
+		return orderOnStockThresholdStorage22;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public processOutputFlowStorage23 createprocessOutputFlowStorage23() {
+		processOutputFlowStorage23Impl processOutputFlowStorage23 = new processOutputFlowStorage23Impl();
+		return processOutputFlowStorage23;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public refillPolicySupplier31 createrefillPolicySupplier31() {
+		refillPolicySupplier31Impl refillPolicySupplier31 = new refillPolicySupplier31Impl();
+		return refillPolicySupplier31;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public supplierDelaySupplier32 createsupplierDelaySupplier32() {
+		supplierDelaySupplier32Impl supplierDelaySupplier32 = new supplierDelaySupplier32Impl();
+		return supplierDelaySupplier32;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public storageOutputFlowBatchProcess41 createstorageOutputFlowBatchProcess41() {
+		storageOutputFlowBatchProcess41Impl storageOutputFlowBatchProcess41 = new storageOutputFlowBatchProcess41Impl();
+		return storageOutputFlowBatchProcess41;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public durationBatchProcess42 createdurationBatchProcess42() {
+		durationBatchProcess42Impl durationBatchProcess42 = new durationBatchProcess42Impl();
+		return durationBatchProcess42;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public outputsBatchProcess43 createoutputsBatchProcess43() {
+		outputsBatchProcess43Impl outputsBatchProcess43 = new outputsBatchProcess43Impl();
+		return outputsBatchProcess43;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public processOutputFlowOutput51 createprocessOutputFlowOutput51() {
+		processOutputFlowOutput51Impl processOutputFlowOutput51 = new processOutputFlowOutput51Impl();
+		return processOutputFlowOutput51;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public quantityStorageOutputFlow61 createquantityStorageOutputFlow61() {
+		quantityStorageOutputFlow61Impl quantityStorageOutputFlow61 = new quantityStorageOutputFlow61Impl();
+		return quantityStorageOutputFlow61;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public sourceStorageOutputFlow62 createsourceStorageOutputFlow62() {
+		sourceStorageOutputFlow62Impl sourceStorageOutputFlow62 = new sourceStorageOutputFlow62Impl();
+		return sourceStorageOutputFlow62;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public destinationStorageOutputFlow63 createdestinationStorageOutputFlow63() {
+		destinationStorageOutputFlow63Impl destinationStorageOutputFlow63 = new destinationStorageOutputFlow63Impl();
+		return destinationStorageOutputFlow63;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public quantityProcessOutputFlow71 createquantityProcessOutputFlow71() {
+		quantityProcessOutputFlow71Impl quantityProcessOutputFlow71 = new quantityProcessOutputFlow71Impl();
+		return quantityProcessOutputFlow71;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public sourceProcessOutputFlow72 createsourceProcessOutputFlow72() {
+		sourceProcessOutputFlow72Impl sourceProcessOutputFlow72 = new sourceProcessOutputFlow72Impl();
+		return sourceProcessOutputFlow72;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public processOutputFlowDelayProcessOutputFlow73 createprocessOutputFlowDelayProcessOutputFlow73() {
+		processOutputFlowDelayProcessOutputFlow73Impl processOutputFlowDelayProcessOutputFlow73 = new processOutputFlowDelayProcessOutputFlow73Impl();
+		return processOutputFlowDelayProcessOutputFlow73;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public destinationProcessOutputFlow74 createdestinationProcessOutputFlow74() {
+		destinationProcessOutputFlow74Impl destinationProcessOutputFlow74 = new destinationProcessOutputFlow74Impl();
+		return destinationProcessOutputFlow74;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public supplierOrderOnStockThreshold81 createsupplierOrderOnStockThreshold81() {
+		supplierOrderOnStockThreshold81Impl supplierOrderOnStockThreshold81 = new supplierOrderOnStockThreshold81Impl();
+		return supplierOrderOnStockThreshold81;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public storageOrderOnStockThreshold82 createstorageOrderOnStockThreshold82() {
+		storageOrderOnStockThreshold82Impl storageOrderOnStockThreshold82 = new storageOrderOnStockThreshold82Impl();
+		return storageOrderOnStockThreshold82;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public storageOutputFlowConveyorBelt131 createstorageOutputFlowConveyorBelt131() {
+		storageOutputFlowConveyorBelt131Impl storageOutputFlowConveyorBelt131 = new storageOutputFlowConveyorBelt131Impl();
+		return storageOutputFlowConveyorBelt131;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public durationConveyorBelt132 createdurationConveyorBelt132() {
+		durationConveyorBelt132Impl durationConveyorBelt132 = new durationConveyorBelt132Impl();
+		return durationConveyorBelt132;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public outputConveyorBelt133 createoutputConveyorBelt133() {
+		outputConveyorBelt133Impl outputConveyorBelt133 = new outputConveyorBelt133Impl();
+		return outputConveyorBelt133;
 	}
 
 	/**
@@ -700,6 +954,16 @@ public class Metamodel_bdslFactoryImpl extends EFactoryImpl implements Metamodel
 	public VirtualAttribute createVirtualAttribute() {
 		VirtualAttributeImpl virtualAttribute = new VirtualAttributeImpl();
 		return virtualAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SiriusTag createSiriusTag() {
+		SiriusTagImpl siriusTag = new SiriusTagImpl();
+		return siriusTag;
 	}
 
 	/**

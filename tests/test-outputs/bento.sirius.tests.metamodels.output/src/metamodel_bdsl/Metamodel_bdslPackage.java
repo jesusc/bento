@@ -177,13 +177,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int MODEL__CONTAINS_VIRTUAL_ATTRIBUTE = 11;
 
 	/**
+	 * The feature id for the '<em><b>Source MM</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__SOURCE_MM = 12;
+
+	/**
 	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = 12;
+	int MODEL_FEATURE_COUNT = 13;
 
 	/**
 	 * The number of operations of the '<em>Model</em>' class.
@@ -202,7 +211,16 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getBindingElement()
 	 * @generated
 	 */
-	int BINDING_ELEMENT = 49;
+	int BINDING_ELEMENT = 70;
+
+	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINDING_ELEMENT__CONTAINS_SIRIUS_TAG = 0;
 
 	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
@@ -211,7 +229,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ELEMENT__NONE_ELEMENT = 0;
+	int BINDING_ELEMENT__NONE_ELEMENT = 1;
 
 	/**
 	 * The number of structural features of the '<em>Binding Element</em>' class.
@@ -220,7 +238,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINDING_ELEMENT_FEATURE_COUNT = 1;
+	int BINDING_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Binding Element</em>' class.
@@ -240,6 +258,15 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	int QUERY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY__CONTAINS_SIRIUS_TAG = BINDING_ELEMENT__CONTAINS_SIRIUS_TAG;
 
 	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
@@ -415,13 +442,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int STORAGE__NAME = COMPONENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE__CONTAINS_SIRIUS_TAG = COMPONENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__NONE_ELEMENT = COMPONENT_FEATURE_COUNT + 0;
+	int STORAGE__NONE_ELEMENT = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' attribute.
@@ -430,7 +466,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__SIZE = COMPONENT_FEATURE_COUNT + 1;
+	int STORAGE__SIZE = COMPONENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Initial Content</b></em>' attribute.
@@ -439,7 +475,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__INITIAL_CONTENT = COMPONENT_FEATURE_COUNT + 2;
+	int STORAGE__INITIAL_CONTENT = COMPONENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Overflow</b></em>' attribute.
@@ -448,7 +484,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__OVERFLOW = COMPONENT_FEATURE_COUNT + 3;
+	int STORAGE__OVERFLOW = COMPONENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Storage Output Flow</b></em>' reference list.
@@ -457,7 +493,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__STORAGE_OUTPUT_FLOW = COMPONENT_FEATURE_COUNT + 4;
+	int STORAGE__STORAGE_OUTPUT_FLOW = COMPONENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Order On Stock Threshold</b></em>' reference list.
@@ -466,7 +502,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__ORDER_ON_STOCK_THRESHOLD = COMPONENT_FEATURE_COUNT + 5;
+	int STORAGE__ORDER_ON_STOCK_THRESHOLD = COMPONENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Process Output Flow</b></em>' reference list.
@@ -475,7 +511,34 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__PROCESS_OUTPUT_FLOW = COMPONENT_FEATURE_COUNT + 6;
+	int STORAGE__PROCESS_OUTPUT_FLOW = COMPONENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Eref storage Output Flow Storage21</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21 = COMPONENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Eref order On Stock Threshold Storage22</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22 = COMPONENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Eref process Output Flow Storage23</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23 = COMPONENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Containsname Storage</b></em>' containment reference list.
@@ -484,7 +547,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__CONTAINSNAME_STORAGE = COMPONENT_FEATURE_COUNT + 7;
+	int STORAGE__CONTAINSNAME_STORAGE = COMPONENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Containssize Storage</b></em>' containment reference list.
@@ -493,7 +556,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__CONTAINSSIZE_STORAGE = COMPONENT_FEATURE_COUNT + 8;
+	int STORAGE__CONTAINSSIZE_STORAGE = COMPONENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Containsinitial Content Storage</b></em>' containment reference list.
@@ -502,7 +565,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__CONTAINSINITIAL_CONTENT_STORAGE = COMPONENT_FEATURE_COUNT + 9;
+	int STORAGE__CONTAINSINITIAL_CONTENT_STORAGE = COMPONENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Containsoverflow Storage</b></em>' containment reference list.
@@ -511,7 +574,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE__CONTAINSOVERFLOW_STORAGE = COMPONENT_FEATURE_COUNT + 10;
+	int STORAGE__CONTAINSOVERFLOW_STORAGE = COMPONENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Storage</em>' class.
@@ -520,7 +583,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 11;
+	int STORAGE_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of operations of the '<em>Storage</em>' class.
@@ -551,13 +614,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int SUPPLIER__NAME = COMPONENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__CONTAINS_SIRIUS_TAG = COMPONENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__NONE_ELEMENT = COMPONENT_FEATURE_COUNT + 0;
+	int SUPPLIER__NONE_ELEMENT = COMPONENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Delivered Percentage</b></em>' attribute.
@@ -566,7 +638,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__DELIVERED_PERCENTAGE = COMPONENT_FEATURE_COUNT + 1;
+	int SUPPLIER__DELIVERED_PERCENTAGE = COMPONENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Refill Policy</b></em>' reference list.
@@ -575,7 +647,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__REFILL_POLICY = COMPONENT_FEATURE_COUNT + 2;
+	int SUPPLIER__REFILL_POLICY = COMPONENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Supplier Delay</b></em>' containment reference.
@@ -584,7 +656,25 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__SUPPLIER_DELAY = COMPONENT_FEATURE_COUNT + 3;
+	int SUPPLIER__SUPPLIER_DELAY = COMPONENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Eref refill Policy Supplier31</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31 = COMPONENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Eref supplier Delay Supplier32</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32 = COMPONENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Containsname Supplier</b></em>' containment reference list.
@@ -593,7 +683,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__CONTAINSNAME_SUPPLIER = COMPONENT_FEATURE_COUNT + 4;
+	int SUPPLIER__CONTAINSNAME_SUPPLIER = COMPONENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Containsdelivered Percentage Supplier</b></em>' containment reference list.
@@ -602,7 +692,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER__CONTAINSDELIVERED_PERCENTAGE_SUPPLIER = COMPONENT_FEATURE_COUNT + 5;
+	int SUPPLIER__CONTAINSDELIVERED_PERCENTAGE_SUPPLIER = COMPONENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Supplier</em>' class.
@@ -611,7 +701,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUPPLIER_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 6;
+	int SUPPLIER_FEATURE_COUNT = COMPONENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Supplier</em>' class.
@@ -715,13 +805,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int BATCH_PROCESS__DURATION = PROCESS__DURATION;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BATCH_PROCESS__CONTAINS_SIRIUS_TAG = PROCESS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__NONE_ELEMENT = PROCESS_FEATURE_COUNT + 0;
+	int BATCH_PROCESS__NONE_ELEMENT = PROCESS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Percentage Of Success</b></em>' attribute.
@@ -730,7 +829,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__PERCENTAGE_OF_SUCCESS = PROCESS_FEATURE_COUNT + 1;
+	int BATCH_PROCESS__PERCENTAGE_OF_SUCCESS = PROCESS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Number Of Chains</b></em>' attribute.
@@ -739,7 +838,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__NUMBER_OF_CHAINS = PROCESS_FEATURE_COUNT + 2;
+	int BATCH_PROCESS__NUMBER_OF_CHAINS = PROCESS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Outputs</b></em>' containment reference list.
@@ -748,7 +847,34 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__OUTPUTS = PROCESS_FEATURE_COUNT + 3;
+	int BATCH_PROCESS__OUTPUTS = PROCESS_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Eref storage Output Flow Batch Process41</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BATCH_PROCESS__EREF_STORAGE_OUTPUT_FLOW_BATCH_PROCESS41 = PROCESS_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Eref duration Batch Process42</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BATCH_PROCESS__EREF_DURATION_BATCH_PROCESS42 = PROCESS_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Eref outputs Batch Process43</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BATCH_PROCESS__EREF_OUTPUTS_BATCH_PROCESS43 = PROCESS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Containsname Batch Process</b></em>' containment reference list.
@@ -757,7 +883,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__CONTAINSNAME_BATCH_PROCESS = PROCESS_FEATURE_COUNT + 4;
+	int BATCH_PROCESS__CONTAINSNAME_BATCH_PROCESS = PROCESS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Containspercentage Of Success Batch Process</b></em>' containment reference list.
@@ -766,7 +892,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__CONTAINSPERCENTAGE_OF_SUCCESS_BATCH_PROCESS = PROCESS_FEATURE_COUNT + 5;
+	int BATCH_PROCESS__CONTAINSPERCENTAGE_OF_SUCCESS_BATCH_PROCESS = PROCESS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Containsnumber Of Chains Batch Process</b></em>' containment reference list.
@@ -775,7 +901,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS__CONTAINSNUMBER_OF_CHAINS_BATCH_PROCESS = PROCESS_FEATURE_COUNT + 6;
+	int BATCH_PROCESS__CONTAINSNUMBER_OF_CHAINS_BATCH_PROCESS = PROCESS_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Batch Process</em>' class.
@@ -784,7 +910,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BATCH_PROCESS_FEATURE_COUNT = PROCESS_FEATURE_COUNT + 7;
+	int BATCH_PROCESS_FEATURE_COUNT = PROCESS_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of operations of the '<em>Batch Process</em>' class.
@@ -804,6 +930,15 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	int OUTPUT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT__CONTAINS_SIRIUS_TAG = BINDING_ELEMENT__CONTAINS_SIRIUS_TAG;
 
 	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
@@ -842,13 +977,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int OUTPUT__DESCRIPTION = BINDING_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Eref process Output Flow Output51</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51 = BINDING_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Containstype Output</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT__CONTAINSTYPE_OUTPUT = BINDING_ELEMENT_FEATURE_COUNT + 3;
+	int OUTPUT__CONTAINSTYPE_OUTPUT = BINDING_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Containsdescription Output</b></em>' containment reference list.
@@ -857,7 +1001,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT__CONTAINSDESCRIPTION_OUTPUT = BINDING_ELEMENT_FEATURE_COUNT + 4;
+	int OUTPUT__CONTAINSDESCRIPTION_OUTPUT = BINDING_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Output</em>' class.
@@ -866,7 +1010,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT_FEATURE_COUNT = BINDING_ELEMENT_FEATURE_COUNT + 5;
+	int OUTPUT_FEATURE_COUNT = BINDING_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Output</em>' class.
@@ -934,13 +1078,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int STORAGE_OUTPUT_FLOW__QUANTITY = FLOW__QUANTITY;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW__CONTAINS_SIRIUS_TAG = FLOW_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE_OUTPUT_FLOW__NONE_ELEMENT = FLOW_FEATURE_COUNT + 0;
+	int STORAGE_OUTPUT_FLOW__NONE_ELEMENT = FLOW_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -949,7 +1102,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE_OUTPUT_FLOW__SOURCE = FLOW_FEATURE_COUNT + 1;
+	int STORAGE_OUTPUT_FLOW__SOURCE = FLOW_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -958,7 +1111,34 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE_OUTPUT_FLOW__DESTINATION = FLOW_FEATURE_COUNT + 2;
+	int STORAGE_OUTPUT_FLOW__DESTINATION = FLOW_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Eref quantity Storage Output Flow61</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW__EREF_QUANTITY_STORAGE_OUTPUT_FLOW61 = FLOW_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Eref source Storage Output Flow62</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW__EREF_SOURCE_STORAGE_OUTPUT_FLOW62 = FLOW_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Eref destination Storage Output Flow63</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW__EREF_DESTINATION_STORAGE_OUTPUT_FLOW63 = FLOW_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Storage Output Flow</em>' class.
@@ -967,7 +1147,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STORAGE_OUTPUT_FLOW_FEATURE_COUNT = FLOW_FEATURE_COUNT + 3;
+	int STORAGE_OUTPUT_FLOW_FEATURE_COUNT = FLOW_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Storage Output Flow</em>' class.
@@ -998,13 +1178,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int PROCESS_OUTPUT_FLOW__QUANTITY = FLOW__QUANTITY;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW__CONTAINS_SIRIUS_TAG = FLOW_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_OUTPUT_FLOW__NONE_ELEMENT = FLOW_FEATURE_COUNT + 0;
+	int PROCESS_OUTPUT_FLOW__NONE_ELEMENT = FLOW_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -1013,7 +1202,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_OUTPUT_FLOW__SOURCE = FLOW_FEATURE_COUNT + 1;
+	int PROCESS_OUTPUT_FLOW__SOURCE = FLOW_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Process Output Flow Delay</b></em>' containment reference.
@@ -1022,7 +1211,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_OUTPUT_FLOW__PROCESS_OUTPUT_FLOW_DELAY = FLOW_FEATURE_COUNT + 2;
+	int PROCESS_OUTPUT_FLOW__PROCESS_OUTPUT_FLOW_DELAY = FLOW_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -1031,7 +1220,43 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_OUTPUT_FLOW__DESTINATION = FLOW_FEATURE_COUNT + 3;
+	int PROCESS_OUTPUT_FLOW__DESTINATION = FLOW_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Eref quantity Process Output Flow71</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW__EREF_QUANTITY_PROCESS_OUTPUT_FLOW71 = FLOW_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Eref source Process Output Flow72</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW__EREF_SOURCE_PROCESS_OUTPUT_FLOW72 = FLOW_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Eref process Output Flow Delay Process Output Flow73</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW__EREF_PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73 = FLOW_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Eref destination Process Output Flow74</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW__EREF_DESTINATION_PROCESS_OUTPUT_FLOW74 = FLOW_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Process Output Flow</em>' class.
@@ -1040,7 +1265,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_OUTPUT_FLOW_FEATURE_COUNT = FLOW_FEATURE_COUNT + 4;
+	int PROCESS_OUTPUT_FLOW_FEATURE_COUNT = FLOW_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Process Output Flow</em>' class.
@@ -1060,6 +1285,15 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	int ORDER_ON_STOCK_THRESHOLD = 9;
+
+	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_ON_STOCK_THRESHOLD__CONTAINS_SIRIUS_TAG = BINDING_ELEMENT__CONTAINS_SIRIUS_TAG;
 
 	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
@@ -1134,13 +1368,31 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int ORDER_ON_STOCK_THRESHOLD__STORAGE = BINDING_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Eref supplier Order On Stock Threshold81</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81 = BINDING_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Eref storage Order On Stock Threshold82</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82 = BINDING_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Containsperiod Order On Stock Threshold</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 7;
+	int ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Containsthreshold Order On Stock Threshold</b></em>' containment reference list.
@@ -1149,7 +1401,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_ON_STOCK_THRESHOLD__CONTAINSTHRESHOLD_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 8;
+	int ORDER_ON_STOCK_THRESHOLD__CONTAINSTHRESHOLD_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Containsname Order On Stock Threshold</b></em>' containment reference list.
@@ -1158,7 +1410,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_ON_STOCK_THRESHOLD__CONTAINSNAME_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 9;
+	int ORDER_ON_STOCK_THRESHOLD__CONTAINSNAME_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Containsorder Quantity Order On Stock Threshold</b></em>' containment reference list.
@@ -1167,7 +1419,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_ON_STOCK_THRESHOLD__CONTAINSORDER_QUANTITY_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 10;
+	int ORDER_ON_STOCK_THRESHOLD__CONTAINSORDER_QUANTITY_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Containsorder Type Order On Stock Threshold</b></em>' containment reference list.
@@ -1176,7 +1428,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_ON_STOCK_THRESHOLD__CONTAINSORDER_TYPE_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 11;
+	int ORDER_ON_STOCK_THRESHOLD__CONTAINSORDER_TYPE_ORDER_ON_STOCK_THRESHOLD = BINDING_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>Order On Stock Threshold</em>' class.
@@ -1185,7 +1437,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDER_ON_STOCK_THRESHOLD_FEATURE_COUNT = BINDING_ELEMENT_FEATURE_COUNT + 12;
+	int ORDER_ON_STOCK_THRESHOLD_FEATURE_COUNT = BINDING_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of operations of the '<em>Order On Stock Threshold</em>' class.
@@ -1263,13 +1515,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int SCALAR = 14;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR__CONTAINS_SIRIUS_TAG = PROBABILITY_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR__NONE_ELEMENT = PROBABILITY_FEATURE_COUNT + 0;
+	int SCALAR__NONE_ELEMENT = PROBABILITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1278,7 +1539,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR__VALUE = PROBABILITY_FEATURE_COUNT + 1;
+	int SCALAR__VALUE = PROBABILITY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Containsvalue Scalar</b></em>' containment reference list.
@@ -1287,7 +1548,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR__CONTAINSVALUE_SCALAR = PROBABILITY_FEATURE_COUNT + 2;
+	int SCALAR__CONTAINSVALUE_SCALAR = PROBABILITY_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Scalar</em>' class.
@@ -1296,7 +1557,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_FEATURE_COUNT = PROBABILITY_FEATURE_COUNT + 3;
+	int SCALAR_FEATURE_COUNT = PROBABILITY_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Scalar</em>' class.
@@ -1318,13 +1579,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int GAUSSIAN = 15;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GAUSSIAN__CONTAINS_SIRIUS_TAG = DISTRIBUTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GAUSSIAN__NONE_ELEMENT = DISTRIBUTION_FEATURE_COUNT + 0;
+	int GAUSSIAN__NONE_ELEMENT = DISTRIBUTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -1333,7 +1603,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GAUSSIAN__LOCATION = DISTRIBUTION_FEATURE_COUNT + 1;
+	int GAUSSIAN__LOCATION = DISTRIBUTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -1342,7 +1612,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GAUSSIAN__SCALE = DISTRIBUTION_FEATURE_COUNT + 2;
+	int GAUSSIAN__SCALE = DISTRIBUTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Containslocation Gaussian</b></em>' containment reference list.
@@ -1351,7 +1621,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GAUSSIAN__CONTAINSLOCATION_GAUSSIAN = DISTRIBUTION_FEATURE_COUNT + 3;
+	int GAUSSIAN__CONTAINSLOCATION_GAUSSIAN = DISTRIBUTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Containsscale Gaussian</b></em>' containment reference list.
@@ -1360,7 +1630,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GAUSSIAN__CONTAINSSCALE_GAUSSIAN = DISTRIBUTION_FEATURE_COUNT + 4;
+	int GAUSSIAN__CONTAINSSCALE_GAUSSIAN = DISTRIBUTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Gaussian</em>' class.
@@ -1369,7 +1639,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GAUSSIAN_FEATURE_COUNT = DISTRIBUTION_FEATURE_COUNT + 5;
+	int GAUSSIAN_FEATURE_COUNT = DISTRIBUTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Gaussian</em>' class.
@@ -1391,13 +1661,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int POISSON = 16;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POISSON__CONTAINS_SIRIUS_TAG = DISTRIBUTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POISSON__NONE_ELEMENT = DISTRIBUTION_FEATURE_COUNT + 0;
+	int POISSON__NONE_ELEMENT = DISTRIBUTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Interval</b></em>' attribute.
@@ -1406,7 +1685,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POISSON__INTERVAL = DISTRIBUTION_FEATURE_COUNT + 1;
+	int POISSON__INTERVAL = DISTRIBUTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Containsinterval Poisson</b></em>' containment reference list.
@@ -1415,7 +1694,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POISSON__CONTAINSINTERVAL_POISSON = DISTRIBUTION_FEATURE_COUNT + 2;
+	int POISSON__CONTAINSINTERVAL_POISSON = DISTRIBUTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Poisson</em>' class.
@@ -1424,7 +1703,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POISSON_FEATURE_COUNT = DISTRIBUTION_FEATURE_COUNT + 3;
+	int POISSON_FEATURE_COUNT = DISTRIBUTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Poisson</em>' class.
@@ -1446,13 +1725,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int UNIFORM = 17;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIFORM__CONTAINS_SIRIUS_TAG = DISTRIBUTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIFORM__NONE_ELEMENT = DISTRIBUTION_FEATURE_COUNT + 0;
+	int UNIFORM__NONE_ELEMENT = DISTRIBUTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Minimum</b></em>' attribute.
@@ -1461,7 +1749,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIFORM__MINIMUM = DISTRIBUTION_FEATURE_COUNT + 1;
+	int UNIFORM__MINIMUM = DISTRIBUTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Maximum</b></em>' attribute.
@@ -1470,7 +1758,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIFORM__MAXIMUM = DISTRIBUTION_FEATURE_COUNT + 2;
+	int UNIFORM__MAXIMUM = DISTRIBUTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Containsminimum Uniform</b></em>' containment reference list.
@@ -1479,7 +1767,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIFORM__CONTAINSMINIMUM_UNIFORM = DISTRIBUTION_FEATURE_COUNT + 3;
+	int UNIFORM__CONTAINSMINIMUM_UNIFORM = DISTRIBUTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Containsmaximum Uniform</b></em>' containment reference list.
@@ -1488,7 +1776,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIFORM__CONTAINSMAXIMUM_UNIFORM = DISTRIBUTION_FEATURE_COUNT + 4;
+	int UNIFORM__CONTAINSMAXIMUM_UNIFORM = DISTRIBUTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Uniform</em>' class.
@@ -1497,7 +1785,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIFORM_FEATURE_COUNT = DISTRIBUTION_FEATURE_COUNT + 5;
+	int UNIFORM_FEATURE_COUNT = DISTRIBUTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Uniform</em>' class.
@@ -1546,13 +1834,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int CONVEYOR_BELT__DURATION = PROCESS__DURATION;
 
 	/**
+	 * The feature id for the '<em><b>Contains Sirius Tag</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONVEYOR_BELT__CONTAINS_SIRIUS_TAG = PROCESS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>None Element</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONVEYOR_BELT__NONE_ELEMENT = PROCESS_FEATURE_COUNT + 0;
+	int CONVEYOR_BELT__NONE_ELEMENT = PROCESS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Minimal Separation Between Batches</b></em>' attribute.
@@ -1561,7 +1858,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONVEYOR_BELT__MINIMAL_SEPARATION_BETWEEN_BATCHES = PROCESS_FEATURE_COUNT + 1;
+	int CONVEYOR_BELT__MINIMAL_SEPARATION_BETWEEN_BATCHES = PROCESS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Output</b></em>' containment reference.
@@ -1570,7 +1867,34 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONVEYOR_BELT__OUTPUT = PROCESS_FEATURE_COUNT + 2;
+	int CONVEYOR_BELT__OUTPUT = PROCESS_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Eref storage Output Flow Conveyor Belt131</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONVEYOR_BELT__EREF_STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131 = PROCESS_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Eref duration Conveyor Belt132</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONVEYOR_BELT__EREF_DURATION_CONVEYOR_BELT132 = PROCESS_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Eref output Conveyor Belt133</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONVEYOR_BELT__EREF_OUTPUT_CONVEYOR_BELT133 = PROCESS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Containsname Conveyor Belt</b></em>' containment reference list.
@@ -1579,7 +1903,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONVEYOR_BELT__CONTAINSNAME_CONVEYOR_BELT = PROCESS_FEATURE_COUNT + 3;
+	int CONVEYOR_BELT__CONTAINSNAME_CONVEYOR_BELT = PROCESS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Containsminimal Separation Between Batches Conveyor Belt</b></em>' containment reference list.
@@ -1588,7 +1912,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONVEYOR_BELT__CONTAINSMINIMAL_SEPARATION_BETWEEN_BATCHES_CONVEYOR_BELT = PROCESS_FEATURE_COUNT + 4;
+	int CONVEYOR_BELT__CONTAINSMINIMAL_SEPARATION_BETWEEN_BATCHES_CONVEYOR_BELT = PROCESS_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Conveyor Belt</em>' class.
@@ -1597,7 +1921,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONVEYOR_BELT_FEATURE_COUNT = PROCESS_FEATURE_COUNT + 5;
+	int CONVEYOR_BELT_FEATURE_COUNT = PROCESS_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Conveyor Belt</em>' class.
@@ -1616,7 +1940,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getBindingAttribute()
 	 * @generated
 	 */
-	int BINDING_ATTRIBUTE = 53;
+	int BINDING_ATTRIBUTE = 74;
 
 	/**
 	 * The number of structural features of the '<em>Binding Attribute</em>' class.
@@ -1637,6 +1961,783 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int BINDING_ATTRIBUTE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.storageOutputFlowStorage21Impl <em>storage Output Flow Storage21</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.storageOutputFlowStorage21Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOutputFlowStorage21()
+	 * @generated
+	 */
+	int STORAGE_OUTPUT_FLOW_STORAGE21 = 19;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_STORAGE21__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>storage Output Flow Storage21</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_STORAGE21_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>storage Output Flow Storage21</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_STORAGE21_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.orderOnStockThresholdStorage22Impl <em>order On Stock Threshold Storage22</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.orderOnStockThresholdStorage22Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getorderOnStockThresholdStorage22()
+	 * @generated
+	 */
+	int ORDER_ON_STOCK_THRESHOLD_STORAGE22 = 20;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_ON_STOCK_THRESHOLD_STORAGE22__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>order On Stock Threshold Storage22</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_ON_STOCK_THRESHOLD_STORAGE22_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>order On Stock Threshold Storage22</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_ON_STOCK_THRESHOLD_STORAGE22_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.processOutputFlowStorage23Impl <em>process Output Flow Storage23</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.processOutputFlowStorage23Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getprocessOutputFlowStorage23()
+	 * @generated
+	 */
+	int PROCESS_OUTPUT_FLOW_STORAGE23 = 21;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_STORAGE23__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>process Output Flow Storage23</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_STORAGE23_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>process Output Flow Storage23</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_STORAGE23_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.refillPolicySupplier31Impl <em>refill Policy Supplier31</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.refillPolicySupplier31Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getrefillPolicySupplier31()
+	 * @generated
+	 */
+	int REFILL_POLICY_SUPPLIER31 = 22;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFILL_POLICY_SUPPLIER31__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>refill Policy Supplier31</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFILL_POLICY_SUPPLIER31_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>refill Policy Supplier31</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFILL_POLICY_SUPPLIER31_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.supplierDelaySupplier32Impl <em>supplier Delay Supplier32</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.supplierDelaySupplier32Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsupplierDelaySupplier32()
+	 * @generated
+	 */
+	int SUPPLIER_DELAY_SUPPLIER32 = 23;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER_DELAY_SUPPLIER32__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>supplier Delay Supplier32</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER_DELAY_SUPPLIER32_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>supplier Delay Supplier32</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER_DELAY_SUPPLIER32_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.storageOutputFlowBatchProcess41Impl <em>storage Output Flow Batch Process41</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.storageOutputFlowBatchProcess41Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOutputFlowBatchProcess41()
+	 * @generated
+	 */
+	int STORAGE_OUTPUT_FLOW_BATCH_PROCESS41 = 24;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_BATCH_PROCESS41__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>storage Output Flow Batch Process41</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_BATCH_PROCESS41_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>storage Output Flow Batch Process41</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_BATCH_PROCESS41_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.durationBatchProcess42Impl <em>duration Batch Process42</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.durationBatchProcess42Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdurationBatchProcess42()
+	 * @generated
+	 */
+	int DURATION_BATCH_PROCESS42 = 25;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_BATCH_PROCESS42__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>duration Batch Process42</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_BATCH_PROCESS42_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>duration Batch Process42</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_BATCH_PROCESS42_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.outputsBatchProcess43Impl <em>outputs Batch Process43</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.outputsBatchProcess43Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getoutputsBatchProcess43()
+	 * @generated
+	 */
+	int OUTPUTS_BATCH_PROCESS43 = 26;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUTS_BATCH_PROCESS43__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>outputs Batch Process43</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUTS_BATCH_PROCESS43_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>outputs Batch Process43</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUTS_BATCH_PROCESS43_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.processOutputFlowOutput51Impl <em>process Output Flow Output51</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.processOutputFlowOutput51Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getprocessOutputFlowOutput51()
+	 * @generated
+	 */
+	int PROCESS_OUTPUT_FLOW_OUTPUT51 = 27;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_OUTPUT51__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>process Output Flow Output51</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_OUTPUT51_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>process Output Flow Output51</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_OUTPUT51_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.quantityStorageOutputFlow61Impl <em>quantity Storage Output Flow61</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.quantityStorageOutputFlow61Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getquantityStorageOutputFlow61()
+	 * @generated
+	 */
+	int QUANTITY_STORAGE_OUTPUT_FLOW61 = 28;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUANTITY_STORAGE_OUTPUT_FLOW61__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>quantity Storage Output Flow61</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUANTITY_STORAGE_OUTPUT_FLOW61_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>quantity Storage Output Flow61</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUANTITY_STORAGE_OUTPUT_FLOW61_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.sourceStorageOutputFlow62Impl <em>source Storage Output Flow62</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.sourceStorageOutputFlow62Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsourceStorageOutputFlow62()
+	 * @generated
+	 */
+	int SOURCE_STORAGE_OUTPUT_FLOW62 = 29;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_STORAGE_OUTPUT_FLOW62__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>source Storage Output Flow62</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_STORAGE_OUTPUT_FLOW62_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>source Storage Output Flow62</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_STORAGE_OUTPUT_FLOW62_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.destinationStorageOutputFlow63Impl <em>destination Storage Output Flow63</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.destinationStorageOutputFlow63Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdestinationStorageOutputFlow63()
+	 * @generated
+	 */
+	int DESTINATION_STORAGE_OUTPUT_FLOW63 = 30;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTINATION_STORAGE_OUTPUT_FLOW63__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>destination Storage Output Flow63</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTINATION_STORAGE_OUTPUT_FLOW63_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>destination Storage Output Flow63</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTINATION_STORAGE_OUTPUT_FLOW63_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.quantityProcessOutputFlow71Impl <em>quantity Process Output Flow71</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.quantityProcessOutputFlow71Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getquantityProcessOutputFlow71()
+	 * @generated
+	 */
+	int QUANTITY_PROCESS_OUTPUT_FLOW71 = 31;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUANTITY_PROCESS_OUTPUT_FLOW71__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>quantity Process Output Flow71</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUANTITY_PROCESS_OUTPUT_FLOW71_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>quantity Process Output Flow71</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUANTITY_PROCESS_OUTPUT_FLOW71_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.sourceProcessOutputFlow72Impl <em>source Process Output Flow72</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.sourceProcessOutputFlow72Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsourceProcessOutputFlow72()
+	 * @generated
+	 */
+	int SOURCE_PROCESS_OUTPUT_FLOW72 = 32;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_PROCESS_OUTPUT_FLOW72__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>source Process Output Flow72</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_PROCESS_OUTPUT_FLOW72_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>source Process Output Flow72</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_PROCESS_OUTPUT_FLOW72_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.processOutputFlowDelayProcessOutputFlow73Impl <em>process Output Flow Delay Process Output Flow73</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.processOutputFlowDelayProcessOutputFlow73Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getprocessOutputFlowDelayProcessOutputFlow73()
+	 * @generated
+	 */
+	int PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73 = 33;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>process Output Flow Delay Process Output Flow73</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>process Output Flow Delay Process Output Flow73</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.destinationProcessOutputFlow74Impl <em>destination Process Output Flow74</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.destinationProcessOutputFlow74Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdestinationProcessOutputFlow74()
+	 * @generated
+	 */
+	int DESTINATION_PROCESS_OUTPUT_FLOW74 = 34;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTINATION_PROCESS_OUTPUT_FLOW74__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>destination Process Output Flow74</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTINATION_PROCESS_OUTPUT_FLOW74_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>destination Process Output Flow74</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESTINATION_PROCESS_OUTPUT_FLOW74_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.supplierOrderOnStockThreshold81Impl <em>supplier Order On Stock Threshold81</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.supplierOrderOnStockThreshold81Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsupplierOrderOnStockThreshold81()
+	 * @generated
+	 */
+	int SUPPLIER_ORDER_ON_STOCK_THRESHOLD81 = 35;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER_ORDER_ON_STOCK_THRESHOLD81__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>supplier Order On Stock Threshold81</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER_ORDER_ON_STOCK_THRESHOLD81_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>supplier Order On Stock Threshold81</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUPPLIER_ORDER_ON_STOCK_THRESHOLD81_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.storageOrderOnStockThreshold82Impl <em>storage Order On Stock Threshold82</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.storageOrderOnStockThreshold82Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOrderOnStockThreshold82()
+	 * @generated
+	 */
+	int STORAGE_ORDER_ON_STOCK_THRESHOLD82 = 36;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_ORDER_ON_STOCK_THRESHOLD82__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>storage Order On Stock Threshold82</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_ORDER_ON_STOCK_THRESHOLD82_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>storage Order On Stock Threshold82</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_ORDER_ON_STOCK_THRESHOLD82_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.storageOutputFlowConveyorBelt131Impl <em>storage Output Flow Conveyor Belt131</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.storageOutputFlowConveyorBelt131Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOutputFlowConveyorBelt131()
+	 * @generated
+	 */
+	int STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131 = 37;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>storage Output Flow Conveyor Belt131</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>storage Output Flow Conveyor Belt131</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.durationConveyorBelt132Impl <em>duration Conveyor Belt132</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.durationConveyorBelt132Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdurationConveyorBelt132()
+	 * @generated
+	 */
+	int DURATION_CONVEYOR_BELT132 = 38;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_CONVEYOR_BELT132__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>duration Conveyor Belt132</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_CONVEYOR_BELT132_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>duration Conveyor Belt132</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_CONVEYOR_BELT132_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.outputConveyorBelt133Impl <em>output Conveyor Belt133</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.outputConveyorBelt133Impl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getoutputConveyorBelt133()
+	 * @generated
+	 */
+	int OUTPUT_CONVEYOR_BELT133 = 39;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_CONVEYOR_BELT133__NAME = BINDING_ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>output Conveyor Belt133</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_CONVEYOR_BELT133_FEATURE_COUNT = BINDING_ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>output Conveyor Belt133</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_CONVEYOR_BELT133_OPERATION_COUNT = BINDING_ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link metamodel_bdsl.impl.nameQueryImpl <em>name Query</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1644,7 +2745,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnameQuery()
 	 * @generated
 	 */
-	int NAME_QUERY = 19;
+	int NAME_QUERY = 40;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1681,7 +2782,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getvalueQuery()
 	 * @generated
 	 */
-	int VALUE_QUERY = 20;
+	int VALUE_QUERY = 41;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1718,7 +2819,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#geterrorQuery()
 	 * @generated
 	 */
-	int ERROR_QUERY = 21;
+	int ERROR_QUERY = 42;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1755,7 +2856,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#gettypeQuery()
 	 * @generated
 	 */
-	int TYPE_QUERY = 22;
+	int TYPE_QUERY = 43;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1792,7 +2893,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsystemQuery()
 	 * @generated
 	 */
-	int SYSTEM_QUERY = 23;
+	int SYSTEM_QUERY = 44;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1829,7 +2930,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnameStorage()
 	 * @generated
 	 */
-	int NAME_STORAGE = 24;
+	int NAME_STORAGE = 45;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1866,7 +2967,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsizeStorage()
 	 * @generated
 	 */
-	int SIZE_STORAGE = 25;
+	int SIZE_STORAGE = 46;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1903,7 +3004,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getinitialContentStorage()
 	 * @generated
 	 */
-	int INITIAL_CONTENT_STORAGE = 26;
+	int INITIAL_CONTENT_STORAGE = 47;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1940,7 +3041,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getoverflowStorage()
 	 * @generated
 	 */
-	int OVERFLOW_STORAGE = 27;
+	int OVERFLOW_STORAGE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1977,7 +3078,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnameSupplier()
 	 * @generated
 	 */
-	int NAME_SUPPLIER = 28;
+	int NAME_SUPPLIER = 49;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2014,7 +3115,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdeliveredPercentageSupplier()
 	 * @generated
 	 */
-	int DELIVERED_PERCENTAGE_SUPPLIER = 29;
+	int DELIVERED_PERCENTAGE_SUPPLIER = 50;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2051,7 +3152,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnameBatchProcess()
 	 * @generated
 	 */
-	int NAME_BATCH_PROCESS = 30;
+	int NAME_BATCH_PROCESS = 51;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2088,7 +3189,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getpercentageOfSuccessBatchProcess()
 	 * @generated
 	 */
-	int PERCENTAGE_OF_SUCCESS_BATCH_PROCESS = 31;
+	int PERCENTAGE_OF_SUCCESS_BATCH_PROCESS = 52;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2125,7 +3226,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnumberOfChainsBatchProcess()
 	 * @generated
 	 */
-	int NUMBER_OF_CHAINS_BATCH_PROCESS = 32;
+	int NUMBER_OF_CHAINS_BATCH_PROCESS = 53;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2162,7 +3263,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#gettypeOutput()
 	 * @generated
 	 */
-	int TYPE_OUTPUT = 33;
+	int TYPE_OUTPUT = 54;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2199,7 +3300,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdescriptionOutput()
 	 * @generated
 	 */
-	int DESCRIPTION_OUTPUT = 34;
+	int DESCRIPTION_OUTPUT = 55;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2236,7 +3337,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getperiodOrderOnStockThreshold()
 	 * @generated
 	 */
-	int PERIOD_ORDER_ON_STOCK_THRESHOLD = 35;
+	int PERIOD_ORDER_ON_STOCK_THRESHOLD = 56;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2273,7 +3374,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getthresholdOrderOnStockThreshold()
 	 * @generated
 	 */
-	int THRESHOLD_ORDER_ON_STOCK_THRESHOLD = 36;
+	int THRESHOLD_ORDER_ON_STOCK_THRESHOLD = 57;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2310,7 +3411,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnameOrderOnStockThreshold()
 	 * @generated
 	 */
-	int NAME_ORDER_ON_STOCK_THRESHOLD = 37;
+	int NAME_ORDER_ON_STOCK_THRESHOLD = 58;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2347,7 +3448,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getorderQuantityOrderOnStockThreshold()
 	 * @generated
 	 */
-	int ORDER_QUANTITY_ORDER_ON_STOCK_THRESHOLD = 38;
+	int ORDER_QUANTITY_ORDER_ON_STOCK_THRESHOLD = 59;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2384,7 +3485,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getorderTypeOrderOnStockThreshold()
 	 * @generated
 	 */
-	int ORDER_TYPE_ORDER_ON_STOCK_THRESHOLD = 39;
+	int ORDER_TYPE_ORDER_ON_STOCK_THRESHOLD = 60;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2421,7 +3522,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getvalueScalar()
 	 * @generated
 	 */
-	int VALUE_SCALAR = 40;
+	int VALUE_SCALAR = 61;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2458,7 +3559,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getlocationGaussian()
 	 * @generated
 	 */
-	int LOCATION_GAUSSIAN = 41;
+	int LOCATION_GAUSSIAN = 62;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2495,7 +3596,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getscaleGaussian()
 	 * @generated
 	 */
-	int SCALE_GAUSSIAN = 42;
+	int SCALE_GAUSSIAN = 63;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2532,7 +3633,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getintervalPoisson()
 	 * @generated
 	 */
-	int INTERVAL_POISSON = 43;
+	int INTERVAL_POISSON = 64;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2569,7 +3670,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getminimumUniform()
 	 * @generated
 	 */
-	int MINIMUM_UNIFORM = 44;
+	int MINIMUM_UNIFORM = 65;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2606,7 +3707,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getmaximumUniform()
 	 * @generated
 	 */
-	int MAXIMUM_UNIFORM = 45;
+	int MAXIMUM_UNIFORM = 66;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2643,7 +3744,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getnameConveyorBelt()
 	 * @generated
 	 */
-	int NAME_CONVEYOR_BELT = 46;
+	int NAME_CONVEYOR_BELT = 67;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2680,7 +3781,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getminimalSeparationBetweenBatchesConveyorBelt()
 	 * @generated
 	 */
-	int MINIMAL_SEPARATION_BETWEEN_BATCHES_CONVEYOR_BELT = 47;
+	int MINIMAL_SEPARATION_BETWEEN_BATCHES_CONVEYOR_BELT = 68;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2717,7 +3818,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getNoneElement()
 	 * @generated
 	 */
-	int NONE_ELEMENT = 48;
+	int NONE_ELEMENT = 69;
 
 	/**
 	 * The number of structural features of the '<em>None Element</em>' class.
@@ -2745,7 +3846,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getIntermediateElement()
 	 * @generated
 	 */
-	int INTERMEDIATE_ELEMENT = 50;
+	int INTERMEDIATE_ELEMENT = 71;
 
 	/**
 	 * The feature id for the '<em><b>Binding Element</b></em>' reference.
@@ -2791,7 +3892,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getMetamodelElement()
 	 * @generated
 	 */
-	int METAMODEL_ELEMENT = 51;
+	int METAMODEL_ELEMENT = 72;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Attribute</b></em>' containment reference list.
@@ -2846,7 +3947,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getMetamodelElementFeature()
 	 * @generated
 	 */
-	int METAMODEL_ELEMENT_FEATURE = 52;
+	int METAMODEL_ELEMENT_FEATURE = 73;
 
 	/**
 	 * The feature id for the '<em><b>Feature Class</b></em>' reference list.
@@ -2892,7 +3993,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getVirtualAttribute()
 	 * @generated
 	 */
-	int VIRTUAL_ATTRIBUTE = 54;
+	int VIRTUAL_ATTRIBUTE = 75;
 
 	/**
 	 * The feature id for the '<em><b>To virtual Attribute</b></em>' reference.
@@ -2940,6 +4041,43 @@ public interface Metamodel_bdslPackage extends EPackage {
 	int VIRTUAL_ATTRIBUTE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link metamodel_bdsl.impl.SiriusTagImpl <em>Sirius Tag</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see metamodel_bdsl.impl.SiriusTagImpl
+	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getSiriusTag()
+	 * @generated
+	 */
+	int SIRIUS_TAG = 76;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_TAG__TAG = 0;
+
+	/**
+	 * The number of structural features of the '<em>Sirius Tag</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_TAG_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Sirius Tag</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIRIUS_TAG_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link metamodel_bdsl.OrderType <em>Order Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2947,7 +4085,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getOrderType()
 	 * @generated
 	 */
-	int ORDER_TYPE = 55;
+	int ORDER_TYPE = 77;
 
 	/**
 	 * The meta object id for the '{@link metamodel_bdsl.OutputType <em>Output Type</em>}' enum.
@@ -2957,7 +4095,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getOutputType()
 	 * @generated
 	 */
-	int OUTPUT_TYPE = 56;
+	int OUTPUT_TYPE = 78;
 
 	/**
 	 * The meta object id for the '{@link metamodel_bdsl.QueryType <em>Query Type</em>}' enum.
@@ -2967,7 +4105,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getQueryType()
 	 * @generated
 	 */
-	int QUERY_TYPE = 57;
+	int QUERY_TYPE = 79;
 
 	/**
 	 * The meta object id for the '<em>Percent</em>' data type.
@@ -2977,7 +4115,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getPercent()
 	 * @generated
 	 */
-	int PERCENT = 58;
+	int PERCENT = 80;
 
 	/**
 	 * The meta object id for the '<em>Positive Int</em>' data type.
@@ -2987,7 +4125,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getPositiveInt()
 	 * @generated
 	 */
-	int POSITIVE_INT = 59;
+	int POSITIVE_INT = 81;
 
 	/**
 	 * The meta object id for the '<em>Positive Double</em>' data type.
@@ -2997,7 +4135,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getPositiveDouble()
 	 * @generated
 	 */
-	int POSITIVE_DOUBLE = 60;
+	int POSITIVE_DOUBLE = 82;
 
 	/**
 	 * The meta object id for the '<em>Positive Int Not Null</em>' data type.
@@ -3007,7 +4145,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getPositiveIntNotNull()
 	 * @generated
 	 */
-	int POSITIVE_INT_NOT_NULL = 61;
+	int POSITIVE_INT_NOT_NULL = 83;
 
 	/**
 	 * The meta object id for the '<em>Positive Double Not Null</em>' data type.
@@ -3017,7 +4155,7 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getPositiveDoubleNotNull()
 	 * @generated
 	 */
-	int POSITIVE_DOUBLE_NOT_NULL = 62;
+	int POSITIVE_DOUBLE_NOT_NULL = 84;
 
 
 	/**
@@ -3161,6 +4299,17 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModel_ContainsVirtualAttribute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.Model#getSourceMM <em>Source MM</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source MM</em>'.
+	 * @see metamodel_bdsl.Model#getSourceMM()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EAttribute getModel_SourceMM();
 
 	/**
 	 * Returns the meta object for class '{@link metamodel_bdsl.Query <em>Query</em>}'.
@@ -3359,6 +4508,39 @@ public interface Metamodel_bdslPackage extends EPackage {
 	EReference getStorage_ProcessOutputFlow();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.Storage#getEref_storageOutputFlowStorage21 <em>Eref storage Output Flow Storage21</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref storage Output Flow Storage21</em>'.
+	 * @see metamodel_bdsl.Storage#getEref_storageOutputFlowStorage21()
+	 * @see #getStorage()
+	 * @generated
+	 */
+	EReference getStorage_Eref_storageOutputFlowStorage21();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.Storage#getEref_orderOnStockThresholdStorage22 <em>Eref order On Stock Threshold Storage22</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref order On Stock Threshold Storage22</em>'.
+	 * @see metamodel_bdsl.Storage#getEref_orderOnStockThresholdStorage22()
+	 * @see #getStorage()
+	 * @generated
+	 */
+	EReference getStorage_Eref_orderOnStockThresholdStorage22();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.Storage#getEref_processOutputFlowStorage23 <em>Eref process Output Flow Storage23</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref process Output Flow Storage23</em>'.
+	 * @see metamodel_bdsl.Storage#getEref_processOutputFlowStorage23()
+	 * @see #getStorage()
+	 * @generated
+	 */
+	EReference getStorage_Eref_processOutputFlowStorage23();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.Storage#getContainsnameStorage <em>Containsname Storage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3446,6 +4628,28 @@ public interface Metamodel_bdslPackage extends EPackage {
 	EReference getSupplier_SupplierDelay();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.Supplier#getEref_refillPolicySupplier31 <em>Eref refill Policy Supplier31</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref refill Policy Supplier31</em>'.
+	 * @see metamodel_bdsl.Supplier#getEref_refillPolicySupplier31()
+	 * @see #getSupplier()
+	 * @generated
+	 */
+	EReference getSupplier_Eref_refillPolicySupplier31();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.Supplier#getEref_supplierDelaySupplier32 <em>Eref supplier Delay Supplier32</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref supplier Delay Supplier32</em>'.
+	 * @see metamodel_bdsl.Supplier#getEref_supplierDelaySupplier32()
+	 * @see #getSupplier()
+	 * @generated
+	 */
+	EReference getSupplier_Eref_supplierDelaySupplier32();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.Supplier#getContainsnameSupplier <em>Containsname Supplier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3509,6 +4713,39 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBatchProcess_Outputs();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.BatchProcess#getEref_storageOutputFlowBatchProcess41 <em>Eref storage Output Flow Batch Process41</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref storage Output Flow Batch Process41</em>'.
+	 * @see metamodel_bdsl.BatchProcess#getEref_storageOutputFlowBatchProcess41()
+	 * @see #getBatchProcess()
+	 * @generated
+	 */
+	EReference getBatchProcess_Eref_storageOutputFlowBatchProcess41();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.BatchProcess#getEref_durationBatchProcess42 <em>Eref duration Batch Process42</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref duration Batch Process42</em>'.
+	 * @see metamodel_bdsl.BatchProcess#getEref_durationBatchProcess42()
+	 * @see #getBatchProcess()
+	 * @generated
+	 */
+	EReference getBatchProcess_Eref_durationBatchProcess42();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.BatchProcess#getEref_outputsBatchProcess43 <em>Eref outputs Batch Process43</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref outputs Batch Process43</em>'.
+	 * @see metamodel_bdsl.BatchProcess#getEref_outputsBatchProcess43()
+	 * @see #getBatchProcess()
+	 * @generated
+	 */
+	EReference getBatchProcess_Eref_outputsBatchProcess43();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.BatchProcess#getContainsnameBatchProcess <em>Containsname Batch Process</em>}'.
@@ -3587,6 +4824,17 @@ public interface Metamodel_bdslPackage extends EPackage {
 	EAttribute getOutput_Description();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.Output#getEref_processOutputFlowOutput51 <em>Eref process Output Flow Output51</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref process Output Flow Output51</em>'.
+	 * @see metamodel_bdsl.Output#getEref_processOutputFlowOutput51()
+	 * @see #getOutput()
+	 * @generated
+	 */
+	EReference getOutput_Eref_processOutputFlowOutput51();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.Output#getContainstypeOutput <em>Containstype Output</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3641,6 +4889,39 @@ public interface Metamodel_bdslPackage extends EPackage {
 	EReference getStorageOutputFlow_Destination();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.StorageOutputFlow#getEref_quantityStorageOutputFlow61 <em>Eref quantity Storage Output Flow61</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref quantity Storage Output Flow61</em>'.
+	 * @see metamodel_bdsl.StorageOutputFlow#getEref_quantityStorageOutputFlow61()
+	 * @see #getStorageOutputFlow()
+	 * @generated
+	 */
+	EReference getStorageOutputFlow_Eref_quantityStorageOutputFlow61();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.StorageOutputFlow#getEref_sourceStorageOutputFlow62 <em>Eref source Storage Output Flow62</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref source Storage Output Flow62</em>'.
+	 * @see metamodel_bdsl.StorageOutputFlow#getEref_sourceStorageOutputFlow62()
+	 * @see #getStorageOutputFlow()
+	 * @generated
+	 */
+	EReference getStorageOutputFlow_Eref_sourceStorageOutputFlow62();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.StorageOutputFlow#getEref_destinationStorageOutputFlow63 <em>Eref destination Storage Output Flow63</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref destination Storage Output Flow63</em>'.
+	 * @see metamodel_bdsl.StorageOutputFlow#getEref_destinationStorageOutputFlow63()
+	 * @see #getStorageOutputFlow()
+	 * @generated
+	 */
+	EReference getStorageOutputFlow_Eref_destinationStorageOutputFlow63();
+
+	/**
 	 * Returns the meta object for class '{@link metamodel_bdsl.ProcessOutputFlow <em>Process Output Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3682,6 +4963,50 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProcessOutputFlow_Destination();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ProcessOutputFlow#getEref_quantityProcessOutputFlow71 <em>Eref quantity Process Output Flow71</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref quantity Process Output Flow71</em>'.
+	 * @see metamodel_bdsl.ProcessOutputFlow#getEref_quantityProcessOutputFlow71()
+	 * @see #getProcessOutputFlow()
+	 * @generated
+	 */
+	EReference getProcessOutputFlow_Eref_quantityProcessOutputFlow71();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ProcessOutputFlow#getEref_sourceProcessOutputFlow72 <em>Eref source Process Output Flow72</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref source Process Output Flow72</em>'.
+	 * @see metamodel_bdsl.ProcessOutputFlow#getEref_sourceProcessOutputFlow72()
+	 * @see #getProcessOutputFlow()
+	 * @generated
+	 */
+	EReference getProcessOutputFlow_Eref_sourceProcessOutputFlow72();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ProcessOutputFlow#getEref_processOutputFlowDelayProcessOutputFlow73 <em>Eref process Output Flow Delay Process Output Flow73</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref process Output Flow Delay Process Output Flow73</em>'.
+	 * @see metamodel_bdsl.ProcessOutputFlow#getEref_processOutputFlowDelayProcessOutputFlow73()
+	 * @see #getProcessOutputFlow()
+	 * @generated
+	 */
+	EReference getProcessOutputFlow_Eref_processOutputFlowDelayProcessOutputFlow73();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ProcessOutputFlow#getEref_destinationProcessOutputFlow74 <em>Eref destination Process Output Flow74</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref destination Process Output Flow74</em>'.
+	 * @see metamodel_bdsl.ProcessOutputFlow#getEref_destinationProcessOutputFlow74()
+	 * @see #getProcessOutputFlow()
+	 * @generated
+	 */
+	EReference getProcessOutputFlow_Eref_destinationProcessOutputFlow74();
 
 	/**
 	 * Returns the meta object for class '{@link metamodel_bdsl.Process <em>Process</em>}'.
@@ -3801,6 +5126,28 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOrderOnStockThreshold_Storage();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.OrderOnStockThreshold#getEref_supplierOrderOnStockThreshold81 <em>Eref supplier Order On Stock Threshold81</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref supplier Order On Stock Threshold81</em>'.
+	 * @see metamodel_bdsl.OrderOnStockThreshold#getEref_supplierOrderOnStockThreshold81()
+	 * @see #getOrderOnStockThreshold()
+	 * @generated
+	 */
+	EReference getOrderOnStockThreshold_Eref_supplierOrderOnStockThreshold81();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.OrderOnStockThreshold#getEref_storageOrderOnStockThreshold82 <em>Eref storage Order On Stock Threshold82</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref storage Order On Stock Threshold82</em>'.
+	 * @see metamodel_bdsl.OrderOnStockThreshold#getEref_storageOrderOnStockThreshold82()
+	 * @see #getOrderOnStockThreshold()
+	 * @generated
+	 */
+	EReference getOrderOnStockThreshold_Eref_storageOrderOnStockThreshold82();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.OrderOnStockThreshold#getContainsperiodOrderOnStockThreshold <em>Containsperiod Order On Stock Threshold</em>}'.
@@ -4124,6 +5471,39 @@ public interface Metamodel_bdslPackage extends EPackage {
 	EReference getConveyorBelt_Output();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ConveyorBelt#getEref_storageOutputFlowConveyorBelt131 <em>Eref storage Output Flow Conveyor Belt131</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref storage Output Flow Conveyor Belt131</em>'.
+	 * @see metamodel_bdsl.ConveyorBelt#getEref_storageOutputFlowConveyorBelt131()
+	 * @see #getConveyorBelt()
+	 * @generated
+	 */
+	EReference getConveyorBelt_Eref_storageOutputFlowConveyorBelt131();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ConveyorBelt#getEref_durationConveyorBelt132 <em>Eref duration Conveyor Belt132</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref duration Conveyor Belt132</em>'.
+	 * @see metamodel_bdsl.ConveyorBelt#getEref_durationConveyorBelt132()
+	 * @see #getConveyorBelt()
+	 * @generated
+	 */
+	EReference getConveyorBelt_Eref_durationConveyorBelt132();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link metamodel_bdsl.ConveyorBelt#getEref_outputConveyorBelt133 <em>Eref output Conveyor Belt133</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Eref output Conveyor Belt133</em>'.
+	 * @see metamodel_bdsl.ConveyorBelt#getEref_outputConveyorBelt133()
+	 * @see #getConveyorBelt()
+	 * @generated
+	 */
+	EReference getConveyorBelt_Eref_outputConveyorBelt133();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.ConveyorBelt#getContainsnameConveyorBelt <em>Containsname Conveyor Belt</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4144,6 +5524,447 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConveyorBelt_ContainsminimalSeparationBetweenBatchesConveyorBelt();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.storageOutputFlowStorage21 <em>storage Output Flow Storage21</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>storage Output Flow Storage21</em>'.
+	 * @see metamodel_bdsl.storageOutputFlowStorage21
+	 * @generated
+	 */
+	EClass getstorageOutputFlowStorage21();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.storageOutputFlowStorage21#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.storageOutputFlowStorage21#getName()
+	 * @see #getstorageOutputFlowStorage21()
+	 * @generated
+	 */
+	EAttribute getstorageOutputFlowStorage21_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.orderOnStockThresholdStorage22 <em>order On Stock Threshold Storage22</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>order On Stock Threshold Storage22</em>'.
+	 * @see metamodel_bdsl.orderOnStockThresholdStorage22
+	 * @generated
+	 */
+	EClass getorderOnStockThresholdStorage22();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.orderOnStockThresholdStorage22#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.orderOnStockThresholdStorage22#getName()
+	 * @see #getorderOnStockThresholdStorage22()
+	 * @generated
+	 */
+	EAttribute getorderOnStockThresholdStorage22_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.processOutputFlowStorage23 <em>process Output Flow Storage23</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>process Output Flow Storage23</em>'.
+	 * @see metamodel_bdsl.processOutputFlowStorage23
+	 * @generated
+	 */
+	EClass getprocessOutputFlowStorage23();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.processOutputFlowStorage23#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.processOutputFlowStorage23#getName()
+	 * @see #getprocessOutputFlowStorage23()
+	 * @generated
+	 */
+	EAttribute getprocessOutputFlowStorage23_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.refillPolicySupplier31 <em>refill Policy Supplier31</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>refill Policy Supplier31</em>'.
+	 * @see metamodel_bdsl.refillPolicySupplier31
+	 * @generated
+	 */
+	EClass getrefillPolicySupplier31();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.refillPolicySupplier31#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.refillPolicySupplier31#getName()
+	 * @see #getrefillPolicySupplier31()
+	 * @generated
+	 */
+	EAttribute getrefillPolicySupplier31_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.supplierDelaySupplier32 <em>supplier Delay Supplier32</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>supplier Delay Supplier32</em>'.
+	 * @see metamodel_bdsl.supplierDelaySupplier32
+	 * @generated
+	 */
+	EClass getsupplierDelaySupplier32();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.supplierDelaySupplier32#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.supplierDelaySupplier32#getName()
+	 * @see #getsupplierDelaySupplier32()
+	 * @generated
+	 */
+	EAttribute getsupplierDelaySupplier32_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.storageOutputFlowBatchProcess41 <em>storage Output Flow Batch Process41</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>storage Output Flow Batch Process41</em>'.
+	 * @see metamodel_bdsl.storageOutputFlowBatchProcess41
+	 * @generated
+	 */
+	EClass getstorageOutputFlowBatchProcess41();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.storageOutputFlowBatchProcess41#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.storageOutputFlowBatchProcess41#getName()
+	 * @see #getstorageOutputFlowBatchProcess41()
+	 * @generated
+	 */
+	EAttribute getstorageOutputFlowBatchProcess41_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.durationBatchProcess42 <em>duration Batch Process42</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>duration Batch Process42</em>'.
+	 * @see metamodel_bdsl.durationBatchProcess42
+	 * @generated
+	 */
+	EClass getdurationBatchProcess42();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.durationBatchProcess42#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.durationBatchProcess42#getName()
+	 * @see #getdurationBatchProcess42()
+	 * @generated
+	 */
+	EAttribute getdurationBatchProcess42_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.outputsBatchProcess43 <em>outputs Batch Process43</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>outputs Batch Process43</em>'.
+	 * @see metamodel_bdsl.outputsBatchProcess43
+	 * @generated
+	 */
+	EClass getoutputsBatchProcess43();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.outputsBatchProcess43#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.outputsBatchProcess43#getName()
+	 * @see #getoutputsBatchProcess43()
+	 * @generated
+	 */
+	EAttribute getoutputsBatchProcess43_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.processOutputFlowOutput51 <em>process Output Flow Output51</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>process Output Flow Output51</em>'.
+	 * @see metamodel_bdsl.processOutputFlowOutput51
+	 * @generated
+	 */
+	EClass getprocessOutputFlowOutput51();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.processOutputFlowOutput51#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.processOutputFlowOutput51#getName()
+	 * @see #getprocessOutputFlowOutput51()
+	 * @generated
+	 */
+	EAttribute getprocessOutputFlowOutput51_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.quantityStorageOutputFlow61 <em>quantity Storage Output Flow61</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>quantity Storage Output Flow61</em>'.
+	 * @see metamodel_bdsl.quantityStorageOutputFlow61
+	 * @generated
+	 */
+	EClass getquantityStorageOutputFlow61();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.quantityStorageOutputFlow61#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.quantityStorageOutputFlow61#getName()
+	 * @see #getquantityStorageOutputFlow61()
+	 * @generated
+	 */
+	EAttribute getquantityStorageOutputFlow61_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.sourceStorageOutputFlow62 <em>source Storage Output Flow62</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>source Storage Output Flow62</em>'.
+	 * @see metamodel_bdsl.sourceStorageOutputFlow62
+	 * @generated
+	 */
+	EClass getsourceStorageOutputFlow62();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.sourceStorageOutputFlow62#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.sourceStorageOutputFlow62#getName()
+	 * @see #getsourceStorageOutputFlow62()
+	 * @generated
+	 */
+	EAttribute getsourceStorageOutputFlow62_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.destinationStorageOutputFlow63 <em>destination Storage Output Flow63</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>destination Storage Output Flow63</em>'.
+	 * @see metamodel_bdsl.destinationStorageOutputFlow63
+	 * @generated
+	 */
+	EClass getdestinationStorageOutputFlow63();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.destinationStorageOutputFlow63#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.destinationStorageOutputFlow63#getName()
+	 * @see #getdestinationStorageOutputFlow63()
+	 * @generated
+	 */
+	EAttribute getdestinationStorageOutputFlow63_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.quantityProcessOutputFlow71 <em>quantity Process Output Flow71</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>quantity Process Output Flow71</em>'.
+	 * @see metamodel_bdsl.quantityProcessOutputFlow71
+	 * @generated
+	 */
+	EClass getquantityProcessOutputFlow71();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.quantityProcessOutputFlow71#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.quantityProcessOutputFlow71#getName()
+	 * @see #getquantityProcessOutputFlow71()
+	 * @generated
+	 */
+	EAttribute getquantityProcessOutputFlow71_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.sourceProcessOutputFlow72 <em>source Process Output Flow72</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>source Process Output Flow72</em>'.
+	 * @see metamodel_bdsl.sourceProcessOutputFlow72
+	 * @generated
+	 */
+	EClass getsourceProcessOutputFlow72();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.sourceProcessOutputFlow72#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.sourceProcessOutputFlow72#getName()
+	 * @see #getsourceProcessOutputFlow72()
+	 * @generated
+	 */
+	EAttribute getsourceProcessOutputFlow72_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73 <em>process Output Flow Delay Process Output Flow73</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>process Output Flow Delay Process Output Flow73</em>'.
+	 * @see metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73
+	 * @generated
+	 */
+	EClass getprocessOutputFlowDelayProcessOutputFlow73();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73#getName()
+	 * @see #getprocessOutputFlowDelayProcessOutputFlow73()
+	 * @generated
+	 */
+	EAttribute getprocessOutputFlowDelayProcessOutputFlow73_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.destinationProcessOutputFlow74 <em>destination Process Output Flow74</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>destination Process Output Flow74</em>'.
+	 * @see metamodel_bdsl.destinationProcessOutputFlow74
+	 * @generated
+	 */
+	EClass getdestinationProcessOutputFlow74();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.destinationProcessOutputFlow74#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.destinationProcessOutputFlow74#getName()
+	 * @see #getdestinationProcessOutputFlow74()
+	 * @generated
+	 */
+	EAttribute getdestinationProcessOutputFlow74_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.supplierOrderOnStockThreshold81 <em>supplier Order On Stock Threshold81</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>supplier Order On Stock Threshold81</em>'.
+	 * @see metamodel_bdsl.supplierOrderOnStockThreshold81
+	 * @generated
+	 */
+	EClass getsupplierOrderOnStockThreshold81();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.supplierOrderOnStockThreshold81#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.supplierOrderOnStockThreshold81#getName()
+	 * @see #getsupplierOrderOnStockThreshold81()
+	 * @generated
+	 */
+	EAttribute getsupplierOrderOnStockThreshold81_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.storageOrderOnStockThreshold82 <em>storage Order On Stock Threshold82</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>storage Order On Stock Threshold82</em>'.
+	 * @see metamodel_bdsl.storageOrderOnStockThreshold82
+	 * @generated
+	 */
+	EClass getstorageOrderOnStockThreshold82();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.storageOrderOnStockThreshold82#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.storageOrderOnStockThreshold82#getName()
+	 * @see #getstorageOrderOnStockThreshold82()
+	 * @generated
+	 */
+	EAttribute getstorageOrderOnStockThreshold82_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.storageOutputFlowConveyorBelt131 <em>storage Output Flow Conveyor Belt131</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>storage Output Flow Conveyor Belt131</em>'.
+	 * @see metamodel_bdsl.storageOutputFlowConveyorBelt131
+	 * @generated
+	 */
+	EClass getstorageOutputFlowConveyorBelt131();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.storageOutputFlowConveyorBelt131#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.storageOutputFlowConveyorBelt131#getName()
+	 * @see #getstorageOutputFlowConveyorBelt131()
+	 * @generated
+	 */
+	EAttribute getstorageOutputFlowConveyorBelt131_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.durationConveyorBelt132 <em>duration Conveyor Belt132</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>duration Conveyor Belt132</em>'.
+	 * @see metamodel_bdsl.durationConveyorBelt132
+	 * @generated
+	 */
+	EClass getdurationConveyorBelt132();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.durationConveyorBelt132#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.durationConveyorBelt132#getName()
+	 * @see #getdurationConveyorBelt132()
+	 * @generated
+	 */
+	EAttribute getdurationConveyorBelt132_Name();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.outputConveyorBelt133 <em>output Conveyor Belt133</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>output Conveyor Belt133</em>'.
+	 * @see metamodel_bdsl.outputConveyorBelt133
+	 * @generated
+	 */
+	EClass getoutputConveyorBelt133();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.outputConveyorBelt133#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see metamodel_bdsl.outputConveyorBelt133#getName()
+	 * @see #getoutputConveyorBelt133()
+	 * @generated
+	 */
+	EAttribute getoutputConveyorBelt133_Name();
 
 	/**
 	 * Returns the meta object for class '{@link metamodel_bdsl.nameQuery <em>name Query</em>}'.
@@ -4775,6 +6596,17 @@ public interface Metamodel_bdslPackage extends EPackage {
 	EClass getBindingElement();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link metamodel_bdsl.BindingElement#getContainsSiriusTag <em>Contains Sirius Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Contains Sirius Tag</em>'.
+	 * @see metamodel_bdsl.BindingElement#getContainsSiriusTag()
+	 * @see #getBindingElement()
+	 * @generated
+	 */
+	EReference getBindingElement_ContainsSiriusTag();
+
+	/**
 	 * Returns the meta object for the reference list '{@link metamodel_bdsl.BindingElement#getNoneElement <em>None Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4944,6 +6776,27 @@ public interface Metamodel_bdslPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getVirtualAttribute_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link metamodel_bdsl.SiriusTag <em>Sirius Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sirius Tag</em>'.
+	 * @see metamodel_bdsl.SiriusTag
+	 * @generated
+	 */
+	EClass getSiriusTag();
+
+	/**
+	 * Returns the meta object for the attribute '{@link metamodel_bdsl.SiriusTag#getTag <em>Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tag</em>'.
+	 * @see metamodel_bdsl.SiriusTag#getTag()
+	 * @see #getSiriusTag()
+	 * @generated
+	 */
+	EAttribute getSiriusTag_Tag();
 
 	/**
 	 * Returns the meta object for enum '{@link metamodel_bdsl.OrderType <em>Order Type</em>}'.
@@ -5165,6 +7018,14 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EReference MODEL__CONTAINS_VIRTUAL_ATTRIBUTE = eINSTANCE.getModel_ContainsVirtualAttribute();
 
 		/**
+		 * The meta object literal for the '<em><b>Source MM</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL__SOURCE_MM = eINSTANCE.getModel_SourceMM();
+
+		/**
 		 * The meta object literal for the '{@link metamodel_bdsl.impl.QueryImpl <em>Query</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5313,6 +7174,30 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EReference STORAGE__PROCESS_OUTPUT_FLOW = eINSTANCE.getStorage_ProcessOutputFlow();
 
 		/**
+		 * The meta object literal for the '<em><b>Eref storage Output Flow Storage21</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21 = eINSTANCE.getStorage_Eref_storageOutputFlowStorage21();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref order On Stock Threshold Storage22</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22 = eINSTANCE.getStorage_Eref_orderOnStockThresholdStorage22();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref process Output Flow Storage23</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23 = eINSTANCE.getStorage_Eref_processOutputFlowStorage23();
+
+		/**
 		 * The meta object literal for the '<em><b>Containsname Storage</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5379,6 +7264,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EReference SUPPLIER__SUPPLIER_DELAY = eINSTANCE.getSupplier_SupplierDelay();
 
 		/**
+		 * The meta object literal for the '<em><b>Eref refill Policy Supplier31</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31 = eINSTANCE.getSupplier_Eref_refillPolicySupplier31();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref supplier Delay Supplier32</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32 = eINSTANCE.getSupplier_Eref_supplierDelaySupplier32();
+
+		/**
 		 * The meta object literal for the '<em><b>Containsname Supplier</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5427,6 +7328,30 @@ public interface Metamodel_bdslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BATCH_PROCESS__OUTPUTS = eINSTANCE.getBatchProcess_Outputs();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref storage Output Flow Batch Process41</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BATCH_PROCESS__EREF_STORAGE_OUTPUT_FLOW_BATCH_PROCESS41 = eINSTANCE.getBatchProcess_Eref_storageOutputFlowBatchProcess41();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref duration Batch Process42</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BATCH_PROCESS__EREF_DURATION_BATCH_PROCESS42 = eINSTANCE.getBatchProcess_Eref_durationBatchProcess42();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref outputs Batch Process43</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BATCH_PROCESS__EREF_OUTPUTS_BATCH_PROCESS43 = eINSTANCE.getBatchProcess_Eref_outputsBatchProcess43();
 
 		/**
 		 * The meta object literal for the '<em><b>Containsname Batch Process</b></em>' containment reference list feature.
@@ -5487,6 +7412,14 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EAttribute OUTPUT__DESCRIPTION = eINSTANCE.getOutput_Description();
 
 		/**
+		 * The meta object literal for the '<em><b>Eref process Output Flow Output51</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51 = eINSTANCE.getOutput_Eref_processOutputFlowOutput51();
+
+		/**
 		 * The meta object literal for the '<em><b>Containstype Output</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5529,6 +7462,30 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EReference STORAGE_OUTPUT_FLOW__DESTINATION = eINSTANCE.getStorageOutputFlow_Destination();
 
 		/**
+		 * The meta object literal for the '<em><b>Eref quantity Storage Output Flow61</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORAGE_OUTPUT_FLOW__EREF_QUANTITY_STORAGE_OUTPUT_FLOW61 = eINSTANCE.getStorageOutputFlow_Eref_quantityStorageOutputFlow61();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref source Storage Output Flow62</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORAGE_OUTPUT_FLOW__EREF_SOURCE_STORAGE_OUTPUT_FLOW62 = eINSTANCE.getStorageOutputFlow_Eref_sourceStorageOutputFlow62();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref destination Storage Output Flow63</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STORAGE_OUTPUT_FLOW__EREF_DESTINATION_STORAGE_OUTPUT_FLOW63 = eINSTANCE.getStorageOutputFlow_Eref_destinationStorageOutputFlow63();
+
+		/**
 		 * The meta object literal for the '{@link metamodel_bdsl.impl.ProcessOutputFlowImpl <em>Process Output Flow</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5561,6 +7518,38 @@ public interface Metamodel_bdslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS_OUTPUT_FLOW__DESTINATION = eINSTANCE.getProcessOutputFlow_Destination();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref quantity Process Output Flow71</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_OUTPUT_FLOW__EREF_QUANTITY_PROCESS_OUTPUT_FLOW71 = eINSTANCE.getProcessOutputFlow_Eref_quantityProcessOutputFlow71();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref source Process Output Flow72</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_OUTPUT_FLOW__EREF_SOURCE_PROCESS_OUTPUT_FLOW72 = eINSTANCE.getProcessOutputFlow_Eref_sourceProcessOutputFlow72();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref process Output Flow Delay Process Output Flow73</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_OUTPUT_FLOW__EREF_PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73 = eINSTANCE.getProcessOutputFlow_Eref_processOutputFlowDelayProcessOutputFlow73();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref destination Process Output Flow74</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_OUTPUT_FLOW__EREF_DESTINATION_PROCESS_OUTPUT_FLOW74 = eINSTANCE.getProcessOutputFlow_Eref_destinationProcessOutputFlow74();
 
 		/**
 		 * The meta object literal for the '{@link metamodel_bdsl.impl.ProcessImpl <em>Process</em>}' class.
@@ -5653,6 +7642,22 @@ public interface Metamodel_bdslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ORDER_ON_STOCK_THRESHOLD__STORAGE = eINSTANCE.getOrderOnStockThreshold_Storage();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref supplier Order On Stock Threshold81</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81 = eINSTANCE.getOrderOnStockThreshold_Eref_supplierOrderOnStockThreshold81();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref storage Order On Stock Threshold82</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82 = eINSTANCE.getOrderOnStockThreshold_Eref_storageOrderOnStockThreshold82();
 
 		/**
 		 * The meta object literal for the '<em><b>Containsperiod Order On Stock Threshold</b></em>' containment reference list feature.
@@ -5913,6 +7918,30 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EReference CONVEYOR_BELT__OUTPUT = eINSTANCE.getConveyorBelt_Output();
 
 		/**
+		 * The meta object literal for the '<em><b>Eref storage Output Flow Conveyor Belt131</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONVEYOR_BELT__EREF_STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131 = eINSTANCE.getConveyorBelt_Eref_storageOutputFlowConveyorBelt131();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref duration Conveyor Belt132</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONVEYOR_BELT__EREF_DURATION_CONVEYOR_BELT132 = eINSTANCE.getConveyorBelt_Eref_durationConveyorBelt132();
+
+		/**
+		 * The meta object literal for the '<em><b>Eref output Conveyor Belt133</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONVEYOR_BELT__EREF_OUTPUT_CONVEYOR_BELT133 = eINSTANCE.getConveyorBelt_Eref_outputConveyorBelt133();
+
+		/**
 		 * The meta object literal for the '<em><b>Containsname Conveyor Belt</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5927,6 +7956,384 @@ public interface Metamodel_bdslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONVEYOR_BELT__CONTAINSMINIMAL_SEPARATION_BETWEEN_BATCHES_CONVEYOR_BELT = eINSTANCE.getConveyorBelt_ContainsminimalSeparationBetweenBatchesConveyorBelt();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.storageOutputFlowStorage21Impl <em>storage Output Flow Storage21</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.storageOutputFlowStorage21Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOutputFlowStorage21()
+		 * @generated
+		 */
+		EClass STORAGE_OUTPUT_FLOW_STORAGE21 = eINSTANCE.getstorageOutputFlowStorage21();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STORAGE_OUTPUT_FLOW_STORAGE21__NAME = eINSTANCE.getstorageOutputFlowStorage21_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.orderOnStockThresholdStorage22Impl <em>order On Stock Threshold Storage22</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.orderOnStockThresholdStorage22Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getorderOnStockThresholdStorage22()
+		 * @generated
+		 */
+		EClass ORDER_ON_STOCK_THRESHOLD_STORAGE22 = eINSTANCE.getorderOnStockThresholdStorage22();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORDER_ON_STOCK_THRESHOLD_STORAGE22__NAME = eINSTANCE.getorderOnStockThresholdStorage22_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.processOutputFlowStorage23Impl <em>process Output Flow Storage23</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.processOutputFlowStorage23Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getprocessOutputFlowStorage23()
+		 * @generated
+		 */
+		EClass PROCESS_OUTPUT_FLOW_STORAGE23 = eINSTANCE.getprocessOutputFlowStorage23();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS_OUTPUT_FLOW_STORAGE23__NAME = eINSTANCE.getprocessOutputFlowStorage23_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.refillPolicySupplier31Impl <em>refill Policy Supplier31</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.refillPolicySupplier31Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getrefillPolicySupplier31()
+		 * @generated
+		 */
+		EClass REFILL_POLICY_SUPPLIER31 = eINSTANCE.getrefillPolicySupplier31();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REFILL_POLICY_SUPPLIER31__NAME = eINSTANCE.getrefillPolicySupplier31_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.supplierDelaySupplier32Impl <em>supplier Delay Supplier32</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.supplierDelaySupplier32Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsupplierDelaySupplier32()
+		 * @generated
+		 */
+		EClass SUPPLIER_DELAY_SUPPLIER32 = eINSTANCE.getsupplierDelaySupplier32();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SUPPLIER_DELAY_SUPPLIER32__NAME = eINSTANCE.getsupplierDelaySupplier32_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.storageOutputFlowBatchProcess41Impl <em>storage Output Flow Batch Process41</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.storageOutputFlowBatchProcess41Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOutputFlowBatchProcess41()
+		 * @generated
+		 */
+		EClass STORAGE_OUTPUT_FLOW_BATCH_PROCESS41 = eINSTANCE.getstorageOutputFlowBatchProcess41();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STORAGE_OUTPUT_FLOW_BATCH_PROCESS41__NAME = eINSTANCE.getstorageOutputFlowBatchProcess41_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.durationBatchProcess42Impl <em>duration Batch Process42</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.durationBatchProcess42Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdurationBatchProcess42()
+		 * @generated
+		 */
+		EClass DURATION_BATCH_PROCESS42 = eINSTANCE.getdurationBatchProcess42();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DURATION_BATCH_PROCESS42__NAME = eINSTANCE.getdurationBatchProcess42_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.outputsBatchProcess43Impl <em>outputs Batch Process43</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.outputsBatchProcess43Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getoutputsBatchProcess43()
+		 * @generated
+		 */
+		EClass OUTPUTS_BATCH_PROCESS43 = eINSTANCE.getoutputsBatchProcess43();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTPUTS_BATCH_PROCESS43__NAME = eINSTANCE.getoutputsBatchProcess43_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.processOutputFlowOutput51Impl <em>process Output Flow Output51</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.processOutputFlowOutput51Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getprocessOutputFlowOutput51()
+		 * @generated
+		 */
+		EClass PROCESS_OUTPUT_FLOW_OUTPUT51 = eINSTANCE.getprocessOutputFlowOutput51();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS_OUTPUT_FLOW_OUTPUT51__NAME = eINSTANCE.getprocessOutputFlowOutput51_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.quantityStorageOutputFlow61Impl <em>quantity Storage Output Flow61</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.quantityStorageOutputFlow61Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getquantityStorageOutputFlow61()
+		 * @generated
+		 */
+		EClass QUANTITY_STORAGE_OUTPUT_FLOW61 = eINSTANCE.getquantityStorageOutputFlow61();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUANTITY_STORAGE_OUTPUT_FLOW61__NAME = eINSTANCE.getquantityStorageOutputFlow61_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.sourceStorageOutputFlow62Impl <em>source Storage Output Flow62</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.sourceStorageOutputFlow62Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsourceStorageOutputFlow62()
+		 * @generated
+		 */
+		EClass SOURCE_STORAGE_OUTPUT_FLOW62 = eINSTANCE.getsourceStorageOutputFlow62();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SOURCE_STORAGE_OUTPUT_FLOW62__NAME = eINSTANCE.getsourceStorageOutputFlow62_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.destinationStorageOutputFlow63Impl <em>destination Storage Output Flow63</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.destinationStorageOutputFlow63Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdestinationStorageOutputFlow63()
+		 * @generated
+		 */
+		EClass DESTINATION_STORAGE_OUTPUT_FLOW63 = eINSTANCE.getdestinationStorageOutputFlow63();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DESTINATION_STORAGE_OUTPUT_FLOW63__NAME = eINSTANCE.getdestinationStorageOutputFlow63_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.quantityProcessOutputFlow71Impl <em>quantity Process Output Flow71</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.quantityProcessOutputFlow71Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getquantityProcessOutputFlow71()
+		 * @generated
+		 */
+		EClass QUANTITY_PROCESS_OUTPUT_FLOW71 = eINSTANCE.getquantityProcessOutputFlow71();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUANTITY_PROCESS_OUTPUT_FLOW71__NAME = eINSTANCE.getquantityProcessOutputFlow71_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.sourceProcessOutputFlow72Impl <em>source Process Output Flow72</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.sourceProcessOutputFlow72Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsourceProcessOutputFlow72()
+		 * @generated
+		 */
+		EClass SOURCE_PROCESS_OUTPUT_FLOW72 = eINSTANCE.getsourceProcessOutputFlow72();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SOURCE_PROCESS_OUTPUT_FLOW72__NAME = eINSTANCE.getsourceProcessOutputFlow72_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.processOutputFlowDelayProcessOutputFlow73Impl <em>process Output Flow Delay Process Output Flow73</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.processOutputFlowDelayProcessOutputFlow73Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getprocessOutputFlowDelayProcessOutputFlow73()
+		 * @generated
+		 */
+		EClass PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73 = eINSTANCE.getprocessOutputFlowDelayProcessOutputFlow73();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73__NAME = eINSTANCE.getprocessOutputFlowDelayProcessOutputFlow73_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.destinationProcessOutputFlow74Impl <em>destination Process Output Flow74</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.destinationProcessOutputFlow74Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdestinationProcessOutputFlow74()
+		 * @generated
+		 */
+		EClass DESTINATION_PROCESS_OUTPUT_FLOW74 = eINSTANCE.getdestinationProcessOutputFlow74();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DESTINATION_PROCESS_OUTPUT_FLOW74__NAME = eINSTANCE.getdestinationProcessOutputFlow74_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.supplierOrderOnStockThreshold81Impl <em>supplier Order On Stock Threshold81</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.supplierOrderOnStockThreshold81Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getsupplierOrderOnStockThreshold81()
+		 * @generated
+		 */
+		EClass SUPPLIER_ORDER_ON_STOCK_THRESHOLD81 = eINSTANCE.getsupplierOrderOnStockThreshold81();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SUPPLIER_ORDER_ON_STOCK_THRESHOLD81__NAME = eINSTANCE.getsupplierOrderOnStockThreshold81_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.storageOrderOnStockThreshold82Impl <em>storage Order On Stock Threshold82</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.storageOrderOnStockThreshold82Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOrderOnStockThreshold82()
+		 * @generated
+		 */
+		EClass STORAGE_ORDER_ON_STOCK_THRESHOLD82 = eINSTANCE.getstorageOrderOnStockThreshold82();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STORAGE_ORDER_ON_STOCK_THRESHOLD82__NAME = eINSTANCE.getstorageOrderOnStockThreshold82_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.storageOutputFlowConveyorBelt131Impl <em>storage Output Flow Conveyor Belt131</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.storageOutputFlowConveyorBelt131Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getstorageOutputFlowConveyorBelt131()
+		 * @generated
+		 */
+		EClass STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131 = eINSTANCE.getstorageOutputFlowConveyorBelt131();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131__NAME = eINSTANCE.getstorageOutputFlowConveyorBelt131_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.durationConveyorBelt132Impl <em>duration Conveyor Belt132</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.durationConveyorBelt132Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getdurationConveyorBelt132()
+		 * @generated
+		 */
+		EClass DURATION_CONVEYOR_BELT132 = eINSTANCE.getdurationConveyorBelt132();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DURATION_CONVEYOR_BELT132__NAME = eINSTANCE.getdurationConveyorBelt132_Name();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.outputConveyorBelt133Impl <em>output Conveyor Belt133</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.outputConveyorBelt133Impl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getoutputConveyorBelt133()
+		 * @generated
+		 */
+		EClass OUTPUT_CONVEYOR_BELT133 = eINSTANCE.getoutputConveyorBelt133();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTPUT_CONVEYOR_BELT133__NAME = eINSTANCE.getoutputConveyorBelt133_Name();
 
 		/**
 		 * The meta object literal for the '{@link metamodel_bdsl.impl.nameQueryImpl <em>name Query</em>}' class.
@@ -6471,6 +8878,14 @@ public interface Metamodel_bdslPackage extends EPackage {
 		EClass BINDING_ELEMENT = eINSTANCE.getBindingElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Contains Sirius Tag</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINDING_ELEMENT__CONTAINS_SIRIUS_TAG = eINSTANCE.getBindingElement_ContainsSiriusTag();
+
+		/**
 		 * The meta object literal for the '<em><b>None Element</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6607,6 +9022,24 @@ public interface Metamodel_bdslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VIRTUAL_ATTRIBUTE__EXPRESSION = eINSTANCE.getVirtualAttribute_Expression();
+
+		/**
+		 * The meta object literal for the '{@link metamodel_bdsl.impl.SiriusTagImpl <em>Sirius Tag</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see metamodel_bdsl.impl.SiriusTagImpl
+		 * @see metamodel_bdsl.impl.Metamodel_bdslPackageImpl#getSiriusTag()
+		 * @generated
+		 */
+		EClass SIRIUS_TAG = eINSTANCE.getSiriusTag();
+
+		/**
+		 * The meta object literal for the '<em><b>Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIRIUS_TAG__TAG = eINSTANCE.getSiriusTag_Tag();
 
 		/**
 		 * The meta object literal for the '{@link metamodel_bdsl.OrderType <em>Order Type</em>}' enum.

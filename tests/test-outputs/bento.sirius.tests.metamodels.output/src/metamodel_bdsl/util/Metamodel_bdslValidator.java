@@ -28,6 +28,7 @@ import metamodel_bdsl.ProcessOutputFlow;
 import metamodel_bdsl.Query;
 import metamodel_bdsl.QueryType;
 import metamodel_bdsl.Scalar;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Storage;
 import metamodel_bdsl.StorageOutputFlow;
 import metamodel_bdsl.Supplier;
@@ -35,6 +36,10 @@ import metamodel_bdsl.Uniform;
 import metamodel_bdsl.VirtualAttribute;
 import metamodel_bdsl.deliveredPercentageSupplier;
 import metamodel_bdsl.descriptionOutput;
+import metamodel_bdsl.destinationProcessOutputFlow74;
+import metamodel_bdsl.destinationStorageOutputFlow63;
+import metamodel_bdsl.durationBatchProcess42;
+import metamodel_bdsl.durationConveyorBelt132;
 import metamodel_bdsl.errorQuery;
 import metamodel_bdsl.initialContentStorage;
 import metamodel_bdsl.intervalPoisson;
@@ -49,13 +54,30 @@ import metamodel_bdsl.nameQuery;
 import metamodel_bdsl.nameStorage;
 import metamodel_bdsl.nameSupplier;
 import metamodel_bdsl.numberOfChainsBatchProcess;
+import metamodel_bdsl.orderOnStockThresholdStorage22;
 import metamodel_bdsl.orderQuantityOrderOnStockThreshold;
 import metamodel_bdsl.orderTypeOrderOnStockThreshold;
+import metamodel_bdsl.outputConveyorBelt133;
+import metamodel_bdsl.outputsBatchProcess43;
 import metamodel_bdsl.overflowStorage;
 import metamodel_bdsl.percentageOfSuccessBatchProcess;
 import metamodel_bdsl.periodOrderOnStockThreshold;
+import metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73;
+import metamodel_bdsl.processOutputFlowOutput51;
+import metamodel_bdsl.processOutputFlowStorage23;
+import metamodel_bdsl.quantityProcessOutputFlow71;
+import metamodel_bdsl.quantityStorageOutputFlow61;
+import metamodel_bdsl.refillPolicySupplier31;
 import metamodel_bdsl.scaleGaussian;
 import metamodel_bdsl.sizeStorage;
+import metamodel_bdsl.sourceProcessOutputFlow72;
+import metamodel_bdsl.sourceStorageOutputFlow62;
+import metamodel_bdsl.storageOrderOnStockThreshold82;
+import metamodel_bdsl.storageOutputFlowBatchProcess41;
+import metamodel_bdsl.storageOutputFlowConveyorBelt131;
+import metamodel_bdsl.storageOutputFlowStorage21;
+import metamodel_bdsl.supplierDelaySupplier32;
+import metamodel_bdsl.supplierOrderOnStockThreshold81;
 import metamodel_bdsl.systemQuery;
 import metamodel_bdsl.thresholdOrderOnStockThreshold;
 import metamodel_bdsl.typeOutput;
@@ -180,6 +202,48 @@ public class Metamodel_bdslValidator extends EObjectValidator {
 				return validateUniform((Uniform)value, diagnostics, context);
 			case Metamodel_bdslPackage.CONVEYOR_BELT:
 				return validateConveyorBelt((ConveyorBelt)value, diagnostics, context);
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_STORAGE21:
+				return validatestorageOutputFlowStorage21((storageOutputFlowStorage21)value, diagnostics, context);
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD_STORAGE22:
+				return validateorderOnStockThresholdStorage22((orderOnStockThresholdStorage22)value, diagnostics, context);
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_STORAGE23:
+				return validateprocessOutputFlowStorage23((processOutputFlowStorage23)value, diagnostics, context);
+			case Metamodel_bdslPackage.REFILL_POLICY_SUPPLIER31:
+				return validaterefillPolicySupplier31((refillPolicySupplier31)value, diagnostics, context);
+			case Metamodel_bdslPackage.SUPPLIER_DELAY_SUPPLIER32:
+				return validatesupplierDelaySupplier32((supplierDelaySupplier32)value, diagnostics, context);
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_BATCH_PROCESS41:
+				return validatestorageOutputFlowBatchProcess41((storageOutputFlowBatchProcess41)value, diagnostics, context);
+			case Metamodel_bdslPackage.DURATION_BATCH_PROCESS42:
+				return validatedurationBatchProcess42((durationBatchProcess42)value, diagnostics, context);
+			case Metamodel_bdslPackage.OUTPUTS_BATCH_PROCESS43:
+				return validateoutputsBatchProcess43((outputsBatchProcess43)value, diagnostics, context);
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_OUTPUT51:
+				return validateprocessOutputFlowOutput51((processOutputFlowOutput51)value, diagnostics, context);
+			case Metamodel_bdslPackage.QUANTITY_STORAGE_OUTPUT_FLOW61:
+				return validatequantityStorageOutputFlow61((quantityStorageOutputFlow61)value, diagnostics, context);
+			case Metamodel_bdslPackage.SOURCE_STORAGE_OUTPUT_FLOW62:
+				return validatesourceStorageOutputFlow62((sourceStorageOutputFlow62)value, diagnostics, context);
+			case Metamodel_bdslPackage.DESTINATION_STORAGE_OUTPUT_FLOW63:
+				return validatedestinationStorageOutputFlow63((destinationStorageOutputFlow63)value, diagnostics, context);
+			case Metamodel_bdslPackage.QUANTITY_PROCESS_OUTPUT_FLOW71:
+				return validatequantityProcessOutputFlow71((quantityProcessOutputFlow71)value, diagnostics, context);
+			case Metamodel_bdslPackage.SOURCE_PROCESS_OUTPUT_FLOW72:
+				return validatesourceProcessOutputFlow72((sourceProcessOutputFlow72)value, diagnostics, context);
+			case Metamodel_bdslPackage.PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73:
+				return validateprocessOutputFlowDelayProcessOutputFlow73((processOutputFlowDelayProcessOutputFlow73)value, diagnostics, context);
+			case Metamodel_bdslPackage.DESTINATION_PROCESS_OUTPUT_FLOW74:
+				return validatedestinationProcessOutputFlow74((destinationProcessOutputFlow74)value, diagnostics, context);
+			case Metamodel_bdslPackage.SUPPLIER_ORDER_ON_STOCK_THRESHOLD81:
+				return validatesupplierOrderOnStockThreshold81((supplierOrderOnStockThreshold81)value, diagnostics, context);
+			case Metamodel_bdslPackage.STORAGE_ORDER_ON_STOCK_THRESHOLD82:
+				return validatestorageOrderOnStockThreshold82((storageOrderOnStockThreshold82)value, diagnostics, context);
+			case Metamodel_bdslPackage.STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131:
+				return validatestorageOutputFlowConveyorBelt131((storageOutputFlowConveyorBelt131)value, diagnostics, context);
+			case Metamodel_bdslPackage.DURATION_CONVEYOR_BELT132:
+				return validatedurationConveyorBelt132((durationConveyorBelt132)value, diagnostics, context);
+			case Metamodel_bdslPackage.OUTPUT_CONVEYOR_BELT133:
+				return validateoutputConveyorBelt133((outputConveyorBelt133)value, diagnostics, context);
 			case Metamodel_bdslPackage.NAME_QUERY:
 				return validatenameQuery((nameQuery)value, diagnostics, context);
 			case Metamodel_bdslPackage.VALUE_QUERY:
@@ -252,6 +316,8 @@ public class Metamodel_bdslValidator extends EObjectValidator {
 				return validateBindingAttribute((BindingAttribute)value, diagnostics, context);
 			case Metamodel_bdslPackage.VIRTUAL_ATTRIBUTE:
 				return validateVirtualAttribute((VirtualAttribute)value, diagnostics, context);
+			case Metamodel_bdslPackage.SIRIUS_TAG:
+				return validateSiriusTag((SiriusTag)value, diagnostics, context);
 			case Metamodel_bdslPackage.ORDER_TYPE:
 				return validateOrderType((OrderType)value, diagnostics, context);
 			case Metamodel_bdslPackage.OUTPUT_TYPE:
@@ -442,6 +508,195 @@ public class Metamodel_bdslValidator extends EObjectValidator {
 	 */
 	public boolean validateConveyorBelt(ConveyorBelt conveyorBelt, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(conveyorBelt, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatestorageOutputFlowStorage21(storageOutputFlowStorage21 storageOutputFlowStorage21, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(storageOutputFlowStorage21, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateorderOnStockThresholdStorage22(orderOnStockThresholdStorage22 orderOnStockThresholdStorage22, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(orderOnStockThresholdStorage22, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateprocessOutputFlowStorage23(processOutputFlowStorage23 processOutputFlowStorage23, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(processOutputFlowStorage23, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validaterefillPolicySupplier31(refillPolicySupplier31 refillPolicySupplier31, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(refillPolicySupplier31, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatesupplierDelaySupplier32(supplierDelaySupplier32 supplierDelaySupplier32, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(supplierDelaySupplier32, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatestorageOutputFlowBatchProcess41(storageOutputFlowBatchProcess41 storageOutputFlowBatchProcess41, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(storageOutputFlowBatchProcess41, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatedurationBatchProcess42(durationBatchProcess42 durationBatchProcess42, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(durationBatchProcess42, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateoutputsBatchProcess43(outputsBatchProcess43 outputsBatchProcess43, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(outputsBatchProcess43, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateprocessOutputFlowOutput51(processOutputFlowOutput51 processOutputFlowOutput51, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(processOutputFlowOutput51, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatequantityStorageOutputFlow61(quantityStorageOutputFlow61 quantityStorageOutputFlow61, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(quantityStorageOutputFlow61, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatesourceStorageOutputFlow62(sourceStorageOutputFlow62 sourceStorageOutputFlow62, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(sourceStorageOutputFlow62, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatedestinationStorageOutputFlow63(destinationStorageOutputFlow63 destinationStorageOutputFlow63, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(destinationStorageOutputFlow63, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatequantityProcessOutputFlow71(quantityProcessOutputFlow71 quantityProcessOutputFlow71, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(quantityProcessOutputFlow71, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatesourceProcessOutputFlow72(sourceProcessOutputFlow72 sourceProcessOutputFlow72, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(sourceProcessOutputFlow72, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateprocessOutputFlowDelayProcessOutputFlow73(processOutputFlowDelayProcessOutputFlow73 processOutputFlowDelayProcessOutputFlow73, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(processOutputFlowDelayProcessOutputFlow73, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatedestinationProcessOutputFlow74(destinationProcessOutputFlow74 destinationProcessOutputFlow74, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(destinationProcessOutputFlow74, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatesupplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81 supplierOrderOnStockThreshold81, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(supplierOrderOnStockThreshold81, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatestorageOrderOnStockThreshold82(storageOrderOnStockThreshold82 storageOrderOnStockThreshold82, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(storageOrderOnStockThreshold82, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatestorageOutputFlowConveyorBelt131(storageOutputFlowConveyorBelt131 storageOutputFlowConveyorBelt131, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(storageOutputFlowConveyorBelt131, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatedurationConveyorBelt132(durationConveyorBelt132 durationConveyorBelt132, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(durationConveyorBelt132, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateoutputConveyorBelt133(outputConveyorBelt133 outputConveyorBelt133, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(outputConveyorBelt133, diagnostics, context);
 	}
 
 	/**
@@ -766,6 +1021,15 @@ public class Metamodel_bdslValidator extends EObjectValidator {
 	 */
 	public boolean validateVirtualAttribute(VirtualAttribute virtualAttribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(virtualAttribute, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSiriusTag(SiriusTag siriusTag, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(siriusTag, diagnostics, context);
 	}
 
 	/**

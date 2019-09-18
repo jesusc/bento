@@ -148,6 +148,195 @@ public interface Metamodel_bdslFactory extends EFactory {
 	ConveyorBelt createConveyorBelt();
 
 	/**
+	 * Returns a new object of class '<em>storage Output Flow Storage21</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>storage Output Flow Storage21</em>'.
+	 * @generated
+	 */
+	storageOutputFlowStorage21 createstorageOutputFlowStorage21();
+
+	/**
+	 * Returns a new object of class '<em>order On Stock Threshold Storage22</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>order On Stock Threshold Storage22</em>'.
+	 * @generated
+	 */
+	orderOnStockThresholdStorage22 createorderOnStockThresholdStorage22();
+
+	/**
+	 * Returns a new object of class '<em>process Output Flow Storage23</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>process Output Flow Storage23</em>'.
+	 * @generated
+	 */
+	processOutputFlowStorage23 createprocessOutputFlowStorage23();
+
+	/**
+	 * Returns a new object of class '<em>refill Policy Supplier31</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>refill Policy Supplier31</em>'.
+	 * @generated
+	 */
+	refillPolicySupplier31 createrefillPolicySupplier31();
+
+	/**
+	 * Returns a new object of class '<em>supplier Delay Supplier32</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>supplier Delay Supplier32</em>'.
+	 * @generated
+	 */
+	supplierDelaySupplier32 createsupplierDelaySupplier32();
+
+	/**
+	 * Returns a new object of class '<em>storage Output Flow Batch Process41</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>storage Output Flow Batch Process41</em>'.
+	 * @generated
+	 */
+	storageOutputFlowBatchProcess41 createstorageOutputFlowBatchProcess41();
+
+	/**
+	 * Returns a new object of class '<em>duration Batch Process42</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>duration Batch Process42</em>'.
+	 * @generated
+	 */
+	durationBatchProcess42 createdurationBatchProcess42();
+
+	/**
+	 * Returns a new object of class '<em>outputs Batch Process43</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>outputs Batch Process43</em>'.
+	 * @generated
+	 */
+	outputsBatchProcess43 createoutputsBatchProcess43();
+
+	/**
+	 * Returns a new object of class '<em>process Output Flow Output51</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>process Output Flow Output51</em>'.
+	 * @generated
+	 */
+	processOutputFlowOutput51 createprocessOutputFlowOutput51();
+
+	/**
+	 * Returns a new object of class '<em>quantity Storage Output Flow61</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>quantity Storage Output Flow61</em>'.
+	 * @generated
+	 */
+	quantityStorageOutputFlow61 createquantityStorageOutputFlow61();
+
+	/**
+	 * Returns a new object of class '<em>source Storage Output Flow62</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>source Storage Output Flow62</em>'.
+	 * @generated
+	 */
+	sourceStorageOutputFlow62 createsourceStorageOutputFlow62();
+
+	/**
+	 * Returns a new object of class '<em>destination Storage Output Flow63</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>destination Storage Output Flow63</em>'.
+	 * @generated
+	 */
+	destinationStorageOutputFlow63 createdestinationStorageOutputFlow63();
+
+	/**
+	 * Returns a new object of class '<em>quantity Process Output Flow71</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>quantity Process Output Flow71</em>'.
+	 * @generated
+	 */
+	quantityProcessOutputFlow71 createquantityProcessOutputFlow71();
+
+	/**
+	 * Returns a new object of class '<em>source Process Output Flow72</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>source Process Output Flow72</em>'.
+	 * @generated
+	 */
+	sourceProcessOutputFlow72 createsourceProcessOutputFlow72();
+
+	/**
+	 * Returns a new object of class '<em>process Output Flow Delay Process Output Flow73</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>process Output Flow Delay Process Output Flow73</em>'.
+	 * @generated
+	 */
+	processOutputFlowDelayProcessOutputFlow73 createprocessOutputFlowDelayProcessOutputFlow73();
+
+	/**
+	 * Returns a new object of class '<em>destination Process Output Flow74</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>destination Process Output Flow74</em>'.
+	 * @generated
+	 */
+	destinationProcessOutputFlow74 createdestinationProcessOutputFlow74();
+
+	/**
+	 * Returns a new object of class '<em>supplier Order On Stock Threshold81</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>supplier Order On Stock Threshold81</em>'.
+	 * @generated
+	 */
+	supplierOrderOnStockThreshold81 createsupplierOrderOnStockThreshold81();
+
+	/**
+	 * Returns a new object of class '<em>storage Order On Stock Threshold82</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>storage Order On Stock Threshold82</em>'.
+	 * @generated
+	 */
+	storageOrderOnStockThreshold82 createstorageOrderOnStockThreshold82();
+
+	/**
+	 * Returns a new object of class '<em>storage Output Flow Conveyor Belt131</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>storage Output Flow Conveyor Belt131</em>'.
+	 * @generated
+	 */
+	storageOutputFlowConveyorBelt131 createstorageOutputFlowConveyorBelt131();
+
+	/**
+	 * Returns a new object of class '<em>duration Conveyor Belt132</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>duration Conveyor Belt132</em>'.
+	 * @generated
+	 */
+	durationConveyorBelt132 createdurationConveyorBelt132();
+
+	/**
+	 * Returns a new object of class '<em>output Conveyor Belt133</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>output Conveyor Belt133</em>'.
+	 * @generated
+	 */
+	outputConveyorBelt133 createoutputConveyorBelt133();
+
+	/**
 	 * Returns a new object of class '<em>name Query</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -452,6 +641,15 @@ public interface Metamodel_bdslFactory extends EFactory {
 	 * @generated
 	 */
 	VirtualAttribute createVirtualAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Sirius Tag</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sirius Tag</em>'.
+	 * @generated
+	 */
+	SiriusTag createSiriusTag();
 
 	/**
 	 * Returns the package supported by this factory.

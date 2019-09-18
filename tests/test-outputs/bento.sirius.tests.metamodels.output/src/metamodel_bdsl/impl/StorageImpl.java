@@ -9,13 +9,17 @@ import metamodel_bdsl.Metamodel_bdslPackage;
 import metamodel_bdsl.NoneElement;
 import metamodel_bdsl.OrderOnStockThreshold;
 import metamodel_bdsl.ProcessOutputFlow;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Storage;
 import metamodel_bdsl.StorageOutputFlow;
 import metamodel_bdsl.initialContentStorage;
 import metamodel_bdsl.nameStorage;
+import metamodel_bdsl.orderOnStockThresholdStorage22;
 import metamodel_bdsl.overflowStorage;
+import metamodel_bdsl.processOutputFlowStorage23;
 import metamodel_bdsl.sizeStorage;
 
+import metamodel_bdsl.storageOutputFlowStorage21;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -39,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link metamodel_bdsl.impl.StorageImpl#getContainsSiriusTag <em>Contains Sirius Tag</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getNoneElement <em>None Element</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getSize <em>Size</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getInitialContent <em>Initial Content</em>}</li>
@@ -46,6 +51,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getStorageOutputFlow <em>Storage Output Flow</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getOrderOnStockThreshold <em>Order On Stock Threshold</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getProcessOutputFlow <em>Process Output Flow</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.StorageImpl#getEref_storageOutputFlowStorage21 <em>Eref storage Output Flow Storage21</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.StorageImpl#getEref_orderOnStockThresholdStorage22 <em>Eref order On Stock Threshold Storage22</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.StorageImpl#getEref_processOutputFlowStorage23 <em>Eref process Output Flow Storage23</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getContainsnameStorage <em>Containsname Storage</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getContainssizeStorage <em>Containssize Storage</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.StorageImpl#getContainsinitialContentStorage <em>Containsinitial Content Storage</em>}</li>
@@ -55,6 +63,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class StorageImpl extends ComponentImpl implements Storage {
+	/**
+	 * The cached value of the '{@link #getContainsSiriusTag() <em>Contains Sirius Tag</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainsSiriusTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SiriusTag> containsSiriusTag;
+
 	/**
 	 * The cached value of the '{@link #getNoneElement() <em>None Element</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -156,6 +174,36 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	protected EList<ProcessOutputFlow> processOutputFlow;
 
 	/**
+	 * The cached value of the '{@link #getEref_storageOutputFlowStorage21() <em>Eref storage Output Flow Storage21</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_storageOutputFlowStorage21()
+	 * @generated
+	 * @ordered
+	 */
+	protected storageOutputFlowStorage21 eref_storageOutputFlowStorage21;
+
+	/**
+	 * The cached value of the '{@link #getEref_orderOnStockThresholdStorage22() <em>Eref order On Stock Threshold Storage22</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_orderOnStockThresholdStorage22()
+	 * @generated
+	 * @ordered
+	 */
+	protected orderOnStockThresholdStorage22 eref_orderOnStockThresholdStorage22;
+
+	/**
+	 * The cached value of the '{@link #getEref_processOutputFlowStorage23() <em>Eref process Output Flow Storage23</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_processOutputFlowStorage23()
+	 * @generated
+	 * @ordered
+	 */
+	protected processOutputFlowStorage23 eref_processOutputFlowStorage23;
+
+	/**
 	 * The cached value of the '{@link #getContainsnameStorage() <em>Containsname Storage</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -212,6 +260,18 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	@Override
 	protected EClass eStaticClass() {
 		return Metamodel_bdslPackage.Literals.STORAGE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SiriusTag> getContainsSiriusTag() {
+		if (containsSiriusTag == null) {
+			containsSiriusTag = new EObjectContainmentEList<SiriusTag>(SiriusTag.class, this, Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG);
+		}
+		return containsSiriusTag;
 	}
 
 	/**
@@ -330,6 +390,135 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public storageOutputFlowStorage21 getEref_storageOutputFlowStorage21() {
+		return eref_storageOutputFlowStorage21;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_storageOutputFlowStorage21(storageOutputFlowStorage21 newEref_storageOutputFlowStorage21, NotificationChain msgs) {
+		storageOutputFlowStorage21 oldEref_storageOutputFlowStorage21 = eref_storageOutputFlowStorage21;
+		eref_storageOutputFlowStorage21 = newEref_storageOutputFlowStorage21;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21, oldEref_storageOutputFlowStorage21, newEref_storageOutputFlowStorage21);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_storageOutputFlowStorage21(storageOutputFlowStorage21 newEref_storageOutputFlowStorage21) {
+		if (newEref_storageOutputFlowStorage21 != eref_storageOutputFlowStorage21) {
+			NotificationChain msgs = null;
+			if (eref_storageOutputFlowStorage21 != null)
+				msgs = ((InternalEObject)eref_storageOutputFlowStorage21).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21, null, msgs);
+			if (newEref_storageOutputFlowStorage21 != null)
+				msgs = ((InternalEObject)newEref_storageOutputFlowStorage21).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21, null, msgs);
+			msgs = basicSetEref_storageOutputFlowStorage21(newEref_storageOutputFlowStorage21, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21, newEref_storageOutputFlowStorage21, newEref_storageOutputFlowStorage21));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public orderOnStockThresholdStorage22 getEref_orderOnStockThresholdStorage22() {
+		return eref_orderOnStockThresholdStorage22;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_orderOnStockThresholdStorage22(orderOnStockThresholdStorage22 newEref_orderOnStockThresholdStorage22, NotificationChain msgs) {
+		orderOnStockThresholdStorage22 oldEref_orderOnStockThresholdStorage22 = eref_orderOnStockThresholdStorage22;
+		eref_orderOnStockThresholdStorage22 = newEref_orderOnStockThresholdStorage22;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22, oldEref_orderOnStockThresholdStorage22, newEref_orderOnStockThresholdStorage22);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_orderOnStockThresholdStorage22(orderOnStockThresholdStorage22 newEref_orderOnStockThresholdStorage22) {
+		if (newEref_orderOnStockThresholdStorage22 != eref_orderOnStockThresholdStorage22) {
+			NotificationChain msgs = null;
+			if (eref_orderOnStockThresholdStorage22 != null)
+				msgs = ((InternalEObject)eref_orderOnStockThresholdStorage22).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22, null, msgs);
+			if (newEref_orderOnStockThresholdStorage22 != null)
+				msgs = ((InternalEObject)newEref_orderOnStockThresholdStorage22).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22, null, msgs);
+			msgs = basicSetEref_orderOnStockThresholdStorage22(newEref_orderOnStockThresholdStorage22, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22, newEref_orderOnStockThresholdStorage22, newEref_orderOnStockThresholdStorage22));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public processOutputFlowStorage23 getEref_processOutputFlowStorage23() {
+		return eref_processOutputFlowStorage23;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_processOutputFlowStorage23(processOutputFlowStorage23 newEref_processOutputFlowStorage23, NotificationChain msgs) {
+		processOutputFlowStorage23 oldEref_processOutputFlowStorage23 = eref_processOutputFlowStorage23;
+		eref_processOutputFlowStorage23 = newEref_processOutputFlowStorage23;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23, oldEref_processOutputFlowStorage23, newEref_processOutputFlowStorage23);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_processOutputFlowStorage23(processOutputFlowStorage23 newEref_processOutputFlowStorage23) {
+		if (newEref_processOutputFlowStorage23 != eref_processOutputFlowStorage23) {
+			NotificationChain msgs = null;
+			if (eref_processOutputFlowStorage23 != null)
+				msgs = ((InternalEObject)eref_processOutputFlowStorage23).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23, null, msgs);
+			if (newEref_processOutputFlowStorage23 != null)
+				msgs = ((InternalEObject)newEref_processOutputFlowStorage23).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23, null, msgs);
+			msgs = basicSetEref_processOutputFlowStorage23(newEref_processOutputFlowStorage23, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23, newEref_processOutputFlowStorage23, newEref_processOutputFlowStorage23));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<nameStorage> getContainsnameStorage() {
 		if (containsnameStorage == null) {
 			containsnameStorage = new EObjectContainmentEList<nameStorage>(nameStorage.class, this, Metamodel_bdslPackage.STORAGE__CONTAINSNAME_STORAGE);
@@ -400,12 +589,20 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG:
+				return ((InternalEList<?>)getContainsSiriusTag()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.STORAGE__STORAGE_OUTPUT_FLOW:
 				return ((InternalEList<?>)getStorageOutputFlow()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.STORAGE__ORDER_ON_STOCK_THRESHOLD:
 				return ((InternalEList<?>)getOrderOnStockThreshold()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.STORAGE__PROCESS_OUTPUT_FLOW:
 				return ((InternalEList<?>)getProcessOutputFlow()).basicRemove(otherEnd, msgs);
+			case Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21:
+				return basicSetEref_storageOutputFlowStorage21(null, msgs);
+			case Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22:
+				return basicSetEref_orderOnStockThresholdStorage22(null, msgs);
+			case Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23:
+				return basicSetEref_processOutputFlowStorage23(null, msgs);
 			case Metamodel_bdslPackage.STORAGE__CONTAINSNAME_STORAGE:
 				return ((InternalEList<?>)getContainsnameStorage()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.STORAGE__CONTAINSSIZE_STORAGE:
@@ -426,6 +623,8 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG:
+				return getContainsSiriusTag();
 			case Metamodel_bdslPackage.STORAGE__NONE_ELEMENT:
 				return getNoneElement();
 			case Metamodel_bdslPackage.STORAGE__SIZE:
@@ -440,6 +639,12 @@ public class StorageImpl extends ComponentImpl implements Storage {
 				return getOrderOnStockThreshold();
 			case Metamodel_bdslPackage.STORAGE__PROCESS_OUTPUT_FLOW:
 				return getProcessOutputFlow();
+			case Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21:
+				return getEref_storageOutputFlowStorage21();
+			case Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22:
+				return getEref_orderOnStockThresholdStorage22();
+			case Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23:
+				return getEref_processOutputFlowStorage23();
 			case Metamodel_bdslPackage.STORAGE__CONTAINSNAME_STORAGE:
 				return getContainsnameStorage();
 			case Metamodel_bdslPackage.STORAGE__CONTAINSSIZE_STORAGE:
@@ -461,6 +666,10 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG:
+				getContainsSiriusTag().clear();
+				getContainsSiriusTag().addAll((Collection<? extends SiriusTag>)newValue);
+				return;
 			case Metamodel_bdslPackage.STORAGE__NONE_ELEMENT:
 				getNoneElement().clear();
 				getNoneElement().addAll((Collection<? extends NoneElement>)newValue);
@@ -485,6 +694,15 @@ public class StorageImpl extends ComponentImpl implements Storage {
 			case Metamodel_bdslPackage.STORAGE__PROCESS_OUTPUT_FLOW:
 				getProcessOutputFlow().clear();
 				getProcessOutputFlow().addAll((Collection<? extends ProcessOutputFlow>)newValue);
+				return;
+			case Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21:
+				setEref_storageOutputFlowStorage21((storageOutputFlowStorage21)newValue);
+				return;
+			case Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22:
+				setEref_orderOnStockThresholdStorage22((orderOnStockThresholdStorage22)newValue);
+				return;
+			case Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23:
+				setEref_processOutputFlowStorage23((processOutputFlowStorage23)newValue);
 				return;
 			case Metamodel_bdslPackage.STORAGE__CONTAINSNAME_STORAGE:
 				getContainsnameStorage().clear();
@@ -514,6 +732,9 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG:
+				getContainsSiriusTag().clear();
+				return;
 			case Metamodel_bdslPackage.STORAGE__NONE_ELEMENT:
 				getNoneElement().clear();
 				return;
@@ -534,6 +755,15 @@ public class StorageImpl extends ComponentImpl implements Storage {
 				return;
 			case Metamodel_bdslPackage.STORAGE__PROCESS_OUTPUT_FLOW:
 				getProcessOutputFlow().clear();
+				return;
+			case Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21:
+				setEref_storageOutputFlowStorage21((storageOutputFlowStorage21)null);
+				return;
+			case Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22:
+				setEref_orderOnStockThresholdStorage22((orderOnStockThresholdStorage22)null);
+				return;
+			case Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23:
+				setEref_processOutputFlowStorage23((processOutputFlowStorage23)null);
 				return;
 			case Metamodel_bdslPackage.STORAGE__CONTAINSNAME_STORAGE:
 				getContainsnameStorage().clear();
@@ -559,6 +789,8 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG:
+				return containsSiriusTag != null && !containsSiriusTag.isEmpty();
 			case Metamodel_bdslPackage.STORAGE__NONE_ELEMENT:
 				return noneElement != null && !noneElement.isEmpty();
 			case Metamodel_bdslPackage.STORAGE__SIZE:
@@ -573,6 +805,12 @@ public class StorageImpl extends ComponentImpl implements Storage {
 				return orderOnStockThreshold != null && !orderOnStockThreshold.isEmpty();
 			case Metamodel_bdslPackage.STORAGE__PROCESS_OUTPUT_FLOW:
 				return processOutputFlow != null && !processOutputFlow.isEmpty();
+			case Metamodel_bdslPackage.STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21:
+				return eref_storageOutputFlowStorage21 != null;
+			case Metamodel_bdslPackage.STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22:
+				return eref_orderOnStockThresholdStorage22 != null;
+			case Metamodel_bdslPackage.STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23:
+				return eref_processOutputFlowStorage23 != null;
 			case Metamodel_bdslPackage.STORAGE__CONTAINSNAME_STORAGE:
 				return containsnameStorage != null && !containsnameStorage.isEmpty();
 			case Metamodel_bdslPackage.STORAGE__CONTAINSSIZE_STORAGE:
@@ -594,6 +832,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingElement.class) {
 			switch (derivedFeatureID) {
+				case Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG: return Metamodel_bdslPackage.BINDING_ELEMENT__CONTAINS_SIRIUS_TAG;
 				case Metamodel_bdslPackage.STORAGE__NONE_ELEMENT: return Metamodel_bdslPackage.BINDING_ELEMENT__NONE_ELEMENT;
 				default: return -1;
 			}
@@ -610,6 +849,7 @@ public class StorageImpl extends ComponentImpl implements Storage {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingElement.class) {
 			switch (baseFeatureID) {
+				case Metamodel_bdslPackage.BINDING_ELEMENT__CONTAINS_SIRIUS_TAG: return Metamodel_bdslPackage.STORAGE__CONTAINS_SIRIUS_TAG;
 				case Metamodel_bdslPackage.BINDING_ELEMENT__NONE_ELEMENT: return Metamodel_bdslPackage.STORAGE__NONE_ELEMENT;
 				default: return -1;
 			}

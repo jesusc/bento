@@ -7,6 +7,7 @@ import java.util.Collection;
 import metamodel_bdsl.BindingElement;
 import metamodel_bdsl.Metamodel_bdslPackage;
 import metamodel_bdsl.NoneElement;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Uniform;
 import metamodel_bdsl.maximumUniform;
 import metamodel_bdsl.minimumUniform;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link metamodel_bdsl.impl.UniformImpl#getContainsSiriusTag <em>Contains Sirius Tag</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.UniformImpl#getNoneElement <em>None Element</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.UniformImpl#getMinimum <em>Minimum</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.UniformImpl#getMaximum <em>Maximum</em>}</li>
@@ -43,6 +45,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class UniformImpl extends DistributionImpl implements Uniform {
+	/**
+	 * The cached value of the '{@link #getContainsSiriusTag() <em>Contains Sirius Tag</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainsSiriusTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SiriusTag> containsSiriusTag;
+
 	/**
 	 * The cached value of the '{@link #getNoneElement() <em>None Element</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -137,6 +149,18 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<SiriusTag> getContainsSiriusTag() {
+		if (containsSiriusTag == null) {
+			containsSiriusTag = new EObjectContainmentEList<SiriusTag>(SiriusTag.class, this, Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG);
+		}
+		return containsSiriusTag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<NoneElement> getNoneElement() {
 		if (noneElement == null) {
 			noneElement = new EObjectResolvingEList<NoneElement>(NoneElement.class, this, Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT);
@@ -218,6 +242,8 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG:
+				return ((InternalEList<?>)getContainsSiriusTag()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.UNIFORM__CONTAINSMINIMUM_UNIFORM:
 				return ((InternalEList<?>)getContainsminimumUniform()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.UNIFORM__CONTAINSMAXIMUM_UNIFORM:
@@ -234,6 +260,8 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG:
+				return getContainsSiriusTag();
 			case Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT:
 				return getNoneElement();
 			case Metamodel_bdslPackage.UNIFORM__MINIMUM:
@@ -257,6 +285,10 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG:
+				getContainsSiriusTag().clear();
+				getContainsSiriusTag().addAll((Collection<? extends SiriusTag>)newValue);
+				return;
 			case Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT:
 				getNoneElement().clear();
 				getNoneElement().addAll((Collection<? extends NoneElement>)newValue);
@@ -287,6 +319,9 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG:
+				getContainsSiriusTag().clear();
+				return;
 			case Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT:
 				getNoneElement().clear();
 				return;
@@ -314,6 +349,8 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG:
+				return containsSiriusTag != null && !containsSiriusTag.isEmpty();
 			case Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT:
 				return noneElement != null && !noneElement.isEmpty();
 			case Metamodel_bdslPackage.UNIFORM__MINIMUM:
@@ -337,6 +374,7 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingElement.class) {
 			switch (derivedFeatureID) {
+				case Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG: return Metamodel_bdslPackage.BINDING_ELEMENT__CONTAINS_SIRIUS_TAG;
 				case Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT: return Metamodel_bdslPackage.BINDING_ELEMENT__NONE_ELEMENT;
 				default: return -1;
 			}
@@ -353,6 +391,7 @@ public class UniformImpl extends DistributionImpl implements Uniform {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == BindingElement.class) {
 			switch (baseFeatureID) {
+				case Metamodel_bdslPackage.BINDING_ELEMENT__CONTAINS_SIRIUS_TAG: return Metamodel_bdslPackage.UNIFORM__CONTAINS_SIRIUS_TAG;
 				case Metamodel_bdslPackage.BINDING_ELEMENT__NONE_ELEMENT: return Metamodel_bdslPackage.UNIFORM__NONE_ELEMENT;
 				default: return -1;
 			}

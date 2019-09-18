@@ -27,6 +27,7 @@ import metamodel_bdsl.ProcessOutputFlow;
 import metamodel_bdsl.Query;
 import metamodel_bdsl.QueryType;
 import metamodel_bdsl.Scalar;
+import metamodel_bdsl.SiriusTag;
 import metamodel_bdsl.Storage;
 import metamodel_bdsl.StorageOutputFlow;
 import metamodel_bdsl.Supplier;
@@ -34,6 +35,10 @@ import metamodel_bdsl.Uniform;
 import metamodel_bdsl.VirtualAttribute;
 import metamodel_bdsl.deliveredPercentageSupplier;
 import metamodel_bdsl.descriptionOutput;
+import metamodel_bdsl.destinationProcessOutputFlow74;
+import metamodel_bdsl.destinationStorageOutputFlow63;
+import metamodel_bdsl.durationBatchProcess42;
+import metamodel_bdsl.durationConveyorBelt132;
 import metamodel_bdsl.errorQuery;
 import metamodel_bdsl.initialContentStorage;
 import metamodel_bdsl.intervalPoisson;
@@ -48,13 +53,30 @@ import metamodel_bdsl.nameQuery;
 import metamodel_bdsl.nameStorage;
 import metamodel_bdsl.nameSupplier;
 import metamodel_bdsl.numberOfChainsBatchProcess;
+import metamodel_bdsl.orderOnStockThresholdStorage22;
 import metamodel_bdsl.orderQuantityOrderOnStockThreshold;
 import metamodel_bdsl.orderTypeOrderOnStockThreshold;
+import metamodel_bdsl.outputConveyorBelt133;
+import metamodel_bdsl.outputsBatchProcess43;
 import metamodel_bdsl.overflowStorage;
 import metamodel_bdsl.percentageOfSuccessBatchProcess;
 import metamodel_bdsl.periodOrderOnStockThreshold;
+import metamodel_bdsl.processOutputFlowDelayProcessOutputFlow73;
+import metamodel_bdsl.processOutputFlowOutput51;
+import metamodel_bdsl.processOutputFlowStorage23;
+import metamodel_bdsl.quantityProcessOutputFlow71;
+import metamodel_bdsl.quantityStorageOutputFlow61;
+import metamodel_bdsl.refillPolicySupplier31;
 import metamodel_bdsl.scaleGaussian;
 import metamodel_bdsl.sizeStorage;
+import metamodel_bdsl.sourceProcessOutputFlow72;
+import metamodel_bdsl.sourceStorageOutputFlow62;
+import metamodel_bdsl.storageOrderOnStockThreshold82;
+import metamodel_bdsl.storageOutputFlowBatchProcess41;
+import metamodel_bdsl.storageOutputFlowConveyorBelt131;
+import metamodel_bdsl.storageOutputFlowStorage21;
+import metamodel_bdsl.supplierDelaySupplier32;
+import metamodel_bdsl.supplierOrderOnStockThreshold81;
 import metamodel_bdsl.systemQuery;
 import metamodel_bdsl.thresholdOrderOnStockThreshold;
 import metamodel_bdsl.typeOutput;
@@ -214,6 +236,153 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * @generated
 	 */
 	private EClass conveyorBeltEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass storageOutputFlowStorage21EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass orderOnStockThresholdStorage22EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass processOutputFlowStorage23EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass refillPolicySupplier31EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass supplierDelaySupplier32EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass storageOutputFlowBatchProcess41EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass durationBatchProcess42EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass outputsBatchProcess43EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass processOutputFlowOutput51EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass quantityStorageOutputFlow61EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sourceStorageOutputFlow62EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass destinationStorageOutputFlow63EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass quantityProcessOutputFlow71EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sourceProcessOutputFlow72EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass processOutputFlowDelayProcessOutputFlow73EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass destinationProcessOutputFlow74EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass supplierOrderOnStockThreshold81EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass storageOrderOnStockThreshold82EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass storageOutputFlowConveyorBelt131EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass durationConveyorBelt132EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass outputConveyorBelt133EClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -472,6 +641,13 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass siriusTagEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum orderTypeEEnum = null;
 
 	/**
@@ -715,6 +891,15 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getModel_SourceMM() {
+		return (EAttribute)modelEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQuery() {
 		return queryEClass;
 	}
@@ -877,7 +1062,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStorage_ContainsnameStorage() {
+	public EReference getStorage_Eref_storageOutputFlowStorage21() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -886,7 +1071,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStorage_ContainssizeStorage() {
+	public EReference getStorage_Eref_orderOnStockThresholdStorage22() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -895,7 +1080,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStorage_ContainsinitialContentStorage() {
+	public EReference getStorage_Eref_processOutputFlowStorage23() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -904,8 +1089,35 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStorage_ContainsoverflowStorage() {
+	public EReference getStorage_ContainsnameStorage() {
 		return (EReference)storageEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStorage_ContainssizeStorage() {
+		return (EReference)storageEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStorage_ContainsinitialContentStorage() {
+		return (EReference)storageEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStorage_ContainsoverflowStorage() {
+		return (EReference)storageEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -949,7 +1161,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSupplier_ContainsnameSupplier() {
+	public EReference getSupplier_Eref_refillPolicySupplier31() {
 		return (EReference)supplierEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -958,8 +1170,26 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSupplier_ContainsdeliveredPercentageSupplier() {
+	public EReference getSupplier_Eref_supplierDelaySupplier32() {
 		return (EReference)supplierEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSupplier_ContainsnameSupplier() {
+		return (EReference)supplierEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSupplier_ContainsdeliveredPercentageSupplier() {
+		return (EReference)supplierEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1003,7 +1233,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBatchProcess_ContainsnameBatchProcess() {
+	public EReference getBatchProcess_Eref_storageOutputFlowBatchProcess41() {
 		return (EReference)batchProcessEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1012,7 +1242,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBatchProcess_ContainspercentageOfSuccessBatchProcess() {
+	public EReference getBatchProcess_Eref_durationBatchProcess42() {
 		return (EReference)batchProcessEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1021,8 +1251,35 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBatchProcess_ContainsnumberOfChainsBatchProcess() {
+	public EReference getBatchProcess_Eref_outputsBatchProcess43() {
 		return (EReference)batchProcessEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBatchProcess_ContainsnameBatchProcess() {
+		return (EReference)batchProcessEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBatchProcess_ContainspercentageOfSuccessBatchProcess() {
+		return (EReference)batchProcessEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBatchProcess_ContainsnumberOfChainsBatchProcess() {
+		return (EReference)batchProcessEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1066,7 +1323,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOutput_ContainstypeOutput() {
+	public EReference getOutput_Eref_processOutputFlowOutput51() {
 		return (EReference)outputEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1075,8 +1332,17 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOutput_ContainsdescriptionOutput() {
+	public EReference getOutput_ContainstypeOutput() {
 		return (EReference)outputEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOutput_ContainsdescriptionOutput() {
+		return (EReference)outputEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1104,6 +1370,33 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 */
 	public EReference getStorageOutputFlow_Destination() {
 		return (EReference)storageOutputFlowEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStorageOutputFlow_Eref_quantityStorageOutputFlow61() {
+		return (EReference)storageOutputFlowEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStorageOutputFlow_Eref_sourceStorageOutputFlow62() {
+		return (EReference)storageOutputFlowEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStorageOutputFlow_Eref_destinationStorageOutputFlow63() {
+		return (EReference)storageOutputFlowEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1140,6 +1433,42 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 */
 	public EReference getProcessOutputFlow_Destination() {
 		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProcessOutputFlow_Eref_quantityProcessOutputFlow71() {
+		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProcessOutputFlow_Eref_sourceProcessOutputFlow72() {
+		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProcessOutputFlow_Eref_processOutputFlowDelayProcessOutputFlow73() {
+		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProcessOutputFlow_Eref_destinationProcessOutputFlow74() {
+		return (EReference)processOutputFlowEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1246,7 +1575,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOrderOnStockThreshold_ContainsperiodOrderOnStockThreshold() {
+	public EReference getOrderOnStockThreshold_Eref_supplierOrderOnStockThreshold81() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -1255,7 +1584,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOrderOnStockThreshold_ContainsthresholdOrderOnStockThreshold() {
+	public EReference getOrderOnStockThreshold_Eref_storageOrderOnStockThreshold82() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -1264,7 +1593,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOrderOnStockThreshold_ContainsnameOrderOnStockThreshold() {
+	public EReference getOrderOnStockThreshold_ContainsperiodOrderOnStockThreshold() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -1273,7 +1602,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOrderOnStockThreshold_ContainsorderQuantityOrderOnStockThreshold() {
+	public EReference getOrderOnStockThreshold_ContainsthresholdOrderOnStockThreshold() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1282,8 +1611,26 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getOrderOnStockThreshold_ContainsorderTypeOrderOnStockThreshold() {
+	public EReference getOrderOnStockThreshold_ContainsnameOrderOnStockThreshold() {
 		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOrderOnStockThreshold_ContainsorderQuantityOrderOnStockThreshold() {
+		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOrderOnStockThreshold_ContainsorderTypeOrderOnStockThreshold() {
+		return (EReference)orderOnStockThresholdEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1516,7 +1863,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getConveyorBelt_ContainsnameConveyorBelt() {
+	public EReference getConveyorBelt_Eref_storageOutputFlowConveyorBelt131() {
 		return (EReference)conveyorBeltEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1525,8 +1872,413 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getConveyorBelt_ContainsminimalSeparationBetweenBatchesConveyorBelt() {
+	public EReference getConveyorBelt_Eref_durationConveyorBelt132() {
 		return (EReference)conveyorBeltEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConveyorBelt_Eref_outputConveyorBelt133() {
+		return (EReference)conveyorBeltEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConveyorBelt_ContainsnameConveyorBelt() {
+		return (EReference)conveyorBeltEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConveyorBelt_ContainsminimalSeparationBetweenBatchesConveyorBelt() {
+		return (EReference)conveyorBeltEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getstorageOutputFlowStorage21() {
+		return storageOutputFlowStorage21EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getstorageOutputFlowStorage21_Name() {
+		return (EAttribute)storageOutputFlowStorage21EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getorderOnStockThresholdStorage22() {
+		return orderOnStockThresholdStorage22EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getorderOnStockThresholdStorage22_Name() {
+		return (EAttribute)orderOnStockThresholdStorage22EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getprocessOutputFlowStorage23() {
+		return processOutputFlowStorage23EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getprocessOutputFlowStorage23_Name() {
+		return (EAttribute)processOutputFlowStorage23EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getrefillPolicySupplier31() {
+		return refillPolicySupplier31EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getrefillPolicySupplier31_Name() {
+		return (EAttribute)refillPolicySupplier31EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getsupplierDelaySupplier32() {
+		return supplierDelaySupplier32EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getsupplierDelaySupplier32_Name() {
+		return (EAttribute)supplierDelaySupplier32EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getstorageOutputFlowBatchProcess41() {
+		return storageOutputFlowBatchProcess41EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getstorageOutputFlowBatchProcess41_Name() {
+		return (EAttribute)storageOutputFlowBatchProcess41EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getdurationBatchProcess42() {
+		return durationBatchProcess42EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getdurationBatchProcess42_Name() {
+		return (EAttribute)durationBatchProcess42EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getoutputsBatchProcess43() {
+		return outputsBatchProcess43EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getoutputsBatchProcess43_Name() {
+		return (EAttribute)outputsBatchProcess43EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getprocessOutputFlowOutput51() {
+		return processOutputFlowOutput51EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getprocessOutputFlowOutput51_Name() {
+		return (EAttribute)processOutputFlowOutput51EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getquantityStorageOutputFlow61() {
+		return quantityStorageOutputFlow61EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getquantityStorageOutputFlow61_Name() {
+		return (EAttribute)quantityStorageOutputFlow61EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getsourceStorageOutputFlow62() {
+		return sourceStorageOutputFlow62EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getsourceStorageOutputFlow62_Name() {
+		return (EAttribute)sourceStorageOutputFlow62EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getdestinationStorageOutputFlow63() {
+		return destinationStorageOutputFlow63EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getdestinationStorageOutputFlow63_Name() {
+		return (EAttribute)destinationStorageOutputFlow63EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getquantityProcessOutputFlow71() {
+		return quantityProcessOutputFlow71EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getquantityProcessOutputFlow71_Name() {
+		return (EAttribute)quantityProcessOutputFlow71EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getsourceProcessOutputFlow72() {
+		return sourceProcessOutputFlow72EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getsourceProcessOutputFlow72_Name() {
+		return (EAttribute)sourceProcessOutputFlow72EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getprocessOutputFlowDelayProcessOutputFlow73() {
+		return processOutputFlowDelayProcessOutputFlow73EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getprocessOutputFlowDelayProcessOutputFlow73_Name() {
+		return (EAttribute)processOutputFlowDelayProcessOutputFlow73EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getdestinationProcessOutputFlow74() {
+		return destinationProcessOutputFlow74EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getdestinationProcessOutputFlow74_Name() {
+		return (EAttribute)destinationProcessOutputFlow74EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getsupplierOrderOnStockThreshold81() {
+		return supplierOrderOnStockThreshold81EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getsupplierOrderOnStockThreshold81_Name() {
+		return (EAttribute)supplierOrderOnStockThreshold81EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getstorageOrderOnStockThreshold82() {
+		return storageOrderOnStockThreshold82EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getstorageOrderOnStockThreshold82_Name() {
+		return (EAttribute)storageOrderOnStockThreshold82EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getstorageOutputFlowConveyorBelt131() {
+		return storageOutputFlowConveyorBelt131EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getstorageOutputFlowConveyorBelt131_Name() {
+		return (EAttribute)storageOutputFlowConveyorBelt131EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getdurationConveyorBelt132() {
+		return durationConveyorBelt132EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getdurationConveyorBelt132_Name() {
+		return (EAttribute)durationConveyorBelt132EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getoutputConveyorBelt133() {
+		return outputConveyorBelt133EClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getoutputConveyorBelt133_Name() {
+		return (EAttribute)outputConveyorBelt133EClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2074,8 +2826,17 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBindingElement_NoneElement() {
+	public EReference getBindingElement_ContainsSiriusTag() {
 		return (EReference)bindingElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingElement_NoneElement() {
+		return (EReference)bindingElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2218,6 +2979,24 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSiriusTag() {
+		return siriusTagEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSiriusTag_Tag() {
+		return (EAttribute)siriusTagEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getOrderType() {
 		return orderTypeEEnum;
 	}
@@ -2326,6 +3105,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEReference(modelEClass, MODEL__CONTAINS_METAMODEL_ELEMENT_FEATURE);
 		createEReference(modelEClass, MODEL__CONTAINS_BINDING_ATTRIBUTE);
 		createEReference(modelEClass, MODEL__CONTAINS_VIRTUAL_ATTRIBUTE);
+		createEAttribute(modelEClass, MODEL__SOURCE_MM);
 
 		queryEClass = createEClass(QUERY);
 		createEAttribute(queryEClass, QUERY__NAME);
@@ -2346,6 +3126,9 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEReference(storageEClass, STORAGE__STORAGE_OUTPUT_FLOW);
 		createEReference(storageEClass, STORAGE__ORDER_ON_STOCK_THRESHOLD);
 		createEReference(storageEClass, STORAGE__PROCESS_OUTPUT_FLOW);
+		createEReference(storageEClass, STORAGE__EREF_STORAGE_OUTPUT_FLOW_STORAGE21);
+		createEReference(storageEClass, STORAGE__EREF_ORDER_ON_STOCK_THRESHOLD_STORAGE22);
+		createEReference(storageEClass, STORAGE__EREF_PROCESS_OUTPUT_FLOW_STORAGE23);
 		createEReference(storageEClass, STORAGE__CONTAINSNAME_STORAGE);
 		createEReference(storageEClass, STORAGE__CONTAINSSIZE_STORAGE);
 		createEReference(storageEClass, STORAGE__CONTAINSINITIAL_CONTENT_STORAGE);
@@ -2355,6 +3138,8 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEAttribute(supplierEClass, SUPPLIER__DELIVERED_PERCENTAGE);
 		createEReference(supplierEClass, SUPPLIER__REFILL_POLICY);
 		createEReference(supplierEClass, SUPPLIER__SUPPLIER_DELAY);
+		createEReference(supplierEClass, SUPPLIER__EREF_REFILL_POLICY_SUPPLIER31);
+		createEReference(supplierEClass, SUPPLIER__EREF_SUPPLIER_DELAY_SUPPLIER32);
 		createEReference(supplierEClass, SUPPLIER__CONTAINSNAME_SUPPLIER);
 		createEReference(supplierEClass, SUPPLIER__CONTAINSDELIVERED_PERCENTAGE_SUPPLIER);
 
@@ -2362,6 +3147,9 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEAttribute(batchProcessEClass, BATCH_PROCESS__PERCENTAGE_OF_SUCCESS);
 		createEAttribute(batchProcessEClass, BATCH_PROCESS__NUMBER_OF_CHAINS);
 		createEReference(batchProcessEClass, BATCH_PROCESS__OUTPUTS);
+		createEReference(batchProcessEClass, BATCH_PROCESS__EREF_STORAGE_OUTPUT_FLOW_BATCH_PROCESS41);
+		createEReference(batchProcessEClass, BATCH_PROCESS__EREF_DURATION_BATCH_PROCESS42);
+		createEReference(batchProcessEClass, BATCH_PROCESS__EREF_OUTPUTS_BATCH_PROCESS43);
 		createEReference(batchProcessEClass, BATCH_PROCESS__CONTAINSNAME_BATCH_PROCESS);
 		createEReference(batchProcessEClass, BATCH_PROCESS__CONTAINSPERCENTAGE_OF_SUCCESS_BATCH_PROCESS);
 		createEReference(batchProcessEClass, BATCH_PROCESS__CONTAINSNUMBER_OF_CHAINS_BATCH_PROCESS);
@@ -2370,17 +3158,25 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEAttribute(outputEClass, OUTPUT__TYPE);
 		createEReference(outputEClass, OUTPUT__PROCESS_OUTPUT_FLOW);
 		createEAttribute(outputEClass, OUTPUT__DESCRIPTION);
+		createEReference(outputEClass, OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51);
 		createEReference(outputEClass, OUTPUT__CONTAINSTYPE_OUTPUT);
 		createEReference(outputEClass, OUTPUT__CONTAINSDESCRIPTION_OUTPUT);
 
 		storageOutputFlowEClass = createEClass(STORAGE_OUTPUT_FLOW);
 		createEReference(storageOutputFlowEClass, STORAGE_OUTPUT_FLOW__SOURCE);
 		createEReference(storageOutputFlowEClass, STORAGE_OUTPUT_FLOW__DESTINATION);
+		createEReference(storageOutputFlowEClass, STORAGE_OUTPUT_FLOW__EREF_QUANTITY_STORAGE_OUTPUT_FLOW61);
+		createEReference(storageOutputFlowEClass, STORAGE_OUTPUT_FLOW__EREF_SOURCE_STORAGE_OUTPUT_FLOW62);
+		createEReference(storageOutputFlowEClass, STORAGE_OUTPUT_FLOW__EREF_DESTINATION_STORAGE_OUTPUT_FLOW63);
 
 		processOutputFlowEClass = createEClass(PROCESS_OUTPUT_FLOW);
 		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__SOURCE);
 		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__PROCESS_OUTPUT_FLOW_DELAY);
 		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__DESTINATION);
+		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__EREF_QUANTITY_PROCESS_OUTPUT_FLOW71);
+		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__EREF_SOURCE_PROCESS_OUTPUT_FLOW72);
+		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__EREF_PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73);
+		createEReference(processOutputFlowEClass, PROCESS_OUTPUT_FLOW__EREF_DESTINATION_PROCESS_OUTPUT_FLOW74);
 
 		processEClass = createEClass(PROCESS);
 		createEReference(processEClass, PROCESS__STORAGE_OUTPUT_FLOW);
@@ -2394,6 +3190,8 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEAttribute(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__ORDER_TYPE);
 		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__SUPPLIER);
 		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__STORAGE);
+		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81);
+		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82);
 		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD);
 		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__CONTAINSTHRESHOLD_ORDER_ON_STOCK_THRESHOLD);
 		createEReference(orderOnStockThresholdEClass, ORDER_ON_STOCK_THRESHOLD__CONTAINSNAME_ORDER_ON_STOCK_THRESHOLD);
@@ -2433,8 +3231,74 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		conveyorBeltEClass = createEClass(CONVEYOR_BELT);
 		createEAttribute(conveyorBeltEClass, CONVEYOR_BELT__MINIMAL_SEPARATION_BETWEEN_BATCHES);
 		createEReference(conveyorBeltEClass, CONVEYOR_BELT__OUTPUT);
+		createEReference(conveyorBeltEClass, CONVEYOR_BELT__EREF_STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131);
+		createEReference(conveyorBeltEClass, CONVEYOR_BELT__EREF_DURATION_CONVEYOR_BELT132);
+		createEReference(conveyorBeltEClass, CONVEYOR_BELT__EREF_OUTPUT_CONVEYOR_BELT133);
 		createEReference(conveyorBeltEClass, CONVEYOR_BELT__CONTAINSNAME_CONVEYOR_BELT);
 		createEReference(conveyorBeltEClass, CONVEYOR_BELT__CONTAINSMINIMAL_SEPARATION_BETWEEN_BATCHES_CONVEYOR_BELT);
+
+		storageOutputFlowStorage21EClass = createEClass(STORAGE_OUTPUT_FLOW_STORAGE21);
+		createEAttribute(storageOutputFlowStorage21EClass, STORAGE_OUTPUT_FLOW_STORAGE21__NAME);
+
+		orderOnStockThresholdStorage22EClass = createEClass(ORDER_ON_STOCK_THRESHOLD_STORAGE22);
+		createEAttribute(orderOnStockThresholdStorage22EClass, ORDER_ON_STOCK_THRESHOLD_STORAGE22__NAME);
+
+		processOutputFlowStorage23EClass = createEClass(PROCESS_OUTPUT_FLOW_STORAGE23);
+		createEAttribute(processOutputFlowStorage23EClass, PROCESS_OUTPUT_FLOW_STORAGE23__NAME);
+
+		refillPolicySupplier31EClass = createEClass(REFILL_POLICY_SUPPLIER31);
+		createEAttribute(refillPolicySupplier31EClass, REFILL_POLICY_SUPPLIER31__NAME);
+
+		supplierDelaySupplier32EClass = createEClass(SUPPLIER_DELAY_SUPPLIER32);
+		createEAttribute(supplierDelaySupplier32EClass, SUPPLIER_DELAY_SUPPLIER32__NAME);
+
+		storageOutputFlowBatchProcess41EClass = createEClass(STORAGE_OUTPUT_FLOW_BATCH_PROCESS41);
+		createEAttribute(storageOutputFlowBatchProcess41EClass, STORAGE_OUTPUT_FLOW_BATCH_PROCESS41__NAME);
+
+		durationBatchProcess42EClass = createEClass(DURATION_BATCH_PROCESS42);
+		createEAttribute(durationBatchProcess42EClass, DURATION_BATCH_PROCESS42__NAME);
+
+		outputsBatchProcess43EClass = createEClass(OUTPUTS_BATCH_PROCESS43);
+		createEAttribute(outputsBatchProcess43EClass, OUTPUTS_BATCH_PROCESS43__NAME);
+
+		processOutputFlowOutput51EClass = createEClass(PROCESS_OUTPUT_FLOW_OUTPUT51);
+		createEAttribute(processOutputFlowOutput51EClass, PROCESS_OUTPUT_FLOW_OUTPUT51__NAME);
+
+		quantityStorageOutputFlow61EClass = createEClass(QUANTITY_STORAGE_OUTPUT_FLOW61);
+		createEAttribute(quantityStorageOutputFlow61EClass, QUANTITY_STORAGE_OUTPUT_FLOW61__NAME);
+
+		sourceStorageOutputFlow62EClass = createEClass(SOURCE_STORAGE_OUTPUT_FLOW62);
+		createEAttribute(sourceStorageOutputFlow62EClass, SOURCE_STORAGE_OUTPUT_FLOW62__NAME);
+
+		destinationStorageOutputFlow63EClass = createEClass(DESTINATION_STORAGE_OUTPUT_FLOW63);
+		createEAttribute(destinationStorageOutputFlow63EClass, DESTINATION_STORAGE_OUTPUT_FLOW63__NAME);
+
+		quantityProcessOutputFlow71EClass = createEClass(QUANTITY_PROCESS_OUTPUT_FLOW71);
+		createEAttribute(quantityProcessOutputFlow71EClass, QUANTITY_PROCESS_OUTPUT_FLOW71__NAME);
+
+		sourceProcessOutputFlow72EClass = createEClass(SOURCE_PROCESS_OUTPUT_FLOW72);
+		createEAttribute(sourceProcessOutputFlow72EClass, SOURCE_PROCESS_OUTPUT_FLOW72__NAME);
+
+		processOutputFlowDelayProcessOutputFlow73EClass = createEClass(PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73);
+		createEAttribute(processOutputFlowDelayProcessOutputFlow73EClass, PROCESS_OUTPUT_FLOW_DELAY_PROCESS_OUTPUT_FLOW73__NAME);
+
+		destinationProcessOutputFlow74EClass = createEClass(DESTINATION_PROCESS_OUTPUT_FLOW74);
+		createEAttribute(destinationProcessOutputFlow74EClass, DESTINATION_PROCESS_OUTPUT_FLOW74__NAME);
+
+		supplierOrderOnStockThreshold81EClass = createEClass(SUPPLIER_ORDER_ON_STOCK_THRESHOLD81);
+		createEAttribute(supplierOrderOnStockThreshold81EClass, SUPPLIER_ORDER_ON_STOCK_THRESHOLD81__NAME);
+
+		storageOrderOnStockThreshold82EClass = createEClass(STORAGE_ORDER_ON_STOCK_THRESHOLD82);
+		createEAttribute(storageOrderOnStockThreshold82EClass, STORAGE_ORDER_ON_STOCK_THRESHOLD82__NAME);
+
+		storageOutputFlowConveyorBelt131EClass = createEClass(STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131);
+		createEAttribute(storageOutputFlowConveyorBelt131EClass, STORAGE_OUTPUT_FLOW_CONVEYOR_BELT131__NAME);
+
+		durationConveyorBelt132EClass = createEClass(DURATION_CONVEYOR_BELT132);
+		createEAttribute(durationConveyorBelt132EClass, DURATION_CONVEYOR_BELT132__NAME);
+
+		outputConveyorBelt133EClass = createEClass(OUTPUT_CONVEYOR_BELT133);
+		createEAttribute(outputConveyorBelt133EClass, OUTPUT_CONVEYOR_BELT133__NAME);
 
 		nameQueryEClass = createEClass(NAME_QUERY);
 		createEAttribute(nameQueryEClass, NAME_QUERY__VALUE);
@@ -2526,6 +3390,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		noneElementEClass = createEClass(NONE_ELEMENT);
 
 		bindingElementEClass = createEClass(BINDING_ELEMENT);
+		createEReference(bindingElementEClass, BINDING_ELEMENT__CONTAINS_SIRIUS_TAG);
 		createEReference(bindingElementEClass, BINDING_ELEMENT__NONE_ELEMENT);
 
 		intermediateElementEClass = createEClass(INTERMEDIATE_ELEMENT);
@@ -2547,6 +3412,9 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		createEReference(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__TO_VIRTUAL_ATTRIBUTE);
 		createEAttribute(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__NAME);
 		createEAttribute(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__EXPRESSION);
+
+		siriusTagEClass = createEClass(SIRIUS_TAG);
+		createEAttribute(siriusTagEClass, SIRIUS_TAG__TAG);
 
 		// Create enums
 		orderTypeEEnum = createEEnum(ORDER_TYPE);
@@ -2614,6 +3482,27 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		uniformEClass.getESuperTypes().add(this.getBindingElement());
 		conveyorBeltEClass.getESuperTypes().add(this.getProcess());
 		conveyorBeltEClass.getESuperTypes().add(this.getBindingElement());
+		storageOutputFlowStorage21EClass.getESuperTypes().add(this.getBindingAttribute());
+		orderOnStockThresholdStorage22EClass.getESuperTypes().add(this.getBindingAttribute());
+		processOutputFlowStorage23EClass.getESuperTypes().add(this.getBindingAttribute());
+		refillPolicySupplier31EClass.getESuperTypes().add(this.getBindingAttribute());
+		supplierDelaySupplier32EClass.getESuperTypes().add(this.getBindingAttribute());
+		storageOutputFlowBatchProcess41EClass.getESuperTypes().add(this.getBindingAttribute());
+		durationBatchProcess42EClass.getESuperTypes().add(this.getBindingAttribute());
+		outputsBatchProcess43EClass.getESuperTypes().add(this.getBindingAttribute());
+		processOutputFlowOutput51EClass.getESuperTypes().add(this.getBindingAttribute());
+		quantityStorageOutputFlow61EClass.getESuperTypes().add(this.getBindingAttribute());
+		sourceStorageOutputFlow62EClass.getESuperTypes().add(this.getBindingAttribute());
+		destinationStorageOutputFlow63EClass.getESuperTypes().add(this.getBindingAttribute());
+		quantityProcessOutputFlow71EClass.getESuperTypes().add(this.getBindingAttribute());
+		sourceProcessOutputFlow72EClass.getESuperTypes().add(this.getBindingAttribute());
+		processOutputFlowDelayProcessOutputFlow73EClass.getESuperTypes().add(this.getBindingAttribute());
+		destinationProcessOutputFlow74EClass.getESuperTypes().add(this.getBindingAttribute());
+		supplierOrderOnStockThreshold81EClass.getESuperTypes().add(this.getBindingAttribute());
+		storageOrderOnStockThreshold82EClass.getESuperTypes().add(this.getBindingAttribute());
+		storageOutputFlowConveyorBelt131EClass.getESuperTypes().add(this.getBindingAttribute());
+		durationConveyorBelt132EClass.getESuperTypes().add(this.getBindingAttribute());
+		outputConveyorBelt133EClass.getESuperTypes().add(this.getBindingAttribute());
 		nameQueryEClass.getESuperTypes().add(this.getBindingAttribute());
 		valueQueryEClass.getESuperTypes().add(this.getBindingAttribute());
 		errorQueryEClass.getESuperTypes().add(this.getBindingAttribute());
@@ -2658,6 +3547,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEReference(getModel_ContainsMetamodelElementFeature(), this.getMetamodelElementFeature(), null, "containsMetamodelElementFeature", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModel_ContainsBindingAttribute(), this.getBindingAttribute(), null, "containsBindingAttribute", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModel_ContainsVirtualAttribute(), this.getVirtualAttribute(), null, "containsVirtualAttribute", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModel_SourceMM(), ecorePackage.getEString(), "SourceMM", "http://www.example.org/metamodel_bdsl", 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryEClass, Query.class, "Query", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuery_Name(), ecorePackage.getEString(), "name", "query", 0, 1, Query.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2678,6 +3568,9 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEReference(getStorage_StorageOutputFlow(), this.getStorageOutputFlow(), this.getStorageOutputFlow_Source(), "storageOutputFlow", null, 0, -1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStorage_OrderOnStockThreshold(), this.getOrderOnStockThreshold(), this.getOrderOnStockThreshold_Storage(), "orderOnStockThreshold", null, 0, -1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStorage_ProcessOutputFlow(), this.getProcessOutputFlow(), this.getProcessOutputFlow_Destination(), "processOutputFlow", null, 0, -1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStorage_Eref_storageOutputFlowStorage21(), this.getstorageOutputFlowStorage21(), null, "eref_storageOutputFlowStorage21", null, 0, 1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStorage_Eref_orderOnStockThresholdStorage22(), this.getorderOnStockThresholdStorage22(), null, "eref_orderOnStockThresholdStorage22", null, 0, 1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStorage_Eref_processOutputFlowStorage23(), this.getprocessOutputFlowStorage23(), null, "eref_processOutputFlowStorage23", null, 0, 1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStorage_ContainsnameStorage(), this.getnameStorage(), null, "containsnameStorage", null, 0, -1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStorage_ContainssizeStorage(), this.getsizeStorage(), null, "containssizeStorage", null, 0, -1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStorage_ContainsinitialContentStorage(), this.getinitialContentStorage(), null, "containsinitialContentStorage", null, 0, -1, Storage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2687,6 +3580,8 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEAttribute(getSupplier_DeliveredPercentage(), this.getPercent(), "deliveredPercentage", "100", 0, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSupplier_RefillPolicy(), this.getOrderOnStockThreshold(), this.getOrderOnStockThreshold_Supplier(), "refillPolicy", null, 0, -1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSupplier_SupplierDelay(), this.getProbability(), null, "supplierDelay", null, 1, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSupplier_Eref_refillPolicySupplier31(), this.getrefillPolicySupplier31(), null, "eref_refillPolicySupplier31", null, 0, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSupplier_Eref_supplierDelaySupplier32(), this.getsupplierDelaySupplier32(), null, "eref_supplierDelaySupplier32", null, 0, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSupplier_ContainsnameSupplier(), this.getnameSupplier(), null, "containsnameSupplier", null, 0, -1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSupplier_ContainsdeliveredPercentageSupplier(), this.getdeliveredPercentageSupplier(), null, "containsdeliveredPercentageSupplier", null, 0, -1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2694,6 +3589,9 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEAttribute(getBatchProcess_PercentageOfSuccess(), this.getPercent(), "percentageOfSuccess", "100", 0, 1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBatchProcess_NumberOfChains(), this.getPositiveIntNotNull(), "numberOfChains", "3", 0, 1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBatchProcess_Outputs(), this.getOutput(), null, "outputs", null, 0, -1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBatchProcess_Eref_storageOutputFlowBatchProcess41(), this.getstorageOutputFlowBatchProcess41(), null, "eref_storageOutputFlowBatchProcess41", null, 0, 1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBatchProcess_Eref_durationBatchProcess42(), this.getdurationBatchProcess42(), null, "eref_durationBatchProcess42", null, 0, 1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBatchProcess_Eref_outputsBatchProcess43(), this.getoutputsBatchProcess43(), null, "eref_outputsBatchProcess43", null, 0, 1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBatchProcess_ContainsnameBatchProcess(), this.getnameBatchProcess(), null, "containsnameBatchProcess", null, 0, -1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBatchProcess_ContainspercentageOfSuccessBatchProcess(), this.getpercentageOfSuccessBatchProcess(), null, "containspercentageOfSuccessBatchProcess", null, 0, -1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBatchProcess_ContainsnumberOfChainsBatchProcess(), this.getnumberOfChainsBatchProcess(), null, "containsnumberOfChainsBatchProcess", null, 0, -1, BatchProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2702,17 +3600,25 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEAttribute(getOutput_Type(), this.getOutputType(), "type", null, 0, 1, Output.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOutput_ProcessOutputFlow(), this.getProcessOutputFlow(), this.getProcessOutputFlow_Source(), "processOutputFlow", null, 0, -1, Output.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutput_Description(), ecorePackage.getEString(), "description", null, 0, 1, Output.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOutput_Eref_processOutputFlowOutput51(), this.getprocessOutputFlowOutput51(), null, "eref_processOutputFlowOutput51", null, 0, 1, Output.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOutput_ContainstypeOutput(), this.gettypeOutput(), null, "containstypeOutput", null, 0, -1, Output.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOutput_ContainsdescriptionOutput(), this.getdescriptionOutput(), null, "containsdescriptionOutput", null, 0, -1, Output.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(storageOutputFlowEClass, StorageOutputFlow.class, "StorageOutputFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStorageOutputFlow_Source(), this.getStorage(), this.getStorage_StorageOutputFlow(), "source", null, 1, 1, StorageOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStorageOutputFlow_Destination(), this.getProcess(), this.getProcess_StorageOutputFlow(), "destination", null, 1, 1, StorageOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStorageOutputFlow_Eref_quantityStorageOutputFlow61(), this.getquantityStorageOutputFlow61(), null, "eref_quantityStorageOutputFlow61", null, 0, 1, StorageOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStorageOutputFlow_Eref_sourceStorageOutputFlow62(), this.getsourceStorageOutputFlow62(), null, "eref_sourceStorageOutputFlow62", null, 0, 1, StorageOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStorageOutputFlow_Eref_destinationStorageOutputFlow63(), this.getdestinationStorageOutputFlow63(), null, "eref_destinationStorageOutputFlow63", null, 0, 1, StorageOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(processOutputFlowEClass, ProcessOutputFlow.class, "ProcessOutputFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcessOutputFlow_Source(), this.getOutput(), this.getOutput_ProcessOutputFlow(), "source", null, 1, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcessOutputFlow_ProcessOutputFlowDelay(), this.getProbability(), null, "processOutputFlowDelay", null, 1, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcessOutputFlow_Destination(), this.getStorage(), this.getStorage_ProcessOutputFlow(), "destination", null, 1, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcessOutputFlow_Eref_quantityProcessOutputFlow71(), this.getquantityProcessOutputFlow71(), null, "eref_quantityProcessOutputFlow71", null, 0, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcessOutputFlow_Eref_sourceProcessOutputFlow72(), this.getsourceProcessOutputFlow72(), null, "eref_sourceProcessOutputFlow72", null, 0, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcessOutputFlow_Eref_processOutputFlowDelayProcessOutputFlow73(), this.getprocessOutputFlowDelayProcessOutputFlow73(), null, "eref_processOutputFlowDelayProcessOutputFlow73", null, 0, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcessOutputFlow_Eref_destinationProcessOutputFlow74(), this.getdestinationProcessOutputFlow74(), null, "eref_destinationProcessOutputFlow74", null, 0, 1, ProcessOutputFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(processEClass, metamodel_bdsl.Process.class, "Process", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcess_StorageOutputFlow(), this.getStorageOutputFlow(), this.getStorageOutputFlow_Destination(), "storageOutputFlow", null, 0, -1, metamodel_bdsl.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2726,6 +3632,8 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEAttribute(getOrderOnStockThreshold_OrderType(), this.getOrderType(), "orderType", null, 0, 1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrderOnStockThreshold_Supplier(), this.getSupplier(), this.getSupplier_RefillPolicy(), "supplier", null, 1, 1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrderOnStockThreshold_Storage(), this.getStorage(), this.getStorage_OrderOnStockThreshold(), "storage", null, 1, 1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOrderOnStockThreshold_Eref_supplierOrderOnStockThreshold81(), this.getsupplierOrderOnStockThreshold81(), null, "eref_supplierOrderOnStockThreshold81", null, 0, 1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOrderOnStockThreshold_Eref_storageOrderOnStockThreshold82(), this.getstorageOrderOnStockThreshold82(), null, "eref_storageOrderOnStockThreshold82", null, 0, 1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrderOnStockThreshold_ContainsperiodOrderOnStockThreshold(), this.getperiodOrderOnStockThreshold(), null, "containsperiodOrderOnStockThreshold", null, 0, -1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrderOnStockThreshold_ContainsthresholdOrderOnStockThreshold(), this.getthresholdOrderOnStockThreshold(), null, "containsthresholdOrderOnStockThreshold", null, 0, -1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrderOnStockThreshold_ContainsnameOrderOnStockThreshold(), this.getnameOrderOnStockThreshold(), null, "containsnameOrderOnStockThreshold", null, 0, -1, OrderOnStockThreshold.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2765,8 +3673,74 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEClass(conveyorBeltEClass, ConveyorBelt.class, "ConveyorBelt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConveyorBelt_MinimalSeparationBetweenBatches(), this.getPositiveDouble(), "minimalSeparationBetweenBatches", "1", 0, 1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConveyorBelt_Output(), this.getOutput(), null, "output", null, 0, 1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConveyorBelt_Eref_storageOutputFlowConveyorBelt131(), this.getstorageOutputFlowConveyorBelt131(), null, "eref_storageOutputFlowConveyorBelt131", null, 0, 1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConveyorBelt_Eref_durationConveyorBelt132(), this.getdurationConveyorBelt132(), null, "eref_durationConveyorBelt132", null, 0, 1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConveyorBelt_Eref_outputConveyorBelt133(), this.getoutputConveyorBelt133(), null, "eref_outputConveyorBelt133", null, 0, 1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConveyorBelt_ContainsnameConveyorBelt(), this.getnameConveyorBelt(), null, "containsnameConveyorBelt", null, 0, -1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConveyorBelt_ContainsminimalSeparationBetweenBatchesConveyorBelt(), this.getminimalSeparationBetweenBatchesConveyorBelt(), null, "containsminimalSeparationBetweenBatchesConveyorBelt", null, 0, -1, ConveyorBelt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(storageOutputFlowStorage21EClass, storageOutputFlowStorage21.class, "storageOutputFlowStorage21", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getstorageOutputFlowStorage21_Name(), ecorePackage.getEString(), "name", null, 0, 1, storageOutputFlowStorage21.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(orderOnStockThresholdStorage22EClass, orderOnStockThresholdStorage22.class, "orderOnStockThresholdStorage22", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getorderOnStockThresholdStorage22_Name(), ecorePackage.getEString(), "name", null, 0, 1, orderOnStockThresholdStorage22.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(processOutputFlowStorage23EClass, processOutputFlowStorage23.class, "processOutputFlowStorage23", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getprocessOutputFlowStorage23_Name(), ecorePackage.getEString(), "name", null, 0, 1, processOutputFlowStorage23.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(refillPolicySupplier31EClass, refillPolicySupplier31.class, "refillPolicySupplier31", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getrefillPolicySupplier31_Name(), ecorePackage.getEString(), "name", null, 0, 1, refillPolicySupplier31.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(supplierDelaySupplier32EClass, supplierDelaySupplier32.class, "supplierDelaySupplier32", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getsupplierDelaySupplier32_Name(), ecorePackage.getEString(), "name", null, 0, 1, supplierDelaySupplier32.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(storageOutputFlowBatchProcess41EClass, storageOutputFlowBatchProcess41.class, "storageOutputFlowBatchProcess41", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getstorageOutputFlowBatchProcess41_Name(), ecorePackage.getEString(), "name", null, 0, 1, storageOutputFlowBatchProcess41.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(durationBatchProcess42EClass, durationBatchProcess42.class, "durationBatchProcess42", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getdurationBatchProcess42_Name(), ecorePackage.getEString(), "name", null, 0, 1, durationBatchProcess42.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(outputsBatchProcess43EClass, outputsBatchProcess43.class, "outputsBatchProcess43", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getoutputsBatchProcess43_Name(), ecorePackage.getEString(), "name", null, 0, 1, outputsBatchProcess43.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(processOutputFlowOutput51EClass, processOutputFlowOutput51.class, "processOutputFlowOutput51", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getprocessOutputFlowOutput51_Name(), ecorePackage.getEString(), "name", null, 0, 1, processOutputFlowOutput51.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(quantityStorageOutputFlow61EClass, quantityStorageOutputFlow61.class, "quantityStorageOutputFlow61", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getquantityStorageOutputFlow61_Name(), ecorePackage.getEString(), "name", null, 0, 1, quantityStorageOutputFlow61.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sourceStorageOutputFlow62EClass, sourceStorageOutputFlow62.class, "sourceStorageOutputFlow62", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getsourceStorageOutputFlow62_Name(), ecorePackage.getEString(), "name", null, 0, 1, sourceStorageOutputFlow62.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(destinationStorageOutputFlow63EClass, destinationStorageOutputFlow63.class, "destinationStorageOutputFlow63", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getdestinationStorageOutputFlow63_Name(), ecorePackage.getEString(), "name", null, 0, 1, destinationStorageOutputFlow63.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(quantityProcessOutputFlow71EClass, quantityProcessOutputFlow71.class, "quantityProcessOutputFlow71", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getquantityProcessOutputFlow71_Name(), ecorePackage.getEString(), "name", null, 0, 1, quantityProcessOutputFlow71.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sourceProcessOutputFlow72EClass, sourceProcessOutputFlow72.class, "sourceProcessOutputFlow72", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getsourceProcessOutputFlow72_Name(), ecorePackage.getEString(), "name", null, 0, 1, sourceProcessOutputFlow72.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(processOutputFlowDelayProcessOutputFlow73EClass, processOutputFlowDelayProcessOutputFlow73.class, "processOutputFlowDelayProcessOutputFlow73", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getprocessOutputFlowDelayProcessOutputFlow73_Name(), ecorePackage.getEString(), "name", null, 0, 1, processOutputFlowDelayProcessOutputFlow73.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(destinationProcessOutputFlow74EClass, destinationProcessOutputFlow74.class, "destinationProcessOutputFlow74", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getdestinationProcessOutputFlow74_Name(), ecorePackage.getEString(), "name", null, 0, 1, destinationProcessOutputFlow74.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(supplierOrderOnStockThreshold81EClass, supplierOrderOnStockThreshold81.class, "supplierOrderOnStockThreshold81", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getsupplierOrderOnStockThreshold81_Name(), ecorePackage.getEString(), "name", null, 0, 1, supplierOrderOnStockThreshold81.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(storageOrderOnStockThreshold82EClass, storageOrderOnStockThreshold82.class, "storageOrderOnStockThreshold82", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getstorageOrderOnStockThreshold82_Name(), ecorePackage.getEString(), "name", null, 0, 1, storageOrderOnStockThreshold82.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(storageOutputFlowConveyorBelt131EClass, storageOutputFlowConveyorBelt131.class, "storageOutputFlowConveyorBelt131", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getstorageOutputFlowConveyorBelt131_Name(), ecorePackage.getEString(), "name", null, 0, 1, storageOutputFlowConveyorBelt131.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(durationConveyorBelt132EClass, durationConveyorBelt132.class, "durationConveyorBelt132", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getdurationConveyorBelt132_Name(), ecorePackage.getEString(), "name", null, 0, 1, durationConveyorBelt132.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(outputConveyorBelt133EClass, outputConveyorBelt133.class, "outputConveyorBelt133", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getoutputConveyorBelt133_Name(), ecorePackage.getEString(), "name", null, 0, 1, outputConveyorBelt133.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nameQueryEClass, nameQuery.class, "nameQuery", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getnameQuery_Value(), ecorePackage.getEString(), "value", null, 0, 1, nameQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2858,6 +3832,7 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEClass(noneElementEClass, NoneElement.class, "NoneElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(bindingElementEClass, BindingElement.class, "BindingElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBindingElement_ContainsSiriusTag(), this.getSiriusTag(), null, "containsSiriusTag", null, 0, -1, BindingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBindingElement_NoneElement(), this.getNoneElement(), null, "noneElement", null, 0, -1, BindingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(intermediateElementEClass, IntermediateElement.class, "IntermediateElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2879,6 +3854,9 @@ public class Metamodel_bdslPackageImpl extends EPackageImpl implements Metamodel
 		initEReference(getVirtualAttribute_To_virtualAttribute(), this.getBindingAttribute(), null, "to_virtualAttribute", null, 0, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVirtualAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVirtualAttribute_Expression(), ecorePackage.getEString(), "Expression", null, 0, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(siriusTagEClass, SiriusTag.class, "SiriusTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSiriusTag_Tag(), ecorePackage.getEString(), "tag", null, 0, 1, SiriusTag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(orderTypeEEnum, OrderType.class, "OrderType");

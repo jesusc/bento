@@ -16,6 +16,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link metamodel_bdsl.BatchProcess#getPercentageOfSuccess <em>Percentage Of Success</em>}</li>
  *   <li>{@link metamodel_bdsl.BatchProcess#getNumberOfChains <em>Number Of Chains</em>}</li>
  *   <li>{@link metamodel_bdsl.BatchProcess#getOutputs <em>Outputs</em>}</li>
+ *   <li>{@link metamodel_bdsl.BatchProcess#getEref_storageOutputFlowBatchProcess41 <em>Eref storage Output Flow Batch Process41</em>}</li>
+ *   <li>{@link metamodel_bdsl.BatchProcess#getEref_durationBatchProcess42 <em>Eref duration Batch Process42</em>}</li>
+ *   <li>{@link metamodel_bdsl.BatchProcess#getEref_outputsBatchProcess43 <em>Eref outputs Batch Process43</em>}</li>
  *   <li>{@link metamodel_bdsl.BatchProcess#getContainsnameBatchProcess <em>Containsname Batch Process</em>}</li>
  *   <li>{@link metamodel_bdsl.BatchProcess#getContainspercentageOfSuccessBatchProcess <em>Containspercentage Of Success Batch Process</em>}</li>
  *   <li>{@link metamodel_bdsl.BatchProcess#getContainsnumberOfChainsBatchProcess <em>Containsnumber Of Chains Batch Process</em>}</li>
@@ -95,6 +98,84 @@ public interface BatchProcess extends metamodel_bdsl.Process, BindingElement {
 	 * @generated
 	 */
 	EList<Output> getOutputs();
+
+	/**
+	 * Returns the value of the '<em><b>Eref storage Output Flow Batch Process41</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref storage Output Flow Batch Process41</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref storage Output Flow Batch Process41</em>' containment reference.
+	 * @see #setEref_storageOutputFlowBatchProcess41(storageOutputFlowBatchProcess41)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getBatchProcess_Eref_storageOutputFlowBatchProcess41()
+	 * @model containment="true"
+	 * @generated
+	 */
+	storageOutputFlowBatchProcess41 getEref_storageOutputFlowBatchProcess41();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.BatchProcess#getEref_storageOutputFlowBatchProcess41 <em>Eref storage Output Flow Batch Process41</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref storage Output Flow Batch Process41</em>' containment reference.
+	 * @see #getEref_storageOutputFlowBatchProcess41()
+	 * @generated
+	 */
+	void setEref_storageOutputFlowBatchProcess41(storageOutputFlowBatchProcess41 value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref duration Batch Process42</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref duration Batch Process42</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref duration Batch Process42</em>' containment reference.
+	 * @see #setEref_durationBatchProcess42(durationBatchProcess42)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getBatchProcess_Eref_durationBatchProcess42()
+	 * @model containment="true"
+	 * @generated
+	 */
+	durationBatchProcess42 getEref_durationBatchProcess42();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.BatchProcess#getEref_durationBatchProcess42 <em>Eref duration Batch Process42</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref duration Batch Process42</em>' containment reference.
+	 * @see #getEref_durationBatchProcess42()
+	 * @generated
+	 */
+	void setEref_durationBatchProcess42(durationBatchProcess42 value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref outputs Batch Process43</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref outputs Batch Process43</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref outputs Batch Process43</em>' containment reference.
+	 * @see #setEref_outputsBatchProcess43(outputsBatchProcess43)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getBatchProcess_Eref_outputsBatchProcess43()
+	 * @model containment="true"
+	 * @generated
+	 */
+	outputsBatchProcess43 getEref_outputsBatchProcess43();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.BatchProcess#getEref_outputsBatchProcess43 <em>Eref outputs Batch Process43</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref outputs Batch Process43</em>' containment reference.
+	 * @see #getEref_outputsBatchProcess43()
+	 * @generated
+	 */
+	void setEref_outputsBatchProcess43(outputsBatchProcess43 value);
 
 	/**
 	 * Returns the value of the '<em><b>Containsname Batch Process</b></em>' containment reference list.

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link metamodel_bdsl.Model#getContainsMetamodelElementFeature <em>Contains Metamodel Element Feature</em>}</li>
  *   <li>{@link metamodel_bdsl.Model#getContainsBindingAttribute <em>Contains Binding Attribute</em>}</li>
  *   <li>{@link metamodel_bdsl.Model#getContainsVirtualAttribute <em>Contains Virtual Attribute</em>}</li>
+ *   <li>{@link metamodel_bdsl.Model#getSourceMM <em>Source MM</em>}</li>
  * </ul>
  *
  * @see metamodel_bdsl.Metamodel_bdslPackage#getModel()
@@ -235,5 +236,32 @@ public interface Model extends EObject {
 	 * @generated
 	 */
 	EList<VirtualAttribute> getContainsVirtualAttribute();
+
+	/**
+	 * Returns the value of the '<em><b>Source MM</b></em>' attribute.
+	 * The default value is <code>"http://www.example.org/metamodel_bdsl"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source MM</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source MM</em>' attribute.
+	 * @see #setSourceMM(String)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getModel_SourceMM()
+	 * @model default="http://www.example.org/metamodel_bdsl"
+	 * @generated
+	 */
+	String getSourceMM();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Model#getSourceMM <em>Source MM</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source MM</em>' attribute.
+	 * @see #getSourceMM()
+	 * @generated
+	 */
+	void setSourceMM(String value);
 
 } // Model

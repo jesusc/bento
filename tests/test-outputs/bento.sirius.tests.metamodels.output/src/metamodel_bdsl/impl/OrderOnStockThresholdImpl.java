@@ -13,6 +13,8 @@ import metamodel_bdsl.nameOrderOnStockThreshold;
 import metamodel_bdsl.orderQuantityOrderOnStockThreshold;
 import metamodel_bdsl.orderTypeOrderOnStockThreshold;
 import metamodel_bdsl.periodOrderOnStockThreshold;
+import metamodel_bdsl.storageOrderOnStockThreshold82;
+import metamodel_bdsl.supplierOrderOnStockThreshold81;
 import metamodel_bdsl.thresholdOrderOnStockThreshold;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -43,6 +45,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getOrderType <em>Order Type</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getSupplier <em>Supplier</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getStorage <em>Storage</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getEref_supplierOrderOnStockThreshold81 <em>Eref supplier Order On Stock Threshold81</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getEref_storageOrderOnStockThreshold82 <em>Eref storage Order On Stock Threshold82</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getContainsperiodOrderOnStockThreshold <em>Containsperiod Order On Stock Threshold</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getContainsthresholdOrderOnStockThreshold <em>Containsthreshold Order On Stock Threshold</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OrderOnStockThresholdImpl#getContainsnameOrderOnStockThreshold <em>Containsname Order On Stock Threshold</em>}</li>
@@ -172,6 +176,26 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 	 * @ordered
 	 */
 	protected Storage storage;
+
+	/**
+	 * The cached value of the '{@link #getEref_supplierOrderOnStockThreshold81() <em>Eref supplier Order On Stock Threshold81</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_supplierOrderOnStockThreshold81()
+	 * @generated
+	 * @ordered
+	 */
+	protected supplierOrderOnStockThreshold81 eref_supplierOrderOnStockThreshold81;
+
+	/**
+	 * The cached value of the '{@link #getEref_storageOrderOnStockThreshold82() <em>Eref storage Order On Stock Threshold82</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_storageOrderOnStockThreshold82()
+	 * @generated
+	 * @ordered
+	 */
+	protected storageOrderOnStockThreshold82 eref_storageOrderOnStockThreshold82;
 
 	/**
 	 * The cached value of the '{@link #getContainsperiodOrderOnStockThreshold() <em>Containsperiod Order On Stock Threshold</em>}' containment reference list.
@@ -472,6 +496,92 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public supplierOrderOnStockThreshold81 getEref_supplierOrderOnStockThreshold81() {
+		return eref_supplierOrderOnStockThreshold81;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_supplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81 newEref_supplierOrderOnStockThreshold81, NotificationChain msgs) {
+		supplierOrderOnStockThreshold81 oldEref_supplierOrderOnStockThreshold81 = eref_supplierOrderOnStockThreshold81;
+		eref_supplierOrderOnStockThreshold81 = newEref_supplierOrderOnStockThreshold81;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81, oldEref_supplierOrderOnStockThreshold81, newEref_supplierOrderOnStockThreshold81);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_supplierOrderOnStockThreshold81(supplierOrderOnStockThreshold81 newEref_supplierOrderOnStockThreshold81) {
+		if (newEref_supplierOrderOnStockThreshold81 != eref_supplierOrderOnStockThreshold81) {
+			NotificationChain msgs = null;
+			if (eref_supplierOrderOnStockThreshold81 != null)
+				msgs = ((InternalEObject)eref_supplierOrderOnStockThreshold81).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81, null, msgs);
+			if (newEref_supplierOrderOnStockThreshold81 != null)
+				msgs = ((InternalEObject)newEref_supplierOrderOnStockThreshold81).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81, null, msgs);
+			msgs = basicSetEref_supplierOrderOnStockThreshold81(newEref_supplierOrderOnStockThreshold81, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81, newEref_supplierOrderOnStockThreshold81, newEref_supplierOrderOnStockThreshold81));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public storageOrderOnStockThreshold82 getEref_storageOrderOnStockThreshold82() {
+		return eref_storageOrderOnStockThreshold82;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_storageOrderOnStockThreshold82(storageOrderOnStockThreshold82 newEref_storageOrderOnStockThreshold82, NotificationChain msgs) {
+		storageOrderOnStockThreshold82 oldEref_storageOrderOnStockThreshold82 = eref_storageOrderOnStockThreshold82;
+		eref_storageOrderOnStockThreshold82 = newEref_storageOrderOnStockThreshold82;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82, oldEref_storageOrderOnStockThreshold82, newEref_storageOrderOnStockThreshold82);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_storageOrderOnStockThreshold82(storageOrderOnStockThreshold82 newEref_storageOrderOnStockThreshold82) {
+		if (newEref_storageOrderOnStockThreshold82 != eref_storageOrderOnStockThreshold82) {
+			NotificationChain msgs = null;
+			if (eref_storageOrderOnStockThreshold82 != null)
+				msgs = ((InternalEObject)eref_storageOrderOnStockThreshold82).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82, null, msgs);
+			if (newEref_storageOrderOnStockThreshold82 != null)
+				msgs = ((InternalEObject)newEref_storageOrderOnStockThreshold82).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82, null, msgs);
+			msgs = basicSetEref_storageOrderOnStockThreshold82(newEref_storageOrderOnStockThreshold82, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82, newEref_storageOrderOnStockThreshold82, newEref_storageOrderOnStockThreshold82));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<periodOrderOnStockThreshold> getContainsperiodOrderOnStockThreshold() {
 		if (containsperiodOrderOnStockThreshold == null) {
 			containsperiodOrderOnStockThreshold = new EObjectContainmentEList<periodOrderOnStockThreshold>(periodOrderOnStockThreshold.class, this, Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD);
@@ -559,6 +669,10 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 				return basicSetSupplier(null, msgs);
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__STORAGE:
 				return basicSetStorage(null, msgs);
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81:
+				return basicSetEref_supplierOrderOnStockThreshold81(null, msgs);
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82:
+				return basicSetEref_storageOrderOnStockThreshold82(null, msgs);
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD:
 				return ((InternalEList<?>)getContainsperiodOrderOnStockThreshold()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSTHRESHOLD_ORDER_ON_STOCK_THRESHOLD:
@@ -597,6 +711,10 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__STORAGE:
 				if (resolve) return getStorage();
 				return basicGetStorage();
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81:
+				return getEref_supplierOrderOnStockThreshold81();
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82:
+				return getEref_storageOrderOnStockThreshold82();
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD:
 				return getContainsperiodOrderOnStockThreshold();
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSTHRESHOLD_ORDER_ON_STOCK_THRESHOLD:
@@ -640,6 +758,12 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 				return;
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__STORAGE:
 				setStorage((Storage)newValue);
+				return;
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81:
+				setEref_supplierOrderOnStockThreshold81((supplierOrderOnStockThreshold81)newValue);
+				return;
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82:
+				setEref_storageOrderOnStockThreshold82((storageOrderOnStockThreshold82)newValue);
 				return;
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD:
 				getContainsperiodOrderOnStockThreshold().clear();
@@ -694,6 +818,12 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__STORAGE:
 				setStorage((Storage)null);
 				return;
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81:
+				setEref_supplierOrderOnStockThreshold81((supplierOrderOnStockThreshold81)null);
+				return;
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82:
+				setEref_storageOrderOnStockThreshold82((storageOrderOnStockThreshold82)null);
+				return;
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD:
 				getContainsperiodOrderOnStockThreshold().clear();
 				return;
@@ -735,6 +865,10 @@ public class OrderOnStockThresholdImpl extends BindingElementImpl implements Ord
 				return supplier != null;
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__STORAGE:
 				return storage != null;
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_SUPPLIER_ORDER_ON_STOCK_THRESHOLD81:
+				return eref_supplierOrderOnStockThreshold81 != null;
+			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__EREF_STORAGE_ORDER_ON_STOCK_THRESHOLD82:
+				return eref_storageOrderOnStockThreshold82 != null;
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSPERIOD_ORDER_ON_STOCK_THRESHOLD:
 				return containsperiodOrderOnStockThreshold != null && !containsperiodOrderOnStockThreshold.isEmpty();
 			case Metamodel_bdslPackage.ORDER_ON_STOCK_THRESHOLD__CONTAINSTHRESHOLD_ORDER_ON_STOCK_THRESHOLD:

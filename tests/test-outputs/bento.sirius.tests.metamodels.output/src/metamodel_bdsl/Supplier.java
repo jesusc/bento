@@ -16,6 +16,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link metamodel_bdsl.Supplier#getDeliveredPercentage <em>Delivered Percentage</em>}</li>
  *   <li>{@link metamodel_bdsl.Supplier#getRefillPolicy <em>Refill Policy</em>}</li>
  *   <li>{@link metamodel_bdsl.Supplier#getSupplierDelay <em>Supplier Delay</em>}</li>
+ *   <li>{@link metamodel_bdsl.Supplier#getEref_refillPolicySupplier31 <em>Eref refill Policy Supplier31</em>}</li>
+ *   <li>{@link metamodel_bdsl.Supplier#getEref_supplierDelaySupplier32 <em>Eref supplier Delay Supplier32</em>}</li>
  *   <li>{@link metamodel_bdsl.Supplier#getContainsnameSupplier <em>Containsname Supplier</em>}</li>
  *   <li>{@link metamodel_bdsl.Supplier#getContainsdeliveredPercentageSupplier <em>Containsdelivered Percentage Supplier</em>}</li>
  * </ul>
@@ -95,6 +97,58 @@ public interface Supplier extends Component, BindingElement {
 	 * @generated
 	 */
 	void setSupplierDelay(Probability value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref refill Policy Supplier31</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref refill Policy Supplier31</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref refill Policy Supplier31</em>' containment reference.
+	 * @see #setEref_refillPolicySupplier31(refillPolicySupplier31)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getSupplier_Eref_refillPolicySupplier31()
+	 * @model containment="true"
+	 * @generated
+	 */
+	refillPolicySupplier31 getEref_refillPolicySupplier31();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Supplier#getEref_refillPolicySupplier31 <em>Eref refill Policy Supplier31</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref refill Policy Supplier31</em>' containment reference.
+	 * @see #getEref_refillPolicySupplier31()
+	 * @generated
+	 */
+	void setEref_refillPolicySupplier31(refillPolicySupplier31 value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref supplier Delay Supplier32</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref supplier Delay Supplier32</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref supplier Delay Supplier32</em>' containment reference.
+	 * @see #setEref_supplierDelaySupplier32(supplierDelaySupplier32)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getSupplier_Eref_supplierDelaySupplier32()
+	 * @model containment="true"
+	 * @generated
+	 */
+	supplierDelaySupplier32 getEref_supplierDelaySupplier32();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Supplier#getEref_supplierDelaySupplier32 <em>Eref supplier Delay Supplier32</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref supplier Delay Supplier32</em>' containment reference.
+	 * @see #getEref_supplierDelaySupplier32()
+	 * @generated
+	 */
+	void setEref_supplierDelaySupplier32(supplierDelaySupplier32 value);
 
 	/**
 	 * Returns the value of the '<em><b>Containsname Supplier</b></em>' containment reference list.

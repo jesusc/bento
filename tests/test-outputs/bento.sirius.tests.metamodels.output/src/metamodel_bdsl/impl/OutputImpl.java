@@ -9,6 +9,7 @@ import metamodel_bdsl.Output;
 import metamodel_bdsl.OutputType;
 import metamodel_bdsl.ProcessOutputFlow;
 import metamodel_bdsl.descriptionOutput;
+import metamodel_bdsl.processOutputFlowOutput51;
 import metamodel_bdsl.typeOutput;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link metamodel_bdsl.impl.OutputImpl#getType <em>Type</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OutputImpl#getProcessOutputFlow <em>Process Output Flow</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OutputImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.OutputImpl#getEref_processOutputFlowOutput51 <em>Eref process Output Flow Output51</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OutputImpl#getContainstypeOutput <em>Containstype Output</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.OutputImpl#getContainsdescriptionOutput <em>Containsdescription Output</em>}</li>
  * </ul>
@@ -92,6 +94,16 @@ public class OutputImpl extends BindingElementImpl implements Output {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEref_processOutputFlowOutput51() <em>Eref process Output Flow Output51</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEref_processOutputFlowOutput51()
+	 * @generated
+	 * @ordered
+	 */
+	protected processOutputFlowOutput51 eref_processOutputFlowOutput51;
 
 	/**
 	 * The cached value of the '{@link #getContainstypeOutput() <em>Containstype Output</em>}' containment reference list.
@@ -191,6 +203,49 @@ public class OutputImpl extends BindingElementImpl implements Output {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public processOutputFlowOutput51 getEref_processOutputFlowOutput51() {
+		return eref_processOutputFlowOutput51;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEref_processOutputFlowOutput51(processOutputFlowOutput51 newEref_processOutputFlowOutput51, NotificationChain msgs) {
+		processOutputFlowOutput51 oldEref_processOutputFlowOutput51 = eref_processOutputFlowOutput51;
+		eref_processOutputFlowOutput51 = newEref_processOutputFlowOutput51;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51, oldEref_processOutputFlowOutput51, newEref_processOutputFlowOutput51);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEref_processOutputFlowOutput51(processOutputFlowOutput51 newEref_processOutputFlowOutput51) {
+		if (newEref_processOutputFlowOutput51 != eref_processOutputFlowOutput51) {
+			NotificationChain msgs = null;
+			if (eref_processOutputFlowOutput51 != null)
+				msgs = ((InternalEObject)eref_processOutputFlowOutput51).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51, null, msgs);
+			if (newEref_processOutputFlowOutput51 != null)
+				msgs = ((InternalEObject)newEref_processOutputFlowOutput51).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51, null, msgs);
+			msgs = basicSetEref_processOutputFlowOutput51(newEref_processOutputFlowOutput51, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51, newEref_processOutputFlowOutput51, newEref_processOutputFlowOutput51));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<typeOutput> getContainstypeOutput() {
 		if (containstypeOutput == null) {
 			containstypeOutput = new EObjectContainmentEList<typeOutput>(typeOutput.class, this, Metamodel_bdslPackage.OUTPUT__CONTAINSTYPE_OUTPUT);
@@ -235,6 +290,8 @@ public class OutputImpl extends BindingElementImpl implements Output {
 		switch (featureID) {
 			case Metamodel_bdslPackage.OUTPUT__PROCESS_OUTPUT_FLOW:
 				return ((InternalEList<?>)getProcessOutputFlow()).basicRemove(otherEnd, msgs);
+			case Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51:
+				return basicSetEref_processOutputFlowOutput51(null, msgs);
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSTYPE_OUTPUT:
 				return ((InternalEList<?>)getContainstypeOutput()).basicRemove(otherEnd, msgs);
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSDESCRIPTION_OUTPUT:
@@ -257,6 +314,8 @@ public class OutputImpl extends BindingElementImpl implements Output {
 				return getProcessOutputFlow();
 			case Metamodel_bdslPackage.OUTPUT__DESCRIPTION:
 				return getDescription();
+			case Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51:
+				return getEref_processOutputFlowOutput51();
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSTYPE_OUTPUT:
 				return getContainstypeOutput();
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSDESCRIPTION_OUTPUT:
@@ -283,6 +342,9 @@ public class OutputImpl extends BindingElementImpl implements Output {
 				return;
 			case Metamodel_bdslPackage.OUTPUT__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51:
+				setEref_processOutputFlowOutput51((processOutputFlowOutput51)newValue);
 				return;
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSTYPE_OUTPUT:
 				getContainstypeOutput().clear();
@@ -313,6 +375,9 @@ public class OutputImpl extends BindingElementImpl implements Output {
 			case Metamodel_bdslPackage.OUTPUT__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51:
+				setEref_processOutputFlowOutput51((processOutputFlowOutput51)null);
+				return;
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSTYPE_OUTPUT:
 				getContainstypeOutput().clear();
 				return;
@@ -337,6 +402,8 @@ public class OutputImpl extends BindingElementImpl implements Output {
 				return processOutputFlow != null && !processOutputFlow.isEmpty();
 			case Metamodel_bdslPackage.OUTPUT__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case Metamodel_bdslPackage.OUTPUT__EREF_PROCESS_OUTPUT_FLOW_OUTPUT51:
+				return eref_processOutputFlowOutput51 != null;
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSTYPE_OUTPUT:
 				return containstypeOutput != null && !containstypeOutput.isEmpty();
 			case Metamodel_bdslPackage.OUTPUT__CONTAINSDESCRIPTION_OUTPUT:

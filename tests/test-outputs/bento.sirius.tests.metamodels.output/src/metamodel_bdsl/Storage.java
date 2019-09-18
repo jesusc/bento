@@ -19,6 +19,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link metamodel_bdsl.Storage#getStorageOutputFlow <em>Storage Output Flow</em>}</li>
  *   <li>{@link metamodel_bdsl.Storage#getOrderOnStockThreshold <em>Order On Stock Threshold</em>}</li>
  *   <li>{@link metamodel_bdsl.Storage#getProcessOutputFlow <em>Process Output Flow</em>}</li>
+ *   <li>{@link metamodel_bdsl.Storage#getEref_storageOutputFlowStorage21 <em>Eref storage Output Flow Storage21</em>}</li>
+ *   <li>{@link metamodel_bdsl.Storage#getEref_orderOnStockThresholdStorage22 <em>Eref order On Stock Threshold Storage22</em>}</li>
+ *   <li>{@link metamodel_bdsl.Storage#getEref_processOutputFlowStorage23 <em>Eref process Output Flow Storage23</em>}</li>
  *   <li>{@link metamodel_bdsl.Storage#getContainsnameStorage <em>Containsname Storage</em>}</li>
  *   <li>{@link metamodel_bdsl.Storage#getContainssizeStorage <em>Containssize Storage</em>}</li>
  *   <li>{@link metamodel_bdsl.Storage#getContainsinitialContentStorage <em>Containsinitial Content Storage</em>}</li>
@@ -163,6 +166,84 @@ public interface Storage extends Component, BindingElement {
 	 * @generated
 	 */
 	EList<ProcessOutputFlow> getProcessOutputFlow();
+
+	/**
+	 * Returns the value of the '<em><b>Eref storage Output Flow Storage21</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref storage Output Flow Storage21</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref storage Output Flow Storage21</em>' containment reference.
+	 * @see #setEref_storageOutputFlowStorage21(storageOutputFlowStorage21)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getStorage_Eref_storageOutputFlowStorage21()
+	 * @model containment="true"
+	 * @generated
+	 */
+	storageOutputFlowStorage21 getEref_storageOutputFlowStorage21();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Storage#getEref_storageOutputFlowStorage21 <em>Eref storage Output Flow Storage21</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref storage Output Flow Storage21</em>' containment reference.
+	 * @see #getEref_storageOutputFlowStorage21()
+	 * @generated
+	 */
+	void setEref_storageOutputFlowStorage21(storageOutputFlowStorage21 value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref order On Stock Threshold Storage22</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref order On Stock Threshold Storage22</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref order On Stock Threshold Storage22</em>' containment reference.
+	 * @see #setEref_orderOnStockThresholdStorage22(orderOnStockThresholdStorage22)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getStorage_Eref_orderOnStockThresholdStorage22()
+	 * @model containment="true"
+	 * @generated
+	 */
+	orderOnStockThresholdStorage22 getEref_orderOnStockThresholdStorage22();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Storage#getEref_orderOnStockThresholdStorage22 <em>Eref order On Stock Threshold Storage22</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref order On Stock Threshold Storage22</em>' containment reference.
+	 * @see #getEref_orderOnStockThresholdStorage22()
+	 * @generated
+	 */
+	void setEref_orderOnStockThresholdStorage22(orderOnStockThresholdStorage22 value);
+
+	/**
+	 * Returns the value of the '<em><b>Eref process Output Flow Storage23</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Eref process Output Flow Storage23</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Eref process Output Flow Storage23</em>' containment reference.
+	 * @see #setEref_processOutputFlowStorage23(processOutputFlowStorage23)
+	 * @see metamodel_bdsl.Metamodel_bdslPackage#getStorage_Eref_processOutputFlowStorage23()
+	 * @model containment="true"
+	 * @generated
+	 */
+	processOutputFlowStorage23 getEref_processOutputFlowStorage23();
+
+	/**
+	 * Sets the value of the '{@link metamodel_bdsl.Storage#getEref_processOutputFlowStorage23 <em>Eref process Output Flow Storage23</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Eref process Output Flow Storage23</em>' containment reference.
+	 * @see #getEref_processOutputFlowStorage23()
+	 * @generated
+	 */
+	void setEref_processOutputFlowStorage23(processOutputFlowStorage23 value);
 
 	/**
 	 * Returns the value of the '<em><b>Containsname Storage</b></em>' containment reference list.

@@ -52,6 +52,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link metamodel_bdsl.impl.ModelImpl#getContainsMetamodelElementFeature <em>Contains Metamodel Element Feature</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.ModelImpl#getContainsBindingAttribute <em>Contains Binding Attribute</em>}</li>
  *   <li>{@link metamodel_bdsl.impl.ModelImpl#getContainsVirtualAttribute <em>Contains Virtual Attribute</em>}</li>
+ *   <li>{@link metamodel_bdsl.impl.ModelImpl#getSourceMM <em>Source MM</em>}</li>
  * </ul>
  *
  * @generated
@@ -186,6 +187,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * @ordered
 	 */
 	protected EList<VirtualAttribute> containsVirtualAttribute;
+
+	/**
+	 * The default value of the '{@link #getSourceMM() <em>Source MM</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceMM()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SOURCE_MM_EDEFAULT = "http://www.example.org/metamodel_bdsl";
+
+	/**
+	 * The cached value of the '{@link #getSourceMM() <em>Source MM</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceMM()
+	 * @generated
+	 * @ordered
+	 */
+	protected String sourceMM = SOURCE_MM_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -364,6 +385,27 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSourceMM() {
+		return sourceMM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceMM(String newSourceMM) {
+		String oldSourceMM = sourceMM;
+		sourceMM = newSourceMM;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Metamodel_bdslPackage.MODEL__SOURCE_MM, oldSourceMM, sourceMM));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -425,6 +467,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 				return getContainsBindingAttribute();
 			case Metamodel_bdslPackage.MODEL__CONTAINS_VIRTUAL_ATTRIBUTE:
 				return getContainsVirtualAttribute();
+			case Metamodel_bdslPackage.MODEL__SOURCE_MM:
+				return getSourceMM();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -485,6 +529,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 				getContainsVirtualAttribute().clear();
 				getContainsVirtualAttribute().addAll((Collection<? extends VirtualAttribute>)newValue);
 				return;
+			case Metamodel_bdslPackage.MODEL__SOURCE_MM:
+				setSourceMM((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -533,6 +580,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 			case Metamodel_bdslPackage.MODEL__CONTAINS_VIRTUAL_ATTRIBUTE:
 				getContainsVirtualAttribute().clear();
 				return;
+			case Metamodel_bdslPackage.MODEL__SOURCE_MM:
+				setSourceMM(SOURCE_MM_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -569,6 +619,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 				return containsBindingAttribute != null && !containsBindingAttribute.isEmpty();
 			case Metamodel_bdslPackage.MODEL__CONTAINS_VIRTUAL_ATTRIBUTE:
 				return containsVirtualAttribute != null && !containsVirtualAttribute.isEmpty();
+			case Metamodel_bdslPackage.MODEL__SOURCE_MM:
+				return SOURCE_MM_EDEFAULT == null ? sourceMM != null : !SOURCE_MM_EDEFAULT.equals(sourceMM);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -585,6 +637,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", SourceMM: ");
+		result.append(sourceMM);
 		result.append(')');
 		return result.toString();
 	}
