@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -18,7 +17,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -33,7 +31,6 @@ import org.eclipse.sirius.diagram.description.DescriptionFactory;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
-import org.eclipse.sirius.diagram.description.Layer;
 import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.description.style.CenterLabelStyleDescription;
 import org.eclipse.sirius.diagram.description.style.EdgeStyleDescription;
@@ -43,30 +40,20 @@ import org.eclipse.sirius.diagram.description.style.SquareDescription;
 import org.eclipse.sirius.diagram.description.style.StyleFactory;
 import org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription;
 import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
-import org.eclipse.sirius.diagram.description.tool.DirectEditLabel;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.ToolFactory;
 import org.eclipse.sirius.diagram.description.tool.ToolSection;
 import org.eclipse.sirius.viewpoint.FontFormat;
-import org.eclipse.sirius.viewpoint.LabelAlignment;
 import org.eclipse.sirius.viewpoint.description.Group;
-import org.eclipse.sirius.viewpoint.description.RepresentationDescription;
 import org.eclipse.sirius.viewpoint.description.UserColorsPalette;
 import org.eclipse.sirius.viewpoint.description.UserFixedColor;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.eclipse.sirius.viewpoint.description.tool.ChangeContext;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
-import org.eclipse.sirius.viewpoint.description.tool.EditMaskVariables;
 import org.eclipse.sirius.viewpoint.description.tool.InitEdgeCreationOperation;
 import org.eclipse.sirius.viewpoint.description.tool.InitialNodeCreationOperation;
-import org.eclipse.sirius.viewpoint.description.tool.InitialOperation;
 import org.eclipse.sirius.viewpoint.description.tool.SetValue;
-
-import com.odesign.generator.tools.BindingTools;
-import com.odesign.generator.tools.OdesignTools;
-import com.odesign.generator.values.BorderedNodeCreation;
-import com.odesign.generator.values.MetamodelElementFeature;
 
 /**
  * @author souhaila
@@ -302,15 +289,15 @@ public class OdesignGenerator {
 		//dd.setName("Diagram");
 		this.diagramsList.add(dd);
 
+
+		List<EObject> all = new ArrayList<>();
+		TreeIterator<EObject> content1 = this.resource.getAllContents();
+		while (content1.hasNext()) {
+			all.add(content1.next());
+		}
 		
 		//dd.setDefaultLayer(layer);
 		for (Entry<EClass, List<EClass>> entry : eclassMap.entrySet()) {
-
-			List<EObject> all = new ArrayList<>();
-			TreeIterator<EObject> content1 = this.resource.getAllContents();
-			while (content1.hasNext()) {
-				all.add(content1.next());
-			}
 
 			// TreeIterator<EObject> content = this.resource.getAllContents();
 			// while (content.hasNext()) {
@@ -632,9 +619,9 @@ public class OdesignGenerator {
 					
 					
 					
-					System.out.println(((NodeMapping) obj).getDomainClass()
-							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1) ) + 1)
-							.equalsIgnoreCase(entry.getKey().getName()));
+					//System.out.println(((NodeMapping) obj).getDomainClass()
+					//		.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1) ) + 1)
+					//		.equalsIgnoreCase(entry.getKey().getName()));
 
 					if (((NodeMapping) obj).getDomainClass()
 							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
@@ -705,14 +692,8 @@ public class OdesignGenerator {
 
 		}
 		
-		
 		for (Entry<EClass, List<EClass>> entry : tagsERefs.entrySet()) {
 
-			List<EObject> all = new ArrayList<>();
-			TreeIterator<EObject> content1 = this.resource.getAllContents();
-			while (content1.hasNext()) {
-				all.add(content1.next());
-			}
 
 			// TreeIterator<EObject> content = this.resource.getAllContents();
 			// while (content.hasNext()) {

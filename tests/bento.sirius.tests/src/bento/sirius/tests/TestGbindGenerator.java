@@ -2,23 +2,13 @@ package bento.sirius.tests;
 
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 import com.odesign.generator.GbindGenerator;
 
 
-
-
-
 public class TestGbindGenerator {
-
-
 	    
 		@Test
 		public void test() throws IOException {
@@ -37,8 +27,6 @@ public class TestGbindGenerator {
 			
 		
 			GbindGenerator gbin=new GbindGenerator(bindinMetamodel,model,target, source, output);
-
 		}
-
 	
 }
