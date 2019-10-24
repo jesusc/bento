@@ -34,28 +34,53 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_pJ6BgoXvEemP6oEFwIH1kw"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_pJ3lQYXvEemP6oEFwIH1kw" fontName="Noto Sans" fontHeight="12"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pJ3lQoXvEemP6oEFwIH1kw" x="270" y="55"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pJ3lQoXvEemP6oEFwIH1kw" x="250" y="75"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_fvcYEKIQEem1LeKlW1e1uw" type="2002" element="_fvKEMKIQEem1LeKlW1e1uw">
+          <children xmi:type="notation:Node" xmi:id="_fvliAKIQEem1LeKlW1e1uw" type="5006"/>
+          <children xmi:type="notation:Node" xmi:id="_fvmwIKIQEem1LeKlW1e1uw" type="7001">
+            <styles xmi:type="notation:SortingStyle" xmi:id="_fvmwIaIQEem1LeKlW1e1uw"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_fvmwIqIQEem1LeKlW1e1uw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_fvcYEaIQEem1LeKlW1e1uw" fontName="Noto Sans" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fvcYEqIQEem1LeKlW1e1uw" x="490" y="75"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_j9EJMoXvEemP6oEFwIH1kw"/>
         <edges xmi:type="notation:Edge" xmi:id="_rKVBIIXvEemP6oEFwIH1kw" type="4001" element="_rKIM0IXvEemP6oEFwIH1kw" source="_j9b8oIXvEemP6oEFwIH1kw" target="_pJ3lQIXvEemP6oEFwIH1kw">
           <children xmi:type="notation:Node" xmi:id="_rKWPQIXvEemP6oEFwIH1kw" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKWPQYXvEemP6oEFwIH1kw" x="-1" y="-10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKWPQYXvEemP6oEFwIH1kw" x="-3" y="-12"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_rKW2UIXvEemP6oEFwIH1kw" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKW2UYXvEemP6oEFwIH1kw" x="-1" y="9"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKW2UYXvEemP6oEFwIH1kw" x="1" y="8"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_rKXdYIXvEemP6oEFwIH1kw" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKXdYYXvEemP6oEFwIH1kw" y="9"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rKXdYYXvEemP6oEFwIH1kw" x="1" y="9"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_rKVBIYXvEemP6oEFwIH1kw"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_rKVBIoXvEemP6oEFwIH1kw" fontName="Noto Sans" fontHeight="12"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rKVBI4XvEemP6oEFwIH1kw" points="[0, 0, -135, 23]$[135, -23, 0, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rKVBI4XvEemP6oEFwIH1kw" points="[0, 0, -115, 3]$[115, -3, 0, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_rKZ5oIXvEemP6oEFwIH1kw" id="(1.0,0.6666666666666666)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_rKZ5oYXvEemP6oEFwIH1kw" id="(0.0,0.39705882352941174)"/>
         </edges>
+        <edges xmi:type="notation:Edge" xmi:id="_gbtoMKIQEem1LeKlW1e1uw" type="4001" element="_gbipEKIQEem1LeKlW1e1uw" source="_pJ3lQIXvEemP6oEFwIH1kw" target="_fvcYEKIQEem1LeKlW1e1uw">
+          <children xmi:type="notation:Node" xmi:id="_gbwrgKIQEem1LeKlW1e1uw" type="6001">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gbwrgaIQEem1LeKlW1e1uw" x="8" y="-9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_gbxSkKIQEem1LeKlW1e1uw" type="6002">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gbxSkaIQEem1LeKlW1e1uw" x="-20" y="9"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_gbx5oKIQEem1LeKlW1e1uw" type="6003">
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gbx5oaIQEem1LeKlW1e1uw" x="-13" y="7"/>
+          </children>
+          <styles xmi:type="notation:ConnectorStyle" xmi:id="_gbtoMaIQEem1LeKlW1e1uw"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_gbtoMqIQEem1LeKlW1e1uw" fontName="Noto Sans" fontHeight="12"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gbtoM6IQEem1LeKlW1e1uw" points="[3, -1, -182, 29]$[95, -16, -90, 14]"/>
+          <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gb1kAKIQEem1LeKlW1e1uw" id="(0.9797297297297297,0.4411764705882353)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gb1kAaIQEem1LeKlW1e1uw" id="(0.6081081081081081,0.0)"/>
+        </edges>
       </data>
     </ownedAnnotationEntries>
-    <ownedDiagramElements xmi:type="diagram:DNode" uid="_j8FRwIXvEemP6oEFwIH1kw" name="InitialA" outgoingEdges="_rKIM0IXvEemP6oEFwIH1kw" width="3" height="3" resizeKind="NSEW">
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_j8FRwIXvEemP6oEFwIH1kw" name="asdfdasfasdfasdf" outgoingEdges="_rKIM0IXvEemP6oEFwIH1kw" width="3" height="3" resizeKind="NSEW">
       <target xmi:type="stepeasy:InitialTask" href="stepeasy-1.xmi#//@tasks.0"/>
       <semanticElements xmi:type="stepeasy:InitialTask" href="stepeasy-1.xmi#//@tasks.0"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -66,7 +91,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:NodeMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@nodeMappings[name='Initial_InitialTask']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_pJwQgIXvEemP6oEFwIH1kw" incomingEdges="_rKIM0IXvEemP6oEFwIH1kw">
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_pJwQgIXvEemP6oEFwIH1kw" name="asdfadsf" outgoingEdges="_gbipEKIQEem1LeKlW1e1uw" incomingEdges="_rKIM0IXvEemP6oEFwIH1kw">
       <target xmi:type="stepeasy:AwsLambdaTask" href="stepeasy-1.xmi#//@tasks.1"/>
       <semanticElements xmi:type="stepeasy:AwsLambdaTask" href="stepeasy-1.xmi#//@tasks.1"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -83,6 +108,26 @@
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_rKKpEIXvEemP6oEFwIH1kw" size="2">
         <description xmi:type="style:EdgeStyleDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@edgeMappings[name='FlowEdge']/@style"/>
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_rKKpEYXvEemP6oEFwIH1kw" labelSize="12"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:EdgeMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@edgeMappings[name='FlowEdge']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_fvKEMKIQEem1LeKlW1e1uw" name="This is a taslk" incomingEdges="_gbipEKIQEem1LeKlW1e1uw">
+      <target xmi:type="stepeasy:AwsLambdaTask" href="stepeasy-1.xmi#//@tasks.2"/>
+      <semanticElements xmi:type="stepeasy:AwsLambdaTask" href="stepeasy-1.xmi#//@tasks.2"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_fvL5YKIQEem1LeKlW1e1uw" labelSize="12" borderSize="1" borderSizeComputationExpression="1">
+        <description xmi:type="style:FlatContainerStyleDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@containerMappings[name='Task_AwsLambdaTask']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:ContainerMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@containerMappings[name='Task_AwsLambdaTask']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_gbipEKIQEem1LeKlW1e1uw" sourceNode="_pJwQgIXvEemP6oEFwIH1kw" targetNode="_fvKEMKIQEem1LeKlW1e1uw">
+      <target xmi:type="stepeasy:Transition" href="stepeasy-1.xmi#//@transitions.1"/>
+      <semanticElements xmi:type="stepeasy:Transition" href="stepeasy-1.xmi#//@transitions.1"/>
+      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_gbjQIKIQEem1LeKlW1e1uw" size="2">
+        <description xmi:type="style:EdgeStyleDescription" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@edgeMappings[name='FlowEdge']/@style"/>
+        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_gbjQIaIQEem1LeKlW1e1uw" labelSize="12"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="../../test-outputs/sirius.stepeasy.odesign#//@ownedViewpoints[name='sirius.stepeasyGraphicalView']/@ownedRepresentations[name='stepeasymachine']/@defaultLayer/@edgeMappings[name='FlowEdge']"/>
     </ownedDiagramElements>
