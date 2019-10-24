@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -136,9 +139,14 @@ public class TestGraphicalBindingGenerator {
 		
 		Map<Object, Object> options = new HashMap<Object, Object>();
 		options.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-
+			
 		generatedModel.save(new FileOutputStream(new File(outputFile.getAbsolutePath())), options);
-
+		String cmnt= "<!-- "+originalPackage+" -->";
+		try {
+		    Files.write(Paths.get(outputFile.getAbsolutePath()), cmnt.getBytes(), StandardOpenOption.APPEND);
+		}catch (IOException e) {
+		    
+		}
 		
 		// ModelGenerator generator = new ModelGenerator(model.getAbsolutePath(), outputFile, originalPackage, generatedPackage);
 		// Resource generatedModel = generator.getGeneratedModel();

@@ -1,0 +1,40 @@
+/**
+ */
+package mindstorms_bdsl;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Return To Base</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link mindstorms_bdsl.ReturnToBase#getContainsnameReturnToBase <em>Containsname Return To Base</em>}</li>
+ * </ul>
+ *
+ * @see mindstorms_bdsl.Mindstorms_bdslPackage#getReturnToBase()
+ * @model
+ * @generated
+ */
+public interface ReturnToBase extends Action, BindingElement {
+	/**
+	 * Returns the value of the '<em><b>Containsname Return To Base</b></em>' containment reference list.
+	 * The list contents are of type {@link mindstorms_bdsl.nameReturnToBase}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Containsname Return To Base</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Containsname Return To Base</em>' containment reference list.
+	 * @see mindstorms_bdsl.Mindstorms_bdslPackage#getReturnToBase_ContainsnameReturnToBase()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<nameReturnToBase> getContainsnameReturnToBase();
+
+} // ReturnToBase

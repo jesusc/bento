@@ -9,15 +9,17 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import sequence_bdsl.BindingAttribute;
 import sequence_bdsl.BindingElement;
 import sequence_bdsl.Element;
-import sequence_bdsl.FeatureClass;
-import sequence_bdsl.IntemediateElement;
+import sequence_bdsl.IntermediateElement;
 import sequence_bdsl.MetamodelElement;
 import sequence_bdsl.MetamodelElementFeature;
+import sequence_bdsl.NoneElement;
 import sequence_bdsl.SequenceModel;
 import sequence_bdsl.Sequence_bdslFactory;
 import sequence_bdsl.Sequence_bdslPackage;
+import sequence_bdsl.VirtualAttribute;
 import sequence_bdsl.valueElement;
 
 /**
@@ -53,7 +55,21 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass noneElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass bindingElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intermediateElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,13 +83,6 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass intemediateElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass metamodelElementFeatureEClass = null;
 
 	/**
@@ -81,7 +90,14 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass featureClassEClass = null;
+	private EClass bindingAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualAttributeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -167,7 +183,7 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSequenceModel_ContainsMetamodelElement() {
+	public EReference getSequenceModel_ContainsNoneElement() {
 		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -176,7 +192,7 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSequenceModel_ContainsIntermediateElement() {
+	public EReference getSequenceModel_ContainsBindingElement() {
 		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -185,7 +201,7 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSequenceModel_ContainsFeatureClass() {
+	public EReference getSequenceModel_ContainsIntermediateElement() {
 		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -194,8 +210,35 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSequenceModel_ContainsMetamodelElementFeature() {
+	public EReference getSequenceModel_ContainsMetamodelElement() {
 		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSequenceModel_ContainsMetamodelElementFeature() {
+		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSequenceModel_ContainsBindingAttribute() {
+		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSequenceModel_ContainsVirtualAttribute() {
+		return (EReference)sequenceModelEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -257,8 +300,53 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNoneElement() {
+		return noneElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBindingElement() {
 		return bindingElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBindingElement_NoneElement() {
+		return (EReference)bindingElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntermediateElement() {
+		return intermediateElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntermediateElement_BindingElement() {
+		return (EReference)intermediateElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIntermediateElement_MetamodelElement() {
+		return (EReference)intermediateElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -275,8 +363,8 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetamodelElement_Name() {
-		return (EAttribute)metamodelElementEClass.getEStructuralFeatures().get(0);
+	public EReference getMetamodelElement_VirtualAttribute() {
+		return (EReference)metamodelElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -293,26 +381,8 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getIntemediateElement() {
-		return intemediateElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIntemediateElement_BindingElement() {
-		return (EReference)intemediateElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIntemediateElement_MetamodElelement() {
-		return (EReference)intemediateElementEClass.getEStructuralFeatures().get(1);
+	public EAttribute getMetamodelElement_Name() {
+		return (EAttribute)metamodelElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -329,17 +399,8 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMetamodelElementFeature_Name() {
-		return (EAttribute)metamodelElementFeatureEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getMetamodelElementFeature_FeatureClass() {
-		return (EReference)metamodelElementFeatureEClass.getEStructuralFeatures().get(1);
+		return (EReference)metamodelElementFeatureEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -347,8 +408,53 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFeatureClass() {
-		return featureClassEClass;
+	public EAttribute getMetamodelElementFeature_Name() {
+		return (EAttribute)metamodelElementFeatureEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBindingAttribute() {
+		return bindingAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualAttribute() {
+		return virtualAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualAttribute_To_virtualAttribute() {
+		return (EReference)virtualAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVirtualAttribute_Name() {
+		return (EAttribute)virtualAttributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVirtualAttribute_Expression() {
+		return (EAttribute)virtualAttributeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -381,10 +487,13 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 		// Create classes and their features
 		sequenceModelEClass = createEClass(SEQUENCE_MODEL);
 		createEReference(sequenceModelEClass, SEQUENCE_MODEL__ELEMENTS);
-		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_METAMODEL_ELEMENT);
+		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_NONE_ELEMENT);
+		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_BINDING_ELEMENT);
 		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_INTERMEDIATE_ELEMENT);
-		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_FEATURE_CLASS);
+		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_METAMODEL_ELEMENT);
 		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_METAMODEL_ELEMENT_FEATURE);
+		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_BINDING_ATTRIBUTE);
+		createEReference(sequenceModelEClass, SEQUENCE_MODEL__CONTAINS_VIRTUAL_ATTRIBUTE);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__VALUE);
@@ -394,21 +503,30 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 		valueElementEClass = createEClass(VALUE_ELEMENT);
 		createEAttribute(valueElementEClass, VALUE_ELEMENT__VALUE);
 
+		noneElementEClass = createEClass(NONE_ELEMENT);
+
 		bindingElementEClass = createEClass(BINDING_ELEMENT);
+		createEReference(bindingElementEClass, BINDING_ELEMENT__NONE_ELEMENT);
+
+		intermediateElementEClass = createEClass(INTERMEDIATE_ELEMENT);
+		createEReference(intermediateElementEClass, INTERMEDIATE_ELEMENT__BINDING_ELEMENT);
+		createEReference(intermediateElementEClass, INTERMEDIATE_ELEMENT__METAMODEL_ELEMENT);
 
 		metamodelElementEClass = createEClass(METAMODEL_ELEMENT);
-		createEAttribute(metamodelElementEClass, METAMODEL_ELEMENT__NAME);
+		createEReference(metamodelElementEClass, METAMODEL_ELEMENT__VIRTUAL_ATTRIBUTE);
 		createEReference(metamodelElementEClass, METAMODEL_ELEMENT__METAMODEL_ELEMENT_FEATURE);
-
-		intemediateElementEClass = createEClass(INTEMEDIATE_ELEMENT);
-		createEReference(intemediateElementEClass, INTEMEDIATE_ELEMENT__BINDING_ELEMENT);
-		createEReference(intemediateElementEClass, INTEMEDIATE_ELEMENT__METAMOD_ELELEMENT);
+		createEAttribute(metamodelElementEClass, METAMODEL_ELEMENT__NAME);
 
 		metamodelElementFeatureEClass = createEClass(METAMODEL_ELEMENT_FEATURE);
-		createEAttribute(metamodelElementFeatureEClass, METAMODEL_ELEMENT_FEATURE__NAME);
 		createEReference(metamodelElementFeatureEClass, METAMODEL_ELEMENT_FEATURE__FEATURE_CLASS);
+		createEAttribute(metamodelElementFeatureEClass, METAMODEL_ELEMENT_FEATURE__NAME);
 
-		featureClassEClass = createEClass(FEATURE_CLASS);
+		bindingAttributeEClass = createEClass(BINDING_ATTRIBUTE);
+
+		virtualAttributeEClass = createEClass(VIRTUAL_ATTRIBUTE);
+		createEReference(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__TO_VIRTUAL_ATTRIBUTE);
+		createEAttribute(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__NAME);
+		createEAttribute(virtualAttributeEClass, VIRTUAL_ATTRIBUTE__EXPRESSION);
 	}
 
 	/**
@@ -440,39 +558,51 @@ public class Sequence_bdslPackageImpl extends EPackageImpl implements Sequence_b
 
 		// Add supertypes to classes
 		elementEClass.getESuperTypes().add(this.getBindingElement());
-		valueElementEClass.getESuperTypes().add(this.getFeatureClass());
+		valueElementEClass.getESuperTypes().add(this.getBindingAttribute());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(sequenceModelEClass, SequenceModel.class, "SequenceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSequenceModel_Elements(), this.getElement(), null, "elements", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSequenceModel_ContainsNoneElement(), this.getNoneElement(), null, "containsNoneElement", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSequenceModel_ContainsBindingElement(), this.getBindingElement(), null, "containsBindingElement", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSequenceModel_ContainsIntermediateElement(), this.getIntermediateElement(), null, "containsIntermediateElement", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSequenceModel_ContainsMetamodelElement(), this.getMetamodelElement(), null, "containsMetamodelElement", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSequenceModel_ContainsIntermediateElement(), this.getIntemediateElement(), null, "containsIntermediateElement", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSequenceModel_ContainsFeatureClass(), this.getFeatureClass(), null, "containsFeatureClass", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSequenceModel_ContainsMetamodelElementFeature(), this.getFeatureClass(), null, "containsMetamodelElementFeature", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSequenceModel_ContainsMetamodelElementFeature(), this.getMetamodelElementFeature(), null, "containsMetamodelElementFeature", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSequenceModel_ContainsBindingAttribute(), this.getBindingAttribute(), null, "containsBindingAttribute", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSequenceModel_ContainsVirtualAttribute(), this.getVirtualAttribute(), null, "containsVirtualAttribute", null, 0, -1, SequenceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_Value(), ecorePackage.getEString(), "value", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getElement_Next(), this.getElement(), null, "next", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getElement_ContainsvalueElement(), this.getvalueElement(), null, "containsvalueElement", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getElement_ContainsvalueElement(), this.getvalueElement(), null, "containsvalueElement", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueElementEClass, valueElement.class, "valueElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getvalueElement_Value(), ecorePackage.getEString(), "value", null, 0, 1, valueElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(noneElementEClass, NoneElement.class, "NoneElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(bindingElementEClass, BindingElement.class, "BindingElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBindingElement_NoneElement(), this.getNoneElement(), null, "noneElement", null, 0, -1, BindingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(intermediateElementEClass, IntermediateElement.class, "IntermediateElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIntermediateElement_BindingElement(), this.getBindingElement(), null, "bindingElement", null, 0, 1, IntermediateElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIntermediateElement_MetamodelElement(), this.getMetamodelElement(), null, "metamodelElement", null, 0, -1, IntermediateElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metamodelElementEClass, MetamodelElement.class, "MetamodelElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMetamodelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, MetamodelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetamodelElement_VirtualAttribute(), this.getVirtualAttribute(), null, "virtualAttribute", null, 0, -1, MetamodelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetamodelElement_MetamodelElementFeature(), this.getMetamodelElementFeature(), null, "metamodelElementFeature", null, 0, -1, MetamodelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(intemediateElementEClass, IntemediateElement.class, "IntemediateElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIntemediateElement_BindingElement(), this.getBindingElement(), null, "bindingElement", null, 1, 1, IntemediateElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntemediateElement_MetamodElelement(), this.getMetamodelElement(), null, "metamodElelement", null, 1, 1, IntemediateElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetamodelElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, MetamodelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metamodelElementFeatureEClass, MetamodelElementFeature.class, "MetamodelElementFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetamodelElementFeature_FeatureClass(), this.getBindingAttribute(), null, "featureClass", null, 0, -1, MetamodelElementFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetamodelElementFeature_Name(), ecorePackage.getEString(), "name", null, 0, 1, MetamodelElementFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetamodelElementFeature_FeatureClass(), this.getFeatureClass(), null, "featureClass", null, 0, -1, MetamodelElementFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(featureClassEClass, FeatureClass.class, "FeatureClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(bindingAttributeEClass, BindingAttribute.class, "BindingAttribute", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(virtualAttributeEClass, VirtualAttribute.class, "VirtualAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVirtualAttribute_To_virtualAttribute(), this.getBindingAttribute(), null, "to_virtualAttribute", null, 0, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVirtualAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVirtualAttribute_Expression(), ecorePackage.getEString(), "Expression", null, 0, 1, VirtualAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

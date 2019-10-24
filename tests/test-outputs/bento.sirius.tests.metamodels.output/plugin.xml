@@ -23,10 +23,26 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated metamodel_bdsl -->
+      <package
+            uri="http://www.example.org/metamodel_bdsl"
+            class="metamodel_bdsl.Metamodel_bdslPackage"
+            genModel="models/metamodel_bdsl.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated mindstorms_bdsl -->
+      <package
+            uri="http://www.obeo.fr/dsl/mindstorms/1.0.0_bdsl"
+            class="mindstorms_bdsl.Mindstorms_bdslPackage"
+            genModel="models/mindstorms_bdsl.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated workflow_bdsl -->
       <package
             uri="http://bento/flow_concept_bdsl"
-            class="bento.sirius.tests.metamodels.output.workflow_bdsl.Workflow_bdslPackage"
+            class="workflow_bdsl.Workflow_bdslPackage"
             genModel="models/workflow_bdsl.genmodel"/>
    </extension>
 

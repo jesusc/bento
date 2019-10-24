@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamodel_bdsl:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:metamodel_bdsl="http://www.example.org/metamodel_bdsl" xsi:schemaLocation="http://www.example.org/metamodel_bdsl models/metamodel_bdsl.ecore"/>

@@ -6,51 +6,47 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 
 public class BindingTools {
 
-	
-   
-     
-	
-	
 	/**
 	 * @param name
 	 * @param isabstract
 	 * @param epackage
 	 * @return
 	 */
-	public static EClass createEClass(String name, Boolean isabstract, EPackage epackage,EClass container) {
+	public static EClass createEClass(String name, Boolean isabstract, EPackage epackage, EClass container) {
 		EClass eclass = EcoreFactory.eINSTANCE.createEClass();
 		eclass.setName(name);
 		epackage.getEClassifiers().add(eclass);
 		eclass.setAbstract(isabstract);
-		
-		
+
 		EReference ereference = EcoreFactory.eINSTANCE.createEReference();
 		ereference.setContainment(true);
 		ereference.setEType(eclass);
-		ereference.setName("contains"+eclass.getName());
+		ereference.setName("contains" + eclass.getName());
 		ereference.setUpperBound(-1);
 		container.getEReferences().add(ereference);
-	
-		
+
 		return eclass;
 
 	}
-	
-	
-	public static EReference createEReference(String name , Boolean isContainement, EClass etype, int upperbound, int lowerbound, EClass eclass) {
-		
-		
+
+	public static EReference createEReference(String name, Boolean isContainement, EClass etype, int upperbound,
+			int lowerbound, EClass eclass) {
+
 		EReference ereference = EcoreFactory.eINSTANCE.createEReference();
 		ereference.setContainment(isContainement);
 		ereference.setEType(etype);
@@ -58,11 +54,9 @@ public class BindingTools {
 		ereference.setUpperBound(upperbound);
 		eclass.getEReferences().add(ereference);
 		return ereference;
-		
+
 	}
 
-	
-	
 	/**
 	 * @param name
 	 * @param datatype
@@ -89,8 +83,6 @@ public class BindingTools {
 		return eattribute;
 	}
 
-	
-	
 	/**
 	 * @param value
 	 * @return
@@ -164,6 +156,21 @@ public class BindingTools {
 
 	}
 
+	public static EPackage getEPackage(Resource resource) {
+		EPackage ep = EcoreFactory.eINSTANCE.createEPackage();
+		TreeIterator<EObject> contentSource = resource.getAllContents();
+
+		while (contentSource.hasNext()) {
+			EObject obj = contentSource.next();
+			if (obj instanceof EPackage) {
+				ep = (EPackage) obj;
+				break;
+			}
+		}
+
+		return ep;
+	}
+
 	public static boolean isContainerClass(EClass eclass) {
 		boolean isContainer = false;
 		EList<EReference> list = eclass.getEAllContainments();
@@ -178,6 +185,19 @@ public class BindingTools {
 		}
 
 		return isContainer;
+	}
+
+	public static List<EStructuralFeature> getFeaturesItermediateElement(EPackage ep) {
+		EList<EClassifier> listEc = ep.getEClassifiers();
+		List<EStructuralFeature> listEstructural = new ArrayList<>();
+		for (EClassifier ec : listEc) {
+			if (ec.getName().equals("IntermediateElement")) {
+				EClass eclass = (EClass) ec;
+				listEstructural = eclass.getEAllStructuralFeatures();
+			}
+		}
+		return listEstructural;
+		
 	}
 
 }

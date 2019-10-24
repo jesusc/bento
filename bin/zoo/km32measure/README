@@ -1,0 +1,37 @@
+
+== Experiment
+
+- Change KM3.ecore to include only one top-level package... (we do now support other organization yet)
+- Change KM3.ecore to have a URI: amma/km3/modified
+
+- Analysis (First try)
+
+  Error: No operation PARN Classifier : 345:11-345:22
+  Fix: Line 628, make helper context be Classifier instead of Class (TODO: Raise a warning instead of error)
+  
+  Error: No operation CHIN Classifier : 357:2-357:13
+  Fix: Line 612, make helper context be Classifier instead of Class (TODO: Raise a warning instead of error)
+  
+  Error:  No operation NRN Classifier : 377:2-377:12
+  Fix: Line 588, make helper context be Classifier instead of Class (TODO: Raise a warning instead of error)
+
+  Error: No operation NAN Classifier : 377:15-377:25
+  Fix: Line 564, make helper context be Classifier instead of Class (TODO: Raise a warning instead of error)
+  Note: This error is particularly stupid, because SIZE2() is defined over Classifier, and it calls NRN and NAN
+        for self, expecting it to be a Class!!
+  	
+  		helper context KM3!Classifier
+			def : SIZE2() : Integer = self.NRN() + self.NAN();
+			
+  Error: No operation newAttributes Class : 393:5-393:25
+  DO NOT KNOW WHY?? ==> Now I know ==> It is defined as a helper, not as an operation (with ())
+
+- Analysis (Second try)
+  The analyser has been improved to "infer" the intended operation, so that there is no need to change anything
+  except the newAttributes.
+  
+  The newAttributes issue could have spotted by the analyser, but looking for helpers with the same name
+  as the called operation (at least the user can solve this tricky issue rapidly).
+  
+  Error: No operation newAttributes Class : 393:5-393:25
+  Fix: Line 421, changed newAttributes => newAttributes()

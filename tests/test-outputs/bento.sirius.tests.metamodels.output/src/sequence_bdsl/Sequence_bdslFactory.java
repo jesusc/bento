@@ -49,6 +49,24 @@ public interface Sequence_bdslFactory extends EFactory {
 	valueElement createvalueElement();
 
 	/**
+	 * Returns a new object of class '<em>None Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>None Element</em>'.
+	 * @generated
+	 */
+	NoneElement createNoneElement();
+
+	/**
+	 * Returns a new object of class '<em>Intermediate Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Intermediate Element</em>'.
+	 * @generated
+	 */
+	IntermediateElement createIntermediateElement();
+
+	/**
 	 * Returns a new object of class '<em>Metamodel Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,15 +76,6 @@ public interface Sequence_bdslFactory extends EFactory {
 	MetamodelElement createMetamodelElement();
 
 	/**
-	 * Returns a new object of class '<em>Intemediate Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Intemediate Element</em>'.
-	 * @generated
-	 */
-	IntemediateElement createIntemediateElement();
-
-	/**
 	 * Returns a new object of class '<em>Metamodel Element Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,6 +83,15 @@ public interface Sequence_bdslFactory extends EFactory {
 	 * @generated
 	 */
 	MetamodelElementFeature createMetamodelElementFeature();
+
+	/**
+	 * Returns a new object of class '<em>Virtual Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Attribute</em>'.
+	 * @generated
+	 */
+	VirtualAttribute createVirtualAttribute();
 
 	/**
 	 * Returns the package supported by this factory.

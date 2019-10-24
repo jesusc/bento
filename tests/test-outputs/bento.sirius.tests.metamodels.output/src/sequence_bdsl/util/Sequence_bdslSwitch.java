@@ -82,7 +82,13 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 			case Sequence_bdslPackage.VALUE_ELEMENT: {
 				valueElement valueElement = (valueElement)theEObject;
 				T result = casevalueElement(valueElement);
-				if (result == null) result = caseFeatureClass(valueElement);
+				if (result == null) result = caseBindingAttribute(valueElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Sequence_bdslPackage.NONE_ELEMENT: {
+				NoneElement noneElement = (NoneElement)theEObject;
+				T result = caseNoneElement(noneElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -92,15 +98,15 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Sequence_bdslPackage.METAMODEL_ELEMENT: {
-				MetamodelElement metamodelElement = (MetamodelElement)theEObject;
-				T result = caseMetamodelElement(metamodelElement);
+			case Sequence_bdslPackage.INTERMEDIATE_ELEMENT: {
+				IntermediateElement intermediateElement = (IntermediateElement)theEObject;
+				T result = caseIntermediateElement(intermediateElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Sequence_bdslPackage.INTEMEDIATE_ELEMENT: {
-				IntemediateElement intemediateElement = (IntemediateElement)theEObject;
-				T result = caseIntemediateElement(intemediateElement);
+			case Sequence_bdslPackage.METAMODEL_ELEMENT: {
+				MetamodelElement metamodelElement = (MetamodelElement)theEObject;
+				T result = caseMetamodelElement(metamodelElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,9 +116,15 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Sequence_bdslPackage.FEATURE_CLASS: {
-				FeatureClass featureClass = (FeatureClass)theEObject;
-				T result = caseFeatureClass(featureClass);
+			case Sequence_bdslPackage.BINDING_ATTRIBUTE: {
+				BindingAttribute bindingAttribute = (BindingAttribute)theEObject;
+				T result = caseBindingAttribute(bindingAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Sequence_bdslPackage.VIRTUAL_ATTRIBUTE: {
+				VirtualAttribute virtualAttribute = (VirtualAttribute)theEObject;
+				T result = caseVirtualAttribute(virtualAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -166,6 +178,21 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>None Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>None Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNoneElement(NoneElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Binding Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -177,6 +204,21 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBindingElement(BindingElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Intermediate Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Intermediate Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntermediateElement(IntermediateElement object) {
 		return null;
 	}
 
@@ -196,21 +238,6 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Intemediate Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Intemediate Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntemediateElement(IntemediateElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Metamodel Element Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -226,17 +253,32 @@ public class Sequence_bdslSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Class</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Binding Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Class</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Binding Attribute</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeatureClass(FeatureClass object) {
+	public T caseBindingAttribute(BindingAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Virtual Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Virtual Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVirtualAttribute(VirtualAttribute object) {
 		return null;
 	}
 

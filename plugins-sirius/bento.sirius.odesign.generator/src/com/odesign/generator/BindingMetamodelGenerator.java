@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -23,7 +25,7 @@ import com.odesign.generator.tools.BindingTools;
 import com.odesign.generator.values.Datatypes;
 
 public class BindingMetamodelGenerator {
-	
+
 	private EClass virtualAttribute;
 	private EClass noneElement;
 	private EPackage ep;
@@ -33,13 +35,20 @@ public class BindingMetamodelGenerator {
 	private EClass metamodelElement;
 	private EClass metamodelElementFeature;
 	private EClass bindingElement;
+	private EClass siriusTag;
 	private List<EClass> oriClassifiers = new ArrayList<EClass>();
+	private List<EClass> oriClassifiers1 = new ArrayList<EClass>();
 	private HashMap<EClass, List<EClass>> newClassifiers = new HashMap<EClass, List<EClass>>();
+	private HashMap<EClass, List<EClass>> tagsEReferences = new HashMap<EClass, List<EClass>>();
 	private List<EClass> newEClass = new ArrayList<>();
 	private File generatedFile;
 
 	public HashMap<EClass, List<EClass>> getNewClassifiers() {
 		return newClassifiers;
+	}
+
+	public HashMap<EClass, List<EClass>> getTagsEReferences() {
+		return tagsEReferences;
 	}
 
 	public void setNewClassifiers(HashMap<EClass, List<EClass>> newClassifiers) {
@@ -115,15 +124,15 @@ public class BindingMetamodelGenerator {
 	}
 
 	public void createFeatureCLasses() {
-		if (this.root==null) {
-			this.root=(EClass) this.ep.getEClassifiers().get(0);
+		if (this.root == null) {
+			this.root = (EClass) this.ep.getEClassifiers().get(0);
 		}
-		for (EClassifier eclassifier : this.ep.getEClassifiers()) {
-			if ((eclassifier instanceof EClass) && !((EClass) eclassifier).getName().isEmpty()
-					&& !((EClass) eclassifier).isAbstract()
-					&& !((EClass) eclassifier).getName().equals(this.root.getName()))
-				this.oriClassifiers.add((EClass) eclassifier);
-		}
+//		for (EClassifier eclassifier : this.ep.getEClassifiers()) {
+//			if ((eclassifier instanceof EClass) && !((EClass) eclassifier).getName().isEmpty()
+//					&& !((EClass) eclassifier).isAbstract()
+//					&& !((EClass) eclassifier).getName().equals(this.root.getName()))
+//				this.oriClassifiers.add((EClass) eclassifier);
+//		}
 
 		for (EClass eklass : this.oriClassifiers)
 
@@ -148,6 +157,60 @@ public class BindingMetamodelGenerator {
 				newClassifiers.put(eklass, listFeatures);
 
 			}
+
+	}
+
+	public void createEReferencesClasses() {
+		if (this.root == null) {
+			this.root = (EClass) this.ep.getEClassifiers().get(0);
+		}
+		for (EClassifier eclassifier : this.ep.getEClassifiers()) {
+			if ((eclassifier instanceof EClass) && !((EClass) eclassifier).getName().isEmpty()
+					&& !((EClass) eclassifier).isAbstract()
+					&& !((EClass) eclassifier).getName().equals(this.root.getName()))
+				this.oriClassifiers1.add((EClass) eclassifier);
+		}
+		
+		for (EClassifier eclassifier : this.ep.getEClassifiers()) {
+			if ((eclassifier instanceof EClass) && !((EClass) eclassifier).getName().isEmpty()
+					&& !((EClass) eclassifier).isAbstract()
+					&& !((EClass) eclassifier).getName().equals(this.root.getName()))
+				this.oriClassifiers.add((EClass) eclassifier);
+		}
+		int j = 0;
+		for (EClass eklass : this.oriClassifiers1)
+			
+		if (!eklass.isAbstract()) {
+			j = j + 1;
+			List<EClass> listEReferences = new ArrayList<EClass>();
+			listEReferences.clear();
+			EList<EReference> referencesList = (eklass).getEAllReferences();
+			int i=0;
+			for (EReference ereference : referencesList) {
+				i=i+1;
+
+				EClass klass = EcoreFactory.eINSTANCE.createEClass();
+				klass.setName(ereference.getName() + (eklass).getName()+j+i);
+				ep.getEClassifiers().add(klass);
+				klass.setAbstract(false);
+
+				EReference eref = EcoreFactory.eINSTANCE.createEReference();
+				eref.setContainment(true);
+				eref.setEType(klass);
+				eref.setName("eref_" + klass.getName());
+				eref.setUpperBound(1);
+				eklass.getEReferences().add(eref);
+
+				this.newEClass.add(klass);
+
+				listEReferences.add(klass);
+
+				BindingTools.createEAttribute("name", Datatypes.get_string(), klass);
+
+			}
+			tagsEReferences.put(eklass, listEReferences);
+
+		}
 
 	}
 
@@ -203,29 +266,36 @@ public class BindingMetamodelGenerator {
 		this.metamodelElementFeature = BindingTools.createEClass("MetamodelElementFeature", false, this.ep, this.root);
 		this.FeatureCLass = BindingTools.createEClass("BindingAttribute", true, this.ep, this.root);
 		this.virtualAttribute = BindingTools.createEClass("VirtualAttribute", false, this.ep, this.root);
-	
+		this.siriusTag = BindingTools.createEClass("SiriusTag", false, this.ep, this.bindingElement);
+
 		for (EClass eclass : this.newEClass) {
 			eclass.getESuperTypes().add(this.FeatureCLass);
-		}	
-		
+		}
+
 		BindingTools.createEReference("virtualAttribute", true, this.virtualAttribute, -1, 0, this.metamodelElement);
 		BindingTools.createEReference("noneElement", false, this.noneElement, -1, 0, this.bindingElement);
 		BindingTools.createEReference("featureClass", false, this.FeatureCLass, -1, 0, this.metamodelElementFeature);
-		BindingTools.createEReference("metamodelElementFeature", true, this.metamodelElementFeature, -1, 0,this.metamodelElement);
+		BindingTools.createEReference("metamodelElementFeature", true, this.metamodelElementFeature, -1, 0,
+				this.metamodelElement);
 		BindingTools.createEReference("bindingElement", false, this.bindingElement, 1, 1, this.intermediateElement);
-		BindingTools.createEReference("metamodelElement", false, this.metamodelElement, -1, 0,this.intermediateElement);
+		BindingTools.createEReference("metamodelElement", false, this.metamodelElement, -1, 0,
+				this.intermediateElement);
 		BindingTools.createEReference("to_virtualAttribute", false, this.FeatureCLass, 1, 0, this.virtualAttribute);
-		
-		
+		//BindingTools.createEReference("siriusTag", true, this.siriusTag, 1, 0, this.bindingElement);
+
 		BindingTools.createEAttribute("name", Datatypes.get_string(), this.metamodelElement);
 		BindingTools.createEAttribute("name", Datatypes.get_string(), this.metamodelElementFeature);
 		BindingTools.createEAttribute("name", Datatypes.get_string(), this.virtualAttribute);
 		BindingTools.createEAttribute("Expression", Datatypes.get_string(), this.virtualAttribute);
-}
+		BindingTools.createEAttribute("tag", Datatypes.get_string(), this.siriusTag);
 
-	
+		EAttribute sourceMetamodelTag = BindingTools.createEAttribute("SourceMM", Datatypes.get_string(), this.root);
+		sourceMetamodelTag.setDefaultValueLiteral(ep.getNsURI());
+
+	}
+
 	public void save(File file) {
-		System.out.println("Savingthe new metamodel ...");
+		System.out.println("Saving the new metamodel ...");
 		try {
 
 			ResourceSet rs = new ResourceSetImpl();

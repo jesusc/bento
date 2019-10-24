@@ -19,7 +19,7 @@ package sequence_bdsl;
  * @model
  * @generated
  */
-public interface valueElement extends FeatureClass {
+public interface valueElement extends BindingAttribute {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

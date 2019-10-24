@@ -8,7 +8,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ 
 	TestSiriusAdapter.class, 
 	TestSiriusValidity.class,
-	TestGraphicalBindingGenerator.class })
+	TestGraphicalBindingGenerator.class,
+	TestGbindGenerator.class
+	})
 public class AllSiriusTests {
 
 }

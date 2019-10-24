@@ -13,9 +13,15 @@ Export-Package: scenes_bdsl,
  sequence_bdsl,
  sequence_bdsl.impl,
  sequence_bdsl.util,
- bento.sirius.tests.metamodels.output.workflow_bdsl,
- bento.sirius.tests.metamodels.output.workflow_bdsl.impl,
- bento.sirius.tests.metamodels.output.workflow_bdsl.util
+ metamodel_bdsl,
+ metamodel_bdsl.impl,
+ metamodel_bdsl.util,
+ mindstorms_bdsl,
+ mindstorms_bdsl.impl,
+ mindstorms_bdsl.util,
+ workflow_bdsl,
+ workflow_bdsl.impl,
+ workflow_bdsl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

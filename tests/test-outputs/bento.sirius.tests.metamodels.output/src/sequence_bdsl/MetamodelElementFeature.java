@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link sequence_bdsl.MetamodelElementFeature#getName <em>Name</em>}</li>
  *   <li>{@link sequence_bdsl.MetamodelElementFeature#getFeatureClass <em>Feature Class</em>}</li>
+ *   <li>{@link sequence_bdsl.MetamodelElementFeature#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see sequence_bdsl.Sequence_bdslPackage#getMetamodelElementFeature()
@@ -24,6 +24,22 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface MetamodelElementFeature extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Feature Class</b></em>' reference list.
+	 * The list contents are of type {@link sequence_bdsl.BindingAttribute}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Feature Class</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Feature Class</em>' reference list.
+	 * @see sequence_bdsl.Sequence_bdslPackage#getMetamodelElementFeature_FeatureClass()
+	 * @model
+	 * @generated
+	 */
+	EList<BindingAttribute> getFeatureClass();
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -49,21 +65,5 @@ public interface MetamodelElementFeature extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Feature Class</b></em>' reference list.
-	 * The list contents are of type {@link sequence_bdsl.FeatureClass}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Feature Class</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Feature Class</em>' reference list.
-	 * @see sequence_bdsl.Sequence_bdslPackage#getMetamodelElementFeature_FeatureClass()
-	 * @model
-	 * @generated
-	 */
-	EList<FeatureClass> getFeatureClass();
 
 } // MetamodelElementFeature

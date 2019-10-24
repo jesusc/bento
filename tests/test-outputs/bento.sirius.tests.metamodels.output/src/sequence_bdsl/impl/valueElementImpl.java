@@ -24,7 +24,7 @@ import sequence_bdsl.valueElement;
  *
  * @generated
  */
-public class valueElementImpl extends FeatureClassImpl implements valueElement {
+public class valueElementImpl extends BindingAttributeImpl implements valueElement {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -59,9 +59,11 @@ public class Sequence_bdslFactoryImpl extends EFactoryImpl implements Sequence_b
 			case Sequence_bdslPackage.SEQUENCE_MODEL: return createSequenceModel();
 			case Sequence_bdslPackage.ELEMENT: return createElement();
 			case Sequence_bdslPackage.VALUE_ELEMENT: return createvalueElement();
+			case Sequence_bdslPackage.NONE_ELEMENT: return createNoneElement();
+			case Sequence_bdslPackage.INTERMEDIATE_ELEMENT: return createIntermediateElement();
 			case Sequence_bdslPackage.METAMODEL_ELEMENT: return createMetamodelElement();
-			case Sequence_bdslPackage.INTEMEDIATE_ELEMENT: return createIntemediateElement();
 			case Sequence_bdslPackage.METAMODEL_ELEMENT_FEATURE: return createMetamodelElementFeature();
+			case Sequence_bdslPackage.VIRTUAL_ATTRIBUTE: return createVirtualAttribute();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -102,6 +104,26 @@ public class Sequence_bdslFactoryImpl extends EFactoryImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NoneElement createNoneElement() {
+		NoneElementImpl noneElement = new NoneElementImpl();
+		return noneElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntermediateElement createIntermediateElement() {
+		IntermediateElementImpl intermediateElement = new IntermediateElementImpl();
+		return intermediateElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MetamodelElement createMetamodelElement() {
 		MetamodelElementImpl metamodelElement = new MetamodelElementImpl();
 		return metamodelElement;
@@ -112,9 +134,9 @@ public class Sequence_bdslFactoryImpl extends EFactoryImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntemediateElement createIntemediateElement() {
-		IntemediateElementImpl intemediateElement = new IntemediateElementImpl();
-		return intemediateElement;
+	public MetamodelElementFeature createMetamodelElementFeature() {
+		MetamodelElementFeatureImpl metamodelElementFeature = new MetamodelElementFeatureImpl();
+		return metamodelElementFeature;
 	}
 
 	/**
@@ -122,9 +144,9 @@ public class Sequence_bdslFactoryImpl extends EFactoryImpl implements Sequence_b
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetamodelElementFeature createMetamodelElementFeature() {
-		MetamodelElementFeatureImpl metamodelElementFeature = new MetamodelElementFeatureImpl();
-		return metamodelElementFeature;
+	public VirtualAttribute createVirtualAttribute() {
+		VirtualAttributeImpl virtualAttribute = new VirtualAttributeImpl();
+		return virtualAttribute;
 	}
 
 	/**

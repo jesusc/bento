@@ -27,6 +27,7 @@ import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeRouting;
 import org.eclipse.sirius.diagram.LabelPosition;
 import org.eclipse.sirius.diagram.LineStyle;
+import org.eclipse.sirius.diagram.description.AdditionalLayer;
 import org.eclipse.sirius.diagram.description.ContainerMapping;
 import org.eclipse.sirius.diagram.description.DescriptionFactory;
 import org.eclipse.sirius.diagram.description.DiagramDescription;
@@ -37,6 +38,7 @@ import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.description.style.CenterLabelStyleDescription;
 import org.eclipse.sirius.diagram.description.style.EdgeStyleDescription;
 import org.eclipse.sirius.diagram.description.style.FlatContainerStyleDescription;
+import org.eclipse.sirius.diagram.description.style.LozengeNodeDescription;
 import org.eclipse.sirius.diagram.description.style.SquareDescription;
 import org.eclipse.sirius.diagram.description.style.StyleFactory;
 import org.eclipse.sirius.diagram.description.style.WorkspaceImageDescription;
@@ -76,16 +78,16 @@ public class OdesignGenerator {
 	private Resource resource;
 	private EPackage epackage;
 	private DiagramDescription diagramDescription;
-	private EList<RepresentationDescription> diagramsList;
+	private List<DiagramDescription> diagramsList=new ArrayList<>();
 	private List<NodeMapping> nmlist = new ArrayList<>();
 	private Group group;
 	private Viewpoint viewPoint;
 	private File generatedFile;
 	private List<EdgeMapping> emlist = new ArrayList<>();
 
-	private EList<EdgeMapping> oroginalEdges;
-	private EList<NodeMapping> oroginalNodes;
-	private EList<ContainerMapping> oroginalContainers;
+	private EList<EdgeMapping> originalEdges;
+	private EList<NodeMapping> originalNodes;
+	private EList<ContainerMapping> originalContainers;
 	private String originalPackageName;
 	private String targetPackageName;
 
@@ -110,13 +112,72 @@ public class OdesignGenerator {
 	public void setDiagramDescription(DiagramDescription diagramDescription) {
 		this.diagramDescription = diagramDescription;
 	}
+	
+	
+
+	public List<DiagramDescription> getDiagramsList() {
+		return diagramsList;
+	}
+
+	public void setDiagramsList(EList<DiagramDescription> diagramsList) {
+		this.diagramsList = diagramsList;
+	}
+
+	public Viewpoint getViewPoint() {
+		return viewPoint;
+	}
+
+	public void setViewPoint(Viewpoint viewPoint) {
+		this.viewPoint = viewPoint;
+	}
+
+	public EList<EdgeMapping> getOriginalEdges() {
+		return originalEdges;
+	}
+
+	public void setOriginalEdges(EList<EdgeMapping> originalEdges) {
+		this.originalEdges = originalEdges;
+	}
+
+	public EList<NodeMapping> getOriginalNodes() {
+		return originalNodes;
+	}
+
+	public void setOriginalNodes(EList<NodeMapping> originalNodes) {
+		this.originalNodes = originalNodes;
+	}
+
+	public EList<ContainerMapping> getOriginalContainers() {
+		return originalContainers;
+	}
+
+	public void setOriginalContainers(EList<ContainerMapping> originalContainers) {
+		this.originalContainers = originalContainers;
+	}
+
+	public String getOriginalPackageName() {
+		return originalPackageName;
+	}
+
+	public void setOriginalPackageName(String originalPackageName) {
+		this.originalPackageName = originalPackageName;
+	}
+
+	public void setEpackage(EPackage epackage) {
+		this.epackage = epackage;
+	}
+
+	public void setGeneratedFile(File generatedFile) {
+		this.generatedFile = generatedFile;
+	}
 
 	public OdesignGenerator(String modelURI, File file) {
 		super();
 
 		ResourceSet rs = new ResourceSetImpl();
+		try {
 		this.resource = rs.getResource(URI.createFileURI(modelURI), true);
-
+		} catch(Exception e) {e.printStackTrace();}
 		TreeIterator<EObject> content = resource.getAllContents();
 
 		while (content.hasNext()) {
@@ -125,14 +186,14 @@ public class OdesignGenerator {
 			if (obj instanceof DiagramDescription) {
 				this.diagramDescription = (DiagramDescription) obj;
 				this.epackage = ((DiagramDescription) obj).getMetamodel().get(0);
-				this.oroginalEdges = this.diagramDescription.getAllEdgeMappings();
-				this.oroginalNodes = this.diagramDescription.getAllNodeMappings();
-				this.oroginalContainers = this.diagramDescription.getAllContainerMappings();
-
+				this.originalEdges = this.diagramDescription.getAllEdgeMappings();
+				this.originalNodes = this.diagramDescription.getAllNodeMappings();
+				this.originalContainers = this.diagramDescription.getAllContainerMappings();
+				this.diagramsList.add((DiagramDescription) obj);
 			}
 
 			if (obj instanceof Group) {
-				this.diagramsList = ((Group) obj).getOwnedViewpoints().get(0).getOwnedRepresentations();
+			//	this.diagramsList = ((Group) obj).getOwnedViewpoints().get(0).getOwnedRepresentations();
 				this.group = (Group) obj;
 			}
 
@@ -144,8 +205,8 @@ public class OdesignGenerator {
 		}
 	}
 
-	public void GenerateNodesVersion(HashMap<EClass, List<EClass>> eclassMap, File file, EPackage ep,
-			EClass metamodelElement, EClass intermediateElement) {
+	public void GenerateNodesVersion(HashMap<EClass, List<EClass>> eclassMap,HashMap<EClass, List<EClass>> tagsERefs, File file, EPackage ep,
+			EClass metamodelElement, EClass intermediateElement, DiagramDescription diagram) {
 
 		// Let's assume there is only one meta-model for the moment
 		if (diagramDescription.getMetamodel().size() != 1)
@@ -155,18 +216,35 @@ public class OdesignGenerator {
 		this.targetPackageName = ep.getName();
 		
 		
-		this.diagramDescription.getMetamodel().clear();
+		diagram.getMetamodel().clear();
 
-		this.diagramDescription.getMetamodel().add(ep);
+		diagram.getMetamodel().add(ep);
 		DiagramDescription dd = DescriptionFactory.eINSTANCE.createDiagramDescription();
-		dd = this.diagramDescription;
+		dd = diagram;
 		
 		String separator=".";
 		if(dd.getDomainClass().contains("::"))
 			separator="::";
-		Layer layer = dd.getDefaultLayer();
-
-		// Creating the colors pallette
+	    AdditionalLayer layer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
+	    dd.getAdditionalLayers().add(layer);
+	    layer.setName("Generated Layer");
+	    
+	    
+	    AdditionalLayer attributesLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
+	    dd.getAdditionalLayers().add(attributesLayer);
+	    attributesLayer.setName("Generated Attributes Layer");
+	    attributesLayer.setActiveByDefault(true);
+	    
+	    AdditionalLayer siriusTagsLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
+	    dd.getAdditionalLayers().add(siriusTagsLayer);
+	    siriusTagsLayer.setName("Sirius Tags Layer");
+	    siriusTagsLayer.setActiveByDefault(true);
+	    
+	    AdditionalLayer ereferencesLayerLayer=DescriptionFactory.eINSTANCE.createAdditionalLayer();
+	    dd.getAdditionalLayers().add(ereferencesLayerLayer);
+	    ereferencesLayerLayer.setName("EReferences Layer");
+	    ereferencesLayerLayer.setActiveByDefault(true);
+	    // Creating the colors pallette
 
 		UserColorsPalette colorPallette = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
 				.createUserColorsPalette();
@@ -184,6 +262,15 @@ public class OdesignGenerator {
 		featuresFixedColor.setBlue(187);
 		featuresFixedColor.setGreen(187);
 		featuresFixedColor.setRed(134);
+		
+		
+		UserFixedColor siriusTagsFixedColor = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
+				.createUserFixedColor();
+		colorPallette.getEntries().add(siriusTagsFixedColor);
+		siriusTagsFixedColor.setName("Sirius Tags Color");
+		siriusTagsFixedColor.setBlue(232);
+		siriusTagsFixedColor.setGreen(135);
+		siriusTagsFixedColor.setRed(232);
 
 		UserFixedColor featuresFixedColorRed = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
 				.createUserFixedColor();
@@ -193,6 +280,14 @@ public class OdesignGenerator {
 		featuresFixedColorRed.setGreen(85);
 		featuresFixedColorRed.setRed(169);
 
+		
+		UserFixedColor whiteFixedColorRed = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
+				.createUserFixedColor();
+		whiteFixedColorRed.setName("white fixed color");
+		colorPallette.getEntries().add(whiteFixedColorRed);
+		whiteFixedColorRed.setBlue(85);
+		whiteFixedColorRed.setGreen(85);
+		whiteFixedColorRed.setRed(169);
 		
 		UserFixedColor darkBlue = org.eclipse.sirius.viewpoint.description.DescriptionFactory.eINSTANCE
 				.createUserFixedColor();
@@ -204,12 +299,414 @@ public class OdesignGenerator {
 		List<EdgeMapping> edgeList = new ArrayList<>();
 		List<NodeMapping> nodeList = new ArrayList<>();
 		List<ContainerMapping> containerList = new ArrayList<>();
-		dd.setName("Diagram");
+		//dd.setName("Diagram");
 		this.diagramsList.add(dd);
 
-		layer.setName("Default Layer");
-		dd.setDefaultLayer(layer);
+		
+		//dd.setDefaultLayer(layer);
 		for (Entry<EClass, List<EClass>> entry : eclassMap.entrySet()) {
+
+			List<EObject> all = new ArrayList<>();
+			TreeIterator<EObject> content1 = this.resource.getAllContents();
+			while (content1.hasNext()) {
+				all.add(content1.next());
+			}
+
+			// TreeIterator<EObject> content = this.resource.getAllContents();
+			// while (content.hasNext()) {
+			Iterator<EObject> content = all.iterator();
+			while (content.hasNext()) {
+				EObject obj = null;
+				try {
+					obj = content.next();
+				} catch (Throwable e) {
+					e.printStackTrace();
+					System.out.println("fail");
+				}
+				if (obj instanceof DiagramDescription) {
+					((DiagramDescription) obj)
+							.setDomainClass(ep.getName() + separator + ((DiagramDescription) obj).getDomainClass()
+									.substring(((DiagramDescription) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1));
+
+				}
+
+				if (obj instanceof EdgeMapping) {
+
+					NodeMapping siriusTagNode = DescriptionFactory.eINSTANCE.createNodeMapping();
+					siriusTagNode .setName(((EdgeMapping) obj).getName()+"SiriusTag");
+					siriusTagNode .setDomainClass(ep.getName() + separator+ "SiriusTag");
+					siriusTagsLayer.getNodeMappings().add(siriusTagNode);
+					
+					LozengeNodeDescription lnd=StyleFactory.eINSTANCE.createLozengeNodeDescription();
+					lnd.setLabelExpression("RbE");
+					lnd.setColor(siriusTagsFixedColor);
+					lnd.setLabelPosition(LabelPosition.NODE_LITERAL);
+					lnd.setLabelSize(12);
+					lnd.setLabelColor(whiteFixedColorRed);
+					
+					siriusTagNode.setStyle(lnd);
+					lnd.setShowIcon(false);
+					
+					
+					
+					EdgeMapping edge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+					edge.getTargetMapping().add(siriusTagNode);
+					edge.getSourceMapping().add((EdgeMapping) obj);
+					edge.setName("RbEtagConnector_"+((EdgeMapping) obj).getName());
+					edge.setUseDomainElement(false);
+				//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+					siriusTagsLayer.getEdgeMappings().add(edge);
+
+					
+					
+					
+					EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+					CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
+							.createCenterLabelStyleDescription();
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setLineStyle(LineStyle.DASH_LITERAL);
+					edgestyle.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edgestyle.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edge.setStyle(edgestyle);
+					edge.setTargetFinderExpression("feature:containsSiriusTag");
+					
+					
+					if (((EdgeMapping) obj).isUseDomainElement()) {
+						edgeList.add((EdgeMapping) obj);
+						((EdgeMapping) obj).setDomainClass(ep.getName() + separator + ((EdgeMapping) obj).getDomainClass()
+								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1));
+						if (((EdgeMapping) obj).getDomainClass()
+								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
+								.equals(entry.getKey().getName())) {
+
+							NodeMapping siriusTagNode1 = DescriptionFactory.eINSTANCE.createNodeMapping();
+							siriusTagNode1 .setName(((EdgeMapping) obj).getName()+"SiriusTag");
+							siriusTagNode1 .setDomainClass(ep.getName() + separator+ "SiriusTag");
+							siriusTagsLayer.getNodeMappings().add(siriusTagNode1);
+							
+							LozengeNodeDescription lnd1=StyleFactory.eINSTANCE.createLozengeNodeDescription();
+							lnd1.setLabelExpression("RbE");
+							lnd1.setColor(siriusTagsFixedColor);
+							lnd1.setLabelPosition(LabelPosition.NODE_LITERAL);
+							lnd1.setLabelSize(12);
+							lnd1.setLabelColor(whiteFixedColorRed);
+							
+							siriusTagNode1.setStyle(lnd1);
+							lnd1.setShowIcon(false);
+							
+							
+							
+							EdgeMapping edge1 = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+							edge1.getTargetMapping().add(siriusTagNode1);
+							edge1.getSourceMapping().add((EdgeMapping) obj);
+							edge1.setName("EbEtagConnector_"+((EdgeMapping) obj).getName());
+							edge1.setUseDomainElement(false);
+						//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+							siriusTagsLayer.getEdgeMappings().add(edge1);
+
+							
+							
+							
+							EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+							CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE
+									.createCenterLabelStyleDescription();
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							edgestyle1.setLineStyle(LineStyle.DASH_LITERAL);
+							edgestyle1.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							edgestyle1.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edgestyle1.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edge1.setStyle(edgestyle1);
+							edge.setTargetFinderExpression("feature:containsSiriusTag");
+							for (EClass featureCLass : entry.getValue()) {
+
+								NodeMapping nmd = DescriptionFactory.eINSTANCE.createNodeMapping();
+
+								this.nmlist.add(nmd);
+								nmd.setName(featureCLass.getName());
+								nmd.setDomainClass(ep.getName() + separator+ featureCLass.getName());
+								attributesLayer.getNodeMappings().add(nmd);
+
+								SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
+								sd.setColor(attributesFixedColor);
+
+								sd.setBorderSizeComputationExpression("2");
+								sd.setShowIcon(false);
+								sd.setLabelPosition(LabelPosition.NODE_LITERAL);
+								;
+								sd.setHeight(3);
+								sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
+								sd.setBorderSizeComputationExpression("2");
+								sd.setWidth(12);
+								String classname = ((EdgeMapping) obj).getDomainClass()
+										.substring(((((EdgeMapping) obj).getDomainClass()).lastIndexOf(separator.substring(separator.length() - 1))) + 1);
+								String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(),
+										" ");
+								System.out.println(featureCLass);
+								System.out.println(classname);
+
+								sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
+								nmd.setStyle(sd);
+								EdgeMapping em = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+								em.getTargetMapping().add(nmd);
+								em.getSourceMapping().add((EdgeMapping) obj);
+								em.setName(featureCLass.getName() + "Connector");
+								em.setUseDomainElement(false);
+								em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+								attributesLayer.getEdgeMappings().add(em);
+
+								EdgeStyleDescription edgestyle2 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+								CenterLabelStyleDescription labelstyle2 = StyleFactory.eINSTANCE
+										.createCenterLabelStyleDescription();
+								edgestyle2.setCenterLabelStyleDescription(labelstyle2);
+								edgestyle2.setLineStyle(LineStyle.DASH_LITERAL);
+								edgestyle2.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+								edgestyle2.setCenterLabelStyleDescription(labelstyle2);
+								edgestyle2.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+								edgestyle2.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+								em.setStyle(edgestyle2);
+							}
+//
+						}
+					}
+
+				}
+				if (obj instanceof ContainerMapping) {
+					containerList.add((ContainerMapping) obj);
+					((ContainerMapping) obj)
+							.setDomainClass(ep.getName() + separator + ((ContainerMapping) obj).getDomainClass()
+									.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1));
+
+					
+					
+					NodeMapping siriusTagNode = DescriptionFactory.eINSTANCE.createNodeMapping();
+					siriusTagNode .setName(((ContainerMapping) obj).getName()+"SiriusTag");
+					siriusTagNode .setDomainClass(ep.getName() + separator+ "SiriusTag");
+					siriusTagsLayer.getNodeMappings().add(siriusTagNode);
+					
+					LozengeNodeDescription lnd=StyleFactory.eINSTANCE.createLozengeNodeDescription();
+					lnd.setLabelExpression("C");
+					siriusTagNode.setStyle(lnd);
+					lnd.setShowIcon(false);
+					lnd.setColor(siriusTagsFixedColor);
+					lnd.setLabelPosition(LabelPosition.NODE_LITERAL);
+					lnd.setLabelSize(12);
+					lnd.setLabelColor(whiteFixedColorRed);
+					
+					
+					
+					EdgeMapping edge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+					edge.getTargetMapping().add(siriusTagNode);
+					edge.getSourceMapping().add((ContainerMapping) obj);
+					edge.setName("CtagConnector_"+((ContainerMapping) obj).getName());
+					edge.setUseDomainElement(false);
+				//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+					siriusTagsLayer.getEdgeMappings().add(edge);
+					edge.setTargetFinderExpression("feature:containsSiriusTag");
+					
+
+					EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+					CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
+							.createCenterLabelStyleDescription();
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setLineStyle(LineStyle.DASH_LITERAL);
+					edgestyle.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edgestyle.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edge.setStyle(edgestyle);
+					
+					
+					// Make sure the expression is properly rewritten if needed
+					ContainerMapping mapping = ((ContainerMapping) obj);
+					adaptExpressionIfNeeded(mapping.getSemanticCandidatesExpression(), mapping::setSemanticCandidatesExpression);
+					
+					
+					if (((ContainerMapping) obj).getDomainClass()
+							.substring(((ContainerMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
+							.equals(entry.getKey().getName())) {
+
+						for (EClass featureCLass : entry.getValue()) {
+
+							NodeMapping nmd = DescriptionFactory.eINSTANCE.createNodeMapping();
+
+							this.nmlist.add(nmd);
+							nmd.setName(featureCLass.getName());
+							nmd.setDomainClass(ep.getName() + separator + featureCLass.getName());
+							attributesLayer.getNodeMappings().add(nmd);
+
+							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
+							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
+							String classname = ((ContainerMapping) obj).getDomainClass()
+									.substring(((((ContainerMapping) obj).getDomainClass()).lastIndexOf(separator.substring(separator.length() - 1))) + 1);
+							String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(),
+									" ");
+							System.out.println(featureCLass.getName());
+							System.out.println(classname);
+
+							sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
+							nmd.setStyle(sd);
+							EdgeMapping em = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
+							sd.setBorderSizeComputationExpression("2");
+							sd.setColor(attributesFixedColor);
+							sd.setShowIcon(false);
+							sd.setLabelPosition(LabelPosition.NODE_LITERAL);
+							;
+							sd.setHeight(3);
+							sd.setWidth(12);
+
+							em.getTargetMapping().add(nmd);
+							em.getSourceMapping().add((ContainerMapping) obj);
+							em.setName(featureCLass.getName() + "Connector");
+							em.setUseDomainElement(false);
+							em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+							attributesLayer.getEdgeMappings().add(em);
+
+							EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+							CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE
+									.createCenterLabelStyleDescription();
+							edgestyle1.setLineStyle(LineStyle.DASH_LITERAL);
+							edgestyle1.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							edgestyle1.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edgestyle1.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+
+							em.setStyle(edgestyle1);
+						}
+//
+					}
+
+				}
+
+				if (obj instanceof NodeMapping) {
+					nodeList.add((NodeMapping) obj);
+					((NodeMapping) obj).setDomainClass(ep.getName() + separator + ((NodeMapping) obj).getDomainClass()
+							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1) ) + 1));
+					
+					NodeMapping siriusTagNode = DescriptionFactory.eINSTANCE.createNodeMapping();
+					siriusTagNode .setName(((NodeMapping) obj).getName()+"SiriusTag");
+					siriusTagNode .setDomainClass(ep.getName() + separator+ "SiriusTag");
+					siriusTagsLayer.getNodeMappings().add(siriusTagNode);
+					
+					LozengeNodeDescription lnd=StyleFactory.eINSTANCE.createLozengeNodeDescription();
+					lnd.setLabelExpression("N");
+					siriusTagNode.setStyle(lnd);
+					lnd.setShowIcon(false);
+					lnd.setColor(siriusTagsFixedColor);
+					lnd.setLabelPosition(LabelPosition.NODE_LITERAL);
+					lnd.setLabelSize(12);
+					lnd.setLabelColor(whiteFixedColorRed);
+					
+					
+					
+					EdgeMapping edge = DescriptionFactory.eINSTANCE.createEdgeMapping();
+
+					edge.getTargetMapping().add(siriusTagNode);
+					edge.getSourceMapping().add((NodeMapping) obj);
+					edge.setName("NtagConnector_"+((NodeMapping) obj).getName());
+					edge.setUseDomainElement(false);
+					edge.setTargetFinderExpression("feature:containsSiriusTag");
+				//	edge.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+					siriusTagsLayer.getEdgeMappings().add(edge);
+					
+					
+
+					EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+					CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
+							.createCenterLabelStyleDescription();
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setLineStyle(LineStyle.DASH_LITERAL);
+					edgestyle.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+					edgestyle.setCenterLabelStyleDescription(labelstyle);
+					edgestyle.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edgestyle.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+					edge.setStyle(edgestyle);
+					
+					
+					
+					System.out.println(((NodeMapping) obj).getDomainClass()
+							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1) ) + 1)
+							.equalsIgnoreCase(entry.getKey().getName()));
+
+					if (((NodeMapping) obj).getDomainClass()
+							.substring(((NodeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
+							.equals(entry.getKey().getName())) {
+
+						for (EClass featureCLass : entry.getValue()) {
+
+							NodeMapping nmd = DescriptionFactory.eINSTANCE.createNodeMapping();
+
+							this.nmlist.add(nmd);
+							nmd.setName(featureCLass.getName());
+							nmd.setDomainClass(ep.getName() +separator  + featureCLass.getName());
+							attributesLayer.getNodeMappings().add(nmd);
+
+							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
+							sd.setBorderSizeComputationExpression("2");
+							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
+							sd.setColor(attributesFixedColor);
+							sd.setShowIcon(false);
+							sd.setLabelPosition(LabelPosition.NODE_LITERAL);
+
+							sd.setHeight(3);
+							sd.setWidth(12);
+							String classname = ((NodeMapping) obj).getDomainClass()
+									.substring(((((NodeMapping) obj).getDomainClass()).lastIndexOf(separator.substring(separator.length() - 1))) + 1);
+							String attrname = featureCLass.getName().toLowerCase().replace(classname.toLowerCase(),
+									" ");
+							System.out.println(featureCLass);
+							System.out.println(classname);
+							sd.setLabelExpression("aql: '" + attrname + " = '+ self.eContainer()." + attrname);
+
+							System.out.println(((NodeMapping) obj).getName());
+							nmd.setStyle(sd);
+							EdgeMapping em = DescriptionFactory.eINSTANCE.createEdgeMapping();
+							// em.createEdge(nm, (NodeMapping)obj,);
+							emlist.add(em);
+							em.getTargetMapping().add(nmd);
+							em.getSourceMapping().add((NodeMapping) obj);
+							em.setName(featureCLass.getName() + "Connector");
+							em.setUseDomainElement(false);
+							em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
+							attributesLayer.getEdgeMappings().add(em);
+
+							EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
+							CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE
+									.createCenterLabelStyleDescription();
+							edgestyle1.setLineStyle(LineStyle.DASH_LITERAL);
+							edgestyle1.setRoutingStyle(EdgeRouting.TREE_LITERAL);
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							edgestyle1.setSourceArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edgestyle1.setTargetArrow(EdgeArrows.NO_DECORATION_LITERAL);
+							edgestyle1.setCenterLabelStyleDescription(labelstyle1);
+							em.setStyle(edgestyle1);
+						}
+
+					}
+					// ((NodeMapping) obj).setDomainClass(ep.getName() + "." + ((NodeMapping)
+					// obj).getName());
+				}
+
+				if (obj instanceof CreateInstance) {
+					// nodeList.add((CreateInstance) obj);
+					((CreateInstance) obj).setTypeName(ep.getName() + separator  + ((CreateInstance) obj).getTypeName()
+							.substring(((CreateInstance) obj).getTypeName().lastIndexOf(separator.substring(separator.length() - 1)) + 1));
+				}
+
+			}
+
+		}
+		
+		
+		for (Entry<EClass, List<EClass>> entry : tagsERefs.entrySet()) {
 
 			List<EObject> all = new ArrayList<>();
 			TreeIterator<EObject> content1 = this.resource.getAllContents();
@@ -244,6 +741,7 @@ public class OdesignGenerator {
 						if (((EdgeMapping) obj).getDomainClass()
 								.substring(((EdgeMapping) obj).getDomainClass().lastIndexOf(separator.substring(separator.length() - 1)) + 1)
 								.equals(entry.getKey().getName())) {
+							
 
 							for (EClass featureCLass : entry.getValue()) {
 
@@ -252,7 +750,7 @@ public class OdesignGenerator {
 								this.nmlist.add(nmd);
 								nmd.setName(featureCLass.getName());
 								nmd.setDomainClass(ep.getName() + separator+ featureCLass.getName());
-								layer.getNodeMappings().add(nmd);
+								ereferencesLayerLayer.getNodeMappings().add(nmd);
 
 								SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 								sd.setColor(attributesFixedColor);
@@ -278,10 +776,10 @@ public class OdesignGenerator {
 
 								em.getTargetMapping().add(nmd);
 								em.getSourceMapping().add((EdgeMapping) obj);
-								em.setName(featureCLass.getName() + "Connector");
+								em.setName(featureCLass.getName() + "_ref_con");
 								em.setUseDomainElement(false);
 								em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-								layer.getEdgeMappings().add(em);
+								ereferencesLayerLayer.getEdgeMappings().add(em);
 
 								EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 								CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
@@ -321,7 +819,7 @@ public class OdesignGenerator {
 							this.nmlist.add(nmd);
 							nmd.setName(featureCLass.getName());
 							nmd.setDomainClass(ep.getName() + separator + featureCLass.getName());
-							layer.getNodeMappings().add(nmd);
+							ereferencesLayerLayer.getNodeMappings().add(nmd);
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 							sd.setBorderLineStyle(LineStyle.DASH_LITERAL);
@@ -347,10 +845,10 @@ public class OdesignGenerator {
 
 							em.getTargetMapping().add(nmd);
 							em.getSourceMapping().add((ContainerMapping) obj);
-							em.setName(featureCLass.getName() + "Connector");
+							em.setName(featureCLass.getName() + "_ref_con");
 							em.setUseDomainElement(false);
 							em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-							layer.getEdgeMappings().add(em);
+							ereferencesLayerLayer.getEdgeMappings().add(em);
 
 							EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 							CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
@@ -388,7 +886,7 @@ public class OdesignGenerator {
 							this.nmlist.add(nmd);
 							nmd.setName(featureCLass.getName());
 							nmd.setDomainClass(ep.getName() +separator  + featureCLass.getName());
-							layer.getNodeMappings().add(nmd);
+							ereferencesLayerLayer.getNodeMappings().add(nmd);
 
 							SquareDescription sd = StyleFactory.eINSTANCE.createSquareDescription();
 							sd.setBorderSizeComputationExpression("2");
@@ -414,10 +912,10 @@ public class OdesignGenerator {
 							emlist.add(em);
 							em.getTargetMapping().add(nmd);
 							em.getSourceMapping().add((NodeMapping) obj);
-							em.setName(featureCLass.getName() + "Connector");
+							em.setName(featureCLass.getName() + "ref_con");
 							em.setUseDomainElement(false);
 							em.setTargetFinderExpression("feature:contains" + featureCLass.getName());
-							layer.getEdgeMappings().add(em);
+							ereferencesLayerLayer.getEdgeMappings().add(em);
 
 							EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 							CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE
@@ -452,7 +950,7 @@ public class OdesignGenerator {
 		nonemapping.setName("None Element");
 		nonemapping.setDomainClass(ep.getName() + ".NoneElement");
 		nonemapping.setSemanticCandidatesExpression("feature:containsNoneElement");
-		dd.getAllLayers().get(0).getNodeMappings().add(nonemapping);	
+		layer.getNodeMappings().add(nonemapping);	
 		
 		
 		
@@ -484,7 +982,7 @@ public class OdesignGenerator {
 		mapToNone.setTargetFinderExpression("feature:noneElement");
 		mapToNone.getTargetMapping().add(nonemapping);
 		mapToNone.setStyle(edgestylenone);
-		dd.getAllLayers().get(0).getEdgeMappings().add(mapToNone);
+		layer.getEdgeMappings().add(mapToNone);
 
 		FlatContainerStyleDescription csd = StyleFactory.eINSTANCE.createFlatContainerStyleDescription();
 		ContainerMapping cm = DescriptionFactory.eINSTANCE.createContainerMapping();
@@ -507,7 +1005,7 @@ public class OdesignGenerator {
 		cm.setLabel(metamodelElement.getName());
 		cm.setName(metamodelElement.getName());
 		cm.setDomainClass(ep.getName() + "." + metamodelElement.getName());
-		dd.getAllLayers().get(0).getContainerMappings().add(cm);
+		layer.getContainerMappings().add(cm);
 
 		
 
@@ -576,7 +1074,7 @@ public class OdesignGenerator {
 			}
 		}
 		edgeintermediate.setSemanticCandidatesExpression("feature:containsIntermediateElement");
-		dd.getAllLayers().get(0).getEdgeMappings().add(edgeintermediate);
+		attributesLayer.getEdgeMappings().add(edgeintermediate);
 
 		EdgeStyleDescription edgestyle = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 		CenterLabelStyleDescription labelstyle = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
@@ -598,7 +1096,7 @@ public class OdesignGenerator {
 		
 		//pointTo.setStyle(edgestyleVA);
 
-		dd.getAllLayers().get(0).getEdgeMappings().add(pointTo);
+		attributesLayer.getEdgeMappings().add(pointTo);
 
 		EdgeStyleDescription edgestyle1 = StyleFactory.eINSTANCE.createEdgeStyleDescription();
 		CenterLabelStyleDescription labelstyle1 = StyleFactory.eINSTANCE.createCenterLabelStyleDescription();
@@ -641,7 +1139,7 @@ public class OdesignGenerator {
 
 		to_virtualAttributeEdge.setStyle(to_edgestyleVA);
 
-		dd.getAllLayers().get(0).getEdgeMappings().add(to_virtualAttributeEdge);
+		layer.getEdgeMappings().add(to_virtualAttributeEdge);
 		
 // Tool section part 
 		// Tool section creation
@@ -812,18 +1310,18 @@ public class OdesignGenerator {
 		setValue3.setValueExpression("aql:'Class name'");
 		containerInstance.getSubModelOperations().add(setValue3);
 		containerCreation.setInitialOperation(init2);
-		dd.getAllLayers().get(0).getToolSections().add(toolsec);
+		layer.getToolSections().add(toolsec);
         containerCreation.setIconPath("/bento.sirius.odesign.generator/icons/class.png");
-		for (NodeMapping nmapp : this.oroginalNodes) {
+		for (NodeMapping nmapp : this.originalNodes) {
 			mapToNone.getSourceMapping().add(nmapp);
 
 		}
 
-		for (EdgeMapping edgemapp : this.oroginalEdges) {
+		for (EdgeMapping edgemapp : this.originalEdges) {
 			mapToNone.getSourceMapping().add(edgemapp);
 		}
 
-		for (ContainerMapping nmapp : this.oroginalContainers) {
+		for (ContainerMapping nmapp : this.originalContainers) {
 			mapToNone.getSourceMapping().add(nmapp);
 		}
 		
@@ -867,10 +1365,20 @@ public class OdesignGenerator {
 				changecontextVAE.getSubModelOperations().add(setValueVAE);
 				changecontextVAE.setBrowseExpression("var:source");
 				vaedgecreationdesc.setInitialOperation(initVAE);
+				
+				
+				
+				//saveOdesign(file, ep);
+		
+	}
 
+	
+	
+	public void saveOdesign(File file, EPackage ep) {
+		
 		try {
 			// jesusc: we should probably find a better name
-			String diagramName = this.diagramDescription.getName() + "_" + ep.getName();
+			String diagramName = this.viewPoint.getName() + "_" + ep.getName();
 
 			this.generatedFile = new File(file.getAbsolutePath() + File.separator + diagramName + ".odesign");
 			resource.save(new FileOutputStream(generatedFile), null);
@@ -883,8 +1391,8 @@ public class OdesignGenerator {
 			e.printStackTrace();
 		}
 
+		
 	}
-
 	private void adaptExpressionIfNeeded(String expr, Consumer<String> setter) {
 		if (expr == null)
 			return;
