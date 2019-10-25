@@ -163,8 +163,11 @@ public class OdesignGenerator {
 
 		ResourceSet rs = new ResourceSetImpl();
 		try {
-		this.resource = rs.getResource(URI.createFileURI(modelURI), true);
-		} catch(Exception e) {e.printStackTrace();}
+			this.resource = rs.getResource(URI.createFileURI(modelURI), true);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 		TreeIterator<EObject> content = resource.getAllContents();
 
 		while (content.hasNext()) {

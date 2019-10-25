@@ -52,7 +52,9 @@ public class TestGraphicalBindingGenerator {
                 t("resources/components/workflow/workflow.odesign",    
                		 "resources/components/workflow/workflow-1.xmi"),
                 t("resources/components/sirius-gallery-simqri/simqri.odesign",    
-               		 "resources/components/sirius-gallery-simqri/simqri-model-1.xmi")
+               		 "resources/components/sirius-gallery-simqri/simqri-model-1.xmi"),
+                t(catalogue("fault-tree-analysis/com.dsml.fta.design/description/FTdesign.odesign"), 
+                		catalogue("fault-tree-analysis/com.dsml.fta.design/models/fta-example-1.xmi"))
            });
     }
     
@@ -62,6 +64,10 @@ public class TestGraphicalBindingGenerator {
 		return new TestData(odesign, models);
 	}
 
+	private static String catalogue(String file) {
+		return "../../../sirius-reusable-dsml-editors/"  + file;
+	}
+	
 	private static class TestData {
 		private String odesign;
 		private String[] models;

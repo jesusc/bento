@@ -104,14 +104,22 @@ public class ModelCopierByName {
 
 	private void setAttribute(EObject tgt, EAttribute tgtFeature, Object srcValue) {
 		if (tgtFeature.isMany()) {
-			throw new UnsupportedOperationException("Multivalued attributes not handled yet");
+			((Collection<Object>) srcValue).forEach(o -> setAttributeSingle(tgt, tgtFeature, o));
+		} else {
+			setAttributeSingle(tgt, tgtFeature, srcValue);
 		}
-		
+	}
+
+	private void setAttributeSingle(EObject tgt, EAttribute tgtFeature, Object srcValue) {
 		if (tgtFeature.getEType() instanceof EEnum) {			
 			srcValue = mapEEnum(tgt, tgtFeature, (EEnum) tgtFeature.getEType(), srcValue);
 		} 
 		
-		tgt.eSet(tgtFeature, srcValue);
+		if (tgtFeature.isMany()) {
+			((Collection<Object>) tgt.eGet(tgtFeature)).add(srcValue);
+		} else {
+			tgt.eSet(tgtFeature, srcValue);
+		}
 		
 		// Also set the lifted attribute
 		String liftedAttributeClassName = tgtFeature.getName() + tgt.eClass().getName();
