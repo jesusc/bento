@@ -21,7 +21,10 @@ Export-Package: scenes_bdsl,
  mindstorms_bdsl.util,
  workflow_bdsl,
  workflow_bdsl.impl,
- workflow_bdsl.util
+ workflow_bdsl.util,
+ fta_bdsl,
+ fta_bdsl.impl,
+ fta_bdsl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
