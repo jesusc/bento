@@ -288,6 +288,7 @@ public class BindingMetamodelGenerator {
 		BindingTools.createEAttribute("name", Datatypes.get_string(), this.virtualAttribute);
 		BindingTools.createEAttribute("Expression", Datatypes.get_string(), this.virtualAttribute);
 		BindingTools.createEAttribute("tag", Datatypes.get_string(), this.siriusTag);
+		BindingTools.createEAttribute("id_target", Datatypes.get_string(), this.intermediateElement);
 
 		EAttribute sourceMetamodelTag = BindingTools.createEAttribute("SourceMM", Datatypes.get_string(), this.root);
 		sourceMetamodelTag.setDefaultValueLiteral(ep.getNsURI());

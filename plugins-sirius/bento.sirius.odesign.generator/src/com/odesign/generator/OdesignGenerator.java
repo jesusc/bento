@@ -177,8 +177,8 @@ public class OdesignGenerator {
 				this.diagramDescription = (DiagramDescription) obj;
 				this.epackage = ((DiagramDescription) obj).getMetamodel().get(0);
 				this.originalEdges = this.diagramDescription.getAllEdgeMappings();
-				this.originalNodes = this.diagramDescription.getAllNodeMappings();
-				this.originalContainers = this.diagramDescription.getAllContainerMappings();
+				this.originalNodes = this.diagramDescription.getNodeMappings();
+				this.originalContainers = this.diagramDescription.getContainerMappings();
 				this.diagramsList.add((DiagramDescription) obj);
 			}
 
@@ -1265,8 +1265,13 @@ public class OdesignGenerator {
 		SetValue setValue2 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
 		setValue2.setFeatureName("bindingElement");
 		setValue2.setValueExpression("var:target");
+		
+		SetValue setValue33 = org.eclipse.sirius.viewpoint.description.tool.ToolFactory.eINSTANCE.createSetValue();
+		setValue33.setFeatureName("id_target");
+		setValue33.setValueExpression("aql:targetView.getMapping().name");
 		edgeInstance.getSubModelOperations().add(setValue1);
 		edgeInstance.getSubModelOperations().add(setValue2);
+		edgeInstance.getSubModelOperations().add(setValue33);
 		changecontextIntermediate.setBrowseExpression("[source.eContainer()/]");
 		edgecreationdesc.setInitialOperation(init);
 		edgecreationdesc.setIconPath("/bento.sirius.odesign.generator/icons/link.png");

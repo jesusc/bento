@@ -24,7 +24,10 @@ Export-Package: scenes_bdsl,
  workflow_bdsl.util,
  fta_bdsl,
  fta_bdsl.impl,
- fta_bdsl.util
+ fta_bdsl.util,
+ graph_bdsl,
+ graph_bdsl.impl,
+ graph_bdsl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

@@ -54,4 +54,12 @@
             genModel="models/fta_bdsl.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated graph_bdsl -->
+      <package
+            uri="http://bento/sirius/tests/graph_bdsl"
+            class="graph_bdsl.Graph_bdslPackage"
+            genModel="models/graph_bdsl.genmodel"/>
+   </extension>
+
 </plugin>

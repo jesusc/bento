@@ -15,7 +15,7 @@ public class OdesignTools {
 		nodemapping.setName(name);
 		nodemapping.setDomainClass(epackage.getName() + "."+domainClass);
 		nodemapping.setSemanticCandidatesExpression(semanticcandidate);
-		dd.getAllLayers().get(0).getNodeMappings().add(nodemapping);	
+		dd.getAdditionalLayers().get(0).getNodeMappings().add(nodemapping);	
 		SquareDescription sdnode = StyleFactory.eINSTANCE.createSquareDescription();
 		nodemapping.setStyle(sdnode);
 		sdnode.setLabelExpression("");
