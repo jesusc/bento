@@ -29,7 +29,7 @@ public class Trace<I, O> {
 	public O getSingleTarget(I original) {
 		List<? extends O> r = getTargets(original);
 		if (r.size() != 1)
-			throw new IllegalStateException();
+			throw new IllegalStateException("No single for " + original + ". Total targets: " + r.size());
 		return r.get(0);
 	}
 

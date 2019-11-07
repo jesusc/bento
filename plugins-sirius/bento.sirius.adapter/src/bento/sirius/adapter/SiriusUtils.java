@@ -6,6 +6,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -119,5 +120,18 @@ public class SiriusUtils {
 		} else {
 			return getContainer(klass, obj.eContainer());
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> findChildren(EObject container, Predicate<EObject> predicate) {
+		List<T> result = new ArrayList<T>();
+		TreeIterator<EObject> it = container.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (predicate.test(obj)) {
+				result.add((T) obj);
+			}
+		}
+		return result;
 	}
 }

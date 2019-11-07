@@ -14,6 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.sirius.diagram.description.NodeMapping;
+import org.eclipse.sirius.viewpoint.description.tool.ToolEntry;
 
 public class SiriusModel {
 
@@ -34,8 +38,6 @@ public class SiriusModel {
 	public Resource getResource() {
 		return resource;
 	}
-	
-	
 	
 	private void setup(Resource r) {
 		TreeIterator<EObject> it = r.getAllContents();
@@ -60,10 +62,31 @@ public class SiriusModel {
 		return result;
 	}
 	
+	public NodeMapping findNodeById(String id) {
+		List<NodeMapping> mappings = allInstancesOf(NodeMapping.class);
+		for (NodeMapping nodeMapping : mappings) {
+			if (id.equals(nodeMapping.getName()))
+				return nodeMapping;
+		}
+
+		return null;
+	}
 	
 	public void flush() {
 		elements.clear();
 		setup(resource);
 	}
+
+	@Nullable
+	public ToolEntry findToolById(@NonNull String id) {
+		List<ToolEntry> entries = allInstancesOf(ToolEntry.class);
+		for (ToolEntry entry : entries) {
+			if (id.equals(entry.getName()))
+				return entry;
+		}
+
+		return null;		
+	}
+
 
 }

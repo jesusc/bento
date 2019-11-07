@@ -31,7 +31,7 @@ import bento.sirius.adapter.SiriusTemplateHandler;
 import bento.sirius.tests.model.SiriusSpecificationModel;
 
 @RunWith(Parameterized.class)
-public class TestSiriusAdapter {
+public class TestSiriusAdapter extends AbstractSiriusTest {
 
     @Parameters(name="{0}")
     public static Collection<Object> data() {
@@ -52,14 +52,6 @@ public class TestSiriusAdapter {
     	if (TechnologyConfiguration.INSTANCE.getHandler(TechnologiesPackage.Literals.SIRIUS_TEMPLATE) == null) 
     		TechnologyConfiguration.INSTANCE.addHandler(TechnologiesPackage.Literals.SIRIUS_TEMPLATE, new SiriusTemplateHandler());
     }
-    
-	private static void importProject(final File baseDirectory, final String projectName) throws CoreException {
-		IProjectDescription description = ResourcesPlugin.getWorkspace().loadProjectDescription(
-				new Path(baseDirectory.getAbsolutePath() + "/.project"));
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(description.getName());
-		project.create(description, null);
-		project.open(null);
-	}
     
 	private File bentoFile;	
 	
