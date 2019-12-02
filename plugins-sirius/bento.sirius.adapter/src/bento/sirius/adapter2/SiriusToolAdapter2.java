@@ -1,15 +1,11 @@
 package bento.sirius.adapter2;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.viewpoint.description.tool.ChangeContext;
@@ -22,7 +18,8 @@ import bento.sirius.adapter.SiriusModel;
 import bento.sirius.adapter.SiriusPaletteAdapter.Context;
 import bento.sirius.adapter.SiriusUtils;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
-import bento.sirius.adapter.bindingmodel.SiriusInformationModel;
+import bento.sirius.adapter.bindingmodel.SiriusBindingModel.ClassBinding;
+import bento.sirius.adapter.bindingmodel.SiriusBindingModel.ToolBinding;
 
 /**
  * Adapts the tool section of a Sirius diagram.
@@ -35,8 +32,6 @@ public class SiriusToolAdapter2 {
 	@NonNull
 	private final SiriusAdapter2 root;
 	@NonNull
-	private SiriusInformationModel infoModel;
-	@NonNull
 	private SiriusBindingModel bindingModel;
 	@NonNull
 	private SiriusModel siriusModel;
@@ -45,7 +40,6 @@ public class SiriusToolAdapter2 {
 		this.root = root;
 		this.siriusModel = root.getSiriusModel();
 		this.bindingModel = root.getBindingModel();
-		this.infoModel = root.getInformationModel();
 	}
 	
 	public void perform() {
@@ -61,6 +55,8 @@ public class SiriusToolAdapter2 {
 	
 	private void applyTo(@NonNull NodeCreationDescription desc) {
 		InitialNodeCreationOperation operation = desc.getInitialOperation();
+		if (!bindingModel.containsToolMapping(desc))
+			return;
 		
 		for (NodeMapping nodeMapping : desc.getNodeMappings()) {
 			// With this we allow the user to get a result even if the binding model is not complete
@@ -70,18 +66,12 @@ public class SiriusToolAdapter2 {
 			
 		}
 		
-		List<NodeMapping> mapped = new ArrayList<NodeMapping>();
-		ListIterator<NodeMapping> it = desc.getNodeMappings().listIterator();
-		while (it.hasNext()) {
-			// TODO: Don't add everything
-			NodeMapping mapping = it.next();
-			List<? extends DiagramElementMapping> targets = root.getTrace().getTargets(mapping);
-			// This is probably incorrect
-			mapped.addAll((Collection<? extends NodeMapping>) targets);
-		}
-
+		ClassBinding cb = bindingModel.getClassBinding(desc);
+		
+		// We really don't care about what was the original contents of the nodeMappings, but
+		// we assume the binding model is correct
 		desc.getNodeMappings().clear();
-		desc.getNodeMappings().addAll(mapped);
+		desc.getNodeMappings().add((NodeMapping) root.getTrace().getSingleTarget(cb));
 		
 		List<CreateInstance> instances = SiriusUtils.findChildren(operation, (o) -> o instanceof CreateInstance);
 		if ( instances.size() == 0 ) {
@@ -106,13 +96,16 @@ public class SiriusToolAdapter2 {
 
 	private void handleCreateInstance(CreateInstance instance_, Context context) {
 		MappingBasedToolDescription tool = context.getToolElement();
-		if (!infoModel.containsToolMapping(tool))
+		if (!bindingModel.containsToolMapping(tool))
 			return;
 		
-		DiagramElementMapping originalNodeMapping = infoModel.getToolMapping(tool);
-		DiagramElementMapping newNodeMapping = root.getTrace().getSingleTarget(originalNodeMapping);
 		
-		instance_.setTypeName(SiriusUtils.getDomainClass(newNodeMapping));
+		ToolBinding toolBinding = bindingModel.getToolBinding(tool);
+		String typeName = SiriusUtils.getRawClassName(instance_.getTypeName());
+		
+		EClass c = bindingModel.getConcreteClass(typeName, toolBinding);
+		
+		instance_.setTypeName(SiriusUtils.toSiriusClassName(c));
 		
 		// TODO: Process the setters in an intelligent way
 	}

@@ -12,7 +12,6 @@ import org.eclipse.sirius.viewpoint.description.tool.MappingBasedToolDescription
 import bento.sirius.adapter.EMFMetamodel;
 import bento.sirius.adapter.SiriusModel;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
-import bento.sirius.adapter.bindingmodel.SiriusInformationModel;
 
 /**
  * Checks whether a given binding contains all the necessary information
@@ -23,7 +22,6 @@ import bento.sirius.adapter.bindingmodel.SiriusInformationModel;
  */
 public class SiriusBindingValidator {
 
-	private SiriusInformationModel infoModel;
 	@NonNull
 	private SiriusBindingModel bindingModel;
 	@NonNull 
@@ -31,9 +29,8 @@ public class SiriusBindingValidator {
 	@NonNull 
 	private final EMFMetamodel concrete;
 
-	public SiriusBindingValidator(@NonNull SiriusBindingModel model, @NonNull SiriusInformationModel info) {
+	public SiriusBindingValidator(@NonNull SiriusBindingModel model) {
 		this.bindingModel = model;
-		this.infoModel = info;
 		
 		this.sirius = model.getSirius();
 		this.concrete = model.getConcrete();		
@@ -52,7 +49,7 @@ public class SiriusBindingValidator {
 		
 		List<MappingBasedToolDescription> operations = sirius.allInstancesOf(MappingBasedToolDescription.class);
 		for (MappingBasedToolDescription tool : operations) {
-			if (!infoModel.containsToolMapping(tool)) {
+			if (!bindingModel.containsToolMapping(tool)) {
 				report.add(new DefaultValidationError("No binding for tool mapping: " + tool.getName()));				
 			}
 			

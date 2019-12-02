@@ -35,6 +35,19 @@ public class SiriusUtils {
 	}
 	
 	@NonNull
+	public static String getRawPackageName(@NonNull String siriusClassName) {
+		if (! siriusClassName.contains("::")) {
+			throw new IllegalArgumentException();
+		}
+		return siriusClassName.substring(0, siriusClassName.lastIndexOf(":"));
+	}
+	
+	@NonNull
+	public static String toSiriusClassName(@NonNull EClass klass) {
+		return klass.getEPackage().getName() + "::" + klass.getName();
+	}
+	
+	@NonNull
 	public static <T extends DiagramElementMapping> List<T> filter(@NonNull List<? extends T> mappings, Predicate<String> filter) {
 		List<T> result = new ArrayList<T>();
 		for (T m: mappings) {

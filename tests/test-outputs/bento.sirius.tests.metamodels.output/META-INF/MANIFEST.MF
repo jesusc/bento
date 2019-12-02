@@ -27,7 +27,10 @@ Export-Package: scenes_bdsl,
  fta_bdsl.util,
  graph_bdsl,
  graph_bdsl.impl,
- graph_bdsl.util
+ graph_bdsl.util,
+ bento.sirius.tests.metamodels.output.workflow_bdsl,
+ bento.sirius.tests.metamodels.output.workflow_bdsl.impl,
+ bento.sirius.tests.metamodels.output.workflow_bdsl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
