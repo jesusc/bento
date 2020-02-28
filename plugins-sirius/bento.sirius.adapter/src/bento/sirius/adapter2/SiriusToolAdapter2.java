@@ -1,6 +1,8 @@
 package bento.sirius.adapter2;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,9 +16,6 @@ import org.eclipse.sirius.viewpoint.description.tool.InitialNodeCreationOperatio
 import org.eclipse.sirius.viewpoint.description.tool.MappingBasedToolDescription;
 import org.eclipse.sirius.viewpoint.description.tool.ModelOperation;
 
-import bento.sirius.adapter.SiriusModel;
-import bento.sirius.adapter.SiriusPaletteAdapter.Context;
-import bento.sirius.adapter.SiriusUtils;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.ClassBinding;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.ToolBinding;
@@ -40,6 +39,39 @@ public class SiriusToolAdapter2 {
 		this.root = root;
 		this.siriusModel = root.getSiriusModel();
 		this.bindingModel = root.getBindingModel();
+	}
+	
+	private static class Context {
+		private String contextType = null;
+		private MappingBasedToolDescription toolElement;
+		private Map<String, EClass> variables = new HashMap<String, EClass>();
+		
+		public void setContextType(String contextType) {
+			this.contextType = contextType;
+		}
+		
+		public String getContextType() {
+			return contextType;
+		}
+
+		public void setToolElement(MappingBasedToolDescription desc) {
+			if ( this.toolElement != null ) throw new IllegalStateException("Parent operation shouldn't be rewritten");
+			this.toolElement = desc;
+		}
+		
+		public MappingBasedToolDescription getToolElement() {
+			return toolElement;
+		}
+
+		public void addVariable(String name, EClass type) {
+			variables.put(name, type);
+		}
+		
+		public EClass getVariableType(String name) {
+			if ( ! variables.containsKey(name) ) 
+				throw new IllegalStateException();
+			return variables.get(name);
+		}
 	}
 	
 	public void perform() {

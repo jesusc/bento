@@ -4,6 +4,12 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import bento.component.interpreter.TechnologyConfiguration;
+import bento.language.bentocomp.BentocompPackage;
+import bento.language.bentocomp.core.CorePackage;
+import bento.language.bentocomp.technologies.SiriusTemplate;
+import bento.language.bentocomp.technologies.TechnologiesPackage;
+
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -42,8 +48,12 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 		return plugin;
 	}
 
+	// Force the plugin to load through the startup extension point
+	// This should probably be an extension point in bentocomp, but it is a bit heavyweight
+	// given that I don't wan't this to be a general extension mechanism.
 	@Override
 	public void earlyStartup() {
-		
+		TechnologyConfiguration.INSTANCE.addHandler(TechnologiesPackage.Literals.SIRIUS_TEMPLATE, new SiriusTemplateHandler());
 	}
+
 }

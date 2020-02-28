@@ -1,11 +1,9 @@
-package bento.sirius.adapter;
+package bento.sirius.adapter2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 
 public class Trace<I, O> {
 

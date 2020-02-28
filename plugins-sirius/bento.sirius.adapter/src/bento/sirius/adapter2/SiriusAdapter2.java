@@ -5,9 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -17,19 +15,11 @@ import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.Layer;
 import org.eclipse.sirius.diagram.description.NodeMapping;
 
-import bento.sirius.adapter.ATLBasedExpressionAdapter;
-import bento.sirius.adapter.AdapterError;
-import bento.sirius.adapter.EMFMetamodel;
-import bento.sirius.adapter.SiriusModel;
-import bento.sirius.adapter.SiriusUtils;
-import bento.sirius.adapter.Trace;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.ClassBinding;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.NoneBinding;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.NoneToolBinding;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.RootBinding;
-import gbind.dsl.BaseFeatureBinding;
-import gbind.dsl.RenamingFeatureBinding;
 
 /**
  * A rewriter for Sirius based on a model-level binding,
@@ -246,7 +236,7 @@ public class SiriusAdapter2 {
 		
 		EClass c = concept.findEClassInPackageOrNull(mm, className);
 		if ( c == null ) {
-			throw new AdapterError("Can't find class " + domainClassName);
+			throw new IllegalStateException("Can't find class " + domainClassName);
 		}
 		
 		return c;

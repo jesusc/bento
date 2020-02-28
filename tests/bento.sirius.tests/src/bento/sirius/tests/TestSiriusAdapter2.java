@@ -17,12 +17,12 @@ import org.eclipse.sirius.viewpoint.description.tool.ToolEntry;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import bento.sirius.adapter.EMFMetamodel;
-import bento.sirius.adapter.SiriusModel;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
+import bento.sirius.adapter2.EMFMetamodel;
 import bento.sirius.adapter2.SiriusAdapter2;
 import bento.sirius.adapter2.SiriusBindingValidator;
 import bento.sirius.adapter2.SiriusBindingValidator.ValidationReport;
+import bento.sirius.adapter2.SiriusModel;
 
 /**
  * This tests the adapter using a binding model based on links to

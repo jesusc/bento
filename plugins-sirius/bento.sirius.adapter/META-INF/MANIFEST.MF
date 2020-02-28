@@ -10,21 +10,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.diagram;bundle-version="6.1.0",
  org.junit;bundle-version="4.12.0",
  org.eclipse.emf;bundle-version="2.7.0",
- genericity.language.gbind;bundle-version="0.7.1",
- bento.repository.common,
- bento.common;bundle-version="1.0.0",
- bento.component.interpreter,
- bento.language.bentocomp,
- anatlyzer.atl.typing;bundle-version="0.7.1",
- anatlyzer.atl.standalone.api,
- bento.adapter.atl,
- efinder.aql;bundle-version="1.0.0",
  org.eclipse.jdt.annotation,
  org.eclipse.emf.ecore,
- anatlyzer.use.witness
+ anatlyzer.atl.typing;bundle-version="0.7.1",
+ efinder.aql;bundle-version="1.0.0",
+ anatlyzer.atl.standalone.api
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: bento.sirius.adapter
 Bundle-ActivationPolicy: lazy
-Export-Package: bento.sirius.adapter,
- bento.sirius.adapter.bindingmodel,
+Export-Package: bento.sirius.adapter.bindingmodel,
  bento.sirius.adapter2

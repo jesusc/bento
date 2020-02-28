@@ -7,21 +7,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.tools.ToolProvider;
-
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.sirius.diagram.description.DescriptionPackage;
 import org.eclipse.sirius.diagram.description.tool.ContainerCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.EdgeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.NodeCreationDescription;
 import org.eclipse.sirius.diagram.description.tool.ToolSection;
-import org.eclipse.sirius.viewpoint.ToolInstance;
-import org.eclipse.sirius.viewpoint.ToolSectionInstance;
 import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
 import org.eclipse.sirius.viewpoint.description.tool.ToolEntry;
-import org.eclipse.sirius.viewpoint.description.tool.ToolPackage;
-import bento.sirius.adapter.SiriusModel;
-import bento.sirius.adapter.SiriusUtils;
+
+import bento.sirius.adapter2.SiriusModel;
+import bento.sirius.adapter2.SiriusUtils;
 import bento.sirius.tests.model.PaletteItem.ItemKind;
 
 public class SiriusSpecificationModel {

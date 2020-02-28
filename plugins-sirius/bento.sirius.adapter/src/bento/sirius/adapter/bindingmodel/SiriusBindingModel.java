@@ -17,11 +17,10 @@ import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.viewpoint.description.tool.ToolEntry;
 
 import anatlyzer.atlext.OCL.OclExpression;
-import bento.sirius.adapter.EMFMetamodel;
-import bento.sirius.adapter.SiriusModel;
-import bento.sirius.adapter.SiriusUtils;
+import bento.sirius.adapter2.EMFMetamodel;
+import bento.sirius.adapter2.SiriusModel;
+import bento.sirius.adapter2.SiriusUtils;
 import efinder.aql.AQL2ATL;
-import gbind.dsl.BaseFeatureBinding;
 
 /**
  * Represents a binding between one or more example models

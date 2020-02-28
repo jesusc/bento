@@ -31,8 +31,6 @@ import anatlyzer.atlext.OCL.OclModelElement;
 import anatlyzer.atlext.OCL.VariableExp;
 import anatlyzer.atlext.OCL2.SelectByKind;
 import anatlyzer.atlext.processing.AbstractVisitor;
-import bento.adapter.atl.visitors.AdaptationError;
-import bento.sirius.adapter.AQLSerializer;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.AbstractFeatureBinding;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel.ClassBinding;
@@ -152,7 +150,7 @@ public class ATLBasedAQLAdapter {
 			}
 			
 			if (b == null) {
-				throw new AdaptationError("No binding for feature " + f);
+				throw new IllegalStateException("No binding for feature " + f);
 			}
 			
 			if ( b instanceof RenameFeatureBinding ) {

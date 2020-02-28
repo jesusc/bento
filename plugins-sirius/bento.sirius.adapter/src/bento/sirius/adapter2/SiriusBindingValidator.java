@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
-import org.eclipse.sirius.viewpoint.description.tool.CreateInstance;
 import org.eclipse.sirius.viewpoint.description.tool.MappingBasedToolDescription;
 
-import bento.sirius.adapter.EMFMetamodel;
-import bento.sirius.adapter.SiriusModel;
 import bento.sirius.adapter.bindingmodel.SiriusBindingModel;
 
 /**
